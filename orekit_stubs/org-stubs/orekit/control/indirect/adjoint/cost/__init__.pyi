@@ -481,128 +481,19 @@ class FieldUnboundedCartesianEnergyNeglectingMass(FieldCartesianCost[_FieldUnbou
         ...
 
 class PythonCartesianCost(CartesianCost):
-    """
-    public class PythonCartesianCost extends :class:`~org.orekit.control.indirect.adjoint.cost.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.control.indirect.adjoint.cost.CartesianCost`
-    
-        Python implementation of the CartesianCost interface. This class is part of the JCC Python interface and exposes all
-        methods natively.
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getAdjointDimension(self) -> int:
-        """
-            Getter for adjoint vector dimension.
-        
-            Specified by:
-                :meth:`~org.orekit.control.indirect.adjoint.cost.CartesianCost.getAdjointDimension` in
-                interface :class:`~org.orekit.control.indirect.adjoint.cost.CartesianCost`
-        
-            Returns:
-                adjoint dimension
-        
-        
-        """
-        ...
-    def getAdjointName(self) -> str:
-        """
-            Getter for adjoint vector name.
-        
-            Specified by:
-                :meth:`~org.orekit.control.indirect.adjoint.cost.CartesianCost.getAdjointName` in
-                interface :class:`~org.orekit.control.indirect.adjoint.cost.CartesianCost`
-        
-            Returns:
-                adjoint vector name
-        
-        
-        """
-        ...
-    def getHamiltonianContribution(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float) -> float:
-        """
-            Computes the Hamiltonian contribution to the cost function. It equals the Lagrange-form integrand multiplied by -1.
-        
-            Specified by:
-                :meth:`~org.orekit.control.indirect.adjoint.cost.CartesianCost.getHamiltonianContribution` in
-                interface :class:`~org.orekit.control.indirect.adjoint.cost.CartesianCost`
-        
-            Parameters:
-                adjointVariables (double[]): adjoint vector
-                mass (double): mass
-        
-            Returns:
-                contribution to Hamiltonian
-        
-        
-        """
-        ...
-    def getMassFlowRateFactor(self) -> float:
-        """
-            Getter for mass flow rate factor. It is negated and multiplied by the thrust force magnitude to obtain the mass time
-            derivative. The fact that it is a constant means that the exhaust speed is assumed to be independent of time.
-        
-            Specified by:
-                :meth:`~org.orekit.control.indirect.adjoint.cost.CartesianCost.getMassFlowRateFactor` in
-                interface :class:`~org.orekit.control.indirect.adjoint.cost.CartesianCost`
-        
-            Returns:
-                mass flow rate factor
-        
-        
-        """
-        ...
-    def getThrustAccelerationVector(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Computes the thrust acceleration vector in propagation frame from the adjoint variables and the mass.
-        
-            Specified by:
-                :meth:`~org.orekit.control.indirect.adjoint.cost.CartesianCost.getThrustAccelerationVector` in
-                interface :class:`~org.orekit.control.indirect.adjoint.cost.CartesianCost`
-        
-            Parameters:
-                adjointVariables (double[]): adjoint vector
-                mass (double): mass
-        
-            Returns:
-                thrust vector
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getAdjointDimension(self) -> int: ...
+    def getAdjointName(self) -> str: ...
+    def getHamiltonianContribution(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float) -> float: ...
+    def getMassFlowRateFactor(self) -> float: ...
+    def getThrustAccelerationVector(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def updateAdjointDerivatives(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float, doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> None:
-        """
-            Update the adjoint derivatives if necessary.
-        
-            Specified by:
-                :meth:`~org.orekit.control.indirect.adjoint.cost.CartesianCost.updateAdjointDerivatives` in
-                interface :class:`~org.orekit.control.indirect.adjoint.cost.CartesianCost`
-        
-            Parameters:
-                adjointVariables (double[]): adjoint vector
-                mass (double): mass
-                adjointDerivatives (double[]): derivatives to update
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def updateAdjointDerivatives(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float, doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
 
 class CartesianFlightDurationCost(AbstractCartesianCost):
     """
@@ -1014,72 +905,15 @@ class PenalizedCartesianFuelCost(AbstractCartesianCost):
         ...
 
 class PythonAbstractCartesianCost(AbstractCartesianCost):
-    """
-    public class PythonAbstractCartesianCost extends :class:`~org.orekit.control.indirect.adjoint.cost.AbstractCartesianCost`
-    
-        Python implementation of the AbstractCartesianCost class. This class is part of the JCC Python interface and exposes
-        abstract methods natively.
-    """
     def finalize(self) -> None: ...
-    def getHamiltonianContribution(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float) -> float:
-        """
-            Computes the Hamiltonian contribution to the cost function. It equals the Lagrange-form integrand multiplied by -1.
-        
-            Parameters:
-                adjointVariables (double[]): adjoint vector
-                mass (double): mass
-        
-            Returns:
-                contribution to Hamiltonian
-        
-        
-        """
-        ...
-    def getThrustAccelerationVector(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Computes the thrust acceleration vector in propagation frame from the adjoint variables and the mass.
-        
-            Parameters:
-                adjointVariables (double[]): adjoint vector
-                mass (double): mass
-        
-            Returns:
-                thrust vector
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getHamiltonianContribution(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float) -> float: ...
+    def getThrustAccelerationVector(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def updateAdjointDerivatives(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float, doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> None:
-        """
-            Update the adjoint derivatives if necessary.
-        
-            Parameters:
-                adjointVariables (double[]): adjoint vector
-                mass (double): mass
-                adjointDerivatives (double[]): derivatives to update
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def updateAdjointDerivatives(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float, doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
 
 class UnboundedCartesianEnergyNeglectingMass(AbstractCartesianCost):
     """

@@ -418,150 +418,31 @@ class FieldStopOnIncreasing(FieldEventHandler[_FieldStopOnIncreasing__T], typing
     def eventOccurred(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldStopOnIncreasing__T], fieldEventDetector: org.orekit.propagation.events.FieldEventDetector[_FieldStopOnIncreasing__T], boolean: bool) -> org.hipparchus.ode.events.Action: ...
 
 class PythonEventHandler(EventHandler):
-    """
-    public class PythonEventHandler extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.handlers.EventHandler`
-    """
     def __init__(self): ...
-    def eventOccurred(self, spacecraftState: org.orekit.propagation.SpacecraftState, eventDetector: org.orekit.propagation.events.EventDetector, boolean: bool) -> org.hipparchus.ode.events.Action:
-        """
-            Description copied from interface: :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred`
-            Handle an event.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` in
-                interface :class:`~org.orekit.propagation.events.handlers.EventHandler`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): SpaceCraft state to be used in the evaluation
-                detector (:class:`~org.orekit.propagation.events.EventDetector`): object with appropriate type that can be used in determining correct return state
-                increasing (boolean): with the event occurred in an "increasing" or "decreasing" slope direction
-        
-            Returns:
-                the Action that the calling detector should pass back to the evaluation system
-        
-        
-        """
-        ...
+    def eventOccurred(self, spacecraftState: org.orekit.propagation.SpacecraftState, eventDetector: org.orekit.propagation.events.EventDetector, boolean: bool) -> org.hipparchus.ode.events.Action: ...
     def finalize(self) -> None: ...
-    def finish(self, spacecraftState: org.orekit.propagation.SpacecraftState, eventDetector: org.orekit.propagation.events.EventDetector) -> None:
-        """
-            Description copied from interface: :meth:`~org.orekit.propagation.events.handlers.EventHandler.finish`
-            This method finalizes the event handler's job.
-        
-            The default implementation does nothing
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.finish` in
-                interface :class:`~org.orekit.propagation.events.handlers.EventHandler`
-        
-            Parameters:
-                finalState (:class:`~org.orekit.propagation.SpacecraftState`): state at propagation end
-                detector (:class:`~org.orekit.propagation.events.EventDetector`): event detector related to the event handler
-        
-        
-        """
-        ...
-    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate, eventDetector: org.orekit.propagation.events.EventDetector) -> None:
-        """
-            Description copied from interface: :meth:`~org.orekit.propagation.events.handlers.EventHandler.init`
-            Initialize event handler at the start of a propagation.
-        
-            This method is called once at the start of the propagation. It may be used by the event handler to initialize some
-            internal data if needed.
-        
-            The default implementation does nothing
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.init` in
-                interface :class:`~org.orekit.propagation.events.handlers.EventHandler`
-        
-            Parameters:
-                initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state
-                target (:class:`~org.orekit.time.AbsoluteDate`): target date for the propagation
-                detector (:class:`~org.orekit.propagation.events.EventDetector`): event detector related to the event handler
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def finish(self, spacecraftState: org.orekit.propagation.SpacecraftState, eventDetector: org.orekit.propagation.events.EventDetector) -> None: ...
+    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate, eventDetector: org.orekit.propagation.events.EventDetector) -> None: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def resetState(self, eventDetector: org.orekit.propagation.events.EventDetector, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.SpacecraftState:
-        """
-            Description copied from interface: :meth:`~org.orekit.propagation.events.handlers.EventHandler.resetState`
-            Reset the state prior to continue propagation.
-        
-            This method is called after the step handler has returned and before the next step is started, but only when
-            :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` has itself returned the
-            :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
-            indicator. It allows the user to reset the state for the next step, without perturbing the step handler of the finishing
-            step. If the :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` never returns the
-            :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
-            indicator, this function will never be called, and it is safe to simply return null.
-        
-            The default implementation simply return its argument.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.resetState` in
-                interface :class:`~org.orekit.propagation.events.handlers.EventHandler`
-        
-            Parameters:
-                detector (:class:`~org.orekit.propagation.events.EventDetector`): object with appropriate type that can be used in determining correct return state
-                oldState (:class:`~org.orekit.propagation.SpacecraftState`): old state
-        
-            Returns:
-                new state
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def resetState(self, eventDetector: org.orekit.propagation.events.EventDetector, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.SpacecraftState: ...
 
 _PythonFieldEventHandler__KK = typing.TypeVar('_PythonFieldEventHandler__KK', bound=org.orekit.propagation.events.FieldEventDetector)  # <KK>
 _PythonFieldEventHandler__T = typing.TypeVar('_PythonFieldEventHandler__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldEventHandler(FieldEventHandler[_PythonFieldEventHandler__T], typing.Generic[_PythonFieldEventHandler__KK, _PythonFieldEventHandler__T]):
-    """
-    public class PythonFieldEventHandler<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends :class:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<T>
-    """
     def __init__(self): ...
     def eventOccurred(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldEventHandler__T], fieldEventDetector: org.orekit.propagation.events.FieldEventDetector[_PythonFieldEventHandler__T], boolean: bool) -> org.hipparchus.ode.events.Action: ...
     def finalize(self) -> None: ...
     def finish(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldEventHandler__T], fieldEventDetector: org.orekit.propagation.events.FieldEventDetector[_PythonFieldEventHandler__T]) -> None: ...
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldEventHandler__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldEventHandler__T], fieldEventDetector: org.orekit.propagation.events.FieldEventDetector[_PythonFieldEventHandler__T]) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     def resetState(self, fieldEventDetector: org.orekit.propagation.events.FieldEventDetector[_PythonFieldEventHandler__T], fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldEventHandler__T]) -> org.orekit.propagation.FieldSpacecraftState[_PythonFieldEventHandler__T]: ...
 
 class RecallLastOccurrence(EventHandler):
@@ -957,162 +838,38 @@ class FieldCountingHandler(org.orekit.propagation.events.handlers.AbstractGeneri
     def eventOccurred(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldCountingHandler__T], fieldEventDetector: org.orekit.propagation.events.FieldEventDetector[_FieldCountingHandler__T], boolean: bool) -> org.hipparchus.ode.events.Action: ...
 
 class PythonAbstractGenericCountingHandler(org.orekit.propagation.events.handlers.AbstractGenericCountingHandler):
-    """
-    public class PythonAbstractGenericCountingHandler extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    """
     def __init__(self, int: int, action: org.hipparchus.ode.events.Action): ...
     def finalize(self) -> None: ...
-    def getAction(self) -> org.hipparchus.ode.events.Action:
-        """
-            Getter for action.
-        
-            Returns:
-                action
-        
-        
-        """
-        ...
-    def getCount(self) -> int:
-        """
-            Getter for count.
-        
-            Returns:
-                count
-        
-        
-        """
-        ...
-    def increment(self) -> None:
-        """
-            Increment count.
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getAction(self) -> org.hipparchus.ode.events.Action: ...
+    def getCount(self) -> int: ...
+    def increment(self) -> None: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def reset(self) -> None:
-        """
-            Reset count.
-        
-        """
-        ...
-    def setAction(self, action: org.hipparchus.ode.events.Action) -> None:
-        """
-            Setter for action.
-        
-            Parameters:
-                action (:class:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action?is`): new action
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def reset(self) -> None: ...
+    def setAction(self, action: org.hipparchus.ode.events.Action) -> None: ...
 
 class PythonCountingHandler(CountingHandler):
-    """
-    public class PythonCountingHandler extends :class:`~org.orekit.propagation.events.handlers.CountingHandler`
-    """
     def __init__(self, int: int, action: org.hipparchus.ode.events.Action): ...
-    def doesCount(self, spacecraftState: org.orekit.propagation.SpacecraftState, eventDetector: org.orekit.propagation.events.EventDetector, boolean: bool) -> bool:
-        """
-            Abstract method to implement in Python.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.CountingHandler.doesCount` in
-                class :class:`~org.orekit.propagation.events.handlers.CountingHandler`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): state at detection
-                detector (:class:`~org.orekit.propagation.events.EventDetector`): detector
-                increasing (boolean): flag on direction of event function
-        
-            Returns:
-                flag on counting
-        
-        
-        """
-        ...
+    def doesCount(self, spacecraftState: org.orekit.propagation.SpacecraftState, eventDetector: org.orekit.propagation.events.EventDetector, boolean: bool) -> bool: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonFieldCountingHandler(FieldCountingHandler):
-    """
-    public class PythonFieldCountingHandler extends :class:`~org.orekit.propagation.events.handlers.FieldCountingHandler`
-    """
     def __init__(self, int: int, action: org.hipparchus.ode.events.Action): ...
-    def doesCount(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState, fieldEventDetector: org.orekit.propagation.events.FieldEventDetector, boolean: bool) -> bool:
-        """
-            Method returning true if and only if the count needs to be incremented.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.FieldCountingHandler.doesCount` in
-                class :class:`~org.orekit.propagation.events.handlers.FieldCountingHandler`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.FieldSpacecraftState`): state at detection
-                detector (:class:`~org.orekit.propagation.events.FieldEventDetector`): detector
-                increasing (boolean): flag on direction of event function
-        
-            Returns:
-                flag on counting
-        
-        
-        """
-        ...
+    def doesCount(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState, fieldEventDetector: org.orekit.propagation.events.FieldEventDetector, boolean: bool) -> bool: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class AbstractGenericCountingHandler: ...
 

@@ -118,103 +118,17 @@ class AbstractFieldOfView(FieldOfView):
         ...
 
 class PythonFieldOfView(FieldOfView):
-    """
-    public class PythonFieldOfView extends :class:`~org.orekit.geometry.fov.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.geometry.fov.FieldOfView`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def getFootprint(self, transform: org.orekit.frames.Transform, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float) -> java.util.List[java.util.List[org.orekit.bodies.GeodeticPoint]]: ...
-    def getMargin(self) -> float:
-        """
-            Get the angular margin to apply (radians). If angular margin is positive, points outside of the raw FoV but close enough
-            to the boundary are considered visible. If angular margin is negative, points inside of the raw FoV but close enough to
-            the boundary are considered not visible
-        
-            Specified by:
-                :meth:`~org.orekit.geometry.fov.FieldOfView.getMargin` in interface :class:`~org.orekit.geometry.fov.FieldOfView`
-        
-            Returns:
-                angular margin
-        
-            Also see:
-                :meth:`~org.orekit.geometry.fov.PythonFieldOfView.offsetFromBoundary`
-        
-        
-        """
-        ...
-    def offsetFromBoundary(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, visibilityTrigger: org.orekit.propagation.events.VisibilityTrigger) -> float:
-        """
-            Get the offset of target body with respect to the Field Of View Boundary.
-        
-            The offset is the signed angular distance between target body and closest boundary point, taking into account
-            :class:`~org.orekit.propagation.events.VisibilityTrigger` and
-            :meth:`~org.orekit.geometry.fov.PythonFieldOfView.getMargin`.
-        
-            As Field Of View can have complex shapes that may require long computation, when the target point can be proven to be
-            outside of the Field Of View, a faster but approximate computation can be used. This approximation is only performed
-            about 0.01 radians outside of the Field Of View augmented by the deadband defined by target body radius and Field Of
-            View margin and should be designed to still return a positive value if the full accurate computation would return a
-            positive value. When target point is close to the zone (and furthermore when it is inside the zone), the full accurate
-            computation is performed. This design allows this offset to be used as a reliable way to detect Field Of View boundary
-            crossings (taking :class:`~org.orekit.propagation.events.VisibilityTrigger` and
-            :meth:`~org.orekit.geometry.fov.PythonFieldOfView.getMargin` into account), which correspond to sign changes of the
-            offset.
-        
-            Specified by:
-                :meth:`~org.orekit.geometry.fov.FieldOfView.offsetFromBoundary` in
-                interface :class:`~org.orekit.geometry.fov.FieldOfView`
-        
-            Parameters:
-                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
-                angularRadius (double): target body angular radius
-                trigger (:class:`~org.orekit.propagation.events.VisibilityTrigger`): visibility trigger for spherical bodies
-        
-            Returns:
-                an offset negative if the target is visible within the Field Of View and positive if it is outside of the Field Of View
-                (note that this cannot take into account interposing bodies)
-        
-            Also see:
-                :meth:`~org.orekit.geometry.fov.PythonFieldOfView.offsetFromBoundary`
-        
-        
-        """
-        ...
-    def projectToBoundary(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Find the direction on Field Of View Boundary closest to a line of sight.
-        
-            Specified by:
-                :meth:`~org.orekit.geometry.fov.FieldOfView.projectToBoundary` in
-                interface :class:`~org.orekit.geometry.fov.FieldOfView`
-        
-            Parameters:
-                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
-        
-            Returns:
-                direction on Field Of View Boundary closest to a line of sight
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getMargin(self) -> float: ...
+    def offsetFromBoundary(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, visibilityTrigger: org.orekit.propagation.events.VisibilityTrigger) -> float: ...
+    def projectToBoundary(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PolygonalFieldOfView(AbstractFieldOfView):
     """
@@ -301,77 +215,16 @@ class PolygonalFieldOfView(AbstractFieldOfView):
         def values() -> typing.MutableSequence['PolygonalFieldOfView.DefiningConeType']: ...
 
 class PythonAbstractFieldOfView(AbstractFieldOfView):
-    """
-    public class PythonAbstractFieldOfView extends :class:`~org.orekit.geometry.fov.AbstractFieldOfView`
-    """
     def __init__(self, double: float): ...
     def finalize(self) -> None: ...
     def getFootprint(self, transform: org.orekit.frames.Transform, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float) -> java.util.List[java.util.List[org.orekit.bodies.GeodeticPoint]]: ...
-    def offsetFromBoundary(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, visibilityTrigger: org.orekit.propagation.events.VisibilityTrigger) -> float:
-        """
-            Get the offset of target body with respect to the Field Of View Boundary.
-        
-            The offset is the signed angular distance between target body and closest boundary point, taking into account
-            :class:`~org.orekit.propagation.events.VisibilityTrigger` and
-            :meth:`~org.orekit.geometry.fov.AbstractFieldOfView.getMargin`.
-        
-            As Field Of View can have complex shapes that may require long computation, when the target point can be proven to be
-            outside of the Field Of View, a faster but approximate computation can be used. This approximation is only performed
-            about 0.01 radians outside of the Field Of View augmented by the deadband defined by target body radius and Field Of
-            View margin and should be designed to still return a positive value if the full accurate computation would return a
-            positive value. When target point is close to the zone (and furthermore when it is inside the zone), the full accurate
-            computation is performed. This design allows this offset to be used as a reliable way to detect Field Of View boundary
-            crossings (taking :class:`~org.orekit.propagation.events.VisibilityTrigger` and
-            :meth:`~org.orekit.geometry.fov.AbstractFieldOfView.getMargin` into account), which correspond to sign changes of the
-            offset.
-        
-            Parameters:
-                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
-                angularRadius (double): target body angular radius
-                trigger (:class:`~org.orekit.propagation.events.VisibilityTrigger`): visibility trigger for spherical bodies
-        
-            Returns:
-                an offset negative if the target is visible within the Field Of View and positive if it is outside of the Field Of View
-                (note that this cannot take into account interposing bodies)
-        
-            Also see:
-                :meth:`~org.orekit.geometry.fov.PythonAbstractFieldOfView.offsetFromBoundary`
-        
-        
-        """
-        ...
-    def projectToBoundary(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Find the direction on Field Of View Boundary closest to a line of sight.
-        
-            Parameters:
-                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
-        
-            Returns:
-                direction on Field Of View Boundary closest to a line of sight
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def offsetFromBoundary(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, visibilityTrigger: org.orekit.propagation.events.VisibilityTrigger) -> float: ...
+    def projectToBoundary(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class SmoothFieldOfView(AbstractFieldOfView):
     """
@@ -643,91 +496,16 @@ class EllipticalFieldOfView(SmoothFieldOfView):
         ...
 
 class PythonSmoothFieldOfView(SmoothFieldOfView):
-    """
-    public class PythonSmoothFieldOfView extends :class:`~org.orekit.geometry.fov.SmoothFieldOfView`
-    """
     def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
-    def directionAt(self, double: float) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get boundary direction at angle.
-        
-            Specified by:
-                :meth:`~org.orekit.geometry.fov.SmoothFieldOfView.directionAt` in
-                class :class:`~org.orekit.geometry.fov.SmoothFieldOfView`
-        
-            Parameters:
-                angle (double): phase angle of the boundary direction
-        
-            Returns:
-                boundary direction at phase angle in spacecraft frame
-        
-        
-        """
-        ...
+    def directionAt(self, double: float) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     def finalize(self) -> None: ...
-    def offsetFromBoundary(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, visibilityTrigger: org.orekit.propagation.events.VisibilityTrigger) -> float:
-        """
-            Get the offset of target body with respect to the Field Of View Boundary.
-        
-            The offset is the signed angular distance between target body and closest boundary point, taking into account
-            :class:`~org.orekit.propagation.events.VisibilityTrigger` and :meth:`~org.orekit.geometry.fov.FieldOfView.getMargin`.
-        
-            As Field Of View can have complex shapes that may require long computation, when the target point can be proven to be
-            outside of the Field Of View, a faster but approximate computation can be used. This approximation is only performed
-            about 0.01 radians outside of the Field Of View augmented by the deadband defined by target body radius and Field Of
-            View margin and should be designed to still return a positive value if the full accurate computation would return a
-            positive value. When target point is close to the zone (and furthermore when it is inside the zone), the full accurate
-            computation is performed. This design allows this offset to be used as a reliable way to detect Field Of View boundary
-            crossings (taking :class:`~org.orekit.propagation.events.VisibilityTrigger` and
-            :meth:`~org.orekit.geometry.fov.FieldOfView.getMargin` into account), which correspond to sign changes of the offset.
-        
-            Parameters:
-                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
-                angularRadius (double): target body angular radius
-                trigger (:class:`~org.orekit.propagation.events.VisibilityTrigger`): visibility trigger for spherical bodies
-        
-            Returns:
-                an offset negative if the target is visible within the Field Of View and positive if it is outside of the Field Of View
-                (note that this cannot take into account interposing bodies)
-        
-            Also see:
-                :meth:`~org.orekit.geometry.fov.FieldOfView.offsetFromBoundary`
-        
-        
-        """
-        ...
-    def projectToBoundary(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Find the direction on Field Of View Boundary closest to a line of sight.
-        
-            Parameters:
-                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
-        
-            Returns:
-                direction on Field Of View Boundary closest to a line of sight
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def offsetFromBoundary(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, visibilityTrigger: org.orekit.propagation.events.VisibilityTrigger) -> float: ...
+    def projectToBoundary(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 
 class __module_protocol__(Protocol):

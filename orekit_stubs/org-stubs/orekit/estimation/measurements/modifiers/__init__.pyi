@@ -1213,75 +1213,24 @@ class PhaseCentersRangeModifier(PhaseCentersGroundReceiverBaseModifier[org.oreki
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.Range]) -> None: ...
 
 class PythonParametricModelEffect(ParametricModelEffect):
-    """
-    public class PythonParametricModelEffect extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.modifiers.ParametricModelEffect`
-    """
     def __init__(self): ...
-    def evaluate(self, groundStation: org.orekit.estimation.measurements.GroundStation, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
-        """
-            Evaluate the parametric model effect.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.modifiers.ParametricModelEffect.evaluate` in
-                interface :class:`~org.orekit.estimation.measurements.modifiers.ParametricModelEffect`
-        
-            Parameters:
-                station (:class:`~org.orekit.estimation.measurements.GroundStation`): station
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-        
-            Returns:
-                the measurement error due to parametric model
-        
-        
-        """
-        ...
+    def evaluate(self, groundStation: org.orekit.estimation.measurements.GroundStation, spacecraftState: org.orekit.propagation.SpacecraftState) -> float: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonParametricModelEffectGradient(ParametricModelEffectGradient):
-    """
-    public class PythonParametricModelEffectGradient extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.modifiers.ParametricModelEffectGradient`
-    """
     def __init__(self): ...
     def evaluate(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], gradientArray: typing.Union[typing.List[org.hipparchus.analysis.differentiation.Gradient], jpype.JArray]) -> org.hipparchus.analysis.differentiation.Gradient: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class RangeIonosphericDelayModifier(BaseRangeIonosphericDelayModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.Range]):
     """
@@ -1762,31 +1711,14 @@ class ShapiroRangeModifier(AbstractShapiroBaseModifier, org.orekit.estimation.me
 
 _PythonAbstractRelativisticClockOnBoardRangeRateModifier__T = typing.TypeVar('_PythonAbstractRelativisticClockOnBoardRangeRateModifier__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class PythonAbstractRelativisticClockOnBoardRangeRateModifier(AbstractRelativisticClockOnBoardRangeRateModifier[_PythonAbstractRelativisticClockOnBoardRangeRateModifier__T], typing.Generic[_PythonAbstractRelativisticClockOnBoardRangeRateModifier__T]):
-    """
-    public class PythonAbstractRelativisticClockOnBoardRangeRateModifier<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.modifiers.AbstractRelativisticClockOnBoardRangeRateModifier`<T>
-    """
     def __init__(self, double: float): ...
     def finalize(self) -> None: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractRelativisticClockOnBoardRangeRateModifier__T]) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class RelativisticClockInterSatellitesOneWayRangeRateModifier(AbstractRelativisticClockOnBoardRangeRateModifier[org.orekit.estimation.measurements.gnss.InterSatellitesOneWayRangeRate]):
     """

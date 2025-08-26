@@ -962,184 +962,36 @@ class LeastSquaresConverter(OsculatingToMeanConverter):
         ...
 
 class PythonMeanTheory(MeanTheory):
-    """
-    public class PythonMeanTheory extends :class:`~org.orekit.propagation.conversion.osc2mean.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.osc2mean.MeanTheory`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getReferenceRadius(self) -> float:
-        """
-            Gets reference radius of the central body (m).
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.osc2mean.MeanTheory.getReferenceRadius` in
-                interface :class:`~org.orekit.propagation.conversion.osc2mean.MeanTheory`
-        
-            Returns:
-                reference radius of the central body
-        
-        
-        """
-        ...
-    def getTheoryName(self) -> str:
-        """
-            Gets the name of the theory used for osculating to mean conversion.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.osc2mean.MeanTheory.getTheoryName` in
-                interface :class:`~org.orekit.propagation.conversion.osc2mean.MeanTheory`
-        
-            Returns:
-                the actual theory
-        
-        
-        """
-        ...
+    def getReferenceRadius(self) -> float: ...
+    def getTheoryName(self) -> str: ...
     _meanToOsculating_0__T = typing.TypeVar('_meanToOsculating_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def meanToOsculating(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_meanToOsculating_0__T]) -> org.orekit.orbits.FieldOrbit[_meanToOsculating_0__T]:
-        """
-            Gets osculating orbit from mean orbit.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.osc2mean.MeanTheory.meanToOsculating` in
-                interface :class:`~org.orekit.propagation.conversion.osc2mean.MeanTheory`
-        
-            Parameters:
-                mean (:class:`~org.orekit.orbits.FieldOrbit`<T> mean): mean orbit
-        
-            Returns:
-                osculating orbit
-        
-        
-        """
-        ...
+    def meanToOsculating(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_meanToOsculating_0__T]) -> org.orekit.orbits.FieldOrbit[_meanToOsculating_0__T]: ...
     @typing.overload
-    def meanToOsculating(self, orbit: org.orekit.orbits.Orbit) -> org.orekit.orbits.Orbit:
-        """
-            Gets osculating orbit from mean orbit.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.osc2mean.MeanTheory.meanToOsculating` in
-                interface :class:`~org.orekit.propagation.conversion.osc2mean.MeanTheory`
-        
-            Parameters:
-                mean (:class:`~org.orekit.orbits.Orbit`): mean orbit
-        
-            Returns:
-                osculating orbit
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def meanToOsculating(self, orbit: org.orekit.orbits.Orbit) -> org.orekit.orbits.Orbit: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonOsculatingToMeanConverter(OsculatingToMeanConverter):
-    """
-    public class PythonOsculatingToMeanConverter extends :class:`~org.orekit.propagation.conversion.osc2mean.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.osc2mean.OsculatingToMeanConverter`
-    """
     def __init__(self): ...
     _convertToMean_0__T = typing.TypeVar('_convertToMean_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def convertToMean(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_convertToMean_0__T]) -> org.orekit.orbits.FieldOrbit[_convertToMean_0__T]:
-        """
-            Converts an osculating orbit into a mean orbit.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.osc2mean.OsculatingToMeanConverter.convertToMean` in
-                interface :class:`~org.orekit.propagation.conversion.osc2mean.OsculatingToMeanConverter`
-        
-            Parameters:
-                osculating (:class:`~org.orekit.orbits.FieldOrbit`<T> osculating): osculating orbit
-        
-            Returns:
-                mean orbit
-        
-        
-        """
-        ...
+    def convertToMean(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_convertToMean_0__T]) -> org.orekit.orbits.FieldOrbit[_convertToMean_0__T]: ...
     @typing.overload
-    def convertToMean(self, orbit: org.orekit.orbits.Orbit) -> org.orekit.orbits.Orbit:
-        """
-            Converts an osculating orbit into a mean orbit.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.osc2mean.OsculatingToMeanConverter.convertToMean` in
-                interface :class:`~org.orekit.propagation.conversion.osc2mean.OsculatingToMeanConverter`
-        
-            Parameters:
-                osculating (:class:`~org.orekit.orbits.Orbit`): osculating orbit
-        
-            Returns:
-                mean orbit
-        
-        """
-        ...
+    def convertToMean(self, orbit: org.orekit.orbits.Orbit) -> org.orekit.orbits.Orbit: ...
     def finalize(self) -> None: ...
-    def getMeanTheory(self) -> MeanTheory:
-        """
-            Gets the theory defining the mean orbit.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.osc2mean.OsculatingToMeanConverter.getMeanTheory` in
-                interface :class:`~org.orekit.propagation.conversion.osc2mean.OsculatingToMeanConverter`
-        
-            Returns:
-                the mean theory
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getMeanTheory(self) -> MeanTheory: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def setMeanTheory(self, meanTheory: MeanTheory) -> None:
-        """
-            Sets the theory defining the mean orbit.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.osc2mean.OsculatingToMeanConverter.setMeanTheory` in
-                interface :class:`~org.orekit.propagation.conversion.osc2mean.OsculatingToMeanConverter`
-        
-            Parameters:
-                theory (:class:`~org.orekit.propagation.conversion.osc2mean.MeanTheory`): the mean theory
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def setMeanTheory(self, meanTheory: MeanTheory) -> None: ...
 
 class TLETheory(MeanTheory):
     """

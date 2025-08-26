@@ -730,7 +730,7 @@ class DateTimeComponents(java.io.Serializable, java.lang.Comparable['DateTimeCom
                 minuteDuration (int): 59, 60, 61, or 62 seconds depending on the date being close to a leap second introduction and the magnitude of the leap
                     second.
                 fractionDigits (int): the number of digits to include after the decimal point in the string representation of the seconds. The date and time
-                    is first rounded as necessary. :code:`fractionDigits` must be greater than or equal to :code:`0`.
+                    are first rounded as necessary. :code:`fractionDigits` must be greater than or equal to :code:`0`.
         
             Returns:
                 string representation of this date, time, and UTC offset
@@ -852,7 +852,28 @@ class FieldTimeStamped(typing.Generic[_FieldTimeStamped__T]):
             :class:`~org.orekit.time.AbsoluteDate`, :class:`~org.orekit.time.ChronologicalComparator`,
             :class:`~org.orekit.utils.TimeStampedCache`
     """
-    def durationFrom(self, fieldTimeStamped: typing.Union['FieldTimeStamped'[_FieldTimeStamped__T], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]]) -> _FieldTimeStamped__T: ...
+    @typing.overload
+    def durationFrom(self, fieldTimeStamped: typing.Union['FieldTimeStamped'[_FieldTimeStamped__T], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]]) -> _FieldTimeStamped__T:
+        """
+            Compute the physically elapsed duration between two instants.
+        
+            Parameters:
+                timeStamped (:class:`~org.orekit.time.TimeStamped`): instant to subtract from the instance
+        
+            Returns:
+                offset in seconds between the two instants (positive if the instance is posterior to the argument)
+        
+            Since:
+                131
+        
+            Also see:
+                :meth:`~org.orekit.time.FieldAbsoluteDate.durationFrom`
+        
+        
+        """
+        ...
+    @typing.overload
+    def durationFrom(self, timeStamped: typing.Union['TimeStamped', typing.Callable]) -> _FieldTimeStamped__T: ...
     def getDate(self) -> 'FieldAbsoluteDate'[_FieldTimeStamped__T]: ...
 
 class Month(java.lang.Enum['Month']):
@@ -1435,6 +1456,101 @@ class TimeInterpolator(typing.Generic[_TimeInterpolator__T]):
     @typing.overload
     def interpolate(self, absoluteDate: 'AbsoluteDate', stream: java.util.stream.Stream[_TimeInterpolator__T]) -> _TimeInterpolator__T: ...
 
+class TimeInterval:
+    """
+    public interface TimeInterval
+    
+        Interface representing a closed time interval i.e. [a, b], possibly of infinite length.
+    
+        Since:
+            13.1
+    
+        Also see:
+            :class:`~org.orekit.time.AbsoluteDate`
+    """
+    @typing.overload
+    def contains(self, timeInterval: 'TimeInterval') -> bool:
+        """
+            Method returning true if and only if the dated input is contained within the closed interval.
+        
+            Parameters:
+                timeStamped (:class:`~org.orekit.time.TimeStamped`): time stamped object
+        
+            Returns:
+                boolean on inclusion
+        
+            Method returning true if and only if input (also a closed time interval) contains the instance.
+        
+            Parameters:
+                interval (:class:`~org.orekit.time.TimeInterval`): time interval
+        
+            Returns:
+                boolean on inclusion
+        
+        
+        """
+        ...
+    @typing.overload
+    def contains(self, timeStamped: typing.Union['TimeStamped', typing.Callable]) -> bool: ...
+    def duration(self) -> float:
+        """
+            Computes the interval length in seconds.
+        
+            Returns:
+                duration
+        
+        
+        """
+        ...
+    def getEndDate(self) -> 'AbsoluteDate':
+        """
+            Getter for the right end of the interval.
+        
+            Returns:
+                right end
+        
+        
+        """
+        ...
+    def getStartDate(self) -> 'AbsoluteDate':
+        """
+            Getter for the left end of the interval.
+        
+            Returns:
+                left end
+        
+        
+        """
+        ...
+    def intersects(self, timeInterval: 'TimeInterval') -> bool:
+        """
+            Method returning true if and only if input (also a closed time interval) intersects the instance.
+        
+            Parameters:
+                interval (:class:`~org.orekit.time.TimeInterval`): time interval
+        
+            Returns:
+                boolean on intersection
+        
+        
+        """
+        ...
+    @staticmethod
+    def of(absoluteDate: 'AbsoluteDate', absoluteDate2: 'AbsoluteDate') -> 'TimeInterval':
+        """
+            Create instance from two dates in arbitrary order.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date
+                otherDate (:class:`~org.orekit.time.AbsoluteDate`): other date
+        
+            Returns:
+                time interval
+        
+        
+        """
+        ...
+
 class TimeOffset(java.lang.Comparable['TimeOffset'], java.io.Serializable):
     """
     public class TimeOffset extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<:class:`~org.orekit.time.TimeOffset`>, :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
@@ -1656,6 +1772,27 @@ class TimeOffset(java.lang.Comparable['TimeOffset'], java.io.Serializable):
         
         """
         ...
+    def getRoundedOffset(self, int: int) -> 'TimeOffset':
+        """
+            Round to specified accuracy.
+        
+            For simplicity of implementation, the tiebreaking rule applied here is to round half towards positive infinity. This
+            implies that rounding to 3 fraction digits an offset of exactly 2.0025s implies adding 0.0005s so the rounded value
+            becomes 2.003s, whereas rounding to 3 fraction digits an offset of exactly -2.0025s also implies adding 0.0005s so the
+            rounded value becomes -2.002s.
+        
+            Parameters:
+                fractionDigits (int): the number of decimal digits after the decimal point in the seconds number
+        
+            Returns:
+                rounded time offset
+        
+            Since:
+                13.0.3
+        
+        
+        """
+        ...
     def getRoundedTime(self, timeUnit: java.util.concurrent.TimeUnit) -> int:
         """
             Get the time in some unit.
@@ -1835,6 +1972,16 @@ class TimeOffset(java.lang.Comparable['TimeOffset'], java.io.Serializable):
         
             Returns:
                 time as a single double
+        
+        
+        """
+        ...
+    def toString(self) -> str:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -3743,8 +3890,7 @@ class AbsoluteDate(TimeOffset, TimeStamped, TimeShiftable['AbsoluteDate'], java.
             This method uses the :meth:`~org.orekit.data.DataContext.getDefault`.
         
             Overrides:
-                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+                :meth:`~org.orekit.time.TimeOffset.toString` in class :class:`~org.orekit.time.TimeOffset`
         
             Returns:
                 a string representation of the instance, in ISO-8601 format if UTC is available from the default data context.
@@ -5523,158 +5669,38 @@ class PerfectClockModel(ClockModel):
         ...
 
 class PythonClockModel(ClockModel):
-    """
-    public class PythonClockModel extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.ClockModel`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     _getOffset_1__T = typing.TypeVar('_getOffset_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getOffset(self, absoluteDate: AbsoluteDate) -> ClockOffset:
-        """
-            Get the clock offset at date.
-        
-            Specified by:
-                :meth:`~org.orekit.time.ClockModel.getOffset` in interface :class:`~org.orekit.time.ClockModel`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date at which offset is requested
-        
-            Returns:
-                clock offset at specified date
-        
-        """
-        ...
+    def getOffset(self, absoluteDate: AbsoluteDate) -> ClockOffset: ...
     @typing.overload
-    def getOffset(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_getOffset_1__T]) -> FieldClockOffset[_getOffset_1__T]:
-        """
-            Get the clock offset at date.
-        
-            Specified by:
-                :meth:`~org.orekit.time.ClockModel.getOffset` in interface :class:`~org.orekit.time.ClockModel`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date at which offset is requested
-        
-            Returns:
-                clock offset at specified date
-        
-        
-        """
-        ...
-    def getValidityEnd(self) -> AbsoluteDate:
-        """
-            Get validity end.
-        
-            Specified by:
-                :meth:`~org.orekit.time.ClockModel.getValidityEnd` in interface :class:`~org.orekit.time.ClockModel`
-        
-            Returns:
-                model validity end
-        
-        
-        """
-        ...
-    def getValidityStart(self) -> AbsoluteDate:
-        """
-            Get validity start.
-        
-            Specified by:
-                :meth:`~org.orekit.time.ClockModel.getValidityStart` in interface :class:`~org.orekit.time.ClockModel`
-        
-            Returns:
-                model validity start
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getOffset(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_getOffset_1__T]) -> FieldClockOffset[_getOffset_1__T]: ...
+    def getValidityEnd(self) -> AbsoluteDate: ...
+    def getValidityStart(self) -> AbsoluteDate: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonDatesSelector(DatesSelector):
-    """
-    public class PythonDatesSelector extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.DatesSelector`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     def selectDates(self, absoluteDate: AbsoluteDate, absoluteDate2: AbsoluteDate) -> java.util.List[AbsoluteDate]: ...
 
 _PythonFieldTimeInterpolator__T = typing.TypeVar('_PythonFieldTimeInterpolator__T', bound=FieldTimeInterpolator)  # <T>
 _PythonFieldTimeInterpolator__KK = typing.TypeVar('_PythonFieldTimeInterpolator__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
 class PythonFieldTimeInterpolator(FieldTimeInterpolator[_PythonFieldTimeInterpolator__T, _PythonFieldTimeInterpolator__KK], typing.Generic[_PythonFieldTimeInterpolator__T, _PythonFieldTimeInterpolator__KK]):
-    """
-    public class PythonFieldTimeInterpolator<T extends :class:`~org.orekit.time.FieldTimeInterpolator`<T, KK> & :class:`~org.orekit.time.FieldTimeStamped`<KK>, KK extends :class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<KK>> extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.FieldTimeInterpolator`<T, KK>
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getExtrapolationThreshold(self) -> float:
-        """
-            Description copied from interface: :meth:`~org.orekit.time.FieldTimeInterpolator.getExtrapolationThreshold`
-            Get the extrapolation threshold.
-        
-            Specified by:
-                :meth:`~org.orekit.time.FieldTimeInterpolator.getExtrapolationThreshold` in
-                interface :class:`~org.orekit.time.FieldTimeInterpolator`
-        
-            Returns:
-                get the extrapolation threshold.
-        
-        
-        """
-        ...
-    def getNbInterpolationPoints(self) -> int:
-        """
-            Description copied from interface: :meth:`~org.orekit.time.FieldTimeInterpolator.getNbInterpolationPoints`
-            Get the number of interpolation points. In the specific case where this interpolator contains multiple
-            sub-interpolators, this method will return the maximum number of interpolation points required among all
-            sub-interpolators.
-        
-            Specified by:
-                :meth:`~org.orekit.time.FieldTimeInterpolator.getNbInterpolationPoints` in
-                interface :class:`~org.orekit.time.FieldTimeInterpolator`
-        
-            Returns:
-                the number of interpolation points
-        
-        
-        """
-        ...
+    def getExtrapolationThreshold(self) -> float: ...
+    def getNbInterpolationPoints(self) -> int: ...
     def getSubInterpolators(self) -> java.util.List[FieldTimeInterpolator[FieldTimeStamped[_PythonFieldTimeInterpolator__KK], _PythonFieldTimeInterpolator__KK]]: ...
     @typing.overload
     def interpolate(self, absoluteDate: AbsoluteDate, collection: typing.Union[java.util.Collection[_PythonFieldTimeInterpolator__T], typing.Sequence[_PythonFieldTimeInterpolator__T], typing.Set[_PythonFieldTimeInterpolator__T]]) -> _PythonFieldTimeInterpolator__T: ...
@@ -5688,106 +5714,35 @@ class PythonFieldTimeInterpolator(FieldTimeInterpolator[_PythonFieldTimeInterpol
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 _PythonFieldTimeStamped__T = typing.TypeVar('_PythonFieldTimeStamped__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldTimeStamped(FieldTimeStamped[_PythonFieldTimeStamped__T], typing.Generic[_PythonFieldTimeStamped__T]):
-    """
-    public class PythonFieldTimeStamped<T extends :class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.FieldTimeStamped`<T>
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def getDate(self) -> 'FieldAbsoluteDate'[_PythonFieldTimeStamped__T]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonParser(UTCTAIOffsetsLoader.Parser):
-    """
-    public class PythonParser extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.UTCTAIOffsetsLoader.Parser`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def parse(self, inputStream: java.io.InputStream, string: str) -> java.util.List[OffsetModel]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 _PythonTimeInterpolator__T = typing.TypeVar('_PythonTimeInterpolator__T', bound=TimeInterpolator)  # <T>
 class PythonTimeInterpolator(TimeInterpolator[_PythonTimeInterpolator__T], typing.Generic[_PythonTimeInterpolator__T]):
-    """
-    public class PythonTimeInterpolator<T extends :class:`~org.orekit.time.TimeInterpolator`<T> & :class:`~org.orekit.time.TimeStamped`> extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeInterpolator`<T>
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getExtrapolationThreshold(self) -> float:
-        """
-            Get the extrapolation threshold.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeInterpolator.getExtrapolationThreshold` in
-                interface :class:`~org.orekit.time.TimeInterpolator`
-        
-            Returns:
-                get the extrapolation threshold
-        
-        
-        """
-        ...
-    def getNbInterpolationPoints(self) -> int:
-        """
-            Get the number of interpolation points. In the specific case where this interpolator contains multiple
-            sub-interpolators, this method will return the maximum number of interpolation points required among all
-            sub-interpolators.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeInterpolator.getNbInterpolationPoints` in
-                interface :class:`~org.orekit.time.TimeInterpolator`
-        
-            Returns:
-                the number of interpolation points
-        
-        
-        """
-        ...
+    def getExtrapolationThreshold(self) -> float: ...
+    def getNbInterpolationPoints(self) -> int: ...
     def getSubInterpolators(self) -> java.util.List[TimeInterpolator[TimeStamped]]: ...
     @typing.overload
     def interpolate(self, absoluteDate: AbsoluteDate, collection: typing.Union[java.util.Collection[_PythonTimeInterpolator__T], typing.Sequence[_PythonTimeInterpolator__T], typing.Set[_PythonTimeInterpolator__T]]) -> _PythonTimeInterpolator__T: ...
@@ -5797,800 +5752,134 @@ class PythonTimeInterpolator(TimeInterpolator[_PythonTimeInterpolator__T], typin
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+
+class PythonTimeInterval(TimeInterval):
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getEndDate(self) -> AbsoluteDate: ...
+    def getStartDate(self) -> AbsoluteDate: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonTimeScalarFunction(TimeScalarFunction):
-    """
-    public class PythonTimeScalarFunction extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScalarFunction`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def value(self, absoluteDate: AbsoluteDate) -> float:
-        """
-            Compute a function of time.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScalarFunction.value` in interface :class:`~org.orekit.time.TimeScalarFunction`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date
-        
-            Returns:
-                value of the function
-        
-        """
-        ...
+    def value(self, absoluteDate: AbsoluteDate) -> float: ...
     @typing.overload
-    def value(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_value_1__T]) -> _value_1__T:
-        """
-            Compute a function of time.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScalarFunction.value` in interface :class:`~org.orekit.time.TimeScalarFunction`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date
-        
-            Returns:
-                value of the function
-        
-        
-        """
-        ...
+    def value(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_value_1__T]) -> _value_1__T: ...
 
 class PythonTimeScale(TimeScale):
-    """
-    public class PythonTimeScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getName(self) -> str:
-        """
-            Get the name time scale.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScale.getName` in interface :class:`~org.orekit.time.TimeScale`
-        
-            Returns:
-                name of the time scale
-        
-        
-        """
-        ...
+    def getName(self) -> str: ...
     _offsetFromTAI_0__T = typing.TypeVar('_offsetFromTAI_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_0__T]) -> _offsetFromTAI_0__T:
-        """
-            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): conversion date
-        
-            Returns:
-                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
-                time scale*
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
-        
-        
-        """
-        ...
+    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_0__T]) -> _offsetFromTAI_0__T: ...
     @typing.overload
-    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> TimeOffset:
-        """
-            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
-        
-            Returns:
-                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
-                time scale*
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> TimeOffset: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonTimeScales(TimeScales):
-    """
-    public class PythonTimeScales extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScales`
-    """
     def __init__(self): ...
-    def createBesselianEpoch(self, double: float) -> AbsoluteDate:
-        """
-            Build an instance corresponding to a Besselian Epoch (BE).
-        
-            According to Lieske paper: ` Precession Matrix Based on IAU (1976) System of Astronomical Constants
-            <http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?1979A%26A....73..282L&amp;defaultprint=YES&amp;filetype=.pdf.>`,
-            Astronomy and Astrophysics, vol. 73, no. 3, Mar. 1979, p. 282-284, Besselian Epoch is related to Julian Ephemeris Date
-            as:
-        
-            .. code-block: java
-            
-             BE = 1900.0 + (JED - 2415020.31352) / 365.242198781
-             
-        
-            This method reverts the formula above and computes an :code:`AbsoluteDate` from the Besselian Epoch.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.createBesselianEpoch` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Parameters:
-                besselianEpoch (double): Besselian epoch, like 1950 for defining the classical reference B1950.0
-        
-            Returns:
-                a new instant
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScales.createJulianEpoch`
-        
-        
-        """
-        ...
-    def createJulianEpoch(self, double: float) -> AbsoluteDate:
-        """
-            Build an instance corresponding to a Julian Epoch (JE).
-        
-            According to Lieske paper: ` Precession Matrix Based on IAU (1976) System of Astronomical Constants
-            <http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?1979A%26A....73..282L&amp;defaultprint=YES&amp;filetype=.pdf.>`,
-            Astronomy and Astrophysics, vol. 73, no. 3, Mar. 1979, p. 282-284, Julian Epoch is related to Julian Ephemeris Date as:
-        
-            .. code-block: java
-            
-             JE = 2000.0 + (JED - 2451545.0) / 365.25
-             
-        
-            This method reverts the formula above and computes an :code:`AbsoluteDate` from the Julian Epoch.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.createJulianEpoch` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Parameters:
-                julianEpoch (double): Julian epoch, like 2000.0 for defining the classical reference J2000.0
-        
-            Returns:
-                a new instant
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScales.getJ2000Epoch`, :meth:`~org.orekit.time.TimeScales.createBesselianEpoch`
-        
-        
-        """
-        ...
+    def createBesselianEpoch(self, double: float) -> AbsoluteDate: ...
+    def createJulianEpoch(self, double: float) -> AbsoluteDate: ...
     def finalize(self) -> None: ...
-    def getBDT(self) -> 'BDTScale':
-        """
-            Get the BeiDou Navigation Satellite System time scale.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getBDT` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                BeiDou Navigation Satellite System time scale
-        
-        
-        """
-        ...
-    def getBeidouEpoch(self) -> AbsoluteDate:
-        """
-            Reference epoch for BeiDou weeks: 2006-01-01T00:00:00 UTC.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getBeidouEpoch` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                Beidou Epoch
-        
-        
-        """
-        ...
-    def getCcsdsEpoch(self) -> AbsoluteDate:
-        """
-            Reference epoch for CCSDS Time Code Format (CCSDS 301.0-B-4): 1958-01-01T00:00:00 International Atomic Time (*not* UTC).
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getCcsdsEpoch` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                CCSDS Epoch
-        
-        
-        """
-        ...
-    def getFiftiesEpoch(self) -> AbsoluteDate:
-        """
-            Reference epoch for 1950 dates: 1950-01-01T00:00:00 Terrestrial Time.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getFiftiesEpoch` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                Fifties Epoch
-        
-        
-        """
-        ...
-    def getFutureInfinity(self) -> AbsoluteDate:
-        """
-            Dummy date at infinity in the future direction.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getFutureInfinity` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                the latest date.
-        
-        
-        """
-        ...
-    def getGLONASS(self) -> GLONASSScale:
-        """
-            Get the GLObal NAvigation Satellite System time scale.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getGLONASS` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                GLObal NAvigation Satellite System time scale
-        
-        
-        """
-        ...
-    def getGMST(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> GMSTScale:
-        """
-            Get the Greenwich Mean Sidereal Time scale.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getGMST` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Parameters:
-                conventions (:class:`~org.orekit.utils.IERSConventions`): IERS conventions for which EOP parameters will provide dUT1
-                simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
-        
-            Returns:
-                Greenwich Mean Sidereal Time scale
-        
-        
-        """
-        ...
-    def getGPS(self) -> 'GPSScale':
-        """
-            Get the Global Positioning System scale.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getGPS` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                Global Positioning System scale
-        
-        
-        """
-        ...
-    def getGST(self) -> 'GalileoScale':
-        """
-            Get the Galileo System Time scale.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getGST` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                Galileo System Time scale
-        
-        
-        """
-        ...
-    def getGalileoEpoch(self) -> AbsoluteDate:
-        """
-            Reference epoch for Galileo System Time: 1999-08-22T00:00:00 GST.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getGalileoEpoch` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                Galileo Epoch
-        
-        
-        """
-        ...
-    def getGlonassEpoch(self) -> AbsoluteDate:
-        """
-            Reference epoch for GLONASS four-year interval number: 1996-01-01T00:00:00 GLONASS time.
-        
-            By convention, TGLONASS = UTC + 3 hours.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getGlonassEpoch` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                GLONASS Epoch
-        
-        
-        """
-        ...
-    def getGpsEpoch(self) -> AbsoluteDate:
-        """
-            Reference epoch for GPS weeks: 1980-01-06T00:00:00 GPS time.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getGpsEpoch` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                GPS Epoch
-        
-        
-        """
-        ...
-    def getJ2000Epoch(self) -> AbsoluteDate:
-        """
-            J2000.0 Reference epoch: 2000-01-01T12:00:00 Terrestrial Time (*not* UTC).
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getJ2000Epoch` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                J2000 Epoch
-        
-            Also see:
-                :meth:`~org.orekit.time.AbsoluteDate.createJulianEpoch`, :meth:`~org.orekit.time.AbsoluteDate.createBesselianEpoch`
-        
-        
-        """
-        ...
-    def getJavaEpoch(self) -> AbsoluteDate:
-        """
-            Java Reference epoch: 1970-01-01T00:00:00 Universal Time Coordinate.
-        
-            Between 1968-02-01 and 1972-01-01, UTC-TAI = 4.213 170 0s + (MJD - 39 126) x 0.002 592s. As on 1970-01-01 MJD = 40587,
-            UTC-TAI = 8.000082s
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getJavaEpoch` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                Java Epoch
-        
-        
-        """
-        ...
-    def getJulianEpoch(self) -> AbsoluteDate:
-        """
-            Reference epoch for julian dates: -4712-01-01T12:00:00 Terrestrial Time.
-        
-            Both :code:`java.util.Date` and :class:`~org.orekit.time.DateComponents` classes follow the astronomical conventions and
-            consider a year 0 between years -1 and +1, hence this reference date lies in year -4712 and not in year -4713 as can be
-            seen in other documents or programs that obey a different convention (for example the :code:`convcal` utility).
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getJulianEpoch` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                Julian epoch.
-        
-        
-        """
-        ...
-    def getModifiedJulianEpoch(self) -> AbsoluteDate:
-        """
-            Reference epoch for modified julian dates: 1858-11-17T00:00:00 Terrestrial Time.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getModifiedJulianEpoch` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                Modified Julian Epoch
-        
-        
-        """
-        ...
-    def getNavIC(self) -> 'NavicScale':
-        """
-            Get the Navigation with Indian Constellation time scale.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getNavIC` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                Navigation with Indian Constellation time scale
-        
-        
-        """
-        ...
-    def getNavicEpoch(self) -> AbsoluteDate:
-        """
-            Reference epoch for NavIC weeks: 1999-08-22T00:00:00 NavIC time.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getNavicEpoch` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                NavIC Epoch
-        
-        
-        """
-        ...
-    def getPastInfinity(self) -> AbsoluteDate:
-        """
-            Dummy date at infinity in the past direction.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getPastInfinity` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                the earliest date.
-        
-        
-        """
-        ...
-    def getQZSS(self) -> 'QZSSScale':
-        """
-            Get the Quasi-Zenith Satellite System time scale.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getQZSS` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                Quasi-Zenith Satellite System time scale
-        
-        
-        """
-        ...
-    def getQzssEpoch(self) -> AbsoluteDate:
-        """
-            Reference epoch for QZSS weeks: 1980-01-06T00:00:00 QZSS time.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getQzssEpoch` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                QZSS Epoch
-        
-        
-        """
-        ...
-    def getTAI(self) -> 'TAIScale':
-        """
-            Get the International Atomic Time scale.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getTAI` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                International Atomic Time scale
-        
-        
-        """
-        ...
-    def getTCB(self) -> 'TCBScale':
-        """
-            Get the Barycentric Coordinate Time scale.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getTCB` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                Barycentric Coordinate Time scale
-        
-        
-        """
-        ...
-    def getTCG(self) -> 'TCGScale':
-        """
-            Get the Geocentric Coordinate Time scale.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getTCG` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                Geocentric Coordinate Time scale
-        
-        
-        """
-        ...
-    def getTDB(self) -> 'TDBScale':
-        """
-            Get the Barycentric Dynamic Time scale.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getTDB` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                Barycentric Dynamic Time scale
-        
-        
-        """
-        ...
-    def getTT(self) -> 'TTScale':
-        """
-            Get the Terrestrial Time scale.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getTT` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                Terrestrial Time scale
-        
-        
-        """
-        ...
-    def getUT1(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> 'UT1Scale':
-        """
-            Get the Universal Time 1 scale.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getUT1` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Parameters:
-                conventions (:class:`~org.orekit.utils.IERSConventions`): IERS conventions for which EOP parameters will provide dUT1
-                simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
-        
-            Returns:
-                Universal Time 1 scale
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScales.getUTC`, :meth:`~org.orekit.frames.Frames.getEOPHistory`
-        
-        
-        """
-        ...
-    def getUTC(self) -> 'UTCScale':
-        """
-            Get the Universal Time Coordinate scale.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getUTC` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                Universal Time Coordinate scale
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getBDT(self) -> 'BDTScale': ...
+    def getBeidouEpoch(self) -> AbsoluteDate: ...
+    def getCcsdsEpoch(self) -> AbsoluteDate: ...
+    def getFiftiesEpoch(self) -> AbsoluteDate: ...
+    def getFutureInfinity(self) -> AbsoluteDate: ...
+    def getGLONASS(self) -> GLONASSScale: ...
+    def getGMST(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> GMSTScale: ...
+    def getGPS(self) -> 'GPSScale': ...
+    def getGST(self) -> 'GalileoScale': ...
+    def getGalileoEpoch(self) -> AbsoluteDate: ...
+    def getGlonassEpoch(self) -> AbsoluteDate: ...
+    def getGpsEpoch(self) -> AbsoluteDate: ...
+    def getJ2000Epoch(self) -> AbsoluteDate: ...
+    def getJavaEpoch(self) -> AbsoluteDate: ...
+    def getJulianEpoch(self) -> AbsoluteDate: ...
+    def getModifiedJulianEpoch(self) -> AbsoluteDate: ...
+    def getNavIC(self) -> 'NavicScale': ...
+    def getNavicEpoch(self) -> AbsoluteDate: ...
+    def getPastInfinity(self) -> AbsoluteDate: ...
+    def getQZSS(self) -> 'QZSSScale': ...
+    def getQzssEpoch(self) -> AbsoluteDate: ...
+    def getTAI(self) -> 'TAIScale': ...
+    def getTCB(self) -> 'TCBScale': ...
+    def getTCG(self) -> 'TCGScale': ...
+    def getTDB(self) -> 'TDBScale': ...
+    def getTT(self) -> 'TTScale': ...
+    def getUT1(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> 'UT1Scale': ...
+    def getUTC(self) -> 'UTCScale': ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 _PythonTimeShiftable__T = typing.TypeVar('_PythonTimeShiftable__T', bound=TimeShiftable)  # <T>
 class PythonTimeShiftable(TimeShiftable[_PythonTimeShiftable__T], typing.Generic[_PythonTimeShiftable__T]):
-    """
-    public class PythonTimeShiftable<T extends :class:`~org.orekit.time.TimeShiftable`<T>> extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeShiftable`<T>
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     @typing.overload
-    def shiftedBy(self, timeOffset: TimeOffset) -> _PythonTimeShiftable__T:
-        """
-            Get a time-shifted instance.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
-        
-            Parameters:
-                dt (double): time shift in seconds
-        
-            Returns:
-                a new instance, shifted with respect to instance (which is not changed)
-        
-        
-        """
-        ...
+    def shiftedBy(self, timeOffset: TimeOffset) -> _PythonTimeShiftable__T: ...
     @typing.overload
     def shiftedBy(self, double: float) -> _PythonTimeShiftable__T: ...
 
 class PythonTimeStamped(TimeStamped):
-    """
-    public class PythonTimeStamped extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getDate(self) -> AbsoluteDate:
-        """
-            Get the date.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
-        
-            Returns:
-                date attached to the object
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getDate(self) -> AbsoluteDate: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonTimeVectorFunction(TimeVectorFunction):
-    """
-    public class PythonTimeVectorFunction extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeVectorFunction`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def value(self, absoluteDate: AbsoluteDate) -> typing.MutableSequence[float]:
-        """
-            Compute a function of time.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeVectorFunction.value` in interface :class:`~org.orekit.time.TimeVectorFunction`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date
-        
-            Returns:
-                value of the function
-        
-        """
-        ...
+    def value(self, absoluteDate: AbsoluteDate) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def value(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_value_1__T]) -> typing.MutableSequence[_value_1__T]:
-        """
-            Compute a function of time.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeVectorFunction.value` in interface :class:`~org.orekit.time.TimeVectorFunction`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date
-        
-            Returns:
-                value of the function
-        
-        
-        """
-        ...
+    def value(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_value_1__T]) -> typing.MutableSequence[_value_1__T]: ...
 
 class PythonUTCTAIOffsetsLoader(UTCTAIOffsetsLoader):
-    """
-    public class PythonUTCTAIOffsetsLoader extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.UTCTAIOffsetsLoader`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def loadOffsets(self) -> java.util.List[OffsetModel]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class SampledClockModel(ClockModel):
     """
@@ -7067,7 +6356,10 @@ class TimeStampedDouble(TimeStamped):
         Also see:
             :class:`~org.orekit.time.AbsoluteDate`
     """
+    @typing.overload
     def __init__(self, double: float, absoluteDate: AbsoluteDate): ...
+    @typing.overload
+    def __init__(self, absoluteDate: AbsoluteDate, double: float): ...
     def getDate(self) -> AbsoluteDate:
         """
             Get the date.
@@ -7087,6 +6379,16 @@ class TimeStampedDouble(TimeStamped):
         
             Returns:
                 value
+        
+        
+        """
+        ...
+    def toString(self) -> str:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -8095,6 +7397,8 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
         """
         ...
     @typing.overload
+    def durationFrom(self, timeStamped: typing.Union[TimeStamped, typing.Callable]) -> _FieldAbsoluteDate__T: ...
+    @typing.overload
     def durationFrom(self, absoluteDate: AbsoluteDate) -> _FieldAbsoluteDate__T: ...
     @typing.overload
     def durationFrom(self, absoluteDate: AbsoluteDate, timeUnit: java.util.concurrent.TimeUnit) -> _FieldAbsoluteDate__T: ...
@@ -8114,7 +7418,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
                 other (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): other date
         
             Returns:
-                true if the instance and the other date refer to the same instant
+                true if the instance and the other date refer to the same instant with same Field and addendum
         
         
         """
@@ -8516,6 +7820,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
         
         """
         ...
+    def toFUD1Field(self) -> 'FieldAbsoluteDate'[org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1[_FieldAbsoluteDate__T]]: ...
     def toFUD2Field(self) -> 'FieldAbsoluteDate'[org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2[_FieldAbsoluteDate__T]]: ...
     @typing.overload
     def toInstant(self) -> java.time.Instant:
@@ -9020,250 +8325,43 @@ class NavicScale(ConstantOffsetTimeScale):
     ...
 
 class PythonAbstractTimeScales(AbstractTimeScales):
-    """
-    public class PythonAbstractTimeScales extends :class:`~org.orekit.time.AbstractTimeScales`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getBDT(self) -> BDTScale:
-        """
-            Get the BeiDou Navigation Satellite System time scale.
-        
-            Returns:
-                BeiDou Navigation Satellite System time scale
-        
-        
-        """
-        ...
-    def getEopHistory(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> org.orekit.frames.EOPHistory:
-        """
-            Get the EOP history for the given conventions.
-        
-            Specified by:
-                :meth:`~org.orekit.time.AbstractTimeScales.getEopHistory` in class :class:`~org.orekit.time.AbstractTimeScales`
-        
-            Parameters:
-                conventions (:class:`~org.orekit.utils.IERSConventions`): to use in computing the EOP history.
-                simpleEOP (boolean): whether to ignore some small tidal effects.
-        
-            Returns:
-                EOP history.
-        
-        
-        """
-        ...
-    def getGLONASS(self) -> GLONASSScale:
-        """
-            Get the GLObal NAvigation Satellite System time scale.
-        
-            Returns:
-                GLObal NAvigation Satellite System time scale
-        
-        
-        """
-        ...
-    def getGPS(self) -> GPSScale:
-        """
-            Get the Global Positioning System scale.
-        
-            Returns:
-                Global Positioning System scale
-        
-        
-        """
-        ...
-    def getGST(self) -> GalileoScale:
-        """
-            Get the Galileo System Time scale.
-        
-            Returns:
-                Galileo System Time scale
-        
-        
-        """
-        ...
-    def getNavIC(self) -> NavicScale:
-        """
-            Get the Navigation with Indian Constellation time scale.
-        
-            Returns:
-                Navigation with Indian Constellation time scale
-        
-        
-        """
-        ...
-    def getQZSS(self) -> 'QZSSScale':
-        """
-            Get the Quasi-Zenith Satellite System time scale.
-        
-            Returns:
-                Quasi-Zenith Satellite System time scale
-        
-        
-        """
-        ...
-    def getTAI(self) -> 'TAIScale':
-        """
-            Get the International Atomic Time scale.
-        
-            Returns:
-                International Atomic Time scale
-        
-        
-        """
-        ...
-    def getTCB(self) -> TCBScale:
-        """
-            Get the Barycentric Coordinate Time scale.
-        
-            Returns:
-                Barycentric Coordinate Time scale
-        
-        
-        """
-        ...
-    def getTCG(self) -> TCGScale:
-        """
-            Get the Geocentric Coordinate Time scale.
-        
-            Returns:
-                Geocentric Coordinate Time scale
-        
-        
-        """
-        ...
-    def getTDB(self) -> TDBScale:
-        """
-            Get the Barycentric Dynamic Time scale.
-        
-            Returns:
-                Barycentric Dynamic Time scale
-        
-        
-        """
-        ...
-    def getTT(self) -> 'TTScale':
-        """
-            Get the Terrestrial Time scale.
-        
-            Returns:
-                Terrestrial Time scale
-        
-        
-        """
-        ...
+    def getBDT(self) -> BDTScale: ...
+    def getEopHistory(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> org.orekit.frames.EOPHistory: ...
+    def getGLONASS(self) -> GLONASSScale: ...
+    def getGPS(self) -> GPSScale: ...
+    def getGST(self) -> GalileoScale: ...
+    def getNavIC(self) -> NavicScale: ...
+    def getQZSS(self) -> 'QZSSScale': ...
+    def getTAI(self) -> 'TAIScale': ...
+    def getTCB(self) -> TCBScale: ...
+    def getTCG(self) -> TCGScale: ...
+    def getTDB(self) -> TDBScale: ...
+    def getTT(self) -> 'TTScale': ...
     @typing.overload
-    def getUT1(self, eOPHistory: org.orekit.frames.EOPHistory) -> UT1Scale:
-        """
-            Get the Universal Time 1 scale.
-        
-            As this method allow associating any history with the time scale, it may involve large data sets. So this method does
-            *not* cache the resulting :class:`~org.orekit.time.UT1Scale` instance, a new instance will be returned each time. In
-            order to avoid wasting memory, calling :meth:`~org.orekit.time.AbstractTimeScales.getUT1` with the single enumerate
-            corresponding to the conventions may be a better solution. This method is made available only for expert use.
-        
-            Overrides:
-                :meth:`~org.orekit.time.AbstractTimeScales.getUT1` in class :class:`~org.orekit.time.AbstractTimeScales`
-        
-            Parameters:
-                history (:class:`~org.orekit.frames.EOPHistory`): EOP parameters providing dUT1 (may be null if no correction is desired)
-        
-            Returns:
-                Universal Time 1 scale
-        
-            Also see:
-                :meth:`~org.orekit.time.AbstractTimeScales.getUT1`
-        
-        
-        """
-        ...
+    def getUT1(self, eOPHistory: org.orekit.frames.EOPHistory) -> UT1Scale: ...
     @typing.overload
     def getUT1(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> UT1Scale: ...
-    def getUTC(self) -> UTCScale:
-        """
-            Get the Universal Time Coordinate scale.
-        
-            Returns:
-                Universal Time Coordinate scale
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getUTC(self) -> UTCScale: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 _PythonFieldTimeShiftable__T = typing.TypeVar('_PythonFieldTimeShiftable__T', bound=FieldTimeShiftable)  # <T>
 _PythonFieldTimeShiftable__KK = typing.TypeVar('_PythonFieldTimeShiftable__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
 class PythonFieldTimeShiftable(FieldTimeShiftable[_PythonFieldTimeShiftable__T, _PythonFieldTimeShiftable__KK], typing.Generic[_PythonFieldTimeShiftable__T, _PythonFieldTimeShiftable__KK]):
-    """
-    public class PythonFieldTimeShiftable<T extends :class:`~org.orekit.time.FieldTimeShiftable`<T, KK>, KK extends :class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<KK>> extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.FieldTimeShiftable`<T, KK>
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     @typing.overload
-    def shiftedBy(self, timeOffset: TimeOffset) -> _PythonFieldTimeShiftable__T:
-        """
-            Get a time-shifted instance.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
-        
-            Parameters:
-                dt (double): time shift in seconds
-        
-            Returns:
-                a new instance, shifted with respect to instance (which is not changed)
-        
-            Get a time-shifted instance. Calls the ShiftedByType Python extension method
-        
-            Specified by:
-                :meth:`~org.orekit.time.FieldTimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.FieldTimeShiftable`
-        
-            Parameters:
-                dt (:class:`~org.orekit.time.PythonFieldTimeShiftable`): time shift in seconds
-        
-            Returns:
-                a new instance, shifted with respect to instance (which is not changed)
-        
-        
-        """
-        ...
+    def shiftedBy(self, timeOffset: TimeOffset) -> _PythonFieldTimeShiftable__T: ...
     @typing.overload
     def shiftedBy(self, double: float) -> _PythonFieldTimeShiftable__T: ...
     @typing.overload
@@ -9326,13 +8424,25 @@ class TimeStampedDoubleAndDerivative(TimeStampedDouble):
         Since:
             12.1
     """
+    @typing.overload
     def __init__(self, double: float, double2: float, absoluteDate: AbsoluteDate): ...
+    @typing.overload
+    def __init__(self, absoluteDate: AbsoluteDate, double: float, double2: float): ...
     def getDerivative(self) -> float:
         """
             Get time derivative.
         
             Returns:
-                time derivztive
+                time derivative
+        
+        
+        """
+        ...
+    def toString(self) -> str:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.time.TimeStampedDouble.toString` in class :class:`~org.orekit.time.TimeStampedDouble`
         
         
         """
@@ -9446,6 +8556,7 @@ class __module_protocol__(Protocol):
     PythonFieldTimeStamped: typing.Type[PythonFieldTimeStamped]
     PythonParser: typing.Type[PythonParser]
     PythonTimeInterpolator: typing.Type[PythonTimeInterpolator]
+    PythonTimeInterval: typing.Type[PythonTimeInterval]
     PythonTimeScalarFunction: typing.Type[PythonTimeScalarFunction]
     PythonTimeScale: typing.Type[PythonTimeScale]
     PythonTimeScales: typing.Type[PythonTimeScales]
@@ -9464,6 +8575,7 @@ class __module_protocol__(Protocol):
     TTScale: typing.Type[TTScale]
     TimeComponents: typing.Type[TimeComponents]
     TimeInterpolator: typing.Type[TimeInterpolator]
+    TimeInterval: typing.Type[TimeInterval]
     TimeOffset: typing.Type[TimeOffset]
     TimeScalarFunction: typing.Type[TimeScalarFunction]
     TimeScale: typing.Type[TimeScale]

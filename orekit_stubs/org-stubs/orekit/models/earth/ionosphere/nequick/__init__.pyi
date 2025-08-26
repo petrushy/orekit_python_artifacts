@@ -106,9 +106,9 @@ class FourierTimeSeries:
         """
         ...
 
-class NeQuickModel(org.orekit.models.earth.ionosphere.IonosphericModel):
+class NeQuickModel(org.orekit.models.earth.ionosphere.IonosphericModel, org.orekit.models.earth.ionosphere.IonosphericDelayModel):
     """
-    public abstract class NeQuickModel extends :class:`~org.orekit.models.earth.ionosphere.nequick.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+    public abstract class NeQuickModel extends :class:`~org.orekit.models.earth.ionosphere.nequick.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`, :class:`~org.orekit.models.earth.ionosphere.IonosphericDelayModel`
     
         NeQuick ionospheric delay model.
     
@@ -255,7 +255,8 @@ class NeQuickModel(org.orekit.models.earth.ionosphere.IonosphericModel):
         
         """
         ...
-    _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _pathDelay_2__T = typing.TypeVar('_pathDelay_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _pathDelay_3__T = typing.TypeVar('_pathDelay_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
@@ -280,10 +281,34 @@ class NeQuickModel(org.orekit.models.earth.ionosphere.IonosphericModel):
             Returns:
                 the path delay due to the ionosphere in m
         
+            Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
+        
+            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
+            path delay will be equal to zero.
+        
+            For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
+            implemented to compute the path delay for any elevation angle.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericDelayModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericDelayModel`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
+                baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
+                receptionDate (:class:`~org.orekit.time.AbsoluteDate`): date at signal reception
+                frequency (double): frequency of the signal in Hz
+                parameters (double[]): ionospheric model parameters at state date
+        
+            Returns:
+                the path delay due to the ionosphere in m
+        
         """
         ...
     @typing.overload
-    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_1__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.Union[typing.List[_pathDelay_1__T], jpype.JArray]) -> _pathDelay_1__T:
+    def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, absoluteDate: org.orekit.time.AbsoluteDate, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    @typing.overload
+    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_2__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.Union[typing.List[_pathDelay_2__T], jpype.JArray]) -> _pathDelay_2__T:
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
@@ -306,9 +331,33 @@ class NeQuickModel(org.orekit.models.earth.ionosphere.IonosphericModel):
             Returns:
                 the path delay due to the ionosphere in m
         
+            Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
+        
+            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
+            path delay will be equal to zero.
+        
+            For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
+            implemented to compute the path delay for any elevation angle.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericDelayModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericDelayModel`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
+                baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
+                receptionDate (:class:`~org.orekit.time.FieldAbsoluteDate`<T> receptionDate): date at signal reception
+                frequency (double): frequency of the signal in Hz
+                parameters (T[]): ionospheric model parameters at state date
+        
+            Returns:
+                the path delay due to the ionosphere in m
+        
         
         """
         ...
+    @typing.overload
+    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_3__T], topocentricFrame: org.orekit.frames.TopocentricFrame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_3__T], double: float, tArray: typing.Union[typing.List[_pathDelay_3__T], jpype.JArray]) -> _pathDelay_3__T: ...
     _stec_1__T = typing.TypeVar('_stec_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def stec(self, absoluteDate: org.orekit.time.AbsoluteDate, geodeticPoint: org.orekit.bodies.GeodeticPoint, geodeticPoint2: org.orekit.bodies.GeodeticPoint) -> float:

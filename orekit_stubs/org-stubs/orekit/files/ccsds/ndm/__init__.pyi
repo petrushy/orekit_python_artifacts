@@ -1029,140 +1029,30 @@ class ParserBuilder(AbstractBuilder['ParserBuilder']):
 
 _PythonAbstractBuilder__T = typing.TypeVar('_PythonAbstractBuilder__T', bound=AbstractBuilder)  # <T>
 class PythonAbstractBuilder(AbstractBuilder[_PythonAbstractBuilder__T], typing.Generic[_PythonAbstractBuilder__T]):
-    """
-    public class PythonAbstractBuilder<T extends :class:`~org.orekit.files.ccsds.ndm.AbstractBuilder`<T>> extends :class:`~org.orekit.files.ccsds.ndm.AbstractBuilder`<T>
-    """
     def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, double: float, double2: float, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, rangeUnitsConverter: org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter): ...
-    def create(self, iERSConventions: org.orekit.utils.IERSConventions, double: float, double2: float, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, rangeUnitsConverter: org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter) -> _PythonAbstractBuilder__T:
-        """
-            Build an instance.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.ndm.AbstractBuilder.create` in
-                class :class:`~org.orekit.files.ccsds.ndm.AbstractBuilder`
-        
-            Parameters:
-                newConventions (:class:`~org.orekit.utils.IERSConventions`): IERS Conventions
-                newEquatorialRadius (double): central body equatorial radius
-                newFlattening (double): central body flattening
-                newDataContext (:class:`~org.orekit.data.DataContext`): used to retrieve frames, time scales, etc.
-                newMissionReferenceDate (:class:`~org.orekit.time.AbsoluteDate`): reference date for Mission Elapsed Time or Mission Relative Time time systems
-                newRangeUnitsConverter (:class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`): converter for :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`
-        
-            Returns:
-                new instance
-        
-        
-        """
-        ...
+    def create(self, iERSConventions: org.orekit.utils.IERSConventions, double: float, double2: float, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, rangeUnitsConverter: org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter) -> _PythonAbstractBuilder__T: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 _PythonNdmConstituent__H = typing.TypeVar('_PythonNdmConstituent__H', bound=org.orekit.files.ccsds.section.Header)  # <H>
 _PythonNdmConstituent__S = typing.TypeVar('_PythonNdmConstituent__S', bound=org.orekit.files.ccsds.section.Segment)  # <S>
 class PythonNdmConstituent(NdmConstituent[_PythonNdmConstituent__H, _PythonNdmConstituent__S], typing.Generic[_PythonNdmConstituent__H, _PythonNdmConstituent__S]):
-    """
-    public class PythonNdmConstituent<H extends :class:`~org.orekit.files.ccsds.section.Header`, S extends :class:`~org.orekit.files.ccsds.section.Segment`<?, ?>> extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H, S>
-    """
     def __init__(self, h: _PythonNdmConstituent__H, list: java.util.List[_PythonNdmConstituent__S], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext): ...
     def finalize(self) -> None: ...
-    def getConventions(self) -> org.orekit.utils.IERSConventions:
-        """
-            Get IERS conventions.
-        
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getConventions` in
-                class :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
-        
-            Returns:
-                IERS conventions
-        
-        
-        """
-        ...
-    def getDataContext(self) -> org.orekit.data.DataContext:
-        """
-            Get the data context.
-        
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getDataContext` in
-                class :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
-        
-            Returns:
-                the data context used for creating frames, time scales, etc.
-        
-        
-        """
-        ...
-    def getHeader(self) -> _PythonNdmConstituent__H:
-        """
-            Get the header.
-        
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getHeader` in
-                class :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
-        
-            Returns:
-                header
-        
-            Since:
-                11.0
-        
-        
-        """
-        ...
+    def getConventions(self) -> org.orekit.utils.IERSConventions: ...
+    def getDataContext(self) -> org.orekit.data.DataContext: ...
+    def getHeader(self) -> _PythonNdmConstituent__H: ...
     def getSegments(self) -> java.util.List[_PythonNdmConstituent__S]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def validate(self) -> None:
-        """
-            Validate the file message for required and forbidden entries.
-        
-            This method throws an exception if file does not meet format requirements. The requirements may depend on format
-            version, which is found in header.
-        
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.validate` in
-                class :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def validate(self) -> None: ...
 
 class WriterBuilder(AbstractBuilder['WriterBuilder']):
     """

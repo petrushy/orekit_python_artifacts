@@ -262,6 +262,18 @@ class AbstractAnalyticalPropagator(org.orekit.propagation.AbstractPropagator):
         
         """
         ...
+    def clearMatricesComputation(self) -> None:
+        """
+            Description copied from class: :meth:`~org.orekit.propagation.AbstractPropagator.clearMatricesComputation`
+            Erases the internal matrices harvester.
+        
+            Overrides:
+                :meth:`~org.orekit.propagation.AbstractPropagator.clearMatricesComputation` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
+        
+        
+        """
+        ...
     def getEphemerisGenerator(self) -> org.orekit.propagation.EphemerisGenerator:
         """
             Set up an ephemeris generator that will monitor the propagation for building an ephemeris from it once completed.
@@ -557,12 +569,12 @@ class AggregateBoundedPropagator(AbstractAnalyticalPropagator, org.orekit.propag
         ...
     def getMaxDate(self) -> org.orekit.time.AbsoluteDate:
         """
-            Description copied from interface: :meth:`~org.orekit.propagation.BoundedPropagator.getMaxDate`
+            Description copied from interface: :meth:`~org.orekit.utils.BoundedPVCoordinatesProvider.getMaxDate`
             Get the last date of the range.
         
             Specified by:
-                :meth:`~org.orekit.propagation.BoundedPropagator.getMaxDate` in
-                interface :class:`~org.orekit.propagation.BoundedPropagator`
+                :meth:`~org.orekit.utils.BoundedPVCoordinatesProvider.getMaxDate` in
+                interface :class:`~org.orekit.utils.BoundedPVCoordinatesProvider`
         
             Returns:
                 the last date of the range
@@ -572,12 +584,12 @@ class AggregateBoundedPropagator(AbstractAnalyticalPropagator, org.orekit.propag
         ...
     def getMinDate(self) -> org.orekit.time.AbsoluteDate:
         """
-            Description copied from interface: :meth:`~org.orekit.propagation.BoundedPropagator.getMinDate`
+            Description copied from interface: :meth:`~org.orekit.utils.BoundedPVCoordinatesProvider.getMinDate`
             Get the first date of the range.
         
             Specified by:
-                :meth:`~org.orekit.propagation.BoundedPropagator.getMinDate` in
-                interface :class:`~org.orekit.propagation.BoundedPropagator`
+                :meth:`~org.orekit.utils.BoundedPVCoordinatesProvider.getMinDate` in
+                interface :class:`~org.orekit.utils.BoundedPVCoordinatesProvider`
         
             Returns:
                 the first date of the range
@@ -1458,8 +1470,8 @@ class Ephemeris(AbstractAnalyticalPropagator, org.orekit.propagation.BoundedProp
             Get the last date of the range.
         
             Specified by:
-                :meth:`~org.orekit.propagation.BoundedPropagator.getMaxDate` in
-                interface :class:`~org.orekit.propagation.BoundedPropagator`
+                :meth:`~org.orekit.utils.BoundedPVCoordinatesProvider.getMaxDate` in
+                interface :class:`~org.orekit.utils.BoundedPVCoordinatesProvider`
         
             Returns:
                 the last date of the range
@@ -1472,8 +1484,8 @@ class Ephemeris(AbstractAnalyticalPropagator, org.orekit.propagation.BoundedProp
             Get the first date of the range.
         
             Specified by:
-                :meth:`~org.orekit.propagation.BoundedPropagator.getMinDate` in
-                interface :class:`~org.orekit.propagation.BoundedPropagator`
+                :meth:`~org.orekit.utils.BoundedPVCoordinatesProvider.getMinDate` in
+                interface :class:`~org.orekit.utils.BoundedPVCoordinatesProvider`
         
             Returns:
                 the first date of the range
@@ -2044,149 +2056,39 @@ class PythonAbstractAnalyticalGradientConverter(AbstractAnalyticalGradientConver
     def pythonExtension(self, long: int) -> None: ...
 
 class PythonAbstractAnalyticalMatricesHarvester(AbstractAnalyticalMatricesHarvester):
-    """
-    public class PythonAbstractAnalyticalMatricesHarvester extends :class:`~org.orekit.propagation.analytical.AbstractAnalyticalMatricesHarvester`
-    """
     def __init__(self, abstractAnalyticalPropagator: AbstractAnalyticalPropagator, string: str, realMatrix: org.hipparchus.linear.RealMatrix, doubleArrayDictionary: org.orekit.utils.DoubleArrayDictionary): ...
     def finalize(self) -> None: ...
-    def getGradientConverter(self) -> AbstractAnalyticalGradientConverter:
-        """
-            Get the gradient converter related to the analytical orbit propagator.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalMatricesHarvester.getGradientConverter` in
-                class :class:`~org.orekit.propagation.analytical.AbstractAnalyticalMatricesHarvester`
-        
-            Returns:
-                the gradient converter
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getGradientConverter(self) -> AbstractAnalyticalGradientConverter: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonAbstractAnalyticalPropagator(AbstractAnalyticalPropagator):
-    """
-    public class PythonAbstractAnalyticalPropagator extends :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
-    """
     def __init__(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
     def finalize(self) -> None: ...
-    def getMass(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Get the mass. Extension point for Python.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.getMass` in
-                class :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): target date for the orbit
-        
-            Returns:
-                mass mass
-        
-        
-        """
-        ...
-    def propagateOrbit(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.orbits.Orbit:
-        """
-            Extrapolate an orbit up to a specific target date. Extension point for Python.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.propagateOrbit` in
-                class :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): target date for the orbit
-        
-            Returns:
-                extrapolated parameters
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getMass(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
+    def propagateOrbit(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.orbits.Orbit: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def resetIntermediateState(self, spacecraftState: org.orekit.propagation.SpacecraftState, boolean: bool) -> None:
-        """
-            Reset an intermediate state. Extension point for Python.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.resetIntermediateState` in
-                class :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): new intermediate state to consider
-                forward (boolean): if true, the intermediate state is valid for
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def resetIntermediateState(self, spacecraftState: org.orekit.propagation.SpacecraftState, boolean: bool) -> None: ...
 
 _PythonFieldAbstractAnalyticalPropagator__T = typing.TypeVar('_PythonFieldAbstractAnalyticalPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldAbstractAnalyticalPropagator(FieldAbstractAnalyticalPropagator[_PythonFieldAbstractAnalyticalPropagator__T], typing.Generic[_PythonFieldAbstractAnalyticalPropagator__T]):
-    """
-    public class PythonFieldAbstractAnalyticalPropagator<T extends :class:`~org.orekit.propagation.analytical.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator`<T>
-    """
     def __init__(self, field: org.hipparchus.Field[_PythonFieldAbstractAnalyticalPropagator__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
     def finalize(self) -> None: ...
     def getMass(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldAbstractAnalyticalPropagator__T]) -> _PythonFieldAbstractAnalyticalPropagator__T: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def propagateOrbit(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldAbstractAnalyticalPropagator__T], tArray: typing.Union[typing.List[_PythonFieldAbstractAnalyticalPropagator__T], jpype.JArray]) -> org.orekit.orbits.FieldOrbit[_PythonFieldAbstractAnalyticalPropagator__T]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     def resetIntermediateState(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldAbstractAnalyticalPropagator__T], boolean: bool) -> None: ...
 
 class J2DifferentialEffect(AdapterPropagator.DifferentialEffect):
@@ -2246,50 +2148,14 @@ class J2DifferentialEffect(AdapterPropagator.DifferentialEffect):
     def apply(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.SpacecraftState: ...
 
 class PythonDifferentialEffect(AdapterPropagator.DifferentialEffect):
-    """
-    public class PythonDifferentialEffect extends :class:`~org.orekit.propagation.analytical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.analytical.AdapterPropagator.DifferentialEffect`
-    """
     def __init__(self): ...
-    def apply(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.SpacecraftState:
-        """
-            Apply the effect to a :class:`~org.orekit.propagation.SpacecraftState`.
-        
-            Applying the effect may be a no-op in some cases. A typical example is maneuvers, for which the state is changed only
-            for time *after* the maneuver occurrence.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.AdapterPropagator.DifferentialEffect.apply` in
-                interface :class:`~org.orekit.propagation.analytical.AdapterPropagator.DifferentialEffect`
-        
-            Parameters:
-                original (:class:`~org.orekit.propagation.SpacecraftState`): original state *without* the effect
-        
-            Returns:
-                updated state at the same date, taking the effect into account if meaningful
-        
-        
-        """
-        ...
+    def apply(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.SpacecraftState: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 
 class __module_protocol__(Protocol):

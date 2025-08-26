@@ -5,6 +5,7 @@ if sys.version_info >= (3, 8):
 else:
     from typing_extensions import Protocol
 
+import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.estimation.measurements
 import org.orekit.frames
@@ -405,18 +406,114 @@ class IodGooding:
         """
         ...
 
+class IodHerrickGibbs:
+    """
+    public class IodHerrickGibbs extends :class:`~org.orekit.estimation.iod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        HerrickGibbs position-based Initial Orbit Determination (IOD) algorithm.
+    
+        An orbit is determined from three position vectors. Because Gibbs IOD algorithm is limited when the position vectors are
+        to close to one other, Herrick-Gibbs IOD algorithm is a variation made to address this limitation. Because this method
+        is only approximate, it is not robust as the Gibbs method for other cases.
+    
+        Since:
+            13.1
+    
+        Also see:
+            "Vallado, D., Fundamentals of Astrodynamics and Applications, 4th Edition."
+    """
+    def __init__(self, double: float): ...
+    _estimate_0__T = typing.TypeVar('_estimate_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def estimate(self, frame: org.orekit.frames.Frame, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_estimate_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_estimate_0__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_estimate_0__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_estimate_0__T], fieldVector3D3: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_estimate_0__T], fieldAbsoluteDate3: org.orekit.time.FieldAbsoluteDate[_estimate_0__T]) -> org.orekit.orbits.FieldOrbit[_estimate_0__T]:
+        """
+            Give an initial orbit estimation, assuming Keplerian motion.
+        
+            All observations should be from the same location.
+        
+            Parameters:
+                frame (:class:`~org.orekit.frames.Frame`): measurements frame, used as output orbit frame
+                r1 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> r1): position vector 1, expressed in frame
+                date1 (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date1): epoch of position vector 1
+                r2 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> r2): position vector 2, expressed in frame
+                date2 (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date2): epoch of position vector 2
+                r3 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> r3): position vector 3, expressed in frame
+                date3 (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date3): epoch of position vector 3
+        
+            Returns:
+                an initial orbit estimation at the central date (i.e., date of the second position measurement)
+        
+        
+        """
+        ...
+    @typing.overload
+    def estimate(self, frame: org.orekit.frames.Frame, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate2: org.orekit.time.AbsoluteDate, vector3D3: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate3: org.orekit.time.AbsoluteDate) -> org.orekit.orbits.Orbit:
+        """
+            Give an initial orbit estimation, assuming Keplerian motion.
+        
+            All observations should be from the same location.
+        
+            Parameters:
+                frame (:class:`~org.orekit.frames.Frame`): measurements frame, used as output orbit frame
+                r1 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position vector 1, expressed in frame
+                date1 (:class:`~org.orekit.time.AbsoluteDate`): epoch of position vector 1
+                r2 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position vector 2, expressed in frame
+                date2 (:class:`~org.orekit.time.AbsoluteDate`): epoch of position vector 2
+                r3 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position vector 3, expressed in frame
+                date3 (:class:`~org.orekit.time.AbsoluteDate`): epoch of position vector 3
+        
+            Returns:
+                an initial orbit estimation at the central date (i.e., date of the second position measurement)
+        
+        """
+        ...
+    @typing.overload
+    def estimate(self, frame: org.orekit.frames.Frame, pV: org.orekit.estimation.measurements.PV, pV2: org.orekit.estimation.measurements.PV, pV3: org.orekit.estimation.measurements.PV) -> org.orekit.orbits.Orbit:
+        """
+            Give an initial orbit estimation, assuming Keplerian motion.
+        
+            All observations should be from the same location.
+        
+            Parameters:
+                frame (:class:`~org.orekit.frames.Frame`): measurements frame, used as output orbit frame
+                p1 (:class:`~org.orekit.estimation.measurements.Position`): First position measurement
+                p2 (:class:`~org.orekit.estimation.measurements.Position`): Second position measurement
+                p3 (:class:`~org.orekit.estimation.measurements.Position`): Third position measurement
+        
+            Returns:
+                an initial orbit estimation at the central date (i.e., date of the second position measurement)
+        
+            Give an initial orbit estimation, assuming Keplerian motion.
+        
+            All observations should be from the same location.
+        
+            Parameters:
+                frame (:class:`~org.orekit.frames.Frame`): measurements frame, used as output orbit frame
+                pv1 (:class:`~org.orekit.estimation.measurements.PV`): First PV measurement
+                pv2 (:class:`~org.orekit.estimation.measurements.PV`): Second PV measurement
+                pv3 (:class:`~org.orekit.estimation.measurements.PV`): Third PV measurement
+        
+            Returns:
+                an initial orbit estimation at the central date (i.e., date of the second PV measurement)
+        
+        """
+        ...
+    @typing.overload
+    def estimate(self, frame: org.orekit.frames.Frame, position: org.orekit.estimation.measurements.Position, position2: org.orekit.estimation.measurements.Position, position3: org.orekit.estimation.measurements.Position) -> org.orekit.orbits.Orbit: ...
+
 class IodLambert:
     """
     public class IodLambert extends :class:`~org.orekit.estimation.iod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Lambert position-based Initial Orbit Determination (IOD) algorithm, assuming Keplerian motion.
     
-        An orbit is determined from two position vectors. References: Battin, R.H., An Introduction to the Mathematics and
-        Methods of Astrodynamics, AIAA Education, 1999. Lancaster, E.R. and Blanchard, R.C., A Unified Form of Lambert’s
-        Theorem, Goddard Space Flight Center, 1968.
+        An orbit is determined from two position vectors.
     
         Since:
             8.0
+    
+        Also see:
+            :class:`~org.orekit.control.heuristics.lambert.LambertSolver`
     """
     def __init__(self, double: float): ...
     @typing.overload
@@ -592,5 +689,6 @@ class __module_protocol__(Protocol):
     IodGauss: typing.Type[IodGauss]
     IodGibbs: typing.Type[IodGibbs]
     IodGooding: typing.Type[IodGooding]
+    IodHerrickGibbs: typing.Type[IodHerrickGibbs]
     IodLambert: typing.Type[IodLambert]
     IodLaplace: typing.Type[IodLaplace]

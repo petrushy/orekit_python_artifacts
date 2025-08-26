@@ -2040,286 +2040,61 @@ class NiellMappingFunctionModel(TroposphereMappingFunction):
         ...
 
 class PythonAzimuthalGradientProvider(AzimuthalGradientProvider):
-    """
-    public class PythonAzimuthalGradientProvider extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.AzimuthalGradientProvider`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     _getGradientCoefficients_1__T = typing.TypeVar('_getGradientCoefficients_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getGradientCoefficients(self, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> AzimuthalGradientCoefficients:
-        """
-            Get azimuthal asymmetry gradients.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.AzimuthalGradientProvider.getGradientCoefficients` in
-                interface :class:`~org.orekit.models.earth.troposphere.AzimuthalGradientProvider`
-        
-            Parameters:
-                location (:class:`~org.orekit.bodies.GeodeticPoint`): location at which parameters are requested
-                date (:class:`~org.orekit.time.AbsoluteDate`): date at which parameters are requested
-        
-            Returns:
-                azimuthal asymmetry gradients or null if no gradients are available
-        
-        """
-        ...
+    def getGradientCoefficients(self, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> AzimuthalGradientCoefficients: ...
     @typing.overload
-    def getGradientCoefficients(self, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_getGradientCoefficients_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getGradientCoefficients_1__T]) -> FieldAzimuthalGradientCoefficients[_getGradientCoefficients_1__T]:
-        """
-            Get azimuthal asymmetry gradients.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.AzimuthalGradientProvider.getGradientCoefficients` in
-                interface :class:`~org.orekit.models.earth.troposphere.AzimuthalGradientProvider`
-        
-            Parameters:
-                location (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> location): location at which parameters are requested
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date at which parameters are requested
-        
-            Returns:
-                azimuthal asymmetry gradients or null if no gradients are available
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getGradientCoefficients(self, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_getGradientCoefficients_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getGradientCoefficients_1__T]) -> FieldAzimuthalGradientCoefficients[_getGradientCoefficients_1__T]: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonTroposphereMappingFunction(TroposphereMappingFunction):
-    """
-    public class PythonTroposphereMappingFunction extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
-        """
-            This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
-            having the following form:
-        
-              - double[0] = m :sub:`h` (e) → hydrostatic mapping function
-              - double[1] = m :sub:`w` (e) → wet mapping function
-        
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction.mappingFactors` in
-                interface :class:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction`
-        
-            Parameters:
-                trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                a two components array containing the hydrostatic and wet mapping functions.
-        
-        """
-        ...
+    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.MutableSequence[_mappingFactors_1__T]:
-        """
-            This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
-            having the following form:
-        
-              - T[0] = m :sub:`h` (e) → hydrostatic mapping function
-              - T[1] = m :sub:`w` (e) → wet mapping function
-        
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction.mappingFactors` in
-                interface :class:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction`
-        
-            Parameters:
-                trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                a two components array containing the hydrostatic and wet mapping functions.
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.MutableSequence[_mappingFactors_1__T]: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonTroposphericModel(TroposphericModel):
-    """
-    public class PythonTroposphericModel extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.TroposphericModel`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _pathDelay_0__T = typing.TypeVar('_pathDelay_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], tArray: typing.Union[typing.List[_pathDelay_0__T], jpype.JArray], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
-        """
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.TroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.TroposphericModel`
-        
-            Parameters:
-                trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters at current date
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                the path delay due to the troposphere
-        
-        
-        """
-        ...
+    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], tArray: typing.Union[typing.List[_pathDelay_0__T], jpype.JArray], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]: ...
     @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.Union[typing.List[float], jpype.JArray], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
-        """
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.TroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.TroposphericModel`
-        
-            Parameters:
-                trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                parameters (double[]): tropospheric model parameters
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                the path delay due to the troposphere
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.Union[typing.List[float], jpype.JArray], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonViennaAProvider(ViennaAProvider):
-    """
-    public class PythonViennaAProvider extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.ViennaAProvider`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     _getA_0__T = typing.TypeVar('_getA_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getA(self, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_getA_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getA_0__T]) -> FieldViennaACoefficients[_getA_0__T]:
-        """
-            Description copied from interface: :meth:`~org.orekit.models.earth.troposphere.ViennaAProvider.getA`
-            Get coefficients array for VMF mapping function.
-        
-              - double[0] = a :sub:`h`
-              - double[1] = a :sub:`w`
-        
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.ViennaAProvider.getA` in
-                interface :class:`~org.orekit.models.earth.troposphere.ViennaAProvider`
-        
-            Parameters:
-                location (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> location): location at which parameters are requested
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date at which parameters are requested
-        
-            Returns:
-                the coefficients array for VMF mapping function
-        
-        
-        """
-        ...
+    def getA(self, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_getA_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getA_0__T]) -> FieldViennaACoefficients[_getA_0__T]: ...
     @typing.overload
-    def getA(self, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> ViennaACoefficients:
-        """
-            Get coefficients array for VMF mapping function.
-        
-              - double[0] = a :sub:`h`
-              - double[1] = a :sub:`w`
-        
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.ViennaAProvider.getA` in
-                interface :class:`~org.orekit.models.earth.troposphere.ViennaAProvider`
-        
-            Parameters:
-                location (:class:`~org.orekit.bodies.GeodeticPoint`): location at which parameters are requested
-                date (:class:`~org.orekit.time.AbsoluteDate`): date at which parameters are requested
-        
-            Returns:
-                the coefficients array for VMF mapping function
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getA(self, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> ViennaACoefficients: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class TimeSpanEstimatedModel(TroposphericModel):
     """
@@ -2504,76 +2279,18 @@ class ChaoMappingFunction(AbstractChaoMappingFunction):
     def __init__(self): ...
 
 class PythonAbstractVienna(AbstractVienna):
-    """
-    public class PythonAbstractVienna extends :class:`~org.orekit.models.earth.troposphere.AbstractVienna`
-    """
     def __init__(self, viennaAProvider: ViennaAProvider, azimuthalGradientProvider: AzimuthalGradientProvider, troposphericModel: TroposphericModel, timeScale: org.orekit.time.TimeScale): ...
     def finalize(self) -> None: ...
     _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
-        """
-            Description copied from
-            interface: :meth:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction.mappingFactors`
-            This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
-            having the following form:
-        
-              - double[0] = m :sub:`h` (e) → hydrostatic mapping function
-              - double[1] = m :sub:`w` (e) → wet mapping function
-        
-        
-            Parameters:
-                trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                a two components array containing the hydrostatic and wet mapping functions.
-        
-        """
-        ...
+    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.MutableSequence[_mappingFactors_1__T]:
-        """
-            Description copied from
-            interface: :meth:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction.mappingFactors`
-            This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
-            having the following form:
-        
-              - T[0] = m :sub:`h` (e) → hydrostatic mapping function
-              - T[1] = m :sub:`w` (e) → wet mapping function
-        
-        
-            Parameters:
-                trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                a two components array containing the hydrostatic and wet mapping functions.
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.MutableSequence[_mappingFactors_1__T]: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class RevisedChaoMappingFunction(AbstractChaoMappingFunction):
     """

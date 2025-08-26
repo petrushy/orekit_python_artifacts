@@ -166,44 +166,14 @@ class ElevationFilter(MeasurementFilter[_ElevationFilter__T], typing.Generic[_El
 
 _PythonMeasurementFilter__T = typing.TypeVar('_PythonMeasurementFilter__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class PythonMeasurementFilter(MeasurementFilter[_PythonMeasurementFilter__T], typing.Generic[_PythonMeasurementFilter__T]):
-    """
-    public class PythonMeasurementFilter<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.filtering.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.filtering.MeasurementFilter`<T>
-    
-        Interface for measurement pre-processing filter.
-    
-        Pre-processing filters are used to disabled measurements before they are used during an orbit determination process.
-        Example of pre-processing filters are:
-    
-          - Minimum satellite elevation
-          - Minimum value of the signal-to-noise ratio
-          - Measurement residual
-    
-    
-        Since:
-            10.2
-    """
     def __init__(self): ...
     def filter(self, observedMeasurement: org.orekit.estimation.measurements.ObservedMeasurement[_PythonMeasurementFilter__T], spacecraftState: org.orekit.propagation.SpacecraftState) -> None: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 _ResidualFilter__T = typing.TypeVar('_ResidualFilter__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class ResidualFilter(MeasurementFilter[_ResidualFilter__T], typing.Generic[_ResidualFilter__T]):
@@ -258,29 +228,12 @@ class DualFrequencyHatchFilter(org.orekit.estimation.measurements.filtering.Hatc
     def getSecondFrequencyPhaseHistory(self) -> java.util.ArrayList[float]: ...
 
 class PythonHatchFilter(org.orekit.estimation.measurements.filtering.HatchFilter):
-    """
-    public class PythonHatchFilter extends :class:`~org.orekit.estimation.measurements.filtering.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    """
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class SingleFrequencyHatchFilter(org.orekit.estimation.measurements.filtering.HatchFilter):
     """

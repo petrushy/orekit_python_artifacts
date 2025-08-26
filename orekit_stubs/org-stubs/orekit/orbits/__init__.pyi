@@ -1253,6 +1253,10 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
         
         """
         ...
+    @typing.overload
+    def getVelocity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldOrbit__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldOrbit__T]: ...
+    @typing.overload
+    def getVelocity(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldOrbit__T]: ...
     def hasNonKeplerianAcceleration(self) -> bool:
         """
             Check if orbit includes non-Keplerian rates.
@@ -2235,6 +2239,25 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         
             Returns:
                 orbit type
+        
+        
+        """
+        ...
+    @typing.overload
+    def getVelocity(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    @typing.overload
+    def getVelocity(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the velocity in definition frame.
+        
+            Returns:
+                velocity in the definition frame
+        
+            Since:
+                13.1
+        
+            Also see:
+                :meth:`~org.orekit.orbits.Orbit.getPVCoordinates`
         
         
         """
@@ -7857,648 +7880,72 @@ class OrbitHermiteInterpolator(AbstractOrbitInterpolator):
         ...
 
 class PythonLibrationOrbit(LibrationOrbit):
-    """
-    public class PythonLibrationOrbit extends :class:`~org.orekit.orbits.LibrationOrbit`
-    """
     def __init__(self, cR3BPSystem: org.orekit.bodies.CR3BPSystem, pVCoordinates: org.orekit.utils.PVCoordinates, double: float): ...
-    def applyCorrectionOnPV(self, cR3BPDifferentialCorrection: CR3BPDifferentialCorrection) -> org.orekit.utils.PVCoordinates:
-        """
-            Apply the differential correction to compute more accurate initial PV.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.LibrationOrbit.applyCorrectionOnPV` in class :class:`~org.orekit.orbits.LibrationOrbit`
-        
-            Parameters:
-                diff (:class:`~org.orekit.orbits.CR3BPDifferentialCorrection`): cr3bp differential correction
-        
-            Returns:
-                corrected PV coordinates
-        
-        
-        """
-        ...
+    def applyCorrectionOnPV(self, cR3BPDifferentialCorrection: CR3BPDifferentialCorrection) -> org.orekit.utils.PVCoordinates: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonOrbit(Orbit):
-    """
-    public class PythonOrbit extends :class:`~org.orekit.orbits.Orbit`
-    """
     @typing.overload
     def __init__(self, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double: float): ...
     @typing.overload
     def __init__(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame, double: float): ...
-    def addKeplerContribution(self, positionAngleType: PositionAngleType, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
-        """
-            Add the contribution of the Keplerian motion to parameters derivatives
-        
-            This method is used by integration-based propagators to evaluate the part of Keplerian motion to evolution of the
-            orbital state.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.addKeplerContribution` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the position angle in the state
-                gm (double): attraction coefficient to use
-                pDot (double[]): array containing orbital state derivatives to update (the Keplerian part must be *added* to the array components, as the
-                    array may already contain some non-zero elements corresponding to non-Keplerian parts)
-        
-        
-        """
-        ...
-    def computeJacobianEccentricWrtCartesian(self) -> typing.MutableSequence[typing.MutableSequence[float]]:
-        """
-            Compute the Jacobian of the orbital parameters with eccentric angle with respect to the Cartesian parameters.
-        
-            Element :code:`jacobian[i][j]` is the derivative of parameter i of the orbit with respect to Cartesian coordinate j.
-            This means each row correspond to one orbital parameter whereas columns 0 to 5 correspond to the Cartesian coordinates
-            x, y, z, xDot, yDot and zDot.
-        
-            The array returned by this method will not be modified.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.computeJacobianEccentricWrtCartesian` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                6x6 Jacobian matrix
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.computeJacobianMeanWrtCartesian`,
-                :meth:`~org.orekit.orbits.Orbit.computeJacobianTrueWrtCartesian`
-        
-        
-        """
-        ...
-    def computeJacobianMeanWrtCartesian(self) -> typing.MutableSequence[typing.MutableSequence[float]]:
-        """
-            Compute the Jacobian of the orbital parameters with mean angle with respect to the Cartesian parameters.
-        
-            Element :code:`jacobian[i][j]` is the derivative of parameter i of the orbit with respect to Cartesian coordinate j.
-            This means each row correspond to one orbital parameter whereas columns 0 to 5 correspond to the Cartesian coordinates
-            x, y, z, xDot, yDot and zDot.
-        
-            The array returned by this method will not be modified.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.computeJacobianMeanWrtCartesian` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                6x6 Jacobian matrix
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.computeJacobianEccentricWrtCartesian`,
-                :meth:`~org.orekit.orbits.Orbit.computeJacobianTrueWrtCartesian`
-        
-        
-        """
-        ...
-    def computeJacobianTrueWrtCartesian(self) -> typing.MutableSequence[typing.MutableSequence[float]]:
-        """
-            Compute the Jacobian of the orbital parameters with true angle with respect to the Cartesian parameters.
-        
-            Element :code:`jacobian[i][j]` is the derivative of parameter i of the orbit with respect to Cartesian coordinate j.
-            This means each row correspond to one orbital parameter whereas columns 0 to 5 correspond to the Cartesian coordinates
-            x, y, z, xDot, yDot and zDot.
-        
-            The array returned by this method will not be modified.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.computeJacobianTrueWrtCartesian` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                6x6 Jacobian matrix
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.computeJacobianMeanWrtCartesian`,
-                :meth:`~org.orekit.orbits.Orbit.computeJacobianEccentricWrtCartesian`
-        
-        
-        """
-        ...
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
+    def computeJacobianEccentricWrtCartesian(self) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def computeJacobianMeanWrtCartesian(self) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def computeJacobianTrueWrtCartesian(self) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     def finalize(self) -> None: ...
-    def getA(self) -> float:
-        """
-            Get the semi-major axis.
-        
-            Note that the semi-major axis is considered negative for hyperbolic orbits.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getA` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                semi-major axis (m)
-        
-        
-        """
-        ...
-    def getADot(self) -> float:
-        """
-            Get the semi-major axis derivative.
-        
-            Note that the semi-major axis is considered negative for hyperbolic orbits.
-        
-            If the orbit was created without derivatives, the value returned is
-            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getADot` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                semi-major axis derivative (m/s)
-        
-        
-        """
-        ...
-    def getE(self) -> float:
-        """
-            Get the eccentricity.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getE` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                eccentricity
-        
-        
-        """
-        ...
-    def getEDot(self) -> float:
-        """
-            Get the eccentricity derivative.
-        
-            If the orbit was created without derivatives, the value returned is
-            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getEDot` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                eccentricity derivative
-        
-        
-        """
-        ...
-    def getEquinoctialEx(self) -> float:
-        """
-            Get the first component of the equinoctial eccentricity vector.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getEquinoctialEx` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                first component of the equinoctial eccentricity vector
-        
-        
-        """
-        ...
-    def getEquinoctialExDot(self) -> float:
-        """
-            Get the first component of the equinoctial eccentricity vector derivative.
-        
-            If the orbit was created without derivatives, the value returned is
-            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getEquinoctialExDot` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                first component of the equinoctial eccentricity vector derivative
-        
-        
-        """
-        ...
-    def getEquinoctialEy(self) -> float:
-        """
-            Get the second component of the equinoctial eccentricity vector.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getEquinoctialEy` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                second component of the equinoctial eccentricity vector
-        
-        
-        """
-        ...
-    def getEquinoctialEyDot(self) -> float:
-        """
-            Get the second component of the equinoctial eccentricity vector derivative.
-        
-            If the orbit was created without derivatives, the value returned is
-            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getEquinoctialEyDot` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                second component of the equinoctial eccentricity vector derivative
-        
-        
-        """
-        ...
-    def getHx(self) -> float:
-        """
-            Get the first component of the inclination vector.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getHx` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                first component of the inclination vector
-        
-        
-        """
-        ...
-    def getHxDot(self) -> float:
-        """
-            Get the first component of the inclination vector derivative.
-        
-            If the orbit was created without derivatives, the value returned is
-            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getHxDot` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                first component of the inclination vector derivative
-        
-        
-        """
-        ...
-    def getHy(self) -> float:
-        """
-            Get the second component of the inclination vector.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getHy` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                second component of the inclination vector
-        
-        
-        """
-        ...
-    def getHyDot(self) -> float:
-        """
-            Get the second component of the inclination vector derivative.
-        
-            If the orbit was created without derivatives, the value returned is
-            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getHyDot` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                second component of the inclination vector derivative
-        
-        
-        """
-        ...
-    def getI(self) -> float:
-        """
-            Get the inclination.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getI` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                inclination (rad)
-        
-        
-        """
-        ...
-    def getIDot(self) -> float:
-        """
-            Get the inclination derivative.
-        
-            If the orbit was created without derivatives, the value returned is
-            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getIDot` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                inclination derivative (rad/s)
-        
-        
-        """
-        ...
-    def getLE(self) -> float:
-        """
-            Get the eccentric longitude argument.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getLE` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                E + ω + Ω eccentric longitude argument (rad)
-        
-        
-        """
-        ...
-    def getLEDot(self) -> float:
-        """
-            Get the eccentric longitude argument derivative.
-        
-            If the orbit was created without derivatives, the value returned is
-            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getLEDot` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                d(E + ω + Ω)/dt eccentric longitude argument derivative (rad/s)
-        
-        
-        """
-        ...
-    def getLM(self) -> float:
-        """
-            Get the mean longitude argument.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getLM` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                M + ω + Ω mean longitude argument (rad)
-        
-        
-        """
-        ...
-    def getLMDot(self) -> float:
-        """
-            Get the mean longitude argument derivative.
-        
-            If the orbit was created without derivatives, the value returned is
-            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getLMDot` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                d(M + ω + Ω)/dt mean longitude argument derivative (rad/s)
-        
-        
-        """
-        ...
-    def getLv(self) -> float:
-        """
-            Get the true longitude argument.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getLv` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                v + ω + Ω true longitude argument (rad)
-        
-        
-        """
-        ...
-    def getLvDot(self) -> float:
-        """
-            Get the true longitude argument derivative.
-        
-            If the orbit was created without derivatives, the value returned is
-            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getLvDot` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                d(v + ω + Ω)/dt true longitude argument derivative (rad/s)
-        
-        
-        """
-        ...
-    def getType(self) -> OrbitType:
-        """
-            Get the orbit type.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.getType` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                orbit type
-        
-        
-        """
-        ...
-    def inFrame(self, frame: org.orekit.frames.Frame) -> Orbit:
-        """
-            Create a new object representing the same physical orbital state, but attached to a different reference frame. If the
-            new frame is not inertial, an exception will be thrown.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.inFrame` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Parameters:
-                inertialFrame (:class:`~org.orekit.frames.Frame`): reference frame of output orbit
-        
-            Returns:
-                orbit with different frame
-        
-        
-        """
-        ...
-    def initPVCoordinates(self) -> org.orekit.utils.TimeStampedPVCoordinates:
-        """
-            Compute the position/velocity coordinates from the canonical parameters.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.initPVCoordinates` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                computed position/velocity coordinates
-        
-        
-        """
-        ...
-    def initPosition(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Compute the position coordinates from the canonical parameters.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.initPosition` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Returns:
-                computed position coordinates
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getA(self) -> float: ...
+    def getADot(self) -> float: ...
+    def getE(self) -> float: ...
+    def getEDot(self) -> float: ...
+    def getEquinoctialEx(self) -> float: ...
+    def getEquinoctialExDot(self) -> float: ...
+    def getEquinoctialEy(self) -> float: ...
+    def getEquinoctialEyDot(self) -> float: ...
+    def getHx(self) -> float: ...
+    def getHxDot(self) -> float: ...
+    def getHy(self) -> float: ...
+    def getHyDot(self) -> float: ...
+    def getI(self) -> float: ...
+    def getIDot(self) -> float: ...
+    def getLE(self) -> float: ...
+    def getLEDot(self) -> float: ...
+    def getLM(self) -> float: ...
+    def getLMDot(self) -> float: ...
+    def getLv(self) -> float: ...
+    def getLvDot(self) -> float: ...
+    def getType(self) -> OrbitType: ...
+    def inFrame(self, frame: org.orekit.frames.Frame) -> Orbit: ...
+    def initPVCoordinates(self) -> org.orekit.utils.TimeStampedPVCoordinates: ...
+    def initPosition(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     @typing.overload
-    def shiftedBy(self, double: float) -> Orbit:
-        """
-            Get a time-shifted orbit.
-        
-            The orbit can be slightly shifted to close dates. The shifting model is a Keplerian one if no derivatives are available
-            in the orbit, or Keplerian plus quadratic effect of the non-Keplerian acceleration if derivatives are available.
-            Shifting is *not* intended as a replacement for proper orbit propagation but should be sufficient for small time shifts
-            or coarse accuracy.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.shiftedBy` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Parameters:
-                dt (double): time shift in seconds
-        
-            Returns:
-                a new orbit, shifted with respect to the instance (which is immutable)
-        
-            Get a time-shifted orbit.
-        
-            The orbit can be slightly shifted to close dates. The shifting model is a Keplerian one if no derivatives are available
-            in the orbit, or Keplerian plus quadratic effect of the non-Keplerian acceleration if derivatives are available.
-            Shifting is *not* intended as a replacement for proper orbit propagation but should be sufficient for small time shifts
-            or coarse accuracy.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.Orbit.shiftedBy` in class :class:`~org.orekit.orbits.Orbit`
-        
-            Parameters:
-                dt (:class:`~org.orekit.time.TimeOffset`): time shift
-        
-            Returns:
-                a new orbit, shifted with respect to the instance (which is immutable)
-        
-        
-        """
-        ...
+    def shiftedBy(self, double: float) -> Orbit: ...
     @typing.overload
     def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> Orbit: ...
 
-class PythonPositionAngleBased(PositionAngleBased):
-    """
-    public class PythonPositionAngleBased extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.orbits.PositionAngleBased`
-    """
+_PythonPositionAngleBased__T = typing.TypeVar('_PythonPositionAngleBased__T')  # <T>
+class PythonPositionAngleBased(PositionAngleBased[_PythonPositionAngleBased__T], typing.Generic[_PythonPositionAngleBased__T]):
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getCachedPositionAngleType(self) -> PositionAngleType:
-        """
-            Get the cached :class:`~org.orekit.orbits.PositionAngleType`.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.PositionAngleBased.getCachedPositionAngleType` in
-                interface :class:`~org.orekit.orbits.PositionAngleBased`
-        
-            Returns:
-                cached type of position angle
-        
-        
-        """
-        ...
-    def hasNonKeplerianRates(self) -> bool:
-        """
-            Description copied from interface: :meth:`~org.orekit.orbits.PositionAngleBased.hasNonKeplerianRates`
-            Tells whether the instance holds rates (first-order time derivatives) for dependent variables that are incompatible with
-            Keplerian motion.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.PositionAngleBased.hasNonKeplerianRates` in
-                interface :class:`~org.orekit.orbits.PositionAngleBased`
-        
-            Returns:
-                true if and only if holding non-Keplerian rates
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getCachedPositionAngleType(self) -> PositionAngleType: ...
+    def hasNonKeplerianRates(self) -> bool: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def withCachedPositionAngleType(self, positionAngleType: PositionAngleType) -> typing.Any:
-        """
-            Description copied from interface: :meth:`~org.orekit.orbits.PositionAngleBased.withCachedPositionAngleType`
-            Creates a new instance with the provided type used for caching.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.PositionAngleBased.withCachedPositionAngleType` in
-                interface :class:`~org.orekit.orbits.PositionAngleBased`
-        
-            Parameters:
-                positionAngleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use for caching value
-        
-            Returns:
-                new object
-        
-        
-        """
-        ...
-    def withKeplerianRates(self) -> typing.Any:
-        """
-            Description copied from interface: :meth:`~org.orekit.orbits.PositionAngleBased.withKeplerianRates`
-            Creates a new instance such that :meth:`~org.orekit.orbits.PositionAngleBased.hasNonKeplerianRates` is false.
-        
-            Specified by:
-                :meth:`~org.orekit.orbits.PositionAngleBased.withKeplerianRates` in
-                interface :class:`~org.orekit.orbits.PositionAngleBased`
-        
-            Returns:
-                new object without rates
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def withCachedPositionAngleType(self, positionAngleType: PositionAngleType) -> _PythonPositionAngleBased__T: ...
+    def withKeplerianRates(self) -> _PythonPositionAngleBased__T: ...
 
 
 class __module_protocol__(Protocol):

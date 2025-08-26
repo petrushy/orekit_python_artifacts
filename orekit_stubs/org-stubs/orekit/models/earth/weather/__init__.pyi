@@ -586,68 +586,18 @@ class PressureTemperatureHumidity(PressureTemperature):
         ...
 
 class PythonPressureTemperatureHumidityProvider(PressureTemperatureHumidityProvider):
-    """
-    public class PythonPressureTemperatureHumidityProvider extends :class:`~org.orekit.models.earth.weather.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.weather.PressureTemperatureHumidityProvider`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     _getWeatherParameters_0__T = typing.TypeVar('_getWeatherParameters_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getWeatherParameters(self, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_getWeatherParameters_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getWeatherParameters_0__T]) -> FieldPressureTemperatureHumidity[_getWeatherParameters_0__T]:
-        """
-            Provide weather parameters.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.weather.PressureTemperatureHumidityProvider.getWeatherParameters` in
-                interface :class:`~org.orekit.models.earth.weather.PressureTemperatureHumidityProvider`
-        
-            Parameters:
-                location (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> location): location at which parameters are requested
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date at which parameters are requested
-        
-            Returns:
-                weather parameters
-        
-        
-        """
-        ...
+    def getWeatherParameters(self, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_getWeatherParameters_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getWeatherParameters_0__T]) -> FieldPressureTemperatureHumidity[_getWeatherParameters_0__T]: ...
     @typing.overload
-    def getWeatherParameters(self, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> PressureTemperatureHumidity:
-        """
-            Provide weather parameters.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.weather.PressureTemperatureHumidityProvider.getWeatherParameters` in
-                interface :class:`~org.orekit.models.earth.weather.PressureTemperatureHumidityProvider`
-        
-            Parameters:
-                location (:class:`~org.orekit.bodies.GeodeticPoint`): location at which parameters are requested
-                date (:class:`~org.orekit.time.AbsoluteDate`): date at which parameters are requested
-        
-            Returns:
-                weather parameters
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getWeatherParameters(self, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> PressureTemperatureHumidity: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class GlobalPressureTemperature2(AbstractGlobalPressureTemperature):
     """

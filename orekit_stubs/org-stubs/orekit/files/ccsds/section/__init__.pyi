@@ -585,72 +585,24 @@ class Data(Section):
     ...
 
 class PythonAbstractWriter(AbstractWriter):
-    """
-    public class PythonAbstractWriter extends :class:`~org.orekit.files.ccsds.section.AbstractWriter`
-    """
     def __init__(self, string: str, string2: str): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     def writeContent(self, generator: org.orekit.files.ccsds.utils.generation.Generator) -> None: ...
 
 class PythonSection(Section):
-    """
-    public class PythonSection extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.section.Section`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def validate(self, double: float) -> None:
-        """
-            Check is all mandatory entries have been initialized.
-        
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
-        
-            Parameters:
-                version (double): format version
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def validate(self, double: float) -> None: ...
 
 class Header(CommentsContainer):
     """
@@ -842,47 +794,6 @@ class Metadata(CommentsContainer):
         """
         ...
 
-class PyhonData(Data):
-    """
-    public class PyhonData extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.section.Data`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def validate(self, double: float) -> None:
-        """
-            Check is all mandatory entries have been initialized.
-        
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
-        
-            Parameters:
-                version (double): format version
-        
-        
-        """
-        ...
-
 
 class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.section")``.
@@ -897,7 +808,6 @@ class __module_protocol__(Protocol):
     KvnStructureProcessingState: typing.Type[KvnStructureProcessingState]
     Metadata: typing.Type[Metadata]
     MetadataKey: typing.Type[MetadataKey]
-    PyhonData: typing.Type[PyhonData]
     PythonAbstractWriter: typing.Type[PythonAbstractWriter]
     PythonSection: typing.Type[PythonSection]
     Section: typing.Type[Section]

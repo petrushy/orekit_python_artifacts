@@ -1445,30 +1445,13 @@ class CRDHeader(ILRSHeader):
         def values() -> typing.MutableSequence['CRDHeader.RangeType']: ...
 
 class PythonILRSHeader(ILRSHeader):
-    """
-    public class PythonILRSHeader extends :class:`~org.orekit.files.ilrs.ILRSHeader`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class CRD:
     """

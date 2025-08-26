@@ -245,43 +245,14 @@ class OsculatingToSGP4Converter(FixedPointOsculatingToAveragedConverter[org.orek
 
 _PythonFixedPointOsculatingToAveragedConverter__T = typing.TypeVar('_PythonFixedPointOsculatingToAveragedConverter__T', bound=org.orekit.propagation.conversion.averaging.AveragedOrbitalState)  # <T>
 class PythonFixedPointOsculatingToAveragedConverter(FixedPointOsculatingToAveragedConverter[_PythonFixedPointOsculatingToAveragedConverter__T], typing.Generic[_PythonFixedPointOsculatingToAveragedConverter__T]):
-    """
-    public class PythonFixedPointOsculatingToAveragedConverter<T extends :class:`~org.orekit.propagation.conversion.averaging.AveragedOrbitalState`> extends :class:`~org.orekit.propagation.conversion.averaging.converters.FixedPointOsculatingToAveragedConverter`<T>
-    """
     def __init__(self, double: float, int: int): ...
-    def convertToAveraged(self, orbit: org.orekit.orbits.Orbit) -> _PythonFixedPointOsculatingToAveragedConverter__T:
-        """
-            Convert osculating orbit to averaged orbital state according to underlying theory.
-        
-            Parameters:
-                osculatingOrbit (:class:`~org.orekit.orbits.Orbit`): osculating orbit
-        
-            Returns:
-                averaged orbital state
-        
-        
-        """
-        ...
+    def convertToAveraged(self, orbit: org.orekit.orbits.Orbit) -> _PythonFixedPointOsculatingToAveragedConverter__T: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 
 class __module_protocol__(Protocol):

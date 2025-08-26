@@ -382,76 +382,25 @@ class FieldAdaptableInterval(typing.Generic[_FieldAdaptableInterval__T]):
     def of(adaptableInterval: typing.Union[AdaptableInterval, typing.Callable]) -> 'FieldAdaptableInterval'[_of_2__T]: ...
 
 class PythonAdaptableInterval(AdaptableInterval):
-    """
-    public class PythonAdaptableInterval extends :class:`~org.orekit.propagation.events.intervals.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.intervals.AdaptableInterval`
-    """
     def __init__(self): ...
-    def currentInterval(self, spacecraftState: org.orekit.propagation.SpacecraftState, boolean: bool) -> float:
-        """
-            Get the current value of maximal time interval between events handler checks.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.intervals.AdaptableInterval.currentInterval` in
-                interface :class:`~org.orekit.propagation.events.intervals.AdaptableInterval`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
-                isForward (boolean): direction of propagation
-        
-            Returns:
-                current value of maximal time interval between events handler checks
-        
-        
-        """
-        ...
+    def currentInterval(self, spacecraftState: org.orekit.propagation.SpacecraftState, boolean: bool) -> float: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 _PythonFieldAdaptableInterval__T = typing.TypeVar('_PythonFieldAdaptableInterval__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldAdaptableInterval(FieldAdaptableInterval[_PythonFieldAdaptableInterval__T], typing.Generic[_PythonFieldAdaptableInterval__T]):
-    """
-    public class PythonFieldAdaptableInterval<T extends :class:`~org.orekit.propagation.events.intervals.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.intervals.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.intervals.FieldAdaptableInterval`<T>
-    """
     def __init__(self): ...
     def currentInterval(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldAdaptableInterval__T], boolean: bool) -> float: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 
 class __module_protocol__(Protocol):

@@ -604,7 +604,8 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
             (:meth:`~org.orekit.propagation.numerical.NumericalPropagator.setOrbitType`),
           - the :class:`~org.orekit.orbits.PositionAngleType` of position angle to be used in orbital parameters to be used for
             propagation where it is relevant (:meth:`~org.orekit.propagation.numerical.NumericalPropagator.setPositionAngleType`),
-          - whether :class:`~org.orekit.propagation.MatricesHarvester` should be propagated along with orbital state
+          - whether :class:`~org.orekit.propagation.MatricesHarvester` (with the option to include mass if a 7x7 initial matrix is
+            passed) should be propagated along with orbital state
             (:meth:`~org.orekit.propagation.AbstractPropagator.setupMatricesComputation`),
           - whether :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider` should be propagated along with
             orbital state
@@ -698,6 +699,17 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
             Also see:
                 :meth:`~org.orekit.propagation.numerical.NumericalPropagator.removeForceModels`,
                 :meth:`~org.orekit.propagation.numerical.NumericalPropagator.setMu`
+        
+        
+        """
+        ...
+    def clearMatricesComputation(self) -> None:
+        """
+            Erases the internal matrices harvester.
+        
+            Overrides:
+                :meth:`~org.orekit.propagation.AbstractPropagator.clearMatricesComputation` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
         
         """
@@ -909,144 +921,30 @@ class TimeDerivativesEquations:
 
 _PythonFieldTimeDerivativesEquations__T = typing.TypeVar('_PythonFieldTimeDerivativesEquations__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldTimeDerivativesEquations(FieldTimeDerivativesEquations[_PythonFieldTimeDerivativesEquations__T], typing.Generic[_PythonFieldTimeDerivativesEquations__T]):
-    """
-    public class PythonFieldTimeDerivativesEquations<T extends :class:`~org.orekit.propagation.numerical.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.numerical.FieldTimeDerivativesEquations`<T>
-    """
     def __init__(self): ...
-    def addKeplerContribution(self, t: _PythonFieldTimeDerivativesEquations__T) -> None:
-        """
-            Add the contribution of the Kepler evolution.
-        
-            Since the Kepler evolution is the most important, it should be added after all the other ones, in order to improve
-            numerical accuracy.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.numerical.FieldTimeDerivativesEquations.addKeplerContribution` in
-                interface :class:`~org.orekit.propagation.numerical.FieldTimeDerivativesEquations`
-        
-            Parameters:
-                mu (:class:`~org.orekit.propagation.numerical.PythonFieldTimeDerivativesEquations`): central body gravitational constant
-        
-        
-        """
-        ...
-    def addMassDerivative(self, t: _PythonFieldTimeDerivativesEquations__T) -> None:
-        """
-            Add the contribution of the flow rate (dm/dt).
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.numerical.FieldTimeDerivativesEquations.addMassDerivative` in
-                interface :class:`~org.orekit.propagation.numerical.FieldTimeDerivativesEquations`
-        
-            Parameters:
-                q (:class:`~org.orekit.propagation.numerical.PythonFieldTimeDerivativesEquations`): the flow rate, must be negative (dm/dt)
-        
-            Raises:
-                :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if flow-rate is positive
-        
-        
-        """
-        ...
+    def addKeplerContribution(self, t: _PythonFieldTimeDerivativesEquations__T) -> None: ...
+    def addMassDerivative(self, t: _PythonFieldTimeDerivativesEquations__T) -> None: ...
     def addNonKeplerianAcceleration(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_PythonFieldTimeDerivativesEquations__T]) -> None: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonTimeDerivativesEquations(TimeDerivativesEquations):
-    """
-    public class PythonTimeDerivativesEquations extends :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.numerical.TimeDerivativesEquations`
-    """
     def __init__(self): ...
-    def addKeplerContribution(self, double: float) -> None:
-        """
-            Add the contribution of the Kepler evolution.
-        
-            Since the Kepler evolution is the most important, it should be added after all the other ones, in order to improve
-            numerical accuracy.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.numerical.TimeDerivativesEquations.addKeplerContribution` in
-                interface :class:`~org.orekit.propagation.numerical.TimeDerivativesEquations`
-        
-            Parameters:
-                mu (double): central body gravitational constant
-        
-        
-        """
-        ...
-    def addMassDerivative(self, double: float) -> None:
-        """
-            Add the contribution of the flow rate (dm/dt).
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.numerical.TimeDerivativesEquations.addMassDerivative` in
-                interface :class:`~org.orekit.propagation.numerical.TimeDerivativesEquations`
-        
-            Parameters:
-                q (double): the flow rate, must be negative (dm/dt)
-        
-            Raises:
-                :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if flow-rate is positive
-        
-        
-        """
-        ...
-    def addNonKeplerianAcceleration(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> None:
-        """
-            Add the contribution of a non-Keplerian acceleration.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.numerical.TimeDerivativesEquations.addNonKeplerianAcceleration` in
-                interface :class:`~org.orekit.propagation.numerical.TimeDerivativesEquations`
-        
-            Parameters:
-                gamma (:class:`~org.orekit.propagation.numerical.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): acceleration vector in the same inertial frame the spacecraft state is defined in (m/s²)
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
+    def addKeplerContribution(self, double: float) -> None: ...
+    def addMassDerivative(self, double: float) -> None: ...
+    def addNonKeplerianAcceleration(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> None: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
-class PythonPartialsObserver(org.orekit.propagation.numerical.StateTransitionMatrixGenerator.PartialsObserver):
+class PythonPartialsObserver(org.orekit.propagation.numerical.AbstractStateTransitionMatrixGenerator.PartialsObserver):
     def __init__(self): ...
     def finalize(self) -> None: ...
     def partialsComputed(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> None: ...

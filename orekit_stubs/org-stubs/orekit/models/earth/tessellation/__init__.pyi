@@ -245,49 +245,15 @@ class DivertedSingularityAiming(TileAiming):
     def getSingularPoints(self) -> java.util.List[org.orekit.bodies.GeodeticPoint]: ...
 
 class PythonTileAiming(TileAiming):
-    """
-    public class PythonTileAiming extends :class:`~org.orekit.models.earth.tessellation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.tessellation.TileAiming`
-    """
     def __init__(self): ...
-    def alongTileDirection(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, geodeticPoint: org.orekit.bodies.GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Find the along tile direction for tessellation at specified point.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.tessellation.TileAiming.alongTileDirection` in
-                interface :class:`~org.orekit.models.earth.tessellation.TileAiming`
-        
-            Parameters:
-                point (:class:`~org.orekit.models.earth.tessellation.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point on the ellipsoid (Cartesian coordinates)
-                gp (:class:`~org.orekit.bodies.GeodeticPoint`): point on the ellipsoid (geodetic coordinates)
-        
-            Returns:
-                normalized along tile direction
-        
-        
-        """
-        ...
+    def alongTileDirection(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, geodeticPoint: org.orekit.bodies.GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     def finalize(self) -> None: ...
     def getSingularPoints(self) -> java.util.List[org.orekit.bodies.GeodeticPoint]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 
 class __module_protocol__(Protocol):

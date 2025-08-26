@@ -243,220 +243,45 @@ class PolynomialThrustSegment(ThrustVectorProvider):
         ...
 
 class PythonPropulsionModel(PropulsionModel):
-    """
-    public class PythonPropulsionModel extends :class:`~org.orekit.forces.maneuvers.propulsion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     _getAcceleration_0__T = typing.TypeVar('_getAcceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAcceleration_0__T], fieldAttitude: org.orekit.attitudes.FieldAttitude[_getAcceleration_0__T], tArray: typing.Union[typing.List[_getAcceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getAcceleration_0__T]:
-        """
-            Get the acceleration of the spacecraft during maneuver and in maneuver frame.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getAcceleration` in
-                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current spacecraft state
-                maneuverAttitude (:class:`~org.orekit.attitudes.FieldAttitude`<T> maneuverAttitude): current attitude in maneuver
-                parameters (T[]): propulsion model parameters
-        
-            Returns:
-                acceleration
-        
-        
-        """
-        ...
+    def getAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAcceleration_0__T], fieldAttitude: org.orekit.attitudes.FieldAttitude[_getAcceleration_0__T], tArray: typing.Union[typing.List[_getAcceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getAcceleration_0__T]: ...
     @typing.overload
-    def getAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, attitude: org.orekit.attitudes.Attitude, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get the acceleration of the spacecraft during maneuver and in maneuver frame.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getAcceleration` in
-                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
-                maneuverAttitude (:class:`~org.orekit.attitudes.Attitude`): current attitude in maneuver
-                parameters (double[]): propulsion model parameters
-        
-            Returns:
-                acceleration
-        
-        """
-        ...
-    def getControl3DVectorCostType(self) -> org.orekit.forces.maneuvers.Control3DVectorCostType:
-        """
-            Get the control vector's cost type.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getControl3DVectorCostType` in
-                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
-        
-            Returns:
-                control cost type
-        
-        
-        """
-        ...
+    def getAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, attitude: org.orekit.attitudes.Attitude, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def getControl3DVectorCostType(self) -> org.orekit.forces.maneuvers.Control3DVectorCostType: ...
     _getMassDerivatives_1__T = typing.TypeVar('_getMassDerivatives_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getMassDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
-        """
-            Get the mass derivative (i.e. flow rate in kg/s) during maneuver.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getMassDerivatives` in
-                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
-                parameters (double[]): propulsion model parameters
-        
-            Returns:
-                mass derivative in kg/s
-        
-        """
-        ...
+    def getMassDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def getMassDerivatives(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getMassDerivatives_1__T], tArray: typing.Union[typing.List[_getMassDerivatives_1__T], jpype.JArray]) -> _getMassDerivatives_1__T:
-        """
-            Get the mass derivative (i.e. flow rate in kg/s) during maneuver.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getMassDerivatives` in
-                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current spacecraft state
-                parameters (T[]): propulsion model parameters
-        
-            Returns:
-                mass derivative in kg/s
-        
-        
-        """
-        ...
-    def getName(self) -> str:
-        """
-            Get the maneuver name.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getName` in
-                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
-        
-            Returns:
-                the maneuver name
-        
-        
-        """
-        ...
+    def getMassDerivatives(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getMassDerivatives_1__T], tArray: typing.Union[typing.List[_getMassDerivatives_1__T], jpype.JArray]) -> _getMassDerivatives_1__T: ...
+    def getName(self) -> str: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None: ...
     @typing.overload
-    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Initialization method. Called in when Maneuver.init(...) is called (from ForceModel.init(...))
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.init` in
-                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
-        
-            Parameters:
-                initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial spacecraft state (at the start of propagation).
-                target (:class:`~org.orekit.time.AbsoluteDate`): date of propagation. Not equal to :code:`initialState.getDate()`.
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonThrustVectorProvider(ThrustVectorProvider):
-    """
-    public class PythonThrustVectorProvider extends :class:`~org.orekit.forces.maneuvers.propulsion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.propulsion.ThrustVectorProvider`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     _getThrustVector_0__T = typing.TypeVar('_getThrustVector_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getThrustVector(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getThrustVector_0__T], t: _getThrustVector_0__T) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getThrustVector_0__T]:
-        """
-            Get thrust vector at a specified date.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustVectorProvider.getThrustVector` in
-                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustVectorProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date to consider
-                mass (T): current mass
-        
-            Returns:
-                thrust at :code:`date` (N)
-        
-        
-        """
-        ...
+    def getThrustVector(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getThrustVector_0__T], t: _getThrustVector_0__T) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getThrustVector_0__T]: ...
     @typing.overload
-    def getThrustVector(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get thrust vector at a specified date.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustVectorProvider.getThrustVector` in
-                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustVectorProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date to consider
-                mass (double): current mass
-        
-            Returns:
-                thrust at :code:`date` (N)
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getThrustVector(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class ThrustPropulsionModel(PropulsionModel):
     """
@@ -1182,160 +1007,34 @@ class ProfileThrustPropulsionModel(ThrustPropulsionModel):
         ...
 
 class PythonThrustPropulsionModel(ThrustPropulsionModel):
-    """
-    public class PythonThrustPropulsionModel extends :class:`~org.orekit.forces.maneuvers.propulsion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getControl3DVectorCostType(self) -> org.orekit.forces.maneuvers.Control3DVectorCostType:
-        """
-            Get the control vector's cost type.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getControl3DVectorCostType` in
-                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
-        
-            Returns:
-                control cost type
-        
-        
-        """
-        ...
+    def getControl3DVectorCostType(self) -> org.orekit.forces.maneuvers.Control3DVectorCostType: ...
     _getFlowRate_2__T = typing.TypeVar('_getFlowRate_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
-        """
-            Get the flow rate (kg/s).
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getFlowRate` in
-                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
-        
-            Returns:
-                flow rate (kg/s)
-        
-            Get the flow rate (kg/s).
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getFlowRate` in
-                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
-                parameters (double[]): propulsion model parameters
-        
-            Returns:
-                flow rate (kg/s)
-        
-        """
-        ...
+    def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float: ...
     @typing.overload
     def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def getFlowRate(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getFlowRate_2__T], tArray: typing.Union[typing.List[_getFlowRate_2__T], jpype.JArray]) -> _getFlowRate_2__T:
-        """
-            Get the flow rate (kg/s).
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getFlowRate` in
-                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current spacecraft state
-                parameters (T[]): propulsion model parameters
-        
-            Returns:
-                flow rate (kg/s)
-        
-        
-        """
-        ...
+    def getFlowRate(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getFlowRate_2__T], tArray: typing.Union[typing.List[_getFlowRate_2__T], jpype.JArray]) -> _getFlowRate_2__T: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _getThrustVector_0__T = typing.TypeVar('_getThrustVector_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getThrustVector(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getThrustVector_0__T], tArray: typing.Union[typing.List[_getThrustVector_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getThrustVector_0__T]:
-        """
-            Get the thrust vector in spacecraft frame (N).
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getThrustVector` in
-                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current spacecraft state
-                parameters (T[]): propulsion model parameters
-        
-            Returns:
-                thrust vector in spacecraft frame (N)
-        
-        
-        """
-        ...
+    def getThrustVector(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getThrustVector_0__T], tArray: typing.Union[typing.List[_getThrustVector_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getThrustVector_0__T]: ...
     @typing.overload
-    def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get the thrust vector in spacecraft frame (N).
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getThrustVector` in
-                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
-        
-            Returns:
-                thrust vector in spacecraft frame (N)
-        
-            Get the thrust vector in spacecraft frame (N).
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getThrustVector` in
-                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
-                parameters (double[]): propulsion model parameters
-        
-            Returns:
-                thrust vector in spacecraft frame (N)
-        
-        """
-        ...
+    def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     @typing.overload
     def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None: ...
     @typing.overload
-    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Initialization method. Called in when Maneuver.init(...) is called (from ForceModel.init(...))
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.init` in
-                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
-        
-            Parameters:
-                initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial spacecraft state (at the start of propagation).
-                target (:class:`~org.orekit.time.AbsoluteDate`): date of propagation. Not equal to :code:`initialState.getDate()`.
-        
-        
-        """
-        ...
+    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class BasicConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
     """
@@ -1539,150 +1238,33 @@ class BasicConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
     def getThrustVector(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
 
 class PythonAbstractConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
-    """
-    public class PythonAbstractConstantThrustPropulsionModel extends :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
-    """
     def __init__(self, double: float, double2: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, control3DVectorCostType: org.orekit.forces.maneuvers.Control3DVectorCostType, string: str): ...
     def finalize(self) -> None: ...
     _getFlowRate_5__T = typing.TypeVar('_getFlowRate_5__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getFlowRate_6__T = typing.TypeVar('_getFlowRate_6__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
-        """
-            Get the flow rate (kg/s). Here it does not depend on current S/C.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate` in
-                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date at which the thrust vector wants to be known, often the date parameter will not be important and can be whatever if
-                    the thrust parameter driver as only value estimated over the all orbit determination interval
-        
-            Returns:
-                flow rate (kg/s)
-        
-            Get the flow rate (kg/s). Here it does not depend on current S/C state.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate` in
-                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
-        
-            Parameters:
-                parameters (double[]): propulsion model parameters
-        
-            Returns:
-                flow rate (kg/s)
-        
-        """
-        ...
+    def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float: ...
     @typing.overload
     def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def getFlowRate(self) -> float:
-        """
-            Get the flow rate (kg/s). Here it does not depend on current S/C.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate` in
-                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
-        
-            Returns:
-                flow rate (kg/s) will throw an exception if used on driver containing several value spans
-        
-        """
-        ...
+    def getFlowRate(self) -> float: ...
     @typing.overload
     def getFlowRate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
     def getFlowRate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
     @typing.overload
-    def getFlowRate(self, tArray: typing.Union[typing.List[_getFlowRate_5__T], jpype.JArray]) -> _getFlowRate_5__T:
-        """
-            Get the flow rate (kg/s). Here it does not depend on current S/C state.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate` in
-                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
-        
-            Parameters:
-                parameters (T[]): propulsion model parameters
-        
-            Returns:
-                flow rate (kg/s)
-        
-        
-        """
-        ...
+    def getFlowRate(self, tArray: typing.Union[typing.List[_getFlowRate_5__T], jpype.JArray]) -> _getFlowRate_5__T: ...
     @typing.overload
     def getFlowRate(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getFlowRate_6__T], tArray: typing.Union[typing.List[_getFlowRate_6__T], jpype.JArray]) -> _getFlowRate_6__T: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _getThrustVector_0__T = typing.TypeVar('_getThrustVector_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getThrustVector_4__T = typing.TypeVar('_getThrustVector_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getThrustVector(self, tArray: typing.Union[typing.List[_getThrustVector_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getThrustVector_0__T]:
-        """
-            Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector` in
-                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
-        
-            Parameters:
-                parameters (T[]): propulsion model parameters
-        
-            Returns:
-                thrust vector in spacecraft frame (N)
-        
-        
-        """
-        ...
+    def getThrustVector(self, tArray: typing.Union[typing.List[_getThrustVector_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getThrustVector_0__T]: ...
     @typing.overload
-    def getThrustVector(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector` in
-                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
-        
-            Returns:
-                thrust vector in spacecraft frame (N), will throw an exception if used on driver containing several value spans
-        
-        """
-        ...
+    def getThrustVector(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     @typing.overload
-    def getThrustVector(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Description copied from
-            class: :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector`
-            Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector` in
-                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date at which the thrust vector wants to be known, often the date parameter will not be important and can be whatever if
-                    the thrust parameter driver as only value estimated over the all orbit determination interval
-        
-            Returns:
-                thrust vector in spacecraft frame (N)
-        
-            Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector` in
-                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
-        
-            Parameters:
-                parameters (double[]): propulsion model parameters
-        
-            Returns:
-                thrust vector in spacecraft frame (N)
-        
-        """
-        ...
+    def getThrustVector(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     @typing.overload
     def getThrustVector(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     @typing.overload
@@ -1695,13 +1277,7 @@ class PythonAbstractConstantThrustPropulsionModel(AbstractConstantThrustPropulsi
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class ScaledConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
     """
@@ -1893,6 +1469,211 @@ class ScaledConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel)
     @typing.overload
     def getThrustVector(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
 
+class SphericalConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
+    """
+    public class SphericalConstantThrustPropulsionModel extends :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+    
+        Constant thrust propulsion model with: - Constant thrust direction in spacecraft frame - Parameter drivers (for
+        estimation) for the thrust vector in spherical coordinates.
+    
+        Since:
+            13.1
+    
+        Also see:
+            :class:`~org.orekit.forces.maneuvers.propulsion.BasicConstantThrustPropulsionModel`
+    """
+    THRUST_MAGNITUDE: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.forces.maneuvers.propulsion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` THRUST_MAGNITUDE
+    
+        Parameter name for thrust magnitude.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    THRUST_RIGHT_ASCENSION: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.forces.maneuvers.propulsion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` THRUST_RIGHT_ASCENSION
+    
+        Parameter name for thrust right ascension.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    THRUST_DECLINATION: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.forces.maneuvers.propulsion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` THRUST_DECLINATION
+    
+        Parameter name for thrust declination.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    THRUST_SCALE: typing.ClassVar[float] = ...
+    """
+    public static final double THRUST_SCALE
+    
+        Thrust scaling factor.
+    
+        We use a power of 2 to avoid numeric noise introduction in the multiplications/divisions sequences.
+    
+    """
+    @typing.overload
+    def __init__(self, double: float, double2: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, string: str): ...
+    @typing.overload
+    def __init__(self, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, string: str): ...
+    _getFlowRate_5__T = typing.TypeVar('_getFlowRate_5__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getFlowRate_6__T = typing.TypeVar('_getFlowRate_6__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
+        """
+            Get the flow rate (kg/s). Here it does not depend on current S/C.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date at which the thrust vector wants to be known, often the date parameter will not be important and can be whatever if
+                    the thrust parameter driver as only value estimated over the all orbit determination interval
+        
+            Returns:
+                flow rate (kg/s)
+        
+            Get the flow rate (kg/s). Here it does not depend on current S/C state.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+        
+            Parameters:
+                parameters (double[]): propulsion model parameters
+        
+            Returns:
+                flow rate (kg/s)
+        
+        """
+        ...
+    @typing.overload
+    def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    @typing.overload
+    def getFlowRate(self) -> float:
+        """
+            Get the flow rate (kg/s). Here it does not depend on current S/C.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+        
+            Returns:
+                flow rate (kg/s) will throw an exception if used on driver containing several value spans
+        
+        """
+        ...
+    @typing.overload
+    def getFlowRate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    @typing.overload
+    def getFlowRate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
+    @typing.overload
+    def getFlowRate(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getFlowRate_5__T], tArray: typing.Union[typing.List[_getFlowRate_5__T], jpype.JArray]) -> _getFlowRate_5__T: ...
+    @typing.overload
+    def getFlowRate(self, tArray: typing.Union[typing.List[_getFlowRate_6__T], jpype.JArray]) -> _getFlowRate_6__T:
+        """
+            Get the flow rate (kg/s). Here it does not depend on current S/C state.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+        
+            Parameters:
+                parameters (T[]): propulsion model parameters
+        
+            Returns:
+                flow rate (kg/s)
+        
+        
+        """
+        ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    _getThrustVector_0__T = typing.TypeVar('_getThrustVector_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getThrustVector_1__T = typing.TypeVar('_getThrustVector_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getThrustVector(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getThrustVector_0__T], tArray: typing.Union[typing.List[_getThrustVector_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getThrustVector_0__T]: ...
+    @typing.overload
+    def getThrustVector(self, tArray: typing.Union[typing.List[_getThrustVector_1__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getThrustVector_1__T]:
+        """
+            Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+        
+            Parameters:
+                parameters (T[]): propulsion model parameters
+        
+            Returns:
+                thrust vector in spacecraft frame (N)
+        
+        
+        """
+        ...
+    @typing.overload
+    def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date at which the thrust vector wants to be known, often the date parameter will not be important and can be whatever if
+                    the thrust parameter driver as only value estimated over the all orbit determination interval
+        
+            Returns:
+                thrust vector in spacecraft frame (N)
+        
+            Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+        
+            Parameters:
+                parameters (double[]): propulsion model parameters
+        
+            Returns:
+                thrust vector in spacecraft frame (N)
+        
+        """
+        ...
+    @typing.overload
+    def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    @typing.overload
+    def getThrustVector(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+        
+            Returns:
+                thrust vector in spacecraft frame (N), will throw an exception if used on driver containing several value spans
+        
+        """
+        ...
+    @typing.overload
+    def getThrustVector(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    @typing.overload
+    def getThrustVector(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+
 
 class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.forces.maneuvers.propulsion")``.
@@ -1907,5 +1688,6 @@ class __module_protocol__(Protocol):
     PythonThrustPropulsionModel: typing.Type[PythonThrustPropulsionModel]
     PythonThrustVectorProvider: typing.Type[PythonThrustVectorProvider]
     ScaledConstantThrustPropulsionModel: typing.Type[ScaledConstantThrustPropulsionModel]
+    SphericalConstantThrustPropulsionModel: typing.Type[SphericalConstantThrustPropulsionModel]
     ThrustPropulsionModel: typing.Type[ThrustPropulsionModel]
     ThrustVectorProvider: typing.Type[ThrustVectorProvider]

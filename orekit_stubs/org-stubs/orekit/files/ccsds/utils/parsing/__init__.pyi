@@ -366,275 +366,49 @@ class ErrorState(ProcessingState):
 
 _PythonAbstractMessageParser__T = typing.TypeVar('_PythonAbstractMessageParser__T')  # <T>
 class PythonAbstractMessageParser(AbstractMessageParser[_PythonAbstractMessageParser__T], typing.Generic[_PythonAbstractMessageParser__T]):
-    """
-    public class PythonAbstractMessageParser<T> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser`<T>
-    """
     def __init__(self, string: str, string2: str, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
-    def build(self) -> _PythonAbstractMessageParser__T:
-        """
-            Build the file from parsed entries.
-        
-            Returns:
-                parsed file
-        
-        
-        """
-        ...
+    def build(self) -> _PythonAbstractMessageParser__T: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None:
-        """
-            Reset parser to initial state before parsing.
-        
-            Parameters:
-                fileFormat (:class:`~org.orekit.files.ccsds.utils.FileFormat`): format of the file ready to be parsed
-        
-        
-        """
-        ...
-
-class PythonProcessingState(ProcessingState):
-    """
-    public class PythonProcessingState extends :class:`~org.orekit.files.ccsds.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def processToken(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool:
-        """
-            Description copied from interface: :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken`
-            Process one token.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken` in
-                interface :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
-        
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-        
-            Returns:
-                true if token was processed, false otherwise
-        
-        
-        """
-        ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None: ...
+
+class PythonProcessingState(ProcessingState):
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def processToken(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None: ...
 
 _PythonAbstractConstituentParser__H = typing.TypeVar('_PythonAbstractConstituentParser__H', bound=org.orekit.files.ccsds.section.Header)  # <H>
 _PythonAbstractConstituentParser__T = typing.TypeVar('_PythonAbstractConstituentParser__T', bound=org.orekit.files.ccsds.ndm.NdmConstituent)  # <T>
 _PythonAbstractConstituentParser__P = typing.TypeVar('_PythonAbstractConstituentParser__P', bound=AbstractConstituentParser)  # <P>
 class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractConstituentParser__H, _PythonAbstractConstituentParser__T, _PythonAbstractConstituentParser__P], typing.Generic[_PythonAbstractConstituentParser__H, _PythonAbstractConstituentParser__T, _PythonAbstractConstituentParser__P]):
-    """
-    public class PythonAbstractConstituentParser<H extends :class:`~org.orekit.files.ccsds.section.Header`, T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H, ?>, P extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<H, T, ?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<H, T, P>
-    """
     def __init__(self, string: str, string2: str, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
-    def build(self) -> _PythonAbstractConstituentParser__T:
-        """
-            Build the file from parsed entries.
-        
-            Returns:
-                parsed file
-        
-        
-        """
-        ...
+    def build(self) -> _PythonAbstractConstituentParser__T: ...
     def finalize(self) -> None: ...
-    def finalizeData(self) -> bool:
-        """
-            Finalize data after parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def finalizeHeader(self) -> bool:
-        """
-            Finalize header after parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def finalizeMetadata(self) -> bool:
-        """
-            Finalize metadata after parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def getHeader(self) -> _PythonAbstractConstituentParser__H:
-        """
-            Get file header to fill.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                file header to fill
-        
-        
-        """
-        ...
-    def inData(self) -> bool:
-        """
-            Acknowledge data parsing has started.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def inHeader(self) -> bool:
-        """
-            Acknowledge header parsing has started.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def inMetadata(self) -> bool:
-        """
-            Acknowledge metada parsing has started.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def prepareData(self) -> bool:
-        """
-            Prepare data for parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def prepareHeader(self) -> bool:
-        """
-            Prepare header for parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def prepareMetadata(self) -> bool:
-        """
-            Prepare metadata for parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def finalizeData(self) -> bool: ...
+    def finalizeHeader(self) -> bool: ...
+    def finalizeMetadata(self) -> bool: ...
+    def getHeader(self) -> _PythonAbstractConstituentParser__H: ...
+    def inData(self) -> bool: ...
+    def inHeader(self) -> bool: ...
+    def inMetadata(self) -> bool: ...
+    def prepareData(self) -> bool: ...
+    def prepareHeader(self) -> bool: ...
+    def prepareMetadata(self) -> bool: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None:
-        """
-            Reset parser to initial state before parsing.
-        
-            Parameters:
-                fileFormat (:class:`~org.orekit.files.ccsds.utils.FileFormat`): format of the file ready to be parsed
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None: ...
 
 
 class __module_protocol__(Protocol):

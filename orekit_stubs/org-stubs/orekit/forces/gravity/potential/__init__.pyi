@@ -1311,210 +1311,42 @@ class LazyLoadedGravityFields(GravityFields):
         ...
 
 class PythonGravityFields(GravityFields):
-    """
-    public class PythonGravityFields extends :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.gravity.potential.GravityFields`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getConstantNormalizedProvider(self, int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'NormalizedSphericalHarmonicsProvider':
-        """
-            Description copied from
-            interface: :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantNormalizedProvider`
-            Get a constant gravity field normalized coefficients provider frozen at a given epoch.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantNormalizedProvider` in
-                interface :class:`~org.orekit.forces.gravity.potential.GravityFields`
-        
-            Parameters:
-                degree (int): maximal degree
-                order (int): maximal order
-                freezingDate (:class:`~org.orekit.time.AbsoluteDate`): freezing epoch
-        
-            Returns:
-                a gravity field coefficients provider containing already loaded data
-        
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getNormalizedProvider`
-        
-        
-        """
-        ...
-    def getConstantUnnormalizedProvider(self, int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'UnnormalizedSphericalHarmonicsProvider':
-        """
-            Description copied from
-            interface: :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantUnnormalizedProvider`
-            Get a constant gravity field unnormalized coefficients provider frozen at a given epoch.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantUnnormalizedProvider` in
-                interface :class:`~org.orekit.forces.gravity.potential.GravityFields`
-        
-            Parameters:
-                degree (int): maximal degree
-                order (int): maximal order
-                freezingDate (:class:`~org.orekit.time.AbsoluteDate`): freezing epoch
-        
-            Returns:
-                a gravity field coefficients provider containing already loaded data
-        
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getUnnormalizedProvider`
-        
-        
-        """
-        ...
-    def getNormalizedProvider(self, int: int, int2: int) -> 'NormalizedSphericalHarmonicsProvider':
-        """
-            Description copied from interface: :meth:`~org.orekit.forces.gravity.potential.GravityFields.getNormalizedProvider`
-            Get a gravity field normalized coefficients provider.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getNormalizedProvider` in
-                interface :class:`~org.orekit.forces.gravity.potential.GravityFields`
-        
-            Parameters:
-                degree (int): maximal degree
-                order (int): maximal order
-        
-            Returns:
-                a gravity field coefficients provider containing already loaded data
-        
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantNormalizedProvider`
-        
-        
-        """
-        ...
+    def getConstantNormalizedProvider(self, int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'NormalizedSphericalHarmonicsProvider': ...
+    def getConstantUnnormalizedProvider(self, int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'UnnormalizedSphericalHarmonicsProvider': ...
+    def getNormalizedProvider(self, int: int, int2: int) -> 'NormalizedSphericalHarmonicsProvider': ...
     def getOceanTidesWaves(self, int: int, int2: int) -> java.util.List[OceanTidesWave]: ...
-    def getUnnormalizedProvider(self, int: int, int2: int) -> 'UnnormalizedSphericalHarmonicsProvider':
-        """
-            Description copied from interface: :meth:`~org.orekit.forces.gravity.potential.GravityFields.getUnnormalizedProvider`
-            Get a gravity field unnormalized coefficients provider.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getUnnormalizedProvider` in
-                interface :class:`~org.orekit.forces.gravity.potential.GravityFields`
-        
-            Parameters:
-                degree (int): maximal degree
-                order (int): maximal order
-        
-            Returns:
-                a gravity field coefficients provider containing already loaded data
-        
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantUnnormalizedProvider`
-        
-        
-        """
-        ...
+    def getUnnormalizedProvider(self, int: int, int2: int) -> 'UnnormalizedSphericalHarmonicsProvider': ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonPotentialCoefficientsReader(PotentialCoefficientsReader):
-    """
-    public class PythonPotentialCoefficientsReader extends :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader`
-    """
     @typing.overload
     def __init__(self, string: str, boolean: bool): ...
     @typing.overload
     def __init__(self, string: str, boolean: bool, timeScale: org.orekit.time.TimeScale): ...
     def finalize(self) -> None: ...
-    def getProvider(self, boolean: bool, int: int, int2: int) -> 'RawSphericalHarmonicsProvider':
-        """
-            Get a provider for read spherical harmonics coefficients.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader.getProvider` in
-                class :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader`
-        
-            Parameters:
-                wantNormalized (boolean): if true, the provider will provide normalized coefficients, otherwise it will provide un-normalized coefficients
-                degree (int): maximal degree
-                order (int): maximal order
-        
-            Returns:
-                a new provider
-        
-            Since:
-                6.0
-        
-            Also see:
-                :code:`#getConstantProvider(boolean, int, int)`
-        
-        
-        """
-        ...
+    def getProvider(self, boolean: bool, int: int, int2: int) -> 'RawSphericalHarmonicsProvider': ...
     def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonTideSystemProvider(TideSystemProvider):
-    """
-    public class PythonTideSystemProvider extends :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.gravity.potential.TideSystemProvider`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getTideSystem(self) -> TideSystem:
-        """
-            Get the :class:`~org.orekit.forces.gravity.potential.TideSystem` used in the gravity field.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.TideSystemProvider.getTideSystem` in
-                interface :class:`~org.orekit.forces.gravity.potential.TideSystemProvider`
-        
-            Returns:
-                tide system used in the gravity field
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getTideSystem(self) -> TideSystem: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class SHAFormatReader(PotentialCoefficientsReader):
     """
@@ -1735,109 +1567,19 @@ class NormalizedSphericalHarmonicsProvider(SphericalHarmonicsProvider):
         def getNormalizedSnm(self, int: int, int2: int) -> float: ...
 
 class PythonSphericalHarmonicsProvider(SphericalHarmonicsProvider):
-    """
-    public class PythonSphericalHarmonicsProvider extends :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getAe(self) -> float:
-        """
-            Get the value of the central body reference radius.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getAe` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                ae (m)
-        
-        
-        """
-        ...
-    def getMaxDegree(self) -> int:
-        """
-            Description copied from interface: :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getMaxDegree`
-            Get the maximal supported degree.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getMaxDegree` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                maximal supported degree
-        
-        
-        """
-        ...
-    def getMaxOrder(self) -> int:
-        """
-            Get the maximal supported order.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getMaxOrder` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                maximal supported order
-        
-        
-        """
-        ...
-    def getMu(self) -> float:
-        """
-            Get the central body attraction coefficient.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getMu` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                mu (m³/s²)
-        
-        
-        """
-        ...
-    def getReferenceDate(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the reference date for the harmonics.
-        
-            For piecewise models, the latest reference date is returned.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getReferenceDate` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                reference date for the harmonics (may be null if no reference date is defined)
-        
-        
-        """
-        ...
-    def getTideSystem(self) -> TideSystem:
-        """
-            Get the :class:`~org.orekit.forces.gravity.potential.TideSystem` used in the gravity field.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.TideSystemProvider.getTideSystem` in
-                interface :class:`~org.orekit.forces.gravity.potential.TideSystemProvider`
-        
-            Returns:
-                tide system used in the gravity field
-        
-        
-        """
-        ...
+    def getAe(self) -> float: ...
+    def getMaxDegree(self) -> int: ...
+    def getMaxOrder(self) -> int: ...
+    def getMu(self) -> float: ...
+    def getReferenceDate(self) -> org.orekit.time.AbsoluteDate: ...
+    def getTideSystem(self) -> TideSystem: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class RawSphericalHarmonicsProvider(SphericalHarmonicsProvider):
     """
@@ -2048,454 +1790,64 @@ class CachedNormalizedSphericalHarmonicsProvider(NormalizedSphericalHarmonicsPro
         ...
 
 class PythonNormalizedSphericalHarmonicsProvider(NormalizedSphericalHarmonicsProvider):
-    """
-    public class PythonNormalizedSphericalHarmonicsProvider extends :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getAe(self) -> float:
-        """
-            Get the value of the central body reference radius.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getAe` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                ae (m)
-        
-        
-        """
-        ...
-    def getMaxDegree(self) -> int:
-        """
-            Get the maximal supported degree.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getMaxDegree` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                maximal supported degree
-        
-        
-        """
-        ...
-    def getMaxOrder(self) -> int:
-        """
-            Get the maximal supported order.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getMaxOrder` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                maximal supported order
-        
-        
-        """
-        ...
-    def getMu(self) -> float:
-        """
-            Get the central body attraction coefficient.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getMu` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                mu (m³/s²)
-        
-        
-        """
-        ...
-    def getReferenceDate(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the reference date for the harmonics.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getReferenceDate` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                reference date for the harmonics
-        
-        
-        """
-        ...
-    def getTideSystem(self) -> TideSystem:
-        """
-            Get the :class:`~org.orekit.forces.gravity.potential.TideSystem` used in the gravity field.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.TideSystemProvider.getTideSystem` in
-                interface :class:`~org.orekit.forces.gravity.potential.TideSystemProvider`
-        
-            Returns:
-                tide system used in the gravity field
-        
-        
-        """
-        ...
-    def onDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> NormalizedSphericalHarmonicsProvider.NormalizedSphericalHarmonics:
-        """
-            Get the normalized spherical harmonic coefficients at a specific instance in time.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider.onDate` in
-                interface :class:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): of evaluation
-        
-            Returns:
-                normalized coefficients on :code:`date`.
-        
-            Since:
-                6.1
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getAe(self) -> float: ...
+    def getMaxDegree(self) -> int: ...
+    def getMaxOrder(self) -> int: ...
+    def getMu(self) -> float: ...
+    def getReferenceDate(self) -> org.orekit.time.AbsoluteDate: ...
+    def getTideSystem(self) -> TideSystem: ...
+    def onDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> NormalizedSphericalHarmonicsProvider.NormalizedSphericalHarmonics: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonRawSphericalHarmonicsProvider(RawSphericalHarmonicsProvider):
-    """
-    public class PythonRawSphericalHarmonicsProvider extends :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.gravity.potential.RawSphericalHarmonicsProvider`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getAe(self) -> float:
-        """
-            Get the value of the central body reference radius.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getAe` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                ae (m)
-        
-        
-        """
-        ...
-    def getMaxDegree(self) -> int:
-        """
-            Get the maximal supported degree.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getMaxDegree` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                maximal supported degree
-        
-        
-        """
-        ...
-    def getMaxOrder(self) -> int:
-        """
-            Get the maximal supported order.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getMaxOrder` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                maximal supported order
-        
-        
-        """
-        ...
-    def getMu(self) -> float:
-        """
-            Get the central body attraction coefficient.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getMu` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                mu (m³/s²)
-        
-        
-        """
-        ...
-    def getReferenceDate(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the reference date for the harmonics.
-        
-            For piecewise models, the latest reference date is returned.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getReferenceDate` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                reference date for the harmonics (may be null if no reference date is defined)
-        
-        
-        """
-        ...
-    def getTideSystem(self) -> TideSystem:
-        """
-            Get the :class:`~org.orekit.forces.gravity.potential.TideSystem` used in the gravity field.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.TideSystemProvider.getTideSystem` in
-                interface :class:`~org.orekit.forces.gravity.potential.TideSystemProvider`
-        
-            Returns:
-                tide system used in the gravity field
-        
-        
-        """
-        ...
-    def onDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> RawSphericalHarmonicsProvider.RawSphericalHarmonics:
-        """
-            Get the raw spherical harmonic coefficients on a specific date.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.RawSphericalHarmonicsProvider.onDate` in
-                interface :class:`~org.orekit.forces.gravity.potential.RawSphericalHarmonicsProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): to evaluate the spherical harmonics
-        
-            Returns:
-                the raw spherical harmonics on :code:`date`.
-        
-        
-        """
-        ...
+    def getAe(self) -> float: ...
+    def getMaxDegree(self) -> int: ...
+    def getMaxOrder(self) -> int: ...
+    def getMu(self) -> float: ...
+    def getReferenceDate(self) -> org.orekit.time.AbsoluteDate: ...
+    def getTideSystem(self) -> TideSystem: ...
+    def onDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> RawSphericalHarmonicsProvider.RawSphericalHarmonics: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonUnnormalizedSphericalHarmonics(UnnormalizedSphericalHarmonicsProvider.UnnormalizedSphericalHarmonics):
-    """
-    public class PythonUnnormalizedSphericalHarmonics extends :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider.UnnormalizedSphericalHarmonics`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getDate(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the date.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
-        
-            Returns:
-                date attached to the object
-        
-        
-        """
-        ...
-    def getUnnormalizedCnm(self, int: int, int2: int) -> float:
-        """
-            Get a spherical harmonic cosine coefficient.
-        
-            Specified by:
-                
-                meth:`~org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider.UnnormalizedSphericalHarmonics.getUnnormalizedCnm` in
-                interface :class:`~org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider.UnnormalizedSphericalHarmonics`
-        
-            Parameters:
-                n (int): degree of the coefficient
-                m (int): order of the coefficient
-        
-            Returns:
-                un-normalized coefficient Cnm
-        
-        
-        """
-        ...
-    def getUnnormalizedSnm(self, int: int, int2: int) -> float:
-        """
-            Get a spherical harmonic sine coefficient.
-        
-            Specified by:
-                
-                meth:`~org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider.UnnormalizedSphericalHarmonics.getUnnormalizedSnm` in
-                interface :class:`~org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider.UnnormalizedSphericalHarmonics`
-        
-            Parameters:
-                n (int): degree of the coefficient
-                m (int): order of the coefficient
-        
-            Returns:
-                un-normalized coefficient Snm
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-class PythonUnnormalizedSphericalHarmonicsProvider(UnnormalizedSphericalHarmonicsProvider):
-    """
-    public class PythonUnnormalizedSphericalHarmonicsProvider extends :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getAe(self) -> float:
-        """
-            Get the value of the central body reference radius.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getAe` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                ae (m)
-        
-        
-        """
-        ...
-    def getMaxDegree(self) -> int:
-        """
-            Get the maximal supported degree.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getMaxDegree` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                maximal supported degree
-        
-        
-        """
-        ...
-    def getMaxOrder(self) -> int:
-        """
-            Get the maximal supported order.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getMaxOrder` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                maximal supported order
-        
-        
-        """
-        ...
-    def getMu(self) -> float:
-        """
-            Get the central body attraction coefficient.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getMu` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                mu (m³/s²)
-        
-        
-        """
-        ...
-    def getReferenceDate(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the reference date for the harmonics.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getReferenceDate` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Returns:
-                reference date for the harmonics
-        
-        
-        """
-        ...
-    def getTideSystem(self) -> TideSystem:
-        """
-            Get the :class:`~org.orekit.forces.gravity.potential.TideSystem` used in the gravity field.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.TideSystemProvider.getTideSystem` in
-                interface :class:`~org.orekit.forces.gravity.potential.TideSystemProvider`
-        
-            Returns:
-                tide system used in the gravity field
-        
-        
-        """
-        ...
-    def onDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> UnnormalizedSphericalHarmonicsProvider.UnnormalizedSphericalHarmonics:
-        """
-            Get the un-normalized spherical harmonic coefficients at a specific instance in time.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider.onDate` in
-                interface :class:`~org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): of evaluation
-        
-            Returns:
-                un-normalized coefficients on :code:`date`.
-        
-            Since:
-                6.1
-        
-        
-        """
-        ...
+    def getDate(self) -> org.orekit.time.AbsoluteDate: ...
+    def getUnnormalizedCnm(self, int: int, int2: int) -> float: ...
+    def getUnnormalizedSnm(self, int: int, int2: int) -> float: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+
+class PythonUnnormalizedSphericalHarmonicsProvider(UnnormalizedSphericalHarmonicsProvider):
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getAe(self) -> float: ...
+    def getMaxDegree(self) -> int: ...
+    def getMaxOrder(self) -> int: ...
+    def getMu(self) -> float: ...
+    def getReferenceDate(self) -> org.orekit.time.AbsoluteDate: ...
+    def getTideSystem(self) -> TideSystem: ...
+    def onDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> UnnormalizedSphericalHarmonicsProvider.UnnormalizedSphericalHarmonics: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None: ...
 
 
 class __module_protocol__(Protocol):

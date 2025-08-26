@@ -236,12 +236,12 @@ class EphemerisSegmentPropagator(org.orekit.propagation.analytical.AbstractAnaly
         ...
     def getMaxDate(self) -> org.orekit.time.AbsoluteDate:
         """
-            Description copied from interface: :meth:`~org.orekit.propagation.BoundedPropagator.getMaxDate`
+            Description copied from interface: :meth:`~org.orekit.utils.BoundedPVCoordinatesProvider.getMaxDate`
             Get the last date of the range.
         
             Specified by:
-                :meth:`~org.orekit.propagation.BoundedPropagator.getMaxDate` in
-                interface :class:`~org.orekit.propagation.BoundedPropagator`
+                :meth:`~org.orekit.utils.BoundedPVCoordinatesProvider.getMaxDate` in
+                interface :class:`~org.orekit.utils.BoundedPVCoordinatesProvider`
         
             Returns:
                 the last date of the range
@@ -251,12 +251,12 @@ class EphemerisSegmentPropagator(org.orekit.propagation.analytical.AbstractAnaly
         ...
     def getMinDate(self) -> org.orekit.time.AbsoluteDate:
         """
-            Description copied from interface: :meth:`~org.orekit.propagation.BoundedPropagator.getMinDate`
+            Description copied from interface: :meth:`~org.orekit.utils.BoundedPVCoordinatesProvider.getMinDate`
             Get the first date of the range.
         
             Specified by:
-                :meth:`~org.orekit.propagation.BoundedPropagator.getMinDate` in
-                interface :class:`~org.orekit.propagation.BoundedPropagator`
+                :meth:`~org.orekit.utils.BoundedPVCoordinatesProvider.getMinDate` in
+                interface :class:`~org.orekit.utils.BoundedPVCoordinatesProvider`
         
             Returns:
                 the first date of the range
@@ -443,101 +443,34 @@ class OrekitEphemerisFile(EphemerisFile[org.orekit.utils.TimeStampedPVCoordinate
         def getStop(self) -> org.orekit.time.AbsoluteDate: ...
 
 class PythonAttitudeEphemerisFile(AttitudeEphemerisFile):
-    """
-    public class PythonAttitudeEphemerisFile extends :class:`~org.orekit.files.general.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.AttitudeEphemerisFile`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def getSatellites(self) -> java.util.Map[str, AttitudeEphemerisFile.SatelliteAttitudeEphemeris]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonAttitudeEphemerisFileParser(AttitudeEphemerisFileParser):
-    """
-    public class PythonAttitudeEphemerisFileParser extends :class:`~org.orekit.files.general.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.AttitudeEphemerisFileParser`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def parse(self, dataSource: org.orekit.data.DataSource) -> AttitudeEphemerisFile[typing.Any, typing.Any]:
-        """
-            Parse an attitude ephemeris file from a data source.
-        
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFileParser.parse` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFileParser`
-        
-            Parameters:
-                source (:class:`~org.orekit.data.DataSource`): source providing the data to parse
-        
-            Returns:
-                a parsed attitude ephemeris file.
-        
-        
-        """
-        ...
+    def parse(self, dataSource: org.orekit.data.DataSource) -> AttitudeEphemerisFile[typing.Any, typing.Any]: ...
     def parse_BS(self, bufferedReader: java.io.BufferedReader, string: str) -> AttitudeEphemerisFile: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonAttitudeEphemerisFileWriter(AttitudeEphemerisFileWriter):
-    """
-    public class PythonAttitudeEphemerisFileWriter extends :class:`~org.orekit.files.general.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.AttitudeEphemerisFileWriter`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     _write_0__C = typing.TypeVar('_write_0__C', bound=org.orekit.utils.TimeStampedAngularCoordinates)  # <C>
     _write_0__S = typing.TypeVar('_write_0__S', bound=AttitudeEphemerisFile.AttitudeEphemerisSegment)  # <S>
     @typing.overload
@@ -546,313 +479,68 @@ class PythonAttitudeEphemerisFileWriter(AttitudeEphemerisFileWriter):
     def write(self, appendable: java.lang.Appendable, attitudeEphemerisFile: typing.Union[AttitudeEphemerisFile, typing.Callable]) -> None: ...
 
 class PythonAttitudeEphemerisSegment(AttitudeEphemerisFile.AttitudeEphemerisSegment):
-    """
-    public class PythonAttitudeEphemerisSegment extends :class:`~org.orekit.files.general.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def getAngularCoordinates(self) -> java.util.List[org.orekit.utils.TimeStampedAngularCoordinates]: ...
-    def getAttitudeProvider(self) -> org.orekit.attitudes.BoundedAttitudeProvider:
-        """
-            Get the attitude provider for this attitude ephemeris segment.
-        
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getAttitudeProvider` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
-        
-            Returns:
-                the attitude provider for this attitude ephemeris segment.
-        
-        
-        """
-        ...
-    def getAvailableDerivatives(self) -> org.orekit.utils.AngularDerivativesFilter:
-        """
-            Get which derivatives of angular data are available in this attitude ephemeris segment.
-        
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getAvailableDerivatives` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
-        
-            Returns:
-                a value indicating if the file contains rotation and/or rotation rate and/or acceleration data.
-        
-        
-        """
-        ...
-    def getInterpolationMethod(self) -> str:
-        """
-            Get the interpolation method to be used.
-        
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getInterpolationMethod` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
-        
-            Returns:
-                the interpolation method
-        
-        
-        """
-        ...
-    def getInterpolationSamples(self) -> int:
-        """
-            Get the number of samples to use in interpolation.
-        
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getInterpolationSamples` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
-        
-            Returns:
-                the number of points to use for interpolation.
-        
-        
-        """
-        ...
-    def getReferenceFrame(self) -> org.orekit.frames.Frame:
-        """
-            Get the reference frame from which attitude is defined.
-        
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getReferenceFrame` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
-        
-            Returns:
-                the reference frame from which attitude is defined
-        
-        
-        """
-        ...
-    def getStart(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the start date of this ephemeris segment.
-        
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getStart` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
-        
-            Returns:
-                ephemeris segment start date.
-        
-        
-        """
-        ...
-    def getStop(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the end date of this ephemeris segment.
-        
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getStop` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
-        
-            Returns:
-                ephemeris segment end date.
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getAttitudeProvider(self) -> org.orekit.attitudes.BoundedAttitudeProvider: ...
+    def getAvailableDerivatives(self) -> org.orekit.utils.AngularDerivativesFilter: ...
+    def getInterpolationMethod(self) -> str: ...
+    def getInterpolationSamples(self) -> int: ...
+    def getReferenceFrame(self) -> org.orekit.frames.Frame: ...
+    def getStart(self) -> org.orekit.time.AbsoluteDate: ...
+    def getStop(self) -> org.orekit.time.AbsoluteDate: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonEphemerisFile(EphemerisFile):
-    """
-    public class PythonEphemerisFile extends :class:`~org.orekit.files.general.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFile`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def getSatellites(self) -> java.util.Map[str, EphemerisFile.SatelliteEphemeris]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonEphemerisFileParser(EphemerisFileParser):
-    """
-    public class PythonEphemerisFileParser extends :class:`~org.orekit.files.general.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFileParser`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def parse(self, dataSource: org.orekit.data.DataSource) -> EphemerisFile[typing.Any, typing.Any]:
-        """
-            Parse an ephemeris file from a data source.
-        
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFileParser.parse` in
-                interface :class:`~org.orekit.files.general.EphemerisFileParser`
-        
-            Parameters:
-                source (:class:`~org.orekit.data.DataSource`): source providing the data to parse
-        
-            Returns:
-                a parsed ephemeris file.
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def parse(self, dataSource: org.orekit.data.DataSource) -> EphemerisFile[typing.Any, typing.Any]: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonEphemerisFileWriter(EphemerisFileWriter):
-    """
-    public class PythonEphemerisFileWriter extends :class:`~org.orekit.files.general.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFileWriter`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     @typing.overload
     def write(self, appendable: java.lang.Appendable, ephemerisFile: typing.Union[EphemerisFile, typing.Callable]) -> None: ...
     @typing.overload
     def write(self, string: str, ephemerisFile: typing.Union[EphemerisFile, typing.Callable]) -> None: ...
 
 class PythonSatelliteAttitudeEphemeris(AttitudeEphemerisFile.SatelliteAttitudeEphemeris):
-    """
-    public class PythonSatelliteAttitudeEphemeris extends :class:`~org.orekit.files.general.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getAttitudeProvider(self) -> org.orekit.attitudes.BoundedAttitudeProvider:
-        """
-            Get the attitude provider corresponding to this ephemeris, combining data from all
-            :meth:`~org.orekit.files.general.PythonSatelliteAttitudeEphemeris.getSegments`.
-        
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris.getAttitudeProvider` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`
-        
-            Returns:
-                an attitude provider for all the data in this attitude ephemeris file.
-        
-        
-        """
-        ...
-    def getId(self) -> str:
-        """
-            Get the satellite ID. The satellite ID is unique only within the same ephemeris file.
-        
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris.getId` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`
-        
-            Returns:
-                the satellite's ID, never :code:`null`.
-        
-        
-        """
-        ...
+    def getAttitudeProvider(self) -> org.orekit.attitudes.BoundedAttitudeProvider: ...
+    def getId(self) -> str: ...
     def getSegments(self) -> java.util.List[AttitudeEphemerisFile.AttitudeEphemerisSegment]: ...
-    def getStart(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the start date of the ephemeris.
-        
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris.getStart` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`
-        
-            Returns:
-                ephemeris start date.
-        
-        
-        """
-        ...
-    def getStop(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the end date of the ephemeris.
-        
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris.getStop` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`
-        
-            Returns:
-                ephemeris end date.
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getStart(self) -> org.orekit.time.AbsoluteDate: ...
+    def getStop(self) -> org.orekit.time.AbsoluteDate: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 
 class __module_protocol__(Protocol):

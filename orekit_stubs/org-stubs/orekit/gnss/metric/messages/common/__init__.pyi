@@ -308,44 +308,14 @@ class GlonassUserRangeAccuracy(AccuracyProvider):
         ...
 
 class PythonAccuracyProvider(AccuracyProvider):
-    """
-    public class PythonAccuracyProvider extends :class:`~org.orekit.gnss.metric.messages.common.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.metric.messages.common.AccuracyProvider`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getAccuracy(self) -> float:
-        """
-            Get the accuracy of the ephemeris data from an accuracy index.
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.metric.messages.common.AccuracyProvider.getAccuracy` in
-                interface :class:`~org.orekit.gnss.metric.messages.common.AccuracyProvider`
-        
-            Returns:
-                accuracy in meters
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getAccuracy(self) -> float: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class SignalInSpaceAccuracy(AccuracyProvider):
     """

@@ -200,70 +200,18 @@ class NbsNrcSteamTable(WaterVaporPressureProvider):
         ...
 
 class PythonWaterVaporPressureProvider(WaterVaporPressureProvider):
-    """
-    public class PythonWaterVaporPressureProvider extends :class:`~org.orekit.models.earth.weather.water.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.weather.water.WaterVaporPressureProvider`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     _waterVaporPressure_1__T = typing.TypeVar('_waterVaporPressure_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def waterVaporPressure(self, double: float, double2: float, double3: float) -> float:
-        """
-            Compute water vapor pressure.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.weather.water.WaterVaporPressureProvider.waterVaporPressure` in
-                interface :class:`~org.orekit.models.earth.weather.water.WaterVaporPressureProvider`
-        
-            Parameters:
-                p (double): pressure (Pa)
-                t (double): temperature (Kelvin)
-                rh (double): relative humidity, as a ratio (50% → 0.5)
-        
-            Returns:
-                water vapor pressure (Pa)
-        
-        """
-        ...
+    def waterVaporPressure(self, double: float, double2: float, double3: float) -> float: ...
     @typing.overload
-    def waterVaporPressure(self, t: _waterVaporPressure_1__T, t2: _waterVaporPressure_1__T, t3: _waterVaporPressure_1__T) -> _waterVaporPressure_1__T:
-        """
-            Compute water vapor pressure.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.weather.water.WaterVaporPressureProvider.waterVaporPressure` in
-                interface :class:`~org.orekit.models.earth.weather.water.WaterVaporPressureProvider`
-        
-            Parameters:
-                p (T): pressure (Pa)
-                t (T): temperature (Kelvin)
-                rh (T): relative humidity, as a ratio (50% → 0.5)
-        
-            Returns:
-                water vapor pressure (Pa)
-        
-        
-        """
-        ...
+    def waterVaporPressure(self, t: _waterVaporPressure_1__T, t2: _waterVaporPressure_1__T, t3: _waterVaporPressure_1__T) -> _waterVaporPressure_1__T: ...
 
 class Wang1988(WaterVaporPressureProvider):
     """

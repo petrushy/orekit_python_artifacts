@@ -189,6 +189,124 @@ class DTM2000InputParameters(java.io.Serializable):
         """
         ...
 
+class JB2006InputParameters(java.io.Serializable):
+    """
+    public interface JB2006InputParameters extends :class:`~org.orekit.models.earth.atmosphere.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    
+        Interface for solar activity and magnetic activity data.
+    """
+    def getAp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the Geomagnetic planetary 3-hour index A :sub:`p` . Tabular time 6.7 hours earlier.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
+        
+            Returns:
+                the A :sub:`p` index
+        
+        
+        """
+        ...
+    def getF10(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the value of the instantaneous solar flux index (1e :sup:`-22` *Watt/(m²*Hertz)). Tabular time 1.0 day earlier.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
+        
+            Returns:
+                the instantaneous F10.7 index
+        
+        
+        """
+        ...
+    def getF10B(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the value of the mean solar flux. Averaged 81-day centered F10.7 B index on the input time.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
+        
+            Returns:
+                the mean solar flux F10.7B index
+        
+        
+        """
+        ...
+    def getMaxDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Gets the available data range maximum date.
+        
+            Returns:
+                the maximum date.
+        
+        
+        """
+        ...
+    def getMinDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Gets the available data range minimum date.
+        
+            Returns:
+                the minimum date.
+        
+        
+        """
+        ...
+    def getS10(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the EUV index (26-34 nm) scaled to F10. Tabular time 1 day earlier.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
+        
+            Returns:
+                the the EUV S10 index
+        
+        
+        """
+        ...
+    def getS10B(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the EUV 81-day averaged centered index.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
+        
+            Returns:
+                the the mean EUV S10B index
+        
+        
+        """
+        ...
+    def getXM10(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the MG2 index scaled to F10.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
+        
+            Returns:
+                the the EUV S10 index
+        
+        
+        """
+        ...
+    def getXM10B(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the MG2 81-day average centered index. Tabular time 5.0 days earlier.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
+        
+            Returns:
+                the the mean EUV S10B index
+        
+        
+        """
+        ...
+
 class JB2008InputParameters(java.io.Serializable):
     """
     public interface JB2008InputParameters extends :class:`~org.orekit.models.earth.atmosphere.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
@@ -442,253 +560,39 @@ class AbstractSunInfluencedAtmosphere(Atmosphere):
     ...
 
 class PythonAtmosphere(Atmosphere):
-    """
-    public class PythonAtmosphere extends :class:`~org.orekit.models.earth.atmosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     _getDensity_1__T = typing.TypeVar('_getDensity_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getDensity(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame) -> float:
-        """
-            Get the local density.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity` in
-                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): current position in frame
-                frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
-        
-            Returns:
-                local density (kg/m³)
-        
-        """
-        ...
+    def getDensity(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame) -> float: ...
     @typing.overload
-    def getDensity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getDensity_1__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getDensity_1__T], frame: org.orekit.frames.Frame) -> _getDensity_1__T:
-        """
-            Get the local density.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity` in
-                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
-                frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
-        
-            Returns:
-                local density (kg/m³)
-        
-        
-        """
-        ...
-    def getFrame(self) -> org.orekit.frames.Frame:
-        """
-            Get the frame of the central body.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getFrame` in
-                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
-        
-            Returns:
-                frame of the central body.
-        
-        
-        """
-        ...
+    def getDensity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getDensity_1__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getDensity_1__T], frame: org.orekit.frames.Frame) -> _getDensity_1__T: ...
+    def getFrame(self) -> org.orekit.frames.Frame: ...
     _getVelocity_0__T = typing.TypeVar('_getVelocity_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getVelocity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getVelocity_0__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getVelocity_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getVelocity_0__T]:
-        """
-            Get the inertial velocity of atmosphere molecules.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getVelocity` in
-                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
-                frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
-        
-            Returns:
-                velocity (m/s) (defined in the same frame as the position)
-        
-        
-        """
-        ...
+    def getVelocity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getVelocity_0__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getVelocity_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getVelocity_0__T]: ...
     @typing.overload
-    def getVelocity(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get the inertial velocity of atmosphere molecules.
-        
-            By default, atmosphere is supposed to have a null velocity in the central body frame.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getVelocity` in
-                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): current position in frame
-                frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
-        
-            Returns:
-                velocity (m/s) (defined in the same frame as the position)
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getVelocity(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonDTM2000InputParameters(DTM2000InputParameters):
-    """
-    public class PythonDTM2000InputParameters extends :class:`~org.orekit.models.earth.atmosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
-    
-    
-        Also see:
-            :meth:`~serialized`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def get24HoursKp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Get the last 24H mean geomagnetic index.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.get24HoursKp` in
-                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
-        
-            Returns:
-                the 24H geomagnetic index
-        
-        
-        """
-        ...
-    def getInstantFlux(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Get the value of the instantaneous solar flux.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getInstantFlux` in
-                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
-        
-            Returns:
-                the instantaneous solar flux
-        
-        
-        """
-        ...
-    def getMaxDate(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Gets the available data range maximum date.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMaxDate` in
-                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
-        
-            Returns:
-                the maximum date.
-        
-        
-        """
-        ...
-    def getMeanFlux(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Get the value of the mean solar flux.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMeanFlux` in
-                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
-        
-            Returns:
-                the mean solar flux
-        
-        
-        """
-        ...
-    def getMinDate(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Gets the available data range minimum date.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMinDate` in
-                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
-        
-            Returns:
-                the minimum date.
-        
-        
-        """
-        ...
-    def getThreeHourlyKP(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Get the value of the 3 hours geomagnetic index. With a delay of 3 hours at pole to 6 hours at equator using:
-            delay=6-abs(lat)*0.033 (lat in deg.)
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getThreeHourlyKP` in
-                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
-        
-            Returns:
-                the 3H geomagnetic index
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def get24HoursKp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
+    def getInstantFlux(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
+    def getMaxDate(self) -> org.orekit.time.AbsoluteDate: ...
+    def getMeanFlux(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
+    def getMinDate(self) -> org.orekit.time.AbsoluteDate: ...
+    def getThreeHourlyKP(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonJB2008InputParameters(JB2008InputParameters):
     def __init__(self): ...
@@ -711,124 +615,18 @@ class PythonJB2008InputParameters(JB2008InputParameters):
     def pythonExtension(self, long: int) -> None: ...
 
 class PythonNRLMSISE00InputParameters(NRLMSISE00InputParameters):
-    """
-    public class PythonNRLMSISE00InputParameters extends :class:`~org.orekit.models.earth.atmosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
-    
-    
-        Also see:
-            :meth:`~serialized`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getAp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
-        """
-            Get the A :sub:`p` geomagnetic indices.
-        
-            A :sub:`p` indices are provided as an array such as:
-        
-              - 0 -> daily A :sub:`p`
-              - 1 -> 3 hr A :sub:`p` index for current time
-              - 2 -> 3 hr A :sub:`p` index for 3 hrs before current time
-              - 3 -> 3 hr A :sub:`p` index for 6 hrs before current time
-              - 4 -> 3 hr A :sub:`p` index for 9 hrs before current time
-              - 5 -> Average of eight 3 hr A :sub:`p` indices from 12 to 33 hrs prior to current time
-              - 6 -> Average of eight 3 hr A :sub:`p` indices from 36 to 57 hrs prior to current time
-        
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getAp` in
-                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
-        
-            Returns:
-                the array of A :sub:`p` indices
-        
-        
-        """
-        ...
-    def getAverageFlux(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Get the value of the 81 day average of F10.7 solar flux centered on current day.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getAverageFlux` in
-                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
-        
-            Returns:
-                the 81 day average of F10.7 solar flux centered on current day
-        
-        
-        """
-        ...
-    def getDailyFlux(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Get the value of the daily F10.7 solar flux for previous day.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getDailyFlux` in
-                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
-        
-            Returns:
-                the daily F10.7 flux for previous day
-        
-        
-        """
-        ...
-    def getMaxDate(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Gets the available data range maximum date.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getMaxDate` in
-                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
-        
-            Returns:
-                the maximum date.
-        
-        
-        """
-        ...
-    def getMinDate(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Gets the available data range minimum date.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getMinDate` in
-                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
-        
-            Returns:
-                the minimum date.
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getAp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]: ...
+    def getAverageFlux(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
+    def getDailyFlux(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
+    def getMaxDate(self) -> org.orekit.time.AbsoluteDate: ...
+    def getMinDate(self) -> org.orekit.time.AbsoluteDate: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class SimpleExponentialAtmosphere(Atmosphere):
     """
@@ -890,6 +688,81 @@ class SimpleExponentialAtmosphere(Atmosphere):
         
             Returns:
                 frame of the central body.
+        
+        
+        """
+        ...
+
+class AbstractJacchiaBowmanModel(AbstractSunInfluencedAtmosphere):
+    """
+    public abstract class AbstractJacchiaBowmanModel extends :class:`~org.orekit.models.earth.atmosphere.AbstractSunInfluencedAtmosphere`
+    
+        Base class for Jacchia-Bowman atmospheric models.
+    
+        Since:
+            13.1
+    
+        Also see:
+            :class:`~org.orekit.models.earth.atmosphere.JB2006`, :class:`~org.orekit.models.earth.atmosphere.JB2008`
+    """
+    _getDensity_1__T = typing.TypeVar('_getDensity_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getDensity(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame) -> float:
+        """
+            Get the local density.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): current position in frame
+                frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
+        
+            Returns:
+                local density (kg/m³)
+        
+        """
+        ...
+    @typing.overload
+    def getDensity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getDensity_1__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getDensity_1__T], frame: org.orekit.frames.Frame) -> _getDensity_1__T:
+        """
+            Get the local density.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
+                frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
+        
+            Returns:
+                local density (kg/m³)
+        
+        
+        """
+        ...
+    def getEarth(self) -> org.orekit.bodies.BodyShape:
+        """
+            Get the Earth body shape.
+        
+            Returns:
+                the Earth body shape
+        
+        
+        """
+        ...
+    def getFrame(self) -> org.orekit.frames.Frame:
+        """
+            Get the frame of the central body.
+        
+            Returns:
+                frame of the central body.
+        
+        
+        """
+        ...
+    def getUtc(self) -> org.orekit.time.TimeScale:
+        """
+            Get the UTC time scale.
+        
+            Returns:
+                UTC time scale
         
         
         """
@@ -1161,191 +1034,6 @@ class HarrisPriester(AbstractSunInfluencedAtmosphere):
         """
         ...
 
-class JB2008(AbstractSunInfluencedAtmosphere):
-    """
-    public class JB2008 extends :class:`~org.orekit.models.earth.atmosphere.AbstractSunInfluencedAtmosphere`
-    
-        This is the realization of the Jacchia-Bowman 2008 atmospheric model.
-    
-        It is described in the paper:
-    
-    
-        
-        class:`~org.orekit.models.earth.atmosphere.https:.www.researchgate.net.publication.228621668_A_New_Empirical_Thermospheric_Density_Model_JB2008_Using_New_Solar_and_Geomagnetic_Indices`
-    
-    
-        *Bruce R. Bowman & al.*
-    
-    
-        AIAA 2008-6438
-    
-    
-    
-        Two computation methods are proposed to the user:
-    
-          - one OREKIT independent and compliant with initial FORTRAN routine entry values:
-            :meth:`~org.orekit.models.earth.atmosphere.JB2008.getDensity`.
-          -         one compliant with OREKIT Atmosphere interface, necessary to the :class:`~org.orekit.forces.drag.DragForce` computation.
-    
-    
-        This model provides dense output for all altitudes and positions. Output data are :
-    
-          - Exospheric Temperature above Input Position (deg K)
-          - Temperature at Input Position (deg K)
-          - Total Mass-Density at Input Position (kg/m³)
-    
-    
-        The model needs geographical and time information to compute general values, but also needs space weather data : mean
-        and daily solar flux, retrieved through different indices, and planetary geomagnetic indices.
-    
-    
-        More information on these indices can be found on the ` official JB2008 website.
-        <http://sol.spacenvironment.net/~JB2008/indices.html>`
-    """
-    @typing.overload
-    def __init__(self, jB2008InputParameters: JB2008InputParameters, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], bodyShape: org.orekit.bodies.BodyShape): ...
-    @typing.overload
-    def __init__(self, jB2008InputParameters: JB2008InputParameters, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], bodyShape: org.orekit.bodies.BodyShape, timeScale: org.orekit.time.TimeScale): ...
-    _getDensity_2__T = typing.TypeVar('_getDensity_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _getDensity_3__T = typing.TypeVar('_getDensity_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getDensity(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, double11: float, double12: float, double13: float, double14: float, double15: float) -> float:
-        """
-            Get the local density with initial entries.
-        
-            Parameters:
-                dateMJD (double): date and time, in modified julian days and fraction
-                sunRA (double): Right Ascension of Sun (radians)
-                sunDecli (double): Declination of Sun (radians)
-                satLon (double): Right Ascension of position (radians)
-                satLat (double): Geocentric latitude of position (radians)
-                satAlt (double): Height of position (m)
-                f10 (double): 10.7-cm Solar flux (1e :sup:`-22` *Watt/(m²*Hertz))
-        
-        
-        (Tabular time 1.0 day earlier)
-                f10B (double): 10.7-cm Solar Flux, averaged 81-day centered on the input time
-        
-        
-        (Tabular time 1.0 day earlier)
-                s10 (double): EUV index (26-34 nm) scaled to F10
-        
-        
-        (Tabular time 1 day earlier)
-                s10B (double): UV 81-day averaged centered index (Tabular time 1 day earlier)
-                xm10 (double): MG2 index scaled to F10
-        
-        
-        (Tabular time 2.0 days earlier)
-                xm10B (double): MG2 81-day ave. centered index
-        
-        
-        (Tabular time 2.0 days earlier)
-                y10 (double): Solar X-Ray & Lya index scaled to F10
-        
-        
-        (Tabular time 5.0 days earlier)
-                y10B (double): Solar X-Ray & Lya 81-day ave. centered index
-        
-        
-        (Tabular time 5.0 days earlier)
-                dstdtc (double): Temperature change computed from Dst index
-        
-            Returns:
-                total mass-Density at input position (kg/m³)
-        
-        """
-        ...
-    @typing.overload
-    def getDensity(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame) -> float:
-        """
-            Get the local density.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): current position in frame
-                frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
-        
-            Returns:
-                local density (kg/m³)
-        
-        """
-        ...
-    @typing.overload
-    def getDensity(self, t: _getDensity_2__T, t2: _getDensity_2__T, t3: _getDensity_2__T, t4: _getDensity_2__T, t5: _getDensity_2__T, t6: _getDensity_2__T, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float) -> _getDensity_2__T:
-        """
-            Get the local density with initial entries.
-        
-            Parameters:
-                dateMJD (T): date and time, in modified julian days and fraction
-                sunRA (T): Right Ascension of Sun (radians)
-                sunDecli (T): Declination of Sun (radians)
-                satLon (T): Right Ascension of position (radians)
-                satLat (T): Geocentric latitude of position (radians)
-                satAlt (T): Height of position (m)
-                f10 (double): 10.7-cm Solar flux (1e :sup:`-22` *Watt/(m²*Hertz))
-        
-        
-        (Tabular time 1.0 day earlier)
-                f10B (double): 10.7-cm Solar Flux, averaged 81-day centered on the input time
-        
-        
-        (Tabular time 1.0 day earlier)
-                s10 (double): EUV index (26-34 nm) scaled to F10
-        
-        
-        (Tabular time 1 day earlier)
-                s10B (double): UV 81-day averaged centered index (Tabular time 1 day earlier)
-                xm10 (double): MG2 index scaled to F10
-        
-        
-        (Tabular time 2.0 days earlier)
-                xm10B (double): MG2 81-day ave. centered index
-        
-        
-        (Tabular time 2.0 days earlier)
-                y10 (double): Solar X-Ray & Lya index scaled to F10
-        
-        
-        (Tabular time 5.0 days earlier)
-                y10B (double): Solar X-Ray & Lya 81-day ave. centered index
-        
-        
-        (Tabular time 5.0 days earlier)
-                dstdtc (double): Temperature change computed from Dst index
-        
-            Returns:
-                total mass-Density at input position (kg/m³)
-        
-        """
-        ...
-    @typing.overload
-    def getDensity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getDensity_3__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getDensity_3__T], frame: org.orekit.frames.Frame) -> _getDensity_3__T:
-        """
-            Get the local density.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
-                frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
-        
-            Returns:
-                local density (kg/m³)
-        
-        
-        """
-        ...
-    def getFrame(self) -> org.orekit.frames.Frame:
-        """
-            Get the frame of the central body.
-        
-            Returns:
-                frame of the central body.
-        
-        
-        """
-        ...
-
 _NRLMSISE00__FieldOutput__T = typing.TypeVar('_NRLMSISE00__FieldOutput__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class NRLMSISE00(AbstractSunInfluencedAtmosphere):
     """
@@ -1507,134 +1195,238 @@ class NRLMSISE00(AbstractSunInfluencedAtmosphere):
         def getDensity(self, int: int) -> _NRLMSISE00__FieldOutput__T: ...
 
 class PythonAbstractSunInfluencedAtmosphere(AbstractSunInfluencedAtmosphere):
-    """
-    public class PythonAbstractSunInfluencedAtmosphere extends :class:`~org.orekit.models.earth.atmosphere.AbstractSunInfluencedAtmosphere`
-    """
     def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable]): ...
     def finalize(self) -> None: ...
     _getDensity_1__T = typing.TypeVar('_getDensity_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getDensity(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame) -> float:
-        """
-            Get the local density.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): current position in frame
-                frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
-        
-            Returns:
-                local density (kg/m³)
-        
-        """
-        ...
+    def getDensity(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame) -> float: ...
     @typing.overload
-    def getDensity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getDensity_1__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getDensity_1__T], frame: org.orekit.frames.Frame) -> _getDensity_1__T:
-        """
-            Get the local density.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
-                frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
-        
-            Returns:
-                local density (kg/m³)
-        
-        
-        """
-        ...
-    def getFrame(self) -> org.orekit.frames.Frame:
-        """
-            Get the frame of the central body.
-        
-            Returns:
-                frame of the central body.
-        
-        
-        """
-        ...
-    def getSun(self) -> org.orekit.utils.ExtendedPositionProvider:
-        """
-            Getter for Sun's position provider.
-        
-            Overrides:
-                :meth:`~org.orekit.models.earth.atmosphere.AbstractSunInfluencedAtmosphere.getSun` in
-                class :class:`~org.orekit.models.earth.atmosphere.AbstractSunInfluencedAtmosphere`
-        
-            Returns:
-                position provider
-        
-        
-        """
-        ...
+    def getDensity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getDensity_1__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getDensity_1__T], frame: org.orekit.frames.Frame) -> _getDensity_1__T: ...
+    def getFrame(self) -> org.orekit.frames.Frame: ...
+    def getSun(self) -> org.orekit.utils.ExtendedPositionProvider: ...
     _getSunPosition_0__T = typing.TypeVar('_getSunPosition_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getSunPosition(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getSunPosition_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getSunPosition_0__T]:
-        """
-            Method returning the Sun's position vector (Field version).
+    def getSunPosition(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getSunPosition_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getSunPosition_0__T]: ...
+    @typing.overload
+    def getSunPosition(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None: ...
+
+class JB2006(AbstractJacchiaBowmanModel):
+    """
+    public class JB2006 extends :class:`~org.orekit.models.earth.atmosphere.AbstractJacchiaBowmanModel`
+    
+        This is the realization of the Jacchia-Bowman 2006 atmospheric model.
+    
+        It is described in the paper:
+    
+    
+        `A New Empirical Thermospheric Density Model JB2006 Using New Solar Indices
+        <http://sol.spacenvironment.net/~JB2006/pubs/JB2006_AIAA-6166_model.pdf>`
+    
+    
+        *Bruce R. Bowman, W. Kent Tobiska and Frank A. Marcos*
+    
+    
+    
+        AIAA 2006-6166
+    
+    
+    
+        This model provides dense output for all altitudes and positions. Output data are :
+    
+          - Exospheric Temperature above Input Position (deg K)
+          - Temperature at Input Position (deg K)
+          - Total Mass-Density at Input Position (kg/m³)
+    
+    
+        The model needs geographical and time information to compute general values, but also needs space weather data : mean
+        and daily solar flux, retrieved threw different indices, and planetary geomagnetic indices.
+    
+    
+        More information on these indices can be found on the ` official JB2006 website.
+        <http://sol.spacenvironment.net/~JB2006/JB2006_index.html>`
+    
+        Since:
+            13.1
+    """
+    @typing.overload
+    def __init__(self, jB2006InputParameters: JB2006InputParameters, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], bodyShape: org.orekit.bodies.BodyShape): ...
+    @typing.overload
+    def __init__(self, jB2006InputParameters: JB2006InputParameters, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], bodyShape: org.orekit.bodies.BodyShape, timeScale: org.orekit.time.TimeScale): ...
+
+class JB2008(AbstractJacchiaBowmanModel):
+    """
+    public class JB2008 extends :class:`~org.orekit.models.earth.atmosphere.AbstractJacchiaBowmanModel`
+    
+        This is the realization of the Jacchia-Bowman 2008 atmospheric model.
+    
+        It is described in the paper:
+    
+    
         
-            Overrides:
-                :meth:`~org.orekit.models.earth.atmosphere.AbstractSunInfluencedAtmosphere.getSunPosition` in
-                class :class:`~org.orekit.models.earth.atmosphere.AbstractSunInfluencedAtmosphere`
+        class:`~org.orekit.models.earth.atmosphere.https:.www.researchgate.net.publication.228621668_A_New_Empirical_Thermospheric_Density_Model_JB2008_Using_New_Solar_and_Geomagnetic_Indices`
+    
+    
+        *Bruce R. Bowman & al.*
+    
+    
+        AIAA 2008-6438
+    
+    
+    
+        Two computation methods are proposed to the user:
+    
+          - one OREKIT independent and compliant with initial FORTRAN routine entry values:
+            :meth:`~org.orekit.models.earth.atmosphere.JB2008.getDensity`.
+          -         one compliant with OREKIT Atmosphere interface, necessary to the :class:`~org.orekit.forces.drag.DragForce` computation.
+    
+    
+        This model provides dense output for all altitudes and positions. Output data are :
+    
+          - Exospheric Temperature above Input Position (deg K)
+          - Temperature at Input Position (deg K)
+          - Total Mass-Density at Input Position (kg/m³)
+    
+    
+        The model needs geographical and time information to compute general values, but also needs space weather data : mean
+        and daily solar flux, retrieved through different indices, and planetary geomagnetic indices.
+    
+    
+        More information on these indices can be found on the ` official JB2008 website.
+        <http://sol.spacenvironment.net/~JB2008/indices.html>`
+    """
+    @typing.overload
+    def __init__(self, jB2008InputParameters: JB2008InputParameters, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], bodyShape: org.orekit.bodies.BodyShape): ...
+    @typing.overload
+    def __init__(self, jB2008InputParameters: JB2008InputParameters, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], bodyShape: org.orekit.bodies.BodyShape, timeScale: org.orekit.time.TimeScale): ...
+    _getDensity_2__T = typing.TypeVar('_getDensity_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getDensity_3__T = typing.TypeVar('_getDensity_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getDensity(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame) -> float:
+        """
+            Get the local density with initial entries.
+        
+            The method creates a new instance of :class:`~org.orekit.models.earth.atmosphere.JB2008` model and set the input solar
+            activity data equal to the provided one. These data are then available form
+            :meth:`~org.orekit.time.AbsoluteDate.PAST_INFINITY` to :meth:`~org.orekit.time.AbsoluteDate.FUTURE_INFINITY`.
         
             Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of output position
-                frame (:class:`~org.orekit.frames.Frame`): frame of output position
+                dateMJD (double): date and time, in modified julian days and fraction
+                sunRA (double): Right Ascension of Sun (radians).
+                sunDecli (double): Declination of Sun (radians).
+                satLon (double): Right Ascension of position (radians)
+                satLat (double): Geocentric latitude of position (radians)
+                satAlt (double): Height of position (m)
+                f10 (double): 10.7-cm Solar flux (1e :sup:`-22` *Watt/(m²*Hertz))
+        
+        
+        (Tabular time 1.0 day earlier)
+                f10B (double): 10.7-cm Solar Flux, averaged 81-day centered on the input time
+        
+        
+        (Tabular time 1.0 day earlier)
+                s10 (double): EUV index (26-34 nm) scaled to F10
+        
+        
+        (Tabular time 1 day earlier)
+                s10B (double): UV 81-day averaged centered index (Tabular time 1 day earlier)
+                xm10 (double): MG2 index scaled to F10
+        
+        
+        (Tabular time 2.0 days earlier)
+                xm10B (double): MG2 81-day ave. centered index
+        
+        
+        (Tabular time 2.0 days earlier)
+                y10 (double): Solar X-Ray & Lya index scaled to F10
+        
+        
+        (Tabular time 5.0 days earlier)
+                y10B (double): Solar X-Ray & Lya 81-day ave. centered index
+        
+        
+        (Tabular time 5.0 days earlier)
+                dstdtc (double): Temperature change computed from Dst index
         
             Returns:
-                Sun's position
-        
+                total mass-Density at input position (kg/m³)
         
         """
         ...
     @typing.overload
-    def getSunPosition(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getDensity(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, double11: float, double12: float, double13: float, double14: float, double15: float) -> float: ...
+    @typing.overload
+    def getDensity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getDensity_2__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getDensity_2__T], frame: org.orekit.frames.Frame) -> _getDensity_2__T:
         """
-            Method returning the Sun's position vector.
+            Get the local density with initial entries.
         
-            Overrides:
-                :meth:`~org.orekit.models.earth.atmosphere.AbstractSunInfluencedAtmosphere.getSunPosition` in
-                class :class:`~org.orekit.models.earth.atmosphere.AbstractSunInfluencedAtmosphere`
+            The method creates a new instance of :class:`~org.orekit.models.earth.atmosphere.JB2008` model and set the input solar
+            activity data equal to the provided one. These data are then available form
+            :meth:`~org.orekit.time.AbsoluteDate.PAST_INFINITY` to :meth:`~org.orekit.time.AbsoluteDate.FUTURE_INFINITY`.
         
             Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date of output position
-                frame (:class:`~org.orekit.frames.Frame`): frame of output position
+                dateMJD (T): date and time, in modified julian days and fraction
+                sunRA (T): Right Ascension of Sun (radians).
+                sunDecli (T): Declination of Sun (radians).
+                satLon (T): Right Ascension of position (radians)
+                satLat (T): Geocentric latitude of position (radians)
+                satAlt (T): Height of position (m)
+                f10 (double): 10.7-cm Solar flux (1e :sup:`-22` *Watt/(m²*Hertz))
+        
+        
+        (Tabular time 1.0 day earlier)
+                f10B (double): 10.7-cm Solar Flux, averaged 81-day centered on the input time
+        
+        
+        (Tabular time 1.0 day earlier)
+                s10 (double): EUV index (26-34 nm) scaled to F10
+        
+        
+        (Tabular time 1 day earlier)
+                s10B (double): UV 81-day averaged centered index (Tabular time 1 day earlier)
+                xm10 (double): MG2 index scaled to F10
+        
+        
+        (Tabular time 2.0 days earlier)
+                xm10B (double): MG2 81-day ave. centered index
+        
+        
+        (Tabular time 2.0 days earlier)
+                y10 (double): Solar X-Ray & Lya index scaled to F10
+        
+        
+        (Tabular time 5.0 days earlier)
+                y10B (double): Solar X-Ray & Lya 81-day ave. centered index
+        
+        
+        (Tabular time 5.0 days earlier)
+                dstdtc (double): Temperature change computed from Dst index
         
             Returns:
-                Sun's position
+                total mass-Density at input position (kg/m³)
         
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
         
         """
         ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def getDensity(self, t: _getDensity_3__T, t2: _getDensity_3__T, t3: _getDensity_3__T, t4: _getDensity_3__T, t5: _getDensity_3__T, t6: _getDensity_3__T, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float) -> _getDensity_3__T: ...
 
 
 class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.models.earth.atmosphere")``.
 
+    AbstractJacchiaBowmanModel: typing.Type[AbstractJacchiaBowmanModel]
     AbstractSunInfluencedAtmosphere: typing.Type[AbstractSunInfluencedAtmosphere]
     Atmosphere: typing.Type[Atmosphere]
     DTM2000: typing.Type[DTM2000]
     DTM2000InputParameters: typing.Type[DTM2000InputParameters]
     HarrisPriester: typing.Type[HarrisPriester]
+    JB2006: typing.Type[JB2006]
+    JB2006InputParameters: typing.Type[JB2006InputParameters]
     JB2008: typing.Type[JB2008]
     JB2008InputParameters: typing.Type[JB2008InputParameters]
     NRLMSISE00: typing.Type[NRLMSISE00]

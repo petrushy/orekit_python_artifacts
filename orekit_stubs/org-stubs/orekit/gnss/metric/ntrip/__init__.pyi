@@ -1267,90 +1267,14 @@ class NetworkRecord(Record):
         ...
 
 class PythonMessageObserver(MessageObserver):
-    """
-    public class PythonMessageObserver extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.metric.ntrip.MessageObserver`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def messageAvailable(self, string: str, parsedMessage: org.orekit.gnss.metric.messages.ParsedMessage) -> None:
-        """
-            Notify that an encoded message is available.
-        
-            Beware that this method *will* be called from an internal dedicated stream-reading thread. Implementations *must* take
-            to:
-        
-              - not perform long processing there to avoid blocking the stream-reading thread
-              - take care of thread-safety when extracting data from the message
-        
-        
-            The only filtering that can be specified when :meth:`~org.orekit.gnss.metric.ntrip.NtripClient.addObserver` an observer
-            to a :class:`~org.orekit.gnss.metric.ntrip.NtripClient` is based on message type and mount point. If additional
-            filtering is needed (for example on message content like satellites ids, it must be performed by the observer itself
-            when notified (see example below).
-        
-            The recommended way to implement this method is to simply build a domain object from the message fields (for example a
-            gnss propagator) and to store it in the observer class as an instance field using a
-            :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.util.concurrent.atomic.AtomicReference?is`
-            as follows:
-        
-            .. code-block: java
-            
-             public class GPSProvider implements PVCoordinatesProvider, RTCMMessageObserver {
-            
-                 private final int                                filteringId;
-                 private final AtomicReference<GPSPropagator> propagator;
-            
-                 public void messageAvailable(String mountPoint, ParsedMessage message) {
-                     MessageXXX msg = (MessageXXX) message;
-                     GPSPropagator oldPropagator = propagator.get();
-                     if (msg.getSatId() == filteringId) {
-                         GPSPropagator newPropagator = new GPSPropagator(msg.get...(),
-                                                                         msg.get...(),
-                                                                         msg.get...());
-                         // only set propagator if no other observer was notified
-                         // while we were asleep
-                         propagator.compareAndSet(oldPropagator, newPropagator);
-                     }
-                 }
-            
-                 public TimeStampedPVCoordinates getPVCoordinates(AbsoluteDate date, Frame frame) {
-                     GPSPropagator lastAvailablePropagator = propagator.get();
-                     // use the retrieved propagator to compute position-velocity
-                 }
-            
-             }
-             
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.metric.ntrip.MessageObserver.messageAvailable` in
-                interface :class:`~org.orekit.gnss.metric.ntrip.MessageObserver`
-        
-            Parameters:
-                mountPoint (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): mount point from which the message comes
-                message (:class:`~org.orekit.gnss.metric.messages.ParsedMessage`): last available message
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def messageAvailable(self, string: str, parsedMessage: org.orekit.gnss.metric.messages.ParsedMessage) -> None: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 
 class __module_protocol__(Protocol):

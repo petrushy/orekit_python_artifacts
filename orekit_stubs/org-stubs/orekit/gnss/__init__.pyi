@@ -1618,128 +1618,27 @@ class PredefinedObservationType(java.lang.Enum['PredefinedObservationType'], Obs
         ...
 
 class PythonObservationType(ObservationType):
-    """
-    public class PythonObservationType extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.ObservationType`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getMeasurementType(self) -> MeasurementType:
-        """
-            Get the measurement type.
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.ObservationType.getMeasurementType` in interface :class:`~org.orekit.gnss.ObservationType`
-        
-            Returns:
-                measurement type
-        
-        
-        """
-        ...
-    def getName(self) -> str:
-        """
-            Get the name of the observation type.
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.ObservationType.getName` in interface :class:`~org.orekit.gnss.ObservationType`
-        
-            Returns:
-                name of the observation type
-        
-        
-        """
-        ...
-    def getSignal(self, satelliteSystem: SatelliteSystem) -> GnssSignal:
-        """
-            Get the signal for a specified satellite system.
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.ObservationType.getSignal` in interface :class:`~org.orekit.gnss.ObservationType`
-        
-            Parameters:
-                system (:class:`~org.orekit.gnss.SatelliteSystem`): satellite system
-        
-            Returns:
-                signal for the satellite system, or null if satellite system not compatible
-        
-        
-        """
-        ...
-    def getSignalCode(self) -> SignalCode:
-        """
-            Get the signal code.
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.ObservationType.getSignalCode` in interface :class:`~org.orekit.gnss.ObservationType`
-        
-            Returns:
-                signal code
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getMeasurementType(self) -> MeasurementType: ...
+    def getName(self) -> str: ...
+    def getSignal(self, satelliteSystem: SatelliteSystem) -> GnssSignal: ...
+    def getSignalCode(self) -> SignalCode: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonRadioWave(RadioWave):
-    """
-    public class PythonRadioWave extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.RadioWave`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getFrequency(self) -> float:
-        """
-            Description copied from interface: :meth:`~org.orekit.gnss.RadioWave.getFrequency`
-            Get the value of the frequency in Hz.
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.RadioWave.getFrequency` in interface :class:`~org.orekit.gnss.RadioWave`
-        
-            Returns:
-                value of the frequency in Hz
-        
-            Also see:
-                :meth:`~org.orekit.gnss.RadioWave.getWavelength`
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getFrequency(self) -> float: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PredefinedGnssSignal(java.lang.Enum['PredefinedGnssSignal'], GnssSignal):
     """
@@ -1889,88 +1788,17 @@ class PredefinedGnssSignal(java.lang.Enum['PredefinedGnssSignal'], GnssSignal):
         ...
 
 class PythonGnssSignal(GnssSignal):
-    """
-    public class PythonGnssSignal extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.GnssSignal`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getFrequency(self) -> float:
-        """
-            Get the value of the frequency in Hz.
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.RadioWave.getFrequency` in interface :class:`~org.orekit.gnss.RadioWave`
-        
-            Returns:
-                value of the frequency in Hz
-        
-            Also see:
-                :meth:`~org.orekit.gnss.RadioWave.getWavelength`
-        
-        
-        """
-        ...
-    def getName(self) -> str:
-        """
-            Get the RINEX name for the frequency.
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.GnssSignal.getName` in interface :class:`~org.orekit.gnss.GnssSignal`
-        
-            Returns:
-                RINEX name for the frequency
-        
-        
-        """
-        ...
-    def getRatio(self) -> float:
-        """
-            Get the ratio f/f0, where :meth:`~org.orekit.gnss.GnssSignal.F0` is the common frequency.
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.GnssSignal.getRatio` in interface :class:`~org.orekit.gnss.GnssSignal`
-        
-            Returns:
-                ratio f/f0, where :meth:`~org.orekit.gnss.GnssSignal.F0` is the common frequency
-        
-            Also see:
-                :meth:`~org.orekit.gnss.GnssSignal.F0`, :meth:`~org.orekit.gnss.RadioWave.getFrequency`
-        
-        
-        """
-        ...
-    def getSatelliteSystem(self) -> SatelliteSystem:
-        """
-            Get the satellite system for which this frequency is defined.
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.GnssSignal.getSatelliteSystem` in interface :class:`~org.orekit.gnss.GnssSignal`
-        
-            Returns:
-                satellite system for which this frequency is defined
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getFrequency(self) -> float: ...
+    def getName(self) -> str: ...
+    def getRatio(self) -> float: ...
+    def getSatelliteSystem(self) -> SatelliteSystem: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 
 class __module_protocol__(Protocol):

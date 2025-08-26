@@ -46,8 +46,8 @@ class AbstractBodyAttraction(org.orekit.forces.ForceModel):
                 :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
         
             Returns:
-                true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
-                attitude
+                true if force model depends on position only, false if it depends on mass or velocity, either directly or due to a
+                dependency on attitude
         
         
         """
@@ -138,8 +138,8 @@ class DeSitterRelativity(org.orekit.forces.ForceModel):
                 :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
         
             Returns:
-                true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
-                attitude
+                true if force model depends on position only, false if it depends on mass or velocity, either directly or due to a
+                dependency on attitude
         
         
         """
@@ -233,8 +233,8 @@ class HolmesFeatherstoneAttractionModel(org.orekit.forces.ForceModel, org.orekit
                 :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
         
             Returns:
-                true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
-                attitude
+                true if force model depends on position only, false if it depends on mass or velocity, either directly or due to a
+                dependency on attitude
         
         
         """
@@ -440,8 +440,8 @@ class J2OnlyPerturbation(org.orekit.forces.ForceModel):
                 :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
         
             Returns:
-                true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
-                attitude
+                true if force model depends on position only, false if it depends on mass or velocity, either directly or due to a
+                dependency on attitude
         
         
         """
@@ -567,8 +567,8 @@ class LenseThirringRelativity(org.orekit.forces.ForceModel):
                 :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
         
             Returns:
-                true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
-                attitude
+                true if force model depends on position only, false if it depends on mass or velocity, either directly or due to a
+                dependency on attitude
         
         
         """
@@ -670,8 +670,8 @@ class NewtonianAttraction(org.orekit.forces.ForceModel):
                 :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
         
             Returns:
-                true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
-                attitude
+                true if force model depends on position only, false if it depends on mass or velocity, either directly or due to a
+                dependency on attitude
         
         
         """
@@ -818,8 +818,8 @@ class Relativity(org.orekit.forces.ForceModel):
                 :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
         
             Returns:
-                true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
-                attitude
+                true if force model depends on position only, false if it depends on mass or velocity, either directly or due to a
+                dependency on attitude
         
         
         """

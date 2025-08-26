@@ -3109,381 +3109,45 @@ class GNSSOrbitalElements(GNSSOrbitalElementsDriversProvider, org.orekit.time.Ti
 
 _PythonFieldGNSSClockElements__T = typing.TypeVar('_PythonFieldGNSSClockElements__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldGNSSClockElements(FieldGNSSClockElements[_PythonFieldGNSSClockElements__T], typing.Generic[_PythonFieldGNSSClockElements__T]):
-    """
-    public class PythonFieldGNSSClockElements<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`<T>
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getAf0(self) -> _PythonFieldGNSSClockElements__T:
-        """
-            Gets the Zeroth Order Clock Correction.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf0` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`
-        
-            Returns:
-                the Zeroth Order Clock Correction (s)
-        
-            Also see:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf1`,
-                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf2`
-        
-        
-        """
-        ...
-    def getAf1(self) -> _PythonFieldGNSSClockElements__T:
-        """
-            Gets the First Order Clock Correction.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf1` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`
-        
-            Returns:
-                the First Order Clock Correction (s/s)
-        
-            Also see:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf0`,
-                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf2`
-        
-        
-        """
-        ...
-    def getAf2(self) -> _PythonFieldGNSSClockElements__T:
-        """
-            Gets the Second Order Clock Correction.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf2` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`
-        
-            Returns:
-                the Second Order Clock Correction (s/s²)
-        
-            Also see:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf0`,
-                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf1`
-        
-        
-        """
-        ...
+    def getAf0(self) -> _PythonFieldGNSSClockElements__T: ...
+    def getAf1(self) -> _PythonFieldGNSSClockElements__T: ...
+    def getAf2(self) -> _PythonFieldGNSSClockElements__T: ...
     def getDate(self) -> org.orekit.time.FieldAbsoluteDate[_PythonFieldGNSSClockElements__T]: ...
-    def getTGD(self) -> _PythonFieldGNSSClockElements__T:
-        """
-            Get the estimated group delay differential TGD for L1-L2 correction.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getTGD` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`
-        
-            Returns:
-                the estimated group delay differential TGD for L1-L2 correction (s)
-        
-        
-        """
-        ...
-    def getToc(self) -> _PythonFieldGNSSClockElements__T:
-        """
-            Get the time of clock.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getToc` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`
-        
-            Returns:
-                the time of clock (s)
-        
-            Also see:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf0`,
-                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf1`,
-                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf2`
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getTGD(self) -> _PythonFieldGNSSClockElements__T: ...
+    def getToc(self) -> _PythonFieldGNSSClockElements__T: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonSBASOrbitalElements(SBASOrbitalElements):
-    """
-    public class PythonSBASOrbitalElements extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getAGf0(self) -> float:
-        """
-            Gets the Zeroth Order Clock Correction.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getAGf0` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
-        
-            Returns:
-                the Zeroth Order Clock Correction (s)
-        
-        
-        """
-        ...
-    def getAGf1(self) -> float:
-        """
-            Gets the First Order Clock Correction.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getAGf1` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
-        
-            Returns:
-                the First Order Clock Correction (s/s)
-        
-        
-        """
-        ...
-    def getDate(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the date.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
-        
-            Returns:
-                date attached to the object
-        
-        
-        """
-        ...
-    def getIODN(self) -> int:
-        """
-            Gets the Issue Of Data Navigation (IODN).
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getIODN` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
-        
-            Returns:
-                the IODN
-        
-        
-        """
-        ...
-    def getPRN(self) -> int:
-        """
-            Gets the PRN number of the SBAS satellite.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getPRN` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
-        
-            Returns:
-                the PRN number of the SBAS satellite
-        
-        
-        """
-        ...
-    def getTime(self) -> float:
-        """
-            Gets the Reference Time of the SBAS orbit in GPS seconds of the week.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getTime` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
-        
-            Returns:
-                the Reference Time of the SBAS orbit (s)
-        
-        
-        """
-        ...
-    def getToc(self) -> float:
-        """
-            Gets the clock correction reference time toc.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getToc` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
-        
-            Returns:
-                the clock correction reference time (s)
-        
-        
-        """
-        ...
-    def getWeek(self) -> int:
-        """
-            Gets the Reference Week of the SBAS orbit.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getWeek` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
-        
-            Returns:
-                the Reference Week of the SBAS orbit
-        
-        
-        """
-        ...
-    def getX(self) -> float:
-        """
-            Get the ECEF-X component of satellite coordinates.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getX` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
-        
-            Returns:
-                the ECEF-X component of satellite coordinates (m)
-        
-        
-        """
-        ...
-    def getXDot(self) -> float:
-        """
-            Get the ECEF-X component of satellite velocity vector.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getXDot` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
-        
-            Returns:
-                the the ECEF-X component of satellite velocity vector (m/s)
-        
-        
-        """
-        ...
-    def getXDotDot(self) -> float:
-        """
-            Get the ECEF-X component of satellite acceleration vector.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getXDotDot` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
-        
-            Returns:
-                the GLONASS ECEF-X component of satellite acceleration vector (m/s²)
-        
-        
-        """
-        ...
-    def getY(self) -> float:
-        """
-            Get the ECEF-Y component of satellite coordinates.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getY` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
-        
-            Returns:
-                the ECEF-Y component of satellite coordinates (m)
-        
-        
-        """
-        ...
-    def getYDot(self) -> float:
-        """
-            Get the ECEF-Y component of satellite velocity vector.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getYDot` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
-        
-            Returns:
-                the ECEF-Y component of satellite velocity vector (m/s)
-        
-        
-        """
-        ...
-    def getYDotDot(self) -> float:
-        """
-            Get the ECEF-Y component of satellite acceleration vector.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getYDotDot` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
-        
-            Returns:
-                the ECEF-Y component of satellite acceleration vector (m/s²)
-        
-        
-        """
-        ...
-    def getZ(self) -> float:
-        """
-            Get the ECEF-Z component of satellite coordinates.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getZ` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
-        
-            Returns:
-                the ECEF-Z component of satellite coordinates (m)
-        
-        
-        """
-        ...
-    def getZDot(self) -> float:
-        """
-            Get the ECEF-Z component of satellite velocity vector.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getZDot` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
-        
-            Returns:
-                the the ECEF-Z component of satellite velocity vector (m/s)
-        
-        
-        """
-        ...
-    def getZDotDot(self) -> float:
-        """
-            Get the ECEF-Z component of satellite acceleration vector.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getZDotDot` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
-        
-            Returns:
-                the ECEF-Z component of satellite acceleration vector (m/s²)
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getAGf0(self) -> float: ...
+    def getAGf1(self) -> float: ...
+    def getDate(self) -> org.orekit.time.AbsoluteDate: ...
+    def getIODN(self) -> int: ...
+    def getPRN(self) -> int: ...
+    def getTime(self) -> float: ...
+    def getToc(self) -> float: ...
+    def getWeek(self) -> int: ...
+    def getX(self) -> float: ...
+    def getXDot(self) -> float: ...
+    def getXDotDot(self) -> float: ...
+    def getY(self) -> float: ...
+    def getYDot(self) -> float: ...
+    def getYDotDot(self) -> float: ...
+    def getZ(self) -> float: ...
+    def getZDot(self) -> float: ...
+    def getZDotDot(self) -> float: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class SBASNavigationMessage(AbstractEphemerisMessage, SBASOrbitalElements):
     """

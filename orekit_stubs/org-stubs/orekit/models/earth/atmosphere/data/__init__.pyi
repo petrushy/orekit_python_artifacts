@@ -1033,144 +1033,20 @@ class MarshallSolarActivityFutureEstimationLoader(AbstractSolarActivityDataLoade
 _PythonAbstractSolarActivityData__L = typing.TypeVar('_PythonAbstractSolarActivityData__L', bound=AbstractSolarActivityDataLoader.LineParameters)  # <L>
 _PythonAbstractSolarActivityData__D = typing.TypeVar('_PythonAbstractSolarActivityData__D', bound=AbstractSolarActivityDataLoader)  # <D>
 class PythonAbstractSolarActivityData(AbstractSolarActivityData[_PythonAbstractSolarActivityData__L, _PythonAbstractSolarActivityData__D], typing.Generic[_PythonAbstractSolarActivityData__L, _PythonAbstractSolarActivityData__D]):
-    """
-    public class PythonAbstractSolarActivityData<L extends :class:`~org.orekit.models.earth.atmosphere.data.AbstractSolarActivityDataLoader.LineParameters`, D extends :class:`~org.orekit.models.earth.atmosphere.data.AbstractSolarActivityDataLoader`<L>> extends :class:`~org.orekit.models.earth.atmosphere.data.AbstractSolarActivityData`<L, D>
-    
-    
-        Also see:
-            :meth:`~serialized`
-    """
     def __init__(self, string: str, d: _PythonAbstractSolarActivityData__D, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScale: org.orekit.time.TimeScale, int: int, double: float, double2: float, double3: float): ...
     def finalize(self) -> None: ...
-    def get24HoursKp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Description copied from interface: :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.get24HoursKp`
-            Get the last 24H mean geomagnetic index.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
-        
-            Returns:
-                the 24H geomagnetic index
-        
-        
-        """
-        ...
-    def getAp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
-        """
-            Description copied from interface: :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getAp`
-            Get the A :sub:`p` geomagnetic indices.
-        
-            A :sub:`p` indices are provided as an array such as:
-        
-              - 0 → daily A :sub:`p`
-              - 1 → 3 hr A :sub:`p` index for current time
-              - 2 → 3 hr A :sub:`p` index for 3 hrs before current time
-              - 3 → 3 hr A :sub:`p` index for 6 hrs before current time
-              - 4 → 3 hr A :sub:`p` index for 9 hrs before current time
-              - 5 → Average of eight 3 hr A :sub:`p` indices from 12 to 33 hrs prior to current time
-              - 6 → Average of eight 3 hr A :sub:`p` indices from 36 to 57 hrs prior to current time
-        
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
-        
-            Returns:
-                the array of A :sub:`p` indices
-        
-        
-        """
-        ...
-    def getAverageFlux(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Description copied from interface: :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getAverageFlux`
-            Get the value of the 81 day average of F10.7 solar flux centered on current day.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
-        
-            Returns:
-                the 81 day average of F10.7 solar flux centered on current day
-        
-        
-        """
-        ...
-    def getDailyFlux(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Description copied from interface: :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getDailyFlux`
-            Get the value of the daily F10.7 solar flux for previous day.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
-        
-            Returns:
-                the daily F10.7 flux for previous day
-        
-        
-        """
-        ...
-    def getInstantFlux(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Description copied from interface: :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getInstantFlux`
-            Get the value of the instantaneous solar flux.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
-        
-            Returns:
-                the instantaneous solar flux
-        
-        
-        """
-        ...
-    def getMeanFlux(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Description copied from interface: :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMeanFlux`
-            Get the value of the mean solar flux.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
-        
-            Returns:
-                the mean solar flux
-        
-        
-        """
-        ...
-    def getThreeHourlyKP(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Description copied from interface: :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getThreeHourlyKP`
-            Get the value of the 3 hours geomagnetic index. With a delay of 3 hours at pole to 6 hours at equator using:
-            delay=6-abs(lat)*0.033 (lat in deg.)
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
-        
-            Returns:
-                the 3H geomagnetic index
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def get24HoursKp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
+    def getAp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]: ...
+    def getAverageFlux(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
+    def getDailyFlux(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
+    def getInstantFlux(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
+    def getMeanFlux(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
+    def getThreeHourlyKP(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 
 class __module_protocol__(Protocol):

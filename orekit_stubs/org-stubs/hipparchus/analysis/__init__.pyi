@@ -1059,73 +1059,25 @@ class UnivariateVectorFunction:
         ...
 
 class PythonFieldUnivariateFunction(FieldUnivariateFunction):
-    """
-    public class PythonFieldUnivariateFunction extends :class:`~org.hipparchus.analysis.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.FieldUnivariateFunction?is`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    _value__T = typing.TypeVar('_value__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def value(self, t: _value__T) -> _value__T:
-        """
-        
-            Specified by:
-                
-                meth:`~org.hipparchus.analysis.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.FieldUnivariateFunction.html?is` in
-                interface :class:`~org.hipparchus.analysis.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.FieldUnivariateFunction?is`
-        
-        
-        """
-        ...
-
-class PythonUnivariateFunction(UnivariateFunction):
-    """
-    public class PythonUnivariateFunction extends :class:`~org.hipparchus.analysis.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.UnivariateFunction?is`
-    
-        import org.hipparchus.analysis.UnivariateFunction;
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
-    def value(self, double: float) -> float:
-        """
-        
-            Specified by:
-                
-                meth:`~org.hipparchus.analysis.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.UnivariateFunction.html?is` in
-                interface :class:`~org.hipparchus.analysis.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.UnivariateFunction?is`
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    _value__T = typing.TypeVar('_value__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def value(self, t: _value__T) -> _value__T: ...
+
+class PythonUnivariateFunction(UnivariateFunction):
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None: ...
+    def value(self, double: float) -> float: ...
 
 
 class __module_protocol__(Protocol):

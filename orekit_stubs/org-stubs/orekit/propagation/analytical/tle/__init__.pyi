@@ -1780,58 +1780,18 @@ class FieldSGP4(FieldTLEPropagator[_FieldSGP4__T], typing.Generic[_FieldSGP4__T]
     def __init__(self, fieldTLE: FieldTLE[_FieldSGP4__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _FieldSGP4__T, frame: org.orekit.frames.Frame, tArray: typing.Union[typing.List[_FieldSGP4__T], jpype.JArray]): ...
 
 class PythonTLEPropagator(TLEPropagator):
-    """
-    public class PythonTLEPropagator extends :class:`~org.orekit.propagation.analytical.tle.TLEPropagator`
-    """
     @typing.overload
     def __init__(self, tLE: TLE, attitudeProvider: org.orekit.attitudes.AttitudeProvider, double: float): ...
     @typing.overload
     def __init__(self, tLE: TLE, attitudeProvider: org.orekit.attitudes.AttitudeProvider, double: float, frame: org.orekit.frames.Frame): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def sxpInitialize(self) -> None:
-        """
-            Initialization proper to each propagator (SGP or SDP).
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.tle.TLEPropagator.sxpInitialize` in
-                class :class:`~org.orekit.propagation.analytical.tle.TLEPropagator`
-        
-        
-        """
-        ...
-    def sxpPropagate(self, double: float) -> None:
-        """
-            Propagation proper to each propagator (SGP or SDP).
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.tle.TLEPropagator.sxpPropagate` in
-                class :class:`~org.orekit.propagation.analytical.tle.TLEPropagator`
-        
-            Parameters:
-                t (double): the offset from initial epoch (min)
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def sxpInitialize(self) -> None: ...
+    def sxpPropagate(self, double: float) -> None: ...
 
 class SGP4(TLEPropagator):
     """
@@ -1893,56 +1853,16 @@ class FieldDeepSDP4(org.orekit.propagation.analytical.tle.FieldSDP4[_FieldDeepSD
 
 _PythonFieldSDP4__T = typing.TypeVar('_PythonFieldSDP4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldSDP4(org.orekit.propagation.analytical.tle.FieldSDP4[_PythonFieldSDP4__T], typing.Generic[_PythonFieldSDP4__T]):
-    """
-    public class PythonFieldSDP4<T extends :class:`~org.orekit.propagation.analytical.tle.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.tle.FieldTLEPropagator`<T>
-    """
     def __init__(self, fieldTLE: FieldTLE[_PythonFieldSDP4__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _PythonFieldSDP4__T, frame: org.orekit.frames.Frame, tArray: typing.Union[typing.List[_PythonFieldSDP4__T], jpype.JArray]): ...
-    def deepPeriodicEffects(self, t: _PythonFieldSDP4__T) -> None:
-        """
-            Computes periodic terms from current coordinates and epoch.
-        
-            Parameters:
-                t (:class:`~org.orekit.propagation.analytical.tle.PythonFieldSDP4`): offset from initial epoch (min)
-        
-        
-        """
-        ...
-    def deepSecularEffects(self, t: _PythonFieldSDP4__T) -> None:
-        """
-            Computes secular terms from current coordinates and epoch.
-        
-            Parameters:
-                t (:class:`~org.orekit.propagation.analytical.tle.PythonFieldSDP4`): offset from initial epoch (min)
-        
-        
-        """
-        ...
+    def deepPeriodicEffects(self, t: _PythonFieldSDP4__T) -> None: ...
+    def deepSecularEffects(self, t: _PythonFieldSDP4__T) -> None: ...
     def finalize(self) -> None: ...
-    def luniSolarTermsComputation(self) -> None:
-        """
-            Computes luni - solar terms from initial coordinates and epoch.
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def luniSolarTermsComputation(self) -> None: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class FieldSDP4: ...
 

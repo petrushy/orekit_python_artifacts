@@ -1033,305 +1033,46 @@ class LazyLoadedGeoMagneticFields(GeoMagneticFields):
         ...
 
 class PythonEarthShape(EarthShape):
-    """
-    public class PythonEarthShape extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.EarthShape`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getBodyFrame(self) -> org.orekit.frames.Frame:
-        """
-            Get body frame related to body shape.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.getBodyFrame` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Returns:
-                body frame related to body shape
-        
-        
-        """
-        ...
-    def getEllipsoid(self) -> 'ReferenceEllipsoid':
-        """
-            Get the underlying ellipsoid model that defines latitude and longitude. If the height component of a
-            :class:`~org.orekit.bodies.GeodeticPoint` is not needed, then using the ellipsoid will provide the quickest
-            transformation.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.EarthShape.getEllipsoid` in interface :class:`~org.orekit.models.earth.EarthShape`
-        
-            Returns:
-                the reference ellipsoid. May be :code:`this`, but never :code:`null`.
-        
-        
-        """
-        ...
+    def getBodyFrame(self) -> org.orekit.frames.Frame: ...
+    def getEllipsoid(self) -> 'ReferenceEllipsoid': ...
     _getIntersectionPoint_0__T = typing.TypeVar('_getIntersectionPoint_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getIntersectionPoint(self, fieldLine: org.hipparchus.geometry.euclidean.threed.FieldLine[_getIntersectionPoint_0__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getIntersectionPoint_0__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getIntersectionPoint_0__T]) -> org.orekit.bodies.FieldGeodeticPoint[_getIntersectionPoint_0__T]:
-        """
-            Description copied from interface: :meth:`~org.orekit.bodies.BodyShape.getIntersectionPoint`
-            Get the intersection point of a line with the surface of the body.
-        
-            A line may have several intersection points with a closed surface (we consider the one point case as a degenerated two
-            points case). The close parameter is used to select which of these points should be returned. The selected point is the
-            one that is closest to the close point.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.getIntersectionPoint` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Parameters:
-                line (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldLine?is`<T> line): test line (may intersect the body or not)
-                close (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> close): point used for intersections selection
-                frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the line in given frame
-        
-            Returns:
-                intersection point at altitude zero or null if the line does not intersect the surface
-        
-        
-        """
-        ...
+    def getIntersectionPoint(self, fieldLine: org.hipparchus.geometry.euclidean.threed.FieldLine[_getIntersectionPoint_0__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getIntersectionPoint_0__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getIntersectionPoint_0__T]) -> org.orekit.bodies.FieldGeodeticPoint[_getIntersectionPoint_0__T]: ...
     @typing.overload
-    def getIntersectionPoint(self, line: org.hipparchus.geometry.euclidean.threed.Line, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.bodies.GeodeticPoint:
-        """
-            Description copied from interface: :meth:`~org.orekit.bodies.BodyShape.getIntersectionPoint`
-            Get the intersection point of a line with the surface of the body.
-        
-            A line may have several intersection points with a closed surface (we consider the one point case as a degenerated two
-            points case). The close parameter is used to select which of these points should be returned. The selected point is the
-            one that is closest to the close point.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.getIntersectionPoint` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Parameters:
-                line (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Line?is`): test line (may intersect the body or not)
-                close (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point used for intersections selection
-                frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
-                date (:class:`~org.orekit.time.AbsoluteDate`): date of the line in given frame
-        
-            Returns:
-                intersection point at altitude zero or null if the line does not intersect the surface
-        
-        """
-        ...
+    def getIntersectionPoint(self, line: org.hipparchus.geometry.euclidean.threed.Line, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.bodies.GeodeticPoint: ...
     @typing.overload
-    def projectToGround(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Project a point to the ground.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.projectToGround` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Parameters:
-                point (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point to project
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): frame in which moving point is expressed
-        
-            Returns:
-                ground point exactly at the local vertical of specified point, in the same frame as specified point
-        
-            Also see:
-                :meth:`~org.orekit.bodies.BodyShape.projectToGround`
-        
-        """
-        ...
+    def projectToGround(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     @typing.overload
-    def projectToGround(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
-        """
-            Project a moving point to the ground.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.projectToGround` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Parameters:
-                pv (:class:`~org.orekit.utils.TimeStampedPVCoordinates`): moving point
-                frame (:class:`~org.orekit.frames.Frame`): frame in which moving point is expressed
-        
-            Returns:
-                ground point exactly at the local vertical of specified point, in the same frame as specified point
-        
-            Also see:
-                :meth:`~org.orekit.bodies.BodyShape.projectToGround`
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def projectToGround(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     _transform_0__T = typing.TypeVar('_transform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _transform_2__T = typing.TypeVar('_transform_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def transform(self, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_transform_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_0__T]:
-        """
-            Transform a surface-relative point to a Cartesian point.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Parameters:
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): surface-relative point
-        
-            Returns:
-                point at the same location but as a Cartesian point
-        
-        
-        """
-        ...
+    def transform(self, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_transform_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_0__T]: ...
     @typing.overload
-    def transform(self, geodeticPoint: org.orekit.bodies.GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Transform a Cartesian point to a surface-relative point.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Parameters:
-                point (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): Cartesian point
-                frame (:class:`~org.orekit.frames.Frame`): frame in which Cartesian point is expressed
-                date (:class:`~org.orekit.time.AbsoluteDate`): date of the computation (used for frames conversions)
-        
-            Returns:
-                point at the same location but as a surface-relative point
-        
-            Transform a surface-relative point to a Cartesian point.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Parameters:
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): surface-relative point
-        
-            Returns:
-                point at the same location but as a Cartesian point
-        
-        """
-        ...
+    def transform(self, geodeticPoint: org.orekit.bodies.GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     @typing.overload
-    def transform(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_2__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_transform_2__T]) -> org.orekit.bodies.FieldGeodeticPoint[_transform_2__T]:
-        """
-            Transform a Cartesian point to a surface-relative point.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Parameters:
-                point (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> point): Cartesian point
-                frame (:class:`~org.orekit.frames.Frame`): frame in which Cartesian point is expressed
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the computation (used for frames conversions)
-        
-            Returns:
-                point at the same location but as a surface-relative point
-        
-        """
-        ...
+    def transform(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_2__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_transform_2__T]) -> org.orekit.bodies.FieldGeodeticPoint[_transform_2__T]: ...
     @typing.overload
     def transform(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.bodies.GeodeticPoint: ...
 
 class PythonGeoMagneticFields(GeoMagneticFields):
-    """
-    public class PythonGeoMagneticFields extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.GeoMagneticFields`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getField(self, fieldModel: GeoMagneticFieldFactory.FieldModel, double: float) -> GeoMagneticField:
-        """
-            Get the :class:`~org.orekit.models.earth.GeoMagneticField` for the given model type and year.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.GeoMagneticFields.getField` in
-                interface :class:`~org.orekit.models.earth.GeoMagneticFields`
-        
-            Parameters:
-                type (:class:`~org.orekit.models.earth.GeoMagneticFieldFactory.FieldModel`): the field model type
-                year (double): the decimal year
-        
-            Returns:
-                a :class:`~org.orekit.models.earth.GeoMagneticField` for the given year and model
-        
-            Also see:
-                :meth:`~org.orekit.models.earth.GeoMagneticField.getDecimalYear`
-        
-        
-        """
-        ...
-    def getIGRF(self, double: float) -> GeoMagneticField:
-        """
-            Get the IGRF model for the given year.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.GeoMagneticFields.getIGRF` in
-                interface :class:`~org.orekit.models.earth.GeoMagneticFields`
-        
-            Parameters:
-                year (double): the decimal year
-        
-            Returns:
-                a :class:`~org.orekit.models.earth.GeoMagneticField` for the given year
-        
-            Also see:
-                :meth:`~org.orekit.models.earth.GeoMagneticField.getDecimalYear`
-        
-        
-        """
-        ...
-    def getWMM(self, double: float) -> GeoMagneticField:
-        """
-            Get the WMM model for the given year.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.GeoMagneticFields.getWMM` in
-                interface :class:`~org.orekit.models.earth.GeoMagneticFields`
-        
-            Parameters:
-                year (double): the decimal year
-        
-            Returns:
-                a :class:`~org.orekit.models.earth.GeoMagneticField` for the given year
-        
-            Also see:
-                :meth:`~org.orekit.models.earth.GeoMagneticField.getDecimalYear`
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getField(self, fieldModel: GeoMagneticFieldFactory.FieldModel, double: float) -> GeoMagneticField: ...
+    def getIGRF(self, double: float) -> GeoMagneticField: ...
+    def getWMM(self, double: float) -> GeoMagneticField: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class ReferenceEllipsoid(org.orekit.bodies.OneAxisEllipsoid, EarthShape):
     """

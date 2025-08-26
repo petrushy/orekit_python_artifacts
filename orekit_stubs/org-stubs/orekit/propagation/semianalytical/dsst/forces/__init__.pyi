@@ -2556,334 +2556,78 @@ class FieldDSSTThirdBodyDynamicContext(FieldForceModelContext[_FieldDSSTThirdBod
         ...
 
 class PythonDSSTForceModel(DSSTForceModel):
-    """
-    public class PythonDSSTForceModel extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     _getMeanElementRate_1__T = typing.TypeVar('_getMeanElementRate_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getMeanElementRate(self, spacecraftState: org.orekit.propagation.SpacecraftState, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
-        """
-            Computes the mean equinoctial elements rates da :sub:`i` / dt.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                auxiliaryElements (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements`): auxiliary elements related to the current orbit
-                parameters (double[]): values of the force model parameters at state date (only 1 span for each parameter driver) obtained for example by
-                    calling :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` on force model.
-        
-            Returns:
-                the mean element rates dai/dt
-        
-        """
-        ...
+    def getMeanElementRate(self, spacecraftState: org.orekit.propagation.SpacecraftState, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def getMeanElementRate(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getMeanElementRate_1__T], fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_getMeanElementRate_1__T], tArray: typing.Union[typing.List[_getMeanElementRate_1__T], jpype.JArray]) -> typing.MutableSequence[_getMeanElementRate_1__T]:
-        """
-            Computes the mean equinoctial elements rates da :sub:`i` / dt.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state information: date, kinematics, attitude
-                auxiliaryElements (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements`<T> auxiliaryElements): auxiliary elements related to the current orbit
-                parameters (T[]): values of the force model parameters at state date (only 1 span for each parameter driver) obtained for example by
-                    calling :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` on force model or
-                    :meth:`~org.orekit.propagation.integration.AbstractGradientConverter.getParametersAtStateDate` on gradient converter.
-        
-            Returns:
-                the mean element rates dai/dt
-        
-        
-        """
-        ...
+    def getMeanElementRate(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getMeanElementRate_1__T], fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_getMeanElementRate_1__T], tArray: typing.Union[typing.List[_getMeanElementRate_1__T], jpype.JArray]) -> typing.MutableSequence[_getMeanElementRate_1__T]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _initializeShortPeriodTerms_1__T = typing.TypeVar('_initializeShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, propagationType: org.orekit.propagation.PropagationType, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List[ShortPeriodTerms]: ...
     @typing.overload
     def initializeShortPeriodTerms(self, fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], propagationType: org.orekit.propagation.PropagationType, tArray: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_1__T]]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def registerAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None:
-        """
-            Register an attitude provider.
-        
-            Register an attitude provider that can be used by the force model.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.registerAttitudeProvider` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
-        
-            Parameters:
-                provider (:class:`~org.orekit.attitudes.AttitudeProvider`): the :class:`~org.orekit.attitudes.AttitudeProvider`
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def registerAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None: ...
     _updateShortPeriodTerms_1__T = typing.TypeVar('_updateShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def updateShortPeriodTerms(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], *spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
-        """
-            Update the short period terms.
-        
-            The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to
-            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
-        
-            Parameters:
-                parameters (double[]): values of the force model parameters (all span values for each parameters) obtained for example by calling
-                    :meth:`~org.orekit.utils.ParameterDriversProvider.getParametersAllValues` on force model. The extract parameter method
-                    :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.extractParameters` is called in the method to
-                    select the right parameter corresponding to the mean state date.
-                meanStates (:class:`~org.orekit.propagation.SpacecraftState`...): mean states information: date, kinematics, attitude
-        
-        public <T extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> void updateShortPeriodTerms (T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
-        
-            Update the short period terms.
-        
-            The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to
-            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
-        
-            Parameters:
-                parameters (T[]): values of the force model parameters (all span values for each parameters) obtained for example by calling
-                    :meth:`~org.orekit.utils.ParameterDriversProvider.getParametersAllValues` on force model or
-                    :meth:`~org.orekit.propagation.integration.AbstractGradientConverter.getParameters` on gradient converter. The extract
-                    parameter method :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.extractParameters` is called
-                    in the method to select the right parameter.
-                meanStates (:class:`~org.orekit.propagation.FieldSpacecraftState`<T>...): mean states information: date, kinematics, attitude
-        
-        
-        """
-        ...
+    def updateShortPeriodTerms(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], *spacecraftState: org.orekit.propagation.SpacecraftState) -> None: ...
     @typing.overload
     def updateShortPeriodTerms(self, tArray: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
 
 _PythonFieldShortPeriodTerms__T = typing.TypeVar('_PythonFieldShortPeriodTerms__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldShortPeriodTerms(FieldShortPeriodTerms[_PythonFieldShortPeriodTerms__T], typing.Generic[_PythonFieldShortPeriodTerms__T]):
-    """
-    public class PythonFieldShortPeriodTerms<T extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.semianalytical.dsst.forces.FieldShortPeriodTerms`<T>
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def getCoefficients(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldShortPeriodTerms__T], set: java.util.Set[str]) -> java.util.Map[str, typing.MutableSequence[_PythonFieldShortPeriodTerms__T]]: ...
-    def getCoefficientsKeyPrefix(self) -> str:
-        """
-            Get the prefix for short period coefficients keys.
-        
-            This prefix is used to identify the coefficients of the current force model from the coefficients pertaining to other
-            force models. All the keys in the map returned by
-            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.PythonFieldShortPeriodTerms.getCoefficients` start with this
-            prefix, which must be unique among all providers.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.FieldShortPeriodTerms.getCoefficientsKeyPrefix` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.FieldShortPeriodTerms`
-        
-            Returns:
-                the prefix for short periodic coefficients keys
-        
-            Also see:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.PythonFieldShortPeriodTerms.getCoefficients`
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getCoefficientsKeyPrefix(self) -> str: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     def value(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_PythonFieldShortPeriodTerms__T]) -> typing.MutableSequence[_PythonFieldShortPeriodTerms__T]: ...
 
 class PythonForceModelContext(ForceModelContext):
-    """
-    public class PythonForceModelContext extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.ForceModelContext`
-    """
     def __init__(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements): ...
     def finalize(self) -> None: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonJ2SquaredModel(J2SquaredModel):
-    """
-    public class PythonJ2SquaredModel extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.semianalytical.dsst.forces.J2SquaredModel`
-    """
     def __init__(self): ...
     _computeMeanEquinoctialSecondOrderTerms_1__T = typing.TypeVar('_computeMeanEquinoctialSecondOrderTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def computeMeanEquinoctialSecondOrderTerms(self, dSSTJ2SquaredClosedFormContext: DSSTJ2SquaredClosedFormContext) -> typing.MutableSequence[float]:
-        """
-            Description copied from
-            interface: :meth:`~org.orekit.propagation.semianalytical.dsst.forces.J2SquaredModel.computeMeanEquinoctialSecondOrderTerms`
-            Compute the J2-squared second-order terms in equinoctial elements.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.J2SquaredModel.computeMeanEquinoctialSecondOrderTerms` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.J2SquaredModel`
-        
-            Parameters:
-                context (:class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTJ2SquaredClosedFormContext`): model context
-        
-            Returns:
-                the J2-squared second-order terms in equinoctial elements. Order must follow: [A, K, H, Q, P, M]
-        
-        """
-        ...
+    def computeMeanEquinoctialSecondOrderTerms(self, dSSTJ2SquaredClosedFormContext: DSSTJ2SquaredClosedFormContext) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def computeMeanEquinoctialSecondOrderTerms(self, fieldDSSTJ2SquaredClosedFormContext: FieldDSSTJ2SquaredClosedFormContext[_computeMeanEquinoctialSecondOrderTerms_1__T]) -> typing.MutableSequence[_computeMeanEquinoctialSecondOrderTerms_1__T]:
-        """
-            Description copied from
-            interface: :meth:`~org.orekit.propagation.semianalytical.dsst.forces.J2SquaredModel.computeMeanEquinoctialSecondOrderTerms`
-            Compute the J2-squared second-order terms in equinoctial elements.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.J2SquaredModel.computeMeanEquinoctialSecondOrderTerms` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.J2SquaredModel`
-        
-            Parameters:
-                context (:class:`~org.orekit.propagation.semianalytical.dsst.forces.FieldDSSTJ2SquaredClosedFormContext`<T> context): model context
-        
-            Returns:
-                the J2-squared second-order terms in equinoctial elements. Order must follow: [A, K, H, Q, P, M]
-        
-        
-        """
-        ...
+    def computeMeanEquinoctialSecondOrderTerms(self, fieldDSSTJ2SquaredClosedFormContext: FieldDSSTJ2SquaredClosedFormContext[_computeMeanEquinoctialSecondOrderTerms_1__T]) -> typing.MutableSequence[_computeMeanEquinoctialSecondOrderTerms_1__T]: ...
     def finalize(self) -> None: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonShortPeriodTerms(ShortPeriodTerms):
-    """
-    public class PythonShortPeriodTerms extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def getCoefficients(self, absoluteDate: org.orekit.time.AbsoluteDate, set: java.util.Set[str]) -> java.util.Map[str, typing.MutableSequence[float]]: ...
-    def getCoefficientsKeyPrefix(self) -> str:
-        """
-            Get the prefix for short period coefficients keys.
-        
-            This prefix is used to identify the coefficients of the current force model from the coefficients pertaining to other
-            force models. All the keys in the map returned by
-            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.PythonShortPeriodTerms.getCoefficients` start with this
-            prefix, which must be unique among all providers.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms.getCoefficientsKeyPrefix` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms`
-        
-            Returns:
-                the prefix for short periodic coefficients keys
-        
-            Also see:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.PythonShortPeriodTerms.getCoefficients`
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getCoefficientsKeyPrefix(self) -> str: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def value(self, orbit: org.orekit.orbits.Orbit) -> typing.MutableSequence[float]:
-        """
-            Evaluate the contributions of the short period terms.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms.value` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms`
-        
-            Parameters:
-                meanOrbit (:class:`~org.orekit.orbits.Orbit`): mean orbit to which the short period contribution applies
-        
-            Returns:
-                short period terms contributions
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def value(self, orbit: org.orekit.orbits.Orbit) -> typing.MutableSequence[float]: ...
 
 class ZeisModel(J2SquaredModel):
     """
@@ -3437,69 +3181,19 @@ class FieldDSSTZonalContext(FieldDSSTGravityContext[_FieldDSSTZonalContext__T], 
         ...
 
 class PythonAbstractGaussianContribution(AbstractGaussianContribution):
-    """
-    public class PythonAbstractGaussianContribution extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.AbstractGaussianContribution`
-    """
     def __init__(self, string: str, double: float, forceModel: org.orekit.forces.ForceModel, double2: float): ...
     def finalize(self) -> None: ...
     _getLLimits_1__T = typing.TypeVar('_getLLimits_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getLLimits(self, spacecraftState: org.orekit.propagation.SpacecraftState, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements) -> typing.MutableSequence[float]:
-        """
-            Compute the limits in L, the true longitude, for integration.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.AbstractGaussianContribution.getLLimits` in
-                class :class:`~org.orekit.propagation.semianalytical.dsst.forces.AbstractGaussianContribution`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                auxiliaryElements (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements`): auxiliary elements related to the current orbit
-        
-            Returns:
-                the integration limits in L
-        
-        """
-        ...
+    def getLLimits(self, spacecraftState: org.orekit.propagation.SpacecraftState, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def getLLimits(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getLLimits_1__T], fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_getLLimits_1__T]) -> typing.MutableSequence[_getLLimits_1__T]:
-        """
-            Compute the limits in L, the true longitude, for integration.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.AbstractGaussianContribution.getLLimits` in
-                class :class:`~org.orekit.propagation.semianalytical.dsst.forces.AbstractGaussianContribution`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state information: date, kinematics, attitude
-                auxiliaryElements (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements`<T> auxiliaryElements): auxiliary elements related to the current orbit
-        
-            Returns:
-                the integration limits in L
-        
-        
-        """
-        ...
+    def getLLimits(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getLLimits_1__T], fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_getLLimits_1__T]) -> typing.MutableSequence[_getLLimits_1__T]: ...
     def getParametersDriversWithoutMu(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 
 class __module_protocol__(Protocol):

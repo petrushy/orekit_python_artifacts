@@ -2128,68 +2128,15 @@ class IdentityConverter(RangeUnitsConverter):
         ...
 
 class PythonRangeUnitsConverter(RangeUnitsConverter):
-    """
-    public class PythonRangeUnitsConverter extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def metersToRu(self, tdmMetadata: TdmMetadata, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> float:
-        """
-            Convert a range expressed in meters.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter.metersToRu` in
-                interface :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
-        
-            Parameters:
-                metadata (:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`): metadata corresponding to the observation
-                date (:class:`~org.orekit.time.AbsoluteDate`): observation date
-                range (double): range value in meters
-        
-            Returns:
-                range range value in :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def metersToRu(self, tdmMetadata: TdmMetadata, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> float: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def ruToMeters(self, tdmMetadata: TdmMetadata, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> float:
-        """
-            Convert a range expressed in :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter.ruToMeters` in
-                interface :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
-        
-            Parameters:
-                metadata (:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`): metadata corresponding to the observation
-                date (:class:`~org.orekit.time.AbsoluteDate`): observation date
-                range (double): range value in :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`
-        
-            Returns:
-                range range value in meters
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def ruToMeters(self, tdmMetadata: TdmMetadata, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> float: ...
 
 
 class __module_protocol__(Protocol):

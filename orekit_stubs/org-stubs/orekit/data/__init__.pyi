@@ -1989,413 +1989,107 @@ class LazyLoadedDataContext(DataContext):
         ...
 
 class PythonAbstractSelfFeedingLoader(AbstractSelfFeedingLoader):
-    """
-    public class PythonAbstractSelfFeedingLoader extends :class:`~org.orekit.data.AbstractSelfFeedingLoader`
-    """
     def __init__(self, string: str, dataProvidersManager: DataProvidersManager): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonDataContext(DataContext):
-    """
-    public class PythonDataContext extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataContext`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getCelestialBodies(self) -> org.orekit.bodies.CelestialBodies:
-        """
-            Get a factory constructing :class:`~org.orekit.bodies.CelestialBody`s based on the auxiliary data in this context.
-        
-            Specified by:
-                :meth:`~org.orekit.data.DataContext.getCelestialBodies` in interface :class:`~org.orekit.data.DataContext`
-        
-            Returns:
-                the set of common celestial bodies using this data context.
-        
-        
-        """
-        ...
-    def getFrames(self) -> org.orekit.frames.Frames:
-        """
-            Get a factory constructing :class:`~org.orekit.frames.Frame`s based on the auxiliary data in this context.
-        
-            Specified by:
-                :meth:`~org.orekit.data.DataContext.getFrames` in interface :class:`~org.orekit.data.DataContext`
-        
-            Returns:
-                the set of common reference frames using this data context.
-        
-        
-        """
-        ...
-    def getGeoMagneticFields(self) -> org.orekit.models.earth.GeoMagneticFields:
-        """
-            Get a factory constructing :class:`~org.orekit.models.earth.GeoMagneticField`s based on the auxiliary data in this
-            context.
-        
-            Specified by:
-                :meth:`~org.orekit.data.DataContext.getGeoMagneticFields` in interface :class:`~org.orekit.data.DataContext`
-        
-            Returns:
-                the geomagnetic fields using this data context.
-        
-        
-        """
-        ...
-    def getGravityFields(self) -> org.orekit.forces.gravity.potential.GravityFields:
-        """
-            Get a factory constructing gravity fields based on the auxiliary data in this context.
-        
-            Specified by:
-                :meth:`~org.orekit.data.DataContext.getGravityFields` in interface :class:`~org.orekit.data.DataContext`
-        
-            Returns:
-                the gravity fields using this data context.
-        
-        
-        """
-        ...
-    def getTimeScales(self) -> org.orekit.time.TimeScales:
-        """
-            Get a factory for constructing :class:`~org.orekit.time.TimeScale`s based on the auxiliary data in this context.
-        
-            Specified by:
-                :meth:`~org.orekit.data.DataContext.getTimeScales` in interface :class:`~org.orekit.data.DataContext`
-        
-            Returns:
-                the set of common time scales using this data context.
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getCelestialBodies(self) -> org.orekit.bodies.CelestialBodies: ...
+    def getFrames(self) -> org.orekit.frames.Frames: ...
+    def getGeoMagneticFields(self) -> org.orekit.models.earth.GeoMagneticFields: ...
+    def getGravityFields(self) -> org.orekit.forces.gravity.potential.GravityFields: ...
+    def getTimeScales(self) -> org.orekit.time.TimeScales: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonDataFilter(DataFilter):
-    """
-    public class PythonDataFilter extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataFilter`
-    """
     def __init__(self): ...
     def filter(self, dataSource: DataSource) -> DataSource: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonDataLoader(DataLoader):
-    """
-    public class PythonDataLoader extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataLoader`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def stillAcceptsData(self) -> bool:
-        """
-            Check if the loader still accepts new data. Extension point for Python.
-        
-            This method is used to speed up data loading by interrupting crawling the data sets as soon as a loader has found the
-            data it was waiting for. For loaders that can merge data from any number of sources (for example JPL ephemerides or
-            Earth Orientation Parameters that are split among several files), this method should always return true to make sure no
-            data is left over.
-        
-            Specified by:
-                :meth:`~org.orekit.data.DataLoader.stillAcceptsData` in interface :class:`~org.orekit.data.DataLoader`
-        
-            Returns:
-                true while the loader still accepts new data
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def stillAcceptsData(self) -> bool: ...
 
 class PythonDataProvider(DataProvider):
-    """
-    public class PythonDataProvider extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataProvider`
-    """
     def __init__(self): ...
-    def feed(self, pattern: java.util.regex.Pattern, dataLoader: DataLoader, dataProvidersManager: DataProvidersManager) -> bool:
-        """
-            Feed a data file loader by browsing the data collection.
-        
-            The method crawls all files referenced in the instance (for example all files in a directories tree) and for each file
-            supported by the file loader it asks the file loader to load it.
-        
-            If the method completes without exception, then the data loader is considered to have been fed successfully and the top
-            level :class:`~org.orekit.data.DataProvidersManager` will return immediately without attempting to use the next
-            configured providers.
-        
-            If the method completes abruptly with an exception, then the top level :class:`~org.orekit.data.DataProvidersManager`
-            will try to use the next configured providers, in case another one can feed the :class:`~org.orekit.data.DataLoader`.
-        
-            The default implementation will be removed in 11.0. It calls :code:`#feed(Pattern, DataLoader)`.
-        
-            Specified by:
-                :meth:`~org.orekit.data.DataProvider.feed` in interface :class:`~org.orekit.data.DataProvider`
-        
-            Parameters:
-                supported (:class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.util.regex.Pattern?is`): pattern for file names supported by the visitor
-                visitor (:class:`~org.orekit.data.DataLoader`): data file visitor to use
-                manager (:class:`~org.orekit.data.DataProvidersManager`): with the filters to apply to the resources.
-        
-            Returns:
-                true if some data has been loaded
-        
-        
-        """
-        ...
+    def feed(self, pattern: java.util.regex.Pattern, dataLoader: DataLoader, dataProvidersManager: DataProvidersManager) -> bool: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonLineOrientedFilteringReader(LineOrientedFilteringReader):
-    """
-    public class PythonLineOrientedFilteringReader extends :class:`~org.orekit.data.LineOrientedFilteringReader`
-    """
     def __init__(self, string: str, reader: java.io.Reader): ...
     def filterLine(self, int: int, string: str) -> java.lang.CharSequence: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonReaderOpener(DataSource.ReaderOpener):
-    """
-    public class PythonReaderOpener extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataSource.ReaderOpener`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def openOnce(self) -> java.io.Reader: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonSeriesTerm(SeriesTerm):
-    """
-    public class PythonSeriesTerm extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    """
     def __init__(self): ...
     _argument_1__T = typing.TypeVar('_argument_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def argument(self, bodiesElements: BodiesElements) -> float:
-        """
-            Compute the argument for the current date.
-        
-            Parameters:
-                elements (:class:`~org.orekit.data.BodiesElements`): luni-solar and planetary elements for the current date
-        
-            Returns:
-                current value of the argument
-        
-        """
-        ...
+    def argument(self, bodiesElements: BodiesElements) -> float: ...
     @typing.overload
-    def argument(self, fieldBodiesElements: FieldBodiesElements[_argument_1__T]) -> _argument_1__T:
-        """
-            Compute the argument for the current date.
-        
-            Parameters:
-                elements (:class:`~org.orekit.data.FieldBodiesElements`<T> elements): luni-solar and planetary elements for the current date
-        
-            Returns:
-                current value of the argument
-        
-        
-        """
-        ...
+    def argument(self, fieldBodiesElements: FieldBodiesElements[_argument_1__T]) -> _argument_1__T: ...
     _argumentDerivative_1__T = typing.TypeVar('_argumentDerivative_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def argumentDerivative(self, bodiesElements: BodiesElements) -> float:
-        """
-            Compute the time derivative of the argument for the current date.
-        
-            Parameters:
-                elements (:class:`~org.orekit.data.BodiesElements`): luni-solar and planetary elements for the current date
-        
-            Returns:
-                current time derivative of the argument
-        
-        """
-        ...
+    def argumentDerivative(self, bodiesElements: BodiesElements) -> float: ...
     @typing.overload
-    def argumentDerivative(self, fieldBodiesElements: FieldBodiesElements[_argumentDerivative_1__T]) -> _argumentDerivative_1__T:
-        """
-            Compute the time derivative of the argument for the current date.
-        
-            Parameters:
-                elements (:class:`~org.orekit.data.FieldBodiesElements`<T> elements): luni-solar and planetary elements for the current date
-        
-            Returns:
-                current time derivative of the argument
-        
-        
-        """
-        ...
+    def argumentDerivative(self, fieldBodiesElements: FieldBodiesElements[_argumentDerivative_1__T]) -> _argumentDerivative_1__T: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonStreamOpener(DataSource.StreamOpener):
-    """
-    public class PythonStreamOpener extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataSource.StreamOpener`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def openOnce(self) -> java.io.InputStream: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class TruncatingFilter(DataFilter):
     """
@@ -2688,79 +2382,17 @@ class NetworkCrawler(AbstractListCrawler[java.net.URL]):
 
 _PythonAbstractListCrawler__T = typing.TypeVar('_PythonAbstractListCrawler__T')  # <T>
 class PythonAbstractListCrawler(AbstractListCrawler[_PythonAbstractListCrawler__T], typing.Generic[_PythonAbstractListCrawler__T]):
-    """
-    public class PythonAbstractListCrawler<T> extends :class:`~org.orekit.data.AbstractListCrawler`<T>
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getBaseName(self, t: _PythonAbstractListCrawler__T) -> str:
-        """
-            Get the base name of an input.
-        
-            Specified by:
-                :meth:`~org.orekit.data.AbstractListCrawler.getBaseName` in class :class:`~org.orekit.data.AbstractListCrawler`
-        
-            Parameters:
-                input (:class:`~org.orekit.data.PythonAbstractListCrawler`): input to consider
-        
-            Returns:
-                base name of the input
-        
-        
-        """
-        ...
-    def getCompleteName(self, t: _PythonAbstractListCrawler__T) -> str:
-        """
-            Get the complete name of a input.
-        
-            Specified by:
-                :meth:`~org.orekit.data.AbstractListCrawler.getCompleteName` in class :class:`~org.orekit.data.AbstractListCrawler`
-        
-            Parameters:
-                input (:class:`~org.orekit.data.PythonAbstractListCrawler`): input to consider
-        
-            Returns:
-                complete name of the input
-        
-        
-        """
-        ...
+    def getBaseName(self, t: _PythonAbstractListCrawler__T) -> str: ...
+    def getCompleteName(self, t: _PythonAbstractListCrawler__T) -> str: ...
     def getStream(self, t: _PythonAbstractListCrawler__T) -> java.io.InputStream: ...
-    def getZipJarCrawler(self, t: _PythonAbstractListCrawler__T) -> ZipJarCrawler:
-        """
-            Get a zip/jar crawler for an input.
-        
-            Specified by:
-                :meth:`~org.orekit.data.AbstractListCrawler.getZipJarCrawler` in class :class:`~org.orekit.data.AbstractListCrawler`
-        
-            Parameters:
-                input (:class:`~org.orekit.data.PythonAbstractListCrawler`): input to consider
-        
-            Returns:
-                zip/jar crawler for an input
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getZipJarCrawler(self, t: _PythonAbstractListCrawler__T) -> ZipJarCrawler: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 
 class __module_protocol__(Protocol):

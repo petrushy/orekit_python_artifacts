@@ -730,49 +730,14 @@ class PostSeismicDeformation(StationDisplacement):
         ...
 
 class PythonStationDisplacement(StationDisplacement):
-    """
-    public class PythonStationDisplacement extends :class:`~org.orekit.models.earth.displacement.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.displacement.StationDisplacement`
-    """
     def __init__(self): ...
-    def displacement(self, bodiesElements: org.orekit.data.BodiesElements, frame: org.orekit.frames.Frame, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Compute displacement of a ground reference point.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.displacement.StationDisplacement.displacement` in
-                interface :class:`~org.orekit.models.earth.displacement.StationDisplacement`
-        
-            Parameters:
-                elements (:class:`~org.orekit.data.BodiesElements`): elements affecting Earth orientation
-                earthFrame (:class:`~org.orekit.frames.Frame`): Earth frame in which reference point is defined
-                referencePoint (:class:`~org.orekit.models.earth.displacement.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): reference point position in :code:`earthFrame`
-        
-            Returns:
-                displacement vector to be *added* to :code:`referencePoint`
-        
-        
-        """
-        ...
+    def displacement(self, bodiesElements: org.orekit.data.BodiesElements, frame: org.orekit.frames.Frame, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class TectonicsDisplacement(StationDisplacement):
     """

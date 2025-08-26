@@ -469,263 +469,44 @@ class DSSTBatchLSModel(AbstractBatchLSModel):
     def __init__(self, propagatorBuilderArray: typing.Union[typing.List[org.orekit.propagation.conversion.PropagatorBuilder], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union[ModelObserver, typing.Callable], propagationType: org.orekit.propagation.PropagationType): ...
 
 class PythonAbstractBatchLSModel(AbstractBatchLSModel):
-    """
-    public class PythonAbstractBatchLSModel extends :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-    """
     def __init__(self, propagatorBuilderArray: typing.Union[typing.List[org.orekit.propagation.conversion.PropagatorBuilder], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union[ModelObserver, typing.Callable]): ...
-    def configureHarvester(self, propagator: org.orekit.propagation.Propagator) -> org.orekit.propagation.MatricesHarvester:
-        """
-            Configure the propagator to compute derivatives.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.configureHarvester` in
-                class :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Parameters:
-                propagator (:class:`~org.orekit.propagation.Propagator`): :class:`~org.orekit.propagation.Propagator` to configure
-        
-            Returns:
-                harvester harvester to retrive the State Transition Matrix and Jacobian Matrix
-        
-        
-        """
-        ...
-    def configureOrbits(self, matricesHarvester: org.orekit.propagation.MatricesHarvester, propagator: org.orekit.propagation.Propagator) -> org.orekit.orbits.Orbit:
-        """
-            Configure the current estimated orbits.
-        
-            For DSST orbit determination, short period derivatives are also calculated.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.configureOrbits` in
-                class :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Parameters:
-                harvester (:class:`~org.orekit.propagation.MatricesHarvester`): harvester for matrices
-                propagator (:class:`~org.orekit.propagation.Propagator`): the orbit propagator
-        
-            Returns:
-                the current estimated orbits
-        
-        
-        """
-        ...
-    def createPropagators(self, realVector: org.hipparchus.linear.RealVector) -> typing.MutableSequence[org.orekit.propagation.integration.AbstractIntegratedPropagator]:
-        """
-            Create the propagators and parameters corresponding to an evaluation point.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.createPropagators` in
-                class :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Parameters:
-                point (:class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.RealVector?is`): evaluation point
-        
-            Returns:
-                an array of new propagators
-        
-        
-        """
-        ...
-    def fetchEvaluatedMeasurement(self, int: int, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]) -> None:
-        """
-            Fetch a measurement that was evaluated during propagation.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.fetchEvaluatedMeasurement` in
-                class :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Parameters:
-                index (int): index of the measurement first component
-                evaluation (:class:`~org.orekit.estimation.measurements.EstimatedMeasurement`<?> evaluation): measurement evaluation
-        
-        
-        """
-        ...
+    def configureHarvester(self, propagator: org.orekit.propagation.Propagator) -> org.orekit.propagation.MatricesHarvester: ...
+    def configureOrbits(self, matricesHarvester: org.orekit.propagation.MatricesHarvester, propagator: org.orekit.propagation.Propagator) -> org.orekit.orbits.Orbit: ...
+    def createPropagators(self, realVector: org.hipparchus.linear.RealVector) -> typing.MutableSequence[org.orekit.propagation.integration.AbstractIntegratedPropagator]: ...
+    def fetchEvaluatedMeasurement(self, int: int, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]) -> None: ...
     def finalize(self) -> None: ...
-    def getEvaluationsCount(self) -> int:
-        """
-            Get the evaluations count.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.getEvaluationsCount` in
-                class :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Returns:
-                evaluations count
-        
-        
-        """
-        ...
-    def getIterationsCount(self) -> int:
-        """
-            Get the iterations count.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.getIterationsCount` in
-                class :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Returns:
-                iterations count
-        
-        
-        """
-        ...
-    def getSelectedPropagationDriversForBuilder(self, int: int) -> org.orekit.utils.ParameterDriversList:
-        """
-            Get the selected propagation drivers for a propagatorBuilder.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.getSelectedPropagationDriversForBuilder` in
-                class :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Parameters:
-                iBuilder (int): index of the builder in the builders' array
-        
-            Returns:
-                the list of selected propagation drivers for propagatorBuilder of index iBuilder
-        
-        
-        """
-        ...
-    def isForwardPropagation(self) -> bool:
-        """
-            Return the forward propagation flag.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.isForwardPropagation` in
-                class :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Returns:
-                the forward propagation flag
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getEvaluationsCount(self) -> int: ...
+    def getIterationsCount(self) -> int: ...
+    def getSelectedPropagationDriversForBuilder(self, int: int) -> org.orekit.utils.ParameterDriversList: ...
+    def isForwardPropagation(self) -> bool: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def setEvaluationsCounter(self, incrementor: org.hipparchus.util.Incrementor) -> None:
-        """
-            Set the counter for evaluations.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.setEvaluationsCounter` in
-                class :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Parameters:
-                evaluationsCounter (:class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.util.Incrementor?is`): counter for evaluations
-        
-        
-        """
-        ...
-    def setIterationsCounter(self, incrementor: org.hipparchus.util.Incrementor) -> None:
-        """
-            Set the counter for iterations.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.setIterationsCounter` in
-                class :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Parameters:
-                iterationsCounter (:class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.util.Incrementor?is`): counter for iterations
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def setEvaluationsCounter(self, incrementor: org.hipparchus.util.Incrementor) -> None: ...
+    def setIterationsCounter(self, incrementor: org.hipparchus.util.Incrementor) -> None: ...
     def value(self, realVector: org.hipparchus.linear.RealVector) -> org.hipparchus.util.Pair[org.hipparchus.linear.RealVector, org.hipparchus.linear.RealMatrix]: ...
 
 class PythonBatchLSObserver(BatchLSObserver):
-    """
-    public class PythonBatchLSObserver extends :class:`~org.orekit.estimation.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.leastsquares.BatchLSObserver`
-    """
     def __init__(self): ...
-    def evaluationPerformed(self, int: int, int2: int, orbitArray: typing.Union[typing.List[org.orekit.orbits.Orbit], jpype.JArray], parameterDriversList: org.orekit.utils.ParameterDriversList, parameterDriversList2: org.orekit.utils.ParameterDriversList, parameterDriversList3: org.orekit.utils.ParameterDriversList, estimationsProvider: org.orekit.estimation.measurements.EstimationsProvider, evaluation: org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation) -> None:
-        """
-            Notification callback for the end of each evaluation. Extension point for Python.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.leastsquares.BatchLSObserver.evaluationPerformed` in
-                interface :class:`~org.orekit.estimation.leastsquares.BatchLSObserver`
-        
-            Parameters:
-                iterationsCount (int): iterations count
-                evaluationsCount (int): evaluations count
-                orbits (:class:`~org.orekit.orbits.Orbit`[]): current estimated orbits
-                estimatedOrbitalParameters (:class:`~org.orekit.utils.ParameterDriversList`): estimated orbital parameters
-                estimatedPropagatorParameters (:class:`~org.orekit.utils.ParameterDriversList`): estimated propagator parameters
-                estimatedMeasurementsParameters (:class:`~org.orekit.utils.ParameterDriversList`): estimated measurements parameters
-                evaluationsProvider (:class:`~org.orekit.estimation.measurements.EstimationsProvider`): provider for measurements evaluations resulting from the current estimated orbit (this is an unmodifiable view of the
-                    current evaluations, its content is changed at each iteration)
-                lspEvaluation (:class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation?is`): current evaluation of the underlying
-                    :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem?is`
-        
-        
-        """
-        ...
+    def evaluationPerformed(self, int: int, int2: int, orbitArray: typing.Union[typing.List[org.orekit.orbits.Orbit], jpype.JArray], parameterDriversList: org.orekit.utils.ParameterDriversList, parameterDriversList2: org.orekit.utils.ParameterDriversList, parameterDriversList3: org.orekit.utils.ParameterDriversList, estimationsProvider: org.orekit.estimation.measurements.EstimationsProvider, evaluation: org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation) -> None: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonModelObserver(ModelObserver):
-    """
-    public class PythonModelObserver extends :class:`~org.orekit.estimation.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.leastsquares.ModelObserver`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def modelCalled(self, orbitArray: typing.Union[typing.List[org.orekit.orbits.Orbit], jpype.JArray], map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]], typing.Mapping[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]]]) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class SequentialBatchLSEstimator(BatchLSEstimator):
     """

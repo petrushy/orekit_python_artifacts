@@ -469,156 +469,31 @@ class AbstractEncounterLOF(EncounterLOF):
         ...
 
 class PythonEncounterLOF(EncounterLOF):
-    """
-    public class PythonEncounterLOF extends :class:`~org.orekit.frames.encounter.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.encounter.EncounterLOF`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     _getAxisNormalToCollisionPlane_0__T = typing.TypeVar('_getAxisNormalToCollisionPlane_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAxisNormalToCollisionPlane(self, field: org.hipparchus.Field[_getAxisNormalToCollisionPlane_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getAxisNormalToCollisionPlane_0__T]:
-        """
-            Description copied from interface: :meth:`~org.orekit.frames.encounter.EncounterLOF.getAxisNormalToCollisionPlane`
-            Get the axis normal to the collision plane (i, j or k) in this encounter local orbital frame.
-        
-            Specified by:
-                :meth:`~org.orekit.frames.encounter.EncounterLOF.getAxisNormalToCollisionPlane` in
-                interface :class:`~org.orekit.frames.encounter.EncounterLOF`
-        
-            Parameters:
-                field (:class:`~org.orekit.frames.encounter.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field of the elements
-        
-            Returns:
-                axis normal to the collision plane (i, j or k) in this encounter local orbital frame
-        
-        """
-        ...
+    def getAxisNormalToCollisionPlane(self, field: org.hipparchus.Field[_getAxisNormalToCollisionPlane_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getAxisNormalToCollisionPlane_0__T]: ...
     @typing.overload
-    def getAxisNormalToCollisionPlane(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Description copied from interface: :meth:`~org.orekit.frames.encounter.EncounterLOF.getAxisNormalToCollisionPlane`
-            Get the axis normal to the collision plane (i, j or k) in this encounter local orbital frame.
-        
-            Specified by:
-                :meth:`~org.orekit.frames.encounter.EncounterLOF.getAxisNormalToCollisionPlane` in
-                interface :class:`~org.orekit.frames.encounter.EncounterLOF`
-        
-            Returns:
-                axis normal to the collision plane (i, j or k) in this encounter local orbital frame
-        
-        
-        """
-        ...
+    def getAxisNormalToCollisionPlane(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     _getFieldOther__T = typing.TypeVar('_getFieldOther__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldOther(self, field: org.hipparchus.Field[_getFieldOther__T]) -> org.orekit.utils.FieldPVCoordinates[_getFieldOther__T]:
-        """
-            Description copied from interface: :meth:`~org.orekit.frames.encounter.EncounterLOF.getFieldOther`
-            Get other's position and velocity coordinates.
-        
-            Specified by:
-                :meth:`~org.orekit.frames.encounter.EncounterLOF.getFieldOther` in
-                interface :class:`~org.orekit.frames.encounter.EncounterLOF`
-        
-            Parameters:
-                field (:class:`~org.orekit.frames.encounter.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field of the element
-        
-            Returns:
-                other's position and velocity coordinates
-        
-        
-        """
-        ...
-    def getName(self) -> str:
-        """
-            Description copied from interface: :meth:`~org.orekit.frames.LOF.getName`
-            Get name of the local orbital frame.
-        
-            Specified by:
-                :meth:`~org.orekit.frames.LOF.getName` in interface :class:`~org.orekit.frames.LOF`
-        
-            Returns:
-                name of the local orbital frame
-        
-        
-        """
-        ...
-    def getOther(self) -> org.orekit.utils.PVCoordinates:
-        """
-            Description copied from interface: :meth:`~org.orekit.frames.encounter.EncounterLOF.getOther`
-            Get other's position and velocity coordinates.
-        
-            Specified by:
-                :meth:`~org.orekit.frames.encounter.EncounterLOF.getOther` in
-                interface :class:`~org.orekit.frames.encounter.EncounterLOF`
-        
-            Returns:
-                other's position and velocity coordinates
-        
-        
-        """
-        ...
+    def getFieldOther(self, field: org.hipparchus.Field[_getFieldOther__T]) -> org.orekit.utils.FieldPVCoordinates[_getFieldOther__T]: ...
+    def getName(self) -> str: ...
+    def getOther(self) -> org.orekit.utils.PVCoordinates: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     _rotationFromInertial_0__T = typing.TypeVar('_rotationFromInertial_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _rotationFromInertial_1__T = typing.TypeVar('_rotationFromInertial_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _rotationFromInertial_4__T = typing.TypeVar('_rotationFromInertial_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def rotationFromInertial(self, field: org.hipparchus.Field[_rotationFromInertial_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_rotationFromInertial_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromInertial_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromInertial_0__T]:
-        """
-            Description copied from interface: :meth:`~org.orekit.frames.encounter.EncounterLOF.rotationFromInertial`
-            Get the rotation from inertial to this encounter local orbital frame.
-        
-            **BEWARE: The given origin's position and velocity coordinates must be given in the frame in which this instance has
-            been expressed in.**
-        
-            Specified by:
-                :meth:`~org.orekit.frames.encounter.EncounterLOF.rotationFromInertial` in
-                interface :class:`~org.orekit.frames.encounter.EncounterLOF`
-        
-            Parameters:
-                field (:class:`~org.orekit.frames.encounter.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
-                origin (:class:`~org.orekit.utils.FieldPVCoordinates`<T> origin): position-velocity of the origin in the same inertial frame as other
-                other (:class:`~org.orekit.utils.FieldPVCoordinates`<T> other): position-velocity of the other in the same inertial frame as origin
-        
-            Returns:
-                rotation from inertial to this encounter local orbital frame
-        
-        """
-        ...
+    def rotationFromInertial(self, field: org.hipparchus.Field[_rotationFromInertial_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_rotationFromInertial_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromInertial_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromInertial_0__T]: ...
     @typing.overload
     def rotationFromInertial(self, field: org.hipparchus.Field[_rotationFromInertial_1__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromInertial_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromInertial_1__T]: ...
     @typing.overload
-    def rotationFromInertial(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation:
-        """
-            Description copied from interface: :meth:`~org.orekit.frames.encounter.EncounterLOF.rotationFromInertial`
-            Get the rotation from inertial to this encounter local orbital frame.
-        
-            **BEWARE: The given origin's position and velocity coordinates must be given in the frame in which this instance has
-            been expressed in.**
-        
-            Specified by:
-                :meth:`~org.orekit.frames.encounter.EncounterLOF.rotationFromInertial` in
-                interface :class:`~org.orekit.frames.encounter.EncounterLOF`
-        
-            Parameters:
-                origin (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the origin in the same inertial frame as other
-                other (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the other instance in the same inertial frame as origin
-        
-            Returns:
-                rotation from inertial to this encounter local orbital frame
-        
-        
-        """
-        ...
+    def rotationFromInertial(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     @typing.overload
     def rotationFromInertial(self, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     @typing.overload
@@ -737,104 +612,26 @@ class DefaultEncounterLOF(AbstractEncounterLOF):
     def rotationFromInertial(self, pVCoordinates: org.orekit.utils.PVCoordinates, pVCoordinates2: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
 
 class PythonAbstractEncounterLOF(AbstractEncounterLOF):
-    """
-    public class PythonAbstractEncounterLOF extends :class:`~org.orekit.frames.encounter.AbstractEncounterLOF`
-    """
     def __init__(self, pVCoordinates: org.orekit.utils.PVCoordinates): ...
     def finalize(self) -> None: ...
     _getAxisNormalToCollisionPlane_0__T = typing.TypeVar('_getAxisNormalToCollisionPlane_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAxisNormalToCollisionPlane(self, field: org.hipparchus.Field[_getAxisNormalToCollisionPlane_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getAxisNormalToCollisionPlane_0__T]:
-        """
-            Get the axis normal to the collision plane (i, j or k) in this encounter local orbital frame.
-        
-            Parameters:
-                field (:class:`~org.orekit.frames.encounter.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field of the elements
-        
-            Returns:
-                axis normal to the collision plane (i, j or k) in this encounter local orbital frame
-        
-        """
-        ...
+    def getAxisNormalToCollisionPlane(self, field: org.hipparchus.Field[_getAxisNormalToCollisionPlane_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getAxisNormalToCollisionPlane_0__T]: ...
     @typing.overload
-    def getAxisNormalToCollisionPlane(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get the axis normal to the collision plane (i, j or k) in this encounter local orbital frame.
-        
-            Returns:
-                axis normal to the collision plane (i, j or k) in this encounter local orbital frame
-        
-        
-        """
-        ...
-    def getName(self) -> str:
-        """
-            Get name of the local orbital frame.
-        
-            Returns:
-                name of the local orbital frame
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getAxisNormalToCollisionPlane(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def getName(self) -> str: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     _rotationFromInertial_0__T = typing.TypeVar('_rotationFromInertial_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _rotationFromInertial_2__T = typing.TypeVar('_rotationFromInertial_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _rotationFromInertial_4__T = typing.TypeVar('_rotationFromInertial_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def rotationFromInertial(self, field: org.hipparchus.Field[_rotationFromInertial_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_rotationFromInertial_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromInertial_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromInertial_0__T]:
-        """
-            Get the rotation from inertial to this encounter local orbital frame.
-        
-            **BEWARE: The given origin's position and velocity coordinates must be given in the frame in which this instance has
-            been expressed in.**
-        
-            Parameters:
-                field (:class:`~org.orekit.frames.encounter.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
-                origin (:class:`~org.orekit.utils.FieldPVCoordinates`<T> origin): position-velocity of the origin in the same inertial frame as other
-                other (:class:`~org.orekit.utils.FieldPVCoordinates`<T> other): position-velocity of the other in the same inertial frame as origin
-        
-            Returns:
-                rotation from inertial to this encounter local orbital frame
-        
-        """
-        ...
+    def rotationFromInertial(self, field: org.hipparchus.Field[_rotationFromInertial_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_rotationFromInertial_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromInertial_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromInertial_0__T]: ...
     @typing.overload
-    def rotationFromInertial(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation:
-        """
-            Get the rotation from inertial to this encounter local orbital frame.
-        
-            **BEWARE: The given origin's position and velocity coordinates must be given in the frame in which this instance has
-            been expressed in.**
-        
-            Parameters:
-                origin (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the origin in the same inertial frame as other
-                other (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the other instance in the same inertial frame as origin
-        
-            Returns:
-                rotation from inertial to this encounter local orbital frame
-        
-        
-        """
-        ...
+    def rotationFromInertial(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     @typing.overload
     def rotationFromInertial(self, field: org.hipparchus.Field[_rotationFromInertial_2__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromInertial_2__T], fieldPVCoordinates2: org.orekit.utils.FieldPVCoordinates[_rotationFromInertial_2__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromInertial_2__T]: ...
     @typing.overload

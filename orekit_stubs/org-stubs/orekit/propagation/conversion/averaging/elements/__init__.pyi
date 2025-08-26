@@ -297,44 +297,14 @@ class AveragedKeplerianWithMeanAngle(AveragedOrbitalElements):
         ...
 
 class PythonAveragedOrbitalElements(AveragedOrbitalElements):
-    """
-    public class PythonAveragedOrbitalElements extends :class:`~org.orekit.propagation.conversion.averaging.elements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.averaging.elements.AveragedOrbitalElements`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def toArray(self) -> typing.MutableSequence[float]:
-        """
-            Write values from instance into an array of doubles.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.averaging.elements.AveragedOrbitalElements.toArray` in
-                interface :class:`~org.orekit.propagation.conversion.averaging.elements.AveragedOrbitalElements`
-        
-            Returns:
-                array with values
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def toArray(self) -> typing.MutableSequence[float]: ...
 
 
 class __module_protocol__(Protocol):

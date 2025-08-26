@@ -1745,6 +1745,42 @@ class SexagesimalAngle:
         """
         ...
 
+_FieldTimeStampedGeodeticPoint__T = typing.TypeVar('_FieldTimeStampedGeodeticPoint__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldTimeStampedGeodeticPoint(FieldGeodeticPoint[_FieldTimeStampedGeodeticPoint__T], org.orekit.time.FieldTimeStamped[_FieldTimeStampedGeodeticPoint__T], typing.Generic[_FieldTimeStampedGeodeticPoint__T]):
+    """
+    public class FieldTimeStampedGeodeticPoint<T extends :class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.bodies.FieldGeodeticPoint`<T> implements :class:`~org.orekit.time.FieldTimeStamped`<T>
+    
+        Implements a time-stamped :class:`~org.orekit.bodies.FieldGeodeticPoint`.
+    
+        Since:
+            13.1
+    """
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldTimeStampedGeodeticPoint__T], timeStampedGeodeticPoint: 'TimeStampedGeodeticPoint'): ...
+    @typing.overload
+    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTimeStampedGeodeticPoint__T], t: _FieldTimeStampedGeodeticPoint__T, t2: _FieldTimeStampedGeodeticPoint__T, t3: _FieldTimeStampedGeodeticPoint__T): ...
+    @typing.overload
+    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTimeStampedGeodeticPoint__T], fieldGeodeticPoint: FieldGeodeticPoint[_FieldTimeStampedGeodeticPoint__T]): ...
+    def equals(self, object: typing.Any) -> bool:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.bodies.FieldGeodeticPoint.equals` in class :class:`~org.orekit.bodies.FieldGeodeticPoint`
+        
+        
+        """
+        ...
+    def getDate(self) -> org.orekit.time.FieldAbsoluteDate[_FieldTimeStampedGeodeticPoint__T]: ...
+    def hashCode(self) -> int:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.bodies.FieldGeodeticPoint.hashCode` in class :class:`~org.orekit.bodies.FieldGeodeticPoint`
+        
+        
+        """
+        ...
+
 class JPLEphemeridesLoader(org.orekit.data.AbstractSelfFeedingLoader, CelestialBodyLoader):
     """
     public class JPLEphemeridesLoader extends :class:`~org.orekit.data.AbstractSelfFeedingLoader` implements :class:`~org.orekit.bodies.CelestialBodyLoader`
@@ -2744,772 +2780,191 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
     def transform(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> GeodeticPoint: ...
 
 class PythonBodyShape(BodyShape):
-    """
-    public class PythonBodyShape extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.BodyShape`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getBodyFrame(self) -> org.orekit.frames.Frame:
-        """
-            Get body frame related to body shape. Extension point for Python.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.getBodyFrame` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Returns:
-                body frame related to body shape
-        
-        
-        """
-        ...
+    def getBodyFrame(self) -> org.orekit.frames.Frame: ...
     _getIntersectionPoint_0__T = typing.TypeVar('_getIntersectionPoint_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getIntersectionPoint(self, fieldLine: org.hipparchus.geometry.euclidean.threed.FieldLine[_getIntersectionPoint_0__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getIntersectionPoint_0__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getIntersectionPoint_0__T]) -> FieldGeodeticPoint[_getIntersectionPoint_0__T]:
-        """
-            Get the intersection point of a line with the surface of the body.
-        
-            A line may have several intersection points with a closed surface (we consider the one point case as a degenerated two
-            points case). The close parameter is used to select which of these points should be returned. The selected point is the
-            one that is closest to the close point.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.getIntersectionPoint` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Parameters:
-                line (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldLine?is`<T> line): test line (may intersect the body or not)
-                close (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> close): point used for intersections selection
-                frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the line in given frame
-        
-            Returns:
-                intersection point at altitude zero or null if the line does not intersect the surface
-        
-        
-        """
-        ...
+    def getIntersectionPoint(self, fieldLine: org.hipparchus.geometry.euclidean.threed.FieldLine[_getIntersectionPoint_0__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getIntersectionPoint_0__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getIntersectionPoint_0__T]) -> FieldGeodeticPoint[_getIntersectionPoint_0__T]: ...
     @typing.overload
-    def getIntersectionPoint(self, line: org.hipparchus.geometry.euclidean.threed.Line, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> GeodeticPoint:
-        """
-            Get the intersection point of a line with the surface of the body. Extension point for Python.
-        
-            A line may have several intersection points with a closed surface (we consider the one point case as a degenerated two
-            points case). The close parameter is used to select which of these points should be returned. The selected point is the
-            one that is closest to the close point.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.getIntersectionPoint` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Parameters:
-                line (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Line?is`): test line (may intersect the body or not)
-                close (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point used for intersections selection
-                frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
-                date (:class:`~org.orekit.time.AbsoluteDate`): date of the line in given frame
-        
-            Returns:
-                intersection point at altitude zero or null if the line does not intersect the surface
-        
-        """
-        ...
+    def getIntersectionPoint(self, line: org.hipparchus.geometry.euclidean.threed.Line, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> GeodeticPoint: ...
     @typing.overload
-    def projectToGround(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Project a point to the ground.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.projectToGround` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Parameters:
-                point (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point to project
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): frame in which moving point is expressed
-        
-            Returns:
-                ground point exactly at the local vertical of specified point, in the same frame as specified point
-        
-            Also see:
-                :meth:`~org.orekit.bodies.BodyShape.projectToGround`
-        
-        """
-        ...
+    def projectToGround(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     @typing.overload
-    def projectToGround(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
-        """
-            Project a moving point to the ground.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.projectToGround` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Parameters:
-                pv (:class:`~org.orekit.utils.TimeStampedPVCoordinates`): moving point
-                frame (:class:`~org.orekit.frames.Frame`): frame in which moving point is expressed
-        
-            Returns:
-                ground point exactly at the local vertical of specified point, in the same frame as specified point
-        
-            Also see:
-                :meth:`~org.orekit.bodies.BodyShape.projectToGround`
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def projectToGround(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     _transform_0__T = typing.TypeVar('_transform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _transform_2__T = typing.TypeVar('_transform_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def transform(self, fieldGeodeticPoint: FieldGeodeticPoint[_transform_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_0__T]:
-        """
-            Transform a surface-relative point to a Cartesian point.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Parameters:
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): surface-relative point
-        
-            Returns:
-                point at the same location but as a Cartesian point
-        
-        
-        """
-        ...
+    def transform(self, fieldGeodeticPoint: FieldGeodeticPoint[_transform_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_0__T]: ...
     @typing.overload
-    def transform(self, geodeticPoint: GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Transform a Cartesian point to a surface-relative point.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Parameters:
-                point (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): Cartesian point
-                frame (:class:`~org.orekit.frames.Frame`): frame in which Cartesian point is expressed
-                date (:class:`~org.orekit.time.AbsoluteDate`): date of the computation (used for frames conversions)
-        
-            Returns:
-                point at the same location but as a surface-relative point
-        
-            Transform a surface-relative point to a Cartesian point.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Parameters:
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): surface-relative point
-        
-            Returns:
-                point at the same location but as a Cartesian point
-        
-        """
-        ...
+    def transform(self, geodeticPoint: GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     @typing.overload
-    def transform(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_2__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_transform_2__T]) -> FieldGeodeticPoint[_transform_2__T]:
-        """
-            Transform a Cartesian point to a surface-relative point.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Parameters:
-                point (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> point): Cartesian point
-                frame (:class:`~org.orekit.frames.Frame`): frame in which Cartesian point is expressed
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the computation (used for frames conversions)
-        
-            Returns:
-                point at the same location but as a surface-relative point
-        
-        """
-        ...
+    def transform(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_2__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_transform_2__T]) -> FieldGeodeticPoint[_transform_2__T]: ...
     @typing.overload
     def transform(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> GeodeticPoint: ...
 
 class PythonCelestialBodies(CelestialBodies):
-    """
-    public class PythonCelestialBodies extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.CelestialBodies`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getBody(self, string: str) -> CelestialBody:
-        """
-            Get a celestial body. The names of the common bodies are defined as constants in
-            :class:`~org.orekit.bodies.CelestialBodyFactory`.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getBody` in interface :class:`~org.orekit.bodies.CelestialBodies`
-        
-            Parameters:
-                name (:class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the celestial body
-        
-            Returns:
-                celestial body
-        
-        
-        """
-        ...
-    def getEarth(self) -> CelestialBody:
-        """
-            Get the Earth singleton body.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getEarth` in interface :class:`~org.orekit.bodies.CelestialBodies`
-        
-            Returns:
-                Earth body
-        
-        
-        """
-        ...
-    def getEarthMoonBarycenter(self) -> CelestialBody:
-        """
-            Get the Earth-Moon barycenter singleton bodies pair.
-        
-            Both the :meth:`~org.orekit.bodies.CelestialBody.getInertiallyOrientedFrame` and
-            :meth:`~org.orekit.bodies.CelestialBody.getBodyOrientedFrame` for this bodies pair are aligned with
-            :meth:`~org.orekit.frames.FramesFactory.getICRF` (and therefore also :meth:`~org.orekit.frames.FramesFactory.getGCRF`)
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getEarthMoonBarycenter` in
-                interface :class:`~org.orekit.bodies.CelestialBodies`
-        
-            Returns:
-                Earth-Moon barycenter bodies pair
-        
-        
-        """
-        ...
-    def getJupiter(self) -> CelestialBody:
-        """
-            Get the Jupiter singleton body.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getJupiter` in interface :class:`~org.orekit.bodies.CelestialBodies`
-        
-            Returns:
-                Jupiter body
-        
-        
-        """
-        ...
-    def getMars(self) -> CelestialBody:
-        """
-            Get the Mars singleton body.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getMars` in interface :class:`~org.orekit.bodies.CelestialBodies`
-        
-            Returns:
-                Mars body
-        
-        
-        """
-        ...
-    def getMercury(self) -> CelestialBody:
-        """
-            Get the Mercury singleton body.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getMercury` in interface :class:`~org.orekit.bodies.CelestialBodies`
-        
-            Returns:
-                Sun body
-        
-        
-        """
-        ...
-    def getMoon(self) -> CelestialBody:
-        """
-            Get the Moon singleton body.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getMoon` in interface :class:`~org.orekit.bodies.CelestialBodies`
-        
-            Returns:
-                Moon body
-        
-        
-        """
-        ...
-    def getNeptune(self) -> CelestialBody:
-        """
-            Get the Neptune singleton body.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getNeptune` in interface :class:`~org.orekit.bodies.CelestialBodies`
-        
-            Returns:
-                Neptune body
-        
-        
-        """
-        ...
-    def getPluto(self) -> CelestialBody:
-        """
-            Get the Pluto singleton body.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getPluto` in interface :class:`~org.orekit.bodies.CelestialBodies`
-        
-            Returns:
-                Pluto body
-        
-        
-        """
-        ...
-    def getSaturn(self) -> CelestialBody:
-        """
-            Get the Saturn singleton body.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getSaturn` in interface :class:`~org.orekit.bodies.CelestialBodies`
-        
-            Returns:
-                Saturn body
-        
-        
-        """
-        ...
-    def getSolarSystemBarycenter(self) -> CelestialBody:
-        """
-            Get the solar system barycenter aggregated body.
-        
-            Both the :meth:`~org.orekit.bodies.CelestialBody.getInertiallyOrientedFrame` and
-            :meth:`~org.orekit.bodies.CelestialBody.getBodyOrientedFrame` for this aggregated body are aligned with
-            :meth:`~org.orekit.frames.FramesFactory.getICRF` (and therefore also :meth:`~org.orekit.frames.FramesFactory.getGCRF`)
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getSolarSystemBarycenter` in
-                interface :class:`~org.orekit.bodies.CelestialBodies`
-        
-            Returns:
-                solar system barycenter aggregated body
-        
-        
-        """
-        ...
-    def getSun(self) -> CelestialBody:
-        """
-            Get the Sun singleton body.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getSun` in interface :class:`~org.orekit.bodies.CelestialBodies`
-        
-            Returns:
-                Sun body
-        
-        
-        """
-        ...
-    def getUranus(self) -> CelestialBody:
-        """
-            Get the Uranus singleton body.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getUranus` in interface :class:`~org.orekit.bodies.CelestialBodies`
-        
-            Returns:
-                Uranus body
-        
-        
-        """
-        ...
-    def getVenus(self) -> CelestialBody:
-        """
-            Get the Venus singleton body.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getVenus` in interface :class:`~org.orekit.bodies.CelestialBodies`
-        
-            Returns:
-                Venus body
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getBody(self, string: str) -> CelestialBody: ...
+    def getEarth(self) -> CelestialBody: ...
+    def getEarthMoonBarycenter(self) -> CelestialBody: ...
+    def getJupiter(self) -> CelestialBody: ...
+    def getMars(self) -> CelestialBody: ...
+    def getMercury(self) -> CelestialBody: ...
+    def getMoon(self) -> CelestialBody: ...
+    def getNeptune(self) -> CelestialBody: ...
+    def getPluto(self) -> CelestialBody: ...
+    def getSaturn(self) -> CelestialBody: ...
+    def getSolarSystemBarycenter(self) -> CelestialBody: ...
+    def getSun(self) -> CelestialBody: ...
+    def getUranus(self) -> CelestialBody: ...
+    def getVenus(self) -> CelestialBody: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonCelestialBody(CelestialBody):
-    """
-    public class PythonCelestialBody extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.CelestialBody`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getBodyOrientedFrame(self) -> org.orekit.frames.Frame:
-        """
-            Get a body oriented, body centered frame.
-        
-            The frame is always bound to the body center, and its axes have a fixed orientation with respect to the celestial body.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBody.getBodyOrientedFrame` in interface :class:`~org.orekit.bodies.CelestialBody`
-        
-            Returns:
-                a body oriented, body centered frame
-        
-            Also see:
-                :meth:`~org.orekit.bodies.CelestialBody.getInertiallyOrientedFrame`
-        
-        
-        """
-        ...
-    def getGM(self) -> float:
-        """
-            Get the attraction coefficient of the body.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBody.getGM` in interface :class:`~org.orekit.bodies.CelestialBody`
-        
-            Returns:
-                attraction coefficient of the body (m³/s²)
-        
-        
-        """
-        ...
-    def getInertiallyOrientedFrame(self) -> org.orekit.frames.Frame:
-        """
-            Get an inertially oriented, body centered frame.
-        
-            The frame is always bound to the body center, and its axes have a fixed orientation with respect to other inertial
-            frames.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBody.getInertiallyOrientedFrame` in
-                interface :class:`~org.orekit.bodies.CelestialBody`
-        
-            Returns:
-                an inertially oriented, body centered frame
-        
-            Also see:
-                :meth:`~org.orekit.bodies.CelestialBody.getBodyOrientedFrame`
-        
-        
-        """
-        ...
-    def getName(self) -> str:
-        """
-            Get the name of the body.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBody.getName` in interface :class:`~org.orekit.bodies.CelestialBody`
-        
-            Returns:
-                name of the body
-        
-        
-        """
-        ...
+    def getBodyOrientedFrame(self) -> org.orekit.frames.Frame: ...
+    def getGM(self) -> float: ...
+    def getInertiallyOrientedFrame(self) -> org.orekit.frames.Frame: ...
+    def getName(self) -> str: ...
     _getPVCoordinates_0__T = typing.TypeVar('_getPVCoordinates_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPVCoordinates_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getPVCoordinates_0__T]:
-        """
-            Get the position-velocity-acceleration in the selected frame.
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ExtendedPositionProvider.getPVCoordinates` in
-                interface :class:`~org.orekit.utils.ExtendedPositionProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
-        
-            Returns:
-                position-velocity-acceleration vector
-        
-        """
-        ...
+    def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPVCoordinates_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getPVCoordinates_0__T]: ...
     @typing.overload
-    def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
-        """
-            Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ExtendedPositionProvider.getPVCoordinates` in
-                interface :class:`~org.orekit.utils.ExtendedPositionProvider`
-        
-            Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
-                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
-        
-            Returns:
-                time-stamped position/velocity of the body (m and m/s)
-        
-        
-        """
-        ...
+    def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates: ...
     _getPosition_1__T = typing.TypeVar('_getPosition_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getPosition(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     @typing.overload
-    def getPosition(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPosition_1__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getPosition_1__T]:
-        """
-            Get the position in the selected frame.
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ExtendedPositionProvider.getPosition` in
-                interface :class:`~org.orekit.utils.ExtendedPositionProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
-        
-            Returns:
-                position
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getPosition(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPosition_1__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getPosition_1__T]: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     _toFieldPVCoordinatesProvider__T = typing.TypeVar('_toFieldPVCoordinatesProvider__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def toFieldPVCoordinatesProvider(self, field: org.hipparchus.Field[_toFieldPVCoordinatesProvider__T]) -> org.orekit.utils.FieldPVCoordinatesProvider[_toFieldPVCoordinatesProvider__T]:
-        """
-            Convert to a :class:`~org.orekit.utils.FieldPVCoordinatesProvider` with a specific type.
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ExtendedPositionProvider.toFieldPVCoordinatesProvider` in
-                interface :class:`~org.orekit.utils.ExtendedPositionProvider`
-        
-            Parameters:
-                field (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field for the argument and value
-        
-            Returns:
-                converted function
-        
-        
-        """
-        ...
+    def toFieldPVCoordinatesProvider(self, field: org.hipparchus.Field[_toFieldPVCoordinatesProvider__T]) -> org.orekit.utils.FieldPVCoordinatesProvider[_toFieldPVCoordinatesProvider__T]: ...
 
 class PythonCelestialBodyLoader(CelestialBodyLoader):
-    """
-    public class PythonCelestialBodyLoader extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.CelestialBodyLoader`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def loadCelestialBody(self, string: str) -> CelestialBody:
-        """
-            Load celestial body. Extension point for Python.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodyLoader.loadCelestialBody` in
-                interface :class:`~org.orekit.bodies.CelestialBodyLoader`
-        
-            Parameters:
-                name (:class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the celestial body
-        
-            Returns:
-                loaded celestial body
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def loadCelestialBody(self, string: str) -> CelestialBody: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonIAUPole(IAUPole):
-    """
-    public class PythonIAUPole extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.IAUPole`
-    
-    
-        Also see:
-            :meth:`~serialized`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     _getNode_0__T = typing.TypeVar('_getNode_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getNode(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getNode_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getNode_0__T]:
-        """
-            Get the body Q Node direction in ICRF frame.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.IAUPole.getNode` in interface :class:`~org.orekit.bodies.IAUPole`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                body Q Node direction in ICRF frame
-        
-        
-        """
-        ...
+    def getNode(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getNode_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getNode_0__T]: ...
     @typing.overload
-    def getNode(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get the body Q Node direction in ICRF frame.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.IAUPole.getNode` in interface :class:`~org.orekit.bodies.IAUPole`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                body Q Node direction in ICRF frame
-        
-        """
-        ...
+    def getNode(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     _getPole_0__T = typing.TypeVar('_getPole_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getPole(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPole_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getPole_0__T]:
-        """
-            Get the body North pole direction in ICRF frame.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.IAUPole.getPole` in interface :class:`~org.orekit.bodies.IAUPole`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                body North pole direction in ICRF frame
-        
-        
-        """
-        ...
+    def getPole(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPole_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getPole_0__T]: ...
     @typing.overload
-    def getPole(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get the body North pole direction in ICRF frame.
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.IAUPole.getPole` in interface :class:`~org.orekit.bodies.IAUPole`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                body North pole direction in ICRF frame
-        
-        """
-        ...
+    def getPole(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     _getPrimeMeridianAngle_1__T = typing.TypeVar('_getPrimeMeridianAngle_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getPrimeMeridianAngle(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+    def getPrimeMeridianAngle(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
+    @typing.overload
+    def getPrimeMeridianAngle(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPrimeMeridianAngle_1__T]) -> _getPrimeMeridianAngle_1__T: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None: ...
+
+class TimeStampedGeodeticPoint(GeodeticPoint, org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['TimeStampedGeodeticPoint']):
+    """
+    public class TimeStampedGeodeticPoint extends :class:`~org.orekit.bodies.GeodeticPoint` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.bodies.TimeStampedGeodeticPoint`>
+    
+        Implements a time-stamped :class:`~org.orekit.bodies.GeodeticPoint`.
+    
+        Since:
+            13.1
+    
+        Also see:
+            :meth:`~serialized`
+    """
+    @typing.overload
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float): ...
+    @typing.overload
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, geodeticPoint: GeodeticPoint): ...
+    def equals(self, object: typing.Any) -> bool:
         """
-            Get the prime meridian angle.
         
-            The prime meridian angle is the angle between the Q node and the prime meridian. represents the body rotation.
+            Overrides:
+                :meth:`~org.orekit.bodies.GeodeticPoint.equals` in class :class:`~org.orekit.bodies.GeodeticPoint`
+        
+        
+        """
+        ...
+    def getDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Description copied from interface: :meth:`~org.orekit.time.TimeStamped.getDate`
+            Get the date.
         
             Specified by:
-                :meth:`~org.orekit.bodies.IAUPole.getPrimeMeridianAngle` in interface :class:`~org.orekit.bodies.IAUPole`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
         
             Returns:
-                prime meridian vector
+                date attached to the object
+        
+        
+        """
+        ...
+    def hashCode(self) -> int:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.bodies.GeodeticPoint.hashCode` in class :class:`~org.orekit.bodies.GeodeticPoint`
+        
         
         """
         ...
     @typing.overload
-    def getPrimeMeridianAngle(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPrimeMeridianAngle_1__T]) -> _getPrimeMeridianAngle_1__T:
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> org.orekit.time.TimeShiftable:
         """
-            Get the prime meridian angle.
-        
-            The prime meridian angle is the angle between the Q node and the prime meridian. represents the body rotation.
+            Description copied from interface: :meth:`~org.orekit.time.TimeShiftable.shiftedBy`
+            Get a time-shifted instance.
         
             Specified by:
-                :meth:`~org.orekit.bodies.IAUPole.getPrimeMeridianAngle` in interface :class:`~org.orekit.bodies.IAUPole`
+                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
         
             Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                dt (double): time shift in seconds
         
             Returns:
-                prime meridian vector
+                a new instance, shifted with respect to instance (which is not changed)
         
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
         
         """
         ...
     @typing.overload
-    def pythonExtension(self) -> int:
+    def shiftedBy(self, double: float) -> 'TimeStampedGeodeticPoint': ...
+    def toString(self) -> str:
         """
-            Part of JCC Python interface to object
         
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
+            Overrides:
+                :meth:`~org.orekit.bodies.GeodeticPoint.toString` in class :class:`~org.orekit.bodies.GeodeticPoint`
+        
+        
         """
         ...
 
@@ -3529,6 +2984,7 @@ class __module_protocol__(Protocol):
     Ellipsoid: typing.Type[Ellipsoid]
     FieldEllipse: typing.Type[FieldEllipse]
     FieldGeodeticPoint: typing.Type[FieldGeodeticPoint]
+    FieldTimeStampedGeodeticPoint: typing.Type[FieldTimeStampedGeodeticPoint]
     GeodeticPoint: typing.Type[GeodeticPoint]
     IAUPole: typing.Type[IAUPole]
     JPLEphemeridesLoader: typing.Type[JPLEphemeridesLoader]
@@ -3542,3 +2998,4 @@ class __module_protocol__(Protocol):
     PythonCelestialBodyLoader: typing.Type[PythonCelestialBodyLoader]
     PythonIAUPole: typing.Type[PythonIAUPole]
     SexagesimalAngle: typing.Type[SexagesimalAngle]
+    TimeStampedGeodeticPoint: typing.Type[TimeStampedGeodeticPoint]

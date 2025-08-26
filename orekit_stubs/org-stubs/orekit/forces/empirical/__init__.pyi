@@ -37,8 +37,8 @@ class AbstractParametricAcceleration(org.orekit.forces.ForceModel):
                 :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
         
             Returns:
-                true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
-                attitude
+                true if force model depends on position only, false if it depends on mass or velocity, either directly or due to a
+                dependency on attitude
         
         
         """
@@ -353,75 +353,19 @@ class PolynomialAccelerationModel(AccelerationModel):
         ...
 
 class PythonAccelerationModel(AccelerationModel):
-    """
-    public class PythonAccelerationModel extends :class:`~org.orekit.forces.empirical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.empirical.AccelerationModel`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     _signedAmplitude_1__T = typing.TypeVar('_signedAmplitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def signedAmplitude(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
-        """
-            Compute the signed amplitude of the acceleration.
-        
-            The acceleration is the direction multiplied by the signed amplitude. So if signed amplitude is negative, the
-            acceleratin is towards the opposite of the direction specified at construction.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.empirical.AccelerationModel.signedAmplitude` in
-                interface :class:`~org.orekit.forces.empirical.AccelerationModel`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
-        
-            Returns:
-                norm of the acceleration
-        
-        """
-        ...
+    def signedAmplitude(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def signedAmplitude(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_signedAmplitude_1__T], tArray: typing.Union[typing.List[_signedAmplitude_1__T], jpype.JArray]) -> _signedAmplitude_1__T:
-        """
-            Compute the signed amplitude of the acceleration.
-        
-            The acceleration is the direction multiplied by the signed amplitude. So if signed amplitude is negative, the
-            acceleratin is towards the opposite of the direction specified at construction.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.empirical.AccelerationModel.signedAmplitude` in
-                interface :class:`~org.orekit.forces.empirical.AccelerationModel`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
-        
-            Returns:
-                norm of the acceleration
-        
-        
-        """
-        ...
+    def signedAmplitude(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_signedAmplitude_1__T], tArray: typing.Union[typing.List[_signedAmplitude_1__T], jpype.JArray]) -> _signedAmplitude_1__T: ...
 
 class TimeSpanParametricAcceleration(AbstractParametricAcceleration):
     @typing.overload

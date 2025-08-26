@@ -367,48 +367,14 @@ class OneDVariation(PhaseCenterVariationFunction):
         ...
 
 class PythonPhaseCenterVariationFunction(PhaseCenterVariationFunction):
-    """
-    public class PythonPhaseCenterVariationFunction extends :class:`~org.orekit.gnss.antenna.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.antenna.PhaseCenterVariationFunction`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def value(self, double: float, double2: float) -> float:
-        """
-            Evaluate phase center variation in one signal direction.
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.antenna.PhaseCenterVariationFunction.value` in
-                interface :class:`~org.orekit.gnss.antenna.PhaseCenterVariationFunction`
-        
-            Parameters:
-                polarAngle (double): angle from antenna axial direction (zenith angle for receiver antennas, nadir angle for GNSS satellites antennas)
-                azimuthAngle (double): angle around axial direction
-        
-            Returns:
-                phase center variation in the signal direction (m)
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def value(self, double: float, double2: float) -> float: ...
 
 class ReceiverAntenna(Antenna):
     """

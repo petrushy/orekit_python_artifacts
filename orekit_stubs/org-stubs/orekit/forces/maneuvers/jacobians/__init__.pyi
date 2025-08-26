@@ -5,6 +5,7 @@ if sys.version_info >= (3, 8):
 else:
     from typing_extensions import Protocol
 
+import org.orekit.forces
 import org.orekit.forces.maneuvers
 import org.orekit.forces.maneuvers.trigger
 import org.orekit.propagation
@@ -105,7 +106,9 @@ class MassDepletionDelay(org.orekit.propagation.integration.AdditionalDerivative
     """
     public class MassDepletionDelay extends :class:`~org.orekit.forces.maneuvers.jacobians.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
     
-        Generator for effect of delaying mass depletion when delaying a maneuver.
+        Generator for effect of delaying mass depletion when delaying a maneuver, when the mass itself is not included in the
+        transition matrix. It neglects the influence of mass in other force models e.g. drag. For more accurate derivatives, one
+        should use the full 7x7 state transition matrix instead.
     
         Since:
             11.1
@@ -121,7 +124,7 @@ class MassDepletionDelay(org.orekit.propagation.integration.AdditionalDerivative
     
     
     """
-    def __init__(self, string: str, boolean: bool, maneuver: org.orekit.forces.maneuvers.Maneuver): ...
+    def __init__(self, string: str, boolean: bool, maneuver: org.orekit.forces.maneuvers.Maneuver, *forceModel: org.orekit.forces.ForceModel): ...
     def combinedDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.integration.CombinedDerivatives:
         """
             Compute the derivatives related to the additional state (and optionally main state increments).
@@ -285,10 +288,11 @@ class TriggerDate(org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter, 
         maneuver to the global ODE \(\frac{dy}{dt} = f(t, y)\). We are interested in the Jacobian column \(\frac{\partial
         y_t}{\partial t_1}\).
     
-        There are two parts in this Jacobian: the primary part corresponds to the full contribution of the acceleration due to
-        the maneuver as it is delayed by a small amount \(dt_1\), whereas the secondary part corresponds to change of
+        There are two parts in this Jacobian: the primary part corresponds to the full contribution of the jump in the dynamics
+        due to the maneuver as it is delayed by a small amount \(dt_1\), whereas the secondary part corresponds to change of
         acceleration after maneuver start as the mass depletion is delayed and therefore the spacecraft mass is different from
-        the mass for nominal start time.
+        the mass for nominal start time. This second part is already contained in the first one when the mass is included in the
+        transition matrix (7x7 instead of 6x6).
     
         The primary part is computed as follows. After trigger time \(t_1\) (according to propagation direction),
         \[\frac{\partial y_t}{\partial t_1} = \pm \frac{\partial y_t}{\partial y_1} f_m(t_1, y_1)\] where the sign depends on
@@ -314,11 +318,14 @@ class TriggerDate(org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter, 
         As the closed-form expression requires picking \(c_1\) at trigger time \(t_1\), it works only if propagation starts
         outside of the maneuver and passes over \(t_1\) during integration.
     
-        The secondary part is computed as follows. We have acceleration \(\vec{\Gamma} = \frac{\vec{F}}{m}\) and \(m = m_0 - q
-        (t - t_s)\), where \(m\) is current mass, \(m_0\) is initial mass and \(t_s\) is maneuver trigger time. A delay \(dt_s\)
-        on trigger time induces delaying mass depletion. We get: \[d\vec{\Gamma} = \frac{-\vec{F}}{m^2} dm =
-        \frac{-\vec{F}}{m^2} q dt_s = -\vec{\Gamma}\frac{q}{m} dt_s\] From this total differential, we extract the partial
-        derivative of the acceleration \[\frac{\partial\vec{\Gamma}}{\partial t_s} = -\vec{\Gamma}\frac{q}{m}\]
+        The secondary part, if needed (as it is not required if the mass is already included the state transition matrix i.e.
+        when the latter is 7x7), is computed as follows. Let m be the mass and m_s its value at switching time t_s. Let (x,y,z)
+        be the position vector, (vx, vy, vz) the velocity and (ax, ay, az) the total acceleration, we have \(\dot \frac{\partial
+        x} {\partial \partial m_s} = \frac{\partial vx }{\partial m_s})) and similar expressions for y and z. Furthermore,
+        \(\dot \frac{\partial vx}{ \partial \partial m_s} = \frac{\partial ax }{\partial m} . \frac{\partial m }{\partial m_s}
+        \), and symmetric equations for vy and vy. The fact is that \( \frac{\partial m}{ \partial m_s} = 1 \) assuming the mass
+        rate q only depends on time. On the other hand, \( \frac{\partial m_s}{ \partial t_s }= q(t_s) \)/ By the chain rule of
+        derivation, one gets the contribution due to the mass depletion delay.
     
         The contribution of the secondary part to the Jacobian column can therefore be computed by integrating the partial
         derivative of the acceleration, to get the partial derivative of the position.
@@ -338,7 +345,10 @@ class TriggerDate(org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter, 
         Also see:
             :class:`~org.orekit.forces.maneuvers.jacobians.MedianDate`, :class:`~org.orekit.forces.maneuvers.jacobians.Duration`
     """
-    def __init__(self, string: str, string2: str, boolean: bool, maneuver: org.orekit.forces.maneuvers.Maneuver, double: float): ...
+    @typing.overload
+    def __init__(self, string: str, string2: str, boolean: bool, maneuver: org.orekit.forces.maneuvers.Maneuver, double: float, boolean2: bool, *forceModel: org.orekit.forces.ForceModel): ...
+    @typing.overload
+    def __init__(self, string: str, string2: str, boolean: bool, maneuver: org.orekit.forces.maneuvers.Maneuver, double: float, *forceModel: org.orekit.forces.ForceModel): ...
     def getAdditionalData(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.MutableSequence[float]:
         """
             Get the additional data.
@@ -358,7 +368,7 @@ class TriggerDate(org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter, 
         ...
     def getMassDepletionDelay(self) -> MassDepletionDelay:
         """
-            Get the mass depletion effect processor.
+            Get the mass depletion effect processor. Can be null.
         
             Returns:
                 mass depletion effect processor

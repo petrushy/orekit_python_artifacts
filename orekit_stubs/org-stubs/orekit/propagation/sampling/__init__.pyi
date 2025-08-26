@@ -379,11 +379,43 @@ class FieldPropagationStepRecorder(FieldOrekitStepHandler[_FieldPropagationStepR
     
         Since:
             13.0
+    
+        Also see:
+            :class:`~org.orekit.propagation.sampling.PropagationStepRecorder`
     """
+    @typing.overload
     def __init__(self): ...
+    @typing.overload
+    def __init__(self, boolean: bool): ...
     def copyStates(self) -> java.util.List[org.orekit.propagation.FieldSpacecraftState[_FieldPropagationStepRecorder__T]]: ...
     def handleStep(self, fieldOrekitStepInterpolator: FieldOrekitStepInterpolator[_FieldPropagationStepRecorder__T]) -> None: ...
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldPropagationStepRecorder__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldPropagationStepRecorder__T]) -> None: ...
+    def isResetAutomatically(self) -> bool:
+        """
+            Getter for resetting flag.
+        
+            Returns:
+                flag
+        
+            Since:
+                13.1
+        
+        
+        """
+        ...
+    def setResetAutomatically(self, boolean: bool) -> None:
+        """
+            Setter for resetting flag.
+        
+            Parameters:
+                resetAutomatically (boolean): flag
+        
+            Since:
+                13.1
+        
+        
+        """
+        ...
 
 _FieldStepHandlerMultiplexer__T = typing.TypeVar('_FieldStepHandlerMultiplexer__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldStepHandlerMultiplexer(FieldOrekitStepHandler[_FieldStepHandlerMultiplexer__T], typing.Generic[_FieldStepHandlerMultiplexer__T]):
@@ -558,7 +590,10 @@ class PropagationStepRecorder(OrekitStepHandler):
         Since:
             13.0
     """
+    @typing.overload
     def __init__(self): ...
+    @typing.overload
+    def __init__(self, boolean: bool): ...
     def copyStates(self) -> java.util.List[org.orekit.propagation.SpacecraftState]: ...
     def handleStep(self, orekitStepInterpolator: OrekitStepInterpolator) -> None:
         """
@@ -594,36 +629,45 @@ class PropagationStepRecorder(OrekitStepHandler):
         
         """
         ...
+    def isResetAutomatically(self) -> bool:
+        """
+            Getter for resetting flag.
+        
+            Returns:
+                flag
+        
+            Since:
+                13.1
+        
+        
+        """
+        ...
+    def setResetAutomatically(self, boolean: bool) -> None:
+        """
+            Setter for resetting flag.
+        
+            Parameters:
+                resetAutomatically (boolean): flag
+        
+            Since:
+                13.1
+        
+        
+        """
+        ...
 
 _PythonFieldOrekitFixedStepHandler__T = typing.TypeVar('_PythonFieldOrekitFixedStepHandler__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldOrekitFixedStepHandler(FieldOrekitFixedStepHandler[_PythonFieldOrekitFixedStepHandler__T], typing.Generic[_PythonFieldOrekitFixedStepHandler__T]):
-    """
-    public class PythonFieldOrekitFixedStepHandler<T extends :class:`~org.orekit.propagation.sampling.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.FieldOrekitFixedStepHandler`<T>
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def finish(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldOrekitFixedStepHandler__T]) -> None: ...
     def handleStep(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldOrekitFixedStepHandler__T]) -> None: ...
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldOrekitFixedStepHandler__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldOrekitFixedStepHandler__T], t: _PythonFieldOrekitFixedStepHandler__T) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 _PythonFieldOrekitStepHandler__T = typing.TypeVar('_PythonFieldOrekitStepHandler__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldOrekitStepHandler(FieldOrekitStepHandler[_PythonFieldOrekitStepHandler__T], typing.Generic[_PythonFieldOrekitStepHandler__T]):
@@ -640,53 +684,20 @@ class PythonFieldOrekitStepHandler(FieldOrekitStepHandler[_PythonFieldOrekitStep
 
 _PythonFieldOrekitStepInterpolator__T = typing.TypeVar('_PythonFieldOrekitStepInterpolator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldOrekitStepInterpolator(FieldOrekitStepInterpolator[_PythonFieldOrekitStepInterpolator__T], typing.Generic[_PythonFieldOrekitStepInterpolator__T]):
-    """
-    public class PythonFieldOrekitStepInterpolator<T extends :class:`~org.orekit.propagation.sampling.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.FieldOrekitStepInterpolator`<T>
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def getCurrentState(self) -> org.orekit.propagation.FieldSpacecraftState[_PythonFieldOrekitStepInterpolator__T]: ...
     def getInterpolatedState(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldOrekitStepInterpolator__T]) -> org.orekit.propagation.FieldSpacecraftState[_PythonFieldOrekitStepInterpolator__T]: ...
     def getPreviousState(self) -> org.orekit.propagation.FieldSpacecraftState[_PythonFieldOrekitStepInterpolator__T]: ...
-    def isForward(self) -> bool:
-        """
-            Check is integration direction is forward in date.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.sampling.FieldOrekitStepInterpolator.isForward` in
-                interface :class:`~org.orekit.propagation.sampling.FieldOrekitStepInterpolator`
-        
-            Returns:
-                true if integration is forward in date
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def isForward(self) -> bool: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     def restrictStep(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldOrekitStepInterpolator__T], fieldSpacecraftState2: org.orekit.propagation.FieldSpacecraftState[_PythonFieldOrekitStepInterpolator__T]) -> FieldOrekitStepInterpolator[_PythonFieldOrekitStepInterpolator__T]: ...
 
 class PythonMultiSatFixedStepHandler(MultiSatFixedStepHandler):
-    """
-    public class PythonMultiSatFixedStepHandler extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.MultiSatFixedStepHandler`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def finish(self, list: java.util.List[org.orekit.propagation.SpacecraftState]) -> None: ...
@@ -696,341 +707,59 @@ class PythonMultiSatFixedStepHandler(MultiSatFixedStepHandler):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonMultiSatStepHandler(MultiSatStepHandler):
-    """
-    public class PythonMultiSatStepHandler extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.MultiSatStepHandler`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def finish(self, list: java.util.List[org.orekit.propagation.SpacecraftState]) -> None: ...
     def handleStep(self, list: java.util.List[OrekitStepInterpolator]) -> None: ...
     def init(self, list: java.util.List[org.orekit.propagation.SpacecraftState], absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-class PythonOrekitFixedStepHandler(OrekitFixedStepHandler):
-    """
-    public class PythonOrekitFixedStepHandler extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler`
-    
-        This interface is a space-dynamics aware fixed size step handler.
-    
-        It mirrors the :code:`FixedStepHandler` interface from `commons-math <http://commons.apache.org/math/>` but provides a
-        space-dynamics interface to the methods.
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def finish(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
-        """
-            Finalize propagation.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitFixedStepHandler.finish` in
-                interface :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler`
-        
-            Parameters:
-                finalState (:class:`~org.orekit.propagation.SpacecraftState`): state at propagation end
-        
-        
-        """
-        ...
-    def handleStep(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
-        """
-            Handle the current step.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitFixedStepHandler.handleStep` in
-                interface :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler`
-        
-            Parameters:
-                currentState (:class:`~org.orekit.propagation.SpacecraftState`): current state at step time
-        
-        
-        """
-        ...
-    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> None:
-        """
-            Initialize step handler at the start of a propagation.
-        
-            This method is called once at the start of the propagation. It may be used by the step handler to initialize some
-            internal data if needed.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitFixedStepHandler.init` in
-                interface :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler`
-        
-            Parameters:
-                s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
-                t (:class:`~org.orekit.time.AbsoluteDate`): target time for the integration
-                step (double): the duration in seconds of the fixed step. This value is positive even if propagation is backwards.
-        
-        
-        """
-        ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+
+class PythonOrekitFixedStepHandler(OrekitFixedStepHandler):
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def finish(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None: ...
+    def handleStep(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None: ...
+    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> None: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonOrekitStepHandler(OrekitStepHandler):
-    """
-    public class PythonOrekitStepHandler extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def finish(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
-        """
-            Finalize propagation.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.finish` in
-                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
-        
-            Parameters:
-                finalState (:class:`~org.orekit.propagation.SpacecraftState`): state at propagation end
-        
-            Since:
-                11.0
-        
-        
-        """
-        ...
-    def handleStep(self, orekitStepInterpolator: OrekitStepInterpolator) -> None:
-        """
-            Handle the current step.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.handleStep` in
-                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
-        
-            Parameters:
-                interpolator (:class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`): interpolator set up for the current step
-        
-        
-        """
-        ...
-    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Initialize step handler at the start of a propagation. Extension point for Python.
-        
-            This method is called once at the start of the propagation. It may be used by the step handler to initialize some
-            internal data if needed.
-        
-            The default method does nothing
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.init` in
-                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
-        
-            Parameters:
-                s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
-                t (:class:`~org.orekit.time.AbsoluteDate`): target time for the integration
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def finish(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None: ...
+    def handleStep(self, orekitStepInterpolator: OrekitStepInterpolator) -> None: ...
+    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonOrekitStepInterpolator(OrekitStepInterpolator):
-    """
-    public class PythonOrekitStepInterpolator extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getCurrentState(self) -> org.orekit.propagation.SpacecraftState:
-        """
-            Get the state at current grid point date. Extension point for Python.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.getCurrentState` in
-                interface :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
-        
-            Returns:
-                state at current grid point date
-        
-        
-        """
-        ...
-    def getInterpolatedState(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.propagation.SpacecraftState:
-        """
-            Get the state at interpolated date.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.getInterpolatedState` in
-                interface :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date of the interpolated state
-        
-            Returns:
-                state at interpolated date
-        
-        
-        """
-        ...
-    def getPreviousState(self) -> org.orekit.propagation.SpacecraftState:
-        """
-            Get the state at previous grid point date. Extension point for Python.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.getPreviousState` in
-                interface :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
-        
-            Returns:
-                state at previous grid point date
-        
-        
-        """
-        ...
-    def isCurrentStateInterpolated(self) -> bool:
-        """
-            Determines if the :meth:`~org.orekit.propagation.sampling.PythonOrekitStepInterpolator.getCurrentState` is computed
-            directly by the integrator, or if it is calculated using
-            :meth:`~org.orekit.propagation.sampling.PythonOrekitStepInterpolator.getInterpolatedState`. Extension point for Python.
-        
-            Typically the current state is directly computed by the integrator, but when events are detected the steps are shortened
-            so that events occur on step boundaries which means the current state may be computed by the interpolator.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.isCurrentStateInterpolated` in
-                interface :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
-        
-            Returns:
-                :code:`true` if the current state was calculated by the interpolator and false if it was computed directly by the
-                integrator.
-        
-        
-        """
-        ...
-    def isForward(self) -> bool:
-        """
-            Check is integration direction is forward in date.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.isForward` in
-                interface :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
-        
-            Returns:
-                true if integration is forward in date
-        
-        
-        """
-        ...
-    def isPreviousStateInterpolated(self) -> bool:
-        """
-            Determines if the :meth:`~org.orekit.propagation.sampling.PythonOrekitStepInterpolator.getPreviousState` is computed
-            directly by the integrator, or if it is calculated using
-            :meth:`~org.orekit.propagation.sampling.PythonOrekitStepInterpolator.getInterpolatedState`. Extension point for Python.
-        
-            Typically the previous state is directly computed by the integrator, but when events are detected the steps are
-            shortened so that events occur on step boundaries which means the previous state may be computed by the interpolator.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.isPreviousStateInterpolated` in
-                interface :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
-        
-            Returns:
-                :code:`true` if the previous state was calculated by the interpolator and false if it was computed directly by the
-                integrator.
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getCurrentState(self) -> org.orekit.propagation.SpacecraftState: ...
+    def getInterpolatedState(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.propagation.SpacecraftState: ...
+    def getPreviousState(self) -> org.orekit.propagation.SpacecraftState: ...
+    def isCurrentStateInterpolated(self) -> bool: ...
+    def isForward(self) -> bool: ...
+    def isPreviousStateInterpolated(self) -> bool: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def restrictStep(self, spacecraftState: org.orekit.propagation.SpacecraftState, spacecraftState2: org.orekit.propagation.SpacecraftState) -> OrekitStepInterpolator:
-        """
-            Create a new restricted version of the instance.
-        
-            The instance is not changed at all.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.restrictStep` in
-                interface :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
-        
-            Parameters:
-                newPreviousState (:class:`~org.orekit.propagation.SpacecraftState`): start of the restricted step
-                newCurrentState (:class:`~org.orekit.propagation.SpacecraftState`): end of the restricted step
-        
-            Returns:
-                restricted version of the instance
-        
-            Since:
-                9.0
-        
-            Also see:
-                :meth:`~org.orekit.propagation.sampling.PythonOrekitStepInterpolator.getPreviousState`,
-                :meth:`~org.orekit.propagation.sampling.PythonOrekitStepInterpolator.getCurrentState`
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def restrictStep(self, spacecraftState: org.orekit.propagation.SpacecraftState, spacecraftState2: org.orekit.propagation.SpacecraftState) -> OrekitStepInterpolator: ...
 
 class StepHandlerMultiplexer(OrekitStepHandler):
     """

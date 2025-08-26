@@ -8,6 +8,7 @@ else:
 import java.lang
 import java.util
 import java.util.stream
+import jpype
 import org.hipparchus
 import org.hipparchus.analysis.polynomials
 import org.hipparchus.geometry.euclidean.threed
@@ -807,6 +808,7 @@ class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftStat
     def getPosition(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldSpacecraftState__T]: ...
     @typing.overload
     def getPosition(self, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldSpacecraftState__T]: ...
+    def getVelocity(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldSpacecraftState__T]: ...
     def hasAdditionalData(self, string: str) -> bool:
         """
             Check if an additional data is available.
@@ -1028,6 +1030,71 @@ class FieldStateCovariance(org.orekit.time.FieldTimeStamped[_FieldStateCovarianc
         
             Returns:
                 new state covariance instance.
+        
+        
+        """
+        ...
+
+class LinearKeplerianCovarianceHandler(org.orekit.propagation.sampling.OrekitFixedStepHandler):
+    """
+    public class LinearKeplerianCovarianceHandler extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler`
+    
+        Class implementing step handlers to propagate orbital covariance using linearized Keplerian motion, no matter the
+        propagation model. Although less precise than using the same perturbations than the propagator, it is more
+        computationally performant.
+    
+        Since:
+            13.1
+    
+        Also see:
+            :class:`~org.orekit.propagation.StateCovarianceMatrixProvider`
+    """
+    def __init__(self, stateCovariance: 'StateCovariance'): ...
+    def getStatesCovariances(self) -> java.util.List['StateCovariance']: ...
+    def handleStep(self, spacecraftState: 'SpacecraftState') -> None:
+        """
+            Description copied from interface: :meth:`~org.orekit.propagation.sampling.OrekitFixedStepHandler.handleStep`
+            Handle the current step.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.sampling.OrekitFixedStepHandler.handleStep` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler`
+        
+            Parameters:
+                currentState (:class:`~org.orekit.propagation.SpacecraftState`): current state at step time
+        
+        
+        """
+        ...
+    def init(self, spacecraftState: 'SpacecraftState', absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> None:
+        """
+            Description copied from interface: :meth:`~org.orekit.propagation.sampling.OrekitFixedStepHandler.init`
+            Initialize step handler at the start of a propagation.
+        
+            This method is called once at the start of the propagation. It may be used by the step handler to initialize some
+            internal data if needed.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.sampling.OrekitFixedStepHandler.init` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler`
+        
+            Parameters:
+                s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
+                t (:class:`~org.orekit.time.AbsoluteDate`): target time for the integration
+                dt (double): the duration in seconds of the fixed step. This value is positive even if propagation is backwards.
+        
+        
+        """
+        ...
+    def toOrekitStepHandler(self) -> org.orekit.propagation.sampling.OrekitStepHandler:
+        """
+            Convert into a non-fixed step handler, based on the instance (so do not use it elsewhere for something else).
+        
+            Returns:
+                fixed-step handler
+        
+            Also see:
+                :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
         
         
         """
@@ -1888,10 +1955,10 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
     @typing.overload
     def getPosition(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get the position in orbit definition frame.
+            Get the position in state definition frame.
         
             Returns:
-                position in orbit definition frame
+                position in state definition frame
         
             Since:
                 12.0
@@ -1914,6 +1981,22 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
         
             Since:
                 12.0
+        
+            Also see:
+                :meth:`~org.orekit.propagation.SpacecraftState.getPVCoordinates`
+        
+        
+        """
+        ...
+    def getVelocity(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the velocity in state definition frame.
+        
+            Returns:
+                velocity in state definition frame
+        
+            Since:
+                13.1
         
             Also see:
                 :meth:`~org.orekit.propagation.SpacecraftState.getPVCoordinates`
@@ -2373,20 +2456,7 @@ class StateCovariance(org.orekit.time.TimeStamped):
         """
         ...
     @staticmethod
-    def getStm(orbit: org.orekit.orbits.Orbit, double: float) -> org.hipparchus.linear.RealMatrix:
-        """
-            Get the state transition matrix considering Keplerian contribution only.
-        
-            Parameters:
-                initialOrbit (:class:`~org.orekit.orbits.Orbit`): orbit to which the initial covariance matrix should correspond
-                dt (double): time difference between the two orbits
-        
-            Returns:
-                the state transition matrix used to shift the covariance matrix
-        
-        
-        """
-        ...
+    def getStm(orbit: org.orekit.orbits.Orbit, double: float) -> org.hipparchus.linear.RealMatrix: ...
     @staticmethod
     def inputAndOutputAreIdentical(orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType, orbitType2: org.orekit.orbits.OrbitType, positionAngleType2: org.orekit.orbits.PositionAngleType) -> bool:
         """
@@ -2452,9 +2522,22 @@ class AbstractMatricesHarvester(MatricesHarvester):
     """
     STATE_DIMENSION: typing.ClassVar[int] = ...
     """
-    public static final int STATE_DIMENSION
+    :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public static final int STATE_DIMENSION
     
+        Deprecated.
+        as of 13.1, use DEFAULT_STATE_DIMENSION
         State dimension, fixed to 6.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    DEFAULT_STATE_DIMENSION: typing.ClassVar[int] = ...
+    """
+    public static final int DEFAULT_STATE_DIMENSION
+    
+        Default state dimension, equivalent to position and velocity vectors.
     
         Also see:
             :meth:`~constant`
@@ -2509,6 +2592,19 @@ class AbstractMatricesHarvester(MatricesHarvester):
         
         """
         ...
+    def getStateDimension(self) -> int:
+        """
+            Getter for the state dimension.
+        
+            Returns:
+                state dimension
+        
+            Since:
+                13.1
+        
+        
+        """
+        ...
     def getStateTransitionMatrix(self, spacecraftState: SpacecraftState) -> org.hipparchus.linear.RealMatrix:
         """
             Extract state transition matrix from state.
@@ -2557,6 +2653,38 @@ class AbstractMatricesHarvester(MatricesHarvester):
         
         """
         ...
+    def toArray(self, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> typing.MutableSequence[float]:
+        """
+            Set the STM data into an array.
+        
+            Parameters:
+                matrix (double[][]): STM matrix
+        
+            Returns:
+                an array containing the STM data
+        
+            Since:
+                13.1
+        
+        
+        """
+        ...
+    def toSquareMatrix(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.linear.RealMatrix:
+        """
+            Convert a flattened array to a square matrix.
+        
+            Parameters:
+                array (double[]): input array
+        
+            Returns:
+                the corresponding matrix
+        
+            Since:
+                13.1
+        
+        
+        """
+        ...
 
 class AbstractPropagator(Propagator):
     """
@@ -2577,6 +2705,16 @@ class AbstractPropagator(Propagator):
         
             Parameters:
                 provider (:class:`~org.orekit.propagation.AdditionalDataProvider`<?> provider): provider for additional data
+        
+        
+        """
+        ...
+    def clearMatricesComputation(self) -> None:
+        """
+            Erases the internal matrices harvester.
+        
+            Since:
+                13.1
         
         
         """
@@ -2700,6 +2838,19 @@ class AbstractPropagator(Propagator):
         
             Returns:
                 propagated state
+        
+        
+        """
+        ...
+    def removeAdditionalDataProvider(self, string: str) -> None:
+        """
+            Remove an additional data provider.
+        
+            Parameters:
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): data name
+        
+            Since:
+                13.1
         
         
         """
@@ -2861,9 +3012,9 @@ class AbstractStateModifier(AdditionalDataProvider[typing.MutableSequence[float]
         """
         ...
 
-class BoundedPropagator(Propagator):
+class BoundedPropagator(Propagator, org.orekit.utils.BoundedPVCoordinatesProvider):
     """
-    public interface BoundedPropagator extends :class:`~org.orekit.propagation.Propagator`
+    public interface BoundedPropagator extends :class:`~org.orekit.propagation.Propagator`, :class:`~org.orekit.utils.BoundedPVCoordinatesProvider`
     
         This interface is intended for ephemerides valid only during a time range.
     
@@ -2871,26 +3022,7 @@ class BoundedPropagator(Propagator):
         by orbit readers based on external data files and by continuous models built after numerical integration has been
         completed and dense output data as been gathered.
     """
-    def getMaxDate(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the last date of the range.
-        
-            Returns:
-                the last date of the range
-        
-        
-        """
-        ...
-    def getMinDate(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the first date of the range.
-        
-            Returns:
-                the first date of the range
-        
-        
-        """
-        ...
+    ...
 
 _FieldAbstractPropagator__T = typing.TypeVar('_FieldAbstractPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAbstractPropagator(FieldPropagator[_FieldAbstractPropagator__T], typing.Generic[_FieldAbstractPropagator__T]):
@@ -2989,6 +3121,19 @@ class FieldAbstractPropagator(FieldPropagator[_FieldAbstractPropagator__T], typi
     def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldAbstractPropagator__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_FieldAbstractPropagator__T]) -> FieldSpacecraftState[_FieldAbstractPropagator__T]: ...
     @typing.overload
     def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldAbstractPropagator__T]) -> FieldSpacecraftState[_FieldAbstractPropagator__T]: ...
+    def removeAdditionalDataProvider(self, string: str) -> None:
+        """
+            Remove an additional data provider.
+        
+            Parameters:
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): data name
+        
+            Since:
+                13.1
+        
+        
+        """
+        ...
     def resetInitialState(self, fieldSpacecraftState: FieldSpacecraftState[_FieldAbstractPropagator__T]) -> None: ...
     def setAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None:
         """
@@ -3048,9 +3193,9 @@ class FieldAbstractStateModifier(FieldAdditionalDataProvider[typing.MutableSeque
     def update(self, fieldSpacecraftState: FieldSpacecraftState[_FieldAbstractStateModifier__T]) -> FieldSpacecraftState[_FieldAbstractStateModifier__T]: ...
 
 _FieldBoundedPropagator__T = typing.TypeVar('_FieldBoundedPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldBoundedPropagator(FieldPropagator[_FieldBoundedPropagator__T], typing.Generic[_FieldBoundedPropagator__T]):
+class FieldBoundedPropagator(FieldPropagator[_FieldBoundedPropagator__T], org.orekit.utils.FieldBoundedPVCoordinatesProvider[_FieldBoundedPropagator__T], typing.Generic[_FieldBoundedPropagator__T]):
     """
-    public interface FieldBoundedPropagator<T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.FieldPropagator`<T>
+    public interface FieldBoundedPropagator<T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.FieldPropagator`<T>, :class:`~org.orekit.utils.FieldBoundedPVCoordinatesProvider`<T>
     
         This interface is intended for ephemerides valid only during a time range.
     
@@ -3058,113 +3203,34 @@ class FieldBoundedPropagator(FieldPropagator[_FieldBoundedPropagator__T], typing
         by orbit readers based on external data files and by continuous models built after numerical integration has been
         completed and dense output data as been gathered.
     """
-    def getMaxDate(self) -> org.orekit.time.FieldAbsoluteDate[_FieldBoundedPropagator__T]: ...
-    def getMinDate(self) -> org.orekit.time.FieldAbsoluteDate[_FieldBoundedPropagator__T]: ...
+    ...
 
 class PythonAbstractStateCovarianceInterpolator(AbstractStateCovarianceInterpolator):
-    """
-    public class PythonAbstractStateCovarianceInterpolator extends :class:`~org.orekit.propagation.AbstractStateCovarianceInterpolator`
-    
-        Python implementation of the AbstractStateCovarianceInterpolator class. This class is part of the JCC Python interface
-        and exposes abstract methods natively.
-    """
     @typing.overload
     def __init__(self, int: int, double: float, timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], frame: org.orekit.frames.Frame, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType): ...
     @typing.overload
     def __init__(self, int: int, double: float, timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], lOFType: org.orekit.frames.LOFType): ...
     def computeInterpolatedCovarianceInOrbitFrame(self, list: java.util.List[org.orekit.time.TimeStampedPair[org.orekit.orbits.Orbit, StateCovariance]], orbit: org.orekit.orbits.Orbit) -> StateCovariance: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 _PythonAdditionalDataProvider__T = typing.TypeVar('_PythonAdditionalDataProvider__T')  # <T>
 class PythonAdditionalDataProvider(AdditionalDataProvider[_PythonAdditionalDataProvider__T], typing.Generic[_PythonAdditionalDataProvider__T]):
-    """
-    public class PythonAdditionalDataProvider<T> extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.AdditionalDataProvider`<T>
-    
-        Python implementation of the AdditionalDataProvider interface. This class is part of the JCC Python interface and
-        exposes all methods natively.
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getAdditionalData(self, spacecraftState: SpacecraftState) -> _PythonAdditionalDataProvider__T:
-        """
-            Get the additional data.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.AdditionalDataProvider.getAdditionalData` in
-                interface :class:`~org.orekit.propagation.AdditionalDataProvider`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which additional data should correspond
-        
-            Returns:
-                additional state corresponding to spacecraft state
-        
-        
-        """
-        ...
-    def getName(self) -> str:
-        """
-            Get the name of the additional data.
-        
-            If a provider just modifies one of the basic elements (orbit, attitude or mass) without adding any new data, it should
-            return the empty string as its name.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.AdditionalDataProvider.getName` in
-                interface :class:`~org.orekit.propagation.AdditionalDataProvider`
-        
-            Returns:
-                name of the additional data (names containing "orekit" with any case are reserved for the library internal use)
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getAdditionalData(self, spacecraftState: SpacecraftState) -> _PythonAdditionalDataProvider__T: ...
+    def getName(self) -> str: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonCartesianToleranceProvider(CartesianToleranceProvider):
-    """
-    public class PythonCartesianToleranceProvider extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.CartesianToleranceProvider`
-    
-        Python implementation of the CartesianToleranceProvider interface. This class is part of the JCC Python interface and
-        exposes all methods natively.
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     _getTolerances_0__T = typing.TypeVar('_getTolerances_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -3173,25 +3239,7 @@ class PythonCartesianToleranceProvider(CartesianToleranceProvider):
     @typing.overload
     def getTolerances(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTolerances_0__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTolerances_0__T]) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
-    def getTolerances(self, cartesianOrbit: org.orekit.orbits.CartesianOrbit) -> typing.MutableSequence[typing.MutableSequence[float]]:
-        """
-            Description copied from interface: :meth:`~org.orekit.propagation.CartesianToleranceProvider.getTolerances`
-            Retrieve the integration tolerances given reference position and velocity vectors.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.CartesianToleranceProvider.getTolerances` in
-                interface :class:`~org.orekit.propagation.CartesianToleranceProvider`
-        
-            Parameters:
-                position (:class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): reference position vector
-                velocity (:class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): reference velocity vector
-        
-            Returns:
-                absolute and relative tolerances
-        
-        
-        """
-        ...
+    def getTolerances(self, cartesianOrbit: org.orekit.orbits.CartesianOrbit) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
     def getTolerances(self, fieldCartesianOrbit: org.orekit.orbits.FieldCartesianOrbit[_getTolerances_2__T]) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
@@ -3200,718 +3248,120 @@ class PythonCartesianToleranceProvider(CartesianToleranceProvider):
     def getTolerances(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_getTolerances_4__T]) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
     def getTolerances(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonEphemerisGenerator(EphemerisGenerator):
-    """
-    public class PythonEphemerisGenerator extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.EphemerisGenerator`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getGeneratedEphemeris(self) -> BoundedPropagator:
-        """
-            Get the ephemeris generated during the propagation.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.EphemerisGenerator.getGeneratedEphemeris` in
-                interface :class:`~org.orekit.propagation.EphemerisGenerator`
-        
-            Returns:
-                generated ephemeris
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getGeneratedEphemeris(self) -> BoundedPropagator: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 _PythonFieldAdditionalDataProvider__O = typing.TypeVar('_PythonFieldAdditionalDataProvider__O')  # <O>
 _PythonFieldAdditionalDataProvider__T = typing.TypeVar('_PythonFieldAdditionalDataProvider__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldAdditionalDataProvider(FieldAdditionalDataProvider[_PythonFieldAdditionalDataProvider__O, _PythonFieldAdditionalDataProvider__T], typing.Generic[_PythonFieldAdditionalDataProvider__O, _PythonFieldAdditionalDataProvider__T]):
-    """
-    public class PythonFieldAdditionalDataProvider<O, T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.FieldAdditionalDataProvider`<O, T>
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def getAdditionalData(self, fieldSpacecraftState: FieldSpacecraftState[_PythonFieldAdditionalDataProvider__T]) -> _PythonFieldAdditionalDataProvider__O: ...
-    def getName(self) -> str:
-        """
-            Get the name of the additional data.
-        
-            If a provider just modifies one of the basic elements (orbit, attitude or mass) without adding any new data, it should
-            return the empty string as its name.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.FieldAdditionalDataProvider.getName` in
-                interface :class:`~org.orekit.propagation.FieldAdditionalDataProvider`
-        
-            Returns:
-                name of the additional data (names containing "orekit" with any case are reserved for the library internal use)
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getName(self) -> str: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 _PythonFieldEphemerisGenerator__T = typing.TypeVar('_PythonFieldEphemerisGenerator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldEphemerisGenerator(FieldEphemerisGenerator[_PythonFieldEphemerisGenerator__T], typing.Generic[_PythonFieldEphemerisGenerator__T]):
-    """
-    public class PythonFieldEphemerisGenerator<T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.FieldEphemerisGenerator`<T>
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def getGeneratedEphemeris(self) -> FieldBoundedPropagator[_PythonFieldEphemerisGenerator__T]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 _PythonFieldPropagator__T = typing.TypeVar('_PythonFieldPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldPropagator(FieldPropagator[_PythonFieldPropagator__T], typing.Generic[_PythonFieldPropagator__T]):
-    """
-    public class PythonFieldPropagator<T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.FieldPropagator`<T>
-    """
     def __init__(self): ...
     def addAdditionalDataProvider(self, fieldAdditionalDataProvider: FieldAdditionalDataProvider[typing.Any, _PythonFieldPropagator__T]) -> None: ...
     _addEventDetector__D = typing.TypeVar('_addEventDetector__D', bound=org.orekit.propagation.events.FieldEventDetector)  # <D>
     def addEventDetector(self, d: _addEventDetector__D) -> None: ...
-    def clearEventsDetectors(self) -> None:
-        """
-            Remove all events detectors.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.clearEventsDetectors` in
-                interface :class:`~org.orekit.propagation.FieldPropagator`
-        
-            Also see:
-                :meth:`~org.orekit.propagation.FieldPropagator.addEventDetector`,
-                :meth:`~org.orekit.propagation.FieldPropagator.getEventDetectors`
-        
-        
-        """
-        ...
+    def clearEventsDetectors(self) -> None: ...
     def finalize(self) -> None: ...
     def getAdditionalDataProviders(self) -> java.util.List[FieldAdditionalDataProvider[typing.Any, _PythonFieldPropagator__T]]: ...
-    def getAttitudeProvider(self) -> org.orekit.attitudes.AttitudeProvider:
-        """
-            Get attitude provider.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.getAttitudeProvider` in
-                interface :class:`~org.orekit.propagation.FieldPropagator`
-        
-            Returns:
-                attitude provider
-        
-        
-        """
-        ...
+    def getAttitudeProvider(self) -> org.orekit.attitudes.AttitudeProvider: ...
     def getEphemerisGenerator(self) -> FieldEphemerisGenerator[_PythonFieldPropagator__T]: ...
     def getEventDetectors(self) -> java.util.Collection[org.orekit.propagation.events.FieldEventDetector[_PythonFieldPropagator__T]]: ...
-    def getFrame(self) -> org.orekit.frames.Frame:
-        """
-            Get the frame in which the orbit is propagated.
-        
-            The propagation frame is the definition frame of the initial state, so this method should be called after this state has
-            been set, otherwise it may return null.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.getFrame` in interface :class:`~org.orekit.propagation.FieldPropagator`
-        
-            Returns:
-                frame in which the orbit is propagated
-        
-            Also see:
-                :meth:`~org.orekit.propagation.FieldPropagator.resetInitialState`
-        
-        
-        """
-        ...
+    def getFrame(self) -> org.orekit.frames.Frame: ...
     def getInitialState(self) -> FieldSpacecraftState[_PythonFieldPropagator__T]: ...
-    def getManagedAdditionalData(self) -> typing.MutableSequence[str]:
-        """
-            Get all the names of all managed data.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.getManagedAdditionalData` in
-                interface :class:`~org.orekit.propagation.FieldPropagator`
-        
-            Returns:
-                names of all managed data
-        
-        
-        """
-        ...
+    def getManagedAdditionalData(self) -> typing.MutableSequence[str]: ...
     def getMultiplexer(self) -> org.orekit.propagation.sampling.FieldStepHandlerMultiplexer[_PythonFieldPropagator__T]: ...
     def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldPropagator__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_PythonFieldPropagator__T]: ...
-    def isAdditionalDataManaged(self, string: str) -> bool:
-        """
-            Check if an additional data is managed.
-        
-            Managed data are the ones for which the propagators know how to compute its evolution. They correspond to additional
-            data for which an :class:`~org.orekit.propagation.FieldAdditionalDataProvider` has been registered by calling the
-            :meth:`~org.orekit.propagation.FieldPropagator.addAdditionalDataProvider` method. If the propagator is an
-            :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`, the states for which a set of
-            :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider` has been registered by calling the
-            :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.addAdditionalDerivativesProvider` method
-            are also counted as managed additional states.
-        
-            Additional data that are present in the :meth:`~org.orekit.propagation.FieldPropagator.getInitialState` but have no
-            evolution method registered are *not* considered as managed data. These unmanaged additional data are not lost during
-            propagation, though. Their value are piecewise constant between state resets that may change them if some event handler
-            :meth:`~org.orekit.propagation.events.handlers.FieldEventHandler.resetState` method is called at an event occurrence and
-            happens to change the unmanaged additional data.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.isAdditionalDataManaged` in
-                interface :class:`~org.orekit.propagation.FieldPropagator`
-        
-            Parameters:
-                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional data
-        
-            Returns:
-                true if the additional data is managed
-        
-        
-        """
-        ...
+    def isAdditionalDataManaged(self, string: str) -> bool: ...
     @typing.overload
     def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldPropagator__T]) -> FieldSpacecraftState[_PythonFieldPropagator__T]: ...
     @typing.overload
     def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldPropagator__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_PythonFieldPropagator__T]) -> FieldSpacecraftState[_PythonFieldPropagator__T]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     def resetInitialState(self, fieldSpacecraftState: FieldSpacecraftState[_PythonFieldPropagator__T]) -> None: ...
-    def setAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None:
-        """
-            Set attitude provider.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.setAttitudeProvider` in
-                interface :class:`~org.orekit.propagation.FieldPropagator`
-        
-            Parameters:
-                attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
-        
-        
-        """
-        ...
+    def setAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None: ...
 
 class PythonMatricesHarvester(MatricesHarvester):
-    """
-    public class PythonMatricesHarvester extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.MatricesHarvester`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     def getJacobiansColumnsNames(self) -> java.util.List[str]: ...
-    def getOrbitType(self) -> org.orekit.orbits.OrbitType:
-        """
-            Description copied from interface: :meth:`~org.orekit.propagation.MatricesHarvester.getOrbitType`
-            Get the orbit type used for the matrix computation.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.getOrbitType` in
-                interface :class:`~org.orekit.propagation.MatricesHarvester`
-        
-            Returns:
-                the orbit type used for the matrix computation
-        
-        
-        """
-        ...
-    def getParametersJacobian(self, spacecraftState: SpacecraftState) -> org.hipparchus.linear.RealMatrix:
-        """
-            Get the Jacobian with respect to propagation parameters.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.getParametersJacobian` in
-                interface :class:`~org.orekit.propagation.MatricesHarvester`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-        
-            Returns:
-                Jacobian with respect to propagation parameters, or null if there are no parameters
-        
-        
-        """
-        ...
-    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType:
-        """
-            Description copied from interface: :meth:`~org.orekit.propagation.MatricesHarvester.getPositionAngleType`
-            Get the position angle used for the matrix computation.
-        
-            Irrelevant if :meth:`~org.orekit.propagation.MatricesHarvester.getOrbitType` returns
-            :meth:`~org.orekit.orbits.OrbitType.CARTESIAN`.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.getPositionAngleType` in
-                interface :class:`~org.orekit.propagation.MatricesHarvester`
-        
-            Returns:
-                the position angle used for the matrix computation
-        
-        
-        """
-        ...
-    def getStateTransitionMatrix(self, spacecraftState: SpacecraftState) -> org.hipparchus.linear.RealMatrix:
-        """
-            Extract state transition matrix from state.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.getStateTransitionMatrix` in
-                interface :class:`~org.orekit.propagation.MatricesHarvester`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-        
-            Returns:
-                state transition matrix, with semantics consistent with propagation, or null if no state transition matrix is available
-                :class:`~org.orekit.orbits.OrbitType`.
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getOrbitType(self) -> org.orekit.orbits.OrbitType: ...
+    def getParametersJacobian(self, spacecraftState: SpacecraftState) -> org.hipparchus.linear.RealMatrix: ...
+    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType: ...
+    def getStateTransitionMatrix(self, spacecraftState: SpacecraftState) -> org.hipparchus.linear.RealMatrix: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def setReferenceState(self, spacecraftState: SpacecraftState) -> None:
-        """
-            Set up reference state.
-        
-            This method is called whenever the global propagation reference state changes. This corresponds to the start of
-            propagation in batch least squares orbit determination or at prediction step for each measurement in Kalman filtering.
-            Its goal is to allow the harvester to compute some internal data. Analytical models like TLE use it to compute
-            analytical derivatives, semi-analytical models like DSST use it to compute short periodic terms, numerical models do not
-            use it at all.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.setReferenceState` in
-                interface :class:`~org.orekit.propagation.MatricesHarvester`
-        
-            Parameters:
-                reference (:class:`~org.orekit.propagation.SpacecraftState`): reference state to set
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def setReferenceState(self, spacecraftState: SpacecraftState) -> None: ...
 
 class PythonPropagator(Propagator):
-    """
-    public class PythonPropagator extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.Propagator`
-    """
     def __init__(self): ...
-    def addAdditionalDataProvider(self, additionalDataProvider: AdditionalDataProvider[typing.Any]) -> None:
-        """
-            Add a set of user-specified data to be computed along with the orbit propagation.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.addAdditionalDataProvider` in
-                interface :class:`~org.orekit.propagation.Propagator`
-        
-            Parameters:
-                additionalDataProvider (:class:`~org.orekit.propagation.AdditionalDataProvider`<?> additionalDataProvider): provider for additional data
-        
-        
-        """
-        ...
+    def addAdditionalDataProvider(self, additionalDataProvider: AdditionalDataProvider[typing.Any]) -> None: ...
     _addEventDetector__T = typing.TypeVar('_addEventDetector__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
-    def addEventDetector(self, t: _addEventDetector__T) -> None:
-        """
-            Add an event detector.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.addEventDetector` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Parameters:
-                detector (T): event detector to add
-        
-            Also see:
-                :meth:`~org.orekit.propagation.Propagator.clearEventsDetectors`,
-                :meth:`~org.orekit.propagation.Propagator.getEventDetectors`
-        
-        
-        """
-        ...
-    def clearEventsDetectors(self) -> None:
-        """
-            Remove all events detectors.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.clearEventsDetectors` in
-                interface :class:`~org.orekit.propagation.Propagator`
-        
-            Also see:
-                :meth:`~org.orekit.propagation.Propagator.addEventDetector`,
-                :meth:`~org.orekit.propagation.Propagator.getEventDetectors`
-        
-        
-        """
-        ...
+    def addEventDetector(self, t: _addEventDetector__T) -> None: ...
+    def clearEventsDetectors(self) -> None: ...
     def finalize(self) -> None: ...
     def getAdditionalDataProviders(self) -> java.util.List[AdditionalDataProvider[typing.Any]]: ...
-    def getAttitudeProvider(self) -> org.orekit.attitudes.AttitudeProvider:
-        """
-            Get attitude provider.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getAttitudeProvider` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Returns:
-                attitude provider
-        
-        
-        """
-        ...
-    def getEphemerisGenerator(self) -> EphemerisGenerator:
-        """
-            Set up an ephemeris generator that will monitor the propagation for building an ephemeris from it once completed.
-        
-            This generator can be used when the user needs fast random access to the orbit state at any time between the initial and
-            target times. A typical example is the implementation of search and iterative algorithms that may navigate forward and
-            backward inside the propagation range before finding their result even if the propagator used is integration-based and
-            only goes from one initial time to one target time.
-        
-            Beware that when used with integration-based propagators, the generator will store **all** intermediate results. It is
-            therefore memory intensive for long integration-based ranges and high precision/short time steps. When used with
-            analytical propagators, the generator only stores start/stop time and a reference to the analytical propagator itself to
-            call it back as needed, so it is less memory intensive.
-        
-            The returned ephemeris generator will be initially empty, it will be filled with propagation data when a subsequent call
-            to either :meth:`~org.orekit.propagation.Propagator.propagate` or :meth:`~org.orekit.propagation.Propagator.propagate`
-            is called. The proper way to use this method is therefore to do:
-        
-            .. code-block: java
-            
-               EphemerisGenerator generator = propagator.getEphemerisGenerator();
-               propagator.propagate(target);
-               BoundedPropagator ephemeris = generator.getGeneratedEphemeris();
-             
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getEphemerisGenerator` in
-                interface :class:`~org.orekit.propagation.Propagator`
-        
-            Returns:
-                ephemeris generator
-        
-        
-        """
-        ...
+    def getAttitudeProvider(self) -> org.orekit.attitudes.AttitudeProvider: ...
+    def getEphemerisGenerator(self) -> EphemerisGenerator: ...
     def getEventDetectors(self) -> java.util.Collection[org.orekit.propagation.events.EventDetector]: ...
-    def getFrame(self) -> org.orekit.frames.Frame:
-        """
-            Get the frame in which the orbit is propagated.
-        
-            The propagation frame is the definition frame of the initial state, so this method should be called after this state has
-            been set, otherwise it may return null.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getFrame` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Returns:
-                frame in which the orbit is propagated
-        
-            Also see:
-                :meth:`~org.orekit.propagation.Propagator.resetInitialState`
-        
-        
-        """
-        ...
-    def getInitialState(self) -> SpacecraftState:
-        """
-            Get the propagator initial state.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getInitialState` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Returns:
-                initial state
-        
-        
-        """
-        ...
-    def getManagedAdditionalData(self) -> typing.MutableSequence[str]:
-        """
-            Get all the names of all managed additional data.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getManagedAdditionalData` in
-                interface :class:`~org.orekit.propagation.Propagator`
-        
-            Returns:
-                names of all managed additional data
-        
-        
-        """
-        ...
-    def getMultiplexer(self) -> org.orekit.propagation.sampling.StepHandlerMultiplexer:
-        """
-            Get the multiplexer holding all step handlers.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getMultiplexer` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Returns:
-                multiplexer holding all step handlers
-        
-        
-        """
-        ...
-    def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
-        """
-            Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getPVCoordinates` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
-                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
-        
-            Returns:
-                time-stamped position/velocity of the body (m and m/s)
-        
-        
-        """
-        ...
-    def isAdditionalDataManaged(self, string: str) -> bool:
-        """
-            Check if an additional data is managed.
-        
-            Managed data are the ones for which the propagators know how to compute its evolution. They correspond to additional
-            data for which a :class:`~org.orekit.propagation.AdditionalDataProvider` has been registered by calling the
-            :meth:`~org.orekit.propagation.Propagator.addAdditionalDataProvider` method.
-        
-            Additional data that are present in the :meth:`~org.orekit.propagation.Propagator.getInitialState` but have no evolution
-            method registered are *not* considered as managed data. These unmanaged additional data are not lost during propagation,
-            though. Their value are piecewise constant between state resets that may change them if some event handler
-            :meth:`~org.orekit.propagation.events.handlers.EventHandler.resetState` method is called at an event occurrence and
-            happens to change the unmanaged additional data.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.isAdditionalDataManaged` in
-                interface :class:`~org.orekit.propagation.Propagator`
-        
-            Parameters:
-                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional data
-        
-            Returns:
-                true if the additional data is managed
-        
-        
-        """
-        ...
+    def getFrame(self) -> org.orekit.frames.Frame: ...
+    def getInitialState(self) -> SpacecraftState: ...
+    def getManagedAdditionalData(self) -> typing.MutableSequence[str]: ...
+    def getMultiplexer(self) -> org.orekit.propagation.sampling.StepHandlerMultiplexer: ...
+    def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates: ...
+    def isAdditionalDataManaged(self, string: str) -> bool: ...
     @typing.overload
-    def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> SpacecraftState:
-        """
-            Propagate towards a target date.
-        
-            Simple propagators use only the target date as the specification for computing the propagated state. More feature rich
-            propagators can consider other information and provide different operating modes or G-stop facilities to stop at
-            pinpointed events occurrences. In these cases, the target date is only a hint, not a mandatory objective.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.propagate` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Parameters:
-                target (:class:`~org.orekit.time.AbsoluteDate`): target date towards which orbit state should be propagated
-        
-            Returns:
-                propagated state
-        
-            Propagate from a start date towards a target date.
-        
-            Those propagators use a start date and a target date to compute the propagated state. For propagators using event
-            detection mechanism, if the provided start date is different from the initial state date, a first, simple propagation is
-            performed, without processing any event computation. Then complete propagation is performed from start date to target
-            date.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.propagate` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Parameters:
-                start (:class:`~org.orekit.time.AbsoluteDate`): start date from which orbit state should be propagated
-                target (:class:`~org.orekit.time.AbsoluteDate`): target date to which orbit state should be propagated
-        
-            Returns:
-                propagated state
-        
-        
-        """
-        ...
+    def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> SpacecraftState: ...
     @typing.overload
     def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> SpacecraftState: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
-    def resetInitialState(self, spacecraftState: SpacecraftState) -> None:
-        """
-            Reset the propagator initial state.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.resetInitialState` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): new initial state to consider
-        
-        
-        """
-        ...
-    def setAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None:
-        """
-            Set attitude provider.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.setAttitudeProvider` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Parameters:
-                attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
-        
-        
-        """
-        ...
-    def setupMatricesComputation(self, string: str, realMatrix: org.hipparchus.linear.RealMatrix, doubleArrayDictionary: org.orekit.utils.DoubleArrayDictionary) -> MatricesHarvester:
-        """
-            Set up computation of State Transition Matrix and Jacobians matrix with respect to parameters.
-        
-            If this method is called, both State Transition Matrix and Jacobians with respect to the force models parameters that
-            will be selected when propagation starts will be automatically computed, and the harvester will allow to retrieve them.
-        
-            The arguments for initial matrices *must* be compatible with the :class:`~org.orekit.orbits.OrbitType` and
-            :class:`~org.orekit.orbits.PositionAngleType` that will be used by the propagator.
-        
-            The default implementation throws an exception as the method is not supported by all propagators.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.setupMatricesComputation` in
-                interface :class:`~org.orekit.propagation.Propagator`
-        
-            Parameters:
-                stmName (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): State Transition Matrix state name
-                initialStm (:class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.RealMatrix?is`): initial State Transition Matrix ∂Y/∂Y₀, if null (which is the most frequent case), assumed to be 6x6 identity
-                initialJacobianColumns (:class:`~org.orekit.utils.DoubleArrayDictionary`): initial columns of the Jacobians matrix with respect to parameters, if null or if some selected parameters are missing
-                    from the dictionary, the corresponding initial column is assumed to be 0
-        
-            Returns:
-                harvester to retrieve computed matrices during and after propagation
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def resetInitialState(self, spacecraftState: SpacecraftState) -> None: ...
+    def setAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None: ...
+    def setupMatricesComputation(self, string: str, realMatrix: org.hipparchus.linear.RealMatrix, doubleArrayDictionary: org.orekit.utils.DoubleArrayDictionary) -> MatricesHarvester: ...
 
 class StateCovarianceBlender(AbstractStateCovarianceInterpolator):
     """
@@ -3923,7 +3373,7 @@ class StateCovarianceBlender(AbstractStateCovarianceInterpolator):
         exposed in : "Efficient Covariance Interpolation using Blending of Approximate State Error Transitions" by Sergei
         Tanygin.
     
-        It propagates tabulated values to the interpolation date assuming a standard keplerian model and then blend each
+        It propagates tabulated values to the interpolation date assuming a standard Keplerian model and then blend each
         propagated covariances using a smoothstep function.
     
         It gives accurate results as explained :class:`~org.orekit.propagation.https:.orekit.org.doc.technical`. In the very
@@ -4309,565 +3759,83 @@ class ToleranceProvider(CartesianToleranceProvider):
         ...
 
 class PythonAbstractMatricesHarvester(AbstractMatricesHarvester):
-    """
-    public class PythonAbstractMatricesHarvester extends :class:`~org.orekit.propagation.AbstractMatricesHarvester`
-    """
     def __init__(self, string: str, realMatrix: org.hipparchus.linear.RealMatrix, doubleArrayDictionary: org.orekit.utils.DoubleArrayDictionary): ...
     def finalize(self) -> None: ...
-    def freezeColumnsNames(self) -> None:
-        """
-            Freeze the names of the Jacobian columns.
-        
-            This method is called when propagation starts, i.e. when configuration is completed
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.freezeColumnsNames` in
-                class :class:`~org.orekit.propagation.AbstractMatricesHarvester`
-        
-        
-        """
-        ...
+    def freezeColumnsNames(self) -> None: ...
     def getJacobiansColumnsNames(self) -> java.util.List[str]: ...
-    def getOrbitType(self) -> org.orekit.orbits.OrbitType:
-        """
-            Get the orbit type used for the matrix computation.
-        
-            Returns:
-                the orbit type used for the matrix computation
-        
-        
-        """
-        ...
-    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType:
-        """
-            Get the position angle used for the matrix computation.
-        
-            Irrelevant if :meth:`~org.orekit.propagation.MatricesHarvester.getOrbitType` returns
-            :meth:`~org.orekit.orbits.OrbitType.CARTESIAN`.
-        
-            Returns:
-                the position angle used for the matrix computation
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getOrbitType(self) -> org.orekit.orbits.OrbitType: ...
+    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonAbstractPropagator(AbstractPropagator):
-    """
-    public class PythonAbstractPropagator extends :class:`~org.orekit.propagation.AbstractPropagator`
-    """
     def __init__(self): ...
     _addEventDetector__T = typing.TypeVar('_addEventDetector__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
-    def addEventDetector(self, t: _addEventDetector__T) -> None:
-        """
-            Description copied from interface: :meth:`~org.orekit.propagation.Propagator.addEventDetector`
-            Add an event detector.
-        
-            Parameters:
-                detector (T): event detector to add
-        
-            Also see:
-                :meth:`~org.orekit.propagation.Propagator.clearEventsDetectors`,
-                :meth:`~org.orekit.propagation.Propagator.getEventDetectors`
-        
-        
-        """
-        ...
-    def clearEventsDetectors(self) -> None:
-        """
-            Description copied from interface: :meth:`~org.orekit.propagation.Propagator.clearEventsDetectors`
-            Remove all events detectors.
-        
-            Also see:
-                :meth:`~org.orekit.propagation.Propagator.addEventDetector`,
-                :meth:`~org.orekit.propagation.Propagator.getEventDetectors`
-        
-        
-        """
-        ...
+    def addEventDetector(self, t: _addEventDetector__T) -> None: ...
+    def clearEventsDetectors(self) -> None: ...
     def finalize(self) -> None: ...
-    def getEphemerisGenerator(self) -> EphemerisGenerator:
-        """
-            Description copied from interface: :meth:`~org.orekit.propagation.Propagator.getEphemerisGenerator`
-            Set up an ephemeris generator that will monitor the propagation for building an ephemeris from it once completed.
-        
-            This generator can be used when the user needs fast random access to the orbit state at any time between the initial and
-            target times. A typical example is the implementation of search and iterative algorithms that may navigate forward and
-            backward inside the propagation range before finding their result even if the propagator used is integration-based and
-            only goes from one initial time to one target time.
-        
-            Beware that when used with integration-based propagators, the generator will store **all** intermediate results. It is
-            therefore memory intensive for long integration-based ranges and high precision/short time steps. When used with
-            analytical propagators, the generator only stores start/stop time and a reference to the analytical propagator itself to
-            call it back as needed, so it is less memory intensive.
-        
-            The returned ephemeris generator will be initially empty, it will be filled with propagation data when a subsequent call
-            to either :meth:`~org.orekit.propagation.Propagator.propagate` or :meth:`~org.orekit.propagation.Propagator.propagate`
-            is called. The proper way to use this method is therefore to do:
-        
-            .. code-block: java
-            
-               EphemerisGenerator generator = propagator.getEphemerisGenerator();
-               propagator.propagate(target);
-               BoundedPropagator ephemeris = generator.getGeneratedEphemeris();
-             
-        
-            Returns:
-                ephemeris generator
-        
-        
-        """
-        ...
+    def getEphemerisGenerator(self) -> EphemerisGenerator: ...
     def getEventDetectors(self) -> java.util.Collection[org.orekit.propagation.events.EventDetector]: ...
-    @typing.overload
-    def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> SpacecraftState:
-        """
-            Description copied from interface: :meth:`~org.orekit.propagation.Propagator.propagate`
-            Propagate from a start date towards a target date.
-        
-            Those propagators use a start date and a target date to compute the propagated state. For propagators using event
-            detection mechanism, if the provided start date is different from the initial state date, a first, simple propagation is
-            performed, without processing any event computation. Then complete propagation is performed from start date to target
-            date.
-        
-            Parameters:
-                start (:class:`~org.orekit.time.AbsoluteDate`): start date from which orbit state should be propagated
-                target (:class:`~org.orekit.time.AbsoluteDate`): target date to which orbit state should be propagated
-        
-            Returns:
-                propagated state
-        
-        
-        """
-        ...
-    @typing.overload
-    def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> SpacecraftState: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-class PythonAbstractStateModifier(AbstractStateModifier):
-    """
-    public class PythonAbstractStateModifier extends :class:`~org.orekit.propagation.AbstractStateModifier`
-    """
-    def __init__(self): ...
-    def change(self, spacecraftState: SpacecraftState) -> SpacecraftState:
-        """
-            Description copied from class: :meth:`~org.orekit.propagation.AbstractStateModifier.change`
-            Change main state.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.AbstractStateModifier.change` in
-                class :class:`~org.orekit.propagation.AbstractStateModifier`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to change
-        
-            Returns:
-                changed state
-        
-        
-        """
-        ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-class PythonBoundedPropagator(BoundedPropagator):
-    """
-    public class PythonBoundedPropagator extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.BoundedPropagator`
-    """
-    def __init__(self): ...
-    def addAdditionalDataProvider(self, additionalDataProvider: AdditionalDataProvider[typing.Any]) -> None:
-        """
-            Add a set of user-specified data to be computed along with the orbit propagation.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.addAdditionalDataProvider` in
-                interface :class:`~org.orekit.propagation.Propagator`
-        
-            Parameters:
-                additionalDataProvider (:class:`~org.orekit.propagation.AdditionalDataProvider`<?> additionalDataProvider): provider for additional data
-        
-        
-        """
-        ...
-    _addEventDetector__T = typing.TypeVar('_addEventDetector__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
-    def addEventDetector(self, t: _addEventDetector__T) -> None:
-        """
-            Add an event detector.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.addEventDetector` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Parameters:
-                detector (T): event detector to add
-        
-            Also see:
-                :meth:`~org.orekit.propagation.Propagator.clearEventsDetectors`,
-                :meth:`~org.orekit.propagation.Propagator.getEventDetectors`
-        
-        
-        """
-        ...
-    def clearEventsDetectors(self) -> None:
-        """
-            Remove all events detectors.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.clearEventsDetectors` in
-                interface :class:`~org.orekit.propagation.Propagator`
-        
-            Also see:
-                :meth:`~org.orekit.propagation.Propagator.addEventDetector`,
-                :meth:`~org.orekit.propagation.Propagator.getEventDetectors`
-        
-        
-        """
-        ...
-    def finalize(self) -> None: ...
-    def getAdditionalDataProviders(self) -> java.util.List[AdditionalDataProvider[typing.Any]]: ...
-    def getAttitudeProvider(self) -> org.orekit.attitudes.AttitudeProvider:
-        """
-            Get attitude provider.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getAttitudeProvider` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Returns:
-                attitude provider
-        
-        
-        """
-        ...
-    def getEphemerisGenerator(self) -> EphemerisGenerator:
-        """
-            Set up an ephemeris generator that will monitor the propagation for building an ephemeris from it once completed.
-        
-            This generator can be used when the user needs fast random access to the orbit state at any time between the initial and
-            target times. A typical example is the implementation of search and iterative algorithms that may navigate forward and
-            backward inside the propagation range before finding their result even if the propagator used is integration-based and
-            only goes from one initial time to one target time.
-        
-            Beware that when used with integration-based propagators, the generator will store **all** intermediate results. It is
-            therefore memory intensive for long integration-based ranges and high precision/short time steps. When used with
-            analytical propagators, the generator only stores start/stop time and a reference to the analytical propagator itself to
-            call it back as needed, so it is less memory intensive.
-        
-            The returned ephemeris generator will be initially empty, it will be filled with propagation data when a subsequent call
-            to either :meth:`~org.orekit.propagation.Propagator.propagate` or :meth:`~org.orekit.propagation.Propagator.propagate`
-            is called. The proper way to use this method is therefore to do:
-        
-            .. code-block: java
-            
-               EphemerisGenerator generator = propagator.getEphemerisGenerator();
-               propagator.propagate(target);
-               BoundedPropagator ephemeris = generator.getGeneratedEphemeris();
-             
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getEphemerisGenerator` in
-                interface :class:`~org.orekit.propagation.Propagator`
-        
-            Returns:
-                ephemeris generator
-        
-        
-        """
-        ...
-    def getEventDetectors(self) -> java.util.Collection[org.orekit.propagation.events.EventDetector]: ...
-    def getFrame(self) -> org.orekit.frames.Frame:
-        """
-            Get the frame in which the orbit is propagated.
-        
-            The propagation frame is the definition frame of the initial state, so this method should be called after this state has
-            been set, otherwise it may return null.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getFrame` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Returns:
-                frame in which the orbit is propagated
-        
-            Also see:
-                :meth:`~org.orekit.propagation.Propagator.resetInitialState`
-        
-        
-        """
-        ...
-    def getInitialState(self) -> SpacecraftState:
-        """
-            Get the propagator initial state.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getInitialState` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Returns:
-                initial state
-        
-        
-        """
-        ...
-    def getManagedAdditionalData(self) -> typing.MutableSequence[str]:
-        """
-            Get all the names of all managed additional data.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getManagedAdditionalData` in
-                interface :class:`~org.orekit.propagation.Propagator`
-        
-            Returns:
-                names of all managed additional data
-        
-        
-        """
-        ...
-    def getMaxDate(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the last date of the range.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.BoundedPropagator.getMaxDate` in
-                interface :class:`~org.orekit.propagation.BoundedPropagator`
-        
-            Returns:
-                the last date of the range
-        
-        
-        """
-        ...
-    def getMinDate(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the first date of the range.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.BoundedPropagator.getMinDate` in
-                interface :class:`~org.orekit.propagation.BoundedPropagator`
-        
-            Returns:
-                the first date of the range
-        
-        
-        """
-        ...
-    def getMultiplexer(self) -> org.orekit.propagation.sampling.StepHandlerMultiplexer:
-        """
-            Get the multiplexer holding all step handlers.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getMultiplexer` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Returns:
-                multiplexer holding all step handlers
-        
-        
-        """
-        ...
-    def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
-        """
-            Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getPVCoordinates` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
-                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
-        
-            Returns:
-                time-stamped position/velocity of the body (m and m/s)
-        
-        
-        """
-        ...
-    def isAdditionalDataManaged(self, string: str) -> bool:
-        """
-            Check if an additional data is managed.
-        
-            Managed data are the ones for which the propagators know how to compute its evolution. They correspond to additional
-            data for which a :class:`~org.orekit.propagation.AdditionalDataProvider` has been registered by calling the
-            :meth:`~org.orekit.propagation.Propagator.addAdditionalDataProvider` method.
-        
-            Additional data that are present in the :meth:`~org.orekit.propagation.Propagator.getInitialState` but have no evolution
-            method registered are *not* considered as managed data. These unmanaged additional data are not lost during propagation,
-            though. Their value are piecewise constant between state resets that may change them if some event handler
-            :meth:`~org.orekit.propagation.events.handlers.EventHandler.resetState` method is called at an event occurrence and
-            happens to change the unmanaged additional data.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.isAdditionalDataManaged` in
-                interface :class:`~org.orekit.propagation.Propagator`
-        
-            Parameters:
-                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional data
-        
-            Returns:
-                true if the additional data is managed
-        
-        
-        """
-        ...
-    @typing.overload
-    def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> SpacecraftState:
-        """
-            Propagate towards a target date.
-        
-            Simple propagators use only the target date as the specification for computing the propagated state. More feature rich
-            propagators can consider other information and provide different operating modes or G-stop facilities to stop at
-            pinpointed events occurrences. In these cases, the target date is only a hint, not a mandatory objective.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.propagate` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Parameters:
-                target (:class:`~org.orekit.time.AbsoluteDate`): target date towards which orbit state should be propagated
-        
-            Returns:
-                propagated state
-        
-            Propagate from a start date towards a target date.
-        
-            Those propagators use a start date and a target date to compute the propagated state. For propagators using event
-            detection mechanism, if the provided start date is different from the initial state date, a first, simple propagation is
-            performed, without processing any event computation. Then complete propagation is performed from start date to target
-            date.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.propagate` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Parameters:
-                start (:class:`~org.orekit.time.AbsoluteDate`): start date from which orbit state should be propagated
-                target (:class:`~org.orekit.time.AbsoluteDate`): target date to which orbit state should be propagated
-        
-            Returns:
-                propagated state
-        
-        
-        """
-        ...
     @typing.overload
     def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> SpacecraftState: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> SpacecraftState: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def resetInitialState(self, spacecraftState: SpacecraftState) -> None:
-        """
-            Reset the propagator initial state.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.resetInitialState` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): new initial state to consider
-        
-        
-        """
-        ...
-    def setAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None:
-        """
-            Set attitude provider.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.setAttitudeProvider` in interface :class:`~org.orekit.propagation.Propagator`
-        
-            Parameters:
-                attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
-        
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None: ...
+
+class PythonAbstractStateModifier(AbstractStateModifier):
+    def __init__(self): ...
+    def change(self, spacecraftState: SpacecraftState) -> SpacecraftState: ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None: ...
+
+class PythonBoundedPropagator(BoundedPropagator):
+    def __init__(self): ...
+    def addAdditionalDataProvider(self, additionalDataProvider: AdditionalDataProvider[typing.Any]) -> None: ...
+    _addEventDetector__T = typing.TypeVar('_addEventDetector__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
+    def addEventDetector(self, t: _addEventDetector__T) -> None: ...
+    def clearEventsDetectors(self) -> None: ...
+    def finalize(self) -> None: ...
+    def getAdditionalDataProviders(self) -> java.util.List[AdditionalDataProvider[typing.Any]]: ...
+    def getAttitudeProvider(self) -> org.orekit.attitudes.AttitudeProvider: ...
+    def getEphemerisGenerator(self) -> EphemerisGenerator: ...
+    def getEventDetectors(self) -> java.util.Collection[org.orekit.propagation.events.EventDetector]: ...
+    def getFrame(self) -> org.orekit.frames.Frame: ...
+    def getInitialState(self) -> SpacecraftState: ...
+    def getManagedAdditionalData(self) -> typing.MutableSequence[str]: ...
+    def getMaxDate(self) -> org.orekit.time.AbsoluteDate: ...
+    def getMinDate(self) -> org.orekit.time.AbsoluteDate: ...
+    def getMultiplexer(self) -> org.orekit.propagation.sampling.StepHandlerMultiplexer: ...
+    def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates: ...
+    def isAdditionalDataManaged(self, string: str) -> bool: ...
+    @typing.overload
+    def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> SpacecraftState: ...
+    @typing.overload
+    def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> SpacecraftState: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None: ...
+    def resetInitialState(self, spacecraftState: SpacecraftState) -> None: ...
+    def setAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None: ...
 
 _PythonFieldAbstractPropagator__T = typing.TypeVar('_PythonFieldAbstractPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldAbstractPropagator(FieldAbstractPropagator[_PythonFieldAbstractPropagator__T], typing.Generic[_PythonFieldAbstractPropagator__T]):
-    """
-    public class PythonFieldAbstractPropagator<T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.FieldAbstractPropagator`<T>
-    """
     def __init__(self, field: org.hipparchus.Field[_PythonFieldAbstractPropagator__T]): ...
     _addEventDetector__D = typing.TypeVar('_addEventDetector__D', bound=org.orekit.propagation.events.FieldEventDetector)  # <D>
     def addEventDetector(self, d: _addEventDetector__D) -> None: ...
-    def clearEventsDetectors(self) -> None:
-        """
-            Remove all events detectors.
-        
-            Also see:
-                :meth:`~org.orekit.propagation.FieldPropagator.addEventDetector`,
-                :meth:`~org.orekit.propagation.FieldPropagator.getEventDetectors`
-        
-        
-        """
-        ...
+    def clearEventsDetectors(self) -> None: ...
     def finalize(self) -> None: ...
     def getEphemerisGenerator(self) -> FieldEphemerisGenerator[_PythonFieldAbstractPropagator__T]: ...
     def getEventDetectors(self) -> java.util.Collection[org.orekit.propagation.events.FieldEventDetector[_PythonFieldAbstractPropagator__T]]: ...
@@ -4875,180 +3843,45 @@ class PythonFieldAbstractPropagator(FieldAbstractPropagator[_PythonFieldAbstract
     def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldAbstractPropagator__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_PythonFieldAbstractPropagator__T]) -> FieldSpacecraftState[_PythonFieldAbstractPropagator__T]: ...
     @typing.overload
     def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldAbstractPropagator__T]) -> FieldSpacecraftState[_PythonFieldAbstractPropagator__T]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 _PythonFieldBoundedPropagator__T = typing.TypeVar('_PythonFieldBoundedPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldBoundedPropagator(FieldBoundedPropagator[_PythonFieldBoundedPropagator__T], typing.Generic[_PythonFieldBoundedPropagator__T]):
-    """
-    public class PythonFieldBoundedPropagator<T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.FieldBoundedPropagator`<T>
-    """
     def __init__(self): ...
     def addAdditionalDataProvider(self, fieldAdditionalDataProvider: FieldAdditionalDataProvider[typing.Any, _PythonFieldBoundedPropagator__T]) -> None: ...
     _addEventDetector__D = typing.TypeVar('_addEventDetector__D', bound=org.orekit.propagation.events.FieldEventDetector)  # <D>
     def addEventDetector(self, d: _addEventDetector__D) -> None: ...
-    def clearEventsDetectors(self) -> None:
-        """
-            Remove all events detectors.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.clearEventsDetectors` in
-                interface :class:`~org.orekit.propagation.FieldPropagator`
-        
-            Also see:
-                :meth:`~org.orekit.propagation.FieldPropagator.addEventDetector`,
-                :meth:`~org.orekit.propagation.FieldPropagator.getEventDetectors`
-        
-        
-        """
-        ...
+    def clearEventsDetectors(self) -> None: ...
     def finalize(self) -> None: ...
     def getAdditionalDataProviders(self) -> java.util.List[FieldAdditionalDataProvider[typing.Any, _PythonFieldBoundedPropagator__T]]: ...
-    def getAttitudeProvider(self) -> org.orekit.attitudes.AttitudeProvider:
-        """
-            Get attitude provider.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.getAttitudeProvider` in
-                interface :class:`~org.orekit.propagation.FieldPropagator`
-        
-            Returns:
-                attitude provider
-        
-        
-        """
-        ...
+    def getAttitudeProvider(self) -> org.orekit.attitudes.AttitudeProvider: ...
     def getEphemerisGenerator(self) -> FieldEphemerisGenerator[_PythonFieldBoundedPropagator__T]: ...
     def getEventDetectors(self) -> java.util.Collection[org.orekit.propagation.events.FieldEventDetector[_PythonFieldBoundedPropagator__T]]: ...
-    def getFrame(self) -> org.orekit.frames.Frame:
-        """
-            Get the frame in which the orbit is propagated.
-        
-            The propagation frame is the definition frame of the initial state, so this method should be called after this state has
-            been set, otherwise it may return null.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.getFrame` in interface :class:`~org.orekit.propagation.FieldPropagator`
-        
-            Returns:
-                frame in which the orbit is propagated
-        
-            Also see:
-                :meth:`~org.orekit.propagation.FieldPropagator.resetInitialState`
-        
-        
-        """
-        ...
+    def getFrame(self) -> org.orekit.frames.Frame: ...
     def getInitialState(self) -> FieldSpacecraftState[_PythonFieldBoundedPropagator__T]: ...
-    def getManagedAdditionalData(self) -> typing.MutableSequence[str]:
-        """
-            Get all the names of all managed data.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.getManagedAdditionalData` in
-                interface :class:`~org.orekit.propagation.FieldPropagator`
-        
-            Returns:
-                names of all managed data
-        
-        
-        """
-        ...
+    def getManagedAdditionalData(self) -> typing.MutableSequence[str]: ...
     def getMaxDate(self) -> org.orekit.time.FieldAbsoluteDate[_PythonFieldBoundedPropagator__T]: ...
     def getMinDate(self) -> org.orekit.time.FieldAbsoluteDate[_PythonFieldBoundedPropagator__T]: ...
     def getMultiplexer(self) -> org.orekit.propagation.sampling.FieldStepHandlerMultiplexer[_PythonFieldBoundedPropagator__T]: ...
     def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldBoundedPropagator__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_PythonFieldBoundedPropagator__T]: ...
-    def isAdditionalDataManaged(self, string: str) -> bool:
-        """
-            Check if an additional data is managed.
-        
-            Managed data are the ones for which the propagators know how to compute its evolution. They correspond to additional
-            data for which an :class:`~org.orekit.propagation.FieldAdditionalDataProvider` has been registered by calling the
-            :meth:`~org.orekit.propagation.FieldPropagator.addAdditionalDataProvider` method. If the propagator is an
-            :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`, the states for which a set of
-            :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider` has been registered by calling the
-            :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.addAdditionalDerivativesProvider` method
-            are also counted as managed additional states.
-        
-            Additional data that are present in the :meth:`~org.orekit.propagation.FieldPropagator.getInitialState` but have no
-            evolution method registered are *not* considered as managed data. These unmanaged additional data are not lost during
-            propagation, though. Their value are piecewise constant between state resets that may change them if some event handler
-            :meth:`~org.orekit.propagation.events.handlers.FieldEventHandler.resetState` method is called at an event occurrence and
-            happens to change the unmanaged additional data.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.isAdditionalDataManaged` in
-                interface :class:`~org.orekit.propagation.FieldPropagator`
-        
-            Parameters:
-                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional data
-        
-            Returns:
-                true if the additional data is managed
-        
-        
-        """
-        ...
+    def isAdditionalDataManaged(self, string: str) -> bool: ...
     @typing.overload
     def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldBoundedPropagator__T]) -> FieldSpacecraftState[_PythonFieldBoundedPropagator__T]: ...
     @typing.overload
     def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldBoundedPropagator__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_PythonFieldBoundedPropagator__T]) -> FieldSpacecraftState[_PythonFieldBoundedPropagator__T]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     def resetInitialState(self, fieldSpacecraftState: FieldSpacecraftState[_PythonFieldBoundedPropagator__T]) -> None: ...
-    def setAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None:
-        """
-            Set attitude provider.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.setAttitudeProvider` in
-                interface :class:`~org.orekit.propagation.FieldPropagator`
-        
-            Parameters:
-                attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
-        
-        
-        """
-        ...
+    def setAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None: ...
 
 class PythonToleranceProvider(ToleranceProvider):
-    """
-    public class PythonToleranceProvider extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.ToleranceProvider`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     _getTolerances_0__T = typing.TypeVar('_getTolerances_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -5059,38 +3892,7 @@ class PythonToleranceProvider(ToleranceProvider):
     @typing.overload
     def getTolerances(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTolerances_0__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTolerances_0__T]) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
-    def getTolerances(self, cartesianOrbit: org.orekit.orbits.CartesianOrbit) -> typing.MutableSequence[typing.MutableSequence[float]]:
-        """
-            Retrieve the integration tolerances given a reference orbit.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.ToleranceProvider.getTolerances` in
-                interface :class:`~org.orekit.propagation.ToleranceProvider`
-        
-            Parameters:
-                referenceOrbit (:class:`~org.orekit.orbits.Orbit`): orbit
-                propagationOrbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type for propagation (can be different from the input orbit one)
-                positionAngleType (:class:`~org.orekit.orbits.PositionAngleType`): reference position angle type
-        
-            Returns:
-                absolute and relative tolerances
-        
-            Retrieve the integration tolerances given reference position and velocity vectors.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.CartesianToleranceProvider.getTolerances` in
-                interface :class:`~org.orekit.propagation.CartesianToleranceProvider`
-        
-            Parameters:
-                position (:class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): reference position vector
-                velocity (:class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): reference velocity vector
-        
-            Returns:
-                absolute and relative tolerances
-        
-        
-        """
-        ...
+    def getTolerances(self, cartesianOrbit: org.orekit.orbits.CartesianOrbit) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
     def getTolerances(self, fieldCartesianOrbit: org.orekit.orbits.FieldCartesianOrbit[_getTolerances_2__T]) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
@@ -5107,25 +3909,11 @@ class PythonToleranceProvider(ToleranceProvider):
     def getTolerances(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
     def getTolerances(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 
 class __module_protocol__(Protocol):
@@ -5148,6 +3936,7 @@ class __module_protocol__(Protocol):
     FieldSpacecraftState: typing.Type[FieldSpacecraftState]
     FieldSpacecraftStateInterpolator: typing.Type[FieldSpacecraftStateInterpolator]
     FieldStateCovariance: typing.Type[FieldStateCovariance]
+    LinearKeplerianCovarianceHandler: typing.Type[LinearKeplerianCovarianceHandler]
     MatricesHarvester: typing.Type[MatricesHarvester]
     PropagationType: typing.Type[PropagationType]
     Propagator: typing.Type[Propagator]

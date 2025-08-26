@@ -93,6 +93,19 @@ class AbstractWindUp(org.orekit.estimation.measurements.EstimationModifier[_Abst
         ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_AbstractWindUp__T]) -> None: ...
+    def setAngularWindUp(self, double: float) -> None:
+        """
+            Set cached value of angular wind-up.
+        
+            Parameters:
+                angularWindUp (double): angular wind-up value
+        
+            Since:
+                13.1
+        
+        
+        """
+        ...
 
 class AmbiguityAcceptance:
     """
@@ -1275,302 +1288,74 @@ class MelbourneWubbenaCombination(MeasurementCombination):
 
 _PythonAbstractOnBoardMeasurement__T = typing.TypeVar('_PythonAbstractOnBoardMeasurement__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class PythonAbstractOnBoardMeasurement(AbstractOnBoardMeasurement[_PythonAbstractOnBoardMeasurement__T], typing.Generic[_PythonAbstractOnBoardMeasurement__T]):
-    """
-    public class PythonAbstractOnBoardMeasurement<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.gnss.AbstractOnBoardMeasurement`<T>
-    """
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, list: java.util.List[org.orekit.estimation.measurements.ObservableSatellite]): ...
     def finalize(self) -> None: ...
-    def getRemoteClock(self) -> org.orekit.estimation.measurements.QuadraticClockModel:
-        """
-            Description copied from
-            class: :meth:`~org.orekit.estimation.measurements.gnss.AbstractOnBoardMeasurement.getRemoteClock`
-            Get emitting satellite clock provider.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractOnBoardMeasurement.getRemoteClock` in
-                class :class:`~org.orekit.estimation.measurements.gnss.AbstractOnBoardMeasurement`
-        
-            Returns:
-                emitting satellite clock provider
-        
-        
-        """
-        ...
+    def getRemoteClock(self) -> org.orekit.estimation.measurements.QuadraticClockModel: ...
     @typing.overload
     def getRemotePV(self, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray], int: int) -> org.orekit.utils.FieldPVCoordinatesProvider[org.hipparchus.analysis.differentiation.Gradient]: ...
     @typing.overload
-    def getRemotePV(self, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.utils.PVCoordinatesProvider:
-        """
-            Description copied from class: :meth:`~org.orekit.estimation.measurements.gnss.AbstractOnBoardMeasurement.getRemotePV`
-            Get emitting satellite position/velocity provider.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractOnBoardMeasurement.getRemotePV` in
-                class :class:`~org.orekit.estimation.measurements.gnss.AbstractOnBoardMeasurement`
-        
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): states of all spacecraft involved in the measurement
-        
-            Returns:
-                emitting satellite position/velocity provider
-        
-        public :class:`~org.orekit.utils.FieldPVCoordinatesProvider`<:class:`~org.orekit.estimation.measurements.gnss.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is`> getRemotePV (:class:`~org.orekit.propagation.SpacecraftState`[] states, int freeParameters)
-        
-            Description copied from class: :meth:`~org.orekit.estimation.measurements.gnss.AbstractOnBoardMeasurement.getRemotePV`
-            Get emitting satellite position/velocity provider.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractOnBoardMeasurement.getRemotePV` in
-                class :class:`~org.orekit.estimation.measurements.gnss.AbstractOnBoardMeasurement`
-        
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): states of all spacecraft involved in the measurement
-                freeParameters (int): total number of free parameters in the gradient
-        
-            Returns:
-                emitting satellite position/velocity provider
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getRemotePV(self, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.utils.PVCoordinatesProvider: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     def theoreticalEvaluation(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurement[_PythonAbstractOnBoardMeasurement__T]: ...
     def theoreticalEvaluationWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractOnBoardMeasurement__T]: ...
 
 _PythonAbstractWindUp__T = typing.TypeVar('_PythonAbstractWindUp__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class PythonAbstractWindUp(AbstractWindUp[_PythonAbstractWindUp__T], typing.Generic[_PythonAbstractWindUp__T]):
-    """
-    public class PythonAbstractWindUp<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.gnss.AbstractWindUp`<T>
-    """
     def __init__(self, dipole: Dipole, dipole2: Dipole): ...
     def emitterToInert(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractWindUp__T]) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     def receiverToInert(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractWindUp__T]) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
 
 class PythonAmbiguityAcceptance(AmbiguityAcceptance):
-    """
-    public class PythonAmbiguityAcceptance extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
-    """
     def __init__(self): ...
-    def accept(self, integerLeastSquareSolutionArray: typing.Union[typing.List[IntegerLeastSquareSolution], jpype.JArray]) -> IntegerLeastSquareSolution:
-        """
-            Check if one of the candidate solutions can be accepted.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance.accept` in
-                interface :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
-        
-            Parameters:
-                candidates (:class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolution`[]): candidate solutions of the Integer Least Squares problem, in increasing squared distance order (the array contains at
-                    least :meth:`~org.orekit.estimation.measurements.gnss.PythonAmbiguityAcceptance.numberOfCandidates` candidates)
-        
-            Returns:
-                the candidate solution to accept (normally the one at index 0), or null if we should still use the float solution
-        
-        
-        """
-        ...
+    def accept(self, integerLeastSquareSolutionArray: typing.Union[typing.List[IntegerLeastSquareSolution], jpype.JArray]) -> IntegerLeastSquareSolution: ...
     def finalize(self) -> None: ...
-    def numberOfCandidates(self) -> int:
-        """
-            Get the number of candidate solutions to search for.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance.numberOfCandidates` in
-                interface :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
-        
-            Returns:
-                number of candidate solutions to search for
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def numberOfCandidates(self) -> int: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonCycleSlipDetectors(CycleSlipDetectors):
-    """
-    public class PythonCycleSlipDetectors extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.CycleSlipDetectors`
-    """
     def __init__(self): ...
     def detect(self, list: java.util.List[org.orekit.files.rinex.observation.ObservationDataSet]) -> java.util.List[CycleSlipDetectorResults]: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonIntegerLeastSquareSolver(IntegerLeastSquareSolver):
-    """
-    public class PythonIntegerLeastSquareSolver extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def solveILS(self, int: int, doubleArray: typing.Union[typing.List[float], jpype.JArray], intArray: typing.Union[typing.List[int], jpype.JArray], realMatrix: org.hipparchus.linear.RealMatrix) -> typing.MutableSequence[IntegerLeastSquareSolution]:
-        """
-            Find the best solutions to an Integer Least Square problem.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver.solveILS` in
-                interface :class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver`
-        
-            Parameters:
-                nbSol (int): number of solutions to search for
-                floatAmbiguities (double[]): float estimates of ambiguities
-                indirection (int[]): indirection array to extract ambiguity covariances from global covariance matrix
-                covariance (:class:`~org.orekit.estimation.measurements.gnss.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.RealMatrix?is`): global covariance matrix (includes ambiguities among other parameters)
-        
-            Returns:
-                at most :code:`nbSol` solutions a to the Integer Least Square problem, in increasing squared distance order
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def solveILS(self, int: int, doubleArray: typing.Union[typing.List[float], jpype.JArray], intArray: typing.Union[typing.List[int], jpype.JArray], realMatrix: org.hipparchus.linear.RealMatrix) -> typing.MutableSequence[IntegerLeastSquareSolution]: ...
 
 class PythonMeasurementCombination(MeasurementCombination):
-    """
-    public class PythonMeasurementCombination extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
-    """
     def __init__(self): ...
-    def combine(self, observationDataSet: org.orekit.files.rinex.observation.ObservationDataSet) -> CombinedObservationDataSet:
-        """
-            Combines observation data using a combination of measurements.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.combine` in
-                interface :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
-        
-            Parameters:
-                observations (:class:`~org.orekit.files.rinex.observation.ObservationDataSet`): observation data set
-        
-            Returns:
-                a combined observation data set
-        
-        
-        """
-        ...
+    def combine(self, observationDataSet: org.orekit.files.rinex.observation.ObservationDataSet) -> CombinedObservationDataSet: ...
     def finalize(self) -> None: ...
-    def getName(self) -> str:
-        """
-            Get the name of the combination of measurements.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.getName` in
-                interface :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
-        
-            Returns:
-                name of the combination of measurements
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getName(self) -> str: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class SimpleRatioAmbiguityAcceptance(AmbiguityAcceptance):
     """
@@ -2053,329 +1838,75 @@ class PhaseMinusCodeCycleSlipDetector(AbstractCycleSlipDetector):
     def __init__(self, double: float, double2: float, int: int, int2: int): ...
 
 class PythonAbstractCycleSlipDetector(AbstractCycleSlipDetector):
-    """
-    public class PythonAbstractCycleSlipDetector extends :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
-    """
     def finalize(self) -> None: ...
-    def getMaxTimeBeetween2Measurement(self) -> float:
-        """
-            Get the maximum time lapse between 2 measurements without considering a cycle-slip has occurring between both.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector.getMaxTimeBeetween2Measurement` in
-                class :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
-        
-            Returns:
-                the maximum time lapse between 2 measurements
-        
-        
-        """
-        ...
-    def getMinMeasurementNumber(self) -> int:
-        """
-            Get the minimum number of measurement needed before being able to figure out cycle-slip occurrence.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector.getMinMeasurementNumber` in
-                class :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
-        
-            Returns:
-                the minimum number of measurement needed before being able to figure out cycle-slip occurrence.
-        
-        
-        """
-        ...
+    def getMaxTimeBeetween2Measurement(self) -> float: ...
+    def getMinMeasurementNumber(self) -> int: ...
     def getResults(self) -> java.util.List[CycleSlipDetectorResults]: ...
-    def manageData(self, observationDataSet: org.orekit.files.rinex.observation.ObservationDataSet) -> None:
-        """
-            The method is in charge of collecting the measurements, manage them, and call the detection method.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector.manageData` in
-                class :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
-        
-            Parameters:
-                observation (:class:`~org.orekit.files.rinex.observation.ObservationDataSet`): observation data set
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def manageData(self, observationDataSet: org.orekit.files.rinex.observation.ObservationDataSet) -> None: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def setName(self, int: int, satelliteSystem: org.orekit.gnss.SatelliteSystem) -> str:
-        """
-            Create the name of a satellite from its PRN number and satellite System it belongs to.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector.setName` in
-                class :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
-        
-            Parameters:
-                numSat (int): satellite PRN number
-                sys (:class:`~org.orekit.gnss.SatelliteSystem`): Satellite System of the satellite
-        
-            Returns:
-                the satellite name on a specified format (e.g.: "GPS - 7")
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def setName(self, int: int, satelliteSystem: org.orekit.gnss.SatelliteSystem) -> str: ...
 
 class PythonAbstractDualFrequencyCombination(AbstractDualFrequencyCombination):
-    """
-    public class PythonAbstractDualFrequencyCombination extends :class:`~org.orekit.estimation.measurements.gnss.AbstractDualFrequencyCombination`
-    """
     def __init__(self, combinationType: CombinationType, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
     def finalize(self) -> None: ...
-    def getCombinedFrequency(self, gnssSignal: org.orekit.gnss.GnssSignal, gnssSignal2: org.orekit.gnss.GnssSignal) -> float:
-        """
-            Get the combined frequency of two measurements.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractDualFrequencyCombination.getCombinedFrequency` in
-                class :class:`~org.orekit.estimation.measurements.gnss.AbstractDualFrequencyCombination`
-        
-            Parameters:
-                s1 (:class:`~org.orekit.gnss.GnssSignal`): frequency of the first measurement
-                s2 (:class:`~org.orekit.gnss.GnssSignal`): frequency of the second measurement
-        
-            Returns:
-                combined frequency in Hz
-        
-        
-        """
-        ...
-    def getCombinedValue(self, double: float, gnssSignal: org.orekit.gnss.GnssSignal, double2: float, gnssSignal2: org.orekit.gnss.GnssSignal) -> float:
-        """
-            Get the combined observed value of two measurements.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractDualFrequencyCombination.getCombinedValue` in
-                class :class:`~org.orekit.estimation.measurements.gnss.AbstractDualFrequencyCombination`
-        
-            Parameters:
-                obs1 (double): observed value of the first measurement
-                s1 (:class:`~org.orekit.gnss.GnssSignal`): frequency of the first measurement
-                obs2 (double): observed value of the second measurement
-                s2 (:class:`~org.orekit.gnss.GnssSignal`): frequency of the second measurement
-        
-            Returns:
-                combined observed value
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getCombinedFrequency(self, gnssSignal: org.orekit.gnss.GnssSignal, gnssSignal2: org.orekit.gnss.GnssSignal) -> float: ...
+    def getCombinedValue(self, double: float, gnssSignal: org.orekit.gnss.GnssSignal, double2: float, gnssSignal2: org.orekit.gnss.GnssSignal) -> float: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 _PythonAbstractInterSatellitesMeasurement__T = typing.TypeVar('_PythonAbstractInterSatellitesMeasurement__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class PythonAbstractInterSatellitesMeasurement(AbstractInterSatellitesMeasurement[_PythonAbstractInterSatellitesMeasurement__T], typing.Generic[_PythonAbstractInterSatellitesMeasurement__T]):
-    """
-    public class PythonAbstractInterSatellitesMeasurement<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.gnss.AbstractInterSatellitesMeasurement`<T>
-    """
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite, observableSatellite2: org.orekit.estimation.measurements.ObservableSatellite): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     def theoreticalEvaluation(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurement[_PythonAbstractInterSatellitesMeasurement__T]: ...
     def theoreticalEvaluationWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractInterSatellitesMeasurement__T]: ...
 
 class PythonAbstractLambdaMethod(AbstractLambdaMethod):
-    """
-    public class PythonAbstractLambdaMethod extends :class:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod`
-    """
     def __init__(self): ...
-    def discreteSearch(self) -> None:
-        """
-            Find the best solutions to the Integer Least Square problem.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod.discreteSearch` in
-                class :class:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod`
-        
-        
-        """
-        ...
+    def discreteSearch(self) -> None: ...
     def finalize(self) -> None: ...
-    def inverseDecomposition(self) -> None:
-        """
-            Inverse the decomposition.
-        
-            This method transforms the Lᵀ.D.L = Q decomposition of covariance into the L⁻¹.D⁻¹.L⁻ᵀ = Q⁻¹
-            decomposition of the inverse of covariance.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod.inverseDecomposition` in
-                class :class:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod`
-        
-        
-        """
-        ...
-    def ltdlDecomposition(self) -> None:
-        """
-            Perform Lᵀ.D.L = Q decomposition of the covariance matrix.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod.ltdlDecomposition` in
-                class :class:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod`
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def inverseDecomposition(self) -> None: ...
+    def ltdlDecomposition(self) -> None: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def reduction(self) -> None:
-        """
-            Perform LAMBDA reduction.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod.reduction` in
-                class :class:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod`
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
+    def reduction(self) -> None: ...
 
 _PythonAbstractOneWayGNSSMeasurement__T = typing.TypeVar('_PythonAbstractOneWayGNSSMeasurement__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class PythonAbstractOneWayGNSSMeasurement(AbstractOneWayGNSSMeasurement[_PythonAbstractOneWayGNSSMeasurement__T], typing.Generic[_PythonAbstractOneWayGNSSMeasurement__T]):
-    """
-    public class PythonAbstractOneWayGNSSMeasurement<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.gnss.AbstractOneWayGNSSMeasurement`<T>
-    """
     def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], quadraticClockModel: org.orekit.estimation.measurements.QuadraticClockModel, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
     def theoreticalEvaluation(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurement[_PythonAbstractOneWayGNSSMeasurement__T]: ...
     def theoreticalEvaluationWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractOneWayGNSSMeasurement__T]: ...
 
 class PythonAbstractSingleFrequencyCombination(AbstractSingleFrequencyCombination):
-    """
-    public class PythonAbstractSingleFrequencyCombination extends :class:`~org.orekit.estimation.measurements.gnss.AbstractSingleFrequencyCombination`
-    """
     def __init__(self, combinationType: CombinationType, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
     def finalize(self) -> None: ...
-    def getCombinedValue(self, double: float, double2: float) -> float:
-        """
-            Get the combined observed value of two measurements.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractSingleFrequencyCombination.getCombinedValue` in
-                class :class:`~org.orekit.estimation.measurements.gnss.AbstractSingleFrequencyCombination`
-        
-            Parameters:
-                phase (double): observed value of the phase measurement
-                pseudoRange (double): observed value of the range measurement
-        
-            Returns:
-                combined observed value
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def getCombinedValue(self, double: float, double2: float) -> float: ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class WideLaneCombination(AbstractDualFrequencyCombination):
     """

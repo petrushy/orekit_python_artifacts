@@ -619,113 +619,34 @@ class IgsSsrMessagesParser(MessagesParser):
     def __init__(self, list: java.util.List[int], timeScales: org.orekit.time.TimeScales): ...
 
 class PythonDataField(DataField):
-    """
-    public class PythonDataField extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.metric.parser.DataField`
-    """
     def __init__(self): ...
-    def booleanValue(self, encodedMessage: typing.Union[EncodedMessage, typing.Callable]) -> bool:
-        """
-            Description copied from interface: :meth:`~org.orekit.gnss.metric.parser.DataField.booleanValue`
-            Get the value of the field as a boolean.
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.metric.parser.DataField.booleanValue` in
-                interface :class:`~org.orekit.gnss.metric.parser.DataField`
-        
-            Parameters:
-                message (:class:`~org.orekit.gnss.metric.parser.EncodedMessage`): message containing the data
-        
-            Returns:
-                boolean value of the field
-        
-        
-        """
-        ...
+    def booleanValue(self, encodedMessage: typing.Union[EncodedMessage, typing.Callable]) -> bool: ...
     def finalize(self) -> None: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonEncodedMessage(EncodedMessage):
-    """
-    public class PythonEncodedMessage extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.metric.parser.EncodedMessage`
-    """
     def __init__(self): ...
-    def extractBits(self, int: int) -> int:
-        """
-            Description copied from interface: :meth:`~org.orekit.gnss.metric.parser.EncodedMessage.extractBits`
-            Extract the next n bits from the encoded message.
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.metric.parser.EncodedMessage.extractBits` in
-                interface :class:`~org.orekit.gnss.metric.parser.EncodedMessage`
-        
-            Parameters:
-                n (int): number of bits to extract (cannot exceed 32 bits)
-        
-            Returns:
-                bits packed as the LSB of a 64 bits primitive long
-        
-        
-        """
-        ...
+    def extractBits(self, int: int) -> int: ...
     def finalize(self) -> None: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonMessageType(MessageType):
-    """
-    public class PythonMessageType extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.metric.parser.MessageType`
-    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def parse(self, encodedMessage: typing.Union[EncodedMessage, typing.Callable], int: int, timeScales: org.orekit.time.TimeScales) -> org.orekit.gnss.metric.messages.ParsedMessage:
-        """
-            Parse an encoded message.
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.metric.parser.MessageType.parse` in
-                interface :class:`~org.orekit.gnss.metric.parser.MessageType`
-        
-            Parameters:
-                encodedMessage (:class:`~org.orekit.gnss.metric.parser.EncodedMessage`): encoded message to parse
-                messageNumber (int): message number
-                timeScales (:class:`~org.orekit.time.TimeScales`): known time scales
-        
-            Returns:
-                parsed message
-        
-        
-        """
-        ...
+    def parse(self, encodedMessage: typing.Union[EncodedMessage, typing.Callable], int: int, timeScales: org.orekit.time.TimeScales) -> org.orekit.gnss.metric.messages.ParsedMessage: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 class RtcmDataField(java.lang.Enum['RtcmDataField'], DataField):
     """
@@ -1122,44 +1043,14 @@ class InputStreamEncodedMessage(AbstractEncodedMessage):
     def __init__(self, inputStream: java.io.InputStream): ...
 
 class PythonAbstractEncodedMessage(AbstractEncodedMessage):
-    """
-    public class PythonAbstractEncodedMessage extends :class:`~org.orekit.gnss.metric.parser.AbstractEncodedMessage`
-    """
     def __init__(self): ...
-    def fetchByte(self) -> int:
-        """
-            Fetch the next byte from the message.
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.metric.parser.AbstractEncodedMessage.fetchByte` in
-                class :class:`~org.orekit.gnss.metric.parser.AbstractEncodedMessage`
-        
-            Returns:
-                next byte from the message, as a primitive integer, or -1 if end of data has been reached
-        
-        
-        """
-        ...
+    def fetchByte(self) -> int: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
+    def pythonExtension(self, long: int) -> None: ...
 
 
 class __module_protocol__(Protocol):
