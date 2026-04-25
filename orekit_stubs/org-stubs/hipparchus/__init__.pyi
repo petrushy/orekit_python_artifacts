@@ -29,39 +29,42 @@ import typing
 _Field__T = typing.TypeVar('_Field__T', bound='FieldElement')  # <T>
 class Field(typing.Generic[_Field__T]):
     """
-    public interfaceField<T extends :class:`~org.hipparchus.FieldElement`<T>>
+    Interface representing a `field <http://mathworld.wolfram.com/Field.html>`.
     
-        Interface representing a `field <http://mathworld.wolfram.com/Field.html>`.
+    Classes implementing this interface will often be singletons.
     
-        Classes implementing this interface will often be singletons.
-    
-        Also see:
-    
-              - :class:`~org.hipparchus.FieldElement`
+          - FieldElement
     """
     def getOne(self) -> _Field__T:
         """
-            Get the multiplicative identity of the field.
+        Get the multiplicative identity of the field.
         
-            The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the
-            equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
+        The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
         
-            Returns:
-                multiplicative identity of the field
+        Returns:
+            multiplicative identity of the field
         
         
         """
         ...
-    def getRuntimeClass(self) -> typing.Type[_Field__T]: ...
+    def getRuntimeClass(self) -> typing.Type[_Field__T]:
+        """
+        Returns the runtime class of the FieldElement.
+        
+        Returns:
+            The Class object that represents the runtime class of this object.
+        
+        
+        """
+        ...
     def getZero(self) -> _Field__T:
         """
-            Get the additive identity of the field.
+        Get the additive identity of the field.
         
-            The additive identity is the element e :sub:`0` of the field such that for all elements a of the field, the equalities a
-            + e :sub:`0` = e :sub:`0` + a = a hold.
+        The additive identity is the element e :sub:`0` of the field such that for all elements a of the field, the equalities a + e :sub:`0` = e :sub:`0` + a = a hold.
         
-            Returns:
-                additive identity of the field
+        Returns:
+            additive identity of the field
         
         
         """
@@ -70,41 +73,74 @@ class Field(typing.Generic[_Field__T]):
 _FieldElement__T = typing.TypeVar('_FieldElement__T', bound='FieldElement')  # <T>
 class FieldElement(typing.Generic[_FieldElement__T]):
     """
-    public interfaceFieldElement<T extends FieldElement<T>>
+    Interface representing `field <http://mathworld.wolfram.com/Field.html>` elements.
     
-        Interface representing `field <http://mathworld.wolfram.com/Field.html>` elements.
-    
-        Also see:
-    
-              - :class:`~org.hipparchus.Field`
+          - Field
     """
-    def add(self, t: _FieldElement__T) -> _FieldElement__T: ...
-    def divide(self, t: _FieldElement__T) -> _FieldElement__T: ...
-    def getField(self) -> Field[_FieldElement__T]: ...
+    def add(self, a: _FieldElement__T) -> _FieldElement__T:
+        """
+        Compute this + a.
+        
+        Parameters:
+            a (FieldElement): element to add
+        
+        Returns:
+            a new element representing this + a
+        
+        Raises:
+            NullArgumentException: if a is null.
+        
+        
+        """
+        ...
+    def divide(self, a: _FieldElement__T) -> _FieldElement__T:
+        """
+        Compute this ÷ a.
+        
+        Parameters:
+            a (FieldElement): element to divide by
+        
+        Returns:
+            a new element representing this ÷ a
+        
+        Raises:
+            NullArgumentException: if a is null.
+            MathRuntimeException: if a is zero
+        
+        
+        """
+        ...
+    def getField(self) -> Field[_FieldElement__T]:
+        """
+        Get the Field to which the instance belongs.
+        
+        Returns:
+            Field to which the instance belongs
+        
+        
+        """
+        ...
     def getReal(self) -> float:
         """
-            Get the real value of the number.
+        Get the real value of the number.
         
-            Returns:
-                real value
+        Returns:
+            real value
         
         
         """
         ...
     def isZero(self) -> bool:
         """
-            Check if an element is semantically equal to zero.
+        Check if an element is semantically equal to zero.
         
-            The default implementation simply calls :code:`equals(getField().getZero())`. However, this may need to be overridden in
-            some cases as due to compatibility with :code:`hashCode()` some classes implements :code:`equals(Object)` in such a way
-            that -0.0 and +0.0 are different, which may be a problem. It prevents for example identifying a diagonal element is zero
-            and should be avoided when doing partial pivoting in LU decomposition.
+        The default implementation simply calls getZero()). However, this may need to be overridden in some cases as due to compatibility with hashCode() some classes implements equals(Object) in such a way that -0.0 and +0.0 are different, which may be a problem. It prevents for example identifying a diagonal element is zero and should be avoided when doing partial pivoting in LU decomposition.
         
-            Returns:
-                true if the element is semantically equal to zero
+        Returns:
+            true if the element is semantically equal to zero
         
-            Since:
-                1.8
+        Since:
+            1.8
         
         
         """
@@ -112,27 +148,26 @@ class FieldElement(typing.Generic[_FieldElement__T]):
     @typing.overload
     def multiply(self, int: int) -> _FieldElement__T:
         """
-            Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} =
-            \sum_{i=1}^n \mathrm{this} \]
+        Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} = \sum_{i=1}^n \mathrm{this} \]
         
-            Parameters:
-                n (int): Number of times :code:`this` must be added to itself.
+        Parameters:
+            n (int): Number of times this must be added to itself.
         
-            Returns:
-                A new element representing n × this.
+        Returns:
+            A new element representing n × this.
         
-        :class:`~org.hipparchus.FieldElement` multiply(:class:`~org.hipparchus.FieldElement` a) throws :class:`~org.hipparchus.exception.NullArgumentException`
+        FieldElement multiply(FieldElement a) throws NullArgumentException
         
-            Compute this × a.
+        Compute this × a.
         
-            Parameters:
-                a (:class:`~org.hipparchus.FieldElement`): element to multiply
+        Parameters:
+            a (FieldElement): element to multiply
         
-            Returns:
-                a new element representing this × a
+        Returns:
+            a new element representing this × a
         
-            Raises:
-                :class:`~org.hipparchus.exception.NullArgumentException`: if :code:`a` is :code:`null`.
+        Raises:
+            NullArgumentException: if a is null.
         
         
         """
@@ -141,71 +176,94 @@ class FieldElement(typing.Generic[_FieldElement__T]):
     def multiply(self, t: _FieldElement__T) -> _FieldElement__T: ...
     def negate(self) -> _FieldElement__T:
         """
-            Returns the additive inverse of :code:`this` element.
+        Returns the additive inverse of this element.
         
-            Returns:
-                the opposite of :code:`this`.
+        Returns:
+            the opposite of this.
         
         
         """
         ...
-    def reciprocal(self) -> _FieldElement__T: ...
-    def subtract(self, t: _FieldElement__T) -> _FieldElement__T: ...
+    def reciprocal(self) -> _FieldElement__T:
+        """
+        Returns the multiplicative inverse of this element.
+        
+        Returns:
+            the inverse of this.
+        
+        Raises:
+            MathRuntimeException: if this is zero
+        
+        
+        """
+        ...
+    def subtract(self, a: _FieldElement__T) -> _FieldElement__T:
+        """
+        Compute this - a.
+        
+        Parameters:
+            a (FieldElement): element to subtract
+        
+        Returns:
+            a new element representing this - a
+        
+        Raises:
+            NullArgumentException: if a is null.
+        
+        
+        """
+        ...
 
 _CalculusFieldElement__T = typing.TypeVar('_CalculusFieldElement__T', bound=FieldElement)  # <T>
 class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generic[_CalculusFieldElement__T]):
     """
-    public interfaceCalculusFieldElement<T extends :class:`~org.hipparchus.FieldElement`<T>>extends :class:`~org.hipparchus.FieldElement`<T>
+    Interface representing a `field <http://mathworld.wolfram.com/Field.html>` with calculus capabilities (sin, cos...).
     
-        Interface representing a `field <http://mathworld.wolfram.com/Field.html>` with calculus capabilities (sin, cos, ...).
+    Since:
+        1.7
     
-        Since:
-            1.7
-    
-        Also see:
-    
-              - :class:`~org.hipparchus.FieldElement`
+          - FieldElement
     """
     def abs(self) -> _CalculusFieldElement__T:
         """
-            absolute value.
+        absolute value.
         
-            Returns:
-                abs(this)
+        Returns:
+            abs(this)
         
         
         """
         ...
     def acos(self) -> _CalculusFieldElement__T:
         """
-            Arc cosine operation.
+        Arc cosine operation.
         
-            Returns:
-                acos(this)
+        Returns:
+            acos(this)
         
         
         """
         ...
     def acosh(self) -> _CalculusFieldElement__T:
         """
-            Inverse hyperbolic cosine operation.
+        Inverse hyperbolic cosine operation.
         
-            Returns:
-                acosh(this)
+        Returns:
+            acosh(this)
         
         
         """
         ...
     @typing.overload
-    def add(self, t: _CalculusFieldElement__T) -> _CalculusFieldElement__T:
+    def add(self, a: _CalculusFieldElement__T) -> _CalculusFieldElement__T:
         """
-            '+' operator.
+        '+' operator.
         
-            Parameters:
-                a (double): right hand side parameter of the operator
+        Parameters:
+            a (double): right hand side parameter of the operator
         
-            Returns:
-                this+a
+        Returns:
+            this+a
         
         
         """
@@ -214,68 +272,78 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
     def add(self, double: float) -> _CalculusFieldElement__T: ...
     def asin(self) -> _CalculusFieldElement__T:
         """
-            Arc sine operation.
+        Arc sine operation.
         
-            Returns:
-                asin(this)
+        Returns:
+            asin(this)
         
         
         """
         ...
     def asinh(self) -> _CalculusFieldElement__T:
         """
-            Inverse hyperbolic sine operation.
+        Inverse hyperbolic sine operation.
         
-            Returns:
-                asin(this)
+        Returns:
+            asin(this)
         
         
         """
         ...
     def atan(self) -> _CalculusFieldElement__T:
         """
-            Arc tangent operation.
+        Arc tangent operation.
         
-            Returns:
-                atan(this)
+        Returns:
+            atan(this)
         
         
         """
         ...
-    def atan2(self, t: _CalculusFieldElement__T) -> _CalculusFieldElement__T:
+    def atan2(self, x: _CalculusFieldElement__T) -> _CalculusFieldElement__T:
         """
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if number of free parameters or orders are inconsistent
+        Two arguments arc tangent operation.
+        
+        Beware of the order or arguments! As this is based on a two-arguments functions, in order to be consistent with arguments order, the instance is the first argument and the single provided argument is the second argument. In order to be consistent with programming languages atan2, this method computes atan2(this, x), i.e. the instance represents the y argument and the x argument is the one passed as a single argument. This may seem confusing especially for users of Wolfram alpha, as this site is not consistent with programming languages atan2 two-arguments arc tangent and puts x as its first argument.
+        
+        Parameters:
+            x (CalculusFieldElement): second argument of the arc tangent
+        
+        Returns:
+            atan2(this, x)
+        
+        Raises:
+            MathIllegalArgumentException: if number of free parameters or orders are inconsistent
         
         
         """
         ...
     def atanh(self) -> _CalculusFieldElement__T:
         """
-            Inverse hyperbolic tangent operation.
+        Inverse hyperbolic tangent operation.
         
-            Returns:
-                atanh(this)
+        Returns:
+            atanh(this)
         
         
         """
         ...
     def cbrt(self) -> _CalculusFieldElement__T:
         """
-            Cubic root.
+        Cubic root.
         
-            Returns:
-                cubic root of the instance
+        Returns:
+            cubic root of the instance
         
         
         """
         ...
     def ceil(self) -> _CalculusFieldElement__T:
         """
-            Get the smallest whole number larger than instance.
+        Get the smallest whole number larger than instance.
         
-            Returns:
-                ceil(this)
+        Returns:
+            ceil(this)
         
         
         """
@@ -283,21 +351,21 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
     @typing.overload
     def copySign(self, t: _CalculusFieldElement__T) -> _CalculusFieldElement__T:
         """
-            Returns the instance with the sign of the argument. A NaN :code:`sign` argument is treated as positive.
+        Returns the instance with the sign of the argument. A NaN sign argument is treated as positive.
         
-            Parameters:
-                sign (:class:`~org.hipparchus.CalculusFieldElement`): the sign for the returned value
+        Parameters:
+            sign (CalculusFieldElement): the sign for the returned value
         
-            Returns:
-                the instance with the same sign as the :code:`sign` argument
+        Returns:
+            the instance with the same sign as the sign argument
         
-            Returns the instance with the sign of the argument. A NaN :code:`sign` argument is treated as positive.
+        Returns the instance with the sign of the argument. A NaN sign argument is treated as positive.
         
-            Parameters:
-                sign (double): the sign for the returned value
+        Parameters:
+            sign (double): the sign for the returned value
         
-            Returns:
-                the instance with the same sign as the :code:`sign` argument
+        Returns:
+            the instance with the same sign as the sign argument
         
         
         """
@@ -306,20 +374,20 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
     def copySign(self, double: float) -> _CalculusFieldElement__T: ...
     def cos(self) -> _CalculusFieldElement__T:
         """
-            Cosine operation.
+        Cosine operation.
         
-            Returns:
-                cos(this)
+        Returns:
+            cos(this)
         
         
         """
         ...
     def cosh(self) -> _CalculusFieldElement__T:
         """
-            Hyperbolic cosine operation.
+        Hyperbolic cosine operation.
         
-            Returns:
-                cosh(this)
+        Returns:
+            cosh(this)
         
         
         """
@@ -327,24 +395,23 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
     @typing.overload
     def divide(self, double: float) -> _CalculusFieldElement__T:
         """
-            '÷' operator.
+        '÷' operator.
         
-            Parameters:
-                a (double): right hand side parameter of the operator
+        Parameters:
+            a (double): right hand side parameter of the operator
         
-            Returns:
-                this÷a
+        Returns:
+            this÷a
         
-            Compute this ÷ a.
+        Compute this ÷ a.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.divide` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: divide in interface FieldElement
         
-            Parameters:
-                a (:class:`~org.hipparchus.CalculusFieldElement`): element to divide by
+        Parameters:
+            a (CalculusFieldElement): element to divide by
         
-            Returns:
-                a new element representing this ÷ a
+        Returns:
+            a new element representing this ÷ a
         
         
         """
@@ -353,112 +420,125 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
     def divide(self, t: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
     def exp(self) -> _CalculusFieldElement__T:
         """
-            Exponential.
+        Exponential.
         
-            Returns:
-                exponential of the instance
+        Returns:
+            exponential of the instance
         
         
         """
         ...
     def expm1(self) -> _CalculusFieldElement__T:
         """
-            Exponential minus 1.
+        Exponential minus 1.
         
-            Returns:
-                exponential minus one of the instance
+        Returns:
+            exponential minus one of the instance
         
         
         """
         ...
     def floor(self) -> _CalculusFieldElement__T:
         """
-            Get the largest whole number smaller than instance.
+        Get the largest whole number smaller than instance.
         
-            Returns:
-                floor(this)
+        Returns:
+            floor(this)
         
         
         """
         ...
     def getAddendum(self) -> _CalculusFieldElement__T:
         """
-            Get the addendum to the real value of the number.
+        Get the addendum to the real value of the number.
         
-            The addendum is considered to be the part that when added back to the :meth:`~org.hipparchus.FieldElement.getReal`
-            recovers the instance. This means that when :code:`e.getReal()` is finite (i.e. neither infinite nor NaN), then
-            :code:`e.getAddendum().add(e.getReal())` is :code:`e` and :code:`e.subtract(e.getReal())` is :code:`e.getAddendum()`.
-            Beware that for non-finite numbers, these two equalities may not hold. The first equality (with the addition), always
-            holds even for infinity and NaNs if the real part is independent of the addendum (this is the case for all derivatives
-            types, as well as for complex and Dfp, but it is not the case for Tuple and FieldTuple). The second equality (with the
-            subtraction), generally doesn't hold for non-finite numbers, because the subtraction generates NaNs.
+        The addendum is considered to be the part that when added back to the getReal recovers the instance. This means that when getReal() is finite (i.e. neither infinite nor NaN), then getReal()) is e and getReal()) is getAddendum(). Beware that for non-finite numbers, these two equalities may not hold. The first equality (with the addition), always holds even for infinity and NaNs if the real part is independent of the addendum (this is the case for all derivatives types, as well as for complex and Dfp, but it is not the case for Tuple and FieldTuple). The second equality (with the subtraction), generally doesn't hold for non-finite numbers, because the subtraction generates NaNs.
         
-            Returns:
-                real value
+        Returns:
+            real value
         
-            Since:
-                4.0
+        Since:
+            4.0
         
         
         """
         ...
     def getExponent(self) -> int:
         """
-            Return the exponent of the instance, removing the bias.
+        Return the exponent of the instance, removing the bias.
         
-            For double numbers of the form 2 :sup:`x` , the unbiased exponent is exactly x.
+        For double numbers of the form 2 :sup:`x` , the unbiased exponent is exactly x.
         
-            Returns:
-                exponent for the instance, without bias
+        Returns:
+            exponent for the instance, without bias
         
         
         """
         ...
     def getPi(self) -> _CalculusFieldElement__T:
         """
-            Get the Archimedes constant π.
+        Get the Archimedes constant π.
         
-            Archimedes constant is the ratio of a circle's circumference to its diameter.
+        Archimedes constant is the ratio of a circle's circumference to its diameter.
         
-            Returns:
-                Archimedes constant π
+        Returns:
+            Archimedes constant π
         
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """
         ...
-    def hypot(self, t: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
+    def hypot(self, y: _CalculusFieldElement__T) -> _CalculusFieldElement__T:
+        """
+        Returns the hypotenuse of a triangle with sides this and y - sqrt(this :sup:`2`  +y :sup:`2` ) avoiding intermediate overflow or underflow.
+        
+          - If either argument is infinite, then the result is positive infinity.
+          - else, if either argument is NaN then the result is NaN.
+        
+        
+        Parameters:
+            y (CalculusFieldElement): a value
+        
+        Returns:
+            sqrt(this :sup:`2`  +y :sup:`2` )
+        
+        Raises:
+            MathIllegalArgumentException: if number of free parameters or orders are inconsistent
+        
+        
+        """
+        ...
     def isFinite(self) -> bool:
         """
-            Check if the instance is finite (neither infinite nor NaN).
+        Check if the instance is finite (neither infinite nor NaN).
         
-            Returns:
-                true if the instance is finite (neither infinite nor NaN)
+        Returns:
+            true if the instance is finite (neither infinite nor NaN)
         
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """
         ...
     def isInfinite(self) -> bool:
         """
-            Check if the instance is infinite.
+        Check if the instance is infinite.
         
-            Returns:
-                true if the instance is infinite
+        Returns:
+            true if the instance is infinite
         
         
         """
         ...
     def isNaN(self) -> bool:
         """
-            Check if the instance is Not a Number.
+        Check if the instance is Not a Number.
         
-            Returns:
-                true if the instance is Not a Number
+        Returns:
+            true if the instance is Not a Number
         
         
         """
@@ -466,118 +546,101 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
     @typing.overload
     def linearCombination(self, t: _CalculusFieldElement__T, t2: _CalculusFieldElement__T, t3: _CalculusFieldElement__T, t4: _CalculusFieldElement__T) -> _CalculusFieldElement__T:
         """
-            Compute a linear combination.
+        Compute a linear combination.
         
-            Parameters:
-                a1 (:class:`~org.hipparchus.CalculusFieldElement`): first factor of the first term
-                b1 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the first term
-                a2 (:class:`~org.hipparchus.CalculusFieldElement`): first factor of the second term
-                b2 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the second term
+        Parameters:
+            a1 (CalculusFieldElement): first factor of the first term
+            b1 (CalculusFieldElement): second factor of the first term
+            a2 (CalculusFieldElement): first factor of the second term
+            b2 (CalculusFieldElement): second factor of the second term
         
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-            Also see:
+              - linearCombination
+              - linearCombination
         
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
+        Compute a linear combination.
         
+        Parameters:
+            a1 (double): first factor of the first term
+            b1 (CalculusFieldElement): second factor of the first term
+            a2 (double): first factor of the second term
+            b2 (CalculusFieldElement): second factor of the second term
         
-            Compute a linear combination.
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-            Parameters:
-                a1 (double): first factor of the first term
-                b1 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the first term
-                a2 (double): first factor of the second term
-                b2 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the second term
+              - linearCombination
+              - linearCombination
         
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
+        Compute a linear combination.
         
-            Also see:
+        Parameters:
+            a1 (CalculusFieldElement): first factor of the first term
+            b1 (CalculusFieldElement): second factor of the first term
+            a2 (CalculusFieldElement): first factor of the second term
+            b2 (CalculusFieldElement): second factor of the second term
+            a3 (CalculusFieldElement): first factor of the third term
+            b3 (CalculusFieldElement): second factor of the third term
         
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
+              - linearCombination
+              - linearCombination
         
-            Compute a linear combination.
+        Compute a linear combination.
         
-            Parameters:
-                a1 (:class:`~org.hipparchus.CalculusFieldElement`): first factor of the first term
-                b1 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the first term
-                a2 (:class:`~org.hipparchus.CalculusFieldElement`): first factor of the second term
-                b2 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the second term
-                a3 (:class:`~org.hipparchus.CalculusFieldElement`): first factor of the third term
-                b3 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the third term
+        Parameters:
+            a1 (double): first factor of the first term
+            b1 (CalculusFieldElement): second factor of the first term
+            a2 (double): first factor of the second term
+            b2 (CalculusFieldElement): second factor of the second term
+            a3 (double): first factor of the third term
+            b3 (CalculusFieldElement): second factor of the third term
         
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-            Also see:
+              - linearCombination
+              - linearCombination
         
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
+        Compute a linear combination.
         
+        Parameters:
+            a1 (CalculusFieldElement): first factor of the first term
+            b1 (CalculusFieldElement): second factor of the first term
+            a2 (CalculusFieldElement): first factor of the second term
+            b2 (CalculusFieldElement): second factor of the second term
+            a3 (CalculusFieldElement): first factor of the third term
+            b3 (CalculusFieldElement): second factor of the third term
+            a4 (CalculusFieldElement): first factor of the fourth term
+            b4 (CalculusFieldElement): second factor of the fourth term
         
-            Compute a linear combination.
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-            Parameters:
-                a1 (double): first factor of the first term
-                b1 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the first term
-                a2 (double): first factor of the second term
-                b2 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the second term
-                a3 (double): first factor of the third term
-                b3 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the third term
+              - linearCombination
+              - linearCombination
         
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
+        Compute a linear combination.
         
-            Also see:
+        Parameters:
+            a1 (double): first factor of the first term
+            b1 (CalculusFieldElement): second factor of the first term
+            a2 (double): first factor of the second term
+            b2 (CalculusFieldElement): second factor of the second term
+            a3 (double): first factor of the third term
+            b3 (CalculusFieldElement): second factor of the third term
+            a4 (double): first factor of the fourth term
+            b4 (CalculusFieldElement): second factor of the fourth term
         
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-        
-            Compute a linear combination.
-        
-            Parameters:
-                a1 (:class:`~org.hipparchus.CalculusFieldElement`): first factor of the first term
-                b1 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the first term
-                a2 (:class:`~org.hipparchus.CalculusFieldElement`): first factor of the second term
-                b2 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the second term
-                a3 (:class:`~org.hipparchus.CalculusFieldElement`): first factor of the third term
-                b3 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the third term
-                a4 (:class:`~org.hipparchus.CalculusFieldElement`): first factor of the fourth term
-                b4 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the fourth term
-        
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-        
-        
-            Compute a linear combination.
-        
-            Parameters:
-                a1 (double): first factor of the first term
-                b1 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the first term
-                a2 (double): first factor of the second term
-                b2 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the second term
-                a3 (double): first factor of the third term
-                b3 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the third term
-                a4 (double): first factor of the fourth term
-                b4 (:class:`~org.hipparchus.CalculusFieldElement`): second factor of the fourth term
-        
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
+              - linearCombination
+              - linearCombination
         
         
         
@@ -599,30 +662,30 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
     def linearCombination(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], tArray: typing.Union[typing.List[_CalculusFieldElement__T], jpype.JArray]) -> _CalculusFieldElement__T: ...
     def log(self) -> _CalculusFieldElement__T:
         """
-            Natural logarithm.
+        Natural logarithm.
         
-            Returns:
-                logarithm of the instance
+        Returns:
+            logarithm of the instance
         
         
         """
         ...
     def log10(self) -> _CalculusFieldElement__T:
         """
-            Base 10 logarithm.
+        Base 10 logarithm.
         
-            Returns:
-                base 10 logarithm of the instance
+        Returns:
+            base 10 logarithm of the instance
         
         
         """
         ...
     def log1p(self) -> _CalculusFieldElement__T:
         """
-            Shifted natural logarithm.
+        Shifted natural logarithm.
         
-            Returns:
-                logarithm of one plus the instance
+        Returns:
+            logarithm of one plus the instance
         
         
         """
@@ -630,25 +693,23 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
     @typing.overload
     def multiply(self, t: _CalculusFieldElement__T) -> _CalculusFieldElement__T:
         """
-            '×' operator.
+        '×' operator.
         
-            Parameters:
-                a (double): right hand side parameter of the operator
+        Parameters:
+            a (double): right hand side parameter of the operator
         
-            Returns:
-                this×a
+        Returns:
+            this×a
         
-            Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} =
-            \sum_{i=1}^n \mathrm{this} \]
+        Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} = \sum_{i=1}^n \mathrm{this} \]
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.multiply` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: multiply in interface FieldElement
         
-            Parameters:
-                n (int): Number of times :code:`this` must be added to itself.
+        Parameters:
+            n (int): Number of times this must be added to itself.
         
-            Returns:
-                A new element representing n × this.
+        Returns:
+            A new element representing n × this.
         
         
         """
@@ -657,28 +718,28 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
     def multiply(self, double: float) -> _CalculusFieldElement__T: ...
     @typing.overload
     def multiply(self, int: int) -> _CalculusFieldElement__T: ...
-    def newInstance(self, double: float) -> _CalculusFieldElement__T:
+    def newInstance(self, value: float) -> _CalculusFieldElement__T:
         """
-            Create an instance corresponding to a constant real value.
+        Create an instance corresponding to a constant real value.
         
-            Parameters:
-                value (double): constant real value
+        Parameters:
+            value (double): constant real value
         
-            Returns:
-                instance corresponding to a constant real value
+        Returns:
+            instance corresponding to a constant real value
         
         
         """
         ...
     def norm(self) -> float:
         """
-            norm.
+        norm.
         
-            Returns:
-                norm(this)
+        Returns:
+            norm(this)
         
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """
@@ -686,34 +747,34 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
     @typing.overload
     def pow(self, t: _CalculusFieldElement__T) -> _CalculusFieldElement__T:
         """
-            Power operation.
+        Power operation.
         
-            Parameters:
-                p (double): power to apply
+        Parameters:
+            p (double): power to apply
         
-            Returns:
-                this :sup:`p`
+        Returns:
+            this :sup:`p`
         
-            Integer power operation.
+        Integer power operation.
         
-            Parameters:
-                n (int): power to apply
+        Parameters:
+            n (int): power to apply
         
-            Returns:
-                this :sup:`n`
+        Returns:
+            this :sup:`n`
         
-        :class:`~org.hipparchus.CalculusFieldElement` pow(:class:`~org.hipparchus.CalculusFieldElement` e) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        CalculusFieldElement pow(CalculusFieldElement e) throws MathIllegalArgumentException
         
-            Power operation.
+        Power operation.
         
-            Parameters:
-                e (:class:`~org.hipparchus.CalculusFieldElement`): exponent
+        Parameters:
+            e (CalculusFieldElement): exponent
         
-            Returns:
-                this :sup:`e`
+        Returns:
+            this :sup:`e`
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if number of free parameters or orders are inconsistent
+        Raises:
+            MathIllegalArgumentException: if number of free parameters or orders are inconsistent
         
         
         """
@@ -725,21 +786,21 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
     @typing.overload
     def remainder(self, double: float) -> _CalculusFieldElement__T:
         """
-            IEEE remainder operator.
+        IEEE remainder operator.
         
-            Parameters:
-                a (double): right hand side parameter of the operator
+        Parameters:
+            a (double): right hand side parameter of the operator
         
-            Returns:
-                this - n × a where n is the closest integer to this/a
+        Returns:
+            this - n × a where n is the closest integer to this/a
         
-            IEEE remainder operator.
+        IEEE remainder operator.
         
-            Parameters:
-                a (:class:`~org.hipparchus.CalculusFieldElement`): right hand side parameter of the operator
+        Parameters:
+            a (CalculusFieldElement): right hand side parameter of the operator
         
-            Returns:
-                this - n × a where n is the closest integer to this/a
+        Returns:
+            this - n × a where n is the closest integer to this/a
         
         
         """
@@ -748,102 +809,125 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
     def remainder(self, t: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
     def rint(self) -> _CalculusFieldElement__T:
         """
-            Get the whole number that is the nearest to the instance, or the even one if x is exactly half way between two integers.
+        Get the whole number that is the nearest to the instance, or the even one if x is exactly half way between two integers.
         
-            Returns:
-                a double number r such that r is an integer r - 0.5 ≤ this ≤ r + 0.5
+        Returns:
+            a double number r such that r is an integer r - 0.5 ≤ this ≤ r + 0.5
         
         
         """
         ...
-    def rootN(self, int: int) -> _CalculusFieldElement__T:
+    def rootN(self, n: int) -> _CalculusFieldElement__T:
         """
-            N :sup:`th` root.
+        N :sup:`th` root.
         
-            Parameters:
-                n (int): order of the root
+        Parameters:
+            n (int): order of the root
         
-            Returns:
-                n :sup:`th` root of the instance
+        Returns:
+            n :sup:`th` root of the instance
         
         
         """
         ...
     def round(self) -> int:
         """
-            Get the closest long to instance real value.
+        Get the closest long to instance real value.
         
-            Returns:
-                closest long to :meth:`~org.hipparchus.FieldElement.getReal`
+        Returns:
+            closest long to getReal
         
         
         """
         ...
-    def scalb(self, int: int) -> _CalculusFieldElement__T:
+    def scalb(self, n: int) -> _CalculusFieldElement__T:
         """
-            Multiply the instance by a power of 2.
+        Multiply the instance by a power of 2.
         
-            Parameters:
-                n (int): power of 2
+        Parameters:
+            n (int): power of 2
         
-            Returns:
-                this × 2 :sup:`n`
+        Returns:
+            this × 2 :sup:`n`
         
         
         """
         ...
     def sign(self) -> _CalculusFieldElement__T:
         """
-            Compute the sign of the instance. The sign is -1 for negative numbers, +1 for positive numbers and 0 otherwise, for
-            Complex number, it is extended on the unit circle (equivalent to z/|z|, with special handling for 0 and NaN)
+        Compute the sign of the instance. The sign is -1 for negative numbers, +1 for positive numbers and 0 otherwise, for Complex number, it is extended on the unit circle (equivalent to z/|z|, with special handling for 0 and NaN)
         
-            Returns:
-                -1.0, -0.0, +0.0, +1.0 or NaN depending on sign of a
+        Returns:
+            -1.0, -0.0, +0.0, +1.0 or NaN depending on sign of a
         
         
         """
         ...
     def sin(self) -> _CalculusFieldElement__T:
         """
-            Sine operation.
+        Sine operation.
         
-            Returns:
-                sin(this)
+        Returns:
+            sin(this)
         
         
         """
         ...
-    def sinCos(self) -> org.hipparchus.util.FieldSinCos[_CalculusFieldElement__T]: ...
+    def sinCos(self) -> org.hipparchus.util.FieldSinCos[_CalculusFieldElement__T]:
+        """
+        Combined Sine and Cosine operation.
+        
+        Returns:
+            [sin(this), cos(this)]
+        
+        Since:
+            1.4
+        
+        
+        """
+        ...
     def sinh(self) -> _CalculusFieldElement__T:
         """
-            Hyperbolic sine operation.
+        Hyperbolic sine operation.
         
-            Returns:
-                sinh(this)
+        Returns:
+            sinh(this)
         
         
         """
         ...
-    def sinhCosh(self) -> org.hipparchus.util.FieldSinhCosh[_CalculusFieldElement__T]: ...
+    def sinhCosh(self) -> org.hipparchus.util.FieldSinhCosh[_CalculusFieldElement__T]:
+        """
+        Combined hyperbolic sine and cosine operation.
+        
+        Returns:
+            [sinh(this), cosh(this)]
+        
+        Since:
+            2.0
+        
+        
+        """
+        ...
     def sqrt(self) -> _CalculusFieldElement__T:
         """
-            Square root.
+        Square root.
         
-            Returns:
-                square root of the instance
+        Returns:
+            square root of the instance
         
         
         """
         ...
     def square(self) -> _CalculusFieldElement__T:
         """
-            Compute this × this.
+        Compute this × this.
         
-            Returns:
-                a new element representing this × this
+        Returns:
+            a new element representing this × this
         
-            Since:
-                3.1
+        Since:
+            3.1
         
         
         """
@@ -851,24 +935,23 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
     @typing.overload
     def subtract(self, double: float) -> _CalculusFieldElement__T:
         """
-            '-' operator.
+        '-' operator.
         
-            Parameters:
-                a (double): right hand side parameter of the operator
+        Parameters:
+            a (double): right hand side parameter of the operator
         
-            Returns:
-                this-a
+        Returns:
+            this-a
         
-            Compute this - a.
+        Compute this - a.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.subtract` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: subtract in interface FieldElement
         
-            Parameters:
-                a (:class:`~org.hipparchus.CalculusFieldElement`): element to subtract
+        Parameters:
+            a (CalculusFieldElement): element to subtract
         
-            Returns:
-                a new element representing this - a
+        Returns:
+            a new element representing this - a
         
         
         """
@@ -877,53 +960,53 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
     def subtract(self, t: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
     def tan(self) -> _CalculusFieldElement__T:
         """
-            Tangent operation.
+        Tangent operation.
         
-            Returns:
-                tan(this)
+        Returns:
+            tan(this)
         
         
         """
         ...
     def tanh(self) -> _CalculusFieldElement__T:
         """
-            Hyperbolic tangent operation.
+        Hyperbolic tangent operation.
         
-            Returns:
-                tanh(this)
+        Returns:
+            tanh(this)
         
         
         """
         ...
     def toDegrees(self) -> _CalculusFieldElement__T:
         """
-            Convert radians to degrees, with error of less than 0.5 ULP
+        Convert radians to degrees, with error of less than 0.5 ULP
         
-            Returns:
-                instance converted into degrees
+        Returns:
+            instance converted into degrees
         
         
         """
         ...
     def toRadians(self) -> _CalculusFieldElement__T:
         """
-            Convert degrees to radians, with error of less than 0.5 ULP
+        Convert degrees to radians, with error of less than 0.5 ULP
         
-            Returns:
-                instance converted into radians
+        Returns:
+            instance converted into radians
         
         
         """
         ...
     def ulp(self) -> _CalculusFieldElement__T:
         """
-            Compute least significant bit (Unit in Last Position) for a number.
+        Compute least significant bit (Unit in Last Position) for a number.
         
-            Returns:
-                ulp(this)
+        Returns:
+            ulp(this)
         
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """

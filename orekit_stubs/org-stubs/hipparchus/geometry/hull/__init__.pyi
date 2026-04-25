@@ -19,17 +19,27 @@ _ConvexHull__H = typing.TypeVar('_ConvexHull__H', bound=org.hipparchus.geometry.
 _ConvexHull__I = typing.TypeVar('_ConvexHull__I', bound=org.hipparchus.geometry.partitioning.SubHyperplane)  # <I>
 class ConvexHull(java.io.Serializable, typing.Generic[_ConvexHull__S, _ConvexHull__P, _ConvexHull__H, _ConvexHull__I]):
     """
-    public interfaceConvexHull<S extends :class:`~org.hipparchus.geometry.Space`,P extends :class:`~org.hipparchus.geometry.Point`<S,P>,H extends :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<S,P,H,I>,I extends :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`<S,P,H,I>>extends :class:`~org.hipparchus.geometry.hull.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
-    
-        This class represents a convex hull.
+    This class represents a convex hull.
     """
-    def createRegion(self) -> org.hipparchus.geometry.partitioning.Region[_ConvexHull__S, _ConvexHull__P, _ConvexHull__H, _ConvexHull__I]: ...
+    def createRegion(self) -> org.hipparchus.geometry.partitioning.Region[_ConvexHull__S, _ConvexHull__P, _ConvexHull__H, _ConvexHull__I]:
+        """
+        Returns a new region that is enclosed by the convex hull.
+        
+        Returns:
+            the region enclosed by the convex hull
+        
+        Raises:
+            hipparchus: if the number of vertices is not enough to build a region in the respective space
+        
+        
+        """
+        ...
     def getVertices(self) -> typing.MutableSequence[_ConvexHull__P]:
         """
-            Get the vertices of the convex hull.
+        Get the vertices of the convex hull.
         
-            Returns:
-                vertices of the convex hull
+        Returns:
+            vertices of the convex hull
         
         
         """
@@ -41,16 +51,27 @@ _ConvexHullGenerator__H = typing.TypeVar('_ConvexHullGenerator__H', bound=org.hi
 _ConvexHullGenerator__I = typing.TypeVar('_ConvexHullGenerator__I', bound=org.hipparchus.geometry.partitioning.SubHyperplane)  # <I>
 class ConvexHullGenerator(typing.Generic[_ConvexHullGenerator__S, _ConvexHullGenerator__P, _ConvexHullGenerator__H, _ConvexHullGenerator__I]):
     """
-    public interfaceConvexHullGenerator<S extends :class:`~org.hipparchus.geometry.Space`,P extends :class:`~org.hipparchus.geometry.Point`<S,P>,H extends :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<S,P,H,I>,I extends :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`<S,P,H,I>>
+    Interface for convex hull generators.
     
-        Interface for convex hull generators.
-    
-        Also see:
-    
-              - `Convex Hull (Wikipedia) <http://en.wikipedia.org/wiki/Convex_hull>`
-              - `Convex Hull (MathWorld) <http://mathworld.wolfram.com/ConvexHull.html>`
+          - `Convex Hull (Wikipedia) <http://en.wikipedia.org/wiki/Convex_hull>`
+          - `Convex Hull (MathWorld) <http://mathworld.wolfram.com/ConvexHull.html>`
     """
-    def generate(self, collection: typing.Union[java.util.Collection[_ConvexHullGenerator__P], typing.Sequence[_ConvexHullGenerator__P], typing.Set[_ConvexHullGenerator__P]]) -> ConvexHull[_ConvexHullGenerator__S, _ConvexHullGenerator__P, _ConvexHullGenerator__H, _ConvexHullGenerator__I]: ...
+    def generate(self, points: typing.Union[java.util.Collection[_ConvexHullGenerator__P], typing.Sequence[_ConvexHullGenerator__P], typing.Set[_ConvexHullGenerator__P]]) -> ConvexHull[_ConvexHullGenerator__S, _ConvexHullGenerator__P, _ConvexHullGenerator__H, _ConvexHullGenerator__I]:
+        """
+        Builds the convex hull from the set of input points.
+        
+        Parameters:
+            points (Collection<ConvexHullGenerator> points): the set of input points
+        
+        Returns:
+            the convex hull
+        
+        Raises:
+            hipparchus: if generator fails to generate a convex hull for the given set of input points
+        
+        
+        """
+        ...
 
 
 class __module_protocol__(Protocol):

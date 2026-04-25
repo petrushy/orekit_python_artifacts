@@ -23,33 +23,30 @@ import typing
 
 class GeneratedMeasurementSubscriber:
     """
-    public interface GeneratedMeasurementSubscriber
+    Interface for subscribing to generated EstimatedMeasurementBase events.
     
-        Interface for subscribing to generated :class:`~org.orekit.estimation.measurements.EstimatedMeasurementBase` events.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
-    def handleGeneratedMeasurement(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[typing.Any]) -> None:
+    def handleGeneratedMeasurement(self, measurement: org.orekit.estimation.measurements.EstimatedMeasurementBase[typing.Any]) -> None:
         """
-            Handle a generated measurement.
+        Handle a generated measurement.
         
-            Parameters:
-                measurement (:class:`~org.orekit.estimation.measurements.EstimatedMeasurementBase`<?> measurement): measurements that has just been generated
+        Parameters:
+            measurement (EstimatedMeasurementBase<?> measurement): measurements that has just been generated
         
         
         """
         ...
-    def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
+    def init(self, start: org.orekit.time.AbsoluteDate, end: org.orekit.time.AbsoluteDate) -> None:
         """
-            Initialize subscriber at the start of a measurements generation.
+        Initialize subscriber at the start of a measurements generation.
         
-            This method is called once at the start of the measurements generation. It may be used by the subscriber to initialize
-            some internal data if needed.
+        This method is called once at the start of the measurements generation. It may be used by the subscriber to initialize some internal data if needed.
         
-            Parameters:
-                start (:class:`~org.orekit.time.AbsoluteDate`): start of the measurements time span
-                end (:class:`~org.orekit.time.AbsoluteDate`): end of the measurements time span
+        Parameters:
+            start (AbsoluteDate): start of the measurements time span
+            end (AbsoluteDate): end of the measurements time span
         
         
         """
@@ -57,36 +54,38 @@ class GeneratedMeasurementSubscriber:
 
 class Generator:
     """
-    public class Generator extends :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Main generator for ObservedMeasurement.
     
-        Main generator for :class:`~org.orekit.estimation.measurements.ObservedMeasurement`.
-    
-        Since:
-            9.3
+    Since:
+        9.3
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Build a generator with no sequences generator.
+        """
+        ...
     @typing.overload
     def addPropagator(self, propagator: org.orekit.propagation.Propagator) -> org.orekit.estimation.measurements.ObservableSatellite:
         """
-            Add a propagator.
+        Add a propagator.
         
-            Parameters:
-                propagator (:class:`~org.orekit.propagation.Propagator`): to add
+        Parameters:
+            propagator (Propagator): to add
         
-            Returns:
-                satellite satellite propagated by the propagator
+        Returns:
+            satellite satellite propagated by the propagator
         
-            Add a propagator.
+        Add a propagator.
         
-            Parameters:
-                propagator (:class:`~org.orekit.propagation.Propagator`): to add
-                name (:class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): satellite name (if null, a default name built from index will be used)
+        Parameters:
+            propagator (Propagator): to add
+            name (String): satellite name (if null, a default name built from index will be used)
         
-            Returns:
-                satellite satellite propagated by the propagator
+        Returns:
+            satellite satellite propagated by the propagator
         
-            Since:
-                13.0
+        Since:
+            13.0
         
         
         """
@@ -96,50 +95,50 @@ class Generator:
     _addScheduler__T = typing.TypeVar('_addScheduler__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
     def addScheduler(self, scheduler: 'Scheduler'[_addScheduler__T]) -> None:
         """
-            Add a sequences generator for a specific measurement type.
+        Add a sequences generator for a specific measurement type.
         
-            Parameters:
-                scheduler (:class:`~org.orekit.estimation.measurements.generation.Scheduler`<T> scheduler): sequences generator to add
-        
-        
-        """
-        ...
-    def addSubscriber(self, generatedMeasurementSubscriber: GeneratedMeasurementSubscriber) -> None:
-        """
-            Add a subscriber.
-        
-            Parameters:
-                subscriber (:class:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber`): to add
-        
-            Since:
-                12.0
-        
-            Also see:
-                :class:`~org.orekit.estimation.measurements.generation.GatheringSubscriber`
+        Parameters:
+            scheduler (Scheduler<T> scheduler): sequences generator to add
         
         
         """
         ...
-    def generate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
+    def addSubscriber(self, subscriber: GeneratedMeasurementSubscriber) -> None:
         """
-            Generate measurements.
+        Add a subscriber.
         
-            Parameters:
-                start (:class:`~org.orekit.time.AbsoluteDate`): start of the measurements time span
-                end (:class:`~org.orekit.time.AbsoluteDate`): end of the measurements time span
+        Parameters:
+            subscriber (GeneratedMeasurementSubscriber): to add
+        
+        Since:
+            12.0
+        
+        Also see:
+            GatheringSubscriber
         
         
         """
         ...
-    def getPropagator(self, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite) -> org.orekit.propagation.Propagator:
+    def generate(self, start: org.orekit.time.AbsoluteDate, end: org.orekit.time.AbsoluteDate) -> None:
         """
-            Get a registered propagator.
+        Generate measurements.
         
-            Parameters:
-                satellite (:class:`~org.orekit.estimation.measurements.ObservableSatellite`): satellite propagated by the propagator :meth:`~org.orekit.estimation.measurements.generation.Generator.addPropagator`
+        Parameters:
+            start (AbsoluteDate): start of the measurements time span
+            end (AbsoluteDate): end of the measurements time span
         
-            Returns:
-                propagator corresponding to satellite
+        
+        """
+        ...
+    def getPropagator(self, satellite: org.orekit.estimation.measurements.ObservableSatellite) -> org.orekit.propagation.Propagator:
+        """
+        Get a registered propagator.
+        
+        Parameters:
+            satellite (ObservableSatellite): satellite propagated by the propagator addPropagator
+        
+        Returns:
+            propagator corresponding to satellite
         
         
         """
@@ -148,42 +147,60 @@ class Generator:
 _MeasurementBuilder__T = typing.TypeVar('_MeasurementBuilder__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class MeasurementBuilder(typing.Generic[_MeasurementBuilder__T]):
     """
-    public interface MeasurementBuilder<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>>
+    Interface for generating individual ObservedMeasurement.
     
-        Interface for generating individual :class:`~org.orekit.estimation.measurements.ObservedMeasurement`.
-    
-        Since:
-            9.3
+    Since:
+        9.3
     """
-    def addModifier(self, estimationModifier: org.orekit.estimation.measurements.EstimationModifier[_MeasurementBuilder__T]) -> None: ...
-    @typing.overload
-    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_MeasurementBuilder__T]: ...
-    @typing.overload
-    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_MeasurementBuilder__T]: ...
-    def getModifiers(self) -> java.util.List[org.orekit.estimation.measurements.EstimationModifier[_MeasurementBuilder__T]]: ...
-    def getSatellites(self) -> typing.MutableSequence[org.orekit.estimation.measurements.ObservableSatellite]:
+    def addModifier(self, modifier: org.orekit.estimation.measurements.EstimationModifier[_MeasurementBuilder__T]) -> None:
         """
-            Get the satellites related to this measurement.
+        Add a modifier.
         
-            Returns:
-                satellites related to this measurement
-        
-            Since:
-                12.0
+        Parameters:
+            modifier (EstimationModifier<MeasurementBuilder> modifier): modifier to add
         
         
         """
         ...
-    def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
+    @typing.overload
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_MeasurementBuilder__T]: ...
+    @typing.overload
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_MeasurementBuilder__T]: ...
+    def getModifiers(self) -> java.util.List[org.orekit.estimation.measurements.EstimationModifier[_MeasurementBuilder__T]]:
         """
-            Initialize builder at the start of a measurements generation.
+        Get the modifiers that apply to a measurement.
         
-            This method is called once at the start of the measurements generation. It may be used by the builder to initialize some
-            internal data if needed, typically setting up parameters reference dates.
+        Returns:
+            modifiers that apply to a measurement
         
-            Parameters:
-                start (:class:`~org.orekit.time.AbsoluteDate`): start of the measurements time span
-                end (:class:`~org.orekit.time.AbsoluteDate`): end of the measurements time span
+        Also see:
+            addModifier
+        
+        
+        """
+        ...
+    def getSatellites(self) -> typing.MutableSequence[org.orekit.estimation.measurements.ObservableSatellite]:
+        """
+        Get the satellites related to this measurement.
+        
+        Returns:
+            satellites related to this measurement
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
+    def init(self, start: org.orekit.time.AbsoluteDate, end: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Initialize builder at the start of a measurements generation.
+        
+        This method is called once at the start of the measurements generation. It may be used by the builder to initialize some internal data if needed, typically setting up parameters reference dates.
+        
+        Parameters:
+            start (AbsoluteDate): start of the measurements time span
+            end (AbsoluteDate): end of the measurements time span
         
         
         """
@@ -192,25 +209,49 @@ class MeasurementBuilder(typing.Generic[_MeasurementBuilder__T]):
 _Scheduler__T = typing.TypeVar('_Scheduler__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class Scheduler(typing.Generic[_Scheduler__T]):
     """
-    public interface Scheduler<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>>
+    Interface for generating ObservedMeasurement sequences.
     
-        Interface for generating :class:`~org.orekit.estimation.measurements.ObservedMeasurement` sequences.
-    
-        Since:
-            9.3
+    Since:
+        9.3
     """
-    def generate(self, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> java.util.SortedSet[org.orekit.estimation.measurements.EstimatedMeasurementBase[_Scheduler__T]]: ...
-    def getBuilder(self) -> MeasurementBuilder[_Scheduler__T]: ...
-    def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
+    def generate(self, interpolators: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> java.util.SortedSet[org.orekit.estimation.measurements.EstimatedMeasurementBase[_Scheduler__T]]:
         """
-            Initialize scheduler at the start of a measurements generation.
+        Generate a sequence of measurements.
         
-            This method is called once at the start of the measurements generation. It may be used by the scheduler to initialize
-            some internal data if needed, typically :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.init`.
+        Parameters:
+            interpolators (Map<ObservableSatellite, OrekitStepInterpolator> interpolators): interpolators for spacecraft states
         
-            Parameters:
-                start (:class:`~org.orekit.time.AbsoluteDate`): start of the measurements time span
-                end (:class:`~org.orekit.time.AbsoluteDate`): end of the measurements time span
+        Returns:
+            generated measurements
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
+    def getBuilder(self) -> MeasurementBuilder[_Scheduler__T]:
+        """
+        Get the builder associated with this scheduler.
+        
+        Returns:
+            builder associated with this scheduler
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
+    def init(self, start: org.orekit.time.AbsoluteDate, end: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Initialize scheduler at the start of a measurements generation.
+        
+        This method is called once at the start of the measurements generation. It may be used by the scheduler to initialize some internal data if needed, typically init.
+        
+        Parameters:
+            start (AbsoluteDate): start of the measurements time span
+            end (AbsoluteDate): end of the measurements time span
         
         
         """
@@ -218,27 +259,25 @@ class Scheduler(typing.Generic[_Scheduler__T]):
 
 class SignSemantic(java.lang.Enum['SignSemantic']):
     """
-    public enum SignSemantic extends :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.estimation.measurements.generation.SignSemantic`>
+    Enumerate for the semantic of the g function sign during measurements generation.
     
-        Enumerate for the semantic of the :code:`g` function sign during measurements generation.
+    Since:
+        9.3
     
-        Since:
-            9.3
-    
-        Also see:
-            :class:`~org.orekit.estimation.measurements.generation.EventBasedScheduler`
+    Also see:
+        EventBasedScheduler
     """
     FEASIBLE_MEASUREMENT_WHEN_POSITIVE: typing.ClassVar['SignSemantic'] = ...
     FEASIBLE_MEASUREMENT_WHEN_NEGATIVE: typing.ClassVar['SignSemantic'] = ...
-    def measurementIsFeasible(self, double: float) -> bool:
+    def measurementIsFeasible(self, g: float) -> bool:
         """
-            Check if measurement is feasible.
+        Check if measurement is feasible.
         
-            Parameters:
-                g (double): value of the detector g function
+        Parameters:
+            g (double): value of the detector g function
         
-            Returns:
-                true if measurement is feasible
+        Returns:
+            true if measurement is feasible
         
         
         """
@@ -249,20 +288,19 @@ class SignSemantic(java.lang.Enum['SignSemantic']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'SignSemantic':
+    def valueOf(name: str) -> 'SignSemantic':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -270,17 +308,15 @@ class SignSemantic(java.lang.Enum['SignSemantic']):
     @staticmethod
     def values() -> typing.MutableSequence['SignSemantic']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (SignSemantic c : SignSemantic.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (SignSemantic c : SignSemantic.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -289,49 +325,67 @@ class SignSemantic(java.lang.Enum['SignSemantic']):
 _AbstractMeasurementBuilder__T = typing.TypeVar('_AbstractMeasurementBuilder__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class AbstractMeasurementBuilder(MeasurementBuilder[_AbstractMeasurementBuilder__T], typing.Generic[_AbstractMeasurementBuilder__T]):
     """
-    public abstract class AbstractMeasurementBuilder<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`<T>
+    Base class for MeasurementBuilder.
     
-        Base class for :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`.
-    
-        Since:
-            9.3
+    Since:
+        9.3
     """
-    def addModifier(self, estimationModifier: org.orekit.estimation.measurements.EstimationModifier[_AbstractMeasurementBuilder__T]) -> None: ...
-    @typing.overload
-    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_AbstractMeasurementBuilder__T]: ...
-    @typing.overload
-    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_AbstractMeasurementBuilder__T]: ...
-    def getModifiers(self) -> java.util.List[org.orekit.estimation.measurements.EstimationModifier[_AbstractMeasurementBuilder__T]]: ...
-    def getSatellites(self) -> typing.MutableSequence[org.orekit.estimation.measurements.ObservableSatellite]:
+    def addModifier(self, modifier: org.orekit.estimation.measurements.EstimationModifier[_AbstractMeasurementBuilder__T]) -> None:
         """
-            Get the satellites related to this measurement.
+        Add a modifier.
         
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.getSatellites` in
-                interface :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`
+        Specified by: addModifier in interface MeasurementBuilder
         
-            Returns:
-                satellites related to this measurement
+        Parameters:
+            modifier (EstimationModifier<AbstractMeasurementBuilder> modifier): modifier to add
         
         
         """
         ...
-    def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
+    @typing.overload
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_AbstractMeasurementBuilder__T]: ...
+    @typing.overload
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_AbstractMeasurementBuilder__T]: ...
+    def getModifiers(self) -> java.util.List[org.orekit.estimation.measurements.EstimationModifier[_AbstractMeasurementBuilder__T]]:
         """
-            Initialize builder at the start of a measurements generation.
+        Get the modifiers that apply to a measurement.
         
-            This method is called once at the start of the measurements generation. It may be used by the builder to initialize some
-            internal data if needed, typically setting up parameters reference dates.
+        Specified by: getModifiers in interface MeasurementBuilder
         
-            This implementation stores the time span of the measurements generation.
+        Returns:
+            modifiers that apply to a measurement
         
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.init` in
-                interface :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`
+        Also see:
+            addModifier
         
-            Parameters:
-                start (:class:`~org.orekit.time.AbsoluteDate`): start of the measurements time span
-                end (:class:`~org.orekit.time.AbsoluteDate`): end of the measurements time span
+        
+        """
+        ...
+    def getSatellites(self) -> typing.MutableSequence[org.orekit.estimation.measurements.ObservableSatellite]:
+        """
+        Get the satellites related to this measurement.
+        
+        Specified by: getSatellites in interface MeasurementBuilder
+        
+        Returns:
+            satellites related to this measurement
+        
+        
+        """
+        ...
+    def init(self, start: org.orekit.time.AbsoluteDate, end: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Initialize builder at the start of a measurements generation.
+        
+        This method is called once at the start of the measurements generation. It may be used by the builder to initialize some internal data if needed, typically setting up parameters reference dates.
+        
+        This implementation stores the time span of the measurements generation.
+        
+        Specified by: init in interface MeasurementBuilder
+        
+        Parameters:
+            start (AbsoluteDate): start of the measurements time span
+            end (AbsoluteDate): end of the measurements time span
         
         
         """
@@ -340,42 +394,61 @@ class AbstractMeasurementBuilder(MeasurementBuilder[_AbstractMeasurementBuilder_
 _AbstractScheduler__T = typing.TypeVar('_AbstractScheduler__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class AbstractScheduler(Scheduler[_AbstractScheduler__T], typing.Generic[_AbstractScheduler__T]):
     """
-    public abstract class AbstractScheduler<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.generation.Scheduler`<T>
+    Base implementation of Scheduler managing DatesSelector.
     
-        Base implementation of :class:`~org.orekit.estimation.measurements.generation.Scheduler` managing
-        :class:`~org.orekit.time.DatesSelector`.
-    
-        Since:
-            9.3
+    Since:
+        9.3
     """
-    def generate(self, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> java.util.SortedSet[org.orekit.estimation.measurements.EstimatedMeasurementBase[_AbstractScheduler__T]]: ...
-    def getBuilder(self) -> MeasurementBuilder[_AbstractScheduler__T]: ...
-    def getSelector(self) -> org.orekit.time.DatesSelector:
+    def generate(self, interpolators: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> java.util.SortedSet[org.orekit.estimation.measurements.EstimatedMeasurementBase[_AbstractScheduler__T]]:
         """
-            Get the dates selector.
+        Generate a sequence of measurements.
         
-            Returns:
-                dates selector
+        Specified by: generate in interface Scheduler
+        
+        Parameters:
+            interpolators (Map<ObservableSatellite, OrekitStepInterpolator> interpolators): interpolators for spacecraft states
+        
+        Returns:
+            generated measurements
         
         
         """
         ...
-    def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
+    def getBuilder(self) -> MeasurementBuilder[_AbstractScheduler__T]:
         """
-            Initialize scheduler at the start of a measurements generation.
+        Get the builder associated with this scheduler.
         
-            This method is called once at the start of the measurements generation. It may be used by the scheduler to initialize
-            some internal data if needed, typically :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.init`.
+        Specified by: getBuilder in interface Scheduler
         
-            This implementation initialize the measurement builder.
+        Returns:
+            builder associated with this scheduler
         
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.generation.Scheduler.init` in
-                interface :class:`~org.orekit.estimation.measurements.generation.Scheduler`
         
-            Parameters:
-                start (:class:`~org.orekit.time.AbsoluteDate`): start of the measurements time span
-                end (:class:`~org.orekit.time.AbsoluteDate`): end of the measurements time span
+        """
+        ...
+    def getSelector(self) -> org.orekit.time.DatesSelector:
+        """
+        Get the dates selector.
+        
+        Returns:
+            dates selector
+        
+        
+        """
+        ...
+    def init(self, start: org.orekit.time.AbsoluteDate, end: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Initialize scheduler at the start of a measurements generation.
+        
+        This method is called once at the start of the measurements generation. It may be used by the scheduler to initialize some internal data if needed, typically init.
+        
+        This implementation initialize the measurement builder.
+        
+        Specified by: init in interface Scheduler
+        
+        Parameters:
+            start (AbsoluteDate): start of the measurements time span
+            end (AbsoluteDate): end of the measurements time span
         
         
         """
@@ -383,43 +456,51 @@ class AbstractScheduler(Scheduler[_AbstractScheduler__T], typing.Generic[_Abstra
 
 class GatheringSubscriber(GeneratedMeasurementSubscriber):
     """
-    public class GatheringSubscriber extends :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber`
+    Subscriber that gather all generated measurements in a sorted set.
     
-        Subscriber that gather all generated measurements in a sorted set.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
-    def __init__(self): ...
-    def getGeneratedMeasurements(self) -> java.util.SortedSet[org.orekit.estimation.measurements.EstimatedMeasurementBase[typing.Any]]: ...
-    def handleGeneratedMeasurement(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[typing.Any]) -> None:
+    def __init__(self):
         """
-            Handle a generated measurement.
+        Simple constructor.
+        """
+        ...
+    def getGeneratedMeasurements(self) -> java.util.SortedSet[org.orekit.estimation.measurements.EstimatedMeasurementBase[typing.Any]]:
+        """
+        Get generated measurements.
         
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber.handleGeneratedMeasurement` in
-                interface :class:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber`
+        The measurements are sorted according to ComparableMeasurement if generation was chronological, or reversed ComparableMeasurement if generation was non-chronological.
         
-            Parameters:
-                measurement (:class:`~org.orekit.estimation.measurements.EstimatedMeasurementBase`<?> measurement): measurements that has just been generated
+        Returns:
+            unmodifiable view of generated measurements
         
         
         """
         ...
-    def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
+    def handleGeneratedMeasurement(self, measurement: org.orekit.estimation.measurements.EstimatedMeasurementBase[typing.Any]) -> None:
         """
-            Initialize subscriber at the start of a measurements generation.
+        Handle a generated measurement.
         
-            This method is called once at the start of the measurements generation. It may be used by the subscriber to initialize
-            some internal data if needed.
+        Specified by: handleGeneratedMeasurement in interface GeneratedMeasurementSubscriber
         
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber.init` in
-                interface :class:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber`
+        Parameters:
+            measurement (EstimatedMeasurementBase<?> measurement): measurements that has just been generated
         
-            Parameters:
-                start (:class:`~org.orekit.time.AbsoluteDate`): start of the measurements time span
-                end (:class:`~org.orekit.time.AbsoluteDate`): end of the measurements time span
+        
+        """
+        ...
+    def init(self, start: org.orekit.time.AbsoluteDate, end: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Initialize subscriber at the start of a measurements generation.
+        
+        This method is called once at the start of the measurements generation. It may be used by the subscriber to initialize some internal data if needed.
+        
+        Specified by: init in interface GeneratedMeasurementSubscriber
+        
+        Parameters:
+            start (AbsoluteDate): start of the measurements time span
+            end (AbsoluteDate): end of the measurements time span
         
         
         """
@@ -427,50 +508,77 @@ class GatheringSubscriber(GeneratedMeasurementSubscriber):
 
 class MultiplexedMeasurementBuilder(MeasurementBuilder[org.orekit.estimation.measurements.MultiplexedMeasurement]):
     """
-    public class MultiplexedMeasurementBuilder extends :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`<:class:`~org.orekit.estimation.measurements.MultiplexedMeasurement`>
+    Builder for MultiplexedMeasurement measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.MultiplexedMeasurement` measurements.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
-    def __init__(self, list: java.util.List[MeasurementBuilder[typing.Any]]): ...
-    def addModifier(self, estimationModifier: org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.MultiplexedMeasurement]) -> None: ...
-    @typing.overload
-    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.ObservedMeasurement]: ...
-    @typing.overload
-    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.MultiplexedMeasurement]: ...
-    def getModifiers(self) -> java.util.List[org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.MultiplexedMeasurement]]: ...
-    def getSatellites(self) -> typing.MutableSequence[org.orekit.estimation.measurements.ObservableSatellite]:
+    def __init__(self, builders: java.util.List[MeasurementBuilder[typing.Any]]):
         """
-            Get the satellites related to this measurement.
+        Simple constructor.
         
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.getSatellites` in
-                interface :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`
-        
-            Returns:
-                satellites related to this measurement
+        Parameters:
+            builders (List<MeasurementBuilder<?>>): builders for multiplexed measurements
         
         
         """
         ...
-    def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
+    def addModifier(self, modifier: org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.MultiplexedMeasurement]) -> None:
         """
-            Initialize builder at the start of a measurements generation.
+        Add a modifier.
         
-            This method is called once at the start of the measurements generation. It may be used by the builder to initialize some
-            internal data if needed, typically setting up parameters reference dates.
+        Specified by: addModifier in interface MeasurementBuilder
         
-            This implementation stores the time span of the measurements generation.
+        Parameters:
+            modifier (EstimationModifier<MultiplexedMeasurement> modifier): modifier to add
         
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.init` in
-                interface :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`
         
-            Parameters:
-                start (:class:`~org.orekit.time.AbsoluteDate`): start of the measurements time span
-                end (:class:`~org.orekit.time.AbsoluteDate`): end of the measurements time span
+        """
+        ...
+    @typing.overload
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.ObservedMeasurement]: ...
+    @typing.overload
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.MultiplexedMeasurement]: ...
+    def getModifiers(self) -> java.util.List[org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.MultiplexedMeasurement]]:
+        """
+        Get the modifiers that apply to a measurement.
+        
+        Specified by: getModifiers in interface MeasurementBuilder
+        
+        Returns:
+            modifiers that apply to a measurement
+        
+        Also see:
+            addModifier
+        
+        
+        """
+        ...
+    def getSatellites(self) -> typing.MutableSequence[org.orekit.estimation.measurements.ObservableSatellite]:
+        """
+        Get the satellites related to this measurement.
+        
+        Specified by: getSatellites in interface MeasurementBuilder
+        
+        Returns:
+            satellites related to this measurement
+        
+        
+        """
+        ...
+    def init(self, start: org.orekit.time.AbsoluteDate, end: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Initialize builder at the start of a measurements generation.
+        
+        This method is called once at the start of the measurements generation. It may be used by the builder to initialize some internal data if needed, typically setting up parameters reference dates.
+        
+        This implementation stores the time span of the measurements generation.
+        
+        Specified by: init in interface MeasurementBuilder
+        
+        Parameters:
+            start (AbsoluteDate): start of the measurements time span
+            end (AbsoluteDate): end of the measurements time span
         
         
         """
@@ -478,9 +586,42 @@ class MultiplexedMeasurementBuilder(MeasurementBuilder[org.orekit.estimation.mea
 
 class PythonGeneratedMeasurementSubscriber(GeneratedMeasurementSubscriber):
     def __init__(self): ...
-    def finalize(self) -> None: ...
-    def handleGeneratedMeasurement(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[typing.Any]) -> None: ...
-    def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None: ...
+    def finalize(self) -> None:
+        """
+        Overrides: meth:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def handleGeneratedMeasurement(self, measurement: org.orekit.estimation.measurements.EstimatedMeasurementBase[typing.Any]) -> None:
+        """
+        Description copied from interface: handleGeneratedMeasurement Handle a generated measurement.
+        
+        Specified by: handleGeneratedMeasurement in interface GeneratedMeasurementSubscriber
+        
+        Parameters:
+            measurement (EstimatedMeasurementBase<?> measurement): measurements that has just been generated
+        
+        
+        """
+        ...
+    def init(self, start: org.orekit.time.AbsoluteDate, end: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Description copied from interface: init Initialize subscriber at the start of a measurements generation.
+        
+        This method is called once at the start of the measurements generation. It may be used by the subscriber to initialize some internal data if needed.
+        
+        Specified by: init in interface GeneratedMeasurementSubscriber
+        
+        Parameters:
+            start (AbsoluteDate): start of the measurements time span
+            end (AbsoluteDate): end of the measurements time span
+        
+        
+        """
+        ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
@@ -490,28 +631,147 @@ class PythonGeneratedMeasurementSubscriber(GeneratedMeasurementSubscriber):
 _PythonMeasurementBuilder__T = typing.TypeVar('_PythonMeasurementBuilder__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class PythonMeasurementBuilder(MeasurementBuilder[_PythonMeasurementBuilder__T], typing.Generic[_PythonMeasurementBuilder__T]):
     def __init__(self): ...
-    def addModifier(self, estimationModifier: org.orekit.estimation.measurements.EstimationModifier[_PythonMeasurementBuilder__T]) -> None: ...
+    def addModifier(self, modifier: org.orekit.estimation.measurements.EstimationModifier[_PythonMeasurementBuilder__T]) -> None:
+        """
+        Add a modifier.
+        
+        Specified by: addModifier in interface MeasurementBuilder
+        
+        Parameters:
+            modifier (EstimationModifier<PythonMeasurementBuilder> modifier): modifier to add
+        
+        
+        """
+        ...
     @typing.overload
     def build(self, absoluteDate: org.orekit.time.AbsoluteDate, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonMeasurementBuilder__T]: ...
     @typing.overload
     def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonMeasurementBuilder__T]: ...
-    def finalize(self) -> None: ...
-    def getModifiers(self) -> java.util.List[org.orekit.estimation.measurements.EstimationModifier[_PythonMeasurementBuilder__T]]: ...
-    def getSatellites(self) -> typing.MutableSequence[org.orekit.estimation.measurements.ObservableSatellite]: ...
-    def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None: ...
-    def pythonDecRef(self) -> None: ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: meth:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getModifiers(self) -> java.util.List[org.orekit.estimation.measurements.EstimationModifier[_PythonMeasurementBuilder__T]]:
+        """
+        Get the modifiers that apply to a measurement.
+        
+        Specified by: getModifiers in interface MeasurementBuilder
+        
+        Returns:
+            modifiers that apply to a measurement
+        
+        Also see:
+            addModifier
+        
+        
+        """
+        ...
+    def getSatellites(self) -> typing.MutableSequence[org.orekit.estimation.measurements.ObservableSatellite]:
+        """
+        Get the satellites related to this measurement.
+        
+        Specified by: getSatellites in interface MeasurementBuilder
+        
+        Returns:
+            satellites related to this measurement
+        
+        
+        """
+        ...
+    def init(self, start: org.orekit.time.AbsoluteDate, end: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Initialize builder at the start of a measurements generation.
+        
+        This method is called once at the start of the measurements generation. It may be used by the builder to initialize some internal data if needed, typically setting up parameters reference dates.
+        
+        Specified by: init in interface MeasurementBuilder
+        
+        Parameters:
+            start (AbsoluteDate): start of the measurements time span
+            end (AbsoluteDate): end of the measurements time span
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
 
 _PythonScheduler__T = typing.TypeVar('_PythonScheduler__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class PythonScheduler(Scheduler[_PythonScheduler__T], typing.Generic[_PythonScheduler__T]):
     def __init__(self): ...
-    def finalize(self) -> None: ...
-    def generate(self, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> java.util.SortedSet[org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonScheduler__T]]: ...
-    def getBuilder(self) -> MeasurementBuilder[_PythonScheduler__T]: ...
-    def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None: ...
+    def finalize(self) -> None:
+        """
+        Overrides: meth:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def generate(self, interpolators: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> java.util.SortedSet[org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonScheduler__T]]:
+        """
+        Generate a sequence of measurements.
+        
+        Specified by: generate in interface Scheduler
+        
+        Parameters:
+            interpolators (Map<ObservableSatellite, OrekitStepInterpolator> interpolators): interpolators for spacecraft states
+        
+        Returns:
+            generated measurements
+        
+        
+        """
+        ...
+    def getBuilder(self) -> MeasurementBuilder[_PythonScheduler__T]:
+        """
+        Get the builder associated with this scheduler.
+        
+        Specified by: getBuilder in interface Scheduler
+        
+        Returns:
+            builder associated with this scheduler
+        
+        
+        """
+        ...
+    def init(self, start: org.orekit.time.AbsoluteDate, end: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Initialize scheduler at the start of a measurements generation.
+        
+        This method is called once at the start of the measurements generation. It may be used by the scheduler to initialize some internal data if needed, typically init.
+        
+        Specified by: init in interface Scheduler
+        
+        Parameters:
+            start (AbsoluteDate): start of the measurements time span
+            end (AbsoluteDate): end of the measurements time span
+        
+        
+        """
+        ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
@@ -520,80 +780,120 @@ class PythonScheduler(Scheduler[_PythonScheduler__T], typing.Generic[_PythonSche
 
 class AngularAzElBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.AngularAzEl]):
     """
-    public class AngularAzElBuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.AngularAzEl`>
+    Builder for AngularAzEl measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.AngularAzEl` measurements.
-    
-        Since:
-            9.3
+    Since:
+        9.3
     """
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def __init__(self, noiseSource: org.hipparchus.random.CorrelatedRandomVectorGenerator, station: org.orekit.estimation.measurements.GroundStation, sigma: typing.Union[typing.List[float], jpype.JArray], baseWeight: typing.Union[typing.List[float], jpype.JArray], satellite: org.orekit.estimation.measurements.ObservableSatellite):
+        """
+        Simple constructor.
+        
+        Parameters:
+            noiseSource (CorrelatedRandomVectorGenerator): noise source, may be null for generating perfect measurements
+            station (GroundStation): ground station from which measurement is performed
+            sigma (double[]): theoretical standard deviation
+            baseWeight (double[]): base weight
+            satellite (ObservableSatellite): satellite related to this builder
+        
+        
+        """
+        ...
 
 class AngularRaDecBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.AngularRaDec]):
     """
-    public class AngularRaDecBuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.AngularRaDec`>
+    Builder for AngularRaDec measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.AngularRaDec` measurements.
-    
-        Since:
-            9.3
+    Since:
+        9.3
     """
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, frame: org.orekit.frames.Frame, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def __init__(self, noiseSource: org.hipparchus.random.CorrelatedRandomVectorGenerator, station: org.orekit.estimation.measurements.GroundStation, referenceFrame: org.orekit.frames.Frame, sigma: typing.Union[typing.List[float], jpype.JArray], baseWeight: typing.Union[typing.List[float], jpype.JArray], satellite: org.orekit.estimation.measurements.ObservableSatellite):
+        """
+        Simple constructor.
+        
+        Parameters:
+            noiseSource (CorrelatedRandomVectorGenerator): noise source, may be null for generating perfect measurements
+            station (GroundStation): ground station from which measurement is performed
+            referenceFrame (Frame): Reference frame in which the right ascension - declination angles are given
+            sigma (double[]): theoretical standard deviation
+            baseWeight (double[]): base weight
+            satellite (ObservableSatellite): satellite related to this builder
+        
+        
+        """
+        ...
 
 class BistaticRangeBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.BistaticRange]):
     """
-    public class BistaticRangeBuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.BistaticRange`>
+    Builder for BistaticRange measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.BistaticRange` measurements.
-    
-        Since:
-            11.2
+    Since:
+        11.2
     """
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, groundStation2: org.orekit.estimation.measurements.GroundStation, double: float, double2: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def __init__(self, noiseSource: org.hipparchus.random.CorrelatedRandomVectorGenerator, emitter: org.orekit.estimation.measurements.GroundStation, receiver: org.orekit.estimation.measurements.GroundStation, sigma: float, baseWeight: float, satellite: org.orekit.estimation.measurements.ObservableSatellite):
+        """
+        Simple constructor.
+        
+        Parameters:
+            noiseSource (CorrelatedRandomVectorGenerator): noise source, may be null for generating perfect measurements
+            emitter (GroundStation): emitter ground station
+            receiver (GroundStation): receiver ground station, from which measurement is performed
+            sigma (double): theoretical standard deviation
+            baseWeight (double): base weight
+            satellite (ObservableSatellite): satellite related to this builder
+        
+        
+        """
+        ...
 
 class BistaticRangeRateBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.BistaticRangeRate]):
     """
-    public class BistaticRangeRateBuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.BistaticRangeRate`>
+    Builder for BistaticRangeRate measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.BistaticRangeRate` measurements.
-    
-        Since:
-            11.2
+    Since:
+        11.2
     """
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, groundStation2: org.orekit.estimation.measurements.GroundStation, double: float, double2: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def __init__(self, noiseSource: org.hipparchus.random.CorrelatedRandomVectorGenerator, emitter: org.orekit.estimation.measurements.GroundStation, receiver: org.orekit.estimation.measurements.GroundStation, sigma: float, baseWeight: float, satellite: org.orekit.estimation.measurements.ObservableSatellite):
+        """
+        Simple constructor.
+        
+        Parameters:
+            noiseSource (CorrelatedRandomVectorGenerator): noise source, may be null for generating perfect measurements
+            emitter (GroundStation): emitter ground station
+            receiver (GroundStation): receiver ground station, from which measurement is performed
+            sigma (double): theoretical standard deviation
+            baseWeight (double): base weight
+            satellite (ObservableSatellite): satellite related to this builder
+        
+        
+        """
+        ...
 
 _ContinuousScheduler__T = typing.TypeVar('_ContinuousScheduler__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class ContinuousScheduler(AbstractScheduler[_ContinuousScheduler__T], typing.Generic[_ContinuousScheduler__T]):
     """
-    public class ContinuousScheduler<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.generation.AbstractScheduler`<T>
+    Scheduler generating measurements sequences continuously.
     
-        :class:`~org.orekit.estimation.measurements.generation.Scheduler` generating measurements sequences continuously.
+    Continuous schedulers continuously generate measurements following a repetitive pattern. The repetitive pattern can be either a continuous stream of measurements separated by a constant step (for example one measurement every 60s), or several sequences of measurements at high rate up to a maximum number, with a rest period between sequences (for example sequences of up to 256 measurements every 100ms with 300s between each sequence).
     
-        Continuous schedulers continuously generate measurements following a repetitive pattern. The repetitive pattern can be
-        either a continuous stream of measurements separated by a constant step (for example one measurement every 60s), or
-        several sequences of measurements at high rate up to a maximum number, with a rest period between sequences (for example
-        sequences of up to 256 measurements every 100ms with 300s between each sequence).
-    
-        Since:
-            9.3
+    Since:
+        9.3
     """
     @typing.overload
     def __init__(self, measurementBuilder: MeasurementBuilder[_ContinuousScheduler__T], datesSelector: typing.Union[org.orekit.time.DatesSelector, typing.Callable]): ...
     @typing.overload
     def __init__(self, measurementBuilder: MeasurementBuilder[_ContinuousScheduler__T], datesSelector: typing.Union[org.orekit.time.DatesSelector, typing.Callable], predicate: typing.Union[java.util.function.Predicate[org.orekit.estimation.measurements.EstimatedMeasurementBase[_ContinuousScheduler__T]], typing.Callable[[org.orekit.estimation.measurements.EstimatedMeasurementBase[_ContinuousScheduler__T]], bool]]): ...
-    def measurementIsFeasible(self, absoluteDate: org.orekit.time.AbsoluteDate) -> bool:
+    def measurementIsFeasible(self, date: org.orekit.time.AbsoluteDate) -> bool:
         """
-            Check if a measurement is feasible at some date.
+        Check if a measurement is feasible at some date.
         
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.generation.AbstractScheduler.measurementIsFeasible` in
-                class :class:`~org.orekit.estimation.measurements.generation.AbstractScheduler`
+        Specified by: measurementIsFeasible in class AbstractScheduler
         
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date to check
+        Parameters:
+            date (AbsoluteDate): date to check
         
-            Returns:
-                true if measurement if feasible
+        Returns:
+            true if measurement if feasible
         
         
         """
@@ -602,45 +902,30 @@ class ContinuousScheduler(AbstractScheduler[_ContinuousScheduler__T], typing.Gen
 _EventBasedScheduler__T = typing.TypeVar('_EventBasedScheduler__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class EventBasedScheduler(AbstractScheduler[_EventBasedScheduler__T], typing.Generic[_EventBasedScheduler__T]):
     """
-    public class EventBasedScheduler<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.generation.AbstractScheduler`<T>
+    Scheduler based on EventDetector for generating measurements sequences.
     
-        :class:`~org.orekit.estimation.measurements.generation.Scheduler` based on
-        :class:`~org.orekit.propagation.events.EventDetector` for generating measurements sequences.
+    Event-based schedulers generate measurements following a repetitive pattern when the a EventDetector provided at construction is in a SignSemantic state. It is important that the sign of the g function of the underlying event detector is not arbitrary, but has a semantic meaning, e.g. in or out, true or false. This class works well with event detectors that detect entry to or exit from a region, e.g. EclipseDetector, ElevationDetector, LatitudeCrossingDetector. Using this scheduler with detectors that are not based on entry to or exit from a region, e.g. DateDetector, LongitudeCrossingDetector, will likely lead to unexpected results.
     
-        Event-based schedulers generate measurements following a repetitive pattern when the a
-        :class:`~org.orekit.propagation.events.EventDetector` provided at construction is in a
-        :class:`~org.orekit.estimation.measurements.generation.SignSemantic` state. It is important that the sign of the g
-        function of the underlying event detector is not arbitrary, but has a semantic meaning, e.g. in or out, true or false.
-        This class works well with event detectors that detect entry to or exit from a region, e.g.
-        :class:`~org.orekit.propagation.events.EclipseDetector`, :class:`~org.orekit.propagation.events.ElevationDetector`,
-        :class:`~org.orekit.propagation.events.LatitudeCrossingDetector`. Using this scheduler with detectors that are not based
-        on entry to or exit from a region, e.g. :class:`~org.orekit.propagation.events.DateDetector`,
-        :class:`~org.orekit.propagation.events.LongitudeCrossingDetector`, will likely lead to unexpected results.
+    The repetitive pattern can be either a continuous stream of measurements separated by a constant step (for example one measurement every 60s), or several sequences of measurements at high rate up to a maximum number, with a rest period between sequences (for example sequences of up to 256 measurements every 100ms with 300s between each sequence).
     
-        The repetitive pattern can be either a continuous stream of measurements separated by a constant step (for example one
-        measurement every 60s), or several sequences of measurements at high rate up to a maximum number, with a rest period
-        between sequences (for example sequences of up to 256 measurements every 100ms with 300s between each sequence).
-    
-        Since:
-            9.3
+    Since:
+        9.3
     """
     @typing.overload
     def __init__(self, measurementBuilder: MeasurementBuilder[_EventBasedScheduler__T], datesSelector: typing.Union[org.orekit.time.DatesSelector, typing.Callable], predicate: typing.Union[java.util.function.Predicate[org.orekit.estimation.measurements.EstimatedMeasurementBase[_EventBasedScheduler__T]], typing.Callable[[org.orekit.estimation.measurements.EstimatedMeasurementBase[_EventBasedScheduler__T]], bool]], propagator: org.orekit.propagation.Propagator, eventDetector: org.orekit.propagation.events.EventDetector, signSemantic: SignSemantic): ...
     @typing.overload
     def __init__(self, measurementBuilder: MeasurementBuilder[_EventBasedScheduler__T], datesSelector: typing.Union[org.orekit.time.DatesSelector, typing.Callable], propagator: org.orekit.propagation.Propagator, eventDetector: org.orekit.propagation.events.EventDetector, signSemantic: SignSemantic): ...
-    def measurementIsFeasible(self, absoluteDate: org.orekit.time.AbsoluteDate) -> bool:
+    def measurementIsFeasible(self, date: org.orekit.time.AbsoluteDate) -> bool:
         """
-            Check if a measurement is feasible at some date.
+        Check if a measurement is feasible at some date.
         
-            Specified by:
-                :meth:`~org.orekit.estimation.measurements.generation.AbstractScheduler.measurementIsFeasible` in
-                class :class:`~org.orekit.estimation.measurements.generation.AbstractScheduler`
+        Specified by: measurementIsFeasible in class AbstractScheduler
         
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date to check
+        Parameters:
+            date (AbsoluteDate): date to check
         
-            Returns:
-                true if measurement if feasible
+        Returns:
+            true if measurement if feasible
         
         
         """
@@ -648,102 +933,213 @@ class EventBasedScheduler(AbstractScheduler[_EventBasedScheduler__T], typing.Gen
 
 class FDOABuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.FDOA]):
     """
-    public class FDOABuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.FDOA`>
+    Builder for FDOA measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.FDOA` measurements.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, groundStation2: org.orekit.estimation.measurements.GroundStation, double: float, double2: float, double3: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def __init__(self, noiseSource: org.hipparchus.random.CorrelatedRandomVectorGenerator, primeStation: org.orekit.estimation.measurements.GroundStation, secondStation: org.orekit.estimation.measurements.GroundStation, centreFrequency: float, sigma: float, baseWeight: float, satellite: org.orekit.estimation.measurements.ObservableSatellite):
+        """
+        Simple constructor.
+        
+        Parameters:
+            noiseSource (CorrelatedRandomVectorGenerator): noise source, may be null for generating perfect measurements
+            primeStation (GroundStation): ground station that gives the date of the measurement
+            secondStation (GroundStation): ground station that gives the measurement
+            centreFrequency (double): satellite emitter frequency
+            sigma (double): theoretical standard deviation
+            baseWeight (double): base weight
+            satellite (ObservableSatellite): satellite related to this builder
+        
+        
+        """
+        ...
 
 class InterSatellitesOneWayRangeRateBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.gnss.InterSatellitesOneWayRangeRate]):
     """
-    public class InterSatellitesOneWayRangeRateBuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.gnss.InterSatellitesOneWayRangeRate`>
+    Builder for InterSatellitesOneWayRangeRate measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.gnss.InterSatellitesOneWayRangeRate` measurements.
-    
-        Since:
-            12.1
+    Since:
+        12.1
     """
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite, observableSatellite2: org.orekit.estimation.measurements.ObservableSatellite, double: float, double2: float): ...
+    def __init__(self, noiseSource: org.hipparchus.random.CorrelatedRandomVectorGenerator, local: org.orekit.estimation.measurements.ObservableSatellite, remote: org.orekit.estimation.measurements.ObservableSatellite, sigma: float, baseWeight: float):
+        """
+        Simple constructor.
+        
+        Parameters:
+            noiseSource (CorrelatedRandomVectorGenerator): noise source, may be null for generating perfect measurements
+            local (ObservableSatellite): satellite which receives the signal and performs the measurement
+            remote (ObservableSatellite): satellite which simply emits the signal
+            sigma (double): theoretical standard deviation
+            baseWeight (double): base weight
+        
+        
+        """
+        ...
 
 class InterSatellitesPhaseBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.gnss.InterSatellitesPhase]):
     """
-    public class InterSatellitesPhaseBuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.gnss.InterSatellitesPhase`>
+    Builder for InterSatellitesPhase measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.gnss.InterSatellitesPhase` measurements.
-    
-        Since:
-            10.3
+    Since:
+        10.3
     """
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite, observableSatellite2: org.orekit.estimation.measurements.ObservableSatellite, double: float, double2: float, double3: float, ambiguityCache: org.orekit.estimation.measurements.gnss.AmbiguityCache): ...
+    def __init__(self, noiseSource: org.hipparchus.random.CorrelatedRandomVectorGenerator, local: org.orekit.estimation.measurements.ObservableSatellite, remote: org.orekit.estimation.measurements.ObservableSatellite, wavelength: float, sigma: float, baseWeight: float, cache: org.orekit.estimation.measurements.gnss.AmbiguityCache):
+        """
+        Simple constructor.
+        
+        Parameters:
+            noiseSource (CorrelatedRandomVectorGenerator): noise source, may be null for generating perfect measurements
+            local (ObservableSatellite): satellite which receives the signal and performs the measurement
+            remote (ObservableSatellite): satellite which simply emits the signal
+            wavelength (double): phase observed value wavelength (m)
+            sigma (double): theoretical standard deviation
+            baseWeight (double): base weight
+            cache (AmbiguityCache): from which ambiguity drive should come
+        
+        Since:
+            12.1
+        
+        
+        """
+        ...
 
 class InterSatellitesRangeBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.InterSatellitesRange]):
     """
-    public class InterSatellitesRangeBuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.InterSatellitesRange`>
+    Builder for InterSatellitesRange measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.InterSatellitesRange` measurements.
-    
-        Since:
-            9.3
+    Since:
+        9.3
     """
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite, observableSatellite2: org.orekit.estimation.measurements.ObservableSatellite, boolean: bool, double: float, double2: float): ...
+    def __init__(self, noiseSource: org.hipparchus.random.CorrelatedRandomVectorGenerator, local: org.orekit.estimation.measurements.ObservableSatellite, remote: org.orekit.estimation.measurements.ObservableSatellite, twoWay: bool, sigma: float, baseWeight: float):
+        """
+        Simple constructor.
+        
+        Parameters:
+            noiseSource (CorrelatedRandomVectorGenerator): noise source, may be null for generating perfect measurements
+            local (ObservableSatellite): satellite which receives the signal and performs the measurement
+            remote (ObservableSatellite): satellite which simply emits the signal in the one-way case, or reflects the signal in the two-way case
+            twoWay (boolean): flag indicating whether it is a two-way measurement
+            sigma (double): theoretical standard deviation
+            baseWeight (double): base weight
+        
+        
+        """
+        ...
 
 class OneWayGNSSPhaseBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.gnss.OneWayGNSSPhase]):
     """
-    public class OneWayGNSSPhaseBuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSPhase`>
+    Builder for OneWayGNSSPhase measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSPhase` measurements.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite, observableSatellite2: org.orekit.estimation.measurements.ObservableSatellite, double: float, double2: float, double3: float, ambiguityCache: org.orekit.estimation.measurements.gnss.AmbiguityCache): ...
+    def __init__(self, noiseSource: org.hipparchus.random.CorrelatedRandomVectorGenerator, local: org.orekit.estimation.measurements.ObservableSatellite, remote: org.orekit.estimation.measurements.ObservableSatellite, wavelength: float, sigma: float, baseWeight: float, cache: org.orekit.estimation.measurements.gnss.AmbiguityCache):
+        """
+        Simple constructor.
+        
+        Parameters:
+            noiseSource (CorrelatedRandomVectorGenerator): noise source, may be null for generating perfect measurements
+            local (ObservableSatellite): satellite which receives the signal and performs the measurement
+            remote (ObservableSatellite): satellite which simply emits the signal
+            wavelength (double): phase observed value wavelength (m)
+            sigma (double): theoretical standard deviation
+            baseWeight (double): base weight
+            cache (AmbiguityCache): from which ambiguity drive should come
+        
+        Since:
+            12.1
+        
+        
+        """
+        ...
 
 class OneWayGNSSRangeBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.gnss.OneWayGNSSRange]):
     """
-    public class OneWayGNSSRangeBuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSRange`>
+    Builder for OneWayGNSSRange measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSRange` measurements.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite, observableSatellite2: org.orekit.estimation.measurements.ObservableSatellite, double: float, double2: float): ...
+    def __init__(self, noiseSource: org.hipparchus.random.CorrelatedRandomVectorGenerator, local: org.orekit.estimation.measurements.ObservableSatellite, remote: org.orekit.estimation.measurements.ObservableSatellite, sigma: float, baseWeight: float):
+        """
+        Simple constructor.
+        
+        Parameters:
+            noiseSource (CorrelatedRandomVectorGenerator): noise source, may be null for generating perfect measurements
+            local (ObservableSatellite): satellite which receives the signal and performs the measurement
+            remote (ObservableSatellite): satellite which simply emits the signal
+            sigma (double): theoretical standard deviation
+            baseWeight (double): base weight
+        
+        
+        """
+        ...
 
 class OneWayGNSSRangeRateBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.gnss.OneWayGNSSRangeRate]):
     """
-    public class OneWayGNSSRangeRateBuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSRangeRate`>
+    Builder for OneWayGNSSRangeRate measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSRangeRate` measurements.
-    
-        Since:
-            12.1
+    Since:
+        12.1
     """
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite, observableSatellite2: org.orekit.estimation.measurements.ObservableSatellite, double: float, double2: float): ...
+    def __init__(self, noiseSource: org.hipparchus.random.CorrelatedRandomVectorGenerator, local: org.orekit.estimation.measurements.ObservableSatellite, remote: org.orekit.estimation.measurements.ObservableSatellite, sigma: float, baseWeight: float):
+        """
+        Simple constructor.
+        
+        Parameters:
+            noiseSource (CorrelatedRandomVectorGenerator): noise source, may be null for generating perfect measurements
+            local (ObservableSatellite): satellite which receives the signal and performs the measurement
+            remote (ObservableSatellite): satellite which simply emits the signal
+            sigma (double): theoretical standard deviation
+            baseWeight (double): base weight
+        
+        
+        """
+        ...
 
 class PVBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.PV]):
     """
-    public class PVBuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.PV`>
+    Builder for PV measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.PV` measurements.
-    
-        Since:
-            9.3
+    Since:
+        9.3
     """
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, double: float, double2: float, double3: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def __init__(self, noiseSource: org.hipparchus.random.CorrelatedRandomVectorGenerator, sigmaPosition: float, sigmaVelocity: float, baseWeight: float, satellite: org.orekit.estimation.measurements.ObservableSatellite):
+        """
+        Simple constructor.
+        
+        Parameters:
+            noiseSource (CorrelatedRandomVectorGenerator): noise source, may be null for generating perfect measurements
+            sigmaPosition (double): theoretical standard deviation on position components
+            sigmaVelocity (double): theoretical standard deviation on velocity components
+            baseWeight (double): base weight
+            satellite (ObservableSatellite): satellite related to this builder
+        
+        
+        """
+        ...
 
 class PositionBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.Position]):
     """
-    public class PositionBuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.Position`>
+    Builder for Position measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.Position` measurements.
-    
-        Since:
-            9.3
+    Since:
+        9.3
     """
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, double: float, double2: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def __init__(self, noiseSource: org.hipparchus.random.CorrelatedRandomVectorGenerator, sigma: float, baseWeight: float, satellite: org.orekit.estimation.measurements.ObservableSatellite):
+        """
+        Simple constructor.
+        
+        Parameters:
+            noiseSource (CorrelatedRandomVectorGenerator): noise source, may be null for generating perfect measurements
+            sigma (double): theoretical standard deviation
+            baseWeight (double): base weight
+            satellite (ObservableSatellite): satellite related to this builder
+        
+        
+        """
+        ...
 
 _PythonAbstractMeasurementBuilder__T = typing.TypeVar('_PythonAbstractMeasurementBuilder__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class PythonAbstractMeasurementBuilder(AbstractMeasurementBuilder[_PythonAbstractMeasurementBuilder__T], typing.Generic[_PythonAbstractMeasurementBuilder__T]):
@@ -751,74 +1147,288 @@ class PythonAbstractMeasurementBuilder(AbstractMeasurementBuilder[_PythonAbstrac
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, double: float, double2: float, *observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
     @typing.overload
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], *observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
-    def buildObserved(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> _PythonAbstractMeasurementBuilder__T: ...
-    def finalize(self) -> None: ...
-    def getBaseWeight(self) -> typing.MutableSequence[float]: ...
-    def getEnd(self) -> org.orekit.time.AbsoluteDate: ...
-    def getNoise(self) -> typing.MutableSequence[float]: ...
-    def getSatellites(self) -> typing.MutableSequence[org.orekit.estimation.measurements.ObservableSatellite]: ...
-    def getStart(self) -> org.orekit.time.AbsoluteDate: ...
-    def getTheoreticalStandardDeviation(self) -> typing.MutableSequence[float]: ...
-    def pythonDecRef(self) -> None: ...
+    def buildObserved(self, date: org.orekit.time.AbsoluteDate, interpolators: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> _PythonAbstractMeasurementBuilder__T:
+        """
+        Build a dummy observed measurement.
+        
+        Specified by: buildObserved in class AbstractMeasurementBuilder
+        
+        Parameters:
+            date (AbsoluteDate): measurement date
+            interpolators (Map<ObservableSatellite, OrekitStepInterpolator> interpolators): interpolators relevant for this builder
+        
+        Returns:
+            dummy observed measurement
+        
+        
+        """
+        ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: meth:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getBaseWeight(self) -> typing.MutableSequence[float]:
+        """
+        Get the base weight associated with the measurement
+        
+        The base weight is used on residuals already normalized thanks to getTheoreticalStandardDeviation to increase or decrease relative effect of some measurements with respect to other measurements. It is a dimensionless value, typically between 0 and 1 (but it can really have any non-negative value).
+        
+        Overrides: getBaseWeight in class AbstractMeasurementBuilder
+        
+        Returns:
+            base weight
+        
+        Also see:
+            getTheoreticalStandardDeviation
+        
+        
+        """
+        ...
+    def getEnd(self) -> org.orekit.time.AbsoluteDate:
+        """
+        Get the end of the measurements time span.
+        
+        Overrides: getEnd in class AbstractMeasurementBuilder
+        
+        Returns:
+            end of the measurements time span
+        
+        
+        """
+        ...
+    def getNoise(self) -> typing.MutableSequence[float]:
+        """
+        Generate a noise vector.
+        
+        Overrides: getNoise in class AbstractMeasurementBuilder
+        
+        Returns:
+            noise vector (null if we generate perfect measurements)
+        
+        
+        """
+        ...
+    def getSatellites(self) -> typing.MutableSequence[org.orekit.estimation.measurements.ObservableSatellite]:
+        """
+        Get the satellites related to this measurement.
+        
+        Specified by: getSatellites in interface MeasurementBuilder
+        
+        Overrides: getSatellites in class AbstractMeasurementBuilder
+        
+        Returns:
+            satellites related to this measurement
+        
+        
+        """
+        ...
+    def getStart(self) -> org.orekit.time.AbsoluteDate:
+        """
+        Get the start of the measurements time span.
+        
+        Overrides: getStart in class AbstractMeasurementBuilder
+        
+        Returns:
+            start of the measurements time span
+        
+        
+        """
+        ...
+    def getTheoreticalStandardDeviation(self) -> typing.MutableSequence[float]:
+        """
+        Get the theoretical standard deviation.
+        
+        The theoretical standard deviation is a theoretical value used for normalizing the residuals. It acts as a weighting factor to mix appropriately measurements with different units and different accuracy. The value has the same dimension as the measurement itself (i.e. when a residual is divided by this value, it becomes dimensionless).
+        
+        Overrides: getTheoreticalStandardDeviation in class AbstractMeasurementBuilder
+        
+        Returns:
+            expected standard deviation
+        
+        Also see:
+            getBaseWeight
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
 
 _PythonAbstractScheduler__T = typing.TypeVar('_PythonAbstractScheduler__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class PythonAbstractScheduler(AbstractScheduler[_PythonAbstractScheduler__T], typing.Generic[_PythonAbstractScheduler__T]):
-    def __init__(self, measurementBuilder: MeasurementBuilder[_PythonAbstractScheduler__T], datesSelector: typing.Union[org.orekit.time.DatesSelector, typing.Callable], predicate: typing.Union[java.util.function.Predicate[org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractScheduler__T]], typing.Callable[[org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractScheduler__T]], bool]]): ...
-    def finalize(self) -> None: ...
-    def measurementIsFeasible(self, absoluteDate: org.orekit.time.AbsoluteDate) -> bool: ...
-    def pythonDecRef(self) -> None: ...
+    def __init__(self, builder: MeasurementBuilder[_PythonAbstractScheduler__T], selector: typing.Union[org.orekit.time.DatesSelector, typing.Callable], filter: typing.Union[java.util.function.Predicate[org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractScheduler__T]], typing.Callable[[org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractScheduler__T]], bool]]):
+        """
+        Simple constructor.
+        
+        Parameters:
+            builder (MeasurementBuilder<PythonAbstractScheduler> builder): builder for individual measurements
+            selector (DatesSelector): selector for dates
+            filter (Predicate<EstimatedMeasurementBase<PythonAbstractScheduler>>): predicate for a posteriori filtering of generated measurements (measurements are accepted if the predicates evaluates to
+                true)
+        
+        Since:
+            13.0
+        
+        
+        """
+        ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: meth:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def measurementIsFeasible(self, date: org.orekit.time.AbsoluteDate) -> bool:
+        """
+        Description copied from class: measurementIsFeasible Check if a measurement is feasible at some date.
+        
+        Specified by: measurementIsFeasible in class AbstractScheduler
+        
+        Parameters:
+            date (AbsoluteDate): date to check
+        
+        Returns:
+            true if measurement if feasible
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
 
 class RangeBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.Range]):
     """
-    public class RangeBuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.Range`>
+    Builder for Range measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.Range` measurements.
-    
-        Since:
-            9.3
+    Since:
+        9.3
     """
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, boolean: bool, double: float, double2: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def __init__(self, noiseSource: org.hipparchus.random.CorrelatedRandomVectorGenerator, station: org.orekit.estimation.measurements.GroundStation, twoWay: bool, sigma: float, baseWeight: float, satellite: org.orekit.estimation.measurements.ObservableSatellite):
+        """
+        Simple constructor.
+        
+        Parameters:
+            noiseSource (CorrelatedRandomVectorGenerator): noise source, may be null for generating perfect measurements
+            station (GroundStation): ground station from which measurement is performed
+            twoWay (boolean): flag indicating whether it is a two-way measurement
+            sigma (double): theoretical standard deviation
+            baseWeight (double): base weight
+            satellite (ObservableSatellite): satellite related to this builder
+        
+        
+        """
+        ...
 
 class RangeRateBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.RangeRate]):
     """
-    public class RangeRateBuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.RangeRate`>
+    Builder for RangeRate measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.RangeRate` measurements.
-    
-        Since:
-            9.3
+    Since:
+        9.3
     """
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, boolean: bool, double: float, double2: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def __init__(self, noiseSource: org.hipparchus.random.CorrelatedRandomVectorGenerator, station: org.orekit.estimation.measurements.GroundStation, twoWay: bool, sigma: float, baseWeight: float, satellite: org.orekit.estimation.measurements.ObservableSatellite):
+        """
+        Simple constructor.
+        
+        Parameters:
+            noiseSource (CorrelatedRandomVectorGenerator): noise source, may be null for generating perfect measurements
+            station (GroundStation): ground station from which measurement is performed
+            twoWay (boolean): flag indicating whether it is a two-way measurement
+            sigma (double): theoretical standard deviation
+            baseWeight (double): base weight
+            satellite (ObservableSatellite): satellite related to this builder
+        
+        
+        """
+        ...
 
 class TDOABuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.TDOA]):
     """
-    public class TDOABuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.TDOA`>
+    Builder for TDOA measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.TDOA` measurements.
-    
-        Since:
-            11.2
+    Since:
+        11.2
     """
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, groundStation2: org.orekit.estimation.measurements.GroundStation, double: float, double2: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def __init__(self, noiseSource: org.hipparchus.random.CorrelatedRandomVectorGenerator, primeStation: org.orekit.estimation.measurements.GroundStation, secondStation: org.orekit.estimation.measurements.GroundStation, sigma: float, baseWeight: float, satellite: org.orekit.estimation.measurements.ObservableSatellite):
+        """
+        Simple constructor.
+        
+        Parameters:
+            noiseSource (CorrelatedRandomVectorGenerator): noise source, may be null for generating perfect measurements
+            primeStation (GroundStation): ground station that gives the date of the measurement
+            secondStation (GroundStation): ground station that gives the measurement
+            sigma (double): theoretical standard deviation
+            baseWeight (double): base weight
+            satellite (ObservableSatellite): satellite related to this builder
+        
+        
+        """
+        ...
 
 class TurnAroundRangeBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.TurnAroundRange]):
     """
-    public class TurnAroundRangeBuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.TurnAroundRange`>
+    Builder for TurnAroundRange measurements.
     
-        Builder for :class:`~org.orekit.estimation.measurements.TurnAroundRange` measurements.
-    
-        Since:
-            9.3
+    Since:
+        9.3
     """
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, groundStation2: org.orekit.estimation.measurements.GroundStation, double: float, double2: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def __init__(self, noiseSource: org.hipparchus.random.CorrelatedRandomVectorGenerator, primaryStation: org.orekit.estimation.measurements.GroundStation, secondaryStation: org.orekit.estimation.measurements.GroundStation, sigma: float, baseWeight: float, satellite: org.orekit.estimation.measurements.ObservableSatellite):
+        """
+        Simple constructor.
+        
+        Parameters:
+            noiseSource (CorrelatedRandomVectorGenerator): noise source, may be null for generating perfect measurements
+            primaryStation (GroundStation): ground station from which measurement is performed
+            secondaryStation (GroundStation): ground station reflecting the signal
+            sigma (double): theoretical standard deviation
+            baseWeight (double): base weight
+            satellite (ObservableSatellite): satellite related to this builder
+        
+        
+        """
+        ...
 
 
 class __module_protocol__(Protocol):

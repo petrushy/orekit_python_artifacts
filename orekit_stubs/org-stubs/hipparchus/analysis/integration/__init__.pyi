@@ -15,460 +15,488 @@ import typing
 _FieldUnivariateIntegrator__T = typing.TypeVar('_FieldUnivariateIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldUnivariateIntegrator(typing.Generic[_FieldUnivariateIntegrator__T]):
     """
-    public interfaceFieldUnivariateIntegrator<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>>
+    Interface for univariate real integration algorithms.
     
-        Interface for univariate real integration algorithms.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
     def getAbsoluteAccuracy(self) -> float:
         """
-            Get the absolute accuracy.
+        Get the absolute accuracy.
         
-            Returns:
-                the accuracy
+        Returns:
+            the accuracy
         
         
         """
         ...
     def getEvaluations(self) -> int:
         """
-            Get the number of function evaluations of the last run of the integrator.
+        Get the number of function evaluations of the last run of the integrator.
         
-            Returns:
-                number of function evaluations
+        Returns:
+            number of function evaluations
         
         
         """
         ...
     def getIterations(self) -> int:
         """
-            Get the number of iterations of the last run of the integrator.
+        Get the number of iterations of the last run of the integrator.
         
-            Returns:
-                number of iterations
+        Returns:
+            number of iterations
         
         
         """
         ...
     def getMaximalIterationCount(self) -> int:
         """
-            Get the upper limit for the number of iterations.
+        Get the upper limit for the number of iterations.
         
-            Returns:
-                the actual upper limit
+        Returns:
+            the actual upper limit
         
         
         """
         ...
     def getMinimalIterationCount(self) -> int:
         """
-            Get the min limit for the number of iterations.
+        Get the min limit for the number of iterations.
         
-            Returns:
-                the actual min limit
+        Returns:
+            the actual min limit
         
         
         """
         ...
     def getRelativeAccuracy(self) -> float:
         """
-            Get the relative accuracy.
+        Get the relative accuracy.
         
-            Returns:
-                the accuracy
+        Returns:
+            the accuracy
         
         
         """
         ...
-    def integrate(self, int: int, calculusFieldUnivariateFunction: typing.Union[org.hipparchus.analysis.CalculusFieldUnivariateFunction[_FieldUnivariateIntegrator__T], typing.Callable[[_FieldUnivariateIntegrator__T], _FieldUnivariateIntegrator__T]], t: _FieldUnivariateIntegrator__T, t2: _FieldUnivariateIntegrator__T) -> _FieldUnivariateIntegrator__T: ...
+    def integrate(self, maxEval: int, f: typing.Union[org.hipparchus.analysis.CalculusFieldUnivariateFunction[_FieldUnivariateIntegrator__T], typing.Callable[[_FieldUnivariateIntegrator__T], _FieldUnivariateIntegrator__T]], min: _FieldUnivariateIntegrator__T, max: _FieldUnivariateIntegrator__T) -> _FieldUnivariateIntegrator__T:
+        """
+        Integrate the function in the given interval.
+        
+        Parameters:
+            maxEval (int): Maximum number of evaluations.
+            f (CalculusFieldUnivariateFunction<FieldUnivariateIntegrator> f): the integrand function
+            min (FieldUnivariateIntegrator): the lower bound for the interval
+            max (FieldUnivariateIntegrator): the upper bound for the interval
+        
+        Returns:
+            the value of integral
+        
+        Raises:
+            MathIllegalStateException: if the maximum number of function evaluations is exceeded
+            MathIllegalStateException: if the maximum iteration count is exceeded or the integrator detects convergence problems otherwise
+            MathIllegalArgumentException: if min > max or the endpoints do not satisfy the requirements specified by the integrator
+            NullArgumentException: if f is null.
+        
+        
+        """
+        ...
 
 class UnivariateIntegrator:
     """
-    public interfaceUnivariateIntegrator
-    
-        Interface for univariate real integration algorithms.
+    Interface for univariate real integration algorithms.
     """
     def getAbsoluteAccuracy(self) -> float:
         """
-            Get the absolute accuracy.
+        Get the absolute accuracy.
         
-            Returns:
-                the accuracy
+        Returns:
+            the accuracy
         
         
         """
         ...
     def getEvaluations(self) -> int:
         """
-            Get the number of function evaluations of the last run of the integrator.
+        Get the number of function evaluations of the last run of the integrator.
         
-            Returns:
-                number of function evaluations
+        Returns:
+            number of function evaluations
         
         
         """
         ...
     def getIterations(self) -> int:
         """
-            Get the number of iterations of the last run of the integrator.
+        Get the number of iterations of the last run of the integrator.
         
-            Returns:
-                number of iterations
+        Returns:
+            number of iterations
         
         
         """
         ...
     def getMaximalIterationCount(self) -> int:
         """
-            Get the upper limit for the number of iterations.
+        Get the upper limit for the number of iterations.
         
-            Returns:
-                the actual upper limit
+        Returns:
+            the actual upper limit
         
         
         """
         ...
     def getMinimalIterationCount(self) -> int:
         """
-            Get the min limit for the number of iterations.
+        Get the min limit for the number of iterations.
         
-            Returns:
-                the actual min limit
+        Returns:
+            the actual min limit
         
         
         """
         ...
     def getRelativeAccuracy(self) -> float:
         """
-            Get the relative accuracy.
+        Get the relative accuracy.
         
-            Returns:
-                the accuracy
+        Returns:
+            the accuracy
         
         
         """
         ...
-    def integrate(self, int: int, univariateFunction: typing.Union[org.hipparchus.analysis.UnivariateFunction, typing.Callable], double: float, double2: float) -> float: ...
+    def integrate(self, maxEval: int, f: typing.Union[org.hipparchus.analysis.UnivariateFunction, typing.Callable], min: float, max: float) -> float:
+        """
+        Integrate the function in the given interval.
+        
+        Parameters:
+            maxEval (int): Maximum number of evaluations.
+            f (UnivariateFunction): the integrand function
+            min (double): the lower bound for the interval
+            max (double): the upper bound for the interval
+        
+        Returns:
+            the value of integral
+        
+        Raises:
+            MathIllegalStateException: if the maximum number of function evaluations is exceeded
+            MathIllegalStateException: if the maximum iteration count is exceeded or the integrator detects convergence problems otherwise
+            MathIllegalArgumentException: if min > max or the endpoints do not satisfy the requirements specified by the integrator
+            NullArgumentException: if f is null.
+        
+        
+        """
+        ...
 
 _BaseAbstractFieldUnivariateIntegrator__T = typing.TypeVar('_BaseAbstractFieldUnivariateIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class BaseAbstractFieldUnivariateIntegrator(FieldUnivariateIntegrator[_BaseAbstractFieldUnivariateIntegrator__T], typing.Generic[_BaseAbstractFieldUnivariateIntegrator__T]):
     """
-    public abstract classBaseAbstractFieldUnivariateIntegrator<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`<T>
+    implements FieldUnivariateIntegrator<T>
     
-        Provide a default implementation for several generic functions.
+    Provide a default implementation for several generic functions.
     
-        Since:
-            2.0
+    Since:
+        2.0
     """
     DEFAULT_ABSOLUTE_ACCURACY: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_ABSOLUTE_ACCURACY
+    Default absolute accuracy.
     
-        Default absolute accuracy.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     DEFAULT_RELATIVE_ACCURACY: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_RELATIVE_ACCURACY
+    Default relative accuracy.
     
-        Default relative accuracy.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     DEFAULT_MIN_ITERATIONS_COUNT: typing.ClassVar[int] = ...
     """
-    public static final int DEFAULT_MIN_ITERATIONS_COUNT
+    Default minimal iteration count.
     
-        Default minimal iteration count.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     DEFAULT_MAX_ITERATIONS_COUNT: typing.ClassVar[int] = ...
     """
-    public static final int DEFAULT_MAX_ITERATIONS_COUNT
+    Default maximal iteration count.
     
-        Default maximal iteration count.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     def getAbsoluteAccuracy(self) -> float:
         """
-            Get the absolute accuracy.
+        Get the absolute accuracy.
         
-            Specified by:
-                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getAbsoluteAccuracy` in
-                interface :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
+        Specified by: getAbsoluteAccuracy in interface FieldUnivariateIntegrator
         
-            Returns:
-                the accuracy
+        Returns:
+            the accuracy
         
         
         """
         ...
     def getEvaluations(self) -> int:
         """
-            Get the number of function evaluations of the last run of the integrator.
+        Get the number of function evaluations of the last run of the integrator.
         
-            Specified by:
-                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getEvaluations` in
-                interface :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
+        Specified by: getEvaluations in interface FieldUnivariateIntegrator
         
-            Returns:
-                number of function evaluations
+        Returns:
+            number of function evaluations
         
         
         """
         ...
-    def getField(self) -> org.hipparchus.Field[_BaseAbstractFieldUnivariateIntegrator__T]: ...
+    def getField(self) -> org.hipparchus.Field[_BaseAbstractFieldUnivariateIntegrator__T]:
+        """
+        Get the field to which function argument and value belong.
+        
+        Returns:
+            field to which function argument and value belong
+        
+        
+        """
+        ...
     def getIterations(self) -> int:
         """
-            Get the number of iterations of the last run of the integrator.
+        Get the number of iterations of the last run of the integrator.
         
-            Specified by:
-                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getIterations` in
-                interface :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
+        Specified by: getIterations in interface FieldUnivariateIntegrator
         
-            Returns:
-                number of iterations
+        Returns:
+            number of iterations
         
         
         """
         ...
     def getMaximalIterationCount(self) -> int:
         """
-            Get the upper limit for the number of iterations.
+        Get the upper limit for the number of iterations.
         
-            Specified by:
-                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getMaximalIterationCount` in
-                interface :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
+        Specified by: getMaximalIterationCount in interface FieldUnivariateIntegrator
         
-            Returns:
-                the actual upper limit
+        Returns:
+            the actual upper limit
         
         
         """
         ...
     def getMinimalIterationCount(self) -> int:
         """
-            Get the min limit for the number of iterations.
+        Get the min limit for the number of iterations.
         
-            Specified by:
-                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getMinimalIterationCount` in
-                interface :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
+        Specified by: getMinimalIterationCount in interface FieldUnivariateIntegrator
         
-            Returns:
-                the actual min limit
+        Returns:
+            the actual min limit
         
         
         """
         ...
     def getRelativeAccuracy(self) -> float:
         """
-            Get the relative accuracy.
+        Get the relative accuracy.
         
-            Specified by:
-                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getRelativeAccuracy` in
-                interface :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
+        Specified by: getRelativeAccuracy in interface FieldUnivariateIntegrator
         
-            Returns:
-                the accuracy
+        Returns:
+            the accuracy
         
         
         """
         ...
-    def integrate(self, int: int, calculusFieldUnivariateFunction: typing.Union[org.hipparchus.analysis.CalculusFieldUnivariateFunction[_BaseAbstractFieldUnivariateIntegrator__T], typing.Callable[[_BaseAbstractFieldUnivariateIntegrator__T], _BaseAbstractFieldUnivariateIntegrator__T]], t: _BaseAbstractFieldUnivariateIntegrator__T, t2: _BaseAbstractFieldUnivariateIntegrator__T) -> _BaseAbstractFieldUnivariateIntegrator__T: ...
+    def integrate(self, maxEval: int, f: typing.Union[org.hipparchus.analysis.CalculusFieldUnivariateFunction[_BaseAbstractFieldUnivariateIntegrator__T], typing.Callable[[_BaseAbstractFieldUnivariateIntegrator__T], _BaseAbstractFieldUnivariateIntegrator__T]], lower: _BaseAbstractFieldUnivariateIntegrator__T, upper: _BaseAbstractFieldUnivariateIntegrator__T) -> _BaseAbstractFieldUnivariateIntegrator__T:
+        """
+        Integrate the function in the given interval.
+        
+        Specified by: integrate in interface FieldUnivariateIntegrator
+        
+        Parameters:
+            maxEval (int): Maximum number of evaluations.
+            f (CalculusFieldUnivariateFunction<BaseAbstractFieldUnivariateIntegrator> f): the integrand function
+            lower (BaseAbstractFieldUnivariateIntegrator): the lower bound for the interval
+            upper (BaseAbstractFieldUnivariateIntegrator): the upper bound for the interval
+        
+        Returns:
+            the value of integral
+        
+        Raises:
+            MathIllegalArgumentException: if min > max or the endpoints do not satisfy the requirements specified by the integrator
+            MathIllegalStateException: if the maximum number of function evaluations is exceeded
+            MathIllegalStateException: if the maximum iteration count is exceeded or the integrator detects convergence problems otherwise
+            NullArgumentException: if f is null.
+        
+        
+        """
+        ...
 
 class BaseAbstractUnivariateIntegrator(UnivariateIntegrator):
     """
-    public abstract classBaseAbstractUnivariateIntegrator extends :class:`~org.hipparchus.analysis.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
+    implements UnivariateIntegrator
     
-        Provide a default implementation for several generic functions.
+    Provide a default implementation for several generic functions.
     """
     DEFAULT_ABSOLUTE_ACCURACY: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_ABSOLUTE_ACCURACY
+    Default absolute accuracy.
     
-        Default absolute accuracy.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     DEFAULT_RELATIVE_ACCURACY: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_RELATIVE_ACCURACY
+    Default relative accuracy.
     
-        Default relative accuracy.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     DEFAULT_MIN_ITERATIONS_COUNT: typing.ClassVar[int] = ...
     """
-    public static final int DEFAULT_MIN_ITERATIONS_COUNT
+    Default minimal iteration count.
     
-        Default minimal iteration count.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     DEFAULT_MAX_ITERATIONS_COUNT: typing.ClassVar[int] = ...
     """
-    public static final int DEFAULT_MAX_ITERATIONS_COUNT
+    Default maximal iteration count.
     
-        Default maximal iteration count.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     def getAbsoluteAccuracy(self) -> float:
         """
-            Get the absolute accuracy.
+        Get the absolute accuracy.
         
-            Specified by:
-                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getAbsoluteAccuracy` in
-                interface :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
+        Specified by: getAbsoluteAccuracy in interface UnivariateIntegrator
         
-            Returns:
-                the accuracy
+        Returns:
+            the accuracy
         
         
         """
         ...
     def getEvaluations(self) -> int:
         """
-            Get the number of function evaluations of the last run of the integrator.
+        Get the number of function evaluations of the last run of the integrator.
         
-            Specified by:
-                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getEvaluations` in
-                interface :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
+        Specified by: getEvaluations in interface UnivariateIntegrator
         
-            Returns:
-                number of function evaluations
+        Returns:
+            number of function evaluations
         
         
         """
         ...
     def getIterations(self) -> int:
         """
-            Get the number of iterations of the last run of the integrator.
+        Get the number of iterations of the last run of the integrator.
         
-            Specified by:
-                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getIterations` in
-                interface :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
+        Specified by: getIterations in interface UnivariateIntegrator
         
-            Returns:
-                number of iterations
+        Returns:
+            number of iterations
         
         
         """
         ...
     def getMaximalIterationCount(self) -> int:
         """
-            Get the upper limit for the number of iterations.
+        Get the upper limit for the number of iterations.
         
-            Specified by:
-                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getMaximalIterationCount` in
-                interface :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
+        Specified by: getMaximalIterationCount in interface UnivariateIntegrator
         
-            Returns:
-                the actual upper limit
+        Returns:
+            the actual upper limit
         
         
         """
         ...
     def getMinimalIterationCount(self) -> int:
         """
-            Get the min limit for the number of iterations.
+        Get the min limit for the number of iterations.
         
-            Specified by:
-                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getMinimalIterationCount` in
-                interface :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
+        Specified by: getMinimalIterationCount in interface UnivariateIntegrator
         
-            Returns:
-                the actual min limit
+        Returns:
+            the actual min limit
         
         
         """
         ...
     def getRelativeAccuracy(self) -> float:
         """
-            Get the relative accuracy.
+        Get the relative accuracy.
         
-            Specified by:
-                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getRelativeAccuracy` in
-                interface :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
+        Specified by: getRelativeAccuracy in interface UnivariateIntegrator
         
-            Returns:
-                the accuracy
+        Returns:
+            the accuracy
         
         
         """
         ...
-    def integrate(self, int: int, univariateFunction: typing.Union[org.hipparchus.analysis.UnivariateFunction, typing.Callable], double: float, double2: float) -> float: ...
+    def integrate(self, maxEval: int, f: typing.Union[org.hipparchus.analysis.UnivariateFunction, typing.Callable], lower: float, upper: float) -> float:
+        """
+        Integrate the function in the given interval.
+        
+        Specified by: integrate in interface UnivariateIntegrator
+        
+        Parameters:
+            maxEval (int): Maximum number of evaluations.
+            f (UnivariateFunction): the integrand function
+            lower (double): the lower bound for the interval
+            upper (double): the upper bound for the interval
+        
+        Returns:
+            the value of integral
+        
+        Raises:
+            MathIllegalArgumentException: if min > max or the endpoints do not satisfy the requirements specified by the integrator
+            MathIllegalStateException: if the maximum number of function evaluations is exceeded
+            MathIllegalStateException: if the maximum iteration count is exceeded or the integrator detects convergence problems otherwise
+            NullArgumentException: if f is null.
+        
+        
+        """
+        ...
 
 _FieldMidPointIntegrator__T = typing.TypeVar('_FieldMidPointIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldMidPointIntegrator(BaseAbstractFieldUnivariateIntegrator[_FieldMidPointIntegrator__T], typing.Generic[_FieldMidPointIntegrator__T]):
     """
-    public classFieldMidPointIntegrator<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.integration.BaseAbstractFieldUnivariateIntegrator`<T>
+    Implements the ` Midpoint Rule <http://en.wikipedia.org/wiki/Midpoint_method>` for integration of real univariate functions. For reference, see Numerical Mathematics, ISBN 0387989595, chapter 9.2.
     
-        Implements the ` Midpoint Rule <http://en.wikipedia.org/wiki/Midpoint_method>` for integration of real univariate
-        functions. For reference, see **Numerical Mathematics**, ISBN 0387989595, chapter 9.2.
+    The function should be integrable.
     
-        The function should be integrable.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
     MIDPOINT_MAX_ITERATIONS_COUNT: typing.ClassVar[int] = ...
     """
-    public static final int MIDPOINT_MAX_ITERATIONS_COUNT
+    Maximum number of iterations for midpoint.
     
-        Maximum number of iterations for midpoint.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
@@ -483,26 +511,18 @@ class FieldMidPointIntegrator(BaseAbstractFieldUnivariateIntegrator[_FieldMidPoi
 _FieldRombergIntegrator__T = typing.TypeVar('_FieldRombergIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldRombergIntegrator(BaseAbstractFieldUnivariateIntegrator[_FieldRombergIntegrator__T], typing.Generic[_FieldRombergIntegrator__T]):
     """
-    public classFieldRombergIntegrator<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.integration.BaseAbstractFieldUnivariateIntegrator`<T>
+    Implements the ` Romberg Algorithm <http://mathworld.wolfram.com/RombergIntegration.html>` for integration of real univariate functions. For reference, see Introduction to Numerical Analysis, ISBN 038795452X, chapter 3.
     
-        Implements the ` Romberg Algorithm <http://mathworld.wolfram.com/RombergIntegration.html>` for integration of real
-        univariate functions. For reference, see **Introduction to Numerical Analysis**, ISBN 038795452X, chapter 3.
+    Romberg integration employs k successive refinements of the trapezoid rule to remove error terms less than order O(N^(-2k)). Simpson's rule is a special case of k = 2.
     
-        Romberg integration employs k successive refinements of the trapezoid rule to remove error terms less than order
-        O(N^(-2k)). Simpson's rule is a special case of k = 2.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
     ROMBERG_MAX_ITERATIONS_COUNT: typing.ClassVar[int] = ...
     """
-    public static final int ROMBERG_MAX_ITERATIONS_COUNT
+    Maximal number of iterations for Romberg.
     
-        Maximal number of iterations for Romberg.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
@@ -517,25 +537,18 @@ class FieldRombergIntegrator(BaseAbstractFieldUnivariateIntegrator[_FieldRomberg
 _FieldSimpsonIntegrator__T = typing.TypeVar('_FieldSimpsonIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldSimpsonIntegrator(BaseAbstractFieldUnivariateIntegrator[_FieldSimpsonIntegrator__T], typing.Generic[_FieldSimpsonIntegrator__T]):
     """
-    public classFieldSimpsonIntegrator<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.integration.BaseAbstractFieldUnivariateIntegrator`<T>
+    Implements ` Simpson's Rule <http://mathworld.wolfram.com/SimpsonsRule.html>` for integration of real univariate functions. For reference, see Introduction to Numerical Analysis, ISBN 038795452X, chapter 3.
     
-        Implements ` Simpson's Rule <http://mathworld.wolfram.com/SimpsonsRule.html>` for integration of real univariate
-        functions. For reference, see **Introduction to Numerical Analysis**, ISBN 038795452X, chapter 3.
+    This implementation employs the basic trapezoid rule to calculate Simpson's rule.
     
-        This implementation employs the basic trapezoid rule to calculate Simpson's rule.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
     SIMPSON_MAX_ITERATIONS_COUNT: typing.ClassVar[int] = ...
     """
-    public static final int SIMPSON_MAX_ITERATIONS_COUNT
+    Maximal number of iterations for Simpson.
     
-        Maximal number of iterations for Simpson.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
@@ -550,25 +563,18 @@ class FieldSimpsonIntegrator(BaseAbstractFieldUnivariateIntegrator[_FieldSimpson
 _FieldTrapezoidIntegrator__T = typing.TypeVar('_FieldTrapezoidIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTrapezoidIntegrator(BaseAbstractFieldUnivariateIntegrator[_FieldTrapezoidIntegrator__T], typing.Generic[_FieldTrapezoidIntegrator__T]):
     """
-    public classFieldTrapezoidIntegrator<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.integration.BaseAbstractFieldUnivariateIntegrator`<T>
+    Implements the ` Trapezoid Rule <http://mathworld.wolfram.com/TrapezoidalRule.html>` for integration of real univariate functions. For reference, see Introduction to Numerical Analysis, ISBN 038795452X, chapter 3.
     
-        Implements the ` Trapezoid Rule <http://mathworld.wolfram.com/TrapezoidalRule.html>` for integration of real univariate
-        functions. For reference, see **Introduction to Numerical Analysis**, ISBN 038795452X, chapter 3.
+    The function should be integrable.
     
-        The function should be integrable.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
     TRAPEZOID_MAX_ITERATIONS_COUNT: typing.ClassVar[int] = ...
     """
-    public static final int TRAPEZOID_MAX_ITERATIONS_COUNT
+    Maximum number of iterations for trapezoid.
     
-        Maximum number of iterations for trapezoid.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
@@ -583,18 +589,10 @@ class FieldTrapezoidIntegrator(BaseAbstractFieldUnivariateIntegrator[_FieldTrape
 _IterativeLegendreFieldGaussIntegrator__T = typing.TypeVar('_IterativeLegendreFieldGaussIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class IterativeLegendreFieldGaussIntegrator(BaseAbstractFieldUnivariateIntegrator[_IterativeLegendreFieldGaussIntegrator__T], typing.Generic[_IterativeLegendreFieldGaussIntegrator__T]):
     """
-    public classIterativeLegendreFieldGaussIntegrator<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.integration.BaseAbstractFieldUnivariateIntegrator`<T>
+    This algorithm divides the integration interval into equally-sized sub-interval and on each of them performs a ` Legendre-Gauss <http://mathworld.wolfram.com/Legendre-GaussQuadrature.html>` quadrature. Because of its non-adaptive nature, this algorithm can converge to a wrong value for the integral (for example, if the function is significantly different from zero toward the ends of the integration interval). In particular, a change of variables aimed at estimating integrals over infinite intervals as proposed ` here <http://en.wikipedia.org/w/index.php?title=Numerical_integration#Integrals_over_infinite_intervals>` should be avoided when using this class.
     
-        This algorithm divides the integration interval into equally-sized sub-interval and on each of them performs a `
-        Legendre-Gauss <http://mathworld.wolfram.com/Legendre-GaussQuadrature.html>` quadrature. Because of its *non-adaptive*
-        nature, this algorithm can converge to a wrong value for the integral (for example, if the function is significantly
-        different from zero toward the ends of the integration interval). In particular, a change of variables aimed at
-        estimating integrals over infinite intervals as proposed ` here
-        <http://en.wikipedia.org/w/index.php?title=Numerical_integration#Integrals_over_infinite_intervals>` should be avoided
-        when using this class.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_IterativeLegendreFieldGaussIntegrator__T], int: int, double: float, double2: float): ...
@@ -605,15 +603,7 @@ class IterativeLegendreFieldGaussIntegrator(BaseAbstractFieldUnivariateIntegrato
 
 class IterativeLegendreGaussIntegrator(BaseAbstractUnivariateIntegrator):
     """
-    public classIterativeLegendreGaussIntegrator extends :class:`~org.hipparchus.analysis.integration.BaseAbstractUnivariateIntegrator`
-    
-        This algorithm divides the integration interval into equally-sized sub-interval and on each of them performs a `
-        Legendre-Gauss <http://mathworld.wolfram.com/Legendre-GaussQuadrature.html>` quadrature. Because of its *non-adaptive*
-        nature, this algorithm can converge to a wrong value for the integral (for example, if the function is significantly
-        different from zero toward the ends of the integration interval). In particular, a change of variables aimed at
-        estimating integrals over infinite intervals as proposed ` here
-        <http://en.wikipedia.org/w/index.php?title=Numerical_integration#Integrals_over_infinite_intervals>` should be avoided
-        when using this class.
+    This algorithm divides the integration interval into equally-sized sub-interval and on each of them performs a ` Legendre-Gauss <http://mathworld.wolfram.com/Legendre-GaussQuadrature.html>` quadrature. Because of its non-adaptive nature, this algorithm can converge to a wrong value for the integral (for example, if the function is significantly different from zero toward the ends of the integration interval). In particular, a change of variables aimed at estimating integrals over infinite intervals as proposed ` here <http://en.wikipedia.org/w/index.php?title=Numerical_integration#Integrals_over_infinite_intervals>` should be avoided when using this class.
     """
     @typing.overload
     def __init__(self, int: int, double: float, double2: float): ...
@@ -624,22 +614,15 @@ class IterativeLegendreGaussIntegrator(BaseAbstractUnivariateIntegrator):
 
 class MidPointIntegrator(BaseAbstractUnivariateIntegrator):
     """
-    public classMidPointIntegrator extends :class:`~org.hipparchus.analysis.integration.BaseAbstractUnivariateIntegrator`
+    Implements the ` Midpoint Rule <http://en.wikipedia.org/wiki/Midpoint_method>` for integration of real univariate functions. For reference, see Numerical Mathematics, ISBN 0387989595, chapter 9.2.
     
-        Implements the ` Midpoint Rule <http://en.wikipedia.org/wiki/Midpoint_method>` for integration of real univariate
-        functions. For reference, see **Numerical Mathematics**, ISBN 0387989595, chapter 9.2.
-    
-        The function should be integrable.
+    The function should be integrable.
     """
     MIDPOINT_MAX_ITERATIONS_COUNT: typing.ClassVar[int] = ...
     """
-    public static final int MIDPOINT_MAX_ITERATIONS_COUNT
+    Maximum number of iterations for midpoint.
     
-        Maximum number of iterations for midpoint.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
@@ -653,23 +636,15 @@ class MidPointIntegrator(BaseAbstractUnivariateIntegrator):
 
 class RombergIntegrator(BaseAbstractUnivariateIntegrator):
     """
-    public classRombergIntegrator extends :class:`~org.hipparchus.analysis.integration.BaseAbstractUnivariateIntegrator`
+    Implements the ` Romberg Algorithm <http://mathworld.wolfram.com/RombergIntegration.html>` for integration of real univariate functions. For reference, see Introduction to Numerical Analysis, ISBN 038795452X, chapter 3.
     
-        Implements the ` Romberg Algorithm <http://mathworld.wolfram.com/RombergIntegration.html>` for integration of real
-        univariate functions. For reference, see **Introduction to Numerical Analysis**, ISBN 038795452X, chapter 3.
-    
-        Romberg integration employs k successive refinements of the trapezoid rule to remove error terms less than order
-        O(N^(-2k)). Simpson's rule is a special case of k = 2.
+    Romberg integration employs k successive refinements of the trapezoid rule to remove error terms less than order O(N^(-2k)). Simpson's rule is a special case of k = 2.
     """
     ROMBERG_MAX_ITERATIONS_COUNT: typing.ClassVar[int] = ...
     """
-    public static final int ROMBERG_MAX_ITERATIONS_COUNT
+    Maximal number of iterations for Romberg.
     
-        Maximal number of iterations for Romberg.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
@@ -683,22 +658,15 @@ class RombergIntegrator(BaseAbstractUnivariateIntegrator):
 
 class SimpsonIntegrator(BaseAbstractUnivariateIntegrator):
     """
-    public classSimpsonIntegrator extends :class:`~org.hipparchus.analysis.integration.BaseAbstractUnivariateIntegrator`
+    Implements ` Simpson's Rule <http://mathworld.wolfram.com/SimpsonsRule.html>` for integration of real univariate functions. For reference, see Introduction to Numerical Analysis, ISBN 038795452X, chapter 3.
     
-        Implements ` Simpson's Rule <http://mathworld.wolfram.com/SimpsonsRule.html>` for integration of real univariate
-        functions. For reference, see **Introduction to Numerical Analysis**, ISBN 038795452X, chapter 3.
-    
-        This implementation employs the basic trapezoid rule to calculate Simpson's rule.
+    This implementation employs the basic trapezoid rule to calculate Simpson's rule.
     """
     SIMPSON_MAX_ITERATIONS_COUNT: typing.ClassVar[int] = ...
     """
-    public static final int SIMPSON_MAX_ITERATIONS_COUNT
+    Maximal number of iterations for Simpson.
     
-        Maximal number of iterations for Simpson.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
@@ -712,22 +680,15 @@ class SimpsonIntegrator(BaseAbstractUnivariateIntegrator):
 
 class TrapezoidIntegrator(BaseAbstractUnivariateIntegrator):
     """
-    public classTrapezoidIntegrator extends :class:`~org.hipparchus.analysis.integration.BaseAbstractUnivariateIntegrator`
+    Implements the ` Trapezoid Rule <http://mathworld.wolfram.com/TrapezoidalRule.html>` for integration of real univariate functions. For reference, see Introduction to Numerical Analysis, ISBN 038795452X, chapter 3.
     
-        Implements the ` Trapezoid Rule <http://mathworld.wolfram.com/TrapezoidalRule.html>` for integration of real univariate
-        functions. For reference, see **Introduction to Numerical Analysis**, ISBN 038795452X, chapter 3.
-    
-        The function should be integrable.
+    The function should be integrable.
     """
     TRAPEZOID_MAX_ITERATIONS_COUNT: typing.ClassVar[int] = ...
     """
-    public static final int TRAPEZOID_MAX_ITERATIONS_COUNT
+    Maximum number of iterations for trapezoid.
     
-        Maximum number of iterations for trapezoid.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     

@@ -29,23 +29,17 @@ import typing
 
 class EarthShape(org.orekit.bodies.BodyShape):
     """
-    public interface EarthShape extends :class:`~org.orekit.bodies.BodyShape`
+    All models of Earth's shape have some common properties that are not shared with arbitrary BodyShapes. In particular, an ellipsoidal (or spherical) model is used to compute latitude and longitude.
     
-        All models of Earth's shape have some common properties that are not shared with arbitrary
-        :class:`~org.orekit.bodies.BodyShape`s. In particular, an ellipsoidal (or spherical) model is used to compute latitude
-        and longitude.
-    
-        Also see:
-            :meth:`~org.orekit.models.earth.EarthShape.getEllipsoid`
+    Also see:
+        getEllipsoid
     """
     def getEllipsoid(self) -> 'ReferenceEllipsoid':
         """
-            Get the underlying ellipsoid model that defines latitude and longitude. If the height component of a
-            :class:`~org.orekit.bodies.GeodeticPoint` is not needed, then using the ellipsoid will provide the quickest
-            transformation.
+        Get the underlying ellipsoid model that defines latitude and longitude. If the height component of a GeodeticPoint is not needed, then using the ellipsoid will provide the quickest transformation.
         
-            Returns:
-                the reference ellipsoid. May be :code:`this`, but never :code:`null`.
+        Returns:
+            the reference ellipsoid. May be this, but never null.
         
         
         """
@@ -53,78 +47,64 @@ class EarthShape(org.orekit.bodies.BodyShape):
 
 class EarthStandardAtmosphereRefraction(org.orekit.models.AtmosphericRefractionModel):
     """
-    public class EarthStandardAtmosphereRefraction extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.AtmosphericRefractionModel`
+    Implementation of refraction model for Earth standard atmosphere.
     
-        Implementation of refraction model for Earth standard atmosphere.
+    Refraction angle is 0 at zenith, about 1 arcminute at 45°, and 34 arcminutes at the horizon for optical wavelengths.
     
-        Refraction angle is 0 at zenith, about 1 arcminute at 45°, and 34 arcminutes at the horizon for optical wavelengths.
+    Refraction angle is computed according to Saemundssen formula quoted by Meeus. For reference, see Astronomical Algorithms (1998), 2nd ed, (ISBN 0-943396-61-1), chap. 15.
     
-        Refraction angle is computed according to Saemundssen formula quoted by Meeus. For reference, see **Astronomical
-        Algorithms** (1998), 2nd ed, (ISBN 0-943396-61-1), chap. 15.
+    This formula is about 30 arcseconds of accuracy very close to the horizon, as variable atmospheric effects become very important.
     
-        This formula is about 30 arcseconds of accuracy very close to the horizon, as variable atmospheric effects become very
-        important.
+    Local pressure and temperature can be set to correct refraction at the viewpoint.
     
-        Local pressure and temperature can be set to correct refraction at the viewpoint.
+    Since:
+        6.1
     
-        Since:
-            6.1
-    
-        Also see:
-            :meth:`~serialized`
+    Also see:
+        serialized
     """
     DEFAULT_CORRECTION_FACTOR: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_CORRECTION_FACTOR
+    Default correction factor value.
     
-        Default correction factor value.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     DEFAULT_PRESSURE: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_PRESSURE
+    Default local pressure at viewpoint (Pa).
     
-        Default local pressure at viewpoint (Pa).
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     DEFAULT_TEMPERATURE: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_TEMPERATURE
+    Default local temperature at viewpoint (K).
     
-        Default local temperature at viewpoint (K).
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     STANDARD_ATM_PRESSURE: typing.ClassVar[float] = ...
     """
-    public static final double STANDARD_ATM_PRESSURE
+    NIST standard atmospheric pressure (Pa).
     
-        NIST standard atmospheric pressure (Pa).
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     STANDARD_ATM_TEMPERATURE: typing.ClassVar[float] = ...
     """
-    public static final double STANDARD_ATM_TEMPERATURE
+    NIST standard atmospheric temperature (K).
     
-        NIST standard atmospheric temperature (K).
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -134,64 +114,59 @@ class EarthStandardAtmosphereRefraction(org.orekit.models.AtmosphericRefractionM
     def __init__(self, double: float, double2: float): ...
     def getPressure(self) -> float:
         """
-            Get the local pressure at the evaluation location.
+        Get the local pressure at the evaluation location.
         
-            Returns:
-                the pressure (Pa)
+        Returns:
+            the pressure (Pa)
         
         
         """
         ...
-    def getRefraction(self, double: float) -> float:
+    def getRefraction(self, trueElevation: float) -> float:
         """
-            Description copied from interface: :meth:`~org.orekit.models.AtmosphericRefractionModel.getRefraction`
-            Compute the refraction angle from the true (geometrical) elevation.
+        Description copied from interface: getRefraction Compute the refraction angle from the true (geometrical) elevation.
         
-            Specified by:
-                :meth:`~org.orekit.models.AtmosphericRefractionModel.getRefraction` in
-                interface :class:`~org.orekit.models.AtmosphericRefractionModel`
+        Specified by: getRefraction in interface AtmosphericRefractionModel
         
-            Parameters:
-                trueElevation (double): true elevation (rad)
+        Parameters:
+            trueElevation (double): true elevation (rad)
         
-            Returns:
-                refraction angle (rad)
+        Returns:
+            refraction angle (rad)
         
         
         """
         ...
     def getTemperature(self) -> float:
         """
-            Get the local temperature at the evaluation location.
+        Get the local temperature at the evaluation location.
         
-            Returns:
-                the temperature (K)
-        
-        
-        """
-        ...
-    def setPressure(self, double: float) -> None:
-        """
-            Set the local pressure at the evaluation location
-        
-            Otherwise the default value for the local pressure is set to
-            :meth:`~org.orekit.models.earth.EarthStandardAtmosphereRefraction.DEFAULT_PRESSURE`.
-        
-            Parameters:
-                pressure (double): the pressure to set (Pa)
+        Returns:
+            the temperature (K)
         
         
         """
         ...
-    def setTemperature(self, double: float) -> None:
+    def setPressure(self, pressure: float) -> None:
         """
-            Set the local temperature at the evaluation location
+        Set the local pressure at the evaluation location
         
-            Otherwise the default value for the local temperature is set to
-            :meth:`~org.orekit.models.earth.EarthStandardAtmosphereRefraction.DEFAULT_TEMPERATURE`.
+        Otherwise the default value for the local pressure is set to DEFAULT_PRESSURE.
         
-            Parameters:
-                temperature (double): the temperature to set (K)
+        Parameters:
+            pressure (double): the pressure to set (Pa)
+        
+        
+        """
+        ...
+    def setTemperature(self, temperature: float) -> None:
+        """
+        Set the local temperature at the evaluation location
+        
+        Otherwise the default value for the local temperature is set to DEFAULT_TEMPERATURE.
+        
+        Parameters:
+            temperature (double): the temperature to set (K)
         
         
         """
@@ -199,71 +174,74 @@ class EarthStandardAtmosphereRefraction(org.orekit.models.AtmosphericRefractionM
 
 class GeoMagneticElements(java.io.Serializable):
     """
-    public class GeoMagneticElements extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    Contains the elements to represent a magnetic field at a single point.
     
-        Contains the elements to represent a magnetic field at a single point.
-    
-        Also see:
-            :meth:`~serialized`
+    Also see:
+        serialized
     """
-    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
+    def __init__(self, b: org.hipparchus.geometry.euclidean.threed.Vector3D):
+        """
+        Construct a new element with the given field vector. The other elements of the magnetic field are calculated from the field vector.
+        
+        Parameters:
+            b (Vector3D): the magnetic field vector
+        
+        
+        """
+        ...
     def getDeclination(self) -> float:
         """
-            Returns the declination of the magnetic field in radians.
+        Returns the declination of the magnetic field in radians.
         
-            Returns:
-                the declination (dec) in radians
+        Returns:
+            the declination (dec) in radians
         
         
         """
         ...
     def getFieldVector(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Returns the magnetic field vector in Tesla.
+        Returns the magnetic field vector in Tesla.
         
-            Returns:
-                the magnetic field vector in Tesla
+        Returns:
+            the magnetic field vector in Tesla
         
         
         """
         ...
     def getHorizontalIntensity(self) -> float:
         """
-            Returns the horizontal intensity of the magnetic field (= norm of the vector in the plane spanned by the x/y components
-            of the field vector).
+        Returns the horizontal intensity of the magnetic field (= norm of the vector in the plane spanned by the x/y components of the field vector).
         
-            Returns:
-                the horizontal intensity in Tesla
+        Returns:
+            the horizontal intensity in Tesla
         
         
         """
         ...
     def getInclination(self) -> float:
         """
-            Returns the inclination of the magnetic field in radians.
+        Returns the inclination of the magnetic field in radians.
         
-            Returns:
-                the inclination (dip) in radians
+        Returns:
+            the inclination (dip) in radians
         
         
         """
         ...
     def getTotalIntensity(self) -> float:
         """
-            Returns the total intensity of the magnetic field (= norm of the field vector).
+        Returns the total intensity of the magnetic field (= norm of the field vector).
         
-            Returns:
-                the total intensity in Tesla
+        Returns:
+            the total intensity in Tesla
         
         
         """
         ...
     def toString(self) -> str:
         """
-        
-            Overrides:
-                :meth:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        Overrides: Object in class Object
         
         
         """
@@ -271,76 +249,71 @@ class GeoMagneticElements(java.io.Serializable):
 
 class GeoMagneticField:
     """
-    public class GeoMagneticField extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Used to calculate the geomagnetic field at a given geodetic point on earth. The calculation is estimated using spherical harmonic expansion of the geomagnetic potential with coefficients provided by an actual geomagnetic field model (e.g. IGRF, WMM).
     
-        Used to calculate the geomagnetic field at a given geodetic point on earth. The calculation is estimated using spherical
-        harmonic expansion of the geomagnetic potential with coefficients provided by an actual geomagnetic field model (e.g.
-        IGRF, WMM).
+    Based on original software written by Manoj Nair from the National Geophysical Data Center, NOAA, as part of the WMM 2010 software release (WMM_SubLibrary.c)
     
-        Based on original software written by Manoj Nair from the National Geophysical Data Center, NOAA, as part of the WMM
-        2010 software release (WMM_SubLibrary.c)
-    
-        Also see:
-            `World Magnetic Model Overview <http://www.ngdc.noaa.gov/geomag/WMM/DoDWMM.shtml>`, `WMM Software Downloads
-            <http://www.ngdc.noaa.gov/geomag/WMM/soft.shtml>`
+    Also see:
+        `World Magnetic Model Overview <http://www.ngdc.noaa.gov/geomag/WMM/DoDWMM.shtml>`, `WMM Software Downloads
+        <http://www.ngdc.noaa.gov/geomag/WMM/soft.shtml>`
     """
-    def calculateField(self, double: float, double2: float, double3: float) -> GeoMagneticElements:
+    def calculateField(self, latitude: float, longitude: float, height: float) -> GeoMagneticElements:
         """
-            Calculate the magnetic field at the specified geodetic point identified by latitude, longitude and altitude.
+        Calculate the magnetic field at the specified geodetic point identified by latitude, longitude and altitude.
         
-            Parameters:
-                latitude (double): the WGS84 latitude in radians
-                longitude (double): the WGS84 longitude in radians
-                height (double): the height above the WGS84 ellipsoid in meters
+        Parameters:
+            latitude (double): the WGS84 latitude in radians
+            longitude (double): the WGS84 longitude in radians
+            height (double): the height above the WGS84 ellipsoid in meters
         
-            Returns:
-                the :class:`~org.orekit.models.earth.GeoMagneticElements` at the given geodetic point
+        Returns:
+            the GeoMagneticElements at the given geodetic point
         
         
         """
         ...
     @staticmethod
-    def getDecimalYear(int: int, int2: int, int3: int) -> float:
+    def getDecimalYear(day: int, month: int, year: int) -> float:
         """
-            Utility function to get a decimal year for a given day.
+        Utility function to get a decimal year for a given day.
         
-            Parameters:
-                day (int): the day (1-31)
-                month (int): the month (1-12)
-                year (int): the year
+        Parameters:
+            day (int): the day (1-31)
+            month (int): the month (1-12)
+            year (int): the year
         
-            Returns:
-                the decimal year represented by the given day
+        Returns:
+            the decimal year represented by the given day
         
         
         """
         ...
     def getEpoch(self) -> float:
         """
-            Returns the epoch for this magnetic field model.
+        Returns the epoch for this magnetic field model.
         
-            Returns:
-                the epoch
+        Returns:
+            the epoch
         
         
         """
         ...
     def getModelName(self) -> str:
         """
-            Returns the model name.
+        Returns the model name.
         
-            Returns:
-                the model name
+        Returns:
+            the model name
         
         
         """
         ...
     def supportsTimeTransform(self) -> bool:
         """
-            Indicates whether this model supports time transformation or not.
+        Indicates whether this model supports time transformation or not.
         
-            Returns:
-                :code:`true` if this model can be transformed within its validity period, :code:`false` otherwise
+        Returns:
+            true if this model can be transformed within its validity period, false otherwise
         
         
         """
@@ -348,23 +321,22 @@ class GeoMagneticField:
     @typing.overload
     def transformModel(self, double: float) -> 'GeoMagneticField':
         """
-            Time transform the model coefficients from the base year of the model using secular variation coefficients.
+        Time transform the model coefficients from the base year of the model using secular variation coefficients.
         
-            Parameters:
-                year (double): the year to which the model shall be transformed
+        Parameters:
+            year (double): the year to which the model shall be transformed
         
-            Returns:
-                a time-transformed magnetic field model
+        Returns:
+            a time-transformed magnetic field model
         
-            Time transform the model coefficients from the base year of the model using a linear interpolation with a second model.
-            The second model is required to have an adjacent validity period.
+        Time transform the model coefficients from the base year of the model using a linear interpolation with a second model. The second model is required to have an adjacent validity period.
         
-            Parameters:
-                otherModel (:class:`~org.orekit.models.earth.GeoMagneticField`): the other magnetic field model
-                year (double): the year to which the model shall be transformed
+        Parameters:
+            otherModel (GeoMagneticField): the other magnetic field model
+            year (double): the year to which the model shall be transformed
         
-            Returns:
-                a time-transformed magnetic field model
+        Returns:
+            a time-transformed magnetic field model
         
         
         """
@@ -373,20 +345,20 @@ class GeoMagneticField:
     def transformModel(self, geoMagneticField: 'GeoMagneticField', double: float) -> 'GeoMagneticField': ...
     def validFrom(self) -> float:
         """
-            Returns the start of the validity period for this model.
+        Returns the start of the validity period for this model.
         
-            Returns:
-                the validity start as decimal year
+        Returns:
+            the validity start as decimal year
         
         
         """
         ...
     def validTo(self) -> float:
         """
-            Returns the end of the validity period for this model.
+        Returns the end of the validity period for this model.
         
-            Returns:
-                the validity end as decimal year
+        Returns:
+            the validity end as decimal year
         
         
         """
@@ -394,24 +366,80 @@ class GeoMagneticField:
 
 class GeoMagneticFieldFactory:
     """
-    public class GeoMagneticFieldFactory extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Factory for different GeoMagneticField models.
     
-        Factory for different :class:`~org.orekit.models.earth.GeoMagneticField` models.
+    This is a utility class, so its constructor is private.
     
-        This is a utility class, so its constructor is private.
-    
-        Also see:
-            :class:`~org.orekit.models.earth.GeoMagneticFields`, :class:`~org.orekit.models.earth.LazyLoadedGeoMagneticFields`,
-            :meth:`~org.orekit.data.DataContext.getGeoMagneticFields`
+    Also see:
+        GeoMagneticFields, LazyLoadedGeoMagneticFields,
+        getGeoMagneticFields
     """
     @staticmethod
-    def getField(fieldModel: 'GeoMagneticFieldFactory.FieldModel', double: float) -> GeoMagneticField: ...
+    def getField(type: 'GeoMagneticFieldFactory.FieldModel', year: float) -> GeoMagneticField:
+        """
+        Get the GeoMagneticField for the given model type and year.
+        
+        Parameters:
+            type (FieldModel): the field model type
+            year (double): the decimal year
+        
+        Returns:
+            a GeoMagneticField for the given year and model
+        
+        Also see:
+            getDecimalYear
+        
+        
+        """
+        ...
     @staticmethod
-    def getGeoMagneticFields() -> 'LazyLoadedGeoMagneticFields': ...
+    def getGeoMagneticFields() -> 'LazyLoadedGeoMagneticFields':
+        """
+        Get the instance of GeoMagneticFields that is called by methods in this class.
+        
+        Returns:
+            the geomagnetic fields used by this factory.
+        
+        Since:
+            10.1
+        
+        
+        """
+        ...
     @staticmethod
-    def getIGRF(double: float) -> GeoMagneticField: ...
+    def getIGRF(year: float) -> GeoMagneticField:
+        """
+        Get the IGRF model for the given year.
+        
+        Parameters:
+            year (double): the decimal year
+        
+        Returns:
+            a GeoMagneticField for the given year
+        
+        Also see:
+            getDecimalYear
+        
+        
+        """
+        ...
     @staticmethod
-    def getWMM(double: float) -> GeoMagneticField: ...
+    def getWMM(year: float) -> GeoMagneticField:
+        """
+        Get the WMM model for the given year.
+        
+        Parameters:
+            year (double): the decimal year
+        
+        Returns:
+            a GeoMagneticField for the given year
+        
+        Also see:
+            getDecimalYear
+        
+        
+        """
+        ...
     class FieldModel(java.lang.Enum['GeoMagneticFieldFactory.FieldModel']):
         WMM: typing.ClassVar['GeoMagneticFieldFactory.FieldModel'] = ...
         IGRF: typing.ClassVar['GeoMagneticFieldFactory.FieldModel'] = ...
@@ -427,61 +455,59 @@ class GeoMagneticFieldFactory:
 
 class GeoMagneticFields:
     """
-    public interface GeoMagneticFields
+    Methods for obtaining geomagnetic fields.
     
-        Methods for obtaining geomagnetic fields.
+    Since:
+        10.1
     
-        Since:
-            10.1
-    
-        Also see:
-            :class:`~org.orekit.models.earth.GeoMagneticFieldFactory`, :class:`~org.orekit.models.earth.LazyLoadedGeoMagneticFields`
+    Also see:
+        GeoMagneticFieldFactory, LazyLoadedGeoMagneticFields
     """
-    def getField(self, fieldModel: GeoMagneticFieldFactory.FieldModel, double: float) -> GeoMagneticField:
+    def getField(self, type: GeoMagneticFieldFactory.FieldModel, year: float) -> GeoMagneticField:
         """
-            Get the :class:`~org.orekit.models.earth.GeoMagneticField` for the given model type and year.
+        Get the GeoMagneticField for the given model type and year.
         
-            Parameters:
-                type (:class:`~org.orekit.models.earth.GeoMagneticFieldFactory.FieldModel`): the field model type
-                year (double): the decimal year
+        Parameters:
+            type (FieldModel): the field model type
+            year (double): the decimal year
         
-            Returns:
-                a :class:`~org.orekit.models.earth.GeoMagneticField` for the given year and model
+        Returns:
+            a GeoMagneticField for the given year and model
         
-            Also see:
-                :meth:`~org.orekit.models.earth.GeoMagneticField.getDecimalYear`
-        
-        
-        """
-        ...
-    def getIGRF(self, double: float) -> GeoMagneticField:
-        """
-            Get the IGRF model for the given year.
-        
-            Parameters:
-                year (double): the decimal year
-        
-            Returns:
-                a :class:`~org.orekit.models.earth.GeoMagneticField` for the given year
-        
-            Also see:
-                :meth:`~org.orekit.models.earth.GeoMagneticField.getDecimalYear`
+        Also see:
+            getDecimalYear
         
         
         """
         ...
-    def getWMM(self, double: float) -> GeoMagneticField:
+    def getIGRF(self, year: float) -> GeoMagneticField:
         """
-            Get the WMM model for the given year.
+        Get the IGRF model for the given year.
         
-            Parameters:
-                year (double): the decimal year
+        Parameters:
+            year (double): the decimal year
         
-            Returns:
-                a :class:`~org.orekit.models.earth.GeoMagneticField` for the given year
+        Returns:
+            a GeoMagneticField for the given year
         
-            Also see:
-                :meth:`~org.orekit.models.earth.GeoMagneticField.getDecimalYear`
+        Also see:
+            getDecimalYear
+        
+        
+        """
+        ...
+    def getWMM(self, year: float) -> GeoMagneticField:
+        """
+        Get the WMM model for the given year.
+        
+        Parameters:
+            year (double): the decimal year
+        
+        Returns:
+            a GeoMagneticField for the given year
+        
+        Also see:
+            getDecimalYear
         
         
         """
@@ -489,68 +515,83 @@ class GeoMagneticFields:
 
 class GeoMagneticModelLoader(org.orekit.data.DataLoader):
     """
-    public class GeoMagneticModelLoader extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataLoader`
+    Loads geomagnetic field models from a given input stream. A stream may contain multiple models, the loader reads all available models in consecutive order.
     
-        Loads geomagnetic field models from a given input stream. A stream may contain multiple models, the loader reads all
-        available models in consecutive order.
+    The format of the expected model file is either:
     
-        The format of the expected model file is either:
+      - combined format as used by the geomag software, available from the `IGRF model site
+        <http://www.ngdc.noaa.gov/IAGA/vmod/igrf.html>`; supports multiple epochs per file
+      - original format as used by the `WMM model site <http://www.ngdc.noaa.gov/geomag/WMM/DoDWMM.shtml>`.
     
-          - combined format as used by the geomag software, available from the `IGRF model site
-            <http://www.ngdc.noaa.gov/IAGA/vmod/igrf.html>`; supports multiple epochs per file
-          - original format as used by the `WMM model site <http://www.ngdc.noaa.gov/geomag/WMM/DoDWMM.shtml>`.
+    Combined Format
     
     
-        **Combined Format**
+         {model name} {epoch} {nMax} {nMaxSec} {nMax3} {validity start} {validity end} {minAlt} {maxAlt} {model name} {line number}
+     {n} {m} {gnm} {hnm} {dgnm} {dhnm} {model name} {line number}
+     
     
-        .. code-block: java
-        
-             {model name} {epoch} {nMax} {nMaxSec} {nMax3} {validity start} {validity end} {minAlt} {maxAlt} {model name} {line number}
-         {n} {m} {gnm} {hnm} {dgnm} {dhnm} {model name} {line number}
-         
+    Example:
     
-        Example:
+        WMM2010  2010.00 12 12  0 2010.00 2015.00   -1.0  600.0          WMM2010   0 1  0  -29496.6       0.0      11.6       0.0                        WMM2010   1 1  1   -1586.3    4944.4      16.5     -25.9                        WMM2010   2
     
-        .. code-block: java
-        
-            WMM2010  2010.00 12 12  0 2010.00 2015.00   -1.0  600.0          WMM2010   0
-         1  0  -29496.6       0.0      11.6       0.0                        WMM2010   1
-         1  1   -1586.3    4944.4      16.5     -25.9                        WMM2010   2
-         
+    Original WMM Format
     
-        **Original WMM Format**
     
-        .. code-block: java
-        
-            {epoch} {model name} {validity start}
-         {n} {m} {gnm} {hnm} {dgnm} {dhnm}
-         
+        {epoch} {model name} {validity start}
+     {n} {m} {gnm} {hnm} {dgnm} {dhnm}
+     
     
-        Example:
+    Example:
     
-        .. code-block: java
-        
-            2015.0            WMM-2015        12/15/2014
-          1  0  -29438.5       0.0       10.7        0.0
-          1  1   -1501.1    4796.2       17.9      -26.8
+        2015.0            WMM-2015        12/15/2014 1  0  -29438.5       0.0       10.7        0.0 1  1   -1501.1    4796.2       17.9      -26.8
     """
-    def __init__(self): ...
-    def getModels(self) -> java.util.Collection[GeoMagneticField]: ...
-    def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
+    def __init__(self):
+        """
+        Empty constructor.
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
+    def getModels(self) -> java.util.Collection[GeoMagneticField]:
+        """
+        Returns a Collection of the GeoMagneticField models that have been successfully loaded. The Collection is in insertion-order, thus it may not be sorted in order of the model epoch.
+        
+        Returns:
+            a Collection of
+            GeoMagneticField models
+        
+        
+        """
+        ...
+    def loadData(self, input: java.io.InputStream, name: str) -> None:
+        """
+        Load data from a stream.
+        
+        Specified by: loadData in interface DataLoader
+        
+        Parameters:
+            input (InputStream): data input stream
+            name (String): name of the file (or zip entry)
+        
+        Raises:
+            IOException: if data can't be read
+        
+        
+        """
+        ...
     def stillAcceptsData(self) -> bool:
         """
-            Check if the loader still accepts new data.
+        Check if the loader still accepts new data.
         
-            This method is used to speed up data loading by interrupting crawling the data sets as soon as a loader has found the
-            data it was waiting for. For loaders that can merge data from any number of sources (for example JPL ephemerides or
-            Earth Orientation Parameters that are split among several files), this method should always return true to make sure no
-            data is left over.
+        This method is used to speed up data loading by interrupting crawling the data sets as soon as a loader has found the data it was waiting for. For loaders that can merge data from any number of sources (for example JPL ephemerides or Earth Orientation Parameters that are split among several files), this method should always return true to make sure no data is left over.
         
-            Specified by:
-                :meth:`~org.orekit.data.DataLoader.stillAcceptsData` in interface :class:`~org.orekit.data.DataLoader`
+        Specified by: stillAcceptsData in interface DataLoader
         
-            Returns:
-                true while the loader still accepts new data
+        Returns:
+            true while the loader still accepts new data
         
         
         """
@@ -558,108 +599,114 @@ class GeoMagneticModelLoader(org.orekit.data.DataLoader):
 
 class GeoMagneticModelParser:
     """
-    public class GeoMagneticModelParser extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Loads geomagnetic field models from a given input stream. A stream may contain multiple models, the loader reads all available models in consecutive order.
     
-        Loads geomagnetic field models from a given input stream. A stream may contain multiple models, the loader reads all
-        available models in consecutive order.
+    The format of the expected model file is either:
     
-        The format of the expected model file is either:
+      - combined format as used by the geomag software, available from the `IGRF model site
+        <http://www.ngdc.noaa.gov/IAGA/vmod/igrf.html>`; supports multiple epochs per file
+      - original format as used by the `WMM model site <http://www.ngdc.noaa.gov/geomag/WMM/DoDWMM.shtml>`.
     
-          - combined format as used by the geomag software, available from the `IGRF model site
-            <http://www.ngdc.noaa.gov/IAGA/vmod/igrf.html>`; supports multiple epochs per file
-          - original format as used by the `WMM model site <http://www.ngdc.noaa.gov/geomag/WMM/DoDWMM.shtml>`.
+    Combined Format
     
     
-        **Combined Format**
+         {model name} {epoch} {nMax} {nMaxSec} {nMax3} {validity start} {validity end} {minAlt} {maxAlt} {model name} {line number}
+     {n} {m} {gnm} {hnm} {dgnm} {dhnm} {model name} {line number}
+     
     
-        .. code-block: java
-        
-             {model name} {epoch} {nMax} {nMaxSec} {nMax3} {validity start} {validity end} {minAlt} {maxAlt} {model name} {line number}
-         {n} {m} {gnm} {hnm} {dgnm} {dhnm} {model name} {line number}
-         
+    Example:
     
-        Example:
+        WMM2010  2010.00 12 12  0 2010.00 2015.00   -1.0  600.0          WMM2010   0 1  0  -29496.6       0.0      11.6       0.0                        WMM2010   1 1  1   -1586.3    4944.4      16.5     -25.9                        WMM2010   2
     
-        .. code-block: java
-        
-            WMM2010  2010.00 12 12  0 2010.00 2015.00   -1.0  600.0          WMM2010   0
-         1  0  -29496.6       0.0      11.6       0.0                        WMM2010   1
-         1  1   -1586.3    4944.4      16.5     -25.9                        WMM2010   2
-         
+    Original WMM Format
     
-        **Original WMM Format**
     
-        .. code-block: java
-        
-            {epoch} {model name} {validity start}
-         {n} {m} {gnm} {hnm} {dgnm} {dhnm}
-         
+        {epoch} {model name} {validity start}
+     {n} {m} {gnm} {hnm} {dgnm} {dhnm}
+     
     
-        Example:
+    Example:
     
-        .. code-block: java
-        
-            2015.0            WMM-2015        12/15/2014
-          1  0  -29438.5       0.0       10.7        0.0
-          1  1   -1501.1    4796.2       17.9      -26.8
-         
+        2015.0            WMM-2015        12/15/2014 1  0  -29438.5       0.0       10.7        0.0 1  1   -1501.1    4796.2       17.9      -26.8
     
-        Since:
-            13.0
+    Since:
+        13.0
     """
-    def __init__(self): ...
-    def parse(self, dataSource: org.orekit.data.DataSource) -> java.util.List[GeoMagneticField]: ...
+    def __init__(self):
+        """
+        Empty constructor.
+        """
+        ...
+    def parse(self, dataSource: org.orekit.data.DataSource) -> java.util.List[GeoMagneticField]:
+        """
+        Parse a model.
+        
+        Parameters:
+            dataSource (DataSource): source data
+        
+        Returns:
+            parsed fields
+        
+        Raises:
+            IOException: if an I/O error occurs
+        
+        
+        """
+        ...
 
 class ITURP834AtmosphericRefraction(org.orekit.models.AtmosphericRefractionModel):
     """
-    public class ITURP834AtmosphericRefraction extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.AtmosphericRefractionModel`
+    Implementation of refraction model for Earth exponential atmosphere based on ITU-R P.834 recommendation.
     
-        Implementation of refraction model for Earth exponential atmosphere based on ITU-R P.834 recommendation.
+    This class implements the ray bending part, i.e. section 1 of the recommendation. The excess radio path length part of the model, i.e. section 6 of the recommendation, is implemented in the ITURP834PathDelay class.
     
-        This class implements the ray bending part, i.e. section 1 of the recommendation. The excess radio path length part of
-        the model, i.e. section 6 of the recommendation, is implemented in the
-        :class:`~org.orekit.models.earth.troposphere.iturp834.ITURP834PathDelay` class.
+    Since:
+        7.1
     
-        Since:
-            7.1
-    
-        Also see:
-            :class:`~org.orekit.models.earth.https:.www.itu.int.rec.R`, :meth:`~serialized`
+    Also see:
+        R, serialized
     """
-    def __init__(self, double: float): ...
-    def getRefraction(self, double: float) -> float:
+    def __init__(self, altitude: float):
         """
-            Compute the refraction angle from the true (geometrical) elevation.
+        Creates a new default instance.
         
-            Specified by:
-                :meth:`~org.orekit.models.AtmosphericRefractionModel.getRefraction` in
-                interface :class:`~org.orekit.models.AtmosphericRefractionModel`
+        Parameters:
+            altitude (double): altitude of the ground station from which measurement is performed (m)
         
-            Parameters:
-                elevation (double): true elevation (rad)
         
-            Returns:
-                refraction angle (rad)
+        """
+        ...
+    def getRefraction(self, elevation: float) -> float:
+        """
+        Compute the refraction angle from the true (geometrical) elevation.
+        
+        Specified by: getRefraction in interface AtmosphericRefractionModel
+        
+        Parameters:
+            elevation (double): true elevation (rad)
+        
+        Returns:
+            refraction angle (rad)
         
         
         """
         ...
     def getTheta0(self) -> float:
         """
-            Get the station elevation angle under free-space propagation .
+        Get the station elevation angle under free-space propagation .
         
-            Returns:
-                the elevation angle under free-space propagation (rad)
+        Returns:
+            the elevation angle under free-space propagation (rad)
         
         
         """
         ...
     def getThetaMin(self) -> float:
         """
-            Get the station minimal elevation angle.
+        Get the station minimal elevation angle.
         
-            Returns:
-                the minimal elevation angle (rad)
+        Returns:
+            the minimal elevation angle (rad)
         
         
         """
@@ -667,199 +714,175 @@ class ITURP834AtmosphericRefraction(org.orekit.models.AtmosphericRefractionModel
 
 class Geoid(EarthShape):
     """
-    public class Geoid extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.EarthShape`
+    A geoid is a level surface of the gravity potential of a body. The gravity potential, W, is split so W = U + T, where U is the normal potential (defined by the ellipsoid) and T is the anomalous potential.[3](eq. 2-137)
     
-        A geoid is a level surface of the gravity potential of a body. The gravity potential, W, is split so W = U + T, where U
-        is the normal potential (defined by the ellipsoid) and T is the anomalous potential.[3](eq. 2-137)
+    The getIntersectionPoint method is tailored specifically for Earth's geoid. All of the other methods in this class are general and will work for an arbitrary body.
     
-        The :meth:`~org.orekit.models.earth.Geoid.getIntersectionPoint` method is tailored specifically for Earth's geoid. All
-        of the other methods in this class are general and will work for an arbitrary body.
+    There are several components that are needed to define a geoid[1]:
     
-        There are several components that are needed to define a geoid[1]:
+      - Geopotential field. These are the coefficients of the spherical harmonics: S :sub:`n,m` and C :sub:`n,m`
+      - Reference Ellipsoid. The ellipsoid is used to define the undulation of the geoid (distance between ellipsoid and geoid)
+        and U :sub:`0` the value of the normal gravity potential at the surface of the ellipsoid.
+      - W :sub:`0` , the potential at the geoid. The value of the potential on the level surface. This is taken to be U :sub:`0`
+        , the normal gravity potential at the surface of the ReferenceEllipsoid.
+      - Permanent Tide System. This implementation assumes that the geopotential field and the reference ellipsoid use the same
+        permanent tide system. If the assumption is false it will produce errors of about 0.5 m. Conversion between tide systems
+        is a possible improvement.[1,2]
+      - Topographic Masses. That is mass outside of the geoid, e.g. mountains. This implementation ignores topographic masses,
+        which causes up to 3m error in the Himalayas, and ~ 1.5m error in the Rockies. This could be improved through the use of
+        DTED and calculating height anomalies or using the correction coefficients.[1]
     
-          - Geopotential field. These are the coefficients of the spherical harmonics: S :sub:`n,m` and C :sub:`n,m`
-          - Reference Ellipsoid. The ellipsoid is used to define the undulation of the geoid (distance between ellipsoid and geoid)
-            and U :sub:`0` the value of the normal gravity potential at the surface of the ellipsoid.
-          - W :sub:`0` , the potential at the geoid. The value of the potential on the level surface. This is taken to be U :sub:`0`
-            , the normal gravity potential at the surface of the :class:`~org.orekit.models.earth.ReferenceEllipsoid`.
-          - Permanent Tide System. This implementation assumes that the geopotential field and the reference ellipsoid use the same
-            permanent tide system. If the assumption is false it will produce errors of about 0.5 m. Conversion between tide systems
-            is a possible improvement.[1,2]
-          - Topographic Masses. That is mass outside of the geoid, e.g. mountains. This implementation ignores topographic masses,
-            which causes up to 3m error in the Himalayas, and ~ 1.5m error in the Rockies. This could be improved through the use of
-            DTED and calculating height anomalies or using the correction coefficients.[1]
+    This implementation also assumes that the normal to the reference ellipsoid is the same as the normal to the geoid. This assumption enables the equation: (height above geoid) = (height above ellipsoid) - (undulation), which is used in transform and transform.
     
+    In testing, the error in the undulations calculated by this class were off by less than 3 meters, which matches the assumptions outlined above.
     
-        This implementation also assumes that the normal to the reference ellipsoid is the same as the normal to the geoid. This
-        assumption enables the equation: (height above geoid) = (height above ellipsoid) - (undulation), which is used in
-        :meth:`~org.orekit.models.earth.Geoid.transform` and :meth:`~org.orekit.models.earth.Geoid.transform`.
+    References:
     
-        In testing, the error in the undulations calculated by this class were off by less than 3 meters, which matches the
-        assumptions outlined above.
-    
-        References:
-    
-          1.  Dru A. Smith. There is no such thing as "The" EGM96 geoid: Subtle points on the use of a global geopotential model. IGeS
-            Bulletin No. 8:17-28, 1998. `http://www.ngs.noaa.gov/PUBS_LIB/EGM96_GEOID_PAPER/egm96_geoid_paper.html
-            <http://www.ngs.noaa.gov/PUBS_LIB/EGM96_GEOID_PAPER/egm96_geoid_paper.html>`
-          2.  Martin Losch, Verena Seufer. How to Compute Geoid Undulations (Geoid Height Relative to a Given Reference Ellipsoid)
-            from Spherical Harmonic Coefficients for Satellite Altimetry Applications. , 2003. `mitgcm.org/~mlosch/geoidcookbook.pdf
-            <http://mitgcm.org/~mlosch/geoidcookbook.pdf>`
-          3.  Weikko A. Heiskanen, Helmut Moritz. Physical Geodesy. W. H. Freeman and Company, 1967. (especially sections 2.13 and
-            equation 2-144 Bruns Formula)
-          4.  S. A. Holmes, W. E. Featherstone. A unified approach to the Clenshaw summation and the recursive computation of very
-            high degree and order normalised associated Legendre functions. Journal of Geodesy, 76(5):279, 2002.
-          5.  DMA TR 8350.2. 1984.
-          6.  Department of Defense World Geodetic System 1984. 2000. NIMA TR 8350.2 Third Edition, Amendment 1.
+      1.  Dru A. Smith. There is no such thing as "The" EGM96 geoid: Subtle points on the use of a global geopotential model. IGeS Bulletin No. 8:17-28, 1998. `http://www.ngs.noaa.gov/PUBS_LIB/EGM96_GEOID_PAPER/egm96_geoid_paper.html <http://www.ngs.noaa.gov/PUBS_LIB/EGM96_GEOID_PAPER/egm96_geoid_paper.html>` 2.  Martin Losch, Verena Seufer. How to Compute Geoid Undulations (Geoid Height Relative to a Given Reference Ellipsoid) from Spherical Harmonic Coefficients for Satellite Altimetry Applications. , 2003. `mitgcm.org/~mlosch/geoidcookbook.pdf <http://mitgcm.org/~mlosch/geoidcookbook.pdf>` 3.  Weikko A. Heiskanen, Helmut Moritz. Physical Geodesy. W. H. Freeman and Company, 1967. (especially sections 2.13 and equation 2-144 Bruns Formula) 4.  S. A. Holmes, W. E. Featherstone. A unified approach to the Clenshaw summation and the recursive computation of very high degree and order normalised associated Legendre functions. Journal of Geodesy, 76(5):279, 2002. 5.  DMA TR 8350.2. 1984. 6.  Department of Defense World Geodetic System 1984. 2000. NIMA TR 8350.2 Third Edition, Amendment 1.
     """
-    def __init__(self, normalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider, referenceEllipsoid: 'ReferenceEllipsoid'): ...
+    def __init__(self, geopotential: org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider, referenceEllipsoid: 'ReferenceEllipsoid'):
+        """
+        Creates a geoid from the given geopotential, reference ellipsoid and the assumptions in the comment for Geoid.
+        
+        Parameters:
+            geopotential (NormalizedSphericalHarmonicsProvider): the gravity potential. Only the anomalous potential will be used. It is assumed that the geopotential and the
+                referenceEllipsoid are defined in the same frame. Usually a
+                getConstantNormalizedProvider is used to define a
+                time-invariant Geoid.
+            referenceEllipsoid (ReferenceEllipsoid): the normal gravity potential.
+        
+        Raises:
+            NullPointerException: if geopotential == null || referenceEllipsoid == null
+        
+        
+        """
+        ...
     def getBodyFrame(self) -> org.orekit.frames.Frame:
         """
-            Description copied from interface: :meth:`~org.orekit.bodies.BodyShape.getBodyFrame`
-            Get body frame related to body shape.
+        Description copied from interface: getBodyFrame Get body frame related to body shape.
         
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.getBodyFrame` in interface :class:`~org.orekit.bodies.BodyShape`
+        Specified by: getBodyFrame in interface BodyShape
         
-            Returns:
-                body frame related to body shape
+        Returns:
+            body frame related to body shape
         
         
         """
         ...
     def getEllipsoid(self) -> 'ReferenceEllipsoid':
         """
-            Description copied from interface: :meth:`~org.orekit.models.earth.EarthShape.getEllipsoid`
-            Get the underlying ellipsoid model that defines latitude and longitude. If the height component of a
-            :class:`~org.orekit.bodies.GeodeticPoint` is not needed, then using the ellipsoid will provide the quickest
-            transformation.
+        Description copied from interface: getEllipsoid Get the underlying ellipsoid model that defines latitude and longitude. If the height component of a GeodeticPoint is not needed, then using the ellipsoid will provide the quickest transformation.
         
-            Specified by:
-                :meth:`~org.orekit.models.earth.EarthShape.getEllipsoid` in interface :class:`~org.orekit.models.earth.EarthShape`
+        Specified by: getEllipsoid in interface EarthShape
         
-            Returns:
-                the reference ellipsoid. May be :code:`this`, but never :code:`null`.
+        Returns:
+            the reference ellipsoid. May be this, but never null.
         
         
         """
         ...
     _getIntersectionPoint_0__T = typing.TypeVar('_getIntersectionPoint_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getIntersectionPoint(self, fieldLine: org.hipparchus.geometry.euclidean.threed.FieldLine[_getIntersectionPoint_0__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getIntersectionPoint_0__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getIntersectionPoint_0__T]) -> org.orekit.bodies.FieldGeodeticPoint[_getIntersectionPoint_0__T]:
+    def getIntersectionPoint(self, lineInFrame: org.hipparchus.geometry.euclidean.threed.FieldLine[_getIntersectionPoint_0__T], closeInFrame: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getIntersectionPoint_0__T], frame: org.orekit.frames.Frame, date: org.orekit.time.FieldAbsoluteDate[_getIntersectionPoint_0__T]) -> org.orekit.bodies.FieldGeodeticPoint[_getIntersectionPoint_0__T]:
         """
-            Get the intersection point of a line with the surface of the body.
+        Get the intersection point of a line with the surface of the body.
         
-            A line may have several intersection points with a closed surface (we consider the one point case as a degenerated two
-            points case). The close parameter is used to select which of these points should be returned. The selected point is the
-            one that is closest to the close point.
+        A line may have several intersection points with a closed surface (we consider the one point case as a degenerated two points case). The close parameter is used to select which of these points should be returned. The selected point is the one that is closest to the close point.
         
-            The intersection point is computed using a line search along the specified line. This is accurate when the geoid is
-            slowly varying.
+        The intersection point is computed using a line search along the specified line. This is accurate when the geoid is slowly varying.
         
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.getIntersectionPoint` in interface :class:`~org.orekit.bodies.BodyShape`
+        Specified by: getIntersectionPoint in interface BodyShape
         
-            Parameters:
-                lineInFrame (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldLine?is`<T> lineInFrame): test line (may intersect the body or not)
-                closeInFrame (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> closeInFrame): point used for intersections selection
-                frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the line in given frame
+        Parameters:
+            lineInFrame (FieldLine<T> lineInFrame): test line (may intersect the body or not)
+            closeInFrame (FieldVector3D<T> closeInFrame): point used for intersections selection
+            frame (Frame): frame in which line is expressed
+            date (FieldAbsoluteDate<T> date): date of the line in given frame
         
-            Returns:
-                intersection point at altitude zero or null if the line does not intersect the surface
+        Returns:
+            intersection point at altitude zero or null if the line does not intersect the surface
         
         
         """
         ...
     @typing.overload
-    def getIntersectionPoint(self, line: org.hipparchus.geometry.euclidean.threed.Line, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.bodies.GeodeticPoint:
+    def getIntersectionPoint(self, lineInFrame: org.hipparchus.geometry.euclidean.threed.Line, closeInFrame: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, date: org.orekit.time.AbsoluteDate) -> org.orekit.bodies.GeodeticPoint:
         """
-            Get the intersection point of a line with the surface of the body.
+        Get the intersection point of a line with the surface of the body.
         
-            A line may have several intersection points with a closed surface (we consider the one point case as a degenerated two
-            points case). The close parameter is used to select which of these points should be returned. The selected point is the
-            one that is closest to the close point.
+        A line may have several intersection points with a closed surface (we consider the one point case as a degenerated two points case). The close parameter is used to select which of these points should be returned. The selected point is the one that is closest to the close point.
         
-            The intersection point is computed using a line search along the specified line. This is accurate when the geoid is
-            slowly varying.
+        The intersection point is computed using a line search along the specified line. This is accurate when the geoid is slowly varying.
         
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.getIntersectionPoint` in interface :class:`~org.orekit.bodies.BodyShape`
+        Specified by: getIntersectionPoint in interface BodyShape
         
-            Parameters:
-                lineInFrame (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Line?is`): test line (may intersect the body or not)
-                closeInFrame (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point used for intersections selection
-                frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
-                date (:class:`~org.orekit.time.AbsoluteDate`): date of the line in given frame
+        Parameters:
+            lineInFrame (Line): test line (may intersect the body or not)
+            closeInFrame (Vector3D): point used for intersections selection
+            frame (Frame): frame in which line is expressed
+            date (AbsoluteDate): date of the line in given frame
         
-            Returns:
-                intersection point at altitude zero or null if the line does not intersect the surface
+        Returns:
+            intersection point at altitude zero or null if the line does not intersect the surface
         
         """
         ...
-    def getUndulation(self, double: float, double2: float, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+    def getUndulation(self, geodeticLatitude: float, longitude: float, date: org.orekit.time.AbsoluteDate) -> float:
         """
-            Gets the Undulation of the Geoid, N at the given position. N is the distance between the
-            :meth:`~org.orekit.models.earth.Geoid.getEllipsoid` and the geoid. The latitude and longitude parameters are both
-            defined with respect to the reference ellipsoid. For EGM96 and the WGS84 ellipsoid the undulation is between -107m and
-            +86m.
+        Gets the Undulation of the Geoid, N at the given position. N is the distance between the getEllipsoid and the geoid. The latitude and longitude parameters are both defined with respect to the reference ellipsoid. For EGM96 and the WGS84 ellipsoid the undulation is between -107m and +86m.
         
-            NOTE: Restrictions are not put on the range of the arguments :code:`geodeticLatitude` and :code:`longitude`.
+        NOTE: Restrictions are not put on the range of the arguments geodeticLatitude and longitude.
         
-            Parameters:
-                geodeticLatitude (double): geodetic latitude (angle between the local normal and the equatorial plane on the reference ellipsoid), in radians.
-                longitude (double): on the reference ellipsoid, in radians.
-                date (:class:`~org.orekit.time.AbsoluteDate`): of evaluation. Used for time varying geopotential fields.
+        Parameters:
+            geodeticLatitude (double): geodetic latitude (angle between the local normal and the equatorial plane on the reference ellipsoid), in radians.
+            longitude (double): on the reference ellipsoid, in radians.
+            date (AbsoluteDate): of evaluation. Used for time varying geopotential fields.
         
-            Returns:
-                the undulation in m, positive means the geoid is higher than the ellipsoid.
+        Returns:
+            the undulation in m, positive means the geoid is higher than the ellipsoid.
         
-            Also see:
-                :class:`~org.orekit.models.earth.Geoid`, `Geoid on Wikipedia <http://en.wikipedia.org/wiki/Geoid>`
+        Also see:
+            Geoid, `Geoid on Wikipedia <http://en.wikipedia.org/wiki/Geoid>`
         
         
         """
         ...
     @typing.overload
-    def projectToGround(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def projectToGround(self, point: org.hipparchus.geometry.euclidean.threed.Vector3D, date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Description copied from interface: :meth:`~org.orekit.bodies.BodyShape.projectToGround`
-            Project a point to the ground.
+        Description copied from interface: projectToGround Project a point to the ground.
         
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.projectToGround` in interface :class:`~org.orekit.bodies.BodyShape`
+        Specified by: projectToGround in interface BodyShape
         
-            Parameters:
-                point (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point to project
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): frame in which moving point is expressed
+        Parameters:
+            point (Vector3D): point to project
+            date (AbsoluteDate): current date
+            frame (Frame): frame in which moving point is expressed
         
-            Returns:
-                ground point exactly at the local vertical of specified point, in the same frame as specified point
+        Returns:
+            ground point exactly at the local vertical of specified point, in the same frame as specified point
         
-            Also see:
-                :meth:`~org.orekit.bodies.BodyShape.projectToGround`
+        Also see:
+            projectToGround
         
         """
         ...
     @typing.overload
-    def projectToGround(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
+    def projectToGround(self, pv: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
         """
-            Description copied from interface: :meth:`~org.orekit.bodies.BodyShape.projectToGround`
-            Project a moving point to the ground.
+        Description copied from interface: projectToGround Project a moving point to the ground.
         
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.projectToGround` in interface :class:`~org.orekit.bodies.BodyShape`
+        Specified by: projectToGround in interface BodyShape
         
-            Parameters:
-                pv (:class:`~org.orekit.utils.TimeStampedPVCoordinates`): moving point
-                frame (:class:`~org.orekit.frames.Frame`): frame in which moving point is expressed
+        Parameters:
+            pv (TimeStampedPVCoordinates): moving point
+            frame (Frame): frame in which moving point is expressed
         
-            Returns:
-                ground point exactly at the local vertical of specified point, in the same frame as specified point
+        Returns:
+            ground point exactly at the local vertical of specified point, in the same frame as specified point
         
-            Also see:
-                :meth:`~org.orekit.bodies.BodyShape.projectToGround`
+        Also see:
+            projectToGround
         
         
         """
@@ -867,26 +890,25 @@ class Geoid(EarthShape):
     _transform_0__T = typing.TypeVar('_transform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _transform_2__T = typing.TypeVar('_transform_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def transform(self, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_transform_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_0__T]:
+    def transform(self, point: org.orekit.bodies.FieldGeodeticPoint[_transform_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_0__T]:
         """
-            Transform a surface-relative point to a Cartesian point.
+        Transform a surface-relative point to a Cartesian point.
         
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
+        Specified by: transform in interface BodyShape
         
-            Parameters:
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): The surface relative point to transform. Altitude is orthometric height, that is height above the
-                    :class:`~org.orekit.models.earth.Geoid`. Latitude and longitude are both geodetic and defined with respect to the
-                    :meth:`~org.orekit.models.earth.Geoid.getEllipsoid`.
+        Parameters:
+            point (FieldGeodeticPoint<T> point): The surface relative point to transform. Altitude is orthometric height, that is height above the
+                Geoid. Latitude and longitude are both geodetic and defined with respect to the
+                getEllipsoid.
         
-            Returns:
-                point at the same location but as a Cartesian point in the :meth:`~org.orekit.models.earth.Geoid.getBodyFrame`.
+        Returns:
+            point at the same location but as a Cartesian point in the getBodyFrame.
         
-            Since:
-                9.0
+        Since:
+            9.0
         
-            Also see:
-                :meth:`~org.orekit.models.earth.Geoid.transform`
+        Also see:
+            transform
         
         
         """
@@ -894,62 +916,59 @@ class Geoid(EarthShape):
     @typing.overload
     def transform(self, geodeticPoint: org.orekit.bodies.GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Transform a Cartesian point to a surface-relative point.
+        Transform a Cartesian point to a surface-relative point.
         
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
+        Specified by: transform in interface BodyShape
         
-            Parameters:
-                date (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): date of the conversion. Used for computing frame transformations and for time dependent geopotential.
-                point (:class:`~org.orekit.frames.Frame`): Cartesian point
-                frame (:class:`~org.orekit.time.AbsoluteDate`): frame in which Cartesian point is expressed
+        Parameters:
+            date (Vector3D): date of the conversion. Used for computing frame transformations and for time dependent geopotential.
+            point (Frame): Cartesian point
+            frame (AbsoluteDate): frame in which Cartesian point is expressed
         
-            Returns:
-                The surface relative point at the same location. Altitude is orthometric height, that is height above the
-                :class:`~org.orekit.models.earth.Geoid`. Latitude and longitude are both geodetic and defined with respect to the
-                :meth:`~org.orekit.models.earth.Geoid.getEllipsoid`.
+        Returns:
+            The surface relative point at the same location. Altitude is orthometric height, that is height above the
+            Geoid. Latitude and longitude are both geodetic and defined with respect to the
+            getEllipsoid.
         
-            Also see:
-                :meth:`~org.orekit.models.earth.Geoid.transform`, `Orthometric_height <http://en.wikipedia.org/wiki/Orthometric_height>`
+        Also see:
+            transform, `Orthometric_height <http://en.wikipedia.org/wiki/Orthometric_height>`
         
-            Transform a surface-relative point to a Cartesian point.
+        Transform a surface-relative point to a Cartesian point.
         
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
+        Specified by: transform in interface BodyShape
         
-            Parameters:
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): The surface relative point to transform. Altitude is orthometric height, that is height above the
-                    :class:`~org.orekit.models.earth.Geoid`. Latitude and longitude are both geodetic and defined with respect to the
-                    :meth:`~org.orekit.models.earth.Geoid.getEllipsoid`.
+        Parameters:
+            point (GeodeticPoint): The surface relative point to transform. Altitude is orthometric height, that is height above the
+                Geoid. Latitude and longitude are both geodetic and defined with respect to the
+                getEllipsoid.
         
-            Returns:
-                point at the same location but as a Cartesian point in the :meth:`~org.orekit.models.earth.Geoid.getBodyFrame`.
+        Returns:
+            point at the same location but as a Cartesian point in the getBodyFrame.
         
-            Also see:
-                :meth:`~org.orekit.models.earth.Geoid.transform`
+        Also see:
+            transform
         
         """
         ...
     @typing.overload
-    def transform(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_2__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_transform_2__T]) -> org.orekit.bodies.FieldGeodeticPoint[_transform_2__T]:
+    def transform(self, date: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_2__T], point: org.orekit.frames.Frame, frame: org.orekit.time.FieldAbsoluteDate[_transform_2__T]) -> org.orekit.bodies.FieldGeodeticPoint[_transform_2__T]:
         """
-            Transform a Cartesian point to a surface-relative point.
+        Transform a Cartesian point to a surface-relative point.
         
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
+        Specified by: transform in interface BodyShape
         
-            Parameters:
-                date (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> point): date of the conversion. Used for computing frame transformations and for time dependent geopotential.
-                point (:class:`~org.orekit.frames.Frame`): Cartesian point
-                frame (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): frame in which Cartesian point is expressed
+        Parameters:
+            date (FieldVector3D<T> point): date of the conversion. Used for computing frame transformations and for time dependent geopotential.
+            point (Frame): Cartesian point
+            frame (FieldAbsoluteDate<T> date): frame in which Cartesian point is expressed
         
-            Returns:
-                The surface relative point at the same location. Altitude is orthometric height, that is height above the
-                :class:`~org.orekit.models.earth.Geoid`. Latitude and longitude are both geodetic and defined with respect to the
-                :meth:`~org.orekit.models.earth.Geoid.getEllipsoid`.
+        Returns:
+            The surface relative point at the same location. Altitude is orthometric height, that is height above the
+            Geoid. Latitude and longitude are both geodetic and defined with respect to the
+            getEllipsoid.
         
-            Also see:
-                :meth:`~org.orekit.models.earth.Geoid.transform`, `Orthometric_height <http://en.wikipedia.org/wiki/Orthometric_height>`
+        Also see:
+            transform, `Orthometric_height <http://en.wikipedia.org/wiki/Orthometric_height>`
         
         """
         ...
@@ -958,75 +977,72 @@ class Geoid(EarthShape):
 
 class LazyLoadedGeoMagneticFields(GeoMagneticFields):
     """
-    public class LazyLoadedGeoMagneticFields extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.GeoMagneticFields`
+    Loads magnetic fields on request and can be configured after creation. Designed to match the behavior of GeoMagneticFieldFactory in Orekit 10.0
     
-        Loads magnetic fields on request and can be configured after creation. Designed to match the behavior of
-        :class:`~org.orekit.models.earth.GeoMagneticFieldFactory` in Orekit 10.0
-    
-        Since:
-            10.1
+    Since:
+        10.1
     """
-    def __init__(self, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
-    def getField(self, fieldModel: GeoMagneticFieldFactory.FieldModel, double: float) -> GeoMagneticField:
+    def __init__(self, dataProvidersManager: org.orekit.data.DataProvidersManager):
         """
-            Description copied from interface: :meth:`~org.orekit.models.earth.GeoMagneticFields.getField`
-            Get the :class:`~org.orekit.models.earth.GeoMagneticField` for the given model type and year.
+        Create a factory for magnetic fields that uses the given data manager to load magnetic field files.
         
-            Specified by:
-                :meth:`~org.orekit.models.earth.GeoMagneticFields.getField` in
-                interface :class:`~org.orekit.models.earth.GeoMagneticFields`
-        
-            Parameters:
-                type (:class:`~org.orekit.models.earth.GeoMagneticFieldFactory.FieldModel`): the field model type
-                year (double): the decimal year
-        
-            Returns:
-                a :class:`~org.orekit.models.earth.GeoMagneticField` for the given year and model
-        
-            Also see:
-                :meth:`~org.orekit.models.earth.GeoMagneticField.getDecimalYear`
+        Parameters:
+            dataProvidersManager (DataProvidersManager): provides access to auxiliary data files.
         
         
         """
         ...
-    def getIGRF(self, double: float) -> GeoMagneticField:
+    def getField(self, type: GeoMagneticFieldFactory.FieldModel, year: float) -> GeoMagneticField:
         """
-            Description copied from interface: :meth:`~org.orekit.models.earth.GeoMagneticFields.getIGRF`
-            Get the IGRF model for the given year.
+        Description copied from interface: getField Get the GeoMagneticField for the given model type and year.
         
-            Specified by:
-                :meth:`~org.orekit.models.earth.GeoMagneticFields.getIGRF` in
-                interface :class:`~org.orekit.models.earth.GeoMagneticFields`
+        Specified by: getField in interface GeoMagneticFields
         
-            Parameters:
-                year (double): the decimal year
+        Parameters:
+            type (FieldModel): the field model type
+            year (double): the decimal year
         
-            Returns:
-                a :class:`~org.orekit.models.earth.GeoMagneticField` for the given year
+        Returns:
+            a GeoMagneticField for the given year and model
         
-            Also see:
-                :meth:`~org.orekit.models.earth.GeoMagneticField.getDecimalYear`
+        Also see:
+            getDecimalYear
         
         
         """
         ...
-    def getWMM(self, double: float) -> GeoMagneticField:
+    def getIGRF(self, year: float) -> GeoMagneticField:
         """
-            Description copied from interface: :meth:`~org.orekit.models.earth.GeoMagneticFields.getWMM`
-            Get the WMM model for the given year.
+        Description copied from interface: getIGRF Get the IGRF model for the given year.
         
-            Specified by:
-                :meth:`~org.orekit.models.earth.GeoMagneticFields.getWMM` in
-                interface :class:`~org.orekit.models.earth.GeoMagneticFields`
+        Specified by: getIGRF in interface GeoMagneticFields
         
-            Parameters:
-                year (double): the decimal year
+        Parameters:
+            year (double): the decimal year
         
-            Returns:
-                a :class:`~org.orekit.models.earth.GeoMagneticField` for the given year
+        Returns:
+            a GeoMagneticField for the given year
         
-            Also see:
-                :meth:`~org.orekit.models.earth.GeoMagneticField.getDecimalYear`
+        Also see:
+            getDecimalYear
+        
+        
+        """
+        ...
+    def getWMM(self, year: float) -> GeoMagneticField:
+        """
+        Description copied from interface: getWMM Get the WMM model for the given year.
+        
+        Specified by: getWMM in interface GeoMagneticFields
+        
+        Parameters:
+            year (double): the decimal year
+        
+        Returns:
+            a GeoMagneticField for the given year
+        
+        Also see:
+            getDecimalYear
         
         
         """
@@ -1034,220 +1050,464 @@ class LazyLoadedGeoMagneticFields(GeoMagneticFields):
 
 class PythonEarthShape(EarthShape):
     def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getBodyFrame(self) -> org.orekit.frames.Frame: ...
-    def getEllipsoid(self) -> 'ReferenceEllipsoid': ...
-    _getIntersectionPoint_0__T = typing.TypeVar('_getIntersectionPoint_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getIntersectionPoint(self, fieldLine: org.hipparchus.geometry.euclidean.threed.FieldLine[_getIntersectionPoint_0__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getIntersectionPoint_0__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getIntersectionPoint_0__T]) -> org.orekit.bodies.FieldGeodeticPoint[_getIntersectionPoint_0__T]: ...
-    @typing.overload
-    def getIntersectionPoint(self, line: org.hipparchus.geometry.euclidean.threed.Line, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.bodies.GeodeticPoint: ...
-    @typing.overload
-    def projectToGround(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
-    @typing.overload
-    def projectToGround(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates: ...
-    def pythonDecRef(self) -> None: ...
-    @typing.overload
-    def pythonExtension(self) -> int: ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-    _transform_0__T = typing.TypeVar('_transform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _transform_2__T = typing.TypeVar('_transform_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def transform(self, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_transform_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_0__T]: ...
-    @typing.overload
-    def transform(self, geodeticPoint: org.orekit.bodies.GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
-    @typing.overload
-    def transform(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_2__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_transform_2__T]) -> org.orekit.bodies.FieldGeodeticPoint[_transform_2__T]: ...
-    @typing.overload
-    def transform(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.bodies.GeodeticPoint: ...
-
-class PythonGeoMagneticFields(GeoMagneticFields):
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getField(self, fieldModel: GeoMagneticFieldFactory.FieldModel, double: float) -> GeoMagneticField: ...
-    def getIGRF(self, double: float) -> GeoMagneticField: ...
-    def getWMM(self, double: float) -> GeoMagneticField: ...
-    def pythonDecRef(self) -> None: ...
-    @typing.overload
-    def pythonExtension(self) -> int: ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-
-class ReferenceEllipsoid(org.orekit.bodies.OneAxisEllipsoid, EarthShape):
-    """
-    public class ReferenceEllipsoid extends :class:`~org.orekit.bodies.OneAxisEllipsoid` implements :class:`~org.orekit.models.earth.EarthShape`
-    
-        A Reference Ellipsoid for use in geodesy. The ellipsoid defines an ellipsoidal potential called the normal potential,
-        and its gradient, normal gravity.
-    
-        These parameters are needed to define the normal potential:
-    
-          - a, semi-major axis
-          - f, flattening
-          - GM, the gravitational parameter
-          - ω, the spin rate
-    
-    
-        References:
-    
-          1.  Martin Losch, Verena Seufer. How to Compute Geoid Undulations (Geoid Height Relative to a Given Reference Ellipsoid)
-            from Spherical Harmonic Coefficients for Satellite Altimetry Applications. , 2003. `mitgcm.org/~mlosch/geoidcookbook.pdf
-            <http://mitgcm.org/~mlosch/geoidcookbook.pdf>`
-          2.  Weikko A. Heiskanen, Helmut Moritz. Physical Geodesy. W. H. Freeman and Company, 1967. (especially sections 2.13 and
-            equation 2-144)
-          3.  Department of Defense World Geodetic System 1984. 2000. NIMA TR 8350.2 Third Edition, Amendment 1.
-    """
-    def __init__(self, double: float, double2: float, frame: org.orekit.frames.Frame, double3: float, double4: float): ...
-    def getC2n0(self, int: int) -> float:
+    def finalize(self) -> None:
         """
-            Get the fully normalized coefficient C :sub:`2n,0` for the normal gravity potential.
+        Part of JCC Python interface to object
         
-            Parameters:
-                n (int): index in C :sub:`2n,0` , n >= 1.
+        Overrides: Object in class Object
         
-            Returns:
-                normalized C :sub:`2n,0` of the ellipsoid
+        Raises:
+            Throwable: 
         
-            Also see:
-                "Department of Defense World Geodetic System 1984. 2000. NIMA TR 8350.2 Third Edition, Amendment 1.", "DMA TR 8350.2.
-                1984."
+        """
+        ...
+    def getBodyFrame(self) -> org.orekit.frames.Frame:
+        """
+        Get body frame related to body shape.
+        
+        Specified by: getBodyFrame in interface BodyShape
+        
+        Returns:
+            body frame related to body shape
         
         
         """
         ...
     def getEllipsoid(self) -> 'ReferenceEllipsoid':
         """
-            Description copied from interface: :meth:`~org.orekit.models.earth.EarthShape.getEllipsoid`
-            Get the underlying ellipsoid model that defines latitude and longitude. If the height component of a
-            :class:`~org.orekit.bodies.GeodeticPoint` is not needed, then using the ellipsoid will provide the quickest
-            transformation.
+        Get the underlying ellipsoid model that defines latitude and longitude. If the height component of a GeodeticPoint is not needed, then using the ellipsoid will provide the quickest transformation.
         
-            Specified by:
-                :meth:`~org.orekit.models.earth.EarthShape.getEllipsoid` in interface :class:`~org.orekit.models.earth.EarthShape`
+        Specified by: getEllipsoid in interface EarthShape
         
-            Returns:
-                the reference ellipsoid. May be :code:`this`, but never :code:`null`.
+        Returns:
+            the reference ellipsoid. May be this, but never null.
+        
+        
+        """
+        ...
+    _getIntersectionPoint_0__T = typing.TypeVar('_getIntersectionPoint_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getIntersectionPoint(self, line: org.hipparchus.geometry.euclidean.threed.FieldLine[_getIntersectionPoint_0__T], close: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getIntersectionPoint_0__T], frame: org.orekit.frames.Frame, date: org.orekit.time.FieldAbsoluteDate[_getIntersectionPoint_0__T]) -> org.orekit.bodies.FieldGeodeticPoint[_getIntersectionPoint_0__T]:
+        """
+        Description copied from interface: getIntersectionPoint Get the intersection point of a line with the surface of the body.
+        
+        A line may have several intersection points with a closed surface (we consider the one point case as a degenerated two points case). The close parameter is used to select which of these points should be returned. The selected point is the one that is closest to the close point.
+        
+        Specified by: getIntersectionPoint in interface BodyShape
+        
+        Parameters:
+            line (FieldLine<T> line): test line (may intersect the body or not)
+            close (FieldVector3D<T> close): point used for intersections selection
+            frame (Frame): frame in which line is expressed
+            date (FieldAbsoluteDate<T> date): date of the line in given frame
+        
+        Returns:
+            intersection point at altitude zero or null if the line does not intersect the surface
+        
+        
+        """
+        ...
+    @typing.overload
+    def getIntersectionPoint(self, line: org.hipparchus.geometry.euclidean.threed.Line, close: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, date: org.orekit.time.AbsoluteDate) -> org.orekit.bodies.GeodeticPoint:
+        """
+        Description copied from interface: getIntersectionPoint Get the intersection point of a line with the surface of the body.
+        
+        A line may have several intersection points with a closed surface (we consider the one point case as a degenerated two points case). The close parameter is used to select which of these points should be returned. The selected point is the one that is closest to the close point.
+        
+        Specified by: getIntersectionPoint in interface BodyShape
+        
+        Parameters:
+            line (Line): test line (may intersect the body or not)
+            close (Vector3D): point used for intersections selection
+            frame (Frame): frame in which line is expressed
+            date (AbsoluteDate): date of the line in given frame
+        
+        Returns:
+            intersection point at altitude zero or null if the line does not intersect the surface
+        
+        """
+        ...
+    @typing.overload
+    def projectToGround(self, point: org.hipparchus.geometry.euclidean.threed.Vector3D, date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+        Project a point to the ground.
+        
+        Specified by: projectToGround in interface BodyShape
+        
+        Parameters:
+            point (Vector3D): point to project
+            date (AbsoluteDate): current date
+            frame (Frame): frame in which moving point is expressed
+        
+        Returns:
+            ground point exactly at the local vertical of specified point, in the same frame as specified point
+        
+        Also see:
+            projectToGround
+        
+        """
+        ...
+    @typing.overload
+    def projectToGround(self, pv: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
+        """
+        Project a moving point to the ground.
+        
+        Specified by: projectToGround in interface BodyShape
+        
+        Parameters:
+            pv (TimeStampedPVCoordinates): moving point
+            frame (Frame): frame in which moving point is expressed
+        
+        Returns:
+            ground point exactly at the local vertical of specified point, in the same frame as specified point
+        
+        Also see:
+            projectToGround
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    _transform_0__T = typing.TypeVar('_transform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _transform_2__T = typing.TypeVar('_transform_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def transform(self, point: org.orekit.bodies.FieldGeodeticPoint[_transform_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_0__T]:
+        """
+        Transform a surface-relative point to a Cartesian point.
+        
+        Specified by: transform in interface BodyShape
+        
+        Parameters:
+            point (FieldGeodeticPoint<T> point): surface-relative point
+        
+        Returns:
+            point at the same location but as a Cartesian point
+        
+        
+        """
+        ...
+    @typing.overload
+    def transform(self, geodeticPoint: org.orekit.bodies.GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+        Transform a Cartesian point to a surface-relative point.
+        
+        Specified by: transform in interface BodyShape
+        
+        Parameters:
+            point (Vector3D): Cartesian point
+            frame (Frame): frame in which Cartesian point is expressed
+            date (AbsoluteDate): date of the computation (used for frames conversions)
+        
+        Returns:
+            point at the same location but as a surface-relative point
+        
+        Transform a surface-relative point to a Cartesian point.
+        
+        Specified by: transform in interface BodyShape
+        
+        Parameters:
+            point (GeodeticPoint): surface-relative point
+        
+        Returns:
+            point at the same location but as a Cartesian point
+        
+        """
+        ...
+    @typing.overload
+    def transform(self, point: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_2__T], frame: org.orekit.frames.Frame, date: org.orekit.time.FieldAbsoluteDate[_transform_2__T]) -> org.orekit.bodies.FieldGeodeticPoint[_transform_2__T]:
+        """
+        Transform a Cartesian point to a surface-relative point.
+        
+        Specified by: transform in interface BodyShape
+        
+        Parameters:
+            point (FieldVector3D<T> point): Cartesian point
+            frame (Frame): frame in which Cartesian point is expressed
+            date (FieldAbsoluteDate<T> date): date of the computation (used for frames conversions)
+        
+        Returns:
+            point at the same location but as a surface-relative point
+        
+        """
+        ...
+    @typing.overload
+    def transform(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.bodies.GeodeticPoint: ...
+
+class PythonGeoMagneticFields(GeoMagneticFields):
+    def __init__(self): ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getField(self, type: GeoMagneticFieldFactory.FieldModel, year: float) -> GeoMagneticField:
+        """
+        Get the GeoMagneticField for the given model type and year.
+        
+        Specified by: getField in interface GeoMagneticFields
+        
+        Parameters:
+            type (FieldModel): the field model type
+            year (double): the decimal year
+        
+        Returns:
+            a GeoMagneticField for the given year and model
+        
+        Also see:
+            getDecimalYear
+        
+        
+        """
+        ...
+    def getIGRF(self, year: float) -> GeoMagneticField:
+        """
+        Get the IGRF model for the given year.
+        
+        Specified by: getIGRF in interface GeoMagneticFields
+        
+        Parameters:
+            year (double): the decimal year
+        
+        Returns:
+            a GeoMagneticField for the given year
+        
+        Also see:
+            getDecimalYear
+        
+        
+        """
+        ...
+    def getWMM(self, year: float) -> GeoMagneticField:
+        """
+        Get the WMM model for the given year.
+        
+        Specified by: getWMM in interface GeoMagneticFields
+        
+        Parameters:
+            year (double): the decimal year
+        
+        Returns:
+            a GeoMagneticField for the given year
+        
+        Also see:
+            getDecimalYear
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+
+class ReferenceEllipsoid(org.orekit.bodies.OneAxisEllipsoid, EarthShape):
+    """
+    A Reference Ellipsoid for use in geodesy. The ellipsoid defines an ellipsoidal potential called the normal potential, and its gradient, normal gravity.
+    
+    These parameters are needed to define the normal potential:
+    
+      - a, semi-major axis
+      - f, flattening
+      - GM, the gravitational parameter
+      - ω, the spin rate
+    
+    References:
+    
+      1.  Martin Losch, Verena Seufer. How to Compute Geoid Undulations (Geoid Height Relative to a Given Reference Ellipsoid) from Spherical Harmonic Coefficients for Satellite Altimetry Applications. , 2003. `mitgcm.org/~mlosch/geoidcookbook.pdf <http://mitgcm.org/~mlosch/geoidcookbook.pdf>` 2.  Weikko A. Heiskanen, Helmut Moritz. Physical Geodesy. W. H. Freeman and Company, 1967. (especially sections 2.13 and equation 2-144) 3.  Department of Defense World Geodetic System 1984. 2000. NIMA TR 8350.2 Third Edition, Amendment 1.
+    """
+    def __init__(self, ae: float, f: float, bodyFrame: org.orekit.frames.Frame, GM: float, spin: float):
+        """
+        Creates a new geodetic Reference Ellipsoid from four defining parameters.
+        
+        Parameters:
+            ae (double): Equatorial radius, in m
+            f (double): flattening of the ellipsoid.
+            bodyFrame (Frame): the frame to attach to the ellipsoid. The origin is at the center of mass, the z axis is the minor axis.
+            GM (double): gravitational parameter, in m :sup:`3` /s :sup:`2`
+            spin (double): ω in rad/s
+        
+        
+        """
+        ...
+    def getC2n0(self, n: int) -> float:
+        """
+        Get the fully normalized coefficient C :sub:`2n,0` for the normal gravity potential.
+        
+        Parameters:
+            n (int): index in C :sub:`2n,0` , n >= 1.
+        
+        Returns:
+            normalized C :sub:`2n,0` of the ellipsoid
+        
+        Also see:
+            "Department of Defense World Geodetic System 1984. 2000. NIMA TR 8350.2 Third Edition, Amendment 1.", "DMA TR 8350.2.
+            1984."
+        
+        
+        """
+        ...
+    def getEllipsoid(self) -> 'ReferenceEllipsoid':
+        """
+        Description copied from interface: getEllipsoid Get the underlying ellipsoid model that defines latitude and longitude. If the height component of a GeodeticPoint is not needed, then using the ellipsoid will provide the quickest transformation.
+        
+        Specified by: getEllipsoid in interface EarthShape
+        
+        Returns:
+            the reference ellipsoid. May be this, but never null.
         
         
         """
         ...
     def getGM(self) -> float:
         """
-            Gets the gravitational parameter that is part of the definition of the reference ellipsoid.
+        Gets the gravitational parameter that is part of the definition of the reference ellipsoid.
         
-            Returns:
-                GM in m :sup:`3` /s :sup:`2`
-        
-        
-        """
-        ...
-    @staticmethod
-    def getGrs80(frame: org.orekit.frames.Frame) -> 'ReferenceEllipsoid':
-        """
-            Get the GRS80 ellipsoid, attached to the given body frame.
-        
-            Parameters:
-                bodyFrame (:class:`~org.orekit.frames.Frame`): the earth centered fixed frame
-        
-            Returns:
-                a GRS80 reference ellipsoid
+        Returns:
+            GM in m :sup:`3` /s :sup:`2`
         
         
         """
         ...
     @staticmethod
-    def getIers2003(frame: org.orekit.frames.Frame) -> 'ReferenceEllipsoid':
+    def getGrs80(bodyFrame: org.orekit.frames.Frame) -> 'ReferenceEllipsoid':
         """
-            Get the IERS2003 ellipsoid, attached to the given body frame.
+        Get the GRS80 ellipsoid, attached to the given body frame.
         
-            Parameters:
-                bodyFrame (:class:`~org.orekit.frames.Frame`): the earth centered fixed frame
+        Parameters:
+            bodyFrame (Frame): the earth centered fixed frame
         
-            Returns:
-                an IERS2003 reference ellipsoid
-        
-        
-        """
-        ...
-    @staticmethod
-    def getIers2010(frame: org.orekit.frames.Frame) -> 'ReferenceEllipsoid':
-        """
-            Get the IERS2010 ellipsoid, attached to the given body frame.
-        
-            Parameters:
-                bodyFrame (:class:`~org.orekit.frames.Frame`): the earth centered fixed frame
-        
-            Returns:
-                an IERS2010 reference ellipsoid
+        Returns:
+            a GRS80 reference ellipsoid
         
         
         """
         ...
     @staticmethod
-    def getIers96(frame: org.orekit.frames.Frame) -> 'ReferenceEllipsoid':
+    def getIers2003(bodyFrame: org.orekit.frames.Frame) -> 'ReferenceEllipsoid':
         """
-            Get the IERS96 ellipsoid, attached to the given body frame.
+        Get the IERS2003 ellipsoid, attached to the given body frame.
         
-            Parameters:
-                bodyFrame (:class:`~org.orekit.frames.Frame`): the earth centered fixed frame
+        Parameters:
+            bodyFrame (Frame): the earth centered fixed frame
         
-            Returns:
-                an IERS96 reference ellipsoid
+        Returns:
+            an IERS2003 reference ellipsoid
         
         
         """
         ...
-    def getNormalGravity(self, double: float) -> float:
+    @staticmethod
+    def getIers2010(bodyFrame: org.orekit.frames.Frame) -> 'ReferenceEllipsoid':
         """
-            Gets the normal gravity, that is gravity just due to the reference ellipsoid's potential. The normal gravity only
-            depends on latitude because the ellipsoid is axis symmetric.
+        Get the IERS2010 ellipsoid, attached to the given body frame.
         
-            The normal gravity is a vector, having both magnitude and direction. This method only give the magnitude.
+        Parameters:
+            bodyFrame (Frame): the earth centered fixed frame
         
-            Parameters:
-                latitude (double): geodetic latitude, in radians. That is the angle between the local normal on the ellipsoid and the equatorial plane.
+        Returns:
+            an IERS2010 reference ellipsoid
         
-            Returns:
-                the normal gravity, γ, at the given latitude in m/s :sup:`2` . This is the acceleration felt by a mass at rest on the
-                surface of the reference ellipsoid.
+        
+        """
+        ...
+    @staticmethod
+    def getIers96(bodyFrame: org.orekit.frames.Frame) -> 'ReferenceEllipsoid':
+        """
+        Get the IERS96 ellipsoid, attached to the given body frame.
+        
+        Parameters:
+            bodyFrame (Frame): the earth centered fixed frame
+        
+        Returns:
+            an IERS96 reference ellipsoid
+        
+        
+        """
+        ...
+    def getNormalGravity(self, latitude: float) -> float:
+        """
+        Gets the normal gravity, that is gravity just due to the reference ellipsoid's potential. The normal gravity only depends on latitude because the ellipsoid is axis symmetric.
+        
+        The normal gravity is a vector, having both magnitude and direction. This method only give the magnitude.
+        
+        Parameters:
+            latitude (double): geodetic latitude, in radians. That is the angle between the local normal on the ellipsoid and the equatorial plane.
+        
+        Returns:
+            the normal gravity, γ, at the given latitude in m/s :sup:`2` . This is the acceleration felt by a mass at rest on the
+            surface of the reference ellipsoid.
         
         
         """
         ...
     def getPolarRadius(self) -> float:
         """
-            Get the radius of this ellipsoid at the poles.
+        Get the radius of this ellipsoid at the poles.
         
-            Returns:
-                the polar radius, in meters
+        Returns:
+            the polar radius, in meters
         
-            Also see:
-                :meth:`~org.orekit.bodies.OneAxisEllipsoid.getEquatorialRadius`
+        Also see:
+            getEquatorialRadius
         
         
         """
         ...
     def getSpin(self) -> float:
         """
-            Gets the rotation of the ellipsoid about its axis.
+        Gets the rotation of the ellipsoid about its axis.
         
-            Returns:
-                ω in rad/s
+        Returns:
+            ω in rad/s
         
         
         """
         ...
     @staticmethod
-    def getWgs84(frame: org.orekit.frames.Frame) -> 'ReferenceEllipsoid':
+    def getWgs84(bodyFrame: org.orekit.frames.Frame) -> 'ReferenceEllipsoid':
         """
-            Get the WGS84 ellipsoid, attached to the given body frame.
+        Get the WGS84 ellipsoid, attached to the given body frame.
         
-            Parameters:
-                bodyFrame (:class:`~org.orekit.frames.Frame`): the earth centered fixed frame
+        Parameters:
+            bodyFrame (Frame): the earth centered fixed frame
         
-            Returns:
-                a WGS84 reference ellipsoid
+        Returns:
+            a WGS84 reference ellipsoid
         
         
         """

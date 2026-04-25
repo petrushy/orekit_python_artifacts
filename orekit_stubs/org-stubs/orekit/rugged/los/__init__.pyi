@@ -19,42 +19,45 @@ import typing
 
 class LOSBuilder:
     """
-    public class LOSBuilder extends :class:`~org.orekit.rugged.los.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Builder for lines-of-sight list.
     
-        Builder for lines-of-sight list.
+    This class implements the builder pattern to create TimeDependentLOS instances. It does so by using a fluent API in order to clarify reading and allow later extensions with new configuration parameters.
     
-        This class implements the *builder pattern* to create :class:`~org.orekit.rugged.los.TimeDependentLOS` instances. It
-        does so by using a *fluent API* in order to clarify reading and allow later extensions with new configuration
-        parameters.
+    This builder aims at creating lines-of-sight directions which are the result of several transforms applied to an initial list of raw directions. It therefore allows to take into account the optical path due to mirrors and the alignments of sensors frames with respect to a spacecraft.
     
-        This builder aims at creating lines-of-sight directions which are the result of several transforms applied to an initial
-        list of raw directions. It therefore allows to take into account the optical path due to mirrors and the alignments of
-        sensors frames with respect to a spacecraft.
-    
-        Also see:
-            :class:`~org.orekit.rugged.los.TimeDependentLOS`,
-            :class:`~org.orekit.rugged.los.https:.en.wikipedia.org.wiki.Builder_pattern`,
-            :class:`~org.orekit.rugged.los.https:.en.wikipedia.org.wiki.Fluent_interface`
+    Also see:
+        TimeDependentLOS,
+        Builder_pattern,
+        Fluent_interface
     """
-    def __init__(self, list: java.util.List[org.hipparchus.geometry.euclidean.threed.Vector3D]): ...
+    def __init__(self, rawLOS: java.util.List[org.hipparchus.geometry.euclidean.threed.Vector3D]):
+        """
+        Create builder.
+        
+        Parameters:
+            rawLOS (List<org.hipparchus.geometry.euclidean.threed.Vector3D> rawLOS): raw fixed lines-of-sight
+        
+        
+        """
+        ...
     @typing.overload
     def addTransform(self, lOSTransform: 'LOSTransform') -> 'LOSBuilder':
         """
-            Add a transform to be applied after the already registered transforms.
+        Add a transform to be applied after the already registered transforms.
         
-            Parameters:
-                transform (:class:`~org.orekit.rugged.los.TimeIndependentLOSTransform`): transform to be applied to the lines-of-sight
+        Parameters:
+            transform (TimeIndependentLOSTransform): transform to be applied to the lines-of-sight
         
-            Returns:
-                the builder instance
+        Returns:
+            the builder instance
         
-            Add a transform to be applied after the already registered transforms.
+        Add a transform to be applied after the already registered transforms.
         
-            Parameters:
-                transform (:class:`~org.orekit.rugged.los.LOSTransform`): transform to be applied to the lines-of-sight
+        Parameters:
+            transform (LOSTransform): transform to be applied to the lines-of-sight
         
-            Returns:
-                the builder instance
+        Returns:
+            the builder instance
         
         
         """
@@ -63,10 +66,10 @@ class LOSBuilder:
     def addTransform(self, timeIndependentLOSTransform: 'TimeIndependentLOSTransform') -> 'LOSBuilder': ...
     def build(self) -> 'TimeDependentLOS':
         """
-            Build a lines-of-sight provider.
+        Build a lines-of-sight provider.
         
-            Returns:
-                lines-of-sight provider
+        Returns:
+            lines-of-sight provider
         
         
         """
@@ -74,133 +77,123 @@ class LOSBuilder:
 
 class LOSTransform:
     """
-    public interface LOSTransform
+    Interface for lines-of-sight transforms.
     
-        Interface for lines-of-sight transforms.
-    
-        Also see:
-            :class:`~org.orekit.rugged.los.LOSBuilder`
+    Also see:
+        LOSBuilder
     """
     def getParametersDrivers(self) -> java.util.stream.Stream[org.orekit.utils.ParameterDriver]:
         """
-            Get the drivers for LOS parameters.
+        Get the drivers for LOS parameters.
         
-            Returns:
-                drivers for LOS parameters
+        Returns:
+            drivers for LOS parameters
         
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """
         ...
     _transformLOS_0__T = typing.TypeVar('_transformLOS_0__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def transformLOS(self, int: int, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T], absoluteDate: org.orekit.time.AbsoluteDate, derivativeGenerator: org.orekit.rugged.utils.DerivativeGenerator[_transformLOS_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T]:
+    def transformLOS(self, index: int, los: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T], date: org.orekit.time.AbsoluteDate, generator: org.orekit.rugged.utils.DerivativeGenerator[_transformLOS_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T]:
         """
-            Transform a line-of-sight and its partial derivatives.
+        Transform a line-of-sight and its partial derivatives.
         
-            This method is used for LOS calibration purposes. It allows to compute the Jacobian matrix of the LOS with respect to
-            the parameters, which are typically polynomials coefficients representing rotation angles. These polynomials can be used
-            for example to model thermo-elastic effects.
+        This method is used for LOS calibration purposes. It allows to compute the Jacobian matrix of the LOS with respect to the parameters, which are typically polynomials coefficients representing rotation angles. These polynomials can be used for example to model thermo-elastic effects.
         
-            Parameters:
-                index (int): los pixel index
-                los (org.hipparchus.geometry.euclidean.threed.FieldVector3D<T> los): line-of-sight to transform
-                date (org.orekit.time.AbsoluteDate): date
-                generator (:class:`~org.orekit.rugged.utils.DerivativeGenerator`<T> generator): generator to use for building :code:`DerivativeStructure` instances
+        Parameters:
+            index (int): los pixel index
+            los (org.hipparchus.geometry.euclidean.threed.FieldVector3D<T> los): line-of-sight to transform
+            date (org.orekit.time.AbsoluteDate): date
+            generator (DerivativeGenerator<T> generator): generator to use for building DerivativeStructure instances
         
-            Returns:
-                line of sight, and its first partial derivatives with respect to the parameters
+        Returns:
+            line of sight, and its first partial derivatives with respect to the parameters
         
         
         """
         ...
     @typing.overload
-    def transformLOS(self, int: int, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def transformLOS(self, i: int, los: org.hipparchus.geometry.euclidean.threed.Vector3D, date: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Transform a line-of-sight.
+        Transform a line-of-sight.
         
-            Parameters:
-                i (int): los pixel index
-                los (org.hipparchus.geometry.euclidean.threed.Vector3D): line-of-sight to transform
-                date (org.orekit.time.AbsoluteDate): current date
+        Parameters:
+            i (int): los pixel index
+            los (org.hipparchus.geometry.euclidean.threed.Vector3D): line-of-sight to transform
+            date (org.orekit.time.AbsoluteDate): current date
         
-            Returns:
-                transformed line-of-sight
+        Returns:
+            transformed line-of-sight
         
         """
         ...
 
 class TimeDependentLOS:
     """
-    public interface TimeDependentLOS
+    Interface representing a line-of-sight which depends on time.
     
-        Interface representing a line-of-sight which depends on time.
-    
-        Also see:
-            :class:`~org.orekit.rugged.linesensor.LineSensor`
+    Also see:
+        LineSensor
     """
-    def getLOS(self, int: int, absoluteDate: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getLOS(self, index: int, date: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get the line of sight for a given date.
+        Get the line of sight for a given date.
         
-            Parameters:
-                index (int): los pixel index
-                date (org.orekit.time.AbsoluteDate): date
+        Parameters:
+            index (int): los pixel index
+            date (org.orekit.time.AbsoluteDate): date
         
-            Returns:
-                line of sight
+        Returns:
+            line of sight
         
         
         """
         ...
     _getLOSDerivatives__T = typing.TypeVar('_getLOSDerivatives__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
-    def getLOSDerivatives(self, int: int, absoluteDate: org.orekit.time.AbsoluteDate, derivativeGenerator: org.orekit.rugged.utils.DerivativeGenerator[_getLOSDerivatives__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getLOSDerivatives__T]:
+    def getLOSDerivatives(self, index: int, date: org.orekit.time.AbsoluteDate, generator: org.orekit.rugged.utils.DerivativeGenerator[_getLOSDerivatives__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getLOSDerivatives__T]:
         """
-            Get the line of sight and its partial derivatives for a given date.
+        Get the line of sight and its partial derivatives for a given date.
         
-            This method is used for LOS calibration purposes. It allows to compute the Jacobian matrix of the LOS with respect to
-            the estimated parameters, which are typically polynomials coefficients representing rotation angles. These polynomials
-            can be used for example to model thermo-elastic effects.
+        This method is used for LOS calibration purposes. It allows to compute the Jacobian matrix of the LOS with respect to the estimated parameters, which are typically polynomials coefficients representing rotation angles. These polynomials can be used for example to model thermo-elastic effects.
         
-            Note that in order for the partial derivatives to be properly set up, the :code:`setSelected` method must have been set
-            to :code:`true` for the various parameters returned by
-            :meth:`~org.orekit.rugged.los.TimeDependentLOS.getParametersDrivers` that should be estimated.
+        Note that in order for the partial derivatives to be properly set up, the setSelected method must have been set to true for the various parameters returned by getParametersDrivers that should be estimated.
         
-            Parameters:
-                index (int): los pixel index
-                date (org.orekit.time.AbsoluteDate): date
-                generator (:class:`~org.orekit.rugged.utils.DerivativeGenerator`<T> generator): generator to use for building :code:`Derivative` instances
+        Parameters:
+            index (int): los pixel index
+            date (org.orekit.time.AbsoluteDate): date
+            generator (DerivativeGenerator<T> generator): generator to use for building Derivative instances
         
-            Returns:
-                line of sight, and its first partial derivatives with respect to the parameters
+        Returns:
+            line of sight, and its first partial derivatives with respect to the parameters
         
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """
         ...
     def getNbPixels(self) -> int:
         """
-            Get the number of pixels.
+        Get the number of pixels.
         
-            Returns:
-                number of pixels
+        Returns:
+            number of pixels
         
         
         """
         ...
     def getParametersDrivers(self) -> java.util.stream.Stream[org.orekit.utils.ParameterDriver]:
         """
-            Get the drivers for LOS parameters.
+        Get the drivers for LOS parameters.
         
-            Returns:
-                drivers for LOS parameters
+        Returns:
+            drivers for LOS parameters
         
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """
@@ -208,221 +201,214 @@ class TimeDependentLOS:
 
 class TimeIndependentLOSTransform:
     """
-    public interface TimeIndependentLOSTransform
+    Interface for lines-of-sight tranforms that do not depend on time.
     
-        Interface for lines-of-sight tranforms that do not depend on time.
-    
-        Also see:
-            :class:`~org.orekit.rugged.los.LOSBuilder`
+    Also see:
+        LOSBuilder
     """
     def getParametersDrivers(self) -> java.util.stream.Stream[org.orekit.utils.ParameterDriver]:
         """
-            Get the drivers for LOS parameters.
+        Get the drivers for LOS parameters.
         
-            Returns:
-                drivers for LOS parameters
+        Returns:
+            drivers for LOS parameters
         
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """
         ...
     _transformLOS_0__T = typing.TypeVar('_transformLOS_0__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def transformLOS(self, int: int, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T], derivativeGenerator: org.orekit.rugged.utils.DerivativeGenerator[_transformLOS_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T]:
+    def transformLOS(self, index: int, los: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T], generator: org.orekit.rugged.utils.DerivativeGenerator[_transformLOS_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T]:
         """
-            Transform a line-of-sight and its partial derivatives.
+        Transform a line-of-sight and its partial derivatives.
         
-            This method is used for LOS calibration purposes. It allows to compute the Jacobian matrix of the LOS with respect to
-            the parameters, which are typically polynomials coefficients representing rotation angles. These polynomials can be used
-            for example to model thermo-elastic effects.
+        This method is used for LOS calibration purposes. It allows to compute the Jacobian matrix of the LOS with respect to the parameters, which are typically polynomials coefficients representing rotation angles. These polynomials can be used for example to model thermo-elastic effects.
         
-            Note that in order for the partial derivatives to be properly set up, the :code:`setSelected` method must have been set
-            to :code:`true` for the various parameters returned by
-            :meth:`~org.orekit.rugged.los.TimeIndependentLOSTransform.getParametersDrivers` that should be estimated.
+        Note that in order for the partial derivatives to be properly set up, the setSelected method must have been set to true for the various parameters returned by getParametersDrivers that should be estimated.
         
-            Parameters:
-                index (int): los pixel index
-                los (org.hipparchus.geometry.euclidean.threed.FieldVector3D<T> los): line-of-sight to transform
-                generator (:class:`~org.orekit.rugged.utils.DerivativeGenerator`<T> generator): generator to use for building :code:`Derivative` instances
+        Parameters:
+            index (int): los pixel index
+            los (org.hipparchus.geometry.euclidean.threed.FieldVector3D<T> los): line-of-sight to transform
+            generator (DerivativeGenerator<T> generator): generator to use for building Derivative instances
         
-            Returns:
-                line of sight, and its first partial derivatives with respect to the parameters
+        Returns:
+            line of sight, and its first partial derivatives with respect to the parameters
         
         
         """
         ...
     @typing.overload
-    def transformLOS(self, int: int, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def transformLOS(self, i: int, los: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Transform a line-of-sight.
+        Transform a line-of-sight.
         
-            Parameters:
-                i (int): los pixel index
-                los (org.hipparchus.geometry.euclidean.threed.Vector3D): line-of-sight to transform
+        Parameters:
+            i (int): los pixel index
+            los (org.hipparchus.geometry.euclidean.threed.Vector3D): line-of-sight to transform
         
-            Returns:
-                transformed line-of-sight
+        Returns:
+            transformed line-of-sight
         
         """
         ...
 
 class FixedRotation(TimeIndependentLOSTransform):
     """
-    public class FixedRotation extends :class:`~org.orekit.rugged.los.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.rugged.los.TimeIndependentLOSTransform`
+    TimeIndependentLOSTransform based on a fixed rotation.
     
-        :class:`~org.orekit.rugged.los.TimeIndependentLOSTransform` based on a fixed rotation.
-    
-        Also see:
-            :class:`~org.orekit.rugged.los.LOSBuilder`
+    Also see:
+        LOSBuilder
     """
-    def __init__(self, string: str, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
+    def __init__(self, name: str, axis: org.hipparchus.geometry.euclidean.threed.Vector3D, angle: float):
+        """
+        Simple constructor.
+        
+        The single parameter is the rotation angle.
+        
+        Parameters:
+            name (String): name of the rotation (used for estimated parameters identification)
+            axis (org.hipparchus.geometry.euclidean.threed.Vector3D): rotation axis
+            angle (double): rotation angle
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.stream.Stream[org.orekit.utils.ParameterDriver]:
         """
-            Get the drivers for LOS parameters.
+        Get the drivers for LOS parameters.
         
-            Specified by:
-                :meth:`~org.orekit.rugged.los.TimeIndependentLOSTransform.getParametersDrivers` in
-                interface :class:`~org.orekit.rugged.los.TimeIndependentLOSTransform`
+        Specified by: getParametersDrivers in interface TimeIndependentLOSTransform
         
-            Returns:
-                drivers for LOS parameters
+        Returns:
+            drivers for LOS parameters
         
         
         """
         ...
     _transformLOS_0__T = typing.TypeVar('_transformLOS_0__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def transformLOS(self, int: int, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T], derivativeGenerator: org.orekit.rugged.utils.DerivativeGenerator[_transformLOS_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T]:
+    def transformLOS(self, i: int, los: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T], generator: org.orekit.rugged.utils.DerivativeGenerator[_transformLOS_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T]:
         """
-            Transform a line-of-sight and its partial derivatives.
+        Transform a line-of-sight and its partial derivatives.
         
-            This method is used for LOS calibration purposes. It allows to compute the Jacobian matrix of the LOS with respect to
-            the parameters, which are typically polynomials coefficients representing rotation angles. These polynomials can be used
-            for example to model thermo-elastic effects.
+        This method is used for LOS calibration purposes. It allows to compute the Jacobian matrix of the LOS with respect to the parameters, which are typically polynomials coefficients representing rotation angles. These polynomials can be used for example to model thermo-elastic effects.
         
-            Note that in order for the partial derivatives to be properly set up, the :code:`setSelected` method must have been set
-            to :code:`true` for the various parameters returned by
-            :meth:`~org.orekit.rugged.los.TimeIndependentLOSTransform.getParametersDrivers` that should be estimated.
+        Note that in order for the partial derivatives to be properly set up, the setSelected method must have been set to true for the various parameters returned by getParametersDrivers that should be estimated.
         
-            Specified by:
-                :meth:`~org.orekit.rugged.los.TimeIndependentLOSTransform.transformLOS` in
-                interface :class:`~org.orekit.rugged.los.TimeIndependentLOSTransform`
+        Specified by: transformLOS in interface TimeIndependentLOSTransform
         
-            Parameters:
-                i (int): los pixel index
-                los (org.hipparchus.geometry.euclidean.threed.FieldVector3D<T> los): line-of-sight to transform
-                generator (:class:`~org.orekit.rugged.utils.DerivativeGenerator`<T> generator): generator to use for building :code:`Derivative` instances
+        Parameters:
+            i (int): los pixel index
+            los (org.hipparchus.geometry.euclidean.threed.FieldVector3D<T> los): line-of-sight to transform
+            generator (DerivativeGenerator<T> generator): generator to use for building Derivative instances
         
-            Returns:
-                line of sight, and its first partial derivatives with respect to the parameters
+        Returns:
+            line of sight, and its first partial derivatives with respect to the parameters
         
         
         """
         ...
     @typing.overload
-    def transformLOS(self, int: int, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def transformLOS(self, i: int, los: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Transform a line-of-sight.
+        Transform a line-of-sight.
         
-            Specified by:
-                :meth:`~org.orekit.rugged.los.TimeIndependentLOSTransform.transformLOS` in
-                interface :class:`~org.orekit.rugged.los.TimeIndependentLOSTransform`
+        Specified by: transformLOS in interface TimeIndependentLOSTransform
         
-            Parameters:
-                i (int): los pixel index
-                los (org.hipparchus.geometry.euclidean.threed.Vector3D): line-of-sight to transform
+        Parameters:
+            i (int): los pixel index
+            los (org.hipparchus.geometry.euclidean.threed.Vector3D): line-of-sight to transform
         
-            Returns:
-                transformed line-of-sight
+        Returns:
+            transformed line-of-sight
         
         """
         ...
 
 class FixedZHomothety(TimeIndependentLOSTransform):
     """
-    public class FixedZHomothety extends :class:`~org.orekit.rugged.los.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.rugged.los.TimeIndependentLOSTransform`
+    TimeIndependentLOSTransform based on a homothety along the Z axis.
     
-        :class:`~org.orekit.rugged.los.TimeIndependentLOSTransform` based on a homothety along the Z axis.
+    Since:
+        2.0
     
-        Since:
-            2.0
-    
-        Also see:
-            :class:`~org.orekit.rugged.los.LOSBuilder`
+    Also see:
+        LOSBuilder
     """
-    def __init__(self, string: str, double: float): ...
+    def __init__(self, name: str, factorvalue: float):
+        """
+        Simple constructor.
+        
+        The single parameter is the homothety factor.
+        
+        Parameters:
+            name (String): name of the homothety (used for estimated parameters identification)
+            factorvalue (double): homothety factor
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.stream.Stream[org.orekit.utils.ParameterDriver]:
         """
-            Get the drivers for LOS parameters.
+        Get the drivers for LOS parameters.
         
-            Specified by:
-                :meth:`~org.orekit.rugged.los.TimeIndependentLOSTransform.getParametersDrivers` in
-                interface :class:`~org.orekit.rugged.los.TimeIndependentLOSTransform`
+        Specified by: getParametersDrivers in interface TimeIndependentLOSTransform
         
-            Returns:
-                drivers for LOS parameters
+        Returns:
+            drivers for LOS parameters
         
         
         """
         ...
     _transformLOS_0__T = typing.TypeVar('_transformLOS_0__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def transformLOS(self, int: int, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T], derivativeGenerator: org.orekit.rugged.utils.DerivativeGenerator[_transformLOS_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T]:
+    def transformLOS(self, i: int, los: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T], generator: org.orekit.rugged.utils.DerivativeGenerator[_transformLOS_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T]:
         """
-            Transform a line-of-sight and its partial derivatives.
+        Transform a line-of-sight and its partial derivatives.
         
-            This method is used for LOS calibration purposes. It allows to compute the Jacobian matrix of the LOS with respect to
-            the parameters, which are typically polynomials coefficients representing rotation angles. These polynomials can be used
-            for example to model thermo-elastic effects.
+        This method is used for LOS calibration purposes. It allows to compute the Jacobian matrix of the LOS with respect to the parameters, which are typically polynomials coefficients representing rotation angles. These polynomials can be used for example to model thermo-elastic effects.
         
-            Note that in order for the partial derivatives to be properly set up, the :code:`setSelected` method must have been set
-            to :code:`true` for the various parameters returned by
-            :meth:`~org.orekit.rugged.los.TimeIndependentLOSTransform.getParametersDrivers` that should be estimated.
+        Note that in order for the partial derivatives to be properly set up, the setSelected method must have been set to true for the various parameters returned by getParametersDrivers that should be estimated.
         
-            Specified by:
-                :meth:`~org.orekit.rugged.los.TimeIndependentLOSTransform.transformLOS` in
-                interface :class:`~org.orekit.rugged.los.TimeIndependentLOSTransform`
+        Specified by: transformLOS in interface TimeIndependentLOSTransform
         
-            Parameters:
-                i (int): los pixel index
-                los (org.hipparchus.geometry.euclidean.threed.FieldVector3D<T> los): line-of-sight to transform
-                generator (:class:`~org.orekit.rugged.utils.DerivativeGenerator`<T> generator): generator to use for building :code:`Derivative` instances
+        Parameters:
+            i (int): los pixel index
+            los (org.hipparchus.geometry.euclidean.threed.FieldVector3D<T> los): line-of-sight to transform
+            generator (DerivativeGenerator<T> generator): generator to use for building Derivative instances
         
-            Returns:
-                line of sight, and its first partial derivatives with respect to the parameters
+        Returns:
+            line of sight, and its first partial derivatives with respect to the parameters
         
         
         """
         ...
     @typing.overload
-    def transformLOS(self, int: int, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def transformLOS(self, i: int, los: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Transform a line-of-sight.
+        Transform a line-of-sight.
         
-            Specified by:
-                :meth:`~org.orekit.rugged.los.TimeIndependentLOSTransform.transformLOS` in
-                interface :class:`~org.orekit.rugged.los.TimeIndependentLOSTransform`
+        Specified by: transformLOS in interface TimeIndependentLOSTransform
         
-            Parameters:
-                i (int): los pixel index
-                los (org.hipparchus.geometry.euclidean.threed.Vector3D): line-of-sight to transform
+        Parameters:
+            i (int): los pixel index
+            los (org.hipparchus.geometry.euclidean.threed.Vector3D): line-of-sight to transform
         
-            Returns:
-                transformed line-of-sight
+        Returns:
+            transformed line-of-sight
         
         """
         ...
 
 class PolynomialRotation(LOSTransform):
     """
-    public class PolynomialRotation extends :class:`~org.orekit.rugged.los.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.rugged.los.LOSTransform`
+    LOSTransform based on a rotation with polynomial angle.
     
-        :class:`~org.orekit.rugged.los.LOSTransform` based on a rotation with polynomial angle.
-    
-        Also see:
-            :class:`~org.orekit.rugged.los.LOSBuilder`
+    Also see:
+        LOSBuilder
     """
     @typing.overload
     def __init__(self, string: str, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, *double: float): ...
@@ -430,61 +416,55 @@ class PolynomialRotation(LOSTransform):
     def __init__(self, string: str, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, polynomialFunction: org.hipparchus.analysis.polynomials.PolynomialFunction): ...
     def getParametersDrivers(self) -> java.util.stream.Stream[org.orekit.utils.ParameterDriver]:
         """
-            Get the drivers for LOS parameters.
+        Get the drivers for LOS parameters.
         
-            Specified by:
-                :meth:`~org.orekit.rugged.los.LOSTransform.getParametersDrivers` in
-                interface :class:`~org.orekit.rugged.los.LOSTransform`
+        Specified by: getParametersDrivers in interface LOSTransform
         
-            Returns:
-                drivers for LOS parameters
+        Returns:
+            drivers for LOS parameters
         
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """
         ...
     _transformLOS_0__T = typing.TypeVar('_transformLOS_0__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def transformLOS(self, int: int, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T], absoluteDate: org.orekit.time.AbsoluteDate, derivativeGenerator: org.orekit.rugged.utils.DerivativeGenerator[_transformLOS_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T]:
+    def transformLOS(self, i: int, los: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T], date: org.orekit.time.AbsoluteDate, generator: org.orekit.rugged.utils.DerivativeGenerator[_transformLOS_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformLOS_0__T]:
         """
-            Transform a line-of-sight and its partial derivatives.
+        Transform a line-of-sight and its partial derivatives.
         
-            This method is used for LOS calibration purposes. It allows to compute the Jacobian matrix of the LOS with respect to
-            the parameters, which are typically polynomials coefficients representing rotation angles. These polynomials can be used
-            for example to model thermo-elastic effects.
+        This method is used for LOS calibration purposes. It allows to compute the Jacobian matrix of the LOS with respect to the parameters, which are typically polynomials coefficients representing rotation angles. These polynomials can be used for example to model thermo-elastic effects.
         
-            Specified by:
-                :meth:`~org.orekit.rugged.los.LOSTransform.transformLOS` in interface :class:`~org.orekit.rugged.los.LOSTransform`
+        Specified by: transformLOS in interface LOSTransform
         
-            Parameters:
-                i (int): los pixel index
-                los (org.hipparchus.geometry.euclidean.threed.FieldVector3D<T> los): line-of-sight to transform
-                date (org.orekit.time.AbsoluteDate): date
-                generator (:class:`~org.orekit.rugged.utils.DerivativeGenerator`<T> generator): generator to use for building :code:`DerivativeStructure` instances
+        Parameters:
+            i (int): los pixel index
+            los (org.hipparchus.geometry.euclidean.threed.FieldVector3D<T> los): line-of-sight to transform
+            date (org.orekit.time.AbsoluteDate): date
+            generator (DerivativeGenerator<T> generator): generator to use for building DerivativeStructure instances
         
-            Returns:
-                line of sight, and its first partial derivatives with respect to the parameters
+        Returns:
+            line of sight, and its first partial derivatives with respect to the parameters
         
         
         """
         ...
     @typing.overload
-    def transformLOS(self, int: int, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def transformLOS(self, i: int, los: org.hipparchus.geometry.euclidean.threed.Vector3D, date: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Transform a line-of-sight.
+        Transform a line-of-sight.
         
-            Specified by:
-                :meth:`~org.orekit.rugged.los.LOSTransform.transformLOS` in interface :class:`~org.orekit.rugged.los.LOSTransform`
+        Specified by: transformLOS in interface LOSTransform
         
-            Parameters:
-                i (int): los pixel index
-                los (org.hipparchus.geometry.euclidean.threed.Vector3D): line-of-sight to transform
-                date (org.orekit.time.AbsoluteDate): current date
+        Parameters:
+            i (int): los pixel index
+            los (org.hipparchus.geometry.euclidean.threed.Vector3D): line-of-sight to transform
+            date (org.orekit.time.AbsoluteDate): current date
         
-            Returns:
-                transformed line-of-sight
+        Returns:
+            transformed line-of-sight
         
         """
         ...

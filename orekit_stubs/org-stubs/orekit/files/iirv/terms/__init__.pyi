@@ -15,42 +15,34 @@ import typing
 
 class CheckSumTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
     """
-    public class CheckSumTerm extends :class:`~org.orekit.files.iirv.terms.base.LongValuedIIRVTerm`
+    Three-character checksum to validate message.
     
-        Three-character checksum to validate message.
+    Calculated by summing the decimal equivalent of the preceding characters in the line, counting spaces as 0 and negative signs as 1:
     
-        Calculated by summing the decimal equivalent of the preceding characters in the line, counting spaces as 0 and negative
-        signs as 1:
+      - 0 through 9 = face value
+      - Minus (-) = 1
+      - ASCII Space = 0
     
-          - 0 through 9 = face value
-          - Minus (-) = 1
-          - ASCII Space = 0
+    Valid Values: 000-999
     
-    
-        Valid Values: 000-999
-    
-        Since:
-            13.0
+    Since:
+        13.0
     """
     CHECK_SUM_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int CHECK_SUM_TERM_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     CHECK_SUM_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` CHECK_SUM_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -59,44 +51,56 @@ class CheckSumTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
     @typing.overload
     def __init__(self, long: int): ...
     @staticmethod
-    def computeChecksum(string: str) -> int:
+    def computeChecksum(input: str) -> int:
         """
-            Computes the sum of the decimal equivalent of characters in the line, counting spaces as 0 and negative signs as 1.
+        Computes the sum of the decimal equivalent of characters in the line, counting spaces as 0 and negative signs as 1.
         
-            Parameters:
-                input (:class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): input string to compute checksum from
+        Parameters:
+            input (String): input string to compute checksum from
         
-            Returns:
-                computed checksum integer value
-        
-        
-        """
-        ...
-    @staticmethod
-    def fromIIRVTerms(*iIRVVectorTerm: org.orekit.files.iirv.terms.base.IIRVVectorTerm[typing.Any]) -> 'CheckSumTerm': ...
-    def validateAgainstLineString(self, string: str) -> bool:
-        """
-            Validate the checksum from a line based on the object's checksum integer value.
-        
-            Parameters:
-                line (:class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string line of an IIRV message (including checksum as the final three characters)
-        
-            Returns:
-                true if the extracted checksum value matches this object's integer value
+        Returns:
+            computed checksum integer value
         
         
         """
         ...
     @staticmethod
-    def validateLineCheckSum(string: str) -> bool:
+    def fromIIRVTerms(*terms: org.orekit.files.iirv.terms.base.IIRVVectorTerm[typing.Any]) -> 'CheckSumTerm':
         """
-            Validate a line's embedded checksum value.
+        Constructs an IIRV checksum from a series of IIRVTerm instances.
         
-            Parameters:
-                line (:class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string line of an IIRV message (including checksum as the final three characters)
+        Parameters:
+            terms (IIRVVectorTerm<?>...): IIRVTerms to compute checksum
         
-            Returns:
-                true if the derived and embedded checksum values are equal
+        Returns:
+            newly created CheckSum instance
+        
+        
+        """
+        ...
+    def validateAgainstLineString(self, line: str) -> bool:
+        """
+        Validate the checksum from a line based on the object's checksum integer value.
+        
+        Parameters:
+            line (String): string line of an IIRV message (including checksum as the final three characters)
+        
+        Returns:
+            true if the extracted checksum value matches this object's integer value
+        
+        
+        """
+        ...
+    @staticmethod
+    def validateLineCheckSum(line: str) -> bool:
+        """
+        Validate a line's embedded checksum value.
+        
+        Parameters:
+            line (String): string line of an IIRV message (including checksum as the final three characters)
+        
+        Returns:
+            true if the derived and embedded checksum values are equal
         
         
         """
@@ -104,94 +108,67 @@ class CheckSumTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
 
 class CoordinateSystemTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
     """
-    public class CoordinateSystemTerm extends :class:`~org.orekit.files.iirv.terms.base.LongValuedIIRVTerm`
+    1-character representing the coordinate system associated with the state variables.
     
-        1-character representing the coordinate system associated with the state variables.
+    Valid values:
     
-        Valid values:
-    
-          - 1 = Geocentric True-of-Date Rotating
-          - 2 = Geocentric mean of 1950.0 (B1950.0)
-          - 3 = Heliocentric B1950.0
-          - 4 = Reserved for JPL use (non-GSFC)
-          - 5 = Reserved for JPL use (non-GSFC)
-          - 6 = Geocentric mean of 2000.0 (J2000.0)
-          - 7 = Heliocentric J2000.0
+      - 1 = Geocentric True-of-Date Rotating
+      - 2 = Geocentric mean of 1950.0 (B1950.0)
+      - 3 = Heliocentric B1950.0
+      - 4 = Reserved for JPL use (non-GSFC)
+      - 5 = Reserved for JPL use (non-GSFC)
+      - 6 = Geocentric mean of 2000.0 (J2000.0)
+      - 7 = Heliocentric J2000.0
     
     
-        Since:
-            13.0
+    Since:
+        13.0
     """
     GEOCENTRIC_TRUE_OF_DATE_ROTATING: typing.ClassVar['CoordinateSystemTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.CoordinateSystemTerm` GEOCENTRIC_TRUE_OF_DATE_ROTATING
+    Geocentric True-of-Date Rotating (GTOD) CoordinateSystemTerm.
     
-        Geocentric True-of-Date Rotating (GTOD) CoordinateSystemTerm.
-    
-        Also known as True of Date Rotating frame (TDR) or Greenwich Rotating Coordinate frame (GCR).
-    
+    Also known as True of Date Rotating frame (TDR) or Greenwich Rotating Coordinate frame (GCR).
     """
     GEOCENTRIC_MEAN_B1950: typing.ClassVar['CoordinateSystemTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.CoordinateSystemTerm` GEOCENTRIC_MEAN_B1950
-    
-        Geocentric mean of 1950.0 (B1950.0) CoordinateSystemTerm.
-    
+    Geocentric mean of 1950.0 (B1950.0) CoordinateSystemTerm.
     """
     HELIOCENTRIC_B1950: typing.ClassVar['CoordinateSystemTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.CoordinateSystemTerm` HELIOCENTRIC_B1950
-    
-        Heliocentric B1950.0 CoordinateSystemTerm.
-    
+    Heliocentric B1950.0 CoordinateSystemTerm.
     """
     JPL_RESERVED_1: typing.ClassVar['CoordinateSystemTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.CoordinateSystemTerm` JPL_RESERVED_1
-    
-        Reserved for JPL use (non-GSFC) CoordinateSystemTerm.
-    
+    Reserved for JPL use (non-GSFC) CoordinateSystemTerm.
     """
     JPL_RESERVED_2: typing.ClassVar['CoordinateSystemTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.CoordinateSystemTerm` JPL_RESERVED_2
-    
-        Reserved for JPL use (non-GSFC) CoordinateSystemTerm.
-    
+    Reserved for JPL use (non-GSFC) CoordinateSystemTerm.
     """
     GEOCENTRIC_MEAN_OF_J2000: typing.ClassVar['CoordinateSystemTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.CoordinateSystemTerm` GEOCENTRIC_MEAN_OF_J2000
-    
-        Geocentric mean of 2000.0 (J2000.0) CoordinateSystemTerm.
-    
+    Geocentric mean of 2000.0 (J2000.0) CoordinateSystemTerm.
     """
     HELIOCENTRIC_J2000: typing.ClassVar['CoordinateSystemTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.CoordinateSystemTerm` HELIOCENTRIC_J2000
-    
-        Heliocentric J2000.0 CoordinateSystemTerm.
-    
+    Heliocentric J2000.0 CoordinateSystemTerm.
     """
     COORDINATE_SYSTEM_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int COORDINATE_SYSTEM_TERM_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     COORDINATE_SYSTEM_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` COORDINATE_SYSTEM_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -202,77 +179,66 @@ class CoordinateSystemTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
     @typing.overload
     def getFrame(self) -> org.orekit.frames.Frame:
         """
-            Returns the :class:`~org.orekit.frames.Frame` specified within the IIRV using the
-            :meth:`~org.orekit.data.DataContext.getDefault`.
+        Returns the Frame specified within the IIRV using the getDefault.
         
-            Returns:
-                coordinate system
+        Returns:
+            coordinate system
         
         
         """
         ...
     @typing.overload
-    def getFrame(self, dataContext: org.orekit.data.DataContext) -> org.orekit.frames.Frame:
+    def getFrame(self, context: org.orekit.data.DataContext) -> org.orekit.frames.Frame:
         """
-            Returns the :class:`~org.orekit.frames.Frame` specified within the IIRV.
+        Returns the Frame specified within the IIRV.
         
-            Parameters:
-                context (:class:`~org.orekit.data.DataContext`): data context used to retrieve frames
+        Parameters:
+            context (DataContext): data context used to retrieve frames
         
-            Returns:
-                coordinate system
+        Returns:
+            coordinate system
         
         """
         ...
 
 class CrossSectionalAreaTerm(org.orekit.files.iirv.terms.base.DoubleValuedIIRVTerm):
     """
-    public class CrossSectionalAreaTerm extends :class:`~org.orekit.files.iirv.terms.base.DoubleValuedIIRVTerm`
+    5-character average satellite cross-sectional area in square meters with a resolution to the nearest hundredth of a square meter.
     
-        5-character average satellite cross-sectional area in square meters with a resolution to the nearest hundredth of a
-        square meter.
+    Assumed decimal point is two places from the right. Must contain all zeros if not used.
     
-        Assumed decimal point is two places from the right. Must contain all zeros if not used.
+    Units: m^2
     
-        Units: m^2
-    
-        Valid values:
+    Valid values:
     
     
     
-          - 0 to 999.99
-          - [String]: Any integer 0-9 for characters 1-5
+      - 0 to 999.99
+      - [String]: Any integer 0-9 for characters 1-5
     
     
-        Since:
-            13.0
+    Since:
+        13.0
     """
     UNUSED: typing.ClassVar['CrossSectionalAreaTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.CrossSectionalAreaTerm` UNUSED
-    
-        CrossSectionalAreaTerm contains all zeros when not used.
-    
+    CrossSectionalAreaTerm contains all zeros when not used.
     """
     CROSS_SECTIONAL_AREA_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int CROSS_SECTIONAL_AREA_TERM_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     CROSS_SECTIONAL_AREA_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` CROSS_SECTIONAL_AREA_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -283,69 +249,51 @@ class CrossSectionalAreaTerm(org.orekit.files.iirv.terms.base.DoubleValuedIIRVTe
 
 class DataSourceTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
     """
-    public class DataSourceTerm extends :class:`~org.orekit.files.iirv.terms.base.LongValuedIIRVTerm`
+    Source of the data message.
     
-        Source of the data message.
+    Valid values:
     
-        Valid values:
-    
-          - 1 = Nominal/planning
-          - 2 = Real-time
-          - 3 = Off-line
-          - 4 = Off-line/mean
+      - 1 = Nominal/planning
+      - 2 = Real-time
+      - 3 = Off-line
+      - 4 = Off-line/mean
     
     
     
-        Since:
-            13.0
+    Since:
+        13.0
     """
     NOMINAL: typing.ClassVar['DataSourceTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.DataSourceTerm` NOMINAL
-    
-        Nominal/planning DataSource.
-    
+    Nominal/planning DataSource.
     """
     REAL_TIME: typing.ClassVar['DataSourceTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.DataSourceTerm` REAL_TIME
-    
-        Real-time DataSource.
-    
+    Real-time DataSource.
     """
     OFFLINE: typing.ClassVar['DataSourceTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.DataSourceTerm` OFFLINE
-    
-        Off-line DataSource.
-    
+    Off-line DataSource.
     """
     OFFLINE_MEAN: typing.ClassVar['DataSourceTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.DataSourceTerm` OFFLINE_MEAN
-    
-        Off-line/mean DataSource.
-    
+    Off-line/mean DataSource.
     """
     DATA_SOURCE_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int DATA_SOURCE_TERM_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     DATA_SOURCE_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DATA_SOURCE_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -356,34 +304,28 @@ class DataSourceTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
 
 class DayOfYearTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
     """
-    public class DayOfYearTerm extends :class:`~org.orekit.files.iirv.terms.base.LongValuedIIRVTerm`
+    3-character integer representing the day of the year.
     
-        3-character integer representing the day of the year.
+    Valid values: 001-366 (365 + 1 for leap year)
     
-        Valid values: 001-366 (365 + 1 for leap year)
-    
-        Since:
-            13.0
+    Since:
+        13.0
     """
     DAY_OF_YEAR_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int DAY_OF_YEAR_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     DAY_OF_YEAR_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DAY_OF_YEAR_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -393,15 +335,15 @@ class DayOfYearTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
     def __init__(self, long: int): ...
     @typing.overload
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, uTCScale: org.orekit.time.UTCScale): ...
-    def getDateComponents(self, int: int) -> org.orekit.time.DateComponents:
+    def getDateComponents(self, year: int) -> org.orekit.time.DateComponents:
         """
-            Returns the :class:`~org.orekit.time.DateComponents` instance that corresponds this term's value.
+        Returns the DateComponents instance that corresponds this term's value.
         
-            Parameters:
-                year (int): year to associated with the created date components
+        Parameters:
+            year (int): year to associated with the created date components
         
-            Returns:
-                the date components associated with this term
+        Returns:
+            the date components associated with this term
         
         
         """
@@ -409,49 +351,40 @@ class DayOfYearTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
 
 class DragCoefficientTerm(org.orekit.files.iirv.terms.base.DoubleValuedIIRVTerm):
     """
-    public class DragCoefficientTerm extends :class:`~org.orekit.files.iirv.terms.base.DoubleValuedIIRVTerm`
+    4-character dimensionless drag coefficient.
     
-        4-character dimensionless drag coefficient.
+    Assumed decimal point is two places from the right. Must contain all zeros if not used.
     
-        Assumed decimal point is two places from the right. Must contain all zeros if not used.
+    Units: dimensionless
     
-        Units: dimensionless
+    Valid values:
     
-        Valid values:
-    
-          - 0 to 99.99
-          - ":code:`xxxx`", :code:`x`: Any integer 0-9
+      - 0 to 99.99
+      - "xxxx", x: Any integer 0-9
     
     
-        Since:
-            13.0
+    Since:
+        13.0
     """
     UNUSED: typing.ClassVar['DragCoefficientTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.DragCoefficientTerm` UNUSED
-    
-        DragCoefficientTerm contains all zeros when not used.
-    
+    DragCoefficientTerm contains all zeros when not used.
     """
     DRAG_COEFFICIENT_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int DRAG_COEFFICIENT_TERM_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     DRAG_COEFFICIENT_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DRAG_COEFFICIENT_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -462,81 +395,96 @@ class DragCoefficientTerm(org.orekit.files.iirv.terms.base.DoubleValuedIIRVTerm)
 
 class IIRVTermUtils:
     """
-    public final class IIRVTermUtils extends :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Utilities class for IIRVVectorTerm subclasses.
     
-        Utilities class for :class:`~org.orekit.files.iirv.terms.base.IIRVVectorTerm` subclasses.
-    
-        Since:
-            13.0
+    Since:
+        13.0
     """
     @staticmethod
-    def addPadding(string: str, char: str, int: int, boolean: bool) -> str:
+    def addPadding(string: str, c: str, size: int, addPaddingToLeft: bool) -> str:
         """
-            Add padding characters to a string.
+        Add padding characters to a string.
         
-            Parameters:
-                string (:class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string to pad
-                c (char): padding character
-                size (int): desired size
-                addPaddingToLeft (boolean): if true, the resulting string is right justified (i.e. the padding character is added to the left of the string)
+        Parameters:
+            string (String): string to pad
+            c (char): padding character
+            size (int): desired size
+            addPaddingToLeft (boolean): if true, the resulting string is right justified (i.e. the padding character is added to the left of the string)
         
-            Returns:
-                padded String
+        Returns:
+            padded String
         
         
         """
         ...
     @staticmethod
-    def iirvTermsToLineString(*iIRVVectorTerm: org.orekit.files.iirv.terms.base.IIRVVectorTerm[typing.Any]) -> str: ...
+    def iirvTermsToLineString(*terms: org.orekit.files.iirv.terms.base.IIRVVectorTerm[typing.Any]) -> str:
+        """
+        Converts a list of IIRVVectorTerm instances to a String for a single line of an IIRVVector.
+        
+        Parameters:
+            terms (IIRVVectorTerm<?>...): terms to parse/convert
+        
+        Returns:
+            String containing each of the inputted terms
+        
+        
+        """
+        ...
     @staticmethod
-    def iirvTermsToLineStringSplitByTerm(string: str, *iIRVVectorTerm: org.orekit.files.iirv.terms.base.IIRVVectorTerm[typing.Any]) -> str: ...
+    def iirvTermsToLineStringSplitByTerm(delimiter: str, *terms: org.orekit.files.iirv.terms.base.IIRVVectorTerm[typing.Any]) -> str:
+        """
+        Converts a list of IIRVVectorTerm instances to a String for a single line of an IIRVVector, where each term in the line is split by a specified delimiter.
+        
+        For real IIRV vector, the deliminator is always empty; it is only used when creating human-readable forms to more readily identify specific terms within a given message.
+        
+        Parameters:
+            delimiter (String): delimiter to insert between each IIRV vector term
+            terms (IIRVVectorTerm<?>...): terms to parse/convert
+        
+        Returns:
+            String containing each of the inputted terms
+        
+        
+        """
+        ...
 
 class MassTerm(org.orekit.files.iirv.terms.base.DoubleValuedIIRVTerm):
     """
-    public class MassTerm extends :class:`~org.orekit.files.iirv.terms.base.DoubleValuedIIRVTerm`
+    8-character mass of the satellite in kilograms with a resolution to the nearest tenth of a kilogram; assumed decimal point is one place from the right. Must contain all zeros if not used.
     
-        8-character mass of the satellite in kilograms with a resolution to the nearest tenth of a kilogram; assumed decimal
-        point is one place from the right. Must contain all zeros if not used.
+    Units: kg
     
-        Units: kg
-    
-        Valid values:
+    Valid values:
     
     
     
-          - 0 to 999.99
-          - [String]: Any integer 0-9 for characters 1-8
+      - 0 to 999.99
+      - [String]: Any integer 0-9 for characters 1-8
     
     
-        Since:
-            13.0
+    Since:
+        13.0
     """
     UNUSED: typing.ClassVar['MassTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.MassTerm` UNUSED
-    
-        MassTerm contains all zeros when not used.
-    
+    MassTerm contains all zeros when not used.
     """
     MASS_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int MASS_TERM_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     MASS_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MASS_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -547,52 +495,40 @@ class MassTerm(org.orekit.files.iirv.terms.base.DoubleValuedIIRVTerm):
 
 class MessageClassTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
     """
-    public class MessageClassTerm extends :class:`~org.orekit.files.iirv.terms.base.LongValuedIIRVTerm`
+    2-character IIRV message class.
     
-        2-character IIRV message class.
+    Valid values:
     
-        Valid values:
-    
-          - 10 = IIRV (nominal)
-          - 15 = IIRV (inflight update)
+      - 10 = IIRV (nominal)
+      - 15 = IIRV (inflight update)
     
     
-        Since:
-            13.0
+    Since:
+        13.0
     """
     NOMINAL: typing.ClassVar['MessageClassTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.MessageClassTerm` NOMINAL
-    
-        Nominal MessageClass.
-    
+    Nominal MessageClass.
     """
     INFLIGHT_UPDATE: typing.ClassVar['MessageClassTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.MessageClassTerm` INFLIGHT_UPDATE
-    
-        Inflight update MessageClass.
-    
+    Inflight update MessageClass.
     """
     MESSAGE_CLASS_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int MESSAGE_CLASS_TERM_LENGTH
+    Length of the term (number of characters).
     
-        Length of the term (number of characters).
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     MESSAGE_CLASS_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MESSAGE_CLASS_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -603,58 +539,54 @@ class MessageClassTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
 
 class MessageEndConstantTerm(org.orekit.files.iirv.terms.base.ConstantValuedIIRVTerm):
     """
-    public class MessageEndConstantTerm extends :class:`~org.orekit.files.iirv.terms.base.ConstantValuedIIRVTerm`
+    5-character immutable end of the message: "ITERM".
     
-        5-character immutable end of the message: "ITERM".
+    Valid values: ITERM
     
-        Valid values: ITERM
-    
-        Since:
-            13.0
+    Since:
+        13.0
     """
     MESSAGE_END_TERM_STRING: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MESSAGE_END_TERM_STRING
+    End of the message is always "ITERM".
     
-        End of the message is always "ITERM".
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Constructor.
+        
+        See
+        """
+        ...
 
 class MessageIDTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
     """
-    public class MessageIDTerm extends :class:`~org.orekit.files.iirv.terms.base.LongValuedIIRVTerm`
+    A unique 7-character number used to reference the IIRV message.
     
-        A unique 7-character number used to reference the IIRV message.
+    Valid values: 0000000 to 9999999
     
-        Valid values: 0000000 to 9999999
-    
-        Since:
-            13.0
+    Since:
+        13.0
     """
     MESSAGE_ID_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int MESSAGE_ID_TERM_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     MESSAGE_ID_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MESSAGE_ID_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -665,314 +597,288 @@ class MessageIDTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
 
 class MessageSourceTerm(org.orekit.files.iirv.terms.base.StringValuedIIRVTerm):
     """
-    public class MessageSourceTerm extends :class:`~org.orekit.files.iirv.terms.base.StringValuedIIRVTerm`
+    1-character source of the message (Default = "0").
     
-        1-character source of the message (Default = "0").
-    
-        Since:
-            13.0
+    Since:
+        13.0
     """
     DEFAULT: typing.ClassVar['MessageSourceTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.MessageSourceTerm` DEFAULT
-    
-        Default value for the message source is "0".
-    
+    Default value for the message source is "0".
     """
     MESSAGE_SOURCE_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int MESSAGE_SOURCE_TERM_LENGTH
+    The length of the message source term within the IIRV vector.
     
-        The length of the message source term within the IIRV vector.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     MESSAGE_SOURCE_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MESSAGE_SOURCE_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, string: str): ...
+    def __init__(self, value: str):
+        """
+        Constructor.
+        
+        See
+        
+        Parameters:
+            value (String): value of message source term
+        
+        
+        """
+        ...
 
 class MessageStartConstantTerm(org.orekit.files.iirv.terms.base.ConstantValuedIIRVTerm):
     """
-    public class MessageStartConstantTerm extends :class:`~org.orekit.files.iirv.terms.base.ConstantValuedIIRVTerm`
+    5-character start of the message, always is "GIIRV".
     
-        5-character start of the message, always is "GIIRV".
+    Valid values: GIIRV
     
-        Valid values: GIIRV
-    
-        Since:
-            13.0
+    Since:
+        13.0
     """
     MESSAGE_START_TERM_STRING: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MESSAGE_START_TERM_STRING
+    Start of the message is always "GIIRV".
     
-        Start of the message is always "GIIRV".
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Constructor.
+        
+        See
+        """
+        ...
 
 class MessageTypeTerm(org.orekit.files.iirv.terms.base.StringValuedIIRVTerm):
     """
-    public class MessageTypeTerm extends :class:`~org.orekit.files.iirv.terms.base.StringValuedIIRVTerm`
+    2-character type of this message.
     
-        2-character type of this message.
+    Valid values: Any letter, number or, ASCII space
     
-        Valid values: Any letter, number or, ASCII space
-    
-        Since:
-            13.0
+    Since:
+        13.0
     """
     DEFAULT: typing.ClassVar['MessageTypeTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.MessageTypeTerm` DEFAULT
-    
-        Default value: "03" (operations data message).
-    
+    Default value: "03" (operations data message).
     """
     MESSAGE_TYPE_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int MESSAGE_TYPE_TERM_LENGTH
+    The length of the message type term within the IIRV vector.
     
-        The length of the message type term within the IIRV vector.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     MESSAGE_TYPE_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MESSAGE_TYPE_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, string: str): ...
+    def __init__(self, value: str):
+        """
+        Constructor.
+        
+        See
+        
+        Parameters:
+            value (String): value of the message type term
+        
+        
+        """
+        ...
 
 class OriginIdentificationTerm(org.orekit.files.iirv.terms.base.StringValuedIIRVTerm):
     """
-    public class OriginIdentificationTerm extends :class:`~org.orekit.files.iirv.terms.base.StringValuedIIRVTerm`
+    1-character alphabetic character indicating originator of message.
     
-        1-character alphabetic character indicating originator of message.
+    See RoutingIndicatorTerm for the related four-character routing indicator
     
-        See :class:`~org.orekit.files.iirv.terms.RoutingIndicatorTerm` for the related four-character routing indicator
+    Valid values:
     
-        Valid values:
-    
-          - ASCII space = GSFC
-          - Z = WLP
-          - E = ETR
-          - L = JPL
-          - W = WTR
-          - J = JSC
-          - P = PMR
-          - A = CSTC
-          - K = KMR
-          - C = CNES
+      - ASCII space = GSFC
+      - Z = WLP
+      - E = ETR
+      - L = JPL
+      - W = WTR
+      - J = JSC
+      - P = PMR
+      - A = CSTC
+      - K = KMR
+      - C = CNES
     
     
-        Since:
-            13.0
+    Since:
+        13.0
     """
     GSFC: typing.ClassVar['OriginIdentificationTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.OriginIdentificationTerm` GSFC
-    
-        NASA Goddard Space Flight Center (GSFC) OriginIdentification.
-    
+    NASA Goddard Space Flight Center (GSFC) OriginIdentification.
     """
     WLP: typing.ClassVar['OriginIdentificationTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.OriginIdentificationTerm` WLP
-    
-        Wallops Island tracking radars (WLP) OriginIdentification.
-    
+    Wallops Island tracking radars (WLP) OriginIdentification.
     """
     ETR: typing.ClassVar['OriginIdentificationTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.OriginIdentificationTerm` ETR
-    
-        NASA/USFC Eastern Test Range (ETR) OriginIdentification.
-    
+    NASA/USFC Eastern Test Range (ETR) OriginIdentification.
     """
     JPL: typing.ClassVar['OriginIdentificationTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.OriginIdentificationTerm` JPL
-    
-        NASA Jet Propulsion Laboratory (JPL) OriginIdentification.
-    
+    NASA Jet Propulsion Laboratory (JPL) OriginIdentification.
     """
     WTR: typing.ClassVar['OriginIdentificationTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.OriginIdentificationTerm` WTR
-    
-        NASA/USFC Western Test Range (WTR) OriginIdentification.
-    
+    NASA/USFC Western Test Range (WTR) OriginIdentification.
     """
     JSC: typing.ClassVar['OriginIdentificationTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.OriginIdentificationTerm` JSC
-    
-        NASA Johnson Space Center (JSC) OriginIdentification.
-    
+    NASA Johnson Space Center (JSC) OriginIdentification.
     """
     PMR: typing.ClassVar['OriginIdentificationTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.OriginIdentificationTerm` PMR
-    
-        Navy Pacific Missile Range (PMR) OriginIdentification.
-    
+    Navy Pacific Missile Range (PMR) OriginIdentification.
     """
     CSTC: typing.ClassVar['OriginIdentificationTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.OriginIdentificationTerm` CSTC
-    
-        Air Force Satellite Control Facility (CSTC) OriginIdentification.
-    
+    Air Force Satellite Control Facility (CSTC) OriginIdentification.
     """
     KMR: typing.ClassVar['OriginIdentificationTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.OriginIdentificationTerm` KMR
-    
-        Army Kwajalein Missile Range (KMR) OriginIdentification.
-    
+    Army Kwajalein Missile Range (KMR) OriginIdentification.
     """
     CNES: typing.ClassVar['OriginIdentificationTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.OriginIdentificationTerm` CNES
-    
-        French Space Agency National Centre for Space Studies (CNES) OriginIdentification.
-    
+    French Space Agency National Centre for Space Studies (CNES) OriginIdentification.
     """
     ORIGIN_IDENTIFICATION_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int ORIGIN_IDENTIFICATION_TERM_LENGTH
+    The length of the origin identification term within the IIRV vector.
     
-        The length of the origin identification term within the IIRV vector.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     ORIGIN_IDENTIFICATION_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ORIGIN_IDENTIFICATION_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, string: str): ...
+    def __init__(self, value: str):
+        """
+        Constructor.
+        
+        See
+        
+        Parameters:
+            value (String): value of the origin ID term
+        
+        
+        """
+        ...
 
 class OriginatorRoutingIndicatorTerm(org.orekit.files.iirv.terms.base.StringValuedIIRVTerm):
     """
-    public class OriginatorRoutingIndicatorTerm extends :class:`~org.orekit.files.iirv.terms.base.StringValuedIIRVTerm`
+    4-character originating routing indicator.
     
-        4-character originating routing indicator.
+    Valid values: GCQU, GAQD
     
-        Valid values: GCQU, GAQD
-    
-        Since:
-            13.0
+    Since:
+        13.0
     """
     GCQU: typing.ClassVar['OriginatorRoutingIndicatorTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.OriginatorRoutingIndicatorTerm` GCQU
-    
-        GCQU OriginatorRoutingIndicator.
-    
+    GCQU OriginatorRoutingIndicator.
     """
     GAQD: typing.ClassVar['OriginatorRoutingIndicatorTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.OriginatorRoutingIndicatorTerm` GAQD
-    
-        GAQD OriginatorRoutingIndicator.
-    
+    GAQD OriginatorRoutingIndicator.
     """
     ORIGINATOR_ROUTING_INDICATOR_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int ORIGINATOR_ROUTING_INDICATOR_TERM_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     ORIGINATOR_ROUTING_INDICATOR_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ORIGINATOR_ROUTING_INDICATOR_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, string: str): ...
+    def __init__(self, value: str):
+        """
+        Constructor.
+        
+        See
+        
+        Parameters:
+            value (String): value of the originator routing indicator term (dimensionless)
+        
+        
+        """
+        ...
 
 class PositionVectorComponentTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
     """
-    public class PositionVectorComponentTerm extends :class:`~org.orekit.files.iirv.terms.base.LongValuedIIRVTerm`
+    13-character signed component of a position vector.
     
-        13-character signed component of a position vector.
+    Units: m
     
-        Units: m
+    Valid values:
     
-        Valid values:
-    
-          - Character 1: ' ' or '-'
-          - Character 2-12: Any integer 0-9
+      - Character 1: ' ' or '-'
+      - Character 2-12: Any integer 0-9
     
     
-        Since:
-            13.0
+    Since:
+        13.0
     """
     POSITION_VECTOR_COMPONENT_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int POSITION_VECTOR_COMPONENT_TERM_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     POSITION_VECTOR_COMPONENT_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` POSITION_VECTOR_COMPONENT_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -985,173 +891,136 @@ class PositionVectorComponentTerm(org.orekit.files.iirv.terms.base.LongValuedIIR
 
 class RoutingIndicatorTerm(org.orekit.files.iirv.terms.base.StringValuedIIRVTerm):
     """
-    public class RoutingIndicatorTerm extends :class:`~org.orekit.files.iirv.terms.base.StringValuedIIRVTerm`
+    4-character destination routing indicator that specifies the site for which the message was generated.
     
-        4-character destination routing indicator that specifies the site for which the message was generated.
+    See OriginIdentificationTerm for the related alphabetic character
     
-        See :class:`~org.orekit.files.iirv.terms.OriginIdentificationTerm` for the related alphabetic character
+    Valid values:
     
-        Valid values:
-    
-          - GSFC = NASA Goddard Space Flight Center
-          - WLP = Wallops Island tracking radars
-          - ETR = NASA/USFC Eastern Test Range
-          - JPL = NASA Jet Propulsion Laboratory
-          - WTR = NASA/USFC Western Test Range
-          - JSC = NASA Johnson Space Center
-          - PMR = Navy Pacific Missile Range
-          - CSTC = Air Force Satellite Control Facility
-          - KMR = Army Kwajalein Missile Range
-          - CNES = French Space Agency National Centre for Space Studies (CNES)
-          - MANY = Message originated from more than one of the above stations
+      - GSFC = NASA Goddard Space Flight Center
+      - WLP = Wallops Island tracking radars
+      - ETR = NASA/USFC Eastern Test Range
+      - JPL = NASA Jet Propulsion Laboratory
+      - WTR = NASA/USFC Western Test Range
+      - JSC = NASA Johnson Space Center
+      - PMR = Navy Pacific Missile Range
+      - CSTC = Air Force Satellite Control Facility
+      - KMR = Army Kwajalein Missile Range
+      - CNES = French Space Agency National Centre for Space Studies (CNES)
+      - MANY = Message originated from more than one of the above stations
     
     
-        Since:
-            13.0
+    Since:
+        13.0
     """
     GSFC: typing.ClassVar['RoutingIndicatorTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.RoutingIndicatorTerm` GSFC
-    
-        NASA Goddard Space Flight Center (GSFC) RoutingIndicator.
-    
+    NASA Goddard Space Flight Center (GSFC) RoutingIndicator.
     """
     WLP: typing.ClassVar['RoutingIndicatorTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.RoutingIndicatorTerm` WLP
-    
-        Wallops Island tracking radars (WLP) RoutingIndicator.
-    
+    Wallops Island tracking radars (WLP) RoutingIndicator.
     """
     ETR: typing.ClassVar['RoutingIndicatorTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.RoutingIndicatorTerm` ETR
-    
-        NASA/USFC Eastern Test Range (ETR) RoutingIndicator.
-    
+    NASA/USFC Eastern Test Range (ETR) RoutingIndicator.
     """
     JPL: typing.ClassVar['RoutingIndicatorTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.RoutingIndicatorTerm` JPL
-    
-        NASA Jet Propulsion Laboratory (JPL) RoutingIndicator.
-    
+    NASA Jet Propulsion Laboratory (JPL) RoutingIndicator.
     """
     WTR: typing.ClassVar['RoutingIndicatorTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.RoutingIndicatorTerm` WTR
-    
-        NASA/USFC Western Test Range (WTR) RoutingIndicator.
-    
+    NASA/USFC Western Test Range (WTR) RoutingIndicator.
     """
     JSC: typing.ClassVar['RoutingIndicatorTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.RoutingIndicatorTerm` JSC
-    
-        NASA Johnson Space Center (JSC) RoutingIndicator.
-    
+    NASA Johnson Space Center (JSC) RoutingIndicator.
     """
     PMR: typing.ClassVar['RoutingIndicatorTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.RoutingIndicatorTerm` PMR
-    
-        Navy Pacific Missile Range (PMR) RoutingIndicator.
-    
+    Navy Pacific Missile Range (PMR) RoutingIndicator.
     """
     CSTC: typing.ClassVar['RoutingIndicatorTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.RoutingIndicatorTerm` CSTC
-    
-        Air Force Satellite Control Facility (CSTC) RoutingIndicator.
-    
+    Air Force Satellite Control Facility (CSTC) RoutingIndicator.
     """
     KMR: typing.ClassVar['RoutingIndicatorTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.RoutingIndicatorTerm` KMR
-    
-        Army Kwajalein Missile Range (KMR) RoutingIndicator.
-    
+    Army Kwajalein Missile Range (KMR) RoutingIndicator.
     """
     CNES: typing.ClassVar['RoutingIndicatorTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.RoutingIndicatorTerm` CNES
-    
-        French Space Agency National Centre for Space Studies (CNES) RoutingIndicator.
-    
+    French Space Agency National Centre for Space Studies (CNES) RoutingIndicator.
     """
     MANY: typing.ClassVar['RoutingIndicatorTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.RoutingIndicatorTerm` MANY
-    
-        Message originated from more than one of the above stations RoutingIndicator.
-    
+    Message originated from more than one of the above stations RoutingIndicator.
     """
     ROUTING_INDICATOR_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int ROUTING_INDICATOR_TERM_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     ROUTING_INDICATOR_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ROUTING_INDICATOR_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, string: str): ...
+    def __init__(self, value: str):
+        """
+        Constructor.
+        
+        See
+        
+        Parameters:
+            value (String): value of the routing indicator term
+        
+        
+        """
+        ...
 
 class SequenceNumberTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
     """
-    public class SequenceNumberTerm extends :class:`~org.orekit.files.iirv.terms.base.LongValuedIIRVTerm`
+    3-character sequence number counter that is incremented for each vector in a set of vector data on a per-station per transmission basis.
     
-        3-character sequence number counter that is incremented for each vector in a set of vector data on a per-station per
-        transmission basis.
+    Valid values: 000-999.
     
-        Valid values: 000-999.
-    
-        Since:
-            13.0
+    Since:
+        13.0
     """
     SEQUENCE_NUMBER_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int SEQUENCE_NUMBER_TERM_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     MAX_SEQUENCE_NUMBER: typing.ClassVar[int] = ...
     """
-    public static final int MAX_SEQUENCE_NUMBER
+    Maximum value of an IIRV sequence number.
     
-        Maximum value of an IIRV sequence number.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     SEQUENCE_NUMBER_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SEQUENCE_NUMBER_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term (integer 000-999).
     
-        Regular expression that ensures the validity of string values for this term (integer 000-999).
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -1162,61 +1031,49 @@ class SequenceNumberTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
 
 class SolarReflectivityCoefficientTerm(org.orekit.files.iirv.terms.base.DoubleValuedIIRVTerm):
     """
-    public class SolarReflectivityCoefficientTerm extends :class:`~org.orekit.files.iirv.terms.base.DoubleValuedIIRVTerm`
+    8-character dimensionless solar reflectivity coefficient.
     
-        8-character dimensionless solar reflectivity coefficient.
+    s = "-" for negative sign or blank for positive sign, assumed decimal point is six places from the right. May contain all zeros if not used.
     
-        s = "-" for negative sign or blank for positive sign, assumed decimal point is six places from the right. May contain
-        all zeros if not used.
+    Units: dimensionless
     
-        Units: dimensionless
+    Valid values
     
-        Valid values
-    
-          - -99.99999 to 99.99999
-          - ":code:`sxxxxxxx`: :code:`s`: ' ' (ASCII space) or '-', :code:`x`: Any integer 0-9
+      - -99.99999 to 99.99999
+      - "sxxxxxxx: s: ' ' (ASCII space) or '-', x: Any integer 0-9
     
     
-        Since:
-            13.0
+    Since:
+        13.0
     """
     UNUSED: typing.ClassVar['SolarReflectivityCoefficientTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.SolarReflectivityCoefficientTerm` UNUSED
-    
-        SolarReflectivityCoefficientTerm contains all zeros when not used.
-    
+    SolarReflectivityCoefficientTerm contains all zeros when not used.
     """
     SOLAR_REFLECTIVITY_COEFFICIENT_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int SOLAR_REFLECTIVITY_COEFFICIENT_TERM_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     SOLAR_REFLECTIVITY_COEFFICIENT_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SOLAR_REFLECTIVITY_COEFFICIENT_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     N_CHARS_AFTER_DECIMAL_PLACE: typing.ClassVar[int] = ...
     """
-    public static final int N_CHARS_AFTER_DECIMAL_PLACE
+    Number of characters before the end of the string the decimal place occurs.
     
-        Number of characters before the end of the string the decimal place occurs.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -1227,56 +1084,52 @@ class SolarReflectivityCoefficientTerm(org.orekit.files.iirv.terms.base.DoubleVa
 
 class SpareConstantTerm(org.orekit.files.iirv.terms.base.ConstantValuedIIRVTerm):
     """
-    public class SpareConstantTerm extends :class:`~org.orekit.files.iirv.terms.base.ConstantValuedIIRVTerm`
+    IIRV spare character (ASCII space).
     
-        IIRV spare character (ASCII space).
-    
-        Since:
-            13.0
+    Since:
+        13.0
     """
     SPARE_TERM_STRING: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SPARE_TERM_STRING
+    IIRV spare character (ASCII space).
     
-        IIRV spare character (ASCII space).
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Constructor.
+        
+        See
+        """
+        ...
 
 class SupportIdCodeTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
     """
-    public class SupportIdCodeTerm extends :class:`~org.orekit.files.iirv.terms.base.LongValuedIIRVTerm`
+    4-character mission-specific support identification code (SIC).
     
-        4-character mission-specific support identification code (SIC).
+    Valid values: 0000-9999.
     
-        Valid values: 0000-9999.
-    
-        Since:
-            13.0
+    Since:
+        13.0
     """
     SUPPORT_ID_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int SUPPORT_ID_TERM_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     SUPPORT_ID_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SUPPORT_ID_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term (0000-9999).
     
-        Regular expression that ensures the validity of string values for this term (0000-9999).
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -1287,72 +1140,68 @@ class SupportIdCodeTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
 
 class TransferTypeConstantTerm(org.orekit.files.iirv.terms.base.ConstantValuedIIRVTerm):
     """
-    public class TransferTypeConstantTerm extends :class:`~org.orekit.files.iirv.terms.base.ConstantValuedIIRVTerm`
+    1-character type of transfer (constant).
     
-        1-character type of transfer (constant).
+    Valid values: 1 (Interrange)
     
-        Valid values: 1 (Interrange)
-    
-        Since:
-            13.0
+    Since:
+        13.0
     """
     TRANSFER_TYPE_TERM_STRING: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` TRANSFER_TYPE_TERM_STRING
+    Start of the message is always "1" denoting an interrange message type.
     
-        Start of the message is always "1" denoting an interrange message type.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Constructor.
+        
+        See
+        """
+        ...
 
 class VectorEpochTerm(org.orekit.files.iirv.terms.base.IIRVVectorTerm[org.orekit.time.TimeComponents]):
     """
-    public class VectorEpochTerm extends :class:`~org.orekit.files.iirv.terms.base.IIRVVectorTerm`<:class:`~org.orekit.time.TimeComponents`>
+    Vector epoch in UTC with resolution to nearest millisecond.
     
-        Vector epoch in UTC with resolution to nearest millisecond.
+    Valid values:
     
-        Valid values:
+    hhmmsssss where:
     
-        hhmmsssss where:
-    
-          - hh = 00 to 23
-          - mm = 00 to 59
-          - sssss = 00000 to 59999 (milliseconds, implied decimal point three places from right)
+      - hh = 00 to 23
+      - mm = 00 to 59
+      - sssss = 00000 to 59999 (milliseconds, implied decimal point three places from right)
     
     
-        Since:
-            13.0
+    Since:
+        13.0
     """
     VECTOR_EPOCH_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int VECTOR_EPOCH_TERM_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     VECTOR_EPOCH_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` VECTOR_EPOCH_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
+    String in the form "hhmmsssss":
     
-        String in the form "hhmmsssss":
-    
-          - hh is 00 to 23: (0[0-9]|1[0-9]|2[0-3])
-          - mm is 00 to 59: ([0-5][0-9])
-          - sssss is 00000 to 599999: ([0-5][0-9]{4})
+      - hh is 00 to 23: (0[0-9]|1[0-9]|2[0-3])
+      - mm is 00 to 59: ([0-5][0-9])
+      - sssss is 00000 to 599999: ([0-5][0-9]{4})
     
     
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -1364,48 +1213,46 @@ class VectorEpochTerm(org.orekit.files.iirv.terms.base.IIRVVectorTerm[org.orekit
     def __init__(self, timeComponents: org.orekit.time.TimeComponents): ...
     def hh(self) -> str:
         """
-            Gets the two-character hour of the vector epoch.
+        Gets the two-character hour of the vector epoch.
         
-            Returns:
-                hh: hour of the vector epoch
+        Returns:
+            hh: hour of the vector epoch
         
         
         """
         ...
     def mm(self) -> str:
         """
-            Gets the two-character minute of the vector epoch.
+        Gets the two-character minute of the vector epoch.
         
-            Returns:
-                mm: minute of the vector epoch
+        Returns:
+            mm: minute of the vector epoch
         
         
         """
         ...
     def ss(self) -> str:
         """
-            Gets the two-character second of the vector epoch.
+        Gets the two-character second of the vector epoch.
         
-            Returns:
-                ss: second of the vector epoch
+        Returns:
+            ss: second of the vector epoch
         
         
         """
         ...
     @typing.overload
-    def toEncodedString(self, timeComponents: org.orekit.time.TimeComponents) -> str:
+    def toEncodedString(self, value: org.orekit.time.TimeComponents) -> str:
         """
-            Convert an IIRV term value into the encoded String representation, as it would appear in the IIRV message.
+        Convert an IIRV term value into the encoded String representation, as it would appear in the IIRV message.
         
-            Specified by:
-                :meth:`~org.orekit.files.iirv.terms.base.IIRVVectorTerm.toEncodedString` in
-                class :class:`~org.orekit.files.iirv.terms.base.IIRVVectorTerm`
+        Specified by: toEncodedString in class IIRVVectorTerm
         
-            Parameters:
-                value (:class:`~org.orekit.time.TimeComponents`): Value of the term
+        Parameters:
+            value (TimeComponents): Value of the term
         
-            Returns:
-                Encoded String representing of the inputted IIRV term it appears in the IIRV message
+        Returns:
+            Encoded String representing of the inputted IIRV term it appears in the IIRV message
         
         
         """
@@ -1415,108 +1262,75 @@ class VectorEpochTerm(org.orekit.files.iirv.terms.base.IIRVVectorTerm[org.orekit
 
 class VectorTypeTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
     """
-    public class VectorTypeTerm extends :class:`~org.orekit.files.iirv.terms.base.LongValuedIIRVTerm`
+    1-character type of vector specified in the message.
     
-        1-character type of vector specified in the message.
+    Valid values:
     
-        Valid values:
-    
-          - 1 = Free flight (routine on-orbit)
-          - 2 = Forced (special orbit update)
-          - 3 = Spare
-          - 4 = Maneuver ignition
-          - 5 = Maneuver cutoff
-          - 6 = Reentry
-          - 7 = Powered flight
-          - 8 = Stationary
-          - 9 = Spare
+      - 1 = Free flight (routine on-orbit)
+      - 2 = Forced (special orbit update)
+      - 3 = Spare
+      - 4 = Maneuver ignition
+      - 5 = Maneuver cutoff
+      - 6 = Reentry
+      - 7 = Powered flight
+      - 8 = Stationary
+      - 9 = Spare
     
     
-        Since:
-            13.0
+    Since:
+        13.0
     """
     FREE_FLIGHT: typing.ClassVar['VectorTypeTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.VectorTypeTerm` FREE_FLIGHT
-    
-        Free flight (routine on-orbit) VectorType.
-    
+    Free flight (routine on-orbit) VectorType.
     """
     FORCED: typing.ClassVar['VectorTypeTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.VectorTypeTerm` FORCED
-    
-        Forced VectorType.
-    
+    Forced VectorType.
     """
     SPARE3: typing.ClassVar['VectorTypeTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.VectorTypeTerm` SPARE3
-    
-        Spare VectorType: 3.
-    
+    Spare VectorType: 3.
     """
     MANEUVER_IGNITION: typing.ClassVar['VectorTypeTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.VectorTypeTerm` MANEUVER_IGNITION
-    
-        Maneuver ignition VectorType.
-    
+    Maneuver ignition VectorType.
     """
     MANEUVER_CUTOFF: typing.ClassVar['VectorTypeTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.VectorTypeTerm` MANEUVER_CUTOFF
-    
-        Maneuver cutoff VectorType.
-    
+    Maneuver cutoff VectorType.
     """
     REENTRY: typing.ClassVar['VectorTypeTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.VectorTypeTerm` REENTRY
-    
-        Reentry VectorType.
-    
+    Reentry VectorType.
     """
     POWERED_FLIGHT: typing.ClassVar['VectorTypeTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.VectorTypeTerm` POWERED_FLIGHT
-    
-        Powered flight VectorType.
-    
+    Powered flight VectorType.
     """
     STATIONARY: typing.ClassVar['VectorTypeTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.VectorTypeTerm` STATIONARY
-    
-        Stationary VectorType.
-    
+    Stationary VectorType.
     """
     SPARE9: typing.ClassVar['VectorTypeTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.VectorTypeTerm` SPARE9
-    
-        Spare VectorType: 9.
-    
+    Spare VectorType: 9.
     """
     VECTOR_TYPE_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int VECTOR_TYPE_TERM_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     VECTOR_TYPE_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` VECTOR_TYPE_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -1527,41 +1341,32 @@ class VectorTypeTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
 
 class VehicleIdCodeTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
     """
-    public class VehicleIdCodeTerm extends :class:`~org.orekit.files.iirv.terms.base.LongValuedIIRVTerm`
+    2-character body number/vehicle identification code (VIC).
     
-        2-character body number/vehicle identification code (VIC).
+    Valid values: 01-99.
     
-        Valid values: 01-99.
-    
-        Since:
-            13.0
+    Since:
+        13.0
     """
     DEFAULT: typing.ClassVar['VehicleIdCodeTerm'] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.VehicleIdCodeTerm` DEFAULT
-    
-        Default VIC set to 1.
-    
+    Default VIC set to 1.
     """
     VEHICLE_ID_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int VEHICLE_ID_TERM_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     VEHICLE_ID_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` VEHICLE_ID_TERM_PATTERN
+    Regular expression to check that vehicle identification codes are 01-99 (00 is not a valid entry).
     
-        Regular expression to check that vehicle identification codes are 01-99 (00 is not a valid entry).
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -1572,53 +1377,45 @@ class VehicleIdCodeTerm(org.orekit.files.iirv.terms.base.LongValuedIIRVTerm):
 
 class VelocityVectorComponentTerm(org.orekit.files.iirv.terms.base.DoubleValuedIIRVTerm):
     """
-    public class VelocityVectorComponentTerm extends :class:`~org.orekit.files.iirv.terms.base.DoubleValuedIIRVTerm`
+    13-character signed component of a velocity vector.
     
-        13-character signed component of a velocity vector.
+    Units: m/s
     
-        Units: m/s
+    Assumed decimal places is three places from the right
     
-        Assumed decimal places is three places from the right
+    Valid values:
     
-        Valid values:
-    
-          - Character 1: ' ' or '-'
-          - Character 2-12: Any integer 0-9
+      - Character 1: ' ' or '-'
+      - Character 2-12: Any integer 0-9
     
     
-        Since:
-            13.0
+    Since:
+        13.0
     """
     VELOCITY_VECTOR_COMPONENT_TERM_LENGTH: typing.ClassVar[int] = ...
     """
-    public static final int VELOCITY_VECTOR_COMPONENT_TERM_LENGTH
+    The length of the IIRV term within the message.
     
-        The length of the IIRV term within the message.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     VELOCITY_VECTOR_COMPONENT_TERM_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.iirv.terms.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` VELOCITY_VECTOR_COMPONENT_TERM_PATTERN
+    Regular expression that ensures the validity of string values for this term.
     
-        Regular expression that ensures the validity of string values for this term.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     N_CHARS_AFTER_DECIMAL_PLACE: typing.ClassVar[int] = ...
     """
-    public static final int N_CHARS_AFTER_DECIMAL_PLACE
+    Number of characters before the end of the string the decimal place occurs.
     
-        Number of characters before the end of the string the decimal place occurs.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """

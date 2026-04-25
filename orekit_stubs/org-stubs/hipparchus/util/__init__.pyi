@@ -24,32 +24,30 @@ import typing
 
 class AbstractOpenIntHashMap:
     """
-    public abstract classAbstractOpenIntHashMap extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Base class for open addressed map from int.
     
-        Base class for open addressed map from int.
-    
-        Since:
-            3.1
+    Since:
+        3.1
     """
     @typing.overload
     def containsKey(self, int: int) -> bool:
         """
-            Check if a value is associated with a key.
+        Check if a value is associated with a key.
         
-            Parameters:
-                key (int): key to check
+        Parameters:
+            key (int): key to check
         
-            Returns:
-                true if a value is associated with key
+        Returns:
+            true if a value is associated with key
         
-            Check if the tables contain an element associated with specified key at specified index.
+        Check if the tables contain an element associated with specified key at specified index.
         
-            Parameters:
-                key (int): key to check
-                index (int): index to check
+        Parameters:
+            key (int): key to check
+            index (int): index to check
         
-            Returns:
-                true if an element is associated with key at index
+        Returns:
+            true if an element is associated with key at index
         
         
         """
@@ -58,20 +56,20 @@ class AbstractOpenIntHashMap:
     def containsKey(self, int: int, int2: int) -> bool: ...
     def getSize(self) -> int:
         """
-            Get the number of elements stored in the map.
+        Get the number of elements stored in the map.
         
-            Returns:
-                number of elements stored in the map
+        Returns:
+            number of elements stored in the map
         
         
         """
         ...
     def size(self) -> int:
         """
-            Get the number of elements stored in the map.
+        Get the number of elements stored in the map.
         
-            Returns:
-                number of elements stored in the map
+        Returns:
+            number of elements stored in the map
         
         
         """
@@ -79,10 +77,7 @@ class AbstractOpenIntHashMap:
 
 class ArithmeticUtils:
     """
-    public final classArithmeticUtils extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    
-        Some useful, arithmetics related, additions to the built-in functions in
-        :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Math`.
+    Some useful, arithmetics related, additions to the built-in functions in Math.
     """
     @typing.overload
     @staticmethod
@@ -94,37 +89,31 @@ class ArithmeticUtils:
     @staticmethod
     def divideUnsigned(int: int, int2: int) -> int:
         """
-            Returns the unsigned quotient of dividing the first argument by the second where each argument and the result is
-            interpreted as an unsigned value.
+        Returns the unsigned quotient of dividing the first argument by the second where each argument and the result is interpreted as an unsigned value.
         
-            Note that in two's complement arithmetic, the three other basic arithmetic operations of add, subtract, and multiply are
-            bit-wise identical if the two operands are regarded as both being signed or both being unsigned. Therefore separate
-            :code:`addUnsigned`, etc. methods are not provided.
+        Note that in two's complement arithmetic, the three other basic arithmetic operations of add, subtract, and multiply are bit-wise identical if the two operands are regarded as both being signed or both being unsigned. Therefore separate addUnsigned, etc. methods are not provided.
         
-            This method does not use the :code:`long` datatype.
+        This method does not use the long datatype.
         
-            Parameters:
-                dividend (int): the value to be divided
-                divisor (int): the value doing the dividing
+        Parameters:
+            dividend (int): the value to be divided
+            divisor (int): the value doing the dividing
         
-            Returns:
-                the unsigned quotient of the first argument divided by the second argument
+        Returns:
+            the unsigned quotient of the first argument divided by the second argument
         
-            Returns the unsigned quotient of dividing the first argument by the second where each argument and the result is
-            interpreted as an unsigned value.
+        Returns the unsigned quotient of dividing the first argument by the second where each argument and the result is interpreted as an unsigned value.
         
-            Note that in two's complement arithmetic, the three other basic arithmetic operations of add, subtract, and multiply are
-            bit-wise identical if the two operands are regarded as both being signed or both being unsigned. Therefore separate
-            :code:`addUnsigned`, etc. methods are not provided.
+        Note that in two's complement arithmetic, the three other basic arithmetic operations of add, subtract, and multiply are bit-wise identical if the two operands are regarded as both being signed or both being unsigned. Therefore separate addUnsigned, etc. methods are not provided.
         
-            This method does not use the :code:`BigInteger` datatype.
+        This method does not use the BigInteger datatype.
         
-            Parameters:
-                dividend (long): the value to be divided
-                divisor (long): the value doing the dividing
+        Parameters:
+            dividend (long): the value to be divided
+            divisor (long): the value doing the dividing
         
-            Returns:
-                the unsigned quotient of the first argument divided by the second argument.
+        Returns:
+            the unsigned quotient of the first argument divided by the second argument.
         
         
         """
@@ -139,15 +128,15 @@ class ArithmeticUtils:
     @staticmethod
     def gcd(long: int, long2: int) -> int: ...
     @staticmethod
-    def isPowerOfTwo(long: int) -> bool:
+    def isPowerOfTwo(n: int) -> bool:
         """
-            Returns true if the argument is a power of two.
+        Returns true if the argument is a power of two.
         
-            Parameters:
-                n (long): the number to test
+        Parameters:
+            n (long): the number to test
         
-            Returns:
-                true if the argument is a power of two
+        Returns:
+            true if the argument is a power of two
         
         
         """
@@ -183,29 +172,27 @@ class ArithmeticUtils:
     @staticmethod
     def remainderUnsigned(int: int, int2: int) -> int:
         """
-            Returns the unsigned remainder from dividing the first argument by the second where each argument and the result is
-            interpreted as an unsigned value.
+        Returns the unsigned remainder from dividing the first argument by the second where each argument and the result is interpreted as an unsigned value.
         
-            This method does not use the :code:`long` datatype.
+        This method does not use the long datatype.
         
-            Parameters:
-                dividend (int): the value to be divided
-                divisor (int): the value doing the dividing
+        Parameters:
+            dividend (int): the value to be divided
+            divisor (int): the value doing the dividing
         
-            Returns:
-                the unsigned remainder of the first argument divided by the second argument.
+        Returns:
+            the unsigned remainder of the first argument divided by the second argument.
         
-            Returns the unsigned remainder from dividing the first argument by the second where each argument and the result is
-            interpreted as an unsigned value.
+        Returns the unsigned remainder from dividing the first argument by the second where each argument and the result is interpreted as an unsigned value.
         
-            This method does not use the :code:`BigInteger` datatype.
+        This method does not use the BigInteger datatype.
         
-            Parameters:
-                dividend (long): the value to be divided
-                divisor (long): the value doing the dividing
+        Parameters:
+            dividend (long): the value to be divided
+            divisor (long): the value doing the dividing
         
-            Returns:
-                the unsigned remainder of the first argument divided by the second argument.
+        Returns:
+            the unsigned remainder of the first argument divided by the second argument.
         
         
         """
@@ -222,31 +209,21 @@ class ArithmeticUtils:
 
 class BigReal(org.hipparchus.FieldElement['BigReal'], java.lang.Comparable['BigReal'], java.io.Serializable):
     """
-    public classBigReal extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.FieldElement`<:class:`~org.hipparchus.util.BigReal`>, :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable`<:class:`~org.hipparchus.util.BigReal`>, :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements FieldElement<BigReal>, Comparable<BigReal>, Serializable
     
-        Arbitrary precision decimal number.
+    Arbitrary precision decimal number.
     
-        This class is a simple wrapper around the standard :code:`BigDecimal` in order to implement the
-        :class:`~org.hipparchus.FieldElement` interface.
+    This class is a simple wrapper around the standard BigDecimal in order to implement the FieldElement interface.
     
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
     ZERO: typing.ClassVar['BigReal'] = ...
     """
-    public static final :class:`~org.hipparchus.util.BigReal` ZERO
-    
-        A big real representing 0.
-    
+    A big real representing 0.
     """
     ONE: typing.ClassVar['BigReal'] = ...
     """
-    public static final :class:`~org.hipparchus.util.BigReal` ONE
-    
-        A big real representing 1.
-    
+    A big real representing 1.
     """
     @typing.overload
     def __init__(self, charArray: typing.Union[typing.List[str], jpype.JArray]): ...
@@ -282,103 +259,120 @@ class BigReal(org.hipparchus.FieldElement['BigReal'], java.lang.Comparable['BigR
     def __init__(self, long: int): ...
     @typing.overload
     def __init__(self, long: int, mathContext: java.math.MathContext): ...
-    def add(self, bigReal: 'BigReal') -> 'BigReal':
+    def add(self, a: 'BigReal') -> 'BigReal':
         """
-            Compute this + a.
+        Compute this + a.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.add` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: add in interface FieldElement
         
-            Parameters:
-                a (:class:`~org.hipparchus.util.BigReal`): element to add
+        Parameters:
+            a (BigReal): element to add
         
-            Returns:
-                a new element representing this + a
+        Returns:
+            a new element representing this + a
         
         
         """
         ...
     def bigDecimalValue(self) -> java.math.BigDecimal:
         """
-            Get the BigDecimal value corresponding to the instance.
+        Get the BigDecimal value corresponding to the instance.
         
-            Returns:
-                BigDecimal value corresponding to the instance
+        Returns:
+            BigDecimal value corresponding to the instance
         
         
         """
         ...
     def compareTo(self, bigReal: 'BigReal') -> int:
         """
-        
-            Specified by:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.compareTo` in
-                interface :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable`
+        Specified by: compareTo in interface Comparable
         
         
         """
         ...
-    def divide(self, bigReal: 'BigReal') -> 'BigReal': ...
+    def divide(self, a: 'BigReal') -> 'BigReal':
+        """
+        Compute this ÷ a.
+        
+        Specified by: divide in interface FieldElement
+        
+        Parameters:
+            a (BigReal): element to divide by
+        
+        Returns:
+            a new element representing this ÷ a
+        
+        Raises:
+            MathRuntimeException: if a is zero
+        
+        
+        """
+        ...
     def doubleValue(self) -> float:
         """
-            Get the double value corresponding to the instance.
+        Get the double value corresponding to the instance.
         
-            Returns:
-                double value corresponding to the instance
+        Returns:
+            double value corresponding to the instance
         
         
         """
         ...
     def equals(self, object: typing.Any) -> bool:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: equals in class Object
         
         
         """
         ...
-    def getField(self) -> org.hipparchus.Field['BigReal']: ...
+    def getField(self) -> org.hipparchus.Field['BigReal']:
+        """
+        Get the Field to which the instance belongs.
+        
+        Specified by: getField in interface FieldElement
+        
+        Returns:
+            Field to which the instance belongs
+        
+        
+        """
+        ...
     def getReal(self) -> float:
         """
-            Get the real value of the number.
+        Get the real value of the number.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.getReal` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: getReal in interface FieldElement
         
-            Returns:
-                real value
+        Returns:
+            real value
         
         
         """
         ...
     def getRoundingMode(self) -> java.math.RoundingMode:
         """
-            Gets the rounding mode for division operations The default is :code:`RoundingMode.HALF_UP`
+        Gets the rounding mode for division operations The default is HALF_UP
         
-            Returns:
-                the rounding mode.
+        Returns:
+            the rounding mode.
         
         
         """
         ...
     def getScale(self) -> int:
         """
-            Sets the scale for division operations. The default is 64
+        Sets the scale for division operations. The default is 64
         
-            Returns:
-                the scale
+        Returns:
+            the scale
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.hashCode` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: hashCode in class Object
         
         
         """
@@ -386,28 +380,25 @@ class BigReal(org.hipparchus.FieldElement['BigReal'], java.lang.Comparable['BigR
     @typing.overload
     def multiply(self, int: int) -> 'BigReal':
         """
-            Compute this × a.
+        Compute this × a.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.multiply` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: multiply in interface FieldElement
         
-            Parameters:
-                a (:class:`~org.hipparchus.util.BigReal`): element to multiply
+        Parameters:
+            a (BigReal): element to multiply
         
-            Returns:
-                a new element representing this × a
+        Returns:
+            a new element representing this × a
         
-            Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} =
-            \sum_{i=1}^n \mathrm{this} \]
+        Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} = \sum_{i=1}^n \mathrm{this} \]
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.multiply` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: multiply in interface FieldElement
         
-            Parameters:
-                n (int): Number of times :code:`this` must be added to itself.
+        Parameters:
+            n (int): Number of times this must be added to itself.
         
-            Returns:
-                A new element representing n × this.
+        Returns:
+            A new element representing n × this.
         
         
         """
@@ -416,50 +407,62 @@ class BigReal(org.hipparchus.FieldElement['BigReal'], java.lang.Comparable['BigR
     def multiply(self, bigReal: 'BigReal') -> 'BigReal': ...
     def negate(self) -> 'BigReal':
         """
-            Returns the additive inverse of :code:`this` element.
+        Returns the additive inverse of this element.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.negate` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: negate in interface FieldElement
         
-            Returns:
-                the opposite of :code:`this`.
+        Returns:
+            the opposite of this.
         
         
         """
         ...
-    def reciprocal(self) -> 'BigReal': ...
+    def reciprocal(self) -> 'BigReal':
+        """
+        Returns the multiplicative inverse of this element.
+        
+        Specified by: reciprocal in interface FieldElement
+        
+        Returns:
+            the inverse of this.
+        
+        Raises:
+            MathRuntimeException: if this is zero
+        
+        
+        """
+        ...
     def setRoundingMode(self, roundingMode: java.math.RoundingMode) -> None:
         """
-            Sets the rounding mode for decimal divisions.
+        Sets the rounding mode for decimal divisions.
         
-            Parameters:
-                roundingMode (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.math.RoundingMode`): rounding mode for decimal divisions
-        
-        
-        """
-        ...
-    def setScale(self, int: int) -> None:
-        """
-            Sets the scale for division operations.
-        
-            Parameters:
-                scale (int): scale for division operations
+        Parameters:
+            roundingMode (RoundingMode): rounding mode for decimal divisions
         
         
         """
         ...
-    def subtract(self, bigReal: 'BigReal') -> 'BigReal':
+    def setScale(self, scale: int) -> None:
         """
-            Compute this - a.
+        Sets the scale for division operations.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.subtract` in interface :class:`~org.hipparchus.FieldElement`
+        Parameters:
+            scale (int): scale for division operations
         
-            Parameters:
-                a (:class:`~org.hipparchus.util.BigReal`): element to subtract
         
-            Returns:
-                a new element representing this - a
+        """
+        ...
+    def subtract(self, a: 'BigReal') -> 'BigReal':
+        """
+        Compute this - a.
+        
+        Specified by: subtract in interface FieldElement
+        
+        Parameters:
+            a (BigReal): element to subtract
+        
+        Returns:
+            a new element representing this - a
         
         
         """
@@ -467,24 +470,18 @@ class BigReal(org.hipparchus.FieldElement['BigReal'], java.lang.Comparable['BigR
 
 class BigRealField(org.hipparchus.Field[BigReal], java.io.Serializable):
     """
-    public classBigRealField extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.util.BigReal`>, :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements Field<BigReal>, Serializable
     
-        Representation of real numbers with arbitrary precision field.
+    Representation of real numbers with arbitrary precision field.
     
-        This class is a singleton.
+    This class is a singleton.
     
-        Also see:
-    
-              - :class:`~org.hipparchus.util.BigReal`
-              - :meth:`~serialized`
+          - BigReal
+          - serialized
     """
     def equals(self, object: typing.Any) -> bool:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: equals in class Object
         
         
         """
@@ -492,53 +489,57 @@ class BigRealField(org.hipparchus.Field[BigReal], java.io.Serializable):
     @staticmethod
     def getInstance() -> 'BigRealField':
         """
-            Get the unique instance.
+        Get the unique instance.
         
-            Returns:
-                the unique instance
+        Returns:
+            the unique instance
         
         
         """
         ...
     def getOne(self) -> BigReal:
         """
-            Get the multiplicative identity of the field.
+        Get the multiplicative identity of the field.
         
-            The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the
-            equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
+        The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
         
-            Specified by:
-                :meth:`~org.hipparchus.Field.getOne` in interface :class:`~org.hipparchus.Field`
+        Specified by: getOne in interface Field
         
-            Returns:
-                multiplicative identity of the field
+        Returns:
+            multiplicative identity of the field
         
         
         """
         ...
-    def getRuntimeClass(self) -> typing.Type[BigReal]: ...
+    def getRuntimeClass(self) -> typing.Type[BigReal]:
+        """
+        Returns the runtime class of the FieldElement.
+        
+        Specified by: getRuntimeClass in interface Field
+        
+        Returns:
+            The Class object that represents the runtime class of this object.
+        
+        
+        """
+        ...
     def getZero(self) -> BigReal:
         """
-            Get the additive identity of the field.
+        Get the additive identity of the field.
         
-            The additive identity is the element e :sub:`0` of the field such that for all elements a of the field, the equalities a
-            + e :sub:`0` = e :sub:`0` + a = a hold.
+        The additive identity is the element e :sub:`0` of the field such that for all elements a of the field, the equalities a + e :sub:`0` = e :sub:`0` + a = a hold.
         
-            Specified by:
-                :meth:`~org.hipparchus.Field.getZero` in interface :class:`~org.hipparchus.Field`
+        Specified by: getZero in interface Field
         
-            Returns:
-                additive identity of the field
+        Returns:
+            additive identity of the field
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.hashCode` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: hashCode in class Object
         
         
         """
@@ -546,100 +547,78 @@ class BigRealField(org.hipparchus.Field[BigReal], java.io.Serializable):
 
 class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64'], java.lang.Comparable['Binary64']):
     """
-    public classBinary64 extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number`
-    implements :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.util.Binary64`>, :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable`<:class:`~org.hipparchus.util.Binary64`>
+    implements CalculusFieldElement<Binary64>, Comparable<Binary64>
     
-        This class wraps a :code:`double` value in an object. It is similar to the standard class
-        :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double`, while also implementing the
-        :class:`~org.hipparchus.CalculusFieldElement` interface.
+    This class wraps a double value in an object. It is similar to the standard class Double, while also implementing the CalculusFieldElement interface.
     
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
     ZERO: typing.ClassVar['Binary64'] = ...
     """
-    public static final :class:`~org.hipparchus.util.Binary64` ZERO
-    
-        The constant value of :code:`0d` as a :code:`Binary64`.
-    
+    The constant value of 0d as a Binary64.
     """
     ONE: typing.ClassVar['Binary64'] = ...
     """
-    public static final :class:`~org.hipparchus.util.Binary64` ONE
-    
-        The constant value of :code:`1d` as a :code:`Binary64`.
-    
+    The constant value of 1d as a Binary64.
     """
     PI: typing.ClassVar['Binary64'] = ...
     """
-    public static final :class:`~org.hipparchus.util.Binary64` PI
-    
-        The constant value of π as a :code:`Binary64`.
-    
+    The constant value of π as a Binary64.
     """
     NEGATIVE_INFINITY: typing.ClassVar['Binary64'] = ...
     """
-    public static final :class:`~org.hipparchus.util.Binary64` NEGATIVE_INFINITY
-    
-        The constant value of
-        :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.NEGATIVE_INFINITY` as a
-        :code:`Binary64`.
-    
+    The constant value of NEGATIVE_INFINITY as a Binary64.
     """
     POSITIVE_INFINITY: typing.ClassVar['Binary64'] = ...
     """
-    public static final :class:`~org.hipparchus.util.Binary64` POSITIVE_INFINITY
-    
-        The constant value of
-        :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.POSITIVE_INFINITY` as a
-        :code:`Binary64`.
-    
+    The constant value of POSITIVE_INFINITY as a Binary64.
     """
     NAN: typing.ClassVar['Binary64'] = ...
     """
-    public static final :class:`~org.hipparchus.util.Binary64` NAN
-    
-        The constant value of :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.NaN` as a
-        :code:`Binary64`.
-    
+    The constant value of NaN as a Binary64.
     """
-    def __init__(self, double: float): ...
+    def __init__(self, x: float):
+        """
+        Creates a new instance of this class.
+        
+        Parameters:
+            x (double): the primitive double value of the object to be created
+        
+        
+        """
+        ...
     def abs(self) -> 'Binary64':
         """
-            absolute value.
+        absolute value.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.abs` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: abs in interface CalculusFieldElement
         
-            Returns:
-                abs(this)
+        Returns:
+            abs(this)
         
         
         """
         ...
     def acos(self) -> 'Binary64':
         """
-            Arc cosine operation.
+        Arc cosine operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.acos` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: acos in interface CalculusFieldElement
         
-            Returns:
-                acos(this)
+        Returns:
+            acos(this)
         
         
         """
         ...
     def acosh(self) -> 'Binary64':
         """
-            Inverse hyperbolic cosine operation.
+        Inverse hyperbolic cosine operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.acosh` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: acosh in interface CalculusFieldElement
         
-            Returns:
-                acosh(this)
+        Returns:
+            acosh(this)
         
         
         """
@@ -647,28 +626,23 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
     @typing.overload
     def add(self, double: float) -> 'Binary64':
         """
-            Compute this + a. The current implementation strictly enforces :code:`this.add(a).equals(new Binary64(this.doubleValue()
-            + a.doubleValue()))`.
+        Specified by: add in interface FieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.add` in interface :class:`~org.hipparchus.FieldElement`
+        Parameters:
+            a (Binary64): element to add
         
-            Parameters:
-                a (:class:`~org.hipparchus.util.Binary64`): element to add
+        Returns:
+            a new element representing this + a
         
-            Returns:
-                a new element representing this + a
+        '+' operator.
         
-            '+' operator.
+        Specified by: add in interface CalculusFieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.add` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Parameters:
+            a (double): right hand side parameter of the operator
         
-            Parameters:
-                a (double): right hand side parameter of the operator
-        
-            Returns:
-                this+a
+        Returns:
+            this+a
         
         
         """
@@ -677,126 +651,109 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
     def add(self, binary64: 'Binary64') -> 'Binary64': ...
     def asin(self) -> 'Binary64':
         """
-            Arc sine operation.
+        Arc sine operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.asin` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: asin in interface CalculusFieldElement
         
-            Returns:
-                asin(this)
+        Returns:
+            asin(this)
         
         
         """
         ...
     def asinh(self) -> 'Binary64':
         """
-            Inverse hyperbolic sine operation.
+        Inverse hyperbolic sine operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.asinh` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: asinh in interface CalculusFieldElement
         
-            Returns:
-                asin(this)
+        Returns:
+            asin(this)
         
         
         """
         ...
     def atan(self) -> 'Binary64':
         """
-            Arc tangent operation.
+        Arc tangent operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.atan` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: atan in interface CalculusFieldElement
         
-            Returns:
-                atan(this)
+        Returns:
+            atan(this)
         
         
         """
         ...
-    def atan2(self, binary64: 'Binary64') -> 'Binary64':
+    def atan2(self, x: 'Binary64') -> 'Binary64':
         """
-            Two arguments arc tangent operation.
+        Two arguments arc tangent operation.
         
-            Beware of the order or arguments! As this is based on a two-arguments functions, in order to be consistent with
-            arguments order, the instance is the *first* argument and the single provided argument is the *second* argument. In
-            order to be consistent with programming languages :code:`atan2`, this method computes :code:`atan2(this, x)`, i.e. the
-            instance represents the :code:`y` argument and the :code:`x` argument is the one passed as a single argument. This may
-            seem confusing especially for users of Wolfram alpha, as this site is *not* consistent with programming languages
-            :code:`atan2` two-arguments arc tangent and puts :code:`x` as its first argument.
+        Beware of the order or arguments! As this is based on a two-arguments functions, in order to be consistent with arguments order, the instance is the first argument and the single provided argument is the second argument. In order to be consistent with programming languages atan2, this method computes atan2(this, x), i.e. the instance represents the y argument and the x argument is the one passed as a single argument. This may seem confusing especially for users of Wolfram alpha, as this site is not consistent with programming languages atan2 two-arguments arc tangent and puts x as its first argument.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.atan2` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: atan2 in interface CalculusFieldElement
         
-            Parameters:
-                x (:class:`~org.hipparchus.util.Binary64`): second argument of the arc tangent
+        Parameters:
+            x (Binary64): second argument of the arc tangent
         
-            Returns:
+        Returns:
+            atan2(this, x)
+        
         
         """
         ...
     def atanh(self) -> 'Binary64':
         """
-            Inverse hyperbolic tangent operation.
+        Inverse hyperbolic tangent operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.atanh` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: atanh in interface CalculusFieldElement
         
-            Returns:
-                atanh(this)
+        Returns:
+            atanh(this)
         
         
         """
         ...
     def byteValue(self) -> int:
         """
-            The current implementation performs casting to a :code:`byte`.
+        The current implementation performs casting to a byte.
         
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.byteValue` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number`
+        Overrides: byteValue in class Number
         
         
         """
         ...
     def cbrt(self) -> 'Binary64':
         """
-            Cubic root.
+        Cubic root.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.cbrt` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: cbrt in interface CalculusFieldElement
         
-            Returns:
-                cubic root of the instance
+        Returns:
+            cubic root of the instance
         
         
         """
         ...
     def ceil(self) -> 'Binary64':
         """
-            Get the smallest whole number larger than instance.
+        Get the smallest whole number larger than instance.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.ceil` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: ceil in interface CalculusFieldElement
         
-            Returns:
-                ceil(this)
+        Returns:
+            ceil(this)
         
         
         """
         ...
     def compareTo(self, binary64: 'Binary64') -> int:
         """
-            The current implementation returns the same value as :code:`new Double(this.doubleValue()).compareTo(new
-            Double(o.doubleValue()))`
+        The current implementation returns the same value as doubleValue()))
         
-            Specified by:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.compareTo` in
-                interface :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable`
+        Specified by: compareTo in interface Comparable
         
-            Also see:
-        
-                  - :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.compareTo`
+              - compareTo
         
         
         
@@ -805,27 +762,25 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
     @typing.overload
     def copySign(self, double: float) -> 'Binary64':
         """
-            Returns the instance with the sign of the argument. A NaN :code:`sign` argument is treated as positive.
+        Returns the instance with the sign of the argument. A NaN sign argument is treated as positive.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.copySign` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: copySign in interface CalculusFieldElement
         
-            Parameters:
-                sign (:class:`~org.hipparchus.util.Binary64`): the sign for the returned value
+        Parameters:
+            sign (Binary64): the sign for the returned value
         
-            Returns:
-                the instance with the same sign as the :code:`sign` argument
+        Returns:
+            the instance with the same sign as the sign argument
         
-            Returns the instance with the sign of the argument. A NaN :code:`sign` argument is treated as positive.
+        Returns the instance with the sign of the argument. A NaN sign argument is treated as positive.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.copySign` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: copySign in interface CalculusFieldElement
         
-            Parameters:
-                sign (double): the sign for the returned value
+        Parameters:
+            sign (double): the sign for the returned value
         
-            Returns:
-                the instance with the same sign as the :code:`sign` argument
+        Returns:
+            the instance with the same sign as the sign argument
         
         
         """
@@ -834,26 +789,24 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
     def copySign(self, binary64: 'Binary64') -> 'Binary64': ...
     def cos(self) -> 'Binary64':
         """
-            Cosine operation.
+        Cosine operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.cos` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: cos in interface CalculusFieldElement
         
-            Returns:
-                cos(this)
+        Returns:
+            cos(this)
         
         
         """
         ...
     def cosh(self) -> 'Binary64':
         """
-            Hyperbolic cosine operation.
+        Hyperbolic cosine operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.cosh` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: cosh in interface CalculusFieldElement
         
-            Returns:
-                cosh(this)
+        Returns:
+            cosh(this)
         
         
         """
@@ -861,31 +814,25 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
     @typing.overload
     def divide(self, double: float) -> 'Binary64':
         """
-            Compute this ÷ a. The current implementation strictly enforces :code:`this.divide(a).equals(new
-            Binary64(this.doubleValue() / a.doubleValue()))`.
+        Specified by: divide in interface CalculusFieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.divide` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: divide in interface FieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.divide` in interface :class:`~org.hipparchus.FieldElement`
+        Parameters:
+            a (Binary64): element to divide by
         
-            Parameters:
-                a (:class:`~org.hipparchus.util.Binary64`): element to divide by
+        Returns:
+            a new element representing this ÷ a
         
-            Returns:
-                a new element representing this ÷ a
+        '÷' operator.
         
-            '÷' operator.
+        Specified by: divide in interface CalculusFieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.divide` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Parameters:
+            a (double): right hand side parameter of the operator
         
-            Parameters:
-                a (double): right hand side parameter of the operator
-        
-            Returns:
-                this÷a
+        Returns:
+            this÷a
         
         
         """
@@ -894,219 +841,193 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
     def divide(self, binary64: 'Binary64') -> 'Binary64': ...
     def doubleValue(self) -> float:
         """
-        
-            Specified by:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.doubleValue` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number`
+        Specified by: doubleValue in class Number
         
         
         """
         ...
     def equals(self, object: typing.Any) -> bool:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: equals in class Object
         
         
         """
         ...
     def exp(self) -> 'Binary64':
         """
-            Exponential.
+        Exponential.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.exp` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: exp in interface CalculusFieldElement
         
-            Returns:
-                exponential of the instance
+        Returns:
+            exponential of the instance
         
         
         """
         ...
     def expm1(self) -> 'Binary64':
         """
-            Exponential minus 1.
+        Exponential minus 1.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.expm1` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: expm1 in interface CalculusFieldElement
         
-            Returns:
-                exponential minus one of the instance
+        Returns:
+            exponential minus one of the instance
         
         
         """
         ...
     def floatValue(self) -> float:
         """
-            The current implementation performs casting to a :code:`float`.
+        The current implementation performs casting to a float.
         
-            Specified by:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.floatValue` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number`
+        Specified by: floatValue in class Number
         
         
         """
         ...
     def floor(self) -> 'Binary64':
         """
-            Get the largest whole number smaller than instance.
+        Get the largest whole number smaller than instance.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.floor` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: floor in interface CalculusFieldElement
         
-            Returns:
-                floor(this)
+        Returns:
+            floor(this)
         
         
         """
         ...
     def getAddendum(self) -> 'Binary64':
         """
-            Get the addendum to the real value of the number.
+        Get the addendum to the real value of the number.
         
-            The addendum is considered to be the part that when added back to the :meth:`~org.hipparchus.FieldElement.getReal`
-            recovers the instance. This means that when :code:`e.getReal()` is finite (i.e. neither infinite nor NaN), then
-            :code:`e.getAddendum().add(e.getReal())` is :code:`e` and :code:`e.subtract(e.getReal())` is :code:`e.getAddendum()`.
-            Beware that for non-finite numbers, these two equalities may not hold. The first equality (with the addition), always
-            holds even for infinity and NaNs if the real part is independent of the addendum (this is the case for all derivatives
-            types, as well as for complex and Dfp, but it is not the case for Tuple and FieldTuple). The second equality (with the
-            subtraction), generally doesn't hold for non-finite numbers, because the subtraction generates NaNs.
+        The addendum is considered to be the part that when added back to the getReal recovers the instance. This means that when getReal() is finite (i.e. neither infinite nor NaN), then getReal()) is e and getReal()) is getAddendum(). Beware that for non-finite numbers, these two equalities may not hold. The first equality (with the addition), always holds even for infinity and NaNs if the real part is independent of the addendum (this is the case for all derivatives types, as well as for complex and Dfp, but it is not the case for Tuple and FieldTuple). The second equality (with the subtraction), generally doesn't hold for non-finite numbers, because the subtraction generates NaNs.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.getAddendum` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: getAddendum in interface CalculusFieldElement
         
-            Returns:
-                real value
+        Returns:
+            real value
         
         
         """
         ...
-    def getField(self) -> org.hipparchus.Field['Binary64']: ...
+    def getField(self) -> org.hipparchus.Field['Binary64']:
+        """
+        Get the Field to which the instance belongs.
+        
+        Specified by: getField in interface FieldElement
+        
+        Returns:
+            Field to which the instance belongs
+        
+        
+        """
+        ...
     def getPi(self) -> 'Binary64':
         """
-            Get the Archimedes constant π.
+        Get the Archimedes constant π.
         
-            Archimedes constant is the ratio of a circle's circumference to its diameter.
+        Archimedes constant is the ratio of a circle's circumference to its diameter.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.getPi` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: getPi in interface CalculusFieldElement
         
-            Returns:
-                Archimedes constant π
+        Returns:
+            Archimedes constant π
         
         
         """
         ...
     def getReal(self) -> float:
         """
-            Get the real value of the number.
+        Get the real value of the number.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.getReal` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: getReal in interface FieldElement
         
-            Returns:
-                real value
+        Returns:
+            real value
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-            The current implementation returns the same value as :code:`new Double(this.doubleValue()).hashCode()`
+        The current implementation returns the same value as hashCode()
         
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.hashCode` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: hashCode in class Object
         
-            Also see:
-        
-                  - :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.hashCode`
+              - hashCode
         
         
         
         """
         ...
-    def hypot(self, binary64: 'Binary64') -> 'Binary64':
+    def hypot(self, y: 'Binary64') -> 'Binary64':
         """
-            Returns the hypotenuse of a triangle with sides :code:`this` and :code:`y` - sqrt(*this* :sup:`2`  +*y* :sup:`2` )
-            avoiding intermediate overflow or underflow.
+        Returns the hypotenuse of a triangle with sides this and y - sqrt(this :sup:`2`  +y :sup:`2` ) avoiding intermediate overflow or underflow.
         
-              - If either argument is infinite, then the result is positive infinity.
-              - else, if either argument is NaN then the result is NaN.
+          - If either argument is infinite, then the result is positive infinity.
+          - else, if either argument is NaN then the result is NaN.
         
+        Specified by: hypot in interface CalculusFieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.hypot` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Parameters:
+            y (Binary64): a value
         
-            Parameters:
-                y (:class:`~org.hipparchus.util.Binary64`): a value
-        
-            Returns:
-                sqrt(*this* :sup:`2`  +*y* :sup:`2` )
+        Returns:
+            sqrt(this :sup:`2`  +y :sup:`2` )
         
         
         """
         ...
     def intValue(self) -> int:
         """
-            The current implementation performs casting to a :code:`int`.
+        The current implementation performs casting to a int.
         
-            Specified by:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.intValue` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number`
+        Specified by: intValue in class Number
         
         
         """
         ...
     def isInfinite(self) -> bool:
         """
-            Returns :code:`true` if :code:`this` double precision number is infinite
-            (:meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.POSITIVE_INFINITY` or
-            :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.NEGATIVE_INFINITY`).
+        Returns true if this double precision number is infinite (POSITIVE_INFINITY or NEGATIVE_INFINITY).
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.isInfinite` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: isInfinite in interface CalculusFieldElement
         
-            Returns:
-                :code:`true` if :code:`this` number is infinite
+        Returns:
+            true if this number is infinite
         
         
         """
         ...
     def isNaN(self) -> bool:
         """
-            Returns :code:`true` if :code:`this` double precision number is Not-a-Number (:code:`NaN`), false otherwise.
+        Returns true if this double precision number is Not-a-Number (NaN), false otherwise.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.isNaN` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: isNaN in interface CalculusFieldElement
         
-            Returns:
-                :code:`true` if :code:`this` is :code:`NaN`
+        Returns:
+            true if this is NaN
         
         
         """
         ...
     def isZero(self) -> bool:
         """
-            Check if an element is semantically equal to zero.
+        Check if an element is semantically equal to zero.
         
-            The default implementation simply calls :code:`equals(getField().getZero())`. However, this may need to be overridden in
-            some cases as due to compatibility with :code:`hashCode()` some classes implements :code:`equals(Object)` in such a way
-            that -0.0 and +0.0 are different, which may be a problem. It prevents for example identifying a diagonal element is zero
-            and should be avoided when doing partial pivoting in LU decomposition.
+        The default implementation simply calls getZero()). However, this may need to be overridden in some cases as due to compatibility with hashCode() some classes implements equals(Object) in such a way that -0.0 and +0.0 are different, which may be a problem. It prevents for example identifying a diagonal element is zero and should be avoided when doing partial pivoting in LU decomposition.
         
-            This implementation considers +0.0 and -0.0 to be equal.
+        This implementation considers +0.0 and -0.0 to be equal.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.isZero` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: isZero in interface FieldElement
         
-            Returns:
-                true if the element is semantically equal to zero
+        Returns:
+            true if the element is semantically equal to zero
         
-            Since:
-                1.8
+        Since:
+            1.8
         
         
         """
@@ -1114,142 +1035,113 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
     @typing.overload
     def linearCombination(self, double: float, binary64: 'Binary64', double2: float, binary642: 'Binary64') -> 'Binary64':
         """
-            Compute a linear combination.
+        Compute a linear combination.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
-                interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: linearCombination in interface CalculusFieldElement
         
-            Parameters:
-                a1 (:class:`~org.hipparchus.util.Binary64`): first factor of the first term
-                b1 (:class:`~org.hipparchus.util.Binary64`): second factor of the first term
-                a2 (:class:`~org.hipparchus.util.Binary64`): first factor of the second term
-                b2 (:class:`~org.hipparchus.util.Binary64`): second factor of the second term
+        Parameters:
+            a1 (Binary64): first factor of the first term
+            b1 (Binary64): second factor of the first term
+            a2 (Binary64): first factor of the second term
+            b2 (Binary64): second factor of the second term
         
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-            Also see:
+              - linearCombination
+              - linearCombination
         
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
+        Compute a linear combination.
         
+        Specified by: linearCombination in interface CalculusFieldElement
         
-            Compute a linear combination.
+        Parameters:
+            a1 (double): first factor of the first term
+            b1 (Binary64): second factor of the first term
+            a2 (double): first factor of the second term
+            b2 (Binary64): second factor of the second term
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
-                interface :class:`~org.hipparchus.CalculusFieldElement`
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-            Parameters:
-                a1 (double): first factor of the first term
-                b1 (:class:`~org.hipparchus.util.Binary64`): second factor of the first term
-                a2 (double): first factor of the second term
-                b2 (:class:`~org.hipparchus.util.Binary64`): second factor of the second term
+              - linearCombination
+              - linearCombination
         
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
+        Compute a linear combination.
         
-            Also see:
+        Specified by: linearCombination in interface CalculusFieldElement
         
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
+        Parameters:
+            a1 (Binary64): first factor of the first term
+            b1 (Binary64): second factor of the first term
+            a2 (Binary64): first factor of the second term
+            b2 (Binary64): second factor of the second term
+            a3 (Binary64): first factor of the third term
+            b3 (Binary64): second factor of the third term
         
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-            Compute a linear combination.
+              - linearCombination
+              - linearCombination
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
-                interface :class:`~org.hipparchus.CalculusFieldElement`
+        Compute a linear combination.
         
-            Parameters:
-                a1 (:class:`~org.hipparchus.util.Binary64`): first factor of the first term
-                b1 (:class:`~org.hipparchus.util.Binary64`): second factor of the first term
-                a2 (:class:`~org.hipparchus.util.Binary64`): first factor of the second term
-                b2 (:class:`~org.hipparchus.util.Binary64`): second factor of the second term
-                a3 (:class:`~org.hipparchus.util.Binary64`): first factor of the third term
-                b3 (:class:`~org.hipparchus.util.Binary64`): second factor of the third term
+        Specified by: linearCombination in interface CalculusFieldElement
         
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
+        Parameters:
+            a1 (double): first factor of the first term
+            b1 (Binary64): second factor of the first term
+            a2 (double): first factor of the second term
+            b2 (Binary64): second factor of the second term
+            a3 (double): first factor of the third term
+            b3 (Binary64): second factor of the third term
         
-            Also see:
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
+              - linearCombination
+              - linearCombination
         
+        Compute a linear combination.
         
-            Compute a linear combination.
+        Specified by: linearCombination in interface CalculusFieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
-                interface :class:`~org.hipparchus.CalculusFieldElement`
+        Parameters:
+            a1 (Binary64): first factor of the first term
+            b1 (Binary64): second factor of the first term
+            a2 (Binary64): first factor of the second term
+            b2 (Binary64): second factor of the second term
+            a3 (Binary64): first factor of the third term
+            b3 (Binary64): second factor of the third term
+            a4 (Binary64): first factor of the fourth term
+            b4 (Binary64): second factor of the fourth term
         
-            Parameters:
-                a1 (double): first factor of the first term
-                b1 (:class:`~org.hipparchus.util.Binary64`): second factor of the first term
-                a2 (double): first factor of the second term
-                b2 (:class:`~org.hipparchus.util.Binary64`): second factor of the second term
-                a3 (double): first factor of the third term
-                b3 (:class:`~org.hipparchus.util.Binary64`): second factor of the third term
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
+              - linearCombination
+              - linearCombination
         
-            Also see:
+        Compute a linear combination.
         
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
+        Specified by: linearCombination in interface CalculusFieldElement
         
+        Parameters:
+            a1 (double): first factor of the first term
+            b1 (Binary64): second factor of the first term
+            a2 (double): first factor of the second term
+            b2 (Binary64): second factor of the second term
+            a3 (double): first factor of the third term
+            b3 (Binary64): second factor of the third term
+            a4 (double): first factor of the fourth term
+            b4 (Binary64): second factor of the fourth term
         
-            Compute a linear combination.
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
-                interface :class:`~org.hipparchus.CalculusFieldElement`
-        
-            Parameters:
-                a1 (:class:`~org.hipparchus.util.Binary64`): first factor of the first term
-                b1 (:class:`~org.hipparchus.util.Binary64`): second factor of the first term
-                a2 (:class:`~org.hipparchus.util.Binary64`): first factor of the second term
-                b2 (:class:`~org.hipparchus.util.Binary64`): second factor of the second term
-                a3 (:class:`~org.hipparchus.util.Binary64`): first factor of the third term
-                b3 (:class:`~org.hipparchus.util.Binary64`): second factor of the third term
-                a4 (:class:`~org.hipparchus.util.Binary64`): first factor of the fourth term
-                b4 (:class:`~org.hipparchus.util.Binary64`): second factor of the fourth term
-        
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-        
-        
-            Compute a linear combination.
-        
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
-                interface :class:`~org.hipparchus.CalculusFieldElement`
-        
-            Parameters:
-                a1 (double): first factor of the first term
-                b1 (:class:`~org.hipparchus.util.Binary64`): second factor of the first term
-                a2 (double): first factor of the second term
-                b2 (:class:`~org.hipparchus.util.Binary64`): second factor of the second term
-                a3 (double): first factor of the third term
-                b3 (:class:`~org.hipparchus.util.Binary64`): second factor of the third term
-                a4 (double): first factor of the fourth term
-                b4 (:class:`~org.hipparchus.util.Binary64`): second factor of the fourth term
-        
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
+              - linearCombination
+              - linearCombination
         
         
         
@@ -1271,50 +1163,45 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
     def linearCombination(self, binary64Array: typing.Union[typing.List['Binary64'], jpype.JArray], binary64Array2: typing.Union[typing.List['Binary64'], jpype.JArray]) -> 'Binary64': ...
     def log(self) -> 'Binary64':
         """
-            Natural logarithm.
+        Natural logarithm.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.log` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: log in interface CalculusFieldElement
         
-            Returns:
-                logarithm of the instance
+        Returns:
+            logarithm of the instance
         
         
         """
         ...
     def log10(self) -> 'Binary64':
         """
-            Base 10 logarithm.
+        Base 10 logarithm.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.log10` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: log10 in interface CalculusFieldElement
         
-            Returns:
-                base 10 logarithm of the instance
+        Returns:
+            base 10 logarithm of the instance
         
         
         """
         ...
     def log1p(self) -> 'Binary64':
         """
-            Shifted natural logarithm.
+        Shifted natural logarithm.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.log1p` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: log1p in interface CalculusFieldElement
         
-            Returns:
-                logarithm of one plus the instance
+        Returns:
+            logarithm of one plus the instance
         
         
         """
         ...
     def longValue(self) -> int:
         """
-            The current implementation performs casting to a :code:`long`.
+        The current implementation performs casting to a long.
         
-            Specified by:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.longValue` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number`
+        Specified by: longValue in class Number
         
         
         """
@@ -1322,44 +1209,35 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
     @typing.overload
     def multiply(self, double: float) -> 'Binary64':
         """
-            Compute this × a. The current implementation strictly enforces :code:`this.multiply(a).equals(new
-            Binary64(this.doubleValue() * a.doubleValue()))`.
+        Specified by: multiply in interface FieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.multiply` in interface :class:`~org.hipparchus.FieldElement`
+        Parameters:
+            a (Binary64): element to multiply
         
-            Parameters:
-                a (:class:`~org.hipparchus.util.Binary64`): element to multiply
+        Returns:
+            a new element representing this × a
         
-            Returns:
-                a new element representing this × a
+        Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} = \sum_{i=1}^n \mathrm{this} \] The current implementation strictly enforces doubleValue())).
         
-            Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} =
-            \sum_{i=1}^n \mathrm{this} \] The current implementation strictly enforces :code:`this.multiply(n).equals(new Binary64(n
-            * this.doubleValue()))`.
+        Specified by: multiply in interface CalculusFieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.multiply` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: multiply in interface FieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.multiply` in interface :class:`~org.hipparchus.FieldElement`
+        Parameters:
+            n (int): Number of times this must be added to itself.
         
-            Parameters:
-                n (int): Number of times :code:`this` must be added to itself.
+        Returns:
+            A new element representing n × this.
         
-            Returns:
-                A new element representing n × this.
+        '×' operator.
         
-            '×' operator.
+        Specified by: multiply in interface CalculusFieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.multiply` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Parameters:
+            a (double): right hand side parameter of the operator
         
-            Parameters:
-                a (double): right hand side parameter of the operator
-        
-            Returns:
-                this×a
+        Returns:
+            this×a
         
         
         """
@@ -1370,30 +1248,27 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
     def multiply(self, binary64: 'Binary64') -> 'Binary64': ...
     def negate(self) -> 'Binary64':
         """
-            Returns the additive inverse of :code:`this` element. The current implementation strictly enforces
-            :code:`this.negate().equals(new Binary64(-this.doubleValue()))`.
+        Returns the additive inverse of this element. The current implementation strictly enforces doubleValue())).
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.negate` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: negate in interface FieldElement
         
-            Returns:
-                the opposite of :code:`this`.
+        Returns:
+            the opposite of this.
         
         
         """
         ...
-    def newInstance(self, double: float) -> 'Binary64':
+    def newInstance(self, v: float) -> 'Binary64':
         """
-            Create an instance corresponding to a constant real value.
+        Create an instance corresponding to a constant real value.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.newInstance` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: newInstance in interface CalculusFieldElement
         
-            Parameters:
-                v (double): constant real value
+        Parameters:
+            v (double): constant real value
         
-            Returns:
-                instance corresponding to a constant real value
+        Returns:
+            instance corresponding to a constant real value
         
         
         """
@@ -1401,38 +1276,35 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
     @typing.overload
     def pow(self, double: float) -> 'Binary64':
         """
-            Power operation.
+        Power operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.pow` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: pow in interface CalculusFieldElement
         
-            Parameters:
-                p (double): power to apply
+        Parameters:
+            p (double): power to apply
         
-            Returns:
-                this :sup:`p`
+        Returns:
+            this :sup:`p`
         
-            Integer power operation.
+        Integer power operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.pow` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: pow in interface CalculusFieldElement
         
-            Parameters:
-                n (int): power to apply
+        Parameters:
+            n (int): power to apply
         
-            Returns:
-                this :sup:`n`
+        Returns:
+            this :sup:`n`
         
-            Power operation.
+        Power operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.pow` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: pow in interface CalculusFieldElement
         
-            Parameters:
-                e (:class:`~org.hipparchus.util.Binary64`): exponent
+        Parameters:
+            e (Binary64): exponent
         
-            Returns:
-                this :sup:`e`
+        Returns:
+            this :sup:`e`
         
         
         """
@@ -1443,14 +1315,12 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
     def pow(self, binary64: 'Binary64') -> 'Binary64': ...
     def reciprocal(self) -> 'Binary64':
         """
-            Returns the multiplicative inverse of :code:`this` element. The current implementation strictly enforces
-            :code:`this.reciprocal().equals(new Binary64(1.0 / this.doubleValue()))`.
+        Returns the multiplicative inverse of this element. The current implementation strictly enforces doubleValue())).
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.reciprocal` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: reciprocal in interface FieldElement
         
-            Returns:
-                the inverse of :code:`this`.
+        Returns:
+            the inverse of this.
         
         
         """
@@ -1458,27 +1328,25 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
     @typing.overload
     def remainder(self, double: float) -> 'Binary64':
         """
-            IEEE remainder operator.
+        IEEE remainder operator.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.remainder` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: remainder in interface CalculusFieldElement
         
-            Parameters:
-                a (double): right hand side parameter of the operator
+        Parameters:
+            a (double): right hand side parameter of the operator
         
-            Returns:
-                this - n × a where n is the closest integer to this/a
+        Returns:
+            this - n × a where n is the closest integer to this/a
         
-            IEEE remainder operator.
+        IEEE remainder operator.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.remainder` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: remainder in interface CalculusFieldElement
         
-            Parameters:
-                a (:class:`~org.hipparchus.util.Binary64`): right hand side parameter of the operator
+        Parameters:
+            a (Binary64): right hand side parameter of the operator
         
-            Returns:
-                this - n × a where n is the closest integer to this/a
+        Returns:
+            this - n × a where n is the closest integer to this/a
         
         
         """
@@ -1487,125 +1355,135 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
     def remainder(self, binary64: 'Binary64') -> 'Binary64': ...
     def rint(self) -> 'Binary64':
         """
-            Get the whole number that is the nearest to the instance, or the even one if x is exactly half way between two integers.
+        Get the whole number that is the nearest to the instance, or the even one if x is exactly half way between two integers.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.rint` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: rint in interface CalculusFieldElement
         
-            Returns:
-                a double number r such that r is an integer r - 0.5 ≤ this ≤ r + 0.5
-        
-        
-        """
-        ...
-    def rootN(self, int: int) -> 'Binary64':
-        """
-            N :sup:`th` root.
-        
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.rootN` in interface :class:`~org.hipparchus.CalculusFieldElement`
-        
-            Parameters:
-                n (int): order of the root
-        
-            Returns:
-                n :sup:`th` root of the instance
+        Returns:
+            a double number r such that r is an integer r - 0.5 ≤ this ≤ r + 0.5
         
         
         """
         ...
-    def scalb(self, int: int) -> 'Binary64':
+    def rootN(self, n: int) -> 'Binary64':
         """
-            Multiply the instance by a power of 2.
+        N :sup:`th` root.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.scalb` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: rootN in interface CalculusFieldElement
         
-            Parameters:
-                n (int): power of 2
+        Parameters:
+            n (int): order of the root
         
-            Returns:
-                this × 2 :sup:`n`
+        Returns:
+            n :sup:`th` root of the instance
+        
+        
+        """
+        ...
+    def scalb(self, n: int) -> 'Binary64':
+        """
+        Multiply the instance by a power of 2.
+        
+        Specified by: scalb in interface CalculusFieldElement
+        
+        Parameters:
+            n (int): power of 2
+        
+        Returns:
+            this × 2 :sup:`n`
         
         
         """
         ...
     def shortValue(self) -> int:
         """
-            The current implementation performs casting to a :code:`short`.
+        The current implementation performs casting to a short.
         
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.shortValue` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number`
+        Overrides: shortValue in class Number
         
         
         """
         ...
     def sign(self) -> 'Binary64':
         """
-            Compute the sign of the instance. The sign is -1 for negative numbers, +1 for positive numbers and 0 otherwise, for
-            Complex number, it is extended on the unit circle (equivalent to z/|z|, with special handling for 0 and NaN)
+        Compute the sign of the instance. The sign is -1 for negative numbers, +1 for positive numbers and 0 otherwise, for Complex number, it is extended on the unit circle (equivalent to z/|z|, with special handling for 0 and NaN)
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.sign` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: sign in interface CalculusFieldElement
         
-            Returns:
-                -1.0, -0.0, +0.0, +1.0 or NaN depending on sign of a
+        Returns:
+            -1.0, -0.0, +0.0, +1.0 or NaN depending on sign of a
         
         
         """
         ...
     def sin(self) -> 'Binary64':
         """
-            Sine operation.
+        Sine operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.sin` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: sin in interface CalculusFieldElement
         
-            Returns:
-                sin(this)
+        Returns:
+            sin(this)
         
         
         """
         ...
-    def sinCos(self) -> 'FieldSinCos'['Binary64']: ...
+    def sinCos(self) -> 'FieldSinCos'['Binary64']:
+        """
+        Combined Sine and Cosine operation.
+        
+        Specified by: sinCos in interface CalculusFieldElement
+        
+        Returns:
+            [sin(this), cos(this)]
+        
+        
+        """
+        ...
     def sinh(self) -> 'Binary64':
         """
-            Hyperbolic sine operation.
+        Hyperbolic sine operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.sinh` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: sinh in interface CalculusFieldElement
         
-            Returns:
-                sinh(this)
+        Returns:
+            sinh(this)
         
         
         """
         ...
-    def sinhCosh(self) -> 'FieldSinhCosh'['Binary64']: ...
+    def sinhCosh(self) -> 'FieldSinhCosh'['Binary64']:
+        """
+        Combined hyperbolic sine and cosine operation.
+        
+        Specified by: sinhCosh in interface CalculusFieldElement
+        
+        Returns:
+            [sinh(this), cosh(this)]
+        
+        
+        """
+        ...
     def sqrt(self) -> 'Binary64':
         """
-            Square root.
+        Square root.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.sqrt` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: sqrt in interface CalculusFieldElement
         
-            Returns:
-                square root of the instance
+        Returns:
+            square root of the instance
         
         
         """
         ...
     def square(self) -> 'Binary64':
         """
-            Description copied from interface: :meth:`~org.hipparchus.CalculusFieldElement.square`
-            Compute this × this.
+        Description copied from interface: square Compute this × this.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.square` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: square in interface CalculusFieldElement
         
-            Returns:
-                a new element representing this × this
+        Returns:
+            a new element representing this × this
         
         
         """
@@ -1613,31 +1491,25 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
     @typing.overload
     def subtract(self, double: float) -> 'Binary64':
         """
-            Compute this - a. The current implementation strictly enforces :code:`this.subtract(a).equals(new
-            Binary64(this.doubleValue() - a.doubleValue()))`.
+        Specified by: subtract in interface CalculusFieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.subtract` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: subtract in interface FieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.subtract` in interface :class:`~org.hipparchus.FieldElement`
+        Parameters:
+            a (Binary64): element to subtract
         
-            Parameters:
-                a (:class:`~org.hipparchus.util.Binary64`): element to subtract
+        Returns:
+            a new element representing this - a
         
-            Returns:
-                a new element representing this - a
+        '-' operator.
         
-            '-' operator.
+        Specified by: subtract in interface CalculusFieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.subtract` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Parameters:
+            a (double): right hand side parameter of the operator
         
-            Parameters:
-                a (double): right hand side parameter of the operator
-        
-            Returns:
-                this-a
+        Returns:
+            this-a
         
         
         """
@@ -1646,67 +1518,59 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
     def subtract(self, binary64: 'Binary64') -> 'Binary64': ...
     def tan(self) -> 'Binary64':
         """
-            Tangent operation.
+        Tangent operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.tan` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: tan in interface CalculusFieldElement
         
-            Returns:
-                tan(this)
+        Returns:
+            tan(this)
         
         
         """
         ...
     def tanh(self) -> 'Binary64':
         """
-            Hyperbolic tangent operation.
+        Hyperbolic tangent operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.tanh` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: tanh in interface CalculusFieldElement
         
-            Returns:
-                tanh(this)
+        Returns:
+            tanh(this)
         
         
         """
         ...
     def toDegrees(self) -> 'Binary64':
         """
-            Convert radians to degrees, with error of less than 0.5 ULP
+        Convert radians to degrees, with error of less than 0.5 ULP
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.toDegrees` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: toDegrees in interface CalculusFieldElement
         
-            Returns:
-                instance converted into degrees
+        Returns:
+            instance converted into degrees
         
         
         """
         ...
     def toRadians(self) -> 'Binary64':
         """
-            Convert degrees to radians, with error of less than 0.5 ULP
+        Convert degrees to radians, with error of less than 0.5 ULP
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.toRadians` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: toRadians in interface CalculusFieldElement
         
-            Returns:
-                instance converted into radians
+        Returns:
+            instance converted into radians
         
         
         """
         ...
     def toString(self) -> str:
         """
-            The returned :code:`String` is equal to :code:`Double.toString(this.doubleValue())`
+        The returned String is equal to doubleValue())
         
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.toString` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: toString in class Object
         
-            Also see:
-        
-                  - :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.toString`
+              - toString
         
         
         
@@ -1714,13 +1578,12 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         ...
     def ulp(self) -> 'Binary64':
         """
-            Compute least significant bit (Unit in Last Position) for a number.
+        Compute least significant bit (Unit in Last Position) for a number.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.ulp` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: ulp in interface CalculusFieldElement
         
-            Returns:
-                ulp(this)
+        Returns:
+            ulp(this)
         
         
         """
@@ -1728,22 +1591,16 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
 
 class Binary64Field(org.hipparchus.Field[Binary64], java.io.Serializable):
     """
-    public classBinary64Field extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.util.Binary64`>, :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements Field<Binary64>, Serializable
     
-        The field of :class:`~org.hipparchus.util.Binary64`.
+    The field of Binary64.
     
-        Also see:
-    
-              - :class:`~org.hipparchus.util.Binary64`
-              - :meth:`~serialized`
+          - Binary64
+          - serialized
     """
     def equals(self, object: typing.Any) -> bool:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: equals in class Object
         
         
         """
@@ -1751,53 +1608,57 @@ class Binary64Field(org.hipparchus.Field[Binary64], java.io.Serializable):
     @staticmethod
     def getInstance() -> 'Binary64Field':
         """
-            Returns the unique instance of this class.
+        Returns the unique instance of this class.
         
-            Returns:
-                the unique instance of this class
+        Returns:
+            the unique instance of this class
         
         
         """
         ...
     def getOne(self) -> Binary64:
         """
-            Get the multiplicative identity of the field.
+        Get the multiplicative identity of the field.
         
-            The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the
-            equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
+        The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
         
-            Specified by:
-                :meth:`~org.hipparchus.Field.getOne` in interface :class:`~org.hipparchus.Field`
+        Specified by: getOne in interface Field
         
-            Returns:
-                multiplicative identity of the field
+        Returns:
+            multiplicative identity of the field
         
         
         """
         ...
-    def getRuntimeClass(self) -> typing.Type[Binary64]: ...
+    def getRuntimeClass(self) -> typing.Type[Binary64]:
+        """
+        Returns the runtime class of the FieldElement.
+        
+        Specified by: getRuntimeClass in interface Field
+        
+        Returns:
+            The Class object that represents the runtime class of this object.
+        
+        
+        """
+        ...
     def getZero(self) -> Binary64:
         """
-            Get the additive identity of the field.
+        Get the additive identity of the field.
         
-            The additive identity is the element e :sub:`0` of the field such that for all elements a of the field, the equalities a
-            + e :sub:`0` = e :sub:`0` + a = a hold.
+        The additive identity is the element e :sub:`0` of the field such that for all elements a of the field, the equalities a + e :sub:`0` = e :sub:`0` + a = a hold.
         
-            Specified by:
-                :meth:`~org.hipparchus.Field.getZero` in interface :class:`~org.hipparchus.Field`
+        Specified by: getZero in interface Field
         
-            Returns:
-                additive identity of the field
+        Returns:
+            additive identity of the field
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.hashCode` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: hashCode in class Object
         
         
         """
@@ -1806,69 +1667,95 @@ class Binary64Field(org.hipparchus.Field[Binary64], java.io.Serializable):
 _Blendable__B = typing.TypeVar('_Blendable__B')  # <B>
 class Blendable(typing.Generic[_Blendable__B]):
     """
-    public interfaceBlendable<B>
+    Interface representing classes that can blend with other instances of themselves using a given blending value.
     
-        Interface representing classes that can blend with other instances of themselves using a given blending value.
-    
-        The blending value is commonly given from a
-        :class:`~org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction`.
+    The blending value is commonly given from a SmoothStepFunction.
     """
-    def blendArithmeticallyWith(self, b: _Blendable__B, double: float) -> _Blendable__B: ...
+    def blendArithmeticallyWith(self, other: _Blendable__B, blendingValue: float) -> _Blendable__B:
+        """
+        Blend arithmetically this instance with another one.
+        
+        Parameters:
+            other (Blendable): other instance to blend arithmetically with
+            blendingValue (double): value from smoothstep function B(x). It is expected to be between [0:1] and will throw an exception otherwise.
+        
+        Returns:
+            this * (1 - B(x)) + other * B(x)
+        
+        Raises:
+            MathIllegalArgumentException: if blending value is not within [0:1]
+        
+        
+        """
+        ...
 
 class Combinations(java.lang.Iterable[typing.MutableSequence[int]]):
     """
-    public classCombinations extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable`<int[]>
+    implements Iterable<int[]>
     
-        Utility to create combinations :code:`(n, k)` of :code:`k` elements in a set of :code:`n` elements.
+    Utility to create combinations (n, k) of k elements in a set of n elements.
     
-        Also see:
-    
-              - ` Combination @ Wikipedia <http://en.wikipedia.org/wiki/Combination>`
+          - ` Combination @ Wikipedia <http://en.wikipedia.org/wiki/Combination>`
     """
-    def __init__(self, int: int, int2: int): ...
+    def __init__(self, n: int, k: int):
+        """
+        Creates an instance whose range is the k-element subsets of {0..., n - 1} represented as int[] arrays.
+        
+        The iteration order is lexicographic: the arrays returned by the iterator are sorted in descending order and they are visited in lexicographic order with significance from right to left. For example, iterator() returns an iterator that will generate the following sequence of arrays on successive calls to next():
+        
+        
+        [0, 1], [0, 2], [1, 2], [0, 3], [1, 3], [2, 3]
+        If k == 0 an iterator containing an empty array is returned; if k == n an iterator containing [0..., n
+        - 1] is returned.
+        
+        Parameters:
+            n (int): Size of the set from which subsets are selected.
+            k (int): Size of the subsets to be enumerated.
+        
+        Raises:
+            MathIllegalArgumentException: if n < 0.
+            MathIllegalArgumentException: if k > n.
+        
+        
+        """
+        ...
     def comparator(self) -> java.util.Comparator[typing.MutableSequence[int]]:
         """
-            Defines a lexicographic ordering of combinations. The returned comparator allows to compare any two combinations that
-            can be produced by this instance's :meth:`~org.hipparchus.util.Combinations.iterator`. Its :code:`compare(int[],int[])`
-            method will throw exceptions if passed combinations that are inconsistent with this instance:
+        Defines a lexicographic ordering of combinations. The returned comparator allows to compare any two combinations that can be produced by this instance's iterator. Its compare(int[],int[]) method will throw exceptions if passed combinations that are inconsistent with this instance:
         
-              - if the array lengths are not equal to :code:`k`,
-              - if an element of the array is not within the interval [0, :code:`n`).
+          - if the array lengths are not equal to k,
+          - if an element of the array is not within the interval [0, n).
         
         
-            Returns:
-                a lexicographic comparator.
+        Returns:
+            a lexicographic comparator.
         
         
         """
         ...
     def getK(self) -> int:
         """
-            Gets the number of elements in each combination.
+        Gets the number of elements in each combination.
         
-            Returns:
-                the size of the subsets to be enumerated.
+        Returns:
+            the size of the subsets to be enumerated.
         
         
         """
         ...
     def getN(self) -> int:
         """
-            Gets the size of the set from which combinations are drawn.
+        Gets the size of the set from which combinations are drawn.
         
-            Returns:
-                the size of the universe.
+        Returns:
+            the size of the universe.
         
         
         """
         ...
     def iterator(self) -> java.util.Iterator[typing.MutableSequence[int]]:
         """
-        
-            Specified by:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable.iterator` in
-                interface :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable`
+        Specified by: iterator in interface Iterable
         
         
         """
@@ -1876,93 +1763,283 @@ class Combinations(java.lang.Iterable[typing.MutableSequence[int]]):
 
 class CombinatoricsUtils:
     """
-    public final classCombinatoricsUtils extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    
-        Combinatorial utilities.
+    Combinatorial utilities.
     """
     MAX_BELL: typing.ClassVar[int] = ...
     """
-    public static final int MAX_BELL
+    Maximum index of Bell number that fits into a long.
     
-        Maximum index of Bell number that fits into a long.
+    Since:
+        2.2
     
-        Since:
-            2.2
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     @staticmethod
-    def bellNumber(int: int) -> int:
+    def bellNumber(n: int) -> int:
         """
-            Compute the Bell number (number of partitions of a set).
+        Compute the Bell number (number of partitions of a set).
         
-            Parameters:
-                n (int): number of elements of the set
+        Parameters:
+            n (int): number of elements of the set
         
-            Returns:
-                Bell number Bₙ
+        Returns:
+            Bell number Bₙ
         
-            Since:
-                2.2
-        
-        
-        """
-        ...
-    @staticmethod
-    def binomialCoefficient(int: int, int2: int) -> int: ...
-    @staticmethod
-    def binomialCoefficientDouble(int: int, int2: int) -> float: ...
-    @staticmethod
-    def binomialCoefficientLog(int: int, int2: int) -> float: ...
-    @staticmethod
-    def checkBinomial(int: int, int2: int) -> None: ...
-    @staticmethod
-    def combinationsIterator(int: int, int2: int) -> java.util.Iterator[typing.MutableSequence[int]]:
-        """
-            Returns an iterator whose range is the k-element subsets of {0, ..., n - 1} represented as :code:`int[]` arrays.
-        
-            The arrays returned by the iterator are sorted in descending order and they are visited in lexicographic order with
-            significance from right to left. For example, combinationsIterator(4, 2) returns an Iterator that will generate the
-            following sequence of arrays on successive calls to :code:`next()`:
-        
-            :code:`[0, 1], [0, 2], [1, 2], [0, 3], [1, 3], [2, 3]`
-        
-            If :code:`k == 0` an Iterator containing an empty array is returned and if :code:`k == n` an Iterator containing [0,
-            ..., n -1] is returned.
-        
-            Parameters:
-                n (int): Size of the set from which subsets are selected.
-                k (int): Size of the subsets to be enumerated.
-        
-            Returns:
-                an :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Iterator` over the k-sets in n.
-        
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`n < 0`.
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`k > n`.
+        Since:
+            2.2
         
         
         """
         ...
     @staticmethod
-    def factorial(int: int) -> int: ...
+    def binomialCoefficient(n: int, k: int) -> int:
+        """
+        Returns an exact representation of the ` Binomial Coefficient <http://mathworld.wolfram.com/BinomialCoefficient.html>`, "n choose k", the number of k-element subsets that can be selected from an n-element set.
+        
+        Preconditions:
+        
+          - 0 <= k <= n (otherwise MathIllegalArgumentException is thrown)
+          - The result is small enough to fit into a long. The largest value of n for which all coefficients are
+            MAX_VALUE is 66. If the computed value exceeds MAX_VALUE a MathRuntimeException is
+            thrown.
+        
+        
+        Parameters:
+            n (int): the size of the set
+            k (int): the size of the subsets to be counted
+        
+        Returns:
+            n choose k
+        
+        Raises:
+            MathIllegalArgumentException: if n < 0.
+            MathIllegalArgumentException: if k > n.
+            MathRuntimeException: if the result is too large to be represented by a long integer.
+        
+        
+        """
+        ...
     @staticmethod
-    def factorialDouble(int: int) -> float: ...
+    def binomialCoefficientDouble(n: int, k: int) -> float:
+        """
+        Returns a double representation of the ` Binomial Coefficient <http://mathworld.wolfram.com/BinomialCoefficient.html>`, "n choose k", the number of k-element subsets that can be selected from an n-element set.
+        
+        * Preconditions:
+        
+          - 0 <= k <= n (otherwise IllegalArgumentException is thrown)
+          - The result is small enough to fit into a double. The largest value of n for which all coefficients are <
+            Double.MAX_VALUE is 1029. If the computed value exceeds Double.MAX_VALUE, Double.POSITIVE_INFINITY is returned
+        
+        
+        Parameters:
+            n (int): the size of the set
+            k (int): the size of the subsets to be counted
+        
+        Returns:
+            n choose k
+        
+        Raises:
+            MathIllegalArgumentException: if n < 0.
+            MathIllegalArgumentException: if k > n.
+            MathRuntimeException: if the result is too large to be represented by a long integer.
+        
+        
+        """
+        ...
     @staticmethod
-    def factorialLog(int: int) -> float: ...
+    def binomialCoefficientLog(n: int, k: int) -> float:
+        """
+        Returns the natural log of the ` Binomial Coefficient <http://mathworld.wolfram.com/BinomialCoefficient.html>`, "n choose k", the number of k-element subsets that can be selected from an n-element set.
+        
+        * Preconditions:
+        
+          - 0 <= k <= n (otherwise MathIllegalArgumentException is thrown)
+        
+        
+        Parameters:
+            n (int): the size of the set
+            k (int): the size of the subsets to be counted
+        
+        Returns:
+            n choose k
+        
+        Raises:
+            MathIllegalArgumentException: if n < 0.
+            MathIllegalArgumentException: if k > n.
+            MathRuntimeException: if the result is too large to be represented by a long integer.
+        
+        
+        """
+        ...
+    @staticmethod
+    def checkBinomial(n: int, k: int) -> None:
+        """
+        Check binomial preconditions.
+        
+        Parameters:
+            n (int): Size of the set.
+            k (int): Size of the subsets to be counted.
+        
+        Raises:
+            MathIllegalArgumentException: if n < 0.
+            MathIllegalArgumentException: if k > n.
+        
+        
+        """
+        ...
+    @staticmethod
+    def combinationsIterator(n: int, k: int) -> java.util.Iterator[typing.MutableSequence[int]]:
+        """
+        Returns an iterator whose range is the k-element subsets of {0..., n - 1} represented as int[] arrays.
+        
+        The arrays returned by the iterator are sorted in descending order and they are visited in lexicographic order with significance from right to left. For example, combinationsIterator(4, 2) returns an Iterator that will generate the following sequence of arrays on successive calls to next():
+        
+        [0, 1], [0, 2], [1, 2], [0, 3], [1, 3], [2, 3]
+        
+        If k == 0 an Iterator containing an empty array is returned and if k == n an Iterator containing [0..., n -1] is returned.
+        
+        Parameters:
+            n (int): Size of the set from which subsets are selected.
+            k (int): Size of the subsets to be enumerated.
+        
+        Returns:
+            an Iterator over the k-sets in n.
+        
+        Raises:
+            MathIllegalArgumentException: if n < 0.
+            MathIllegalArgumentException: if k > n.
+        
+        
+        """
+        ...
+    @staticmethod
+    def factorial(n: int) -> int:
+        """
+        Returns n!. Shorthand for n ` Factorial <http://mathworld.wolfram.com/Factorial.html>`, the product of the numbers ,n.
+        
+        * Preconditions:
+        
+          - n >= 0 (otherwise MathIllegalArgumentException is thrown)
+          - The result is small enough to fit into a long. The largest value of n for which n! does not
+            exceed Long.MAX_VALUE} is 20. If the computed value exceeds MAX_VALUE an MathRuntimeException is
+            thrown.
+        
+        
+        Parameters:
+            n (int): argument
+        
+        Returns:
+            n!
+        
+        Raises:
+            MathRuntimeException: if the result is too large to be represented by a long.
+            MathIllegalArgumentException: if n < 0.
+            MathIllegalArgumentException: if n > 20: The factorial value is too large to fit in a long.
+        
+        
+        """
+        ...
+    @staticmethod
+    def factorialDouble(n: int) -> float:
+        """
+        Compute n!, the` factorial <http://mathworld.wolfram.com/Factorial.html>` of n (the product of the numbers 1 to n), as a double. The result should be small enough to fit into a double: The largest n for which n! does not exceed MAX_VALUE is 170. If the computed value exceeds MAX_VALUE, POSITIVE_INFINITY is returned.
+        
+        Parameters:
+            n (int): Argument.
+        
+        Returns:
+            n!
+        
+        Raises:
+            MathIllegalArgumentException: if n < 0.
+        
+        
+        """
+        ...
+    @staticmethod
+    def factorialLog(n: int) -> float:
+        """
+        Compute the natural logarithm of the factorial of n.
+        
+        Parameters:
+            n (int): Argument.
+        
+        Returns:
+            log(n!)
+        
+        Raises:
+            MathIllegalArgumentException: if n < 0.
+        
+        
+        """
+        ...
     _partitions__T = typing.TypeVar('_partitions__T')  # <T>
     @staticmethod
-    def partitions(list: java.util.List[_partitions__T]) -> java.util.stream.Stream[typing.MutableSequence[java.util.List[_partitions__T]]]: ...
+    def partitions(list: java.util.List[_partitions__T]) -> java.util.stream.Stream[typing.MutableSequence[java.util.List[_partitions__T]]]:
+        """
+        Generate a stream of partitions of a list.
+        
+        This method implements the iterative algorithm described in article by B. Djokić, M. Miyakawa, S. Sekiguchi, I. Semba, and I. Stojmenović (The Computer Journal, Volume 32, Issue 3, 1989, Pages 281–282, comjnl
+        
+        Parameters:
+            list (List<T> list): list to partition
+        
+        Returns:
+            stream of partitions of the list, each partition is an array or parts and each part is a list of elements
+        
+        Since:
+            2.2
+        
+        
+        """
+        ...
     _permutations__T = typing.TypeVar('_permutations__T')  # <T>
     @staticmethod
-    def permutations(list: java.util.List[_permutations__T]) -> java.util.stream.Stream[java.util.List[_permutations__T]]: ...
+    def permutations(list: java.util.List[_permutations__T]) -> java.util.stream.Stream[java.util.List[_permutations__T]]:
+        """
+        Generate a stream of permutations of a list.
+        
+        This method implements the Steinhaus–Johnson–Trotter algorithm with Even's speedup
+        
+        
+        Parameters:
+            list (List<T> list): list to permute
+        
+        Returns:
+            stream of permutations of the list
+        
+        Since:
+            2.2
+        
+        
+        """
+        ...
     @staticmethod
-    def stirlingS2(int: int, int2: int) -> int: ...
+    def stirlingS2(n: int, k: int) -> int:
+        """
+        Returns the ` Stirling number of the second kind <http://mathworld.wolfram.com/StirlingNumberoftheSecondKind.html>`, "S(n,k)", the number of ways of partitioning an n-element set into k non-empty subsets.
+        
+        The preconditions are 0 <= k <= n (otherwise MathIllegalArgumentException is thrown)
+        
+        Parameters:
+            n (int): the size of the set
+            k (int): the number of non-empty subsets
+        
+        Returns:
+            S(n,k)
+        
+        Raises:
+            MathIllegalArgumentException: if k < 0.
+            MathIllegalArgumentException: if k > n.
+            MathRuntimeException: if some overflow happens, typically for n exceeding 25 and k between 20 and n-2 (S(n,n-1) is handled specifically and
+                does not overflow)
+        
+        
+        """
+        ...
     class FactorialLog:
         @staticmethod
         def create() -> 'CombinatoricsUtils.FactorialLog': ...
@@ -1971,29 +2048,24 @@ class CombinatoricsUtils:
 
 class CompositeFormat:
     """
-    public classCompositeFormat extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    
-        Base class for formatters of composite objects (complex numbers, vectors ...).
+    Base class for formatters of composite objects (complex numbers, vectors ...).
     """
     @staticmethod
-    def formatDouble(double: float, numberFormat: java.text.NumberFormat, stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer:
+    def formatDouble(value: float, format: java.text.NumberFormat, toAppendTo: java.lang.StringBuffer, pos: java.text.FieldPosition) -> java.lang.StringBuffer:
         """
-            Formats a double value to produce a string. In general, the value is formatted using the formatting rules of
-            :code:`format`. There are three exceptions to this:
+        Formats a double value to produce a string. In general, the value is formatted using the formatting rules of format. There are three exceptions to this:
         
-              1.  NaN is formatted as '(NaN)'
-              2.  Positive infinity is formatted as '(Infinity)'
-              3.  Negative infinity is formatted as '(-Infinity)'
+          1.  NaN is formatted as '(NaN)' 2.  Positive infinity is formatted as '(Infinity)' 3.  Negative infinity is formatted as '(-Infinity)'
         
         
-            Parameters:
-                value (double): the double to format.
-                format (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat`): the format used.
-                toAppendTo (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer`): where the text is to be appended
-                pos (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition`): On input: an alignment field, if desired. On output: the offsets of the alignment field
+        Parameters:
+            value (double): the double to format.
+            format (NumberFormat): the format used.
+            toAppendTo (StringBuffer): where the text is to be appended
+            pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
-            Returns:
-                the value passed in as toAppendTo.
+        Returns:
+            the value passed in as toAppendTo.
         
         
         """
@@ -2002,12 +2074,10 @@ class CompositeFormat:
     @staticmethod
     def getDefaultNumberFormat() -> java.text.NumberFormat:
         """
-            Create a default number format. The default number format is based on
-            :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.getInstance` with the only
-            customizing that the maximum number of fraction digits is set to 10.
+        getInstance with the only customizing that the maximum number of fraction digits is set to 10.
         
-            Returns:
-                the default number format.
+        Returns:
+            the default number format.
         
         """
         ...
@@ -2015,75 +2085,72 @@ class CompositeFormat:
     @staticmethod
     def getDefaultNumberFormat(locale: java.util.Locale) -> java.text.NumberFormat:
         """
-            Create a default number format. The default number format is based on
-            :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.getInstance` with the only
-            customizing that the maximum number of fraction digits is set to 10.
+        getInstance with the only customizing that the maximum number of fraction digits is set to 10.
         
-            Parameters:
-                locale (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale`): the specific locale used by the format.
+        Parameters:
+            locale (Locale): the specific locale used by the format.
         
-            Returns:
-                the default number format specific to the given locale.
+        Returns:
+            the default number format specific to the given locale.
         
         
         """
         ...
     @staticmethod
-    def parseAndIgnoreWhitespace(string: str, parsePosition: java.text.ParsePosition) -> None:
+    def parseAndIgnoreWhitespace(source: str, pos: java.text.ParsePosition) -> None:
         """
-            Parses :code:`source` until a non-whitespace character is found.
+        Parses source until a non-whitespace character is found.
         
-            Parameters:
-                source (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.String`): the string to parse
-                pos (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition`): input/output parsing parameter. On output, :code:`pos` holds the index of the next non-whitespace character.
-        
-        
-        """
-        ...
-    @staticmethod
-    def parseFixedstring(string: str, string2: str, parsePosition: java.text.ParsePosition) -> bool:
-        """
-            Parse :code:`source` for an expected fixed string.
-        
-            Parameters:
-                source (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.String`): the string to parse
-                expected (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.String`): expected string
-                pos (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition`): input/output parsing parameter.
-        
-            Returns:
-                true if the expected string was there
+        Parameters:
+            source (String): the string to parse
+            pos (ParsePosition): input/output parsing parameter. On output, pos holds the index of the next non-whitespace character.
         
         
         """
         ...
     @staticmethod
-    def parseNextCharacter(string: str, parsePosition: java.text.ParsePosition) -> str:
+    def parseFixedstring(source: str, expected: str, pos: java.text.ParsePosition) -> bool:
         """
-            Parses :code:`source` until a non-whitespace character is found.
+        Parse source for an expected fixed string.
         
-            Parameters:
-                source (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.String`): the string to parse
-                pos (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition`): input/output parsing parameter.
+        Parameters:
+            source (String): the string to parse
+            expected (String): expected string
+            pos (ParsePosition): input/output parsing parameter.
         
-            Returns:
-                the first non-whitespace character.
+        Returns:
+            true if the expected string was there
         
         
         """
         ...
     @staticmethod
-    def parseNumber(string: str, numberFormat: java.text.NumberFormat, parsePosition: java.text.ParsePosition) -> java.lang.Number:
+    def parseNextCharacter(source: str, pos: java.text.ParsePosition) -> str:
         """
-            Parses :code:`source` for a number. This method can parse normal, numeric values as well as special values. These
-            special values include Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY.
+        Parses source until a non-whitespace character is found.
         
-            Parameters:
-                source (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.String`): the string to parse
-                format (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat`): the number format used to parse normal, numeric values.
-                pos (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition`): input/output parsing parameter.
+        Parameters:
+            source (String): the string to parse
+            pos (ParsePosition): input/output parsing parameter.
         
-            Returns:
-                the parsed number.
+        Returns:
+            the first non-whitespace character.
+        
+        
+        """
+        ...
+    @staticmethod
+    def parseNumber(source: str, format: java.text.NumberFormat, pos: java.text.ParsePosition) -> java.lang.Number:
+        """
+        Parses source for a number. This method can parse normal, numeric values as well as special values. These special values include Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY.
+        
+        Parameters:
+            source (String): the string to parse
+            format (NumberFormat): the number format used to parse normal, numeric values.
+            pos (ParsePosition): input/output parsing parameter.
+        
+        Returns:
+            the parsed number.
         
         
         """
@@ -2091,14 +2158,11 @@ class CompositeFormat:
 
 class ContinuedFraction:
     """
-    public abstract classContinuedFraction extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Provides a generic means to evaluate continued fractions. Subclasses simply provided the a and b coefficients to evaluate the continued fraction.
     
-        Provides a generic means to evaluate continued fractions. Subclasses simply provided the a and b coefficients to
-        evaluate the continued fraction.
+    References:
     
-        References:
-    
-          - ` Continued Fraction <http://mathworld.wolfram.com/ContinuedFraction.html>`
+      - ` Continued Fraction <http://mathworld.wolfram.com/ContinuedFraction.html>`
     """
     @typing.overload
     def evaluate(self, double: float) -> float: ...
@@ -2111,72 +2175,49 @@ class ContinuedFraction:
 
 class FastMath:
     """
-    public classFastMath extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Faster, more accurate, portable alternative to Math and StrictMath for large scale computation.
     
-        Faster, more accurate, portable alternative to
-        :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Math` and
-        :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.StrictMath` for large scale computation.
+    FastMath is a drop-in replacement for both Math and StrictMath. This means that for any method in Math (say sin(x) or cbrt(y)), user can directly change the class and use the methods as is (using sin(x) or cbrt(y) in the previous example).
     
-        FastMath is a drop-in replacement for both Math and StrictMath. This means that for any method in Math (say
-        :code:`Math.sin(x)` or :code:`Math.cbrt(y)`), user can directly change the class and use the methods as is (using
-        :code:`FastMath.sin(x)` or :code:`FastMath.cbrt(y)` in the previous example).
+    FastMath speed is achieved by relying heavily on optimizing compilers to native code present in many JVMs today and use of large tables. The larger tables are lazily initialized on first use, so that the setup time does not penalize methods that don't need them.
     
-        FastMath speed is achieved by relying heavily on optimizing compilers to native code present in many JVMs today and use
-        of large tables. The larger tables are lazily initialized on first use, so that the setup time does not penalize methods
-        that don't need them.
+    Note that FastMath is extensively used inside Hipparchus, so by calling some algorithms, the overhead when the the tables need to be initialized will occur regardless of the end-user calling FastMath methods directly or not. Performance figures for a specific JVM and hardware can be evaluated by running the FastMathTestPerformance tests in the test directory of the source distribution.
     
-        Note that FastMath is extensively used inside Hipparchus, so by calling some algorithms, the overhead when the the
-        tables need to be initialized will occur regardless of the end-user calling FastMath methods directly or not.
-        Performance figures for a specific JVM and hardware can be evaluated by running the FastMathTestPerformance tests in the
-        test directory of the source distribution.
+    FastMath accuracy should be mostly independent of the JVM as it relies only on IEEE-754 basic operations and on embedded tables. Almost all operations are accurate to about 0.5 ulp throughout the domain range. This statement, of course is only a rough global observed behavior, it is not a guarantee for every double numbers input (see William Kahan's `Table Maker's Dilemma <http://en.wikipedia.org/wiki/Rounding#The_table-maker.27s_dilemma>`).
     
-        FastMath accuracy should be mostly independent of the JVM as it relies only on IEEE-754 basic operations and on embedded
-        tables. Almost all operations are accurate to about 0.5 ulp throughout the domain range. This statement, of course is
-        only a rough global observed behavior, it is *not* a guarantee for *every* double numbers input (see William Kahan's
-        `Table Maker's Dilemma <http://en.wikipedia.org/wiki/Rounding#The_table-maker.27s_dilemma>`).
+    FastMath additionally implements the following methods not found in Math/StrictMath:
     
-        FastMath additionally implements the following methods not found in Math/StrictMath:
+      - asinh
+      - acosh
+      - atanh
     
-          - :meth:`~org.hipparchus.util.FastMath.asinh`
-          - :meth:`~org.hipparchus.util.FastMath.acosh`
-          - :meth:`~org.hipparchus.util.FastMath.atanh`
+    The following methods are found in Math/StrictMath since 1.6 only, they are provided by FastMath even in 1.5 Java virtual machines
     
-        The following methods are found in Math/StrictMath since 1.6 only, they are provided by FastMath even in 1.5 Java
-        virtual machines
-    
-          - :meth:`~org.hipparchus.util.FastMath.copySign`
-          - :meth:`~org.hipparchus.util.FastMath.getExponent`
-          - :meth:`~org.hipparchus.util.FastMath.nextAfter`
-          - :meth:`~org.hipparchus.util.FastMath.nextUp`
-          - :meth:`~org.hipparchus.util.FastMath.scalb`
-          - :meth:`~org.hipparchus.util.FastMath.copySign`
-          - :meth:`~org.hipparchus.util.FastMath.getExponent`
-          - :meth:`~org.hipparchus.util.FastMath.nextAfter`
-          - :meth:`~org.hipparchus.util.FastMath.nextUp`
-          - :meth:`~org.hipparchus.util.FastMath.scalb`
+      - copySign
+      - getExponent
+      - nextAfter
+      - nextUp
+      - scalb
+      - copySign
+      - getExponent
+      - nextAfter
+      - nextUp
+      - scalb
     """
     PI: typing.ClassVar[float] = ...
     """
-    public static final double PI
+    Archimede's constant PI, ratio of circle circumference to diameter.
     
-        Archimede's constant PI, ratio of circle circumference to diameter.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     E: typing.ClassVar[float] = ...
     """
-    public static final double E
+    Napier's constant e, base of the natural logarithm.
     
-        Napier's constant e, base of the natural logarithm.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
@@ -2185,27 +2226,25 @@ class FastMath:
     _IEEEremainder_2__T = typing.TypeVar('_IEEEremainder_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def IEEEremainder(double: float, double2: float) -> float:
+    def IEEEremainder(dividend: float, divisor: float) -> float:
         """
-            Computes the remainder as prescribed by the IEEE 754 standard.
+        Computes the remainder as prescribed by the IEEE 754 standard.
         
-            The remainder value is mathematically equal to :code:`x - y*n` where :code:`n` is the mathematical integer closest to
-            the exact mathematical value of the quotient :code:`x/y`. If two mathematical integers are equally close to :code:`x/y`
-            then :code:`n` is the integer that is even.
+        The remainder value is mathematically equal to x - y*n where n is the mathematical integer closest to the exact mathematical value of the quotient x/y. If two mathematical integers are equally close to x/y then n is the integer that is even.
         
-              - If either operand is NaN, the result is NaN.
-              - If the result is not NaN, the sign of the result equals the sign of the dividend.
-              - If the dividend is an infinity, or the divisor is a zero, or both, the result is NaN.
-              - If the dividend is finite and the divisor is an infinity, the result equals the dividend.
-              - If the dividend is a zero and the divisor is finite, the result equals the dividend.
+          - If either operand is NaN, the result is NaN.
+          - If the result is not NaN, the sign of the result equals the sign of the dividend.
+          - If the dividend is an infinity, or the divisor is a zero, or both, the result is NaN.
+          - If the dividend is finite and the divisor is an infinity, the result equals the dividend.
+          - If the dividend is a zero and the divisor is finite, the result equals the dividend.
         
         
-            Parameters:
-                dividend (double): the number to be divided
-                divisor (double): the number by which to divide
+        Parameters:
+            dividend (double): the number to be divided
+            divisor (double): the number by which to divide
         
-            Returns:
-                the remainder, rounded
+        Returns:
+            the remainder, rounded
         
         """
         ...
@@ -2213,51 +2252,47 @@ class FastMath:
     @staticmethod
     def IEEEremainder(t: _IEEEremainder_1__T, double: float) -> _IEEEremainder_1__T:
         """
-            Computes the remainder as prescribed by the IEEE 754 standard.
+        Computes the remainder as prescribed by the IEEE 754 standard.
         
-            The remainder value is mathematically equal to :code:`x - y*n` where :code:`n` is the mathematical integer closest to
-            the exact mathematical value of the quotient :code:`x/y`. If two mathematical integers are equally close to :code:`x/y`
-            then :code:`n` is the integer that is even.
+        The remainder value is mathematically equal to x - yn where n is the mathematical integer closest to the exact mathematical value of the quotient x/y. If two mathematical integers are equally close to x/y then n is the integer that is even.
         
-              - If either operand is NaN, the result is NaN.
-              - If the result is not NaN, the sign of the result equals the sign of the dividend.
-              - If the dividend is an infinity, or the divisor is a zero, or both, the result is NaN.
-              - If the dividend is finite and the divisor is an infinity, the result equals the dividend.
-              - If the dividend is a zero and the divisor is finite, the result equals the dividend.
+          - If either operand is NaN, the result is NaN.
+          - If the result is not NaN, the sign of the result equals the sign of the dividend.
+          - If the dividend is an infinity, or the divisor is a zero, or both, the result is NaN.
+          - If the dividend is finite and the divisor is an infinity, the result equals the dividend.
+          - If the dividend is a zero and the divisor is finite, the result equals the dividend.
         
         
-            Parameters:
-                dividend (T): the number to be divided
-                divisor (double): the number by which to divide
+        Parameters:
+            dividend (T): the number to be divided
+            divisor (double): the number by which to divide
         
-            Returns:
-                the remainder, rounded
+        Returns:
+            the remainder, rounded
         
-            Since:
-                1.3
+        Since:
+            1.3
         
-            Computes the remainder as prescribed by the IEEE 754 standard.
+        Computes the remainder as prescribed by the IEEE 754 standard.
         
-            The remainder value is mathematically equal to :code:`x - y*n` where :code:`n` is the mathematical integer closest to
-            the exact mathematical value of the quotient :code:`x/y`. If two mathematical integers are equally close to :code:`x/y`
-            then :code:`n` is the integer that is even.
+        The remainder value is mathematically equal to x - yn where n is the mathematical integer closest to the exact mathematical value of the quotient x/y. If two mathematical integers are equally close to x/y then n is the integer that is even.
         
-              - If either operand is NaN, the result is NaN.
-              - If the result is not NaN, the sign of the result equals the sign of the dividend.
-              - If the dividend is an infinity, or the divisor is a zero, or both, the result is NaN.
-              - If the dividend is finite and the divisor is an infinity, the result equals the dividend.
-              - If the dividend is a zero and the divisor is finite, the result equals the dividend.
+          - If either operand is NaN, the result is NaN.
+          - If the result is not NaN, the sign of the result equals the sign of the dividend.
+          - If the dividend is an infinity, or the divisor is a zero, or both, the result is NaN.
+          - If the dividend is finite and the divisor is an infinity, the result equals the dividend.
+          - If the dividend is a zero and the divisor is finite, the result equals the dividend.
         
         
-            Parameters:
-                dividend (T): the number to be divided
-                divisor (T): the number by which to divide
+        Parameters:
+            dividend (T): the number to be divided
+            divisor (T): the number by which to divide
         
-            Returns:
-                the remainder, rounded
+        Returns:
+            the remainder, rounded
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -2270,40 +2305,40 @@ class FastMath:
     @staticmethod
     def abs(double: float) -> float:
         """
-            Absolute value.
+        Absolute value.
         
-            Parameters:
-                x (int): number from which absolute value is requested
+        Parameters:
+            x (int): number from which absolute value is requested
         
-            Returns:
-                abs(x)
+        Returns:
+            abs(x)
         
-            Absolute value.
+        Absolute value.
         
-            Parameters:
-                x (long): number from which absolute value is requested
+        Parameters:
+            x (long): number from which absolute value is requested
         
-            Returns:
-                abs(x)
+        Returns:
+            abs(x)
         
-            Absolute value.
+        Absolute value.
         
-            Parameters:
-                x (float): number from which absolute value is requested
+        Parameters:
+            x (float): number from which absolute value is requested
         
-            Returns:
-                abs(x)
+        Returns:
+            abs(x)
         
-            Since:
-                2.0
+        Since:
+            2.0
         
-            Absolute value.
+        Absolute value.
         
-            Parameters:
-                x (double): number from which absolute value is requested
+        Parameters:
+            x (double): number from which absolute value is requested
         
-            Returns:
-                abs(x)
+        Returns:
+            abs(x)
         
         """
         ...
@@ -2318,18 +2353,18 @@ class FastMath:
     def abs(long: int) -> int: ...
     @typing.overload
     @staticmethod
-    def abs(t: _abs_4__T) -> _abs_4__T:
+    def abs(x: _abs_4__T) -> _abs_4__T:
         """
-            Absolute value.
+        Absolute value.
         
-            Parameters:
-                x (T): number from which absolute value is requested
+        Parameters:
+            x (T): number from which absolute value is requested
         
-            Returns:
-                abs(x)
+        Returns:
+            abs(x)
         
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """
@@ -2338,27 +2373,27 @@ class FastMath:
     @staticmethod
     def absExact(int: int) -> int:
         """
-            Absolute value.
+        Absolute value.
         
-            Parameters:
-                x (int): number from which absolute value is requested
+        Parameters:
+            x (int): number from which absolute value is requested
         
-            Returns:
-                abs(x), or throws an exception for :code:`Integer.MIN_VALUE`
+        Returns:
+            abs(x), or throws an exception for MIN_VALUE
         
-            Since:
-                2.0
+        Since:
+            2.0
         
-            Absolute value.
+        Absolute value.
         
-            Parameters:
-                x (long): number from which absolute value is requested
+        Parameters:
+            x (long): number from which absolute value is requested
         
-            Returns:
-                abs(x), or throws an exception for :code:`Long.MIN_VALUE`
+        Returns:
+            abs(x), or throws an exception for MIN_VALUE
         
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """
@@ -2369,32 +2404,32 @@ class FastMath:
     _acos_1__T = typing.TypeVar('_acos_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def acos(double: float) -> float:
+    def acos(x: float) -> float:
         """
-            Compute the arc cosine of a number.
+        Compute the arc cosine of a number.
         
-            Parameters:
-                x (double): number on which evaluation is done
+        Parameters:
+            x (double): number on which evaluation is done
         
-            Returns:
-                arc cosine of x
+        Returns:
+            arc cosine of x
         
         """
         ...
     @typing.overload
     @staticmethod
-    def acos(t: _acos_1__T) -> _acos_1__T:
+    def acos(x: _acos_1__T) -> _acos_1__T:
         """
-            Compute the arc cosine of a number.
+        Compute the arc cosine of a number.
         
-            Parameters:
-                x (T): number on which evaluation is done
+        Parameters:
+            x (T): number on which evaluation is done
         
-            Returns:
-                arc cosine of x
+        Returns:
+            arc cosine of x
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -2402,32 +2437,32 @@ class FastMath:
     _acosh_1__T = typing.TypeVar('_acosh_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def acosh(double: float) -> float:
+    def acosh(a: float) -> float:
         """
-            Compute the inverse hyperbolic cosine of a number.
+        Compute the inverse hyperbolic cosine of a number.
         
-            Parameters:
-                a (double): number on which evaluation is done
+        Parameters:
+            a (double): number on which evaluation is done
         
-            Returns:
-                inverse hyperbolic cosine of a
+        Returns:
+            inverse hyperbolic cosine of a
         
         """
         ...
     @typing.overload
     @staticmethod
-    def acosh(t: _acosh_1__T) -> _acosh_1__T:
+    def acosh(a: _acosh_1__T) -> _acosh_1__T:
         """
-            Compute the inverse hyperbolic cosine of a number.
+        Compute the inverse hyperbolic cosine of a number.
         
-            Parameters:
-                a (T): number on which evaluation is done
+        Parameters:
+            a (T): number on which evaluation is done
         
-            Returns:
-                inverse hyperbolic cosine of a
+        Returns:
+            inverse hyperbolic cosine of a
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -2441,32 +2476,32 @@ class FastMath:
     _asin_1__T = typing.TypeVar('_asin_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def asin(double: float) -> float:
+    def asin(x: float) -> float:
         """
-            Compute the arc sine of a number.
+        Compute the arc sine of a number.
         
-            Parameters:
-                x (double): number on which evaluation is done
+        Parameters:
+            x (double): number on which evaluation is done
         
-            Returns:
-                arc sine of x
+        Returns:
+            arc sine of x
         
         """
         ...
     @typing.overload
     @staticmethod
-    def asin(t: _asin_1__T) -> _asin_1__T:
+    def asin(x: _asin_1__T) -> _asin_1__T:
         """
-            Compute the arc sine of a number.
+        Compute the arc sine of a number.
         
-            Parameters:
-                x (T): number on which evaluation is done
+        Parameters:
+            x (T): number on which evaluation is done
         
-            Returns:
-                arc sine of x
+        Returns:
+            arc sine of x
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -2474,32 +2509,32 @@ class FastMath:
     _asinh_1__T = typing.TypeVar('_asinh_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def asinh(double: float) -> float:
+    def asinh(a: float) -> float:
         """
-            Compute the inverse hyperbolic sine of a number.
+        Compute the inverse hyperbolic sine of a number.
         
-            Parameters:
-                a (double): number on which evaluation is done
+        Parameters:
+            a (double): number on which evaluation is done
         
-            Returns:
-                inverse hyperbolic sine of a
+        Returns:
+            inverse hyperbolic sine of a
         
         """
         ...
     @typing.overload
     @staticmethod
-    def asinh(t: _asinh_1__T) -> _asinh_1__T:
+    def asinh(a: _asinh_1__T) -> _asinh_1__T:
         """
-            Compute the inverse hyperbolic sine of a number.
+        Compute the inverse hyperbolic sine of a number.
         
-            Parameters:
-                a (T): number on which evaluation is done
+        Parameters:
+            a (T): number on which evaluation is done
         
-            Returns:
-                inverse hyperbolic sine of a
+        Returns:
+            inverse hyperbolic sine of a
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -2507,32 +2542,32 @@ class FastMath:
     _atan_1__T = typing.TypeVar('_atan_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def atan(double: float) -> float:
+    def atan(x: float) -> float:
         """
-            Arctangent function
+        Arctangent function
         
-            Parameters:
-                x (double): a number
+        Parameters:
+            x (double): a number
         
-            Returns:
-                atan(x)
+        Returns:
+            atan(x)
         
         """
         ...
     @typing.overload
     @staticmethod
-    def atan(t: _atan_1__T) -> _atan_1__T:
+    def atan(x: _atan_1__T) -> _atan_1__T:
         """
-            Arctangent function
+        Arctangent function
         
-            Parameters:
-                x (T): a number
+        Parameters:
+            x (T): a number
         
-            Returns:
-                atan(x)
+        Returns:
+            atan(x)
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -2540,34 +2575,34 @@ class FastMath:
     _atan2_1__T = typing.TypeVar('_atan2_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def atan2(double: float, double2: float) -> float:
+    def atan2(y: float, x: float) -> float:
         """
-            Two arguments arctangent function
+        Two arguments arctangent function
         
-            Parameters:
-                y (double): ordinate
-                x (double): abscissa
+        Parameters:
+            y (double): ordinate
+            x (double): abscissa
         
-            Returns:
-                phase angle of point (x,y) between :code:`-PI` and :code:`PI`
+        Returns:
+            phase angle of point (x,y) between -PI and PI
         
         """
         ...
     @typing.overload
     @staticmethod
-    def atan2(t: _atan2_1__T, t2: _atan2_1__T) -> _atan2_1__T:
+    def atan2(y: _atan2_1__T, x: _atan2_1__T) -> _atan2_1__T:
         """
-            Two arguments arctangent function
+        Two arguments arctangent function
         
-            Parameters:
-                y (T): ordinate
-                x (T): abscissa
+        Parameters:
+            y (T): ordinate
+            x (T): abscissa
         
-            Returns:
-                phase angle of point (x,y) between :code:`-PI` and :code:`PI`
+        Returns:
+            phase angle of point (x,y) between -PI and PI
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -2575,32 +2610,32 @@ class FastMath:
     _atanh_1__T = typing.TypeVar('_atanh_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def atanh(double: float) -> float:
+    def atanh(a: float) -> float:
         """
-            Compute the inverse hyperbolic tangent of a number.
+        Compute the inverse hyperbolic tangent of a number.
         
-            Parameters:
-                a (double): number on which evaluation is done
+        Parameters:
+            a (double): number on which evaluation is done
         
-            Returns:
-                inverse hyperbolic tangent of a
+        Returns:
+            inverse hyperbolic tangent of a
         
         """
         ...
     @typing.overload
     @staticmethod
-    def atanh(t: _atanh_1__T) -> _atanh_1__T:
+    def atanh(a: _atanh_1__T) -> _atanh_1__T:
         """
-            Compute the inverse hyperbolic tangent of a number.
+        Compute the inverse hyperbolic tangent of a number.
         
-            Parameters:
-                a (T): number on which evaluation is done
+        Parameters:
+            a (T): number on which evaluation is done
         
-            Returns:
-                inverse hyperbolic tangent of a
+        Returns:
+            inverse hyperbolic tangent of a
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -2608,32 +2643,32 @@ class FastMath:
     _cbrt_1__T = typing.TypeVar('_cbrt_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def cbrt(double: float) -> float:
+    def cbrt(x: float) -> float:
         """
-            Compute the cubic root of a number.
+        Compute the cubic root of a number.
         
-            Parameters:
-                x (double): number on which evaluation is done
+        Parameters:
+            x (double): number on which evaluation is done
         
-            Returns:
-                cubic root of x
+        Returns:
+            cubic root of x
         
         """
         ...
     @typing.overload
     @staticmethod
-    def cbrt(t: _cbrt_1__T) -> _cbrt_1__T:
+    def cbrt(x: _cbrt_1__T) -> _cbrt_1__T:
         """
-            Compute the cubic root of a number.
+        Compute the cubic root of a number.
         
-            Parameters:
-                x (T): number on which evaluation is done
+        Parameters:
+            x (T): number on which evaluation is done
         
-            Returns:
-                cubic root of x
+        Returns:
+            cubic root of x
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -2641,32 +2676,32 @@ class FastMath:
     _ceil_1__T = typing.TypeVar('_ceil_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def ceil(double: float) -> float:
+    def ceil(x: float) -> float:
         """
-            Get the smallest whole number larger than x.
+        Get the smallest whole number larger than x.
         
-            Parameters:
-                x (double): number from which ceil is requested
+        Parameters:
+            x (double): number from which ceil is requested
         
-            Returns:
-                a double number c such that c is an integer c - 1.0 < x <= c
+        Returns:
+            a double number c such that c is an integer c - 1.0 < x <= c
         
         """
         ...
     @typing.overload
     @staticmethod
-    def ceil(t: _ceil_1__T) -> _ceil_1__T:
+    def ceil(x: _ceil_1__T) -> _ceil_1__T:
         """
-            Get the smallest whole number larger than x.
+        Get the smallest whole number larger than x.
         
-            Parameters:
-                x (T): number from which ceil is requested
+        Parameters:
+            x (T): number from which ceil is requested
         
-            Returns:
-                a double number c such that c is an integer c - 1.0 < x <= c
+        Returns:
+            a double number c such that c is an integer c - 1.0 < x <= c
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -2699,74 +2734,74 @@ class FastMath:
     @staticmethod
     def clamp(double: float, double2: float, double3: float) -> float:
         """
-            Clamp a value within an interval.
+        Clamp a value within an interval.
         
-            Parameters:
-                value (int): value to clamp
-                inf (int): lower bound of the clamping interval
-                sup (int): upper bound of the clamping interval
+        Parameters:
+            value (int): value to clamp
+            inf (int): lower bound of the clamping interval
+            sup (int): upper bound of the clamping interval
         
-            Returns:
-                value clamped within [inf; sup], or value if already within bounds.
+        Returns:
+            value clamped within [inf; sup], or value if already within bounds.
         
-            Since:
-                3.0
+        Since:
+            3.0
         
-            Clamp a value within an interval.
+        Clamp a value within an interval.
         
-            Parameters:
-                value (long): value to clamp
-                inf (long): lower bound of the clamping interval
-                sup (long): upper bound of the clamping interval
+        Parameters:
+            value (long): value to clamp
+            inf (long): lower bound of the clamping interval
+            sup (long): upper bound of the clamping interval
         
-            Returns:
-                value clamped within [inf; sup], or value if already within bounds.
+        Returns:
+            value clamped within [inf; sup], or value if already within bounds.
         
-            Since:
-                3.0
+        Since:
+            3.0
         
-            Clamp a value within an interval.
+        Clamp a value within an interval.
         
-            Parameters:
-                value (long): value to clamp
-                inf (int): lower bound of the clamping interval
-                sup (int): upper bound of the clamping interval
+        Parameters:
+            value (long): value to clamp
+            inf (int): lower bound of the clamping interval
+            sup (int): upper bound of the clamping interval
         
-            Returns:
-                value clamped within [inf; sup], or value if already within bounds.
+        Returns:
+            value clamped within [inf; sup], or value if already within bounds.
         
-            Since:
-                3.0
+        Since:
+            3.0
         
-            Clamp a value within an interval.
+        Clamp a value within an interval.
         
-            This method assumes -0.0 is below +0.0
+        This method assumes -0.0 is below +0.0
         
-            Parameters:
-                value (float): value to clamp
-                inf (float): lower bound of the clamping interval
-                sup (float): upper bound of the clamping interval
+        Parameters:
+            value (float): value to clamp
+            inf (float): lower bound of the clamping interval
+            sup (float): upper bound of the clamping interval
         
-            Returns:
-                value clamped within [inf; sup], or value if already within bounds.
+        Returns:
+            value clamped within [inf; sup], or value if already within bounds.
         
-            Since:
-                3.0
+        Since:
+            3.0
         
-            Clamp a value within an interval.
+        Clamp a value within an interval.
         
-            This method assumes -0.0 is below +0.0
+        This method assumes -0.0 is below +0.0
         
-            Parameters:
-                value (double): value to clamp
-                inf (double): lower bound of the clamping interval
-                sup (double): upper bound of the clamping interval
+        Parameters:
+            value (double): value to clamp
+            inf (double): lower bound of the clamping interval
+            sup (double): upper bound of the clamping interval
         
-            Returns:
-                value clamped within [inf; sup], or value if already within bounds.
+        Returns:
+            value clamped within [inf; sup], or value if already within bounds.
         
-            Since:
-                3.0
+        Since:
+            3.0
         
         
         """
@@ -2789,23 +2824,23 @@ class FastMath:
     @staticmethod
     def copySign(double: float, double2: float) -> float:
         """
-            Returns the first argument with the sign of the second argument. A NaN :code:`sign` argument is treated as positive.
+        Returns the first argument with the sign of the second argument. A NaN sign argument is treated as positive.
         
-            Parameters:
-                magnitude (double): the value to return
-                sign (double): the sign for the returned value
+        Parameters:
+            magnitude (double): the value to return
+            sign (double): the sign for the returned value
         
-            Returns:
-                the magnitude with the same sign as the :code:`sign` argument
+        Returns:
+            the magnitude with the same sign as the sign argument
         
-            Returns the first argument with the sign of the second argument. A NaN :code:`sign` argument is treated as positive.
+        Returns the first argument with the sign of the second argument. A NaN sign argument is treated as positive.
         
-            Parameters:
-                magnitude (float): the value to return
-                sign (float): the sign for the returned value
+        Parameters:
+            magnitude (float): the value to return
+            sign (float): the sign for the returned value
         
-            Returns:
-                the magnitude with the same sign as the :code:`sign` argument
+        Returns:
+            the magnitude with the same sign as the sign argument
         
         """
         ...
@@ -2816,29 +2851,29 @@ class FastMath:
     @staticmethod
     def copySign(t: _copySign_2__T, double: float) -> _copySign_2__T:
         """
-            Returns the first argument with the sign of the second argument. A NaN :code:`sign` argument is treated as positive.
+        Returns the first argument with the sign of the second argument. A NaN sign argument is treated as positive.
         
-            Parameters:
-                magnitude (T): the value to return
-                sign (T): the sign for the returned value
+        Parameters:
+            magnitude (T): the value to return
+            sign (T): the sign for the returned value
         
-            Returns:
-                the magnitude with the same sign as the :code:`sign` argument
+        Returns:
+            the magnitude with the same sign as the sign argument
         
-            Since:
-                1.3
+        Since:
+            1.3
         
-            Returns the first argument with the sign of the second argument. A NaN :code:`sign` argument is treated as positive.
+        Returns the first argument with the sign of the second argument. A NaN sign argument is treated as positive.
         
-            Parameters:
-                magnitude (T): the value to return
-                sign (double): the sign for the returned value
+        Parameters:
+            magnitude (T): the value to return
+            sign (double): the sign for the returned value
         
-            Returns:
-                the magnitude with the same sign as the :code:`sign` argument
+        Returns:
+            the magnitude with the same sign as the sign argument
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -2849,32 +2884,32 @@ class FastMath:
     _cos_1__T = typing.TypeVar('_cos_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def cos(double: float) -> float:
+    def cos(x: float) -> float:
         """
-            Cosine function.
+        Cosine function.
         
-            Parameters:
-                x (double): Argument.
+        Parameters:
+            x (double): Argument.
         
-            Returns:
-                cos(x)
+        Returns:
+            cos(x)
         
         """
         ...
     @typing.overload
     @staticmethod
-    def cos(t: _cos_1__T) -> _cos_1__T:
+    def cos(x: _cos_1__T) -> _cos_1__T:
         """
-            Cosine function.
+        Cosine function.
         
-            Parameters:
-                x (T): Argument.
+        Parameters:
+            x (T): Argument.
         
-            Returns:
-                cos(x)
+        Returns:
+            cos(x)
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -2882,32 +2917,32 @@ class FastMath:
     _cosh_1__T = typing.TypeVar('_cosh_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def cosh(double: float) -> float:
+    def cosh(x: float) -> float:
         """
-            Compute the hyperbolic cosine of a number.
+        Compute the hyperbolic cosine of a number.
         
-            Parameters:
-                x (double): number on which evaluation is done
+        Parameters:
+            x (double): number on which evaluation is done
         
-            Returns:
-                hyperbolic cosine of x
+        Returns:
+            hyperbolic cosine of x
         
         """
         ...
     @typing.overload
     @staticmethod
-    def cosh(t: _cosh_1__T) -> _cosh_1__T:
+    def cosh(x: _cosh_1__T) -> _cosh_1__T:
         """
-            Compute the hyperbolic cosine of a number.
+        Compute the hyperbolic cosine of a number.
         
-            Parameters:
-                x (T): number on which evaluation is done
+        Parameters:
+            x (T): number on which evaluation is done
         
-            Returns:
-                hyperbolic cosine of x
+        Returns:
+            hyperbolic cosine of x
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -2922,35 +2957,35 @@ class FastMath:
     @staticmethod
     def divideExact(int: int, int2: int) -> int:
         """
-            Divide two integers, checking for overflow.
+        Divide two integers, checking for overflow.
         
-            Parameters:
-                x (int): dividend
-                y (int): divisor
+        Parameters:
+            x (int): dividend
+            y (int): divisor
         
-            Returns:
-                x / y
+        Returns:
+            x / y
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if an overflow occurs
+        Raises:
+            MathRuntimeException: if an overflow occurs
         
-            Since:
-                3.0
+        Since:
+            3.0
         
-            Divide two long integers, checking for overflow.
+        Divide two long integers, checking for overflow.
         
-            Parameters:
-                x (long): dividend
-                y (long): divisor
+        Parameters:
+            x (long): dividend
+            y (long): divisor
         
-            Returns:
-                x / y
+        Returns:
+            x / y
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if an overflow occurs
+        Raises:
+            MathRuntimeException: if an overflow occurs
         
-            Since:
-                3.0
+        Since:
+            3.0
         
         
         """
@@ -2961,40 +2996,32 @@ class FastMath:
     _exp_1__T = typing.TypeVar('_exp_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def exp(double: float) -> float:
+    def exp(x: float) -> float:
         """
-            Exponential function. Computes exp(x), function result is nearly rounded. It will be correctly rounded to the
-            theoretical value for 99.9% of input values, otherwise it will have a 1 ULP error. Method: Lookup intVal = exp(int(x))
-            Lookup fracVal = exp(int(x-int(x) / 1024.0) * 1024.0 ); Compute z as the exponential of the remaining bits by a
-            polynomial minus one exp(x) = intVal * fracVal * (1 + z) Accuracy: Calculation is done with 63 bits of precision, so
-            result should be correctly rounded for 99.9% of input values, with less than 1 ULP error otherwise.
+        theoretical value for 99.9% of input values, otherwise it will have a 1 ULP error. Method: Lookup intVal = exp(int(x)) Lookup fracVal = exp(int(x-int(x) / 1024.0) * 1024.0 ); Compute z as the exponential of the remaining bits by a polynomial minus one exp(x) = intVal * fracVal * (1 + z) Accuracy: Calculation is done with 63 bits of precision, so result should be correctly rounded for 99.9% of input values, with less than 1 ULP error otherwise.
         
-            Parameters:
-                x (double): a double
+        Parameters:
+            x (double): a double
         
-            Returns:
-                double e :sup:`x`
+        Returns:
+            double e :sup:`x`
         
         """
         ...
     @typing.overload
     @staticmethod
-    def exp(t: _exp_1__T) -> _exp_1__T:
+    def exp(x: _exp_1__T) -> _exp_1__T:
         """
-            Exponential function. Computes exp(x), function result is nearly rounded. It will be correctly rounded to the
-            theoretical value for 99.9% of input values, otherwise it will have a 1 ULP error. Method: Lookup intVal = exp(int(x))
-            Lookup fracVal = exp(int(x-int(x) / 1024.0) * 1024.0 ); Compute z as the exponential of the remaining bits by a
-            polynomial minus one exp(x) = intVal * fracVal * (1 + z) Accuracy: Calculation is done with 63 bits of precision, so
-            result should be correctly rounded for 99.9% of input values, with less than 1 ULP error otherwise.
+        theoretical value for 99.9% of input values, otherwise it will have a 1 ULP error. Method: Lookup intVal = exp(int(x)) Lookup fracVal = exp(int(x-int(x) / 1024.0) * 1024.0 ); Compute z as the exponential of the remaining bits by a polynomial minus one exp(x) = intVal * fracVal * (1 + z) Accuracy: Calculation is done with 63 bits of precision, so result should be correctly rounded for 99.9% of input values, with less than 1 ULP error otherwise.
         
-            Parameters:
-                x (T): a double
+        Parameters:
+            x (T): a double
         
-            Returns:
-                double e :sup:`x`
+        Returns:
+            double e :sup:`x`
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -3002,32 +3029,28 @@ class FastMath:
     _expm1_1__T = typing.TypeVar('_expm1_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def expm1(double: float) -> float:
+    def expm1(x: float) -> float:
         """
-            Compute exp(x) - 1
+        Parameters:
+            x (double): number to compute shifted exponential
         
-            Parameters:
-                x (double): number to compute shifted exponential
-        
-            Returns:
-                exp(x) - 1
+        Returns:
+            exp(x) - 1
         
         """
         ...
     @typing.overload
     @staticmethod
-    def expm1(t: _expm1_1__T) -> _expm1_1__T:
+    def expm1(x: _expm1_1__T) -> _expm1_1__T:
         """
-            Compute exp(x) - 1
+        Parameters:
+            x (T): number to compute shifted exponential
         
-            Parameters:
-                x (T): number to compute shifted exponential
+        Returns:
+            exp(x) - 1
         
-            Returns:
-                exp(x) - 1
-        
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -3035,32 +3058,32 @@ class FastMath:
     _floor_1__T = typing.TypeVar('_floor_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def floor(double: float) -> float:
+    def floor(x: float) -> float:
         """
-            Get the largest whole number smaller than x.
+        Get the largest whole number smaller than x.
         
-            Parameters:
-                x (double): number from which floor is requested
+        Parameters:
+            x (double): number from which floor is requested
         
-            Returns:
-                a double number f such that f is an integer f <= x < f + 1.0
+        Returns:
+            a double number f such that f is an integer f <= x < f + 1.0
         
         """
         ...
     @typing.overload
     @staticmethod
-    def floor(t: _floor_1__T) -> _floor_1__T:
+    def floor(x: _floor_1__T) -> _floor_1__T:
         """
-            Get the largest whole number smaller than x.
+        Get the largest whole number smaller than x.
         
-            Parameters:
-                x (T): number from which floor is requested
+        Parameters:
+            x (T): number from which floor is requested
         
-            Returns:
-                a double number f such that f is an integer f <= x < f + 1.0
+        Returns:
+            a double number f such that f is an integer f <= x < f + 1.0
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -3084,47 +3107,40 @@ class FastMath:
     @staticmethod
     def floorMod(int: int, int2: int) -> int:
         """
-            Finds r such that :code:`a = q b + r` with :code:`0 <= r < b` if :code:`b > 0` and :code:`b < r <= 0` if :code:`b < 0`.
+        Finds r such that a = q b + r with 0 <= r < b if b > 0 and b < r <= 0 if b < 0.
         
-            This methods returns the same value as integer modulo when a and b are same signs, but returns a different value when
-            they are opposite (i.e. q is negative).
+        This methods returns the same value as integer modulo when a and b are same signs, but returns a different value when they are opposite (i.e. q is negative).
         
-            Parameters:
-                a (long): dividend
-                b (int): divisor
+        Parameters:
+            a (long): dividend
+            b (int): divisor
         
-            Returns:
-                r such that :code:`a = q b + r` with :code:`0 <= r < b` if :code:`b > 0` and :code:`b < r <= 0` if :code:`b < 0`
+        Returns:
+            r such that a = q b + r with 0 <= r < b if b > 0 and b < r <= 0 if b < 0
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if b == 0
+        Raises:
+            MathRuntimeException: if b == 0
         
-            Since:
-                1.3
+        Since:
+            1.3
         
-            Also see:
+              - floorDiv
         
-                  - :meth:`~org.hipparchus.util.FastMath.floorDiv`
+        Finds r such that a = q b + r with 0 <= r < b if b > 0 and b < r <= 0 if b < 0.
         
+        This methods returns the same value as integer modulo when a and b are same signs, but returns a different value when they are opposite (i.e. q is negative).
         
-            Finds r such that :code:`a = q b + r` with :code:`0 <= r < b` if :code:`b > 0` and :code:`b < r <= 0` if :code:`b < 0`.
+        Parameters:
+            a (long): dividend
+            b (long): divisor
         
-            This methods returns the same value as integer modulo when a and b are same signs, but returns a different value when
-            they are opposite (i.e. q is negative).
+        Returns:
+            r such that a = q b + r with 0 <= r < b if b > 0 and b < r <= 0 if b < 0
         
-            Parameters:
-                a (long): dividend
-                b (long): divisor
+        Raises:
+            MathRuntimeException: if b == 0
         
-            Returns:
-                r such that :code:`a = q b + r` with :code:`0 <= r < b` if :code:`b > 0` and :code:`b < r <= 0` if :code:`b < 0`
-        
-            Raises:
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if b == 0
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.util.FastMath.floorDiv`
+              - floorDiv
         
         
         
@@ -3140,53 +3156,42 @@ class FastMath:
     @staticmethod
     def fma(double: float, double2: float, double3: float) -> float:
         """
-            Compute Fused-multiply-add operation a * b + c.
+        Compute Fused-multiply-add operation a * b + c.
         
-            This method was introduced in the regular :code:`Math` and :code:`StrictMath` methods with Java 9, and then added to
-            Hipparchus for consistency. However, a more general method was available in Hipparchus that also allow to repeat this
-            computation across several terms: :meth:`~org.hipparchus.util.MathArrays.linearCombination`. The linear combination
-            method should probably be preferred in most cases.
+        This method was introduced in the regular Math and StrictMath methods with Java 9, and then added to Hipparchus for consistency. However, a more general method was available in Hipparchus that also allow to repeat this computation across several terms: linearCombination. The linear combination method should probably be preferred in most cases.
         
-            Parameters:
-                a (double): first factor
-                b (double): second factor
-                c (double): additive term
+        Parameters:
+            a (double): first factor
+            b (double): second factor
+            c (double): additive term
         
-            Returns:
-                a * b + c, using extended precision in the multiplication
+        Returns:
+            a * b + c, using extended precision in the multiplication
         
-            Since:
-                1.3
+        Since:
+            1.3
         
-            Also see:
+              - linearCombination
+              - linearCombination
+              - linearCombination
+              - linearCombination
         
-                  - :meth:`~org.hipparchus.util.MathArrays.linearCombination`
-                  - :meth:`~org.hipparchus.util.MathArrays.linearCombination`
-                  - :meth:`~org.hipparchus.util.MathArrays.linearCombination`
-                  - :meth:`~org.hipparchus.util.MathArrays.linearCombination`
+        Compute Fused-multiply-add operation a * b + c.
         
+        This method was introduced in the regular Math and StrictMath methods with Java 9, and then added to Hipparchus for consistency. However, a more general method was available in Hipparchus that also allow to repeat this computation across several terms: linearCombination. The linear combination method should probably be preferred in most cases.
         
-            Compute Fused-multiply-add operation a * b + c.
+        Parameters:
+            a (float): first factor
+            b (float): second factor
+            c (float): additive term
         
-            This method was introduced in the regular :code:`Math` and :code:`StrictMath` methods with Java 9, and then added to
-            Hipparchus for consistency. However, a more general method was available in Hipparchus that also allow to repeat this
-            computation across several terms: :meth:`~org.hipparchus.util.MathArrays.linearCombination`. The linear combination
-            method should probably be preferred in most cases.
+        Returns:
+            a * b + c, using extended precision in the multiplication
         
-            Parameters:
-                a (float): first factor
-                b (float): second factor
-                c (float): additive term
-        
-            Returns:
-                a * b + c, using extended precision in the multiplication
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.util.MathArrays.linearCombination`
-                  - :meth:`~org.hipparchus.util.MathArrays.linearCombination`
-                  - :meth:`~org.hipparchus.util.MathArrays.linearCombination`
-                  - :meth:`~org.hipparchus.util.MathArrays.linearCombination`
+              - linearCombination
+              - linearCombination
+              - linearCombination
+              - linearCombination
         
         
         
@@ -3199,25 +3204,25 @@ class FastMath:
     @staticmethod
     def getExponent(double: float) -> int:
         """
-            Return the exponent of a double number, removing the bias.
+        Return the exponent of a double number, removing the bias.
         
-            For double numbers of the form 2 :sup:`x` , the unbiased exponent is exactly x.
+        For double numbers of the form 2 :sup:`x` , the unbiased exponent is exactly x.
         
-            Parameters:
-                d (double): number from which exponent is requested
+        Parameters:
+            d (double): number from which exponent is requested
         
-            Returns:
-                exponent for d in IEEE754 representation, without bias
+        Returns:
+            exponent for d in IEEE754 representation, without bias
         
-            Return the exponent of a float number, removing the bias.
+        Return the exponent of a float number, removing the bias.
         
-            For float numbers of the form 2 :sup:`x` , the unbiased exponent is exactly x.
+        For float numbers of the form 2 :sup:`x` , the unbiased exponent is exactly x.
         
-            Parameters:
-                f (float): number from which exponent is requested
+        Parameters:
+            f (float): number from which exponent is requested
         
-            Returns:
-                exponent for d in IEEE754 representation, without bias
+        Returns:
+            exponent for d in IEEE754 representation, without bias
         
         
         """
@@ -3228,48 +3233,46 @@ class FastMath:
     _hypot_1__T = typing.TypeVar('_hypot_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def hypot(double: float, double2: float) -> float:
+    def hypot(x: float, y: float) -> float:
         """
-            Returns the hypotenuse of a triangle with sides :code:`x` and :code:`y` - sqrt(*x* :sup:`2`  +*y* :sup:`2` )
+        Returns the hypotenuse of a triangle with sides x and y - sqrt(x :sup:`2`  +y :sup:`2` )
+        
+        avoiding intermediate overflow or underflow.
+        
+          - If either argument is infinite, then the result is positive infinity.
+          - else, if either argument is NaN then the result is NaN.
         
         
-            avoiding intermediate overflow or underflow.
+        Parameters:
+            x (double): a value
+            y (double): a value
         
-              - If either argument is infinite, then the result is positive infinity.
-              - else, if either argument is NaN then the result is NaN.
-        
-        
-            Parameters:
-                x (double): a value
-                y (double): a value
-        
-            Returns:
-                sqrt(*x* :sup:`2`  +*y* :sup:`2` )
+        Returns:
+            sqrt(x :sup:`2`  +y :sup:`2` )
         
         """
         ...
     @typing.overload
     @staticmethod
-    def hypot(t: _hypot_1__T, t2: _hypot_1__T) -> _hypot_1__T:
+    def hypot(x: _hypot_1__T, y: _hypot_1__T) -> _hypot_1__T:
         """
-            Returns the hypotenuse of a triangle with sides :code:`x` and :code:`y` - sqrt(*x* :sup:`2`  +*y* :sup:`2` )
+        Returns the hypotenuse of a triangle with sides x and y - sqrt(x :sup:`2`  +y :sup:`2` )
+        
+        avoiding intermediate overflow or underflow.
+        
+          - If either argument is infinite, then the result is positive infinity.
+          - else, if either argument is NaN then the result is NaN.
         
         
-            avoiding intermediate overflow or underflow.
+        Parameters:
+            x (T): a value
+            y (T): a value
         
-              - If either argument is infinite, then the result is positive infinity.
-              - else, if either argument is NaN then the result is NaN.
+        Returns:
+            sqrt(x :sup:`2`  +y :sup:`2` )
         
-        
-            Parameters:
-                x (T): a value
-                y (T): a value
-        
-            Returns:
-                sqrt(*x* :sup:`2`  +*y* :sup:`2` )
-        
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -3285,24 +3288,22 @@ class FastMath:
     @staticmethod
     def log(double: float) -> float:
         """
-            Natural logarithm.
+        Natural logarithm.
         
-            Parameters:
-                x (double): a double
+        Parameters:
+            x (double): a double
         
-            Returns:
-                log(x)
+        Returns:
+            log(x)
         
-            Computes the ` logarithm <http://mathworld.wolfram.com/Logarithm.html>` in a given base. Returns :code:`NaN` if either
-            argument is negative. If :code:`base` is 0 and :code:`x` is positive, 0 is returned. If :code:`base` is positive and
-            :code:`x` is 0, :code:`Double.NEGATIVE_INFINITY` is returned. If both arguments are 0, the result is :code:`NaN`.
+        Computes the ` logarithm <http://mathworld.wolfram.com/Logarithm.html>` in a given base. Returns NaN if either argument is negative. If base is 0 and x is positive, 0 is returned. If base is positive and x is 0, NEGATIVE_INFINITY is returned. If both arguments are 0, the result is NaN.
         
-            Parameters:
-                base (double): Base of the logarithm, must be greater than 0.
-                x (double): Argument, must be greater than 0.
+        Parameters:
+            base (double): Base of the logarithm, must be greater than 0.
+            x (double): Argument, must be greater than 0.
         
-            Returns:
-                the value of the logarithm, i.e. the number :code:`y` such that :code:`base :sup:`y` = x`.
+        Returns:
+            the value of the logarithm, i.e. the number y such that y` = x`.
         
         """
         ...
@@ -3311,18 +3312,18 @@ class FastMath:
     def log(double: float, double2: float) -> float: ...
     @typing.overload
     @staticmethod
-    def log(t: _log_2__T) -> _log_2__T:
+    def log(x: _log_2__T) -> _log_2__T:
         """
-            Natural logarithm.
+        Natural logarithm.
         
-            Parameters:
-                x (T): a double
+        Parameters:
+            x (T): a double
         
-            Returns:
-                log(x)
+        Returns:
+            log(x)
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -3330,32 +3331,32 @@ class FastMath:
     _log10_1__T = typing.TypeVar('_log10_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def log10(double: float) -> float:
+    def log10(x: float) -> float:
         """
-            Compute the base 10 logarithm.
+        Compute the base 10 logarithm.
         
-            Parameters:
-                x (double): a number
+        Parameters:
+            x (double): a number
         
-            Returns:
-                log10(x)
+        Returns:
+            log10(x)
         
         """
         ...
     @typing.overload
     @staticmethod
-    def log10(t: _log10_1__T) -> _log10_1__T:
+    def log10(x: _log10_1__T) -> _log10_1__T:
         """
-            Compute the base 10 logarithm.
+        Compute the base 10 logarithm.
         
-            Parameters:
-                x (T): a number
+        Parameters:
+            x (T): a number
         
-            Returns:
-                log10(x)
+        Returns:
+            log10(x)
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -3363,32 +3364,28 @@ class FastMath:
     _log1p_1__T = typing.TypeVar('_log1p_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def log1p(double: float) -> float:
+    def log1p(x: float) -> float:
         """
-            Computes log(1 + x).
+        Parameters:
+            x (double): Number.
         
-            Parameters:
-                x (double): Number.
-        
-            Returns:
-                :code:`log(1 + x)`.
+        Returns:
+            log(1 + x).
         
         """
         ...
     @typing.overload
     @staticmethod
-    def log1p(t: _log1p_1__T) -> _log1p_1__T:
+    def log1p(x: _log1p_1__T) -> _log1p_1__T:
         """
-            Computes log(1 + x).
+        Parameters:
+            x (T): Number.
         
-            Parameters:
-                x (T): Number.
+        Returns:
+            log(1 + x).
         
-            Returns:
-                :code:`log(1 + x)`.
-        
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -3399,41 +3396,41 @@ class FastMath:
     @staticmethod
     def max(double: float, double2: float) -> float:
         """
-            Compute the maximum of two values
+        Compute the maximum of two values
         
-            Parameters:
-                a (int): first value
-                b (int): second value
+        Parameters:
+            a (int): first value
+            b (int): second value
         
-            Returns:
-                b if a is lesser or equal to b, a otherwise
+        Returns:
+            b if a is lesser or equal to b, a otherwise
         
-            Compute the maximum of two values
+        Compute the maximum of two values
         
-            Parameters:
-                a (long): first value
-                b (long): second value
+        Parameters:
+            a (long): first value
+            b (long): second value
         
-            Returns:
-                b if a is lesser or equal to b, a otherwise
+        Returns:
+            b if a is lesser or equal to b, a otherwise
         
-            Compute the maximum of two values
+        Compute the maximum of two values
         
-            Parameters:
-                a (float): first value
-                b (float): second value
+        Parameters:
+            a (float): first value
+            b (float): second value
         
-            Returns:
-                b if a is lesser or equal to b, a otherwise
+        Returns:
+            b if a is lesser or equal to b, a otherwise
         
-            Compute the maximum of two values
+        Compute the maximum of two values
         
-            Parameters:
-                a (double): first value
-                b (double): second value
+        Parameters:
+            a (double): first value
+            b (double): second value
         
-            Returns:
-                b if a is lesser or equal to b, a otherwise
+        Returns:
+            b if a is lesser or equal to b, a otherwise
         
         """
         ...
@@ -3450,29 +3447,29 @@ class FastMath:
     @staticmethod
     def max(t: _max_4__T, double: float) -> _max_4__T:
         """
-            Compute the maximum of two values
+        Compute the maximum of two values
         
-            Parameters:
-                a (T): first value
-                b (T): second value
+        Parameters:
+            a (T): first value
+            b (T): second value
         
-            Returns:
-                b if a is lesser or equal to b, a otherwise
+        Returns:
+            b if a is lesser or equal to b, a otherwise
         
-            Since:
-                1.3
+        Since:
+            1.3
         
-            Compute the maximum of two values
+        Compute the maximum of two values
         
-            Parameters:
-                a (T): first value
-                b (double): second value
+        Parameters:
+            a (T): first value
+            b (double): second value
         
-            Returns:
-                b if a is lesser or equal to b, a otherwise
+        Returns:
+            b if a is lesser or equal to b, a otherwise
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -3486,41 +3483,41 @@ class FastMath:
     @staticmethod
     def min(double: float, double2: float) -> float:
         """
-            Compute the minimum of two values
+        Compute the minimum of two values
         
-            Parameters:
-                a (int): first value
-                b (int): second value
+        Parameters:
+            a (int): first value
+            b (int): second value
         
-            Returns:
-                a if a is lesser or equal to b, b otherwise
+        Returns:
+            a if a is lesser or equal to b, b otherwise
         
-            Compute the minimum of two values
+        Compute the minimum of two values
         
-            Parameters:
-                a (long): first value
-                b (long): second value
+        Parameters:
+            a (long): first value
+            b (long): second value
         
-            Returns:
-                a if a is lesser or equal to b, b otherwise
+        Returns:
+            a if a is lesser or equal to b, b otherwise
         
-            Compute the minimum of two values
+        Compute the minimum of two values
         
-            Parameters:
-                a (float): first value
-                b (float): second value
+        Parameters:
+            a (float): first value
+            b (float): second value
         
-            Returns:
-                a if a is lesser or equal to b, b otherwise
+        Returns:
+            a if a is lesser or equal to b, b otherwise
         
-            Compute the minimum of two values
+        Compute the minimum of two values
         
-            Parameters:
-                a (double): first value
-                b (double): second value
+        Parameters:
+            a (double): first value
+            b (double): second value
         
-            Returns:
-                a if a is lesser or equal to b, b otherwise
+        Returns:
+            a if a is lesser or equal to b, b otherwise
         
         """
         ...
@@ -3537,29 +3534,29 @@ class FastMath:
     @staticmethod
     def min(t: _min_4__T, double: float) -> _min_4__T:
         """
-            Compute the minimum of two values
+        Compute the minimum of two values
         
-            Parameters:
-                a (T): first value
-                b (T): second value
+        Parameters:
+            a (T): first value
+            b (T): second value
         
-            Returns:
-                a if a is lesser or equal to b, b otherwise
+        Returns:
+            a if a is lesser or equal to b, b otherwise
         
-            Since:
-                1.3
+        Since:
+            1.3
         
-            Compute the minimum of two values
+        Compute the minimum of two values
         
-            Parameters:
-                a (T): first value
-                b (double): second value
+        Parameters:
+            a (T): first value
+            b (double): second value
         
-            Returns:
-                a if a is lesser or equal to b, b otherwise
+        Returns:
+            a if a is lesser or equal to b, b otherwise
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -3571,44 +3568,44 @@ class FastMath:
     @staticmethod
     def multiplyExact(int: int, int2: int) -> int:
         """
-            Multiply two numbers, detecting overflows.
+        Multiply two numbers, detecting overflows.
         
-            Parameters:
-                a (int): first number to multiply
-                b (int): second number to multiply
+        Parameters:
+            a (int): first number to multiply
+            b (int): second number to multiply
         
-            Returns:
-                a*b if no overflows occur
+        Returns:
+            ab if no overflows occur
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if an overflow occurs
+        Raises:
+            MathRuntimeException: if an overflow occurs
         
-            Multiply two numbers, detecting overflows.
+        Multiply two numbers, detecting overflows.
         
-            Parameters:
-                a (long): first number to multiply
-                b (int): second number to multiply
+        Parameters:
+            a (long): first number to multiply
+            b (int): second number to multiply
         
-            Returns:
-                a*b if no overflows occur
+        Returns:
+            ab if no overflows occur
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if an overflow occurs
+        Raises:
+            MathRuntimeException: if an overflow occurs
         
-            Since:
-                1.3
+        Since:
+            1.3
         
-            Multiply two numbers, detecting overflows.
+        Multiply two numbers, detecting overflows.
         
-            Parameters:
-                a (long): first number to multiply
-                b (long): second number to multiply
+        Parameters:
+            a (long): first number to multiply
+            b (long): second number to multiply
         
-            Returns:
-                a*b if no overflows occur
+        Returns:
+            a*b if no overflows occur
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if an overflow occurs
+        Raises:
+            MathRuntimeException: if an overflow occurs
         
         
         """
@@ -3620,43 +3617,39 @@ class FastMath:
     @staticmethod
     def multiplyExact(long: int, long2: int) -> int: ...
     @staticmethod
-    def multiplyFull(int: int, int2: int) -> int:
+    def multiplyFull(a: int, b: int) -> int:
         """
-            Multiply two integers and give an exact result without overflow.
+        Multiply two integers and give an exact result without overflow.
         
-            Parameters:
-                a (int): first factor
-                b (int): second factor
+        Parameters:
+            a (int): first factor
+            b (int): second factor
         
-            Returns:
-                a * b exactly
+        Returns:
+            a * b exactly
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
         ...
     @staticmethod
-    def multiplyHigh(long: int, long2: int) -> int:
+    def multiplyHigh(a: int, b: int) -> int:
         """
-            Multiply two long integers and give the 64 most significant bits of the result.
+        Multiply two long integers and give the 64 most significant bits of the result.
         
-            Beware that as Java primitive long are always considered to be signed, there are some intermediate values :code:`a` and
-            :code:`b` for which :code:`a * b` exceeds :code:`Long.MAX_VALUE` but this method will still return 0l. This happens for
-            example for :code:`a = 2³¹` and :code:`b = 2³²` as :code:`a * b = 2⁶³ = Long.MAX_VALUE + 1`, so it exceeds the
-            max value for a long, but still fits in 64 bits, so this method correctly returns 0l in this case, but multiplication
-            result would be considered negative (and in fact equal to :code:`Long.MIN_VALUE`
+        Beware that as Java primitive long are always considered to be signed, there are some intermediate values a and b for which a * b exceeds MAX_VALUE but this method will still return 0l. This happens for example for a = 2³¹ and b = 2³² as MAX_VALUE + 1, so it exceeds the max value for a long, but still fits in 64 bits, so this method correctly returns 0l in this case, but multiplication result would be considered negative (and in fact equal to MIN_VALUE
         
-            Parameters:
-                a (long): first factor
-                b (long): second factor
+        Parameters:
+            a (long): first factor
+            b (long): second factor
         
-            Returns:
-                a * b / 2 :sup:`64`
+        Returns:
+            a * b / 2 :sup:`64`
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -3665,27 +3658,27 @@ class FastMath:
     @staticmethod
     def negateExact(int: int) -> int:
         """
-            Negates the argument.
+        Negates the argument.
         
-            Parameters:
-                x (int): number from which opposite value is requested
+        Parameters:
+            x (int): number from which opposite value is requested
         
-            Returns:
-                -x, or throws an exception for :code:`Integer.MIN_VALUE`
+        Returns:
+            -x, or throws an exception for MIN_VALUE
         
-            Since:
-                2.0
+        Since:
+            2.0
         
-            Negates the argument.
+        Negates the argument.
         
-            Parameters:
-                x (long): number from which opposite value is requested
+        Parameters:
+            x (long): number from which opposite value is requested
         
-            Returns:
-                -x, or throws an exception for :code:`Long.MIN_VALUE`
+        Returns:
+            -x, or throws an exception for MIN_VALUE
         
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """
@@ -3697,61 +3690,57 @@ class FastMath:
     @staticmethod
     def nextAfter(double: float, double2: float) -> float:
         """
-            Get the next machine representable number after a number, moving in the direction of another number.
+        Get the next machine representable number after a number, moving in the direction of another number.
         
-            The ordering is as follows (increasing):
+        The ordering is as follows (increasing):
         
-              - -INFINITY
-              - -MAX_VALUE
-              - -MIN_VALUE
-              - -0.0
-              - +0.0
-              - +MIN_VALUE
-              - +MAX_VALUE
-              - +INFINITY
+          - -INFINITY
+          - -MAX_VALUE
+          - -MIN_VALUE
+          - -0.0
+          - +0.0
+          - +MIN_VALUE
+          - +MAX_VALUE
+          - +INFINITY
         
+        If arguments compare equal, then the second argument is returned.
         
-            If arguments compare equal, then the second argument is returned.
+        If direction is greater than d, the smallest machine representable number strictly greater than d is returned; if less, then the largest representable number strictly less than d is returned.
         
-            If :code:`direction` is greater than :code:`d`, the smallest machine representable number strictly greater than
-            :code:`d` is returned; if less, then the largest representable number strictly less than :code:`d` is returned.
+        If d is infinite and direction does not bring it back to finite numbers, it is returned unchanged.
         
-            If :code:`d` is infinite and direction does not bring it back to finite numbers, it is returned unchanged.
+        Parameters:
+            d (double): base number
+            direction (double): (the only important thing is whether direction is greater or smaller than d)
         
-            Parameters:
-                d (double): base number
-                direction (double): (the only important thing is whether :code:`direction` is greater or smaller than :code:`d`)
+        Returns:
+            the next machine representable number in the specified direction
         
-            Returns:
-                the next machine representable number in the specified direction
+        Get the next machine representable number after a number, moving in the direction of another number.
         
-            Get the next machine representable number after a number, moving in the direction of another number.
+        * The ordering is as follows (increasing):
         
-            * The ordering is as follows (increasing):
+          - -INFINITY
+          - -MAX_VALUE
+          - -MIN_VALUE
+          - -0.0
+          - +0.0
+          - +MIN_VALUE
+          - +MAX_VALUE
+          - +INFINITY
         
-              - -INFINITY
-              - -MAX_VALUE
-              - -MIN_VALUE
-              - -0.0
-              - +0.0
-              - +MIN_VALUE
-              - +MAX_VALUE
-              - +INFINITY
+        If arguments compare equal, then the second argument is returned.
         
+        If direction is greater than f, the smallest machine representable number strictly greater than f is returned; if less, then the largest representable number strictly less than f is returned.
         
-            If arguments compare equal, then the second argument is returned.
+        If f is infinite and direction does not bring it back to finite numbers, it is returned unchanged.
         
-            If :code:`direction` is greater than :code:`f`, the smallest machine representable number strictly greater than
-            :code:`f` is returned; if less, then the largest representable number strictly less than :code:`f` is returned.
+        Parameters:
+            f (float): base number
+            direction (double): (the only important thing is whether direction is greater or smaller than f)
         
-            If :code:`f` is infinite and direction does not bring it back to finite numbers, it is returned unchanged.
-        
-            Parameters:
-                f (float): base number
-                direction (double): (the only important thing is whether :code:`direction` is greater or smaller than :code:`f`)
-        
-            Returns:
-                the next machine representable number in the specified direction
+        Returns:
+            the next machine representable number in the specified direction
         
         
         """
@@ -3763,21 +3752,21 @@ class FastMath:
     @staticmethod
     def nextDown(double: float) -> float:
         """
-            Compute next number towards negative infinity.
+        Compute next number towards negative infinity.
         
-            Parameters:
-                a (double): number to which neighbor should be computed
+        Parameters:
+            a (double): number to which neighbor should be computed
         
-            Returns:
-                neighbor of a towards negative infinity
+        Returns:
+            neighbor of a towards negative infinity
         
-            Compute next number towards negative infinity.
+        Compute next number towards negative infinity.
         
-            Parameters:
-                a (float): number to which neighbor should be computed
+        Parameters:
+            a (float): number to which neighbor should be computed
         
-            Returns:
-                neighbor of a towards negative infinity
+        Returns:
+            neighbor of a towards negative infinity
         
         
         """
@@ -3789,21 +3778,21 @@ class FastMath:
     @staticmethod
     def nextUp(double: float) -> float:
         """
-            Compute next number towards positive infinity.
+        Compute next number towards positive infinity.
         
-            Parameters:
-                a (double): number to which neighbor should be computed
+        Parameters:
+            a (double): number to which neighbor should be computed
         
-            Returns:
-                neighbor of a towards positive infinity
+        Returns:
+            neighbor of a towards positive infinity
         
-            Compute next number towards positive infinity.
+        Compute next number towards positive infinity.
         
-            Parameters:
-                a (float): number to which neighbor should be computed
+        Parameters:
+            a (float): number to which neighbor should be computed
         
-            Returns:
-                neighbor of a towards positive infinity
+        Returns:
+            neighbor of a towards positive infinity
         
         
         """
@@ -3813,18 +3802,18 @@ class FastMath:
     def nextUp(float: float) -> float: ...
     _norm__T = typing.TypeVar('_norm__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
-    def norm(t: _norm__T) -> float:
+    def norm(x: _norm__T) -> float:
         """
-            Norm.
+        Norm.
         
-            Parameters:
-                x (T): number from which norm is requested
+        Parameters:
+            x (T): number from which norm is requested
         
-            Returns:
-                norm(x)
+        Returns:
+            norm(x)
         
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """
@@ -3836,32 +3825,32 @@ class FastMath:
     @staticmethod
     def pow(double: float, double2: float) -> float:
         """
-            Power function. Compute x^y.
+        Power function. Compute x^y.
         
-            Parameters:
-                x (double): a double
-                y (double): a double
+        Parameters:
+            x (double): a double
+            y (double): a double
         
-            Returns:
-                double
+        Returns:
+            double
         
-            Raise a double to an int power.
+        Raise a double to an int power.
         
-            Parameters:
-                d (double): Number to raise.
-                e (int): Exponent.
+        Parameters:
+            d (double): Number to raise.
+            e (int): Exponent.
         
-            Returns:
-                d :sup:`e`
+        Returns:
+            d :sup:`e`
         
-            Raise a double to a long power.
+        Raise a double to a long power.
         
-            Parameters:
-                d (double): Number to raise.
-                e (long): Exponent.
+        Parameters:
+            d (double): Number to raise.
+            e (long): Exponent.
         
-            Returns:
-                d :sup:`e`
+        Returns:
+            d :sup:`e`
         
         """
         ...
@@ -3875,41 +3864,41 @@ class FastMath:
     @staticmethod
     def pow(t: _pow_3__T, double: float) -> _pow_3__T:
         """
-            Power function. Compute x :sup:`y` .
+        Power function. Compute x :sup:`y` .
         
-            Parameters:
-                x (T): a double
-                y (T): a double
+        Parameters:
+            x (T): a double
+            y (T): a double
         
-            Returns:
-                x :sup:`y`
+        Returns:
+            x :sup:`y`
         
-            Since:
-                1.3
+        Since:
+            1.3
         
-            Power function. Compute x :sup:`y` .
+        Power function. Compute x :sup:`y` .
         
-            Parameters:
-                x (T): a double
-                y (double): a double
+        Parameters:
+            x (T): a double
+            y (double): a double
         
-            Returns:
-                x :sup:`y`
+        Returns:
+            x :sup:`y`
         
-            Since:
-                1.7
+        Since:
+            1.7
         
-            Raise a double to an int power.
+        Raise a double to an int power.
         
-            Parameters:
-                d (T): Number to raise.
-                e (int): Exponent.
+        Parameters:
+            d (T): Number to raise.
+            e (int): Exponent.
         
-            Returns:
-                d :sup:`e`
+        Returns:
+            d :sup:`e`
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -3923,13 +3912,12 @@ class FastMath:
     @staticmethod
     def random() -> float:
         """
-            Returns a pseudo-random number between 0.0 and 1.0.
+        Returns a pseudo-random number between 0.0 and 1.0.
         
-            **Note:** this implementation currently delegates to
-            :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Math.random`
+        Note: this implementation currently delegates to random
         
-            Returns:
-                a random number between 0.0 and 1.0
+        Returns:
+            a random number between 0.0 and 1.0
         
         
         """
@@ -3937,32 +3925,32 @@ class FastMath:
     _rint_1__T = typing.TypeVar('_rint_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def rint(double: float) -> float:
+    def rint(x: float) -> float:
         """
-            Get the whole number that is the nearest to x, or the even one if x is exactly half way between two integers.
+        Get the whole number that is the nearest to x, or the even one if x is exactly half way between two integers.
         
-            Parameters:
-                x (double): number from which nearest whole number is requested
+        Parameters:
+            x (double): number from which nearest whole number is requested
         
-            Returns:
-                a double number r such that r is an integer r - 0.5 <= x <= r + 0.5
+        Returns:
+            a double number r such that r is an integer r - 0.5 <= x <= r + 0.5
         
         """
         ...
     @typing.overload
     @staticmethod
-    def rint(t: _rint_1__T) -> _rint_1__T:
+    def rint(x: _rint_1__T) -> _rint_1__T:
         """
-            Get the whole number that is the nearest to x, or the even one if x is exactly half way between two integers.
+        Get the whole number that is the nearest to x, or the even one if x is exactly half way between two integers.
         
-            Parameters:
-                x (T): number from which nearest whole number is requested
+        Parameters:
+            x (T): number from which nearest whole number is requested
         
-            Returns:
-                a double number r such that r is an integer r - 0.5 <= x <= r + 0.5
+        Returns:
+            a double number r such that r is an integer r - 0.5 <= x <= r + 0.5
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -3972,21 +3960,21 @@ class FastMath:
     @staticmethod
     def round(float: float) -> int:
         """
-            Get the closest long to x.
+        Get the closest long to x.
         
-            Parameters:
-                x (double): number from which closest long is requested
+        Parameters:
+            x (double): number from which closest long is requested
         
-            Returns:
-                closest long to x
+        Returns:
+            closest long to x
         
-            Get the closest int to x.
+        Get the closest int to x.
         
-            Parameters:
-                x (float): number from which closest int is requested
+        Parameters:
+            x (float): number from which closest int is requested
         
-            Returns:
-                closest int to x
+        Returns:
+            closest int to x
         
         """
         ...
@@ -3995,18 +3983,18 @@ class FastMath:
     def round(double: float) -> int: ...
     @typing.overload
     @staticmethod
-    def round(t: _round_2__T) -> int:
+    def round(x: _round_2__T) -> int:
         """
-            Get the closest long to x.
+        Get the closest long to x.
         
-            Parameters:
-                x (T): number from which closest long is requested
+        Parameters:
+            x (T): number from which closest long is requested
         
-            Returns:
-                closest long to x
+        Returns:
+            closest long to x
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -4016,23 +4004,23 @@ class FastMath:
     @staticmethod
     def scalb(double: float, int: int) -> float:
         """
-            Multiply a double number by a power of 2.
+        Multiply a double number by a power of 2.
         
-            Parameters:
-                d (double): number to multiply
-                n (int): power of 2
+        Parameters:
+            d (double): number to multiply
+            n (int): power of 2
         
-            Returns:
-                d × 2 :sup:`n`
+        Returns:
+            d × 2 :sup:`n`
         
-            Multiply a float number by a power of 2.
+        Multiply a float number by a power of 2.
         
-            Parameters:
-                f (float): number to multiply
-                n (int): power of 2
+        Parameters:
+            f (float): number to multiply
+            n (int): power of 2
         
-            Returns:
-                f × 2 :sup:`n`
+        Returns:
+            f × 2 :sup:`n`
         
         """
         ...
@@ -4041,38 +4029,37 @@ class FastMath:
     def scalb(float: float, int: int) -> float: ...
     @typing.overload
     @staticmethod
-    def scalb(t: _scalb_2__T, int: int) -> _scalb_2__T:
+    def scalb(d: _scalb_2__T, n: int) -> _scalb_2__T:
         """
-            Multiply a double number by a power of 2.
+        Multiply a double number by a power of 2.
         
-            Parameters:
-                d (T): number to multiply
-                n (int): power of 2
+        Parameters:
+            d (T): number to multiply
+            n (int): power of 2
         
-            Returns:
-                d × 2 :sup:`n`
+        Returns:
+            d × 2 :sup:`n`
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
         ...
     _sign__T = typing.TypeVar('_sign__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
-    def sign(t: _sign__T) -> _sign__T:
+    def sign(a: _sign__T) -> _sign__T:
         """
-            Compute the sign of a number. The sign is -1 for negative numbers, +1 for positive numbers and 0 otherwise, for Complex
-            number, it is extended on the unit circle (equivalent to z/|z|, with special handling for 0 and NaN)
+        Compute the sign of a number. The sign is -1 for negative numbers, +1 for positive numbers and 0 otherwise, for Complex number, it is extended on the unit circle (equivalent to z/|z|, with special handling for 0 and NaN)
         
-            Parameters:
-                a (T): number on which evaluation is done
+        Parameters:
+            a (T): number on which evaluation is done
         
-            Returns:
-                -1.0, -0.0, +0.0, +1.0 or NaN depending on sign of a
+        Returns:
+            -1.0, -0.0, +0.0, +1.0 or NaN depending on sign of a
         
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """
@@ -4081,21 +4068,21 @@ class FastMath:
     @staticmethod
     def signum(double: float) -> float:
         """
-            Compute the signum of a number. The signum is -1 for negative numbers, +1 for positive numbers and 0 otherwise
+        Compute the signum of a number. The signum is -1 for negative numbers, +1 for positive numbers and 0 otherwise
         
-            Parameters:
-                a (double): number on which evaluation is done
+        Parameters:
+            a (double): number on which evaluation is done
         
-            Returns:
-                -1.0, -0.0, +0.0, +1.0 or NaN depending on sign of a
+        Returns:
+            -1.0, -0.0, +0.0, +1.0 or NaN depending on sign of a
         
-            Compute the signum of a number. The signum is -1 for negative numbers, +1 for positive numbers and 0 otherwise
+        Compute the signum of a number. The signum is -1 for negative numbers, +1 for positive numbers and 0 otherwise
         
-            Parameters:
-                a (float): number on which evaluation is done
+        Parameters:
+            a (float): number on which evaluation is done
         
-            Returns:
-                -1.0, -0.0, +0.0, +1.0 or NaN depending on sign of a
+        Returns:
+            -1.0, -0.0, +0.0, +1.0 or NaN depending on sign of a
         
         
         """
@@ -4106,32 +4093,32 @@ class FastMath:
     _sin_1__T = typing.TypeVar('_sin_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def sin(double: float) -> float:
+    def sin(x: float) -> float:
         """
-            Sine function.
+        Sine function.
         
-            Parameters:
-                x (double): Argument.
+        Parameters:
+            x (double): Argument.
         
-            Returns:
-                sin(x)
+        Returns:
+            sin(x)
         
         """
         ...
     @typing.overload
     @staticmethod
-    def sin(t: _sin_1__T) -> _sin_1__T:
+    def sin(x: _sin_1__T) -> _sin_1__T:
         """
-            Sine function.
+        Sine function.
         
-            Parameters:
-                x (T): Argument.
+        Parameters:
+            x (T): Argument.
         
-            Returns:
-                sin(x)
+        Returns:
+            sin(x)
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -4139,65 +4126,65 @@ class FastMath:
     _sinCos_0__T = typing.TypeVar('_sinCos_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def sinCos(t: _sinCos_0__T) -> 'FieldSinCos'[_sinCos_0__T]:
+    def sinCos(x: _sinCos_0__T) -> 'FieldSinCos'[_sinCos_0__T]:
         """
-            Combined Sine and Cosine function.
+        Combined Sine and Cosine function.
         
-            Parameters:
-                x (T): Argument.
+        Parameters:
+            x (T): Argument.
         
-            Returns:
-                [sin(x), cos(x)]
+        Returns:
+            [sin(x), cos(x)]
         
-            Since:
-                1.4
+        Since:
+            1.4
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def sinCos(double: float) -> 'SinCos':
+    def sinCos(x: float) -> 'SinCos':
         """
-            Combined Sine and Cosine function.
+        Combined Sine and Cosine function.
         
-            Parameters:
-                x (double): Argument.
+        Parameters:
+            x (double): Argument.
         
-            Returns:
-                [sin(x), cos(x)]
+        Returns:
+            [sin(x), cos(x)]
         
         """
         ...
     _sinh_1__T = typing.TypeVar('_sinh_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def sinh(double: float) -> float:
+    def sinh(x: float) -> float:
         """
-            Compute the hyperbolic sine of a number.
+        Compute the hyperbolic sine of a number.
         
-            Parameters:
-                x (double): number on which evaluation is done
+        Parameters:
+            x (double): number on which evaluation is done
         
-            Returns:
-                hyperbolic sine of x
+        Returns:
+            hyperbolic sine of x
         
         """
         ...
     @typing.overload
     @staticmethod
-    def sinh(t: _sinh_1__T) -> _sinh_1__T:
+    def sinh(x: _sinh_1__T) -> _sinh_1__T:
         """
-            Compute the hyperbolic sine of a number.
+        Compute the hyperbolic sine of a number.
         
-            Parameters:
-                x (T): number on which evaluation is done
+        Parameters:
+            x (T): number on which evaluation is done
         
-            Returns:
-                hyperbolic sine of x
+        Returns:
+            hyperbolic sine of x
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -4205,65 +4192,64 @@ class FastMath:
     _sinhCosh_0__T = typing.TypeVar('_sinhCosh_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def sinhCosh(t: _sinhCosh_0__T) -> 'FieldSinhCosh'[_sinhCosh_0__T]:
+    def sinhCosh(x: _sinhCosh_0__T) -> 'FieldSinhCosh'[_sinhCosh_0__T]:
         """
-            Combined hyperbolic sine and hyperbolic cosine function.
+        Combined hyperbolic sine and hyperbolic cosine function.
         
-            Parameters:
-                x (T): Argument.
+        Parameters:
+            x (T): Argument.
         
-            Returns:
-                [sinh(x), cosh(x)]
+        Returns:
+            [sinh(x), cosh(x)]
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def sinhCosh(double: float) -> 'SinhCosh':
+    def sinhCosh(x: float) -> 'SinhCosh':
         """
-            Combined hyperbolic sine and hyperbolic cosine function.
+        Combined hyperbolic sine and hyperbolic cosine function.
         
-            Parameters:
-                x (double): Argument.
+        Parameters:
+            x (double): Argument.
         
-            Returns:
-                [sinh(x), cosh(x)]
+        Returns:
+            [sinh(x), cosh(x)]
         
         """
         ...
     _sqrt_1__T = typing.TypeVar('_sqrt_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def sqrt(double: float) -> float:
+    def sqrt(a: float) -> float:
         """
-            Compute the square root of a number.
+        Compute the square root of a number.
         
-            **Note:** this implementation currently delegates to
-            :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Math.sqrt`
+        Note: this implementation currently delegates to sqrt
         
-            Parameters:
-                a (double): number on which evaluation is done
+        Parameters:
+            a (double): number on which evaluation is done
         
-            Returns:
-                square root of a
+        Returns:
+            square root of a
         
         """
         ...
     @typing.overload
     @staticmethod
-    def sqrt(t: _sqrt_1__T) -> _sqrt_1__T:
+    def sqrt(a: _sqrt_1__T) -> _sqrt_1__T:
         """
-            Compute the square root of a number.
+        Compute the square root of a number.
         
-            Parameters:
-                a (T): number on which evaluation is done
+        Parameters:
+            a (T): number on which evaluation is done
         
-            Returns:
-                square root of a
+        Returns:
+            square root of a
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -4272,29 +4258,29 @@ class FastMath:
     @staticmethod
     def subtractExact(int: int, int2: int) -> int:
         """
-            Subtract two numbers, detecting overflows.
+        Subtract two numbers, detecting overflows.
         
-            Parameters:
-                a (int): first number
-                b (int): second number to subtract from a
+        Parameters:
+            a (int): first number
+            b (int): second number to subtract from a
         
-            Returns:
-                a-b if no overflows occur
+        Returns:
+            a-b if no overflows occur
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if an overflow occurs
+        Raises:
+            MathRuntimeException: if an overflow occurs
         
-            Subtract two numbers, detecting overflows.
+        Subtract two numbers, detecting overflows.
         
-            Parameters:
-                a (long): first number
-                b (long): second number to subtract from a
+        Parameters:
+            a (long): first number
+            b (long): second number to subtract from a
         
-            Returns:
-                a-b if no overflows occur
+        Returns:
+            a-b if no overflows occur
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if an overflow occurs
+        Raises:
+            MathRuntimeException: if an overflow occurs
         
         
         """
@@ -4305,32 +4291,32 @@ class FastMath:
     _tan_1__T = typing.TypeVar('_tan_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def tan(double: float) -> float:
+    def tan(x: float) -> float:
         """
-            Tangent function.
+        Tangent function.
         
-            Parameters:
-                x (double): Argument.
+        Parameters:
+            x (double): Argument.
         
-            Returns:
-                tan(x)
+        Returns:
+            tan(x)
         
         """
         ...
     @typing.overload
     @staticmethod
-    def tan(t: _tan_1__T) -> _tan_1__T:
+    def tan(x: _tan_1__T) -> _tan_1__T:
         """
-            Tangent function.
+        Tangent function.
         
-            Parameters:
-                x (T): Argument.
+        Parameters:
+            x (T): Argument.
         
-            Returns:
-                tan(x)
+        Returns:
+            tan(x)
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -4338,32 +4324,32 @@ class FastMath:
     _tanh_1__T = typing.TypeVar('_tanh_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def tanh(double: float) -> float:
+    def tanh(x: float) -> float:
         """
-            Compute the hyperbolic tangent of a number.
+        Compute the hyperbolic tangent of a number.
         
-            Parameters:
-                x (double): number on which evaluation is done
+        Parameters:
+            x (double): number on which evaluation is done
         
-            Returns:
-                hyperbolic tangent of x
+        Returns:
+            hyperbolic tangent of x
         
         """
         ...
     @typing.overload
     @staticmethod
-    def tanh(t: _tanh_1__T) -> _tanh_1__T:
+    def tanh(x: _tanh_1__T) -> _tanh_1__T:
         """
-            Compute the hyperbolic tangent of a number.
+        Compute the hyperbolic tangent of a number.
         
-            Parameters:
-                x (T): number on which evaluation is done
+        Parameters:
+            x (T): number on which evaluation is done
         
-            Returns:
-                hyperbolic tangent of x
+        Returns:
+            hyperbolic tangent of x
         
-            Since:
-                1.3
+        Since:
+            1.3
         
         
         """
@@ -4371,61 +4357,76 @@ class FastMath:
     _toDegrees_1__T = typing.TypeVar('_toDegrees_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def toDegrees(double: float) -> float:
+    def toDegrees(x: float) -> float:
         """
-            Convert radians to degrees, with error of less than 0.5 ULP
+        Convert radians to degrees, with error of less than 0.5 ULP
         
-            Parameters:
-                x (double): angle in radians
+        Parameters:
+            x (double): angle in radians
         
-            Returns:
-                x converted into degrees
+        Returns:
+            x converted into degrees
         
         """
         ...
     @typing.overload
     @staticmethod
-    def toDegrees(t: _toDegrees_1__T) -> _toDegrees_1__T:
+    def toDegrees(x: _toDegrees_1__T) -> _toDegrees_1__T:
         """
-            Convert radians to degrees, with error of less than 0.5 ULP
+        Convert radians to degrees, with error of less than 0.5 ULP
         
-            Parameters:
-                x (T): angle in radians
+        Parameters:
+            x (T): angle in radians
         
-            Returns:
-                x converted into degrees
+        Returns:
+            x converted into degrees
         
         
         """
         ...
     @staticmethod
-    def toIntExact(long: int) -> int: ...
+    def toIntExact(n: int) -> int:
+        """
+        Convert a long to interger, detecting overflows
+        
+        Parameters:
+            n (long): number to convert to int
+        
+        Returns:
+            integer with same valie as n if no overflows occur
+        
+        Raises:
+            MathRuntimeException: if n cannot fit into an int
+        
+        
+        """
+        ...
     _toRadians_1__T = typing.TypeVar('_toRadians_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def toRadians(double: float) -> float:
+    def toRadians(x: float) -> float:
         """
-            Convert degrees to radians, with error of less than 0.5 ULP
+        Convert degrees to radians, with error of less than 0.5 ULP
         
-            Parameters:
-                x (double): angle in degrees
+        Parameters:
+            x (double): angle in degrees
         
-            Returns:
-                x converted into radians
+        Returns:
+            x converted into radians
         
         """
         ...
     @typing.overload
     @staticmethod
-    def toRadians(t: _toRadians_1__T) -> _toRadians_1__T:
+    def toRadians(x: _toRadians_1__T) -> _toRadians_1__T:
         """
-            Convert degrees to radians, with error of less than 0.5 ULP
+        Convert degrees to radians, with error of less than 0.5 ULP
         
-            Parameters:
-                x (T): angle in degrees
+        Parameters:
+            x (T): angle in degrees
         
-            Returns:
-                x converted into radians
+        Returns:
+            x converted into radians
         
         
         """
@@ -4435,21 +4436,19 @@ class FastMath:
     @staticmethod
     def ulp(double: float) -> float:
         """
-            Compute least significant bit (Unit in Last Position) for a number.
+        Parameters:
+            x (double): number from which ulp is requested
         
-            Parameters:
-                x (double): number from which ulp is requested
+        Returns:
+            ulp(x)
         
-            Returns:
-                ulp(x)
+        Compute least significant bit (Unit in Last Position) for a number.
         
-            Compute least significant bit (Unit in Last Position) for a number.
+        Parameters:
+            x (float): number from which ulp is requested
         
-            Parameters:
-                x (float): number from which ulp is requested
-        
-            Returns:
-                ulp(x)
+        Returns:
+            ulp(x)
         
         """
         ...
@@ -4458,42 +4457,36 @@ class FastMath:
     def ulp(float: float) -> float: ...
     @typing.overload
     @staticmethod
-    def ulp(t: _ulp_2__T) -> _ulp_2__T:
+    def ulp(x: _ulp_2__T) -> _ulp_2__T:
         """
-            Compute least significant bit (Unit in Last Position) for a number.
+        Parameters:
+            x (T): number from which ulp is requested
         
-            Parameters:
-                x (T): number from which ulp is requested
+        Returns:
+            ulp(x)
         
-            Returns:
-                ulp(x)
-        
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """
         ...
     @staticmethod
-    def unsignedMultiplyHigh(long: int, long2: int) -> int:
+    def unsignedMultiplyHigh(a: int, b: int) -> int:
         """
-            Multiply two long unsigned integers and give the 64 most significant bits of the unsigned result.
+        Multiply two long unsigned integers and give the 64 most significant bits of the unsigned result.
         
-            Beware that as Java primitive long are always considered to be signed, there are some intermediate values :code:`a` and
-            :code:`b` for which :code:`a * b` exceeds :code:`Long.MAX_VALUE` but this method will still return 0l. This happens for
-            example for :code:`a = 2³¹` and :code:`b = 2³²` as :code:`a * b = 2⁶³ = Long.MAX_VALUE + 1`, so it exceeds the
-            max value for a long, but still fits in 64 bits, so this method correctly returns 0l in this case, but multiplication
-            result would be considered negative (and in fact equal to :code:`Long.MIN_VALUE`
+        Beware that as Java primitive long are always considered to be signed, there are some intermediate values a and b for which a * b exceeds MAX_VALUE but this method will still return 0l. This happens for example for a = 2³¹ and b = 2³² as MAX_VALUE + 1, so it exceeds the max value for a long, but still fits in 64 bits, so this method correctly returns 0l in this case, but multiplication result would be considered negative (and in fact equal to MIN_VALUE
         
-            Parameters:
-                a (long): first factor
-                b (long): second factor
+        Parameters:
+            a (long): first factor
+            b (long): second factor
         
-            Returns:
-                a * b / 2 :sup:`64`
+        Returns:
+            a * b / 2 :sup:`64`
         
-            Since:
-                3.0
+        Since:
+            3.0
         
         
         """
@@ -4503,25 +4496,35 @@ _FieldBlendable__B = typing.TypeVar('_FieldBlendable__B')  # <B>
 _FieldBlendable__T = typing.TypeVar('_FieldBlendable__T', bound=org.hipparchus.FieldElement)  # <T>
 class FieldBlendable(typing.Generic[_FieldBlendable__B, _FieldBlendable__T]):
     """
-    public interfaceFieldBlendable<B,T extends :class:`~org.hipparchus.FieldElement`<T>>
+    Interface representing classes that can blend with other instances of themselves using a given blending value.
     
-        Interface representing classes that can blend with other instances of themselves using a given blending value.
-    
-        The blending value is commonly given from a
-        :class:`~org.hipparchus.analysis.polynomials.SmoothStepFactory.FieldSmoothStepFunction`.
+    The blending value is commonly given from a FieldSmoothStepFunction.
     """
-    def blendArithmeticallyWith(self, b: _FieldBlendable__B, t: _FieldBlendable__T) -> _FieldBlendable__B: ...
+    def blendArithmeticallyWith(self, other: _FieldBlendable__B, blendingValue: _FieldBlendable__T) -> _FieldBlendable__B:
+        """
+        Blend arithmetically this instance with another one.
+        
+        Parameters:
+            other (FieldBlendable): other instance to blend arithmetically with
+            blendingValue (FieldBlendable): value from smoothstep function B(x). It is expected to be between [0:1] and will throw an exception otherwise.
+        
+        Returns:
+            this * (1 - B(x)) + other * B(x)
+        
+        Raises:
+            MathIllegalArgumentException: if blending value is not within [0:1]
+        
+        
+        """
+        ...
 
 class FieldContinuedFraction:
     """
-    public abstract classFieldContinuedFraction extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Provides a generic means to evaluate continued fractions. Subclasses simply provided the a and b coefficients to evaluate the continued fraction.
     
-        Provides a generic means to evaluate continued fractions. Subclasses simply provided the a and b coefficients to
-        evaluate the continued fraction.
+    References:
     
-        References:
-    
-          - ` Continued Fraction <http://mathworld.wolfram.com/ContinuedFraction.html>`
+      - ` Continued Fraction <http://mathworld.wolfram.com/ContinuedFraction.html>`
     """
     _evaluate_0__T = typing.TypeVar('_evaluate_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _evaluate_1__T = typing.TypeVar('_evaluate_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -4536,81 +4539,113 @@ class FieldContinuedFraction:
     @typing.overload
     def evaluate(self, t: _evaluate_3__T, int: int) -> _evaluate_3__T: ...
     _getA__T = typing.TypeVar('_getA__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getA(self, int: int, t: _getA__T) -> _getA__T: ...
+    def getA(self, n: int, x: _getA__T) -> _getA__T:
+        """
+        Access the n-th a coefficient of the continued fraction. Since a can be a function of the evaluation point, x, that is passed in as well.
+        
+        Parameters:
+            n (int): the coefficient index to retrieve.
+            x (T): the evaluation point.
+        
+        Returns:
+            the n-th a coefficient.
+        
+        
+        """
+        ...
     _getB__T = typing.TypeVar('_getB__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getB(self, int: int, t: _getB__T) -> _getB__T: ...
+    def getB(self, n: int, x: _getB__T) -> _getB__T:
+        """
+        Access the n-th b coefficient of the continued fraction. Since b can be a function of the evaluation point, x, that is passed in as well.
+        
+        Parameters:
+            n (int): the coefficient index to retrieve.
+            x (T): the evaluation point.
+        
+        Returns:
+            the n-th b coefficient.
+        
+        
+        """
+        ...
 
 _FieldSinCos__T = typing.TypeVar('_FieldSinCos__T')  # <T>
 class FieldSinCos(typing.Generic[_FieldSinCos__T]):
     """
-    public classFieldSinCos<T> extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Holder for both sine and cosine values.
     
-        Holder for both sine and cosine values.
+    This class is a simple container, it does not provide any computational method.
     
-        This class is a simple container, it does not provide any computational method.
+    Since:
+        1.4
     
-        Since:
-            1.4
-    
-        Also see:
-    
-              - :meth:`~org.hipparchus.util.FastMath.sinCos`
+          - sinCos
     """
-    def __init__(self, t: _FieldSinCos__T, t2: _FieldSinCos__T): ...
+    def __init__(self, sin: _FieldSinCos__T, cos: _FieldSinCos__T):
+        """
+        Simple constructor.
+        
+        Parameters:
+            sin (FieldSinCos): value of the sine
+            cos (FieldSinCos): value of the cosine
+        
+        
+        """
+        ...
     def cos(self) -> _FieldSinCos__T:
         """
-            Get the value of the cosine.
+        Get the value of the cosine.
         
-            Returns:
-                value of the cosine
+        Returns:
+            value of the cosine
         
         
         """
         ...
     _difference__S = typing.TypeVar('_difference__S', bound=org.hipparchus.CalculusFieldElement)  # <S>
     @staticmethod
-    def difference(fieldSinCos: 'FieldSinCos'[_difference__S], fieldSinCos2: 'FieldSinCos'[_difference__S]) -> 'FieldSinCos'[_difference__S]:
+    def difference(scAlpha: 'FieldSinCos'[_difference__S], scBeta: 'FieldSinCos'[_difference__S]) -> 'FieldSinCos'[_difference__S]:
         """
-            Compute sine and cosine of angles difference.
+        Compute sine and cosine of angles difference.
         
-            Parameters:
-                scAlpha (:class:`~org.hipparchus.util.FieldSinCos`<S> scAlpha): \((\sin \alpha, \cos \alpha)\)
-                scBeta (:class:`~org.hipparchus.util.FieldSinCos`<S> scBeta): \((\sin \beta, \cos \beta)\)
+        Parameters:
+            scAlpha (FieldSinCos<S> scAlpha): \((\sin \alpha, \cos \alpha)\)
+            scBeta (FieldSinCos<S> scBeta): \((\sin \beta, \cos \beta)\)
         
-            Returns:
-                \((\sin \alpha+\beta, \cos \alpha-\beta)\)
+        Returns:
+            \((\sin \alpha+\beta, \cos \alpha-\beta)\)
         
-            Since:
-                1.8
+        Since:
+            1.8
         
         
         """
         ...
     def sin(self) -> _FieldSinCos__T:
         """
-            Get the value of the sine.
+        Get the value of the sine.
         
-            Returns:
-                value of the sine
+        Returns:
+            value of the sine
         
         
         """
         ...
     _sum__S = typing.TypeVar('_sum__S', bound=org.hipparchus.CalculusFieldElement)  # <S>
     @staticmethod
-    def sum(fieldSinCos: 'FieldSinCos'[_sum__S], fieldSinCos2: 'FieldSinCos'[_sum__S]) -> 'FieldSinCos'[_sum__S]:
+    def sum(scAlpha: 'FieldSinCos'[_sum__S], scBeta: 'FieldSinCos'[_sum__S]) -> 'FieldSinCos'[_sum__S]:
         """
-            Compute sine and cosine of angles sum.
+        Compute sine and cosine of angles sum.
         
-            Parameters:
-                scAlpha (:class:`~org.hipparchus.util.FieldSinCos`<S> scAlpha): \((\sin \alpha, \cos \alpha)\)
-                scBeta (:class:`~org.hipparchus.util.FieldSinCos`<S> scBeta): \((\sin \beta, \cos \beta)\)
+        Parameters:
+            scAlpha (FieldSinCos<S> scAlpha): \((\sin \alpha, \cos \alpha)\)
+            scBeta (FieldSinCos<S> scBeta): \((\sin \beta, \cos \beta)\)
         
-            Returns:
-                \((\sin \alpha+\beta, \cos \alpha+\beta)\)
+        Returns:
+            \((\sin \alpha+\beta, \cos \alpha+\beta)\)
         
-            Since:
-                1.8
+        Since:
+            1.8
         
         
         """
@@ -4619,68 +4654,74 @@ class FieldSinCos(typing.Generic[_FieldSinCos__T]):
 _FieldSinhCosh__T = typing.TypeVar('_FieldSinhCosh__T')  # <T>
 class FieldSinhCosh(typing.Generic[_FieldSinhCosh__T]):
     """
-    public classFieldSinhCosh<T> extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Holder for both hyperbolic sine and hyperbolic cosine values.
     
-        Holder for both hyperbolic sine and hyperbolic cosine values.
+    This class is a simple container, it does not provide any computational method.
     
-        This class is a simple container, it does not provide any computational method.
+    Since:
+        2.0
     
-        Since:
-            2.0
-    
-        Also see:
-    
-              - :meth:`~org.hipparchus.util.FastMath.sinhCosh`
+          - sinhCosh
     """
-    def __init__(self, t: _FieldSinhCosh__T, t2: _FieldSinhCosh__T): ...
+    def __init__(self, sinh: _FieldSinhCosh__T, cosh: _FieldSinhCosh__T):
+        """
+        Simple constructor.
+        
+        Parameters:
+            sinh (FieldSinhCosh): value of the hyperbolic sine
+            cosh (FieldSinhCosh): value of the hyperbolic cosine
+        
+        
+        """
+        ...
     def cosh(self) -> _FieldSinhCosh__T:
         """
-            Get the value of the hyperbolic cosine.
+        Get the value of the hyperbolic cosine.
         
-            Returns:
-                value of the hyperbolic cosine
+        Returns:
+            value of the hyperbolic cosine
         
         
         """
         ...
     _difference__S = typing.TypeVar('_difference__S', bound=org.hipparchus.CalculusFieldElement)  # <S>
     @staticmethod
-    def difference(fieldSinhCosh: 'FieldSinhCosh'[_difference__S], fieldSinhCosh2: 'FieldSinhCosh'[_difference__S]) -> 'FieldSinhCosh'[_difference__S]:
+    def difference(schAlpha: 'FieldSinhCosh'[_difference__S], schBeta: 'FieldSinhCosh'[_difference__S]) -> 'FieldSinhCosh'[_difference__S]:
         """
-            Compute hyperbolic sine and hyperbolic cosine of angles difference.
+        Compute hyperbolic sine and hyperbolic cosine of angles difference.
         
-            Parameters:
-                schAlpha (:class:`~org.hipparchus.util.FieldSinhCosh`<S> schAlpha): \((\sinh \alpha, \cosh \alpha)\)
-                schBeta (:class:`~org.hipparchus.util.FieldSinhCosh`<S> schBeta): \((\sinh \beta, \cosh \beta)\)
+        Parameters:
+            schAlpha (FieldSinhCosh<S> schAlpha): \((\sinh \alpha, \cosh \alpha)\)
+            schBeta (FieldSinhCosh<S> schBeta): \((\sinh \beta, \cosh \beta)\)
         
-            Returns:
-                \((\sinh \alpha+\beta, \cosh \alpha-\beta)\)
+        Returns:
+            \((\sinh \alpha+\beta, \cosh \alpha-\beta)\)
         
         
         """
         ...
     def sinh(self) -> _FieldSinhCosh__T:
         """
-            Get the value of the hyperbolic sine.
+        Get the value of the hyperbolic sine.
         
-            Returns:
-                value of the hyperbolic sine
+        Returns:
+            value of the hyperbolic sine
         
         
         """
         ...
     _sum__S = typing.TypeVar('_sum__S', bound=org.hipparchus.CalculusFieldElement)  # <S>
     @staticmethod
-    def sum(fieldSinhCosh: 'FieldSinhCosh'[_sum__S], fieldSinhCosh2: 'FieldSinhCosh'[_sum__S]) -> 'FieldSinhCosh'[_sum__S]:
+    def sum(schAlpha: 'FieldSinhCosh'[_sum__S], schBeta: 'FieldSinhCosh'[_sum__S]) -> 'FieldSinhCosh'[_sum__S]:
         """
-            Compute hyperbolic sine and hyperbolic cosine of angles sum.
+        Compute hyperbolic sine and hyperbolic cosine of angles sum.
         
-            Parameters:
-                schAlpha (:class:`~org.hipparchus.util.FieldSinhCosh`<S> schAlpha): \((\sinh \alpha, \cosh \alpha)\)
-                schBeta (:class:`~org.hipparchus.util.FieldSinhCosh`<S> schBeta): \((\sinh \beta, \cosh \beta)\)
+        Parameters:
+            schAlpha (FieldSinhCosh<S> schAlpha): \((\sinh \alpha, \cosh \alpha)\)
+            schBeta (FieldSinhCosh<S> schBeta): \((\sinh \beta, \cosh \beta)\)
         
-            Returns:
-                \((\sinh \alpha+\beta, \cosh \alpha+\beta)\)
+        Returns:
+            \((\sinh \alpha+\beta, \cosh \alpha+\beta)\)
         
         
         """
@@ -4689,112 +4730,337 @@ class FieldSinhCosh(typing.Generic[_FieldSinhCosh__T]):
 _FieldTuple__T = typing.TypeVar('_FieldTuple__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTuple(org.hipparchus.CalculusFieldElement['FieldTuple'[_FieldTuple__T]], typing.Generic[_FieldTuple__T]):
     """
-    public classFieldTuple<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.util.FieldTuple`<T>>
+    implements CalculusFieldElement<FieldTuple<T>>
     
-        This class allows to perform the same computation of all components of a Tuple at once.
+    This class allows to perform the same computation of all components of a Tuple at once.
     
-        Since:
-            1.2
+    Since:
+        1.2
     """
-    def __init__(self, *t: _FieldTuple__T): ...
-    def abs(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def acos(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def acosh(self) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def __init__(self, *x: _FieldTuple__T):
+        """
+        Creates a new instance from its components.
+        
+        Parameters:
+            x (FieldTuple...): components of the tuple
+        
+        
+        """
+        ...
+    def abs(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        absolute value.
+        
+        Specified by: abs in interface CalculusFieldElement
+        
+        Returns:
+            abs(this)
+        
+        
+        """
+        ...
+    def acos(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Arc cosine operation.
+        
+        Specified by: acos in interface CalculusFieldElement
+        
+        Returns:
+            acos(this)
+        
+        
+        """
+        ...
+    def acosh(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Inverse hyperbolic cosine operation.
+        
+        Specified by: acosh in interface CalculusFieldElement
+        
+        Returns:
+            acosh(this)
+        
+        
+        """
+        ...
     @typing.overload
     def add(self, double: float) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
     def add(self, fieldTuple: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def asin(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def asinh(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def atan(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def atan2(self, fieldTuple: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def atanh(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def cbrt(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def ceil(self) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def asin(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Arc sine operation.
+        
+        Specified by: asin in interface CalculusFieldElement
+        
+        Returns:
+            asin(this)
+        
+        
+        """
+        ...
+    def asinh(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Inverse hyperbolic sine operation.
+        
+        Specified by: asinh in interface CalculusFieldElement
+        
+        Returns:
+            asin(this)
+        
+        
+        """
+        ...
+    def atan(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Arc tangent operation.
+        
+        Specified by: atan in interface CalculusFieldElement
+        
+        Returns:
+            atan(this)
+        
+        
+        """
+        ...
+    def atan2(self, x: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Two arguments arc tangent operation.
+        
+        Beware of the order or arguments! As this is based on a two-arguments functions, in order to be consistent with arguments order, the instance is the first argument and the single provided argument is the second argument. In order to be consistent with programming languages atan2, this method computes atan2(this, x), i.e. the instance represents the y argument and the x argument is the one passed as a single argument. This may seem confusing especially for users of Wolfram alpha, as this site is not consistent with programming languages atan2 two-arguments arc tangent and puts x as its first argument.
+        
+        Specified by: atan2 in interface CalculusFieldElement
+        
+        Parameters:
+            x (FieldTuple<FieldTuple> x): second argument of the arc tangent
+        
+        Returns:
+            atan2(this, x)
+        
+        
+        """
+        ...
+    def atanh(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Inverse hyperbolic tangent operation.
+        
+        Specified by: atanh in interface CalculusFieldElement
+        
+        Returns:
+            atanh(this)
+        
+        
+        """
+        ...
+    def cbrt(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Cubic root.
+        
+        Specified by: cbrt in interface CalculusFieldElement
+        
+        Returns:
+            cubic root of the instance
+        
+        
+        """
+        ...
+    def ceil(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Get the smallest whole number larger than instance.
+        
+        Specified by: ceil in interface CalculusFieldElement
+        
+        Returns:
+            ceil(this)
+        
+        
+        """
+        ...
     @typing.overload
     def copySign(self, double: float) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
     def copySign(self, fieldTuple: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def cos(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def cosh(self) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def cos(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Cosine operation.
+        
+        Specified by: cos in interface CalculusFieldElement
+        
+        Returns:
+            cos(this)
+        
+        
+        """
+        ...
+    def cosh(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Hyperbolic cosine operation.
+        
+        Specified by: cosh in interface CalculusFieldElement
+        
+        Returns:
+            cosh(this)
+        
+        
+        """
+        ...
     @typing.overload
     def divide(self, double: float) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
     def divide(self, fieldTuple: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
     def equals(self, object: typing.Any) -> bool:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: equals in class Object
         
         
         """
         ...
-    def exp(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def expm1(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def floor(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def getAddendum(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def getComponent(self, int: int) -> _FieldTuple__T:
+    def exp(self) -> 'FieldTuple'[_FieldTuple__T]:
         """
-            Get one component of the tuple.
+        Exponential.
         
-            Parameters:
-                index (int): index of the component, between 0 and :meth:`~org.hipparchus.util.FieldTuple.getDimension` - 1
+        Specified by: exp in interface CalculusFieldElement
         
-            Returns:
-                value of the component
+        Returns:
+            exponential of the instance
+        
+        
+        """
+        ...
+    def expm1(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Exponential minus 1.
+        
+        Specified by: expm1 in interface CalculusFieldElement
+        
+        Returns:
+            exponential minus one of the instance
+        
+        
+        """
+        ...
+    def floor(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Get the largest whole number smaller than instance.
+        
+        Specified by: floor in interface CalculusFieldElement
+        
+        Returns:
+            floor(this)
+        
+        
+        """
+        ...
+    def getAddendum(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Get the addendum to the real value of the number.
+        
+        The addendum is considered to be the part that when added back to the getReal recovers the instance. This means that when getReal() is finite (i.e. neither infinite nor NaN), then getReal()) is e and getReal()) is getAddendum(). Beware that for non-finite numbers, these two equalities may not hold. The first equality (with the addition), always holds even for infinity and NaNs if the real part is independent of the addendum (this is the case for all derivatives types, as well as for complex and Dfp, but it is not the case for Tuple and FieldTuple). The second equality (with the subtraction), generally doesn't hold for non-finite numbers, because the subtraction generates NaNs.
+        
+        Specified by: getAddendum in interface CalculusFieldElement
+        
+        Returns:
+            real value
+        
+        
+        """
+        ...
+    def getComponent(self, index: int) -> _FieldTuple__T:
+        """
+        Get one component of the tuple.
+        
+        Parameters:
+            index (int): index of the component, between 0 and getDimension - 1
+        
+        Returns:
+            value of the component
         
         
         """
         ...
     def getComponents(self) -> typing.MutableSequence[_FieldTuple__T]:
         """
-            Get all components of the tuple.
+        Get all components of the tuple.
         
-            Returns:
-                all components
+        Returns:
+            all components
         
         
         """
         ...
     def getDimension(self) -> int:
         """
-            Get the dimension of the tuple.
+        Get the dimension of the tuple.
         
-            Returns:
-                dimension of the tuple
+        Returns:
+            dimension of the tuple
         
         
         """
         ...
-    def getField(self) -> org.hipparchus.Field['FieldTuple'[_FieldTuple__T]]: ...
-    def getPi(self) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def getField(self) -> org.hipparchus.Field['FieldTuple'[_FieldTuple__T]]:
+        """
+        Get the Field to which the instance belongs.
+        
+        Specified by: getField in interface FieldElement
+        
+        Returns:
+            Field to which the instance belongs
+        
+        
+        """
+        ...
+    def getPi(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Get the Archimedes constant π.
+        
+        Archimedes constant is the ratio of a circle's circumference to its diameter.
+        
+        Specified by: getPi in interface CalculusFieldElement
+        
+        Returns:
+            Archimedes constant π
+        
+        
+        """
+        ...
     def getReal(self) -> float:
         """
-            Get the real value of the number.
+        Get the real value of the number.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.getReal` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: getReal in interface FieldElement
         
-            Returns:
-                real value
+        Returns:
+            real value
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.hashCode` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: hashCode in class Object
         
         
         """
         ...
-    def hypot(self, fieldTuple: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def hypot(self, y: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Returns the hypotenuse of a triangle with sides this and y - sqrt(this :sup:`2`  +y :sup:`2` ) avoiding intermediate overflow or underflow.
+        
+          - If either argument is infinite, then the result is positive infinity.
+          - else, if either argument is NaN then the result is NaN.
+        
+        Specified by: hypot in interface CalculusFieldElement
+        
+        Parameters:
+            y (FieldTuple<FieldTuple> y): a value
+        
+        Returns:
+            sqrt(this :sup:`2`  +y :sup:`2` )
+        
+        
+        """
+        ...
     @typing.overload
     def linearCombination(self, double: float, fieldTuple: 'FieldTuple'[_FieldTuple__T], double2: float, fieldTuple2: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
@@ -4811,56 +5077,291 @@ class FieldTuple(org.hipparchus.CalculusFieldElement['FieldTuple'[_FieldTuple__T
     def linearCombination(self, fieldTuple: 'FieldTuple'[_FieldTuple__T], fieldTuple2: 'FieldTuple'[_FieldTuple__T], fieldTuple3: 'FieldTuple'[_FieldTuple__T], fieldTuple4: 'FieldTuple'[_FieldTuple__T], fieldTuple5: 'FieldTuple'[_FieldTuple__T], fieldTuple6: 'FieldTuple'[_FieldTuple__T], fieldTuple7: 'FieldTuple'[_FieldTuple__T], fieldTuple8: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
     def linearCombination(self, fieldTupleArray: typing.Union[typing.List['FieldTuple'[_FieldTuple__T]], jpype.JArray], fieldTupleArray2: typing.Union[typing.List['FieldTuple'[_FieldTuple__T]], jpype.JArray]) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def log(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def log10(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def log1p(self) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def log(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Natural logarithm.
+        
+        Specified by: log in interface CalculusFieldElement
+        
+        Returns:
+            logarithm of the instance
+        
+        
+        """
+        ...
+    def log10(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Base 10 logarithm.
+        
+        Specified by: log10 in interface CalculusFieldElement
+        
+        Returns:
+            base 10 logarithm of the instance
+        
+        
+        """
+        ...
+    def log1p(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Shifted natural logarithm.
+        
+        Specified by: log1p in interface CalculusFieldElement
+        
+        Returns:
+            logarithm of one plus the instance
+        
+        
+        """
+        ...
     @typing.overload
     def multiply(self, double: float) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
     def multiply(self, int: int) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
     def multiply(self, fieldTuple: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def negate(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def newInstance(self, double: float) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def negate(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Returns the additive inverse of this element.
+        
+        Specified by: negate in interface FieldElement
+        
+        Returns:
+            the opposite of this.
+        
+        
+        """
+        ...
+    def newInstance(self, value: float) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Create an instance corresponding to a constant real value.
+        
+        Specified by: newInstance in interface CalculusFieldElement
+        
+        Parameters:
+            value (double): constant real value
+        
+        Returns:
+            instance corresponding to a constant real value
+        
+        
+        """
+        ...
     @typing.overload
     def pow(self, double: float) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
     def pow(self, int: int) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
     def pow(self, fieldTuple: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def reciprocal(self) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def reciprocal(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Returns the multiplicative inverse of this element.
+        
+        Specified by: reciprocal in interface FieldElement
+        
+        Returns:
+            the inverse of this.
+        
+        
+        """
+        ...
     @typing.overload
     def remainder(self, double: float) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
     def remainder(self, fieldTuple: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def rint(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def rootN(self, int: int) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def scalb(self, int: int) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def sign(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def sin(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def sinCos(self) -> FieldSinCos['FieldTuple'[_FieldTuple__T]]: ...
-    def sinh(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def sinhCosh(self) -> FieldSinhCosh['FieldTuple'[_FieldTuple__T]]: ...
-    def sqrt(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def square(self) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def rint(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Get the whole number that is the nearest to the instance, or the even one if x is exactly half way between two integers.
+        
+        Specified by: rint in interface CalculusFieldElement
+        
+        Returns:
+            a double number r such that r is an integer r - 0.5 ≤ this ≤ r + 0.5
+        
+        
+        """
+        ...
+    def rootN(self, n: int) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        N :sup:`th` root.
+        
+        Specified by: rootN in interface CalculusFieldElement
+        
+        Parameters:
+            n (int): order of the root
+        
+        Returns:
+            n :sup:`th` root of the instance
+        
+        
+        """
+        ...
+    def scalb(self, n: int) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Multiply the instance by a power of 2.
+        
+        Specified by: scalb in interface CalculusFieldElement
+        
+        Parameters:
+            n (int): power of 2
+        
+        Returns:
+            this × 2 :sup:`n`
+        
+        
+        """
+        ...
+    def sign(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Compute the sign of the instance. The sign is -1 for negative numbers, +1 for positive numbers and 0 otherwise, for Complex number, it is extended on the unit circle (equivalent to z/|z|, with special handling for 0 and NaN)
+        
+        Specified by: sign in interface CalculusFieldElement
+        
+        Returns:
+            -1.0, -0.0, +0.0, +1.0 or NaN depending on sign of a
+        
+        
+        """
+        ...
+    def sin(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Sine operation.
+        
+        Specified by: sin in interface CalculusFieldElement
+        
+        Returns:
+            sin(this)
+        
+        
+        """
+        ...
+    def sinCos(self) -> FieldSinCos['FieldTuple'[_FieldTuple__T]]:
+        """
+        Combined Sine and Cosine operation.
+        
+        Specified by: sinCos in interface CalculusFieldElement
+        
+        Returns:
+            [sin(this), cos(this)]
+        
+        
+        """
+        ...
+    def sinh(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Hyperbolic sine operation.
+        
+        Specified by: sinh in interface CalculusFieldElement
+        
+        Returns:
+            sinh(this)
+        
+        
+        """
+        ...
+    def sinhCosh(self) -> FieldSinhCosh['FieldTuple'[_FieldTuple__T]]:
+        """
+        Combined hyperbolic sine and cosine operation.
+        
+        Specified by: sinhCosh in interface CalculusFieldElement
+        
+        Returns:
+            [sinh(this), cosh(this)]
+        
+        
+        """
+        ...
+    def sqrt(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Square root.
+        
+        Specified by: sqrt in interface CalculusFieldElement
+        
+        Returns:
+            square root of the instance
+        
+        
+        """
+        ...
+    def square(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Compute this × this.
+        
+        Specified by: square in interface CalculusFieldElement
+        
+        Returns:
+            a new element representing this × this
+        
+        
+        """
+        ...
     @typing.overload
     def subtract(self, double: float) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
     def subtract(self, fieldTuple: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def tan(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def tanh(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def toDegrees(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def toRadians(self) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def ulp(self) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def tan(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Tangent operation.
+        
+        Specified by: tan in interface CalculusFieldElement
+        
+        Returns:
+            tan(this)
+        
+        
+        """
+        ...
+    def tanh(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Hyperbolic tangent operation.
+        
+        Specified by: tanh in interface CalculusFieldElement
+        
+        Returns:
+            tanh(this)
+        
+        
+        """
+        ...
+    def toDegrees(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Convert radians to degrees, with error of less than 0.5 ULP
+        
+        Specified by: toDegrees in interface CalculusFieldElement
+        
+        Returns:
+            instance converted into degrees
+        
+        
+        """
+        ...
+    def toRadians(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Convert degrees to radians, with error of less than 0.5 ULP
+        
+        Specified by: toRadians in interface CalculusFieldElement
+        
+        Returns:
+            instance converted into radians
+        
+        
+        """
+        ...
+    def ulp(self) -> 'FieldTuple'[_FieldTuple__T]:
+        """
+        Compute least significant bit (Unit in Last Position) for a number.
+        
+        Specified by: ulp in interface CalculusFieldElement
+        
+        Returns:
+            ulp(this)
+        
+        
+        """
+        ...
 
 class Incrementor:
     """
-    public classIncrementor extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    
-        Utility that increments a counter until a maximum is reached, at which point, the instance will by default throw a
-        :class:`~org.hipparchus.exception.MathIllegalStateException`. However, the user is able to override this behaviour by
-        defining a custom :class:`~org.hipparchus.util.Incrementor.MaxCountExceededCallback`, in order to e.g. select which
-        exception must be thrown.
+    Utility that increments a counter until a maximum is reached, at which point, the instance will by default throw a MathIllegalStateException. However, the user is able to override this behaviour by defining a custom MaxCountExceededCallback, in order to e.g. select which exception must be thrown.
     """
     @typing.overload
     def __init__(self): ...
@@ -4871,48 +5372,48 @@ class Incrementor:
     @typing.overload
     def canIncrement(self) -> bool:
         """
-            Checks whether incrementing the counter :code:`nTimes` is allowed.
+        Checks whether incrementing the counter nTimes is allowed.
         
-            Returns:
-                :code:`false` if calling :meth:`~org.hipparchus.util.Incrementor.increment` will trigger a
-                :code:`MathIllegalStateException`, :code:`true` otherwise.
+        Returns:
+            false if calling increment will trigger a
+            MathIllegalStateException, true otherwise.
         
         """
         ...
     @typing.overload
-    def canIncrement(self, int: int) -> bool:
+    def canIncrement(self, nTimes: int) -> bool:
         """
-            Checks whether incrementing the counter several times is allowed.
+        Checks whether incrementing the counter several times is allowed.
         
-            Parameters:
-                nTimes (int): Number of increments.
+        Parameters:
+            nTimes (int): Number of increments.
         
-            Returns:
-                :code:`false` if calling :meth:`~org.hipparchus.util.Incrementor.increment` would call the
-                :class:`~org.hipparchus.util.Incrementor.MaxCountExceededCallback` :code:`true` otherwise.
+        Returns:
+            false if calling increment would call the
+            MaxCountExceededCallback true otherwise.
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`nTimes` is negative.
+        Raises:
+            MathIllegalArgumentException: if nTimes is negative.
         
         
         """
         ...
     def getCount(self) -> int:
         """
-            Gets the current count.
+        Gets the current count.
         
-            Returns:
-                the current count.
+        Returns:
+            the current count.
         
         
         """
         ...
     def getMaximalCount(self) -> int:
         """
-            Gets the upper limit of the counter.
+        Gets the upper limit of the counter.
         
-            Returns:
-                the counter upper limit.
+        Returns:
+            the counter upper limit.
         
         
         """
@@ -4920,80 +5421,73 @@ class Incrementor:
     @typing.overload
     def increment(self) -> None:
         """
-            Adds the increment value to the current iteration count. At counter exhaustion, this method will call the
-            :meth:`~org.hipparchus.util.Incrementor.MaxCountExceededCallback.trigger` method of the callback object passed to the
-            :meth:`~org.hipparchus.util.Incrementor.withCallback` method.
+        Adds the increment value to the current iteration count. At counter exhaustion, this method will call the trigger method of the callback object passed to the withCallback method.
         
-            Also see:
-        
-                  - :meth:`~org.hipparchus.util.Incrementor.increment`
+              - increment
         
         
         
         """
         ...
     @typing.overload
-    def increment(self, int: int) -> None:
+    def increment(self, nTimes: int) -> None:
         """
-            Performs multiple increments.
+        Performs multiple increments.
         
-            Parameters:
-                nTimes (int): Number of increments.
+        Parameters:
+            nTimes (int): Number of increments.
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`nTimes` is negative.
+        Raises:
+            MathIllegalArgumentException: if nTimes is negative.
         
-            Also see:
-        
-                  - :meth:`~org.hipparchus.util.Incrementor.increment`
+              - increment
         
         
         """
         ...
     def reset(self) -> None:
         """
-            Resets the counter to 0.
-        
+        Resets the counter to 0.
         """
         ...
-    def withCallback(self, maxCountExceededCallback: typing.Union['Incrementor.MaxCountExceededCallback', typing.Callable]) -> 'Incrementor':
+    def withCallback(self, cb: typing.Union['Incrementor.MaxCountExceededCallback', typing.Callable]) -> 'Incrementor':
         """
-            Creates a new instance with a given callback. The counter is reset to 0.
+        Creates a new instance with a given callback. The counter is reset to 0.
         
-            Parameters:
-                cb (:class:`~org.hipparchus.util.Incrementor.MaxCountExceededCallback`): Callback to be called at counter exhaustion.
+        Parameters:
+            cb (MaxCountExceededCallback): Callback to be called at counter exhaustion.
         
-            Returns:
-                a new instance.
-        
-        
-        """
-        ...
-    def withCount(self, int: int) -> 'Incrementor':
-        """
-            Creates a new instance and set the counter to the given value.
-        
-            Parameters:
-                value (int): Value of the counter.
-        
-            Returns:
-                a new instance.
+        Returns:
+            a new instance.
         
         
         """
         ...
-    def withMaximalCount(self, int: int) -> 'Incrementor':
+    def withCount(self, value: int) -> 'Incrementor':
         """
-            Creates a new instance with a given maximal count. The counter is reset to 0.
+        Creates a new instance and set the counter to the given value.
         
-            Parameters:
-                max (int): Maximal count.
+        Parameters:
+            value (int): Value of the counter.
         
-            Returns:
-                a new instance.
+        Returns:
+            a new instance.
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`max` is negative.
+        
+        """
+        ...
+    def withMaximalCount(self, max: int) -> 'Incrementor':
+        """
+        Creates a new instance with a given maximal count. The counter is reset to 0.
+        
+        Parameters:
+            max (int): Maximal count.
+        
+        Returns:
+            a new instance.
+        
+        Raises:
+            MathIllegalArgumentException: if max is negative.
         
         
         """
@@ -5003,22 +5497,27 @@ class Incrementor:
 
 class IterationEvent(java.util.EventObject):
     """
-    public classIterationEvent extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.EventObject`
+    The root class from which all events occurring while running an IterationManager should be derived.
     
-        The root class from which all events occurring while running an :class:`~org.hipparchus.util.IterationManager` should be
-        derived.
-    
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
-    def __init__(self, object: typing.Any, int: int): ...
+    def __init__(self, source: typing.Any, iterations: int):
+        """
+        Creates a new instance of this class.
+        
+        Parameters:
+            source (Object): the iterative algorithm on which the event initially occurred
+            iterations (int): the number of iterations performed at the time this event is created
+        
+        
+        """
+        ...
     def getIterations(self) -> int:
         """
-            Returns the number of iterations performed at the time :code:`this` event is created.
+        Returns the number of iterations performed at the time this event is created.
         
-            Returns:
-                the number of iterations performed
+        Returns:
+            the number of iterations performed
         
         
         """
@@ -5026,46 +5525,44 @@ class IterationEvent(java.util.EventObject):
 
 class IterationListener(java.util.EventListener):
     """
-    public interfaceIterationListenerextends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.EventListener`
-    
-        The listener interface for receiving events occurring in an iterative algorithm.
+    The listener interface for receiving events occurring in an iterative algorithm.
     """
-    def initializationPerformed(self, iterationEvent: IterationEvent) -> None:
+    def initializationPerformed(self, e: IterationEvent) -> None:
         """
-            Invoked after completion of the initial phase of the iterative algorithm (prior to the main iteration loop).
+        Invoked after completion of the initial phase of the iterative algorithm (prior to the main iteration loop).
         
-            Parameters:
-                e (:class:`~org.hipparchus.util.IterationEvent`): The :class:`~org.hipparchus.util.IterationEvent` object.
-        
-        
-        """
-        ...
-    def iterationPerformed(self, iterationEvent: IterationEvent) -> None:
-        """
-            Invoked each time an iteration is completed (in the main iteration loop).
-        
-            Parameters:
-                e (:class:`~org.hipparchus.util.IterationEvent`): The :class:`~org.hipparchus.util.IterationEvent` object.
+        Parameters:
+            e (IterationEvent): The IterationEvent object.
         
         
         """
         ...
-    def iterationStarted(self, iterationEvent: IterationEvent) -> None:
+    def iterationPerformed(self, e: IterationEvent) -> None:
         """
-            Invoked each time a new iteration is completed (in the main iteration loop).
+        Invoked each time an iteration is completed (in the main iteration loop).
         
-            Parameters:
-                e (:class:`~org.hipparchus.util.IterationEvent`): The :class:`~org.hipparchus.util.IterationEvent` object.
+        Parameters:
+            e (IterationEvent): The IterationEvent object.
         
         
         """
         ...
-    def terminationPerformed(self, iterationEvent: IterationEvent) -> None:
+    def iterationStarted(self, e: IterationEvent) -> None:
         """
-            Invoked after completion of the operations which occur after breaking out of the main iteration loop.
+        Invoked each time a new iteration is completed (in the main iteration loop).
         
-            Parameters:
-                e (:class:`~org.hipparchus.util.IterationEvent`): The :class:`~org.hipparchus.util.IterationEvent` object.
+        Parameters:
+            e (IterationEvent): The IterationEvent object.
+        
+        
+        """
+        ...
+    def terminationPerformed(self, e: IterationEvent) -> None:
+        """
+        Invoked after completion of the operations which occur after breaking out of the main iteration loop.
+        
+        Parameters:
+            e (IterationEvent): The IterationEvent object.
         
         
         """
@@ -5073,115 +5570,115 @@ class IterationListener(java.util.EventListener):
 
 class IterationManager:
     """
-    public classIterationManager extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    
-        This abstract class provides a general framework for managing iterative algorithms. The maximum number of iterations can
-        be set, and methods are provided to monitor the current iteration count. A lightweight event framework is also provided.
+    This abstract class provides a general framework for managing iterative algorithms. The maximum number of iterations can be set, and methods are provided to monitor the current iteration count. A lightweight event framework is also provided.
     """
     @typing.overload
     def __init__(self, int: int): ...
     @typing.overload
     def __init__(self, int: int, maxCountExceededCallback: typing.Union[Incrementor.MaxCountExceededCallback, typing.Callable]): ...
-    def addIterationListener(self, iterationListener: IterationListener) -> None:
+    def addIterationListener(self, listener: IterationListener) -> None:
         """
-            Attaches a listener to this manager.
+        Attaches a listener to this manager.
         
-            Parameters:
-                listener (:class:`~org.hipparchus.util.IterationListener`): A :code:`IterationListener` object.
-        
-        
-        """
-        ...
-    def fireInitializationEvent(self, iterationEvent: IterationEvent) -> None:
-        """
-            Informs all registered listeners that the initial phase (prior to the main iteration loop) has been completed.
-        
-            Parameters:
-                e (:class:`~org.hipparchus.util.IterationEvent`): The :class:`~org.hipparchus.util.IterationEvent` object.
+        Parameters:
+            listener (IterationListener): A IterationListener object.
         
         
         """
         ...
-    def fireIterationPerformedEvent(self, iterationEvent: IterationEvent) -> None:
+    def fireInitializationEvent(self, e: IterationEvent) -> None:
         """
-            Informs all registered listeners that a new iteration (in the main iteration loop) has been performed.
+        Informs all registered listeners that the initial phase (prior to the main iteration loop) has been completed.
         
-            Parameters:
-                e (:class:`~org.hipparchus.util.IterationEvent`): The :class:`~org.hipparchus.util.IterationEvent` object.
-        
-        
-        """
-        ...
-    def fireIterationStartedEvent(self, iterationEvent: IterationEvent) -> None:
-        """
-            Informs all registered listeners that a new iteration (in the main iteration loop) has been started.
-        
-            Parameters:
-                e (:class:`~org.hipparchus.util.IterationEvent`): The :class:`~org.hipparchus.util.IterationEvent` object.
+        Parameters:
+            e (IterationEvent): The IterationEvent object.
         
         
         """
         ...
-    def fireTerminationEvent(self, iterationEvent: IterationEvent) -> None:
+    def fireIterationPerformedEvent(self, e: IterationEvent) -> None:
         """
-            Informs all registered listeners that the final phase (post-iterations) has been completed.
+        Informs all registered listeners that a new iteration (in the main iteration loop) has been performed.
         
-            Parameters:
-                e (:class:`~org.hipparchus.util.IterationEvent`): The :class:`~org.hipparchus.util.IterationEvent` object.
+        Parameters:
+            e (IterationEvent): The IterationEvent object.
+        
+        
+        """
+        ...
+    def fireIterationStartedEvent(self, e: IterationEvent) -> None:
+        """
+        Informs all registered listeners that a new iteration (in the main iteration loop) has been started.
+        
+        Parameters:
+            e (IterationEvent): The IterationEvent object.
+        
+        
+        """
+        ...
+    def fireTerminationEvent(self, e: IterationEvent) -> None:
+        """
+        Informs all registered listeners that the final phase (post-iterations) has been completed.
+        
+        Parameters:
+            e (IterationEvent): The IterationEvent object.
         
         
         """
         ...
     def getIterations(self) -> int:
         """
-            Returns the number of iterations of this solver, 0 if no iterations has been performed yet.
+        Returns the number of iterations of this solver, 0 if no iterations has been performed yet.
         
-            Returns:
-                the number of iterations.
+        Returns:
+            the number of iterations.
         
         
         """
         ...
     def getMaxIterations(self) -> int:
         """
-            Returns the maximum number of iterations.
+        Returns the maximum number of iterations.
         
-            Returns:
-                the maximum number of iterations.
+        Returns:
+            the maximum number of iterations.
         
         
         """
         ...
-    def incrementIterationCount(self) -> None: ...
-    def removeIterationListener(self, iterationListener: IterationListener) -> None:
+    def incrementIterationCount(self) -> None:
         """
-            Removes the specified iteration listener from the list of listeners currently attached to :code:`this` object.
-            Attempting to remove a listener which was *not* previously registered does not cause any error.
+        Increments the iteration count by one, and throws an exception if the maximum number of iterations is reached. This method should be called at the beginning of a new iteration.
         
-            Parameters:
-                listener (:class:`~org.hipparchus.util.IterationListener`): The :class:`~org.hipparchus.util.IterationListener` to be removed.
+        Raises:
+            MathIllegalStateException: if the maximum number of iterations is reached.
+        
+        
+        """
+        ...
+    def removeIterationListener(self, listener: IterationListener) -> None:
+        """
+        Removes the specified iteration listener from the list of listeners currently attached to this object. Attempting to remove a listener which was not previously registered does not cause any error.
+        
+        Parameters:
+            listener (IterationListener): The IterationListener to be removed.
         
         
         """
         ...
     def resetIterationCount(self) -> None:
         """
-            Sets the iteration count to 0. This method must be called during the initial phase.
-        
+        Sets the iteration count to 0. This method must be called during the initial phase.
         """
         ...
 
 class KthSelector(java.io.Serializable):
     """
-    public classKthSelector extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements Serializable
     
-        A Simple K :sup:`th` selector implementation to pick up the K :sup:`th` ordered element from a work array containing the
-        input numbers.
+    A Simple K :sup:`th` selector implementation to pick up the K :sup:`th` ordered element from a work array containing the input numbers.
     
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -5189,25 +5686,25 @@ class KthSelector(java.io.Serializable):
     def __init__(self, pivotingStrategy: 'PivotingStrategy'): ...
     def getPivotingStrategy(self) -> 'PivotingStrategy':
         """
-            Get the pivoting strategy.
+        Get the pivoting strategy.
         
-            Returns:
-                pivoting strategy
+        Returns:
+            pivoting strategy
         
         
         """
         ...
-    def select(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], intArray: typing.Union[typing.List[int], jpype.JArray], int2: int) -> float:
+    def select(self, work: typing.Union[typing.List[float], jpype.JArray], pivotsHeap: typing.Union[typing.List[int], jpype.JArray], k: int) -> float:
         """
-            Select K :sup:`th` value in the array.
+        Select K :sup:`th` value in the array.
         
-            Parameters:
-                work (double[]): work array to use to find out the K :sup:`th` value
-                pivotsHeap (int[]): cached pivots heap that can be used for efficient estimation
-                k (int): the index whose value in the array is of interest
+        Parameters:
+            work (double[]): work array to use to find out the K :sup:`th` value
+            pivotsHeap (int[]): cached pivots heap that can be used for efficient estimation
+            k (int): the index whose value in the array is of interest
         
-            Returns:
-                K :sup:`th` value
+        Returns:
+            K :sup:`th` value
         
         
         """
@@ -5215,9 +5712,7 @@ class KthSelector(java.io.Serializable):
 
 class MathArrays:
     """
-    public classMathArrays extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    
-        Arrays utilities.
+    Arrays utilities.
     """
     _buildArray_0__T = typing.TypeVar('_buildArray_0__T', bound=org.hipparchus.FieldElement)  # <T>
     _buildArray_1__T = typing.TypeVar('_buildArray_1__T', bound=org.hipparchus.FieldElement)  # <T>
@@ -5226,45 +5721,45 @@ class MathArrays:
     @staticmethod
     def buildArray(field: org.hipparchus.Field[_buildArray_0__T], int: int) -> typing.MutableSequence[_buildArray_0__T]:
         """
-            Build an array of elements.
+        Build an array of elements.
         
-            Arrays are filled with :code:`field.getZero()`
+        Arrays are filled with getZero()
         
-            Parameters:
-                field (:class:`~org.hipparchus.Field`<T> field): field to which array elements belong
-                length (int): of the array
+        Parameters:
+            field (Field<T> field): field to which array elements belong
+            length (int): of the array
         
-            Returns:
-                a new array
+        Returns:
+            a new array
         
-            Build a double dimension array of elements.
+        Build a double dimension array of elements.
         
-            Arrays are filled with :code:`field.getZero()`
+        Arrays are filled with getZero()
         
-            Parameters:
-                field (:class:`~org.hipparchus.Field`<T> field): field to which array elements belong
-                rows (int): number of rows in the array
-                columns (int): number of columns (may be negative to build partial arrays in the same way :code:`new Field[rows][]` works)
+        Parameters:
+            field (Field<T> field): field to which array elements belong
+            rows (int): number of rows in the array
+            columns (int): number of columns (may be negative to build partial arrays in the same way new Field[rows][] works)
         
-            Returns:
-                a new array
+        Returns:
+            a new array
         
-            Build a triple dimension array of elements.
+        Build a triple dimension array of elements.
         
-            Arrays are filled with :code:`field.getZero()`
+        Arrays are filled with getZero()
         
-            Parameters:
-                field (:class:`~org.hipparchus.Field`<T> field): field to which array elements belong
-                l1 (int): number of elements along first dimension
-                l2 (int): number of elements along second dimension
-                l3 (int): number of elements along third dimension (may be negative to build partial arrays in the same way :code:`new
-                    Field[l1][l2][]` works)
+        Parameters:
+            field (Field<T> field): field to which array elements belong
+            l1 (int): number of elements along first dimension
+            l2 (int): number of elements along second dimension
+            l3 (int): number of elements along third dimension (may be negative to build partial arrays in the same way new
+                Field[l1][l2][] works)
         
-            Returns:
-                a new array
+        Returns:
+            a new array
         
-            Since:
-                1.4
+        Since:
+            1.4
         
         
         """
@@ -5281,31 +5776,31 @@ class MathArrays:
     @staticmethod
     def checkEqualLength(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], boolean: bool) -> bool:
         """
-            Check that both arrays have the same length.
+        Check that both arrays have the same length.
         
-            Parameters:
-                a (double[]): Array.
-                b (double[]): Array.
-                abort (boolean): Whether to throw an exception if the check fails.
+        Parameters:
+            a (double[]): Array.
+            b (double[]): Array.
+            abort (boolean): Whether to throw an exception if the check fails.
         
-            Returns:
-                :code:`true` if the arrays have the same length.
+        Returns:
+            true if the arrays have the same length.
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if the lengths differ and :code:`abort` is :code:`true`.
+        Raises:
+            MathIllegalArgumentException: if the lengths differ and abort is true.
         
-            Check that both arrays have the same length.
+        Check that both arrays have the same length.
         
-            Parameters:
-                a (int[]): Array.
-                b (int[]): Array.
-                abort (boolean): Whether to throw an exception if the check fails.
+        Parameters:
+            a (int[]): Array.
+            b (int[]): Array.
+            abort (boolean): Whether to throw an exception if the check fails.
         
-            Returns:
-                :code:`true` if the arrays have the same length.
+        Returns:
+            true if the arrays have the same length.
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if the lengths differ and :code:`abort` is :code:`true`.
+        Raises:
+            MathIllegalArgumentException: if the lengths differ and abort is true.
         
         """
         ...
@@ -5314,23 +5809,23 @@ class MathArrays:
     def checkEqualLength(intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray], boolean: bool) -> bool: ...
     @typing.overload
     @staticmethod
-    def checkEqualLength(tArray: typing.Union[typing.List[_checkEqualLength_2__T], jpype.JArray], tArray2: typing.Union[typing.List[_checkEqualLength_2__T], jpype.JArray], boolean: bool) -> bool:
+    def checkEqualLength(a: typing.Union[typing.List[_checkEqualLength_2__T], jpype.JArray], b: typing.Union[typing.List[_checkEqualLength_2__T], jpype.JArray], abort: bool) -> bool:
         """
-            Check that both arrays have the same length.
+        Check that both arrays have the same length.
         
-            Parameters:
-                a (T[]): Array.
-                b (T[]): Array.
-                abort (boolean): Whether to throw an exception if the check fails.
+        Parameters:
+            a (T[]): Array.
+            b (T[]): Array.
+            abort (boolean): Whether to throw an exception if the check fails.
         
-            Returns:
-                :code:`true` if the arrays have the same length.
+        Returns:
+            true if the arrays have the same length.
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if the lengths differ and :code:`abort` is :code:`true`.
+        Raises:
+            MathIllegalArgumentException: if the lengths differ and abort is true.
         
-            Since:
-                1.5
+        Since:
+            1.5
         
         """
         ...
@@ -5338,23 +5833,23 @@ class MathArrays:
     @staticmethod
     def checkEqualLength(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
-            Check that both arrays have the same length.
+        Check that both arrays have the same length.
         
-            Parameters:
-                a (double[]): Array.
-                b (double[]): Array.
+        Parameters:
+            a (double[]): Array.
+            b (double[]): Array.
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if the lengths differ.
+        Raises:
+            MathIllegalArgumentException: if the lengths differ.
         
-            Check that both arrays have the same length.
+        Check that both arrays have the same length.
         
-            Parameters:
-                a (int[]): Array.
-                b (int[]): Array.
+        Parameters:
+            a (int[]): Array.
+            b (int[]): Array.
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if the lengths differ.
+        Raises:
+            MathIllegalArgumentException: if the lengths differ.
         
         
         """
@@ -5364,19 +5859,19 @@ class MathArrays:
     def checkEqualLength(intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
     @typing.overload
     @staticmethod
-    def checkEqualLength(tArray: typing.Union[typing.List[_checkEqualLength_5__T], jpype.JArray], tArray2: typing.Union[typing.List[_checkEqualLength_5__T], jpype.JArray]) -> None:
+    def checkEqualLength(a: typing.Union[typing.List[_checkEqualLength_5__T], jpype.JArray], b: typing.Union[typing.List[_checkEqualLength_5__T], jpype.JArray]) -> None:
         """
-            Check that both arrays have the same length.
+        Check that both arrays have the same length.
         
-            Parameters:
-                a (T[]): Array.
-                b (T[]): Array.
+        Parameters:
+            a (T[]): Array.
+            b (T[]): Array.
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if the lengths differ.
+        Raises:
+            MathIllegalArgumentException: if the lengths differ.
         
-            Since:
-                1.5
+        Since:
+            1.5
         
         """
         ...
@@ -5387,7 +5882,19 @@ class MathArrays:
     @staticmethod
     def checkNonNegative(longArray: typing.Union[typing.List[typing.MutableSequence[int]], jpype.JArray]) -> None: ...
     @staticmethod
-    def checkNotNaN(doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
+    def checkNotNaN(in_: typing.Union[typing.List[float], jpype.JArray]) -> None:
+        """
+        Check that no entry of the input array is NaN.
+        
+        Parameters:
+            in (double[]): Array to be tested.
+        
+        Raises:
+            MathIllegalArgumentException: if an entry is NaN.
+        
+        
+        """
+        ...
     _checkOrder_1__T = typing.TypeVar('_checkOrder_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _checkOrder_4__T = typing.TypeVar('_checkOrder_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _checkOrder_5__T = typing.TypeVar('_checkOrder_5__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -5410,24 +5917,83 @@ class MathArrays:
     @staticmethod
     def checkOrder(tArray: typing.Union[typing.List[_checkOrder_5__T], jpype.JArray], orderDirection: 'MathArrays.OrderDirection', boolean: bool) -> None: ...
     @staticmethod
-    def checkPositive(doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
-    @staticmethod
-    def checkRectangular(longArray: typing.Union[typing.List[typing.MutableSequence[int]], jpype.JArray]) -> None: ...
-    @staticmethod
-    def concatenate(*doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
-    @staticmethod
-    def convolve(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
-    @staticmethod
-    def cosAngle(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float:
+    def checkPositive(in_: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
-            Calculates the cosine of the angle between two vectors.
+        Check that all entries of the input array are strictly positive.
         
-            Parameters:
-                v1 (double[]): Cartesian coordinates of the first vector.
-                v2 (double[]): Cartesian coordinates of the second vector.
+        Parameters:
+            in (double[]): Array to be tested
         
-            Returns:
-                the cosine of the angle between the vectors.
+        Raises:
+            MathIllegalArgumentException: if any entries of the array are not strictly positive.
+        
+        
+        """
+        ...
+    @staticmethod
+    def checkRectangular(in_: typing.Union[typing.List[typing.MutableSequence[int]], jpype.JArray]) -> None:
+        """
+        Throws MathIllegalArgumentException if the input array is not rectangular.
+        
+        Parameters:
+            in (long[][]): array to be tested
+        
+        Raises:
+            NullArgumentException: if input array is null
+            MathIllegalArgumentException: if input array is not rectangular
+        
+        
+        """
+        ...
+    @staticmethod
+    def concatenate(*x: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
+        """
+        Concatenates a sequence of arrays. The return array consists of the entries of the input arrays concatenated in the order they appear in the argument list. Null arrays cause NullPointerExceptions; zero length arrays are allowed (contributing nothing to the output array).
+        
+        Parameters:
+            x (double[]...): list of double[] arrays to concatenate
+        
+        Returns:
+            a new array consisting of the entries of the argument arrays
+        
+        Raises:
+            NullPointerException: if any of the arrays are null
+        
+        
+        """
+        ...
+    @staticmethod
+    def convolve(x: typing.Union[typing.List[float], jpype.JArray], h: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
+        """
+        Calculates the ` convolution <http://en.wikipedia.org/wiki/Convolution>` between two sequences.
+        
+        The solution is obtained via straightforward computation of the convolution sum (and not via FFT). Whenever the computation needs an element that would be located at an index outside the input arrays, the value is assumed to be zero.
+        
+        Parameters:
+            x (double[]): First sequence. Typically, this sequence will represent an input signal to a system.
+            h (double[]): Second sequence. Typically, this sequence will represent the impulse response of the system.
+        
+        Returns:
+            the convolution of x and h. This array's length will be length - 1.
+        
+        Raises:
+            NullArgumentException: if either x or h is null.
+            MathIllegalArgumentException: if either x or h is empty.
+        
+        
+        """
+        ...
+    @staticmethod
+    def cosAngle(v1: typing.Union[typing.List[float], jpype.JArray], v2: typing.Union[typing.List[float], jpype.JArray]) -> float:
+        """
+        Calculates the cosine of the angle between two vectors.
+        
+        Parameters:
+            v1 (double[]): Cartesian coordinates of the first vector.
+            v2 (double[]): Cartesian coordinates of the second vector.
+        
+        Returns:
+            the cosine of the angle between the vectors.
         
         
         """
@@ -5451,13 +6017,77 @@ class MathArrays:
     @staticmethod
     def distanceInf(intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]) -> int: ...
     @staticmethod
-    def ebeAdd(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
+    def ebeAdd(a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
+        """
+        Creates an array whose contents will be the element-by-element addition of the arguments.
+        
+        Parameters:
+            a (double[]): First term of the addition.
+            b (double[]): Second term of the addition.
+        
+        Returns:
+            a new array r where r[i] = a[i] + b[i].
+        
+        Raises:
+            MathIllegalArgumentException: if the array lengths differ.
+        
+        
+        """
+        ...
     @staticmethod
-    def ebeDivide(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
+    def ebeDivide(a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
+        """
+        Creates an array whose contents will be the element-by-element division of the first argument by the second.
+        
+        Parameters:
+            a (double[]): Numerator of the division.
+            b (double[]): Denominator of the division.
+        
+        Returns:
+            a new array r where r[i] = a[i] / b[i].
+        
+        Raises:
+            MathIllegalArgumentException: if the array lengths differ.
+        
+        
+        """
+        ...
     @staticmethod
-    def ebeMultiply(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
+    def ebeMultiply(a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
+        """
+        Creates an array whose contents will be the element-by-element multiplication of the arguments.
+        
+        Parameters:
+            a (double[]): First factor of the multiplication.
+            b (double[]): Second factor of the multiplication.
+        
+        Returns:
+            a new array r where r[i] = a[i] * b[i].
+        
+        Raises:
+            MathIllegalArgumentException: if the array lengths differ.
+        
+        
+        """
+        ...
     @staticmethod
-    def ebeSubtract(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
+    def ebeSubtract(a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
+        """
+        Creates an array whose contents will be the element-by-element subtraction of the second argument from the first.
+        
+        Parameters:
+            a (double[]): First term.
+            b (double[]): Element to be subtracted.
+        
+        Returns:
+            a new array r where r[i] = a[i] - b[i].
+        
+        Raises:
+            MathIllegalArgumentException: if the array lengths differ.
+        
+        
+        """
+        ...
     _equals_6__T = typing.TypeVar('_equals_6__T', bound=org.hipparchus.FieldElement)  # <T>
     @typing.overload
     def equals(self, object: typing.Any) -> bool: ...
@@ -5465,61 +6095,59 @@ class MathArrays:
     @staticmethod
     def equals(byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], byteArray2: typing.Union[typing.List[int], jpype.JArray, bytes]) -> bool:
         """
-            Returns true iff both arguments are null or have same dimensions and all their elements are equal as defined by
-            :meth:`~org.hipparchus.util.Precision.equals`.
+        Returns true iff both arguments are null or have same dimensions and all their elements are equal as defined by equals.
         
-            Parameters:
-                x (float[]): first array
-                y (float[]): second array
+        Parameters:
+            x (float[]): first array
+            y (float[]): second array
         
-            Returns:
-                true if the values are both null or have same dimension and equal elements.
+        Returns:
+            true if the values are both null or have same dimension and equal elements.
         
-            Returns :code:`true` iff both arguments are :code:`null` or have same dimensions and all their elements are equal as
-            defined by :meth:`~org.hipparchus.util.Precision.equals`.
+        Returns true iff both arguments are null or have same dimensions and all their elements are equal as defined by equals.
         
-            Parameters:
-                x (double[]): First array.
-                y (double[]): Second array.
+        Parameters:
+            x (double[]): First array.
+            y (double[]): Second array.
         
-            Returns:
-                :code:`true` if the values are both :code:`null` or have same dimension and equal elements.
+        Returns:
+            true if the values are both null or have same dimension and equal elements.
         
-            Returns :code:`true` if both arguments are :code:`null` or have same dimensions and all their elements are equals.
+        Returns true if both arguments are null or have same dimensions and all their elements are equals.
         
-            Parameters:
-                x (long[]): First array.
-                y (long[]): Second array.
+        Parameters:
+            x (long[]): First array.
+            y (long[]): Second array.
         
-            Returns:
-                :code:`true` if the values are both :code:`null` or have same dimension and equal elements.
+        Returns:
+            true if the values are both null or have same dimension and equal elements.
         
-            Returns :code:`true` if both arguments are :code:`null` or have same dimensions and all their elements are equals.
+        Returns true if both arguments are null or have same dimensions and all their elements are equals.
         
-            Parameters:
-                x (int[]): First array.
-                y (int[]): Second array.
+        Parameters:
+            x (int[]): First array.
+            y (int[]): Second array.
         
-            Returns:
-                :code:`true` if the values are both :code:`null` or have same dimension and equal elements.
+        Returns:
+            true if the values are both null or have same dimension and equal elements.
         
-            Returns :code:`true` if both arguments are :code:`null` or have same dimensions and all their elements are equals.
+        Returns true if both arguments are null or have same dimensions and all their elements are equals.
         
-            Parameters:
-                x (byte[]): First array.
-                y (byte[]): Second array.
+        Parameters:
+            x (byte[]): First array.
+            y (byte[]): Second array.
         
-            Returns:
-                :code:`true` if the values are both :code:`null` or have same dimension and equal elements.
+        Returns:
+            true if the values are both null or have same dimension and equal elements.
         
-            Returns :code:`true` if both arguments are :code:`null` or have same dimensions and all their elements are equals.
+        Returns true if both arguments are null or have same dimensions and all their elements are equals.
         
-            Parameters:
-                x (short[]): First array.
-                y (short[]): Second array.
+        Parameters:
+            x (short[]): First array.
+            y (short[]): Second array.
         
-            Returns:
-                :code:`true` if the values are both :code:`null` or have same dimension and equal elements.
+        Returns:
+            true if the values are both null or have same dimension and equal elements.
         
         
         """
@@ -5538,20 +6166,19 @@ class MathArrays:
     def equals(longArray: typing.Union[typing.List[int], jpype.JArray], longArray2: typing.Union[typing.List[int], jpype.JArray]) -> bool: ...
     @typing.overload
     @staticmethod
-    def equals(tArray: typing.Union[typing.List[_equals_6__T], jpype.JArray], tArray2: typing.Union[typing.List[_equals_6__T], jpype.JArray]) -> bool:
+    def equals(x: typing.Union[typing.List[_equals_6__T], jpype.JArray], y: typing.Union[typing.List[_equals_6__T], jpype.JArray]) -> bool:
         """
-            Returns :code:`true` iff both arguments are :code:`null` or have same dimensions and all their elements are equal as
-            defined by :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals`.
+        Returns true iff both arguments are null or have same dimensions and all their elements are equal as defined by equals.
         
-            Parameters:
-                x (T[]): First array.
-                y (T[]): Second array.
+        Parameters:
+            x (T[]): First array.
+            y (T[]): Second array.
         
-            Returns:
-                :code:`true` if the values are both :code:`null` or have same dimension and equal elements.
+        Returns:
+            true if the values are both null or have same dimension and equal elements.
         
-            Since:
-                4.0
+        Since:
+            4.0
         
         """
         ...
@@ -5562,25 +6189,23 @@ class MathArrays:
     @staticmethod
     def equalsIncludingNaN(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> bool:
         """
-            Returns true iff both arguments are null or have same dimensions and all their elements are equal as defined by
-            :meth:`~org.hipparchus.util.Precision.equalsIncludingNaN`.
+        Returns true iff both arguments are null or have same dimensions and all their elements are equal as defined by equalsIncludingNaN.
         
-            Parameters:
-                x (float[]): first array
-                y (float[]): second array
+        Parameters:
+            x (float[]): first array
+            y (float[]): second array
         
-            Returns:
-                true if the values are both null or have same dimension and equal elements
+        Returns:
+            true if the values are both null or have same dimension and equal elements
         
-            Returns :code:`true` iff both arguments are :code:`null` or have same dimensions and all their elements are equal as
-            defined by :meth:`~org.hipparchus.util.Precision.equalsIncludingNaN`.
+        Returns true iff both arguments are null or have same dimensions and all their elements are equal as defined by equalsIncludingNaN.
         
-            Parameters:
-                x (double[]): First array.
-                y (double[]): Second array.
+        Parameters:
+            x (double[]): First array.
+            y (double[]): Second array.
         
-            Returns:
-                :code:`true` if the values are both :code:`null` or have same dimension and equal elements.
+        Returns:
+            true if the values are both null or have same dimension and equal elements.
         
         
         """
@@ -5591,34 +6216,34 @@ class MathArrays:
     _isMonotonic_1__T = typing.TypeVar('_isMonotonic_1__T', bound=java.lang.Comparable)  # <T>
     @typing.overload
     @staticmethod
-    def isMonotonic(doubleArray: typing.Union[typing.List[float], jpype.JArray], orderDirection: 'MathArrays.OrderDirection', boolean: bool) -> bool:
+    def isMonotonic(val: typing.Union[typing.List[float], jpype.JArray], dir: 'MathArrays.OrderDirection', strict: bool) -> bool:
         """
-            Check that an array is monotonically increasing or decreasing.
+        Check that an array is monotonically increasing or decreasing.
         
-            Parameters:
-                val (double[]): Values.
-                dir (:class:`~org.hipparchus.util.MathArrays.OrderDirection`): Ordering direction.
-                strict (boolean): Whether the order should be strict.
+        Parameters:
+            val (double[]): Values.
+            dir (OrderDirection): Ordering direction.
+            strict (boolean): Whether the order should be strict.
         
-            Returns:
-                :code:`true` if sorted, :code:`false` otherwise.
+        Returns:
+            true if sorted, false otherwise.
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def isMonotonic(tArray: typing.Union[typing.List[_isMonotonic_1__T], jpype.JArray], orderDirection: 'MathArrays.OrderDirection', boolean: bool) -> bool:
+    def isMonotonic(val: typing.Union[typing.List[_isMonotonic_1__T], jpype.JArray], dir: 'MathArrays.OrderDirection', strict: bool) -> bool:
         """
-            Check that an array is monotonically increasing or decreasing.
+        Check that an array is monotonically increasing or decreasing.
         
-            Parameters:
-                val (T[]): Values.
-                dir (:class:`~org.hipparchus.util.MathArrays.OrderDirection`): Ordering direction.
-                strict (boolean): Whether the order should be strict.
+        Parameters:
+            val (T[]): Values.
+            dir (OrderDirection): Ordering direction.
+            strict (boolean): Whether the order should be strict.
         
-            Returns:
-                :code:`true` if sorted, :code:`false` otherwise.
+        Returns:
+            true if sorted, false otherwise.
         
         """
         ...
@@ -5626,78 +6251,59 @@ class MathArrays:
     @staticmethod
     def linearCombination(double: float, double2: float, double3: float, double4: float) -> float:
         """
-            Compute a linear combination accurately.
+        Compute a linear combination accurately.
         
-            This method computes a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` to high accuracy. It does so by using specific
-            multiplication and addition algorithms to preserve accuracy and reduce cancellation effects. It is based on the 2005
-            paper ` Accurate Sum and Dot Product <http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.2.1547>` by Takeshi Ogita,
-            Siegfried M. Rump, and Shin'ichi Oishi published in SIAM J. Sci. Comput.
+        This method computes a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` to high accuracy. It does so by using specific multiplication and addition algorithms to preserve accuracy and reduce cancellation effects. It is based on the 2005 paper ` Accurate Sum and Dot Product <http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.2.1547>` by Takeshi Ogita, Siegfried M. Rump, and Shin'ichi Oishi published in SIAM J. Sci. Comput.
         
-            Parameters:
-                a1 (double): first factor of the first term
-                b1 (double): second factor of the first term
-                a2 (double): first factor of the second term
-                b2 (double): second factor of the second term
+        Parameters:
+            a1 (double): first factor of the first term
+            b1 (double): second factor of the first term
+            a2 (double): first factor of the second term
+            b2 (double): second factor of the second term
         
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-            Also see:
+              - linearCombination
+              - linearCombination
         
-                  - :meth:`~org.hipparchus.util.MathArrays.linearCombination`
-                  - :meth:`~org.hipparchus.util.MathArrays.linearCombination`
+        Compute a linear combination accurately.
         
+        This method computes a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` to high accuracy. It does so by using specific multiplication and addition algorithms to preserve accuracy and reduce cancellation effects. It is based on the 2005 paper ` Accurate Sum and Dot Product <http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.2.1547>` by Takeshi Ogita, Siegfried M. Rump, and Shin'ichi Oishi published in SIAM J. Sci. Comput.
         
-            Compute a linear combination accurately.
+        Parameters:
+            a1 (double): first factor of the first term
+            b1 (double): second factor of the first term
+            a2 (double): first factor of the second term
+            b2 (double): second factor of the second term
+            a3 (double): first factor of the third term
+            b3 (double): second factor of the third term
         
-            This method computes a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` to high accuracy. It
-            does so by using specific multiplication and addition algorithms to preserve accuracy and reduce cancellation effects.
-            It is based on the 2005 paper ` Accurate Sum and Dot Product
-            <http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.2.1547>` by Takeshi Ogita, Siegfried M. Rump, and Shin'ichi
-            Oishi published in SIAM J. Sci. Comput.
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-            Parameters:
-                a1 (double): first factor of the first term
-                b1 (double): second factor of the first term
-                a2 (double): first factor of the second term
-                b2 (double): second factor of the second term
-                a3 (double): first factor of the third term
-                b3 (double): second factor of the third term
+              - linearCombination
+              - linearCombination
         
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
+        Compute a linear combination accurately.
         
-            Also see:
+        This method computes a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4` to high accuracy. It does so by using specific multiplication and addition algorithms to preserve accuracy and reduce cancellation effects. It is based on the 2005 paper ` Accurate Sum and Dot Product <http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.2.1547>` by Takeshi Ogita, Siegfried M. Rump, and Shin'ichi Oishi published in SIAM J. Sci. Comput.
         
-                  - :meth:`~org.hipparchus.util.MathArrays.linearCombination`
-                  - :meth:`~org.hipparchus.util.MathArrays.linearCombination`
+        Parameters:
+            a1 (double): first factor of the first term
+            b1 (double): second factor of the first term
+            a2 (double): first factor of the second term
+            b2 (double): second factor of the second term
+            a3 (double): first factor of the third term
+            b3 (double): second factor of the third term
+            a4 (double): first factor of the third term
+            b4 (double): second factor of the third term
         
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-            Compute a linear combination accurately.
-        
-            This method computes a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b
-            :sub:`4` to high accuracy. It does so by using specific multiplication and addition algorithms to preserve accuracy and
-            reduce cancellation effects. It is based on the 2005 paper ` Accurate Sum and Dot Product
-            <http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.2.1547>` by Takeshi Ogita, Siegfried M. Rump, and Shin'ichi
-            Oishi published in SIAM J. Sci. Comput.
-        
-            Parameters:
-                a1 (double): first factor of the first term
-                b1 (double): second factor of the first term
-                a2 (double): first factor of the second term
-                b2 (double): second factor of the second term
-                a3 (double): first factor of the third term
-                b3 (double): second factor of the third term
-                a4 (double): first factor of the third term
-                b4 (double): second factor of the third term
-        
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.util.MathArrays.linearCombination`
-                  - :meth:`~org.hipparchus.util.MathArrays.linearCombination`
+              - linearCombination
+              - linearCombination
         
         
         
@@ -5713,122 +6319,123 @@ class MathArrays:
     @staticmethod
     def linearCombination(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @staticmethod
-    def natural(int: int) -> typing.MutableSequence[int]:
+    def natural(n: int) -> typing.MutableSequence[int]:
         """
-            Returns an array representing the natural number :code:`n`.
+        Returns an array representing the natural number n.
         
-            Parameters:
-                n (int): Natural number.
+        Parameters:
+            n (int): Natural number.
         
-            Returns:
-                an array whose entries are the numbers 0, 1, ..., :code:`n`-1. If :code:`n == 0`, the returned array is empty.
-        
-        
-        """
-        ...
-    @staticmethod
-    def normalizeArray(doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float) -> typing.MutableSequence[float]: ...
-    @staticmethod
-    def safeNorm(doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
-        """
-            Returns the Cartesian norm (2-norm), handling both overflow and underflow. Translation of the minpack enorm subroutine.
-        
-            The redistribution policy for MINPACK is available `here <http://www.netlib.org/minpack/disclaimer>`, for convenience,
-            it is reproduced below.
-        
-                Minpack Copyright Notice (1999) University of Chicago. All rights reserved
-        
-                Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
-                following conditions are met:
-        
-                  1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following
-                    disclaimer.
-                  2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
-                    disclaimer in the documentation and/or other materials provided with the distribution.
-                  3.  The end-user documentation included with the redistribution, if any, must include the following acknowledgment:
-                    :code:`This product includes software developed by the University of Chicago, as Operator of Argonne National
-                    Laboratory.` Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party
-                    acknowledgments normally appear.
-                  4.  **WARRANTY DISCLAIMER. THE SOFTWARE IS SUPPLIED "AS IS" WITHOUT WARRANTY OF ANY KIND. THE COPYRIGHT HOLDER, THE UNITED
-                    STATES, THE UNITED STATES DEPARTMENT OF ENERGY, AND THEIR EMPLOYEES: (1) DISCLAIM ANY WARRANTIES, EXPRESS OR IMPLIED,
-                    INCLUDING BUT NOT LIMITED TO ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE OR
-                    NON-INFRINGEMENT, (2) DO NOT ASSUME ANY LEGAL LIABILITY OR RESPONSIBILITY FOR THE ACCURACY, COMPLETENESS, OR USEFULNESS
-                    OF THE SOFTWARE, (3) DO NOT REPRESENT THAT USE OF THE SOFTWARE WOULD NOT INFRINGE PRIVATELY OWNED RIGHTS, (4) DO NOT
-                    WARRANT THAT THE SOFTWARE WILL FUNCTION UNINTERRUPTED, THAT IT IS ERROR-FREE OR THAT ANY ERRORS WILL BE CORRECTED.**
-                  5.  **LIMITATION OF LIABILITY. IN NO EVENT WILL THE COPYRIGHT HOLDER, THE UNITED STATES, THE UNITED STATES DEPARTMENT OF
-                    ENERGY, OR THEIR EMPLOYEES: BE LIABLE FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL OR PUNITIVE DAMAGES OF ANY
-                    KIND OR NATURE, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS OR LOSS OF DATA, FOR ANY REASON WHATSOEVER, WHETHER SUCH
-                    LIABILITY IS ASSERTED ON THE BASIS OF CONTRACT, TORT (INCLUDING NEGLIGENCE OR STRICT LIABILITY), OR OTHERWISE, EVEN IF
-                    ANY OF SAID PARTIES HAS BEEN WARNED OF THE POSSIBILITY OF SUCH LOSS OR DAMAGES.**
-        
-        
-            Parameters:
-                v (double[]): Vector of doubles.
-        
-            Returns:
-                the 2-norm of the vector.
+        Returns:
+            an array whose entries are the numbers 0, 1..., n-1. If n == 0, the returned array is empty.
         
         
         """
         ...
     @staticmethod
-    def scale(double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
+    def normalizeArray(values: typing.Union[typing.List[float], jpype.JArray], normalizedSum: float) -> typing.MutableSequence[float]:
         """
-            Create a copy of an array scaled by a value.
+        Normalizes an array to make it sum to a specified value. Returns the result of the transformation
         
-            Parameters:
-                val (double): Scalar.
-                arr (double[]): Array to scale.
+            x ↦ x * normalizedSum / sum applied to each non-NaN element x of the input array, where sum is the sum of the non-NaN entries in the input array.
         
-            Returns:
-                scaled copy of array with each entry multiplied by val.
+        Throws IllegalArgumentException if normalizedSum is infinite or NaN and ArithmeticException if the input array contains any infinite elements or sums to 0.
         
+        Ignores (i.e., copies unchanged to the output array) NaNs in the input array. The input array is unchanged by this method.
         
-        """
-        ...
-    @staticmethod
-    def scaleInPlace(double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
-        """
-            Multiply each element of an array by a value.
+        Parameters:
+            values (double[]): Input array to be normalized
+            normalizedSum (double): Target sum for the normalized array
         
-            The array is modified in place (no copy is created).
+        Returns:
+            the normalized array
         
-            Parameters:
-                val (double): Scalar
-                arr (double[]): Array to scale
+        Raises:
+            MathRuntimeException: if the input array contains infinite elements or sums to zero
+            MathIllegalArgumentException: if the target sum is infinite or NaN
         
         
         """
         ...
     @staticmethod
-    def sequence(int: int, int2: int, int3: int) -> typing.MutableSequence[int]:
+    def safeNorm(v: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
-            Returns an array of :code:`size` integers starting at :code:`start`, skipping :code:`stride` numbers.
+        Returns the Cartesian norm (2-norm), handling both overflow and underflow. Translation of the minpack enorm subroutine.
         
-            Parameters:
-                size (int): Natural number.
-                start (int): Natural number.
-                stride (int): Natural number.
+        The redistribution policy for MINPACK is available `here <http://www.netlib.org/minpack/disclaimer>`, for convenience, it is reproduced below.
         
-            Returns:
-                an array whose entries are the numbers :code:`start, start + stride, ..., start + (size - 1) * stride`. If :code:`size
-                == 0`, the returned array is empty.
+            Minpack Copyright Notice (1999) University of Chicago. All rights reserved
+        
+            Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        
+              1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. 2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. 3.  The end-user documentation included with the redistribution, if any, must include the following acknowledgment: This product includes software developed by the University of Chicago, as Operator of Argonne National Laboratory Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments normally appear. 4.  WARRANTY DISCLAIMER. THE SOFTWARE IS SUPPLIED "AS IS" WITHOUT WARRANTY OF ANY KIND. THE COPYRIGHT HOLDER, THE UNITED STATES, THE UNITED STATES DEPARTMENT OF ENERGY, AND THEIR EMPLOYEES: (1) DISCLAIM ANY WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE OR NON-INFRINGEMENT, (2) DO NOT ASSUME ANY LEGAL LIABILITY OR RESPONSIBILITY FOR THE ACCURACY, COMPLETENESS, OR USEFULNESS OF THE SOFTWARE, (3) DO NOT REPRESENT THAT USE OF THE SOFTWARE WOULD NOT INFRINGE PRIVATELY OWNED RIGHTS, (4) DO NOT WARRANT THAT THE SOFTWARE WILL FUNCTION UNINTERRUPTED, THAT IT IS ERROR-FREE OR THAT ANY ERRORS WILL BE CORRECTED. 5.  LIMITATION OF LIABILITY. IN NO EVENT WILL THE COPYRIGHT HOLDER, THE UNITED STATES, THE UNITED STATES DEPARTMENT OF ENERGY, OR THEIR EMPLOYEES: BE LIABLE FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL OR PUNITIVE DAMAGES OF ANY KIND OR NATURE, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS OR LOSS OF DATA, FOR ANY REASON WHATSOEVER, WHETHER SUCH LIABILITY IS ASSERTED ON THE BASIS OF CONTRACT, TORT (INCLUDING NEGLIGENCE OR STRICT LIABILITY), OR OTHERWISE, EVEN IF ANY OF SAID PARTIES HAS BEEN WARNED OF THE POSSIBILITY OF SUCH LOSS OR DAMAGES.
+        
+        
+        Parameters:
+            v (double[]): Vector of doubles.
+        
+        Returns:
+            the 2-norm of the vector.
+        
+        
+        """
+        ...
+    @staticmethod
+    def scale(val: float, arr: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
+        """
+        Create a copy of an array scaled by a value.
+        
+        Parameters:
+            val (double): Scalar.
+            arr (double[]): Array to scale.
+        
+        Returns:
+            scaled copy of array with each entry multiplied by val.
+        
+        
+        """
+        ...
+    @staticmethod
+    def scaleInPlace(val: float, arr: typing.Union[typing.List[float], jpype.JArray]) -> None:
+        """
+        Multiply each element of an array by a value.
+        
+        The array is modified in place (no copy is created).
+        
+        Parameters:
+            val (double): Scalar
+            arr (double[]): Array to scale
+        
+        
+        """
+        ...
+    @staticmethod
+    def sequence(size: int, start: int, stride: int) -> typing.MutableSequence[int]:
+        """
+        Returns an array of size integers starting at start, skipping stride numbers.
+        
+        Parameters:
+            size (int): Natural number.
+            start (int): Natural number.
+            stride (int): Natural number.
+        
+        Returns:
+            an array whose entries are the numbers , start + (size - 1) * stride. If size
+            == 0, the returned array is empty.
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def shuffle(intArray: typing.Union[typing.List[int], jpype.JArray]) -> None:
+    def shuffle(list: typing.Union[typing.List[int], jpype.JArray]) -> None:
         """
-            Shuffle the entries of the given array.
+        Shuffle the entries of the given array.
         
-            Parameters:
-                list (int[]): Array whose entries will be shuffled (in-place).
+        Parameters:
+            list (int[]): Array whose entries will be shuffled (in-place).
         
-            Also see:
-        
-                  - :meth:`~org.hipparchus.util.MathArrays.shuffle`
+              - shuffle
         
         
         
@@ -5838,32 +6445,26 @@ class MathArrays:
     @staticmethod
     def shuffle(intArray: typing.Union[typing.List[int], jpype.JArray], int2: int, position: 'MathArrays.Position') -> None:
         """
-            Shuffle the entries of the given array. The :code:`start` and :code:`pos` parameters select which portion of the array
-            is randomized and which is left untouched.
+        Shuffle the entries of the given array. The start and pos parameters select which portion of the array is randomized and which is left untouched.
         
-            Parameters:
-                list (int[]): Array whose entries will be shuffled (in-place).
-                start (int): Index at which shuffling begins.
-                pos (:class:`~org.hipparchus.util.MathArrays.Position`): Shuffling is performed for index positions between :code:`start` and either the end (if
-                    :meth:`~org.hipparchus.util.MathArrays.Position.TAIL`) or the beginning (if
-                    :meth:`~org.hipparchus.util.MathArrays.Position.HEAD`) of the array.
+        Parameters:
+            list (int[]): Array whose entries will be shuffled (in-place).
+            start (int): Index at which shuffling begins.
+            pos (Position): Shuffling is performed for index positions between start and either the end (if
+                TAIL) or the beginning (if
+                HEAD) of the array.
         
-            Also see:
+              - shuffle
         
-                  - :meth:`~org.hipparchus.util.MathArrays.shuffle`
+        Shuffle the entries of the given array, using the Fisher algorithm. The start and pos parameters select which portion of the array is randomized and which is left untouched.
         
-        
-            Shuffle the entries of the given array, using the :meth:`~org.hipparchus.util.https:.en.wikipedia.org.wiki.Fisher`
-            algorithm. The :code:`start` and :code:`pos` parameters select which portion of the array is randomized and which is
-            left untouched.
-        
-            Parameters:
-                list (int[]): Array whose entries will be shuffled (in-place).
-                start (int): Index at which shuffling begins.
-                pos (:class:`~org.hipparchus.util.MathArrays.Position`): Shuffling is performed for index positions between :code:`start` and either the end (if
-                    :meth:`~org.hipparchus.util.MathArrays.Position.TAIL`) or the beginning (if
-                    :meth:`~org.hipparchus.util.MathArrays.Position.HEAD`) of the array.
-                rng (:class:`~org.hipparchus.random.RandomGenerator`): Random number generator.
+        Parameters:
+            list (int[]): Array whose entries will be shuffled (in-place).
+            start (int): Index at which shuffling begins.
+            pos (Position): Shuffling is performed for index positions between start and either the end (if
+                TAIL) or the beginning (if
+                HEAD) of the array.
+            rng (RandomGenerator): Random number generator.
         
         """
         ...
@@ -5872,17 +6473,15 @@ class MathArrays:
     def shuffle(intArray: typing.Union[typing.List[int], jpype.JArray], int2: int, position: 'MathArrays.Position', randomGenerator: org.hipparchus.random.RandomGenerator) -> None: ...
     @typing.overload
     @staticmethod
-    def shuffle(intArray: typing.Union[typing.List[int], jpype.JArray], randomGenerator: org.hipparchus.random.RandomGenerator) -> None:
+    def shuffle(list: typing.Union[typing.List[int], jpype.JArray], rng: org.hipparchus.random.RandomGenerator) -> None:
         """
-            Shuffle the entries of the given array.
+        Shuffle the entries of the given array.
         
-            Parameters:
-                list (int[]): Array whose entries will be shuffled (in-place).
-                rng (:class:`~org.hipparchus.random.RandomGenerator`): Random number generator.
+        Parameters:
+            list (int[]): Array whose entries will be shuffled (in-place).
+            rng (RandomGenerator): Random number generator.
         
-            Also see:
-        
-                  - :meth:`~org.hipparchus.util.MathArrays.shuffle`
+              - shuffle
         
         
         """
@@ -5894,21 +6493,18 @@ class MathArrays:
     @staticmethod
     def sortInPlace(doubleArray: typing.Union[typing.List[float], jpype.JArray], orderDirection: 'MathArrays.OrderDirection', *doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
     @staticmethod
-    def unique(doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
+    def unique(data: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
         """
-            Returns an array consisting of the unique values in :code:`data`. The return array is sorted in descending order. Empty
-            arrays are allowed, but null arrays result in NullPointerException. Infinities are allowed. NaN values are allowed with
-            maximum sort order - i.e., if there are NaN values in :code:`data`, :code:`Double.NaN` will be the first element of the
-            output array, even if the array also contains :code:`Double.POSITIVE_INFINITY`.
+        Returns an array consisting of the unique values in data. The return array is sorted in descending order. Empty arrays are allowed, but null arrays result in NullPointerException. Infinities are allowed. NaN values are allowed with maximum sort order - i.e., if there are NaN values in data, NaN will be the first element of the output array, even if the array also contains POSITIVE_INFINITY.
         
-            Parameters:
-                data (double[]): array to scan
+        Parameters:
+            data (double[]): array to scan
         
-            Returns:
-                descending list of values included in the input array
+        Returns:
+            descending list of values included in the input array
         
-            Raises:
-                :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException`: if data is null
+        Raises:
+            NullPointerException: if data is null
         
         
         """
@@ -5958,66 +6554,50 @@ class MathArrays:
 _MathUtils__FieldSumAndResidual__T = typing.TypeVar('_MathUtils__FieldSumAndResidual__T', bound=org.hipparchus.FieldElement)  # <T>
 class MathUtils:
     """
-    public final classMathUtils extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Miscellaneous utility functions.
     
-        Miscellaneous utility functions.
-    
-        Also see:
-    
-              - :class:`~org.hipparchus.util.ArithmeticUtils`
-              - :class:`~org.hipparchus.util.Precision`
-              - :class:`~org.hipparchus.util.MathArrays`
+          - ArithmeticUtils
+          - Precision
+          - MathArrays
     """
     TWO_PI: typing.ClassVar[float] = ...
     """
-    public static final double TWO_PI
+    \(2\pi\)
     
-        \(2\pi\)
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     PI_SQUARED: typing.ClassVar[float] = ...
     """
-    public static final double PI_SQUARED
+    \(\pi^2\)
     
-        \(\pi^2\)
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     SEMI_PI: typing.ClassVar[float] = ...
     """
-    public static final double SEMI_PI
+    \(\pi/2\).
     
-        \(\pi/2\).
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     @staticmethod
-    def checkDimension(int: int, int2: int) -> None:
+    def checkDimension(dimension: int, otherDimension: int) -> None:
         """
-            Checks that the given dimensions match.
+        Checks that the given dimensions match.
         
-            Parameters:
-                dimension (int): the first dimension.
-                otherDimension (int): the second dimension.
+        Parameters:
+            dimension (int): the first dimension.
+            otherDimension (int): the second dimension.
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if length != otherLength.
+        Raises:
+            MathIllegalArgumentException: if length != otherLength.
         
         
         """
@@ -6038,25 +6618,25 @@ class MathUtils:
     @staticmethod
     def checkRangeInclusive(double: float, double2: float, double3: float) -> None:
         """
-            Checks that the given value is strictly within the range [lo, hi].
+        Checks that the given value is strictly within the range [lo, hi].
         
-            Parameters:
-                value (long): value to be checked.
-                lo (long): the lower bound (inclusive).
-                hi (long): the upper bound (inclusive).
+        Parameters:
+            value (long): value to be checked.
+            lo (long): the lower bound (inclusive).
+            hi (long): the upper bound (inclusive).
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`value` is strictly outside [lo, hi].
+        Raises:
+            MathIllegalArgumentException: if value is strictly outside [lo, hi].
         
-            Checks that the given value is strictly within the range [lo, hi].
+        Checks that the given value is strictly within the range [lo, hi].
         
-            Parameters:
-                value (double): value to be checked.
-                lo (double): the lower bound (inclusive).
-                hi (double): the upper bound (inclusive).
+        Parameters:
+            value (double): value to be checked.
+            lo (double): the lower bound (inclusive).
+            hi (double): the upper bound (inclusive).
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`value` is strictly outside [lo, hi].
+        Raises:
+            MathIllegalArgumentException: if value is strictly outside [lo, hi].
         
         
         """
@@ -6079,15 +6659,14 @@ class MathUtils:
     @typing.overload
     def equals(self, object: typing.Any) -> bool:
         """
-            Returns :code:`true` if the values are equal according to semantics of
-            :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.equals`.
+        Returns true if the values are equal according to semantics of equals.
         
-            Parameters:
-                x (double): Value
-                y (double): Value
+        Parameters:
+            x (double): Value
+            y (double): Value
         
-            Returns:
-                :code:`Double.valueOf(x).equals(Double.valueOf(y))`
+        Returns:
+            valueOf(y))
         
         
         """
@@ -6098,16 +6677,15 @@ class MathUtils:
     @staticmethod
     def getHipparchusVersion() -> str:
         """
-            Get Hipparchus version.
+        Get Hipparchus version.
         
-            The version is automatically retrieved from a properties file generated at maven compilation time. When using an IDE not
-            configured to use maven, then a default value :code:`"unknown"` will be returned.
+        The version is automatically retrieved from a properties file generated at maven compilation time. When using an IDE not configured to use maven, then a default value "unknown" will be returned.
         
-            Returns:
-                hipparchus version
+        Returns:
+            hipparchus version
         
-            Since:
-                4.0
+        Since:
+            4.0
         
         
         """
@@ -6116,21 +6694,21 @@ class MathUtils:
     @staticmethod
     def hash(double: float) -> int:
         """
-            Returns an integer hash code representing the given double value.
+        Returns an integer hash code representing the given double value.
         
-            Parameters:
-                value (double): the value to be hashed
+        Parameters:
+            value (double): the value to be hashed
         
-            Returns:
-                the hash code
+        Returns:
+            the hash code
         
-            Returns an integer hash code representing the given double array.
+        Returns an integer hash code representing the given double array.
         
-            Parameters:
-                value (double[]): the value to be hashed (may be null)
+        Parameters:
+            value (double[]): the value to be hashed (may be null)
         
-            Returns:
-                the hash code
+        Returns:
+            the hash code
         
         
         """
@@ -6140,32 +6718,32 @@ class MathUtils:
     def hash(doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> int: ...
     _max__T = typing.TypeVar('_max__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
-    def max(t: _max__T, t2: _max__T) -> _max__T:
+    def max(e1: _max__T, e2: _max__T) -> _max__T:
         """
-            Find the maximum of two field elements.
+        Find the maximum of two field elements.
         
-            Parameters:
-                e1 (T): first element
-                e2 (T): second element
+        Parameters:
+            e1 (T): first element
+            e2 (T): second element
         
-            Returns:
-                max(a1, e2)
+        Returns:
+            max(a1, e2)
         
         
         """
         ...
     _min__T = typing.TypeVar('_min__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
-    def min(t: _min__T, t2: _min__T) -> _min__T:
+    def min(e1: _min__T, e2: _min__T) -> _min__T:
         """
-            Find the minimum of two field elements.
+        Find the minimum of two field elements.
         
-            Parameters:
-                e1 (T): first element
-                e2 (T): second element
+        Parameters:
+            e1 (T): first element
+            e2 (T): second element
         
-            Returns:
-                min(a1, e2)
+        Returns:
+            min(a1, e2)
         
         
         """
@@ -6173,93 +6751,87 @@ class MathUtils:
     _normalizeAngle_1__T = typing.TypeVar('_normalizeAngle_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def normalizeAngle(double: float, double2: float) -> float:
+    def normalizeAngle(a: float, center: float) -> float:
         """
-            Normalize an angle in a 2π wide interval around a center value.
+        Normalize an angle in a 2π wide interval around a center value.
         
-            This method has three main uses:
+        This method has three main uses:
         
-              - normalize an angle between 0 and 2π:
-        
-        
-        :code:`a = MathUtils.normalizeAngle(a, FastMath.PI);`
-              - normalize an angle between -π and +π
+          - normalize an angle between 0 and 2π:
         
         
-        :code:`a = MathUtils.normalizeAngle(a, 0.0);`
-              - compute the angle between two defining angular positions:
+        PI);
+          - normalize an angle between -π and +π
         
         
-        :code:`angle = MathUtils.normalizeAngle(end, start) - start;`
+        0);
+          - compute the angle between two defining angular positions:
         
         
-            Note that due to numerical accuracy and since π cannot be represented exactly, the result interval is *closed*, it
-            cannot be half-closed as would be more satisfactory in a purely mathematical view.
+        normalizeAngle(end, start) - start;
         
-            Parameters:
-                a (double): angle to normalize
-                center (double): center of the desired 2π interval for the result
+        Note that due to numerical accuracy and since π cannot be represented exactly, the result interval is closed, it cannot be half-closed as would be more satisfactory in a purely mathematical view.
         
-            Returns:
-                a-2kπ with integer k and center-π <= a-2kπ <= center+π
+        Parameters:
+            a (double): angle to normalize
+            center (double): center of the desired 2π interval for the result
+        
+        Returns:
+            a-2kπ with integer k and center-π <= a-2kπ <= center+π
         
         """
         ...
     @typing.overload
     @staticmethod
-    def normalizeAngle(t: _normalizeAngle_1__T, t2: _normalizeAngle_1__T) -> _normalizeAngle_1__T:
+    def normalizeAngle(a: _normalizeAngle_1__T, center: _normalizeAngle_1__T) -> _normalizeAngle_1__T:
         """
-            Normalize an angle in a 2π wide interval around a center value.
+        Normalize an angle in a 2π wide interval around a center value.
         
-            This method has three main uses:
+        This method has three main uses:
         
-              - normalize an angle between 0 and 2π:
-        
-        
-        :code:`a = MathUtils.normalizeAngle(a, FastMath.PI);`
-              - normalize an angle between -π and +π
+          - normalize an angle between 0 and 2π:
         
         
-        :code:`a = MathUtils.normalizeAngle(a, zero);`
-              - compute the angle between two defining angular positions:
+        PI);
+          - normalize an angle between -π and +π
         
         
-        :code:`angle = MathUtils.normalizeAngle(end, start).subtract(start);`
+        normalizeAngle(a, zero);
+          - compute the angle between two defining angular positions:
         
         
-            Note that due to numerical accuracy and since π cannot be represented exactly, the result interval is *closed*, it
-            cannot be half-closed as would be more satisfactory in a purely mathematical view.
+        subtract(start);
         
-            Parameters:
-                a (T): angle to normalize
-                center (T): center of the desired 2π interval for the result
+        Note that due to numerical accuracy and since π cannot be represented exactly, the result interval is closed, it cannot be half-closed as would be more satisfactory in a purely mathematical view.
         
-            Returns:
-                a-2kπ with integer k and center-π <= a-2kπ <= center+π
+        Parameters:
+            a (T): angle to normalize
+            center (T): center of the desired 2π interval for the result
+        
+        Returns:
+            a-2kπ with integer k and center-π <= a-2kπ <= center+π
         
         
         """
         ...
     @staticmethod
-    def reduce(double: float, double2: float, double3: float) -> float:
+    def reduce(a: float, period: float, offset: float) -> float:
         """
+        Reduce |a - offset| to the primary interval [0, |period|).
         
-            Reduce :code:`|a - offset|` to the primary interval :code:`[0, |period|)`.
+        Specifically, the value returned is
         
-            Specifically, the value returned is
+        a - |period| * floor((a - offset) / |period|) - offset.
         
+        If any of the parameters are NaN or infinite, the result is NaN.
         
-            :code:`a - |period| * floor((a - offset) / |period|) - offset`.
+        Parameters:
+            a (double): Value to reduce.
+            period (double): Period.
+            offset (double): Value that will be mapped to .
         
-            If any of the parameters are :code:`NaN` or infinite, the result is :code:`NaN`.
-        
-            Parameters:
-                a (double): Value to reduce.
-                period (double): Period.
-                offset (double): Value that will be mapped to :code:`0`.
-        
-            Returns:
-                the value, within the interval :code:`[0 |period|)`, that corresponds to :code:`a`.
+        Returns:
+            the value, within the interval [0 |period|), that corresponds to a.
         
         
         """
@@ -6267,48 +6839,48 @@ class MathUtils:
     _twoSum_0__T = typing.TypeVar('_twoSum_0__T', bound=org.hipparchus.FieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def twoSum(t: _twoSum_0__T, t2: _twoSum_0__T) -> 'MathUtils.FieldSumAndResidual'[_twoSum_0__T]:
+    def twoSum(a: _twoSum_0__T, b: _twoSum_0__T) -> 'MathUtils.FieldSumAndResidual'[_twoSum_0__T]:
         """
-            Sums :code:`a` and :code:`b` using Møller's 2Sum algorithm.
+        Sums a and b using Møller's 2Sum algorithm.
         
-            References:
+        References:
         
-              - Møller, Ole. "Quasi double-precision in floating point addition." BIT 5, 37–50 (1965).
-              - Shewchuk, Richard J. "Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates." Discrete &
-                Computational Geometry 18, 305–363 (1997).
-              - :class:`~org.hipparchus.util.https:.en.wikipedia.org.wiki.2Sum`
+          - Møller, Ole. "Quasi double-precision in floating point addition." BIT 5, 37–50 (1965).
+          - Shewchuk, Richard J. "Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates." Discrete &
+            Computational Geometry 18, 305–363 (1997).
+          - 2Sum
         
         
-            Parameters:
-                a (T): first summand
-                b (T): second summand
+        Parameters:
+            a (T): first summand
+            b (T): second summand
         
-            Returns:
-                sum and residual error in the sum
+        Returns:
+            sum and residual error in the sum
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def twoSum(double: float, double2: float) -> 'MathUtils.SumAndResidual':
+    def twoSum(a: float, b: float) -> 'MathUtils.SumAndResidual':
         """
-            Sums :code:`a` and :code:`b` using Møller's 2Sum algorithm.
+        Sums a and b using Møller's 2Sum algorithm.
         
-            References:
+        References:
         
-              - Møller, Ole. "Quasi double-precision in floating point addition." BIT 5, 37–50 (1965).
-              - Shewchuk, Richard J. "Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates." Discrete &
-                Computational Geometry 18, 305–363 (1997).
-              - :class:`~org.hipparchus.util.https:.en.wikipedia.org.wiki.2Sum`
+          - Møller, Ole. "Quasi double-precision in floating point addition." BIT 5, 37–50 (1965).
+          - Shewchuk, Richard J. "Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates." Discrete &
+            Computational Geometry 18, 305–363 (1997).
+          - 2Sum
         
         
-            Parameters:
-                a (double): first summand
-                b (double): second summand
+        Parameters:
+            a (double): first summand
+            b (double): second summand
         
-            Returns:
-                sum and residual error in the sum
+        Returns:
+            sum and residual error in the sum
         
         """
         ...
@@ -6321,76 +6893,112 @@ class MathUtils:
 
 class MultidimensionalCounter(java.lang.Iterable[int]):
     """
-    public classMultidimensionalCounter extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable`<:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer`>
+    implements Iterable<Integer>
     
-        Converter between unidimensional storage structure and multidimensional conceptual structure. This utility will convert
-        from indices in a multidimensional structure to the corresponding index in a one-dimensional array. For example,
-        assuming that the ranges (in 3 dimensions) of indices are 2, 4 and 3, the following correspondences, between 3-tuples
-        indices and unidimensional indices, will hold:
+    Converter between unidimensional storage structure and multidimensional conceptual structure. This utility will convert from indices in a multidimensional structure to the corresponding index in a one-dimensional array. For example, assuming that the ranges (in 3 dimensions) of indices are 2, 4 and 3, the following correspondences, between 3-tuples indices and unidimensional indices, will hold:
     
-          - (0, 0, 0) corresponds to 0
-          - (0, 0, 1) corresponds to 1
-          - (0, 0, 2) corresponds to 2
-          - (0, 1, 0) corresponds to 3
-          - ...
-          - (1, 0, 0) corresponds to 12
-          - ...
-          - (1, 3, 2) corresponds to 23
+      - (0, 0, 0) corresponds to 0
+      - (0, 0, 1) corresponds to 1
+      - (0, 0, 2) corresponds to 2
+      - (0, 1, 0) corresponds to 3
+      - ...
+      - (1, 0, 0) corresponds to 12
+      - ...
+      - (1, 3, 2) corresponds to 23
     """
-    def __init__(self, *int: int): ...
-    def getCount(self, *int: int) -> int: ...
-    def getCounts(self, int: int) -> typing.MutableSequence[int]: ...
+    def __init__(self, *size: int):
+        """
+        Create a counter.
+        
+        Parameters:
+            size (int...): Counter sizes (number of slots in each dimension).
+        
+        Raises:
+            MathIllegalArgumentException: if one of the sizes is negative or zero.
+        
+        
+        """
+        ...
+    def getCount(self, *c: int) -> int:
+        """
+        Convert to unidimensional counter.
+        
+        Parameters:
+            c (int...): Indices in multidimensional counter.
+        
+        Returns:
+            the index within the unidimensionl counter.
+        
+        Raises:
+            MathIllegalArgumentException: if the size of c does not match the size of the array given in the constructor.
+            MathIllegalArgumentException: if a value of c is not in the range of the corresponding dimension, as defined in the
+                .
+        
+        
+        """
+        ...
+    def getCounts(self, index: int) -> typing.MutableSequence[int]:
+        """
+        Convert to multidimensional counter.
+        
+        Parameters:
+            index (int): Index in unidimensional counter.
+        
+        Returns:
+            the multidimensional counts.
+        
+        Raises:
+            MathIllegalArgumentException: if index is not between  and the value returned by
+                getSize (excluded).
+        
+        
+        """
+        ...
     def getDimension(self) -> int:
         """
-            Get the number of dimensions of the multidimensional counter.
+        Get the number of dimensions of the multidimensional counter.
         
-            Returns:
-                the number of dimensions.
+        Returns:
+            the number of dimensions.
         
         
         """
         ...
     def getSize(self) -> int:
         """
-            Get the total number of elements.
+        Get the total number of elements.
         
-            Returns:
-                the total size of the unidimensional counter.
+        Returns:
+            the total size of the unidimensional counter.
         
         
         """
         ...
     def getSizes(self) -> typing.MutableSequence[int]:
         """
-            Get the number of multidimensional counter slots in each dimension.
+        Get the number of multidimensional counter slots in each dimension.
         
-            Returns:
-                the sizes of the multidimensional counter in each dimension.
+        Returns:
+            the sizes of the multidimensional counter in each dimension.
         
         
         """
         ...
     def iterator(self) -> 'MultidimensionalCounter.Iterator':
         """
-            Create an iterator over this counter.
+        Create an iterator over this counter.
         
-            Specified by:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable.iterator` in
-                interface :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable`
+        Specified by: iterator in interface Iterable
         
-            Returns:
-                the iterator.
+        Returns:
+            the iterator.
         
         
         """
         ...
     def toString(self) -> str:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.toString` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: toString in class Object
         
         
         """
@@ -6409,12 +7017,9 @@ _Pair__K = typing.TypeVar('_Pair__K')  # <K>
 _Pair__V = typing.TypeVar('_Pair__V')  # <V>
 class Pair(typing.Generic[_Pair__K, _Pair__V]):
     """
-    public classPair<K,V> extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Generic pair.
     
-        Generic pair.
-    
-        Although the instances of this class are immutable, it is impossible to ensure that the references passed to the
-        constructor will not be modified by the caller.
+    Although the instances of this class are immutable, it is impossible to ensure that the references passed to the constructor will not be modified by the caller.
     """
     @typing.overload
     def __init__(self, k: _Pair__K, v: _Pair__V): ...
@@ -6425,95 +7030,88 @@ class Pair(typing.Generic[_Pair__K, _Pair__V]):
     @staticmethod
     def create(k: _create__K, v: _create__V) -> 'Pair'[_create__K, _create__V]:
         """
-            Convenience factory method that calls the :meth:`~org.hipparchus.util.Pair.%3Cinit%3E`.
+        Convenience factory method that calls the .
         
-            Parameters:
-                k (K): First element of the pair.
-                v (V): Second element of the pair.
+        Parameters:
+            k (K): First element of the pair.
+            v (V): Second element of the pair.
         
-            Returns:
-                a new :code:`Pair` containing :code:`k` and :code:`v`.
+        Returns:
+            a new Pair containing k and v.
         
         
         """
         ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, o: typing.Any) -> bool:
         """
-            Compare the specified object with this entry for equality.
+        Compare the specified object with this entry for equality.
         
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: equals in class Object
         
-            Parameters:
-                o (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`): Object.
+        Parameters:
+            o (Object): Object.
         
-            Returns:
-                :code:`true` if the given object is also a map entry and the two entries represent the same mapping.
+        Returns:
+            true if the given object is also a map entry and the two entries represent the same mapping.
         
         
         """
         ...
     def getFirst(self) -> _Pair__K:
         """
-            Get the first element of the pair.
+        Get the first element of the pair.
         
-            Returns:
-                the first element of the pair.
+        Returns:
+            the first element of the pair.
         
         
         """
         ...
     def getKey(self) -> _Pair__K:
         """
-            Get the key.
+        Get the key.
         
-            Returns:
-                the key (first element of the pair).
+        Returns:
+            the key (first element of the pair).
         
         
         """
         ...
     def getSecond(self) -> _Pair__V:
         """
-            Get the second element of the pair.
+        Get the second element of the pair.
         
-            Returns:
-                the second element of the pair.
+        Returns:
+            the second element of the pair.
         
         
         """
         ...
     def getValue(self) -> _Pair__V:
         """
-            Get the value.
+        Get the value.
         
-            Returns:
-                the value (second element of the pair).
+        Returns:
+            the value (second element of the pair).
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-            Compute a hash code.
+        Compute a hash code.
         
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.hashCode` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: hashCode in class Object
         
-            Returns:
-                the hash code value.
+        Returns:
+            the hash code value.
         
         
         """
         ...
     def toString(self) -> str:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.toString` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: toString in class Object
         
         
         """
@@ -6521,33 +7119,47 @@ class Pair(typing.Generic[_Pair__K, _Pair__V]):
 
 class PivotingStrategy(java.lang.Enum['PivotingStrategy']):
     """
-    public enumPivotingStrategy extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum`<:class:`~org.hipparchus.util.PivotingStrategy`>
-    
-        A strategy to pick a pivoting index of an array for doing partitioning.
+    A strategy to pick a pivoting index of an array for doing partitioning.
     """
     CENTRAL: typing.ClassVar['PivotingStrategy'] = ...
     MEDIAN_OF_3: typing.ClassVar['PivotingStrategy'] = ...
-    def pivotIndex(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> int: ...
+    def pivotIndex(self, work: typing.Union[typing.List[float], jpype.JArray], begin: int, end: int) -> int:
+        """
+        Find pivot index of the array so that partition and K :sup:`th` element selection can be made
+        
+        Parameters:
+            work (double[]): data array
+            begin (int): index of the first element of the slice
+            end (int): index after the last element of the slice
+        
+        Returns:
+            the index of the pivot element chosen between the first and the last element of the array slice
+        
+        Raises:
+            MathIllegalArgumentException: when indices exceeds range
+        
+        
+        """
+        ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'PivotingStrategy':
+    def valueOf(name: str) -> 'PivotingStrategy':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.String`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`: if this enum type has no constant with the specified name
-                :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -6555,10 +7167,10 @@ class PivotingStrategy(java.lang.Enum['PivotingStrategy']):
     @staticmethod
     def values() -> typing.MutableSequence['PivotingStrategy']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared.
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -6566,70 +7178,54 @@ class PivotingStrategy(java.lang.Enum['PivotingStrategy']):
 
 class Precision:
     """
-    public classPrecision extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    
-        Utilities for comparing numbers.
+    Utilities for comparing numbers.
     """
     EPSILON: typing.ClassVar[float] = ...
     """
-    public static final double EPSILON
+    Largest double-precision floating-point number such that 1 + EPSILON is numerically equal to 1. This value is an upper bound on the relative error due to rounding real numbers to double precision floating-point numbers.
     
-        Largest double-precision floating-point number such that :code:`1 + EPSILON` is numerically equal to 1. This value is an
-        upper bound on the relative error due to rounding real numbers to double precision floating-point numbers.
+    In IEEE 754 arithmetic, this is 2 :sup:`-53` .
     
-        In IEEE 754 arithmetic, this is 2 :sup:`-53` .
-    
-        Also see:
-    
-              - `Machine epsilon <http://en.wikipedia.org/wiki/Machine_epsilon>`
+          - `Machine epsilon <http://en.wikipedia.org/wiki/Machine_epsilon>`
     
     
     
     """
     SAFE_MIN: typing.ClassVar[float] = ...
     """
-    public static final double SAFE_MIN
+    Safe minimum, such that 1 / SAFE_MIN does not overflow.
     
-        Safe minimum, such that :code:`1 / SAFE_MIN` does not overflow.
-    
-    
-        In IEEE 754 arithmetic, this is also the smallest normalized number 2 :sup:`-1022` .
-    
+    In IEEE 754 arithmetic, this is also the smallest normalized number 2 :sup:`-1022` .
     """
     @typing.overload
     @staticmethod
     def compareTo(double: float, double2: float, double3: float) -> int:
         """
-            Compares two numbers given some amount of allowed error.
+        Compares two numbers given some amount of allowed error.
         
-            Parameters:
-                x (double): the first number
-                y (double): the second number
-                eps (double): the amount of error to allow when checking for equality
+        Parameters:
+            x (double): the first number
+            y (double): the second number
+            eps (double): the amount of error to allow when checking for equality
         
-            Returns:
+        Returns:
         
-                  - 0 if :meth:`~org.hipparchus.util.Precision.equals`
-                  - < 0 if !:meth:`~org.hipparchus.util.Precision.equals` &&amp; x < y
-                  - > 0 if !:meth:`~org.hipparchus.util.Precision.equals` &&amp; x > y or either argument is NaN
+              - 0 if equals
+              - < 0 if !equals &&amp; x < y
+              - > 0 if !equals &&amp; x > y or either argument is NaN
         
+        Compares two numbers given some amount of allowed error. Two float numbers are considered equal if there are (maxUlps - 1) (or fewer) floating point numbers between them, i.e. two adjacent floating point numbers are considered equal. Adapted from ` Bruce Dawson <http://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/>`. Returns false if either of the arguments is NaN.
         
-            Compares two numbers given some amount of allowed error. Two float numbers are considered equal if there are
-            :code:`(maxUlps - 1)` (or fewer) floating point numbers between them, i.e. two adjacent floating point numbers are
-            considered equal. Adapted from ` Bruce Dawson
-            <http://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/>`. Returns :code:`false` if
-            either of the arguments is NaN.
+        Parameters:
+            x (double): first value
+            y (double): second value
+            maxUlps (int): (maxUlps - 1) is the number of floating point values between x and y.
         
-            Parameters:
-                x (double): first value
-                y (double): second value
-                maxUlps (int): :code:`(maxUlps - 1)` is the number of floating point values between :code:`x` and :code:`y`.
+        Returns:
         
-            Returns:
-        
-                  - 0 if :meth:`~org.hipparchus.util.Precision.equals`
-                  - < 0 if !:meth:`~org.hipparchus.util.Precision.equals` &&amp; x < y
-                  - > 0 if !:meth:`~org.hipparchus.util.Precision.equals` &&amp; x > y or either argument is NaN
+              - 0 if equals
+              - < 0 if !equals &&amp; x < y
+              - > 0 if !equals &&amp; x > y or either argument is NaN
         
         
         
@@ -6641,76 +7237,67 @@ class Precision:
     @typing.overload
     def equals(self, object: typing.Any) -> bool:
         """
-            Returns true iff they are equal as defined by :meth:`~org.hipparchus.util.Precision.equals`.
+        Returns true iff they are equal as defined by equals.
         
-            Parameters:
-                x (float): first value
-                y (float): second value
+        Parameters:
+            x (float): first value
+            y (float): second value
         
-            Returns:
-                :code:`true` if the values are equal.
+        Returns:
+            true if the values are equal.
         
-            Returns true if the arguments are equal or within the range of allowed error (inclusive). Returns :code:`false` if
-            either of the arguments is NaN.
+        Returns true if the arguments are equal or within the range of allowed error (inclusive). Returns false if either of the arguments is NaN.
         
-            Parameters:
-                x (float): first value
-                y (float): second value
-                eps (float): the amount of absolute error to allow.
+        Parameters:
+            x (float): first value
+            y (float): second value
+            eps (float): the amount of absolute error to allow.
         
-            Returns:
-                :code:`true` if the values are equal or within range of each other.
+        Returns:
+            true if the values are equal or within range of each other.
         
-            Returns true if the arguments are equal or within the range of allowed error (inclusive). Two float numbers are
-            considered equal if there are :code:`(maxUlps - 1)` (or fewer) floating point numbers between them, i.e. two adjacent
-            floating point numbers are considered equal. Adapted from ` Bruce Dawson
-            <http://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/>`. Returns :code:`false` if
-            either of the arguments is NaN.
+        Returns true if the arguments are equal or within the range of allowed error (inclusive). Two float numbers are considered equal if there are (maxUlps - 1) (or fewer) floating point numbers between them, i.e. two adjacent floating point numbers are considered equal. Adapted from ` Bruce Dawson <http://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/>`. Returns false if either of the arguments is NaN.
         
-            Parameters:
-                x (float): first value
-                y (float): second value
-                maxUlps (int): :code:`(maxUlps - 1)` is the number of floating point values between :code:`x` and :code:`y`.
+        Parameters:
+            x (float): first value
+            y (float): second value
+            maxUlps (int): (maxUlps - 1) is the number of floating point values between x and y.
         
-            Returns:
-                :code:`true` if there are fewer than :code:`maxUlps` floating point values between :code:`x` and :code:`y`.
+        Returns:
+            true if there are fewer than maxUlps floating point values between x and y.
         
-            Returns true iff they are equal as defined by :meth:`~org.hipparchus.util.Precision.equals`.
+        Returns true iff they are equal as defined by equals.
         
-            Parameters:
-                x (double): first value
-                y (double): second value
+        Parameters:
+            x (double): first value
+            y (double): second value
         
-            Returns:
-                :code:`true` if the values are equal.
+        Returns:
+            true if the values are equal.
         
-            Returns :code:`true` if there is no double value strictly between the arguments or the difference between them is within
-            the range of allowed error (inclusive). Returns :code:`false` if either of the arguments is NaN.
+        Returns true if there is no double value strictly between the arguments or the difference between them is within the range of allowed error (inclusive). Returns false if either of the arguments is NaN.
         
-            Parameters:
-                x (double): First value.
-                y (double): Second value.
-                eps (double): Amount of allowed absolute error.
+        Parameters:
+            x (double): First value.
+            y (double): Second value.
+            eps (double): Amount of allowed absolute error.
         
-            Returns:
-                :code:`true` if the values are two adjacent floating point numbers or they are within range of each other.
+        Returns:
+            true if the values are two adjacent floating point numbers or they are within range of each other.
         
-            Returns true if the arguments are equal or within the range of allowed error (inclusive).
+        Returns true if the arguments are equal or within the range of allowed error (inclusive).
         
-            Two float numbers are considered equal if there are :code:`(maxUlps - 1)` (or fewer) floating point numbers between
-            them, i.e. two adjacent floating point numbers are considered equal.
+        Two float numbers are considered equal if there are (maxUlps - 1) (or fewer) floating point numbers between them, i.e. two adjacent floating point numbers are considered equal.
         
-            Adapted from ` Bruce Dawson
-            <http://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/>`. Returns :code:`false` if
-            either of the arguments is NaN.
+        Adapted from ` Bruce Dawson <http://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/>`. Returns false if either of the arguments is NaN.
         
-            Parameters:
-                x (double): first value
-                y (double): second value
-                maxUlps (int): :code:`(maxUlps - 1)` is the number of floating point values between :code:`x` and :code:`y`.
+        Parameters:
+            x (double): first value
+            y (double): second value
+            maxUlps (int): (maxUlps - 1) is the number of floating point values between x and y.
         
-            Returns:
-                :code:`true` if there are fewer than :code:`maxUlps` floating point values between :code:`x` and :code:`y`.
+        Returns:
+            true if there are fewer than maxUlps floating point values between x and y.
         
         
         """
@@ -6737,67 +7324,65 @@ class Precision:
     @staticmethod
     def equalsIncludingNaN(double: float, double2: float) -> bool:
         """
-            Returns true if both arguments are NaN or they are equal as defined by :meth:`~org.hipparchus.util.Precision.equals`.
+        Returns true if both arguments are NaN or they are equal as defined by equals.
         
-            Parameters:
-                x (float): first value
-                y (float): second value
+        Parameters:
+            x (float): first value
+            y (float): second value
         
-            Returns:
-                :code:`true` if the values are equal or both are NaN.
+        Returns:
+            true if the values are equal or both are NaN.
         
-            Returns true if the arguments are both NaN, are equal, or are within the range of allowed error (inclusive).
+        Returns true if the arguments are both NaN, are equal, or are within the range of allowed error (inclusive).
         
-            Parameters:
-                x (float): first value
-                y (float): second value
-                eps (float): the amount of absolute error to allow.
+        Parameters:
+            x (float): first value
+            y (float): second value
+            eps (float): the amount of absolute error to allow.
         
-            Returns:
-                :code:`true` if the values are equal or within range of each other, or both are NaN.
+        Returns:
+            true if the values are equal or within range of each other, or both are NaN.
         
-            Returns true if the arguments are both NaN or if they are equal as defined by
-            :meth:`~org.hipparchus.util.Precision.equals`.
+        Returns true if the arguments are both NaN or if they are equal as defined by equals.
         
-            Parameters:
-                x (float): first value
-                y (float): second value
-                maxUlps (int): :code:`(maxUlps - 1)` is the number of floating point values between :code:`x` and :code:`y`.
+        Parameters:
+            x (float): first value
+            y (float): second value
+            maxUlps (int): (maxUlps - 1) is the number of floating point values between x and y.
         
-            Returns:
-                :code:`true` if both arguments are NaN or if there are less than :code:`maxUlps` floating point values between :code:`x`
-                and :code:`y`.
+        Returns:
+            true if both arguments are NaN or if there are less than maxUlps floating point values between x
+            and y.
         
-            Returns true if the arguments are both NaN or they are equal as defined by
-            :meth:`~org.hipparchus.util.Precision.equals`.
+        Returns true if the arguments are both NaN or they are equal as defined by equals.
         
-            Parameters:
-                x (double): first value
-                y (double): second value
+        Parameters:
+            x (double): first value
+            y (double): second value
         
-            Returns:
-                :code:`true` if the values are equal or both are NaN.
+        Returns:
+            true if the values are equal or both are NaN.
         
-            Returns true if the arguments are both NaN, are equal or are within the range of allowed error (inclusive).
+        Returns true if the arguments are both NaN, are equal or are within the range of allowed error (inclusive).
         
-            Parameters:
-                x (double): first value
-                y (double): second value
-                eps (double): the amount of absolute error to allow.
+        Parameters:
+            x (double): first value
+            y (double): second value
+            eps (double): the amount of absolute error to allow.
         
-            Returns:
-                :code:`true` if the values are equal or within range of each other, or both are NaN.
+        Returns:
+            true if the values are equal or within range of each other, or both are NaN.
         
-            Returns true if both arguments are NaN or if they are equal as defined by :meth:`~org.hipparchus.util.Precision.equals`.
+        Returns true if both arguments are NaN or if they are equal as defined by equals.
         
-            Parameters:
-                x (double): first value
-                y (double): second value
-                maxUlps (int): :code:`(maxUlps - 1)` is the number of floating point values between :code:`x` and :code:`y`.
+        Parameters:
+            x (double): first value
+            y (double): second value
+            maxUlps (int): (maxUlps - 1) is the number of floating point values between x and y.
         
-            Returns:
-                :code:`true` if both arguments are NaN or if there are less than :code:`maxUlps` floating point values between :code:`x`
-                and :code:`y`.
+        Returns:
+            true if both arguments are NaN or if there are less than maxUlps floating point values between x
+            and y.
         
         
         """
@@ -6818,18 +7403,17 @@ class Precision:
     @staticmethod
     def equalsIncludingNaN(float: float, float2: float, int: int) -> bool: ...
     @staticmethod
-    def equalsWithRelativeTolerance(double: float, double2: float, double3: float) -> bool:
+    def equalsWithRelativeTolerance(x: float, y: float, eps: float) -> bool:
         """
-            Returns :code:`true` if there is no double value strictly between the arguments or the relative difference between them
-            is less than or equal to the given tolerance. Returns :code:`false` if either of the arguments is NaN.
+        Returns true if there is no double value strictly between the arguments or the relative difference between them is less than or equal to the given tolerance. Returns false if either of the arguments is NaN.
         
-            Parameters:
-                x (double): First value.
-                y (double): Second value.
-                eps (double): Amount of allowed relative error.
+        Parameters:
+            x (double): First value.
+            y (double): Second value.
+            eps (double): Amount of allowed relative error.
         
-            Returns:
-                :code:`true` if the values are two adjacent floating point numbers or they are within range of each other.
+        Returns:
+            true if the values are two adjacent floating point numbers or they are within range of each other.
         
         
         """
@@ -6838,27 +7422,27 @@ class Precision:
     @staticmethod
     def isMathematicalInteger(double: float) -> bool:
         """
-            Check is x is a mathematical integer.
+        Check is x is a mathematical integer.
         
-            Parameters:
-                x (double): number to check
+        Parameters:
+            x (double): number to check
         
-            Returns:
-                true if x is a mathematical integer
+        Returns:
+            true if x is a mathematical integer
         
-            Since:
-                1.7
+        Since:
+            1.7
         
-            Check is x is a mathematical integer.
+        Check is x is a mathematical integer.
         
-            Parameters:
-                x (float): number to check
+        Parameters:
+            x (float): number to check
         
-            Returns:
-                true if x is a mathematical integer
+        Returns:
+            true if x is a mathematical integer
         
-            Since:
-                1.7
+        Since:
+            1.7
         
         
         """
@@ -6867,23 +7451,18 @@ class Precision:
     @staticmethod
     def isMathematicalInteger(float: float) -> bool: ...
     @staticmethod
-    def representableDelta(double: float, double2: float) -> float:
+    def representableDelta(x: float, originalDelta: float) -> float:
         """
-            Computes a number :code:`delta` close to :code:`originalDelta` with the property that
+        Computes a number delta close to originalDelta with the property that
         
-            .. code-block: java
-            
-               x + delta - x
-             
-            is exactly machine-representable. This is useful when computing numerical derivatives, in order to reduce roundoff
-            errors.
+           x + delta - x is exactly machine-representable. This is useful when computing numerical derivatives, in order to reduce roundoff errors.
         
-            Parameters:
-                x (double): Value.
-                originalDelta (double): Offset value.
+        Parameters:
+            x (double): Value.
+            originalDelta (double): Offset value.
         
-            Returns:
-                a number :code:`delta` so that :code:`x + delta` and :code:`x` differ by a representable floating number.
+        Returns:
+            a number delta so that x + delta and x differ by a representable floating number.
         
         
         """
@@ -6892,61 +7471,55 @@ class Precision:
     @staticmethod
     def round(double: float, int: int) -> float:
         """
-            Rounds the given value to the specified number of decimal places. The value is rounded using the
-            :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal.ROUND_HALF_UP` method.
+        Rounds the given value to the specified number of decimal places. The value is rounded using the ROUND_HALF_UP method.
         
-            Parameters:
-                x (double): Value to round.
-                scale (int): Number of digits to the right of the decimal point.
+        Parameters:
+            x (double): Value to round.
+            scale (int): Number of digits to the right of the decimal point.
         
-            Returns:
-                the rounded value.
+        Returns:
+            the rounded value.
         
-            Rounds the given value to the specified number of decimal places. The value is rounded using the given method which is
-            any method defined in :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal`. If
-            :code:`x` is infinite or :code:`NaN`, then the value of :code:`x` is returned unchanged, regardless of the other
-            parameters.
+        Rounds the given value to the specified number of decimal places. The value is rounded using the given method which is any method defined in BigDecimal. If x is infinite or NaN, then the value of x is returned unchanged, regardless of the other parameters.
         
-            Parameters:
-                x (double): Value to round.
-                scale (int): Number of digits to the right of the decimal point.
-                roundingMethod (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.math.RoundingMode`): Rounding method as defined in
-                    :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal`.
+        Parameters:
+            x (double): Value to round.
+            scale (int): Number of digits to the right of the decimal point.
+            roundingMethod (RoundingMode): Rounding method as defined in
+                BigDecimal.
         
-            Returns:
-                the rounded value.
+        Returns:
+            the rounded value.
         
-            Raises:
-                :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.ArithmeticException`: if :code:`roundingMethod == ROUND_UNNECESSARY` and the specified scaling operation would require rounding.
-                :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`: if :code:`roundingMethod` does not represent a valid rounding mode.
+        Raises:
+            ArithmeticException: if roundingMethod == ROUND_UNNECESSARY and the specified scaling operation would require rounding.
+            IllegalArgumentException: if roundingMethod does not represent a valid rounding mode.
         
-            Rounds the given value to the specified number of decimal places. The value is rounded using the
-            :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal.ROUND_HALF_UP` method.
+        Rounds the given value to the specified number of decimal places. The value is rounded using the ROUND_HALF_UP method.
         
-            Parameters:
-                x (float): Value to round.
-                scale (int): Number of digits to the right of the decimal point.
+        Parameters:
+            x (float): Value to round.
+            scale (int): Number of digits to the right of the decimal point.
         
-            Returns:
-                the rounded value.
+        Returns:
+            the rounded value.
         
-        public static float round(float x, int scale, :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.math.RoundingMode` roundingMethod) throws :class:`~org.hipparchus.exception.MathRuntimeException`, :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public static float round(float x, int scale, RoundingMode roundingMethod) throws MathRuntimeException, MathIllegalArgumentException
         
-            Rounds the given value to the specified number of decimal places. The value is rounded using the given method which is
-            any method defined in :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal`.
+        Rounds the given value to the specified number of decimal places. The value is rounded using the given method which is any method defined in BigDecimal.
         
-            Parameters:
-                x (float): Value to round.
-                scale (int): Number of digits to the right of the decimal point.
-                roundingMethod (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.math.RoundingMode`): Rounding method as defined in
-                    :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal`.
+        Parameters:
+            x (float): Value to round.
+            scale (int): Number of digits to the right of the decimal point.
+            roundingMethod (RoundingMode): Rounding method as defined in
+                BigDecimal.
         
-            Returns:
-                the rounded value.
+        Returns:
+            the rounded value.
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if an exact operation is required but result is not exact
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`roundingMethod` is not a valid rounding method.
+        Raises:
+            MathRuntimeException: if an exact operation is required but result is not exact
+            MathIllegalArgumentException: if roundingMethod is not a valid rounding method.
         
         
         """
@@ -6963,43 +7536,19 @@ class Precision:
 
 class ResizableDoubleArray(java.io.Serializable):
     """
-    public classResizableDoubleArray extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements Serializable
     
-        A variable length primitive double array implementation that automatically handles expanding and contracting its
-        internal storage array as elements are added and removed.
+    A variable length primitive double array implementation that automatically handles expanding and contracting its internal storage array as elements are added and removed.
     
-        The internal storage array starts with capacity determined by the :code:`initialCapacity` property, which can be set by
-        the constructor. The default initial capacity is 16. Adding elements using
-        :meth:`~org.hipparchus.util.ResizableDoubleArray.addElement` appends elements to the end of the array. When there are no
-        open entries at the end of the internal storage array, the array is expanded. The size of the expanded array depends on
-        the :code:`expansionMode` and :code:`expansionFactor` properties. The :code:`expansionMode` determines whether the size
-        of the array is multiplied by the :code:`expansionFactor`
-        (:meth:`~org.hipparchus.util.ResizableDoubleArray.ExpansionMode.MULTIPLICATIVE`) or if the expansion is additive
-        (:meth:`~org.hipparchus.util.ResizableDoubleArray.ExpansionMode.ADDITIVE` -- :code:`expansionFactor` storage locations
-        added). The default :code:`expansionMode` is :code:`MULTIPLICATIVE` and the default :code:`expansionFactor` is 2.
+    The internal storage array starts with capacity determined by the initialCapacity property, which can be set by the constructor. The default initial capacity is 16. Adding elements using addElement appends elements to the end of the array. When there are no open entries at the end of the internal storage array, the array is expanded. The size of the expanded array depends on the expansionMode and expansionFactor properties. The expansionMode determines whether the size of the array is multiplied by the expansionFactor (MULTIPLICATIVE) or if the expansion is additive (ADDITIVE -- expansionFactor storage locations added). The default expansionMode is MULTIPLICATIVE and the default expansionFactor is 2.
     
-        The :meth:`~org.hipparchus.util.ResizableDoubleArray.addElementRolling` method adds a new element to the end of the
-        internal storage array and adjusts the "usable window" of the internal array forward by one position (effectively making
-        what was the second element the first, and so on). Repeated activations of this method (or activation of
-        :meth:`~org.hipparchus.util.ResizableDoubleArray.discardFrontElements`) will effectively orphan the storage locations at
-        the beginning of the internal storage array. To reclaim this storage, each time one of these methods is activated, the
-        size of the internal storage array is compared to the number of addressable elements (the :code:`numElements` property)
-        and if the difference is too large, the internal array is contracted to size :code:`numElements + 1`. The determination
-        of when the internal storage array is "too large" depends on the :code:`expansionMode` and :code:`contractionFactor`
-        properties. If the :code:`expansionMode` is :code:`MULTIPLICATIVE`, contraction is triggered when the ratio between
-        storage array length and :code:`numElements` exceeds :code:`contractionFactor.` If the :code:`expansionMode` is
-        :code:`ADDITIVE`, the number of excess storage locations is compared to :code:`contractionFactor`.
+    The addElementRolling method adds a new element to the end of the internal storage array and adjusts the "usable window" of the internal array forward by one position (effectively making what was the second element the first, and so on). Repeated activations of this method (or activation of discardFrontElements) will effectively orphan the storage locations at the beginning of the internal storage array. To reclaim this storage, each time one of these methods is activated, the size of the internal storage array is compared to the number of addressable elements (the numElements property) and if the difference is too large, the internal array is contracted to size numElements + 1. The determination of when the internal storage array is "too large" depends on the expansionMode and contractionFactor properties. If the expansionMode is MULTIPLICATIVE, contraction is triggered when the ratio between storage array length and numElements exceeds contractionFactor If the expansionMode is ADDITIVE, the number of excess storage locations is compared to contractionFactor.
     
-        To avoid cycles of expansions and contractions, the :code:`expansionFactor` must not exceed the
-        :code:`contractionFactor`. Constructors and mutators for both of these properties enforce this requirement, throwing a
-        :code:`MathIllegalArgumentException` if it is violated.
+    To avoid cycles of expansions and contractions, the expansionFactor must not exceed the contractionFactor. Constructors and mutators for both of these properties enforce this requirement, throwing a MathIllegalArgumentException if it is violated.
     
-        **Note:** this class is **NOT** thread-safe.
+    Note: this class is NOT thread-safe.
     
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -7015,226 +7564,262 @@ class ResizableDoubleArray(java.io.Serializable):
     def __init__(self, int: int, double: float, double2: float, expansionMode: 'ResizableDoubleArray.ExpansionMode', *double3: float): ...
     @typing.overload
     def __init__(self, resizableDoubleArray: 'ResizableDoubleArray'): ...
-    def addElement(self, double: float) -> None:
+    def addElement(self, value: float) -> None:
         """
-            Adds an element to the end of this expandable array.
+        Adds an element to the end of this expandable array.
         
-            Parameters:
-                value (double): Value to be added to end of array.
-        
-        
-        """
-        ...
-    def addElementRolling(self, double: float) -> float:
-        """
-            Adds an element to the end of the array and removes the first element in the array. Returns the discarded first element.
-        
-            The effect is similar to a push operation in a FIFO queue.
-        
-            Example: If the array contains the elements 1, 2, 3, 4 (in that order) and addElementRolling(5) is invoked, the result
-            is an array containing the entries 2, 3, 4, 5 and the value returned is 1.
-        
-            Parameters:
-                value (double): Value to be added to the array.
-        
-            Returns:
-                the value which has been discarded or "pushed" out of the array by this rolling insert.
+        Parameters:
+            value (double): Value to be added to end of array.
         
         
         """
         ...
-    def addElements(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
+    def addElementRolling(self, value: float) -> float:
         """
-            Adds several element to the end of this expandable array.
+        Adds an element to the end of the array and removes the first element in the array. Returns the discarded first element.
         
-            Parameters:
-                values (double[]): Values to be added to end of array.
+        The effect is similar to a push operation in a FIFO queue.
+        
+        Example: If the array contains the elements 1, 2, 3, 4 (in that order) and addElementRolling(5) is invoked, the result is an array containing the entries 2, 3, 4, 5 and the value returned is 1.
+        
+        Parameters:
+            value (double): Value to be added to the array.
+        
+        Returns:
+            the value which has been discarded or "pushed" out of the array by this rolling insert.
+        
+        
+        """
+        ...
+    def addElements(self, values: typing.Union[typing.List[float], jpype.JArray]) -> None:
+        """
+        Adds several element to the end of this expandable array.
+        
+        Parameters:
+            values (double[]): Values to be added to end of array.
         
         
         """
         ...
     def clear(self) -> None:
         """
-            Clear the array contents, resetting the number of elements to zero.
-        
+        Clear the array contents, resetting the number of elements to zero.
         """
         ...
-    def compute(self, function: MathArrays.Function) -> float:
+    def compute(self, f: MathArrays.Function) -> float:
         """
-            Performs an operation on the addressable elements of the array.
+        Performs an operation on the addressable elements of the array.
         
-            Parameters:
-                f (:class:`~org.hipparchus.util.MathArrays.Function`): Function to be applied on this array.
+        Parameters:
+            f (Function): Function to be applied on this array.
         
-            Returns:
-                the result.
+        Returns:
+            the result.
         
         
         """
         ...
     def contract(self) -> None:
         """
-            Contracts the storage array to the (size of the element set) + 1 - to avoid a zero length array. This function also
-            resets the startIndex to zero.
-        
+        Contracts the storage array to the (size of the element set) + 1 - to avoid a zero length array. This function also resets the startIndex to zero.
         """
         ...
     def copy(self) -> 'ResizableDoubleArray':
         """
-            Returns a copy of the ResizableDoubleArray. Does not contract before the copy, so the returned object is an exact copy
-            of this.
+        Returns a copy of the ResizableDoubleArray. Does not contract before the copy, so the returned object is an exact copy of this.
         
-            Returns:
-                a new ResizableDoubleArray with the same data and configuration properties as this
+        Returns:
+            a new ResizableDoubleArray with the same data and configuration properties as this
         
         
         """
         ...
-    def discardFrontElements(self, int: int) -> None: ...
-    def discardMostRecentElements(self, int: int) -> None: ...
+    def discardFrontElements(self, i: int) -> None:
+        """
+        Discards the i initial elements of the array.
+        
+        For example, if the array contains the elements 1,2,3,4, invoking discardFrontElements(2) will cause the first two elements to be discarded, leaving 3,4 in the array.
+        
+        Parameters:
+            i (int): the number of elements to discard from the front of the array
+        
+        Raises:
+            MathIllegalArgumentException: if i is greater than numElements.
+        
+        
+        """
+        ...
+    def discardMostRecentElements(self, i: int) -> None:
+        """
+        Discards the i last elements of the array.
+        
+        For example, if the array contains the elements 1,2,3,4, invoking discardMostRecentElements(2) will cause the last two elements to be discarded, leaving 1,2 in the array.
+        
+        Parameters:
+            i (int): the number of elements to discard from the end of the array
+        
+        Raises:
+            MathIllegalArgumentException: if i is greater than numElements.
+        
+        
+        """
+        ...
     def equals(self, object: typing.Any) -> bool:
         """
-            Returns true iff object is a ResizableDoubleArray with the same properties as this and an identical internal storage
-            array.
+        Returns true iff object is a ResizableDoubleArray with the same properties as this and an identical internal storage array.
         
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: equals in class Object
         
-            Parameters:
-                object (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`): object to be compared for equality with this
+        Parameters:
+            object (Object): object to be compared for equality with this
         
-            Returns:
-                true iff object is a ResizableDoubleArray with the same data and properties as this
+        Returns:
+            true iff object is a ResizableDoubleArray with the same data and properties as this
         
         
         """
         ...
     def getCapacity(self) -> int:
         """
-            Gets the currently allocated size of the internal data structure used for storing elements. This is not to be confused
-            with :meth:`~org.hipparchus.util.ResizableDoubleArray.getNumElements`.
+        Gets the currently allocated size of the internal data structure used for storing elements. This is not to be confused with getNumElements.
         
-            Returns:
-                the length of the internal array.
+        Returns:
+            the length of the internal array.
         
         
         """
         ...
     def getContractionCriterion(self) -> float:
         """
-            The contraction criterion defines when the internal array will contract to store only the number of elements in the
-            element array.
+        The contraction criterion defines when the internal array will contract to store only the number of elements in the element array.
         
-            If the :code:`expansionMode` is :code:`MULTIPLICATIVE`, contraction is triggered when the ratio between storage array
-            length and :code:`numElements` exceeds :code:`contractionFactor`. If the :code:`expansionMode` is :code:`ADDITIVE`, the
-            number of excess storage locations is compared to :code:`contractionFactor`.
+        If the expansionMode is MULTIPLICATIVE, contraction is triggered when the ratio between storage array length and numElements exceeds contractionFactor. If the expansionMode is ADDITIVE, the number of excess storage locations is compared to contractionFactor.
         
-            Returns:
-                the contraction criterion used to reclaim memory.
+        Returns:
+            the contraction criterion used to reclaim memory.
         
         
         """
         ...
-    def getElement(self, int: int) -> float:
+    def getElement(self, index: int) -> float:
         """
-            Returns the element at the specified index.
+        Returns the element at the specified index.
         
-            Parameters:
-                index (int): index to fetch a value from
+        Parameters:
+            index (int): index to fetch a value from
         
-            Returns:
-                value stored at the specified index
+        Returns:
+            value stored at the specified index
         
-            Raises:
-                :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.ArrayIndexOutOfBoundsException`: if :code:`index` is less than zero or is greater than :code:`getNumElements() - 1`.
+        Raises:
+            ArrayIndexOutOfBoundsException: if index is less than zero or is greater than getNumElements() - 1.
         
         
         """
         ...
     def getElements(self) -> typing.MutableSequence[float]:
         """
-            Returns a double array containing the elements of this ResizableArray.
+        Returns a double array containing the elements of this ResizableArray.
         
-            This method returns a copy, not a reference to the underlying array, so that changes made to the returned array have no
-            effect on this ResizableArray.
+        This method returns a copy, not a reference to the underlying array, so that changes made to the returned array have no effect on this ResizableArray.
         
-            Returns:
-                the double array.
+        Returns:
+            the double array.
         
         
         """
         ...
     def getExpansionFactor(self) -> float:
         """
-            The expansion factor controls the size of a new array when an array needs to be expanded.
+        The expansion factor controls the size of a new array when an array needs to be expanded.
         
-            The :code:`expansionMode` determines whether the size of the array is multiplied by the :code:`expansionFactor`
-            (MULTIPLICATIVE) or if the expansion is additive (ADDITIVE -- :code:`expansionFactor` storage locations added). The
-            default :code:`expansionMode` is MULTIPLICATIVE and the default :code:`expansionFactor` is 2.0.
+        The expansionMode determines whether the size of the array is multiplied by the expansionFactor (MULTIPLICATIVE) or if the expansion is additive (ADDITIVE -- expansionFactor storage locations added). The default expansionMode is MULTIPLICATIVE and the default expansionFactor is 2.0.
         
-            Returns:
-                the expansion factor of this expandable double array
+        Returns:
+            the expansion factor of this expandable double array
         
         
         """
         ...
     def getExpansionMode(self) -> 'ResizableDoubleArray.ExpansionMode':
         """
-            The expansion mode determines whether the internal storage array grows additively or multiplicatively when it is
-            expanded.
+        The expansion mode determines whether the internal storage array grows additively or multiplicatively when it is expanded.
         
-            Returns:
-                the expansion mode.
+        Returns:
+            the expansion mode.
         
         
         """
         ...
     def getNumElements(self) -> int:
         """
-            Returns the number of elements currently in the array. Please note that this is different from the length of the
-            internal storage array.
+        Returns the number of elements currently in the array. Please note that this is different from the length of the internal storage array.
         
-            Returns:
-                the number of elements.
+        Returns:
+            the number of elements.
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-            Returns a hash code consistent with equals.
+        Returns a hash code consistent with equals.
         
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.hashCode` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: hashCode in class Object
         
-            Returns:
-                the hash code representing this :code:`ResizableDoubleArray`.
+        Returns:
+            the hash code representing this ResizableDoubleArray.
         
         
         """
         ...
-    def setElement(self, int: int, double: float) -> None:
+    def setElement(self, index: int, value: float) -> None:
         """
-            Sets the element at the specified index.
+        Sets the element at the specified index.
         
-            If the specified index is greater than :code:`getNumElements() - 1`, the :code:`numElements` property is increased to
-            :code:`index +1` and additional storage is allocated (if necessary) for the new element and all (uninitialized) elements
-            between the new element and the previous end of the array).
+        If the specified index is greater than getNumElements() - 1, the numElements property is increased to index +1 and additional storage is allocated (if necessary) for the new element and all (uninitialized) elements between the new element and the previous end of the array).
         
-            Parameters:
-                index (int): index to store a value in
-                value (double): value to store at the specified index
+        Parameters:
+            index (int): index to store a value in
+            value (double): value to store at the specified index
         
-            Raises:
-                :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.ArrayIndexOutOfBoundsException`: if :code:`index < 0`.
+        Raises:
+            ArrayIndexOutOfBoundsException: if index < 0.
         
         
         """
         ...
-    def setNumElements(self, int: int) -> None: ...
-    def substituteMostRecentElement(self, double: float) -> float: ...
+    def setNumElements(self, i: int) -> None:
+        """
+        This function allows you to control the number of elements contained in this array, and can be used to "throw out" the last n values in an array. This function will also expand the internal array as needed.
+        
+        Parameters:
+            i (int): a new number of elements
+        
+        Raises:
+            MathIllegalArgumentException: if i is negative.
+        
+        
+        """
+        ...
+    def substituteMostRecentElement(self, value: float) -> float:
+        """
+        Substitutes value for the most recently added value.
+        
+        Returns the value that has been replaced. If the array is empty (i.e. if numElements is zero), an MathIllegalStateException is thrown.
+        
+        Parameters:
+            value (double): New value to substitute for the most recently added value
+        
+        Returns:
+            the value that has been replaced in the array.
+        
+        Raises:
+            MathIllegalStateException: if the array is empty
+        
+        
+        """
+        ...
     class ExpansionMode(java.lang.Enum['ResizableDoubleArray.ExpansionMode']):
         MULTIPLICATIVE: typing.ClassVar['ResizableDoubleArray.ExpansionMode'] = ...
         ADDITIVE: typing.ClassVar['ResizableDoubleArray.ExpansionMode'] = ...
@@ -7250,30 +7835,30 @@ class ResizableDoubleArray(java.io.Serializable):
 
 class RosenNumberPartitionIterator(java.util.Iterator[typing.MutableSequence[int]]):
     """
-    public classRosenNumberPartitionIterator extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Iterator`<int[]>
+    implements Iterator<int[]>
     
-        An iterator that generates all partitions of :code:`n` elements, into :code:`k` parts containing the number of elements
-        in each part, based on Rosen's algorithm.
+    An iterator that generates all partitions of n elements, into k parts containing the number of elements in each part, based on Rosen's algorithm.
     
-        This is a copy of the class (with slight edits) with the same name from the
-        :class:`~org.hipparchus.util.https:.github.com.axkr.symja_android_library`. The original file was published under the
-        terms of the GPLV3 license, but the Hipparchus project was :meth:`~org.hipparchus.util.https:.github.com.Hipparchus` to
-        include it relicensed to Apache V2.
+    This is a copy of the class (with slight edits) with the same name from the symja_android_library. The original file was published under the terms of the GPLV3 license, but the Hipparchus project was Hipparchus to include it relicensed to Apache V2.
     
-        See Kenneth H. Rosen, Discrete Mathematics and Its Applications, 2nd edition (NY: McGraw-Hill, 1991), pp. 284-286
+    See Kenneth H. Rosen, Discrete Mathematics and Its Applications, 2nd edition (NY: McGraw-Hill, 1991), pp. 284-286
     """
-    def __init__(self, int: int, int2: int): ...
+    def __init__(self, n: int, k: int):
+        """
+        Simple constructor.
+        
+        Parameters:
+            n (int): the number of elements
+            k (int): divided into k parts
+        
+        
+        """
+        ...
     def hasNext(self) -> bool:
         """
+        Specified by: hasNext in interface Iterator
         
-            Specified by:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Iterator.hasNext` in
-                interface :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Iterator`
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Iterator.hasNext`
+              - hasNext
         
         
         
@@ -7281,14 +7866,9 @@ class RosenNumberPartitionIterator(java.util.Iterator[typing.MutableSequence[int
         ...
     def next(self) -> typing.MutableSequence[int]:
         """
+        Specified by: next in interface Iterator
         
-            Specified by:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Iterator.next` in
-                interface :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Iterator`
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Iterator.next`
+              - next
         
         
         
@@ -7296,47 +7876,32 @@ class RosenNumberPartitionIterator(java.util.Iterator[typing.MutableSequence[int
         ...
     def reset(self) -> None:
         """
-            Reset this iterator to the start condition.
-        
+        Reset this iterator to the start condition.
         """
         ...
 
 class RyuDouble:
     """
-    public final classRyuDouble extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    An implementation of Ryū for double.
     
-        An implementation of Ryū for double.
+    Ryū generates the shortest decimal representation of a floating point number that maintains round-trip safety. That is, a correct parser can recover the exact original number. Ryū is very fast (about 10 time faster than toString()).
     
-        Ryū generates the shortest decimal representation of a floating point number that maintains round-trip safety. That is,
-        a correct parser can recover the exact original number. Ryū is very fast (about 10 time faster than
-        :code:`Double.toString()`).
-    
-        Also see:
-    
-              - :class:`~org.hipparchus.util.https:.dl.acm.org.citation.cfm?doid=3296979.3192369`
+          - cfm
     """
     DEFAULT_LOW_EXP: typing.ClassVar[int] = ...
     """
-    public static final int DEFAULT_LOW_EXP
+    Default low switch level to scientific notation.
     
-        Default low switch level to scientific notation.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     DEFAULT_HIGH_EXP: typing.ClassVar[int] = ...
     """
-    public static final int DEFAULT_HIGH_EXP
+    Default high switch level to scientific notation.
     
-        Default high switch level to scientific notation.
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
@@ -7345,43 +7910,35 @@ class RyuDouble:
     @staticmethod
     def doubleToString(double: float) -> str:
         """
-            Convert a double to shortest string representation, preserving full accuracy.
+        Convert a double to shortest string representation, preserving full accuracy.
         
-            This implementation uses the same specifications as :code:`Double.toString()`, i.e. it uses scientific notation if for
-            numbers smaller than 10⁻³ or larger than 10⁺⁷, and decimal notion in between. That is it call
-            :meth:`~org.hipparchus.util.RyuDouble.doubleToString`.
+        This implementation uses the same specifications as toString(), i.e. it uses scientific notation if for numbers smaller than 10⁻³ or larger than 10⁺⁷, and decimal notion in between. That is it call doubleToString.
         
-            Parameters:
-                value (double): double number to convert
+        Parameters:
+            value (double): double number to convert
         
-            Returns:
-                shortest string representation
+        Returns:
+            shortest string representation
         
-            Also see:
+              - doubleToString
+              - DEFAULT_LOW_EXP
+              - DEFAULT_HIGH_EXP
         
-                  - :meth:`~org.hipparchus.util.RyuDouble.doubleToString`
-                  - :meth:`~org.hipparchus.util.RyuDouble.DEFAULT_LOW_EXP`
-                  - :meth:`~org.hipparchus.util.RyuDouble.DEFAULT_HIGH_EXP`
+        Convert a double to shortest string representation, preserving full accuracy.
         
+        Number inside of the interval [10 :sup:`lowExp` , 10 :sup:`highExp` ] are represented using decimal notation, numbers outside of this range are represented using scientific notation.
         
-            Convert a double to shortest string representation, preserving full accuracy.
+        Parameters:
+            value (double): double number to convert
+            lowExp (int): lowest decimal exponent for which decimal notation can be used
+            highExp (int): highest decimal exponent for which decimal notation can be used
         
-            Number inside of the interval [10 :sup:`lowExp` , 10 :sup:`highExp` ] are represented using decimal notation, numbers
-            outside of this range are represented using scientific notation.
+        Returns:
+            shortest string representation
         
-            Parameters:
-                value (double): double number to convert
-                lowExp (int): lowest decimal exponent for which decimal notation can be used
-                highExp (int): highest decimal exponent for which decimal notation can be used
-        
-            Returns:
-                shortest string representation
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.util.RyuDouble.doubleToString`
-                  - :meth:`~org.hipparchus.util.RyuDouble.DEFAULT_LOW_EXP`
-                  - :meth:`~org.hipparchus.util.RyuDouble.DEFAULT_HIGH_EXP`
+              - doubleToString
+              - DEFAULT_LOW_EXP
+              - DEFAULT_HIGH_EXP
         
         
         
@@ -7393,71 +7950,67 @@ class RyuDouble:
 
 class SinCos:
     """
-    public classSinCos extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Holder for both sine and cosine values.
     
-        Holder for both sine and cosine values.
+    This class is a simple container, it does not provide any computational method.
     
-        This class is a simple container, it does not provide any computational method.
+    Since:
+        1.3
     
-        Since:
-            1.3
-    
-        Also see:
-    
-              - :meth:`~org.hipparchus.util.FastMath.sinCos`
+          - sinCos
     """
     def cos(self) -> float:
         """
-            Get the value of the cosine.
+        Get the value of the cosine.
         
-            Returns:
-                value of the cosine
+        Returns:
+            value of the cosine
         
         
         """
         ...
     @staticmethod
-    def difference(sinCos: 'SinCos', sinCos2: 'SinCos') -> 'SinCos':
+    def difference(scAlpha: 'SinCos', scBeta: 'SinCos') -> 'SinCos':
         """
-            Compute sine and cosine of angles difference.
+        Compute sine and cosine of angles difference.
         
-            Parameters:
-                scAlpha (:class:`~org.hipparchus.util.SinCos`): \((\sin \alpha, \cos \alpha)\)
-                scBeta (:class:`~org.hipparchus.util.SinCos`): \((\sin \beta, \cos \beta)\)
+        Parameters:
+            scAlpha (SinCos): \((\sin \alpha, \cos \alpha)\)
+            scBeta (SinCos): \((\sin \beta, \cos \beta)\)
         
-            Returns:
-                \((\sin \alpha+\beta, \cos \alpha-\beta)\)
+        Returns:
+            \((\sin \alpha+\beta, \cos \alpha-\beta)\)
         
-            Since:
-                1.8
+        Since:
+            1.8
         
         
         """
         ...
     def sin(self) -> float:
         """
-            Get the value of the sine.
+        Get the value of the sine.
         
-            Returns:
-                value of the sine
+        Returns:
+            value of the sine
         
         
         """
         ...
     @staticmethod
-    def sum(sinCos: 'SinCos', sinCos2: 'SinCos') -> 'SinCos':
+    def sum(scAlpha: 'SinCos', scBeta: 'SinCos') -> 'SinCos':
         """
-            Compute sine and cosine of angles sum.
+        Compute sine and cosine of angles sum.
         
-            Parameters:
-                scAlpha (:class:`~org.hipparchus.util.SinCos`): \((\sin \alpha, \cos \alpha)\)
-                scBeta (:class:`~org.hipparchus.util.SinCos`): \((\sin \beta, \cos \beta)\)
+        Parameters:
+            scAlpha (SinCos): \((\sin \alpha, \cos \alpha)\)
+            scBeta (SinCos): \((\sin \beta, \cos \beta)\)
         
-            Returns:
-                \((\sin \alpha+\beta, \cos \alpha+\beta)\)
+        Returns:
+            \((\sin \alpha+\beta, \cos \alpha+\beta)\)
         
-            Since:
-                1.8
+        Since:
+            1.8
         
         
         """
@@ -7465,65 +8018,61 @@ class SinCos:
 
 class SinhCosh:
     """
-    public classSinhCosh extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Holder for both hyperbolic sine and hyperbolic cosine values.
     
-        Holder for both hyperbolic sine and hyperbolic cosine values.
+    This class is a simple container, it does not provide any computational method.
     
-        This class is a simple container, it does not provide any computational method.
+    Since:
+        2.0
     
-        Since:
-            2.0
-    
-        Also see:
-    
-              - :meth:`~org.hipparchus.util.FastMath.sinhCosh`
+          - sinhCosh
     """
     def cosh(self) -> float:
         """
-            Get the value of the hyperbolic cosine.
+        Get the value of the hyperbolic cosine.
         
-            Returns:
-                value of the hyperbolic cosine
+        Returns:
+            value of the hyperbolic cosine
         
         
         """
         ...
     @staticmethod
-    def difference(sinhCosh: 'SinhCosh', sinhCosh2: 'SinhCosh') -> 'SinhCosh':
+    def difference(schAlpha: 'SinhCosh', schBeta: 'SinhCosh') -> 'SinhCosh':
         """
-            Compute hyperbolic sine and hyperbolic cosine of angles difference.
+        Compute hyperbolic sine and hyperbolic cosine of angles difference.
         
-            Parameters:
-                schAlpha (:class:`~org.hipparchus.util.SinhCosh`): \((\sinh \alpha, \cosh \alpha)\)
-                schBeta (:class:`~org.hipparchus.util.SinhCosh`): \((\sinh \beta, \cosh \beta)\)
+        Parameters:
+            schAlpha (SinhCosh): \((\sinh \alpha, \cosh \alpha)\)
+            schBeta (SinhCosh): \((\sinh \beta, \cosh \beta)\)
         
-            Returns:
-                \((\sinh \alpha+\beta, \cosh \alpha-\beta)\)
+        Returns:
+            \((\sinh \alpha+\beta, \cosh \alpha-\beta)\)
         
         
         """
         ...
     def sinh(self) -> float:
         """
-            Get the value of the hyperbolic sine.
+        Get the value of the hyperbolic sine.
         
-            Returns:
-                value of the hyperbolic sine
+        Returns:
+            value of the hyperbolic sine
         
         
         """
         ...
     @staticmethod
-    def sum(sinhCosh: 'SinhCosh', sinhCosh2: 'SinhCosh') -> 'SinhCosh':
+    def sum(schAlpha: 'SinhCosh', schBeta: 'SinhCosh') -> 'SinhCosh':
         """
-            Compute hyperbolic sine and hyperbolic cosine of angles sum.
+        Compute hyperbolic sine and hyperbolic cosine of angles sum.
         
-            Parameters:
-                schAlpha (:class:`~org.hipparchus.util.SinhCosh`): \((\sinh \alpha, \cosh \alpha)\)
-                schBeta (:class:`~org.hipparchus.util.SinhCosh`): \((\sinh \beta, \cosh \beta)\)
+        Parameters:
+            schAlpha (SinhCosh): \((\sinh \alpha, \cosh \alpha)\)
+            schBeta (SinhCosh): \((\sinh \beta, \cosh \beta)\)
         
-            Returns:
-                \((\sinh \alpha+\beta, \cosh \alpha+\beta)\)
+        Returns:
+            \((\sinh \alpha+\beta, \cosh \alpha+\beta)\)
         
         
         """
@@ -7531,50 +8080,55 @@ class SinhCosh:
 
 class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     """
-    public classTuple extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.util.Tuple`>
+    implements CalculusFieldElement<Tuple>
     
-        This class allows to perform the same computation of all components of a Tuple at once.
+    This class allows to perform the same computation of all components of a Tuple at once.
     
-        Since:
-            1.2
+    Since:
+        1.2
     """
-    def __init__(self, *double: float): ...
+    def __init__(self, *x: float):
+        """
+        Creates a new instance from its components.
+        
+        Parameters:
+            x (double...): components of the tuple
+        
+        
+        """
+        ...
     def abs(self) -> 'Tuple':
         """
-            absolute value.
+        absolute value.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.abs` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: abs in interface CalculusFieldElement
         
-            Returns:
-                abs(this)
+        Returns:
+            abs(this)
         
         
         """
         ...
     def acos(self) -> 'Tuple':
         """
-            Arc cosine operation.
+        Arc cosine operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.acos` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: acos in interface CalculusFieldElement
         
-            Returns:
-                acos(this)
+        Returns:
+            acos(this)
         
         
         """
         ...
     def acosh(self) -> 'Tuple':
         """
-            Inverse hyperbolic cosine operation.
+        Inverse hyperbolic cosine operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.acosh` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: acosh in interface CalculusFieldElement
         
-            Returns:
-                acosh(this)
+        Returns:
+            acosh(this)
         
         
         """
@@ -7582,27 +8136,25 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     @typing.overload
     def add(self, double: float) -> 'Tuple':
         """
-            Compute this + a.
+        Compute this + a.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.add` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: add in interface FieldElement
         
-            Parameters:
-                a (:class:`~org.hipparchus.util.Tuple`): element to add
+        Parameters:
+            a (Tuple): element to add
         
-            Returns:
-                a new element representing this + a
+        Returns:
+            a new element representing this + a
         
-            '+' operator.
+        '+' operator.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.add` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: add in interface CalculusFieldElement
         
-            Parameters:
-                a (double): right hand side parameter of the operator
+        Parameters:
+            a (double): right hand side parameter of the operator
         
-            Returns:
-                this+a
+        Returns:
+            this+a
         
         
         """
@@ -7611,99 +8163,89 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     def add(self, tuple: 'Tuple') -> 'Tuple': ...
     def asin(self) -> 'Tuple':
         """
-            Arc sine operation.
+        Arc sine operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.asin` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: asin in interface CalculusFieldElement
         
-            Returns:
-                asin(this)
+        Returns:
+            asin(this)
         
         
         """
         ...
     def asinh(self) -> 'Tuple':
         """
-            Inverse hyperbolic sine operation.
+        Inverse hyperbolic sine operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.asinh` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: asinh in interface CalculusFieldElement
         
-            Returns:
-                asin(this)
+        Returns:
+            asin(this)
         
         
         """
         ...
     def atan(self) -> 'Tuple':
         """
-            Arc tangent operation.
+        Arc tangent operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.atan` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: atan in interface CalculusFieldElement
         
-            Returns:
-                atan(this)
+        Returns:
+            atan(this)
         
         
         """
         ...
-    def atan2(self, tuple: 'Tuple') -> 'Tuple':
+    def atan2(self, x: 'Tuple') -> 'Tuple':
         """
-            Two arguments arc tangent operation.
+        Two arguments arc tangent operation.
         
-            Beware of the order or arguments! As this is based on a two-arguments functions, in order to be consistent with
-            arguments order, the instance is the *first* argument and the single provided argument is the *second* argument. In
-            order to be consistent with programming languages :code:`atan2`, this method computes :code:`atan2(this, x)`, i.e. the
-            instance represents the :code:`y` argument and the :code:`x` argument is the one passed as a single argument. This may
-            seem confusing especially for users of Wolfram alpha, as this site is *not* consistent with programming languages
-            :code:`atan2` two-arguments arc tangent and puts :code:`x` as its first argument.
+        Beware of the order or arguments! As this is based on a two-arguments functions, in order to be consistent with arguments order, the instance is the first argument and the single provided argument is the second argument. In order to be consistent with programming languages atan2, this method computes atan2(this, x), i.e. the instance represents the y argument and the x argument is the one passed as a single argument. This may seem confusing especially for users of Wolfram alpha, as this site is not consistent with programming languages atan2 two-arguments arc tangent and puts x as its first argument.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.atan2` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: atan2 in interface CalculusFieldElement
         
-            Parameters:
-                x (:class:`~org.hipparchus.util.Tuple`): second argument of the arc tangent
+        Parameters:
+            x (Tuple): second argument of the arc tangent
         
-            Returns:
+        Returns:
+            atan2(this, x)
+        
         
         """
         ...
     def atanh(self) -> 'Tuple':
         """
-            Inverse hyperbolic tangent operation.
+        Inverse hyperbolic tangent operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.atanh` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: atanh in interface CalculusFieldElement
         
-            Returns:
-                atanh(this)
+        Returns:
+            atanh(this)
         
         
         """
         ...
     def cbrt(self) -> 'Tuple':
         """
-            Cubic root.
+        Cubic root.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.cbrt` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: cbrt in interface CalculusFieldElement
         
-            Returns:
-                cubic root of the instance
+        Returns:
+            cubic root of the instance
         
         
         """
         ...
     def ceil(self) -> 'Tuple':
         """
-            Get the smallest whole number larger than instance.
+        Get the smallest whole number larger than instance.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.ceil` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: ceil in interface CalculusFieldElement
         
-            Returns:
-                ceil(this)
+        Returns:
+            ceil(this)
         
         
         """
@@ -7711,27 +8253,25 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     @typing.overload
     def copySign(self, double: float) -> 'Tuple':
         """
-            Returns the instance with the sign of the argument. A NaN :code:`sign` argument is treated as positive.
+        Returns the instance with the sign of the argument. A NaN sign argument is treated as positive.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.copySign` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: copySign in interface CalculusFieldElement
         
-            Parameters:
-                sign (:class:`~org.hipparchus.util.Tuple`): the sign for the returned value
+        Parameters:
+            sign (Tuple): the sign for the returned value
         
-            Returns:
-                the instance with the same sign as the :code:`sign` argument
+        Returns:
+            the instance with the same sign as the sign argument
         
-            Returns the instance with the sign of the argument. A NaN :code:`sign` argument is treated as positive.
+        Returns the instance with the sign of the argument. A NaN sign argument is treated as positive.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.copySign` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: copySign in interface CalculusFieldElement
         
-            Parameters:
-                sign (double): the sign for the returned value
+        Parameters:
+            sign (double): the sign for the returned value
         
-            Returns:
-                the instance with the same sign as the :code:`sign` argument
+        Returns:
+            the instance with the same sign as the sign argument
         
         
         """
@@ -7740,26 +8280,24 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     def copySign(self, tuple: 'Tuple') -> 'Tuple': ...
     def cos(self) -> 'Tuple':
         """
-            Cosine operation.
+        Cosine operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.cos` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: cos in interface CalculusFieldElement
         
-            Returns:
-                cos(this)
+        Returns:
+            cos(this)
         
         
         """
         ...
     def cosh(self) -> 'Tuple':
         """
-            Hyperbolic cosine operation.
+        Hyperbolic cosine operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.cosh` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: cosh in interface CalculusFieldElement
         
-            Returns:
-                cosh(this)
+        Returns:
+            cosh(this)
         
         
         """
@@ -7767,30 +8305,27 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     @typing.overload
     def divide(self, double: float) -> 'Tuple':
         """
-            Compute this ÷ a.
+        Compute this ÷ a.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.divide` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: divide in interface CalculusFieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.divide` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: divide in interface FieldElement
         
-            Parameters:
-                a (:class:`~org.hipparchus.util.Tuple`): element to divide by
+        Parameters:
+            a (Tuple): element to divide by
         
-            Returns:
-                a new element representing this ÷ a
+        Returns:
+            a new element representing this ÷ a
         
-            '÷' operator.
+        '÷' operator.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.divide` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: divide in interface CalculusFieldElement
         
-            Parameters:
-                a (double): right hand side parameter of the operator
+        Parameters:
+            a (double): right hand side parameter of the operator
         
-            Returns:
-                this÷a
+        Returns:
+            this÷a
         
         
         """
@@ -7799,163 +8334,153 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     def divide(self, tuple: 'Tuple') -> 'Tuple': ...
     def equals(self, object: typing.Any) -> bool:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: equals in class Object
         
         
         """
         ...
     def exp(self) -> 'Tuple':
         """
-            Exponential.
+        Exponential.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.exp` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: exp in interface CalculusFieldElement
         
-            Returns:
-                exponential of the instance
+        Returns:
+            exponential of the instance
         
         
         """
         ...
     def expm1(self) -> 'Tuple':
         """
-            Exponential minus 1.
+        Exponential minus 1.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.expm1` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: expm1 in interface CalculusFieldElement
         
-            Returns:
-                exponential minus one of the instance
+        Returns:
+            exponential minus one of the instance
         
         
         """
         ...
     def floor(self) -> 'Tuple':
         """
-            Get the largest whole number smaller than instance.
+        Get the largest whole number smaller than instance.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.floor` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: floor in interface CalculusFieldElement
         
-            Returns:
-                floor(this)
+        Returns:
+            floor(this)
         
         
         """
         ...
     def getAddendum(self) -> 'Tuple':
         """
-            Get the addendum to the real value of the number.
+        Get the addendum to the real value of the number.
         
-            The addendum is considered to be the part that when added back to the :meth:`~org.hipparchus.FieldElement.getReal`
-            recovers the instance. This means that when :code:`e.getReal()` is finite (i.e. neither infinite nor NaN), then
-            :code:`e.getAddendum().add(e.getReal())` is :code:`e` and :code:`e.subtract(e.getReal())` is :code:`e.getAddendum()`.
-            Beware that for non-finite numbers, these two equalities may not hold. The first equality (with the addition), always
-            holds even for infinity and NaNs if the real part is independent of the addendum (this is the case for all derivatives
-            types, as well as for complex and Dfp, but it is not the case for Tuple and FieldTuple). The second equality (with the
-            subtraction), generally doesn't hold for non-finite numbers, because the subtraction generates NaNs.
+        The addendum is considered to be the part that when added back to the getReal recovers the instance. This means that when getReal() is finite (i.e. neither infinite nor NaN), then getReal()) is e and getReal()) is getAddendum(). Beware that for non-finite numbers, these two equalities may not hold. The first equality (with the addition), always holds even for infinity and NaNs if the real part is independent of the addendum (this is the case for all derivatives types, as well as for complex and Dfp, but it is not the case for Tuple and FieldTuple). The second equality (with the subtraction), generally doesn't hold for non-finite numbers, because the subtraction generates NaNs.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.getAddendum` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: getAddendum in interface CalculusFieldElement
         
-            Returns:
-                real value
+        Returns:
+            real value
         
         
         """
         ...
-    def getComponent(self, int: int) -> float:
+    def getComponent(self, index: int) -> float:
         """
-            Get one component of the tuple.
+        Get one component of the tuple.
         
-            Parameters:
-                index (int): index of the component, between 0 and :meth:`~org.hipparchus.util.Tuple.getDimension` - 1
+        Parameters:
+            index (int): index of the component, between 0 and getDimension - 1
         
-            Returns:
-                value of the component
+        Returns:
+            value of the component
         
         
         """
         ...
     def getComponents(self) -> typing.MutableSequence[float]:
         """
-            Get all components of the tuple.
+        Get all components of the tuple.
         
-            Returns:
-                all components
+        Returns:
+            all components
         
         
         """
         ...
     def getDimension(self) -> int:
         """
-            Get the dimension of the tuple.
+        Get the dimension of the tuple.
         
-            Returns:
-                dimension of the tuple
+        Returns:
+            dimension of the tuple
         
         
         """
         ...
-    def getField(self) -> org.hipparchus.Field['Tuple']: ...
+    def getField(self) -> org.hipparchus.Field['Tuple']:
+        """
+        Get the Field to which the instance belongs.
+        
+        Specified by: getField in interface FieldElement
+        
+        Returns:
+            Field to which the instance belongs
+        
+        
+        """
+        ...
     def getPi(self) -> 'Tuple':
         """
-            Get the Archimedes constant π.
+        Get the Archimedes constant π.
         
-            Archimedes constant is the ratio of a circle's circumference to its diameter.
+        Archimedes constant is the ratio of a circle's circumference to its diameter.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.getPi` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: getPi in interface CalculusFieldElement
         
-            Returns:
-                Archimedes constant π
+        Returns:
+            Archimedes constant π
         
         
         """
         ...
     def getReal(self) -> float:
         """
-            Get the real value of the number.
+        Get the real value of the number.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.getReal` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: getReal in interface FieldElement
         
-            Returns:
-                real value
+        Returns:
+            real value
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.hashCode` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: hashCode in class Object
         
         
         """
         ...
-    def hypot(self, tuple: 'Tuple') -> 'Tuple':
+    def hypot(self, y: 'Tuple') -> 'Tuple':
         """
-            Returns the hypotenuse of a triangle with sides :code:`this` and :code:`y` - sqrt(*this* :sup:`2`  +*y* :sup:`2` )
-            avoiding intermediate overflow or underflow.
+        Returns the hypotenuse of a triangle with sides this and y - sqrt(this :sup:`2`  +y :sup:`2` ) avoiding intermediate overflow or underflow.
         
-              - If either argument is infinite, then the result is positive infinity.
-              - else, if either argument is NaN then the result is NaN.
+          - If either argument is infinite, then the result is positive infinity.
+          - else, if either argument is NaN then the result is NaN.
         
+        Specified by: hypot in interface CalculusFieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.hypot` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Parameters:
+            y (Tuple): a value
         
-            Parameters:
-                y (:class:`~org.hipparchus.util.Tuple`): a value
-        
-            Returns:
-                sqrt(*this* :sup:`2`  +*y* :sup:`2` )
+        Returns:
+            sqrt(this :sup:`2`  +y :sup:`2` )
         
         
         """
@@ -7963,142 +8488,113 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     @typing.overload
     def linearCombination(self, double: float, tuple: 'Tuple', double2: float, tuple2: 'Tuple') -> 'Tuple':
         """
-            Compute a linear combination.
+        Compute a linear combination.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
-                interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: linearCombination in interface CalculusFieldElement
         
-            Parameters:
-                a1 (:class:`~org.hipparchus.util.Tuple`): first factor of the first term
-                b1 (:class:`~org.hipparchus.util.Tuple`): second factor of the first term
-                a2 (:class:`~org.hipparchus.util.Tuple`): first factor of the second term
-                b2 (:class:`~org.hipparchus.util.Tuple`): second factor of the second term
+        Parameters:
+            a1 (Tuple): first factor of the first term
+            b1 (Tuple): second factor of the first term
+            a2 (Tuple): first factor of the second term
+            b2 (Tuple): second factor of the second term
         
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-            Also see:
+              - linearCombination
+              - linearCombination
         
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
+        Compute a linear combination.
         
+        Specified by: linearCombination in interface CalculusFieldElement
         
-            Compute a linear combination.
+        Parameters:
+            a1 (double): first factor of the first term
+            b1 (Tuple): second factor of the first term
+            a2 (double): first factor of the second term
+            b2 (Tuple): second factor of the second term
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
-                interface :class:`~org.hipparchus.CalculusFieldElement`
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-            Parameters:
-                a1 (double): first factor of the first term
-                b1 (:class:`~org.hipparchus.util.Tuple`): second factor of the first term
-                a2 (double): first factor of the second term
-                b2 (:class:`~org.hipparchus.util.Tuple`): second factor of the second term
+              - linearCombination
+              - linearCombination
         
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
+        Compute a linear combination.
         
-            Also see:
+        Specified by: linearCombination in interface CalculusFieldElement
         
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
+        Parameters:
+            a1 (Tuple): first factor of the first term
+            b1 (Tuple): second factor of the first term
+            a2 (Tuple): first factor of the second term
+            b2 (Tuple): second factor of the second term
+            a3 (Tuple): first factor of the third term
+            b3 (Tuple): second factor of the third term
         
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-            Compute a linear combination.
+              - linearCombination
+              - linearCombination
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
-                interface :class:`~org.hipparchus.CalculusFieldElement`
+        Compute a linear combination.
         
-            Parameters:
-                a1 (:class:`~org.hipparchus.util.Tuple`): first factor of the first term
-                b1 (:class:`~org.hipparchus.util.Tuple`): second factor of the first term
-                a2 (:class:`~org.hipparchus.util.Tuple`): first factor of the second term
-                b2 (:class:`~org.hipparchus.util.Tuple`): second factor of the second term
-                a3 (:class:`~org.hipparchus.util.Tuple`): first factor of the third term
-                b3 (:class:`~org.hipparchus.util.Tuple`): second factor of the third term
+        Specified by: linearCombination in interface CalculusFieldElement
         
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
+        Parameters:
+            a1 (double): first factor of the first term
+            b1 (Tuple): second factor of the first term
+            a2 (double): first factor of the second term
+            b2 (Tuple): second factor of the second term
+            a3 (double): first factor of the third term
+            b3 (Tuple): second factor of the third term
         
-            Also see:
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
+              - linearCombination
+              - linearCombination
         
+        Compute a linear combination.
         
-            Compute a linear combination.
+        Specified by: linearCombination in interface CalculusFieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
-                interface :class:`~org.hipparchus.CalculusFieldElement`
+        Parameters:
+            a1 (Tuple): first factor of the first term
+            b1 (Tuple): second factor of the first term
+            a2 (Tuple): first factor of the second term
+            b2 (Tuple): second factor of the second term
+            a3 (Tuple): first factor of the third term
+            b3 (Tuple): second factor of the third term
+            a4 (Tuple): first factor of the fourth term
+            b4 (Tuple): second factor of the fourth term
         
-            Parameters:
-                a1 (double): first factor of the first term
-                b1 (:class:`~org.hipparchus.util.Tuple`): second factor of the first term
-                a2 (double): first factor of the second term
-                b2 (:class:`~org.hipparchus.util.Tuple`): second factor of the second term
-                a3 (double): first factor of the third term
-                b3 (:class:`~org.hipparchus.util.Tuple`): second factor of the third term
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
+              - linearCombination
+              - linearCombination
         
-            Also see:
+        Compute a linear combination.
         
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
+        Specified by: linearCombination in interface CalculusFieldElement
         
+        Parameters:
+            a1 (double): first factor of the first term
+            b1 (Tuple): second factor of the first term
+            a2 (double): first factor of the second term
+            b2 (Tuple): second factor of the second term
+            a3 (double): first factor of the third term
+            b3 (Tuple): second factor of the third term
+            a4 (double): first factor of the fourth term
+            b4 (Tuple): second factor of the fourth term
         
-            Compute a linear combination.
+        Returns:
+            a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
-                interface :class:`~org.hipparchus.CalculusFieldElement`
-        
-            Parameters:
-                a1 (:class:`~org.hipparchus.util.Tuple`): first factor of the first term
-                b1 (:class:`~org.hipparchus.util.Tuple`): second factor of the first term
-                a2 (:class:`~org.hipparchus.util.Tuple`): first factor of the second term
-                b2 (:class:`~org.hipparchus.util.Tuple`): second factor of the second term
-                a3 (:class:`~org.hipparchus.util.Tuple`): first factor of the third term
-                b3 (:class:`~org.hipparchus.util.Tuple`): second factor of the third term
-                a4 (:class:`~org.hipparchus.util.Tuple`): first factor of the fourth term
-                b4 (:class:`~org.hipparchus.util.Tuple`): second factor of the fourth term
-        
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-        
-        
-            Compute a linear combination.
-        
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
-                interface :class:`~org.hipparchus.CalculusFieldElement`
-        
-            Parameters:
-                a1 (double): first factor of the first term
-                b1 (:class:`~org.hipparchus.util.Tuple`): second factor of the first term
-                a2 (double): first factor of the second term
-                b2 (:class:`~org.hipparchus.util.Tuple`): second factor of the second term
-                a3 (double): first factor of the third term
-                b3 (:class:`~org.hipparchus.util.Tuple`): second factor of the third term
-                a4 (double): first factor of the fourth term
-                b4 (:class:`~org.hipparchus.util.Tuple`): second factor of the fourth term
-        
-            Returns:
-                a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
-                  - :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`
+              - linearCombination
+              - linearCombination
         
         
         
@@ -8120,39 +8616,36 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     def linearCombination(self, tupleArray: typing.Union[typing.List['Tuple'], jpype.JArray], tupleArray2: typing.Union[typing.List['Tuple'], jpype.JArray]) -> 'Tuple': ...
     def log(self) -> 'Tuple':
         """
-            Natural logarithm.
+        Natural logarithm.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.log` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: log in interface CalculusFieldElement
         
-            Returns:
-                logarithm of the instance
+        Returns:
+            logarithm of the instance
         
         
         """
         ...
     def log10(self) -> 'Tuple':
         """
-            Base 10 logarithm.
+        Base 10 logarithm.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.log10` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: log10 in interface CalculusFieldElement
         
-            Returns:
-                base 10 logarithm of the instance
+        Returns:
+            base 10 logarithm of the instance
         
         
         """
         ...
     def log1p(self) -> 'Tuple':
         """
-            Shifted natural logarithm.
+        Shifted natural logarithm.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.log1p` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: log1p in interface CalculusFieldElement
         
-            Returns:
-                logarithm of one plus the instance
+        Returns:
+            logarithm of one plus the instance
         
         
         """
@@ -8160,42 +8653,37 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     @typing.overload
     def multiply(self, double: float) -> 'Tuple':
         """
-            Compute this × a.
+        Compute this × a.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.multiply` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: multiply in interface FieldElement
         
-            Parameters:
-                a (:class:`~org.hipparchus.util.Tuple`): element to multiply
+        Parameters:
+            a (Tuple): element to multiply
         
-            Returns:
-                a new element representing this × a
+        Returns:
+            a new element representing this × a
         
-            Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} =
-            \sum_{i=1}^n \mathrm{this} \]
+        Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} = \sum_{i=1}^n \mathrm{this} \]
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.multiply` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: multiply in interface CalculusFieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.multiply` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: multiply in interface FieldElement
         
-            Parameters:
-                n (int): Number of times :code:`this` must be added to itself.
+        Parameters:
+            n (int): Number of times this must be added to itself.
         
-            Returns:
-                A new element representing n × this.
+        Returns:
+            A new element representing n × this.
         
-            '×' operator.
+        '×' operator.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.multiply` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: multiply in interface CalculusFieldElement
         
-            Parameters:
-                a (double): right hand side parameter of the operator
+        Parameters:
+            a (double): right hand side parameter of the operator
         
-            Returns:
-                this×a
+        Returns:
+            this×a
         
         
         """
@@ -8206,29 +8694,27 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     def multiply(self, tuple: 'Tuple') -> 'Tuple': ...
     def negate(self) -> 'Tuple':
         """
-            Returns the additive inverse of :code:`this` element.
+        Returns the additive inverse of this element.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.negate` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: negate in interface FieldElement
         
-            Returns:
-                the opposite of :code:`this`.
+        Returns:
+            the opposite of this.
         
         
         """
         ...
-    def newInstance(self, double: float) -> 'Tuple':
+    def newInstance(self, value: float) -> 'Tuple':
         """
-            Create an instance corresponding to a constant real value.
+        Create an instance corresponding to a constant real value.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.newInstance` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: newInstance in interface CalculusFieldElement
         
-            Parameters:
-                value (double): constant real value
+        Parameters:
+            value (double): constant real value
         
-            Returns:
-                instance corresponding to a constant real value
+        Returns:
+            instance corresponding to a constant real value
         
         
         """
@@ -8236,38 +8722,35 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     @typing.overload
     def pow(self, double: float) -> 'Tuple':
         """
-            Power operation.
+        Power operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.pow` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: pow in interface CalculusFieldElement
         
-            Parameters:
-                p (double): power to apply
+        Parameters:
+            p (double): power to apply
         
-            Returns:
-                this :sup:`p`
+        Returns:
+            this :sup:`p`
         
-            Integer power operation.
+        Integer power operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.pow` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: pow in interface CalculusFieldElement
         
-            Parameters:
-                n (int): power to apply
+        Parameters:
+            n (int): power to apply
         
-            Returns:
-                this :sup:`n`
+        Returns:
+            this :sup:`n`
         
-            Power operation.
+        Power operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.pow` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: pow in interface CalculusFieldElement
         
-            Parameters:
-                e (:class:`~org.hipparchus.util.Tuple`): exponent
+        Parameters:
+            e (Tuple): exponent
         
-            Returns:
-                this :sup:`e`
+        Returns:
+            this :sup:`e`
         
         
         """
@@ -8278,13 +8761,12 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     def pow(self, tuple: 'Tuple') -> 'Tuple': ...
     def reciprocal(self) -> 'Tuple':
         """
-            Returns the multiplicative inverse of :code:`this` element.
+        Returns the multiplicative inverse of this element.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.reciprocal` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: reciprocal in interface FieldElement
         
-            Returns:
-                the inverse of :code:`this`.
+        Returns:
+            the inverse of this.
         
         
         """
@@ -8292,27 +8774,25 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     @typing.overload
     def remainder(self, double: float) -> 'Tuple':
         """
-            IEEE remainder operator.
+        IEEE remainder operator.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.remainder` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: remainder in interface CalculusFieldElement
         
-            Parameters:
-                a (double): right hand side parameter of the operator
+        Parameters:
+            a (double): right hand side parameter of the operator
         
-            Returns:
-                this - n × a where n is the closest integer to this/a
+        Returns:
+            this - n × a where n is the closest integer to this/a
         
-            IEEE remainder operator.
+        IEEE remainder operator.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.remainder` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: remainder in interface CalculusFieldElement
         
-            Parameters:
-                a (:class:`~org.hipparchus.util.Tuple`): right hand side parameter of the operator
+        Parameters:
+            a (Tuple): right hand side parameter of the operator
         
-            Returns:
-                this - n × a where n is the closest integer to this/a
+        Returns:
+            this - n × a where n is the closest integer to this/a
         
         
         """
@@ -8321,113 +8801,126 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     def remainder(self, tuple: 'Tuple') -> 'Tuple': ...
     def rint(self) -> 'Tuple':
         """
-            Get the whole number that is the nearest to the instance, or the even one if x is exactly half way between two integers.
+        Get the whole number that is the nearest to the instance, or the even one if x is exactly half way between two integers.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.rint` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: rint in interface CalculusFieldElement
         
-            Returns:
-                a double number r such that r is an integer r - 0.5 ≤ this ≤ r + 0.5
-        
-        
-        """
-        ...
-    def rootN(self, int: int) -> 'Tuple':
-        """
-            N :sup:`th` root.
-        
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.rootN` in interface :class:`~org.hipparchus.CalculusFieldElement`
-        
-            Parameters:
-                n (int): order of the root
-        
-            Returns:
-                n :sup:`th` root of the instance
+        Returns:
+            a double number r such that r is an integer r - 0.5 ≤ this ≤ r + 0.5
         
         
         """
         ...
-    def scalb(self, int: int) -> 'Tuple':
+    def rootN(self, n: int) -> 'Tuple':
         """
-            Multiply the instance by a power of 2.
+        N :sup:`th` root.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.scalb` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: rootN in interface CalculusFieldElement
         
-            Parameters:
-                n (int): power of 2
+        Parameters:
+            n (int): order of the root
         
-            Returns:
-                this × 2 :sup:`n`
+        Returns:
+            n :sup:`th` root of the instance
+        
+        
+        """
+        ...
+    def scalb(self, n: int) -> 'Tuple':
+        """
+        Multiply the instance by a power of 2.
+        
+        Specified by: scalb in interface CalculusFieldElement
+        
+        Parameters:
+            n (int): power of 2
+        
+        Returns:
+            this × 2 :sup:`n`
         
         
         """
         ...
     def sign(self) -> 'Tuple':
         """
-            Compute the sign of the instance. The sign is -1 for negative numbers, +1 for positive numbers and 0 otherwise, for
-            Complex number, it is extended on the unit circle (equivalent to z/|z|, with special handling for 0 and NaN)
+        Compute the sign of the instance. The sign is -1 for negative numbers, +1 for positive numbers and 0 otherwise, for Complex number, it is extended on the unit circle (equivalent to z/|z|, with special handling for 0 and NaN)
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.sign` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: sign in interface CalculusFieldElement
         
-            Returns:
-                -1.0, -0.0, +0.0, +1.0 or NaN depending on sign of a
+        Returns:
+            -1.0, -0.0, +0.0, +1.0 or NaN depending on sign of a
         
         
         """
         ...
     def sin(self) -> 'Tuple':
         """
-            Sine operation.
+        Sine operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.sin` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: sin in interface CalculusFieldElement
         
-            Returns:
-                sin(this)
+        Returns:
+            sin(this)
         
         
         """
         ...
-    def sinCos(self) -> FieldSinCos['Tuple']: ...
+    def sinCos(self) -> FieldSinCos['Tuple']:
+        """
+        Combined Sine and Cosine operation.
+        
+        Specified by: sinCos in interface CalculusFieldElement
+        
+        Returns:
+            [sin(this), cos(this)]
+        
+        
+        """
+        ...
     def sinh(self) -> 'Tuple':
         """
-            Hyperbolic sine operation.
+        Hyperbolic sine operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.sinh` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: sinh in interface CalculusFieldElement
         
-            Returns:
-                sinh(this)
+        Returns:
+            sinh(this)
         
         
         """
         ...
-    def sinhCosh(self) -> FieldSinhCosh['Tuple']: ...
+    def sinhCosh(self) -> FieldSinhCosh['Tuple']:
+        """
+        Combined hyperbolic sine and cosine operation.
+        
+        Specified by: sinhCosh in interface CalculusFieldElement
+        
+        Returns:
+            [sinh(this), cosh(this)]
+        
+        
+        """
+        ...
     def sqrt(self) -> 'Tuple':
         """
-            Square root.
+        Square root.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.sqrt` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: sqrt in interface CalculusFieldElement
         
-            Returns:
-                square root of the instance
+        Returns:
+            square root of the instance
         
         
         """
         ...
     def square(self) -> 'Tuple':
         """
-            Compute this × this.
+        Compute this × this.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.square` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: square in interface CalculusFieldElement
         
-            Returns:
-                a new element representing this × this
+        Returns:
+            a new element representing this × this
         
         
         """
@@ -8435,30 +8928,27 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     @typing.overload
     def subtract(self, double: float) -> 'Tuple':
         """
-            Compute this - a.
+        Compute this - a.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.subtract` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: subtract in interface CalculusFieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.subtract` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: subtract in interface FieldElement
         
-            Parameters:
-                a (:class:`~org.hipparchus.util.Tuple`): element to subtract
+        Parameters:
+            a (Tuple): element to subtract
         
-            Returns:
-                a new element representing this - a
+        Returns:
+            a new element representing this - a
         
-            '-' operator.
+        '-' operator.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.subtract` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: subtract in interface CalculusFieldElement
         
-            Parameters:
-                a (double): right hand side parameter of the operator
+        Parameters:
+            a (double): right hand side parameter of the operator
         
-            Returns:
-                this-a
+        Returns:
+            this-a
         
         
         """
@@ -8467,65 +8957,60 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     def subtract(self, tuple: 'Tuple') -> 'Tuple': ...
     def tan(self) -> 'Tuple':
         """
-            Tangent operation.
+        Tangent operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.tan` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: tan in interface CalculusFieldElement
         
-            Returns:
-                tan(this)
+        Returns:
+            tan(this)
         
         
         """
         ...
     def tanh(self) -> 'Tuple':
         """
-            Hyperbolic tangent operation.
+        Hyperbolic tangent operation.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.tanh` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: tanh in interface CalculusFieldElement
         
-            Returns:
-                tanh(this)
+        Returns:
+            tanh(this)
         
         
         """
         ...
     def toDegrees(self) -> 'Tuple':
         """
-            Convert radians to degrees, with error of less than 0.5 ULP
+        Convert radians to degrees, with error of less than 0.5 ULP
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.toDegrees` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: toDegrees in interface CalculusFieldElement
         
-            Returns:
-                instance converted into degrees
+        Returns:
+            instance converted into degrees
         
         
         """
         ...
     def toRadians(self) -> 'Tuple':
         """
-            Convert degrees to radians, with error of less than 0.5 ULP
+        Convert degrees to radians, with error of less than 0.5 ULP
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.toRadians` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: toRadians in interface CalculusFieldElement
         
-            Returns:
-                instance converted into radians
+        Returns:
+            instance converted into radians
         
         
         """
         ...
     def ulp(self) -> 'Tuple':
         """
-            Compute least significant bit (Unit in Last Position) for a number.
+        Compute least significant bit (Unit in Last Position) for a number.
         
-            Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.ulp` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        Specified by: ulp in interface CalculusFieldElement
         
-            Returns:
-                ulp(this)
+        Returns:
+            ulp(this)
         
         
         """
@@ -8533,80 +9018,89 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
 
 class UnscentedTransformProvider:
     """
-    public interfaceUnscentedTransformProvider
+    Provider for unscented transform.
     
-        Provider for unscented transform.
-    
-        Since:
-            2.2
+    Since:
+        2.2
     """
-    def getUnscentedCovariance(self, realVectorArray: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray], realVector2: org.hipparchus.linear.RealVector) -> org.hipparchus.linear.RealMatrix:
+    def getUnscentedCovariance(self, sigmaPoints: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray], meanState: org.hipparchus.linear.RealVector) -> org.hipparchus.linear.RealMatrix:
         """
-            Computes the unscented covariance matrix from a weighted mean state and a set of sigma points.
+        Computes the unscented covariance matrix from a weighted mean state and a set of sigma points.
         
-            This method can be used for computing both the predicted state covariance matrix and the innovation covariance matrix in
-            an Unscented Kalman filter.
+        This method can be used for computing both the predicted state covariance matrix and the innovation covariance matrix in an Unscented Kalman filter.
         
-            It corresponds to Equation 18 of "Wan, E. A., & Van Der Merwe, R. The unscented Kalman filter for nonlinear estimation"
+        It corresponds to Equation 18 of "Wan, E. A., & Van Der Merwe, R. The unscented Kalman filter for nonlinear estimation"
         
-            Parameters:
-                sigmaPoints (:class:`~org.hipparchus.linear.RealVector`[]): input sigma points
-                meanState (:class:`~org.hipparchus.linear.RealVector`): weighted mean state
+        Parameters:
+            sigmaPoints (RealVector[]): input sigma points
+            meanState (RealVector): weighted mean state
         
-            Returns:
-                the unscented covariance matrix
+        Returns:
+            the unscented covariance matrix
         
         
         """
         ...
-    def getUnscentedMeanState(self, realVectorArray: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray]) -> org.hipparchus.linear.RealVector:
+    def getUnscentedMeanState(self, sigmaPoints: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray]) -> org.hipparchus.linear.RealVector:
         """
-            Computes a weighted mean state from a given set of sigma points.
+        Computes a weighted mean state from a given set of sigma points.
         
-            This method can be used for computing both the mean state and the mean measurement in an Unscented Kalman filter.
+        This method can be used for computing both the mean state and the mean measurement in an Unscented Kalman filter.
         
-            It corresponds to Equation 17 of "Wan, E. A., & Van Der Merwe, R. The unscented Kalman filter for nonlinear estimation"
+        It corresponds to Equation 17 of "Wan, E. A., & Van Der Merwe, R. The unscented Kalman filter for nonlinear estimation"
         
-            Parameters:
-                sigmaPoints (:class:`~org.hipparchus.linear.RealVector`[]): input samples
+        Parameters:
+            sigmaPoints (RealVector[]): input samples
         
-            Returns:
-                weighted mean state
+        Returns:
+            weighted mean state
         
         
         """
         ...
     def getWc(self) -> org.hipparchus.linear.RealVector:
         """
-            Get the covariance weights.
+        Get the covariance weights.
         
-            Returns:
-                the covariance weights
+        Returns:
+            the covariance weights
         
         
         """
         ...
     def getWm(self) -> org.hipparchus.linear.RealVector:
         """
-            Get the mean weights.
+        Get the mean weights.
         
-            Returns:
-                the mean weights
+        Returns:
+            the mean weights
         
         
         """
         ...
-    def inverseUnscentedTransform(self, realVectorArray: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray]) -> Pair[org.hipparchus.linear.RealVector, org.hipparchus.linear.RealMatrix]: ...
-    def unscentedTransform(self, realVector: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix) -> typing.MutableSequence[org.hipparchus.linear.RealVector]:
+    def inverseUnscentedTransform(self, sigmaPoints: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray]) -> Pair[org.hipparchus.linear.RealVector, org.hipparchus.linear.RealMatrix]:
         """
-            Perform the unscented transform from a state and its covariance.
+        Perform the inverse unscented transform from an array of sigma points.
         
-            Parameters:
-                state (:class:`~org.hipparchus.linear.RealVector`): process state
-                covariance (:class:`~org.hipparchus.linear.RealMatrix`): covariance associated with the process state
+        Parameters:
+            sigmaPoints (RealVector[]): array containing the sigma points of the unscented transform
         
-            Returns:
-                an array containing the sigma points of the unscented transform
+        Returns:
+            mean state and associated covariance
+        
+        
+        """
+        ...
+    def unscentedTransform(self, state: org.hipparchus.linear.RealVector, covariance: org.hipparchus.linear.RealMatrix) -> typing.MutableSequence[org.hipparchus.linear.RealVector]:
+        """
+        Perform the unscented transform from a state and its covariance.
+        
+        Parameters:
+            state (RealVector): process state
+            covariance (RealMatrix): covariance associated with the process state
+        
+        Returns:
+            an array containing the sigma points of the unscented transform
         
         
         """
@@ -8614,32 +9108,27 @@ class UnscentedTransformProvider:
 
 class AbstractUnscentedTransform(UnscentedTransformProvider):
     """
-    public abstract classAbstractUnscentedTransform extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.util.UnscentedTransformProvider`
+    implements UnscentedTransformProvider
     
-        Base class for unscented transform providers.
+    Base class for unscented transform providers.
     
-        Since:
-            2.2
+    Since:
+        2.2
     """
-    def unscentedTransform(self, realVector: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix) -> typing.MutableSequence[org.hipparchus.linear.RealVector]:
+    def unscentedTransform(self, state: org.hipparchus.linear.RealVector, covariance: org.hipparchus.linear.RealMatrix) -> typing.MutableSequence[org.hipparchus.linear.RealVector]:
         """
-            Perform the unscented transform from a state and its covariance.
+        Perform the unscented transform from a state and its covariance.
         
-            Let n be the state dimension and Si be the ith row of the covariance matrix square root. The returned array is organized
-            as follow. Element 0 contains the process state, also called the mean state. Elements from 1 to n contain the process
-            state + Si. Finally, elements from n + 1 to 2n contain the process state - Si
+        Let n be the state dimension and Si be the ith row of the covariance matrix square root. The returned array is organized as follow. Element 0 contains the process state, also called the mean state. Elements from 1 to n contain the process state + Si. Finally, elements from n + 1 to 2n contain the process state - Si
         
-            Specified by:
-                :meth:`~org.hipparchus.util.UnscentedTransformProvider.unscentedTransform` in
-                interface :class:`~org.hipparchus.util.UnscentedTransformProvider`
+        Specified by: unscentedTransform in interface UnscentedTransformProvider
         
-            Parameters:
-                state (:class:`~org.hipparchus.linear.RealVector`): process state
-                covariance (:class:`~org.hipparchus.linear.RealMatrix`): covariance associated with the process state
+        Parameters:
+            state (RealVector): process state
+            covariance (RealMatrix): covariance associated with the process state
         
-            Returns:
-                an array containing the sigma points of the unscented transform
+        Returns:
+            an array containing the sigma points of the unscented transform
         
         
         """
@@ -8647,34 +9136,23 @@ class AbstractUnscentedTransform(UnscentedTransformProvider):
 
 class JulierUnscentedTransform(AbstractUnscentedTransform):
     """
-    public classJulierUnscentedTransform extends :class:`~org.hipparchus.util.AbstractUnscentedTransform`
+    Unscented transform as defined by Julier and Uhlmann.
     
-        Unscented transform as defined by Julier and Uhlmann.
+    The unscented transform uses three parameters: alpha, beta and kappa. Alpha determines the spread of the sigma points around the process state, kappa is a secondary scaling parameter, and beta is used to incorporate prior knowledge of the distribution of the process state.
     
-        The unscented transform uses three parameters: alpha, beta and kappa. Alpha determines the spread of the sigma points
-        around the process state, kappa is a secondary scaling parameter, and beta is used to incorporate prior knowledge of the
-        distribution of the process state.
+    The Julier transform is a particular case of MerweUnscentedTransform with alpha = 1 and beta = 0.
     
-        The Julier transform is a particular case of :class:`~org.hipparchus.util.MerweUnscentedTransform` with alpha = 1 and
-        beta = 0.
+    Since:
+        2.2
     
-        Since:
-            2.2
-    
-        Also see:
-    
-              - "S. J. Julier and J. K. Uhlmann. A New Extension of the Kalman Filter to Nonlinear Systems. Proc. SPIE 3068, Signal
-                Processing, Sensor Fusion, and Target Recognition VI, 182 (July 28, 1997)"
+          - "S. J. Julier and J. K. Uhlmann. A New Extension of the Kalman Filter to Nonlinear Systems. Proc. SPIE 3068, Signal
+            Processing, Sensor Fusion, and Target Recognition VI, 182 (July 28, 1997)"
     """
     DEFAULT_KAPPA: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_KAPPA
+    Default value for kappa, (0.0, see reference).
     
-        Default value for kappa, (0.0, see reference).
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
@@ -8685,20 +9163,20 @@ class JulierUnscentedTransform(AbstractUnscentedTransform):
     def __init__(self, int: int, double: float): ...
     def getWc(self) -> org.hipparchus.linear.RealVector:
         """
-            Get the covariance weights.
+        Get the covariance weights.
         
-            Returns:
-                the covariance weights
+        Returns:
+            the covariance weights
         
         
         """
         ...
     def getWm(self) -> org.hipparchus.linear.RealVector:
         """
-            Get the mean weights.
+        Get the mean weights.
         
-            Returns:
-                the mean weights
+        Returns:
+            the mean weights
         
         
         """
@@ -8706,57 +9184,39 @@ class JulierUnscentedTransform(AbstractUnscentedTransform):
 
 class MerweUnscentedTransform(AbstractUnscentedTransform):
     """
-    public classMerweUnscentedTransform extends :class:`~org.hipparchus.util.AbstractUnscentedTransform`
+    Unscented transform as defined by Merwe and Wan.
     
-        Unscented transform as defined by Merwe and Wan.
+    The unscented transform uses three parameters: alpha, beta and kappa. Alpha determines the spread of the sigma points around the process state, kappa is a secondary scaling parameter, and beta is used to incorporate prior knowledge of the distribution of the process state.
     
-        The unscented transform uses three parameters: alpha, beta and kappa. Alpha determines the spread of the sigma points
-        around the process state, kappa is a secondary scaling parameter, and beta is used to incorporate prior knowledge of the
-        distribution of the process state.
+    Since:
+        2.2
     
-        Since:
-            2.2
-    
-        Also see:
-    
-              - "E. A. Wan and R. Van der Merwe, The unscented Kalman filter for nonlinear estimation, in Proc. Symp. Adaptive Syst.
-                Signal Process., Commun. Contr., Lake Louise, AB, Canada, Oct. 2000."
+          - "E. A. Wan and R. Van der Merwe, The unscented Kalman filter for nonlinear estimation, in Proc. Symp. Adaptive Syst.
+            Signal Process., Commun. Contr., Lake Louise, AB, Canada, Oct. 2000."
     """
     DEFAULT_ALPHA: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_ALPHA
+    Default value for alpha (0.5, see reference).
     
-        Default value for alpha (0.5, see reference).
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     DEFAULT_BETA: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_BETA
+    Default value for beta (2.0, see reference).
     
-        Default value for beta (2.0, see reference).
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     DEFAULT_KAPPA: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_KAPPA
+    Default value for kappa, (0.0, see reference).
     
-        Default value for kappa, (0.0, see reference).
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
@@ -8767,20 +9227,20 @@ class MerweUnscentedTransform(AbstractUnscentedTransform):
     def __init__(self, int: int, double: float, double2: float, double3: float): ...
     def getWc(self) -> org.hipparchus.linear.RealVector:
         """
-            Get the covariance weights.
+        Get the covariance weights.
         
-            Returns:
-                the covariance weights
+        Returns:
+            the covariance weights
         
         
         """
         ...
     def getWm(self) -> org.hipparchus.linear.RealVector:
         """
-            Get the mean weights.
+        Get the mean weights.
         
-            Returns:
-                the mean weights
+        Returns:
+            the mean weights
         
         
         """
@@ -8788,21 +9248,15 @@ class MerweUnscentedTransform(AbstractUnscentedTransform):
 
 class OpenIntToDoubleHashMap(AbstractOpenIntHashMap, java.io.Serializable):
     """
-    public classOpenIntToDoubleHashMap extends :class:`~org.hipparchus.util.AbstractOpenIntHashMap`
-    implements :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements Serializable
     
-        Open addressed map from int to double.
+    Open addressed map from int to double.
     
-        This class provides a dedicated map from integers to doubles with a much smaller memory overhead than standard
-        :code:`java.util.Map`.
+    This class provides a dedicated map from integers to doubles with a much smaller memory overhead than standard Map.
     
-        This class is not synchronized. The specialized iterators returned by
-        :meth:`~org.hipparchus.util.OpenIntToDoubleHashMap.iterator` are fail-fast: they throw a
-        :code:`ConcurrentModificationException` when they detect the map has been modified during iteration.
+    This class is not synchronized. The specialized iterators returned by iterator are fail-fast: they throw a ConcurrentModificationException when they detect the map has been modified during iteration.
     
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -8816,73 +9270,66 @@ class OpenIntToDoubleHashMap(AbstractOpenIntHashMap, java.io.Serializable):
     def __init__(self, openIntToDoubleHashMap: 'OpenIntToDoubleHashMap'): ...
     def equals(self, object: typing.Any) -> bool:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: equals in class Object
         
         
         """
         ...
-    def get(self, int: int) -> float:
+    def get(self, key: int) -> float:
         """
-            Get the stored value associated with the given key
+        Get the stored value associated with the given key
         
-            Parameters:
-                key (int): key associated with the data
+        Parameters:
+            key (int): key associated with the data
         
-            Returns:
-                data associated with the key
+        Returns:
+            data associated with the key
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.hashCode` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: hashCode in class Object
         
         
         """
         ...
     def iterator(self) -> 'OpenIntToDoubleHashMap.Iterator':
         """
-            Get an iterator over map elements.
+        Get an iterator over map elements.
         
-            The specialized iterators returned are fail-fast: they throw a :code:`ConcurrentModificationException` when they detect
-            the map has been modified during iteration.
+        The specialized iterators returned are fail-fast: they throw a ConcurrentModificationException when they detect the map has been modified during iteration.
         
-            Returns:
-                iterator over the map elements
-        
-        
-        """
-        ...
-    def put(self, int: int, double: float) -> float:
-        """
-            Put a value associated with a key in the map.
-        
-            Parameters:
-                key (int): key to which value is associated
-                value (double): value to put in the map
-        
-            Returns:
-                previous value associated with the key
+        Returns:
+            iterator over the map elements
         
         
         """
         ...
-    def remove(self, int: int) -> float:
+    def put(self, key: int, value: float) -> float:
         """
-            Remove the value associated with a key.
+        Put a value associated with a key in the map.
         
-            Parameters:
-                key (int): key to which the value is associated
+        Parameters:
+            key (int): key to which value is associated
+            value (double): value to put in the map
         
-            Returns:
-                removed value
+        Returns:
+            previous value associated with the key
+        
+        
+        """
+        ...
+    def remove(self, key: int) -> float:
+        """
+        Remove the value associated with a key.
+        
+        Parameters:
+            key (int): key to which the value is associated
+        
+        Returns:
+            removed value
         
         
         """
@@ -8894,21 +9341,15 @@ class OpenIntToDoubleHashMap(AbstractOpenIntHashMap, java.io.Serializable):
 _OpenIntToFieldHashMap__T = typing.TypeVar('_OpenIntToFieldHashMap__T', bound=org.hipparchus.FieldElement)  # <T>
 class OpenIntToFieldHashMap(AbstractOpenIntHashMap, java.io.Serializable, typing.Generic[_OpenIntToFieldHashMap__T]):
     """
-    public classOpenIntToFieldHashMap<T extends :class:`~org.hipparchus.FieldElement`<T>> extends :class:`~org.hipparchus.util.AbstractOpenIntHashMap`
-    implements :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements Serializable
     
-        Open addressed map from int to FieldElement.
+    Open addressed map from int to FieldElement.
     
-        This class provides a dedicated map from integers to FieldElements with a much smaller memory overhead than standard
-        :code:`java.util.Map`.
+    This class provides a dedicated map from integers to FieldElements with a much smaller memory overhead than standard Map.
     
-        This class is not synchronized. The specialized iterators returned by
-        :meth:`~org.hipparchus.util.OpenIntToFieldHashMap.iterator` are fail-fast: they throw a
-        :code:`ConcurrentModificationException` when they detect the map has been modified during iteration.
+    This class is not synchronized. The specialized iterators returned by iterator are fail-fast: they throw a ConcurrentModificationException when they detect the map has been modified during iteration.
     
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_OpenIntToFieldHashMap__T]): ...
@@ -8922,61 +9363,66 @@ class OpenIntToFieldHashMap(AbstractOpenIntHashMap, java.io.Serializable, typing
     def __init__(self, openIntToFieldHashMap: 'OpenIntToFieldHashMap'[_OpenIntToFieldHashMap__T]): ...
     def equals(self, object: typing.Any) -> bool:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: equals in class Object
         
         
         """
         ...
-    def get(self, int: int) -> _OpenIntToFieldHashMap__T:
+    def get(self, key: int) -> _OpenIntToFieldHashMap__T:
         """
-            Get the stored value associated with the given key
+        Get the stored value associated with the given key
         
-            Parameters:
-                key (int): key associated with the data
+        Parameters:
+            key (int): key associated with the data
         
-            Returns:
-                data associated with the key
+        Returns:
+            data associated with the key
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.hashCode` in
-                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: hashCode in class Object
         
         
         """
         ...
-    def iterator(self) -> 'OpenIntToFieldHashMap.Iterator': ...
-    def put(self, int: int, t: _OpenIntToFieldHashMap__T) -> _OpenIntToFieldHashMap__T:
+    def iterator(self) -> 'OpenIntToFieldHashMap.Iterator':
         """
-            Put a value associated with a key in the map.
+        Get an iterator over map elements.
         
-            Parameters:
-                key (int): key to which value is associated
-                value (:class:`~org.hipparchus.util.OpenIntToFieldHashMap`): value to put in the map
+        The specialized iterators returned are fail-fast: they throw a ConcurrentModificationException when they detect the map has been modified during iteration.
         
-            Returns:
-                previous value associated with the key
+        Returns:
+            iterator over the map elements
         
         
         """
         ...
-    def remove(self, int: int) -> _OpenIntToFieldHashMap__T:
+    def put(self, key: int, value: _OpenIntToFieldHashMap__T) -> _OpenIntToFieldHashMap__T:
         """
-            Remove the value associated with a key.
+        Put a value associated with a key in the map.
         
-            Parameters:
-                key (int): key to which the value is associated
+        Parameters:
+            key (int): key to which value is associated
+            value (OpenIntToFieldHashMap): value to put in the map
         
-            Returns:
-                removed value
+        Returns:
+            previous value associated with the key
+        
+        
+        """
+        ...
+    def remove(self, key: int) -> _OpenIntToFieldHashMap__T:
+        """
+        Remove the value associated with a key.
+        
+        Parameters:
+            key (int): key to which the value is associated
+        
+        Returns:
+            removed value
         
         
         """

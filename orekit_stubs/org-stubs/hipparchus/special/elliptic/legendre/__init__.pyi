@@ -13,43 +13,33 @@ import typing
 
 class LegendreEllipticIntegral:
     """
-    public classLegendreEllipticIntegral extends :class:`~org.hipparchus.special.elliptic.legendre.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Complete and incomplete elliptic integrals in Legendre form.
     
-        Complete and incomplete elliptic integrals in Legendre form.
+    The elliptic integrals are related to Jacobi elliptic functions.
     
-        The elliptic integrals are related to Jacobi elliptic functions.
+    Beware that when computing elliptic integrals in the complex plane, many issues arise due to branch cuts. See the hipparchus for a thorough explanation.
     
-        *Beware that when computing elliptic integrals in the complex plane, many issues arise due to branch cuts. See the
-        :meth:`~org.hipparchus.special.elliptic.legendre.https:.www.hipparchus.org.hipparchus` for a thorough explanation.*
+    There are different conventions to interpret the arguments of Legendre elliptic integrals. In mathematical texts, these conventions show up using the separator between arguments. So for example for the incomplete integral of the first kind F we have:
     
-        There are different conventions to interpret the arguments of Legendre elliptic integrals. In mathematical texts, these
-        conventions show up using the separator between arguments. So for example for the incomplete integral of the first kind
-        F we have:
+      - F(φ, k): the first argument φ is an angle and the second argument k is the elliptic modulus: this is the trigonometric
+        form of the integral
+      - F(φ; m): the first argument φ is an angle and the second argument m=k² is the parameter: this is also a trigonometric
+        form of the integral
+      - F(x|m): the first argument x=sin(φ) is not an angle anymore and the second argument m=k² is the parameter: this is the
+        Legendre form
+      - F(φ\α): the first argument φ is an angle and the second argument α is the modular angle
     
-          - F(φ, k): the first argument φ is an angle and the second argument k is the elliptic modulus: this is the trigonometric
-            form of the integral
-          - F(φ; m): the first argument φ is an angle and the second argument m=k² is the parameter: this is also a trigonometric
-            form of the integral
-          - F(x|m): the first argument x=sin(φ) is not an angle anymore and the second argument m=k² is the parameter: this is the
-            Legendre form
-          - F(φ\α): the first argument φ is an angle and the second argument α is the modular angle
+    As we have no separator in a method call, we have to adopt one convention and stick to it. In Hipparchus, we adopted the Legendre form (i.e. F(x|m), with x=sin(φ) and m=k². These conventions are consistent with Wolfram Alpha functions EllipticF, EllipticE, ElliptiPI…
     
+    Since:
+        2.0
     
-        As we have no separator in a method call, we have to adopt one convention and stick to it. In Hipparchus, we adopted the
-        Legendre form (i.e. F(x|m), with x=sin(φ) and m=k². These conventions are consistent with Wolfram Alpha functions
-        EllipticF, EllipticE, ElliptiPI…
-    
-        Since:
-            2.0
-    
-        Also see:
-    
-              - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
-              - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.CompleteEllipticIntegraloftheFirstKind`
-              - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.CompleteEllipticIntegraloftheSecondKind`
-              - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheFirstKind`
-              - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheSecondKind`
-              - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheThirdKind`
+          - Elliptic_integral
+          - CompleteEllipticIntegraloftheFirstKind
+          - CompleteEllipticIntegraloftheSecondKind
+          - EllipticIntegraloftheFirstKind
+          - EllipticIntegraloftheSecondKind
+          - EllipticIntegraloftheThirdKind
     """
     _bigD_2__T = typing.TypeVar('_bigD_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _bigD_3__T = typing.TypeVar('_bigD_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -59,81 +49,63 @@ class LegendreEllipticIntegral:
     @staticmethod
     def bigD(double: float) -> float:
         """
-            Get the complete elliptic integral D(m) = [K(m) - E(m)]/m.
+        The complete elliptic integral D(m) is \[ \int_0^{\frac{\pi}{2}} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
         
-            The complete elliptic integral D(m) is \[ \int_0^{\frac{\pi}{2}} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        Parameters:
+            m (double): parameter (m=k² where k is the elliptic modulus)
         
-            Parameters:
-                m (double): parameter (m=k² where k is the elliptic modulus)
+        Returns:
+            complete elliptic integral D(m)
         
-            Returns:
-                complete elliptic integral D(m)
+              - bigD
         
-            Also see:
+        Get the complete elliptic integral D(m) = [K(m) - E(m)]/m.
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigD`
+        The complete elliptic integral D(m) is \[ \int_0^{\frac{\pi}{2}} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
         
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            Get the complete elliptic integral D(m) = [K(m) - E(m)]/m.
+        Parameters:
+            m (Complex): parameter (m=k² where k is the elliptic modulus)
         
-            The complete elliptic integral D(m) is \[ \int_0^{\frac{\pi}{2}} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
+        Returns:
+            complete elliptic integral D(m)
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+              - bigD
         
-            Parameters:
-                m (:class:`~org.hipparchus.complex.Complex`): parameter (m=k² where k is the elliptic modulus)
+        Get the incomplete elliptic integral D(φ, m) = [F(φ, m) - E(φ, m)]/m.
         
-            Returns:
-                complete elliptic integral D(m)
+        The incomplete elliptic integral D(φ, m) is \[ \int_0^{\phi} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
         
-            Also see:
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigD`
+        Parameters:
+            phi (double): amplitude (i.e. upper bound of the integral)
+            m (double): parameter (m=k² where k is the elliptic modulus)
         
+        Returns:
+            incomplete elliptic integral D(φ, m)
         
-            Get the incomplete elliptic integral D(φ, m) = [F(φ, m) - E(φ, m)]/m.
+              - bigD
         
-            The incomplete elliptic integral D(φ, m) is \[ \int_0^{\phi} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
+        Get the incomplete elliptic integral D(φ, m) = [F(φ, m) - E(φ, m)]/m.
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have known issues.
         
-            Parameters:
-                phi (double): amplitude (i.e. upper bound of the integral)
-                m (double): parameter (m=k² where k is the elliptic modulus)
+        The incomplete elliptic integral D(φ, m) is \[ \int_0^{\phi} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
         
-            Returns:
-                incomplete elliptic integral D(φ, m)
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            Also see:
+        Parameters:
+            phi (Complex): amplitude (i.e. upper bound of the integral)
+            m (Complex): parameter (m=k² where k is the elliptic modulus)
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigD`
+        Returns:
+            incomplete elliptic integral D(φ, m)
         
-        
-            Get the incomplete elliptic integral D(φ, m) = [F(φ, m) - E(φ, m)]/m.
-        
-            *BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have
-            known issues.*
-        
-            The incomplete elliptic integral D(φ, m) is \[ \int_0^{\phi} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
-        
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
-        
-            Parameters:
-                phi (:class:`~org.hipparchus.complex.Complex`): amplitude (i.e. upper bound of the integral)
-                m (:class:`~org.hipparchus.complex.Complex`): parameter (m=k² where k is the elliptic modulus)
-        
-            Returns:
-                incomplete elliptic integral D(φ, m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigD`
+              - bigD
         
         
         """
@@ -145,87 +117,68 @@ class LegendreEllipticIntegral:
     @staticmethod
     def bigD(t: _bigD_2__T) -> _bigD_2__T:
         """
-            Get the complete elliptic integral D(m) = [K(m) - E(m)]/m.
+        The complete elliptic integral D(m) is \[ \int_0^{\frac{\pi}{2}} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
         
-            The complete elliptic integral D(m) is \[ \int_0^{\frac{\pi}{2}} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        Parameters:
+            m (T): parameter (m=k² where k is the elliptic modulus)
         
-            Parameters:
-                m (T): parameter (m=k² where k is the elliptic modulus)
+        Returns:
+            complete elliptic integral D(m)
         
-            Returns:
-                complete elliptic integral D(m)
+              - bigD
         
-            Also see:
+        Get the complete elliptic integral D(m) = [K(m) - E(m)]/m.
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigD`
+        The complete elliptic integral D(m) is \[ \int_0^{\frac{\pi}{2}} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
         
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            Get the complete elliptic integral D(m) = [K(m) - E(m)]/m.
+        Parameters:
+            m (FieldComplex<T> m): parameter (m=k² where k is the elliptic modulus)
         
-            The complete elliptic integral D(m) is \[ \int_0^{\frac{\pi}{2}} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
+        Returns:
+            complete elliptic integral D(m)
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+              - bigD
         
-            Parameters:
-                m (:class:`~org.hipparchus.complex.FieldComplex`<T> m): parameter (m=k² where k is the elliptic modulus)
+        Get the incomplete elliptic integral D(φ, m) = [F(φ, m) - E(φ, m)]/m.
         
-            Returns:
-                complete elliptic integral D(m)
+        The incomplete elliptic integral D(φ, m) is \[ \int_0^{\phi} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
         
-            Also see:
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigD`
+        Parameters:
+            phi (T): amplitude (i.e. upper bound of the integral)
+            m (T): parameter (m=k² where k is the elliptic modulus)
         
+        Returns:
+            incomplete elliptic integral D(φ, m)
         
-            Get the incomplete elliptic integral D(φ, m) = [F(φ, m) - E(φ, m)]/m.
-        
-            The incomplete elliptic integral D(φ, m) is \[ \int_0^{\phi} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
-        
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
-        
-            Parameters:
-                phi (T): amplitude (i.e. upper bound of the integral)
-                m (T): parameter (m=k² where k is the elliptic modulus)
-        
-            Returns:
-                incomplete elliptic integral D(φ, m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigD`
+              - bigD
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def bigD(t: _bigD_3__T, t2: _bigD_3__T) -> _bigD_3__T:
+    def bigD(phi: _bigD_3__T, m: _bigD_3__T) -> _bigD_3__T:
         """
-            Get the incomplete elliptic integral D(φ, m) = [F(φ, m) - E(φ, m)]/m.
+        BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have known issues.
         
-            *BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have
-            known issues.*
+        The incomplete elliptic integral D(φ, m) is \[ \int_0^{\phi} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
         
-            The incomplete elliptic integral D(φ, m) is \[ \int_0^{\phi} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        Parameters:
+            phi (FieldComplex<T> phi): amplitude (i.e. upper bound of the integral)
+            m (FieldComplex<T> m): parameter (m=k² where k is the elliptic modulus)
         
-            Parameters:
-                phi (:class:`~org.hipparchus.complex.FieldComplex`<T> phi): amplitude (i.e. upper bound of the integral)
-                m (:class:`~org.hipparchus.complex.FieldComplex`<T> m): parameter (m=k² where k is the elliptic modulus)
+        Returns:
+            incomplete elliptic integral D(φ, m)
         
-            Returns:
-                incomplete elliptic integral D(φ, m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigD`
+              - bigD
         
         
         
@@ -252,117 +205,93 @@ class LegendreEllipticIntegral:
     @staticmethod
     def bigE(double: float) -> float:
         """
-            Get the complete elliptic integral of the second kind E(m).
+        The complete elliptic integral of the second kind E(m) is \[ \int_0^{\frac{\pi}{2}} \sqrt{1-m \sin^2\theta} d\theta \]
         
-            The complete elliptic integral of the second kind E(m) is \[ \int_0^{\frac{\pi}{2}} \sqrt{1-m \sin^2\theta} d\theta \]
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        Parameters:
+            m (double): parameter (m=k² where k is the elliptic modulus)
         
-            Parameters:
-                m (double): parameter (m=k² where k is the elliptic modulus)
+        Returns:
+            complete elliptic integral of the second kind E(m)
         
-            Returns:
-                complete elliptic integral of the second kind E(m)
+              - bigE
+              - CompleteEllipticIntegraloftheSecondKind
+              - Elliptic_integral
         
-            Also see:
+        Get the complete elliptic integral of the second kind E(m).
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigE`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.CompleteEllipticIntegraloftheSecondKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+        The complete elliptic integral of the second kind E(m) is \[ \int_0^{\frac{\pi}{2}} \sqrt{1-m \sin^2\theta} d\theta \]
         
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            Get the complete elliptic integral of the second kind E(m).
+        Parameters:
+            m (Complex): parameter (m=k² where k is the elliptic modulus)
         
-            The complete elliptic integral of the second kind E(m) is \[ \int_0^{\frac{\pi}{2}} \sqrt{1-m \sin^2\theta} d\theta \]
+        Returns:
+            complete elliptic integral of the second kind E(m)
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+              - bigE
+              - CompleteEllipticIntegraloftheSecondKind
+              - Elliptic_integral
         
-            Parameters:
-                m (:class:`~org.hipparchus.complex.Complex`): parameter (m=k² where k is the elliptic modulus)
+        Get the incomplete elliptic integral of the second kind E(φ, m).
         
-            Returns:
-                complete elliptic integral of the second kind E(m)
+        The incomplete elliptic integral of the second kind E(φ, m) is \[ \int_0^{\phi} \sqrt{1-m \sin^2\theta} d\theta \]
         
-            Also see:
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigE`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.CompleteEllipticIntegraloftheSecondKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+        Parameters:
+            phi (double): amplitude (i.e. upper bound of the integral)
+            m (double): parameter (m=k² where k is the elliptic modulus)
         
+        Returns:
+            incomplete elliptic integral of the second kind E(φ, m)
         
-            Get the incomplete elliptic integral of the second kind E(φ, m).
+              - bigE
+              - EllipticIntegraloftheSecondKind
+              - Elliptic_integral
         
-            The incomplete elliptic integral of the second kind E(φ, m) is \[ \int_0^{\phi} \sqrt{1-m \sin^2\theta} d\theta \]
+        Get the incomplete elliptic integral of the second kind E(φ, m).
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have known issues.
         
-            Parameters:
-                phi (double): amplitude (i.e. upper bound of the integral)
-                m (double): parameter (m=k² where k is the elliptic modulus)
+        The incomplete elliptic integral of the second kind E(φ, m) is \[ \int_0^{\phi} \sqrt{1-m \sin^2\theta} d\theta \]
         
-            Returns:
-                incomplete elliptic integral of the second kind E(φ, m)
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            Also see:
+        Parameters:
+            phi (Complex): amplitude (i.e. upper bound of the integral)
+            m (Complex): parameter (m=k² where k is the elliptic modulus)
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigE`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheSecondKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+        Returns:
+            incomplete elliptic integral of the second kind E(φ, m)
         
+              - bigE
+              - EllipticIntegraloftheSecondKind
+              - Elliptic_integral
         
-            Get the incomplete elliptic integral of the second kind E(φ, m).
+        Get the incomplete elliptic integral of the second kind E(φ, m) using numerical integration.
         
-            *BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have
-            known issues.*
+        BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have known issues.
         
-            The incomplete elliptic integral of the second kind E(φ, m) is \[ \int_0^{\phi} \sqrt{1-m \sin^2\theta} d\theta \]
+        The incomplete elliptic integral of the second kind E(φ, m) is \[ \int_0^{\phi} \sqrt{1-m \sin^2\theta} d\theta \]
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        The algorithm for evaluating the functions is based on numerical integration. If integration path comes too close to a pole of the integrand, then integration will fail with a MathIllegalStateException even for very large maxEval. This is normal behavior.
         
-            Parameters:
-                phi (:class:`~org.hipparchus.complex.Complex`): amplitude (i.e. upper bound of the integral)
-                m (:class:`~org.hipparchus.complex.Complex`): parameter (m=k² where k is the elliptic modulus)
+        Parameters:
+            phi (Complex): amplitude (i.e. upper bound of the integral)
+            m (Complex): parameter (m=k² where k is the elliptic modulus)
+            integrator (ComplexUnivariateIntegrator): integrator to use
+            maxEval (int): maximum number of evaluations (real and imaginary parts are evaluated separately, so up to twice this number may be
+                used)
         
-            Returns:
-                incomplete elliptic integral of the second kind E(φ, m)
+        Returns:
+            incomplete elliptic integral of the second kind E(φ, m)
         
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigE`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheSecondKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
-        
-        
-            Get the incomplete elliptic integral of the second kind E(φ, m) using numerical integration.
-        
-            *BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have
-            known issues.*
-        
-            The incomplete elliptic integral of the second kind E(φ, m) is \[ \int_0^{\phi} \sqrt{1-m \sin^2\theta} d\theta \]
-        
-            The algorithm for evaluating the functions is based on numerical integration. If integration path comes too close to a
-            pole of the integrand, then integration will fail with a :class:`~org.hipparchus.exception.MathIllegalStateException`
-            even for very large :code:`maxEval`. This is normal behavior.
-        
-            Parameters:
-                phi (:class:`~org.hipparchus.complex.Complex`): amplitude (i.e. upper bound of the integral)
-                m (:class:`~org.hipparchus.complex.Complex`): parameter (m=k² where k is the elliptic modulus)
-                integrator (:class:`~org.hipparchus.complex.ComplexUnivariateIntegrator`): integrator to use
-                maxEval (int): maximum number of evaluations (real and imaginary parts are evaluated separately, so up to twice this number may be
-                    used)
-        
-            Returns:
-                incomplete elliptic integral of the second kind E(φ, m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigE`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheSecondKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+              - bigE
+              - EllipticIntegraloftheSecondKind
+              - Elliptic_integral
         
         
         """
@@ -374,95 +303,76 @@ class LegendreEllipticIntegral:
     @staticmethod
     def bigE(t: _bigE_2__T) -> _bigE_2__T:
         """
-            Get the complete elliptic integral of the second kind E(m).
+        The complete elliptic integral of the second kind E(m) is \[ \int_0^{\frac{\pi}{2}} \sqrt{1-m \sin^2\theta} d\theta \]
         
-            The complete elliptic integral of the second kind E(m) is \[ \int_0^{\frac{\pi}{2}} \sqrt{1-m \sin^2\theta} d\theta \]
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        Parameters:
+            m (T): parameter (m=k² where k is the elliptic modulus)
         
-            Parameters:
-                m (T): parameter (m=k² where k is the elliptic modulus)
+        Returns:
+            complete elliptic integral of the second kind E(m)
         
-            Returns:
-                complete elliptic integral of the second kind E(m)
+              - bigE
+              - CompleteEllipticIntegraloftheSecondKind
+              - Elliptic_integral
         
-            Also see:
+        Get the complete elliptic integral of the second kind E(m).
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigE`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.CompleteEllipticIntegraloftheSecondKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+        The complete elliptic integral of the second kind E(m) is \[ \int_0^{\frac{\pi}{2}} \sqrt{1-m \sin^2\theta} d\theta \]
         
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            Get the complete elliptic integral of the second kind E(m).
+        Parameters:
+            m (FieldComplex<T> m): parameter (m=k² where k is the elliptic modulus)
         
-            The complete elliptic integral of the second kind E(m) is \[ \int_0^{\frac{\pi}{2}} \sqrt{1-m \sin^2\theta} d\theta \]
+        Returns:
+            complete elliptic integral of the second kind E(m)
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+              - bigE
+              - CompleteEllipticIntegraloftheSecondKind
+              - Elliptic_integral
         
-            Parameters:
-                m (:class:`~org.hipparchus.complex.FieldComplex`<T> m): parameter (m=k² where k is the elliptic modulus)
+        Get the incomplete elliptic integral of the second kind E(φ, m).
         
-            Returns:
-                complete elliptic integral of the second kind E(m)
+        The incomplete elliptic integral of the second kind E(φ, m) is \[ \int_0^{\phi} \sqrt{1-m \sin^2\theta} d\theta \]
         
-            Also see:
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigE`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.CompleteEllipticIntegraloftheSecondKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+        Parameters:
+            phi (T): amplitude (i.e. upper bound of the integral)
+            m (T): parameter (m=k² where k is the elliptic modulus)
         
+        Returns:
+            incomplete elliptic integral of the second kind E(φ, m)
         
-            Get the incomplete elliptic integral of the second kind E(φ, m).
-        
-            The incomplete elliptic integral of the second kind E(φ, m) is \[ \int_0^{\phi} \sqrt{1-m \sin^2\theta} d\theta \]
-        
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
-        
-            Parameters:
-                phi (T): amplitude (i.e. upper bound of the integral)
-                m (T): parameter (m=k² where k is the elliptic modulus)
-        
-            Returns:
-                incomplete elliptic integral of the second kind E(φ, m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigE`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheSecondKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+              - bigE
+              - EllipticIntegraloftheSecondKind
+              - Elliptic_integral
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def bigE(t: _bigE_3__T, t2: _bigE_3__T) -> _bigE_3__T:
+    def bigE(phi: _bigE_3__T, m: _bigE_3__T) -> _bigE_3__T:
         """
-            Get the incomplete elliptic integral of the second kind E(φ, m).
+        BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have known issues.
         
-            *BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have
-            known issues.*
+        The incomplete elliptic integral of the second kind E(φ, m) is \[ \int_0^{\phi} \sqrt{1-m \sin^2\theta} d\theta \]
         
-            The incomplete elliptic integral of the second kind E(φ, m) is \[ \int_0^{\phi} \sqrt{1-m \sin^2\theta} d\theta \]
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        Parameters:
+            phi (FieldComplex<T> phi): amplitude (i.e. upper bound of the integral)
+            m (FieldComplex<T> m): parameter (m=k² where k is the elliptic modulus)
         
-            Parameters:
-                phi (:class:`~org.hipparchus.complex.FieldComplex`<T> phi): amplitude (i.e. upper bound of the integral)
-                m (:class:`~org.hipparchus.complex.FieldComplex`<T> m): parameter (m=k² where k is the elliptic modulus)
+        Returns:
+            incomplete elliptic integral of the second kind E(φ, m)
         
-            Returns:
-                incomplete elliptic integral of the second kind E(φ, m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigE`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheSecondKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+              - bigE
+              - EllipticIntegraloftheSecondKind
+              - Elliptic_integral
         
         
         """
@@ -484,34 +394,27 @@ class LegendreEllipticIntegral:
     def bigE(fieldComplex: org.hipparchus.complex.FieldComplex[_bigE_8__T], fieldComplex2: org.hipparchus.complex.FieldComplex[_bigE_8__T]) -> org.hipparchus.complex.FieldComplex[_bigE_8__T]: ...
     @typing.overload
     @staticmethod
-    def bigE(fieldComplex: org.hipparchus.complex.FieldComplex[_bigE_9__T], fieldComplex2: org.hipparchus.complex.FieldComplex[_bigE_9__T], fieldComplexUnivariateIntegrator: org.hipparchus.complex.FieldComplexUnivariateIntegrator[_bigE_9__T], int: int) -> org.hipparchus.complex.FieldComplex[_bigE_9__T]:
+    def bigE(phi: org.hipparchus.complex.FieldComplex[_bigE_9__T], m: org.hipparchus.complex.FieldComplex[_bigE_9__T], integrator: org.hipparchus.complex.FieldComplexUnivariateIntegrator[_bigE_9__T], maxEval: int) -> org.hipparchus.complex.FieldComplex[_bigE_9__T]:
         """
-            Get the incomplete elliptic integral of the second kind E(φ, m).
+        BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have known issues.
         
-            *BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have
-            known issues.*
+        The incomplete elliptic integral of the second kind E(φ, m) is \[ \int_0^{\phi} \sqrt{1-m \sin^2\theta} d\theta \]
         
-            The incomplete elliptic integral of the second kind E(φ, m) is \[ \int_0^{\phi} \sqrt{1-m \sin^2\theta} d\theta \]
+        The algorithm for evaluating the functions is based on numerical integration. If integration path comes too close to a pole of the integrand, then integration will fail with a MathIllegalStateException even for very large maxEval. This is normal behavior.
         
-            The algorithm for evaluating the functions is based on numerical integration. If integration path comes too close to a
-            pole of the integrand, then integration will fail with a :class:`~org.hipparchus.exception.MathIllegalStateException`
-            even for very large :code:`maxEval`. This is normal behavior.
+        Parameters:
+            phi (FieldComplex<T> phi): amplitude (i.e. upper bound of the integral)
+            m (FieldComplex<T> m): parameter (m=k² where k is the elliptic modulus)
+            integrator (FieldComplexUnivariateIntegrator<T> integrator): integrator to use
+            maxEval (int): maximum number of evaluations (real and imaginary parts are evaluated separately, so up to twice this number may be
+                used)
         
-            Parameters:
-                phi (:class:`~org.hipparchus.complex.FieldComplex`<T> phi): amplitude (i.e. upper bound of the integral)
-                m (:class:`~org.hipparchus.complex.FieldComplex`<T> m): parameter (m=k² where k is the elliptic modulus)
-                integrator (:class:`~org.hipparchus.complex.FieldComplexUnivariateIntegrator`<T> integrator): integrator to use
-                maxEval (int): maximum number of evaluations (real and imaginary parts are evaluated separately, so up to twice this number may be
-                    used)
+        Returns:
+            incomplete elliptic integral of the second kind E(φ, m)
         
-            Returns:
-                incomplete elliptic integral of the second kind E(φ, m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigE`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheSecondKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+              - bigE
+              - EllipticIntegraloftheSecondKind
+              - Elliptic_integral
         
         
         
@@ -524,80 +427,61 @@ class LegendreEllipticIntegral:
     @staticmethod
     def bigF(double: float, double2: float) -> float:
         """
-            Get the incomplete elliptic integral of the first kind F(φ, m).
+        The incomplete elliptic integral of the first kind F(φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}} \]
         
-            The incomplete elliptic integral of the first kind F(φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}}
-            \]
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        Parameters:
+            phi (double): amplitude (i.e. upper bound of the integral)
+            m (double): parameter (m=k² where k is the elliptic modulus)
         
-            Parameters:
-                phi (double): amplitude (i.e. upper bound of the integral)
-                m (double): parameter (m=k² where k is the elliptic modulus)
+        Returns:
+            incomplete elliptic integral of the first kind F(φ, m)
         
-            Returns:
-                incomplete elliptic integral of the first kind F(φ, m)
+              - bigK
+              - EllipticIntegraloftheFirstKind
+              - Elliptic_integral
         
-            Also see:
+        Get the incomplete elliptic integral of the first kind F(φ, m).
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigK`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheFirstKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+        BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have known issues.
         
+        The incomplete elliptic integral of the first kind F(φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}} \]
         
-            Get the incomplete elliptic integral of the first kind F(φ, m).
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            *BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have
-            known issues.*
+        Parameters:
+            phi (Complex): amplitude (i.e. upper bound of the integral)
+            m (Complex): parameter (m=k² where k is the elliptic modulus)
         
-            The incomplete elliptic integral of the first kind F(φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}}
-            \]
+        Returns:
+            incomplete elliptic integral of the first kind F(φ, m)
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+              - bigK
+              - EllipticIntegraloftheFirstKind
+              - Elliptic_integral
         
-            Parameters:
-                phi (:class:`~org.hipparchus.complex.Complex`): amplitude (i.e. upper bound of the integral)
-                m (:class:`~org.hipparchus.complex.Complex`): parameter (m=k² where k is the elliptic modulus)
+        Get the incomplete elliptic integral of the first kind F(φ, m) using numerical integration.
         
-            Returns:
-                incomplete elliptic integral of the first kind F(φ, m)
+        BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have known issues.
         
-            Also see:
+        The incomplete elliptic integral of the first kind F(φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}} \]
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigK`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheFirstKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+        The algorithm for evaluating the functions is based on numerical integration. If integration path comes too close to a pole of the integrand, then integration will fail with a MathIllegalStateException even for very large maxEval. This is normal behavior.
         
+        Parameters:
+            phi (Complex): amplitude (i.e. upper bound of the integral)
+            m (Complex): parameter (m=k² where k is the elliptic modulus)
+            integrator (ComplexUnivariateIntegrator): integrator to use
+            maxEval (int): maximum number of evaluations (real and imaginary parts are evaluated separately, so up to twice this number may be
+                used)
         
-            Get the incomplete elliptic integral of the first kind F(φ, m) using numerical integration.
+        Returns:
+            incomplete elliptic integral of the first kind F(φ, m)
         
-            *BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have
-            known issues.*
-        
-            The incomplete elliptic integral of the first kind F(φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}}
-            \]
-        
-            The algorithm for evaluating the functions is based on numerical integration. If integration path comes too close to a
-            pole of the integrand, then integration will fail with a :class:`~org.hipparchus.exception.MathIllegalStateException`
-            even for very large :code:`maxEval`. This is normal behavior.
-        
-            Parameters:
-                phi (:class:`~org.hipparchus.complex.Complex`): amplitude (i.e. upper bound of the integral)
-                m (:class:`~org.hipparchus.complex.Complex`): parameter (m=k² where k is the elliptic modulus)
-                integrator (:class:`~org.hipparchus.complex.ComplexUnivariateIntegrator`): integrator to use
-                maxEval (int): maximum number of evaluations (real and imaginary parts are evaluated separately, so up to twice this number may be
-                    used)
-        
-            Returns:
-                incomplete elliptic integral of the first kind F(φ, m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigK`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheFirstKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+              - bigK
+              - EllipticIntegraloftheFirstKind
+              - Elliptic_integral
         
         
         """
@@ -606,51 +490,39 @@ class LegendreEllipticIntegral:
     @staticmethod
     def bigF(t: _bigF_1__T, t2: _bigF_1__T) -> _bigF_1__T:
         """
-            Get the incomplete elliptic integral of the first kind F(φ, m).
+        The incomplete elliptic integral of the first kind F(φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}} \]
         
-            The incomplete elliptic integral of the first kind F(φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}}
-            \]
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        Parameters:
+            phi (T): amplitude (i.e. upper bound of the integral)
+            m (T): parameter (m=k² where k is the elliptic modulus)
         
-            Parameters:
-                phi (T): amplitude (i.e. upper bound of the integral)
-                m (T): parameter (m=k² where k is the elliptic modulus)
+        Returns:
+            incomplete elliptic integral of the first kind F(φ, m)
         
-            Returns:
-                incomplete elliptic integral of the first kind F(φ, m)
+              - bigK
+              - EllipticIntegraloftheFirstKind
+              - Elliptic_integral
         
-            Also see:
+        Get the incomplete elliptic integral of the first kind F(φ, m).
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigK`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheFirstKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+        BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have known issues.
         
+        The incomplete elliptic integral of the first kind F(φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}} \]
         
-            Get the incomplete elliptic integral of the first kind F(φ, m).
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            *BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have
-            known issues.*
+        Parameters:
+            phi (FieldComplex<T> phi): amplitude (i.e. upper bound of the integral)
+            m (FieldComplex<T> m): parameter (m=k² where k is the elliptic modulus)
         
-            The incomplete elliptic integral of the first kind F(φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}}
-            \]
+        Returns:
+            incomplete elliptic integral of the first kind F(φ, m)
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
-        
-            Parameters:
-                phi (:class:`~org.hipparchus.complex.FieldComplex`<T> phi): amplitude (i.e. upper bound of the integral)
-                m (:class:`~org.hipparchus.complex.FieldComplex`<T> m): parameter (m=k² where k is the elliptic modulus)
-        
-            Returns:
-                incomplete elliptic integral of the first kind F(φ, m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigK`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheFirstKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+              - bigK
+              - EllipticIntegraloftheFirstKind
+              - Elliptic_integral
         
         
         """
@@ -666,35 +538,27 @@ class LegendreEllipticIntegral:
     def bigF(fieldComplex: org.hipparchus.complex.FieldComplex[_bigF_4__T], fieldComplex2: org.hipparchus.complex.FieldComplex[_bigF_4__T]) -> org.hipparchus.complex.FieldComplex[_bigF_4__T]: ...
     @typing.overload
     @staticmethod
-    def bigF(fieldComplex: org.hipparchus.complex.FieldComplex[_bigF_5__T], fieldComplex2: org.hipparchus.complex.FieldComplex[_bigF_5__T], fieldComplexUnivariateIntegrator: org.hipparchus.complex.FieldComplexUnivariateIntegrator[_bigF_5__T], int: int) -> org.hipparchus.complex.FieldComplex[_bigF_5__T]:
+    def bigF(phi: org.hipparchus.complex.FieldComplex[_bigF_5__T], m: org.hipparchus.complex.FieldComplex[_bigF_5__T], integrator: org.hipparchus.complex.FieldComplexUnivariateIntegrator[_bigF_5__T], maxEval: int) -> org.hipparchus.complex.FieldComplex[_bigF_5__T]:
         """
-            Get the incomplete elliptic integral of the first kind F(φ, m).
+        BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have known issues.
         
-            *BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have
-            known issues.*
+        The incomplete elliptic integral of the first kind F(φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}} \]
         
-            The incomplete elliptic integral of the first kind F(φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}}
-            \]
+        The algorithm for evaluating the functions is based on numerical integration. If integration path comes too close to a pole of the integrand, then integration will fail with a MathIllegalStateException even for very large maxEval. This is normal behavior.
         
-            The algorithm for evaluating the functions is based on numerical integration. If integration path comes too close to a
-            pole of the integrand, then integration will fail with a :class:`~org.hipparchus.exception.MathIllegalStateException`
-            even for very large :code:`maxEval`. This is normal behavior.
+        Parameters:
+            phi (FieldComplex<T> phi): amplitude (i.e. upper bound of the integral)
+            m (FieldComplex<T> m): parameter (m=k² where k is the elliptic modulus)
+            integrator (FieldComplexUnivariateIntegrator<T> integrator): integrator to use
+            maxEval (int): maximum number of evaluations (real and imaginary parts are evaluated separately, so up to twice this number may be
+                used)
         
-            Parameters:
-                phi (:class:`~org.hipparchus.complex.FieldComplex`<T> phi): amplitude (i.e. upper bound of the integral)
-                m (:class:`~org.hipparchus.complex.FieldComplex`<T> m): parameter (m=k² where k is the elliptic modulus)
-                integrator (:class:`~org.hipparchus.complex.FieldComplexUnivariateIntegrator`<T> integrator): integrator to use
-                maxEval (int): maximum number of evaluations (real and imaginary parts are evaluated separately, so up to twice this number may be
-                    used)
+        Returns:
+            incomplete elliptic integral of the first kind F(φ, m)
         
-            Returns:
-                incomplete elliptic integral of the first kind F(φ, m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigK`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheFirstKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+              - bigK
+              - EllipticIntegraloftheFirstKind
+              - Elliptic_integral
         
         
         
@@ -706,48 +570,37 @@ class LegendreEllipticIntegral:
     @staticmethod
     def bigK(double: float) -> float:
         """
-            Get the complete elliptic integral of the first kind K(m).
+        The complete elliptic integral of the first kind K(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m \sin^2\theta}} \] it corresponds to the real quarter-period of Jacobi elliptic functions
         
-            The complete elliptic integral of the first kind K(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m
-            \sin^2\theta}} \] it corresponds to the real quarter-period of Jacobi elliptic functions
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        Parameters:
+            m (double): parameter (m=k² where k is the elliptic modulus)
         
-            Parameters:
-                m (double): parameter (m=k² where k is the elliptic modulus)
+        Returns:
+            complete elliptic integral of the first kind K(m)
         
-            Returns:
-                complete elliptic integral of the first kind K(m)
+              - bigKPrime
+              - bigF
+              - CompleteEllipticIntegraloftheFirstKind
+              - Elliptic_integral
         
-            Also see:
+        Get the complete elliptic integral of the first kind K(m).
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigKPrime`
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigF`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.CompleteEllipticIntegraloftheFirstKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+        The complete elliptic integral of the first kind K(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m \sin^2\theta}} \] it corresponds to the real quarter-period of Jacobi elliptic functions
         
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            Get the complete elliptic integral of the first kind K(m).
+        Parameters:
+            m (Complex): parameter (m=k² where k is the elliptic modulus)
         
-            The complete elliptic integral of the first kind K(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m
-            \sin^2\theta}} \] it corresponds to the real quarter-period of Jacobi elliptic functions
+        Returns:
+            complete elliptic integral of the first kind K(m)
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
-        
-            Parameters:
-                m (:class:`~org.hipparchus.complex.Complex`): parameter (m=k² where k is the elliptic modulus)
-        
-            Returns:
-                complete elliptic integral of the first kind K(m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigKPrime`
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigF`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.CompleteEllipticIntegraloftheFirstKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+              - bigKPrime
+              - bigF
+              - CompleteEllipticIntegraloftheFirstKind
+              - Elliptic_integral
         
         
         """
@@ -756,48 +609,37 @@ class LegendreEllipticIntegral:
     @staticmethod
     def bigK(t: _bigK_1__T) -> _bigK_1__T:
         """
-            Get the complete elliptic integral of the first kind K(m).
+        The complete elliptic integral of the first kind K(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m \sin^2\theta}} \] it corresponds to the real quarter-period of Jacobi elliptic functions
         
-            The complete elliptic integral of the first kind K(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m
-            \sin^2\theta}} \] it corresponds to the real quarter-period of Jacobi elliptic functions
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        Parameters:
+            m (T): parameter (m=k² where k is the elliptic modulus)
         
-            Parameters:
-                m (T): parameter (m=k² where k is the elliptic modulus)
+        Returns:
+            complete elliptic integral of the first kind K(m)
         
-            Returns:
-                complete elliptic integral of the first kind K(m)
+              - bigKPrime
+              - bigF
+              - CompleteEllipticIntegraloftheFirstKind
+              - Elliptic_integral
         
-            Also see:
+        Get the complete elliptic integral of the first kind K(m).
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigKPrime`
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigF`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.CompleteEllipticIntegraloftheFirstKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+        The complete elliptic integral of the first kind K(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m \sin^2\theta}} \] it corresponds to the real quarter-period of Jacobi elliptic functions
         
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            Get the complete elliptic integral of the first kind K(m).
+        Parameters:
+            m (FieldComplex<T> m): parameter (m=k² where k is the elliptic modulus)
         
-            The complete elliptic integral of the first kind K(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m
-            \sin^2\theta}} \] it corresponds to the real quarter-period of Jacobi elliptic functions
+        Returns:
+            complete elliptic integral of the first kind K(m)
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
-        
-            Parameters:
-                m (:class:`~org.hipparchus.complex.FieldComplex`<T> m): parameter (m=k² where k is the elliptic modulus)
-        
-            Returns:
-                complete elliptic integral of the first kind K(m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigKPrime`
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigF`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.CompleteEllipticIntegraloftheFirstKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+              - bigKPrime
+              - bigF
+              - CompleteEllipticIntegraloftheFirstKind
+              - Elliptic_integral
         
         
         
@@ -815,46 +657,37 @@ class LegendreEllipticIntegral:
     @staticmethod
     def bigKPrime(double: float) -> float:
         """
-            Get the complete elliptic integral of the first kind K'(m).
+        Get the complete elliptic integral of the first kind K'(m).
         
-            The complete elliptic integral of the first kind K'(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-(1-m)
-            \sin^2\theta}} \] it corresponds to the imaginary quarter-period of Jacobi elliptic functions
+        The complete elliptic integral of the first kind K'(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-(1-m) \sin^2\theta}} \] it corresponds to the imaginary quarter-period of Jacobi elliptic functions
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            Parameters:
-                m (double): parameter (m=k² where k is the elliptic modulus)
+        Parameters:
+            m (double): parameter (m=k² where k is the elliptic modulus)
         
-            Returns:
-                complete elliptic integral of the first kind K'(m)
+        Returns:
+            complete elliptic integral of the first kind K'(m)
         
-            Also see:
+              - bigK
+              - CompleteEllipticIntegraloftheFirstKind
+              - Elliptic_integral
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigK`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.CompleteEllipticIntegraloftheFirstKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+        Get the complete elliptic integral of the first kind K'(m).
         
+        The complete elliptic integral of the first kind K'(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-(1-m) \sin^2\theta}} \] it corresponds to the imaginary quarter-period of Jacobi elliptic functions
         
-            Get the complete elliptic integral of the first kind K'(m).
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            The complete elliptic integral of the first kind K'(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-(1-m)
-            \sin^2\theta}} \] it corresponds to the imaginary quarter-period of Jacobi elliptic functions
+        Parameters:
+            m (Complex): parameter (m=k² where k is the elliptic modulus)
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        Returns:
+            complete elliptic integral of the first kind K'(m)
         
-            Parameters:
-                m (:class:`~org.hipparchus.complex.Complex`): parameter (m=k² where k is the elliptic modulus)
-        
-            Returns:
-                complete elliptic integral of the first kind K'(m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigK`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.CompleteEllipticIntegraloftheFirstKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+              - bigK
+              - CompleteEllipticIntegraloftheFirstKind
+              - Elliptic_integral
         
         
         """
@@ -863,46 +696,37 @@ class LegendreEllipticIntegral:
     @staticmethod
     def bigKPrime(t: _bigKPrime_1__T) -> _bigKPrime_1__T:
         """
-            Get the complete elliptic integral of the first kind K'(m).
+        Get the complete elliptic integral of the first kind K'(m).
         
-            The complete elliptic integral of the first kind K'(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-(1-m)
-            \sin^2\theta}} \] it corresponds to the imaginary quarter-period of Jacobi elliptic functions
+        The complete elliptic integral of the first kind K'(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-(1-m) \sin^2\theta}} \] it corresponds to the imaginary quarter-period of Jacobi elliptic functions
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            Parameters:
-                m (T): parameter (m=k² where k is the elliptic modulus)
+        Parameters:
+            m (T): parameter (m=k² where k is the elliptic modulus)
         
-            Returns:
-                complete elliptic integral of the first kind K'(m)
+        Returns:
+            complete elliptic integral of the first kind K'(m)
         
-            Also see:
+              - bigK
+              - CompleteEllipticIntegraloftheFirstKind
+              - Elliptic_integral
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigK`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.CompleteEllipticIntegraloftheFirstKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+        Get the complete elliptic integral of the first kind K'(m).
         
+        The complete elliptic integral of the first kind K'(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-(1-m) \sin^2\theta}} \] it corresponds to the imaginary quarter-period of Jacobi elliptic functions
         
-            Get the complete elliptic integral of the first kind K'(m).
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            The complete elliptic integral of the first kind K'(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-(1-m)
-            \sin^2\theta}} \] it corresponds to the imaginary quarter-period of Jacobi elliptic functions
+        Parameters:
+            m (FieldComplex<T> m): parameter (m=k² where k is the elliptic modulus)
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        Returns:
+            complete elliptic integral of the first kind K'(m)
         
-            Parameters:
-                m (:class:`~org.hipparchus.complex.FieldComplex`<T> m): parameter (m=k² where k is the elliptic modulus)
-        
-            Returns:
-                complete elliptic integral of the first kind K'(m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigK`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.CompleteEllipticIntegraloftheFirstKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+              - bigK
+              - CompleteEllipticIntegraloftheFirstKind
+              - Elliptic_integral
         
         
         
@@ -923,126 +747,97 @@ class LegendreEllipticIntegral:
     @staticmethod
     def bigPi(double: float, double2: float) -> float:
         """
-            Get the complete elliptic integral of the third kind Π(n, m).
+        The complete elliptic integral of the third kind Π(n, m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m \sin^2\theta}(1-n \sin^2\theta)} \]
         
-            The complete elliptic integral of the third kind Π(n, m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m
-            \sin^2\theta}(1-n \sin^2\theta)} \]
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        Parameters:
+            n (double): elliptic characteristic
+            m (double): parameter (m=k² where k is the elliptic modulus)
         
-            Parameters:
-                n (double): elliptic characteristic
-                m (double): parameter (m=k² where k is the elliptic modulus)
+        Returns:
+            complete elliptic integral of the third kind Π(n, m)
         
-            Returns:
-                complete elliptic integral of the third kind Π(n, m)
+              - bigPi
+              - EllipticIntegraloftheThirdKind
+              - Elliptic_integral
         
-            Also see:
+        Get the complete elliptic integral of the third kind Π(n, m).
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigPi`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheThirdKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+        The complete elliptic integral of the third kind Π(n, m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m \sin^2\theta}(1-n \sin^2\theta)} \]
         
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            Get the complete elliptic integral of the third kind Π(n, m).
+        Parameters:
+            n (Complex): elliptic characteristic
+            m (Complex): parameter (m=k² where k is the elliptic modulus)
         
-            The complete elliptic integral of the third kind Π(n, m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m
-            \sin^2\theta}(1-n \sin^2\theta)} \]
+        Returns:
+            complete elliptic integral of the third kind Π(n, m)
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+              - bigPi
+              - EllipticIntegraloftheThirdKind
+              - Elliptic_integral
         
-            Parameters:
-                n (:class:`~org.hipparchus.complex.Complex`): elliptic characteristic
-                m (:class:`~org.hipparchus.complex.Complex`): parameter (m=k² where k is the elliptic modulus)
+        Get the incomplete elliptic integral of the third kind Π(n, φ, m).
         
-            Returns:
-                complete elliptic integral of the third kind Π(n, m)
+        The incomplete elliptic integral of the third kind Π(n, φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}(1-n \sin^2\theta)} \]
         
-            Also see:
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigPi`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheThirdKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+        Parameters:
+            n (double): elliptic characteristic
+            phi (double): amplitude (i.e. upper bound of the integral)
+            m (double): parameter (m=k² where k is the elliptic modulus)
         
+        Returns:
+            incomplete elliptic integral of the third kind Π(n, φ, m)
         
-            Get the incomplete elliptic integral of the third kind Π(n, φ, m).
+              - bigPi
+              - EllipticIntegraloftheThirdKind
+              - Elliptic_integral
         
-            The incomplete elliptic integral of the third kind Π(n, φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m
-            \sin^2\theta}(1-n \sin^2\theta)} \]
+        Get the incomplete elliptic integral of the third kind Π(n, φ, m).
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have known issues.
         
-            Parameters:
-                n (double): elliptic characteristic
-                phi (double): amplitude (i.e. upper bound of the integral)
-                m (double): parameter (m=k² where k is the elliptic modulus)
+        The incomplete elliptic integral of the third kind Π(n, φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}(1-n \sin^2\theta)} \]
         
-            Returns:
-                incomplete elliptic integral of the third kind Π(n, φ, m)
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            Also see:
+        Parameters:
+            n (Complex): elliptic characteristic
+            phi (Complex): amplitude (i.e. upper bound of the integral)
+            m (Complex): parameter (m=k² where k is the elliptic modulus)
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigPi`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheThirdKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+        Returns:
+            incomplete elliptic integral of the third kind Π(n, φ, m)
         
+              - bigPi
+              - EllipticIntegraloftheThirdKind
+              - Elliptic_integral
         
-            Get the incomplete elliptic integral of the third kind Π(n, φ, m).
+        Get the incomplete elliptic integral of the third kind Π(n, φ, m) using numerical integration.
         
-            *BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have
-            known issues.*
+        BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have known issues.
         
-            The incomplete elliptic integral of the third kind Π(n, φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m
-            \sin^2\theta}(1-n \sin^2\theta)} \]
+        The incomplete elliptic integral of the third kind Π(n, φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}(1-n \sin^2\theta)} \]
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        The algorithm for evaluating the functions is based on numerical integration. If integration path comes too close to a pole of the integrand, then integration will fail with a MathIllegalStateException even for very large maxEval. This is normal behavior.
         
-            Parameters:
-                n (:class:`~org.hipparchus.complex.Complex`): elliptic characteristic
-                phi (:class:`~org.hipparchus.complex.Complex`): amplitude (i.e. upper bound of the integral)
-                m (:class:`~org.hipparchus.complex.Complex`): parameter (m=k² where k is the elliptic modulus)
+        Parameters:
+            n (Complex): elliptic characteristic
+            phi (Complex): amplitude (i.e. upper bound of the integral)
+            m (Complex): parameter (m=k² where k is the elliptic modulus)
+            integrator (ComplexUnivariateIntegrator): integrator to use
+            maxEval (int): maximum number of evaluations (real and imaginary
         
-            Returns:
-                incomplete elliptic integral of the third kind Π(n, φ, m)
+        Returns:
+            incomplete elliptic integral of the third kind Π(n, φ, m)
         
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigPi`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheThirdKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
-        
-        
-            Get the incomplete elliptic integral of the third kind Π(n, φ, m) using numerical integration.
-        
-            *BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have
-            known issues.*
-        
-            The incomplete elliptic integral of the third kind Π(n, φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m
-            \sin^2\theta}(1-n \sin^2\theta)} \]
-        
-            The algorithm for evaluating the functions is based on numerical integration. If integration path comes too close to a
-            pole of the integrand, then integration will fail with a :class:`~org.hipparchus.exception.MathIllegalStateException`
-            even for very large :code:`maxEval`. This is normal behavior.
-        
-            Parameters:
-                n (:class:`~org.hipparchus.complex.Complex`): elliptic characteristic
-                phi (:class:`~org.hipparchus.complex.Complex`): amplitude (i.e. upper bound of the integral)
-                m (:class:`~org.hipparchus.complex.Complex`): parameter (m=k² where k is the elliptic modulus)
-                integrator (:class:`~org.hipparchus.complex.ComplexUnivariateIntegrator`): integrator to use
-                maxEval (int): maximum number of evaluations (real and imaginary
-        
-            Returns:
-                incomplete elliptic integral of the third kind Π(n, φ, m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigPi`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheThirdKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+              - bigPi
+              - EllipticIntegraloftheThirdKind
+              - Elliptic_integral
         
         
         """
@@ -1054,103 +849,80 @@ class LegendreEllipticIntegral:
     @staticmethod
     def bigPi(t: _bigPi_2__T, t2: _bigPi_2__T) -> _bigPi_2__T:
         """
-            Get the complete elliptic integral of the third kind Π(n, m).
+        The complete elliptic integral of the third kind Π(n, m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m \sin^2\theta}(1-n \sin^2\theta)} \]
         
-            The complete elliptic integral of the third kind Π(n, m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m
-            \sin^2\theta}(1-n \sin^2\theta)} \]
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        Parameters:
+            n (T): elliptic characteristic
+            m (T): parameter (m=k² where k is the elliptic modulus)
         
-            Parameters:
-                n (T): elliptic characteristic
-                m (T): parameter (m=k² where k is the elliptic modulus)
+        Returns:
+            complete elliptic integral of the third kind Π(n, m)
         
-            Returns:
-                complete elliptic integral of the third kind Π(n, m)
+              - bigPi
+              - EllipticIntegraloftheThirdKind
+              - Elliptic_integral
         
-            Also see:
+        Get the complete elliptic integral of the third kind Π(n, m).
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigPi`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheThirdKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+        The complete elliptic integral of the third kind Π(n, m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m \sin^2\theta}(1-n \sin^2\theta)} \]
         
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            Get the complete elliptic integral of the third kind Π(n, m).
+        Parameters:
+            n (FieldComplex<T> n): elliptic characteristic
+            m (FieldComplex<T> m): parameter (m=k² where k is the elliptic modulus)
         
-            The complete elliptic integral of the third kind Π(n, m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m
-            \sin^2\theta}(1-n \sin^2\theta)} \]
+        Returns:
+            complete elliptic integral of the third kind Π(n, m)
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+              - bigPi
+              - EllipticIntegraloftheThirdKind
+              - Elliptic_integral
         
-            Parameters:
-                n (:class:`~org.hipparchus.complex.FieldComplex`<T> n): elliptic characteristic
-                m (:class:`~org.hipparchus.complex.FieldComplex`<T> m): parameter (m=k² where k is the elliptic modulus)
+        Get the incomplete elliptic integral of the third kind Π(n, φ, m).
         
-            Returns:
-                complete elliptic integral of the third kind Π(n, m)
+        The incomplete elliptic integral of the third kind Π(n, φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}(1-n \sin^2\theta)} \]
         
-            Also see:
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigPi`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheThirdKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+        Parameters:
+            n (T): elliptic characteristic
+            phi (T): amplitude (i.e. upper bound of the integral)
+            m (T): parameter (m=k² where k is the elliptic modulus)
         
+        Returns:
+            incomplete elliptic integral of the third kind Π(n, φ, m)
         
-            Get the incomplete elliptic integral of the third kind Π(n, φ, m).
-        
-            The incomplete elliptic integral of the third kind Π(n, φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m
-            \sin^2\theta}(1-n \sin^2\theta)} \]
-        
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
-        
-            Parameters:
-                n (T): elliptic characteristic
-                phi (T): amplitude (i.e. upper bound of the integral)
-                m (T): parameter (m=k² where k is the elliptic modulus)
-        
-            Returns:
-                incomplete elliptic integral of the third kind Π(n, φ, m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigPi`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheThirdKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+              - bigPi
+              - EllipticIntegraloftheThirdKind
+              - Elliptic_integral
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def bigPi(t: _bigPi_3__T, t2: _bigPi_3__T, t3: _bigPi_3__T) -> _bigPi_3__T:
+    def bigPi(n: _bigPi_3__T, phi: _bigPi_3__T, m: _bigPi_3__T) -> _bigPi_3__T:
         """
-            Get the incomplete elliptic integral of the third kind Π(n, φ, m).
+        BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have known issues.
         
-            *BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have
-            known issues.*
+        The incomplete elliptic integral of the third kind Π(n, φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}(1-n \sin^2\theta)} \]
         
-            The incomplete elliptic integral of the third kind Π(n, φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m
-            \sin^2\theta}(1-n \sin^2\theta)} \]
+        The algorithm for evaluating the functions is based on CarlsonEllipticIntegral.
         
-            The algorithm for evaluating the functions is based on
-            :class:`~org.hipparchus.special.elliptic.carlson.CarlsonEllipticIntegral`.
+        Parameters:
+            n (FieldComplex<T> n): elliptic characteristic
+            phi (FieldComplex<T> phi): amplitude (i.e. upper bound of the integral)
+            m (FieldComplex<T> m): parameter (m=k² where k is the elliptic modulus)
         
-            Parameters:
-                n (:class:`~org.hipparchus.complex.FieldComplex`<T> n): elliptic characteristic
-                phi (:class:`~org.hipparchus.complex.FieldComplex`<T> phi): amplitude (i.e. upper bound of the integral)
-                m (:class:`~org.hipparchus.complex.FieldComplex`<T> m): parameter (m=k² where k is the elliptic modulus)
+        Returns:
+            incomplete elliptic integral of the third kind Π(n, φ, m)
         
-            Returns:
-                incomplete elliptic integral of the third kind Π(n, φ, m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigPi`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheThirdKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+              - bigPi
+              - EllipticIntegraloftheThirdKind
+              - Elliptic_integral
         
         
         """
@@ -1172,36 +944,28 @@ class LegendreEllipticIntegral:
     def bigPi(fieldComplex: org.hipparchus.complex.FieldComplex[_bigPi_8__T], fieldComplex2: org.hipparchus.complex.FieldComplex[_bigPi_8__T], fieldComplex3: org.hipparchus.complex.FieldComplex[_bigPi_8__T]) -> org.hipparchus.complex.FieldComplex[_bigPi_8__T]: ...
     @typing.overload
     @staticmethod
-    def bigPi(fieldComplex: org.hipparchus.complex.FieldComplex[_bigPi_9__T], fieldComplex2: org.hipparchus.complex.FieldComplex[_bigPi_9__T], fieldComplex3: org.hipparchus.complex.FieldComplex[_bigPi_9__T], fieldComplexUnivariateIntegrator: org.hipparchus.complex.FieldComplexUnivariateIntegrator[_bigPi_9__T], int: int) -> org.hipparchus.complex.FieldComplex[_bigPi_9__T]:
+    def bigPi(n: org.hipparchus.complex.FieldComplex[_bigPi_9__T], phi: org.hipparchus.complex.FieldComplex[_bigPi_9__T], m: org.hipparchus.complex.FieldComplex[_bigPi_9__T], integrator: org.hipparchus.complex.FieldComplexUnivariateIntegrator[_bigPi_9__T], maxEval: int) -> org.hipparchus.complex.FieldComplex[_bigPi_9__T]:
         """
-            Get the incomplete elliptic integral of the third kind Π(n, φ, m).
+        BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have known issues.
         
-            *BEWARE! Elliptic integrals for complex numbers in the incomplete case are considered experimental for now, they have
-            known issues.*
+        The incomplete elliptic integral of the third kind Π(n, φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}(1-n \sin^2\theta)} \]
         
-            The incomplete elliptic integral of the third kind Π(n, φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m
-            \sin^2\theta}(1-n \sin^2\theta)} \]
+        The algorithm for evaluating the functions is based on numerical integration. If integration path comes too close to a pole of the integrand, then integration will fail with a MathIllegalStateException even for very large maxEval. This is normal behavior.
         
-            The algorithm for evaluating the functions is based on numerical integration. If integration path comes too close to a
-            pole of the integrand, then integration will fail with a :class:`~org.hipparchus.exception.MathIllegalStateException`
-            even for very large :code:`maxEval`. This is normal behavior.
+        Parameters:
+            n (FieldComplex<T> n): elliptic characteristic
+            phi (FieldComplex<T> phi): amplitude (i.e. upper bound of the integral)
+            m (FieldComplex<T> m): parameter (m=k² where k is the elliptic modulus)
+            integrator (FieldComplexUnivariateIntegrator<T> integrator): integrator to use
+            maxEval (int): maximum number of evaluations (real and imaginary parts are evaluated separately, so up to twice this number may be
+                used)
         
-            Parameters:
-                n (:class:`~org.hipparchus.complex.FieldComplex`<T> n): elliptic characteristic
-                phi (:class:`~org.hipparchus.complex.FieldComplex`<T> phi): amplitude (i.e. upper bound of the integral)
-                m (:class:`~org.hipparchus.complex.FieldComplex`<T> m): parameter (m=k² where k is the elliptic modulus)
-                integrator (:class:`~org.hipparchus.complex.FieldComplexUnivariateIntegrator`<T> integrator): integrator to use
-                maxEval (int): maximum number of evaluations (real and imaginary parts are evaluated separately, so up to twice this number may be
-                    used)
+        Returns:
+            incomplete elliptic integral of the third kind Π(n, φ, m)
         
-            Returns:
-                incomplete elliptic integral of the third kind Π(n, φ, m)
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.special.elliptic.legendre.LegendreEllipticIntegral.bigPi`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.mathworld.wolfram.com.EllipticIntegraloftheThirdKind`
-                  - :class:`~org.hipparchus.special.elliptic.legendre.https:.en.wikipedia.org.wiki.Elliptic_integral`
+              - bigPi
+              - EllipticIntegraloftheThirdKind
+              - Elliptic_integral
         
         
         
@@ -1210,29 +974,29 @@ class LegendreEllipticIntegral:
     _nome_1__T = typing.TypeVar('_nome_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def nome(double: float) -> float:
+    def nome(m: float) -> float:
         """
-            Get the nome q.
+        Get the nome q.
         
-            Parameters:
-                m (double): parameter (m=k² where k is the elliptic modulus)
+        Parameters:
+            m (double): parameter (m=k² where k is the elliptic modulus)
         
-            Returns:
-                nome q
+        Returns:
+            nome q
         
         """
         ...
     @typing.overload
     @staticmethod
-    def nome(t: _nome_1__T) -> _nome_1__T:
+    def nome(m: _nome_1__T) -> _nome_1__T:
         """
-            Get the nome q.
+        Get the nome q.
         
-            Parameters:
-                m (T): parameter (m=k² where k is the elliptic modulus)
+        Parameters:
+            m (T): parameter (m=k² where k is the elliptic modulus)
         
-            Returns:
-                nome q
+        Returns:
+            nome q
         
         
         """

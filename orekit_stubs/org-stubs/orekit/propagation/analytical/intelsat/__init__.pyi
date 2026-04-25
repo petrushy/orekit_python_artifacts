@@ -23,123 +23,150 @@ import typing
 _FieldIntelsatElevenElements__T = typing.TypeVar('_FieldIntelsatElevenElements__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldIntelsatElevenElements(typing.Generic[_FieldIntelsatElevenElements__T]):
     """
-    public class FieldIntelsatElevenElements<T extends :class:`~org.orekit.propagation.analytical.intelsat.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.intelsat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    This class is a container for a single set of Intelsat's 11 Elements data.
     
-        This class is a container for a single set of Intelsat's 11 Elements data.
+    Intelsat's 11 elements are defined in ITU-R S.1525 standard.
     
-        Intelsat's 11 elements are defined in ITU-R S.1525 standard.
-    
-        Since:
-            12.1
+    Since:
+        12.1
     """
-    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldIntelsatElevenElements__T], t: _FieldIntelsatElevenElements__T, t2: _FieldIntelsatElevenElements__T, t3: _FieldIntelsatElevenElements__T, t4: _FieldIntelsatElevenElements__T, t5: _FieldIntelsatElevenElements__T, t6: _FieldIntelsatElevenElements__T, t7: _FieldIntelsatElevenElements__T, t8: _FieldIntelsatElevenElements__T, t9: _FieldIntelsatElevenElements__T, t10: _FieldIntelsatElevenElements__T, t11: _FieldIntelsatElevenElements__T): ...
-    def getEpoch(self) -> org.orekit.time.FieldAbsoluteDate[_FieldIntelsatElevenElements__T]: ...
+    def __init__(self, epoch: org.orekit.time.FieldAbsoluteDate[_FieldIntelsatElevenElements__T], lm0: _FieldIntelsatElevenElements__T, lm1: _FieldIntelsatElevenElements__T, lm2: _FieldIntelsatElevenElements__T, lonC: _FieldIntelsatElevenElements__T, lonC1: _FieldIntelsatElevenElements__T, lonS: _FieldIntelsatElevenElements__T, lonS1: _FieldIntelsatElevenElements__T, latC: _FieldIntelsatElevenElements__T, latC1: _FieldIntelsatElevenElements__T, latS: _FieldIntelsatElevenElements__T, latS1: _FieldIntelsatElevenElements__T):
+        """
+        Constructor.
+        
+        Parameters:
+            epoch (FieldAbsoluteDate<FieldIntelsatElevenElements> epoch): elements epoch
+            lm0 (FieldIntelsatElevenElements): mean longitude (East of Greenwich) in degrees
+            lm1 (FieldIntelsatElevenElements): drift rate in degrees/day
+            lm2 (FieldIntelsatElevenElements): drift acceleration in degrees/day/day
+            lonC (FieldIntelsatElevenElements): longitude oscillation-amplitude for the cosine term in degrees
+            lonC1 (FieldIntelsatElevenElements): rate of change of longitude, for the cosine term, in degrees/day
+            lonS (FieldIntelsatElevenElements): longitude oscillation-amplitude for the sine term in degrees
+            lonS1 (FieldIntelsatElevenElements): rate of change of longitude, for the sine term, in degrees/day
+            latC (FieldIntelsatElevenElements): latitude oscillation-amplitude for the cosine term in degrees
+            latC1 (FieldIntelsatElevenElements): rate of change of latitude, for the cosine term, in degrees/day
+            latS (FieldIntelsatElevenElements): latitude oscillation-amplitude for the sine term in degrees
+            latS1 (FieldIntelsatElevenElements): rate of change of latitude, for the sine term, in degrees/day
+        
+        
+        """
+        ...
+    def getEpoch(self) -> org.orekit.time.FieldAbsoluteDate[_FieldIntelsatElevenElements__T]:
+        """
+        Get the elements epoch.
+        
+        Returns:
+            elements epoch
+        
+        
+        """
+        ...
     def getLatC(self) -> _FieldIntelsatElevenElements__T:
         """
-            Get the latitude oscillation-amplitude for the cosine term.
+        Get the latitude oscillation-amplitude for the cosine term.
         
-            Returns:
-                the latitude oscillation-amplitude for the cosine term in degrees
+        Returns:
+            the latitude oscillation-amplitude for the cosine term in degrees
         
         
         """
         ...
     def getLatC1(self) -> _FieldIntelsatElevenElements__T:
         """
-            Get the rate of change of latitude, for the cosine term.
+        Get the rate of change of latitude, for the cosine term.
         
-            Returns:
-                the rate of change of latitude, for the cosine term, in degrees/day
+        Returns:
+            the rate of change of latitude, for the cosine term, in degrees/day
         
         
         """
         ...
     def getLatS(self) -> _FieldIntelsatElevenElements__T:
         """
-            Get the latitude oscillation-amplitude for the sine term.
+        Get the latitude oscillation-amplitude for the sine term.
         
-            Returns:
-                the latitude oscillation-amplitude for the sine term in degrees
+        Returns:
+            the latitude oscillation-amplitude for the sine term in degrees
         
         
         """
         ...
     def getLatS1(self) -> _FieldIntelsatElevenElements__T:
         """
-            Get the rate of change of latitude, for the sine term.
+        Get the rate of change of latitude, for the sine term.
         
-            Returns:
-                the rate of change of latitude, for the sine term, in degrees/day
+        Returns:
+            the rate of change of latitude, for the sine term, in degrees/day
         
         
         """
         ...
     def getLm0(self) -> _FieldIntelsatElevenElements__T:
         """
-            Get the mean longitude (East of Greenwich).
+        Get the mean longitude (East of Greenwich).
         
-            Returns:
-                the mean longitude (East of Greenwich) in degrees
+        Returns:
+            the mean longitude (East of Greenwich) in degrees
         
         
         """
         ...
     def getLm1(self) -> _FieldIntelsatElevenElements__T:
         """
-            Get the drift rate.
+        Get the drift rate.
         
-            Returns:
-                the drift rate in degrees/day
+        Returns:
+            the drift rate in degrees/day
         
         
         """
         ...
     def getLm2(self) -> _FieldIntelsatElevenElements__T:
         """
-            Get the drift acceleration.
+        Get the drift acceleration.
         
-            Returns:
-                the drift acceleration in degrees/day/day
+        Returns:
+            the drift acceleration in degrees/day/day
         
         
         """
         ...
     def getLonC(self) -> _FieldIntelsatElevenElements__T:
         """
-            Get the longitude oscillation-amplitude for the cosine term.
+        Get the longitude oscillation-amplitude for the cosine term.
         
-            Returns:
-                the longitude oscillation-amplitude for the cosine term in degrees
+        Returns:
+            the longitude oscillation-amplitude for the cosine term in degrees
         
         
         """
         ...
     def getLonC1(self) -> _FieldIntelsatElevenElements__T:
         """
-            Get the rate of change of longitude, for the cosine term.
+        Get the rate of change of longitude, for the cosine term.
         
-            Returns:
-                the rate of change of longitude, for the cosine term, in degrees/day
+        Returns:
+            the rate of change of longitude, for the cosine term, in degrees/day
         
         
         """
         ...
     def getLonS(self) -> _FieldIntelsatElevenElements__T:
         """
-            Get the longitude oscillation-amplitude for the sine term.
+        Get the longitude oscillation-amplitude for the sine term.
         
-            Returns:
-                the longitude oscillation-amplitude for the sine term in degrees
+        Returns:
+            the longitude oscillation-amplitude for the sine term in degrees
         
         
         """
         ...
     def getLonS1(self) -> _FieldIntelsatElevenElements__T:
         """
-            Get the rate of change of longitude, for the sine term.
+        Get the rate of change of longitude, for the sine term.
         
-            Returns:
-                the rate of change of longitude, for the sine term, in degrees/day
+        Returns:
+            the rate of change of longitude, for the sine term, in degrees/day
         
         
         """
@@ -148,14 +175,12 @@ class FieldIntelsatElevenElements(typing.Generic[_FieldIntelsatElevenElements__T
 _FieldIntelsatElevenElementsPropagator__T = typing.TypeVar('_FieldIntelsatElevenElementsPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldIntelsatElevenElementsPropagator(org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator[_FieldIntelsatElevenElementsPropagator__T], typing.Generic[_FieldIntelsatElevenElementsPropagator__T]):
     """
-    public class FieldIntelsatElevenElementsPropagator<T extends :class:`~org.orekit.propagation.analytical.intelsat.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator`<T>
+    This class provides elements to propagate Intelsat's 11 elements.
     
-        This class provides elements to propagate Intelsat's 11 elements.
+    Intelsat's 11 elements propagation is defined in ITU-R S.1525 standard.
     
-        Intelsat's 11 elements propagation is defined in ITU-R S.1525 standard.
-    
-        Since:
-            12.1
+    Since:
+        12.1
     """
     @typing.overload
     def __init__(self, fieldIntelsatElevenElements: FieldIntelsatElevenElements[_FieldIntelsatElevenElementsPropagator__T]): ...
@@ -163,200 +188,292 @@ class FieldIntelsatElevenElementsPropagator(org.orekit.propagation.analytical.Fi
     def __init__(self, fieldIntelsatElevenElements: FieldIntelsatElevenElements[_FieldIntelsatElevenElementsPropagator__T], frame: org.orekit.frames.Frame, frame2: org.orekit.frames.Frame): ...
     @typing.overload
     def __init__(self, fieldIntelsatElevenElements: FieldIntelsatElevenElements[_FieldIntelsatElevenElementsPropagator__T], frame: org.orekit.frames.Frame, frame2: org.orekit.frames.Frame, attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _FieldIntelsatElevenElementsPropagator__T): ...
-    def getEastLongitudeDegrees(self) -> org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2[_FieldIntelsatElevenElementsPropagator__T]: ...
-    def getFrame(self) -> org.orekit.frames.Frame:
+    def getEastLongitudeDegrees(self) -> org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2[_FieldIntelsatElevenElementsPropagator__T]:
         """
-            Get the frame in which the orbit is propagated.
+        Get the computed satellite's east longitude.
         
-            The propagation frame is the definition frame of the initial state, so this method should be called after this state has
-            been set, otherwise it may return null.
-            .
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.getFrame` in interface :class:`~org.orekit.propagation.FieldPropagator`
-        
-            Overrides:
-                :meth:`~org.orekit.propagation.FieldAbstractPropagator.getFrame` in
-                class :class:`~org.orekit.propagation.FieldAbstractPropagator`
-        
-            Returns:
-                frame in which the orbit is propagated
-        
-            Also see:
-                :meth:`~org.orekit.propagation.FieldPropagator.resetInitialState`
+        Returns:
+            the satellite's east longitude in degrees
         
         
         """
         ...
-    def getGeocentricLatitudeDegrees(self) -> org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2[_FieldIntelsatElevenElementsPropagator__T]: ...
-    def getIntelsatElevenElements(self) -> FieldIntelsatElevenElements[_FieldIntelsatElevenElementsPropagator__T]: ...
-    def getOrbitRadius(self) -> org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2[_FieldIntelsatElevenElementsPropagator__T]: ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def propagateInEcef(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldIntelsatElevenElementsPropagator__T]) -> org.orekit.utils.FieldPVCoordinates[_FieldIntelsatElevenElementsPropagator__T]: ...
-    def propagateOrbit(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldIntelsatElevenElementsPropagator__T], tArray: typing.Union[typing.List[_FieldIntelsatElevenElementsPropagator__T], jpype.JArray]) -> org.orekit.orbits.FieldOrbit[_FieldIntelsatElevenElementsPropagator__T]: ...
-    def resetInitialState(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldIntelsatElevenElementsPropagator__T]) -> None: ...
+    def getFrame(self) -> org.orekit.frames.Frame:
+        """
+        Get the frame in which the orbit is propagated.
+        
+        The propagation frame is the definition frame of the initial state, so this method should be called after this state has been set, otherwise it may return null. .
+        
+        Specified by: getFrame in interface FieldPropagator
+        
+        Overrides: getFrame in class FieldAbstractPropagator
+        
+        Returns:
+            frame in which the orbit is propagated
+        
+        Also see:
+            resetInitialState
+        
+        
+        """
+        ...
+    def getGeocentricLatitudeDegrees(self) -> org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2[_FieldIntelsatElevenElementsPropagator__T]:
+        """
+        Get the computed satellite's geocentric latitude.
+        
+        Returns:
+            the satellite's geocentric latitude in degrees
+        
+        
+        """
+        ...
+    def getIntelsatElevenElements(self) -> FieldIntelsatElevenElements[_FieldIntelsatElevenElementsPropagator__T]:
+        """
+        Get the Intelsat's 11 elements used by the propagator.
+        
+        Returns:
+            the Intelsat's 11 elements used by the propagator
+        
+        
+        """
+        ...
+    def getOrbitRadius(self) -> org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2[_FieldIntelsatElevenElementsPropagator__T]:
+        """
+        Get the computed satellite's orbit.
+        
+        Returns:
+            satellite's orbit radius in meters
+        
+        
+        """
+        ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]:
+        """
+        Get the drivers for parameters..
+        
+        Returns:
+            drivers for parameters
+        
+        
+        """
+        ...
+    def propagateInEcef(self, date: org.orekit.time.FieldAbsoluteDate[_FieldIntelsatElevenElementsPropagator__T]) -> org.orekit.utils.FieldPVCoordinates[_FieldIntelsatElevenElementsPropagator__T]:
+        """
+        Converts the Intelsat's 11 elements into Position/Velocity coordinates in ECEF.
+        
+        Parameters:
+            date (FieldAbsoluteDate<FieldIntelsatElevenElementsPropagator> date): computation epoch
+        
+        Returns:
+            Position/Velocity coordinates in ECEF
+        
+        
+        """
+        ...
+    def propagateOrbit(self, date: org.orekit.time.FieldAbsoluteDate[_FieldIntelsatElevenElementsPropagator__T], parameters: typing.Union[typing.List[_FieldIntelsatElevenElementsPropagator__T], jpype.JArray]) -> org.orekit.orbits.FieldOrbit[_FieldIntelsatElevenElementsPropagator__T]:
+        """
+        Propagate an orbit up to a specific target date..
+        
+        Specified by: propagateOrbit in class FieldAbstractAnalyticalPropagator
+        
+        Parameters:
+            date (FieldAbsoluteDate<FieldIntelsatElevenElementsPropagator> date): target date for the orbit
+            parameters (FieldIntelsatElevenElementsPropagator[]): model parameters
+        
+        Returns:
+            propagated orbit
+        
+        
+        """
+        ...
+    def resetInitialState(self, state: org.orekit.propagation.FieldSpacecraftState[_FieldIntelsatElevenElementsPropagator__T]) -> None:
+        """
+        Reset the propagator initial state..
+        
+        Specified by: resetInitialState in interface FieldPropagator
+        
+        Overrides: resetInitialState in class FieldAbstractPropagator
+        
+        Parameters:
+            state (FieldSpacecraftState<FieldIntelsatElevenElementsPropagator> state): new initial state to consider
+        
+        
+        """
+        ...
 
 class IntelsatElevenElements:
     """
-    public class IntelsatElevenElements extends :class:`~org.orekit.propagation.analytical.intelsat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    This class is a container for a single set of Intelsat's 11 Elements data.
     
-        This class is a container for a single set of Intelsat's 11 Elements data.
+    Intelsat's 11 elements are defined in ITU-R S.1525 standard.
     
-        Intelsat's 11 elements are defined in ITU-R S.1525 standard.
-    
-        Since:
-            12.1
+    Since:
+        12.1
     """
     SYNCHRONOUS_RADIUS_KM: typing.ClassVar[float] = ...
     """
-    public static final double SYNCHRONOUS_RADIUS_KM
+    Sun synchronous radius in kilometers.
     
-        Sun synchronous radius in kilometers.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     K: typing.ClassVar[float] = ...
     """
-    public static final double K
+    PI over 360.
     
-        PI over 360.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     DRIFT_RATE_SHIFT_DEG_PER_DAY: typing.ClassVar[float] = ...
     """
-    public static final double DRIFT_RATE_SHIFT_DEG_PER_DAY
+    Longitude drift rate.
     
-        Longitude drift rate.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, double11: float): ...
+    def __init__(self, epoch: org.orekit.time.AbsoluteDate, lm0: float, lm1: float, lm2: float, lonC: float, lonC1: float, lonS: float, lonS1: float, latC: float, latC1: float, latS: float, latS1: float):
+        """
+        Constructor.
+        
+        Parameters:
+            epoch (AbsoluteDate): elements epoch
+            lm0 (double): mean longitude (East of Greenwich) in degrees
+            lm1 (double): drift rate in degrees/day
+            lm2 (double): drift acceleration in degrees/day/day
+            lonC (double): longitude oscillation-amplitude for the cosine term in degrees
+            lonC1 (double): rate of change of longitude, for the cosine term, in degrees/day
+            lonS (double): longitude oscillation-amplitude for the sine term in degrees
+            lonS1 (double): rate of change of longitude, for the sine term, in degrees/day
+            latC (double): latitude oscillation-amplitude for the cosine term in degrees
+            latC1 (double): rate of change of latitude, for the cosine term, in degrees/day
+            latS (double): latitude oscillation-amplitude for the sine term in degrees
+            latS1 (double): rate of change of latitude, for the sine term, in degrees/day
+        
+        
+        """
+        ...
     def getEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the elements epoch.
+        Get the elements epoch.
         
-            Returns:
-                elements epoch
+        Returns:
+            elements epoch
         
         
         """
         ...
     def getLatC(self) -> float:
         """
-            Get the latitude oscillation-amplitude for the cosine term.
+        Get the latitude oscillation-amplitude for the cosine term.
         
-            Returns:
-                the latitude oscillation-amplitude for the cosine term in degrees
+        Returns:
+            the latitude oscillation-amplitude for the cosine term in degrees
         
         
         """
         ...
     def getLatC1(self) -> float:
         """
-            Get the rate of change of latitude, for the cosine term.
+        Get the rate of change of latitude, for the cosine term.
         
-            Returns:
-                the rate of change of latitude, for the cosine term, in degrees/day
+        Returns:
+            the rate of change of latitude, for the cosine term, in degrees/day
         
         
         """
         ...
     def getLatS(self) -> float:
         """
-            Get the latitude oscillation-amplitude for the sine term.
+        Get the latitude oscillation-amplitude for the sine term.
         
-            Returns:
-                the latitude oscillation-amplitude for the sine term in degrees
+        Returns:
+            the latitude oscillation-amplitude for the sine term in degrees
         
         
         """
         ...
     def getLatS1(self) -> float:
         """
-            Get the rate of change of latitude, for the sine term.
+        Get the rate of change of latitude, for the sine term.
         
-            Returns:
-                the rate of change of latitude, for the sine term, in degrees/day
+        Returns:
+            the rate of change of latitude, for the sine term, in degrees/day
         
         
         """
         ...
     def getLm0(self) -> float:
         """
-            Get the mean longitude (East of Greenwich).
+        Get the mean longitude (East of Greenwich).
         
-            Returns:
-                the mean longitude (East of Greenwich) in degrees
+        Returns:
+            the mean longitude (East of Greenwich) in degrees
         
         
         """
         ...
     def getLm1(self) -> float:
         """
-            Get the drift rate.
+        Get the drift rate.
         
-            Returns:
-                the drift rate in degrees/day
+        Returns:
+            the drift rate in degrees/day
         
         
         """
         ...
     def getLm2(self) -> float:
         """
-            Get the drift acceleration.
+        Get the drift acceleration.
         
-            Returns:
-                the drift acceleration in degrees/day/day
+        Returns:
+            the drift acceleration in degrees/day/day
         
         
         """
         ...
     def getLonC(self) -> float:
         """
-            Get the longitude oscillation-amplitude for the cosine term.
+        Get the longitude oscillation-amplitude for the cosine term.
         
-            Returns:
-                the longitude oscillation-amplitude for the cosine term in degrees
+        Returns:
+            the longitude oscillation-amplitude for the cosine term in degrees
         
         
         """
         ...
     def getLonC1(self) -> float:
         """
-            Get the rate of change of longitude, for the cosine term.
+        Get the rate of change of longitude, for the cosine term.
         
-            Returns:
-                the rate of change of longitude, for the cosine term, in degrees/day
+        Returns:
+            the rate of change of longitude, for the cosine term, in degrees/day
         
         
         """
         ...
     def getLonS(self) -> float:
         """
-            Get the longitude oscillation-amplitude for the sine term.
+        Get the longitude oscillation-amplitude for the sine term.
         
-            Returns:
-                the longitude oscillation-amplitude for the sine term in degrees
+        Returns:
+            the longitude oscillation-amplitude for the sine term in degrees
         
         
         """
         ...
     def getLonS1(self) -> float:
         """
-            Get the rate of change of longitude, for the sine term.
+        Get the rate of change of longitude, for the sine term.
         
-            Returns:
-                the rate of change of longitude, for the sine term, in degrees/day
+        Returns:
+            the rate of change of longitude, for the sine term, in degrees/day
         
         
         """
@@ -364,14 +481,12 @@ class IntelsatElevenElements:
 
 class IntelsatElevenElementsPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropagator):
     """
-    public class IntelsatElevenElementsPropagator extends :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
+    This class provides elements to propagate Intelsat's 11 elements.
     
-        This class provides elements to propagate Intelsat's 11 elements.
+    Intelsat's 11 elements propagation is defined in ITU-R S.1525 standard.
     
-        Intelsat's 11 elements propagation is defined in ITU-R S.1525 standard.
-    
-        Since:
-            12.1
+    Since:
+        12.1
     """
     @typing.overload
     def __init__(self, intelsatElevenElements: IntelsatElevenElements): ...
@@ -381,111 +496,101 @@ class IntelsatElevenElementsPropagator(org.orekit.propagation.analytical.Abstrac
     def __init__(self, intelsatElevenElements: IntelsatElevenElements, frame: org.orekit.frames.Frame, frame2: org.orekit.frames.Frame, attitudeProvider: org.orekit.attitudes.AttitudeProvider, double: float): ...
     def getEastLongitudeDegrees(self) -> org.hipparchus.analysis.differentiation.UnivariateDerivative2:
         """
-            Get the computed satellite's east longitude.
+        Get the computed satellite's east longitude.
         
-            Returns:
-                the satellite's east longitude in degrees
+        Returns:
+            the satellite's east longitude in degrees
         
         
         """
         ...
     def getFrame(self) -> org.orekit.frames.Frame:
         """
-            Get the frame in which the orbit is propagated.
+        Get the frame in which the orbit is propagated.
         
-            The propagation frame is the definition frame of the initial state, so this method should be called after this state has
-            been set, otherwise it may return null.
-            .
+        The propagation frame is the definition frame of the initial state, so this method should be called after this state has been set, otherwise it may return null. .
         
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getFrame` in interface :class:`~org.orekit.propagation.Propagator`
+        Specified by: getFrame in interface Propagator
         
-            Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getFrame` in
-                class :class:`~org.orekit.propagation.AbstractPropagator`
+        Overrides: getFrame in class AbstractPropagator
         
-            Returns:
-                frame in which the orbit is propagated
+        Returns:
+            frame in which the orbit is propagated
         
-            Also see:
-                :meth:`~org.orekit.propagation.Propagator.resetInitialState`
+        Also see:
+            resetInitialState
         
         
         """
         ...
     def getGeocentricLatitudeDegrees(self) -> org.hipparchus.analysis.differentiation.UnivariateDerivative2:
         """
-            Get the computed satellite's geocentric latitude.
+        Get the computed satellite's geocentric latitude.
         
-            Returns:
-                the satellite's geocentric latitude in degrees
+        Returns:
+            the satellite's geocentric latitude in degrees
         
         
         """
         ...
     def getIntelsatElevenElements(self) -> IntelsatElevenElements:
         """
-            Get the Intelsat's 11 elements used by the propagator.
+        Get the Intelsat's 11 elements used by the propagator.
         
-            Returns:
-                the Intelsat's 11 elements used by the propagator
+        Returns:
+            the Intelsat's 11 elements used by the propagator
         
         
         """
         ...
     def getOrbitRadius(self) -> org.hipparchus.analysis.differentiation.UnivariateDerivative2:
         """
-            Get the computed satellite's orbit.
+        Get the computed satellite's orbit.
         
-            Returns:
-                satellite's orbit radius in meters
-        
-        
-        """
-        ...
-    def propagateInEcef(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.utils.PVCoordinates:
-        """
-            Converts the Intelsat's 11 elements into Position/Velocity coordinates in ECEF.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): computation epoch
-        
-            Returns:
-                Position/Velocity coordinates in ECEF
+        Returns:
+            satellite's orbit radius in meters
         
         
         """
         ...
-    def propagateOrbit(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.orbits.Orbit:
+    def propagateInEcef(self, date: org.orekit.time.AbsoluteDate) -> org.orekit.utils.PVCoordinates:
         """
-            Extrapolate an orbit up to a specific target date..
+        Converts the Intelsat's 11 elements into Position/Velocity coordinates in ECEF.
         
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.propagateOrbit` in
-                class :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
+        Parameters:
+            date (AbsoluteDate): computation epoch
         
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): target date for the orbit
-        
-            Returns:
-                extrapolated parameters
+        Returns:
+            Position/Velocity coordinates in ECEF
         
         
         """
         ...
-    def resetInitialState(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
+    def propagateOrbit(self, date: org.orekit.time.AbsoluteDate) -> org.orekit.orbits.Orbit:
         """
-            Reset the propagator initial state..
+        Extrapolate an orbit up to a specific target date..
         
-            Specified by:
-                :meth:`~org.orekit.propagation.Propagator.resetInitialState` in interface :class:`~org.orekit.propagation.Propagator`
+        Specified by: propagateOrbit in class AbstractAnalyticalPropagator
         
-            Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState` in
-                class :class:`~org.orekit.propagation.AbstractPropagator`
+        Parameters:
+            date (AbsoluteDate): target date for the orbit
         
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): new initial state to consider
+        Returns:
+            extrapolated parameters
+        
+        
+        """
+        ...
+    def resetInitialState(self, state: org.orekit.propagation.SpacecraftState) -> None:
+        """
+        Reset the propagator initial state..
+        
+        Specified by: resetInitialState in interface Propagator
+        
+        Overrides: resetInitialState in class AbstractPropagator
+        
+        Parameters:
+            state (SpacecraftState): new initial state to consider
         
         
         """

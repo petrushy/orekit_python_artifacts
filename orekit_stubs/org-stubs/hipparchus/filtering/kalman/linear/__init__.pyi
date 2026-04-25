@@ -13,64 +13,73 @@ import typing
 
 class LinearEvolution:
     """
-    public classLinearEvolution extends :class:`~org.hipparchus.filtering.kalman.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Container for LinearProcess evolution data.
     
-        Container for :class:`~org.hipparchus.filtering.kalman.linear.LinearProcess` evolution data.
+    Since:
+        1.3
     
-        Since:
-            1.3
-    
-        Also see:
-    
-              - :class:`~org.hipparchus.filtering.kalman.linear.LinearProcess`
+          - LinearProcess
     """
-    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, realMatrix2: org.hipparchus.linear.RealMatrix, realVector: org.hipparchus.linear.RealVector, realMatrix3: org.hipparchus.linear.RealMatrix, realMatrix4: org.hipparchus.linear.RealMatrix): ...
+    def __init__(self, stateTransitionMatrix: org.hipparchus.linear.RealMatrix, controlMatrix: org.hipparchus.linear.RealMatrix, command: org.hipparchus.linear.RealVector, processNoiseMatrix: org.hipparchus.linear.RealMatrix, measurementJacobian: org.hipparchus.linear.RealMatrix):
+        """
+        Simple constructor.
+        
+        Parameters:
+            stateTransitionMatrix (hipparchus): state transition matrix A :sub:`k-1`
+            controlMatrix (hipparchus): control matrix B :sub:`k-1` (can be null if the process is not controlled)
+            command (hipparchus): u :sub:`k-1` . (can be null if the process is not controlled)
+            processNoiseMatrix (hipparchus): process noise matrix Q :sub:`k-1`
+            measurementJacobian (hipparchus): Jacobian of the measurement with respect to the state (may be null if measurement should be ignored)
+        
+        
+        """
+        ...
     def getCommand(self) -> org.hipparchus.linear.RealVector:
         """
-            Get the command u :sub:`k-1` .
+        Get the command u :sub:`k-1` .
         
-            Returns:
-                command vector u :sub:`k-1` (can be null if there is no control)
+        Returns:
+            command vector u :sub:`k-1` (can be null if there is no control)
         
         
         """
         ...
     def getControlMatrix(self) -> org.hipparchus.linear.RealMatrix:
         """
-            Get the control matrix B :sub:`k-1` .
+        Get the control matrix B :sub:`k-1` .
         
-            Returns:
-                control matrix B :sub:`k-1` (can be null if there is no control)
+        Returns:
+            control matrix B :sub:`k-1` (can be null if there is no control)
         
         
         """
         ...
     def getMeasurementJacobian(self) -> org.hipparchus.linear.RealMatrix:
         """
-            Get measurement Jacobian.
+        Get measurement Jacobian.
         
-            Returns:
-                Jacobian of the measurement with respect to the state (may be null if measurement should be ignored)
+        Returns:
+            Jacobian of the measurement with respect to the state (may be null if measurement should be ignored)
         
         
         """
         ...
     def getProcessNoiseMatrix(self) -> org.hipparchus.linear.RealMatrix:
         """
-            Get the process noise matrix Q :sub:`k-1` .
+        Get the process noise matrix Q :sub:`k-1` .
         
-            Returns:
-                process noise matrix :sub:`k-1`
+        Returns:
+            process noise matrix :sub:`k-1`
         
         
         """
         ...
     def getStateTransitionMatrix(self) -> org.hipparchus.linear.RealMatrix:
         """
-            Get the state transition matrix A :sub:`k-1` .
+        Get the state transition matrix A :sub:`k-1` .
         
-            Returns:
-                state transition matrix A :sub:`k-1`
+        Returns:
+            state transition matrix A :sub:`k-1`
         
         
         """
@@ -79,50 +88,70 @@ class LinearEvolution:
 _LinearKalmanFilter__T = typing.TypeVar('_LinearKalmanFilter__T', bound=org.hipparchus.filtering.kalman.Measurement)  # <T>
 class LinearKalmanFilter(org.hipparchus.filtering.kalman.AbstractKalmanFilter[_LinearKalmanFilter__T], typing.Generic[_LinearKalmanFilter__T]):
     """
-    public classLinearKalmanFilter<T extends :class:`~org.hipparchus.filtering.kalman.Measurement`> extends :class:`~org.hipparchus.filtering.kalman.AbstractKalmanFilter`<T>
+    Kalman filter for LinearProcess.
     
-        Kalman filter for :class:`~org.hipparchus.filtering.kalman.linear.LinearProcess`.
-    
-        Since:
-            1.3
+    Since:
+        1.3
     """
-    def __init__(self, matrixDecomposer: typing.Union[org.hipparchus.linear.MatrixDecomposer, typing.Callable], linearProcess: typing.Union['LinearProcess'[_LinearKalmanFilter__T], typing.Callable[[_LinearKalmanFilter__T], LinearEvolution]], processEstimate: org.hipparchus.filtering.kalman.ProcessEstimate): ...
-    def estimationStep(self, t: _LinearKalmanFilter__T) -> org.hipparchus.filtering.kalman.ProcessEstimate: ...
+    def __init__(self, decomposer: typing.Union[org.hipparchus.linear.MatrixDecomposer, typing.Callable], process: typing.Union['LinearProcess'[_LinearKalmanFilter__T], typing.Callable[[_LinearKalmanFilter__T], LinearEvolution]], initialState: org.hipparchus.filtering.kalman.ProcessEstimate):
+        """
+        Simple constructor.
+        
+        Parameters:
+            decomposer (hipparchus): decomposer to use for the correction phase
+            process (LinearProcess<LinearKalmanFilter> process): linear process to estimate
+            initialState (ProcessEstimate): initial state
+        
+        
+        """
+        ...
+    def estimationStep(self, measurement: _LinearKalmanFilter__T) -> org.hipparchus.filtering.kalman.ProcessEstimate:
+        """
+        Perform one estimation step.
+        
+        Parameters:
+            measurement (LinearKalmanFilter): single measurement to handle
+        
+        Returns:
+            estimated state after measurement has been considered
+        
+        Raises:
+            hipparchus: if estimation fails
+        
+        
+        """
+        ...
 
 _LinearProcess__T = typing.TypeVar('_LinearProcess__T', bound=org.hipparchus.filtering.kalman.Measurement)  # <T>
 class LinearProcess(typing.Generic[_LinearProcess__T]):
     """
-    public interfaceLinearProcess<T extends :class:`~org.hipparchus.filtering.kalman.Measurement`>
+    Linear process that can be estimated by a LinearKalmanFilter.
     
-        Linear process that can be estimated by a :class:`~org.hipparchus.filtering.kalman.linear.LinearKalmanFilter`.
+    This interface must be implemented by users to represent the behavior of the process to be estimated
     
-        This interface must be implemented by users to represent the behavior of the process to be estimated
+    A linear process is governed by the equation: \( x_k = A_{k-1} x_{k-1} + B_{k-1} u_{k-1} + w_{k-1} \) where
     
-        A linear process is governed by the equation: \( x_k = A_{k-1} x_{k-1} + B_{k-1} u_{k-1} + w_{k-1} \) where
-    
-          - A :sub:`k-1` is the state transition matrix in the absence of control,
-          - B :sub:`k-1` is the control matrix,
-          - u :sub:`k-1` is the command
-          - w :sub:`k-1` is the process noise, which has covariance matrix Q :sub:`k-1`
+      - A :sub:`k-1` is the state transition matrix in the absence of control,
+      - B :sub:`k-1` is the control matrix,
+      - u :sub:`k-1` is the command
+      - w :sub:`k-1` is the process noise, which has covariance matrix Q :sub:`k-1`
     
     
-        Since:
-            1.3
+    Since:
+        1.3
     
-        Also see:
-    
-              - :class:`~org.hipparchus.filtering.kalman.linear.LinearKalmanFilter`
-              - :class:`~org.hipparchus.filtering.kalman.extended.NonLinearProcess`
+          - LinearKalmanFilter
+          - NonLinearProcess
     """
-    def getEvolution(self, t: _LinearProcess__T) -> LinearEvolution:
+    def getEvolution(self, measurement: _LinearProcess__T) -> LinearEvolution:
         """
-            Get the state evolution between two times.
+        Get the state evolution between two times.
         
-            Parameters:
-                measurement (:class:`~org.hipparchus.filtering.kalman.linear.LinearProcess`): measurement to process
+        Parameters:
+            measurement (LinearProcess): measurement to process
         
-            Returns:
-                state evolution
+        Returns:
+            state evolution
         
         
         """

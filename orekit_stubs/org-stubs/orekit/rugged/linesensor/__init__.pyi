@@ -19,48 +19,46 @@ import typing
 
 class LineDatation:
     """
-    public interface LineDatation
+    Interface representing line datation model.
     
-        Interface representing line datation model.
-    
-        Also see:
-            :class:`~org.orekit.rugged.linesensor.LinearLineDatation`
+    Also see:
+        LinearLineDatation
     """
-    def getDate(self, double: float) -> org.orekit.time.AbsoluteDate:
+    def getDate(self, lineNumber: float) -> org.orekit.time.AbsoluteDate:
         """
-            Get the date for a given line.
+        Get the date for a given line.
         
-            Parameters:
-                lineNumber (double): line number
+        Parameters:
+            lineNumber (double): line number
         
-            Returns:
-                date at which line is acquired
-        
-        
-        """
-        ...
-    def getLine(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Get the line for a given date.
-        
-            Parameters:
-                date (org.orekit.time.AbsoluteDate): date
-        
-            Returns:
-                line number
+        Returns:
+            date at which line is acquired
         
         
         """
         ...
-    def getRate(self, double: float) -> float:
+    def getLine(self, date: org.orekit.time.AbsoluteDate) -> float:
         """
-            Get the rate of lines scanning.
+        Get the line for a given date.
         
-            Parameters:
-                lineNumber (double): line number
+        Parameters:
+            date (org.orekit.time.AbsoluteDate): date
         
-            Returns:
-                rate of lines scanning (lines / seconds)
+        Returns:
+            line number
+        
+        
+        """
+        ...
+    def getRate(self, lineNumber: float) -> float:
+        """
+        Get the rate of lines scanning.
+        
+        Parameters:
+            lineNumber (double): line number
+        
+        Returns:
+            rate of lines scanning (lines / seconds)
         
         
         """
@@ -68,30 +66,43 @@ class LineDatation:
 
 class LineSensor:
     """
-    public class LineSensor extends :class:`~org.orekit.rugged.linesensor.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    
-        Line sensor model.
+    Line sensor model.
     """
-    def __init__(self, string: str, lineDatation: LineDatation, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, timeDependentLOS: org.orekit.rugged.los.TimeDependentLOS): ...
-    def dumpRate(self, double: float) -> None:
+    def __init__(self, name: str, datationModel: LineDatation, position: org.hipparchus.geometry.euclidean.threed.Vector3D, los: org.orekit.rugged.los.TimeDependentLOS):
         """
-            Dump the rate for the current line number.
+        Simple constructor.
         
-            Parameters:
-                lineNumber (double): line number
+        Parameters:
+            name (String): name of the sensor
+            datationModel (LineDatation): datation model
+            position (org.hipparchus.geometry.euclidean.threed.Vector3D): sensor position in spacecraft frame
+            los (TimeDependentLOS): pixels lines-of-sight in spacecraft frame
+        
+        Also see:
+            LOSBuilder
         
         
         """
         ...
-    def getDate(self, double: float) -> org.orekit.time.AbsoluteDate:
+    def dumpRate(self, lineNumber: float) -> None:
         """
-            Get the date.
+        Dump the rate for the current line number.
         
-            Parameters:
-                lineNumber (double): line number
+        Parameters:
+            lineNumber (double): line number
         
-            Returns:
-                date corresponding to line number
+        
+        """
+        ...
+    def getDate(self, lineNumber: float) -> org.orekit.time.AbsoluteDate:
+        """
+        Get the date.
+        
+        Parameters:
+            lineNumber (double): line number
+        
+        Returns:
+            date corresponding to line number
         
         
         """
@@ -99,26 +110,26 @@ class LineSensor:
     @typing.overload
     def getLOS(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get the pixel normalized line-of-sight at some date.
+        Get the pixel normalized line-of-sight at some date.
         
-            Parameters:
-                date (org.orekit.time.AbsoluteDate): current date
-                i (int): pixel index (must be between 0 and :meth:`~org.orekit.rugged.linesensor.LineSensor.getNbPixels` - 1
+        Parameters:
+            date (org.orekit.time.AbsoluteDate): current date
+            i (int): pixel index (must be between 0 and getNbPixels - 1
         
-            Returns:
-                pixel normalized line-of-sight
+        Returns:
+            pixel normalized line-of-sight
         
-            Get the pixel normalized interpolated line-of-sight at some date.
+        Get the pixel normalized interpolated line-of-sight at some date.
         
-            Parameters:
-                date (org.orekit.time.AbsoluteDate): current date
-                i (double): pixel index (must be between 0 and :meth:`~org.orekit.rugged.linesensor.LineSensor.getNbPixels` - 1
+        Parameters:
+            date (org.orekit.time.AbsoluteDate): current date
+            i (double): pixel index (must be between 0 and getNbPixels - 1
         
-            Returns:
-                pixel normalized line-of-sight
+        Returns:
+            pixel normalized line-of-sight
         
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """
@@ -130,99 +141,99 @@ class LineSensor:
     @typing.overload
     def getLOSDerivatives(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, derivativeGenerator: org.orekit.rugged.utils.DerivativeGenerator[_getLOSDerivatives_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getLOSDerivatives_0__T]:
         """
-            Get the pixel normalized line-of-sight at some date, and their derivatives with respect to estimated parameters.
+        Get the pixel normalized line-of-sight at some date, and their derivatives with respect to estimated parameters.
         
-            Parameters:
-                date (org.orekit.time.AbsoluteDate): current date
-                i (int): pixel index (must be between 0 and :meth:`~org.orekit.rugged.linesensor.LineSensor.getNbPixels` - 1
-                generator (:class:`~org.orekit.rugged.utils.DerivativeGenerator`<T> generator): generator to use for building :code:`Derivative` instances
+        Parameters:
+            date (org.orekit.time.AbsoluteDate): current date
+            i (int): pixel index (must be between 0 and getNbPixels - 1
+            generator (DerivativeGenerator<T> generator): generator to use for building Derivative instances
         
-            Returns:
-                pixel normalized line-of-sight
+        Returns:
+            pixel normalized line-of-sight
         
-            Get the pixel normalized line-of-sight at some date, and their derivatives with respect to estimated parameters.
+        Get the pixel normalized line-of-sight at some date, and their derivatives with respect to estimated parameters.
         
-            Parameters:
-                date (org.orekit.time.AbsoluteDate): current date
-                i (double): pixel index (must be between 0 and :meth:`~org.orekit.rugged.linesensor.LineSensor.getNbPixels` - 1
-                generator (:class:`~org.orekit.rugged.utils.DerivativeGenerator`<T> generator): generator to use for building :code:`Derivative` instances
+        Parameters:
+            date (org.orekit.time.AbsoluteDate): current date
+            i (double): pixel index (must be between 0 and getNbPixels - 1
+            generator (DerivativeGenerator<T> generator): generator to use for building Derivative instances
         
-            Returns:
-                pixel normalized line-of-sight
+        Returns:
+            pixel normalized line-of-sight
         
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """
         ...
     @typing.overload
     def getLOSDerivatives(self, absoluteDate: org.orekit.time.AbsoluteDate, int: int, derivativeGenerator: org.orekit.rugged.utils.DerivativeGenerator[_getLOSDerivatives_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getLOSDerivatives_1__T]: ...
-    def getLine(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+    def getLine(self, date: org.orekit.time.AbsoluteDate) -> float:
         """
-            Get the line number.
+        Get the line number.
         
-            Parameters:
-                date (org.orekit.time.AbsoluteDate): date
+        Parameters:
+            date (org.orekit.time.AbsoluteDate): date
         
-            Returns:
-                line number corresponding to date
+        Returns:
+            line number corresponding to date
         
         
         """
         ...
     def getName(self) -> str:
         """
-            Get the name of the sensor.
+        Get the name of the sensor.
         
-            Returns:
-                name of the sensor
+        Returns:
+            name of the sensor
         
         
         """
         ...
     def getNbPixels(self) -> int:
         """
-            Get the number of pixels.
+        Get the number of pixels.
         
-            Returns:
-                number of pixels
+        Returns:
+            number of pixels
         
         
         """
         ...
     def getParametersDrivers(self) -> java.util.stream.Stream[org.orekit.utils.ParameterDriver]:
         """
-            Get the drivers for LOS parameters.
+        Get the drivers for LOS parameters.
         
-            Returns:
-                drivers for LOS parameters
+        Returns:
+            drivers for LOS parameters
         
-            Since:
-                2.0
+        Since:
+            2.0
         
         
         """
         ...
     def getPosition(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get the sensor position.
+        Get the sensor position.
         
-            Returns:
-                position
+        Returns:
+            position
         
         
         """
         ...
-    def getRate(self, double: float) -> float:
+    def getRate(self, lineNumber: float) -> float:
         """
-            Get the rate of lines scanning.
+        Get the rate of lines scanning.
         
-            Parameters:
-                lineNumber (double): line number
+        Parameters:
+            lineNumber (double): line number
         
-            Returns:
-                rate of lines scanning (lines / seconds)
+        Returns:
+            rate of lines scanning (lines / seconds)
         
         
         """
@@ -230,99 +241,105 @@ class LineSensor:
 
 class SensorMeanPlaneCrossing:
     """
-    public class SensorMeanPlaneCrossing extends :class:`~org.orekit.rugged.linesensor.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Class dedicated to find when ground point crosses mean sensor plane.
     
-        Class dedicated to find when ground point crosses mean sensor plane.
-    
-        This class is used in the first stage of inverse location.
+    This class is used in the first stage of inverse location.
     """
     @typing.overload
     def __init__(self, lineSensor: LineSensor, spacecraftToObservedBody: org.orekit.rugged.utils.SpacecraftToObservedBody, int: int, int2: int, boolean: bool, boolean2: bool, int3: int, double: float): ...
     @typing.overload
     def __init__(self, lineSensor: LineSensor, spacecraftToObservedBody: org.orekit.rugged.utils.SpacecraftToObservedBody, int: int, int2: int, boolean: bool, boolean2: bool, int3: int, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, stream: java.util.stream.Stream['SensorMeanPlaneCrossing.CrossingResult']): ...
-    def find(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> 'SensorMeanPlaneCrossing.CrossingResult':
+    def find(self, target: org.hipparchus.geometry.euclidean.threed.Vector3D) -> 'SensorMeanPlaneCrossing.CrossingResult':
         """
-            Find mean plane crossing.
+        Find mean plane crossing.
         
-            Parameters:
-                target (org.hipparchus.geometry.euclidean.threed.Vector3D): target ground point
+        Parameters:
+            target (org.hipparchus.geometry.euclidean.threed.Vector3D): target ground point
         
-            Returns:
-                line number and target direction at mean plane crossing, or null if search interval does not bracket a solution
+        Returns:
+            line number and target direction at mean plane crossing, or null if search interval does not bracket a solution
         
         
         """
         ...
     def getAccuracy(self) -> float:
         """
-            Get the accuracy to use for finding crossing line number.
+        Get the accuracy to use for finding crossing line number.
         
-            Returns:
-                accuracy to use for finding crossing line number
+        Returns:
+            accuracy to use for finding crossing line number
         
         
         """
         ...
-    def getCachedResults(self) -> java.util.stream.Stream['SensorMeanPlaneCrossing.CrossingResult']: ...
+    def getCachedResults(self) -> java.util.stream.Stream['SensorMeanPlaneCrossing.CrossingResult']:
+        """
+        Get cached previous results.
+        
+        Returns:
+            cached previous results
+        
+        
+        """
+        ...
     def getMaxEval(self) -> int:
         """
-            Get the maximum number of evaluations.
+        Get the maximum number of evaluations.
         
-            Returns:
-                maximum number of evaluations
+        Returns:
+            maximum number of evaluations
         
         
         """
         ...
     def getMaxLine(self) -> int:
         """
-            Get the maximum line number in the search interval.
+        Get the maximum line number in the search interval.
         
-            Returns:
-                maximum line number in the search interval
+        Returns:
+            maximum line number in the search interval
         
         
         """
         ...
     def getMeanPlaneNormal(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get the mean plane normal.
+        Get the mean plane normal.
         
-            The normal is oriented such traversing pixels in increasing indices order corresponds is consistent with trigonometric
-            order (i.e. counterclockwise).
+        The normal is oriented such traversing pixels in increasing indices order corresponds is consistent with trigonometric order (i.e. counterclockwise).
         
-            Returns:
-                mean plane normal
+        Returns:
+            mean plane normal
         
         
         """
         ...
     def getMinLine(self) -> int:
         """
-            Get the minimum line number in the search interval.
+        Get the minimum line number in the search interval.
         
-            Returns:
-                minimum line number in the search interval
+        Returns:
+            minimum line number in the search interval
         
         
         """
         ...
     def getScToBody(self) -> org.orekit.rugged.utils.SpacecraftToObservedBody:
         """
-            Get converter between spacecraft and body.
+        Get converter between spacecraft and body.
         
-            Returns:
-                converter between spacecraft and body
+        Returns:
+            converter between spacecraft and body
         
         
         """
         ...
     def getSensor(self) -> LineSensor:
         """
-            Get the underlying sensor.
+        Get the underlying sensor.
         
-            Returns:
-                underlying sensor
+        Returns:
+            underlying sensor
         
         
         """
@@ -337,32 +354,40 @@ class SensorMeanPlaneCrossing:
 
 class SensorPixel(java.io.Serializable):
     """
-    public class SensorPixel extends :class:`~org.orekit.rugged.linesensor.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.rugged.linesensor.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    Container for sensor pixel.
     
-        Container for sensor pixel.
+    Instances of this class are guaranteed to be immutable.
     
-        Instances of this class are guaranteed to be immutable.
-    
-        Also see:
-            :meth:`~serialized`
+    Also see:
+        serialized
     """
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, lineNumber: float, pixelNumber: float):
+        """
+        Build a new instance.
+        
+        Parameters:
+            lineNumber (double): line number
+            pixelNumber (double): pixel number
+        
+        
+        """
+        ...
     def getLineNumber(self) -> float:
         """
-            Get the line number.
+        Get the line number.
         
-            Returns:
-                line number
+        Returns:
+            line number
         
         
         """
         ...
     def getPixelNumber(self) -> float:
         """
-            Get the pixel number.
+        Get the pixel number.
         
-            Returns:
-                pixel number
+        Returns:
+            pixel number
         
         
         """
@@ -370,22 +395,33 @@ class SensorPixel(java.io.Serializable):
 
 class SensorPixelCrossing:
     """
-    public class SensorPixelCrossing extends :class:`~org.orekit.rugged.linesensor.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Class devoted to locate where ground point crosses a sensor line.
     
-        Class devoted to locate where ground point crosses a sensor line.
-    
-        This class is used in the first stage of inverse location.
+    This class is used in the first stage of inverse location.
     """
-    def __init__(self, lineSensor: LineSensor, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, int: int, double: float): ...
-    def locatePixel(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+    def __init__(self, sensor: LineSensor, meanNormal: org.hipparchus.geometry.euclidean.threed.Vector3D, targetDirection: org.hipparchus.geometry.euclidean.threed.Vector3D, maxEval: int, accuracy: float):
         """
-            Locate pixel along sensor line.
+        Simple constructor.
         
-            Parameters:
-                date (org.orekit.time.AbsoluteDate): current date
+        Parameters:
+            sensor (LineSensor): sensor to consider
+            meanNormal (org.hipparchus.geometry.euclidean.threed.Vector3D): mean plane normal of the line sensor
+            targetDirection (org.hipparchus.geometry.euclidean.threed.Vector3D): target direction in spacecraft frame
+            maxEval (int): maximum number of evaluations
+            accuracy (double): accuracy to use for finding crossing line number
         
-            Returns:
-                pixel location (:code:`Double.NaN` if the first and last pixels of the line do not bracket a location)
+        
+        """
+        ...
+    def locatePixel(self, date: org.orekit.time.AbsoluteDate) -> float:
+        """
+        Locate pixel along sensor line.
+        
+        Parameters:
+            date (org.orekit.time.AbsoluteDate): current date
+        
+        Returns:
+            pixel location (NaN if the first and last pixels of the line do not bracket a location)
         
         
         """
@@ -393,60 +429,63 @@ class SensorPixelCrossing:
 
 class LinearLineDatation(LineDatation):
     """
-    public class LinearLineDatation extends :class:`~org.orekit.rugged.linesensor.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.rugged.linesensor.LineDatation`
+    Linear model for LineDatation.
     
-        Linear model for :class:`~org.orekit.rugged.linesensor.LineDatation`.
-    
-        Instances of this class are guaranteed to be immutable.
+    Instances of this class are guaranteed to be immutable.
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float): ...
-    def getDate(self, double: float) -> org.orekit.time.AbsoluteDate:
+    def __init__(self, referenceDate: org.orekit.time.AbsoluteDate, referenceLine: float, rate: float):
         """
-            Get the date for a given line.
+        Simple constructor.
         
-            Specified by:
-                :meth:`~org.orekit.rugged.linesensor.LineDatation.getDate` in
-                interface :class:`~org.orekit.rugged.linesensor.LineDatation`
-        
-            Parameters:
-                lineNumber (double): line number
-        
-            Returns:
-                date at which line is acquired
+        Parameters:
+            referenceDate (org.orekit.time.AbsoluteDate): reference date
+            referenceLine (double): line number at reference date
+            rate (double): rate of lines scanning (lines / seconds)
         
         
         """
         ...
-    def getLine(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+    def getDate(self, lineNumber: float) -> org.orekit.time.AbsoluteDate:
         """
-            Get the line for a given date.
+        Get the date for a given line.
         
-            Specified by:
-                :meth:`~org.orekit.rugged.linesensor.LineDatation.getLine` in
-                interface :class:`~org.orekit.rugged.linesensor.LineDatation`
+        Specified by: getDate in interface LineDatation
         
-            Parameters:
-                date (org.orekit.time.AbsoluteDate): date
+        Parameters:
+            lineNumber (double): line number
         
-            Returns:
-                line number
+        Returns:
+            date at which line is acquired
         
         
         """
         ...
-    def getRate(self, double: float) -> float:
+    def getLine(self, date: org.orekit.time.AbsoluteDate) -> float:
         """
-            Get the rate of lines scanning.
+        Get the line for a given date.
         
-            Specified by:
-                :meth:`~org.orekit.rugged.linesensor.LineDatation.getRate` in
-                interface :class:`~org.orekit.rugged.linesensor.LineDatation`
+        Specified by: getLine in interface LineDatation
         
-            Parameters:
-                lineNumber (double): line number
+        Parameters:
+            date (org.orekit.time.AbsoluteDate): date
         
-            Returns:
-                rate of lines scanning (lines / seconds)
+        Returns:
+            line number
+        
+        
+        """
+        ...
+    def getRate(self, lineNumber: float) -> float:
+        """
+        Get the rate of lines scanning.
+        
+        Specified by: getRate in interface LineDatation
+        
+        Parameters:
+            lineNumber (double): line number
+        
+        Returns:
+            rate of lines scanning (lines / seconds)
         
         
         """

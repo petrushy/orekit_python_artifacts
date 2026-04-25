@@ -13,42 +13,39 @@ import typing
 
 class CopolarC:
     """
-    public classCopolarC extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Copolar trio with pole at point c in Glaisher’s Notation.
     
-        Copolar trio with pole at point c in Glaisher’s Notation.
+    This is a container for the three subsidiary Jacobi elliptic functions dc(u|m), nc(u|m), and sc(u|m).
     
-        This is a container for the three subsidiary Jacobi elliptic functions :code:`dc(u|m)`, :code:`nc(u|m)`, and
-        :code:`sc(u|m)`.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
     def dc(self) -> float:
         """
-            Get the value of the dc function.
+        Get the value of the dc function.
         
-            Returns:
-                dc(u|m)
+        Returns:
+            dc(u|m)
         
         
         """
         ...
     def nc(self) -> float:
         """
-            Get the value of the nc function.
+        Get the value of the nc function.
         
-            Returns:
-                nc(u|m)
+        Returns:
+            nc(u|m)
         
         
         """
         ...
     def sc(self) -> float:
         """
-            Get the value of the sc function.
+        Get the value of the sc function.
         
-            Returns:
-                sc(u|m)
+        Returns:
+            sc(u|m)
         
         
         """
@@ -56,42 +53,39 @@ class CopolarC:
 
 class CopolarD:
     """
-    public classCopolarD extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Copolar trio with pole at point d in Glaisher’s Notation.
     
-        Copolar trio with pole at point d in Glaisher’s Notation.
+    This is a container for the three subsidiary Jacobi elliptic functions nd(u|m), sd(u|m), and cd(u|m).
     
-        This is a container for the three subsidiary Jacobi elliptic functions :code:`nd(u|m)`, :code:`sd(u|m)`, and
-        :code:`cd(u|m)`.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
     def cd(self) -> float:
         """
-            Get the value of the cd function.
+        Get the value of the cd function.
         
-            Returns:
-                cd(u|m)
+        Returns:
+            cd(u|m)
         
         
         """
         ...
     def nd(self) -> float:
         """
-            Get the value of the nd function.
+        Get the value of the nd function.
         
-            Returns:
-                nd(u|m)
+        Returns:
+            nd(u|m)
         
         
         """
         ...
     def sd(self) -> float:
         """
-            Get the value of the sd function.
+        Get the value of the sd function.
         
-            Returns:
-                sd(u|m)
+        Returns:
+            sd(u|m)
         
         
         """
@@ -99,42 +93,39 @@ class CopolarD:
 
 class CopolarN:
     """
-    public classCopolarN extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Copolar trio with pole at point n in Glaisher’s Notation.
     
-        Copolar trio with pole at point n in Glaisher’s Notation.
+    This is a container for the three principal Jacobi elliptic functions sn(u|m), cn(u|m), and dn(u|m).
     
-        This is a container for the three principal Jacobi elliptic functions :code:`sn(u|m)`, :code:`cn(u|m)`, and
-        :code:`dn(u|m)`.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
     def cn(self) -> float:
         """
-            Get the value of the cn function.
+        Get the value of the cn function.
         
-            Returns:
-                cn(u|m)
+        Returns:
+            cn(u|m)
         
         
         """
         ...
     def dn(self) -> float:
         """
-            Get the value of the dn function.
+        Get the value of the dn function.
         
-            Returns:
-                dn(u|m)
+        Returns:
+            dn(u|m)
         
         
         """
         ...
     def sn(self) -> float:
         """
-            Get the value of the sn function.
+        Get the value of the sn function.
         
-            Returns:
-                sn(u|m)
+        Returns:
+            sn(u|m)
         
         
         """
@@ -142,42 +133,39 @@ class CopolarN:
 
 class CopolarS:
     """
-    public classCopolarS extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Copolar trio with pole at point s in Glaisher’s Notation.
     
-        Copolar trio with pole at point s in Glaisher’s Notation.
+    This is a container for the three subsidiary Jacobi elliptic functions cs(u|m), ds(u|m) and ns(u|m).
     
-        This is a container for the three subsidiary Jacobi elliptic functions :code:`cs(u|m)`, :code:`ds(u|m)` and
-        :code:`ns(u|m)`.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
     def cs(self) -> float:
         """
-            Get the value of the cs function.
+        Get the value of the cs function.
         
-            Returns:
-                cs(u|m)
+        Returns:
+            cs(u|m)
         
         
         """
         ...
     def ds(self) -> float:
         """
-            Get the value of the ds function.
+        Get the value of the ds function.
         
-            Returns:
-                ds(u|m)
+        Returns:
+            ds(u|m)
         
         
         """
         ...
     def ns(self) -> float:
         """
-            Get the value of the ns function.
+        Get the value of the ns function.
         
-            Returns:
-                ns(u|m)
+        Returns:
+            ns(u|m)
         
         
         """
@@ -186,42 +174,39 @@ class CopolarS:
 _FieldCopolarC__T = typing.TypeVar('_FieldCopolarC__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldCopolarC(typing.Generic[_FieldCopolarC__T]):
     """
-    public classFieldCopolarC<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Copolar trio with pole at point c in Glaisher’s Notation.
     
-        Copolar trio with pole at point c in Glaisher’s Notation.
+    This is a container for the three subsidiary Jacobi elliptic functions dc(u|m), nc(u|m), and sc(u|m).
     
-        This is a container for the three subsidiary Jacobi elliptic functions :code:`dc(u|m)`, :code:`nc(u|m)`, and
-        :code:`sc(u|m)`.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
     def dc(self) -> _FieldCopolarC__T:
         """
-            Get the value of the dc function.
+        Get the value of the dc function.
         
-            Returns:
-                dc(u|m)
+        Returns:
+            dc(u|m)
         
         
         """
         ...
     def nc(self) -> _FieldCopolarC__T:
         """
-            Get the value of the nc function.
+        Get the value of the nc function.
         
-            Returns:
-                nc(u|m)
+        Returns:
+            nc(u|m)
         
         
         """
         ...
     def sc(self) -> _FieldCopolarC__T:
         """
-            Get the value of the sc function.
+        Get the value of the sc function.
         
-            Returns:
-                sc(u|m)
+        Returns:
+            sc(u|m)
         
         
         """
@@ -230,42 +215,39 @@ class FieldCopolarC(typing.Generic[_FieldCopolarC__T]):
 _FieldCopolarD__T = typing.TypeVar('_FieldCopolarD__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldCopolarD(typing.Generic[_FieldCopolarD__T]):
     """
-    public classFieldCopolarD<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Copolar trio with pole at point d in Glaisher’s Notation.
     
-        Copolar trio with pole at point d in Glaisher’s Notation.
+    This is a container for the three subsidiary Jacobi elliptic functions nd(u|m), sd(u|m), and cd(u|m).
     
-        This is a container for the three subsidiary Jacobi elliptic functions :code:`nd(u|m)`, :code:`sd(u|m)`, and
-        :code:`cd(u|m)`.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
     def cd(self) -> _FieldCopolarD__T:
         """
-            Get the value of the cd function.
+        Get the value of the cd function.
         
-            Returns:
-                cd(u|m)
+        Returns:
+            cd(u|m)
         
         
         """
         ...
     def nd(self) -> _FieldCopolarD__T:
         """
-            Get the value of the nd function.
+        Get the value of the nd function.
         
-            Returns:
-                nd(u|m)
+        Returns:
+            nd(u|m)
         
         
         """
         ...
     def sd(self) -> _FieldCopolarD__T:
         """
-            Get the value of the sd function.
+        Get the value of the sd function.
         
-            Returns:
-                sd(u|m)
+        Returns:
+            sd(u|m)
         
         
         """
@@ -274,42 +256,39 @@ class FieldCopolarD(typing.Generic[_FieldCopolarD__T]):
 _FieldCopolarN__T = typing.TypeVar('_FieldCopolarN__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldCopolarN(typing.Generic[_FieldCopolarN__T]):
     """
-    public classFieldCopolarN<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Copolar trio with pole at point n in Glaisher’s Notation.
     
-        Copolar trio with pole at point n in Glaisher’s Notation.
+    This is a container for the three principal Jacobi elliptic functions sn(u|m), cn(u|m), and dn(u|m).
     
-        This is a container for the three principal Jacobi elliptic functions :code:`sn(u|m)`, :code:`cn(u|m)`, and
-        :code:`dn(u|m)`.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
     def cn(self) -> _FieldCopolarN__T:
         """
-            Get the value of the cn function.
+        Get the value of the cn function.
         
-            Returns:
-                cn(u|m)
+        Returns:
+            cn(u|m)
         
         
         """
         ...
     def dn(self) -> _FieldCopolarN__T:
         """
-            Get the value of the dn function.
+        Get the value of the dn function.
         
-            Returns:
-                dn(u|m)
+        Returns:
+            dn(u|m)
         
         
         """
         ...
     def sn(self) -> _FieldCopolarN__T:
         """
-            Get the value of the sn function.
+        Get the value of the sn function.
         
-            Returns:
-                sn(u|m)
+        Returns:
+            sn(u|m)
         
         
         """
@@ -318,42 +297,39 @@ class FieldCopolarN(typing.Generic[_FieldCopolarN__T]):
 _FieldCopolarS__T = typing.TypeVar('_FieldCopolarS__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldCopolarS(typing.Generic[_FieldCopolarS__T]):
     """
-    public classFieldCopolarS<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Copolar trio with pole at point s in Glaisher’s Notation.
     
-        Copolar trio with pole at point s in Glaisher’s Notation.
+    This is a container for the three subsidiary Jacobi elliptic functions cs(u|m), ds(u|m) and ns(u|m).
     
-        This is a container for the three subsidiary Jacobi elliptic functions :code:`cs(u|m)`, :code:`ds(u|m)` and
-        :code:`ns(u|m)`.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
     def cs(self) -> _FieldCopolarS__T:
         """
-            Get the value of the cs function.
+        Get the value of the cs function.
         
-            Returns:
-                cs(u|m)
+        Returns:
+            cs(u|m)
         
         
         """
         ...
     def ds(self) -> _FieldCopolarS__T:
         """
-            Get the value of the ds function.
+        Get the value of the ds function.
         
-            Returns:
-                ds(u|m)
+        Returns:
+            ds(u|m)
         
         
         """
         ...
     def ns(self) -> _FieldCopolarS__T:
         """
-            Get the value of the ns function.
+        Get the value of the ns function.
         
-            Returns:
-                ns(u|m)
+        Returns:
+            ns(u|m)
         
         
         """
@@ -362,37 +338,35 @@ class FieldCopolarS(typing.Generic[_FieldCopolarS__T]):
 _FieldJacobiElliptic__T = typing.TypeVar('_FieldJacobiElliptic__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
     """
-    public abstract classFieldJacobiElliptic<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Computation of Jacobi elliptic functions. The Jacobi elliptic functions are related to elliptic integrals.
     
-        Computation of Jacobi elliptic functions. The Jacobi elliptic functions are related to elliptic integrals.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
     @typing.overload
     def arccd(self, double: float) -> _FieldJacobiElliptic__T:
         """
-            Evaluate inverse of Jacobi elliptic function cd.
+        Evaluate inverse of Jacobi elliptic function cd.
         
-            Parameters:
-                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`cd(u|m)`
+        Parameters:
+            x (FieldJacobiElliptic): value of Jacobi elliptic function cd(u|m)
         
-            Returns:
-                u such that :code:`x=cd(u|m)`
+        Returns:
+            u such that x=cd(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
-            Evaluate inverse of Jacobi elliptic function cd.
+        Evaluate inverse of Jacobi elliptic function cd.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`cd(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function cd(u|m)
         
-            Returns:
-                u such that :code:`x=cd(u|m)`
+        Returns:
+            u such that x=cd(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
@@ -402,27 +376,27 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
     @typing.overload
     def arccn(self, double: float) -> _FieldJacobiElliptic__T:
         """
-            Evaluate inverse of Jacobi elliptic function cn.
+        Evaluate inverse of Jacobi elliptic function cn.
         
-            Parameters:
-                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`cn(u|m)`
+        Parameters:
+            x (FieldJacobiElliptic): value of Jacobi elliptic function cn(u|m)
         
-            Returns:
-                u such that :code:`x=cn(u|m)`
+        Returns:
+            u such that x=cn(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
-            Evaluate inverse of Jacobi elliptic function cn.
+        Evaluate inverse of Jacobi elliptic function cn.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`cn(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function cn(u|m)
         
-            Returns:
-                u such that :code:`x=cn(u|m)`
+        Returns:
+            u such that x=cn(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
@@ -432,27 +406,27 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
     @typing.overload
     def arccs(self, double: float) -> _FieldJacobiElliptic__T:
         """
-            Evaluate inverse of Jacobi elliptic function cs.
+        Evaluate inverse of Jacobi elliptic function cs.
         
-            Parameters:
-                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`cs(u|m)`
+        Parameters:
+            x (FieldJacobiElliptic): value of Jacobi elliptic function cs(u|m)
         
-            Returns:
-                u such that :code:`x=cs(u|m)`
+        Returns:
+            u such that x=cs(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
-            Evaluate inverse of Jacobi elliptic function cs.
+        Evaluate inverse of Jacobi elliptic function cs.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`cs(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function cs(u|m)
         
-            Returns:
-                u such that :code:`x=cs(u|m)`
+        Returns:
+            u such that x=cs(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
@@ -462,27 +436,27 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
     @typing.overload
     def arcdc(self, double: float) -> _FieldJacobiElliptic__T:
         """
-            Evaluate inverse of Jacobi elliptic function dc.
+        Evaluate inverse of Jacobi elliptic function dc.
         
-            Parameters:
-                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`dc(u|m)`
+        Parameters:
+            x (FieldJacobiElliptic): value of Jacobi elliptic function dc(u|m)
         
-            Returns:
-                u such that :code:`x=dc(u|m)`
+        Returns:
+            u such that x=dc(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
-            Evaluate inverse of Jacobi elliptic function dc.
+        Evaluate inverse of Jacobi elliptic function dc.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`dc(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function dc(u|m)
         
-            Returns:
-                u such that :code:`x=dc(u|m)`
+        Returns:
+            u such that x=dc(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
@@ -492,27 +466,27 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
     @typing.overload
     def arcdn(self, double: float) -> _FieldJacobiElliptic__T:
         """
-            Evaluate inverse of Jacobi elliptic function dn.
+        Evaluate inverse of Jacobi elliptic function dn.
         
-            Parameters:
-                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`dn(u|m)`
+        Parameters:
+            x (FieldJacobiElliptic): value of Jacobi elliptic function dn(u|m)
         
-            Returns:
-                u such that :code:`x=dn(u|m)`
+        Returns:
+            u such that x=dn(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
-            Evaluate inverse of Jacobi elliptic function dn.
+        Evaluate inverse of Jacobi elliptic function dn.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`dn(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function dn(u|m)
         
-            Returns:
-                u such that :code:`x=dn(u|m)`
+        Returns:
+            u such that x=dn(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
@@ -522,27 +496,27 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
     @typing.overload
     def arcds(self, double: float) -> _FieldJacobiElliptic__T:
         """
-            Evaluate inverse of Jacobi elliptic function ds.
+        Evaluate inverse of Jacobi elliptic function ds.
         
-            Parameters:
-                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`ds(u|m)`
+        Parameters:
+            x (FieldJacobiElliptic): value of Jacobi elliptic function ds(u|m)
         
-            Returns:
-                u such that :code:`x=ds(u|m)`
+        Returns:
+            u such that x=ds(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
-            Evaluate inverse of Jacobi elliptic function ds.
+        Evaluate inverse of Jacobi elliptic function ds.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`ds(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function ds(u|m)
         
-            Returns:
-                u such that :code:`x=ds(u|m)`
+        Returns:
+            u such that x=ds(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
@@ -552,27 +526,27 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
     @typing.overload
     def arcnc(self, double: float) -> _FieldJacobiElliptic__T:
         """
-            Evaluate inverse of Jacobi elliptic function nc.
+        Evaluate inverse of Jacobi elliptic function nc.
         
-            Parameters:
-                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`nc(u|m)`
+        Parameters:
+            x (FieldJacobiElliptic): value of Jacobi elliptic function nc(u|m)
         
-            Returns:
-                u such that :code:`x=nc(u|m)`
+        Returns:
+            u such that x=nc(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
-            Evaluate inverse of Jacobi elliptic function nc.
+        Evaluate inverse of Jacobi elliptic function nc.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`nc(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function nc(u|m)
         
-            Returns:
-                u such that :code:`x=nc(u|m)`
+        Returns:
+            u such that x=nc(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
@@ -582,27 +556,27 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
     @typing.overload
     def arcnd(self, double: float) -> _FieldJacobiElliptic__T:
         """
-            Evaluate inverse of Jacobi elliptic function nd.
+        Evaluate inverse of Jacobi elliptic function nd.
         
-            Parameters:
-                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`nd(u|m)`
+        Parameters:
+            x (FieldJacobiElliptic): value of Jacobi elliptic function nd(u|m)
         
-            Returns:
-                u such that :code:`x=nd(u|m)`
+        Returns:
+            u such that x=nd(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
-            Evaluate inverse of Jacobi elliptic function nd.
+        Evaluate inverse of Jacobi elliptic function nd.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`nd(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function nd(u|m)
         
-            Returns:
-                u such that :code:`x=nd(u|m)`
+        Returns:
+            u such that x=nd(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
@@ -612,27 +586,27 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
     @typing.overload
     def arcns(self, double: float) -> _FieldJacobiElliptic__T:
         """
-            Evaluate inverse of Jacobi elliptic function ns.
+        Evaluate inverse of Jacobi elliptic function ns.
         
-            Parameters:
-                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`ns(u|m)`
+        Parameters:
+            x (FieldJacobiElliptic): value of Jacobi elliptic function ns(u|m)
         
-            Returns:
-                u such that :code:`x=ns(u|m)`
+        Returns:
+            u such that x=ns(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
-            Evaluate inverse of Jacobi elliptic function ns.
+        Evaluate inverse of Jacobi elliptic function ns.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`ns(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function ns(u|m)
         
-            Returns:
-                u such that :code:`x=ns(u|m)`
+        Returns:
+            u such that x=ns(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
@@ -642,27 +616,27 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
     @typing.overload
     def arcsc(self, double: float) -> _FieldJacobiElliptic__T:
         """
-            Evaluate inverse of Jacobi elliptic function sc.
+        Evaluate inverse of Jacobi elliptic function sc.
         
-            Parameters:
-                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`sc(u|m)`
+        Parameters:
+            x (FieldJacobiElliptic): value of Jacobi elliptic function sc(u|m)
         
-            Returns:
-                u such that :code:`x=sc(u|m)`
+        Returns:
+            u such that x=sc(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
-            Evaluate inverse of Jacobi elliptic function sc.
+        Evaluate inverse of Jacobi elliptic function sc.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`sc(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function sc(u|m)
         
-            Returns:
-                u such that :code:`x=sc(u|m)`
+        Returns:
+            u such that x=sc(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
@@ -672,27 +646,27 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
     @typing.overload
     def arcsd(self, double: float) -> _FieldJacobiElliptic__T:
         """
-            Evaluate inverse of Jacobi elliptic function sd.
+        Evaluate inverse of Jacobi elliptic function sd.
         
-            Parameters:
-                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`sd(u|m)`
+        Parameters:
+            x (FieldJacobiElliptic): value of Jacobi elliptic function sd(u|m)
         
-            Returns:
-                u such that :code:`x=sd(u|m)`
+        Returns:
+            u such that x=sd(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
-            Evaluate inverse of Jacobi elliptic function sd.
+        Evaluate inverse of Jacobi elliptic function sd.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`sd(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function sd(u|m)
         
-            Returns:
-                u such that :code:`x=sd(u|m)`
+        Returns:
+            u such that x=sd(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
@@ -702,27 +676,27 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
     @typing.overload
     def arcsn(self, double: float) -> _FieldJacobiElliptic__T:
         """
-            Evaluate inverse of Jacobi elliptic function sn.
+        Evaluate inverse of Jacobi elliptic function sn.
         
-            Parameters:
-                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`sn(u|m)`
+        Parameters:
+            x (FieldJacobiElliptic): value of Jacobi elliptic function sn(u|m)
         
-            Returns:
-                u such that :code:`x=sn(u|m)`
+        Returns:
+            u such that x=sn(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
-            Evaluate inverse of Jacobi elliptic function sn.
+        Evaluate inverse of Jacobi elliptic function sn.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`sn(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function sn(u|m)
         
-            Returns:
-                u such that :code:`x=sn(u|m)`
+        Returns:
+            u such that x=sn(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
@@ -731,10 +705,10 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
     def arcsn(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
     def getM(self) -> _FieldJacobiElliptic__T:
         """
-            Get the parameter of the function.
+        Get the parameter of the function.
         
-            Returns:
-                parameter of the function
+        Returns:
+            parameter of the function
         
         
         """
@@ -759,78 +733,95 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
 _FieldJacobiTheta__T = typing.TypeVar('_FieldJacobiTheta__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldJacobiTheta(typing.Generic[_FieldJacobiTheta__T]):
     """
-    public classFieldJacobiTheta<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Algorithm computing Jacobi theta functions.
     
-        Algorithm computing Jacobi theta functions.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
-    def __init__(self, t: _FieldJacobiTheta__T): ...
-    def getQ(self) -> _FieldJacobiTheta__T:
+    def __init__(self, q: _FieldJacobiTheta__T):
         """
-            Get the nome.
+        Simple constructor.
         
-            Returns:
-                nome
+        The nome q can be computed using ratios of complete elliptic integrals (nome which are themselves defined in term of parameter m, where m=k² and k is the elliptic modulus.
+        
+        Parameters:
+            q (FieldJacobiTheta): nome
         
         
         """
         ...
-    def values(self, t: _FieldJacobiTheta__T) -> 'FieldTheta'[_FieldJacobiTheta__T]: ...
+    def getQ(self) -> _FieldJacobiTheta__T:
+        """
+        Get the nome.
+        
+        Returns:
+            nome
+        
+        
+        """
+        ...
+    def values(self, z: _FieldJacobiTheta__T) -> 'FieldTheta'[_FieldJacobiTheta__T]:
+        """
+        Evaluate the Jacobi theta functions.
+        
+        Parameters:
+            z (FieldJacobiTheta): argument of the functions
+        
+        Returns:
+            container for the four Jacobi theta functions θ₁(z|τ), θ₂(z|τ), θ₃(z|τ), and θ₄(z|τ)
+        
+        
+        """
+        ...
 
 _FieldTheta__T = typing.TypeVar('_FieldTheta__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTheta(typing.Generic[_FieldTheta__T]):
     """
-    public classFieldTheta<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Values of FieldJacobiTheta functions.
     
-        Values of :class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiTheta` functions.
+    This is a container for the four Jacobi theta functions θ₁(z|τ), θ₂(z|τ), θ₃(z|τ), and θ₄(z|τ).
     
-        This is a container for the four Jacobi theta functions θ₁(z|τ), θ₂(z|τ), θ₃(z|τ), and θ₄(z|τ).
+    Since:
+        2.0
     
-        Since:
-            2.0
-    
-        Also see:
-    
-              - :class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiTheta`
+          - FieldJacobiTheta
     """
     def theta1(self) -> _FieldTheta__T:
         """
-            Get the value of the θ₁(z|τ) function.
+        Get the value of the θ₁(z|τ) function.
         
-            Returns:
-                θ₁(z|τ)
+        Returns:
+            θ₁(z|τ)
         
         
         """
         ...
     def theta2(self) -> _FieldTheta__T:
         """
-            Get the value of the θ₂(z|τ) function.
+        Get the value of the θ₂(z|τ) function.
         
-            Returns:
-                θ₂(z|τ)
+        Returns:
+            θ₂(z|τ)
         
         
         """
         ...
     def theta3(self) -> _FieldTheta__T:
         """
-            Get the value of the θ₃(z|τ) function.
+        Get the value of the θ₃(z|τ) function.
         
-            Returns:
-                θ₃(z|τ)
+        Returns:
+            θ₃(z|τ)
         
         
         """
         ...
     def theta4(self) -> _FieldTheta__T:
         """
-            Get the value of the θ₄(z|τ) function.
+        Get the value of the θ₄(z|τ) function.
         
-            Returns:
-                θ₄(z|τ)
+        Returns:
+            θ₄(z|τ)
         
         
         """
@@ -838,267 +829,265 @@ class FieldTheta(typing.Generic[_FieldTheta__T]):
 
 class JacobiElliptic:
     """
-    public abstract classJacobiElliptic extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Algorithm computing Jacobi elliptic functions.
     
-        Algorithm computing Jacobi elliptic functions.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
-    def arccd(self, double: float) -> float:
+    def arccd(self, x: float) -> float:
         """
-            Evaluate inverse of Jacobi elliptic function cd.
+        Evaluate inverse of Jacobi elliptic function cd.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`cd(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function cd(u|m)
         
-            Returns:
-                u such that :code:`x=cd(u|m)`
+        Returns:
+            u such that x=cd(u|m)
         
-            Since:
-                2.1
-        
-        
-        """
-        ...
-    def arccn(self, double: float) -> float:
-        """
-            Evaluate inverse of Jacobi elliptic function cn.
-        
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`cn(u|m)`
-        
-            Returns:
-                u such that :code:`x=cn(u|m)`
-        
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
         ...
-    def arccs(self, double: float) -> float:
+    def arccn(self, x: float) -> float:
         """
-            Evaluate inverse of Jacobi elliptic function cs.
+        Evaluate inverse of Jacobi elliptic function cn.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`cs(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function cn(u|m)
         
-            Returns:
-                u such that :code:`x=cs(u|m)`
+        Returns:
+            u such that x=cn(u|m)
         
-            Since:
-                2.1
-        
-        
-        """
-        ...
-    def arcdc(self, double: float) -> float:
-        """
-            Evaluate inverse of Jacobi elliptic function dc.
-        
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`dc(u|m)`
-        
-            Returns:
-                u such that :code:`x=dc(u|m)`
-        
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
         ...
-    def arcdn(self, double: float) -> float:
+    def arccs(self, x: float) -> float:
         """
-            Evaluate inverse of Jacobi elliptic function dn.
+        Evaluate inverse of Jacobi elliptic function cs.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`dn(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function cs(u|m)
         
-            Returns:
-                u such that :code:`x=dn(u|m)`
+        Returns:
+            u such that x=cs(u|m)
         
-            Since:
-                2.1
-        
-        
-        """
-        ...
-    def arcds(self, double: float) -> float:
-        """
-            Evaluate inverse of Jacobi elliptic function ds.
-        
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`ds(u|m)`
-        
-            Returns:
-                u such that :code:`x=ds(u|m)`
-        
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
         ...
-    def arcnc(self, double: float) -> float:
+    def arcdc(self, x: float) -> float:
         """
-            Evaluate inverse of Jacobi elliptic function nc.
+        Evaluate inverse of Jacobi elliptic function dc.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`nc(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function dc(u|m)
         
-            Returns:
-                u such that :code:`x=nc(u|m)`
+        Returns:
+            u such that x=dc(u|m)
         
-            Since:
-                2.1
-        
-        
-        """
-        ...
-    def arcnd(self, double: float) -> float:
-        """
-            Evaluate inverse of Jacobi elliptic function nd.
-        
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`nd(u|m)`
-        
-            Returns:
-                u such that :code:`x=nd(u|m)`
-        
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
         ...
-    def arcns(self, double: float) -> float:
+    def arcdn(self, x: float) -> float:
         """
-            Evaluate inverse of Jacobi elliptic function ns.
+        Evaluate inverse of Jacobi elliptic function dn.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`ns(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function dn(u|m)
         
-            Returns:
-                u such that :code:`x=ns(u|m)`
+        Returns:
+            u such that x=dn(u|m)
         
-            Since:
-                2.1
-        
-        
-        """
-        ...
-    def arcsc(self, double: float) -> float:
-        """
-            Evaluate inverse of Jacobi elliptic function sc.
-        
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`sc(u|m)`
-        
-            Returns:
-                u such that :code:`x=sc(u|m)`
-        
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
         ...
-    def arcsd(self, double: float) -> float:
+    def arcds(self, x: float) -> float:
         """
-            Evaluate inverse of Jacobi elliptic function sd.
+        Evaluate inverse of Jacobi elliptic function ds.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`sd(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function ds(u|m)
         
-            Returns:
-                u such that :code:`x=sd(u|m)`
+        Returns:
+            u such that x=ds(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
         
         
         """
         ...
-    def arcsn(self, double: float) -> float:
+    def arcnc(self, x: float) -> float:
         """
-            Evaluate inverse of Jacobi elliptic function sn.
+        Evaluate inverse of Jacobi elliptic function nc.
         
-            Parameters:
-                x (double): value of Jacobi elliptic function :code:`sn(u|m)`
+        Parameters:
+            x (double): value of Jacobi elliptic function nc(u|m)
         
-            Returns:
-                u such that :code:`x=sn(u|m)`
+        Returns:
+            u such that x=nc(u|m)
         
-            Since:
-                2.1
+        Since:
+            2.1
+        
+        
+        """
+        ...
+    def arcnd(self, x: float) -> float:
+        """
+        Evaluate inverse of Jacobi elliptic function nd.
+        
+        Parameters:
+            x (double): value of Jacobi elliptic function nd(u|m)
+        
+        Returns:
+            u such that x=nd(u|m)
+        
+        Since:
+            2.1
+        
+        
+        """
+        ...
+    def arcns(self, x: float) -> float:
+        """
+        Evaluate inverse of Jacobi elliptic function ns.
+        
+        Parameters:
+            x (double): value of Jacobi elliptic function ns(u|m)
+        
+        Returns:
+            u such that x=ns(u|m)
+        
+        Since:
+            2.1
+        
+        
+        """
+        ...
+    def arcsc(self, x: float) -> float:
+        """
+        Evaluate inverse of Jacobi elliptic function sc.
+        
+        Parameters:
+            x (double): value of Jacobi elliptic function sc(u|m)
+        
+        Returns:
+            u such that x=sc(u|m)
+        
+        Since:
+            2.1
+        
+        
+        """
+        ...
+    def arcsd(self, x: float) -> float:
+        """
+        Evaluate inverse of Jacobi elliptic function sd.
+        
+        Parameters:
+            x (double): value of Jacobi elliptic function sd(u|m)
+        
+        Returns:
+            u such that x=sd(u|m)
+        
+        Since:
+            2.1
+        
+        
+        """
+        ...
+    def arcsn(self, x: float) -> float:
+        """
+        Evaluate inverse of Jacobi elliptic function sn.
+        
+        Parameters:
+            x (double): value of Jacobi elliptic function sn(u|m)
+        
+        Returns:
+            u such that x=sn(u|m)
+        
+        Since:
+            2.1
         
         
         """
         ...
     def getM(self) -> float:
         """
-            Get the parameter of the function.
+        Get the parameter of the function.
         
-            Returns:
-                parameter of the function
-        
-        
-        """
-        ...
-    def valuesC(self, double: float) -> CopolarC:
-        """
-            Evaluate the three subsidiary Jacobi elliptic functions with pole at point c in Glaisher’s Notation.
-        
-            Parameters:
-                u (double): argument of the functions
-        
-            Returns:
-                copolar trio containing the three subsidiary Jacobi elliptic functions :code:`dc(u|m)`, :code:`nc(u|m)`, and
-                :code:`sc(u|m)`.
+        Returns:
+            parameter of the function
         
         
         """
         ...
-    def valuesD(self, double: float) -> CopolarD:
+    def valuesC(self, u: float) -> CopolarC:
         """
-            Evaluate the three subsidiary Jacobi elliptic functions with pole at point d in Glaisher’s Notation.
+        Evaluate the three subsidiary Jacobi elliptic functions with pole at point c in Glaisher’s Notation.
         
-            Parameters:
-                u (double): argument of the functions
+        Parameters:
+            u (double): argument of the functions
         
-            Returns:
-                copolar trio containing the three subsidiary Jacobi elliptic functions :code:`nd(u|m)`, :code:`sd(u|m)`, and
-                :code:`cd(u|m)`.
-        
-        
-        """
-        ...
-    def valuesN(self, double: float) -> CopolarN:
-        """
-            Evaluate the three principal Jacobi elliptic functions with pole at point n in Glaisher’s Notation.
-        
-            Parameters:
-                u (double): argument of the functions
-        
-            Returns:
-                copolar trio containing the three principal Jacobi elliptic functions :code:`sn(u|m)`, :code:`cn(u|m)`, and
-                :code:`dn(u|m)`.
+        Returns:
+            copolar trio containing the three subsidiary Jacobi elliptic functions dc(u|m), nc(u|m), and
+            sc(u|m).
         
         
         """
         ...
-    def valuesS(self, double: float) -> CopolarS:
+    def valuesD(self, u: float) -> CopolarD:
         """
-            Evaluate the three subsidiary Jacobi elliptic functions with pole at point s in Glaisher’s Notation.
+        Evaluate the three subsidiary Jacobi elliptic functions with pole at point d in Glaisher’s Notation.
         
-            Parameters:
-                u (double): argument of the functions
+        Parameters:
+            u (double): argument of the functions
         
-            Returns:
-                copolar trio containing the three subsidiary Jacobi elliptic functions :code:`cs(u|m)`, :code:`ds(u|m)` and
-                :code:`ns(u|m)`.
+        Returns:
+            copolar trio containing the three subsidiary Jacobi elliptic functions nd(u|m), sd(u|m), and
+            cd(u|m).
+        
+        
+        """
+        ...
+    def valuesN(self, u: float) -> CopolarN:
+        """
+        Evaluate the three principal Jacobi elliptic functions with pole at point n in Glaisher’s Notation.
+        
+        Parameters:
+            u (double): argument of the functions
+        
+        Returns:
+            copolar trio containing the three principal Jacobi elliptic functions sn(u|m), cn(u|m), and
+            dn(u|m).
+        
+        
+        """
+        ...
+    def valuesS(self, u: float) -> CopolarS:
+        """
+        Evaluate the three subsidiary Jacobi elliptic functions with pole at point s in Glaisher’s Notation.
+        
+        Parameters:
+            u (double): argument of the functions
+        
+        Returns:
+            copolar trio containing the three subsidiary Jacobi elliptic functions cs(u|m), ds(u|m) and
+            ns(u|m).
         
         
         """
@@ -1106,18 +1095,14 @@ class JacobiElliptic:
 
 class JacobiEllipticBuilder:
     """
-    public classJacobiEllipticBuilder extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Builder for algorithms compmuting Jacobi elliptic functions.
     
-        Builder for algorithms compmuting Jacobi elliptic functions.
+    The Jacobi elliptic functions are related to elliptic integrals.
     
-        The Jacobi elliptic functions are related to elliptic integrals.
+    There are different conventions to interpret the arguments of Jacobi elliptic functions. The first argument may be the amplitude φ, but is more often the variable u (with sn(u) = sin(φ) and cn(u) = cos(φ)). The second argument is either the modulus k or the parameter m with m = k². In Hipparchus, we adopted the convention to use u and m.
     
-        There are different conventions to interpret the arguments of Jacobi elliptic functions. The first argument may be the
-        amplitude φ, but is more often the variable u (with sn(u) = sin(φ) and cn(u) = cos(φ)). The second argument is either
-        the modulus k or the parameter m with m = k². In Hipparchus, we adopted the convention to use u and m.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
     _build_0__T = typing.TypeVar('_build_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _build_2__T = typing.TypeVar('_build_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -1125,48 +1110,48 @@ class JacobiEllipticBuilder:
     @staticmethod
     def build(t: _build_0__T) -> FieldJacobiElliptic[_build_0__T]:
         """
-            Build an algorithm for computing Jacobi elliptic functions.
+        Build an algorithm for computing Jacobi elliptic functions.
         
-            Parameters:
-                m (T): parameter of the Jacobi elliptic function
+        Parameters:
+            m (T): parameter of the Jacobi elliptic function
         
-            Returns:
-                selected algorithm
+        Returns:
+            selected algorithm
         
-        public static :class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`<:class:`~org.hipparchus.complex.Complex`> build(:class:`~org.hipparchus.complex.Complex` m)
+        public static FieldJacobiElliptic<Complex> build(Complex m)
         
-            Build an algorithm for computing Jacobi elliptic functions.
+        Build an algorithm for computing Jacobi elliptic functions.
         
-            Parameters:
-                m (:class:`~org.hipparchus.complex.Complex`): parameter of the Jacobi elliptic function
+        Parameters:
+            m (Complex): parameter of the Jacobi elliptic function
         
-            Returns:
-                selected algorithm
+        Returns:
+            selected algorithm
         
-        public static <T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> :class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`<:class:`~org.hipparchus.complex.FieldComplex`<T>> build(:class:`~org.hipparchus.complex.FieldComplex`<T> m)
+        public static <T extends CalculusFieldElement<T>> FieldJacobiElliptic<FieldComplex<T>> build(FieldComplex<T> m)
         
-            Build an algorithm for computing Jacobi elliptic functions.
+        Build an algorithm for computing Jacobi elliptic functions.
         
-            Parameters:
-                m (:class:`~org.hipparchus.complex.FieldComplex`<T> m): parameter of the Jacobi elliptic function
+        Parameters:
+            m (FieldComplex<T> m): parameter of the Jacobi elliptic function
         
-            Returns:
-                selected algorithm
+        Returns:
+            selected algorithm
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def build(complex: org.hipparchus.complex.Complex) -> FieldJacobiElliptic[org.hipparchus.complex.Complex]:
+    def build(m: org.hipparchus.complex.Complex) -> FieldJacobiElliptic[org.hipparchus.complex.Complex]:
         """
-            Build an algorithm for computing Jacobi elliptic functions.
+        Build an algorithm for computing Jacobi elliptic functions.
         
-            Parameters:
-                m (double): parameter of the Jacobi elliptic function
+        Parameters:
+            m (double): parameter of the Jacobi elliptic function
         
-            Returns:
-                selected algorithm
+        Returns:
+            selected algorithm
         
         """
         ...
@@ -1179,33 +1164,42 @@ class JacobiEllipticBuilder:
 
 class JacobiTheta:
     """
-    public classJacobiTheta extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Algorithm computing Jacobi theta functions.
     
-        Algorithm computing Jacobi theta functions.
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
-    def __init__(self, double: float): ...
-    def getQ(self) -> float:
+    def __init__(self, q: float):
         """
-            Get the nome.
+        Simple constructor.
         
-            Returns:
-                nome
+        The nome q can be computed using ratios of complete elliptic integrals (nome which are themselves defined in term of parameter m, where m=k² and k is the elliptic modulus.
+        
+        Parameters:
+            q (double): nome
         
         
         """
         ...
-    def values(self, complex: org.hipparchus.complex.Complex) -> 'Theta':
+    def getQ(self) -> float:
         """
-            Evaluate the Jacobi theta functions.
+        Get the nome.
         
-            Parameters:
-                z (:class:`~org.hipparchus.complex.Complex`): argument of the functions
+        Returns:
+            nome
         
-            Returns:
-                container for the four Jacobi theta functions θ₁(z|τ), θ₂(z|τ), θ₃(z|τ), and θ₄(z|τ)
+        
+        """
+        ...
+    def values(self, z: org.hipparchus.complex.Complex) -> 'Theta':
+        """
+        Evaluate the Jacobi theta functions.
+        
+        Parameters:
+            z (Complex): argument of the functions
+        
+        Returns:
+            container for the four Jacobi theta functions θ₁(z|τ), θ₂(z|τ), θ₃(z|τ), and θ₄(z|τ)
         
         
         """
@@ -1213,55 +1207,51 @@ class JacobiTheta:
 
 class Theta:
     """
-    public classTheta extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Values of JacobiTheta functions.
     
-        Values of :class:`~org.hipparchus.special.elliptic.jacobi.JacobiTheta` functions.
+    This is a container for the four Jacobi theta functions θ₁(z|τ), θ₂(z|τ), θ₃(z|τ), and θ₄(z|τ).
     
-        This is a container for the four Jacobi theta functions θ₁(z|τ), θ₂(z|τ), θ₃(z|τ), and θ₄(z|τ).
+    Since:
+        2.0
     
-        Since:
-            2.0
-    
-        Also see:
-    
-              - :class:`~org.hipparchus.special.elliptic.jacobi.JacobiTheta`
+          - JacobiTheta
     """
     def theta1(self) -> org.hipparchus.complex.Complex:
         """
-            Get the value of the θ₁(z|τ) function.
+        Get the value of the θ₁(z|τ) function.
         
-            Returns:
-                θ₁(z|τ)
+        Returns:
+            θ₁(z|τ)
         
         
         """
         ...
     def theta2(self) -> org.hipparchus.complex.Complex:
         """
-            Get the value of the θ₂(z|τ) function.
+        Get the value of the θ₂(z|τ) function.
         
-            Returns:
-                θ₂(z|τ)
+        Returns:
+            θ₂(z|τ)
         
         
         """
         ...
     def theta3(self) -> org.hipparchus.complex.Complex:
         """
-            Get the value of the θ₃(z|τ) function.
+        Get the value of the θ₃(z|τ) function.
         
-            Returns:
-                θ₃(z|τ)
+        Returns:
+            θ₃(z|τ)
         
         
         """
         ...
     def theta4(self) -> org.hipparchus.complex.Complex:
         """
-            Get the value of the θ₄(z|τ) function.
+        Get the value of the θ₄(z|τ) function.
         
-            Returns:
-                θ₄(z|τ)
+        Returns:
+            θ₄(z|τ)
         
         
         """

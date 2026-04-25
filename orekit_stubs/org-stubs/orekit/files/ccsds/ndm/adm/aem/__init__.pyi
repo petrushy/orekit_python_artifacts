@@ -31,374 +31,397 @@ import typing
 
 class Aem(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.ndm.adm.AdmHeader, 'AemSegment'], org.orekit.files.general.AttitudeEphemerisFile[org.orekit.utils.TimeStampedAngularCoordinates, 'AemSegment']):
     """
-    public class Aem extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmHeader`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`> implements :class:`~org.orekit.files.general.AttitudeEphemerisFile`<:class:`~org.orekit.utils.TimeStampedAngularCoordinates`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`>
+    This class stores all the information of the Attitude Ephemeris Message (AEM) File parsed by AEMParser. It contains the header and a list of Attitude Ephemerides Blocks each containing metadata and a list of attitude ephemerides data lines.
     
-        This class stores all the information of the Attitude Ephemeris Message (AEM) File parsed by AEMParser. It contains the
-        header and a list of Attitude Ephemerides Blocks each containing metadata and a list of attitude ephemerides data lines.
-    
-        Since:
-            10.2
+    Since:
+        10.2
     """
     ROOT: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ROOT
+    Root element for XML files.
     
-        Root element for XML files.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     FORMAT_VERSION_KEY: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` FORMAT_VERSION_KEY
+    Key for format version.
     
-        Key for format version.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, admHeader: org.orekit.files.ccsds.ndm.adm.AdmHeader, list: java.util.List['AemSegment'], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext): ...
-    def getSatellites(self) -> java.util.Map[str, 'AemSatelliteEphemeris']: ...
-
-class AemData(org.orekit.files.ccsds.section.CommentsContainer, org.orekit.files.ccsds.section.Data):
-    """
-    public class AemData extends :class:`~org.orekit.files.ccsds.section.CommentsContainer` implements :class:`~org.orekit.files.ccsds.section.Data`
-    
-        The Attitude Ephemerides data blocks class contain list of attitude data points.
-    
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
-    """
-    def __init__(self): ...
-    def addData(self, timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates) -> bool:
+    def __init__(self, header: org.orekit.files.ccsds.ndm.adm.AdmHeader, segments: java.util.List['AemSegment'], conventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext):
         """
-            Add a data point.
+        Simple constructor.
         
-            Parameters:
-                data (:class:`~org.orekit.utils.TimeStampedAngularCoordinates`): data point to add
-        
-            Returns:
-                always return :code:`true`
+        Parameters:
+            header (AdmHeader): file header
+            segments (List<AemSegment> segments): file segments
+            conventions (IERSConventions): IERS conventions
+            dataContext (DataContext): used for creating frames, time scales, etc.
         
         
         """
         ...
-    def getAngularCoordinates(self) -> java.util.List[org.orekit.utils.TimeStampedAngularCoordinates]: ...
+    def getSatellites(self) -> java.util.Map[str, 'AemSatelliteEphemeris']:
+        """
+        Get the loaded ephemeris for each satellite in the file.
+        
+        Specified by: getSatellites in interface AttitudeEphemerisFile
+        
+        Returns:
+            a map from the satellite's ID to the information about that satellite contained in the file.
+        
+        
+        """
+        ...
+
+class AemData(org.orekit.files.ccsds.section.CommentsContainer, org.orekit.files.ccsds.section.Data):
+    """
+    The Attitude Ephemerides data blocks class contain list of attitude data points.
+    
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
+    """
+    def __init__(self):
+        """
+        Constructor.
+        """
+        ...
+    def addData(self, data: org.orekit.utils.TimeStampedAngularCoordinates) -> bool:
+        """
+        Add a data point.
+        
+        Parameters:
+            data (TimeStampedAngularCoordinates): data point to add
+        
+        Returns:
+            always return true
+        
+        
+        """
+        ...
+    def getAngularCoordinates(self) -> java.util.List[org.orekit.utils.TimeStampedAngularCoordinates]:
+        """
+        Get an unmodifiable view of the data points.
+        
+        Returns:
+            unmodifiable view of the data points
+        
+        
+        """
+        ...
 
 class AemMetadata(org.orekit.files.ccsds.ndm.adm.AdmMetadata):
     """
-    public class AemMetadata extends :class:`~org.orekit.files.ccsds.ndm.adm.AdmMetadata`
+    This class gathers the meta-data present in the Attitude Data Message (ADM).
     
-        This class gathers the meta-data present in the Attitude Data Message (ADM).
-    
-        Since:
-            10.2
+    Since:
+        10.2
     """
-    def __init__(self, int: int): ...
+    def __init__(self, defaultInterpolationDegree: int):
+        """
+        Simple constructor.
+        
+        Parameters:
+            defaultInterpolationDegree (int): default interpolation degree
+        
+        
+        """
+        ...
     def getAttitudeType(self) -> org.orekit.files.ccsds.ndm.adm.AttitudeType:
         """
-            Get the format of the data lines in the message.
+        Get the format of the data lines in the message.
         
-            Returns:
-                the format of the data lines in the message
+        Returns:
+            the format of the data lines in the message
         
         
         """
         ...
     def getEndpoints(self) -> org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints:
         """
-            Get the endpoints (i.e. frames A, B and their relationship).
+        Get the endpoints (i.e. frames A, B and their relationship).
         
-            Returns:
-                endpoints
+        Returns:
+            endpoints
         
         
         """
         ...
     def getEulerRotSeq(self) -> org.hipparchus.geometry.euclidean.threed.RotationOrder:
         """
-            Get the rotation order of Euler angles.
+        Get the rotation order of Euler angles.
         
-            Returns:
-                rotation order
+        Returns:
+            rotation order
         
         
         """
         ...
     def getFrameAngvelFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
         """
-            Get frame in which angular velocities are specified.
+        Get frame in which angular velocities are specified.
         
-            Returns:
-                frame in which angular velocities are specified
+        Returns:
+            frame in which angular velocities are specified
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     def getInterpolationDegree(self) -> int:
         """
-            Get the interpolation degree.
+        Get the interpolation degree.
         
-            Returns:
-                the interpolation degree
+        Returns:
+            the interpolation degree
         
         
         """
         ...
     def getInterpolationMethod(self) -> str:
         """
-            Get the interpolation method to be used.
+        Get the interpolation method to be used.
         
-            Returns:
-                the interpolation method
+        Returns:
+            the interpolation method
         
         
         """
         ...
     def getInterpolationSamples(self) -> int:
         """
-            Get the number of samples to use in interpolation.
+        Get the number of samples to use in interpolation.
         
-            Returns:
-                the number of points to use for interpolation.
+        Returns:
+            the number of points to use for interpolation.
         
         
         """
         ...
     def getStart(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the start date of this ephemeris segment.
+        Get the start date of this ephemeris segment.
         
-            Returns:
-                ephemeris segment start date.
+        Returns:
+            ephemeris segment start date.
         
         
         """
         ...
     def getStartTime(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get start of total time span covered by attitude data.
+        Get start of total time span covered by attitude data.
         
-            Returns:
-                the start time
+        Returns:
+            the start time
         
         
         """
         ...
     def getStop(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the end date of this ephemeris segment.
+        Get the end date of this ephemeris segment.
         
-            Returns:
-                ephemeris segment end date.
+        Returns:
+            ephemeris segment end date.
         
         
         """
         ...
     def getStopTime(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get end of total time span covered by attitude data.
+        Get end of total time span covered by attitude data.
         
-            Returns:
-                the stop time
+        Returns:
+            the stop time
         
         
         """
         ...
     def getUseableStartTime(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get start of useable time span covered by attitude data.
+        Get start of useable time span covered by attitude data.
         
-            Returns:
-                the useable start time
+        Returns:
+            the useable start time
         
         
         """
         ...
     def getUseableStopTime(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get end of useable time span covered by ephemerides data.
+        Get end of useable time span covered by ephemerides data.
         
-            Returns:
-                the useable stop time
+        Returns:
+            the useable stop time
         
         
         """
         ...
     def isFirst(self) -> bool:
         """
-            Get the flag for the placement of the quaternion QC in the attitude data.
+        Get the flag for the placement of the quaternion QC in the attitude data.
         
-            Returns:
-                true if QC is the first element in the attitude data, false if not initialized
+        Returns:
+            true if QC is the first element in the attitude data, false if not initialized
         
         
         """
         ...
     def isSpacecraftBodyRate(self) -> bool:
         """
-            Check if rates are specified in spacecraft body frame.
+        Check if rates are specified in spacecraft body frame.
         
-            :meth:`~org.orekit.files.ccsds.ndm.adm.aem.AemMetadata.validate` must have been initialized properly to non-null values
-            before this method is called, otherwise :code:`NullPointerException` will be thrown.
+        validate must have been initialized properly to non-null values before this method is called, otherwise NullPointerException will be thrown.
         
-            Returns:
-                true if rates are specified in spacecraft body frame
+        Returns:
+            true if rates are specified in spacecraft body frame
         
         
         """
         ...
     def rateFrameIsA(self) -> bool:
         """
-            Check if rates are specified in :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints.getFrameA`.
+        Check if rates are specified in getFrameA.
         
-            Returns:
-                true if rates are specified in :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints.getFrameA`
-        
-        
-        """
-        ...
-    def setAngvelFrame(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
-        """
-            Set frame in which angular velocities are specified.
-        
-            Parameters:
-                angvelFrame (:class:`~org.orekit.files.ccsds.definitions.FrameFacade`): frame in which angular velocities are specified
-        
-            Since:
-                12.0
+        Returns:
+            true if rates are specified in getFrameA
         
         
         """
         ...
-    def setAttitudeType(self, attitudeType: org.orekit.files.ccsds.ndm.adm.AttitudeType) -> None:
+    def setAngvelFrame(self, angvelFrame: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
         """
-            Set the format of the data lines in the message.
+        Set frame in which angular velocities are specified.
         
-            Parameters:
-                type (:class:`~org.orekit.files.ccsds.ndm.adm.AttitudeType`): format to be set
+        Parameters:
+            angvelFrame (FrameFacade): frame in which angular velocities are specified
         
-        
-        """
-        ...
-    def setEulerRotSeq(self, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder) -> None:
-        """
-            Set the rotation order for Euler angles.
-        
-            Parameters:
-                eulerRotSeq (:class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.RotationOrder?is`): order to be set
+        Since:
+            12.0
         
         
         """
         ...
-    def setInterpolationDegree(self, int: int) -> None:
+    def setAttitudeType(self, type: org.orekit.files.ccsds.ndm.adm.AttitudeType) -> None:
         """
-            Set the interpolation degree.
+        Set the format of the data lines in the message.
         
-            Parameters:
-                interpolationDegree (int): the interpolation degree to be set
-        
-        
-        """
-        ...
-    def setInterpolationMethod(self, string: str) -> None:
-        """
-            Set the interpolation method to be used.
-        
-            Parameters:
-                interpolationMethod (:class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the interpolation method to be set
+        Parameters:
+            type (AttitudeType): format to be set
         
         
         """
         ...
-    def setIsFirst(self, boolean: bool) -> None:
+    def setEulerRotSeq(self, eulerRotSeq: org.hipparchus.geometry.euclidean.threed.RotationOrder) -> None:
         """
-            Set the flag for the placement of the quaternion QC in the attitude data.
+        Set the rotation order for Euler angles.
         
-            Parameters:
-                isFirst (boolean): true if QC is the first element in the attitude data
-        
-        
-        """
-        ...
-    def setRateFrameIsA(self, boolean: bool) -> None:
-        """
-            Set the frame in which rates are specified.
-        
-            Parameters:
-                rateFrameIsA (boolean): if true, rates are specified in :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints.getFrameA`
+        Parameters:
+            eulerRotSeq (RotationOrder): order to be set
         
         
         """
         ...
-    def setStartTime(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setInterpolationDegree(self, interpolationDegree: int) -> None:
         """
-            Set start of total time span covered by attitude data.
+        Set the interpolation degree.
         
-            Parameters:
-                startTime (:class:`~org.orekit.time.AbsoluteDate`): the time to be set
-        
-        
-        """
-        ...
-    def setStopTime(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Set end of total time span covered by attitude data.
-        
-            Parameters:
-                stopTime (:class:`~org.orekit.time.AbsoluteDate`): the time to be set
+        Parameters:
+            interpolationDegree (int): the interpolation degree to be set
         
         
         """
         ...
-    def setUseableStartTime(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setInterpolationMethod(self, interpolationMethod: str) -> None:
         """
-            Set start of useable time span covered by attitude data.
+        Set the interpolation method to be used.
         
-            Parameters:
-                useableStartTime (:class:`~org.orekit.time.AbsoluteDate`): the time to be set
-        
-        
-        """
-        ...
-    def setUseableStopTime(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Set end of useable time span covered by ephemerides data.
-        
-            Parameters:
-                useableStopTime (:class:`~org.orekit.time.AbsoluteDate`): the time to be set
+        Parameters:
+            interpolationMethod (String): the interpolation method to be set
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def setIsFirst(self, isFirst: bool) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set the flag for the placement of the quaternion QC in the attitude data.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            isFirst (boolean): true if QC is the first element in the attitude data
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.adm.AdmMetadata.validate` in
-                class :class:`~org.orekit.files.ccsds.ndm.adm.AdmMetadata`
+        """
+        ...
+    def setRateFrameIsA(self, rateFrameIsA: bool) -> None:
+        """
+        Set the frame in which rates are specified.
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            rateFrameIsA (boolean): if true, rates are specified in getFrameA
+        
+        
+        """
+        ...
+    def setStartTime(self, startTime: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Set start of total time span covered by attitude data.
+        
+        Parameters:
+            startTime (AbsoluteDate): the time to be set
+        
+        
+        """
+        ...
+    def setStopTime(self, stopTime: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Set end of total time span covered by attitude data.
+        
+        Parameters:
+            stopTime (AbsoluteDate): the time to be set
+        
+        
+        """
+        ...
+    def setUseableStartTime(self, useableStartTime: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Set start of useable time span covered by attitude data.
+        
+        Parameters:
+            useableStartTime (AbsoluteDate): the time to be set
+        
+        
+        """
+        ...
+    def setUseableStopTime(self, useableStopTime: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Set end of useable time span covered by ephemerides data.
+        
+        Parameters:
+            useableStopTime (AbsoluteDate): the time to be set
+        
+        
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class AdmMetadata
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -406,14 +429,12 @@ class AemMetadata(org.orekit.files.ccsds.ndm.adm.AdmMetadata):
 
 class AemMetadataKey(java.lang.Enum['AemMetadataKey']):
     """
-    public enum AemMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.aem.AemMetadataKey`>
+    Keys for AemMetadata entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemMetadata` entries.
+    Additional container are also listed in AdmMetadataKey.
     
-        Additional container are also listed in :class:`~org.orekit.files.ccsds.ndm.adm.AdmMetadataKey`.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     REF_FRAME_A: typing.ClassVar['AemMetadataKey'] = ...
     REF_FRAME_B: typing.ClassVar['AemMetadataKey'] = ...
@@ -429,17 +450,17 @@ class AemMetadataKey(java.lang.Enum['AemMetadataKey']):
     ANGVEL_FRAME: typing.ClassVar['AemMetadataKey'] = ...
     INTERPOLATION_METHOD: typing.ClassVar['AemMetadataKey'] = ...
     INTERPOLATION_DEGREE: typing.ClassVar['AemMetadataKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, aemMetadata: AemMetadata) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: AemMetadata) -> bool:
         """
-            Process an token.
+        Process an token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.adm.aem.AemMetadata`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (AemMetadata): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -450,20 +471,19 @@ class AemMetadataKey(java.lang.Enum['AemMetadataKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'AemMetadataKey':
+    def valueOf(name: str) -> 'AemMetadataKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -471,17 +491,15 @@ class AemMetadataKey(java.lang.Enum['AemMetadataKey']):
     @staticmethod
     def values() -> typing.MutableSequence['AemMetadataKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (AemMetadataKey c : AemMetadataKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (AemMetadataKey c : AemMetadataKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -489,200 +507,189 @@ class AemMetadataKey(java.lang.Enum['AemMetadataKey']):
 
 class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.orekit.files.general.AttitudeEphemerisFileParser[Aem]):
     """
-    public class AemParser extends :class:`~org.orekit.files.ccsds.ndm.adm.AdmParser`<:class:`~org.orekit.files.ccsds.ndm.adm.aem.Aem`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemParser`> implements :class:`~org.orekit.files.general.AttitudeEphemerisFileParser`<:class:`~org.orekit.files.ccsds.ndm.adm.aem.Aem`>
+    A parser for the CCSDS AEM (Attitude Ephemeris Message).
     
-        A parser for the CCSDS AEM (Attitude Ephemeris Message).
+    Note than starting with Orekit 11.0, CCSDS message parsers are mutable objects that gather the data being parsed, until the message is complete and the parseMessage method has returned. This implies that parsers should not be used in a multi-thread context. The recommended way to use parsers is to either dedicate one parser for each message and drop it afterwards, or to use a single-thread loop.
     
-        Note than starting with Orekit 11.0, CCSDS message parsers are mutable objects that gather the data being parsed, until
-        the message is complete and the :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser.parseMessage` method
-        has returned. This implies that parsers should *not* be used in a multi-thread context. The recommended way to use
-        parsers is to either dedicate one parser for each message and drop it afterwards, or to use a single-thread loop.
-    
-        Since:
-            10.2
+    Since:
+        10.2
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, int: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate, defaultInterpolationDegree: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]):
+        """
+        Complete constructor.
+        
+        Calling this constructor directly is not recommended. Users should rather use buildAemParser.
+        
+        Parameters:
+            conventions (IERSConventions): IERS Conventions
+            simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
+            dataContext (DataContext): used to retrieve frames, time scales, etc.
+            missionReferenceDate (AbsoluteDate): reference date for Mission Elapsed Time or Mission Relative Time time systems (may be null if time system is absolute)
+            defaultInterpolationDegree (int): default interpolation degree
+            parsedUnitsBehavior (ParsedUnitsBehavior): behavior to adopt for handling parsed units
+            filters (Function<ParseToken, List<ParseToken>>[]): filters to apply to parse tokens
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
     def build(self) -> Aem:
         """
-            Build the file from parsed entries.
+        Build the file from parsed entries.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.build` in
-                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+        Specified by: build in interface MessageParser
         
-            Returns:
-                parsed file
+        Returns:
+            parsed file
         
         
         """
         ...
     def finalizeData(self) -> bool:
         """
-            Finalize data after parsing.
+        Finalize data after parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: finalizeData in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def finalizeHeader(self) -> bool:
         """
-            Finalize header after parsing.
+        Finalize header after parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: finalizeHeader in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def finalizeMetadata(self) -> bool:
         """
-            Finalize metadata after parsing.
+        Finalize metadata after parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: finalizeMetadata in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def getHeader(self) -> org.orekit.files.ccsds.ndm.adm.AdmHeader:
         """
-            Get file header to fill.
+        Get file header to fill.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: getHeader in class AbstractConstituentParser
         
-            Returns:
-                file header to fill
+        Returns:
+            file header to fill
         
         
         """
         ...
     def inData(self) -> bool:
         """
-            Acknowledge data parsing has started.
+        Acknowledge data parsing has started.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: inData in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def inHeader(self) -> bool:
         """
-            Acknowledge header parsing has started.
+        Acknowledge header parsing has started.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: inHeader in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def inMetadata(self) -> bool:
         """
-            Acknowledge metada parsing has started.
+        Acknowledge metada parsing has started.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: inMetadata in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
-    def parse(self, dataSource: org.orekit.data.DataSource) -> Aem:
+    def parse(self, source: org.orekit.data.DataSource) -> Aem:
         """
-            Parse an attitude ephemeris file from a data source.
+        Parse an attitude ephemeris file from a data source.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFileParser.parse` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFileParser`
+        Specified by: parse in interface AttitudeEphemerisFileParser
         
-            Parameters:
-                source (:class:`~org.orekit.data.DataSource`): source providing the data to parse
+        Parameters:
+            source (DataSource): source providing the data to parse
         
-            Returns:
-                a parsed attitude ephemeris file.
+        Returns:
+            a parsed attitude ephemeris file.
         
         
         """
         ...
     def prepareData(self) -> bool:
         """
-            Prepare data for parsing.
+        Prepare data for parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: prepareData in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def prepareHeader(self) -> bool:
         """
-            Prepare header for parsing.
+        Prepare header for parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: prepareHeader in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def prepareMetadata(self) -> bool:
         """
-            Prepare metadata for parsing.
+        Prepare metadata for parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: prepareMetadata in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None:
         """
-            Reset parser to initial state before parsing.
+        Reset parser to initial state before parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.reset` in
-                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+        Specified by: reset in interface MessageParser
         
-            Parameters:
-                fileFormat (:class:`~org.orekit.files.ccsds.utils.FileFormat`): format of the file ready to be parsed
+        Parameters:
+            fileFormat (FileFormat): format of the file ready to be parsed
         
         
         """
@@ -690,50 +697,68 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
 
 class AemSatelliteEphemeris(org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris[org.orekit.utils.TimeStampedAngularCoordinates, 'AemSegment']):
     """
-    public class AemSatelliteEphemeris extends :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`<:class:`~org.orekit.utils.TimeStampedAngularCoordinates`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`>
-    
-        AEM ephemeris blocks for a single satellite.
+    AEM ephemeris blocks for a single satellite.
     """
-    def __init__(self, string: str, list: java.util.List['AemSegment']): ...
-    def getId(self) -> str:
+    def __init__(self, id: str, blocks: java.util.List['AemSegment']):
         """
-            Get the satellite ID. The satellite ID is unique only within the same ephemeris file.
+        Create a container for the set of ephemeris blocks in the file that pertain to a single satellite.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris.getId` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`
+        Parameters:
+            id (String): of the satellite.
+            blocks (List<AemSegment> blocks): containing ephemeris data for the satellite.
         
-            Returns:
-                the satellite's ID, never :code:`null`.
+        Since:
+            10.3
         
         
         """
         ...
-    def getSegments(self) -> java.util.List['AemSegment']: ...
+    def getId(self) -> str:
+        """
+        Get the satellite ID. The satellite ID is unique only within the same ephemeris file.
+        
+        Specified by: getId in interface SatelliteAttitudeEphemeris
+        
+        Returns:
+            the satellite's ID, never null.
+        
+        
+        """
+        ...
+    def getSegments(self) -> java.util.List['AemSegment']:
+        """
+        Get the segments of the attitude ephemeris.
+        
+        Attitude ephemeris segments are typically used to split an ephemeris around discontinuous events.
+        
+        Specified by: getSegments in interface SatelliteAttitudeEphemeris
+        
+        Returns:
+            the segments contained in the attitude ephemeris file for this satellite.
+        
+        
+        """
+        ...
     def getStart(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the start date of the ephemeris.
+        Get the start date of the ephemeris.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris.getStart` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`
+        Specified by: getStart in interface SatelliteAttitudeEphemeris
         
-            Returns:
-                ephemeris start date.
+        Returns:
+            ephemeris start date.
         
         
         """
         ...
     def getStop(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the end date of the ephemeris.
+        Get the end date of the ephemeris.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris.getStop` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`
+        Specified by: getStop in interface SatelliteAttitudeEphemeris
         
-            Returns:
-                ephemeris end date.
+        Returns:
+            ephemeris end date.
         
         
         """
@@ -741,109 +766,114 @@ class AemSatelliteEphemeris(org.orekit.files.general.AttitudeEphemerisFile.Satel
 
 class AemSegment(org.orekit.files.ccsds.section.Segment[AemMetadata, AemData], org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment[org.orekit.utils.TimeStampedAngularCoordinates]):
     """
-    public class AemSegment extends :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.adm.aem.AemMetadata`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemData`> implements :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`<:class:`~org.orekit.utils.TimeStampedAngularCoordinates`>
+    This class stores the metadata and data for one attitude segment.
     
-        This class stores the metadata and data for one attitude segment.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, aemMetadata: AemMetadata, aemData: AemData): ...
-    def getAngularCoordinates(self) -> java.util.List[org.orekit.utils.TimeStampedAngularCoordinates]: ...
+    def __init__(self, metadata: AemMetadata, data: AemData):
+        """
+        Simple constructor.
+        
+        Parameters:
+            metadata (AemMetadata): segment metadata
+            data (AemData): segment data
+        
+        
+        """
+        ...
+    def getAngularCoordinates(self) -> java.util.List[org.orekit.utils.TimeStampedAngularCoordinates]:
+        """
+        Get an unmodifiable list of attitude data lines.
+        
+        Specified by: getAngularCoordinates in interface AttitudeEphemerisSegment
+        
+        Returns:
+            a list of attitude data
+        
+        
+        """
+        ...
     def getAttitudeProvider(self) -> org.orekit.attitudes.BoundedAttitudeProvider:
         """
-            Get the attitude provider for this attitude ephemeris segment.
+        Get the attitude provider for this attitude ephemeris segment.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getAttitudeProvider` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
+        Specified by: getAttitudeProvider in interface AttitudeEphemerisSegment
         
-            Returns:
-                the attitude provider for this attitude ephemeris segment.
+        Returns:
+            the attitude provider for this attitude ephemeris segment.
         
         
         """
         ...
     def getAvailableDerivatives(self) -> org.orekit.utils.AngularDerivativesFilter:
         """
-            Get which derivatives of angular data are available in this attitude ephemeris segment.
+        Get which derivatives of angular data are available in this attitude ephemeris segment.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getAvailableDerivatives` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
+        Specified by: getAvailableDerivatives in interface AttitudeEphemerisSegment
         
-            Returns:
-                a value indicating if the file contains rotation and/or rotation rate and/or acceleration data.
+        Returns:
+            a value indicating if the file contains rotation and/or rotation rate and/or acceleration data.
         
         
         """
         ...
     def getInterpolationMethod(self) -> str:
         """
-            Get the interpolation method to be used.
+        Get the interpolation method to be used.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getInterpolationMethod` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
+        Specified by: getInterpolationMethod in interface AttitudeEphemerisSegment
         
-            Returns:
-                the interpolation method
+        Returns:
+            the interpolation method
         
         
         """
         ...
     def getInterpolationSamples(self) -> int:
         """
-            Get the number of samples to use in interpolation.
+        Get the number of samples to use in interpolation.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getInterpolationSamples` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
+        Specified by: getInterpolationSamples in interface AttitudeEphemerisSegment
         
-            Returns:
-                the number of points to use for interpolation.
+        Returns:
+            the number of points to use for interpolation.
         
         
         """
         ...
     def getReferenceFrame(self) -> org.orekit.frames.Frame:
         """
-            Get the reference frame from which attitude is defined.
+        Get the reference frame from which attitude is defined.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getReferenceFrame` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
+        Specified by: getReferenceFrame in interface AttitudeEphemerisSegment
         
-            Returns:
-                the reference frame from which attitude is defined
+        Returns:
+            the reference frame from which attitude is defined
         
         
         """
         ...
     def getStart(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the start date of this ephemeris segment.
+        Get the start date of this ephemeris segment.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getStart` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
+        Specified by: getStart in interface AttitudeEphemerisSegment
         
-            Returns:
-                ephemeris segment start date.
+        Returns:
+            ephemeris segment start date.
         
         
         """
         ...
     def getStop(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the end date of this ephemeris segment.
+        Get the end date of this ephemeris segment.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getStop` in
-                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
+        Specified by: getStop in interface AttitudeEphemerisSegment
         
-            Returns:
-                ephemeris segment end date.
+        Returns:
+            ephemeris segment end date.
         
         
         """
@@ -851,75 +881,63 @@ class AemSegment(org.orekit.files.ccsds.section.Segment[AemMetadata, AemData], o
 
 class AemWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.ndm.adm.AdmHeader, AemSegment, Aem]):
     """
-    public class AemWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmHeader`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.Aem`>
+    A writer for Attitude Ephemeris Messsage (AEM) files.
     
-        A writer for Attitude Ephemeris Messsage (AEM) files.
+    Metadata ----------
     
-        Metadata
-    ----------
+    The AEM header and metadata used by this writer are described in the following tables. Many metadata items are optional or have default values so they do not need to be specified. At a minimum the user must supply those values that are required and for which no default exits: OBJECT_NAME, OBJECT_ID, START_TIME and STOP_TIME. The usage column in the table indicates where the metadata item is used, either in the AEM header or in the metadata section at the start of an AEM attitude segment.
     
+    The AEM header for the whole AEM file is set when calling writeHeader, the entries are defined in table 4-2 of the ADM standard.
     
-        The AEM header and metadata used by this writer are described in the following tables. Many metadata items are optional
-        or have default values so they do not need to be specified. At a minimum the user must supply those values that are
-        required and for which no default exits: :meth:`~org.orekit.files.ccsds.ndm.adm.AdmMetadataKey.OBJECT_NAME`,
-        :meth:`~org.orekit.files.ccsds.ndm.adm.AdmCommonMetadataKey.OBJECT_ID`,
-        :meth:`~org.orekit.files.ccsds.ndm.adm.aem.AemMetadataKey.START_TIME` and
-        :meth:`~org.orekit.files.ccsds.ndm.adm.aem.AemMetadataKey.STOP_TIME`. The usage column in the table indicates where the
-        metadata item is used, either in the AEM header or in the metadata section at the start of an AEM attitude segment.
+    The AEM metadata for the AEM file is set when calling writeSegmentContent, the entries are defined in tables 4-3, 4-4 and annex A of the ADM standard.
     
-        The AEM header for the whole AEM file is set when calling
-        :meth:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter.writeHeader`, the entries are defined in table 4-2
-        of the ADM standard.
+    The TIME_SYSTEM must be constant for the whole file and is used to interpret all dates except CREATION_DATE which is always in UTC. The guessing algorithm is not guaranteed to work so it is recommended to provide values for CENTER_NAME and TIME_SYSTEM to avoid any bugs associated with incorrect guesses.
     
-        The AEM metadata for the AEM file is set when calling
-        :meth:`~org.orekit.files.ccsds.ndm.adm.aem.AemWriter.writeSegmentContent`, the entries are defined in tables 4-3, 4-4
-        and annex A of the ADM standard.
+    Standardized values for TIME_SYSTEM are GMST, GPS, MET, MRT, SCLK, TAI, TCB, TDB, TT, UT1, and UTC. Standardized values for reference frames are EME2000, GTOD, ICRF, ITRF2000, ITRF-93, ITRF-97, LVLH, RTN, QSW, TOD, TNW, NTW and RSW. Additionally ITRF followed by a four digit year may be used.
     
-        The :meth:`~org.orekit.files.ccsds.section.MetadataKey.TIME_SYSTEM` must be constant for the whole file and is used to
-        interpret all dates except :meth:`~org.orekit.files.ccsds.section.HeaderKey.CREATION_DATE` which is always in
-        :meth:`~org.orekit.files.ccsds.definitions.TimeSystem.UTC`. The guessing algorithm is not guaranteed to work so it is
-        recommended to provide values for :meth:`~org.orekit.files.ccsds.ndm.adm.AdmMetadataKey.CENTER_NAME` and
-        :meth:`~org.orekit.files.ccsds.section.MetadataKey.TIME_SYSTEM` to avoid any bugs associated with incorrect guesses.
-    
-        Standardized values for :meth:`~org.orekit.files.ccsds.section.MetadataKey.TIME_SYSTEM` are GMST, GPS, MET, MRT, SCLK,
-        TAI, TCB, TDB, TT, UT1, and UTC. Standardized values for reference frames are EME2000, GTOD, ICRF, ITRF2000, ITRF-93,
-        ITRF-97, LVLH, RTN, QSW, TOD, TNW, NTW and RSW. Additionally ITRF followed by a four digit year may be used.
-    
-        Since:
-            10.2
+    Since:
+        10.2
     """
     CCSDS_AEM_VERS: typing.ClassVar[float] = ...
     """
-    public static final double CCSDS_AEM_VERS
+    Version number implemented.
     
-        Version number implemented.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     KVN_PADDING_WIDTH: typing.ClassVar[int] = ...
     """
-    public static final int KVN_PADDING_WIDTH
+    Padding width for aligning the '=' sign.
     
-        Padding width for aligning the '=' sign.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate): ...
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate):
+        """
+        Constructor used to create a new AEM writer configured with the necessary parameters to successfully fill in all required fields that aren't part of a standard object.
+        
+        Parameters:
+            conventions (IERSConventions): IERS Conventions
+            dataContext (DataContext): used to retrieve frames, time scales, etc.
+            missionReferenceDate (AbsoluteDate): reference date for Mission Elapsed Time or Mission Relative Time time systems
+        
+        Since:
+            11.0
+        
+        
+        """
+        ...
 
 class AttitudeEntryKey(java.lang.Enum['AttitudeEntryKey']):
     """
-    public enum AttitudeEntryKey extends :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.aem.AttitudeEntryKey`>
+    Keys for attitude entries in XML messages.
     
-        Keys for :code:`attitude entries` in XML messages.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     quaternionState: typing.ClassVar['AttitudeEntryKey'] = ...
     quaternionEphemeris: typing.ClassVar['AttitudeEntryKey'] = ...
@@ -973,17 +991,17 @@ class AttitudeEntryKey(java.lang.Enum['AttitudeEntryKey']):
     MOMENTUM_ALPHA: typing.ClassVar['AttitudeEntryKey'] = ...
     MOMENTUM_DELTA: typing.ClassVar['AttitudeEntryKey'] = ...
     NUTATION_VEL: typing.ClassVar['AttitudeEntryKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, attitudeEntry: 'AttitudeEntry') -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: 'AttitudeEntry') -> bool:
         """
-            Process an token.
+        Process an token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (org.orekit.files.ccsds.ndm.adm.aem.AttitudeEntry): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (org.orekit.files.ccsds.ndm.adm.aem.AttitudeEntry): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -994,20 +1012,19 @@ class AttitudeEntryKey(java.lang.Enum['AttitudeEntryKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'AttitudeEntryKey':
+    def valueOf(name: str) -> 'AttitudeEntryKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -1015,17 +1032,15 @@ class AttitudeEntryKey(java.lang.Enum['AttitudeEntryKey']):
     @staticmethod
     def values() -> typing.MutableSequence['AttitudeEntryKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (AttitudeEntryKey c : AttitudeEntryKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (AttitudeEntryKey c : AttitudeEntryKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -1033,13 +1048,10 @@ class AttitudeEntryKey(java.lang.Enum['AttitudeEntryKey']):
 
 class AttitudeWriter(org.orekit.files.general.AttitudeEphemerisFileWriter):
     """
-    public class AttitudeWriter extends :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.AttitudeEphemerisFileWriter`
+    An AttitudeEphemerisFileWriter generating Aem files.
     
-        An :class:`~org.orekit.files.general.AttitudeEphemerisFileWriter` generating
-        :class:`~org.orekit.files.ccsds.ndm.adm.aem.Aem` files.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     @typing.overload
     def __init__(self, aemWriter: AemWriter, admHeader: org.orekit.files.ccsds.ndm.adm.AdmHeader, aemMetadata: AemMetadata, fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, double: float, int: int): ...
@@ -1056,53 +1068,68 @@ class AttitudeWriter(org.orekit.files.general.AttitudeEphemerisFileWriter):
 
 class StreamingAemWriter(java.lang.AutoCloseable):
     """
-    public class StreamingAemWriter extends :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.AutoCloseable?is`
+    A writer for AEM files.
     
-        A writer for AEM files.
+    Each instance corresponds to a single AEM file.
     
-        Each instance corresponds to a single AEM file.
+    This class can be used as a step handler for a Propagator.
     
-        This class can be used as a step handler for a :class:`~org.orekit.propagation.Propagator`.
+     Propagator propagator = ...; // pre-configured propagator AEMWriter  aemWriter  = ...; // pre-configured writer try (Generator out = ...;  // set-up output stream StreamingAemWriter sw = new StreamingAemWriter(out, aemWriter)) { // set-up streaming writer
     
-        .. code-block: java
-        
-         Propagator propagator = ...; // pre-configured propagator
-         AEMWriter  aemWriter  = ...; // pre-configured writer
-           try (Generator out = ...;  // set-up output stream
-                StreamingAemWriter sw = new StreamingAemWriter(out, aemWriter)) { // set-up streaming writer
-        
-             // write segment 1
-             propagator.getMultiplexer().add(step, sw.newSegment());
-             propagator.propagate(startDate1, stopDate1);
-        
-             ...
-        
-             // write segment n
-             propagator.getMultiplexer().clear();
-             propagator.getMultiplexer().add(step, sw.newSegment());
-             propagator.propagate(startDateN, stopDateN);
-        
-           }
-         
+         // write segment 1
+         propagator.getMultiplexer().add(step, sw.newSegment());
+         propagator.propagate(startDate1, stopDate1);
     
-        Since:
-            10.2
+         ...
     
-        Also see:
-            :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.public.ccsds.org.Pubs.504x0b1c1.pdf`,
-            :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemWriter`
+         // write segment n
+         propagator.getMultiplexer().clear();
+         propagator.getMultiplexer().add(step, sw.newSegment());
+         propagator.propagate(startDateN, stopDateN);
+    
+       }
+     
+    
+    Since:
+        10.2
+    
+    Also see:
+        pdf,
+        AemWriter
     """
-    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, aemWriter: AemWriter, admHeader: org.orekit.files.ccsds.ndm.adm.AdmHeader, aemMetadata: AemMetadata): ...
-    def close(self) -> None: ...
+    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, writer: AemWriter, header: org.orekit.files.ccsds.ndm.adm.AdmHeader, template: AemMetadata):
+        """
+        Simple constructor.
+        
+        Parameters:
+            generator (Generator): generator for AEM output
+            writer (AemWriter): writer for the AEM message format
+            header (AdmHeader): file header (may be null)
+            template (AemMetadata): template for metadata
+        
+        Since:
+            11.0
+        
+        
+        """
+        ...
+    def close(self) -> None:
+        """
+        Specified by: AutoCloseable in interface AutoCloseable
+        
+        Raises:
+            IOException: 
+        
+        """
+        ...
     def newSegment(self) -> 'StreamingAemWriter.SegmentWriter':
         """
-            Create a writer for a new AEM attitude ephemeris segment.
+        Create a writer for a new AEM attitude ephemeris segment.
         
-            The returned writer can only write a single attitude ephemeris segment in an AEM. This method must be called to create a
-            writer for each attitude ephemeris segment.
+        The returned writer can only write a single attitude ephemeris segment in an AEM. This method must be called to create a writer for each attitude ephemeris segment.
         
-            Returns:
-                a new AEM segment writer, ready for use.
+        Returns:
+            a new AEM segment writer, ready for use.
         
         
         """

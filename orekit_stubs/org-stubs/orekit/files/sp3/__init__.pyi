@@ -24,12 +24,10 @@ import typing
 
 class DataUsed(java.lang.Enum['DataUsed']):
     """
-    public enum DataUsed extends :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.sp3.DataUsed`>
+    Enumerate for data used.
     
-        Enumerate for data used.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
     UNDIFFERENTIATED_CARRIER_PHASE: typing.ClassVar['DataUsed'] = ...
     CHANGE_IN_UNDIFFERENTIATED_CARRIER_PHASE: typing.ClassVar['DataUsed'] = ...
@@ -48,29 +46,29 @@ class DataUsed(java.lang.Enum['DataUsed']):
     ORBIT: typing.ClassVar['DataUsed'] = ...
     def getKey(self) -> str:
         """
-            Get the key for the data used.
+        Get the key for the data used.
         
-            Returns:
-                key for the data used
+        Returns:
+            key for the data used
         
         
         """
         ...
     @staticmethod
-    def parse(string: str, string2: str, char: str) -> 'DataUsed':
+    def parse(s: str, fileName: str, version: str) -> 'DataUsed':
         """
-            Parse the string to get the data used.
+        Parse the string to get the data used.
         
-            Parameters:
-                s (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string to parse
-                fileName (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): file name to generate the error message
-                version (char): format version
+        Parameters:
+            s (String): string to parse
+            fileName (String): file name to generate the error message
+            version (char): format version
         
-            Returns:
-                the data used corresponding to the string
+        Returns:
+            the data used corresponding to the string
         
-            Raises:
-                :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if the string does not correspond to a data used
+        Raises:
+            IllegalArgumentException: if the string does not correspond to a data used
         
         
         """
@@ -81,20 +79,19 @@ class DataUsed(java.lang.Enum['DataUsed']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'DataUsed':
+    def valueOf(name: str) -> 'DataUsed':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -102,17 +99,15 @@ class DataUsed(java.lang.Enum['DataUsed']):
     @staticmethod
     def values() -> typing.MutableSequence['DataUsed']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (DataUsed c : DataUsed.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (DataUsed c : DataUsed.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -120,27 +115,22 @@ class DataUsed(java.lang.Enum['DataUsed']):
 
 class NsgfV00Filter(org.orekit.data.DataFilter):
     """
-    public class NsgfV00Filter extends :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataFilter`
+    Filter for some non-official files from CDDIS.
     
-        Filter for some non-official files from CDDIS.
+    Some files produced by UKRI/NERC/British Geological Survey Space Geodesy Facility (SGF) claim to be SP3c but are really SP3d since they have more than 4 comments lines. This filter can be used to parse them.
     
-        Some files produced by UKRI/NERC/British Geological Survey Space Geodesy Facility (SGF) claim to be SP3c but are really
-        SP3d since they have more than 4 comments lines. This filter can be used to parse them.
+    Since:
+        12.1
     
-        Since:
-            12.1
-    
-        Also see:
-            :class:`~org.orekit.files.sp3.https:.forum.orekit.org.t.solved`
+    Also see:
+        solved
     """
     DEFAULT_V00_PATTERN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_V00_PATTERN
+    Default regular expression for NSGF V00 files.
     
-        Default regular expression for NSGF V00 files.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -148,55 +138,76 @@ class NsgfV00Filter(org.orekit.data.DataFilter):
     def __init__(self): ...
     @typing.overload
     def __init__(self, string: str, function: typing.Union[java.util.function.Function[str, str], typing.Callable[[str], str]]): ...
-    def filter(self, dataSource: org.orekit.data.DataSource) -> org.orekit.data.DataSource: ...
+    def filter(self, original: org.orekit.data.DataSource) -> org.orekit.data.DataSource:
+        """
+        Filter the data source.
+        
+        Filtering is often based on suffix. For example a gzip compressed file will have an original name of the form base.ext.gz when the corresponding uncompressed file will have a filtered name base.ext.
+        
+        A filter must never openStreamOnce the DataSource by itself, regardless of the fact it will return the original instance or a filtered instance. The rationale is that it is the upper layer that will decide to open (or not) the returned value and that a DataSource can be opened only once; this is the core principle of lazy-opening provided by DataSource.
+        
+        Beware that as the DataProvidersManager will attempt to pile all filters in a stack as long as their implementation of this method returns a value different from the original parameter. This implies that the filter, must perform some checks to see if it must be applied or not. If for example there is a need for a deciphering filter to be applied once to all data, then the filter should for example check for a suffix in the getName and create a new filtered DataSource instance only if the suffix is present, removing the suffix from the filtered instance. Failing to do so and simply creating a filtered instance with one deciphering layer without changing the name would result in an infinite stack of deciphering filters being built, until a stack overflow or memory exhaustion exception occurs.
+        
+        Specified by: filter in interface DataFilter
+        
+        Parameters:
+            original (DataSource): original data source
+        
+        Returns:
+            filtered data source, or original if this filter does not apply to this data source
+        
+        Raises:
+            IOException: if filtered stream cannot be created
+        
+        
+        """
+        ...
 
 class SP3(org.orekit.files.general.EphemerisFile['SP3Coordinate', 'SP3Segment']):
     """
-    public class SP3 extends :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.files.sp3.SP3Coordinate`, :class:`~org.orekit.files.sp3.SP3Segment`>
-    
-        Represents a parsed SP3 orbit file.
+    Represents a parsed SP3 orbit file.
     """
     @typing.overload
     def __init__(self, double: float, int: int, frame: org.orekit.frames.Frame): ...
     @typing.overload
     def __init__(self, sP3Header: 'SP3Header', double: float, int: int, frame: org.orekit.frames.Frame): ...
-    def addSatellite(self, string: str) -> None:
+    def addSatellite(self, satId: str) -> None:
         """
-            Add a new satellite with a given identifier to the list of stored satellites.
+        Add a new satellite with a given identifier to the list of stored satellites.
         
-            Parameters:
-                satId (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the satellite identifier
+        Parameters:
+            satId (String): the satellite identifier
         
         
         """
         ...
     @staticmethod
-    def changeFrame(sP3: 'SP3', frame: org.orekit.frames.Frame) -> 'SP3':
+    def changeFrame(original: 'SP3', newFrame: org.orekit.frames.Frame) -> 'SP3':
         """
-            Change the frame of an SP3 file.
+        Change the frame of an SP3 file.
         
-            Parameters:
-                original (:class:`~org.orekit.files.sp3.SP3`): original SP3 file
-                newFrame (:class:`~org.orekit.frames.Frame`): frame to use for the changed SP3 file
+        Parameters:
+            original (SP3): original SP3 file
+            newFrame (Frame): frame to use for the changed SP3 file
         
-            Returns:
-                changed SP3 file
+        Returns:
+            changed SP3 file
         
-            Since:
-                12.1
+        Since:
+            12.1
         
         
         """
         ...
-    def containsSatellite(self, string: str) -> bool:
+    def containsSatellite(self, satId: str) -> bool:
         """
-            Tests whether a satellite with the given id is contained in this orbit file.
+        Tests whether a satellite with the given id is contained in this orbit file.
         
-            Parameters:
-                satId (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the satellite id
+        Parameters:
+            satId (String): the satellite id
         
-            Returns:
-                :code:`true` if the satellite is contained in the file, :code:`false` otherwise
+        Returns:
+            true if the satellite is contained in the file, false otherwise
         
         
         """
@@ -204,27 +215,27 @@ class SP3(org.orekit.files.general.EphemerisFile['SP3Coordinate', 'SP3Segment'])
     @typing.overload
     def getEphemeris(self, int: int) -> 'SP3Ephemeris':
         """
-            Get an ephemeris.
+        Get an ephemeris.
         
-            Parameters:
-                index (int): index of the satellite
+        Parameters:
+            index (int): index of the satellite
         
-            Returns:
-                satellite ephemeris
+        Returns:
+            satellite ephemeris
         
-            Since:
-                12.0
+        Since:
+            12.0
         
-            Get an ephemeris.
+        Get an ephemeris.
         
-            Parameters:
-                satId (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): satellite identifier
+        Parameters:
+            satId (String): satellite identifier
         
-            Returns:
-                satellite ephemeris, or null if not found
+        Returns:
+            satellite ephemeris, or null if not found
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
@@ -233,145 +244,207 @@ class SP3(org.orekit.files.general.EphemerisFile['SP3Coordinate', 'SP3Segment'])
     def getEphemeris(self, string: str) -> 'SP3Ephemeris': ...
     def getHeader(self) -> 'SP3Header':
         """
-            Get the header.
+        Get the header.
         
-            Returns:
-                header
+        Returns:
+            header
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     def getSatelliteCount(self) -> int:
         """
-            Get the number of satellites contained in this orbit file.
+        Get the number of satellites contained in this orbit file.
         
-            Returns:
-                the number of satellites
+        Returns:
+            the number of satellites
         
         
         """
         ...
-    def getSatellites(self) -> java.util.Map[str, 'SP3Ephemeris']: ...
+    def getSatellites(self) -> java.util.Map[str, 'SP3Ephemeris']:
+        """
+        Description copied from interface: getSatellites Get the loaded ephemeris for each satellite in the file.
+        
+        Specified by: getSatellites in interface EphemerisFile
+        
+        Returns:
+            a map from the satellite's ID to the information about that satellite contained in the file.
+        
+        
+        """
+        ...
     @staticmethod
-    def splice(collection: typing.Union[java.util.Collection['SP3'], typing.Sequence['SP3'], typing.Set['SP3']]) -> 'SP3': ...
-    def validate(self, boolean: bool, string: str) -> None: ...
+    def splice(sp3: typing.Union[java.util.Collection['SP3'], typing.Sequence['SP3'], typing.Set['SP3']]) -> 'SP3':
+        """
+        Splice several SP3 files together.
+        
+        Splicing SP3 files is intended to be used when continuous computation covering more than one file is needed. The files should all have the exact same metadata: getType, getTimeSystem, getCoordinateSystem, except for satellite accuracy which can be different from one file to the next one, and some satellites may be missing in some files… Once sorted (which is done internally), if the gap between segments from two file is at most getEpochInterval, then the segments are merged as one segment, otherwise the segments are kept separated.
+        
+        The spliced file only contains the satellites that were present in all files. Satellites present in some files and absent from other files are silently dropped.
+        
+        Depending on producer, successive SP3 files either have a gap between the last entry of one file and the first entry of the next file (for example files with a 5 minutes epoch interval may end at 23:55 and the next file start at 00:00), or both files have one point exactly at the splicing date (i.e. 24:00 one day and 00:00 next day). In the later case, the last point of the early file is dropped and the first point of the late file takes precedence, hence only one point remains in the spliced file ; this design choice is made to enforce continuity and regular interpolation.
+        
+        Parameters:
+            sp3 (Collection<SP3> sp3): SP3 files to merge
+        
+        Returns:
+            merged SP3
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
+    def validate(self, parsing: bool, fileName: str) -> None:
+        """
+        Check file is valid.
+        
+        Parameters:
+            parsing (boolean): if true, we are parsing an existing file, and are more lenient in order to accept some common errors (like between 86
+                and 99 satellites in SP3a, SP3b or SP3c files)
+            fileName (String): file name to generate the error message
+        
+        Raises:
+            OrekitException: if file is not valid
+        
+        
+        """
+        ...
 
 class SP3Coordinate(org.orekit.utils.TimeStampedPVCoordinates):
     """
-    public class SP3Coordinate extends :class:`~org.orekit.utils.TimeStampedPVCoordinates`
+    A single record of position clock and possibly derivatives in an SP3 file.
     
-        A single record of position clock and possibly derivatives in an SP3 file.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
     DUMMY: typing.ClassVar['SP3Coordinate'] = ...
     """
-    public static final :class:`~org.orekit.files.sp3.SP3Coordinate` DUMMY
-    
-        Dummy coordinate with all fields set to 0.0.
-    
+    Dummy coordinate with all fields set to 0.0.
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D3: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D4: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, double2: float, double3: float, double4: float, boolean: bool, boolean2: bool, boolean3: bool, boolean4: bool): ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, position: org.hipparchus.geometry.euclidean.threed.Vector3D, positionAccuracy: org.hipparchus.geometry.euclidean.threed.Vector3D, velocity: org.hipparchus.geometry.euclidean.threed.Vector3D, velocityAccuracy: org.hipparchus.geometry.euclidean.threed.Vector3D, clock: float, clockAccuracy: float, clockRate: float, clockRateAccuracy: float, clockEvent: bool, clockPrediction: bool, orbitManeuverEvent: bool, orbitPrediction: bool):
+        """
+        Create a coordinate with position and velocity.
+        
+        Parameters:
+            date (AbsoluteDate): of validity.
+            position (Vector3D): of the satellite.
+            positionAccuracy (Vector3D): of the satellite (null if not known).
+            velocity (Vector3D): of the satellite.
+            velocityAccuracy (Vector3D): of the satellite (null if not known).
+            clock (double): correction in s.
+            clockAccuracy (double): correction in s (NaN if not known).
+            clockRate (double): in s / s.
+            clockRateAccuracy (double): in s / s (NaN if not known).
+            clockEvent (boolean): clock event flag
+            clockPrediction (boolean): clock prediction flag
+            orbitManeuverEvent (boolean): orbit maneuver event flag
+            orbitPrediction (boolean): flag
+        
+        
+        """
+        ...
     def getClockAccuracy(self) -> float:
         """
-            Get the clock accuracy.
+        Get the clock accuracy.
         
-            Returns:
-                clock accuracy in s (:code:`Double.NaN` if not known).
+        Returns:
+            clock accuracy in s (NaN if not known).
         
         
         """
         ...
     def getClockCorrection(self) -> float:
         """
-            Get the clock correction value.
+        Get the clock correction value.
         
-            Returns:
-                the clock correction in s.
+        Returns:
+            the clock correction in s.
         
         
         """
         ...
     def getClockRateAccuracy(self) -> float:
         """
-            Get the clock rate accuracy.
+        Get the clock rate accuracy.
         
-            Returns:
-                clock rate accuracy in s/s (:code:`Double.NaN` if not known).
+        Returns:
+            clock rate accuracy in s/s (NaN if not known).
         
         
         """
         ...
     def getClockRateChange(self) -> float:
         """
-            Get the clock rate.
+        Get the clock rate.
         
-            Returns:
-                the clock rate of change in s/s.
+        Returns:
+            the clock rate of change in s/s.
         
         
         """
         ...
     def getPositionAccuracy(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get the position accuracy.
+        Get the position accuracy.
         
-            Returns:
-                position accuracy in m (null if not known).
+        Returns:
+            position accuracy in m (null if not known).
         
         
         """
         ...
     def getVelocityAccuracy(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get the velocity accuracy.
+        Get the velocity accuracy.
         
-            Returns:
-                velocity accuracy in m/s (null if not known).
+        Returns:
+            velocity accuracy in m/s (null if not known).
         
         
         """
         ...
     def hasClockEvent(self) -> bool:
         """
-            Get clock event flag.
+        Get clock event flag.
         
-            Returns:
-                true if clock event flag is set
+        Returns:
+            true if clock event flag is set
         
         
         """
         ...
     def hasClockPrediction(self) -> bool:
         """
-            Get clock prediction flag.
+        Get clock prediction flag.
         
-            Returns:
-                true if clock prediction flag is set
+        Returns:
+            true if clock prediction flag is set
         
         
         """
         ...
     def hasOrbitManeuverEvent(self) -> bool:
         """
-            Get orbit maneuver event flag.
+        Get orbit maneuver event flag.
         
-            Returns:
-                true if orbit maneuver event flag is set
+        Returns:
+            true if orbit maneuver event flag is set
         
         
         """
         ...
     def hasOrbitPrediction(self) -> bool:
         """
-            Get orbit prediction flag.
+        Get orbit prediction flag.
         
-            Returns:
-                true if orbit prediction flag is set
+        Returns:
+            true if orbit prediction flag is set
         
         
         """
@@ -379,154 +452,172 @@ class SP3Coordinate(org.orekit.utils.TimeStampedPVCoordinates):
 
 class SP3CoordinateHermiteInterpolator(org.orekit.time.AbstractTimeInterpolator[SP3Coordinate]):
     """
-    public class SP3CoordinateHermiteInterpolator extends :class:`~org.orekit.time.AbstractTimeInterpolator`<:class:`~org.orekit.files.sp3.SP3Coordinate`>
+    Interpolator for SP3Coordinate.
     
-        Interpolator for :class:`~org.orekit.files.sp3.SP3Coordinate`.
+    As this implementation of interpolation is polynomial, it should be used only with small number of interpolation points (about 10-20 points) in order to avoid `Runge's phenomenon <http://en.wikipedia.org/wiki/Runge%27s_phenomenon>` and numerical problems (including NaN appearing).
     
-        As this implementation of interpolation is polynomial, it should be used only with small number of interpolation points
-        (about 10-20 points) in order to avoid `Runge's phenomenon <http://en.wikipedia.org/wiki/Runge%27s_phenomenon>` and
-        numerical problems (including NaN appearing).
+    If some clock or clock rate are present in the SP3 files as default values (999999.999999), then they are replaced by NaN during parsing, so the interpolation will exhibit NaNs, but the positions will be properly interpolated.
     
-        If some clock or clock rate are present in the SP3 files as default values (999999.999999), then they are replaced by
-        :code:`Double.NaN` during parsing, so the interpolation will exhibit NaNs, but the positions will be properly
-        interpolated.
+    Since:
+        12.0
     
-        Since:
-            12.0
-    
-        Also see:
-            
-            class:`~org.orekit.files.sp3.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.interpolation.HermiteInterpolator?is`,
-            :class:`~org.orekit.files.sp3.SP3Coordinate`
+        class:`~org.orekit.files.sp3.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.interpolation.HermiteInterpolator?is`, SP3Coordinate
     """
-    def __init__(self, int: int, double: float, boolean: bool): ...
+    def __init__(self, interpolationPoints: int, extrapolationThreshold: float, useRates: bool):
+        """
+        Constructor.
+        
+        As this implementation of interpolation is polynomial, it should be used only with small number of interpolation points (about 10-20 points) in order to avoid `Runge's phenomenon <http://en.wikipedia.org/wiki/Runge%27s_phenomenon>` and numerical problems (including NaN appearing).
+        
+        Parameters:
+            interpolationPoints (int): number of interpolation points
+            extrapolationThreshold (double): extrapolation threshold beyond which the propagation will fail
+            useRates (boolean): if true, use velocity and clock rates for interpolation
+        
+        
+        """
+        ...
 
 class SP3Ephemeris(org.orekit.files.general.EphemerisFile.SatelliteEphemeris[SP3Coordinate, 'SP3Segment']):
     """
-    public class SP3Ephemeris extends :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`<:class:`~org.orekit.files.sp3.SP3Coordinate`, :class:`~org.orekit.files.sp3.SP3Segment`>
+    Single satellite ephemeris from an SP3 file.
     
-        Single satellite ephemeris from an :class:`~org.orekit.files.sp3.SP3` file.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
-    def __init__(self, string: str, double: float, frame: org.orekit.frames.Frame, int: int, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter): ...
-    def addCoordinate(self, sP3Coordinate: SP3Coordinate, double: float) -> None:
+    def __init__(self, id: str, mu: float, frame: org.orekit.frames.Frame, interpolationSamples: int, filter: org.orekit.utils.CartesianDerivativesFilter):
         """
-            Adds a new P/V coordinate.
+        Create an ephemeris for a single satellite.
         
-            Parameters:
-                coord (:class:`~org.orekit.files.sp3.SP3Coordinate`): the P/V coordinate of the satellite
-                maxGap (double): maximum gap between segments
+        Parameters:
+            id (String): of the satellite.
+            mu (double): standard gravitational parameter to use for creating Orbit from the ephemeris data.
+            frame (Frame): reference frame
+            interpolationSamples (int): number of points to use for interpolation
+            filter (CartesianDerivativesFilter): available derivatives
+        
+        
+        """
+        ...
+    def addCoordinate(self, coord: SP3Coordinate, maxGap: float) -> None:
+        """
+        Adds a new P/V coordinate.
+        
+        Parameters:
+            coord (SP3Coordinate): the P/V coordinate of the satellite
+            maxGap (double): maximum gap between segments
         
         
         """
         ...
     def extractClockModel(self) -> org.orekit.time.AggregatedClockModel:
         """
-            Extract the clock model.
+        Extract the clock model.
         
-            There are always 2n+1 :meth:`~org.orekit.time.AggregatedClockModel.getModels` underlying clock models when there are n
-            :meth:`~org.orekit.files.sp3.SP3Ephemeris.getSegments` in the ephemeris. This happens because there are spans with
-            :code:`null` data before the first segment, between all regular segments and after last segment.
+        There are always 2n+1 getModels underlying clock models when there are n getSegments in the ephemeris. This happens because there are spans with null data before the first segment, between all regular segments and after last segment.
         
-            Returns:
-                extracted clock model
+        Returns:
+            extracted clock model
         
-            Since:
-                12.1
+        Since:
+            12.1
         
         
         """
         ...
     def getAvailableDerivatives(self) -> org.orekit.utils.CartesianDerivativesFilter:
         """
-            Get the available derivatives.
+        Get the available derivatives.
         
-            Returns:
-                available derivatives
+        Returns:
+            available derivatives
         
         
         """
         ...
     def getFrame(self) -> org.orekit.frames.Frame:
         """
-            Get the reference frame.
+        Get the reference frame.
         
-            Returns:
-                reference frame
+        Returns:
+            reference frame
         
         
         """
         ...
     def getId(self) -> str:
         """
-            Get the satellite ID. The satellite ID is unique only within the same ephemeris file.
+        Get the satellite ID. The satellite ID is unique only within the same ephemeris file.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getId` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+        Specified by: getId in interface SatelliteEphemeris
         
-            Returns:
-                the satellite's ID, never :code:`null`.
+        Returns:
+            the satellite's ID, never null.
         
         
         """
         ...
     def getInterpolationSamples(self) -> int:
         """
-            Get the number of points to use for interpolation.
+        Get the number of points to use for interpolation.
         
-            Returns:
-                number of points to use for interpolation
+        Returns:
+            number of points to use for interpolation
         
         
         """
         ...
     def getMu(self) -> float:
         """
-            Get the standard gravitational parameter for the satellite.
+        Get the standard gravitational parameter for the satellite.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getMu` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+        Specified by: getMu in interface SatelliteEphemeris
         
-            Returns:
-                the gravitational parameter used in :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getPropagator`, in
-                m³/s².
+        Returns:
+            the gravitational parameter used in getPropagator, in
+            m³/s².
         
         
         """
         ...
-    def getSegments(self) -> java.util.List['SP3Segment']: ...
+    def getSegments(self) -> java.util.List['SP3Segment']:
+        """
+        Get the segments of the ephemeris.
+        
+        Ephemeris segments are typically used to split an ephemeris around discontinuous events, such as maneuvers.
+        
+        Specified by: getSegments in interface SatelliteEphemeris
+        
+        Returns:
+            the segments contained in the ephemeris file for this satellite.
+        
+        
+        """
+        ...
     def getStart(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the start date of the ephemeris.
+        Get the start date of the ephemeris.
         
-            The date returned by this method is equivalent to :code:`getPropagator().getMinDate()`.
+        The date returned by this method is equivalent to getMinDate().
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getStart` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+        Specified by: getStart in interface SatelliteEphemeris
         
-            Returns:
-                ephemeris start date.
+        Returns:
+            ephemeris start date.
         
         
         """
         ...
     def getStop(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the end date of the ephemeris.
+        Get the end date of the ephemeris.
         
-            The date returned by this method is equivalent to :code:`getPropagator().getMaxDate()`.
+        The date returned by this method is equivalent to getMaxDate().
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getStop` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+        Specified by: getStop in interface SatelliteEphemeris
         
-            Returns:
-                ephemeris end date.
+        Returns:
+            ephemeris end date.
         
         
         """
@@ -534,12 +625,10 @@ class SP3Ephemeris(org.orekit.files.general.EphemerisFile.SatelliteEphemeris[SP3
 
 class SP3FileType(java.lang.Enum['SP3FileType']):
     """
-    public enum SP3FileType extends :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.sp3.SP3FileType`>
+    File type indicator.
     
-        File type indicator.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
     GPS: typing.ClassVar['SP3FileType'] = ...
     MIXED: typing.ClassVar['SP3FileType'] = ...
@@ -553,24 +642,24 @@ class SP3FileType(java.lang.Enum['SP3FileType']):
     UNDEFINED: typing.ClassVar['SP3FileType'] = ...
     def getKey(self) -> str:
         """
-            Get the key for the file type.
+        Get the key for the file type.
         
-            Returns:
-                key for the file type
+        Returns:
+            key for the file type
         
         
         """
         ...
     @staticmethod
-    def parse(string: str) -> 'SP3FileType':
+    def parse(s: str) -> 'SP3FileType':
         """
-            Parse the string to get the data used.
+        Parse the string to get the data used.
         
-            Parameters:
-                s (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string to parse
+        Parameters:
+            s (String): string to parse
         
-            Returns:
-                the file type corresponding to the string
+        Returns:
+            the file type corresponding to the string
         
         
         """
@@ -581,20 +670,19 @@ class SP3FileType(java.lang.Enum['SP3FileType']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'SP3FileType':
+    def valueOf(name: str) -> 'SP3FileType':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -602,17 +690,15 @@ class SP3FileType(java.lang.Enum['SP3FileType']):
     @staticmethod
     def values() -> typing.MutableSequence['SP3FileType']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (SP3FileType c : SP3FileType.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (SP3FileType c : SP3FileType.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -620,401 +706,437 @@ class SP3FileType(java.lang.Enum['SP3FileType']):
 
 class SP3Header:
     """
-    public class SP3Header extends :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Header for SP3 files.
     
-        Header for SP3 files.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
     SP3_FRAME_CENTER_STRING: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SP3_FRAME_CENTER_STRING
+    String representation of the center of ephemeris coordinate system.
     
-        String representation of the center of ephemeris coordinate system.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self): ...
-    def addComment(self, string: str) -> None:
+    def __init__(self):
         """
-            Add a comment.
+        Create a new SP3 header.
+        """
+        ...
+    def addComment(self, comment: str) -> None:
+        """
+        Add a comment.
         
-            Parameters:
-                comment (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): comment to add
+        Parameters:
+            comment (String): comment to add
         
         
         """
         ...
-    def addSatId(self, string: str) -> None:
+    def addSatId(self, satId: str) -> None:
         """
-            Add a satellite identifier.
+        Add a satellite identifier.
         
-            Parameters:
-                satId (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): satellite identifier
+        Parameters:
+            satId (String): satellite identifier
         
         
         """
         ...
-    def getAccuracy(self, string: str) -> float:
+    def getAccuracy(self, satId: str) -> float:
         """
-            Get the formal accuracy.
+        Get the formal accuracy.
         
-            The accuracy is limited by the SP3 standard to be a power of 2 in mm. The value returned here is in meters.
+        The accuracy is limited by the SP3 standard to be a power of 2 in mm. The value returned here is in meters.
         
-            Parameters:
-                satId (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): satellite identifier
+        Parameters:
+            satId (String): satellite identifier
         
-            Returns:
-                magnitude of one standard deviation, in m.
+        Returns:
+            magnitude of one standard deviation, in m.
         
         
         """
         ...
     def getAgency(self) -> str:
         """
-            Returns the agency that prepared this SP3 file.
+        Returns the agency that prepared this SP3 file.
         
-            Returns:
-                the agency
+        Returns:
+            the agency
         
         
         """
         ...
     def getClockBase(self) -> float:
         """
-            Get the base for clock/clock-rate accuracy.
+        Get the base for clock/clock-rate accuracy.
         
-            Returns:
-                base for clock/clock-rate accuracy
+        Returns:
+            base for clock/clock-rate accuracy
         
         
         """
         ...
-    def getComments(self) -> java.util.List[str]: ...
+    def getComments(self) -> java.util.List[str]:
+        """
+        Get the comments.
+        
+        Returns:
+            an unmodifiable view of comments
+        
+        
+        """
+        ...
     def getCoordinateSystem(self) -> str:
         """
-            Returns the coordinate system of the entries in this orbit file.
+        Returns the coordinate system of the entries in this orbit file.
         
-            Returns:
-                the coordinate system
+        Returns:
+            the coordinate system
         
         
         """
         ...
-    def getDataUsed(self) -> java.util.List[DataUsed]: ...
+    def getDataUsed(self) -> java.util.List[DataUsed]:
+        """
+        Returns the data used indicator from the SP3 file.
+        
+        Returns:
+            the data used indicator
+        
+        
+        """
+        ...
     def getDayFraction(self) -> float:
         """
-            Returns the day fraction for this SP3 file.
+        Returns the day fraction for this SP3 file.
         
-            Returns:
-                the day fraction
+        Returns:
+            the day fraction
         
         
         """
         ...
     def getEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Returns the start epoch of the orbit file.
+        Returns the start epoch of the orbit file.
         
-            Returns:
-                the start epoch
+        Returns:
+            the start epoch
         
         
         """
         ...
     def getEpochInterval(self) -> float:
         """
-            Returns the time interval between epochs (in seconds).
+        Returns the time interval between epochs (in seconds).
         
-            Returns:
-                the time interval between epochs
+        Returns:
+            the time interval between epochs
         
         
         """
         ...
     def getFilter(self) -> org.orekit.utils.CartesianDerivativesFilter:
         """
-            Get the derivatives filter.
+        Get the derivatives filter.
         
-            Returns:
-                filter with available derivatives
+        Returns:
+            filter with available derivatives
         
         
         """
         ...
     def getGpsWeek(self) -> int:
         """
-            Returns the GPS week as contained in the SP3 file.
+        Returns the GPS week as contained in the SP3 file.
         
-            Returns:
-                the GPS week of the SP3 file
+        Returns:
+            the GPS week of the SP3 file
         
         
         """
         ...
     def getModifiedJulianDay(self) -> int:
         """
-            Returns the modified julian day for this SP3 file.
+        Returns the modified julian day for this SP3 file.
         
-            Returns:
-                the modified julian day
+        Returns:
+            the modified julian day
         
         
         """
         ...
     def getNumberOfEpochs(self) -> int:
         """
-            Returns the number of epochs contained in this orbit file.
+        Returns the number of epochs contained in this orbit file.
         
-            Returns:
-                the number of epochs
+        Returns:
+            the number of epochs
         
         
         """
         ...
     def getOrbitType(self) -> 'SP3OrbitType':
         """
-            Returns the :class:`~org.orekit.files.sp3.SP3OrbitType` for this SP3 file.
+        Returns the SP3OrbitType for this SP3 file.
         
-            Returns:
-                the orbit type
+        Returns:
+            the orbit type
         
         
         """
         ...
     def getOrbitTypeKey(self) -> str:
         """
-            Returns the orbit type key for this SP3 file.
+        Returns the orbit type key for this SP3 file.
         
-            Returns:
-                the orbit type key
+        Returns:
+            the orbit type key
         
         
         """
         ...
     def getPosVelBase(self) -> float:
         """
-            Get the base for position/velocity accuracy.
+        Get the base for position/velocity accuracy.
         
-            Returns:
-                base for position/velocity accuracy
+        Returns:
+            base for position/velocity accuracy
         
         
         """
         ...
-    def getSatIds(self) -> java.util.List[str]: ...
+    def getSatIds(self) -> java.util.List[str]:
+        """
+        Get the satellite identifiers.
+        
+        Returns:
+            satellites identifiers
+        
+        
+        """
+        ...
     def getSecondsOfWeek(self) -> float:
         """
-            Returns the seconds of the GPS week as contained in the SP3 file.
+        Returns the seconds of the GPS week as contained in the SP3 file.
         
-            Returns:
-                the seconds of the GPS week
+        Returns:
+            the seconds of the GPS week
         
         
         """
         ...
     def getTimeSystem(self) -> org.orekit.gnss.TimeSystem:
         """
-            Returns the :class:`~org.orekit.gnss.TimeSystem` used to time-stamp position entries.
+        Returns the TimeSystem used to time-stamp position entries.
         
-            Returns:
-                the :class:`~org.orekit.gnss.TimeSystem` of the orbit file
+        Returns:
+            the TimeSystem of the orbit file
         
         
         """
         ...
     def getType(self) -> SP3FileType:
         """
-            Returns the :class:`~org.orekit.files.sp3.SP3FileType` associated with this SP3 file.
+        Returns the SP3FileType associated with this SP3 file.
         
-            Returns:
-                the file type for this SP3 file
+        Returns:
+            the file type for this SP3 file
         
         
         """
         ...
     def getVersion(self) -> str:
         """
-            Get the file version.
+        Get the file version.
         
-            Returns:
-                file version
-        
-        
-        """
-        ...
-    def setAccuracy(self, int: int, double: float) -> None:
-        """
-            Set the accuracy.
-        
-            Parameters:
-                index (int): satellite index in :meth:`~org.orekit.files.sp3.SP3Header.getSatIds`
-                accuracy (double): in m
+        Returns:
+            file version
         
         
         """
         ...
-    def setAgency(self, string: str) -> None:
+    def setAccuracy(self, index: int, accuracy: float) -> None:
         """
-            Set the agency string for this SP3 file.
+        Set the accuracy.
         
-            Parameters:
-                agencyStr (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the agency string to be set
-        
-        
-        """
-        ...
-    def setClockBase(self, double: float) -> None:
-        """
-            Set the base for clock/clock-rate accuracy.
-        
-            Parameters:
-                clockBase (double): base for clock/clock-rate accuracy
+        Parameters:
+            index (int): satellite index in getSatIds
+            accuracy (double): in m
         
         
         """
         ...
-    def setCoordinateSystem(self, string: str) -> None:
+    def setAgency(self, agencyStr: str) -> None:
         """
-            Set the coordinate system used for the orbit entries.
+        Set the agency string for this SP3 file.
         
-            Parameters:
-                system (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the coordinate system to be set
-        
-        
-        """
-        ...
-    def setDataUsed(self, list: java.util.List[DataUsed]) -> None: ...
-    def setDayFraction(self, double: float) -> None:
-        """
-            Set the day fraction for this SP3 file.
-        
-            Parameters:
-                fraction (double): the day fraction to be set
+        Parameters:
+            agencyStr (String): the agency string to be set
         
         
         """
         ...
-    def setEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setClockBase(self, clockBase: float) -> None:
         """
-            Set the epoch of the SP3 file.
+        Set the base for clock/clock-rate accuracy.
         
-            Parameters:
-                time (:class:`~org.orekit.time.AbsoluteDate`): the epoch to be set
-        
-        
-        """
-        ...
-    def setEpochInterval(self, double: float) -> None:
-        """
-            Set the epoch interval for this SP3 file.
-        
-            Parameters:
-                interval (double): the interval between orbit entries
+        Parameters:
+            clockBase (double): base for clock/clock-rate accuracy
         
         
         """
         ...
-    def setFilter(self, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter) -> None:
+    def setCoordinateSystem(self, system: str) -> None:
         """
-            Set the derivatives filter.
+        Set the coordinate system used for the orbit entries.
         
-            Parameters:
-                filter (:class:`~org.orekit.utils.CartesianDerivativesFilter`): that indicates which derivatives of position are available.
-        
-        
-        """
-        ...
-    def setGpsWeek(self, int: int) -> None:
-        """
-            Set the GPS week of the SP3 file.
-        
-            Parameters:
-                week (int): the GPS week to be set
+        Parameters:
+            system (String): the coordinate system to be set
         
         
         """
         ...
-    def setModifiedJulianDay(self, int: int) -> None:
+    def setDataUsed(self, dataUsed: java.util.List[DataUsed]) -> None:
         """
-            Set the modified julian day for this SP3 file.
+        Set the data used indicator for this SP3 file.
         
-            Parameters:
-                day (int): the modified julian day to be set
-        
-        
-        """
-        ...
-    def setNumberOfEpochs(self, int: int) -> None:
-        """
-            Set the number of epochs as contained in the SP3 file.
-        
-            Parameters:
-                epochCount (int): the number of epochs to be set
+        Parameters:
+            dataUsed (List<DataUsed> dataUsed): the data used indicator to be set
         
         
         """
         ...
-    def setOrbitTypeKey(self, string: str) -> None:
+    def setDayFraction(self, fraction: float) -> None:
         """
-            Set the orbit type key for this SP3 file.
+        Set the day fraction for this SP3 file.
         
-            Parameters:
-                oTypeKey (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the orbit type key to be set
-        
-        
-        """
-        ...
-    def setPosVelBase(self, double: float) -> None:
-        """
-            Set the base for position/velocity accuracy.
-        
-            Parameters:
-                posVelBase (double): base for position/velocity accuracy
+        Parameters:
+            fraction (double): the day fraction to be set
         
         
         """
         ...
-    def setSecondsOfWeek(self, double: float) -> None:
+    def setEpoch(self, time: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set the seconds of the GPS week for this SP3 file.
+        Set the epoch of the SP3 file.
         
-            Parameters:
-                seconds (double): the seconds to be set
-        
-        
-        """
-        ...
-    def setTimeSystem(self, timeSystem: org.orekit.gnss.TimeSystem) -> None:
-        """
-            Set the time system used in this SP3 file.
-        
-            Parameters:
-                system (:class:`~org.orekit.gnss.TimeSystem`): the time system to be set
+        Parameters:
+            time (AbsoluteDate): the epoch to be set
         
         
         """
         ...
-    def setType(self, sP3FileType: SP3FileType) -> None:
+    def setEpochInterval(self, interval: float) -> None:
         """
-            Set the file type for this SP3 file.
+        Set the epoch interval for this SP3 file.
         
-            Parameters:
-                fileType (:class:`~org.orekit.files.sp3.SP3FileType`): the file type to be set
+        Parameters:
+            interval (double): the interval between orbit entries
         
         
         """
         ...
-    def setVersion(self, char: str) -> None:
+    def setFilter(self, filter: org.orekit.utils.CartesianDerivativesFilter) -> None:
         """
-            Set the file version.
+        Set the derivatives filter.
         
-            Parameters:
-                version (char): file version
+        Parameters:
+            filter (CartesianDerivativesFilter): that indicates which derivatives of position are available.
+        
+        
+        """
+        ...
+    def setGpsWeek(self, week: int) -> None:
+        """
+        Set the GPS week of the SP3 file.
+        
+        Parameters:
+            week (int): the GPS week to be set
+        
+        
+        """
+        ...
+    def setModifiedJulianDay(self, day: int) -> None:
+        """
+        Set the modified julian day for this SP3 file.
+        
+        Parameters:
+            day (int): the modified julian day to be set
+        
+        
+        """
+        ...
+    def setNumberOfEpochs(self, epochCount: int) -> None:
+        """
+        Set the number of epochs as contained in the SP3 file.
+        
+        Parameters:
+            epochCount (int): the number of epochs to be set
+        
+        
+        """
+        ...
+    def setOrbitTypeKey(self, oTypeKey: str) -> None:
+        """
+        Set the orbit type key for this SP3 file.
+        
+        Parameters:
+            oTypeKey (String): the orbit type key to be set
+        
+        
+        """
+        ...
+    def setPosVelBase(self, posVelBase: float) -> None:
+        """
+        Set the base for position/velocity accuracy.
+        
+        Parameters:
+            posVelBase (double): base for position/velocity accuracy
+        
+        
+        """
+        ...
+    def setSecondsOfWeek(self, seconds: float) -> None:
+        """
+        Set the seconds of the GPS week for this SP3 file.
+        
+        Parameters:
+            seconds (double): the seconds to be set
+        
+        
+        """
+        ...
+    def setTimeSystem(self, system: org.orekit.gnss.TimeSystem) -> None:
+        """
+        Set the time system used in this SP3 file.
+        
+        Parameters:
+            system (TimeSystem): the time system to be set
+        
+        
+        """
+        ...
+    def setType(self, fileType: SP3FileType) -> None:
+        """
+        Set the file type for this SP3 file.
+        
+        Parameters:
+            fileType (SP3FileType): the file type to be set
+        
+        
+        """
+        ...
+    def setVersion(self, version: str) -> None:
+        """
+        Set the file version.
+        
+        Parameters:
+            version (char): file version
         
         
         """
@@ -1022,9 +1144,7 @@ class SP3Header:
 
 class SP3OrbitType(java.lang.Enum['SP3OrbitType']):
     """
-    public enum SP3OrbitType extends :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.sp3.SP3OrbitType`>
-    
-        Orbit type indicator.
+    Orbit type indicator.
     """
     FIT: typing.ClassVar['SP3OrbitType'] = ...
     EXT: typing.ClassVar['SP3OrbitType'] = ...
@@ -1032,15 +1152,15 @@ class SP3OrbitType(java.lang.Enum['SP3OrbitType']):
     HLM: typing.ClassVar['SP3OrbitType'] = ...
     OTHER: typing.ClassVar['SP3OrbitType'] = ...
     @staticmethod
-    def parseType(string: str) -> 'SP3OrbitType':
+    def parseType(s: str) -> 'SP3OrbitType':
         """
-            Parse a string to get the type.
+        Parse a string to get the type.
         
-            Parameters:
-                s (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string to parse
+        Parameters:
+            s (String): string to parse
         
-            Returns:
-                the type corresponding to the string
+        Returns:
+            the type corresponding to the string
         
         
         """
@@ -1051,20 +1171,19 @@ class SP3OrbitType(java.lang.Enum['SP3OrbitType']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'SP3OrbitType':
+    def valueOf(name: str) -> 'SP3OrbitType':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -1072,17 +1191,15 @@ class SP3OrbitType(java.lang.Enum['SP3OrbitType']):
     @staticmethod
     def values() -> typing.MutableSequence['SP3OrbitType']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (SP3OrbitType c : SP3OrbitType.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (SP3OrbitType c : SP3OrbitType.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -1090,26 +1207,21 @@ class SP3OrbitType(java.lang.Enum['SP3OrbitType']):
 
 class SP3Parser(org.orekit.files.general.EphemerisFileParser[SP3]):
     """
-    public class SP3Parser extends :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFileParser`<:class:`~org.orekit.files.sp3.SP3`>
+    A parser for the SP3 orbit file format. It supports all formats from sp3-a to sp3-d.
     
-        A parser for the SP3 orbit file format. It supports all formats from sp3-a to sp3-d.
+    Note: this parser is thread-safe, so calling parse from different threads is allowed.
     
-        **Note:** this parser is thread-safe, so calling :meth:`~org.orekit.files.sp3.SP3Parser.parse` from different threads is
-        allowed.
-    
-        Also see:
-            :class:`~org.orekit.files.sp3.https:.files.igs.org.pub.data.format.sp3_docu.txt`,
-            :class:`~org.orekit.files.sp3.https:.files.igs.org.pub.data.format.sp3c.txt`,
-            :class:`~org.orekit.files.sp3.https:.files.igs.org.pub.data.format.sp3d.pdf`
+    Also see:
+        txt,
+        txt,
+        pdf
     """
     DEFAULT_INTERPOLATION_SAMPLES: typing.ClassVar[int] = ...
     """
-    public static final int DEFAULT_INTERPOLATION_SAMPLES
+    Default number of samples to use when interpolating SP3 coordinates.
     
-        Default number of samples to use when interpolating SP3 coordinates.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -1119,20 +1231,17 @@ class SP3Parser(org.orekit.files.general.EphemerisFileParser[SP3]):
     def __init__(self, double: float, int: int, function: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]]): ...
     @typing.overload
     def __init__(self, double: float, int: int, function: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]], timeScales: org.orekit.time.TimeScales): ...
-    def parse(self, dataSource: org.orekit.data.DataSource) -> SP3:
+    def parse(self, source: org.orekit.data.DataSource) -> SP3:
         """
-            Description copied from interface: :meth:`~org.orekit.files.general.EphemerisFileParser.parse`
-            Parse an ephemeris file from a data source.
+        Description copied from interface: parse Parse an ephemeris file from a data source.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFileParser.parse` in
-                interface :class:`~org.orekit.files.general.EphemerisFileParser`
+        Specified by: parse in interface EphemerisFileParser
         
-            Parameters:
-                source (:class:`~org.orekit.data.DataSource`): source providing the data to parse
+        Parameters:
+            source (DataSource): source providing the data to parse
         
-            Returns:
-                a parsed ephemeris file.
+        Returns:
+            a parsed ephemeris file.
         
         
         """
@@ -1140,99 +1249,111 @@ class SP3Parser(org.orekit.files.general.EphemerisFileParser[SP3]):
 
 class SP3Segment(org.orekit.files.general.EphemerisFile.EphemerisSegment[SP3Coordinate]):
     """
-    public class SP3Segment extends :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`<:class:`~org.orekit.files.sp3.SP3Coordinate`>
+    One segment of an SP3Ephemeris.
     
-        One segment of an :class:`~org.orekit.files.sp3.SP3Ephemeris`.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
-    def __init__(self, double: float, frame: org.orekit.frames.Frame, int: int, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter): ...
-    def addCoordinate(self, sP3Coordinate: SP3Coordinate) -> None:
+    def __init__(self, mu: float, frame: org.orekit.frames.Frame, interpolationSamples: int, filter: org.orekit.utils.CartesianDerivativesFilter):
         """
-            Adds a new P/V coordinate.
+        Simple constructor.
         
-            Parameters:
-                coord (:class:`~org.orekit.files.sp3.SP3Coordinate`): the P/V coordinate of the satellite
+        Parameters:
+            mu (double): standard gravitational parameter to use for creating Orbit from the ephemeris data.
+            frame (Frame): reference frame
+            interpolationSamples (int): number of points to use for interpolation
+            filter (CartesianDerivativesFilter): available derivatives
+        
+        
+        """
+        ...
+    def addCoordinate(self, coord: SP3Coordinate) -> None:
+        """
+        Adds a new P/V coordinate.
+        
+        Parameters:
+            coord (SP3Coordinate): the P/V coordinate of the satellite
         
         
         """
         ...
     def extractClockModel(self) -> org.orekit.time.ClockModel:
         """
-            Extract the clock model.
+        Extract the clock model.
         
-            If some clock or clock rate are present in the SP3 files as default values (999999.999999), then they filtered out here
-            when building the clock model, so interpolation will work if at least there are some remaining regular values.
+        If some clock or clock rate are present in the SP3 files as default values (999999.999999), then they filtered out here when building the clock model, so interpolation will work if at least there are some remaining regular values.
         
-            Returns:
-                extracted clock model
+        Returns:
+            extracted clock model
         
-            Since:
-                12.1
+        Since:
+            12.1
         
         
         """
         ...
     def getAvailableDerivatives(self) -> org.orekit.utils.CartesianDerivativesFilter:
         """
-            Get which derivatives of position are available in this ephemeris segment.
+        Get which derivatives of position are available in this ephemeris segment.
         
-            While :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getCoordinates` always returns position, velocity,
-            and acceleration the return value from this method indicates which of those are in the ephemeris file and are actually
-            valid.
+        While getCoordinates always returns position, velocity, and acceleration the return value from this method indicates which of those are in the ephemeris file and are actually valid.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getAvailableDerivatives` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getAvailableDerivatives in interface EphemerisSegment
         
-            Returns:
-                a value indicating if the file contains velocity and/or acceleration data.
+        Returns:
+            a value indicating if the file contains velocity and/or acceleration data.
         
         
         """
         ...
-    def getCoordinates(self) -> java.util.List[SP3Coordinate]: ...
+    def getCoordinates(self) -> java.util.List[SP3Coordinate]:
+        """
+        Get the coordinates for this ephemeris segment in getFrame.
+        
+        Specified by: getCoordinates in interface EphemerisSegment
+        
+        Returns:
+            a list of state vectors in chronological order. The coordinates are not necessarily evenly spaced in time. The value of
+            getAvailableDerivatives indicates if the velocity or
+            accelerations were specified in the file. Any position, velocity, or acceleration coordinates that are not specified in
+            the ephemeris file are zero in the returned values.
+        
+        
+        """
+        ...
     def getFrame(self) -> org.orekit.frames.Frame:
         """
-            Get the reference frame for this ephemeris segment. The defining frame for
-            :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getCoordinates`.
+        Get the reference frame for this ephemeris segment. The defining frame for getCoordinates.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getFrame` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getFrame in interface EphemerisSegment
         
-            Returns:
-                the reference frame for this segment. Never :code:`null`.
+        Returns:
+            the reference frame for this segment. Never null.
         
         
         """
         ...
     def getInterpolationSamples(self) -> int:
         """
-            Get the number of samples to use in interpolation.
+        Get the number of samples to use in interpolation.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getInterpolationSamples` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getInterpolationSamples in interface EphemerisSegment
         
-            Returns:
-                the number of points to use for interpolation.
+        Returns:
+            the number of points to use for interpolation.
         
         
         """
         ...
     def getMu(self) -> float:
         """
-            Get the standard gravitational parameter for the satellite.
+        Get the standard gravitational parameter for the satellite.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getMu` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getMu in interface EphemerisSegment
         
-            Returns:
-                the gravitational parameter used in :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getPropagator`, in
-                m³/s².
+        Returns:
+            the gravitational parameter used in getPropagator, in
+            m³/s².
         
         
         """
@@ -1240,84 +1361,65 @@ class SP3Segment(org.orekit.files.general.EphemerisFile.EphemerisSegment[SP3Coor
     @typing.overload
     def getPropagator(self) -> org.orekit.propagation.BoundedPropagator:
         """
-            View this ephemeris segment as a propagator.
+        View this ephemeris segment as a propagator.
         
-            In order to view the ephemeris for this satellite as a :class:`~org.orekit.propagation.Propagator` several conditions
-            must be met. An Orekit :class:`~org.orekit.frames.Frame` must be constructable from the frame specification in the
-            ephemeris file. This condition is met when :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getFrame`
-            return normally. Additionally, :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getMu` must return a
-            valid value. If these conditions are not met an :class:`~org.orekit.errors.OrekitException` may be thrown by this method
-            or by one of the methods of the returned :class:`~org.orekit.propagation.Propagator`.
+        In order to view the ephemeris for this satellite as a Propagator several conditions must be met. An Orekit Frame must be constructable from the frame specification in the ephemeris file. This condition is met when getFrame return normally. Additionally, getMu must return a valid value. If these conditions are not met an OrekitException may be thrown by this method or by one of the methods of the returned Propagator.
         
-            The :class:`~org.orekit.attitudes.AttitudeProvider` used is a :class:`~org.orekit.attitudes.FrameAlignedProvider`
-            aligned with the :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getInertialFrame`
+        The AttitudeProvider used is a FrameAlignedProvider aligned with the getInertialFrame
         
-            Each call to this method creates a new propagator.
+        Each call to this method creates a new propagator.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getPropagator` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getPropagator in interface EphemerisSegment
         
-            Returns:
-                a propagator for this ephemeris segment.
+        Returns:
+            a propagator for this ephemeris segment.
         
         """
         ...
     @typing.overload
     def getPropagator(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> org.orekit.propagation.BoundedPropagator:
         """
-            View this ephemeris segment as a propagator.
+        View this ephemeris segment as a propagator.
         
-            In order to view the ephemeris for this satellite as a :class:`~org.orekit.propagation.Propagator` several conditions
-            must be met. An Orekit :class:`~org.orekit.frames.Frame` must be constructable from the frame specification in the
-            ephemeris file. This condition is met when :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getFrame`
-            return normally. Additionally, :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getMu` must return a
-            valid value. If these conditions are not met an :class:`~org.orekit.errors.OrekitException` may be thrown by this method
-            or by one of the methods of the returned :class:`~org.orekit.propagation.Propagator`.
+        In order to view the ephemeris for this satellite as a Propagator several conditions must be met. An Orekit Frame must be constructable from the frame specification in the ephemeris file. This condition is met when getFrame return normally. Additionally, getMu must return a valid value. If these conditions are not met an OrekitException may be thrown by this method or by one of the methods of the returned Propagator.
         
-            Each call to this method creates a new propagator.
+        Each call to this method creates a new propagator.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getPropagator` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getPropagator in interface EphemerisSegment
         
-            Parameters:
-                attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): provider for attitude computation
+        Parameters:
+            attitudeProvider (AttitudeProvider): provider for attitude computation
         
-            Returns:
-                a propagator for this ephemeris segment.
+        Returns:
+            a propagator for this ephemeris segment.
         
         
         """
         ...
     def getStart(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the start date of this ephemeris segment.
+        Get the start date of this ephemeris segment.
         
-            The date returned by this method is equivalent to :code:`getPropagator().getMinDate()`.
+        The date returned by this method is equivalent to getMinDate().
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getStart` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getStart in interface EphemerisSegment
         
-            Returns:
-                ephemeris segment start date.
+        Returns:
+            ephemeris segment start date.
         
         
         """
         ...
     def getStop(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the end date of this ephemeris segment.
+        Get the end date of this ephemeris segment.
         
-            The date returned by this method is equivalent to :code:`getPropagator().getMaxDate()`.
+        The date returned by this method is equivalent to getMaxDate().
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getStop` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getStop in interface EphemerisSegment
         
-            Returns:
-                ephemeris segment end date.
+        Returns:
+            ephemeris segment end date.
         
         
         """
@@ -1325,144 +1427,110 @@ class SP3Segment(org.orekit.files.general.EphemerisFile.EphemerisSegment[SP3Coor
 
 class SP3Utils:
     """
-    public class SP3Utils extends :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Constants for SP3 files.
     
-        Constants for SP3 files.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
     DEFAULT_CLOCK_VALUE: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_CLOCK_VALUE
+    Bad or absent clock values are to be set to 999999.999999.
     
-        Bad or absent clock values are to be set to 999999.999999.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     DEFAULT_CLOCK_RATE_VALUE: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_CLOCK_RATE_VALUE
+    Bad or absent clock rate values are to be set to 999999.999999.
     
-        Bad or absent clock rate values are to be set to 999999.999999.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     POS_VEL_BASE_ACCURACY: typing.ClassVar[float] = ...
     """
-    public static final double POS_VEL_BASE_ACCURACY
+    Base for general position/velocity accuracy.
     
-        Base for general position/velocity accuracy.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     POSITION_UNIT: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
-    public static final :class:`~org.orekit.utils.units.Unit` POSITION_UNIT
-    
-        Position unit.
-    
+    Position unit.
     """
     POSITION_ACCURACY_UNIT: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
-    public static final :class:`~org.orekit.utils.units.Unit` POSITION_ACCURACY_UNIT
-    
-        Position accuracy unit.
-    
+    Position accuracy unit.
     """
     VELOCITY_UNIT: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
-    public static final :class:`~org.orekit.utils.units.Unit` VELOCITY_UNIT
-    
-        Velocity unit.
-    
+    Velocity unit.
     """
     VELOCITY_ACCURACY_UNIT: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
-    public static final :class:`~org.orekit.utils.units.Unit` VELOCITY_ACCURACY_UNIT
-    
-        Velocity accuracy unit.
-    
+    Velocity accuracy unit.
     """
     CLOCK_ADDITIONAL_STATE: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` CLOCK_ADDITIONAL_STATE
+    Additional state name for clock.
     
-        Additional state name for clock.
+    Since:
+        12.1
     
-        Since:
-            12.1
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     CLOCK_UNIT: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
-    public static final :class:`~org.orekit.utils.units.Unit` CLOCK_UNIT
-    
-        Clock unit.
-    
+    Clock unit.
     """
     CLOCK_ACCURACY_UNIT: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
-    public static final :class:`~org.orekit.utils.units.Unit` CLOCK_ACCURACY_UNIT
-    
-        Clock accuracy unit.
-    
+    Clock accuracy unit.
     """
     CLOCK_RATE_UNIT: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
-    public static final :class:`~org.orekit.utils.units.Unit` CLOCK_RATE_UNIT
-    
-        Clock rate unit.
-    
+    Clock rate unit.
     """
     CLOCK_RATE_ACCURACY_UNIT: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
-    public static final :class:`~org.orekit.utils.units.Unit` CLOCK_RATE_ACCURACY_UNIT
-    
-        Clock rate accuracy unit.
-    
+    Clock rate accuracy unit.
     """
     @staticmethod
-    def indexAccuracy(unit: org.orekit.utils.units.Unit, double: float, double2: float) -> int:
+    def indexAccuracy(unit: org.orekit.utils.units.Unit, base: float, accuracy: float) -> int:
         """
-            Convert an accuracy from SI units.
+        Convert an accuracy from SI units.
         
-            Parameters:
-                unit (:class:`~org.orekit.utils.units.Unit`): accuracy unit
-                base (double): base
-                accuracy (double): in SI units
+        Parameters:
+            unit (Unit): accuracy unit
+            base (double): base
+            accuracy (double): in SI units
         
-            Returns:
-                accuracyIndex index of accuracy
+        Returns:
+            index of accuracy
         
         
         """
         ...
     @staticmethod
-    def siAccuracy(unit: org.orekit.utils.units.Unit, double: float, int: int) -> float:
+    def siAccuracy(unit: org.orekit.utils.units.Unit, base: float, accuracyIndex: int) -> float:
         """
-            Convert an accuracy to SI units.
+        Convert an accuracy to SI units.
         
-            Parameters:
-                unit (:class:`~org.orekit.utils.units.Unit`): accuracy unit
-                base (double): base
-                accuracyIndex (int): index of accuracy
+        Parameters:
+            unit (Unit): accuracy unit
+            base (double): base
+            accuracyIndex (int): index of accuracy
         
-            Returns:
-                accuracy in SI units
+        Returns:
+            accuracy in SI units
         
         
         """
@@ -1470,15 +1538,36 @@ class SP3Utils:
 
 class SP3Writer:
     """
-    public class SP3Writer extends :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Writer for SP3 file.
     
-        Writer for SP3 file.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
-    def __init__(self, appendable: java.lang.Appendable, string: str, timeScales: org.orekit.time.TimeScales): ...
-    def write(self, sP3: SP3) -> None: ...
+    def __init__(self, output: java.lang.Appendable, outputName: str, timeScales: org.orekit.time.TimeScales):
+        """
+        Simple constructor.
+        
+        Parameters:
+            output (Appendable): destination of generated output
+            outputName (String): output name for error messages
+            timeScales (TimeScales): set of time scales used for parsing dates
+        
+        
+        """
+        ...
+    def write(self, sp3: SP3) -> None:
+        """
+        Write a SP3 file.
+        
+        Parameters:
+            sp3 (SP3): SP3 file to write
+        
+        Raises:
+            IOException: if an I/O error occurs.
+        
+        
+        """
+        ...
 
 
 class __module_protocol__(Protocol):

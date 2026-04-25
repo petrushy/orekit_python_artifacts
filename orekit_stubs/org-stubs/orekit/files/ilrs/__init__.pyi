@@ -25,113 +25,145 @@ import typing
 
 class CPF(org.orekit.files.general.EphemerisFile['CPF.CPFCoordinate', 'CPF.CPFEphemeris']):
     """
-    public class CPF extends :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.files.ilrs.CPF.CPFCoordinate`, :class:`~org.orekit.files.ilrs.CPF.CPFEphemeris`>
+    This class stores all the information of the Consolidated laser ranging Prediction File (CPF) parsed by CPFParser. It contains the header and a list of ephemeris entry.
     
-        This class stores all the information of the Consolidated laser ranging Prediction File (CPF) parsed by CPFParser. It
-        contains the header and a list of ephemeris entry.
-    
-        Since:
-            10.3
+    Since:
+        10.3
     """
     DEFAULT_ID: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_ID
+    Default satellite ID, used if header is null when initializing the ephemeris.
     
-        Default satellite ID, used if header is null when initializing the ephemeris.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self): ...
-    def addSatelliteCoordinate(self, string: str, cPFCoordinate: 'CPF.CPFCoordinate') -> None:
+    def __init__(self):
         """
-            Add a new P/V coordinates to the satellite.
+        Constructor.
+        """
+        ...
+    def addSatelliteCoordinate(self, id: str, coord: 'CPF.CPFCoordinate') -> None:
+        """
+        Add a new P/V coordinates to the satellite.
         
-            Parameters:
-                id (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): satellite ILRS identifier
-                coord (:class:`~org.orekit.files.ilrs.CPF.CPFCoordinate`): the P/V coordinate of the satellite
+        Parameters:
+            id (String): satellite ILRS identifier
+            coord (CPFCoordinate): the P/V coordinate of the satellite
         
-            Since:
-                11.0.1
+        Since:
+            11.0.1
         
         
         """
         ...
-    def addSatelliteCoordinates(self, string: str, list: java.util.List['CPF.CPFCoordinate']) -> None: ...
-    def addSatelliteVelocityToCPFCoordinate(self, string: str, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> None:
+    def addSatelliteCoordinates(self, id: str, coord: java.util.List['CPF.CPFCoordinate']) -> None:
         """
-            Add the velocity to the last CPF coordinate entry.
+        Adds a set of P/V coordinates to the satellite.
         
-            Parameters:
-                id (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): satellite ILRS identifier
-                velocity (:class:`~org.orekit.files.ilrs.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): the velocity vector of the satellite
+        Parameters:
+            id (String): satellite ILRS identifier
+            coord (List<CPFCoordinate> coord): set of coordinates
         
-            Since:
-                11.2
+        Since:
+            11.0.1
         
         
         """
         ...
-    def getComments(self) -> java.util.List[str]: ...
+    def addSatelliteVelocityToCPFCoordinate(self, id: str, velocity: org.hipparchus.geometry.euclidean.threed.Vector3D) -> None:
+        """
+        Add the velocity to the last CPF coordinate entry.
+        
+        Parameters:
+            id (String): satellite ILRS identifier
+            velocity (Vector3D): the velocity vector of the satellite
+        
+        Since:
+            11.2
+        
+        
+        """
+        ...
+    def getComments(self) -> java.util.List[str]:
+        """
+        Get the comments contained in the file.
+        
+        Returns:
+            the comments contained in the file
+        
+        
+        """
+        ...
     def getHeader(self) -> 'CPFHeader':
         """
-            Get the CPF file header.
+        Get the CPF file header.
         
-            Returns:
-                the CPF file header
+        Returns:
+            the CPF file header
         
         
         """
         ...
-    def getSatellites(self) -> java.util.Map[str, 'CPF.CPFEphemeris']: ...
+    def getSatellites(self) -> java.util.Map[str, 'CPF.CPFEphemeris']:
+        """
+        Get the loaded ephemeris for each satellite in the file. First key corresponds to String value of getIlrsSatelliteId
+        
+        Specified by: getSatellites in interface EphemerisFile
+        
+        Returns:
+            a map from the satellite's ID to the information about that satellite contained in the file.
+        
+        
+        """
+        ...
     def getTimeScale(self) -> org.orekit.time.TimeScale:
         """
-            Get the time scale used in CPF file.
+        Get the time scale used in CPF file.
         
-            Returns:
-                the time scale used to parse epochs in CPF file.
-        
-        
-        """
-        ...
-    def setFilter(self, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter) -> None:
-        """
-            Set the derivatives filter.
-        
-            Parameters:
-                filter (:class:`~org.orekit.utils.CartesianDerivativesFilter`): that indicates which derivatives of position are available.
+        Returns:
+            the time scale used to parse epochs in CPF file.
         
         
         """
         ...
-    def setInterpolationSample(self, int: int) -> None:
+    def setFilter(self, filter: org.orekit.utils.CartesianDerivativesFilter) -> None:
         """
-            Set the interpolation sample.
+        Set the derivatives filter.
         
-            Parameters:
-                interpolationSample (int): interpolation sample
+        Parameters:
+            filter (CartesianDerivativesFilter): that indicates which derivatives of position are available.
         
         
         """
         ...
-    def setMu(self, double: float) -> None:
+    def setInterpolationSample(self, interpolationSample: int) -> None:
         """
-            Set the gravitational coefficient.
+        Set the interpolation sample.
         
-            Parameters:
-                mu (double): the coefficient to be set
+        Parameters:
+            interpolationSample (int): interpolation sample
+        
+        
+        """
+        ...
+    def setMu(self, mu: float) -> None:
+        """
+        Set the gravitational coefficient.
+        
+        Parameters:
+            mu (double): the coefficient to be set
         
         
         """
         ...
     def setTimeScale(self, timeScale: org.orekit.time.TimeScale) -> None:
         """
-            Set the time scale.
+        Set the time scale.
         
-            Parameters:
-                timeScale (:class:`~org.orekit.time.TimeScale`): use to parse dates in this file.
+        Parameters:
+            timeScale (TimeScale): use to parse dates in this file.
         
         
         """
@@ -161,30 +193,25 @@ class CPF(org.orekit.files.general.EphemerisFile['CPF.CPFCoordinate', 'CPF.CPFEp
 
 class CPFParser(org.orekit.files.general.EphemerisFileParser[CPF]):
     """
-    public class CPFParser extends :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFileParser`<:class:`~org.orekit.files.ilrs.CPF`>
+    A parser for the CPF orbit file format.
     
-        A parser for the CPF orbit file format.
+    It supports both 1.0 and 2.0 versions
     
-        It supports both 1.0 and 2.0 versions
+    Note: Only required header keys are read. Furthermore, only position data are read. Other keys are simply ignored Contributions are welcome to support more fields in the format.
     
-        **Note:** Only required header keys are read. Furthermore, only position data are read. Other keys are simply ignored
-        Contributions are welcome to support more fields in the format.
+    Since:
+        10.3
     
-        Since:
-            10.3
-    
-        Also see:
-            :class:`~org.orekit.files.ilrs.https:.ilrs.gsfc.nasa.gov.docs.2006.cpf_1.01.pdf`,
-            :class:`~org.orekit.files.ilrs.https:.ilrs.gsfc.nasa.gov.docs.2018.cpf_2.00h`
+    Also see:
+        pdf,
+        00h
     """
     DEFAULT_INTERPOLATION_SAMPLE: typing.ClassVar[int] = ...
     """
-    public static final int DEFAULT_INTERPOLATION_SAMPLE
+    Default number of sample for interpolating data (See: reference documents).
     
-        Default number of sample for interpolating data (See: reference documents).
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -192,19 +219,17 @@ class CPFParser(org.orekit.files.general.EphemerisFileParser[CPF]):
     def __init__(self): ...
     @typing.overload
     def __init__(self, double: float, int: int, iERSConventions: org.orekit.utils.IERSConventions, timeScale: org.orekit.time.TimeScale, frames: org.orekit.frames.Frames): ...
-    def parse(self, dataSource: org.orekit.data.DataSource) -> CPF:
+    def parse(self, source: org.orekit.data.DataSource) -> CPF:
         """
-            Parse an ephemeris file from a data source.
+        Parse an ephemeris file from a data source.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFileParser.parse` in
-                interface :class:`~org.orekit.files.general.EphemerisFileParser`
+        Specified by: parse in interface EphemerisFileParser
         
-            Parameters:
-                source (:class:`~org.orekit.data.DataSource`): source providing the data to parse
+        Parameters:
+            source (DataSource): source providing the data to parse
         
-            Returns:
-                a parsed ephemeris file.
+        Returns:
+            a parsed ephemeris file.
         
         
         """
@@ -212,23 +237,18 @@ class CPFParser(org.orekit.files.general.EphemerisFileParser[CPF]):
 
 class CPFWriter(org.orekit.files.general.EphemerisFileWriter):
     """
-    public class CPFWriter extends :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFileWriter`
+    An CPF Writer class that can take in a general EphemerisFile object and export it as a valid CPF file.
     
-        An CPF Writer class that can take in a general :class:`~org.orekit.files.general.EphemerisFile` object and export it as
-        a valid CPF file.
+    It supports both 1.0 and 2.0 versions
     
-        It supports both 1.0 and 2.0 versions
+    Note: By default, only required header keys are wrote (H1 and H2). Furthermore, only position data can be written. Other keys (i.e. in header and other types of ephemeris entries) are simply ignored. Contributions are welcome to support more fields in the format.
     
-        **Note:** By default, only required header keys are wrote (H1 and H2). Furthermore, only position data can be written.
-        Other keys (i.e. in header and other types of ephemeris entries) are simply ignored. Contributions are welcome to
-        support more fields in the format.
+    Since:
+        10.3
     
-        Since:
-            10.3
-    
-        Also see:
-            :class:`~org.orekit.files.ilrs.https:.ilrs.gsfc.nasa.gov.docs.2006.cpf_1.01.pdf`,
-            :class:`~org.orekit.files.ilrs.https:.ilrs.gsfc.nasa.gov.docs.2018.cpf_2.00h`
+    Also see:
+        pdf,
+        00h
     """
     @typing.overload
     def __init__(self, cPFHeader: 'CPFHeader', timeScale: org.orekit.time.TimeScale): ...
@@ -245,30 +265,25 @@ class CPFWriter(org.orekit.files.general.EphemerisFileWriter):
 
 class CRDParser:
     """
-    public class CRDParser extends :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    A parser for the CRD data file format.
     
-        A parser for the CRD data file format.
+    It supports both 1.0 and 2.0 versions
     
-        It supports both 1.0 and 2.0 versions
+    Note: Not all the records are read by the parser. Only the most significants are parsed. Contributions are welcome to support more fields in the format.
     
-        **Note**: Not all the records are read by the parser. Only the most significants are parsed. Contributions are welcome
-        to support more fields in the format.
+    Since:
+        10.3
     
-        Since:
-            10.3
-    
-        Also see:
-            :class:`~org.orekit.files.ilrs.https:.ilrs.gsfc.nasa.gov.docs.2009.crd_v1.01.pdf`,
-            :class:`~org.orekit.files.ilrs.https:.ilrs.gsfc.nasa.gov.docs.2021.crd_v2.01e2.pdf`
+    Also see:
+        pdf,
+        pdf
     """
     DEFAULT_CRD_SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_CRD_SUPPORTED_NAMES
+    Default supported files name pattern for CRD files.
     
-        Default supported files name pattern for CRD files.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
@@ -278,293 +293,317 @@ class CRDParser:
     def __init__(self, timeScale: org.orekit.time.TimeScale): ...
     def getTimeScale(self) -> org.orekit.time.TimeScale:
         """
-            Get the time scale used to read the file.
+        Get the time scale used to read the file.
         
-            Returns:
-                the time scale used to read the file
+        Returns:
+            the time scale used to read the file
         
         
         """
         ...
-    def parse(self, dataSource: org.orekit.data.DataSource) -> 'CRD': ...
+    def parse(self, source: org.orekit.data.DataSource) -> 'CRD':
+        """
+        Parse a CRD file.
+        
+        Parameters:
+            source (DataSource): data source containing the CRD file.
+        
+        Returns:
+            a parsed CRD file.
+        
+        Raises:
+            IOException: if reader throws one.
+        
+        
+        """
+        ...
 
 class ILRSHeader:
     """
-    public abstract class ILRSHeader extends :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Container for common data contains in International Laser Ranging Service (ILRS) files header.
     
-        Container for common data contains in International Laser Ranging Service (ILRS) files header.
+    Since:
+        10.3
     
-        Since:
-            10.3
-    
-        Also see:
-            :class:`~org.orekit.files.ilrs.CPFHeader`, :class:`~org.orekit.files.ilrs.CRDHeader`
+    Also see:
+        CPFHeader, CRDHeader
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Empty constructor.
+        
+        This constructor is not strictly necessary, but it prevents spurious javadoc warnings with JDK 18 and later.
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
     def getEndEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the ending epoch (UTC).
+        Get the ending epoch (UTC).
         
-            Returns:
-                the ending epoch
+        Returns:
+            the ending epoch
         
         
         """
         ...
     def getFormat(self) -> str:
         """
-            Get the file format.
+        Get the file format.
         
-            Returns:
-                the file format
+        Returns:
+            the file format
         
         
         """
         ...
     def getIlrsSatelliteId(self) -> str:
         """
-            Get the IRLS satellite ID (based on COSPAR ID).
+        Get the IRLS satellite ID (based on COSPAR ID).
         
-            Returns:
-                the IRLS satellite ID
+        Returns:
+            the IRLS satellite ID
         
         
         """
         ...
     def getName(self) -> str:
         """
-            Get the satellite target name.
+        Get the satellite target name.
         
-            Returns:
-                the satellite target name
+        Returns:
+            the satellite target name
         
         
         """
         ...
     def getNoradId(self) -> str:
         """
-            Get the satellite NORAD ID (i.e. Satellite Catalog Number).
+        Get the satellite NORAD ID (i.e. Satellite Catalog Number).
         
-            Returns:
-                the satellite NORAD ID
+        Returns:
+            the satellite NORAD ID
         
         
         """
         ...
     def getProductionEpoch(self) -> org.orekit.time.DateComponents:
         """
-            Get the date component of the ephemeris production.
+        Get the date component of the ephemeris production.
         
-            Returns:
-                the date component of the ephemeris production
+        Returns:
+            the date component of the ephemeris production
         
         
         """
         ...
     def getProductionHour(self) -> int:
         """
-            Get the hour of ephemeris production (UTC).
+        Get the hour of ephemeris production (UTC).
         
-            Returns:
-                the hour of ephemeris production
+        Returns:
+            the hour of ephemeris production
         
         
         """
         ...
     def getSequenceNumber(self) -> int:
         """
-            Get the ephemeris sequence number.
+        Get the ephemeris sequence number.
         
-            Returns:
-                the ephemeris sequence number
+        Returns:
+            the ephemeris sequence number
         
         
         """
         ...
     def getSic(self) -> str:
         """
-            Get the SIC ID.
+        Get the SIC ID.
         
-            Returns:
-                the SIC ID
+        Returns:
+            the SIC ID
         
         
         """
         ...
     def getStartEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the starting epoch (UTC).
+        Get the starting epoch (UTC).
         
-            Returns:
-                the starting epoch
+        Returns:
+            the starting epoch
         
         
         """
         ...
     def getTargetClass(self) -> int:
         """
-            Get the target class.
+        Get the target class.
         
-            0 = no retroreflector; 1 = passive retroreflector; ...
+        0 = no retroreflector; 1 = passive retroreflector; ...
         
-            Returns:
-                the target class
+        Returns:
+            the target class
         
         
         """
         ...
     def getTargetLocation(self) -> int:
         """
-            Get the target location.
+        Get the target location.
         
-            1 = Earth orbit; 2 = Lunar orbit; ...
+        1 = Earth orbit; 2 = Lunar orbit; ...
         
-            Returns:
-                the target location
+        Returns:
+            the target location
         
         
         """
         ...
     def getVersion(self) -> int:
         """
-            Get the format version.
+        Get the format version.
         
-            Returns:
-                the format version
-        
-        
-        """
-        ...
-    def setEndEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Set the ending epoch (UTC).
-        
-            Parameters:
-                endEpoch (:class:`~org.orekit.time.AbsoluteDate`): the ending epoch to set
+        Returns:
+            the format version
         
         
         """
         ...
-    def setFormat(self, string: str) -> None:
+    def setEndEpoch(self, endEpoch: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set the file format.
+        Set the ending epoch (UTC).
         
-            Parameters:
-                format (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the format to set
-        
-        
-        """
-        ...
-    def setIlrsSatelliteId(self, string: str) -> None:
-        """
-            Set the IRLS satellite ID (based on COSPAR ID).
-        
-            Parameters:
-                ilrsSatelliteId (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the IRLS satellite ID to set
+        Parameters:
+            endEpoch (AbsoluteDate): the ending epoch to set
         
         
         """
         ...
-    def setName(self, string: str) -> None:
+    def setFormat(self, format: str) -> None:
         """
-            Set the satellite target name.
+        Set the file format.
         
-            Parameters:
-                name (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the satellite target name to set
-        
-        
-        """
-        ...
-    def setNoradId(self, string: str) -> None:
-        """
-            Set the satellite NORAD ID.
-        
-            Parameters:
-                noradId (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the NORAD ID to set
+        Parameters:
+            format (String): the format to set
         
         
         """
         ...
-    def setProductionEpoch(self, dateComponents: org.orekit.time.DateComponents) -> None:
+    def setIlrsSatelliteId(self, ilrsSatelliteId: str) -> None:
         """
-            Set the date component of the ephemeris production.
+        Set the IRLS satellite ID (based on COSPAR ID).
         
-            Parameters:
-                productionEpoch (:class:`~org.orekit.time.DateComponents`): the date component to set
-        
-        
-        """
-        ...
-    def setProductionHour(self, int: int) -> None:
-        """
-            Set the hour of ephemeris production.
-        
-            Parameters:
-                productionHour (int): the hour of ephemeris production to set
+        Parameters:
+            ilrsSatelliteId (String): the IRLS satellite ID to set
         
         
         """
         ...
-    def setSequenceNumber(self, int: int) -> None:
+    def setName(self, name: str) -> None:
         """
-            Set the ephemeris sequence number.
+        Set the satellite target name.
         
-            Parameters:
-                sequenceNumber (int): the ephemeris sequence number to set
-        
-        
-        """
-        ...
-    def setSic(self, string: str) -> None:
-        """
-            Set the SIC ID.
-        
-            Parameters:
-                sic (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the SIC ID to set
+        Parameters:
+            name (String): the satellite target name to set
         
         
         """
         ...
-    def setStartEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setNoradId(self, noradId: str) -> None:
         """
-            Set the staring epoch (UTC).
+        Set the satellite NORAD ID.
         
-            Parameters:
-                startEpoch (:class:`~org.orekit.time.AbsoluteDate`): the starting epoch to set
-        
-        
-        """
-        ...
-    def setTargetClass(self, int: int) -> None:
-        """
-            Set the target class.
-        
-            0 = no retroreflector; 1 = passive retroreflector; ...
-        
-            Parameters:
-                targetClass (int): the target class to set
+        Parameters:
+            noradId (String): the NORAD ID to set
         
         
         """
         ...
-    def setTargetLocation(self, int: int) -> None:
+    def setProductionEpoch(self, productionEpoch: org.orekit.time.DateComponents) -> None:
         """
-            Set the target location.
+        Set the date component of the ephemeris production.
         
-            1 = Earth orbit; 2 = Lunar orbit; ...
-        
-            Parameters:
-                targetLocation (int): the target location to set
+        Parameters:
+            productionEpoch (DateComponents): the date component to set
         
         
         """
         ...
-    def setVersion(self, int: int) -> None:
+    def setProductionHour(self, productionHour: int) -> None:
         """
-            Set the format version.
+        Set the hour of ephemeris production.
         
-            Parameters:
-                version (int): the version to set
+        Parameters:
+            productionHour (int): the hour of ephemeris production to set
+        
+        
+        """
+        ...
+    def setSequenceNumber(self, sequenceNumber: int) -> None:
+        """
+        Set the ephemeris sequence number.
+        
+        Parameters:
+            sequenceNumber (int): the ephemeris sequence number to set
+        
+        
+        """
+        ...
+    def setSic(self, sic: str) -> None:
+        """
+        Set the SIC ID.
+        
+        Parameters:
+            sic (String): the SIC ID to set
+        
+        
+        """
+        ...
+    def setStartEpoch(self, startEpoch: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Set the staring epoch (UTC).
+        
+        Parameters:
+            startEpoch (AbsoluteDate): the starting epoch to set
+        
+        
+        """
+        ...
+    def setTargetClass(self, targetClass: int) -> None:
+        """
+        Set the target class.
+        
+        0 = no retroreflector; 1 = passive retroreflector; ...
+        
+        Parameters:
+            targetClass (int): the target class to set
+        
+        
+        """
+        ...
+    def setTargetLocation(self, targetLocation: int) -> None:
+        """
+        Set the target location.
+        
+        1 = Earth orbit; 2 = Lunar orbit; ...
+        
+        Parameters:
+            targetLocation (int): the target location to set
+        
+        
+        """
+        ...
+    def setVersion(self, version: int) -> None:
+        """
+        Set the format version.
+        
+        Parameters:
+            version (int): the version to set
         
         
         """
@@ -572,20 +611,16 @@ class ILRSHeader:
 
 class StreamingCpfWriter:
     """
-    public class StreamingCpfWriter extends :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    A writer for CPF files.
     
-        A writer for CPF files.
+    Each instance corresponds to a single CPF file.
     
-        Each instance corresponds to a single CPF file.
+    This class can be used as a step handler for a Propagator. The following example shows its use as a step handler.
     
-        This class can be used as a step handler for a :class:`~org.orekit.propagation.Propagator`. The following example shows
-        its use as a step handler.
+    Note: By default, only required header keys are wrote (H1 and H2). Furthermore, only position data can be written. Other keys (optionals) are simply ignored. Contributions are welcome to support more fields in the format.
     
-        **Note:** By default, only required header keys are wrote (H1 and H2). Furthermore, only position data can be written.
-        Other keys (optionals) are simply ignored. Contributions are welcome to support more fields in the format.
-    
-        Since:
-            10.3
+    Since:
+        10.3
     """
     @typing.overload
     def __init__(self, appendable: java.lang.Appendable, timeScale: org.orekit.time.TimeScale, cPFHeader: 'CPFHeader'): ...
@@ -593,21 +628,39 @@ class StreamingCpfWriter:
     def __init__(self, appendable: java.lang.Appendable, timeScale: org.orekit.time.TimeScale, cPFHeader: 'CPFHeader', boolean: bool): ...
     def newSegment(self, frame: org.orekit.frames.Frame) -> 'StreamingCpfWriter.Segment':
         """
-            Create a writer for a new CPF ephemeris segment.
+        Create a writer for a new CPF ephemeris segment.
         
-            The returned writer can only write a single ephemeris segment in a CPF.
+        The returned writer can only write a single ephemeris segment in a CPF.
         
-            Parameters:
-                frame (:class:`~org.orekit.frames.Frame`): the reference frame to use for the segment.
+        Parameters:
+            frame (Frame): the reference frame to use for the segment.
         
-            Returns:
-                a new CPF segment, ready for writing.
+        Returns:
+            a new CPF segment, ready for writing.
         
         
         """
         ...
-    def writeEndOfFile(self) -> None: ...
-    def writeHeader(self) -> None: ...
+    def writeEndOfFile(self) -> None:
+        """
+        Write end of file.
+        
+        Raises:
+            IOException: if the stream cannot write to stream
+        
+        
+        """
+        ...
+    def writeHeader(self) -> None:
+        """
+        Writes the CPF header for the file.
+        
+        Raises:
+            IOException: if the stream cannot write to stream
+        
+        
+        """
+        ...
     class HeaderLineWriter(java.lang.Enum['StreamingCpfWriter.HeaderLineWriter']):
         H1: typing.ClassVar['StreamingCpfWriter.HeaderLineWriter'] = ...
         H2: typing.ClassVar['StreamingCpfWriter.HeaderLineWriter'] = ...
@@ -629,292 +682,301 @@ class StreamingCpfWriter:
 
 class CPFHeader(ILRSHeader):
     """
-    public class CPFHeader extends :class:`~org.orekit.files.ilrs.ILRSHeader`
+    Container for Consolidated laser ranging Prediction File (CPF) header.
     
-        Container for Consolidated laser ranging Prediction File (CPF) header.
+    Note: Only the required fields are present.
     
-        Note: Only the required fields are present.
-    
-        Since:
-            10.3
+    Since:
+        10.3
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Empty constructor.
+        
+        This constructor is not strictly necessary, but it prevents spurious javadoc warnings with JDK 18 and later.
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
     def getCenterOfMassOffset(self) -> float:
         """
-            Get the approximate center of mass to reflector offset.
+        Get the approximate center of mass to reflector offset.
         
-            Returns:
-                the approximate center of mass to reflector offset in meters
+        Returns:
+            the approximate center of mass to reflector offset in meters
         
         
         """
         ...
     def getPrf(self) -> float:
         """
-            Get the Pulse Repetition Frequency (PRF).
+        Get the Pulse Repetition Frequency (PRF).
         
-            Returns:
-                the Pulse Repetition Frequency (PRF) in Hz
+        Returns:
+            the Pulse Repetition Frequency (PRF) in Hz
         
         
         """
         ...
     def getRefFrame(self) -> org.orekit.frames.Frame:
         """
-            Get the reference frame.
+        Get the reference frame.
         
-            Returns:
-                the reference frame
+        Returns:
+            the reference frame
         
         
         """
         ...
     def getRefFrameId(self) -> int:
         """
-            Get the reference frame identifier.
+        Get the reference frame identifier.
         
-            Returns:
-                the reference frame
+        Returns:
+            the reference frame
         
         
         """
         ...
     def getRotationalAngleType(self) -> int:
         """
-            Get the rotation angle type.
+        Get the rotation angle type.
         
-            Returns:
-                the rotation angle type
+        Returns:
+            the rotation angle type
         
         
         """
         ...
     def getSource(self) -> str:
         """
-            Get the ephemeris source.
+        Get the ephemeris source.
         
-            Returns:
-                the ephemeris source
+        Returns:
+            the ephemeris source
         
         
         """
         ...
     def getStep(self) -> int:
         """
-            Get the time between table entries.
+        Get the time between table entries.
         
-            Returns:
-                the time between table entries in seconds
+        Returns:
+            the time between table entries in seconds
         
         
         """
         ...
     def getSubDailySequenceNumber(self) -> int:
         """
-            Get the sub-daily ephemeris sequence number.
+        Get the sub-daily ephemeris sequence number.
         
-            Returns:
-                the sub-daily ephemeris sequence number
+        Returns:
+            the sub-daily ephemeris sequence number
         
         
         """
         ...
     def getTranspClkRef(self) -> float:
         """
-            Get the transponder Clock Reference Time.
+        Get the transponder Clock Reference Time.
         
-            Returns:
-                the transponder Clock Reference Time
+        Returns:
+            the transponder Clock Reference Time
         
         
         """
         ...
     def getTranspOscDrift(self) -> float:
         """
-            Get the transponder Oscillator Drift in parts in 10^15.
+        Get the transponder Oscillator Drift in parts in 10^15.
         
-            Returns:
-                the transponder Oscillator Drift in parts.
+        Returns:
+            the transponder Oscillator Drift in parts.
         
         
         """
         ...
     def getTranspTransmitDelay(self) -> float:
         """
-            Get the transponder transmit delay.
+        Get the transponder transmit delay.
         
-            Returns:
-                the transponder transmit delay in seconds
+        Returns:
+            the transponder transmit delay in seconds
         
         
         """
         ...
     def getTranspUtcOffset(self) -> float:
         """
-            Get the transponder UTC offset.
+        Get the transponder UTC offset.
         
-            Returns:
-                the transponder UTC offset in seconds
+        Returns:
+            the transponder UTC offset in seconds
         
         
         """
         ...
     def isCenterOfMassCorrectionApplied(self) -> bool:
         """
-            Get the flag telling if the center of mass correction is applied.
+        Get the flag telling if the center of mass correction is applied.
         
-            Returns:
-                true if center of mass correction is applied
+        Returns:
+            true if center of mass correction is applied
         
         
         """
         ...
     def isCompatibleWithTIVs(self) -> bool:
         """
-            Get the flag for compatibility with TIVs.
+        Get the flag for compatibility with TIVs.
         
-            Returns:
-                true if compatible with TIVs
-        
-        
-        """
-        ...
-    def setCenterOfMassOffset(self, double: float) -> None:
-        """
-            Set the approximate center of mass to reflector offset.
-        
-            Parameters:
-                centerOfMassOffset (double): the offset to set in meters
+        Returns:
+            true if compatible with TIVs
         
         
         """
         ...
-    def setIsCenterOfMassCorrectionApplied(self, boolean: bool) -> None:
+    def setCenterOfMassOffset(self, centerOfMassOffset: float) -> None:
         """
-            Set the flag telling if the center of mass correction is applied.
+        Set the approximate center of mass to reflector offset.
         
-            Parameters:
-                isCenterOfMassCorrectionApplied (boolean): true if center of mass correction is applied
-        
-        
-        """
-        ...
-    def setIsCompatibleWithTIVs(self, boolean: bool) -> None:
-        """
-            Set the flag for compatibility with TIVs.
-        
-            Parameters:
-                isCompatibleWithTIVs (boolean): true if compatible with TIVs
+        Parameters:
+            centerOfMassOffset (double): the offset to set in meters
         
         
         """
         ...
-    def setPrf(self, double: float) -> None:
+    def setIsCenterOfMassCorrectionApplied(self, isCenterOfMassCorrectionApplied: bool) -> None:
         """
-            Set the Pulse Repetition Frequency (PRF).
+        Set the flag telling if the center of mass correction is applied.
         
-            Parameters:
-                prf (double): the ulse Repetition Frequency (PRF) to set in Hz
-        
-        
-        """
-        ...
-    def setRefFrame(self, frame: org.orekit.frames.Frame) -> None:
-        """
-            Set the reference frame.
-        
-            Parameters:
-                refFrame (:class:`~org.orekit.frames.Frame`): the reference frame to set
+        Parameters:
+            isCenterOfMassCorrectionApplied (boolean): true if center of mass correction is applied
         
         
         """
         ...
-    def setRefFrameId(self, int: int) -> None:
+    def setIsCompatibleWithTIVs(self, isCompatibleWithTIVs: bool) -> None:
         """
-            Set the reference frame identifier.
+        Set the flag for compatibility with TIVs.
         
-            Parameters:
-                refFrameId (int): the reference frame identifier to set
-        
-        
-        """
-        ...
-    def setRotationalAngleType(self, int: int) -> None:
-        """
-            Set the rotation angle type.
-        
-            Parameters:
-                rotationalAngleType (int): the rotation angle type to set
+        Parameters:
+            isCompatibleWithTIVs (boolean): true if compatible with TIVs
         
         
         """
         ...
-    def setSource(self, string: str) -> None:
+    def setPrf(self, prf: float) -> None:
         """
-            Set the ephemeris source.
+        Set the Pulse Repetition Frequency (PRF).
         
-            Parameters:
-                source (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the ephemeris source to set
-        
-        
-        """
-        ...
-    def setStep(self, int: int) -> None:
-        """
-            Set the time between table entries.
-        
-            Parameters:
-                step (int): the time to set in seconds
+        Parameters:
+            prf (double): the ulse Repetition Frequency (PRF) to set in Hz
         
         
         """
         ...
-    def setSubDailySequenceNumber(self, int: int) -> None:
+    def setRefFrame(self, refFrame: org.orekit.frames.Frame) -> None:
         """
-            Set the sub-daily ephemeris sequence number.
+        Set the reference frame.
         
-            Parameters:
-                subDailySequenceNumber (int): the sub-daily ephemeris sequence number to set
-        
-        
-        """
-        ...
-    def setTranspClkRef(self, double: float) -> None:
-        """
-            Set the transponder Clock Reference Time.
-        
-            Parameters:
-                transpClkRef (double): the transponder Clock Reference Time to set
+        Parameters:
+            refFrame (Frame): the reference frame to set
         
         
         """
         ...
-    def setTranspOscDrift(self, double: float) -> None:
+    def setRefFrameId(self, refFrameId: int) -> None:
         """
-            Set the transponder Oscillator Drift in parts.
+        Set the reference frame identifier.
         
-            Parameters:
-                transpOscDrift (double): the transponder Oscillator Drift in parts in 10^15 to set
-        
-        
-        """
-        ...
-    def setTranspTransmitDelay(self, double: float) -> None:
-        """
-            Set the transponder transmit delay.
-        
-            Parameters:
-                transpTransmitDelay (double): the transponder transmit delay to set in seconds
+        Parameters:
+            refFrameId (int): the reference frame identifier to set
         
         
         """
         ...
-    def setTranspUtcOffset(self, double: float) -> None:
+    def setRotationalAngleType(self, rotationalAngleType: int) -> None:
         """
-            Set the transponder UTC offset.
+        Set the rotation angle type.
         
-            Parameters:
-                transpUtcOffset (double): the UTC offset to set in seconds
+        Parameters:
+            rotationalAngleType (int): the rotation angle type to set
+        
+        
+        """
+        ...
+    def setSource(self, source: str) -> None:
+        """
+        Set the ephemeris source.
+        
+        Parameters:
+            source (String): the ephemeris source to set
+        
+        
+        """
+        ...
+    def setStep(self, step: int) -> None:
+        """
+        Set the time between table entries.
+        
+        Parameters:
+            step (int): the time to set in seconds
+        
+        
+        """
+        ...
+    def setSubDailySequenceNumber(self, subDailySequenceNumber: int) -> None:
+        """
+        Set the sub-daily ephemeris sequence number.
+        
+        Parameters:
+            subDailySequenceNumber (int): the sub-daily ephemeris sequence number to set
+        
+        
+        """
+        ...
+    def setTranspClkRef(self, transpClkRef: float) -> None:
+        """
+        Set the transponder Clock Reference Time.
+        
+        Parameters:
+            transpClkRef (double): the transponder Clock Reference Time to set
+        
+        
+        """
+        ...
+    def setTranspOscDrift(self, transpOscDrift: float) -> None:
+        """
+        Set the transponder Oscillator Drift in parts.
+        
+        Parameters:
+            transpOscDrift (double): the transponder Oscillator Drift in parts in 10^15 to set
+        
+        
+        """
+        ...
+    def setTranspTransmitDelay(self, transpTransmitDelay: float) -> None:
+        """
+        Set the transponder transmit delay.
+        
+        Parameters:
+            transpTransmitDelay (double): the transponder transmit delay to set in seconds
+        
+        
+        """
+        ...
+    def setTranspUtcOffset(self, transpUtcOffset: float) -> None:
+        """
+        Set the transponder UTC offset.
+        
+        Parameters:
+            transpUtcOffset (double): the UTC offset to set in seconds
         
         
         """
@@ -922,489 +984,494 @@ class CPFHeader(ILRSHeader):
 
 class CRDHeader(ILRSHeader):
     """
-    public class CRDHeader extends :class:`~org.orekit.files.ilrs.ILRSHeader`
+    Container for Consolidated laser ranging Data Format (CDR) header.
     
-        Container for Consolidated laser ranging Data Format (CDR) header.
-    
-        Since:
-            10.3
+    Since:
+        10.3
     """
     PATTERN_DATETIME_DELIMITER_REGEX: typing.ClassVar[java.util.regex.Pattern] = ...
     """
-    public static final :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.util.regex.Pattern?is` PATTERN_DATETIME_DELIMITER_REGEX
-    
-        Pattern of delimiter of datetime.
-    
+    Pattern of delimiter of datetime.
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Empty constructor.
+        
+        This constructor is not strictly necessary, but it prevents spurious javadoc warnings with JDK 18 and later.
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
     def getDataReleaseFlag(self) -> int:
         """
-            Get the flag indicating the data release.
+        Get the flag indicating the data release.
         
-            Returns:
-                the flag indicating the data release
+        Returns:
+            the flag indicating the data release
         
         
         """
         ...
     def getDataType(self) -> int:
         """
-            Get the data type.
+        Get the data type.
         
-            0 = full rate ; 1 = normal point ; 2 = sampled engineering
+        0 = full rate ; 1 = normal point ; 2 = sampled engineering
         
-            Returns:
-                the data type
+        Returns:
+            the data type
         
         
         """
         ...
     def getDateAndTime(self) -> str:
         """
-            Get the date and time as the string value.
+        Get the date and time as the string value.
         
-            Depending the prediction type, this value can represent the CPF starting date and hour (MMDDHH) from CPF H2 record or
-            TLE epoch day/fractional day
+        Depending the prediction type, this value can represent the CPF starting date and hour (MMDDHH) from CPF H2 record or TLE epoch day/fractional day
         
-            Returns:
-                the date and time as the string value
+        Returns:
+            the date and time as the string value
         
         
         """
         ...
     def getEpochIdentifier(self) -> int:
         """
-            Get the epoch identifier.
+        Get the epoch identifier.
         
-            3 = UTC (UNSO) ; 4 = UTC (GPS) ; 7 = UTC (BIPM) ; 10 = UTC (Station Time Scale)
+        3 = UTC (UNSO) ; 4 = UTC (GPS) ; 7 = UTC (BIPM) ; 10 = UTC (Station Time Scale)
         
-            Returns:
-                the epoch identifier
+        Returns:
+            the epoch identifier
         
         
         """
         ...
     def getH1CrdString(self) -> str:
         """
-            Get a string representation of the H1 in the CRD format.
+        Get a string representation of the H1 in the CRD format.
         
-            Returns:
-                a string representation of the H1, in the CRD format.
+        Returns:
+            a string representation of the H1, in the CRD format.
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     def getH2CrdString(self) -> str:
         """
-            Get a string representation of the H2 in the CRD format.
+        Get a string representation of the H2 in the CRD format.
         
-            Returns:
-                a string representation of the H2, in the CRD format.
+        Returns:
+            a string representation of the H2, in the CRD format.
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     def getH3CrdString(self) -> str:
         """
-            Get a string representation of the H3 in the CRD format.
+        Get a string representation of the H3 in the CRD format.
         
-            Returns:
-                a string representation of the H3, in the CRD format.
+        Returns:
+            a string representation of the H3, in the CRD format.
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     def getH4CrdString(self) -> str:
         """
-            Get a string representation of the H4 in the CRD format.
+        Get a string representation of the H4 in the CRD format.
         
-            Returns:
-                a string representation of the H4, in the CRD format.
+        Returns:
+            a string representation of the H4, in the CRD format.
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     def getH5CrdString(self) -> str:
         """
-            Get a string representation of the H5 in the CRD format.
+        Get a string representation of the H5 in the CRD format.
         
-            Returns:
-                a string representation of the H5, in the CRD format.
+        Returns:
+            a string representation of the H5, in the CRD format.
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     def getPredictionProvider(self) -> str:
         """
-            Get the prediction provider.
+        Get the prediction provider.
         
-            Returns:
-                the preditction provider
+        Returns:
+            the preditction provider
         
         
         """
         ...
     def getPredictionType(self) -> int:
         """
-            Get the prediction type (CPF or TLE).
+        Get the prediction type (CPF or TLE).
         
-            Returns:
-                the prediction type
+        Returns:
+            the prediction type
         
         
         """
         ...
     def getQualityIndicator(self) -> int:
         """
-            Get the data quality indicator.
+        Get the data quality indicator.
         
-            Returns:
-                the data quality indicator
+        Returns:
+            the data quality indicator
         
         
         """
         ...
     def getRangeType(self) -> 'CRDHeader.RangeType':
         """
-            Get the range type.
+        Get the range type.
         
-            Returns:
-                the range type
+        Returns:
+            the range type
         
         
         """
         ...
     def getSpacecraftEpochTimeScale(self) -> int:
         """
-            Get the spacecraft epoch time scale.
+        Get the spacecraft epoch time scale.
         
-            Returns:
-                the spacecraft epoch time scale
+        Returns:
+            the spacecraft epoch time scale
         
         
         """
         ...
     def getStationName(self) -> str:
         """
-            Get the station name from official list.
+        Get the station name from official list.
         
-            Returns:
-                the station name from official list
+        Returns:
+            the station name from official list
         
         
         """
         ...
     def getStationNetword(self) -> str:
         """
-            Get the station network.
+        Get the station network.
         
-            Returns:
-                the station network
+        Returns:
+            the station network
         
         
         """
         ...
     def getSystemIdentifier(self) -> int:
         """
-            Get the system identifier.
+        Get the system identifier.
         
-            Returns:
-                the system identifier
+        Returns:
+            the system identifier
         
         
         """
         ...
     def getSystemNumber(self) -> int:
         """
-            Get the system number.
+        Get the system number.
         
-            Returns:
-                the system number
+        Returns:
+            the system number
         
         
         """
         ...
     def getSystemOccupancy(self) -> int:
         """
-            Get the system occupancy.
+        Get the system occupancy.
         
-            Returns:
-                the system occupancy
+        Returns:
+            the system occupancy
         
         
         """
         ...
     def getYearOfCentury(self) -> int:
         """
-            Get the year of century from CPF or TLE.
+        Get the year of century from CPF or TLE.
         
-            Returns:
-                the year of century from CPF or TLE
+        Returns:
+            the year of century from CPF or TLE
         
         
         """
         ...
     def isCenterOfMassCorrectionApplied(self) -> bool:
         """
-            Get the center of mass correction applied indicator.
+        Get the center of mass correction applied indicator.
         
-            Returns:
-                true if center of mass correction is applied
+        Returns:
+            true if center of mass correction is applied
         
         
         """
         ...
     def isReceiveAmplitudeCorrectionApplied(self) -> bool:
         """
-            Get the receive amplitude correction applied indicator.
+        Get the receive amplitude correction applied indicator.
         
-            Returns:
-                true if receive amplitude correction is applied
+        Returns:
+            true if receive amplitude correction is applied
         
         
         """
         ...
     def isStationSystemDelayApplied(self) -> bool:
         """
-            Get the station system delay applied indicator.
+        Get the station system delay applied indicator.
         
-            Returns:
-                true if station system delay is applied
+        Returns:
+            true if station system delay is applied
         
         
         """
         ...
     def isTransponderDelayApplied(self) -> bool:
         """
-            Get the spacecraft system delay applied (transponders) indicator.
+        Get the spacecraft system delay applied (transponders) indicator.
         
-            Returns:
-                true if transponder delay is applied
+        Returns:
+            true if transponder delay is applied
         
         
         """
         ...
     def isTroposphericRefractionApplied(self) -> bool:
         """
-            Get the tropospheric refraction correction applied indicator.
+        Get the tropospheric refraction correction applied indicator.
         
-            Returns:
-                true if tropospheric refraction correction is applied
-        
-        
-        """
-        ...
-    def setDataReleaseFlag(self, int: int) -> None:
-        """
-            Set the flag indicating the data release.
-        
-            Parameters:
-                dataReleaseFlag (int): the flag to set
+        Returns:
+            true if tropospheric refraction correction is applied
         
         
         """
         ...
-    def setDataType(self, int: int) -> None:
+    def setDataReleaseFlag(self, dataReleaseFlag: int) -> None:
         """
-            Set the data type.
+        Set the flag indicating the data release.
         
-            Parameters:
-                dataType (int): the data type to set
-        
-        
-        """
-        ...
-    def setDateAndTime(self, string: str) -> None:
-        """
-            Set the string value of date and time.
-        
-            Parameters:
-                dateAndTime (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the date and time to set
+        Parameters:
+            dataReleaseFlag (int): the flag to set
         
         
         """
         ...
-    def setEpochIdentifier(self, int: int) -> None:
+    def setDataType(self, dataType: int) -> None:
         """
-            Set the epoch identifier.
+        Set the data type.
         
-            Parameters:
-                epochIdentifier (int): the epoch identifier to set
-        
-        
-        """
-        ...
-    def setIsCenterOfMassCorrectionApplied(self, boolean: bool) -> None:
-        """
-            Set the center of mass correction applied indicator.
-        
-            Parameters:
-                isCenterOfMassCorrectionApplied (boolean): true if center of mass correction is applied
+        Parameters:
+            dataType (int): the data type to set
         
         
         """
         ...
-    def setIsReceiveAmplitudeCorrectionApplied(self, boolean: bool) -> None:
+    def setDateAndTime(self, dateAndTime: str) -> None:
         """
-            Set the receive amplitude correction applied indicator.
+        Set the string value of date and time.
         
-            Parameters:
-                isReceiveAmplitudeCorrectionApplied (boolean): true if receive amplitude correction is applied
-        
-        
-        """
-        ...
-    def setIsStationSystemDelayApplied(self, boolean: bool) -> None:
-        """
-            Set the station system delay applied indicator.
-        
-            Parameters:
-                isStationSystemDelayApplied (boolean): true if station system delay is applied
+        Parameters:
+            dateAndTime (String): the date and time to set
         
         
         """
         ...
-    def setIsTransponderDelayApplied(self, boolean: bool) -> None:
+    def setEpochIdentifier(self, epochIdentifier: int) -> None:
         """
-            Set the spacecraft system delay applied (transponders) indicator.
+        Set the epoch identifier.
         
-            Parameters:
-                isTransponderDelayApplied (boolean): true if transponder delay is applied
-        
-        
-        """
-        ...
-    def setIsTroposphericRefractionApplied(self, boolean: bool) -> None:
-        """
-            Set the tropospheric refraction correction applied indicator.
-        
-            Parameters:
-                isTroposphericRefractionApplied (boolean): true if tropospheric refraction correction is applied
+        Parameters:
+            epochIdentifier (int): the epoch identifier to set
         
         
         """
         ...
-    def setPredictionProvider(self, string: str) -> None:
+    def setIsCenterOfMassCorrectionApplied(self, isCenterOfMassCorrectionApplied: bool) -> None:
         """
-            Set the prediction provider.
+        Set the center of mass correction applied indicator.
         
-            Parameters:
-                predictionProvider (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the prediction provider to set
-        
-        
-        """
-        ...
-    def setPredictionType(self, int: int) -> None:
-        """
-            Set the prediction type.
-        
-            Parameters:
-                predictionType (int): the prediction type to set
+        Parameters:
+            isCenterOfMassCorrectionApplied (boolean): true if center of mass correction is applied
         
         
         """
         ...
-    def setQualityIndicator(self, int: int) -> None:
+    def setIsReceiveAmplitudeCorrectionApplied(self, isReceiveAmplitudeCorrectionApplied: bool) -> None:
         """
-            Set the data quality indicator.
+        Set the receive amplitude correction applied indicator.
         
-            Parameters:
-                qualityIndicator (int): the indicator to set
-        
-        
-        """
-        ...
-    def setRangeType(self, int: int) -> None:
-        """
-            Set the range type indicator.
-        
-            Parameters:
-                indicator (int): range type indicator
+        Parameters:
+            isReceiveAmplitudeCorrectionApplied (boolean): true if receive amplitude correction is applied
         
         
         """
         ...
-    def setSpacecraftEpochTimeScale(self, int: int) -> None:
+    def setIsStationSystemDelayApplied(self, isStationSystemDelayApplied: bool) -> None:
         """
-            Set the spacecraft epoch time scale.
+        Set the station system delay applied indicator.
         
-            Parameters:
-                spacecraftEpochTimeScale (int): the spacecraft epoch time scale to set
-        
-        
-        """
-        ...
-    def setStationName(self, string: str) -> None:
-        """
-            Set the station name from official list.
-        
-            Parameters:
-                stationName (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the station name to set
+        Parameters:
+            isStationSystemDelayApplied (boolean): true if station system delay is applied
         
         
         """
         ...
-    def setStationNetword(self, string: str) -> None:
+    def setIsTransponderDelayApplied(self, isTransponderDelayApplied: bool) -> None:
         """
-            Set the station network.
+        Set the spacecraft system delay applied (transponders) indicator.
         
-            Parameters:
-                stationNetword (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the station network to set
-        
-        
-        """
-        ...
-    def setSystemIdentifier(self, int: int) -> None:
-        """
-            Set the system identifier.
-        
-            Parameters:
-                systemIdentifier (int): the system identifier to set
+        Parameters:
+            isTransponderDelayApplied (boolean): true if transponder delay is applied
         
         
         """
         ...
-    def setSystemNumber(self, int: int) -> None:
+    def setIsTroposphericRefractionApplied(self, isTroposphericRefractionApplied: bool) -> None:
         """
-            Set the system number.
+        Set the tropospheric refraction correction applied indicator.
         
-            Parameters:
-                systemNumber (int): the system number to set
-        
-        
-        """
-        ...
-    def setSystemOccupancy(self, int: int) -> None:
-        """
-            Set the system occupancy.
-        
-            Parameters:
-                systemOccupancy (int): the system occupancy to set
+        Parameters:
+            isTroposphericRefractionApplied (boolean): true if tropospheric refraction correction is applied
         
         
         """
         ...
-    def setYearOfCentury(self, int: int) -> None:
+    def setPredictionProvider(self, predictionProvider: str) -> None:
         """
-            Set the year of century from CPF or TLE.
+        Set the prediction provider.
         
-            Parameters:
-                yearOfCentury (int): the year of century to set
+        Parameters:
+            predictionProvider (String): the prediction provider to set
+        
+        
+        """
+        ...
+    def setPredictionType(self, predictionType: int) -> None:
+        """
+        Set the prediction type.
+        
+        Parameters:
+            predictionType (int): the prediction type to set
+        
+        
+        """
+        ...
+    def setQualityIndicator(self, qualityIndicator: int) -> None:
+        """
+        Set the data quality indicator.
+        
+        Parameters:
+            qualityIndicator (int): the indicator to set
+        
+        
+        """
+        ...
+    def setRangeType(self, indicator: int) -> None:
+        """
+        Set the range type indicator.
+        
+        Parameters:
+            indicator (int): range type indicator
+        
+        
+        """
+        ...
+    def setSpacecraftEpochTimeScale(self, spacecraftEpochTimeScale: int) -> None:
+        """
+        Set the spacecraft epoch time scale.
+        
+        Parameters:
+            spacecraftEpochTimeScale (int): the spacecraft epoch time scale to set
+        
+        
+        """
+        ...
+    def setStationName(self, stationName: str) -> None:
+        """
+        Set the station name from official list.
+        
+        Parameters:
+            stationName (String): the station name to set
+        
+        
+        """
+        ...
+    def setStationNetword(self, stationNetword: str) -> None:
+        """
+        Set the station network.
+        
+        Parameters:
+            stationNetword (String): the station network to set
+        
+        
+        """
+        ...
+    def setSystemIdentifier(self, systemIdentifier: int) -> None:
+        """
+        Set the system identifier.
+        
+        Parameters:
+            systemIdentifier (int): the system identifier to set
+        
+        
+        """
+        ...
+    def setSystemNumber(self, systemNumber: int) -> None:
+        """
+        Set the system number.
+        
+        Parameters:
+            systemNumber (int): the system number to set
+        
+        
+        """
+        ...
+    def setSystemOccupancy(self, systemOccupancy: int) -> None:
+        """
+        Set the system occupancy.
+        
+        Parameters:
+            systemOccupancy (int): the system occupancy to set
+        
+        
+        """
+        ...
+    def setYearOfCentury(self, yearOfCentury: int) -> None:
+        """
+        Set the year of century from CPF or TLE.
+        
+        Parameters:
+            yearOfCentury (int): the year of century to set
         
         
         """
@@ -1445,97 +1512,134 @@ class CRDHeader(ILRSHeader):
         def values() -> typing.MutableSequence['CRDHeader.RangeType']: ...
 
 class PythonILRSHeader(ILRSHeader):
+    """
+    Python implementation of the ILRSHeader abstract class. This class is part of the JCC Python interface.
+    """
     def __init__(self): ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None: ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
 
 class CRD:
     """
-    public class CRD extends :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    This class stores all the information of the Consolidated laser ranging Data Format (CRD) parsed by CRDParser. It contains the header and a list of data records.
     
-        This class stores all the information of the Consolidated laser ranging Data Format (CRD) parsed by CRDParser. It
-        contains the header and a list of data records.
-    
-        Since:
-            10.3
+    Since:
+        10.3
     """
     STR_VALUE_NOT_AVAILABLE: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` STR_VALUE_NOT_AVAILABLE
+    Value of 'not available' or 'not applicable' or 'no information'.
     
-        Value of 'not available' or 'not applicable' or 'no information'.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     STR_NAN: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` STR_NAN
+    String of "NaN".
     
-        String of "NaN".
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     PATTERN_NAN: typing.ClassVar[java.util.regex.Pattern] = ...
     """
-    public static final :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.util.regex.Pattern?is` PATTERN_NAN
-    
-        Pattern of "NaN".
-    
+    Pattern of "NaN".
     """
-    def __init__(self): ...
-    def addDataBlock(self, cRDDataBlock: 'CRD.CRDDataBlock') -> None:
+    def __init__(self):
         """
-            Add a data block to the current list of data blocks.
+        Constructor.
+        """
+        ...
+    def addDataBlock(self, dataBlock: 'CRD.CRDDataBlock') -> None:
+        """
+        Add a data block to the current list of data blocks.
         
-            Parameters:
-                dataBlock (:class:`~org.orekit.files.ilrs.CRD.CRDDataBlock`): data block to add
+        Parameters:
+            dataBlock (CRDDataBlock): data block to add
         
         
         """
         ...
     @staticmethod
-    def formatIntegerOrNaN(int: int, int2: int) -> str:
+    def formatIntegerOrNaN(value: int, valueNotAvailable: int) -> str:
         """
-            Format the integer value as a string, or the string :code:`VALUE_NOT_AVAILABLE`.
+        Format the integer value as a string, or the string VALUE_NOT_AVAILABLE.
         
-            Parameters:
-                value (int): the value
-                valueNotAvailable (int): the value means not available
+        Parameters:
+            value (int): the value
+            valueNotAvailable (int): the value means not available
         
-            Returns:
-                a string
+        Returns:
+            a string
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
-    def getComments(self) -> java.util.List[str]: ...
-    def getDataBlocks(self) -> java.util.List['CRD.CRDDataBlock']: ...
-    @staticmethod
-    def handleNaN(string: str) -> str:
+    def getComments(self) -> java.util.List[str]:
         """
-            Replace all " NaN" with " na".
+        Get the comments contained in the file.
         
-            Parameters:
-                crdString (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the original string
+        Returns:
+            the comments contained in the file
         
-            Returns:
-                the string
         
-            Since:
-                12.0
+        """
+        ...
+    def getDataBlocks(self) -> java.util.List['CRD.CRDDataBlock']:
+        """
+        Get the data blocks contain in the file.
+        
+        Returns:
+            the data blocks contain in the file
+        
+        
+        """
+        ...
+    @staticmethod
+    def handleNaN(crdString: str) -> str:
+        """
+        Replace all " NaN" with " na".
+        
+        Parameters:
+            crdString (String): the original string
+        
+        Returns:
+            the string
+        
+        Since:
+            12.0
         
         
         """
@@ -1686,23 +1790,25 @@ class CRD:
 
 class CRDConfiguration:
     """
-    public class CRDConfiguration extends :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Container for Consolidated laser ranging Data Format (CDR) configuration records.
     
-        Container for Consolidated laser ranging Data Format (CDR) configuration records.
-    
-        Since:
-            10.3
+    Since:
+        10.3
     """
-    def __init__(self): ...
-    def addConfigurationRecord(self, baseConfiguration: 'CRDConfiguration.BaseConfiguration') -> None:
+    def __init__(self):
         """
-            Add a configuration record, such as SystemConfiguation, LaserConfiguration, DetectorConfiguration, etc.
+        Constructor.
+        """
+        ...
+    def addConfigurationRecord(self, config: 'CRDConfiguration.BaseConfiguration') -> None:
+        """
+        Add a configuration record, such as SystemConfiguation, LaserConfiguration, DetectorConfiguration, etc.
         
-            Parameters:
-                config (:class:`~org.orekit.files.ilrs.CRDConfiguration.BaseConfiguration`): the configuration record
+        Parameters:
+            config (BaseConfiguration): the configuration record
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
@@ -1710,73 +1816,85 @@ class CRDConfiguration:
     @typing.overload
     def getCalibrationTargetRecord(self) -> 'CRDConfiguration.CalibrationTargetConfiguration':
         """
-            Get the calibration target configuration record.
+        Get the calibration target configuration record.
         
-            Returns:
-                the calibration target configuration record
+        Returns:
+            the calibration target configuration record
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     @typing.overload
-    def getCalibrationTargetRecord(self, systemConfiguration: 'CRDConfiguration.SystemConfiguration') -> 'CRDConfiguration.CalibrationTargetConfiguration':
+    def getCalibrationTargetRecord(self, systemRecord: 'CRDConfiguration.SystemConfiguration') -> 'CRDConfiguration.CalibrationTargetConfiguration':
         """
-            Get calibration target configuration record related to the systemRecord.
+        Get calibration target configuration record related to the systemRecord.
         
-            Parameters:
-                systemRecord (:class:`~org.orekit.files.ilrs.CRDConfiguration.SystemConfiguration`): the system configuration
+        Parameters:
+            systemRecord (SystemConfiguration): the system configuration
         
-            Returns:
-                the calibration target configuration record related the the systemRecord
+        Returns:
+            the calibration target configuration record related the the systemRecord
         
-            Since:
-                12.0
-        
-        """
-        ...
-    def getConfigurationRecord(self, string: str) -> 'CRDConfiguration.BaseConfiguration':
-        """
-            Get configuration record corresponding to the configId.
-        
-            Parameters:
-                configId (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the id of configuration
-        
-            Returns:
-                the configuration with configId, or null
-        
-            Since:
-                12.0
-        
+        Since:
+            12.0
         
         """
         ...
-    def getConfigurationRecordMap(self) -> java.util.Map[str, 'CRDConfiguration.BaseConfiguration']: ...
+    def getConfigurationRecord(self, configId: str) -> 'CRDConfiguration.BaseConfiguration':
+        """
+        Get configuration record corresponding to the configId.
+        
+        Parameters:
+            configId (String): the id of configuration
+        
+        Returns:
+            the configuration with configId, or null
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
+    def getConfigurationRecordMap(self) -> java.util.Map[str, 'CRDConfiguration.BaseConfiguration']:
+        """
+        Get the configuration records map.
+        
+        Returns:
+            the configuration records map
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
     @typing.overload
     def getDetectorRecord(self) -> 'CRDConfiguration.DetectorConfiguration':
         """
-            Get the detector configuration record.
+        Get the detector configuration record.
         
-            Returns:
-                the detector configuration record
+        Returns:
+            the detector configuration record
         
         """
         ...
     @typing.overload
-    def getDetectorRecord(self, systemConfiguration: 'CRDConfiguration.SystemConfiguration') -> 'CRDConfiguration.DetectorConfiguration':
+    def getDetectorRecord(self, systemRecord: 'CRDConfiguration.SystemConfiguration') -> 'CRDConfiguration.DetectorConfiguration':
         """
-            Get detector configuration record related to the systemRecord.
+        Get detector configuration record related to the systemRecord.
         
-            Parameters:
-                systemRecord (:class:`~org.orekit.files.ilrs.CRDConfiguration.SystemConfiguration`): the system configuration
+        Parameters:
+            systemRecord (SystemConfiguration): the system configuration
         
-            Returns:
-                the detector configuration record related the the systemRecord
+        Returns:
+            the detector configuration record related the the systemRecord
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
@@ -1784,36 +1902,36 @@ class CRDConfiguration:
     @typing.overload
     def getLaserRecord(self) -> 'CRDConfiguration.LaserConfiguration':
         """
-            Get the laser configuration record.
+        Get the laser configuration record.
         
-            Returns:
-                the laser configuration record
+        Returns:
+            the laser configuration record
         
         """
         ...
     @typing.overload
-    def getLaserRecord(self, systemConfiguration: 'CRDConfiguration.SystemConfiguration') -> 'CRDConfiguration.LaserConfiguration':
+    def getLaserRecord(self, systemRecord: 'CRDConfiguration.SystemConfiguration') -> 'CRDConfiguration.LaserConfiguration':
         """
-            Get laser configuration record related to the systemRecord.
+        Get laser configuration record related to the systemRecord.
         
-            Parameters:
-                systemRecord (:class:`~org.orekit.files.ilrs.CRDConfiguration.SystemConfiguration`): the system configuration
+        Parameters:
+            systemRecord (SystemConfiguration): the system configuration
         
-            Returns:
-                the laser configuration record related the the systemRecord
+        Returns:
+            the laser configuration record related the the systemRecord
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     def getLastSystemRecord(self) -> 'CRDConfiguration.SystemConfiguration':
         """
-            Get the system configuration record.
+        Get the system configuration record.
         
-            Returns:
-                the system configuration record
+        Returns:
+            the system configuration record
         
         
         """
@@ -1821,26 +1939,26 @@ class CRDConfiguration:
     @typing.overload
     def getMeteorologicalRecord(self) -> 'CRDConfiguration.MeteorologicalConfiguration':
         """
-            Get the meteorological record.
+        Get the meteorological record.
         
-            Returns:
-                the meteorological record
+        Returns:
+            the meteorological record
         
         """
         ...
     @typing.overload
-    def getMeteorologicalRecord(self, systemConfiguration: 'CRDConfiguration.SystemConfiguration') -> 'CRDConfiguration.MeteorologicalConfiguration':
+    def getMeteorologicalRecord(self, systemRecord: 'CRDConfiguration.SystemConfiguration') -> 'CRDConfiguration.MeteorologicalConfiguration':
         """
-            Get meteorological configuration record related to the systemRecord.
+        Get meteorological configuration record related to the systemRecord.
         
-            Parameters:
-                systemRecord (:class:`~org.orekit.files.ilrs.CRDConfiguration.SystemConfiguration`): the system configuration
+        Parameters:
+            systemRecord (SystemConfiguration): the system configuration
         
-            Returns:
-                the meteorological configuration record related the the systemRecord
+        Returns:
+            the meteorological configuration record related the the systemRecord
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
@@ -1848,55 +1966,77 @@ class CRDConfiguration:
     @typing.overload
     def getSoftwareRecord(self) -> 'CRDConfiguration.SoftwareConfiguration':
         """
-            Get the software configuration record.
+        Get the software configuration record.
         
-            Returns:
-                the software configuration record
+        Returns:
+            the software configuration record
         
         """
         ...
     @typing.overload
-    def getSoftwareRecord(self, systemConfiguration: 'CRDConfiguration.SystemConfiguration') -> 'CRDConfiguration.SoftwareConfiguration':
+    def getSoftwareRecord(self, systemRecord: 'CRDConfiguration.SystemConfiguration') -> 'CRDConfiguration.SoftwareConfiguration':
         """
-            Get software configuration record related to the systemRecord.
+        Get software configuration record related to the systemRecord.
         
-            Parameters:
-                systemRecord (:class:`~org.orekit.files.ilrs.CRDConfiguration.SystemConfiguration`): the system configuration
+        Parameters:
+            systemRecord (SystemConfiguration): the system configuration
         
-            Returns:
-                the software configuration record related the the systemRecord
+        Returns:
+            the software configuration record related the the systemRecord
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
-    def getSystemConfigurationIds(self) -> java.util.Set[str]: ...
-    def getSystemConfigurationRecords(self) -> java.util.List['CRDConfiguration.SystemConfiguration']: ...
+    def getSystemConfigurationIds(self) -> java.util.Set[str]:
+        """
+        Get a set of configuration ids.
+        
+        Returns:
+            an unmodifiable set of configuration ids
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
+    def getSystemConfigurationRecords(self) -> java.util.List['CRDConfiguration.SystemConfiguration']:
+        """
+        Get a list of system configurations.
+        
+        Returns:
+            an unmodifiable list of system configurations
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
     @typing.overload
     def getSystemRecord(self) -> 'CRDConfiguration.SystemConfiguration':
         """
-            Get the system configuration record.
+        Get the system configuration record.
         
-            Returns:
-                the system configuration record
+        Returns:
+            the system configuration record
         
         """
         ...
     @typing.overload
-    def getSystemRecord(self, string: str) -> 'CRDConfiguration.SystemConfiguration':
+    def getSystemRecord(self, configId: str) -> 'CRDConfiguration.SystemConfiguration':
         """
-            Get system configuration record. If configId is null, the default(first system configuration record) is returned.
+        Parameters:
+            configId (String): system configuration id, it can be null.
         
-            Parameters:
-                configId (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): system configuration id, it can be null.
+        Returns:
+            the system configuration record
         
-            Returns:
-                the system configuration record
-        
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
@@ -1904,26 +2044,26 @@ class CRDConfiguration:
     @typing.overload
     def getTimingRecord(self) -> 'CRDConfiguration.TimingSystemConfiguration':
         """
-            Get the timing system configuration record.
+        Get the timing system configuration record.
         
-            Returns:
-                the timing system configuration record
+        Returns:
+            the timing system configuration record
         
         """
         ...
     @typing.overload
-    def getTimingRecord(self, systemConfiguration: 'CRDConfiguration.SystemConfiguration') -> 'CRDConfiguration.TimingSystemConfiguration':
+    def getTimingRecord(self, systemRecord: 'CRDConfiguration.SystemConfiguration') -> 'CRDConfiguration.TimingSystemConfiguration':
         """
-            Get timing system configuration record related to the systemRecord.
+        Get timing system configuration record related to the systemRecord.
         
-            Parameters:
-                systemRecord (:class:`~org.orekit.files.ilrs.CRDConfiguration.SystemConfiguration`): the system configuration
+        Parameters:
+            systemRecord (SystemConfiguration): the system configuration
         
-            Returns:
-                the timing system configuration record related the the systemRecord
+        Returns:
+            the timing system configuration record related the the systemRecord
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
@@ -1931,26 +2071,26 @@ class CRDConfiguration:
     @typing.overload
     def getTransponderRecord(self) -> 'CRDConfiguration.TransponderConfiguration':
         """
-            Get the transponder configuration record.
+        Get the transponder configuration record.
         
-            Returns:
-                the transponder configuration record
+        Returns:
+            the transponder configuration record
         
         """
         ...
     @typing.overload
-    def getTransponderRecord(self, systemConfiguration: 'CRDConfiguration.SystemConfiguration') -> 'CRDConfiguration.TransponderConfiguration':
+    def getTransponderRecord(self, systemRecord: 'CRDConfiguration.SystemConfiguration') -> 'CRDConfiguration.TransponderConfiguration':
         """
-            Get transponder configuration record related to the systemRecord.
+        Get transponder configuration record related to the systemRecord.
         
-            Parameters:
-                systemRecord (:class:`~org.orekit.files.ilrs.CRDConfiguration.SystemConfiguration`): the system configuration
+        Parameters:
+            systemRecord (SystemConfiguration): the system configuration
         
-            Returns:
-                the transponder configuration record related the the systemRecord
+        Returns:
+            the transponder configuration record related the the systemRecord
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """

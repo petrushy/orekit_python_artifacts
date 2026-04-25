@@ -19,42 +19,80 @@ import typing
 
 class AbstractWriter:
     """
-    public abstract class AbstractWriter extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Top level class for writing CCSDS message sections.
     
-        Top level class for writing CCSDS message sections.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def enterSection(self, generator: org.orekit.files.ccsds.utils.generation.Generator) -> None: ...
-    def exitSection(self, generator: org.orekit.files.ccsds.utils.generation.Generator) -> None: ...
-    def write(self, generator: org.orekit.files.ccsds.utils.generation.Generator) -> None: ...
+    def enterSection(self, generator: org.orekit.files.ccsds.utils.generation.Generator) -> None:
+        """
+        Enter the section.
+        
+        Parameters:
+            generator (Generator): generator to use for producing output
+        
+        Raises:
+            IOException: if an I/O error occurs.
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
+    def exitSection(self, generator: org.orekit.files.ccsds.utils.generation.Generator) -> None:
+        """
+        Exit the section.
+        
+        Parameters:
+            generator (Generator): generator to use for producing output
+        
+        Raises:
+            IOException: if an I/O error occurs.
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
+    def write(self, generator: org.orekit.files.ccsds.utils.generation.Generator) -> None:
+        """
+        Write the section, including surrounding tags.
+        
+        Parameters:
+            generator (Generator): generator to use for producing output
+        
+        Raises:
+            IOException: if any buffer writing operations fails
+        
+        
+        """
+        ...
 
 class HeaderKey(java.lang.Enum['HeaderKey']):
     """
-    public enum HeaderKey extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.section.HeaderKey`>
+    Keywords allowed in Header.
     
-        Keywords allowed in :class:`~org.orekit.files.ccsds.section.Header`.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     COMMENT: typing.ClassVar['HeaderKey'] = ...
     CLASSIFICATION: typing.ClassVar['HeaderKey'] = ...
     CREATION_DATE: typing.ClassVar['HeaderKey'] = ...
     ORIGINATOR: typing.ClassVar['HeaderKey'] = ...
     MESSAGE_ID: typing.ClassVar['HeaderKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, header: 'Header') -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, header: 'Header') -> bool:
         """
-            Process an token.
+        Process an token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                header (:class:`~org.orekit.files.ccsds.section.Header`): header to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            header (Header): header to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -65,20 +103,19 @@ class HeaderKey(java.lang.Enum['HeaderKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'HeaderKey':
+    def valueOf(name: str) -> 'HeaderKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -86,17 +123,15 @@ class HeaderKey(java.lang.Enum['HeaderKey']):
     @staticmethod
     def values() -> typing.MutableSequence['HeaderKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (HeaderKey c : HeaderKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (HeaderKey c : HeaderKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -104,27 +139,32 @@ class HeaderKey(java.lang.Enum['HeaderKey']):
 
 class HeaderProcessingState(org.orekit.files.ccsds.utils.parsing.ProcessingState):
     """
-    public class HeaderProcessingState extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+    ProcessingState for Header.
     
-        :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState` for :class:`~org.orekit.files.ccsds.section.Header`.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, abstractConstituentParser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any, typing.Any]): ...
-    def processToken(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool:
+    def __init__(self, parser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any, typing.Any]):
         """
-            Process one token.
+        Simple constructor.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken` in
-                interface :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+        Parameters:
+            parser (AbstractConstituentParser<?, ?, ?> parser): parser for the complete message
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
         
-            Returns:
-                true if token was processed, false otherwise
+        """
+        ...
+    def processToken(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool:
+        """
+        Process one token.
+        
+        Specified by: processToken in interface ProcessingState
+        
+        Parameters:
+            token (ParseToken): token to process
+        
+        Returns:
+            true if token was processed, false otherwise
         
         
         """
@@ -132,25 +172,23 @@ class HeaderProcessingState(org.orekit.files.ccsds.utils.parsing.ProcessingState
 
 class KvnStructureKey(java.lang.Enum['KvnStructureKey']):
     """
-    public enum KvnStructureKey extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.section.KvnStructureKey`>
+    Keys for KVN format structure.
     
-        Keys for :meth:`~org.orekit.files.ccsds.utils.FileFormat.KVN` format structure.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     META: typing.ClassVar['KvnStructureKey'] = ...
     DATA: typing.ClassVar['KvnStructureKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, abstractConstituentParser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any, typing.Any]) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, parser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any, typing.Any]) -> bool:
         """
-            Process an token.
+        Process an token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                parser (:class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<?, ?, ?> parser): file parser
+        Parameters:
+            token (ParseToken): token to process
+            parser (AbstractConstituentParser<?, ?, ?> parser): file parser
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -161,20 +199,19 @@ class KvnStructureKey(java.lang.Enum['KvnStructureKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'KvnStructureKey':
+    def valueOf(name: str) -> 'KvnStructureKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -182,17 +219,15 @@ class KvnStructureKey(java.lang.Enum['KvnStructureKey']):
     @staticmethod
     def values() -> typing.MutableSequence['KvnStructureKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (KvnStructureKey c : KvnStructureKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (KvnStructureKey c : KvnStructureKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -200,28 +235,32 @@ class KvnStructureKey(java.lang.Enum['KvnStructureKey']):
 
 class KvnStructureProcessingState(org.orekit.files.ccsds.utils.parsing.ProcessingState):
     """
-    public class KvnStructureProcessingState extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+    ProcessingState for structure of KVN CCSDS Messages.
     
-        :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState` for structure of
-        :meth:`~org.orekit.files.ccsds.utils.FileFormat.KVN` CCSDS Messages.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, abstractConstituentParser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any, typing.Any]): ...
-    def processToken(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool:
+    def __init__(self, parser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any, typing.Any]):
         """
-            Process one token.
+        Simple constructor.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken` in
-                interface :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+        Parameters:
+            parser (AbstractConstituentParser<?, ?, ?> parser): parser for the complete message
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
         
-            Returns:
-                true if token was processed, false otherwise
+        """
+        ...
+    def processToken(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool:
+        """
+        Process one token.
+        
+        Specified by: processToken in interface ProcessingState
+        
+        Parameters:
+            token (ParseToken): token to process
+        
+        Returns:
+            true if token was processed, false otherwise
         
         
         """
@@ -229,26 +268,24 @@ class KvnStructureProcessingState(org.orekit.files.ccsds.utils.parsing.Processin
 
 class MetadataKey(java.lang.Enum['MetadataKey']):
     """
-    public enum MetadataKey extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.section.MetadataKey`>
+    Keys for Metadata entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.section.Metadata` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     COMMENT: typing.ClassVar['MetadataKey'] = ...
     TIME_SYSTEM: typing.ClassVar['MetadataKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, metadata: 'Metadata') -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, metadata: 'Metadata') -> bool:
         """
-            Process an token.
+        Process an token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                metadata (:class:`~org.orekit.files.ccsds.section.Metadata`): metadata to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            metadata (Metadata): metadata to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -259,20 +296,19 @@ class MetadataKey(java.lang.Enum['MetadataKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'MetadataKey':
+    def valueOf(name: str) -> 'MetadataKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -280,17 +316,15 @@ class MetadataKey(java.lang.Enum['MetadataKey']):
     @staticmethod
     def values() -> typing.MutableSequence['MetadataKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (MetadataKey c : MetadataKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (MetadataKey c : MetadataKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -298,21 +332,19 @@ class MetadataKey(java.lang.Enum['MetadataKey']):
 
 class Section:
     """
-    public interface Section
+    Top level interface for all CCSDS message sections.
     
-        Top level interface for all CCSDS message sections.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def validate(self, double: float) -> None:
+    def validate(self, version: float) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Check is all mandatory entries have been initialized.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            version (double): format version
         
         
         """
@@ -322,41 +354,48 @@ _Segment__M = typing.TypeVar('_Segment__M', bound='Metadata')  # <M>
 _Segment__D = typing.TypeVar('_Segment__D', bound='Data')  # <D>
 class Segment(typing.Generic[_Segment__M, _Segment__D]):
     """
-    public class Segment<M extends :class:`~org.orekit.files.ccsds.section.Metadata`, D extends :class:`~org.orekit.files.ccsds.section.Data`> extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    NDM segments are (Metadata, Data) pairs.
     
-        NDM segments are (:class:`~org.orekit.files.ccsds.section.Metadata`, :class:`~org.orekit.files.ccsds.section.Data`)
-        pairs.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, m: _Segment__M, d: _Segment__D): ...
+    def __init__(self, metadata: _Segment__M, data: _Segment__D):
+        """
+        Constructor.
+        
+        Parameters:
+            metadata (Segment): segment metadata
+            data (Segment): segment data
+        
+        
+        """
+        ...
     def getData(self) -> _Segment__D:
         """
-            Get the segment data.
+        Get the segment data.
         
-            Returns:
-                segment data
+        Returns:
+            segment data
         
         
         """
         ...
     def getMetadata(self) -> _Segment__M:
         """
-            Get the segment metadata.
+        Get the segment metadata.
         
-            Returns:
-                segment metadata
+        Returns:
+            segment metadata
         
         
         """
         ...
-    def setMetadata(self, m: _Segment__M) -> None:
+    def setMetadata(self, metadata: _Segment__M) -> None:
         """
-            Set the segment metadata.
+        Set the segment metadata.
         
-            Parameters:
-                metadata (:class:`~org.orekit.files.ccsds.section.Segment`): the segment metadata
+        Parameters:
+            metadata (Segment): the segment metadata
         
         
         """
@@ -364,28 +403,26 @@ class Segment(typing.Generic[_Segment__M, _Segment__D]):
 
 class XmlStructureKey(java.lang.Enum['XmlStructureKey']):
     """
-    public enum XmlStructureKey extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.section.XmlStructureKey`>
+    Keys for XML format structure.
     
-        Keys for :meth:`~org.orekit.files.ccsds.utils.FileFormat.XML` format structure.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     body: typing.ClassVar['XmlStructureKey'] = ...
     segment: typing.ClassVar['XmlStructureKey'] = ...
     header: typing.ClassVar['XmlStructureKey'] = ...
     metadata: typing.ClassVar['XmlStructureKey'] = ...
     data: typing.ClassVar['XmlStructureKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, abstractConstituentParser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any, typing.Any]) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, parser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any, typing.Any]) -> bool:
         """
-            Process an token.
+        Process an token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                parser (:class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<?, ?, ?> parser): file parser
+        Parameters:
+            token (ParseToken): token to process
+            parser (AbstractConstituentParser<?, ?, ?> parser): file parser
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -396,20 +433,19 @@ class XmlStructureKey(java.lang.Enum['XmlStructureKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'XmlStructureKey':
+    def valueOf(name: str) -> 'XmlStructureKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -417,17 +453,15 @@ class XmlStructureKey(java.lang.Enum['XmlStructureKey']):
     @staticmethod
     def values() -> typing.MutableSequence['XmlStructureKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (XmlStructureKey c : XmlStructureKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (XmlStructureKey c : XmlStructureKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -435,28 +469,33 @@ class XmlStructureKey(java.lang.Enum['XmlStructureKey']):
 
 class XmlStructureProcessingState(org.orekit.files.ccsds.utils.parsing.ProcessingState):
     """
-    public class XmlStructureProcessingState extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+    ProcessingState for structure of XML CCSDS Messages.
     
-        :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState` for structure of
-        :meth:`~org.orekit.files.ccsds.utils.FileFormat.XML` CCSDS Messages.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, string: str, abstractConstituentParser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any, typing.Any]): ...
-    def processToken(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool:
+    def __init__(self, root: str, parser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any, typing.Any]):
         """
-            Process one token.
+        Simple constructor.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken` in
-                interface :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+        Parameters:
+            root (String): name of the root element
+            parser (AbstractConstituentParser<?, ?, ?> parser): parser for the complete message
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
         
-            Returns:
-                true if token was processed, false otherwise
+        """
+        ...
+    def processToken(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool:
+        """
+        Process one token.
+        
+        Specified by: processToken in interface ProcessingState
+        
+        Parameters:
+            token (ParseToken): token to process
+        
+        Returns:
+            true if token was processed, false otherwise
         
         
         """
@@ -464,110 +503,127 @@ class XmlStructureProcessingState(org.orekit.files.ccsds.utils.parsing.Processin
 
 class CommentsContainer(Section):
     """
-    public class CommentsContainer extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.section.Section`
+    Container for comments in various CCSDS messages.
     
-        Container for comments in various CCSDS messages.
+    CCSDS files accept comments only at the beginning of sections. Once header/metadata/data content has started, comments in the corresponding section are refused.
     
-        CCSDS files accept comments only at the beginning of sections. Once header/metadata/data content has started, comments
-        in the corresponding section are refused.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Create a new meta-data.
+        """
+        ...
     def acceptComments(self) -> bool:
         """
-            Check if container is still accepting comments.
+        Check if container is still accepting comments.
         
-            A container that still accept comments does not contain any other data.
+        A container that still accept comments does not contain any other data.
         
-            Returns:
-                true if container is still accepting comments
-        
-        
-        """
-        ...
-    def addComment(self, string: str) -> bool:
-        """
-            Add comment.
-        
-            Comments are accepted only at start. Once other content is stored in the same section, comments are refused.
-        
-            Parameters:
-                comment (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): comment line
-        
-            Returns:
-                true if comment was accepted
+        Returns:
+            true if container is still accepting comments
         
         
         """
         ...
-    def checkAllowed(self, double: float, object: typing.Any, string: str, double2: float, double3: float) -> None:
+    def addComment(self, comment: str) -> bool:
         """
-            Complain if a key is not allowed.
+        Add comment.
         
-            Parameters:
-                version (double): format version
-                field (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): field to check
-                key (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): key associated with the field
-                minVersion (double): version at which key started to be allowed
-                maxVersion (double): version at which key started to be forbidden
+        Comments are accepted only at start. Once other content is stored in the same section, comments are refused.
         
+        Parameters:
+            comment (String): comment line
         
-        """
-        ...
-    def checkNotNaN(self, double: float, string: str) -> None:
-        """
-            Complain if a field is NaN.
-        
-            Parameters:
-                field (double): field to check
-                key (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): key associated with the field
+        Returns:
+            true if comment was accepted
         
         
         """
         ...
-    def checkNotNegative(self, int: int, string: str) -> None:
+    def checkAllowed(self, version: float, field: typing.Any, key: str, minVersion: float, maxVersion: float) -> None:
         """
-            Complain if a field is negative.
+        Complain if a key is not allowed.
         
-            Parameters:
-                field (int): field to check
-                key (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): key associated with the field
-        
-        
-        """
-        ...
-    def checkNotNull(self, object: typing.Any, string: str) -> None:
-        """
-            Complain if a field is null.
-        
-            Parameters:
-                field (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): field to check
-                key (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): key associated with the field
+        Parameters:
+            version (double): format version
+            field (Object): field to check
+            key (String): key associated with the field
+            minVersion (double): version at which key started to be allowed
+            maxVersion (double): version at which key started to be forbidden
         
         
         """
         ...
-    def getComments(self) -> java.util.List[str]: ...
+    def checkNotNaN(self, field: float, key: str) -> None:
+        """
+        Complain if a field is NaN.
+        
+        Parameters:
+            field (double): field to check
+            key (String): key associated with the field
+        
+        
+        """
+        ...
+    def checkNotNegative(self, field: int, key: str) -> None:
+        """
+        Complain if a field is negative.
+        
+        Parameters:
+            field (int): field to check
+            key (String): key associated with the field
+        
+        
+        """
+        ...
+    def checkNotNull(self, field: typing.Any, key: str) -> None:
+        """
+        Complain if a field is null.
+        
+        Parameters:
+            field (Object): field to check
+            key (String): key associated with the field
+        
+        
+        """
+        ...
+    def getComments(self) -> java.util.List[str]:
+        """
+        Get the comments.
+        
+        Returns:
+            comments
+        
+        
+        """
+        ...
     def refuseFurtherComments(self) -> None:
         """
-            Set flag to refuse further comments.
+        Set flag to refuse further comments.
+        """
+        ...
+    def setComments(self, comments: java.util.List[str]) -> None:
+        """
+        Set the comments. This removes all previous comments and replaces them with the new ones.
+        
+        Parameters:
+            comments (List<String> comments): List with new comments
+        
         
         """
         ...
-    def setComments(self, list: java.util.List[str]) -> None: ...
-    def validate(self, double: float) -> None:
+    def validate(self, version: float) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Check is all mandatory entries have been initialized.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
+        Specified by: validate in interface Section
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            version (double): format version
         
         
         """
@@ -575,160 +631,244 @@ class CommentsContainer(Section):
 
 class Data(Section):
     """
-    public interface Data extends :class:`~org.orekit.files.ccsds.section.Section`
+    This marker interface represents segment data.
     
-        This marker interface represents segment data.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     ...
 
 class PythonAbstractWriter(AbstractWriter):
-    def __init__(self, string: str, string2: str): ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None: ...
+    def __init__(self, xmlTag: str, kvnTag: str):
+        """
+        Simple constructor.
+        
+        Parameters:
+            xmlTag (String): name of the XML tag surrounding the section
+            kvnTag (String): name of the KVN tag surrounding the section (may be null)
+        
+        
+        """
+        ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-    def writeContent(self, generator: org.orekit.files.ccsds.utils.generation.Generator) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    def writeContent(self, generator: org.orekit.files.ccsds.utils.generation.Generator) -> None:
+        """
+        Write the content of the section, excluding surrounding tags.
+        
+        Specified by: writeContent in class AbstractWriter
+        
+        Parameters:
+            generator (Generator): generator to use for producing output
+        
+        Raises:
+            IOException: if any buffer writing operations fails
+        
+        
+        """
+        ...
 
 class PythonSection(Section):
     def __init__(self): ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None: ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-    def validate(self, double: float) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Parameters:
+            version (double): format version
+        
+        
+        """
+        ...
 
 class Header(CommentsContainer):
     """
-    public class Header extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    Header of a CCSDS Navigation Data Message.
     
-        Header of a CCSDS Navigation Data Message.
-    
-        Since:
-            10.2
+    Since:
+        10.2
     """
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, minVersionMessageId: float, minVersionClassification: float):
+        """
+        Constructor.
+        
+        Parameters:
+            minVersionMessageId (double): minimum version for MESSAGE_ID
+            minVersionClassification (double): minimum version for CLASSIFICATION
+        
+        
+        """
+        ...
     def getClassification(self) -> str:
         """
-            Get the classification/caveats.
+        Get the classification/caveats.
         
-            Returns:
-                classification/caveats.
+        Returns:
+            classification/caveats.
         
         
         """
         ...
     def getCreationDate(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the message creation date and time in UTC.
+        Get the message creation date and time in UTC.
         
-            Returns:
-                the message creation date and time in UTC.
+        Returns:
+            the message creation date and time in UTC.
         
         
         """
         ...
     def getFormatVersion(self) -> float:
         """
-            Get the CCSDS NDM (ADM, ODM or TDM) format version.
+        Get the CCSDS NDM (ADM, ODM or TDM) format version.
         
-            Returns:
-                format version
+        Returns:
+            format version
         
         
         """
         ...
     def getMessageId(self) -> str:
         """
-            Get the ID that uniquely identifies a message from a given originator.
+        Get the ID that uniquely identifies a message from a given originator.
         
-            Returns:
-                ID that uniquely identifies a message from a given originator
+        Returns:
+            ID that uniquely identifies a message from a given originator
         
         
         """
         ...
     def getOriginator(self) -> str:
         """
-            Get the message originator.
+        Get the message originator.
         
-            Returns:
-                originator the message originator.
-        
-        
-        """
-        ...
-    def setClassification(self, string: str) -> None:
-        """
-            Set the classification/caveats.
-        
-            Parameters:
-                classification (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): classification/caveats to be set
+        Returns:
+            originator the message originator.
         
         
         """
         ...
-    def setCreationDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setClassification(self, classification: str) -> None:
         """
-            Set the message creation date and time in UTC.
+        Set the classification/caveats.
         
-            Parameters:
-                creationDate (:class:`~org.orekit.time.AbsoluteDate`): the creation date to be set
-        
-        
-        """
-        ...
-    def setFormatVersion(self, double: float) -> None:
-        """
-            Set the CCSDS NDM (ADM, ODM or TDM) format version.
-        
-            Parameters:
-                formatVersion (double): the format version to be set
+        Parameters:
+            classification (String): classification/caveats to be set
         
         
         """
         ...
-    def setMessageId(self, string: str) -> None:
+    def setCreationDate(self, creationDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set the ID that uniquely identifies a message from a given originator.
+        Set the message creation date and time in UTC.
         
-            Parameters:
-                messageId (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): ID that uniquely identifies a message from a given originator
-        
-        
-        """
-        ...
-    def setOriginator(self, string: str) -> None:
-        """
-            Set the message originator.
-        
-            Parameters:
-                originator (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the originator to be set
+        Parameters:
+            creationDate (AbsoluteDate): the creation date to be set
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def setFormatVersion(self, formatVersion: float) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set the CCSDS NDM (ADM, ODM or TDM) format version.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            formatVersion (double): the format version to be set
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
-                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        """
+        ...
+    def setMessageId(self, messageId: str) -> None:
+        """
+        Set the ID that uniquely identifies a message from a given originator.
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            messageId (String): ID that uniquely identifies a message from a given originator
+        
+        
+        """
+        ...
+    def setOriginator(self, originator: str) -> None:
+        """
+        Set the message originator.
+        
+        Parameters:
+            originator (String): the originator to be set
+        
+        
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class CommentsContainer
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -736,59 +876,90 @@ class Header(CommentsContainer):
 
 class Metadata(CommentsContainer):
     """
-    public class Metadata extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    This class gathers the meta-data present in the Navigation Data Message (ADM, ODM and TDM).
     
-        This class gathers the meta-data present in the Navigation Data Message (ADM, ODM and TDM).
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     def getTimeSystem(self) -> org.orekit.files.ccsds.definitions.TimeSystem:
         """
-            Get the Time System that: for OPM, is used for metadata, state vector, maneuver and covariance data, for OMM, is used
-            for metadata, orbit state and covariance data, for OEM, is used for metadata, ephemeris and covariance data.
+        Get the Time System that: for OPM, is used for metadata, state vector, maneuver and covariance data, for OMM, is used for metadata, orbit state and covariance data, for OEM, is used for metadata, ephemeris and covariance data.
         
-            Returns:
-                the time system
+        Returns:
+            the time system
         
         
         """
         ...
     def setTimeSystem(self, timeSystem: org.orekit.files.ccsds.definitions.TimeSystem) -> None:
         """
-            Set the Time System that: for OPM, is used for metadata, state vector, maneuver and covariance data, for OMM, is used
-            for metadata, orbit state and covariance data, for OEM, is used for metadata, ephemeris and covariance data.
+        Set the Time System that: for OPM, is used for metadata, state vector, maneuver and covariance data, for OMM, is used for metadata, orbit state and covariance data, for OEM, is used for metadata, ephemeris and covariance data.
         
-            Parameters:
-                timeSystem (:class:`~org.orekit.files.ccsds.definitions.TimeSystem`): the time system to be set
+        Parameters:
+            timeSystem (TimeSystem): the time system to be set
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def validate(self, version: float) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Check is all mandatory entries have been initialized.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
+        Specified by: validate in interface Section
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
-                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        Overrides: validate in class CommentsContainer
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            version (double): format version
+        
+        
+        """
+        ...
+
+class PyhonData(Data):
+    def __init__(self): ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -808,6 +979,7 @@ class __module_protocol__(Protocol):
     KvnStructureProcessingState: typing.Type[KvnStructureProcessingState]
     Metadata: typing.Type[Metadata]
     MetadataKey: typing.Type[MetadataKey]
+    PyhonData: typing.Type[PyhonData]
     PythonAbstractWriter: typing.Type[PythonAbstractWriter]
     PythonSection: typing.Type[PythonSection]
     Section: typing.Type[Section]

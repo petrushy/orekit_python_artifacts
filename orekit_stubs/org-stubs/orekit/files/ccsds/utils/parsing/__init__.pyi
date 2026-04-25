@@ -21,126 +21,124 @@ import typing
 _AbstractMessageParser__T = typing.TypeVar('_AbstractMessageParser__T')  # <T>
 class AbstractMessageParser(org.orekit.files.ccsds.utils.lexical.MessageParser[_AbstractMessageParser__T], typing.Generic[_AbstractMessageParser__T]):
     """
-    public abstract class AbstractMessageParser<T> extends :class:`~org.orekit.files.ccsds.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`<T>
+    Parser for CCSDS messages.
     
-        Parser for CCSDS messages.
+    Note than starting with Orekit 11.0, CCSDS message parsers are mutable objects that gather the data being parsed, until the message is complete and the parseMessage method has returned. This implies that parsers should not be used in a multi-thread context. The recommended way to use parsers is to either dedicate one parser for each message and drop it afterwards, or to use a single-thread loop.
     
-        Note than starting with Orekit 11.0, CCSDS message parsers are mutable objects that gather the data being parsed, until
-        the message is complete and the :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser.parseMessage` method
-        has returned. This implies that parsers should *not* be used in a multi-thread context. The recommended way to use
-        parsers is to either dedicate one parser for each message and drop it afterwards, or to use a single-thread loop.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def anticipateNext(self, processingState: typing.Union['ProcessingState', typing.Callable]) -> None:
+    def anticipateNext(self, anticipated: typing.Union['ProcessingState', typing.Callable]) -> None:
         """
-            Anticipate what next processing state should be.
+        Anticipate what next processing state should be.
         
-            Parameters:
-                anticipated (:class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`): anticipated next processing state
+        Parameters:
+            anticipated (ProcessingState): anticipated next processing state
         
         
         """
         ...
     def getCurrent(self) -> 'ProcessingState':
         """
-            Get the current processing state.
+        Get the current processing state.
         
-            Returns:
-                current processing state
+        Returns:
+            current processing state
         
         
         """
         ...
     def getFileFormat(self) -> org.orekit.files.ccsds.utils.FileFormat:
         """
-            Get the file format of the last message parsed.
+        Get the file format of the last message parsed.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.getFileFormat` in
-                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+        Specified by: getFileFormat in interface MessageParser
         
-            Returns:
-                file format of the last message parsed
+        Returns:
+            file format of the last message parsed
         
         
         """
         ...
     def getFormatVersionKey(self) -> str:
         """
-            Get the key for format version.
+        Get the key for format version.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.getFormatVersionKey` in
-                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+        Specified by: getFormatVersionKey in interface MessageParser
         
-            Returns:
-                format version key
+        Returns:
+            format version key
         
         
         """
         ...
-    def getSpecialXmlElementsBuilders(self) -> java.util.Map[str, org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder]: ...
-    def parseMessage(self, dataSource: org.orekit.data.DataSource) -> _AbstractMessageParser__T:
+    def getSpecialXmlElementsBuilders(self) -> java.util.Map[str, org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder]:
         """
-            Parse a data source.
+        Get the non-default token builders for special XML elements.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.parseMessage` in
-                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+        Specified by: getSpecialXmlElementsBuilders in interface MessageParser
         
-            Parameters:
-                source (:class:`~org.orekit.data.DataSource`): data source to parse
-        
-            Returns:
-                parsed file
+        Returns:
+            map of token builders for special XML elements (keyed by XML element name)
         
         
         """
         ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken) -> None:
+    def parseMessage(self, source: org.orekit.data.DataSource) -> _AbstractMessageParser__T:
         """
-            Process a parse token.
+        Parse a data source.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.process` in
-                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+        Specified by: parseMessage in interface MessageParser
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
+        Parameters:
+            source (DataSource): data source to parse
         
-        
-        """
-        ...
-    def setEndTagSeen(self, boolean: bool) -> None:
-        """
-            Set the flag for XML end tag.
-        
-            Parameters:
-                endTagSeen (boolean): if true, the XML end tag has been seen
+        Returns:
+            parsed file
         
         
         """
         ...
-    def setFallback(self, processingState: typing.Union['ProcessingState', typing.Callable]) -> None:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken) -> None:
         """
-            Set fallback processing state.
+        Process a parse token.
         
-            The fallback processing state is used if anticipated state fails to parse the token.
+        Specified by: process in interface MessageParser
         
-            Parameters:
-                fallback (:class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`): processing state to use if anticipated state does not work
+        Parameters:
+            token (ParseToken): token to process
+        
+        
+        """
+        ...
+    def setEndTagSeen(self, endTagSeen: bool) -> None:
+        """
+        Set the flag for XML end tag.
+        
+        Parameters:
+            endTagSeen (boolean): if true, the XML end tag has been seen
+        
+        
+        """
+        ...
+    def setFallback(self, fallback: typing.Union['ProcessingState', typing.Callable]) -> None:
+        """
+        Set fallback processing state.
+        
+        The fallback processing state is used if anticipated state fails to parse the token.
+        
+        Parameters:
+            fallback (ProcessingState): processing state to use if anticipated state does not work
         
         
         """
         ...
     def wasEndTagSeen(self) -> bool:
         """
-            Check if XML end tag has been seen.
+        Check if XML end tag has been seen.
         
-            Returns:
-                true if XML end tag has been seen
+        Returns:
+            true if XML end tag has been seen
         
         
         """
@@ -148,29 +146,25 @@ class AbstractMessageParser(org.orekit.files.ccsds.utils.lexical.MessageParser[_
 
 class ProcessingState:
     """
-    public interface ProcessingState
+    Interface for processing parsing tokens for CCSDS NDM files.
     
-        Interface for processing parsing tokens for CCSDS NDM files.
+    This interface is intended for use as the state in state design pattern, the MessageParser itself being used as the context that holds the active state.
     
-        This interface is intended for use as the state in state design pattern, the
-        :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser` itself being used as the context that holds the active
-        state.
+    Since:
+        11.0
     
-        Since:
-            11.0
-    
-        Also see:
-            :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+    Also see:
+        MessageParser
     """
-    def processToken(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool:
+    def processToken(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool:
         """
-            Process one token.
+        Process one token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
+        Parameters:
+            token (ParseToken): token to process
         
-            Returns:
-                true if token was processed, false otherwise
+        Returns:
+            true if token was processed, false otherwise
         
         
         """
@@ -181,154 +175,149 @@ _AbstractConstituentParser__T = typing.TypeVar('_AbstractConstituentParser__T', 
 _AbstractConstituentParser__P = typing.TypeVar('_AbstractConstituentParser__P', bound='AbstractConstituentParser')  # <P>
 class AbstractConstituentParser(AbstractMessageParser[_AbstractConstituentParser__T], typing.Generic[_AbstractConstituentParser__H, _AbstractConstituentParser__T, _AbstractConstituentParser__P]):
     """
-    public abstract class AbstractConstituentParser<H extends :class:`~org.orekit.files.ccsds.section.Header`, T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H, ?>, P extends AbstractConstituentParser<H, T, ?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser`<T>
+    Parser for CCSDS messages.
     
-        Parser for CCSDS messages.
+    Note than starting with Orekit 11.0, CCSDS message parsers are mutable objects that gather the data being parsed, until the message is complete and the parseMessage method has returned. This implies that parsers should not be used in a multi-thread context. The recommended way to use parsers is to either dedicate one parser for each message and drop it afterwards, or to use a single-thread loop.
     
-        Note than starting with Orekit 11.0, CCSDS message parsers are mutable objects that gather the data being parsed, until
-        the message is complete and the :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser.parseMessage` method
-        has returned. This implies that parsers should *not* be used in a multi-thread context. The recommended way to use
-        parsers is to either dedicate one parser for each message and drop it afterwards, or to use a single-thread loop.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     def finalizeData(self) -> bool:
         """
-            Finalize data after parsing.
+        Finalize data after parsing.
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def finalizeHeader(self) -> bool:
         """
-            Finalize header after parsing.
+        Finalize header after parsing.
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def finalizeMetadata(self) -> bool:
         """
-            Finalize metadata after parsing.
+        Finalize metadata after parsing.
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def getConventions(self) -> org.orekit.utils.IERSConventions:
         """
-            Get IERS conventions.
+        Get IERS conventions.
         
-            Returns:
-                IERS conventions to use while parsing
+        Returns:
+            IERS conventions to use while parsing
         
         
         """
         ...
     def getDataContext(self) -> org.orekit.data.DataContext:
         """
-            Get the data context used for getting frames, time scales, and celestial bodies.
+        Get the data context used for getting frames, time scales, and celestial bodies.
         
-            Returns:
-                the data context.
+        Returns:
+            the data context.
         
         
         """
         ...
     def getHeader(self) -> _AbstractConstituentParser__H:
         """
-            Get file header to fill.
+        Get file header to fill.
         
-            Returns:
-                file header to fill
+        Returns:
+            file header to fill
         
         
         """
         ...
     def getParsedUnitsBehavior(self) -> org.orekit.files.ccsds.ndm.ParsedUnitsBehavior:
         """
-            Get the behavior to adopt for handling parsed units.
+        Get the behavior to adopt for handling parsed units.
         
-            Returns:
-                behavior to adopt for handling parsed units
+        Returns:
+            behavior to adopt for handling parsed units
         
         
         """
         ...
     def inData(self) -> bool:
         """
-            Acknowledge data parsing has started.
+        Acknowledge data parsing has started.
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def inHeader(self) -> bool:
         """
-            Acknowledge header parsing has started.
+        Acknowledge header parsing has started.
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def inMetadata(self) -> bool:
         """
-            Acknowledge metada parsing has started.
+        Acknowledge metada parsing has started.
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def isSimpleEOP(self) -> bool:
         """
-            Get EOP interpolation method.
+        Get EOP interpolation method.
         
-            Returns:
-                true if tidal effects are ignored when interpolating EOP
+        Returns:
+            true if tidal effects are ignored when interpolating EOP
         
         
         """
         ...
     def prepareData(self) -> bool:
         """
-            Prepare data for parsing.
+        Prepare data for parsing.
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def prepareHeader(self) -> bool:
         """
-            Prepare header for parsing.
+        Prepare header for parsing.
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def prepareMetadata(self) -> bool:
         """
-            Prepare metadata for parsing.
+        Prepare metadata for parsing.
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
@@ -336,29 +325,36 @@ class AbstractConstituentParser(AbstractMessageParser[_AbstractConstituentParser
 
 class ErrorState(ProcessingState):
     """
-    public class ErrorState extends :class:`~org.orekit.files.ccsds.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+    Special ProcessingState that always generate an error message.
     
-        Special :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState` that always generate an error message.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self): ...
-    def processToken(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool:
+    def __init__(self):
         """
-            Process one token.
+        Empty constructor.
         
-            This method always generate an error, as no data is expected in this state.
+        This constructor is not strictly necessary, but it prevents spurious javadoc warnings with JDK 18 and later.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken` in
-                interface :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+        Since:
+            12.0
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
         
-            Returns:
-                true if token was processed, false otherwise
+        """
+        ...
+    def processToken(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool:
+        """
+        Process one token.
+        
+        This method always generate an error, as no data is expected in this state.
+        
+        Specified by: processToken in interface ProcessingState
+        
+        Parameters:
+            token (ParseToken): token to process
+        
+        Returns:
+            true if token was processed, false otherwise
         
         
         """
@@ -366,20 +362,92 @@ class ErrorState(ProcessingState):
 
 _PythonAbstractMessageParser__T = typing.TypeVar('_PythonAbstractMessageParser__T')  # <T>
 class PythonAbstractMessageParser(AbstractMessageParser[_PythonAbstractMessageParser__T], typing.Generic[_PythonAbstractMessageParser__T]):
-    def __init__(self, string: str, string2: str, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
-    def build(self) -> _PythonAbstractMessageParser__T: ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None: ...
+    def __init__(self, string: str, string2: str, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]):
+        """
+        Simple constructor.
+        
+        Parameters:
+            root (String): root element for XML files
+            formatVersionKey (String): key for format version
+        
+        
+        """
+        ...
+    def build(self) -> _PythonAbstractMessageParser__T:
+        """
+        Build the file from parsed entries.
+        
+        Returns:
+            parsed file
+        
+        
+        """
+        ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-    def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None:
+        """
+        Reset parser to initial state before parsing.
+        
+        Parameters:
+            fileFormat (FileFormat): format of the file ready to be parsed
+        
+        
+        """
+        ...
 
 class PythonProcessingState(ProcessingState):
     def __init__(self): ...
-    def finalize(self) -> None: ...
-    def processToken(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool: ...
+    def finalize(self) -> None:
+        """
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def processToken(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool:
+        """
+        Description copied from interface: processToken Process one token.
+        
+        Specified by: processToken in interface ProcessingState
+        
+        Parameters:
+            token (ParseToken): token to process
+        
+        Returns:
+            true if token was processed, false otherwise
+        
+        
+        """
+        ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
@@ -391,24 +459,174 @@ _PythonAbstractConstituentParser__T = typing.TypeVar('_PythonAbstractConstituent
 _PythonAbstractConstituentParser__P = typing.TypeVar('_PythonAbstractConstituentParser__P', bound=AbstractConstituentParser)  # <P>
 class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractConstituentParser__H, _PythonAbstractConstituentParser__T, _PythonAbstractConstituentParser__P], typing.Generic[_PythonAbstractConstituentParser__H, _PythonAbstractConstituentParser__T, _PythonAbstractConstituentParser__P]):
     def __init__(self, string: str, string2: str, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
-    def build(self) -> _PythonAbstractConstituentParser__T: ...
-    def finalize(self) -> None: ...
-    def finalizeData(self) -> bool: ...
-    def finalizeHeader(self) -> bool: ...
-    def finalizeMetadata(self) -> bool: ...
-    def getHeader(self) -> _PythonAbstractConstituentParser__H: ...
-    def inData(self) -> bool: ...
-    def inHeader(self) -> bool: ...
-    def inMetadata(self) -> bool: ...
-    def prepareData(self) -> bool: ...
-    def prepareHeader(self) -> bool: ...
-    def prepareMetadata(self) -> bool: ...
-    def pythonDecRef(self) -> None: ...
+    def build(self) -> _PythonAbstractConstituentParser__T:
+        """
+        Build the file from parsed entries.
+        
+        Returns:
+            parsed file
+        
+        
+        """
+        ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def finalizeData(self) -> bool:
+        """
+        Finalize data after parsing.
+        
+        Specified by: finalizeData in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def finalizeHeader(self) -> bool:
+        """
+        Finalize header after parsing.
+        
+        Specified by: finalizeHeader in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def finalizeMetadata(self) -> bool:
+        """
+        Finalize metadata after parsing.
+        
+        Specified by: finalizeMetadata in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def getHeader(self) -> _PythonAbstractConstituentParser__H:
+        """
+        Get file header to fill.
+        
+        Specified by: getHeader in class AbstractConstituentParser
+        
+        Returns:
+            file header to fill
+        
+        
+        """
+        ...
+    def inData(self) -> bool:
+        """
+        Acknowledge data parsing has started.
+        
+        Specified by: inData in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def inHeader(self) -> bool:
+        """
+        Acknowledge header parsing has started.
+        
+        Specified by: inHeader in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def inMetadata(self) -> bool:
+        """
+        Acknowledge metada parsing has started.
+        
+        Specified by: inMetadata in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def prepareData(self) -> bool:
+        """
+        Prepare data for parsing.
+        
+        Specified by: prepareData in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def prepareHeader(self) -> bool:
+        """
+        Prepare header for parsing.
+        
+        Specified by: prepareHeader in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def prepareMetadata(self) -> bool:
+        """
+        Prepare metadata for parsing.
+        
+        Specified by: prepareMetadata in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-    def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None:
+        """
+        Reset parser to initial state before parsing.
+        
+        Parameters:
+            fileFormat (FileFormat): format of the file ready to be parsed
+        
+        
+        """
+        ...
 
 
 class __module_protocol__(Protocol):

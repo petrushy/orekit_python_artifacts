@@ -17,43 +17,52 @@ import typing
 
 class GaussMarkovGenerator:
     """
-    public classGaussMarkovGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    This class is a Gauss-Markov order 1 autoregressive process generator for scalars.
     
-        This class is a Gauss-Markov order 1 autoregressive process generator for scalars.
-    
-        Since:
-            3.1
+    Since:
+        3.1
     """
-    def __init__(self, double: float, double2: float, randomGenerator: 'RandomGenerator'): ...
+    def __init__(self, tau: float, stationarySigma: float, generator: 'RandomGenerator'):
+        """
+        Create a new generator.
+        
+        Parameters:
+            tau (double): correlation time
+            stationarySigma (double): standard deviation of the stationary process
+            generator (RandomGenerator): underlying random generator to use
+        
+        
+        """
+        ...
     def getStationarySigma(self) -> float:
         """
-            Get the standard deviation of the stationary process.
+        Get the standard deviation of the stationary process.
         
-            Returns:
-                standard deviation of the stationary process
+        Returns:
+            standard deviation of the stationary process
         
         
         """
         ...
     def getTau(self) -> float:
         """
-            Get the correlation time.
+        Get the correlation time.
         
-            Returns:
-                correlation time
+        Returns:
+            correlation time
         
         
         """
         ...
-    def next(self, double: float) -> float:
+    def next(self, deltaT: float) -> float:
         """
-            Generate next step in the autoregressive process.
+        Generate next step in the autoregressive process.
         
-            Parameters:
-                deltaT (double): time step since previous estimate (unused at first call)
+        Parameters:
+            deltaT (double): time step since previous estimate (unused at first call)
         
-            Returns:
-                a random scalar obeying autoregressive model
+        Returns:
+            a random scalar obeying autoregressive model
         
         
         """
@@ -61,20 +70,16 @@ class GaussMarkovGenerator:
 
 class NormalizedRandomGenerator:
     """
-    public interfaceNormalizedRandomGenerator
-    
-        This interface represent a normalized random generator for scalars. Normalized generator provide null mean and unit
-        standard deviation scalars.
+    This interface represent a normalized random generator for scalars. Normalized generator provide null mean and unit standard deviation scalars.
     """
     def nextNormalizedDouble(self) -> float:
         """
-            Generate a random scalar with null mean and unit standard deviation.
+        Generate a random scalar with null mean and unit standard deviation.
         
-            This method does **not** specify the shape of the distribution, it is the implementing class that provides it. The only
-            contract here is to generate numbers with null mean and unit standard deviation.
+        This method does not specify the shape of the distribution, it is the implementing class that provides it. The only contract here is to generate numbers with null mean and unit standard deviation.
         
-            Returns:
-                a random scalar with null mean and unit standard deviation
+        Returns:
+            a random scalar with null mean and unit standard deviation
         
         
         """
@@ -82,79 +87,73 @@ class NormalizedRandomGenerator:
 
 class RandomGenerator:
     """
-    public interfaceRandomGenerator
-    
-        Interface for generators of random number sequences.
+    Interface for generators of random number sequences.
     """
     def nextBoolean(self) -> bool:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`boolean` value from this random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed boolean value from this random number generator's sequence.
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`boolean` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed boolean value from this random number generator's sequence
         
-        
-        """
-        ...
-    @typing.overload
-    def nextBytes(self, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes]) -> None:
-        """
-            Generates random bytes and places them into a user-supplied byte array. The number of random bytes produced is equal to
-            the length of the byte array.
-        
-            Parameters:
-                bytes (byte[]): the non-null byte array in which to put the random bytes
         
         """
         ...
     @typing.overload
-    def nextBytes(self, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], int: int, int2: int) -> None:
+    def nextBytes(self, bytes: typing.Union[typing.List[int], jpype.JArray, bytes]) -> None:
         """
-            Generates random bytes and places them into a user-supplied byte array.
+        Generates random bytes and places them into a user-supplied byte array. The number of random bytes produced is equal to the length of the byte array.
         
-            Parameters:
-                bytes (byte[]): the non-null byte array in which to put the random bytes
-                offset (int): the starting index for inserting the generated bytes into the array
-                len (int): the number of bytes to generate
+        Parameters:
+            bytes (byte[]): the non-null byte array in which to put the random bytes
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`offset < 0` or :code:`offset + len >= bytes.length`
+        """
+        ...
+    @typing.overload
+    def nextBytes(self, bytes: typing.Union[typing.List[int], jpype.JArray, bytes], offset: int, len: int) -> None:
+        """
+        Generates random bytes and places them into a user-supplied byte array.
+        
+        Parameters:
+            bytes (byte[]): the non-null byte array in which to put the random bytes
+            offset (int): the starting index for inserting the generated bytes into the array
+            len (int): the number of bytes to generate
+        
+        Raises:
+            MathIllegalArgumentException: if offset < 0 or length
         
         
         """
         ...
     def nextDouble(self) -> float:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`double` value between :code:`0.0` and :code:`1.0` from this
-            random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed double value between  and  from this random number generator's sequence.
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`double` value between :code:`0.0` and :code:`1.0` from this random
-                number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed double value between  and  from this random
+            number generator's sequence
         
         
         """
         ...
     def nextFloat(self) -> float:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`float` value between :code:`0.0` and :code:`1.0` from this
-            random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed float value between  and  from this random number generator's sequence.
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`float` value between :code:`0.0` and :code:`1.0` from this random
-                number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed float value between  and  from this random
+            number generator's sequence
         
         
         """
         ...
     def nextGaussian(self) -> float:
         """
-            Returns the next pseudorandom, Gaussian ("normally") distributed :code:`double` value with mean :code:`0.0` and standard
-            deviation :code:`1.0` from this random number generator's sequence.
+        Returns the next pseudorandom, Gaussian ("normally") distributed double value with mean  and standard deviation  from this random number generator's sequence.
         
-            Returns:
-                the next pseudorandom, Gaussian ("normally") distributed :code:`double` value with mean :code:`0.0` and standard
-                deviation :code:`1.0` from this random number generator's sequence
+        Returns:
+            the next pseudorandom, Gaussian ("normally") distributed double value with mean  and standard
+            deviation  from this random number generator's sequence
         
         
         """
@@ -162,29 +161,28 @@ class RandomGenerator:
     @typing.overload
     def nextInt(self) -> int:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
         
-            All 2 :sup:`32` possible :code:`int` values should be produced with (approximately) equal probability.
+        All 2 :sup:`32` possible int values should be produced with (approximately) equal probability.
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
         """
         ...
     @typing.overload
-    def nextInt(self, int: int) -> int:
+    def nextInt(self, n: int) -> int:
         """
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        (exclusive), drawn from this random number generator's sequence.
         
-            Parameters:
-                n (int): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (int): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
-            Raises:
-                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`: if n is not positive.
+        Raises:
+            IllegalArgumentException: if n is not positive.
         
         
         """
@@ -192,28 +190,26 @@ class RandomGenerator:
     @typing.overload
     def nextLong(self) -> int:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`long` value from this random number generator's sequence.
-            All 2 :sup:`64` possible :code:`long` values should be produced with (approximately) equal probability.
+        Returns the next pseudorandom, uniformly distributed long value from this random number generator's sequence. All 2 :sup:`64` possible long values should be produced with (approximately) equal probability.
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`long` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed long value from this random number generator's sequence
         
         """
         ...
     @typing.overload
-    def nextLong(self, long: int) -> int:
+    def nextLong(self, n: int) -> int:
         """
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        (exclusive), drawn from this random number generator's sequence.
         
-            Parameters:
-                n (long): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (long): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
-            Raises:
-                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`: if n is not positive.
+        Raises:
+            IllegalArgumentException: if n is not positive.
         
         
         """
@@ -221,26 +217,26 @@ class RandomGenerator:
     @typing.overload
     def setSeed(self, int: int) -> None:
         """
-            Sets the seed of the underlying random number generator using an :code:`int` seed.
+        Sets the seed of the underlying random number generator using an int seed.
         
-            Sequences of values generated starting with the same seeds should be identical.
+        Sequences of values generated starting with the same seeds should be identical.
         
-            Parameters:
-                seed (int): the seed value
+        Parameters:
+            seed (int): the seed value
         
-            Sets the seed of the underlying random number generator using an :code:`int` array seed.
+        Sets the seed of the underlying random number generator using an int array seed.
         
-            Sequences of values generated starting with the same seeds should be identical.
+        Sequences of values generated starting with the same seeds should be identical.
         
-            Parameters:
-                seed (int[]): the seed value
+        Parameters:
+            seed (int[]): the seed value
         
-            Sets the seed of the underlying random number generator using a :code:`long` seed.
+        Sets the seed of the underlying random number generator using a long seed.
         
-            Sequences of values generated starting with the same seeds should be identical.
+        Sequences of values generated starting with the same seeds should be identical.
         
-            Parameters:
-                seed (long): the seed value
+        Parameters:
+            seed (long): the seed value
         
         
         """
@@ -252,16 +248,14 @@ class RandomGenerator:
 
 class RandomVectorGenerator:
     """
-    public interfaceRandomVectorGenerator
-    
-        This interface represents a random generator for whole vectors.
+    This interface represents a random generator for whole vectors.
     """
     def nextVector(self) -> typing.MutableSequence[float]:
         """
-            Generate a random vector.
+        Generate a random vector.
         
-            Returns:
-                a random vector as an array of double.
+        Returns:
+            a random vector as an array of double.
         
         
         """
@@ -269,30 +263,15 @@ class RandomVectorGenerator:
 
 class CorrelatedRandomVectorGenerator(RandomVectorGenerator):
     """
-    public classCorrelatedRandomVectorGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.random.RandomVectorGenerator`
+    implements RandomVectorGenerator
     
-        A :class:`~org.hipparchus.random.RandomVectorGenerator` that generates vectors with with correlated components.
+    A RandomVectorGenerator that generates vectors with with correlated components.
     
-        Random vectors with correlated components are built by combining the uncorrelated components of another random vector in
-        such a way that the resulting correlations are the ones specified by a positive definite covariance matrix.
+    Random vectors with correlated components are built by combining the uncorrelated components of another random vector in such a way that the resulting correlations are the ones specified by a positive definite covariance matrix.
     
-        The main use for correlated random vector generation is for Monte-Carlo simulation of physical problems with several
-        variables, for example to generate error vectors to be added to a nominal vector. A particularly interesting case is
-        when the generated vector should be drawn from a ` Multivariate Normal Distribution
-        <http://en.wikipedia.org/wiki/Multivariate_normal_distribution>`. The approach using a Cholesky decomposition is quite
-        usual in this case. However, it can be extended to other cases as long as the underlying random generator provides
-        :class:`~org.hipparchus.random.NormalizedRandomGenerator` like :class:`~org.hipparchus.random.GaussianRandomGenerator`
-        or :class:`~org.hipparchus.random.UniformRandomGenerator`.
+    The main use for correlated random vector generation is for Monte-Carlo simulation of physical problems with several variables, for example to generate error vectors to be added to a nominal vector. A particularly interesting case is when the generated vector should be drawn from a ` Multivariate Normal Distribution <http://en.wikipedia.org/wiki/Multivariate_normal_distribution>`. The approach using a Cholesky decomposition is quite usual in this case. However, it can be extended to other cases as long as the underlying random generator provides NormalizedRandomGenerator like GaussianRandomGenerator or UniformRandomGenerator.
     
-        Sometimes, the covariance matrix for a given simulation is not strictly positive definite. This means that the
-        correlations are not all independent from each other. In this case, however, the non strictly positive elements found
-        during the Cholesky decomposition of the covariance matrix should not be negative either, they should be null. Another
-        non-conventional extension handling this case is used here. Rather than computing :code:`C = U :sup:`T` .U` where
-        :code:`C` is the covariance matrix and :code:`U` is an upper-triangular matrix, we compute :code:`C = B.B :sup:`T``
-        where :code:`B` is a rectangular matrix having more rows than columns. The number of columns of :code:`B` is the rank of
-        the covariance matrix, and it is the dimension of the uncorrelated random vector that is needed to compute the component
-        of the correlated vector. This class handles this situation automatically.
+    Sometimes, the covariance matrix for a given simulation is not strictly positive definite. This means that the correlations are not all independent from each other. In this case, however, the non strictly positive elements found during the Cholesky decomposition of the covariance matrix should not be negative either, they should be null. Another non-conventional extension handling this case is used here. Rather than computing T` .U` where C is the covariance matrix and U is an upper-triangular matrix, we compute C = BT`` where B is a rectangular matrix having more rows than columns. The number of columns of B is the rank of the covariance matrix, and it is the dimension of the uncorrelated random vector that is needed to compute the component of the correlated vector. This class handles this situation automatically.
     """
     @typing.overload
     def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], realMatrix: org.hipparchus.linear.RealMatrix, double2: float, normalizedRandomGenerator: typing.Union[NormalizedRandomGenerator, typing.Callable]): ...
@@ -300,25 +279,22 @@ class CorrelatedRandomVectorGenerator(RandomVectorGenerator):
     def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, double: float, normalizedRandomGenerator: typing.Union[NormalizedRandomGenerator, typing.Callable]): ...
     def getGenerator(self) -> NormalizedRandomGenerator:
         """
-            Get the underlying normalized components generator.
+        Get the underlying normalized components generator.
         
-            Returns:
-                underlying uncorrelated components generator
+        Returns:
+            underlying uncorrelated components generator
         
         
         """
         ...
     def getRank(self) -> int:
         """
-            Get the rank of the covariance matrix. The rank is the number of independent rows in the covariance matrix, it is also
-            the number of columns of the root matrix.
+        Get the rank of the covariance matrix. The rank is the number of independent rows in the covariance matrix, it is also the number of columns of the root matrix.
         
-            Returns:
-                rank of the square matrix.
+        Returns:
+            rank of the square matrix.
         
-            Also see:
-        
-                  - :meth:`~org.hipparchus.random.CorrelatedRandomVectorGenerator.getRootMatrix`
+              - getRootMatrix
         
         
         
@@ -326,15 +302,12 @@ class CorrelatedRandomVectorGenerator(RandomVectorGenerator):
         ...
     def getRootMatrix(self) -> org.hipparchus.linear.RealMatrix:
         """
-            Get the root of the covariance matrix. The root is the rectangular matrix :code:`B` such that the covariance matrix is
-            equal to :code:`B.B :sup:`T``
+        Get the root of the covariance matrix. The root is the rectangular matrix B such that the covariance matrix is equal to BT``
         
-            Returns:
-                root of the square matrix
+        Returns:
+            root of the square matrix
         
-            Also see:
-        
-                  - :meth:`~org.hipparchus.random.CorrelatedRandomVectorGenerator.getRank`
+              - getRank
         
         
         
@@ -342,15 +315,13 @@ class CorrelatedRandomVectorGenerator(RandomVectorGenerator):
         ...
     def nextVector(self) -> typing.MutableSequence[float]:
         """
-            Generate a correlated random vector.
+        Generate a correlated random vector.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomVectorGenerator.nextVector` in
-                interface :class:`~org.hipparchus.random.RandomVectorGenerator`
+        Specified by: nextVector in interface RandomVectorGenerator
         
-            Returns:
-                a random vector as an array of double. The returned array is created at each call, the caller can do what it wants with
-                it.
+        Returns:
+            a random vector as an array of double. The returned array is created at each call, the caller can do what it wants with
+            it.
         
         
         """
@@ -358,24 +329,30 @@ class CorrelatedRandomVectorGenerator(RandomVectorGenerator):
 
 class GaussianRandomGenerator(NormalizedRandomGenerator):
     """
-    public classGaussianRandomGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.random.NormalizedRandomGenerator`
+    implements NormalizedRandomGenerator
     
-        This class is a gaussian normalized random generator for scalars.
+    This class is a gaussian normalized random generator for scalars.
     
-        This class is a simple wrapper around the :meth:`~org.hipparchus.random.RandomGenerator.nextGaussian` method.
+    This class is a simple wrapper around the nextGaussian method.
     """
-    def __init__(self, randomGenerator: RandomGenerator): ...
+    def __init__(self, generator: RandomGenerator):
+        """
+        Create a new generator.
+        
+        Parameters:
+            generator (RandomGenerator): underlying random generator to use
+        
+        
+        """
+        ...
     def nextNormalizedDouble(self) -> float:
         """
-            Generate a random scalar with null mean and unit standard deviation.
+        Generate a random scalar with null mean and unit standard deviation.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.NormalizedRandomGenerator.nextNormalizedDouble` in
-                interface :class:`~org.hipparchus.random.NormalizedRandomGenerator`
+        Specified by: nextNormalizedDouble in interface NormalizedRandomGenerator
         
-            Returns:
-                a random scalar with null mean and unit standard deviation
+        Returns:
+            a random scalar with null mean and unit standard deviation
         
         
         """
@@ -383,38 +360,28 @@ class GaussianRandomGenerator(NormalizedRandomGenerator):
 
 class HaltonSequenceGenerator(RandomVectorGenerator):
     """
-    public classHaltonSequenceGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.random.RandomVectorGenerator`
+    implements RandomVectorGenerator
     
-        Implementation of a Halton sequence.
+    Implementation of a Halton sequence.
     
-        A Halton sequence is a low-discrepancy sequence generating points in the interval [0, 1] according to
+    A Halton sequence is a low-discrepancy sequence generating points in the interval [0, 1] according to
     
-        .. code-block: java
-        
-           H(n) = d_0 / b + d_1 / b^2 .... d_j / b^j+1
-        
-           with
-        
-           n = d_j * b^j-1 + ... d_1 * b + d_0 * b^0
-         
-        For higher dimensions, subsequent prime numbers are used as base, e.g. { 2, 3, 5 } for a Halton sequence in R^3.
+       H(n) = d_0 / b + d_1 / b^2 .... d_j / b^j+1
     
-        Halton sequences are known to suffer from linear correlation for larger prime numbers, thus the individual digits are
-        usually scrambled. This implementation already comes with support for up to 40 dimensions with optimal weight numbers
-        from ` H. Chi: Scrambled quasirandom sequences and their applications
-        <http://etd.lib.fsu.edu/theses/available/etd-07062004-140409/unrestricted/dissertation1.pdf>`.
+       with
     
-        The generator supports two modes:
+       n = d_j * b^j-1 + ... d_1 * b + d_0 * b^0 For higher dimensions, subsequent prime numbers are used as base, e.g. { 2, 3, 5 } for a Halton sequence in R^3.
     
-          - sequential generation of points: :meth:`~org.hipparchus.random.HaltonSequenceGenerator.nextVector`
-          - random access to the i-th point in the sequence: :meth:`~org.hipparchus.random.HaltonSequenceGenerator.skipTo`
+    Halton sequences are known to suffer from linear correlation for larger prime numbers, thus the individual digits are usually scrambled. This implementation already comes with support for up to 40 dimensions with optimal weight numbers from ` H. Chi: Scrambled quasirandom sequences and their applications <http://etd.lib.fsu.edu/theses/available/etd-07062004-140409/unrestricted/dissertation1.pdf>`.
+    
+    The generator supports two modes:
+    
+      - sequential generation of points: nextVector
+      - random access to the i-th point in the sequence: skipTo
     
     
-        Also see:
-    
-              - `Halton sequence (Wikipedia) <http://en.wikipedia.org/wiki/Halton_sequence>`
-              - :class:`~org.hipparchus.random.https:.lirias.kuleuven.be.bitstream.123456789.131168.1.mcm2005_bartv.pdf`
+          - `Halton sequence (Wikipedia) <http://en.wikipedia.org/wiki/Halton_sequence>`
+          - pdf
     """
     @typing.overload
     def __init__(self, int: int): ...
@@ -422,164 +389,160 @@ class HaltonSequenceGenerator(RandomVectorGenerator):
     def __init__(self, int: int, intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]): ...
     def getNextIndex(self) -> int:
         """
-            Returns the index i of the next point in the Halton sequence that will be returned by calling
-            :meth:`~org.hipparchus.random.HaltonSequenceGenerator.nextVector`.
+        Returns the index i of the next point in the Halton sequence that will be returned by calling nextVector.
         
-            Returns:
-                the index of the next point
+        Returns:
+            the index of the next point
         
         
         """
         ...
     def nextVector(self) -> typing.MutableSequence[float]:
         """
-            Generate a random vector.
+        Generate a random vector.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomVectorGenerator.nextVector` in
-                interface :class:`~org.hipparchus.random.RandomVectorGenerator`
+        Specified by: nextVector in interface RandomVectorGenerator
         
-            Returns:
-                a random vector as an array of double.
+        Returns:
+            a random vector as an array of double.
         
         
         """
         ...
-    def skipTo(self, int: int) -> typing.MutableSequence[float]: ...
+    def skipTo(self, index: int) -> typing.MutableSequence[float]:
+        """
+        Skip to the i-th point in the Halton sequence.
+        
+        This operation can be performed in O(1).
+        
+        Parameters:
+            index (int): the index in the sequence to skip to
+        
+        Returns:
+            the i-th point in the Halton sequence
+        
+        Raises:
+            MathIllegalArgumentException: if index < 0
+        
+        
+        """
+        ...
 
 class RandomAdaptor(java.util.Random, RandomGenerator):
     """
-    public classRandomAdaptor extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random`
-    implements :class:`~org.hipparchus.random.RandomGenerator`
+    implements RandomGenerator
     
-        Extension of :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random` wrapping a
-        :class:`~org.hipparchus.random.RandomGenerator`.
+    Extension of Random wrapping a RandomGenerator.
     
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
-    def __init__(self, randomGenerator: RandomGenerator): ...
+    def __init__(self, randomGenerator: RandomGenerator):
+        """
+        Construct a RandomAdaptor wrapping the supplied RandomGenerator.
+        
+        Parameters:
+            randomGenerator (RandomGenerator): the wrapped generator
+        
+        Raises:
+            NullArgumentException: if randomGenerator is null
+        
+        
+        """
+        ...
     def nextBoolean(self) -> bool:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`boolean` value from this random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed boolean value from this random number generator's sequence.
         
-            Specified by:
-                :code:`nextBoolean` in interface :code:`java.util.random.RandomGenerator`
+        Specified by: nextBoolean in interface RandomGenerator
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextBoolean` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextBoolean in interface RandomGenerator
         
-            Overrides:
-                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.nextBoolean` in
-                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random`
+        Overrides: nextBoolean in class Random
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`boolean` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed boolean value from this random number generator's sequence
         
         
         """
         ...
     @typing.overload
-    def nextBytes(self, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes]) -> None:
+    def nextBytes(self, bytes: typing.Union[typing.List[int], jpype.JArray, bytes]) -> None:
         """
-            Generates random bytes and places them into a user-supplied byte array. The number of random bytes produced is equal to
-            the length of the byte array.
+        Generates random bytes and places them into a user-supplied byte array. The number of random bytes produced is equal to the length of the byte array.
         
-            Specified by:
-                :code:`nextBytes` in interface :code:`java.util.random.RandomGenerator`
+        Specified by: nextBytes in interface RandomGenerator
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextBytes` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextBytes in interface RandomGenerator
         
-            Overrides:
-                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.nextBytes` in
-                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random`
+        Overrides: nextBytes in class Random
         
-            Parameters:
-                bytes (byte[]): the non-null byte array in which to put the random bytes
+        Parameters:
+            bytes (byte[]): the non-null byte array in which to put the random bytes
         
         """
         ...
     @typing.overload
-    def nextBytes(self, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], int: int, int2: int) -> None:
+    def nextBytes(self, bytes: typing.Union[typing.List[int], jpype.JArray, bytes], offset: int, len: int) -> None:
         """
-            Generates random bytes and places them into a user-supplied byte array.
+        Generates random bytes and places them into a user-supplied byte array.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextBytes` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextBytes in interface RandomGenerator
         
-            Parameters:
-                bytes (byte[]): the non-null byte array in which to put the random bytes
-                offset (int): the starting index for inserting the generated bytes into the array
-                len (int): the number of bytes to generate
+        Parameters:
+            bytes (byte[]): the non-null byte array in which to put the random bytes
+            offset (int): the starting index for inserting the generated bytes into the array
+            len (int): the number of bytes to generate
         
         
         """
         ...
     def nextDouble(self) -> float:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`double` value between :code:`0.0` and :code:`1.0` from this
-            random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed double value between  and  from this random number generator's sequence.
         
-            Specified by:
-                :code:`nextDouble` in interface :code:`java.util.random.RandomGenerator`
+        Specified by: nextDouble in interface RandomGenerator
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextDouble` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextDouble in interface RandomGenerator
         
-            Overrides:
-                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.nextDouble` in
-                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random`
+        Overrides: nextDouble in class Random
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`double` value between :code:`0.0` and :code:`1.0` from this random
-                number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed double value between  and  from this random
+            number generator's sequence
         
         
         """
         ...
     def nextFloat(self) -> float:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`float` value between :code:`0.0` and :code:`1.0` from this
-            random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed float value between  and  from this random number generator's sequence.
         
-            Specified by:
-                :code:`nextFloat` in interface :code:`java.util.random.RandomGenerator`
+        Specified by: nextFloat in interface RandomGenerator
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextFloat` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextFloat in interface RandomGenerator
         
-            Overrides:
-                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.nextFloat` in
-                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random`
+        Overrides: nextFloat in class Random
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`float` value between :code:`0.0` and :code:`1.0` from this random
-                number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed float value between  and  from this random
+            number generator's sequence
         
         
         """
         ...
     def nextGaussian(self) -> float:
         """
-            Returns the next pseudorandom, Gaussian ("normally") distributed :code:`double` value with mean :code:`0.0` and standard
-            deviation :code:`1.0` from this random number generator's sequence.
+        Returns the next pseudorandom, Gaussian ("normally") distributed double value with mean  and standard deviation  from this random number generator's sequence.
         
-            Specified by:
-                :code:`nextGaussian` in interface :code:`java.util.random.RandomGenerator`
+        Specified by: nextGaussian in interface RandomGenerator
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextGaussian` in
-                interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextGaussian in interface RandomGenerator
         
-            Overrides:
-                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.nextGaussian` in
-                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random`
+        Overrides: nextGaussian in class Random
         
-            Returns:
-                the next pseudorandom, Gaussian ("normally") distributed :code:`double` value with mean :code:`0.0` and standard
-                deviation :code:`1.0` from this random number generator's sequence
+        Returns:
+            the next pseudorandom, Gaussian ("normally") distributed double value with mean  and standard
+            deviation  from this random number generator's sequence
         
         
         """
@@ -587,48 +550,38 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
     @typing.overload
     def nextInt(self) -> int:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence. All
-            2 :sup:`32` possible :code:`int` values should be produced with (approximately) equal probability.
+        Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence. All 2 :sup:`32` possible int values should be produced with (approximately) equal probability.
         
-            Specified by:
-                :code:`nextInt` in interface :code:`java.util.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Overrides:
-                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.nextInt` in
-                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random`
+        Overrides: nextInt in class Random
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
         """
         ...
     @typing.overload
-    def nextInt(self, int: int) -> int:
+    def nextInt(self, n: int) -> int:
         """
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        (exclusive), drawn from this random number generator's sequence.
         
-            Specified by:
-                :code:`nextInt` in interface :code:`java.util.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Overrides:
-                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.nextInt` in
-                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random`
+        Overrides: nextInt in class Random
         
-            Parameters:
-                n (int): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (int): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
-            Raises:
-                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`: if n is not positive.
+        Raises:
+            IllegalArgumentException: if n is not positive.
         
         
         """
@@ -636,41 +589,33 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
     @typing.overload
     def nextLong(self) -> int:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`long` value from this random number generator's sequence.
-            All 2 :sup:`64` possible :code:`long` values should be produced with (approximately) equal probability.
+        Returns the next pseudorandom, uniformly distributed long value from this random number generator's sequence. All 2 :sup:`64` possible long values should be produced with (approximately) equal probability.
         
-            Specified by:
-                :code:`nextLong` in interface :code:`java.util.random.RandomGenerator`
+        Specified by: nextLong in interface RandomGenerator
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextLong` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextLong in interface RandomGenerator
         
-            Overrides:
-                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.nextLong` in
-                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random`
+        Overrides: nextLong in class Random
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`long` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed long value from this random number generator's sequence
         
         """
         ...
     @typing.overload
-    def nextLong(self, long: int) -> int:
+    def nextLong(self, n: int) -> int:
         """
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        (exclusive), drawn from this random number generator's sequence.
         
-            Specified by:
-                :code:`nextLong` in interface :code:`java.util.random.RandomGenerator`
+        Specified by: nextLong in interface RandomGenerator
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextLong` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextLong in interface RandomGenerator
         
-            Parameters:
-                n (long): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (long): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
         
         """
@@ -678,13 +623,13 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
     @staticmethod
     def of(randomGenerator: RandomGenerator) -> java.util.Random:
         """
-            Factory method to create a :code:`Random` using the supplied :code:`RandomGenerator`.
+        Factory method to create a Random using the supplied RandomGenerator.
         
-            Parameters:
-                randomGenerator (:class:`~org.hipparchus.random.RandomGenerator`): wrapped RandomGenerator instance
+        Parameters:
+            randomGenerator (RandomGenerator): wrapped RandomGenerator instance
         
-            Returns:
-                a Random instance wrapping the RandomGenerator
+        Returns:
+            a Random instance wrapping the RandomGenerator
         
         
         """
@@ -692,39 +637,34 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
     @typing.overload
     def setSeed(self, int: int) -> None:
         """
-            Sets the seed of the underlying random number generator using an :code:`int` seed.
+        Sets the seed of the underlying random number generator using an int seed.
         
-            Sequences of values generated starting with the same seeds should be identical.
+        Sequences of values generated starting with the same seeds should be identical.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: setSeed in interface RandomGenerator
         
-            Parameters:
-                seed (int): the seed value
+        Parameters:
+            seed (int): the seed value
         
-            Sets the seed of the underlying random number generator using an :code:`int` array seed.
+        Sets the seed of the underlying random number generator using an int array seed.
         
-            Sequences of values generated starting with the same seeds should be identical.
+        Sequences of values generated starting with the same seeds should be identical.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: setSeed in interface RandomGenerator
         
-            Parameters:
-                seed (int[]): the seed value
+        Parameters:
+            seed (int[]): the seed value
         
-            Sets the seed of the underlying random number generator using a :code:`long` seed.
+        Sets the seed of the underlying random number generator using a long seed.
         
-            Sequences of values generated starting with the same seeds should be identical.
+        Sequences of values generated starting with the same seeds should be identical.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: setSeed in interface RandomGenerator
         
-            Overrides:
-                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.setSeed` in
-                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random`
+        Overrides: setSeed in class Random
         
-            Parameters:
-                seed (long): the seed value
+        Parameters:
+            seed (long): the seed value
         
         
         """
@@ -736,27 +676,22 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
 
 class SobolSequenceGenerator(RandomVectorGenerator):
     """
-    public classSobolSequenceGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.random.RandomVectorGenerator`
+    implements RandomVectorGenerator
     
-        Implementation of a Sobol sequence.
+    Implementation of a Sobol sequence.
     
-        A Sobol sequence is a low-discrepancy sequence with the property that for all values of N, its subsequence (x1, ... xN)
-        has a low discrepancy. It can be used to generate pseudo-random points in a space S, which are equi-distributed.
+    A Sobol sequence is a low-discrepancy sequence with the property that for all values of N, its subsequence (x1... xN) has a low discrepancy. It can be used to generate pseudo-random points in a space S, which are equi-distributed.
     
-        The implementation already comes with support for up to 21201 dimensions with direction numbers calculated from `Stephen
-        Joe and Frances Kuo <http://web.maths.unsw.edu.au/~fkuo/sobol/>`.
+    The implementation already comes with support for up to 21201 dimensions with direction numbers calculated from `Stephen Joe and Frances Kuo <http://web.maths.unsw.edu.au/~fkuo/sobol/>`.
     
-        The generator supports two modes:
+    The generator supports two modes:
     
-          - sequential generation of points: :meth:`~org.hipparchus.random.SobolSequenceGenerator.nextVector`
-          - random access to the i-th point in the sequence: :meth:`~org.hipparchus.random.SobolSequenceGenerator.skipTo`
+      - sequential generation of points: nextVector
+      - random access to the i-th point in the sequence: skipTo
     
     
-        Also see:
-    
-              - `Sobol sequence (Wikipedia) <http://en.wikipedia.org/wiki/Sobol_sequence>`
-              - `Sobol sequence direction numbers <http://web.maths.unsw.edu.au/~fkuo/sobol/>`
+          - `Sobol sequence (Wikipedia) <http://en.wikipedia.org/wiki/Sobol_sequence>`
+          - `Sobol sequence direction numbers <http://web.maths.unsw.edu.au/~fkuo/sobol/>`
     """
     @typing.overload
     def __init__(self, int: int): ...
@@ -764,54 +699,77 @@ class SobolSequenceGenerator(RandomVectorGenerator):
     def __init__(self, int: int, inputStream: java.io.InputStream): ...
     def getNextIndex(self) -> int:
         """
-            Returns the index i of the next point in the Sobol sequence that will be returned by calling
-            :meth:`~org.hipparchus.random.SobolSequenceGenerator.nextVector`.
+        Returns the index i of the next point in the Sobol sequence that will be returned by calling nextVector.
         
-            Returns:
-                the index of the next point
+        Returns:
+            the index of the next point
         
         
         """
         ...
     def nextVector(self) -> typing.MutableSequence[float]:
         """
-            Generate a random vector.
+        Generate a random vector.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomVectorGenerator.nextVector` in
-                interface :class:`~org.hipparchus.random.RandomVectorGenerator`
+        Specified by: nextVector in interface RandomVectorGenerator
         
-            Returns:
-                a random vector as an array of double.
+        Returns:
+            a random vector as an array of double.
         
         
         """
         ...
-    def skipTo(self, int: int) -> typing.MutableSequence[float]: ...
+    def skipTo(self, index: int) -> typing.MutableSequence[float]:
+        """
+        Skip to the i-th point in the Sobol sequence.
+        
+        This operation can be performed in O(1).
+        
+        Parameters:
+            index (int): the index in the sequence to skip to
+        
+        Returns:
+            the i-th point in the Sobol sequence
+        
+        Raises:
+            MathIllegalArgumentException: if index < 0
+        
+        
+        """
+        ...
 
 class StableRandomGenerator(NormalizedRandomGenerator):
     """
-    public classStableRandomGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.random.NormalizedRandomGenerator`
+    implements NormalizedRandomGenerator
     
+    This class provides a stable normalized random generator. It samples from a stable distribution with location parameter 0 and scale 1.
     
-        This class provides a stable normalized random generator. It samples from a stable distribution with location parameter
-        0 and scale 1.
-    
-        The implementation uses the Chambers-Mallows-Stuck method as described in *Handbook of computational statistics:
-        concepts and methods* by James E. Gentle, Wolfgang Härdle, Yuichi Mori.
+    The implementation uses the Chambers-Mallows-Stuck method as described in Handbook of computational statistics: concepts and methods by James E. Gentle, Wolfgang Härdle, Yuichi Mori.
     """
-    def __init__(self, randomGenerator: RandomGenerator, double: float, double2: float): ...
+    def __init__(self, generator: RandomGenerator, alpha: float, beta: float):
+        """
+        Create a new generator.
+        
+        Parameters:
+            generator (RandomGenerator): underlying random generator to use
+            alpha (double): Stability parameter. Must be in range (0, 2]
+            beta (double): Skewness parameter. Must be in range [-1, 1]
+        
+        Raises:
+            NullArgumentException: if generator is null
+            MathIllegalArgumentException: if alpha <= 0 or alpha > 2 or beta < -1 or beta > 1
+        
+        
+        """
+        ...
     def nextNormalizedDouble(self) -> float:
         """
-            Generate a random scalar with zero location and unit scale.
+        Generate a random scalar with zero location and unit scale.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.NormalizedRandomGenerator.nextNormalizedDouble` in
-                interface :class:`~org.hipparchus.random.NormalizedRandomGenerator`
+        Specified by: nextNormalizedDouble in interface NormalizedRandomGenerator
         
-            Returns:
-                a random scalar with zero location and unit scale
+        Returns:
+            a random scalar with zero location and unit scale
         
         
         """
@@ -819,99 +777,95 @@ class StableRandomGenerator(NormalizedRandomGenerator):
 
 class SynchronizedRandomGenerator(RandomGenerator):
     """
-    public classSynchronizedRandomGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.random.RandomGenerator`
+    implements RandomGenerator
     
-        Any :class:`~org.hipparchus.random.RandomGenerator` implementation can be thread-safe if it is used through an instance
-        of this class. This is achieved by enclosing calls to the methods of the actual generator inside the overridden
-        :code:`synchronized` methods of this class.
+    Any RandomGenerator implementation can be thread-safe if it is used through an instance of this class. This is achieved by enclosing calls to the methods of the actual generator inside the overridden synchronized methods of this class.
     """
-    def __init__(self, randomGenerator: RandomGenerator): ...
+    def __init__(self, rng: RandomGenerator):
+        """
+        Creates a synchronized wrapper for the given RandomGenerator instance.
+        
+        Parameters:
+            rng (RandomGenerator): Generator whose methods will be called through their corresponding overridden synchronized version. To ensure
+                thread-safety, the wrapped generator must not be used directly.
+        
+        
+        """
+        ...
     def nextBoolean(self) -> bool:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`boolean` value from this random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed boolean value from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextBoolean` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextBoolean in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`boolean` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed boolean value from this random number generator's sequence
         
-        
-        """
-        ...
-    @typing.overload
-    def nextBytes(self, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes]) -> None:
-        """
-            Generates random bytes and places them into a user-supplied byte array. The number of random bytes produced is equal to
-            the length of the byte array.
-        
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextBytes` in interface :class:`~org.hipparchus.random.RandomGenerator`
-        
-            Parameters:
-                bytes (byte[]): the non-null byte array in which to put the random bytes
         
         """
         ...
     @typing.overload
-    def nextBytes(self, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], int: int, int2: int) -> None:
+    def nextBytes(self, bytes: typing.Union[typing.List[int], jpype.JArray, bytes]) -> None:
         """
-            Generates random bytes and places them into a user-supplied byte array.
+        Generates random bytes and places them into a user-supplied byte array. The number of random bytes produced is equal to the length of the byte array.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextBytes` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextBytes in interface RandomGenerator
         
-            Parameters:
-                bytes (byte[]): the non-null byte array in which to put the random bytes
-                offset (int): the starting index for inserting the generated bytes into the array
-                len (int): the number of bytes to generate
+        Parameters:
+            bytes (byte[]): the non-null byte array in which to put the random bytes
+        
+        """
+        ...
+    @typing.overload
+    def nextBytes(self, bytes: typing.Union[typing.List[int], jpype.JArray, bytes], offset: int, len: int) -> None:
+        """
+        Generates random bytes and places them into a user-supplied byte array.
+        
+        Specified by: nextBytes in interface RandomGenerator
+        
+        Parameters:
+            bytes (byte[]): the non-null byte array in which to put the random bytes
+            offset (int): the starting index for inserting the generated bytes into the array
+            len (int): the number of bytes to generate
         
         
         """
         ...
     def nextDouble(self) -> float:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`double` value between :code:`0.0` and :code:`1.0` from this
-            random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed double value between  and  from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextDouble` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextDouble in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`double` value between :code:`0.0` and :code:`1.0` from this random
-                number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed double value between  and  from this random
+            number generator's sequence
         
         
         """
         ...
     def nextFloat(self) -> float:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`float` value between :code:`0.0` and :code:`1.0` from this
-            random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed float value between  and  from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextFloat` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextFloat in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`float` value between :code:`0.0` and :code:`1.0` from this random
-                number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed float value between  and  from this random
+            number generator's sequence
         
         
         """
         ...
     def nextGaussian(self) -> float:
         """
-            Returns the next pseudorandom, Gaussian ("normally") distributed :code:`double` value with mean :code:`0.0` and standard
-            deviation :code:`1.0` from this random number generator's sequence.
+        Returns the next pseudorandom, Gaussian ("normally") distributed double value with mean  and standard deviation  from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextGaussian` in
-                interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextGaussian in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, Gaussian ("normally") distributed :code:`double` value with mean :code:`0.0` and standard
-                deviation :code:`1.0` from this random number generator's sequence
+        Returns:
+            the next pseudorandom, Gaussian ("normally") distributed double value with mean  and standard
+            deviation  from this random number generator's sequence
         
         
         """
@@ -919,32 +873,29 @@ class SynchronizedRandomGenerator(RandomGenerator):
     @typing.overload
     def nextInt(self) -> int:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
         
-            All 2 :sup:`32` possible :code:`int` values should be produced with (approximately) equal probability.
+        All 2 :sup:`32` possible int values should be produced with (approximately) equal probability.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
         """
         ...
     @typing.overload
-    def nextInt(self, int: int) -> int:
+    def nextInt(self, n: int) -> int:
         """
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        (exclusive), drawn from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Parameters:
-                n (int): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (int): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
         
         """
@@ -952,31 +903,27 @@ class SynchronizedRandomGenerator(RandomGenerator):
     @typing.overload
     def nextLong(self) -> int:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`long` value from this random number generator's sequence.
-            All 2 :sup:`64` possible :code:`long` values should be produced with (approximately) equal probability.
+        Returns the next pseudorandom, uniformly distributed long value from this random number generator's sequence. All 2 :sup:`64` possible long values should be produced with (approximately) equal probability.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextLong` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextLong in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`long` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed long value from this random number generator's sequence
         
         """
         ...
     @typing.overload
-    def nextLong(self, long: int) -> int:
+    def nextLong(self, n: int) -> int:
         """
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        (exclusive), drawn from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextLong` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextLong in interface RandomGenerator
         
-            Parameters:
-                n (long): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (long): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
         
         """
@@ -984,35 +931,32 @@ class SynchronizedRandomGenerator(RandomGenerator):
     @typing.overload
     def setSeed(self, int: int) -> None:
         """
-            Sets the seed of the underlying random number generator using an :code:`int` seed.
+        Sets the seed of the underlying random number generator using an int seed.
         
-            Sequences of values generated starting with the same seeds should be identical.
+        Sequences of values generated starting with the same seeds should be identical.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: setSeed in interface RandomGenerator
         
-            Parameters:
-                seed (int): the seed value
+        Parameters:
+            seed (int): the seed value
         
-            Sets the seed of the underlying random number generator using an :code:`int` array seed.
+        Sets the seed of the underlying random number generator using an int array seed.
         
-            Sequences of values generated starting with the same seeds should be identical.
+        Sequences of values generated starting with the same seeds should be identical.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: setSeed in interface RandomGenerator
         
-            Parameters:
-                seed (int[]): the seed value
+        Parameters:
+            seed (int[]): the seed value
         
-            Sets the seed of the underlying random number generator using a :code:`long` seed.
+        Sets the seed of the underlying random number generator using a long seed.
         
-            Sequences of values generated starting with the same seeds should be identical.
+        Sequences of values generated starting with the same seeds should be identical.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: setSeed in interface RandomGenerator
         
-            Parameters:
-                seed (long): the seed value
+        Parameters:
+            seed (long): the seed value
         
         
         """
@@ -1024,13 +968,11 @@ class SynchronizedRandomGenerator(RandomGenerator):
 
 class UncorrelatedRandomVectorGenerator(RandomVectorGenerator):
     """
-    public classUncorrelatedRandomVectorGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.random.RandomVectorGenerator`
+    implements RandomVectorGenerator
     
-        A :class:`~org.hipparchus.random.RandomVectorGenerator` that generates vectors with uncorrelated components.
+    A RandomVectorGenerator that generates vectors with uncorrelated components.
     
-        Components of generated vectors follow (independent) Gaussian distributions, with parameters supplied in the
-        constructor.
+    Components of generated vectors follow (independent) Gaussian distributions, with parameters supplied in the constructor.
     """
     @typing.overload
     def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], normalizedRandomGenerator: typing.Union[NormalizedRandomGenerator, typing.Callable]): ...
@@ -1038,14 +980,12 @@ class UncorrelatedRandomVectorGenerator(RandomVectorGenerator):
     def __init__(self, int: int, normalizedRandomGenerator: typing.Union[NormalizedRandomGenerator, typing.Callable]): ...
     def nextVector(self) -> typing.MutableSequence[float]:
         """
-            Generate an uncorrelated random vector.
+        Generate an uncorrelated random vector.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomVectorGenerator.nextVector` in
-                interface :class:`~org.hipparchus.random.RandomVectorGenerator`
+        Specified by: nextVector in interface RandomVectorGenerator
         
-            Returns:
-                a random vector as a newly built array of double
+        Returns:
+            a random vector as a newly built array of double
         
         
         """
@@ -1053,27 +993,32 @@ class UncorrelatedRandomVectorGenerator(RandomVectorGenerator):
 
 class UniformRandomGenerator(NormalizedRandomGenerator):
     """
-    public classUniformRandomGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.random.NormalizedRandomGenerator`
+    implements NormalizedRandomGenerator
     
-        This class implements a normalized uniform random generator.
+    This class implements a normalized uniform random generator.
     
-        Since it is a normalized random generator, it generates values from a uniform distribution with mean equal to 0 and
-        standard deviation equal to 1. Generated values fall in the range [-x0221A;3, +x0221A;3].
+    Since it is a normalized random generator, it generates values from a uniform distribution with mean equal to 0 and standard deviation equal to 1. Generated values fall in the range [-x0221A;3, +x0221A;3].
     """
-    def __init__(self, randomGenerator: RandomGenerator): ...
+    def __init__(self, generator: RandomGenerator):
+        """
+        Create a new generator.
+        
+        Parameters:
+            generator (RandomGenerator): underlying random generator to use
+        
+        
+        """
+        ...
     def nextNormalizedDouble(self) -> float:
         """
-            Generate a random scalar with null mean and unit standard deviation.
+        Generate a random scalar with null mean and unit standard deviation.
         
-            The number generated is uniformly distributed between \(-\sqrt{3}\) and \(+\sqrt{3}\).
+        The number generated is uniformly distributed between \(-\sqrt{3}\) and \(+\sqrt{3}\).
         
-            Specified by:
-                :meth:`~org.hipparchus.random.NormalizedRandomGenerator.nextNormalizedDouble` in
-                interface :class:`~org.hipparchus.random.NormalizedRandomGenerator`
+        Specified by: nextNormalizedDouble in interface NormalizedRandomGenerator
         
-            Returns:
-                a random scalar with null mean and unit standard deviation
+        Returns:
+            a random scalar with null mean and unit standard deviation
         
         
         """
@@ -1081,10 +1026,9 @@ class UniformRandomGenerator(NormalizedRandomGenerator):
 
 class UnitSphereRandomVectorGenerator(RandomVectorGenerator):
     """
-    public classUnitSphereRandomVectorGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.random.RandomVectorGenerator`
+    implements RandomVectorGenerator
     
-        Generate random vectors isotropically located on the surface of a sphere.
+    Generate random vectors isotropically located on the surface of a sphere.
     """
     @typing.overload
     def __init__(self, int: int): ...
@@ -1092,14 +1036,12 @@ class UnitSphereRandomVectorGenerator(RandomVectorGenerator):
     def __init__(self, int: int, randomGenerator: RandomGenerator): ...
     def nextVector(self) -> typing.MutableSequence[float]:
         """
-            Generate a random vector.
+        Generate a random vector.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomVectorGenerator.nextVector` in
-                interface :class:`~org.hipparchus.random.RandomVectorGenerator`
+        Specified by: nextVector in interface RandomVectorGenerator
         
-            Returns:
-                a random vector as an array of double.
+        Returns:
+            a random vector as an array of double.
         
         
         """
@@ -1107,84 +1049,75 @@ class UnitSphereRandomVectorGenerator(RandomVectorGenerator):
 
 class AbstractWell(org.hipparchus.random.IntRandomGenerator, java.io.Serializable):
     """
-    public abstract classAbstractWell extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements Serializable
     
-        This abstract class implements the WELL class of pseudo-random number generator from François Panneton, Pierre L'Ecuyer
-        and Makoto Matsumoto.
+    This abstract class implements the WELL class of pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto Matsumoto.
     
-        This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto ` Improved
-        Long-Period Generators Based on Linear Recurrences Modulo 2
-        <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM Transactions on Mathematical Software, 32, 1
-        (2006). The errata for the paper are in ` wellrng-errata.txt
-        <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
+    This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto ` Improved Long-Period Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
     
-        Also see:
-    
-              - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
-              - :meth:`~serialized`
+          - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
+          - serialized
     """
     def nextInt(self) -> int:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
         
-            All 2 :sup:`32` possible :code:`int` values should be produced with (approximately) equal probability.
+        All 2 :sup:`32` possible int values should be produced with (approximately) equal probability.
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`
+        public int nextInt(int n) throws IllegalArgumentException
         
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Parameters:
-                n (int): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (int): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
-            Raises:
-                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`: if n is not positive.
+        Raises:
+            IllegalArgumentException: if n is not positive.
         
         
         """
         ...
     def setSeed(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> None:
         """
-            Reinitialize the generator as if just built with the given int array seed.
+        Reinitialize the generator as if just built with the given int array seed.
         
-            The state of the generator is exactly the same as a new generator built with the same seed.
+        The state of the generator is exactly the same as a new generator built with the same seed.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: setSeed in interface RandomGenerator
         
-            Parameters:
-                seed (int[]): the initial seed (32 bits integers array). If null the seed of the generator will be the system time plus the system
-                    identity hash code of the instance.
+        Parameters:
+            seed (int[]): the initial seed (32 bits integers array). If null the seed of the generator will be the system time plus the system
+                identity hash code of the instance.
         
-            Sets the seed of the underlying random number generator using an :code:`int` seed.
+        public void setSeed(int seed)
         
-            Sequences of values generated starting with the same seeds should be identical.
+        Sets the seed of the underlying random number generator using an int seed.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Sequences of values generated starting with the same seeds should be identical.
         
-            Parameters:
-                seed (int): the seed value
+        Specified by: setSeed in interface RandomGenerator
         
-            Sets the seed of the underlying random number generator using a :code:`long` seed.
+        Parameters:
+            seed (int): the seed value
         
-            Sequences of values generated starting with the same seeds should be identical.
+        public void setSeed(long seed)
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Sets the seed of the underlying random number generator using a long seed.
         
-            Parameters:
-                seed (long): the seed value
+        Sequences of values generated starting with the same seeds should be identical.
+        
+        Specified by: setSeed in interface RandomGenerator
+        
+        Parameters:
+            seed (long): the seed value
         
         
         """
@@ -1192,22 +1125,16 @@ class AbstractWell(org.hipparchus.random.IntRandomGenerator, java.io.Serializabl
 
 class ISAACRandom(org.hipparchus.random.IntRandomGenerator, java.io.Serializable):
     """
-    public classISAACRandom extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements Serializable
     
-        A fast cryptographic pseudo-random number generator.
+    A fast cryptographic pseudo-random number generator.
     
-        ISAAC (Indirection, Shift, Accumulate, Add, and Count) generates 32-bit random numbers. ISAAC has been designed to be
-        cryptographically secure and is inspired by RC4. Cycles are guaranteed to be at least 2 :sup:`40` values long, and they
-        are 2 :sup:`8295` values long on average. The results are uniformly distributed, unbiased, and unpredictable unless you
-        know the seed.
+    ISAAC (Indirection, Shift, Accumulate, Add, and Count) generates 32-bit random numbers. ISAAC has been designed to be cryptographically secure and is inspired by RC4. Cycles are guaranteed to be at least 2 :sup:`40` values long, and they are 2 :sup:`8295` values long on average. The results are uniformly distributed, unbiased, and unpredictable unless you know the seed.
     
-        This code is based (with minor changes and improvements) on the original implementation of the algorithm by Bob Jenkins.
+    This code is based (with minor changes and improvements) on the original implementation of the algorithm by Bob Jenkins.
     
-        Also see:
-    
-              - ` ISAAC: a fast cryptographic pseudo-random number generator <http://burtleburtle.net/bob/rand/isaacafa.html>`
-              - :meth:`~serialized`
+          - ` ISAAC: a fast cryptographic pseudo-random number generator <http://burtleburtle.net/bob/rand/isaacafa.html>`
+          - serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -1217,67 +1144,65 @@ class ISAACRandom(org.hipparchus.random.IntRandomGenerator, java.io.Serializable
     def __init__(self, long: int): ...
     def nextInt(self) -> int:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
         
-            All 2 :sup:`32` possible :code:`int` values should be produced with (approximately) equal probability.
+        All 2 :sup:`32` possible int values should be produced with (approximately) equal probability.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`
+        public int nextInt(int n) throws IllegalArgumentException
         
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Parameters:
-                n (int): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (int): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
-            Raises:
-                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`: if n is not positive.
+        Raises:
+            IllegalArgumentException: if n is not positive.
         
         
         """
         ...
     def setSeed(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> None:
         """
-            Sets the seed of the underlying random number generator using an :code:`int` array seed.
+        Sets the seed of the underlying random number generator using an int array seed.
         
-            Sequences of values generated starting with the same seeds should be identical.
+        Sequences of values generated starting with the same seeds should be identical.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: setSeed in interface RandomGenerator
         
-            Parameters:
-                seed (int[]): the seed value
+        Parameters:
+            seed (int[]): the seed value
         
-            Sets the seed of the underlying random number generator using an :code:`int` seed.
+        public void setSeed(int seed)
         
-            Sequences of values generated starting with the same seeds should be identical.
+        Sets the seed of the underlying random number generator using an int seed.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Sequences of values generated starting with the same seeds should be identical.
         
-            Parameters:
-                seed (int): the seed value
+        Specified by: setSeed in interface RandomGenerator
         
-            Sets the seed of the underlying random number generator using a :code:`long` seed.
+        Parameters:
+            seed (int): the seed value
         
-            Sequences of values generated starting with the same seeds should be identical.
+        public void setSeed(long seed)
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Sets the seed of the underlying random number generator using a long seed.
         
-            Parameters:
-                seed (long): the seed value
+        Sequences of values generated starting with the same seeds should be identical.
+        
+        Specified by: setSeed in interface RandomGenerator
+        
+        Parameters:
+            seed (long): the seed value
         
         
         """
@@ -1285,15 +1210,11 @@ class ISAACRandom(org.hipparchus.random.IntRandomGenerator, java.io.Serializable
 
 class JDKRandomGenerator(org.hipparchus.random.IntRandomGenerator, java.io.Serializable):
     """
-    public classJDKRandomGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements Serializable
     
-        A :class:`~org.hipparchus.random.RandomGenerator` adapter that delegates the random number generation to the standard
-        :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random` class.
+    A RandomGenerator adapter that delegates the random number generation to the standard Random class.
     
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -1303,82 +1224,72 @@ class JDKRandomGenerator(org.hipparchus.random.IntRandomGenerator, java.io.Seria
     def __init__(self, long: int): ...
     def nextBoolean(self) -> bool:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`boolean` value from this random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed boolean value from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextBoolean` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextBoolean in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`boolean` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed boolean value from this random number generator's sequence
         
         
         """
         ...
     def nextBytes(self, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes]) -> None:
         """
-            Generates random bytes and places them into a user-supplied byte array. The number of random bytes produced is equal to
-            the length of the byte array.
+        Generates random bytes and places them into a user-supplied byte array. The number of random bytes produced is equal to the length of the byte array.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextBytes` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextBytes in interface RandomGenerator
         
-            Parameters:
-                bytes (byte[]): the non-null byte array in which to put the random bytes
+        Parameters:
+            bytes (byte[]): the non-null byte array in which to put the random bytes
         
         public void nextBytes(byte[] bytes, int start, int len)
         
-            Generates random bytes and places them into a user-supplied byte array.
+        Generates random bytes and places them into a user-supplied byte array.
         
-            Parameters:
-                bytes (byte[]): the non-null byte array in which to put the random bytes
-                start (int): the starting index for inserting the generated bytes into the array
-                len (int): the number of bytes to generate
+        Parameters:
+            bytes (byte[]): the non-null byte array in which to put the random bytes
+            start (int): the starting index for inserting the generated bytes into the array
+            len (int): the number of bytes to generate
         
         
         """
         ...
     def nextDouble(self) -> float:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`double` value between :code:`0.0` and :code:`1.0` from this
-            random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed double value between  and  from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextDouble` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextDouble in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`double` value between :code:`0.0` and :code:`1.0` from this random
-                number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed double value between  and  from this random
+            number generator's sequence
         
         
         """
         ...
     def nextFloat(self) -> float:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`float` value between :code:`0.0` and :code:`1.0` from this
-            random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed float value between  and  from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextFloat` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextFloat in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`float` value between :code:`0.0` and :code:`1.0` from this random
-                number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed float value between  and  from this random
+            number generator's sequence
         
         
         """
         ...
     def nextGaussian(self) -> float:
         """
-            Returns the next pseudorandom, Gaussian ("normally") distributed :code:`double` value with mean :code:`0.0` and standard
-            deviation :code:`1.0` from this random number generator's sequence.
+        Returns the next pseudorandom, Gaussian ("normally") distributed double value with mean  and standard deviation  from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextGaussian` in
-                interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextGaussian in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, Gaussian ("normally") distributed :code:`double` value with mean :code:`0.0` and standard
-                deviation :code:`1.0` from this random number generator's sequence
+        Returns:
+            the next pseudorandom, Gaussian ("normally") distributed double value with mean  and standard
+            deviation  from this random number generator's sequence
         
         
         """
@@ -1386,60 +1297,53 @@ class JDKRandomGenerator(org.hipparchus.random.IntRandomGenerator, java.io.Seria
     @typing.overload
     def nextInt(self) -> int:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
         
-            All 2 :sup:`32` possible :code:`int` values should be produced with (approximately) equal probability.
+        All 2 :sup:`32` possible int values should be produced with (approximately) equal probability.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
         """
         ...
     @typing.overload
-    def nextInt(self, int: int) -> int:
+    def nextInt(self, n: int) -> int:
         """
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        (exclusive), drawn from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Parameters:
-                n (int): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (int): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
         
         """
         ...
     def nextLong(self) -> int:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`long` value from this random number generator's sequence.
-            All 2 :sup:`64` possible :code:`long` values should be produced with (approximately) equal probability.
+        Returns the next pseudorandom, uniformly distributed long value from this random number generator's sequence. All 2 :sup:`64` possible long values should be produced with (approximately) equal probability.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextLong` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextLong in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`long` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed long value from this random number generator's sequence
         
         public long nextLong(long n)
         
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextLong` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextLong in interface RandomGenerator
         
-            Parameters:
-                n (long): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (long): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
         
         """
@@ -1447,35 +1351,32 @@ class JDKRandomGenerator(org.hipparchus.random.IntRandomGenerator, java.io.Seria
     @typing.overload
     def setSeed(self, int: int) -> None:
         """
-            Sets the seed of the underlying random number generator using an :code:`int` seed.
+        Sets the seed of the underlying random number generator using an int seed.
         
-            Sequences of values generated starting with the same seeds should be identical.
+        Sequences of values generated starting with the same seeds should be identical.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: setSeed in interface RandomGenerator
         
-            Parameters:
-                seed (int): the seed value
+        Parameters:
+            seed (int): the seed value
         
-            Sets the seed of the underlying random number generator using a :code:`long` seed.
+        Sets the seed of the underlying random number generator using a long seed.
         
-            Sequences of values generated starting with the same seeds should be identical.
+        Sequences of values generated starting with the same seeds should be identical.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: setSeed in interface RandomGenerator
         
-            Parameters:
-                seed (long): the seed value
+        Parameters:
+            seed (long): the seed value
         
-            Sets the seed of the underlying random number generator using an :code:`int` array seed.
+        Sets the seed of the underlying random number generator using an int array seed.
         
-            Sequences of values generated starting with the same seeds should be identical.
+        Sequences of values generated starting with the same seeds should be identical.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: setSeed in interface RandomGenerator
         
-            Parameters:
-                seed (int[]): the seed value
+        Parameters:
+            seed (int[]): the seed value
         
         
         """
@@ -1487,51 +1388,27 @@ class JDKRandomGenerator(org.hipparchus.random.IntRandomGenerator, java.io.Seria
 
 class MersenneTwister(org.hipparchus.random.IntRandomGenerator, java.io.Serializable):
     """
-    public classMersenneTwister extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements Serializable
     
-        This class implements a powerful pseudo-random number generator developed by Makoto Matsumoto and Takuji Nishimura
-        during 1996-1997.
+    This class implements a powerful pseudo-random number generator developed by Makoto Matsumoto and Takuji Nishimura during 1996-1997.
     
-        **Caveat:** It is recommended to use one of WELL generators rather than the MersenneTwister generator (see ` this paper
-        <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>` for more information).
+    Caveat: It is recommended to use one of WELL generators rather than the MersenneTwister generator (see ` this paper <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>` for more information).
     
-        This generator features an extremely long period (2 :sup:`19937` -1) and 623-dimensional equidistribution up to 32 bits
-        accuracy. The home page for this generator is located at ` http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html
-        <http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html>`.
+    This generator features an extremely long period (2 :sup:`19937` -1) and 623-dimensional equidistribution up to 32 bits accuracy. The home page for this generator is located at ` http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html <http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html>`.
     
-        This generator is described in a paper by Makoto Matsumoto and Takuji Nishimura in 1998: `Mersenne Twister: A
-        623-Dimensionally Equidistributed Uniform Pseudo-Random Number Generator
-        <http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/ARTICLES/mt.pdf>`, ACM Transactions on Modeling and Computer
-        Simulation, Vol. 8, No. 1, January 1998, pp 3--30.
+    This generator is described in a paper by Makoto Matsumoto and Takuji Nishimura in 1998: `Mersenne Twister: A 623-Dimensionally Equidistributed Uniform Pseudo-Random Number Generator <http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/ARTICLES/mt.pdf>`, ACM Transactions on Modeling and Computer Simulation, Vol. 8, No. 1, January 1998, pp 3--30.
     
-        This class is mainly a Java port of the 2002-01-26 version of the generator written in C by Makoto Matsumoto and Takuji
-        Nishimura. Here is their original copyright:
+    This class is mainly a Java port of the 2002-01-26 version of the generator written in C by Makoto Matsumoto and Takuji Nishimura. Here is their original copyright:
     
-            Copyright (C) 1997 - 2002, Makoto Matsumoto and Takuji Nishimura, All rights reserved.
+        Copyright (C) 1997 - 2002, Makoto Matsumoto and Takuji Nishimura, All rights reserved.
     
-            Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
-            following conditions are met:
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
     
-              1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following
-                disclaimer.
-              2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
-                disclaimer in the documentation and/or other materials provided with the distribution.
-              3.  The names of its contributors may not be used to endorse or promote products derived from this software without specific
-                prior written permission.
+          1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. 2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. 3.  The names of its contributors may not be used to endorse or promote products derived from this software without specific prior written permission.
     
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     
-            **THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
-            INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-            DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-            SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-            SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-            WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
-            THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.**
-    
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -1543,32 +1420,29 @@ class MersenneTwister(org.hipparchus.random.IntRandomGenerator, java.io.Serializ
     def __init__(self, long: int): ...
     def nextInt(self) -> int:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
         
-            All 2 :sup:`32` possible :code:`int` values should be produced with (approximately) equal probability.
+        All 2 :sup:`32` possible int values should be produced with (approximately) equal probability.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`
+        public int nextInt(int n) throws IllegalArgumentException
         
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Parameters:
-                n (int): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (int): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
-            Raises:
-                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`: if n is not positive.
+        Raises:
+            IllegalArgumentException: if n is not positive.
         
         
         """
@@ -1576,36 +1450,33 @@ class MersenneTwister(org.hipparchus.random.IntRandomGenerator, java.io.Serializ
     @typing.overload
     def setSeed(self, int: int) -> None:
         """
-            Reinitialize the generator as if just built with the given int seed.
+        Reinitialize the generator as if just built with the given int seed.
         
-            The state of the generator is exactly the same as a new generator built with the same seed.
+        The state of the generator is exactly the same as a new generator built with the same seed.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: setSeed in interface RandomGenerator
         
-            Parameters:
-                seed (int): the initial seed (32 bits integer)
+        Parameters:
+            seed (int): the initial seed (32 bits integer)
         
-            Reinitialize the generator as if just built with the given int array seed.
+        Reinitialize the generator as if just built with the given int array seed.
         
-            The state of the generator is exactly the same as a new generator built with the same seed.
+        The state of the generator is exactly the same as a new generator built with the same seed.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: setSeed in interface RandomGenerator
         
-            Parameters:
-                seed (int[]): the initial seed (32 bits integers array), if null the seed of the generator will be the current system time plus the
-                    system identity hash code of this instance
+        Parameters:
+            seed (int[]): the initial seed (32 bits integers array), if null the seed of the generator will be the current system time plus the
+                system identity hash code of this instance
         
-            Sets the seed of the underlying random number generator using a :code:`long` seed.
+        Sets the seed of the underlying random number generator using a long seed.
         
-            Sequences of values generated starting with the same seeds should be identical.
+        Sequences of values generated starting with the same seeds should be identical.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: setSeed in interface RandomGenerator
         
-            Parameters:
-                seed (long): the seed value
+        Parameters:
+            seed (long): the seed value
         
         
         """
@@ -1615,29 +1486,26 @@ class MersenneTwister(org.hipparchus.random.IntRandomGenerator, java.io.Serializ
 
 class RandomDataGenerator(org.hipparchus.random.ForwardingRandomGenerator, RandomGenerator, java.io.Serializable):
     """
-    public classRandomDataGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.random.RandomGenerator`, :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements RandomGenerator, Serializable
     
-        A class for generating random data.
+    A class for generating random data.
     
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
     def __init__(self, long: int): ...
-    def nextBeta(self, double: float, double2: float) -> float:
+    def nextBeta(self, alpha: float, beta: float) -> float:
         """
-            Returns the next pseudo-random beta-distributed value with the given shape and scale parameters.
+        Returns the next pseudo-random beta-distributed value with the given shape and scale parameters.
         
-            Parameters:
-                alpha (double): First shape parameter (must be positive).
-                beta (double): Second shape parameter (must be positive).
+        Parameters:
+            alpha (double): First shape parameter (must be positive).
+            beta (double): Second shape parameter (must be positive).
         
-            Returns:
-                beta-distributed random deviate
+        Returns:
+            beta-distributed random deviate
         
         
         """
@@ -1645,21 +1513,21 @@ class RandomDataGenerator(org.hipparchus.random.ForwardingRandomGenerator, Rando
     @typing.overload
     def nextDeviate(self, realDistribution: org.hipparchus.distribution.RealDistribution) -> float:
         """
-            Returns a random deviate from the given distribution.
+        Returns a random deviate from the given distribution.
         
-            Parameters:
-                dist (:class:`~org.hipparchus.distribution.RealDistribution`): the distribution to sample from
+        Parameters:
+            dist (RealDistribution): the distribution to sample from
         
-            Returns:
-                a random value following the given distribution
+        Returns:
+            a random value following the given distribution
         
-            Returns a random deviate from the given distribution.
+        Returns a random deviate from the given distribution.
         
-            Parameters:
-                dist (:class:`~org.hipparchus.distribution.IntegerDistribution`): the distribution to sample from
+        Parameters:
+            dist (IntegerDistribution): the distribution to sample from
         
-            Returns:
-                a random value following the given distribution
+        Returns:
+            a random value following the given distribution
         
         
         """
@@ -1669,142 +1537,217 @@ class RandomDataGenerator(org.hipparchus.random.ForwardingRandomGenerator, Rando
     @typing.overload
     def nextDeviates(self, realDistribution: org.hipparchus.distribution.RealDistribution, int: int) -> typing.MutableSequence[float]:
         """
-            Returns an array of random deviates from the given distribution.
+        Returns an array of random deviates from the given distribution.
         
-            Parameters:
-                dist (:class:`~org.hipparchus.distribution.RealDistribution`): the distribution to sample from
-                size (int): the number of values to return
+        Parameters:
+            dist (RealDistribution): the distribution to sample from
+            size (int): the number of values to return
         
-            Returns:
-                an array of :code:`size` values following the given distribution
+        Returns:
+            an array of size values following the given distribution
         
-            Returns an array of random deviates from the given distribution.
+        Returns an array of random deviates from the given distribution.
         
-            Parameters:
-                dist (:class:`~org.hipparchus.distribution.IntegerDistribution`): the distribution to sample from
-                size (int): the number of values to return
+        Parameters:
+            dist (IntegerDistribution): the distribution to sample from
+            size (int): the number of values to return
         
-            Returns:
-                an array of :code:`size`values following the given distribution
+        Returns:
+            an array of sizevalues following the given distribution
         
         
         """
         ...
     @typing.overload
     def nextDeviates(self, integerDistribution: org.hipparchus.distribution.IntegerDistribution, int2: int) -> typing.MutableSequence[int]: ...
-    def nextExponential(self, double: float) -> float:
+    def nextExponential(self, mean: float) -> float:
         """
-            Returns the next pseudo-random, exponentially distributed deviate.
+        Returns the next pseudo-random, exponentially distributed deviate.
         
-            Parameters:
-                mean (double): mean of the exponential distribution
+        Parameters:
+            mean (double): mean of the exponential distribution
         
-            Returns:
-                exponentially distributed deviate about the given mean
-        
-        
-        """
-        ...
-    def nextGamma(self, double: float, double2: float) -> float:
-        """
-            Returns the next pseudo-random gamma-distributed value with the given shape and scale parameters.
-        
-            Parameters:
-                shape (double): shape parameter of the distribution
-                scale (double): scale parameter of the distribution
-        
-            Returns:
-                gamma-distributed random deviate
+        Returns:
+            exponentially distributed deviate about the given mean
         
         
         """
         ...
-    def nextHexString(self, int: int) -> str: ...
+    def nextGamma(self, shape: float, scale: float) -> float:
+        """
+        Returns the next pseudo-random gamma-distributed value with the given shape and scale parameters.
+        
+        Parameters:
+            shape (double): shape parameter of the distribution
+            scale (double): scale parameter of the distribution
+        
+        Returns:
+            gamma-distributed random deviate
+        
+        
+        """
+        ...
+    def nextHexString(self, len: int) -> str:
+        """
+        Generates a random string of hex characters of length len.
+        
+        The generated string will be random, but not cryptographically secure.
+        
+        Algorithm Description: hex strings are generated using a 2-step process.
+        
+          1.  len / 2 + 1 binary bytes are generated using the underlying Random 2.  Each binary byte is translated into 2 hex digits
+        
+        
+        Parameters:
+            len (int): the desired string length.
+        
+        Returns:
+            the random string.
+        
+        Raises:
+            MathIllegalArgumentException: if len <= 0.
+        
+        
+        """
+        ...
     def nextInt(self, int: int, int2: int) -> int:
         """
-            Returns a uniformly distributed random integer between lower and upper (inclusive).
+        Returns a uniformly distributed random integer between lower and upper (inclusive).
         
-            Parameters:
-                lower (int): lower bound for the generated value
-                upper (int): upper bound for the generated value
+        Parameters:
+            lower (int): lower bound for the generated value
+            upper (int): upper bound for the generated value
         
-            Returns:
-                a random integer value within the given bounds
+        Returns:
+            a random integer value within the given bounds
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if lower is not strictly less than or equal to upper
+        Raises:
+            MathIllegalArgumentException: if lower is not strictly less than or equal to upper
         
         public int nextInt()
         
-            Returns the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
         
-            All 2 :sup:`32` possible :code:`int` values should be produced with (approximately) equal probability.
+        All 2 :sup:`32` possible int values should be produced with (approximately) equal probability.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
         public int nextInt(int n)
         
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Parameters:
-                n (int): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (int): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
         
         """
         ...
-    def nextLogNormal(self, double: float, double2: float) -> float:
+    def nextLogNormal(self, shape: float, scale: float) -> float:
         """
-            Returns the next log-normally-distributed pseudo-random deviate.
+        Returns the next log-normally-distributed pseudo-random deviate.
         
-            Parameters:
-                shape (double): shape parameter of the log-normal distribution
-                scale (double): scale parameter of the log-normal distribution
+        Parameters:
+            shape (double): shape parameter of the log-normal distribution
+            scale (double): scale parameter of the log-normal distribution
         
-            Returns:
-                a random value, normally distributed with the given mean and standard deviation
-        
-        
-        """
-        ...
-    def nextLong(self, long: int, long2: int) -> int: ...
-    def nextNormal(self, double: float, double2: float) -> float:
-        """
-            Returns the next normally-distributed pseudo-random deviate.
-        
-            Parameters:
-                mean (double): mean of the normal distribution
-                standardDeviation (double): standard deviation of the normal distribution
-        
-            Returns:
-                a random value, normally distributed with the given mean and standard deviation
+        Returns:
+            a random value, normally distributed with the given mean and standard deviation
         
         
         """
         ...
-    def nextPermutation(self, int: int, int2: int) -> typing.MutableSequence[int]: ...
-    def nextPoisson(self, double: float) -> int:
+    def nextLong(self, long: int, long2: int) -> int:
         """
-            Returns a poisson-distributed deviate with the given mean.
+        Returns a uniformly distributed random long integer between lower and upper (inclusive).
         
-            Parameters:
-                mean (double): expected value
+        Parameters:
+            lower (long): lower bound for the generated value
+            upper (long): upper bound for the generated value
         
-            Returns:
-                poisson deviate
+        Returns:
+            a random long integer value within the given bounds
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if mean is not strictly positive
+        Raises:
+            MathIllegalArgumentException: if lower is not strictly less than or equal to upper
+        
+        public long nextLong()
+        
+        Returns the next pseudorandom, uniformly distributed long value from this random number generator's sequence. All 2 :sup:`64` possible long values should be produced with (approximately) equal probability.
+        
+        Specified by: nextLong in interface RandomGenerator
+        
+        Returns:
+            the next pseudorandom, uniformly distributed long value from this random number generator's sequence
+        
+        public long nextLong(long n)
+        
+        Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
+        
+        Specified by: nextLong in interface RandomGenerator
+        
+        Parameters:
+            n (long): the bound on the random number to be returned. Must be positive.
+        
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
+        
+        
+        """
+        ...
+    def nextNormal(self, mean: float, standardDeviation: float) -> float:
+        """
+        Returns the next normally-distributed pseudo-random deviate.
+        
+        Parameters:
+            mean (double): mean of the normal distribution
+            standardDeviation (double): standard deviation of the normal distribution
+        
+        Returns:
+            a random value, normally distributed with the given mean and standard deviation
+        
+        
+        """
+        ...
+    def nextPermutation(self, n: int, k: int) -> typing.MutableSequence[int]:
+        """
+        Generates an integer array of length k whose entries are selected randomly, without repetition, from the integers , n - 1 (inclusive).
+        
+        Generated arrays represent permutations of n taken k at a time. This method calls shuffle in order to create a random shuffle of the set of natural numbers , n - 1 }.
+        
+        Parameters:
+            n (int): the domain of the permutation
+            k (int): the size of the permutation
+        
+        Returns:
+            a random k-permutation of n, as an array of integers
+        
+        Raises:
+            MathIllegalArgumentException: if k > n.
+            MathIllegalArgumentException: if k <= 0.
+        
+        
+        """
+        ...
+    def nextPoisson(self, mean: float) -> int:
+        """
+        Returns a poisson-distributed deviate with the given mean.
+        
+        Parameters:
+            mean (double): expected value
+        
+        Returns:
+            poisson deviate
+        
+        Raises:
+            MathIllegalArgumentException: if mean is not strictly positive
         
         
         """
@@ -1813,55 +1756,54 @@ class RandomDataGenerator(org.hipparchus.random.ForwardingRandomGenerator, Rando
     def nextSample(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int) -> typing.MutableSequence[float]: ...
     @typing.overload
     def nextSample(self, collection: typing.Union[java.util.Collection[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any]], int: int) -> typing.MutableSequence[typing.Any]: ...
-    def nextSampleWithReplacement(self, int: int, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[int]:
+    def nextSampleWithReplacement(self, sampleSize: int, weights: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[int]:
         """
-            Generates a random sample of size sampleSize from {0, 1, ... , weights.length - 1}, using weights as probabilities.
+        Generates a random sample of size sampleSize from {0, 1... , weights.length - 1}, using weights as probabilities.
         
-            For 0 < i < weights.length, the probability that i is selected (on any draw) is weights[i]. If necessary, the weights
-            array is normalized to sum to 1 so that weights[i] is a probability and the array sums to 1.
+        For 0 < i < weights.length, the probability that i is selected (on any draw) is weights[i]. If necessary, the weights array is normalized to sum to 1 so that weights[i] is a probability and the array sums to 1.
         
-            Weights can be 0, but must not be negative, infinite or NaN. At least one weight must be positive.
+        Weights can be 0, but must not be negative, infinite or NaN. At least one weight must be positive.
         
-            Parameters:
-                sampleSize (int): size of sample to generate
-                weights (double[]): probability sampling weights
+        Parameters:
+            sampleSize (int): size of sample to generate
+            weights (double[]): probability sampling weights
         
-            Returns:
-                an array of integers between 0 and weights.length - 1
+        Returns:
+            an array of integers between 0 and weights.length - 1
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if weights contains negative, NaN or infinite values or only 0s or sampleSize is less than 0
-        
-        
-        """
-        ...
-    def nextUniform(self, double: float, double2: float) -> float:
-        """
-            Returns a double value uniformly distributed over [lower, upper]
-        
-            Parameters:
-                lower (double): lower bound
-                upper (double): upper bound
-        
-            Returns:
-                uniform deviate
-        
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if upper is less than or equal to upper
+        Raises:
+            MathIllegalArgumentException: if weights contains negative, NaN or infinite values or only 0s or sampleSize is less than 0
         
         
         """
         ...
-    def nextZipf(self, int: int, double: float) -> int:
+    def nextUniform(self, lower: float, upper: float) -> float:
         """
-            Returns an integer value following a Zipf distribution with the given parameter.
+        Returns a double value uniformly distributed over [lower, upper]
         
-            Parameters:
-                numberOfElements (int): number of elements of the distribution
-                exponent (double): exponent of the distribution
+        Parameters:
+            lower (double): lower bound
+            upper (double): upper bound
         
-            Returns:
-                random Zipf value
+        Returns:
+            uniform deviate
+        
+        Raises:
+            MathIllegalArgumentException: if upper is less than or equal to upper
+        
+        
+        """
+        ...
+    def nextZipf(self, numberOfElements: int, exponent: float) -> int:
+        """
+        Returns an integer value following a Zipf distribution with the given parameter.
+        
+        Parameters:
+            numberOfElements (int): number of elements of the distribution
+            exponent (double): exponent of the distribution
+        
+        Returns:
+            random Zipf value
         
         
         """
@@ -1869,16 +1811,16 @@ class RandomDataGenerator(org.hipparchus.random.ForwardingRandomGenerator, Rando
     @staticmethod
     def of(randomGenerator: RandomGenerator) -> 'RandomDataGenerator':
         """
-            Factory method to create a :code:`RandomData` instance using the supplied :code:`RandomGenerator`.
+        Factory method to create a RandomData instance using the supplied RandomGenerator.
         
-            Parameters:
-                randomGenerator (:class:`~org.hipparchus.random.RandomGenerator`): source of random bits
+        Parameters:
+            randomGenerator (RandomGenerator): source of random bits
         
-            Returns:
-                a RandomData using the given RandomGenerator to source bits
+        Returns:
+            a RandomData using the given RandomGenerator to source bits
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if randomGenerator is null
+        Raises:
+            MathIllegalArgumentException: if randomGenerator is null
         
         
         """
@@ -1886,20 +1828,12 @@ class RandomDataGenerator(org.hipparchus.random.ForwardingRandomGenerator, Rando
 
 class Well1024a(AbstractWell):
     """
-    public classWell1024a extends :class:`~org.hipparchus.random.AbstractWell`
+    This class implements the WELL1024a pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto Matsumoto.
     
-        This class implements the WELL1024a pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto
-        Matsumoto.
+    This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
     
-        This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
-        Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM
-        Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt
-        <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
-    
-        Also see:
-    
-              - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
-              - :meth:`~serialized`
+          - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
+          - serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -1911,32 +1845,29 @@ class Well1024a(AbstractWell):
     def __init__(self, long: int): ...
     def nextInt(self) -> int:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
         
-            All 2 :sup:`32` possible :code:`int` values should be produced with (approximately) equal probability.
+        All 2 :sup:`32` possible int values should be produced with (approximately) equal probability.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`
+        public int nextInt(int n) throws IllegalArgumentException
         
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Parameters:
-                n (int): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (int): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
-            Raises:
-                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`: if n is not positive.
+        Raises:
+            IllegalArgumentException: if n is not positive.
         
         
         """
@@ -1944,20 +1875,12 @@ class Well1024a(AbstractWell):
 
 class Well19937a(AbstractWell):
     """
-    public classWell19937a extends :class:`~org.hipparchus.random.AbstractWell`
+    This class implements the WELL19937a pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto Matsumoto.
     
-        This class implements the WELL19937a pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto
-        Matsumoto.
+    This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
     
-        This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
-        Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM
-        Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt
-        <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
-    
-        Also see:
-    
-              - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
-              - :meth:`~serialized`
+          - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
+          - serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -1969,32 +1892,29 @@ class Well19937a(AbstractWell):
     def __init__(self, long: int): ...
     def nextInt(self) -> int:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
         
-            All 2 :sup:`32` possible :code:`int` values should be produced with (approximately) equal probability.
+        All 2 :sup:`32` possible int values should be produced with (approximately) equal probability.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`
+        public int nextInt(int n) throws IllegalArgumentException
         
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Parameters:
-                n (int): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (int): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
-            Raises:
-                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`: if n is not positive.
+        Raises:
+            IllegalArgumentException: if n is not positive.
         
         
         """
@@ -2002,20 +1922,12 @@ class Well19937a(AbstractWell):
 
 class Well19937c(AbstractWell):
     """
-    public classWell19937c extends :class:`~org.hipparchus.random.AbstractWell`
+    This class implements the WELL19937c pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto Matsumoto.
     
-        This class implements the WELL19937c pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto
-        Matsumoto.
+    This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
     
-        This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
-        Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM
-        Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt
-        <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
-    
-        Also see:
-    
-              - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
-              - :meth:`~serialized`
+          - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
+          - serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -2027,32 +1939,29 @@ class Well19937c(AbstractWell):
     def __init__(self, long: int): ...
     def nextInt(self) -> int:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
         
-            All 2 :sup:`32` possible :code:`int` values should be produced with (approximately) equal probability.
+        All 2 :sup:`32` possible int values should be produced with (approximately) equal probability.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`
+        public int nextInt(int n) throws IllegalArgumentException
         
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Parameters:
-                n (int): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (int): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
-            Raises:
-                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`: if n is not positive.
+        Raises:
+            IllegalArgumentException: if n is not positive.
         
         
         """
@@ -2060,20 +1969,12 @@ class Well19937c(AbstractWell):
 
 class Well44497a(AbstractWell):
     """
-    public classWell44497a extends :class:`~org.hipparchus.random.AbstractWell`
+    This class implements the WELL44497a pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto Matsumoto.
     
-        This class implements the WELL44497a pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto
-        Matsumoto.
+    This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
     
-        This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
-        Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM
-        Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt
-        <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
-    
-        Also see:
-    
-              - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
-              - :meth:`~serialized`
+          - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
+          - serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -2085,32 +1986,29 @@ class Well44497a(AbstractWell):
     def __init__(self, long: int): ...
     def nextInt(self) -> int:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
         
-            All 2 :sup:`32` possible :code:`int` values should be produced with (approximately) equal probability.
+        All 2 :sup:`32` possible int values should be produced with (approximately) equal probability.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`
+        public int nextInt(int n) throws IllegalArgumentException
         
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Parameters:
-                n (int): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (int): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
-            Raises:
-                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`: if n is not positive.
+        Raises:
+            IllegalArgumentException: if n is not positive.
         
         
         """
@@ -2118,20 +2016,12 @@ class Well44497a(AbstractWell):
 
 class Well44497b(AbstractWell):
     """
-    public classWell44497b extends :class:`~org.hipparchus.random.AbstractWell`
+    This class implements the WELL44497b pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto Matsumoto.
     
-        This class implements the WELL44497b pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto
-        Matsumoto.
+    This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
     
-        This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
-        Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM
-        Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt
-        <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
-    
-        Also see:
-    
-              - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
-              - :meth:`~serialized`
+          - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
+          - serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -2143,32 +2033,29 @@ class Well44497b(AbstractWell):
     def __init__(self, long: int): ...
     def nextInt(self) -> int:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
         
-            All 2 :sup:`32` possible :code:`int` values should be produced with (approximately) equal probability.
+        All 2 :sup:`32` possible int values should be produced with (approximately) equal probability.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`
+        public int nextInt(int n) throws IllegalArgumentException
         
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Parameters:
-                n (int): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (int): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
-            Raises:
-                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`: if n is not positive.
+        Raises:
+            IllegalArgumentException: if n is not positive.
         
         
         """
@@ -2176,20 +2063,12 @@ class Well44497b(AbstractWell):
 
 class Well512a(AbstractWell):
     """
-    public classWell512a extends :class:`~org.hipparchus.random.AbstractWell`
+    This class implements the WELL512a pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto Matsumoto.
     
-        This class implements the WELL512a pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto
-        Matsumoto.
+    This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
     
-        This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
-        Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM
-        Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt
-        <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
-    
-        Also see:
-    
-              - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
-              - :meth:`~serialized`
+          - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
+          - serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -2201,32 +2080,29 @@ class Well512a(AbstractWell):
     def __init__(self, long: int): ...
     def nextInt(self) -> int:
         """
-            Returns the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence.
+        Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
         
-            All 2 :sup:`32` possible :code:`int` values should be produced with (approximately) equal probability.
+        All 2 :sup:`32` possible int values should be produced with (approximately) equal probability.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Returns:
-                the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
+        Returns:
+            the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`
+        public int nextInt(int n) throws IllegalArgumentException
         
-            Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
-            (exclusive), drawn from this random number generator's sequence.
+        Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
-            Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
+        Specified by: nextInt in interface RandomGenerator
         
-            Parameters:
-                n (int): the bound on the random number to be returned. Must be positive.
+        Parameters:
+            n (int): the bound on the random number to be returned. Must be positive.
         
-            Returns:
-                a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
+        Returns:
+            a pseudorandom, uniformly distributed int value between 0 (inclusive) and n (exclusive).
         
-            Raises:
-                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`: if n is not positive.
+        Raises:
+            IllegalArgumentException: if n is not positive.
         
         
         """

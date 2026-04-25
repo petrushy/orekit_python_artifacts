@@ -20,112 +20,67 @@ import typing
 
 class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], java.lang.Comparable['BigFraction'], java.io.Serializable):
     """
-    public classBigFraction extends :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number`
-    implements :class:`~org.hipparchus.FieldElement`<:class:`~org.hipparchus.fraction.BigFraction`>, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable`<:class:`~org.hipparchus.fraction.BigFraction`>, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements FieldElement<BigFraction>, Comparable<BigFraction>, Serializable
     
-        Representation of a rational number without any overflow. This class is immutable.
+    Representation of a rational number without any overflow. This class is immutable.
     
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
     TWO: typing.ClassVar['BigFraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.BigFraction` TWO
-    
-        A fraction representing "2 / 1".
-    
+    A fraction representing "2 / 1".
     """
     ONE: typing.ClassVar['BigFraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.BigFraction` ONE
-    
-        A fraction representing "1".
-    
+    A fraction representing "1".
     """
     ZERO: typing.ClassVar['BigFraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.BigFraction` ZERO
-    
-        A fraction representing "0".
-    
+    A fraction representing "0".
     """
     MINUS_ONE: typing.ClassVar['BigFraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.BigFraction` MINUS_ONE
-    
-        A fraction representing "-1 / 1".
-    
+    A fraction representing "-1 / 1".
     """
     FOUR_FIFTHS: typing.ClassVar['BigFraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.BigFraction` FOUR_FIFTHS
-    
-        A fraction representing "4/5".
-    
+    A fraction representing "4/5".
     """
     ONE_FIFTH: typing.ClassVar['BigFraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.BigFraction` ONE_FIFTH
-    
-        A fraction representing "1/5".
-    
+    A fraction representing "1/5".
     """
     ONE_HALF: typing.ClassVar['BigFraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.BigFraction` ONE_HALF
-    
-        A fraction representing "1/2".
-    
+    A fraction representing "1/2".
     """
     ONE_QUARTER: typing.ClassVar['BigFraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.BigFraction` ONE_QUARTER
-    
-        A fraction representing "1/4".
-    
+    A fraction representing "1/4".
     """
     ONE_THIRD: typing.ClassVar['BigFraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.BigFraction` ONE_THIRD
-    
-        A fraction representing "1/3".
-    
+    A fraction representing "1/3".
     """
     THREE_FIFTHS: typing.ClassVar['BigFraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.BigFraction` THREE_FIFTHS
-    
-        A fraction representing "3/5".
-    
+    A fraction representing "3/5".
     """
     THREE_QUARTERS: typing.ClassVar['BigFraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.BigFraction` THREE_QUARTERS
-    
-        A fraction representing "3/4".
-    
+    A fraction representing "3/4".
     """
     TWO_FIFTHS: typing.ClassVar['BigFraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.BigFraction` TWO_FIFTHS
-    
-        A fraction representing "2/5".
-    
+    A fraction representing "2/5".
     """
     TWO_QUARTERS: typing.ClassVar['BigFraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.BigFraction` TWO_QUARTERS
-    
-        A fraction representing "2/4".
-    
+    A fraction representing "2/4".
     """
     TWO_THIRDS: typing.ClassVar['BigFraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.BigFraction` TWO_THIRDS
-    
-        A fraction representing "2/3".
-    
+    A fraction representing "2/3".
     """
     @typing.overload
     def __init__(self, double: float): ...
@@ -147,11 +102,10 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
     def __init__(self, long: int, long2: int): ...
     def abs(self) -> 'BigFraction':
         """
+        Returns the absolute value of this BigFraction.
         
-            Returns the absolute value of this :class:`~org.hipparchus.fraction.BigFraction`.
-        
-            Returns:
-                the absolute value as a :class:`~org.hipparchus.fraction.BigFraction`.
+        Returns:
+            the absolute value as a BigFraction.
         
         
         """
@@ -159,38 +113,34 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
     @typing.overload
     def add(self, int: int) -> 'BigFraction':
         """
+        Adds the value of this fraction to the passed integer, returning the result in reduced form.
         
-            Adds the value of this fraction to the passed :code:`integer`, returning the result in reduced form.
+        Parameters:
+            i (int): the integer to add.
         
-            Parameters:
-                i (int): the :code:`integer` to add.
+        Returns:
+            a BigFraction instance with the resulting values.
         
-            Returns:
-                a :code:`BigFraction` instance with the resulting values.
+        Adds the value of this fraction to the passed long, returning the result in reduced form.
         
+        Parameters:
+            l (long): the long to add.
         
-            Adds the value of this fraction to the passed :code:`long`, returning the result in reduced form.
+        Returns:
+            a BigFraction instance with the resulting values.
         
-            Parameters:
-                l (long): the :code:`long` to add.
+        Adds the value of this fraction to another, returning the result in reduced form.
         
-            Returns:
-                a :code:`BigFraction` instance with the resulting values.
+        Specified by: add in interface FieldElement
         
+        Parameters:
+            fraction (BigFraction): the BigFraction to add, must not be null.
         
-            Adds the value of this fraction to another, returning the result in reduced form.
+        Returns:
+            a BigFraction instance with the resulting values.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.add` in interface :class:`~org.hipparchus.FieldElement`
-        
-            Parameters:
-                fraction (:class:`~org.hipparchus.fraction.BigFraction`): the :class:`~org.hipparchus.fraction.BigFraction` to add, must not be :code:`null`.
-        
-            Returns:
-                a :class:`~org.hipparchus.fraction.BigFraction` instance with the resulting values.
-        
-            Raises:
-                :class:`~org.hipparchus.exception.NullArgumentException`: if the :class:`~org.hipparchus.fraction.BigFraction` is :code:`null`.
+        Raises:
+            NullArgumentException: if the BigFraction is null.
         
         
         """
@@ -204,41 +154,34 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
     @typing.overload
     def bigDecimalValue(self) -> java.math.BigDecimal:
         """
+        Gets the fraction as a BigDecimal. This calculates the fraction as the numerator divided by denominator.
         
-            Gets the fraction as a :code:`BigDecimal`. This calculates the fraction as the numerator divided by denominator.
+        Returns:
+            the fraction as a BigDecimal.
         
-            Returns:
-                the fraction as a :code:`BigDecimal`.
+        Raises:
+            ArithmeticException: if the exact quotient does not have a terminating decimal expansion.
         
-            Raises:
-                :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.ArithmeticException`: if the exact quotient does not have a terminating decimal expansion.
-        
-            Also see:
-        
-                  - :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal`
+              - BigDecimal
         
         
         """
         ...
     @typing.overload
-    def bigDecimalValue(self, int: int, roundingMode: java.math.RoundingMode) -> java.math.BigDecimal:
+    def bigDecimalValue(self, scale: int, roundingMode: java.math.RoundingMode) -> java.math.BigDecimal:
         """
+        Gets the fraction as a BigDecimal following the passed scale and rounding mode. This calculates the fraction as the numerator divided by denominator.
         
-            Gets the fraction as a :code:`BigDecimal` following the passed scale and rounding mode. This calculates the fraction as
-            the numerator divided by denominator.
+        Parameters:
+            scale (int): scale of the BigDecimal quotient to be returned. see
+                BigDecimal for more information.
+            roundingMode (RoundingMode): rounding mode to apply. see
+                BigDecimal constants.
         
-            Parameters:
-                scale (int): scale of the :code:`BigDecimal` quotient to be returned. see
-                    :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal` for more information.
-                roundingMode (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.RoundingMode`): rounding mode to apply. see
-                    :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal` constants.
+        Returns:
+            the fraction as a BigDecimal.
         
-            Returns:
-                the fraction as a :code:`BigDecimal`.
-        
-            Also see:
-        
-                  - :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal`
+              - BigDecimal
         
         
         
@@ -247,112 +190,128 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
     @typing.overload
     def bigDecimalValue(self, roundingMode: java.math.RoundingMode) -> java.math.BigDecimal:
         """
+        Gets the fraction as a BigDecimal following the passed rounding mode. This calculates the fraction as the numerator divided by denominator.
         
-            Gets the fraction as a :code:`BigDecimal` following the passed rounding mode. This calculates the fraction as the
-            numerator divided by denominator.
+        Parameters:
+            roundingMode (RoundingMode): rounding mode to apply. see
+                BigDecimal constants.
         
-            Parameters:
-                roundingMode (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.RoundingMode`): rounding mode to apply. see
-                    :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal` constants.
+        Returns:
+            the fraction as a BigDecimal.
         
-            Returns:
-                the fraction as a :code:`BigDecimal`.
+        Raises:
+            IllegalArgumentException: if roundingMode does not represent a valid rounding mode.
         
-            Raises:
-                :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`: if :code:`roundingMode` does not represent a valid rounding mode.
-        
-            Also see:
-        
-                  - :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal`
+              - BigDecimal
         
         
         """
         ...
-    def compareTo(self, bigFraction: 'BigFraction') -> int:
+    def compareTo(self, object: 'BigFraction') -> int:
         """
+        Compares this object to another based on size.
         
-            Compares this object to another based on size.
+        Specified by: compareTo in interface Comparable
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.compareTo` in
-                interface :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable`
+        Parameters:
+            object (BigFraction): the object to compare to, must not be null.
         
-            Parameters:
-                object (:class:`~org.hipparchus.fraction.BigFraction`): the object to compare to, must not be :code:`null`.
+        Returns:
+            -1 if this is less than object, +1 if this is greater than object, 0 if they are equal.
         
-            Returns:
-                -1 if this is less than :code:`object`, +1 if this is greater than :code:`object`, 0 if they are equal.
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.compareTo`
+              - compareTo
         
         
         
         """
         ...
     @staticmethod
-    def convergent(double: float, int: int, convergenceTest: typing.Union['BigFraction.ConvergenceTest', typing.Callable]) -> org.hipparchus.util.Pair['BigFraction', bool]: ...
+    def convergent(value: float, maxConvergents: int, convergenceTest: typing.Union['BigFraction.ConvergenceTest', typing.Callable]) -> org.hipparchus.util.Pair['BigFraction', bool]:
+        """
+        Returns the last element of the series of convergent-steps to approximate the given value.
+        
+        The series terminates either at the first step that satisfies the given convergenceTest or after at most maxConvergents elements. The returned Pair consists of that terminal BigFraction and a Boolean that indicates if it satisfies the given convergence tests. If the returned pair's value is false the element at position maxConvergents was examined but failed to satisfy the convergenceTest. A caller can then decide to accept the result nevertheless or to discard it. This method is usually faster than convergents if only the terminal element is of interest.
+        
+        Parameters:
+            value (double): value to approximate
+            maxConvergents (int): maximum number of convergents to examine
+            convergenceTest (ConvergenceTest): the test if the series has converged at a step
+        
+        Returns:
+            the pair of last element of the series of convergents and a boolean indicating if that element satisfies the specified
+            convergent test
+        
+        
+        """
+        ...
     @staticmethod
-    def convergents(double: float, int: int) -> java.util.stream.Stream['BigFraction']: ...
+    def convergents(value: float, maxConvergents: int) -> java.util.stream.Stream['BigFraction']:
+        """
+        Generate a Stream of convergents from a real number.
+        
+        Parameters:
+            value (double): value to approximate
+            maxConvergents (int): maximum number of convergents.
+        
+        Returns:
+            stream of BigFraction convergents approximating value
+        
+        Since:
+            2.1
+        
+        
+        """
+        ...
     @typing.overload
     def divide(self, int: int) -> 'BigFraction':
         """
+        Divide the value of this fraction by the passed BigInteger, ie this * 1 / bg, returning the result in reduced form.
         
-            Divide the value of this fraction by the passed :code:`BigInteger`, ie :code:`this * 1 / bg`, returning the result in
-            reduced form.
+        Parameters:
+            bg (BigInteger): the BigInteger to divide by, must not be null
         
-            Parameters:
-                bg (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigInteger`): the :code:`BigInteger` to divide by, must not be :code:`null`
+        Returns:
+            a BigFraction instance with the resulting values
         
-            Returns:
-                a :class:`~org.hipparchus.fraction.BigFraction` instance with the resulting values
+        Raises:
+            NullArgumentException: if the BigInteger is null
+            MathRuntimeException: if the fraction to divide by is zero
         
-            Raises:
-                :class:`~org.hipparchus.exception.NullArgumentException`: if the :code:`BigInteger` is :code:`null`
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if the fraction to divide by is zero
+        Divide the value of this fraction by the passed int, ie this * 1 / i, returning the result in reduced form.
         
+        Parameters:
+            i (int): the int to divide by
         
-            Divide the value of this fraction by the passed :code:`int`, ie :code:`this * 1 / i`, returning the result in reduced
-            form.
+        Returns:
+            a BigFraction instance with the resulting values
         
-            Parameters:
-                i (int): the :code:`int` to divide by
+        Raises:
+            MathRuntimeException: if the fraction to divide by is zero
         
-            Returns:
-                a :class:`~org.hipparchus.fraction.BigFraction` instance with the resulting values
+        Divide the value of this fraction by the passed long, ie this * 1 / l, returning the result in reduced form.
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if the fraction to divide by is zero
+        Parameters:
+            l (long): the long to divide by
         
+        Returns:
+            a BigFraction instance with the resulting values
         
-            Divide the value of this fraction by the passed :code:`long`, ie :code:`this * 1 / l`, returning the result in reduced
-            form.
+        Raises:
+            MathRuntimeException: if the fraction to divide by is zero
         
-            Parameters:
-                l (long): the :code:`long` to divide by
+        Divide the value of this fraction by another, returning the result in reduced form.
         
-            Returns:
-                a :class:`~org.hipparchus.fraction.BigFraction` instance with the resulting values
+        Specified by: divide in interface FieldElement
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if the fraction to divide by is zero
+        Parameters:
+            fraction (BigFraction): Fraction to divide by, must not be null.
         
+        Returns:
+            a BigFraction instance with the resulting values.
         
-            Divide the value of this fraction by another, returning the result in reduced form.
-        
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.divide` in interface :class:`~org.hipparchus.FieldElement`
-        
-            Parameters:
-                fraction (:class:`~org.hipparchus.fraction.BigFraction`): Fraction to divide by, must not be :code:`null`.
-        
-            Returns:
-                a :class:`~org.hipparchus.fraction.BigFraction` instance with the resulting values.
-        
-            Raises:
-                :class:`~org.hipparchus.exception.NullArgumentException`: if the :code:`fraction` is :code:`null`.
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if the fraction to divide by is zero
+        Raises:
+            NullArgumentException: if the fraction is null.
+            MathRuntimeException: if the fraction to divide by is zero
         
         
         """
@@ -365,44 +324,33 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
     def divide(self, bigFraction: 'BigFraction') -> 'BigFraction': ...
     def doubleValue(self) -> float:
         """
+        Gets the fraction as a double. This calculates the fraction as the numerator divided by denominator.
         
-            Gets the fraction as a :code:`double`. This calculates the fraction as the numerator divided by denominator.
+        Specified by: doubleValue in class Number
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.doubleValue` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number`
+        Returns:
+            the fraction as a double
         
-            Returns:
-                the fraction as a :code:`double`
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.doubleValue`
+              - doubleValue
         
         
         
         """
         ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
+        Test for the equality of two fractions. If the lowest term numerator and denominators are the same for both fractions, the two fractions are considered to be equal.
         
-            Test for the equality of two fractions. If the lowest term numerator and denominators are the same for both fractions,
-            the two fractions are considered to be equal.
+        Overrides: equals in class Object
         
-            Overrides:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Parameters:
+            other (Object): fraction to test for equality to this fraction, can be null.
         
-            Parameters:
-                other (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`): fraction to test for equality to this fraction, can be :code:`null`.
+        Returns:
+            true if two fractions are equal, false if object is null, not an instance of
+            BigFraction, or not equal to this fraction instance.
         
-            Returns:
-                true if two fractions are equal, false if object is :code:`null`, not an instance of
-                :class:`~org.hipparchus.fraction.BigFraction`, or not equal to this fraction instance.
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals`
+              - equals
         
         
         
@@ -410,168 +358,149 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         ...
     def floatValue(self) -> float:
         """
+        Gets the fraction as a float. This calculates the fraction as the numerator divided by denominator.
         
-            Gets the fraction as a :code:`float`. This calculates the fraction as the numerator divided by denominator.
+        Specified by: floatValue in class Number
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.floatValue` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number`
+        Returns:
+            the fraction as a float.
         
-            Returns:
-                the fraction as a :code:`float`.
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.floatValue`
+              - floatValue
         
         
         
         """
         ...
-    def gcd(self, bigFraction: 'BigFraction') -> 'BigFraction':
+    def gcd(self, s: 'BigFraction') -> 'BigFraction':
         """
-            Rational number greatest common divisor.
+        Rational number greatest common divisor.
         
-            Parameters:
-                s (:class:`~org.hipparchus.fraction.BigFraction`): fraction.
+        Parameters:
+            s (BigFraction): fraction.
         
-            Returns:
-                gcd(this, s).
+        Returns:
+            gcd(this, s).
         
-            Since:
-                3.1
+        Since:
+            3.1
         
         
         """
         ...
     def getDenominator(self) -> java.math.BigInteger:
         """
+        Access the denominator as a BigInteger.
         
-            Access the denominator as a :code:`BigInteger`.
-        
-            Returns:
-                the denominator as a :code:`BigInteger`.
+        Returns:
+            the denominator as a BigInteger.
         
         
         """
         ...
     def getDenominatorAsInt(self) -> int:
         """
+        Access the denominator as a int.
         
-            Access the denominator as a :code:`int`.
-        
-            Returns:
-                the denominator as a :code:`int`.
+        Returns:
+            the denominator as a int.
         
         
         """
         ...
     def getDenominatorAsLong(self) -> int:
         """
+        Access the denominator as a long.
         
-            Access the denominator as a :code:`long`.
-        
-            Returns:
-                the denominator as a :code:`long`.
+        Returns:
+            the denominator as a long.
         
         
         """
         ...
     def getField(self) -> 'BigFractionField':
         """
-            Get the :class:`~org.hipparchus.Field` to which the instance belongs.
+        Get the Field to which the instance belongs.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.getField` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: getField in interface FieldElement
         
-            Returns:
-                :class:`~org.hipparchus.Field` to which the instance belongs
+        Returns:
+            Field to which the instance belongs
         
         
         """
         ...
     def getNumerator(self) -> java.math.BigInteger:
         """
+        Access the numerator as a BigInteger.
         
-            Access the numerator as a :code:`BigInteger`.
-        
-            Returns:
-                the numerator as a :code:`BigInteger`.
+        Returns:
+            the numerator as a BigInteger.
         
         
         """
         ...
     def getNumeratorAsInt(self) -> int:
         """
+        Access the numerator as a int.
         
-            Access the numerator as a :code:`int`.
-        
-            Returns:
-                the numerator as a :code:`int`.
+        Returns:
+            the numerator as a int.
         
         
         """
         ...
     def getNumeratorAsLong(self) -> int:
         """
+        Access the numerator as a long.
         
-            Access the numerator as a :code:`long`.
-        
-            Returns:
-                the numerator as a :code:`long`.
+        Returns:
+            the numerator as a long.
         
         
         """
         ...
     def getReal(self) -> float:
         """
-            Get the real value of the number.
+        Get the real value of the number.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.getReal` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: getReal in interface FieldElement
         
-            Returns:
-                real value
+        Returns:
+            real value
         
         
         """
         ...
     @staticmethod
-    def getReducedFraction(int: int, int2: int) -> 'BigFraction':
+    def getReducedFraction(numerator: int, denominator: int) -> 'BigFraction':
         """
+        Creates a BigFraction instance with the 2 parts of a fraction Y/Z.
         
-            Creates a :code:`BigFraction` instance with the 2 parts of a fraction Y/Z.
+        Any negative signs are resolved to be on the numerator.
         
-            Any negative signs are resolved to be on the numerator.
+        Parameters:
+            numerator (int): the numerator, for example the three in 'three sevenths'.
+            denominator (int): the denominator, for example the seven in 'three sevenths'.
         
-            Parameters:
-                numerator (int): the numerator, for example the three in 'three sevenths'.
-                denominator (int): the denominator, for example the seven in 'three sevenths'.
+        Returns:
+            a new fraction instance, with the numerator and denominator reduced.
         
-            Returns:
-                a new fraction instance, with the numerator and denominator reduced.
-        
-            Raises:
-                :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.ArithmeticException`: if the denominator is :code:`zero`.
+        Raises:
+            ArithmeticException: if the denominator is zero.
         
         
         """
         ...
     def hashCode(self) -> int:
         """
+        Gets a hashCode for the fraction.
         
-            Gets a hashCode for the fraction.
+        Overrides: hashCode in class Object
         
-            Overrides:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.hashCode` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Returns:
+            a hash code value for this object.
         
-            Returns:
-                a hash code value for this object.
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.hashCode`
+              - hashCode
         
         
         
@@ -579,19 +508,14 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         ...
     def intValue(self) -> int:
         """
+        Gets the fraction as an int. This returns the whole number part of the fraction.
         
-            Gets the fraction as an :code:`int`. This returns the whole number part of the fraction.
+        Specified by: intValue in class Number
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.intValue` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number`
+        Returns:
+            the whole number fraction part.
         
-            Returns:
-                the whole number fraction part.
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.intValue`
+              - intValue
         
         
         
@@ -599,45 +523,40 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         ...
     def isInteger(self) -> bool:
         """
-            Check if a fraction is an integer.
+        Check if a fraction is an integer.
         
-            Returns:
-                true of fraction is an integer
+        Returns:
+            true of fraction is an integer
         
         
         """
         ...
-    def lcm(self, bigFraction: 'BigFraction') -> 'BigFraction':
+    def lcm(self, s: 'BigFraction') -> 'BigFraction':
         """
-            Rational number least common multiple.
+        Rational number least common multiple.
         
-            Parameters:
-                s (:class:`~org.hipparchus.fraction.BigFraction`): fraction.
+        Parameters:
+            s (BigFraction): fraction.
         
-            Returns:
-                lcm(this, s).
+        Returns:
+            lcm(this, s).
         
-            Since:
-                3.1
+        Since:
+            3.1
         
         
         """
         ...
     def longValue(self) -> int:
         """
+        Gets the fraction as a long. This returns the whole number part of the fraction.
         
-            Gets the fraction as a :code:`long`. This returns the whole number part of the fraction.
+        Specified by: longValue in class Number
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.longValue` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number`
+        Returns:
+            the whole number fraction part.
         
-            Returns:
-                the whole number fraction part.
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.longValue`
+              - longValue
         
         
         
@@ -646,53 +565,47 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
     @typing.overload
     def multiply(self, int: int) -> 'BigFraction':
         """
+        Multiplies the value of this fraction by the passed BigInteger, returning the result in reduced form.
         
-            Multiplies the value of this fraction by the passed :code:`BigInteger`, returning the result in reduced form.
+        Parameters:
+            bg (BigInteger): the BigInteger to multiply by.
         
-            Parameters:
-                bg (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigInteger`): the :code:`BigInteger` to multiply by.
+        Returns:
+            a BigFraction instance with the resulting values.
         
-            Returns:
-                a :code:`BigFraction` instance with the resulting values.
+        Raises:
+            NullArgumentException: if bg is null.
         
-            Raises:
-                :class:`~org.hipparchus.exception.NullArgumentException`: if :code:`bg` is :code:`null`.
+        Multiply the value of this fraction by the passed int, returning the result in reduced form.
         
+        Specified by: multiply in interface FieldElement
         
-            Multiply the value of this fraction by the passed :code:`int`, returning the result in reduced form.
+        Parameters:
+            i (int): the int to multiply by.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.multiply` in interface :class:`~org.hipparchus.FieldElement`
+        Returns:
+            a BigFraction instance with the resulting values.
         
-            Parameters:
-                i (int): the :code:`int` to multiply by.
+        Multiply the value of this fraction by the passed long, returning the result in reduced form.
         
-            Returns:
-                a :class:`~org.hipparchus.fraction.BigFraction` instance with the resulting values.
+        Parameters:
+            l (long): the long to multiply by.
         
+        Returns:
+            a BigFraction instance with the resulting values.
         
-            Multiply the value of this fraction by the passed :code:`long`, returning the result in reduced form.
+        Multiplies the value of this fraction by another, returning the result in reduced form.
         
-            Parameters:
-                l (long): the :code:`long` to multiply by.
+        Specified by: multiply in interface FieldElement
         
-            Returns:
-                a :class:`~org.hipparchus.fraction.BigFraction` instance with the resulting values.
+        Parameters:
+            fraction (BigFraction): Fraction to multiply by, must not be null.
         
+        Returns:
+            a BigFraction instance with the resulting values.
         
-            Multiplies the value of this fraction by another, returning the result in reduced form.
-        
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.multiply` in interface :class:`~org.hipparchus.FieldElement`
-        
-            Parameters:
-                fraction (:class:`~org.hipparchus.fraction.BigFraction`): Fraction to multiply by, must not be :code:`null`.
-        
-            Returns:
-                a :class:`~org.hipparchus.fraction.BigFraction` instance with the resulting values.
-        
-            Raises:
-                :class:`~org.hipparchus.exception.NullArgumentException`: if :code:`fraction` is :code:`null`.
+        Raises:
+            NullArgumentException: if fraction is null.
         
         
         """
@@ -705,26 +618,22 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
     def multiply(self, bigFraction: 'BigFraction') -> 'BigFraction': ...
     def negate(self) -> 'BigFraction':
         """
+        Return the additive inverse of this fraction, returning the result in reduced form.
         
-            Return the additive inverse of this fraction, returning the result in reduced form.
+        Specified by: negate in interface FieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.negate` in interface :class:`~org.hipparchus.FieldElement`
-        
-            Returns:
-                the negation of this fraction.
+        Returns:
+            the negation of this fraction.
         
         
         """
         ...
     def percentageValue(self) -> float:
         """
+        Gets the fraction percentage as a double. This calculates the fraction as the numerator divided by denominator multiplied by 100.
         
-            Gets the fraction percentage as a :code:`double`. This calculates the fraction as the numerator divided by denominator
-            multiplied by 100.
-        
-            Returns:
-                the fraction percentage as a :code:`double`.
+        Returns:
+            the fraction percentage as a double.
         
         
         """
@@ -732,41 +641,35 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
     @typing.overload
     def pow(self, double: float) -> float:
         """
+        Parameters:
+            exponent (int): exponent to which this BigFraction is to be raised.
         
-            Returns a :code:`BigFraction` whose value is :code:`(this<sup>exponent</sup>)`, returning the result in reduced form.
+        Returns:
+            this :sup:`exponent`
         
-            Parameters:
-                exponent (int): exponent to which this :code:`BigFraction` is to be raised.
+        Returns a BigFraction whose value is this :sup:`exponent` , returning the result in reduced form.
         
-            Returns:
-                this :sup:`exponent`
+        Parameters:
+            exponent (long): exponent to which this BigFraction is to be raised.
         
+        Returns:
+            this :sup:`exponent` as a BigFraction.
         
-            Returns a :code:`BigFraction` whose value is this :sup:`exponent` , returning the result in reduced form.
+        Returns a BigFraction whose value is this :sup:`exponent` , returning the result in reduced form.
         
-            Parameters:
-                exponent (long): exponent to which this :code:`BigFraction` is to be raised.
+        Parameters:
+            exponent (BigInteger): exponent to which this BigFraction is to be raised.
         
-            Returns:
-                this :sup:`exponent` as a :code:`BigFraction`.
+        Returns:
+            this :sup:`exponent` as a BigFraction.
         
+        Returns a double whose value is this :sup:`exponent` , returning the result in reduced form.
         
-            Returns a :code:`BigFraction` whose value is this :sup:`exponent` , returning the result in reduced form.
+        Parameters:
+            exponent (double): exponent to which this BigFraction is to be raised.
         
-            Parameters:
-                exponent (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigInteger`): exponent to which this :code:`BigFraction` is to be raised.
-        
-            Returns:
-                this :sup:`exponent` as a :code:`BigFraction`.
-        
-        
-            Returns a :code:`double` whose value is this :sup:`exponent` , returning the result in reduced form.
-        
-            Parameters:
-                exponent (double): exponent to which this :code:`BigFraction` is to be raised.
-        
-            Returns:
-                this :sup:`exponent`
+        Returns:
+            this :sup:`exponent`
         
         
         """
@@ -779,41 +682,37 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
     def pow(self, long: int) -> 'BigFraction': ...
     def reciprocal(self) -> 'BigFraction':
         """
+        Return the multiplicative inverse of this fraction.
         
-            Return the multiplicative inverse of this fraction.
+        Specified by: reciprocal in interface FieldElement
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.reciprocal` in interface :class:`~org.hipparchus.FieldElement`
-        
-            Returns:
-                the reciprocal fraction.
+        Returns:
+            the reciprocal fraction.
         
         
         """
         ...
     def reduce(self) -> 'BigFraction':
         """
+        Reduce this BigFraction to its lowest terms.
         
-            Reduce this :code:`BigFraction` to its lowest terms.
-        
-            Returns:
-                the reduced :code:`BigFraction`. It doesn't change anything if the fraction can be reduced.
+        Returns:
+            the reduced BigFraction. It doesn't change anything if the fraction can be reduced.
         
         
         """
         ...
     def signum(self) -> int:
         """
-            Returns the signum function of this :class:`~org.hipparchus.fraction.BigFraction`.
+        Returns the signum function of this BigFraction.
         
-            The return value is -1 if the specified value is negative; 0 if the specified value is zero; and 1 if the specified
-            value is positive.
+        The return value is -1 if the specified value is negative; 0 if the specified value is zero; and 1 if the specified value is positive.
         
-            Returns:
-                the signum function of this :class:`~org.hipparchus.fraction.BigFraction`
+        Returns:
+            the signum function of this BigFraction
         
-            Since:
-                1.7
+        Since:
+            1.7
         
         
         """
@@ -821,54 +720,46 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
     @typing.overload
     def subtract(self, int: int) -> 'BigFraction':
         """
+        Subtracts the value of an BigInteger from the value of this BigFraction, returning the result in reduced form.
         
-            Subtracts the value of an
-            :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigInteger` from the value of this
-            :code:`BigFraction`, returning the result in reduced form.
+        Parameters:
+            bg (BigInteger): the BigInteger to subtract, cannot
+                be null.
         
-            Parameters:
-                bg (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigInteger`): the :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigInteger` to subtract, cannot
-                    be :code:`null`.
+        Returns:
+            a BigFraction instance with the resulting values.
         
-            Returns:
-                a :code:`BigFraction` instance with the resulting values.
+        Raises:
+            NullArgumentException: if the BigInteger is null.
         
-            Raises:
-                :class:`~org.hipparchus.exception.NullArgumentException`: if the :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigInteger` is :code:`null`.
+        Subtracts the value of an integer from the value of this BigFraction, returning the result in reduced form.
         
+        Parameters:
+            i (int): the integer to subtract.
         
-            Subtracts the value of an :code:`integer` from the value of this :code:`BigFraction`, returning the result in reduced
-            form.
+        Returns:
+            a BigFraction instance with the resulting values.
         
-            Parameters:
-                i (int): the :code:`integer` to subtract.
+        Subtracts the value of a long from the value of this BigFraction, returning the result in reduced form.
         
-            Returns:
-                a :code:`BigFraction` instance with the resulting values.
+        Parameters:
+            l (long): the long to subtract.
         
+        Returns:
+            a BigFraction instance with the resulting values.
         
-            Subtracts the value of a :code:`long` from the value of this :code:`BigFraction`, returning the result in reduced form.
+        Subtracts the value of another fraction from the value of this one, returning the result in reduced form.
         
-            Parameters:
-                l (long): the :code:`long` to subtract.
+        Specified by: subtract in interface FieldElement
         
-            Returns:
-                a :code:`BigFraction` instance with the resulting values.
+        Parameters:
+            fraction (BigFraction): BigFraction to subtract, must not be null.
         
+        Returns:
+            a BigFraction instance with the resulting values
         
-            Subtracts the value of another fraction from the value of this one, returning the result in reduced form.
-        
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.subtract` in interface :class:`~org.hipparchus.FieldElement`
-        
-            Parameters:
-                fraction (:class:`~org.hipparchus.fraction.BigFraction`): :class:`~org.hipparchus.fraction.BigFraction` to subtract, must not be :code:`null`.
-        
-            Returns:
-                a :class:`~org.hipparchus.fraction.BigFraction` instance with the resulting values
-        
-            Raises:
-                :class:`~org.hipparchus.exception.NullArgumentException`: if the :code:`fraction` is :code:`null`.
+        Raises:
+            NullArgumentException: if the fraction is null.
         
         
         """
@@ -881,19 +772,14 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
     def subtract(self, bigFraction: 'BigFraction') -> 'BigFraction': ...
     def toString(self) -> str:
         """
+        Returns the String representing this fraction, ie "num / dem" or just "num" if the denominator is one.
         
-            Returns the :code:`String` representing this fraction, ie "num / dem" or just "num" if the denominator is one.
+        Overrides: toString in class Object
         
-            Overrides:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.toString` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Returns:
+            a string representation of the fraction.
         
-            Returns:
-                a string representation of the fraction.
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.toString`
+              - toString
         
         
         
@@ -904,24 +790,18 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
 
 class BigFractionField(org.hipparchus.Field[BigFraction], java.io.Serializable):
     """
-    public classBigFractionField extends :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.fraction.BigFraction`>, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements Field<BigFraction>, Serializable
     
-        Representation of the fractional numbers without any overflow field.
+    Representation of the fractional numbers without any overflow field.
     
-        This class is a singleton.
+    This class is a singleton.
     
-        Also see:
-    
-              - :class:`~org.hipparchus.fraction.Fraction`
-              - :meth:`~serialized`
+          - Fraction
+          - serialized
     """
     def equals(self, object: typing.Any) -> bool:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: equals in class Object
         
         
         """
@@ -929,53 +809,57 @@ class BigFractionField(org.hipparchus.Field[BigFraction], java.io.Serializable):
     @staticmethod
     def getInstance() -> 'BigFractionField':
         """
-            Get the unique instance.
+        Get the unique instance.
         
-            Returns:
-                the unique instance
+        Returns:
+            the unique instance
         
         
         """
         ...
     def getOne(self) -> BigFraction:
         """
-            Get the multiplicative identity of the field.
+        Get the multiplicative identity of the field.
         
-            The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the
-            equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
+        The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
         
-            Specified by:
-                :meth:`~org.hipparchus.Field.getOne` in interface :class:`~org.hipparchus.Field`
+        Specified by: getOne in interface Field
         
-            Returns:
-                multiplicative identity of the field
+        Returns:
+            multiplicative identity of the field
         
         
         """
         ...
-    def getRuntimeClass(self) -> typing.Type[BigFraction]: ...
+    def getRuntimeClass(self) -> typing.Type[BigFraction]:
+        """
+        Returns the runtime class of the FieldElement.
+        
+        Specified by: getRuntimeClass in interface Field
+        
+        Returns:
+            The Class object that represents the runtime class of this object.
+        
+        
+        """
+        ...
     def getZero(self) -> BigFraction:
         """
-            Get the additive identity of the field.
+        Get the additive identity of the field.
         
-            The additive identity is the element e :sub:`0` of the field such that for all elements a of the field, the equalities a
-            + e :sub:`0` = e :sub:`0` + a = a hold.
+        The additive identity is the element e :sub:`0` of the field such that for all elements a of the field, the equalities a + e :sub:`0` = e :sub:`0` + a = a hold.
         
-            Specified by:
-                :meth:`~org.hipparchus.Field.getZero` in interface :class:`~org.hipparchus.Field`
+        Specified by: getZero in interface Field
         
-            Returns:
-                additive identity of the field
+        Returns:
+            additive identity of the field
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.hashCode` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: hashCode in class Object
         
         
         """
@@ -983,112 +867,67 @@ class BigFractionField(org.hipparchus.Field[BigFraction], java.io.Serializable):
 
 class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.lang.Comparable['Fraction'], java.io.Serializable):
     """
-    public classFraction extends :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number`
-    implements :class:`~org.hipparchus.FieldElement`<:class:`~org.hipparchus.fraction.Fraction`>, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable`<:class:`~org.hipparchus.fraction.Fraction`>, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements FieldElement<Fraction>, Comparable<Fraction>, Serializable
     
-        Representation of a rational number.
+    Representation of a rational number.
     
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
     TWO: typing.ClassVar['Fraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.Fraction` TWO
-    
-        A fraction representing "2 / 1".
-    
+    A fraction representing "2 / 1".
     """
     ONE: typing.ClassVar['Fraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.Fraction` ONE
-    
-        A fraction representing "1".
-    
+    A fraction representing "1".
     """
     ZERO: typing.ClassVar['Fraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.Fraction` ZERO
-    
-        A fraction representing "0".
-    
+    A fraction representing "0".
     """
     FOUR_FIFTHS: typing.ClassVar['Fraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.Fraction` FOUR_FIFTHS
-    
-        A fraction representing "4/5".
-    
+    A fraction representing "4/5".
     """
     ONE_FIFTH: typing.ClassVar['Fraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.Fraction` ONE_FIFTH
-    
-        A fraction representing "1/5".
-    
+    A fraction representing "1/5".
     """
     ONE_HALF: typing.ClassVar['Fraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.Fraction` ONE_HALF
-    
-        A fraction representing "1/2".
-    
+    A fraction representing "1/2".
     """
     ONE_QUARTER: typing.ClassVar['Fraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.Fraction` ONE_QUARTER
-    
-        A fraction representing "1/4".
-    
+    A fraction representing "1/4".
     """
     ONE_THIRD: typing.ClassVar['Fraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.Fraction` ONE_THIRD
-    
-        A fraction representing "1/3".
-    
+    A fraction representing "1/3".
     """
     THREE_FIFTHS: typing.ClassVar['Fraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.Fraction` THREE_FIFTHS
-    
-        A fraction representing "3/5".
-    
+    A fraction representing "3/5".
     """
     THREE_QUARTERS: typing.ClassVar['Fraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.Fraction` THREE_QUARTERS
-    
-        A fraction representing "3/4".
-    
+    A fraction representing "3/4".
     """
     TWO_FIFTHS: typing.ClassVar['Fraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.Fraction` TWO_FIFTHS
-    
-        A fraction representing "2/5".
-    
+    A fraction representing "2/5".
     """
     TWO_QUARTERS: typing.ClassVar['Fraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.Fraction` TWO_QUARTERS
-    
-        A fraction representing "2/4".
-    
+    A fraction representing "2/4".
     """
     TWO_THIRDS: typing.ClassVar['Fraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.Fraction` TWO_THIRDS
-    
-        A fraction representing "2/3".
-    
+    A fraction representing "2/3".
     """
     MINUS_ONE: typing.ClassVar['Fraction'] = ...
     """
-    public static final :class:`~org.hipparchus.fraction.Fraction` MINUS_ONE
-    
-        A fraction representing "-1 / 1".
-    
+    A fraction representing "-1 / 1".
     """
     @typing.overload
     def __init__(self, double: float): ...
@@ -1102,10 +941,10 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
     def __init__(self, int: int, int2: int): ...
     def abs(self) -> 'Fraction':
         """
-            Returns the absolute value of this fraction.
+        Returns the absolute value of this fraction.
         
-            Returns:
-                the absolute value.
+        Returns:
+            the absolute value.
         
         
         """
@@ -1113,81 +952,110 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
     @typing.overload
     def add(self, int: int) -> 'Fraction':
         """
-            Adds the value of this fraction to another, returning the result in reduced form. The algorithm follows Knuth, 4.5.1.
+        Adds the value of this fraction to another, returning the result in reduced form. The algorithm follows Knuth, 4.5.1.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.add` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: add in interface FieldElement
         
-            Parameters:
-                fraction (:class:`~org.hipparchus.fraction.Fraction`): the fraction to add, must not be :code:`null`
+        Parameters:
+            fraction (Fraction): the fraction to add, must not be null
         
-            Returns:
-                a :code:`Fraction` instance with the resulting values
+        Returns:
+            a Fraction instance with the resulting values
         
-            Raises:
-                :class:`~org.hipparchus.exception.NullArgumentException`: if the fraction is :code:`null`
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if the resulting numerator or denominator exceeds :code:`Integer.MAX_VALUE`
+        Raises:
+            NullArgumentException: if the fraction is null
+            MathRuntimeException: if the resulting numerator or denominator exceeds MAX_VALUE
         
-            Add an integer to the fraction.
+        Add an integer to the fraction.
         
-            Parameters:
-                i (int): the :code:`integer` to add.
+        Parameters:
+            i (int): the integer to add.
         
-            Returns:
-                this + i
+        Returns:
+            this + i
         
         
         """
         ...
     @typing.overload
     def add(self, fraction: 'Fraction') -> 'Fraction': ...
-    def compareTo(self, fraction: 'Fraction') -> int:
+    def compareTo(self, object: 'Fraction') -> int:
         """
-            Compares this object to another based on size.
+        Compares this object to another based on size.
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.compareTo` in
-                interface :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable`
+        Specified by: compareTo in interface Comparable
         
-            Parameters:
-                object (:class:`~org.hipparchus.fraction.Fraction`): the object to compare to
+        Parameters:
+            object (Fraction): the object to compare to
         
-            Returns:
-                -1 if this is less than :code:`object`, +1 if this is greater than :code:`object`, 0 if they are equal.
+        Returns:
+            -1 if this is less than object, +1 if this is greater than object, 0 if they are equal.
         
         
         """
         ...
     @staticmethod
-    def convergent(double: float, int: int, convergenceTest: typing.Union['Fraction.ConvergenceTest', typing.Callable]) -> org.hipparchus.util.Pair['Fraction', bool]: ...
+    def convergent(value: float, maxConvergents: int, convergenceTest: typing.Union['Fraction.ConvergenceTest', typing.Callable]) -> org.hipparchus.util.Pair['Fraction', bool]:
+        """
+        Returns the last element of the series of convergent-steps to approximate the given value.
+        
+        The series terminates either at the first step that satisfies the given convergenceTest or after at most maxConvergents elements. The returned Pair consists of that terminal Fraction and a Boolean that indicates if it satisfies the given convergence tests. If the returned pair's value is false the element at position maxConvergents was examined but failed to satisfy the convergenceTest. A caller can then decide to accept the result nevertheless or to discard it. This method is usually faster than convergents if only the terminal element is of interest.
+        
+        Parameters:
+            value (double): value to approximate
+            maxConvergents (int): maximum number of convergents to examine
+            convergenceTest (ConvergenceTest): the test if the series has converged at a step
+        
+        Returns:
+            the pair of last element of the series of convergents and a boolean indicating if that element satisfies the specified
+            convergent test
+        
+        
+        """
+        ...
     @staticmethod
-    def convergents(double: float, int: int) -> java.util.stream.Stream['Fraction']: ...
+    def convergents(value: float, maxConvergents: int) -> java.util.stream.Stream['Fraction']:
+        """
+        Generate a Stream of convergents from a real number.
+        
+        Parameters:
+            value (double): value to approximate
+            maxConvergents (int): maximum number of convergents.
+        
+        Returns:
+            stream of Fraction convergents approximating value
+        
+        Since:
+            2.1
+        
+        
+        """
+        ...
     @typing.overload
     def divide(self, int: int) -> 'Fraction':
         """
-            Divide the value of this fraction by another.
+        Divide the value of this fraction by another.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.divide` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: divide in interface FieldElement
         
-            Parameters:
-                fraction (:class:`~org.hipparchus.fraction.Fraction`): the fraction to divide by, must not be :code:`null`
+        Parameters:
+            fraction (Fraction): the fraction to divide by, must not be null
         
-            Returns:
-                a :code:`Fraction` instance with the resulting values
+        Returns:
+            a Fraction instance with the resulting values
         
-            Raises:
-                :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`: if the fraction is :code:`null`
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if the fraction to divide by is zero
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if the resulting numerator or denominator exceeds :code:`Integer.MAX_VALUE`
+        Raises:
+            IllegalArgumentException: if the fraction is null
+            MathRuntimeException: if the fraction to divide by is zero
+            MathRuntimeException: if the resulting numerator or denominator exceeds MAX_VALUE
         
-            Divide the fraction by an integer.
+        Divide the fraction by an integer.
         
-            Parameters:
-                i (int): the :code:`integer` to divide by.
+        Parameters:
+            i (int): the integer to divide by.
         
-            Returns:
-                this * i
+        Returns:
+            this * i
         
         
         """
@@ -1196,197 +1064,182 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
     def divide(self, fraction: 'Fraction') -> 'Fraction': ...
     def doubleValue(self) -> float:
         """
-            Gets the fraction as a :code:`double`. This calculates the fraction as the numerator divided by denominator.
+        Gets the fraction as a double. This calculates the fraction as the numerator divided by denominator.
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.doubleValue` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number`
+        Specified by: doubleValue in class Number
         
-            Returns:
-                the fraction as a :code:`double`
+        Returns:
+            the fraction as a double
         
         
         """
         ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
-            Test for the equality of two fractions. If the lowest term numerator and denominators are the same for both fractions,
-            the two fractions are considered to be equal.
+        Test for the equality of two fractions. If the lowest term numerator and denominators are the same for both fractions, the two fractions are considered to be equal.
         
-            Overrides:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: equals in class Object
         
-            Parameters:
-                other (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`): fraction to test for equality to this fraction
+        Parameters:
+            other (Object): fraction to test for equality to this fraction
         
-            Returns:
-                true if two fractions are equal, false if object is :code:`null`, not an instance of
-                :class:`~org.hipparchus.fraction.Fraction`, or not equal to this fraction instance.
+        Returns:
+            true if two fractions are equal, false if object is null, not an instance of
+            Fraction, or not equal to this fraction instance.
         
         
         """
         ...
     def floatValue(self) -> float:
         """
-            Gets the fraction as a :code:`float`. This calculates the fraction as the numerator divided by denominator.
+        Gets the fraction as a float. This calculates the fraction as the numerator divided by denominator.
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.floatValue` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number`
+        Specified by: floatValue in class Number
         
-            Returns:
-                the fraction as a :code:`float`
+        Returns:
+            the fraction as a float
         
         
         """
         ...
-    def gcd(self, fraction: 'Fraction') -> 'Fraction':
+    def gcd(self, s: 'Fraction') -> 'Fraction':
         """
-            Rational number greatest common divisor.
+        Rational number greatest common divisor.
         
-            Parameters:
-                s (:class:`~org.hipparchus.fraction.Fraction`): fraction.
+        Parameters:
+            s (Fraction): fraction.
         
-            Returns:
-                gcd(this, s).
+        Returns:
+            gcd(this, s).
         
-            Since:
-                3.1
+        Since:
+            3.1
         
         
         """
         ...
     def getDenominator(self) -> int:
         """
-            Access the denominator.
+        Access the denominator.
         
-            Returns:
-                the denominator.
+        Returns:
+            the denominator.
         
         
         """
         ...
     def getField(self) -> 'FractionField':
         """
-            Get the :class:`~org.hipparchus.Field` to which the instance belongs.
+        Get the Field to which the instance belongs.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.getField` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: getField in interface FieldElement
         
-            Returns:
-                :class:`~org.hipparchus.Field` to which the instance belongs
+        Returns:
+            Field to which the instance belongs
         
         
         """
         ...
     def getNumerator(self) -> int:
         """
-            Access the numerator.
+        Access the numerator.
         
-            Returns:
-                the numerator.
+        Returns:
+            the numerator.
         
         
         """
         ...
     def getReal(self) -> float:
         """
-            Get the real value of the number.
+        Get the real value of the number.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.getReal` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: getReal in interface FieldElement
         
-            Returns:
-                real value
+        Returns:
+            real value
         
         
         """
         ...
     @staticmethod
-    def getReducedFraction(int: int, int2: int) -> 'Fraction':
+    def getReducedFraction(numerator: int, denominator: int) -> 'Fraction':
         """
-            Creates a :code:`Fraction` instance with the 2 parts of a fraction Y/Z.
+        Creates a Fraction instance with the 2 parts of a fraction Y/Z.
         
-            Any negative signs are resolved to be on the numerator.
+        Any negative signs are resolved to be on the numerator.
         
-            Parameters:
-                numerator (int): the numerator, for example the three in 'three sevenths'
-                denominator (int): the denominator, for example the seven in 'three sevenths'
+        Parameters:
+            numerator (int): the numerator, for example the three in 'three sevenths'
+            denominator (int): the denominator, for example the seven in 'three sevenths'
         
-            Returns:
-                a new fraction instance, with the numerator and denominator reduced
+        Returns:
+            a new fraction instance, with the numerator and denominator reduced
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if the denominator is :code:`zero`
+        Raises:
+            MathRuntimeException: if the denominator is zero
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-            Gets a hashCode for the fraction.
+        Gets a hashCode for the fraction.
         
-            Overrides:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.hashCode` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: hashCode in class Object
         
-            Returns:
-                a hash code value for this object
+        Returns:
+            a hash code value for this object
         
         
         """
         ...
     def intValue(self) -> int:
         """
-            Gets the fraction as an :code:`int`. This returns the whole number part of the fraction.
+        Gets the fraction as an int. This returns the whole number part of the fraction.
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.intValue` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number`
+        Specified by: intValue in class Number
         
-            Returns:
-                the whole number fraction part
+        Returns:
+            the whole number fraction part
         
         
         """
         ...
     def isInteger(self) -> bool:
         """
-            Check if a fraction is an integer.
+        Check if a fraction is an integer.
         
-            Returns:
-                true of fraction is an integer
+        Returns:
+            true of fraction is an integer
         
         
         """
         ...
-    def lcm(self, fraction: 'Fraction') -> 'Fraction':
+    def lcm(self, s: 'Fraction') -> 'Fraction':
         """
-            Rational number least common multiple.
+        Rational number least common multiple.
         
-            Parameters:
-                s (:class:`~org.hipparchus.fraction.Fraction`): fraction.
+        Parameters:
+            s (Fraction): fraction.
         
-            Returns:
-                lcm(this, s).
+        Returns:
+            lcm(this, s).
         
-            Since:
-                3.1
+        Since:
+            3.1
         
         
         """
         ...
     def longValue(self) -> int:
         """
-            Gets the fraction as a :code:`long`. This returns the whole number part of the fraction.
+        Gets the fraction as a long. This returns the whole number part of the fraction.
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.longValue` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number`
+        Specified by: longValue in class Number
         
-            Returns:
-                the whole number fraction part
+        Returns:
+            the whole number fraction part
         
         
         """
@@ -1394,31 +1247,29 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
     @typing.overload
     def multiply(self, int: int) -> 'Fraction':
         """
-            Multiplies the value of this fraction by another, returning the result in reduced form.
+        Multiplies the value of this fraction by another, returning the result in reduced form.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.multiply` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: multiply in interface FieldElement
         
-            Parameters:
-                fraction (:class:`~org.hipparchus.fraction.Fraction`): the fraction to multiply by, must not be :code:`null`
+        Parameters:
+            fraction (Fraction): the fraction to multiply by, must not be null
         
-            Returns:
-                a :code:`Fraction` instance with the resulting values
+        Returns:
+            a Fraction instance with the resulting values
         
-            Raises:
-                :class:`~org.hipparchus.exception.NullArgumentException`: if the fraction is :code:`null`
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if the resulting numerator or denominator exceeds :code:`Integer.MAX_VALUE`
+        Raises:
+            NullArgumentException: if the fraction is null
+            MathRuntimeException: if the resulting numerator or denominator exceeds MAX_VALUE
         
-            Multiply the fraction by an integer.
+        Multiply the fraction by an integer.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.multiply` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: multiply in interface FieldElement
         
-            Parameters:
-                i (int): the :code:`integer` to multiply by.
+        Parameters:
+            i (int): the integer to multiply by.
         
-            Returns:
-                this * i
+        Returns:
+            this * i
         
         
         """
@@ -1427,53 +1278,49 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
     def multiply(self, fraction: 'Fraction') -> 'Fraction': ...
     def negate(self) -> 'Fraction':
         """
-            Return the additive inverse of this fraction.
+        Return the additive inverse of this fraction.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.negate` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: negate in interface FieldElement
         
-            Returns:
-                the negation of this fraction.
+        Returns:
+            the negation of this fraction.
         
         
         """
         ...
     def percentageValue(self) -> float:
         """
-            Gets the fraction percentage as a :code:`double`. This calculates the fraction as the numerator divided by denominator
-            multiplied by 100.
+        Gets the fraction percentage as a double. This calculates the fraction as the numerator divided by denominator multiplied by 100.
         
-            Returns:
-                the fraction percentage as a :code:`double`.
+        Returns:
+            the fraction percentage as a double.
         
         
         """
         ...
     def reciprocal(self) -> 'Fraction':
         """
-            Return the multiplicative inverse of this fraction.
+        Return the multiplicative inverse of this fraction.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.reciprocal` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: reciprocal in interface FieldElement
         
-            Returns:
-                the reciprocal fraction
+        Returns:
+            the reciprocal fraction
         
         
         """
         ...
     def signum(self) -> int:
         """
-            Returns the signum function of this fraction.
+        Returns the signum function of this fraction.
         
-            The return value is -1 if the specified value is negative; 0 if the specified value is zero; and 1 if the specified
-            value is positive.
+        The return value is -1 if the specified value is negative; 0 if the specified value is zero; and 1 if the specified value is positive.
         
-            Returns:
-                the signum function of this fraction
+        Returns:
+            the signum function of this fraction
         
-            Since:
-                1.7
+        Since:
+            1.7
         
         
         """
@@ -1481,28 +1328,27 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
     @typing.overload
     def subtract(self, int: int) -> 'Fraction':
         """
-            Subtracts the value of another fraction from the value of this one, returning the result in reduced form.
+        Subtracts the value of another fraction from the value of this one, returning the result in reduced form.
         
-            Specified by:
-                :meth:`~org.hipparchus.FieldElement.subtract` in interface :class:`~org.hipparchus.FieldElement`
+        Specified by: subtract in interface FieldElement
         
-            Parameters:
-                fraction (:class:`~org.hipparchus.fraction.Fraction`): the fraction to subtract, must not be :code:`null`
+        Parameters:
+            fraction (Fraction): the fraction to subtract, must not be null
         
-            Returns:
-                a :code:`Fraction` instance with the resulting values
+        Returns:
+            a Fraction instance with the resulting values
         
-            Raises:
-                :class:`~org.hipparchus.exception.NullArgumentException`: if the fraction is :code:`null`
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if the resulting numerator or denominator cannot be represented in an :code:`int`.
+        Raises:
+            NullArgumentException: if the fraction is null
+            MathRuntimeException: if the resulting numerator or denominator cannot be represented in an int.
         
-            Subtract an integer from the fraction.
+        Subtract an integer from the fraction.
         
-            Parameters:
-                i (int): the :code:`integer` to subtract.
+        Parameters:
+            i (int): the integer to subtract.
         
-            Returns:
-                this - i
+        Returns:
+            this - i
         
         
         """
@@ -1511,18 +1357,14 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
     def subtract(self, fraction: 'Fraction') -> 'Fraction': ...
     def toString(self) -> str:
         """
-            Returns the :code:`String` representing this fraction, ie "num / dem" or just "num" if the denominator is one.
+        Returns the String representing this fraction, ie "num / dem" or just "num" if the denominator is one.
         
-            Overrides:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.toString` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: toString in class Object
         
-            Returns:
-                a string representation of the fraction.
+        Returns:
+            a string representation of the fraction.
         
-            Also see:
-        
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.toString`
+              - toString
         
         
         
@@ -1533,24 +1375,18 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
 
 class FractionField(org.hipparchus.Field[Fraction], java.io.Serializable):
     """
-    public classFractionField extends :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.fraction.Fraction`>, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements Field<Fraction>, Serializable
     
-        Representation of the fractional numbers field.
+    Representation of the fractional numbers field.
     
-        This class is a singleton.
+    This class is a singleton.
     
-        Also see:
-    
-              - :class:`~org.hipparchus.fraction.Fraction`
-              - :meth:`~serialized`
+          - Fraction
+          - serialized
     """
     def equals(self, object: typing.Any) -> bool:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: equals in class Object
         
         
         """
@@ -1558,53 +1394,57 @@ class FractionField(org.hipparchus.Field[Fraction], java.io.Serializable):
     @staticmethod
     def getInstance() -> 'FractionField':
         """
-            Get the unique instance.
+        Get the unique instance.
         
-            Returns:
-                the unique instance
+        Returns:
+            the unique instance
         
         
         """
         ...
     def getOne(self) -> Fraction:
         """
-            Get the multiplicative identity of the field.
+        Get the multiplicative identity of the field.
         
-            The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the
-            equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
+        The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
         
-            Specified by:
-                :meth:`~org.hipparchus.Field.getOne` in interface :class:`~org.hipparchus.Field`
+        Specified by: getOne in interface Field
         
-            Returns:
-                multiplicative identity of the field
+        Returns:
+            multiplicative identity of the field
         
         
         """
         ...
-    def getRuntimeClass(self) -> typing.Type[Fraction]: ...
+    def getRuntimeClass(self) -> typing.Type[Fraction]:
+        """
+        Returns the runtime class of the FieldElement.
+        
+        Specified by: getRuntimeClass in interface Field
+        
+        Returns:
+            The Class object that represents the runtime class of this object.
+        
+        
+        """
+        ...
     def getZero(self) -> Fraction:
         """
-            Get the additive identity of the field.
+        Get the additive identity of the field.
         
-            The additive identity is the element e :sub:`0` of the field such that for all elements a of the field, the equalities a
-            + e :sub:`0` = e :sub:`0` + a = a hold.
+        The additive identity is the element e :sub:`0` of the field such that for all elements a of the field, the equalities a + e :sub:`0` = e :sub:`0` + a = a hold.
         
-            Specified by:
-                :meth:`~org.hipparchus.Field.getZero` in interface :class:`~org.hipparchus.Field`
+        Specified by: getZero in interface Field
         
-            Returns:
-                additive identity of the field
+        Returns:
+            additive identity of the field
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.hashCode` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: hashCode in class Object
         
         
         """
@@ -1612,16 +1452,13 @@ class FractionField(org.hipparchus.Field[Fraction], java.io.Serializable):
 
 class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializable):
     """
-    public classBigFractionFormat extends :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat`
-    implements :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements Serializable
     
-        Formats a BigFraction number in proper format or improper format.
+    Formats a BigFraction number in proper format or improper format.
     
-        The number format for each of the whole number, numerator and, denominator can be configured.
+    The number format for each of the whole number, numerator and, denominator can be configured.
     
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -1632,81 +1469,60 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
     @typing.overload
     def format(self, object: typing.Any) -> str:
         """
-            Formats a :class:`~org.hipparchus.fraction.BigFraction` object to produce a string. The BigFraction is output in
-            improper format.
+        Formats a BigFraction object to produce a string. The BigFraction is output in improper format.
         
-            Parameters:
-                BigFraction (:class:`~org.hipparchus.fraction.BigFraction`): the object to format.
-                toAppendTo (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer`): where the text is to be appended
-                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition`): On input: an alignment field, if desired. On output: the offsets of the alignment field
+        Parameters:
+            BigFraction (BigFraction): the object to format.
+            toAppendTo (StringBuffer): where the text is to be appended
+            pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
-            Returns:
-                the value passed in as toAppendTo.
+        Returns:
+            the value passed in as toAppendTo.
         
-            Formats an object and appends the result to a StringBuffer. :code:`obj` must be either a
-            :class:`~org.hipparchus.fraction.BigFraction` object or a
-            :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigInteger` object or a
-            :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number` object. Any other type of
-            object will result in an
-            :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException` being
-            thrown.
+        Formats an object and appends the result to a StringBuffer. obj must be either a BigFraction object or a BigInteger object or a Number object. Any other type of object will result in an IllegalArgumentException being thrown.
         
-            Overrides:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat`
+        Overrides: format in class NumberFormat
         
-            Parameters:
-                obj (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`): the object to format.
-                toAppendTo (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer`): where the text is to be appended
-                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition`): On input: an alignment field, if desired. On output: the offsets of the alignment field
+        Parameters:
+            obj (Object): the object to format.
+            toAppendTo (StringBuffer): where the text is to be appended
+            pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
-            Returns:
-                the value passed in as toAppendTo.
+        Returns:
+            the value passed in as toAppendTo.
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`obj` is not a valid type.
+        Raises:
+            MathIllegalArgumentException: if obj is not a valid type.
         
-            Also see:
+              - format
         
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.Format.format`
+        Formats a double value as a fraction and appends the result to a StringBuffer.
         
+        Specified by: format in class NumberFormat
         
-            Formats a double value as a fraction and appends the result to a StringBuffer.
+        Parameters:
+            value (double): the double value to format
+            buffer (StringBuffer): StringBuffer to append to
+            position (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat`
+        Returns:
+            a reference to the appended buffer
         
-            Parameters:
-                value (double): the double value to format
-                buffer (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer`): StringBuffer to append to
-                position (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition`): On input: an alignment field, if desired. On output: the offsets of the alignment field
+              - format
         
-            Returns:
-                a reference to the appended buffer
+        Formats a long value as a fraction and appends the result to a StringBuffer.
         
-            Also see:
+        Specified by: format in class NumberFormat
         
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format`
+        Parameters:
+            value (long): the long value to format
+            buffer (StringBuffer): StringBuffer to append to
+            position (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
+        Returns:
+            a reference to the appended buffer
         
-            Formats a long value as a fraction and appends the result to a StringBuffer.
-        
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat`
-        
-            Parameters:
-                value (long): the long value to format
-                buffer (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer`): StringBuffer to append to
-                position (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition`): On input: an alignment field, if desired. On output: the offsets of the alignment field
-        
-            Returns:
-                a reference to the appended buffer
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format`
+              - format
         
         
         
@@ -1721,15 +1537,15 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
     @typing.overload
     def format(self, bigFraction: BigFraction, stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer: ...
     @staticmethod
-    def formatBigFraction(bigFraction: BigFraction) -> str:
+    def formatBigFraction(f: BigFraction) -> str:
         """
-            This static method calls formatBigFraction() on a default instance of BigFractionFormat.
+        This static method calls formatBigFraction() on a default instance of BigFractionFormat.
         
-            Parameters:
-                f (:class:`~org.hipparchus.fraction.BigFraction`): BigFraction object to format
+        Parameters:
+            f (BigFraction): BigFraction object to format
         
-            Returns:
-                A formatted BigFraction in proper form.
+        Returns:
+            A formatted BigFraction in proper form.
         
         
         """
@@ -1737,11 +1553,10 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
     @staticmethod
     def getAvailableLocales() -> typing.MutableSequence[java.util.Locale]:
         """
-            Get the set of locales for which complex formats are available. This is the same set as the
-            :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat` set.
+        Get the set of locales for which complex formats are available. This is the same set as the NumberFormat set.
         
-            Returns:
-                available complex format locales.
+        Returns:
+            available complex format locales.
         
         
         """
@@ -1750,10 +1565,8 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
     @staticmethod
     def getImproperInstance() -> 'BigFractionFormat':
         """
-            Returns the default complex format for the current locale.
-        
-            Returns:
-                the default complex format.
+        Returns:
+            the default complex format.
         
         """
         ...
@@ -1761,13 +1574,11 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
     @staticmethod
     def getImproperInstance(locale: java.util.Locale) -> 'BigFractionFormat':
         """
-            Returns the default complex format for the given locale.
+        Parameters:
+            locale (Locale): the specific locale used by the format.
         
-            Parameters:
-                locale (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale`): the specific locale used by the format.
-        
-            Returns:
-                the complex format specific to the given locale.
+        Returns:
+            the complex format specific to the given locale.
         
         
         """
@@ -1776,10 +1587,8 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
     @staticmethod
     def getProperInstance() -> 'BigFractionFormat':
         """
-            Returns the default complex format for the current locale.
-        
-            Returns:
-                the default complex format.
+        Returns:
+            the default complex format.
         
         """
         ...
@@ -1787,13 +1596,11 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
     @staticmethod
     def getProperInstance(locale: java.util.Locale) -> 'BigFractionFormat':
         """
-            Returns the default complex format for the given locale.
+        Parameters:
+            locale (Locale): the specific locale used by the format.
         
-            Parameters:
-                locale (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale`): the specific locale used by the format.
-        
-            Returns:
-                the complex format specific to the given locale.
+        Returns:
+            the complex format specific to the given locale.
         
         
         """
@@ -1801,19 +1608,16 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
     @typing.overload
     def parse(self, string: str) -> BigFraction:
         """
-            Parses a string to produce a :class:`~org.hipparchus.fraction.BigFraction` object. This method expects the string to be
-            formatted as an improper BigFraction.
+        Parses a string to produce a BigFraction object. This method expects the string to be formatted as an improper BigFraction.
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.parse` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat`
+        Specified by: parse in class NumberFormat
         
-            Parameters:
-                source (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.String`): the string to parse
-                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition`): input/output parsing parameter.
+        Parameters:
+            source (String): the string to parse
+            pos (ParsePosition): input/output parsing parameter.
         
-            Returns:
-                the parsed :class:`~org.hipparchus.fraction.BigFraction` object.
+        Returns:
+            the parsed BigFraction object.
         
         
         """
@@ -1823,15 +1627,11 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
 
 class FractionFormat(org.hipparchus.fraction.AbstractFormat):
     """
-    public classFractionFormat extends :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat`
+    Formats a Fraction number in proper format or improper format.
     
-        Formats a Fraction number in proper format or improper format.
+    The number format for each of the whole number, numerator and, denominator can be configured.
     
-        The number format for each of the whole number, numerator and, denominator can be configured.
-    
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -1842,83 +1642,63 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
     @typing.overload
     def format(self, object: typing.Any) -> str:
         """
-            Formats a :class:`~org.hipparchus.fraction.Fraction` object to produce a string. The fraction is output in improper
-            format.
+        Formats a Fraction object to produce a string. The fraction is output in improper format.
         
-            Parameters:
-                fraction (:class:`~org.hipparchus.fraction.Fraction`): the object to format.
-                toAppendTo (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer`): where the text is to be appended
-                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition`): On input: an alignment field, if desired. On output: the offsets of the alignment field
+        Parameters:
+            fraction (Fraction): the object to format.
+            toAppendTo (StringBuffer): where the text is to be appended
+            pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
-            Returns:
-                the value passed in as toAppendTo.
+        Returns:
+            the value passed in as toAppendTo.
         
-        public :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer` format(:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object` obj, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer` toAppendTo, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition` pos) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.MathIllegalStateException`
+        public StringBuffer format(Object obj, StringBuffer toAppendTo, FieldPosition pos) throws MathIllegalArgumentException, MathIllegalStateException
         
-            Formats an object and appends the result to a StringBuffer. :code:`obj` must be either a
-            :class:`~org.hipparchus.fraction.Fraction` object or a
-            :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number` object. Any other type of
-            object will result in an
-            :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException` being
-            thrown.
+        Formats an object and appends the result to a StringBuffer. obj must be either a Fraction object or a Number object. Any other type of object will result in an IllegalArgumentException being thrown.
         
-            Overrides:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat`
+        Overrides: format in class NumberFormat
         
-            Parameters:
-                obj (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`): the object to format.
-                toAppendTo (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer`): where the text is to be appended
-                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition`): On input: an alignment field, if desired. On output: the offsets of the alignment field
+        Parameters:
+            obj (Object): the object to format.
+            toAppendTo (StringBuffer): where the text is to be appended
+            pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
-            Returns:
-                the value passed in as toAppendTo.
+        Returns:
+            the value passed in as toAppendTo.
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalStateException`: if the number cannot be converted to a fraction
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`obj` is not a valid type.
+        Raises:
+            MathIllegalStateException: if the number cannot be converted to a fraction
+            MathIllegalArgumentException: if obj is not a valid type.
         
-            Also see:
+              - format
         
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.Format.format`
+        Formats a double value as a fraction and appends the result to a StringBuffer.
         
+        Specified by: format in class NumberFormat
         
-            Formats a double value as a fraction and appends the result to a StringBuffer.
+        Parameters:
+            value (double): the double value to format
+            buffer (StringBuffer): StringBuffer to append to
+            position (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat`
+        Returns:
+            a reference to the appended buffer
         
-            Parameters:
-                value (double): the double value to format
-                buffer (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer`): StringBuffer to append to
-                position (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition`): On input: an alignment field, if desired. On output: the offsets of the alignment field
+              - format
         
-            Returns:
-                a reference to the appended buffer
+        Formats a long value as a fraction and appends the result to a StringBuffer.
         
-            Also see:
+        Specified by: format in class NumberFormat
         
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format`
+        Parameters:
+            value (long): the long value to format
+            buffer (StringBuffer): StringBuffer to append to
+            position (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
+        Returns:
+            a reference to the appended buffer
         
-            Formats a long value as a fraction and appends the result to a StringBuffer.
-        
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat`
-        
-            Parameters:
-                value (long): the long value to format
-                buffer (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer`): StringBuffer to append to
-                position (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition`): On input: an alignment field, if desired. On output: the offsets of the alignment field
-        
-            Returns:
-                a reference to the appended buffer
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format`
+              - format
         
         
         
@@ -1933,15 +1713,15 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
     @typing.overload
     def format(self, fraction: Fraction, stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer: ...
     @staticmethod
-    def formatFraction(fraction: Fraction) -> str:
+    def formatFraction(f: Fraction) -> str:
         """
-            This static method calls formatFraction() on a default instance of FractionFormat.
+        This static method calls formatFraction() on a default instance of FractionFormat.
         
-            Parameters:
-                f (:class:`~org.hipparchus.fraction.Fraction`): Fraction object to format
+        Parameters:
+            f (Fraction): Fraction object to format
         
-            Returns:
-                a formatted fraction in proper form.
+        Returns:
+            a formatted fraction in proper form.
         
         
         """
@@ -1949,11 +1729,10 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
     @staticmethod
     def getAvailableLocales() -> typing.MutableSequence[java.util.Locale]:
         """
-            Get the set of locales for which complex formats are available. This is the same set as the
-            :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat` set.
+        Get the set of locales for which complex formats are available. This is the same set as the NumberFormat set.
         
-            Returns:
-                available complex format locales.
+        Returns:
+            available complex format locales.
         
         
         """
@@ -1962,10 +1741,8 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
     @staticmethod
     def getImproperInstance() -> 'FractionFormat':
         """
-            Returns the default complex format for the current locale.
-        
-            Returns:
-                the default complex format.
+        Returns:
+            the default complex format.
         
         """
         ...
@@ -1973,13 +1750,11 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
     @staticmethod
     def getImproperInstance(locale: java.util.Locale) -> 'FractionFormat':
         """
-            Returns the default complex format for the given locale.
+        Parameters:
+            locale (Locale): the specific locale used by the format.
         
-            Parameters:
-                locale (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale`): the specific locale used by the format.
-        
-            Returns:
-                the complex format specific to the given locale.
+        Returns:
+            the complex format specific to the given locale.
         
         
         """
@@ -1988,10 +1763,8 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
     @staticmethod
     def getProperInstance() -> 'FractionFormat':
         """
-            Returns the default complex format for the current locale.
-        
-            Returns:
-                the default complex format.
+        Returns:
+            the default complex format.
         
         """
         ...
@@ -1999,13 +1772,11 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
     @staticmethod
     def getProperInstance(locale: java.util.Locale) -> 'FractionFormat':
         """
-            Returns the default complex format for the given locale.
+        Parameters:
+            locale (Locale): the specific locale used by the format.
         
-            Parameters:
-                locale (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale`): the specific locale used by the format.
-        
-            Returns:
-                the complex format specific to the given locale.
+        Returns:
+            the complex format specific to the given locale.
         
         
         """
@@ -2013,19 +1784,16 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
     @typing.overload
     def parse(self, string: str) -> Fraction:
         """
-            Parses a string to produce a :class:`~org.hipparchus.fraction.Fraction` object. This method expects the string to be
-            formatted as an improper fraction.
+        Parses a string to produce a Fraction object. This method expects the string to be formatted as an improper fraction.
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.parse` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat`
+        Specified by: parse in class NumberFormat
         
-            Parameters:
-                source (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.String`): the string to parse
-                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition`): input/output parsing parameter.
+        Parameters:
+            source (String): the string to parse
+            pos (ParsePosition): input/output parsing parameter.
         
-            Returns:
-                the parsed :class:`~org.hipparchus.fraction.Fraction` object.
+        Returns:
+            the parsed Fraction object.
         
         
         """
@@ -2035,17 +1803,11 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
 
 class ProperBigFractionFormat(BigFractionFormat):
     """
-    public classProperBigFractionFormat extends :class:`~org.hipparchus.fraction.BigFractionFormat`
+    Formats a BigFraction number in proper format. The number format for each of the whole number, numerator and, denominator can be configured.
     
-        Formats a BigFraction number in proper format. The number format for each of the whole number, numerator and,
-        denominator can be configured.
+    Minus signs are only allowed in the whole number part - i.e., "-3 1/2" is legitimate and denotes -7/2, but "-3 -1/2" is invalid and will result in a ParseException.
     
-        Minus signs are only allowed in the whole number part - i.e., "-3 1/2" is legitimate and denotes -7/2, but "-3 -1/2" is
-        invalid and will result in a :code:`ParseException`.
-    
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -2056,56 +1818,45 @@ class ProperBigFractionFormat(BigFractionFormat):
     @typing.overload
     def format(self, object: typing.Any) -> str:
         """
-            Formats a :class:`~org.hipparchus.fraction.BigFraction` object to produce a string. The BigFraction is output in proper
-            format.
+        Formats a BigFraction object to produce a string. The BigFraction is output in proper format.
         
-            Overrides:
-                :meth:`~org.hipparchus.fraction.BigFractionFormat.format` in class :class:`~org.hipparchus.fraction.BigFractionFormat`
+        Overrides: format in class BigFractionFormat
         
-            Parameters:
-                fraction (:class:`~org.hipparchus.fraction.BigFraction`): the object to format.
-                toAppendTo (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer`): where the text is to be appended
-                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition`): On input: an alignment field, if desired. On output: the offsets of the alignment field
+        Parameters:
+            fraction (BigFraction): the object to format.
+            toAppendTo (StringBuffer): where the text is to be appended
+            pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
-            Returns:
-                the value passed in as toAppendTo.
+        Returns:
+            the value passed in as toAppendTo.
         
-            Formats a double value as a fraction and appends the result to a StringBuffer.
+        Formats a double value as a fraction and appends the result to a StringBuffer.
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat`
+        Specified by: format in class NumberFormat
         
-            Parameters:
-                value (double): the double value to format
-                buffer (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer`): StringBuffer to append to
-                position (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition`): On input: an alignment field, if desired. On output: the offsets of the alignment field
+        Parameters:
+            value (double): the double value to format
+            buffer (StringBuffer): StringBuffer to append to
+            position (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
-            Returns:
-                a reference to the appended buffer
+        Returns:
+            a reference to the appended buffer
         
-            Also see:
+              - format
         
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format`
+        Formats a long value as a fraction and appends the result to a StringBuffer.
         
+        Specified by: format in class NumberFormat
         
-            Formats a long value as a fraction and appends the result to a StringBuffer.
+        Parameters:
+            value (long): the long value to format
+            buffer (StringBuffer): StringBuffer to append to
+            position (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat`
+        Returns:
+            a reference to the appended buffer
         
-            Parameters:
-                value (long): the long value to format
-                buffer (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer`): StringBuffer to append to
-                position (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition`): On input: an alignment field, if desired. On output: the offsets of the alignment field
-        
-            Returns:
-                a reference to the appended buffer
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format`
+              - format
         
         
         
@@ -2121,10 +1872,10 @@ class ProperBigFractionFormat(BigFractionFormat):
     def format(self, bigFraction: BigFraction, stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer: ...
     def getWholeFormat(self) -> java.text.NumberFormat:
         """
-            Access the whole format.
+        Access the whole format.
         
-            Returns:
-                the whole format.
+        Returns:
+            the whole format.
         
         
         """
@@ -2132,21 +1883,18 @@ class ProperBigFractionFormat(BigFractionFormat):
     @typing.overload
     def parse(self, string: str) -> BigFraction:
         """
-            Parses a string to produce a :class:`~org.hipparchus.fraction.BigFraction` object. This method expects the string to be
-            formatted as a proper BigFraction.
+        Parses a string to produce a BigFraction object. This method expects the string to be formatted as a proper BigFraction.
         
-            Minus signs are only allowed in the whole number part - i.e., "-3 1/2" is legitimate and denotes -7/2, but "-3 -1/2" is
-            invalid and will result in a :code:`ParseException`.
+        Minus signs are only allowed in the whole number part - i.e., "-3 1/2" is legitimate and denotes -7/2, but "-3 -1/2" is invalid and will result in a ParseException.
         
-            Overrides:
-                :meth:`~org.hipparchus.fraction.BigFractionFormat.parse` in class :class:`~org.hipparchus.fraction.BigFractionFormat`
+        Overrides: parse in class BigFractionFormat
         
-            Parameters:
-                source (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.String`): the string to parse
-                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition`): input/ouput parsing parameter.
+        Parameters:
+            source (String): the string to parse
+            pos (ParsePosition): input/ouput parsing parameter.
         
-            Returns:
-                the parsed :class:`~org.hipparchus.fraction.BigFraction` object.
+        Returns:
+            the parsed BigFraction object.
         
         
         """
@@ -2156,17 +1904,11 @@ class ProperBigFractionFormat(BigFractionFormat):
 
 class ProperFractionFormat(FractionFormat):
     """
-    public classProperFractionFormat extends :class:`~org.hipparchus.fraction.FractionFormat`
+    Formats a Fraction number in proper format. The number format for each of the whole number, numerator and, denominator can be configured.
     
-        Formats a Fraction number in proper format. The number format for each of the whole number, numerator and, denominator
-        can be configured.
+    Minus signs are only allowed in the whole number part - i.e., "-3 1/2" is legitimate and denotes -7/2, but "-3 -1/2" is invalid and will result in a ParseException.
     
-        Minus signs are only allowed in the whole number part - i.e., "-3 1/2" is legitimate and denotes -7/2, but "-3 -1/2" is
-        invalid and will result in a :code:`ParseException`.
-    
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -2177,56 +1919,45 @@ class ProperFractionFormat(FractionFormat):
     @typing.overload
     def format(self, object: typing.Any) -> str:
         """
-            Formats a :class:`~org.hipparchus.fraction.Fraction` object to produce a string. The fraction is output in proper
-            format.
+        Formats a Fraction object to produce a string. The fraction is output in proper format.
         
-            Overrides:
-                :meth:`~org.hipparchus.fraction.FractionFormat.format` in class :class:`~org.hipparchus.fraction.FractionFormat`
+        Overrides: format in class FractionFormat
         
-            Parameters:
-                fraction (:class:`~org.hipparchus.fraction.Fraction`): the object to format.
-                toAppendTo (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer`): where the text is to be appended
-                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition`): On input: an alignment field, if desired. On output: the offsets of the alignment field
+        Parameters:
+            fraction (Fraction): the object to format.
+            toAppendTo (StringBuffer): where the text is to be appended
+            pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
-            Returns:
-                the value passed in as toAppendTo.
+        Returns:
+            the value passed in as toAppendTo.
         
-            Formats a double value as a fraction and appends the result to a StringBuffer.
+        Formats a double value as a fraction and appends the result to a StringBuffer.
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat`
+        Specified by: format in class NumberFormat
         
-            Parameters:
-                value (double): the double value to format
-                buffer (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer`): StringBuffer to append to
-                position (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition`): On input: an alignment field, if desired. On output: the offsets of the alignment field
+        Parameters:
+            value (double): the double value to format
+            buffer (StringBuffer): StringBuffer to append to
+            position (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
-            Returns:
-                a reference to the appended buffer
+        Returns:
+            a reference to the appended buffer
         
-            Also see:
+              - format
         
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format`
+        Formats a long value as a fraction and appends the result to a StringBuffer.
         
+        Specified by: format in class NumberFormat
         
-            Formats a long value as a fraction and appends the result to a StringBuffer.
+        Parameters:
+            value (long): the long value to format
+            buffer (StringBuffer): StringBuffer to append to
+            position (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
-            Specified by:
-                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format` in
-                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat`
+        Returns:
+            a reference to the appended buffer
         
-            Parameters:
-                value (long): the long value to format
-                buffer (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer`): StringBuffer to append to
-                position (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition`): On input: an alignment field, if desired. On output: the offsets of the alignment field
-        
-            Returns:
-                a reference to the appended buffer
-        
-            Also see:
-        
-                  - :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.format`
+              - format
         
         
         
@@ -2242,10 +1973,10 @@ class ProperFractionFormat(FractionFormat):
     def format(self, fraction: Fraction, stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer: ...
     def getWholeFormat(self) -> java.text.NumberFormat:
         """
-            Access the whole format.
+        Access the whole format.
         
-            Returns:
-                the whole format.
+        Returns:
+            the whole format.
         
         
         """
@@ -2253,21 +1984,18 @@ class ProperFractionFormat(FractionFormat):
     @typing.overload
     def parse(self, string: str) -> Fraction:
         """
-            Parses a string to produce a :class:`~org.hipparchus.fraction.Fraction` object. This method expects the string to be
-            formatted as a proper fraction.
+        Parses a string to produce a Fraction object. This method expects the string to be formatted as a proper fraction.
         
-            Minus signs are only allowed in the whole number part - i.e., "-3 1/2" is legitimate and denotes -7/2, but "-3 -1/2" is
-            invalid and will result in a :code:`ParseException`.
+        Minus signs are only allowed in the whole number part - i.e., "-3 1/2" is legitimate and denotes -7/2, but "-3 -1/2" is invalid and will result in a ParseException.
         
-            Overrides:
-                :meth:`~org.hipparchus.fraction.FractionFormat.parse` in class :class:`~org.hipparchus.fraction.FractionFormat`
+        Overrides: parse in class FractionFormat
         
-            Parameters:
-                source (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.String`): the string to parse
-                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition`): input/ouput parsing parameter.
+        Parameters:
+            source (String): the string to parse
+            pos (ParsePosition): input/ouput parsing parameter.
         
-            Returns:
-                the parsed :class:`~org.hipparchus.fraction.Fraction` object.
+        Returns:
+            the parsed Fraction object.
         
         
         """

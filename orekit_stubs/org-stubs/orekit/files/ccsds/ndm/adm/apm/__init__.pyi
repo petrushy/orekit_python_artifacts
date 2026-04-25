@@ -30,128 +30,120 @@ import typing
 
 class AngularVelocity(org.orekit.files.ccsds.section.CommentsContainer):
     """
-    public class AngularVelocity extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    Container for Attitude Parameter Message data lines.
     
-        Container for Attitude Parameter Message data lines.
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Simple constructor.
+        """
+        ...
     def getAngVelX(self) -> float:
         """
-            Get the angular velocity around X axis (rad/s).
+        Get the angular velocity around X axis (rad/s).
         
-            Returns:
-                angular velocity around X axis (rad/s)
+        Returns:
+            angular velocity around X axis (rad/s)
         
         
         """
         ...
     def getAngVelY(self) -> float:
         """
-            Get the angular velocity around Y axis (rad/s).
+        Get the angular velocity around Y axis (rad/s).
         
-            Returns:
-                angular velocity around Y axis (rad/s)
+        Returns:
+            angular velocity around Y axis (rad/s)
         
         
         """
         ...
     def getAngVelZ(self) -> float:
         """
-            Get the angular velocity around Z axis (rad/s).
+        Get the angular velocity around Z axis (rad/s).
         
-            Returns:
-                angular velocity around Z axis (rad/s)
+        Returns:
+            angular velocity around Z axis (rad/s)
         
         
         """
         ...
     def getEndpoints(self) -> org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints:
         """
-            Get the endpoints (i.e. frames A, B and their relationship).
+        Get the endpoints (i.e. frames A, B and their relationship).
         
-            Returns:
-                endpoints
+        Returns:
+            endpoints
         
         
         """
         ...
     def getFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
         """
-            Get frame in which angular velocities are specified.
+        Get frame in which angular velocities are specified.
         
-            Returns:
-                frame in which angular velocities are specified
-        
-        
-        """
-        ...
-    def setAngVelX(self, double: float) -> None:
-        """
-            Set the angular velocity around X axis (rad/s).
-        
-            Parameters:
-                angVelX (double): angular velocity around X axis (rad/s)
+        Returns:
+            frame in which angular velocities are specified
         
         
         """
         ...
-    def setAngVelY(self, double: float) -> None:
+    def setAngVelX(self, angVelX: float) -> None:
         """
-            Set the angular velocity around Y axis (rad/s).
+        Set the angular velocity around X axis (rad/s).
         
-            Parameters:
-                angVelY (double): angular velocity around Y axis (rad/s)
-        
-        
-        """
-        ...
-    def setAngVelZ(self, double: float) -> None:
-        """
-            Set the angular velocity around Z axis (rad/s).
-        
-            Parameters:
-                angVelZ (double): angular velocity around Z axis (rad/s)
+        Parameters:
+            angVelX (double): angular velocity around X axis (rad/s)
         
         
         """
         ...
-    def setFrame(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
+    def setAngVelY(self, angVelY: float) -> None:
         """
-            Set frame in which angular velocities are specified.
+        Set the angular velocity around Y axis (rad/s).
         
-            Parameters:
-                frame (:class:`~org.orekit.files.ccsds.definitions.FrameFacade`): frame in which angular velocities are specified
+        Parameters:
+            angVelY (double): angular velocity around Y axis (rad/s)
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def setAngVelZ(self, angVelZ: float) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set the angular velocity around Z axis (rad/s).
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            angVelZ (double): angular velocity around Z axis (rad/s)
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
-                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        """
+        ...
+    def setFrame(self, frame: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
+        """
+        Set frame in which angular velocities are specified.
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            frame (FrameFacade): frame in which angular velocities are specified
+        
+        
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class CommentsContainer
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -159,12 +151,10 @@ class AngularVelocity(org.orekit.files.ccsds.section.CommentsContainer):
 
 class AngularVelocityKey(java.lang.Enum['AngularVelocityKey']):
     """
-    public enum AngularVelocityKey extends :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.apm.AngularVelocityKey`>
+    Keys for AngularVelocity entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.adm.apm.AngularVelocity` entries.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
     COMMENT: typing.ClassVar['AngularVelocityKey'] = ...
     REF_FRAME_A: typing.ClassVar['AngularVelocityKey'] = ...
@@ -173,17 +163,17 @@ class AngularVelocityKey(java.lang.Enum['AngularVelocityKey']):
     ANGVEL_X: typing.ClassVar['AngularVelocityKey'] = ...
     ANGVEL_Y: typing.ClassVar['AngularVelocityKey'] = ...
     ANGVEL_Z: typing.ClassVar['AngularVelocityKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, angularVelocity: AngularVelocity) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: AngularVelocity) -> bool:
         """
-            Process one token.
+        Process one token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.adm.apm.AngularVelocity`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (AngularVelocity): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -194,20 +184,19 @@ class AngularVelocityKey(java.lang.Enum['AngularVelocityKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'AngularVelocityKey':
+    def valueOf(name: str) -> 'AngularVelocityKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -215,17 +204,15 @@ class AngularVelocityKey(java.lang.Enum['AngularVelocityKey']):
     @staticmethod
     def values() -> typing.MutableSequence['AngularVelocityKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (AngularVelocityKey c : AngularVelocityKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (AngularVelocityKey c : AngularVelocityKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -233,68 +220,73 @@ class AngularVelocityKey(java.lang.Enum['AngularVelocityKey']):
 
 class Apm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.ndm.adm.AdmHeader, org.orekit.files.ccsds.section.Segment[org.orekit.files.ccsds.ndm.adm.AdmMetadata, 'ApmData']]):
     """
-    public class Apm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmHeader`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmMetadata`, :class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmData`>>
+    This class stores all the information of the Attitude Parameter Message (APM) File parsed by APMParser. It contains the header and the metadata and a the data lines.
     
-        This class stores all the information of the Attitude Parameter Message (APM) File parsed by APMParser. It contains the
-        header and the metadata and a the data lines.
-    
-        Since:
-            10.2
+    Since:
+        10.2
     """
     ROOT: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ROOT
+    Root element for XML files.
     
-        Root element for XML files.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     FORMAT_VERSION_KEY: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` FORMAT_VERSION_KEY
+    Key for format version.
     
-        Key for format version.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, admHeader: org.orekit.files.ccsds.ndm.adm.AdmHeader, list: java.util.List[org.orekit.files.ccsds.section.Segment[org.orekit.files.ccsds.ndm.adm.AdmMetadata, 'ApmData']], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext): ...
-    def getAttitude(self, frame: org.orekit.frames.Frame, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]) -> org.orekit.attitudes.Attitude:
+    def __init__(self, header: org.orekit.files.ccsds.ndm.adm.AdmHeader, segments: java.util.List[org.orekit.files.ccsds.section.Segment[org.orekit.files.ccsds.ndm.adm.AdmMetadata, 'ApmData']], conventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext):
         """
-            Get the attitude.
+        Simple constructor.
         
-            Parameters:
-                frame (:class:`~org.orekit.frames.Frame`): reference frame with respect to which attitude must be defined, (may be null if attitude is *not* orbit-relative and one
-                    wants attitude in the same frame as used in the attitude message)
-                pvProvider (:class:`~org.orekit.utils.PVCoordinatesProvider`): provider for spacecraft position and velocity (may be null if attitude is *not* orbit-relative)
+        Parameters:
+            header (AdmHeader): file header
+            segments (List<Segment<AdmMetadata, ApmData>>): file segments
+            conventions (IERSConventions): IERS conventions
+            dataContext (DataContext): used for creating frames, time scales, etc.
         
-            Returns:
-                attitude
+        
+        """
+        ...
+    def getAttitude(self, frame: org.orekit.frames.Frame, pvProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]) -> org.orekit.attitudes.Attitude:
+        """
+        Get the attitude.
+        
+        Parameters:
+            frame (Frame): reference frame with respect to which attitude must be defined, (may be null if attitude is not orbit-relative and one
+                wants attitude in the same frame as used in the attitude message)
+            pvProvider (PVCoordinatesProvider): provider for spacecraft position and velocity (may be null if attitude is not orbit-relative)
+        
+        Returns:
+            attitude
         
         
         """
         ...
     def getData(self) -> 'ApmData':
         """
-            Get the file data.
+        Get the file data.
         
-            Returns:
-                file data
+        Returns:
+            file data
         
         
         """
         ...
     def getMetadata(self) -> org.orekit.files.ccsds.ndm.adm.AdmMetadata:
         """
-            Get the file metadata.
+        Get the file metadata.
         
-            Returns:
-                file metadata
+        Returns:
+            file metadata
         
         
         """
@@ -302,154 +294,184 @@ class Apm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.ndm.a
 
 class ApmData(org.orekit.files.ccsds.section.Data):
     """
-    public class ApmData extends :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.section.Data`
+    Container for Attitude Parameter Message data.
     
-        Container for Attitude Parameter Message data.
-    
-        Since:
-            10.2
+    Since:
+        10.2
     """
-    def __init__(self, commentsContainer: org.orekit.files.ccsds.section.CommentsContainer, absoluteDate: org.orekit.time.AbsoluteDate, apmQuaternion: 'ApmQuaternion', euler: 'Euler', angularVelocity: AngularVelocity, spinStabilized: 'SpinStabilized', inertia: 'Inertia'): ...
+    def __init__(self, commentsBlock: org.orekit.files.ccsds.section.CommentsContainer, epoch: org.orekit.time.AbsoluteDate, quaternionBlock: 'ApmQuaternion', eulerBlock: 'Euler', angularVelocityBlock: AngularVelocity, spinStabilizedBlock: 'SpinStabilized', inertia: 'Inertia'):
+        """
+        Simple constructor.
+        
+        Parameters:
+            commentsBlock (CommentsContainer): general comments block
+            epoch (AbsoluteDate): epoch of the data
+            quaternionBlock (ApmQuaternion): quaternion logical block (may be null in ADM V2 or later)
+            eulerBlock (Euler): Euler angles logicial block (may be null)
+            angularVelocityBlock (AngularVelocity): angular velocity block (may be null)
+            spinStabilizedBlock (SpinStabilized): spin-stabilized logical block (may be null)
+            inertia (Inertia): inertia logical block (may be null)
+        
+        
+        """
+        ...
     def addManeuver(self, maneuver: 'Maneuver') -> None:
         """
-            Add a maneuver.
+        Add a maneuver.
         
-            Parameters:
-                maneuver (:class:`~org.orekit.files.ccsds.ndm.adm.apm.Maneuver`): maneuver to be set
+        Parameters:
+            maneuver (Maneuver): maneuver to be set
         
         
         """
         ...
     def getAngularVelocityBlock(self) -> AngularVelocity:
         """
-            Get the angular velocity logical block.
+        Get the angular velocity logical block.
         
-            Returns:
-                angular velocity block (may be null)
+        Returns:
+            angular velocity block (may be null)
         
-            Since:
-                12.0
-        
-        
-        """
-        ...
-    def getAttitude(self, frame: org.orekit.frames.Frame, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]) -> org.orekit.attitudes.Attitude:
-        """
-            Get the attitude.
-        
-            Parameters:
-                frame (:class:`~org.orekit.frames.Frame`): reference frame with respect to which attitude must be defined, (may be null if attitude is *not* orbit-relative and one
-                    wants attitude in the same frame as used in the attitude message)
-                pvProvider (:class:`~org.orekit.utils.PVCoordinatesProvider`): provider for spacecraft position and velocity (may be null if attitude is *not* orbit-relative)
-        
-            Returns:
-                attitude
-        
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
-    def getComments(self) -> java.util.List[str]: ...
+    def getAttitude(self, frame: org.orekit.frames.Frame, pvProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]) -> org.orekit.attitudes.Attitude:
+        """
+        Get the attitude.
+        
+        Parameters:
+            frame (Frame): reference frame with respect to which attitude must be defined, (may be null if attitude is not orbit-relative and one
+                wants attitude in the same frame as used in the attitude message)
+            pvProvider (PVCoordinatesProvider): provider for spacecraft position and velocity (may be null if attitude is not orbit-relative)
+        
+        Returns:
+            attitude
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
+    def getComments(self) -> java.util.List[str]:
+        """
+        Get the comments.
+        
+        Returns:
+            comments
+        
+        
+        """
+        ...
     def getEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the epoch of the data.
+        Get the epoch of the data.
         
-            Returns:
-                epoch the epoch
+        Returns:
+            epoch the epoch
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     def getEulerBlock(self) -> 'Euler':
         """
-            Get the Euler angles logical block.
+        Get the Euler angles logical block.
         
-            Returns:
-                Euler angles block (may be null)
+        Returns:
+            Euler angles block (may be null)
         
         
         """
         ...
     def getInertiaBlock(self) -> 'Inertia':
         """
-            Get the inertia logical block.
+        Get the inertia logical block.
         
-            Returns:
-                inertia block (may be null)
-        
-        
-        """
-        ...
-    def getManeuver(self, int: int) -> 'Maneuver':
-        """
-            Get a maneuver.
-        
-            Parameters:
-                index (int): maneuver index, counting from 0
-        
-            Returns:
-                maneuver
+        Returns:
+            inertia block (may be null)
         
         
         """
         ...
-    def getManeuvers(self) -> java.util.List['Maneuver']: ...
+    def getManeuver(self, index: int) -> 'Maneuver':
+        """
+        Get a maneuver.
+        
+        Parameters:
+            index (int): maneuver index, counting from 0
+        
+        Returns:
+            maneuver
+        
+        
+        """
+        ...
+    def getManeuvers(self) -> java.util.List['Maneuver']:
+        """
+        Get a list of all maneuvers.
+        
+        Returns:
+            unmodifiable list of all maneuvers.
+        
+        
+        """
+        ...
     def getNbManeuvers(self) -> int:
         """
-            Get the number of maneuvers present in the APM.
+        Get the number of maneuvers present in the APM.
         
-            Returns:
-                the number of maneuvers
+        Returns:
+            the number of maneuvers
         
         
         """
         ...
     def getQuaternionBlock(self) -> 'ApmQuaternion':
         """
-            Get the quaternion logical block.
+        Get the quaternion logical block.
         
-            Returns:
-                quaternion block
+        Returns:
+            quaternion block
         
         
         """
         ...
     def getSpinStabilizedBlock(self) -> 'SpinStabilized':
         """
-            Get the spin-stabilized logical block.
+        Get the spin-stabilized logical block.
         
-            Returns:
-                spin-stabilized block (may be null)
+        Returns:
+            spin-stabilized block (may be null)
         
         
         """
         ...
     def hasManeuvers(self) -> bool:
         """
-            Get boolean testing whether the APM contains at least one maneuver.
+        Get boolean testing whether the APM contains at least one maneuver.
         
-            Returns:
-                true if APM contains at least one maneuver false otherwise
+        Returns:
+            true if APM contains at least one maneuver false otherwise
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def validate(self, version: float) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Check is all mandatory entries have been initialized.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
+        Specified by: validate in interface Section
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            version (double): format version
         
         
         """
@@ -457,170 +479,167 @@ class ApmData(org.orekit.files.ccsds.section.Data):
 
 class ApmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Apm, 'ApmParser']):
     """
-    public class ApmParser extends :class:`~org.orekit.files.ccsds.ndm.adm.AdmParser`<:class:`~org.orekit.files.ccsds.ndm.adm.apm.Apm`, :class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmParser`>
+    A parser for the CCSDS APM (Attitude Parameter Message).
     
-        A parser for the CCSDS APM (Attitude Parameter Message).
-    
-        Since:
-            10.2
+    Since:
+        10.2
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]):
+        """
+        Complete constructor.
+        
+        Calling this constructor directly is not recommended. Users should rather use buildApmParser.
+        
+        Parameters:
+            conventions (IERSConventions): IERS Conventions
+            simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
+            dataContext (DataContext): used to retrieve frames, time scales, etc.
+            missionReferenceDate (AbsoluteDate): reference date for Mission Elapsed Time or Mission Relative Time time systems (may be null if time system is absolute)
+            parsedUnitsBehavior (ParsedUnitsBehavior): behavior to adopt for handling parsed units
+            filters (Function<ParseToken, List<ParseToken>>[]): filters to apply to parse tokens
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
     def build(self) -> Apm:
         """
-            Build the file from parsed entries.
+        Build the file from parsed entries.
         
-            Returns:
-                parsed file
+        Returns:
+            parsed file
         
         
         """
         ...
     def finalizeData(self) -> bool:
         """
-            Finalize data after parsing.
+        Finalize data after parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: finalizeData in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def finalizeHeader(self) -> bool:
         """
-            Finalize header after parsing.
+        Finalize header after parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: finalizeHeader in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def finalizeMetadata(self) -> bool:
         """
-            Finalize metadata after parsing.
+        Finalize metadata after parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: finalizeMetadata in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def getHeader(self) -> org.orekit.files.ccsds.ndm.adm.AdmHeader:
         """
-            Get file header to fill.
+        Get file header to fill.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: getHeader in class AbstractConstituentParser
         
-            Returns:
-                file header to fill
+        Returns:
+            file header to fill
         
         
         """
         ...
     def inData(self) -> bool:
         """
-            Acknowledge data parsing has started.
+        Acknowledge data parsing has started.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: inData in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def inHeader(self) -> bool:
         """
-            Acknowledge header parsing has started.
+        Acknowledge header parsing has started.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: inHeader in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def inMetadata(self) -> bool:
         """
-            Acknowledge metada parsing has started.
+        Acknowledge metada parsing has started.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: inMetadata in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def prepareData(self) -> bool:
         """
-            Prepare data for parsing.
+        Prepare data for parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: prepareData in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def prepareHeader(self) -> bool:
         """
-            Prepare header for parsing.
+        Prepare header for parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: prepareHeader in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def prepareMetadata(self) -> bool:
         """
-            Prepare metadata for parsing.
+        Prepare metadata for parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: prepareMetadata in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None:
         """
-            Reset parser to initial state before parsing.
+        Reset parser to initial state before parsing.
         
-            Parameters:
-                fileFormat (:class:`~org.orekit.files.ccsds.utils.FileFormat`): format of the file ready to be parsed
+        Parameters:
+            fileFormat (FileFormat): format of the file ready to be parsed
         
         
         """
@@ -628,100 +647,92 @@ class ApmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Apm, 'ApmParser']):
 
 class ApmQuaternion(org.orekit.files.ccsds.section.CommentsContainer):
     """
-    public class ApmQuaternion extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    Container for Attitude Parameter Message quaternion logical block.
     
-        Container for Attitude Parameter Message quaternion logical block.
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
-    
-        Since:
-            10.2
+    Since:
+        10.2
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Simple constructor.
+        """
+        ...
     def getEndpoints(self) -> org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints:
         """
-            Get the endpoints (i.e. frames A, B and their relationship).
+        Get the endpoints (i.e. frames A, B and their relationship).
         
-            Returns:
-                endpoints
+        Returns:
+            endpoints
         
         
         """
         ...
     def getQuaternion(self) -> org.hipparchus.complex.Quaternion:
         """
-            Get the quaternion.
+        Get the quaternion.
         
-            Returns:
-                quaternion
+        Returns:
+            quaternion
         
         
         """
         ...
     def getQuaternionDot(self) -> org.hipparchus.complex.Quaternion:
         """
-            Get the quaternion derivative.
+        Get the quaternion derivative.
         
-            Returns:
-                quaternion derivative
+        Returns:
+            quaternion derivative
         
         
         """
         ...
     def hasRates(self) -> bool:
         """
-            Check if the logical block includes rates.
+        Check if the logical block includes rates.
         
-            Returns:
-                true if logical block includes rates
-        
-        
-        """
-        ...
-    def setQ(self, int: int, double: float) -> None:
-        """
-            Set quaternion component.
-        
-            Parameters:
-                index (int): component index (0 is scalar part)
-                value (double): quaternion component
+        Returns:
+            true if logical block includes rates
         
         
         """
         ...
-    def setQDot(self, int: int, double: float) -> None:
+    def setQ(self, index: int, value: float) -> None:
         """
-            Set quaternion derivative component.
+        Set quaternion component.
         
-            Parameters:
-                index (int): component index (0 is scalar part)
-                derivative (double): quaternion derivative component
+        Parameters:
+            index (int): component index (0 is scalar part)
+            value (double): quaternion component
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def setQDot(self, index: int, derivative: float) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set quaternion derivative component.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            index (int): component index (0 is scalar part)
+            derivative (double): quaternion derivative component
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
-                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
         
-            Parameters:
-                version (double): format version
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class CommentsContainer
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -729,12 +740,10 @@ class ApmQuaternion(org.orekit.files.ccsds.section.CommentsContainer):
 
 class ApmQuaternionKey(java.lang.Enum['ApmQuaternionKey']):
     """
-    public enum ApmQuaternionKey extends :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmQuaternionKey`>
+    Keys for ApmQuaternion entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmQuaternion` entries.
-    
-        Since:
-            10.2
+    Since:
+        10.2
     """
     quaternion: typing.ClassVar['ApmQuaternionKey'] = ...
     quaternionRate: typing.ClassVar['ApmQuaternionKey'] = ...
@@ -754,18 +763,18 @@ class ApmQuaternionKey(java.lang.Enum['ApmQuaternionKey']):
     Q1_DOT: typing.ClassVar['ApmQuaternionKey'] = ...
     Q2_DOT: typing.ClassVar['ApmQuaternionKey'] = ...
     Q3_DOT: typing.ClassVar['ApmQuaternionKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, apmQuaternion: ApmQuaternion, dateConsumer: typing.Union[org.orekit.files.ccsds.utils.lexical.ParseToken.DateConsumer, typing.Callable]) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: ApmQuaternion, epochSetter: typing.Union[org.orekit.files.ccsds.utils.lexical.ParseToken.DateConsumer, typing.Callable]) -> bool:
         """
-            Process one token.
+        Process one token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmQuaternion`): container to fill
-                epochSetter (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.DateConsumer`): setter for the epoch (used only in ADM V1 XML files)
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (ApmQuaternion): container to fill
+            epochSetter (DateConsumer): setter for the epoch (used only in ADM V1 XML files)
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -776,20 +785,19 @@ class ApmQuaternionKey(java.lang.Enum['ApmQuaternionKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'ApmQuaternionKey':
+    def valueOf(name: str) -> 'ApmQuaternionKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -797,17 +805,15 @@ class ApmQuaternionKey(java.lang.Enum['ApmQuaternionKey']):
     @staticmethod
     def values() -> typing.MutableSequence['ApmQuaternionKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (ApmQuaternionKey c : ApmQuaternionKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (ApmQuaternionKey c : ApmQuaternionKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -815,239 +821,237 @@ class ApmQuaternionKey(java.lang.Enum['ApmQuaternionKey']):
 
 class ApmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.ndm.adm.AdmHeader, org.orekit.files.ccsds.section.Segment[org.orekit.files.ccsds.ndm.adm.AdmMetadata, ApmData], Apm]):
     """
-    public class ApmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmHeader`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmMetadata`, :class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmData`>, :class:`~org.orekit.files.ccsds.ndm.adm.apm.Apm`>
+    Writer for CCSDS Orbit Parameter Message.
     
-        Writer for CCSDS Orbit Parameter Message.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     CCSDS_APM_VERS: typing.ClassVar[float] = ...
     """
-    public static final double CCSDS_APM_VERS
+    Version number implemented.
     
-        Version number implemented.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     KVN_PADDING_WIDTH: typing.ClassVar[int] = ...
     """
-    public static final int KVN_PADDING_WIDTH
+    Padding width for aligning the '=' sign.
     
-        Padding width for aligning the '=' sign.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate): ...
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate):
+        """
+        Complete constructor.
+        
+        Calling this constructor directly is not recommended. Users should rather use buildApmWriter.
+        
+        Parameters:
+            conventions (IERSConventions): IERS Conventions
+            dataContext (DataContext): used to retrieve frames, time scales, etc.
+            missionReferenceDate (AbsoluteDate): reference date for Mission Elapsed Time or Mission Relative Time time systems
+        
+        
+        """
+        ...
 
 class Euler(org.orekit.files.ccsds.section.CommentsContainer):
     """
-    public class Euler extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    Container for Euler entries.
     
-        Container for :class:`~org.orekit.files.ccsds.ndm.adm.apm.Euler` entries.
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
-    
-        Since:
-            10.2
+    Since:
+        10.2
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Simple constructor.
+        """
+        ...
     def getEndpoints(self) -> org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints:
         """
-            Get the endpoints (i.e. frames A, B and their relationship).
+        Get the endpoints (i.e. frames A, B and their relationship).
         
-            Returns:
-                endpoints
+        Returns:
+            endpoints
         
         
         """
         ...
     def getEulerRotSeq(self) -> org.hipparchus.geometry.euclidean.threed.RotationOrder:
         """
-            Get the rotation order of Euler angles.
+        Get the rotation order of Euler angles.
         
-            Returns:
-                rotation order
+        Returns:
+            rotation order
         
         
         """
         ...
     def getRotationAngles(self) -> typing.MutableSequence[float]:
         """
-            Get the coordinates of the Euler angles.
+        Get the coordinates of the Euler angles.
         
-            Returns:
-                rotation angles (rad)
+        Returns:
+            rotation angles (rad)
         
         
         """
         ...
     def getRotationRates(self) -> typing.MutableSequence[float]:
         """
-            Get the rates of the Euler angles.
+        Get the rates of the Euler angles.
         
-            Returns:
-                rotation rates (rad/s)
+        Returns:
+            rotation rates (rad/s)
         
         
         """
         ...
     def hasAngles(self) -> bool:
         """
-            Check if the logical block includes angles.
+        Check if the logical block includes angles.
         
-            This can be false only for ADM V1, as angles are mandatory since ADM V2.
+        This can be false only for ADM V1, as angles are mandatory since ADM V2.
         
-            Returns:
-                true if logical block includes angles
+        Returns:
+            true if logical block includes angles
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     def hasRates(self) -> bool:
         """
-            Check if the logical block includes rates.
+        Check if the logical block includes rates.
         
-            Returns:
-                true if logical block includes rates
+        Returns:
+            true if logical block includes rates
         
         
         """
         ...
     def isSpacecraftBodyRate(self) -> bool:
         """
-            Check if rates are specified in spacecraft body frame.
+        Check if rates are specified in spacecraft body frame.
         
-            :meth:`~org.orekit.files.ccsds.ndm.adm.apm.Euler.validate` must have been initialized properly to non-null values before
-            this method is called, otherwise :code:`NullPointerException` will be thrown.
+        validate must have been initialized properly to non-null values before this method is called, otherwise NullPointerException will be thrown.
         
-            Returns:
-                true if rates are specified in spacecraft body frame
+        Returns:
+            true if rates are specified in spacecraft body frame
         
         
         """
         ...
     def rateFrameIsA(self) -> bool:
         """
-            Check if rates are specified in :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints.getFrameA`.
+        Check if rates are specified in getFrameA.
         
-            Returns:
-                true if rates are specified in :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints.getFrameA`
-        
-        
-        """
-        ...
-    def setEulerRotSeq(self, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder) -> None:
-        """
-            Set the rotation order for Euler angles.
-        
-            Parameters:
-                eulerRotSeq (:class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.RotationOrder?is`): order to be set
+        Returns:
+            true if rates are specified in getFrameA
         
         
         """
         ...
-    def setInRotationAngles(self, boolean: bool) -> None:
+    def setEulerRotSeq(self, eulerRotSeq: org.hipparchus.geometry.euclidean.threed.RotationOrder) -> None:
         """
-            Set flag for rotation angle parsing.
+        Set the rotation order for Euler angles.
         
-            Parameters:
-                inRotationAngles (boolean): if true, we are in the rotationAngles part of XML files
-        
-        
-        """
-        ...
-    def setIndexedRotationAngle(self, int: int, double: float) -> None:
-        """
-            Set the Euler angle about axis.
-        
-            Parameters:
-                axis (int): rotation axis
-                angle (double): angle to set (rad)
-        
-            Since:
-                12.0
+        Parameters:
+            eulerRotSeq (RotationOrder): order to be set
         
         
         """
         ...
-    def setIndexedRotationRate(self, int: int, double: float) -> None:
+    def setInRotationAngles(self, inRotationAngles: bool) -> None:
         """
-            Set the rate of Euler angle about axis.
+        Set flag for rotation angle parsing.
         
-            Parameters:
-                axis (int): rotation axis
-                rate (double): angle rate to set (rad/s)
-        
-            Since:
-                12.0
+        Parameters:
+            inRotationAngles (boolean): if true, we are in the rotationAngles part of XML files
         
         
         """
         ...
-    def setLabeledRotationAngle(self, char: str, double: float) -> None:
+    def setIndexedRotationAngle(self, axis: int, angle: float) -> None:
         """
-            Set the Euler angle about axis.
+        Set the Euler angle about axis.
         
-            Parameters:
-                axis (char): rotation axis
-                angle (double): angle to set (rad)
+        Parameters:
+            axis (int): rotation axis
+            angle (double): angle to set (rad)
         
-        
-        """
-        ...
-    def setLabeledRotationRate(self, char: str, double: float) -> None:
-        """
-            Set the rate of Euler angle about axis.
-        
-            Parameters:
-                axis (char): rotation axis
-                rate (double): angle rate to set (rad/s)
+        Since:
+            12.0
         
         
         """
         ...
-    def setRateFrameIsA(self, boolean: bool) -> None:
+    def setIndexedRotationRate(self, axis: int, rate: float) -> None:
         """
-            Set the frame in which rates are specified.
+        Set the rate of Euler angle about axis.
         
-            Parameters:
-                rateFrameIsA (boolean): if true, rates are specified in :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints.getFrameA`
+        Parameters:
+            axis (int): rotation axis
+            rate (double): angle rate to set (rad/s)
+        
+        Since:
+            12.0
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def setLabeledRotationAngle(self, axis: str, angle: float) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set the Euler angle about axis.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            axis (char): rotation axis
+            angle (double): angle to set (rad)
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
-                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        """
+        ...
+    def setLabeledRotationRate(self, axis: str, rate: float) -> None:
+        """
+        Set the rate of Euler angle about axis.
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            axis (char): rotation axis
+            rate (double): angle rate to set (rad/s)
+        
+        
+        """
+        ...
+    def setRateFrameIsA(self, rateFrameIsA: bool) -> None:
+        """
+        Set the frame in which rates are specified.
+        
+        Parameters:
+            rateFrameIsA (boolean): if true, rates are specified in getFrameA
+        
+        
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class CommentsContainer
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -1055,12 +1059,10 @@ class Euler(org.orekit.files.ccsds.section.CommentsContainer):
 
 class EulerKey(java.lang.Enum['EulerKey']):
     """
-    public enum EulerKey extends :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.apm.EulerKey`>
+    Keys for ApmData entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmData` entries.
-    
-        Since:
-            10.2
+    Since:
+        10.2
     """
     rotationAngles: typing.ClassVar['EulerKey'] = ...
     rotationRates: typing.ClassVar['EulerKey'] = ...
@@ -1084,17 +1086,17 @@ class EulerKey(java.lang.Enum['EulerKey']):
     ANGLE_1_DOT: typing.ClassVar['EulerKey'] = ...
     ANGLE_2_DOT: typing.ClassVar['EulerKey'] = ...
     ANGLE_3_DOT: typing.ClassVar['EulerKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, euler: Euler) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: Euler) -> bool:
         """
-            Process one token.
+        Process one token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.adm.apm.Euler`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (Euler): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -1105,20 +1107,19 @@ class EulerKey(java.lang.Enum['EulerKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'EulerKey':
+    def valueOf(name: str) -> 'EulerKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -1126,17 +1127,15 @@ class EulerKey(java.lang.Enum['EulerKey']):
     @staticmethod
     def values() -> typing.MutableSequence['EulerKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (EulerKey c : EulerKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (EulerKey c : EulerKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -1144,73 +1143,72 @@ class EulerKey(java.lang.Enum['EulerKey']):
 
 class Inertia(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
     """
-    public class Inertia extends :class:`~org.orekit.files.ccsds.ndm.CommonPhysicalProperties`
+    Inertia.
     
-        Inertia.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Simple constructor.
+        """
+        ...
     def getFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
         """
-            Get frame in which inertia is specified.
+        Get frame in which inertia is specified.
         
-            Returns:
-                frame in which inertia is specified
+        Returns:
+            frame in which inertia is specified
         
         
         """
         ...
     def getInertiaMatrix(self) -> org.hipparchus.linear.RealMatrix:
         """
-            Get the inertia matrix.
+        Get the inertia matrix.
         
-            Returns:
-                the inertia matrix
-        
-        
-        """
-        ...
-    def setFrame(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
-        """
-            Set frame in which inertia is specified.
-        
-            Parameters:
-                frame (:class:`~org.orekit.files.ccsds.definitions.FrameFacade`): frame in which inertia is specified
+        Returns:
+            the inertia matrix
         
         
         """
         ...
-    def setInertiaMatrixEntry(self, int: int, int2: int, double: float) -> None:
+    def setFrame(self, frame: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
         """
-            Set an entry in the inertia matrix.
+        Set frame in which inertia is specified.
         
-            Both I(j, k) and I(k, j) are set.
-        
-            Parameters:
-                j (int): row index (must be between 0 and 3 (inclusive)
-                k (int): column index (must be between 0 and 3 (inclusive)
-                entry (double): value of the matrix entry
+        Parameters:
+            frame (FrameFacade): frame in which inertia is specified
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def setInertiaMatrixEntry(self, j: int, k: int, entry: float) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set an entry in the inertia matrix.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Both I(j, k) and I(k, j) are set.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
+        Parameters:
+            j (int): row index (must be between 0 and 3 (inclusive)
+            k (int): column index (must be between 0 and 3 (inclusive)
+            entry (double): value of the matrix entry
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.CommonPhysicalProperties.validate` in
-                class :class:`~org.orekit.files.ccsds.ndm.CommonPhysicalProperties`
         
-            Parameters:
-                version (double): format version
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class CommonPhysicalProperties
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -1218,12 +1216,10 @@ class Inertia(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
 
 class InertiaKey(java.lang.Enum['InertiaKey']):
     """
-    public enum InertiaKey extends :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.apm.InertiaKey`>
+    Keys for Inertia entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.adm.apm.Inertia` entries.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
     COMMENT: typing.ClassVar['InertiaKey'] = ...
     INERTIA_REF_FRAME: typing.ClassVar['InertiaKey'] = ...
@@ -1239,17 +1235,17 @@ class InertiaKey(java.lang.Enum['InertiaKey']):
     IXZ: typing.ClassVar['InertiaKey'] = ...
     I23: typing.ClassVar['InertiaKey'] = ...
     IYZ: typing.ClassVar['InertiaKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, inertia: Inertia) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, data: Inertia) -> bool:
         """
-            Process an token.
+        Process an token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                data (:class:`~org.orekit.files.ccsds.ndm.adm.apm.Inertia`): data to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            data (Inertia): data to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -1260,20 +1256,19 @@ class InertiaKey(java.lang.Enum['InertiaKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'InertiaKey':
+    def valueOf(name: str) -> 'InertiaKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -1281,17 +1276,15 @@ class InertiaKey(java.lang.Enum['InertiaKey']):
     @staticmethod
     def values() -> typing.MutableSequence['InertiaKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (InertiaKey c : InertiaKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (InertiaKey c : InertiaKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -1299,145 +1292,137 @@ class InertiaKey(java.lang.Enum['InertiaKey']):
 
 class Maneuver(org.orekit.files.ccsds.section.CommentsContainer):
     """
-    public class Maneuver extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    Maneuver in an APM file.
     
-        Maneuver in an APM file.
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
-    
-        Since:
-            10.2
+    Since:
+        10.2
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Simple constructor.
+        """
+        ...
     def getDeltaMass(self) -> float:
         """
-            Get mass change during maneuver.
+        Get mass change during maneuver.
         
-            Returns:
-                mass change during maneuver (kg, negative)
+        Returns:
+            mass change during maneuver (kg, negative)
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     def getDuration(self) -> float:
         """
-            Get duration (value is 0 for impulsive maneuver).
+        Get duration (value is 0 for impulsive maneuver).
         
-            Returns:
-                duration (value is 0 for impulsive maneuver)
+        Returns:
+            duration (value is 0 for impulsive maneuver)
         
         
         """
         ...
     def getEpochStart(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get epoch start.
+        Get epoch start.
         
-            Returns:
-                epoch start
+        Returns:
+            epoch start
         
         
         """
         ...
     def getFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
         """
-            Get Coordinate system for the torque vector.
+        Get Coordinate system for the torque vector.
         
-            Returns:
-                coordinate system for the torque vector
+        Returns:
+            coordinate system for the torque vector
         
         
         """
         ...
     def getTorque(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get the torque vector (N.m).
+        Get the torque vector (N.m).
         
-            Returns:
-                torque vector
-        
-        
-        """
-        ...
-    def setDeltaMass(self, double: float) -> None:
-        """
-            Set mass change during maneuver.
-        
-            Parameters:
-                deltaMass (double): mass change during maneuver (kg)
-        
-            Since:
-                12.0
+        Returns:
+            torque vector
         
         
         """
         ...
-    def setDuration(self, double: float) -> None:
+    def setDeltaMass(self, deltaMass: float) -> None:
         """
-            Set duration (value is 0 for impulsive maneuver).
+        Set mass change during maneuver.
         
-            Parameters:
-                duration (double): duration (value is 0 for impulsive maneuver)
+        Parameters:
+            deltaMass (double): mass change during maneuver (kg)
         
-        
-        """
-        ...
-    def setEpochStart(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Set epoch start.
-        
-            Parameters:
-                epochStart (:class:`~org.orekit.time.AbsoluteDate`): epoch start
+        Since:
+            12.0
         
         
         """
         ...
-    def setFrame(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
+    def setDuration(self, duration: float) -> None:
         """
-            Set Coordinate system for the torque vector.
+        Set duration (value is 0 for impulsive maneuver).
         
-            Parameters:
-                frame (:class:`~org.orekit.files.ccsds.definitions.FrameFacade`): coordinate system for the torque vector
-        
-        
-        """
-        ...
-    def setTorque(self, int: int, double: float) -> None:
-        """
-            Set the torque vector (N.m).
-        
-            Parameters:
-                index (int): vector component index (counting from 0)
-                value (double): component value
+        Parameters:
+            duration (double): duration (value is 0 for impulsive maneuver)
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def setEpochStart(self, epochStart: org.orekit.time.AbsoluteDate) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set epoch start.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            epochStart (AbsoluteDate): epoch start
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
-                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        """
+        ...
+    def setFrame(self, frame: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
+        """
+        Set Coordinate system for the torque vector.
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            frame (FrameFacade): coordinate system for the torque vector
+        
+        
+        """
+        ...
+    def setTorque(self, index: int, value: float) -> None:
+        """
+        Set the torque vector (N.m).
+        
+        Parameters:
+            index (int): vector component index (counting from 0)
+            value (double): component value
+        
+        
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class CommentsContainer
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -1445,12 +1430,10 @@ class Maneuver(org.orekit.files.ccsds.section.CommentsContainer):
 
 class ManeuverKey(java.lang.Enum['ManeuverKey']):
     """
-    public enum ManeuverKey extends :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.apm.ManeuverKey`>
+    Keys for Maneuver entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.adm.apm.Maneuver` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     COMMENT: typing.ClassVar['ManeuverKey'] = ...
     MAN_EPOCH_START: typing.ClassVar['ManeuverKey'] = ...
@@ -1463,17 +1446,17 @@ class ManeuverKey(java.lang.Enum['ManeuverKey']):
     MAN_TOR_3: typing.ClassVar['ManeuverKey'] = ...
     MAN_TOR_Z: typing.ClassVar['ManeuverKey'] = ...
     MAN_DELTA_MASS: typing.ClassVar['ManeuverKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, maneuver: Maneuver) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: Maneuver) -> bool:
         """
-            Process one token.
+        Process one token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.adm.apm.Maneuver`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (Maneuver): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -1484,20 +1467,19 @@ class ManeuverKey(java.lang.Enum['ManeuverKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'ManeuverKey':
+    def valueOf(name: str) -> 'ManeuverKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -1505,17 +1487,15 @@ class ManeuverKey(java.lang.Enum['ManeuverKey']):
     @staticmethod
     def values() -> typing.MutableSequence['ManeuverKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (ManeuverKey c : ManeuverKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (ManeuverKey c : ManeuverKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -1523,292 +1503,284 @@ class ManeuverKey(java.lang.Enum['ManeuverKey']):
 
 class SpinStabilized(org.orekit.files.ccsds.section.CommentsContainer):
     """
-    public class SpinStabilized extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    Container for Attitude Parameter Message data lines.
     
-        Container for Attitude Parameter Message data lines.
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
-    
-        Since:
-            10.2
+    Since:
+        10.2
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Simple constructor.
+        """
+        ...
     def getEndpoints(self) -> org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints:
         """
-            Get the endpoints (i.e. frames A, B and their relationship).
+        Get the endpoints (i.e. frames A, B and their relationship).
         
-            Returns:
-                endpoints
+        Returns:
+            endpoints
         
         
         """
         ...
     def getMomentumAlpha(self) -> float:
         """
-            Get the right ascension of angular momentum vector (rad).
+        Get the right ascension of angular momentum vector (rad).
         
-            Returns:
-                the right ascension of angular momentum vector
+        Returns:
+            the right ascension of angular momentum vector
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     def getMomentumDelta(self) -> float:
         """
-            Get the declination of the angular momentum vector (rad).
+        Get the declination of the angular momentum vector (rad).
         
-            Returns:
-                the declination of the angular momentum vector (rad).
+        Returns:
+            the declination of the angular momentum vector (rad).
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     def getNutation(self) -> float:
         """
-            Get the nutation angle of spin axis (rad).
+        Get the nutation angle of spin axis (rad).
         
-            Returns:
-                the nutation angle of spin axis
+        Returns:
+            the nutation angle of spin axis
         
         
         """
         ...
     def getNutationPeriod(self) -> float:
         """
-            Get the body nutation period of the spin axis (s).
+        Get the body nutation period of the spin axis (s).
         
-            Returns:
-                the body nutation period of the spin axis
+        Returns:
+            the body nutation period of the spin axis
         
         
         """
         ...
     def getNutationPhase(self) -> float:
         """
-            Get the inertial nutation phase (rad).
+        Get the inertial nutation phase (rad).
         
-            Returns:
-                the inertial nutation phase
+        Returns:
+            the inertial nutation phase
         
         
         """
         ...
     def getNutationVel(self) -> float:
         """
-            Get the angular velocity of spin vector around angular momentum vector.
+        Get the angular velocity of spin vector around angular momentum vector.
         
-            Returns:
-                angular velocity of spin vector around angular momentum vector (rad/s)
+        Returns:
+            angular velocity of spin vector around angular momentum vector (rad/s)
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     def getSpinAlpha(self) -> float:
         """
-            Get the right ascension of spin axis vector (rad).
+        Get the right ascension of spin axis vector (rad).
         
-            Returns:
-                the right ascension of spin axis vector
+        Returns:
+            the right ascension of spin axis vector
         
         
         """
         ...
     def getSpinAngle(self) -> float:
         """
-            Get the phase of the satellite about the spin axis (rad).
+        Get the phase of the satellite about the spin axis (rad).
         
-            Returns:
-                the phase of the satellite about the spin axis
+        Returns:
+            the phase of the satellite about the spin axis
         
         
         """
         ...
     def getSpinAngleVel(self) -> float:
         """
-            Get the angular velocity of satellite around spin axis (rad/s).
+        Get the angular velocity of satellite around spin axis (rad/s).
         
-            Returns:
-                the angular velocity of satellite around spin axis
+        Returns:
+            the angular velocity of satellite around spin axis
         
         
         """
         ...
     def getSpinDelta(self) -> float:
         """
-            Get the declination of the spin axis vector (rad).
+        Get the declination of the spin axis vector (rad).
         
-            Returns:
-                the declination of the spin axis vector (rad).
+        Returns:
+            the declination of the spin axis vector (rad).
         
         
         """
         ...
     def hasMomentum(self) -> bool:
         """
-            Check if the logical block includes momentum.
+        Check if the logical block includes momentum.
         
-            Returns:
-                true if logical block includes momentum
+        Returns:
+            true if logical block includes momentum
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     def hasNutation(self) -> bool:
         """
-            Check if the logical block includes nutation.
+        Check if the logical block includes nutation.
         
-            Returns:
-                true if logical block includes nutation
+        Returns:
+            true if logical block includes nutation
         
-            Since:
-                12.0
-        
-        
-        """
-        ...
-    def setMomentumAlpha(self, double: float) -> None:
-        """
-            Set the right ascension of angular momentum vector (rad).
-        
-            Parameters:
-                momentumAlpha (double): value to be set
-        
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
-    def setMomentumDelta(self, double: float) -> None:
+    def setMomentumAlpha(self, momentumAlpha: float) -> None:
         """
-            Set the declination of the angular momentum vector (rad).
+        Set the right ascension of angular momentum vector (rad).
         
-            Parameters:
-                momentumDelta (double): value to be set
+        Parameters:
+            momentumAlpha (double): value to be set
         
-            Since:
-                12.0
-        
-        
-        """
-        ...
-    def setNutation(self, double: float) -> None:
-        """
-            Set the nutation angle of spin axis (rad).
-        
-            Parameters:
-                nutation (double): the nutation angle to be set
+        Since:
+            12.0
         
         
         """
         ...
-    def setNutationPeriod(self, double: float) -> None:
+    def setMomentumDelta(self, momentumDelta: float) -> None:
         """
-            Set the body nutation period of the spin axis (s).
+        Set the declination of the angular momentum vector (rad).
         
-            Parameters:
-                period (double): the nutation period to be set
+        Parameters:
+            momentumDelta (double): value to be set
         
-        
-        """
-        ...
-    def setNutationPhase(self, double: float) -> None:
-        """
-            Set the inertial nutation phase (rad).
-        
-            Parameters:
-                nutationPhase (double): the nutation phase to be set
+        Since:
+            12.0
         
         
         """
         ...
-    def setNutationVel(self, double: float) -> None:
+    def setNutation(self, nutation: float) -> None:
         """
-            Set the angular velocity of spin vector around angular momentum vector.
+        Set the nutation angle of spin axis (rad).
         
-            Parameters:
-                nutationVel (double): angular velocity of spin vector around angular momentum vector (rad/s)
-        
-            Since:
-                12.0
+        Parameters:
+            nutation (double): the nutation angle to be set
         
         
         """
         ...
-    def setSpinAlpha(self, double: float) -> None:
+    def setNutationPeriod(self, period: float) -> None:
         """
-            Set the right ascension of spin axis vector (rad).
+        Set the body nutation period of the spin axis (s).
         
-            Parameters:
-                spinAlpha (double): value to be set
-        
-        
-        """
-        ...
-    def setSpinAngle(self, double: float) -> None:
-        """
-            Set the phase of the satellite about the spin axis (rad).
-        
-            Parameters:
-                spinAngle (double): value to be set
+        Parameters:
+            period (double): the nutation period to be set
         
         
         """
         ...
-    def setSpinAngleVel(self, double: float) -> None:
+    def setNutationPhase(self, nutationPhase: float) -> None:
         """
-            Set the angular velocity of satellite around spin axis (rad/s).
+        Set the inertial nutation phase (rad).
         
-            Parameters:
-                spinAngleVel (double): value to be set
-        
-        
-        """
-        ...
-    def setSpinDelta(self, double: float) -> None:
-        """
-            Set the declination of the spin axis vector (rad).
-        
-            Parameters:
-                spinDelta (double): value to be set
+        Parameters:
+            nutationPhase (double): the nutation phase to be set
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def setNutationVel(self, nutationVel: float) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set the angular velocity of spin vector around angular momentum vector.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            nutationVel (double): angular velocity of spin vector around angular momentum vector (rad/s)
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
+        Since:
+            12.0
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
-                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
-            Parameters:
-                version (double): format version
+        """
+        ...
+    def setSpinAlpha(self, spinAlpha: float) -> None:
+        """
+        Set the right ascension of spin axis vector (rad).
+        
+        Parameters:
+            spinAlpha (double): value to be set
+        
+        
+        """
+        ...
+    def setSpinAngle(self, spinAngle: float) -> None:
+        """
+        Set the phase of the satellite about the spin axis (rad).
+        
+        Parameters:
+            spinAngle (double): value to be set
+        
+        
+        """
+        ...
+    def setSpinAngleVel(self, spinAngleVel: float) -> None:
+        """
+        Set the angular velocity of satellite around spin axis (rad/s).
+        
+        Parameters:
+            spinAngleVel (double): value to be set
+        
+        
+        """
+        ...
+    def setSpinDelta(self, spinDelta: float) -> None:
+        """
+        Set the declination of the spin axis vector (rad).
+        
+        Parameters:
+            spinDelta (double): value to be set
+        
+        
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class CommentsContainer
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -1816,12 +1788,10 @@ class SpinStabilized(org.orekit.files.ccsds.section.CommentsContainer):
 
 class SpinStabilizedKey(java.lang.Enum['SpinStabilizedKey']):
     """
-    public enum SpinStabilizedKey extends :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.apm.SpinStabilizedKey`>
+    Keys for SpinStabilized entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.adm.apm.SpinStabilized` entries.
-    
-        Since:
-            10.2
+    Since:
+        10.2
     """
     COMMENT: typing.ClassVar['SpinStabilizedKey'] = ...
     SPIN_FRAME_A: typing.ClassVar['SpinStabilizedKey'] = ...
@@ -1839,17 +1809,17 @@ class SpinStabilizedKey(java.lang.Enum['SpinStabilizedKey']):
     MOMENTUM_ALPHA: typing.ClassVar['SpinStabilizedKey'] = ...
     MOMENTUM_DELTA: typing.ClassVar['SpinStabilizedKey'] = ...
     NUTATION_VEL: typing.ClassVar['SpinStabilizedKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, spinStabilized: SpinStabilized) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: SpinStabilized) -> bool:
         """
-            Process one token.
+        Process one token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.adm.apm.SpinStabilized`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (SpinStabilized): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -1860,20 +1830,19 @@ class SpinStabilizedKey(java.lang.Enum['SpinStabilizedKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'SpinStabilizedKey':
+    def valueOf(name: str) -> 'SpinStabilizedKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -1881,17 +1850,15 @@ class SpinStabilizedKey(java.lang.Enum['SpinStabilizedKey']):
     @staticmethod
     def values() -> typing.MutableSequence['SpinStabilizedKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (SpinStabilizedKey c : SpinStabilizedKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (SpinStabilizedKey c : SpinStabilizedKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """

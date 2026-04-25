@@ -15,160 +15,165 @@ import typing
 
 class VectorialCovariance(java.io.Serializable):
     """
-    public classVectorialCovariance extends :class:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements Serializable
     
-        Returns the covariance matrix of the available vectors.
+    Returns the covariance matrix of the available vectors.
     
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
-    def __init__(self, int: int, boolean: bool): ...
+    def __init__(self, dimension: int, isBiasCorrected: bool):
+        """
+        Constructs a VectorialCovariance.
+        
+        Parameters:
+            dimension (int): vectors dimension
+            isBiasCorrected (boolean): if true, computed the unbiased sample covariance, otherwise computes the biased population covariance
+        
+        
+        """
+        ...
     def clear(self) -> None:
         """
-            Clears the internal state of the Statistic
-        
+        Clears the internal state of the Statistic
         """
         ...
     def equals(self, object: typing.Any) -> bool:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals` in
-                class :class:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: equals in class Object
         
         
         """
         ...
     def getN(self) -> int:
         """
-            Get the number of vectors in the sample.
+        Get the number of vectors in the sample.
         
-            Returns:
-                number of vectors in the sample
+        Returns:
+            number of vectors in the sample
         
         
         """
         ...
     def getResult(self) -> org.hipparchus.linear.RealMatrix:
         """
-            Get the covariance matrix.
+        Get the covariance matrix.
         
-            Returns:
-                covariance matrix
+        Returns:
+            covariance matrix
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.hashCode` in
-                class :class:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: hashCode in class Object
         
         
         """
         ...
-    def increment(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
+    def increment(self, v: typing.Union[typing.List[float], jpype.JArray]) -> None:
+        """
+        Add a new vector to the sample.
+        
+        Parameters:
+            v (double[]): vector to add
+        
+        Raises:
+            hipparchus: if the vector does not have the right dimension
+        
+        
+        """
+        ...
 
 class VectorialStorelessStatistic(org.hipparchus.stat.descriptive.StorelessMultivariateStatistic, java.io.Serializable):
     """
-    public classVectorialStorelessStatistic extends :class:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`, :class:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements StorelessMultivariateStatistic, Serializable
     
-        Uses an independent :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic` instance for each component
-        of a vector.
+    Uses an independent StorelessUnivariateStatistic instance for each component of a vector.
     
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
-    def __init__(self, int: int, storelessUnivariateStatistic: org.hipparchus.stat.descriptive.StorelessUnivariateStatistic): ...
+    def __init__(self, dimension: int, univariateStatistic: org.hipparchus.stat.descriptive.StorelessUnivariateStatistic):
+        """
+        Create a new VectorialStorelessStatistic with the given dimension and statistic implementation. A copy of the provided statistic will be created for each component of the vector.
+        
+        Parameters:
+            dimension (int): the vector dimension
+            univariateStatistic (StorelessUnivariateStatistic): the prototype statistic
+        
+        Raises:
+            hipparchus: if dimension < 1
+        
+        
+        """
+        ...
     def clear(self) -> None:
         """
-            Clears the internal state of the statistic.
+        Clears the internal state of the statistic.
         
-            Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic.clear` in
-                interface :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`
+        Specified by: clear in interface StorelessMultivariateStatistic
         
         
         """
         ...
     def equals(self, object: typing.Any) -> bool:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.equals` in
-                class :class:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: equals in class Object
         
         
         """
         ...
     def getDimension(self) -> int:
         """
-            Returns the dimension of the statistic.
+        Returns the dimension of the statistic.
         
-            Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic.getDimension` in
-                interface :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`
+        Specified by: getDimension in interface StorelessMultivariateStatistic
         
-            Returns:
-                the dimension of the statistic
+        Returns:
+            the dimension of the statistic
         
         
         """
         ...
     def getN(self) -> int:
         """
-            Returns the number of values that have been added.
+        Returns the number of values that have been added.
         
-            Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic.getN` in
-                interface :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`
+        Specified by: getN in interface StorelessMultivariateStatistic
         
-            Returns:
-                the number of values.
+        Returns:
+            the number of values.
         
         
         """
         ...
     def getResult(self) -> typing.MutableSequence[float]:
         """
-            Returns the current value of the Statistic.
+        Returns the current value of the Statistic.
         
-            Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic.getResult` in
-                interface :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`
+        Specified by: getResult in interface StorelessMultivariateStatistic
         
-            Returns:
-                value of the statistic, :code:`Double.NaN` if it has been cleared or just instantiated.
+        Returns:
+            value of the statistic, NaN if it has been cleared or just instantiated.
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-        
-            Overrides:
-                :meth:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.hashCode` in
-                class :class:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+        Overrides: hashCode in class Object
         
         
         """
         ...
-    def increment(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
+    def increment(self, d: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
-            Updates the internal state of the statistic to reflect the addition of the new value.
+        Updates the internal state of the statistic to reflect the addition of the new value.
         
-            Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic.increment` in
-                interface :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`
+        Specified by: increment in interface StorelessMultivariateStatistic
         
-            Parameters:
-                d (double[]): the new value
+        Parameters:
+            d (double[]): the new value
         
         
         """

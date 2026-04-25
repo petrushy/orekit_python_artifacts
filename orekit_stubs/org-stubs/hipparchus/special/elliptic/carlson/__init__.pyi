@@ -13,29 +13,18 @@ import typing
 
 class CarlsonEllipticIntegral:
     """
-    public classCarlsonEllipticIntegral extends :class:`~org.hipparchus.special.elliptic.carlson.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Elliptic integrals in Carlson symmetric form.
     
-        Elliptic integrals in Carlson symmetric form.
+    This utility class computes the various symmetric elliptic integrals defined as: \[ \left\{\begin{align} R_F(x,y,z) &= \frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{s(t)}\\ R_J(x,y,z,p) &= \frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{s(t)(t+p)}\\ R_G(x,y,z) &= \frac{1}{4}\int_{0}^{\infty}\frac{1}{s(t)} \left(\frac{x}{t+x}+\frac{y}{t+y}+\frac{z}{t+z}\right)t\mathrm{d}t\\ R_D(x,y,z) &= R_J(x,y,z,z)\\ R_C(x,y) &= R_F(x,y,y) \end{align}\right. \]
     
-        This utility class computes the various symmetric elliptic integrals defined as: \[ \left\{\begin{align} R_F(x,y,z) &=
-        \frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{s(t)}\\ R_J(x,y,z,p) &=
-        \frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{s(t)(t+p)}\\ R_G(x,y,z) &= \frac{1}{4}\int_{0}^{\infty}\frac{1}{s(t)}
-        \left(\frac{x}{t+x}+\frac{y}{t+y}+\frac{z}{t+z}\right)t\mathrm{d}t\\ R_D(x,y,z) &= R_J(x,y,z,z)\\ R_C(x,y) &= R_F(x,y,y)
-        \end{align}\right. \]
+    where \[ s(t) = \sqrt{t+x}\sqrt{t+y}\sqrt{t+z} \]
     
-        where \[ s(t) = \sqrt{t+x}\sqrt{t+y}\sqrt{t+z} \]
+    The algorithms used are based on the duplication method as described in B. C. Carlson 1995 paper "Numerical computation of real or complex elliptic integrals", with the improvements described in the appendix of B. C. Carlson and James FitzSimons 2000 paper "Reduction theorems for elliptic integrands with the square root of two quadratic factors". They are also described in gov of Digital Library of Mathematical Functions.
     
-        The algorithms used are based on the duplication method as described in B. C. Carlson 1995 paper "Numerical computation
-        of real or complex elliptic integrals", with the improvements described in the appendix of B. C. Carlson and James
-        FitzSimons 2000 paper "Reduction theorems for elliptic integrands with the square root of two quadratic factors". They
-        are also described in :meth:`~org.hipparchus.special.elliptic.carlson.https:.dlmf.nist.gov.19.36#i` of Digital Library
-        of Mathematical Functions.
+    Beware that when computing elliptic integrals in the complex plane, many issues arise due to branch cuts. See the hipparchus for a thorough explanation.
     
-        *Beware that when computing elliptic integrals in the complex plane, many issues arise due to branch cuts. See the
-        :meth:`~org.hipparchus.special.elliptic.carlson.https:.www.hipparchus.org.hipparchus` for a thorough explanation.*
-    
-        Since:
-            2.0
+    Since:
+        2.0
     """
     _rC_1__T = typing.TypeVar('_rC_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _rC_3__T = typing.TypeVar('_rC_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -43,29 +32,27 @@ class CarlsonEllipticIntegral:
     @staticmethod
     def rC(double: float, double2: float) -> float:
         """
-            Compute Carlson elliptic integral R :sub:`C` .
+        Compute Carlson elliptic integral R :sub:`C` .
         
-            The Carlson elliptic integral R :sub:`C` is defined as \[
-            R_C(x,y,z)=R_F(x,y,y)=\frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}(t+y)} \]
+        The Carlson elliptic integral R :sub:`C` is defined as \[ R_C(x,y,z)=R_F(x,y,y)=\frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}(t+y)} \]
         
-            Parameters:
-                x (double): first symmetric variable of the integral
-                y (double): second symmetric variable of the integral
+        Parameters:
+            x (double): first symmetric variable of the integral
+            y (double): second symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`C`
+        Returns:
+            Carlson elliptic integral R :sub:`C`
         
-            Compute Carlson elliptic integral R :sub:`C` .
+        Compute Carlson elliptic integral R :sub:`C` .
         
-            The Carlson elliptic integral R :sub:`C` is defined as \[
-            R_C(x,y,z)=R_F(x,y,y)=\frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}(t+y)} \]
+        The Carlson elliptic integral R :sub:`C` is defined as \[ R_C(x,y,z)=R_F(x,y,y)=\frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}(t+y)} \]
         
-            Parameters:
-                x (:class:`~org.hipparchus.complex.Complex`): first symmetric variable of the integral
-                y (:class:`~org.hipparchus.complex.Complex`): second symmetric variable of the integral
+        Parameters:
+            x (Complex): first symmetric variable of the integral
+            y (Complex): second symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`C`
+        Returns:
+            Carlson elliptic integral R :sub:`C`
         
         """
         ...
@@ -73,29 +60,27 @@ class CarlsonEllipticIntegral:
     @staticmethod
     def rC(t: _rC_1__T, t2: _rC_1__T) -> _rC_1__T:
         """
-            Compute Carlson elliptic integral R :sub:`C` .
+        Compute Carlson elliptic integral R :sub:`C` .
         
-            The Carlson elliptic integral R :sub:`C` is defined as \[
-            R_C(x,y,z)=R_F(x,y,y)=\frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}(t+y)} \]
+        The Carlson elliptic integral R :sub:`C` is defined as \[ R_C(x,y,z)=R_F(x,y,y)=\frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}(t+y)} \]
         
-            Parameters:
-                x (T): first symmetric variable of the integral
-                y (T): second symmetric variable of the integral
+        Parameters:
+            x (T): first symmetric variable of the integral
+            y (T): second symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`C`
+        Returns:
+            Carlson elliptic integral R :sub:`C`
         
-            Compute Carlson elliptic integral R :sub:`C` .
+        Compute Carlson elliptic integral R :sub:`C` .
         
-            The Carlson elliptic integral R :sub:`C` is defined as \[
-            R_C(x,y,z)=R_F(x,y,y)=\frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}(t+y)} \]
+        The Carlson elliptic integral R :sub:`C` is defined as \[ R_C(x,y,z)=R_F(x,y,y)=\frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}(t+y)} \]
         
-            Parameters:
-                x (:class:`~org.hipparchus.complex.FieldComplex`<T> x): first symmetric variable of the integral
-                y (:class:`~org.hipparchus.complex.FieldComplex`<T> y): second symmetric variable of the integral
+        Parameters:
+            x (FieldComplex<T> x): first symmetric variable of the integral
+            y (FieldComplex<T> y): second symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`C`
+        Returns:
+            Carlson elliptic integral R :sub:`C`
         
         
         """
@@ -112,31 +97,29 @@ class CarlsonEllipticIntegral:
     @staticmethod
     def rD(double: float, double2: float, double3: float) -> float:
         """
-            Compute Carlson elliptic integral R :sub:`D` .
+        Compute Carlson elliptic integral R :sub:`D` .
         
-            The Carlson elliptic integral R :sub:`D` is defined as \[
-            R_D(x,y,z)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+z)} \]
+        The Carlson elliptic integral R :sub:`D` is defined as \[ R_D(x,y,z)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+z)} \]
         
-            Parameters:
-                x (double): first symmetric variable of the integral
-                y (double): second symmetric variable of the integral
-                z (double): third symmetric variable of the integral
+        Parameters:
+            x (double): first symmetric variable of the integral
+            y (double): second symmetric variable of the integral
+            z (double): third symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`D`
+        Returns:
+            Carlson elliptic integral R :sub:`D`
         
-            Compute Carlson elliptic integral R :sub:`D` .
+        Compute Carlson elliptic integral R :sub:`D` .
         
-            The Carlson elliptic integral R :sub:`D` is defined as \[
-            R_D(x,y,z)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+z)} \]
+        The Carlson elliptic integral R :sub:`D` is defined as \[ R_D(x,y,z)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+z)} \]
         
-            Parameters:
-                x (:class:`~org.hipparchus.complex.Complex`): first symmetric variable of the integral
-                y (:class:`~org.hipparchus.complex.Complex`): second symmetric variable of the integral
-                z (:class:`~org.hipparchus.complex.Complex`): third symmetric variable of the integral
+        Parameters:
+            x (Complex): first symmetric variable of the integral
+            y (Complex): second symmetric variable of the integral
+            z (Complex): third symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`D`
+        Returns:
+            Carlson elliptic integral R :sub:`D`
         
         """
         ...
@@ -144,31 +127,29 @@ class CarlsonEllipticIntegral:
     @staticmethod
     def rD(t: _rD_1__T, t2: _rD_1__T, t3: _rD_1__T) -> _rD_1__T:
         """
-            Compute Carlson elliptic integral R :sub:`D` .
+        Compute Carlson elliptic integral R :sub:`D` .
         
-            The Carlson elliptic integral R :sub:`D` is defined as \[
-            R_D(x,y,z)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+z)} \]
+        The Carlson elliptic integral R :sub:`D` is defined as \[ R_D(x,y,z)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+z)} \]
         
-            Parameters:
-                x (T): first symmetric variable of the integral
-                y (T): second symmetric variable of the integral
-                z (T): third symmetric variable of the integral
+        Parameters:
+            x (T): first symmetric variable of the integral
+            y (T): second symmetric variable of the integral
+            z (T): third symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`D`
+        Returns:
+            Carlson elliptic integral R :sub:`D`
         
-            Compute Carlson elliptic integral R :sub:`D` .
+        Compute Carlson elliptic integral R :sub:`D` .
         
-            The Carlson elliptic integral R :sub:`D` is defined as \[
-            R_D(x,y,z)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+z)} \]
+        The Carlson elliptic integral R :sub:`D` is defined as \[ R_D(x,y,z)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+z)} \]
         
-            Parameters:
-                x (:class:`~org.hipparchus.complex.FieldComplex`<T> x): first symmetric variable of the integral
-                y (:class:`~org.hipparchus.complex.FieldComplex`<T> y): second symmetric variable of the integral
-                z (:class:`~org.hipparchus.complex.FieldComplex`<T> z): third symmetric variable of the integral
+        Parameters:
+            x (FieldComplex<T> x): first symmetric variable of the integral
+            y (FieldComplex<T> y): second symmetric variable of the integral
+            z (FieldComplex<T> z): third symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`D`
+        Returns:
+            Carlson elliptic integral R :sub:`D`
         
         
         """
@@ -185,31 +166,29 @@ class CarlsonEllipticIntegral:
     @staticmethod
     def rF(double: float, double2: float, double3: float) -> float:
         """
-            Compute Carlson elliptic integral R :sub:`F` .
+        Compute Carlson elliptic integral R :sub:`F` .
         
-            The Carlson elliptic integral R :sub:`F` is defined as \[
-            R_F(x,y,z)=\frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}} \]
+        The Carlson elliptic integral R :sub:`F` is defined as \[ R_F(x,y,z)=\frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}} \]
         
-            Parameters:
-                x (double): first symmetric variable of the integral
-                y (double): second symmetric variable of the integral
-                z (double): third symmetric variable of the integral
+        Parameters:
+            x (double): first symmetric variable of the integral
+            y (double): second symmetric variable of the integral
+            z (double): third symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`F`
+        Returns:
+            Carlson elliptic integral R :sub:`F`
         
-            Compute Carlson elliptic integral R :sub:`F` .
+        Compute Carlson elliptic integral R :sub:`F` .
         
-            The Carlson elliptic integral R :sub:`F` is defined as \[
-            R_F(x,y,z)=\frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}} \]
+        The Carlson elliptic integral R :sub:`F` is defined as \[ R_F(x,y,z)=\frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}} \]
         
-            Parameters:
-                x (:class:`~org.hipparchus.complex.Complex`): first symmetric variable of the integral
-                y (:class:`~org.hipparchus.complex.Complex`): second symmetric variable of the integral
-                z (:class:`~org.hipparchus.complex.Complex`): third symmetric variable of the integral
+        Parameters:
+            x (Complex): first symmetric variable of the integral
+            y (Complex): second symmetric variable of the integral
+            z (Complex): third symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`F`
+        Returns:
+            Carlson elliptic integral R :sub:`F`
         
         """
         ...
@@ -217,31 +196,29 @@ class CarlsonEllipticIntegral:
     @staticmethod
     def rF(t: _rF_1__T, t2: _rF_1__T, t3: _rF_1__T) -> _rF_1__T:
         """
-            Compute Carlson elliptic integral R :sub:`F` .
+        Compute Carlson elliptic integral R :sub:`F` .
         
-            The Carlson elliptic integral R :sub:`F` is defined as \[
-            R_F(x,y,z)=\frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}} \]
+        The Carlson elliptic integral R :sub:`F` is defined as \[ R_F(x,y,z)=\frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}} \]
         
-            Parameters:
-                x (T): first symmetric variable of the integral
-                y (T): second symmetric variable of the integral
-                z (T): third symmetric variable of the integral
+        Parameters:
+            x (T): first symmetric variable of the integral
+            y (T): second symmetric variable of the integral
+            z (T): third symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`F`
+        Returns:
+            Carlson elliptic integral R :sub:`F`
         
-            Compute Carlson elliptic integral R :sub:`F` .
+        Compute Carlson elliptic integral R :sub:`F` .
         
-            The Carlson elliptic integral R :sub:`F` is defined as \[
-            R_F(x,y,z)=\frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}} \]
+        The Carlson elliptic integral R :sub:`F` is defined as \[ R_F(x,y,z)=\frac{1}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}} \]
         
-            Parameters:
-                x (:class:`~org.hipparchus.complex.FieldComplex`<T> x): first symmetric variable of the integral
-                y (:class:`~org.hipparchus.complex.FieldComplex`<T> y): second symmetric variable of the integral
-                z (:class:`~org.hipparchus.complex.FieldComplex`<T> z): third symmetric variable of the integral
+        Parameters:
+            x (FieldComplex<T> x): first symmetric variable of the integral
+            y (FieldComplex<T> y): second symmetric variable of the integral
+            z (FieldComplex<T> z): third symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`F`
+        Returns:
+            Carlson elliptic integral R :sub:`F`
         
         
         """
@@ -258,31 +235,29 @@ class CarlsonEllipticIntegral:
     @staticmethod
     def rG(double: float, double2: float, double3: float) -> float:
         """
-            Compute Carlson elliptic integral R :sub:`G` .
+        Compute Carlson elliptic integral R :sub:`G` .
         
-            The Carlson elliptic integral R :sub:`G` is defined as \[ R_{G}(x,y,z)=\frac{1}{4}\int_{0}^{\infty}\frac{1}{s(t)}
-            \left(\frac{x}{t+x}+\frac{y}{t+y}+\frac{z}{t+z}\right)t\mathrm{d}t \]
+        The Carlson elliptic integral R :sub:`G` is defined as \[ R_{G}(x,y,z)=\frac{1}{4}\int_{0}^{\infty}\frac{1}{s(t)} \left(\frac{x}{t+x}+\frac{y}{t+y}+\frac{z}{t+z}\right)t\mathrm{d}t \]
         
-            Parameters:
-                x (double): first symmetric variable of the integral
-                y (double): second symmetric variable of the integral
-                z (double): second symmetric variable of the integral
+        Parameters:
+            x (double): first symmetric variable of the integral
+            y (double): second symmetric variable of the integral
+            z (double): second symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`G`
+        Returns:
+            Carlson elliptic integral R :sub:`G`
         
-            Compute Carlson elliptic integral R :sub:`G` .
+        Compute Carlson elliptic integral R :sub:`G` .
         
-            The Carlson elliptic integral R :sub:`G` is defined as \[ R_{G}(x,y,z)=\frac{1}{4}\int_{0}^{\infty}\frac{1}{s(t)}
-            \left(\frac{x}{t+x}+\frac{y}{t+y}+\frac{z}{t+z}\right)t\mathrm{d}t \]
+        The Carlson elliptic integral R :sub:`G` is defined as \[ R_{G}(x,y,z)=\frac{1}{4}\int_{0}^{\infty}\frac{1}{s(t)} \left(\frac{x}{t+x}+\frac{y}{t+y}+\frac{z}{t+z}\right)t\mathrm{d}t \]
         
-            Parameters:
-                x (:class:`~org.hipparchus.complex.Complex`): first symmetric variable of the integral
-                y (:class:`~org.hipparchus.complex.Complex`): second symmetric variable of the integral
-                z (:class:`~org.hipparchus.complex.Complex`): second symmetric variable of the integral
+        Parameters:
+            x (Complex): first symmetric variable of the integral
+            y (Complex): second symmetric variable of the integral
+            z (Complex): second symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`G`
+        Returns:
+            Carlson elliptic integral R :sub:`G`
         
         """
         ...
@@ -290,31 +265,29 @@ class CarlsonEllipticIntegral:
     @staticmethod
     def rG(t: _rG_1__T, t2: _rG_1__T, t3: _rG_1__T) -> _rG_1__T:
         """
-            Compute Carlson elliptic integral R :sub:`G` .
+        Compute Carlson elliptic integral R :sub:`G` .
         
-            The Carlson elliptic integral R :sub:`G` is defined as \[ R_{G}(x,y,z)=\frac{1}{4}\int_{0}^{\infty}\frac{1}{s(t)}
-            \left(\frac{x}{t+x}+\frac{y}{t+y}+\frac{z}{t+z}\right)t\mathrm{d}t \]
+        The Carlson elliptic integral R :sub:`G` is defined as \[ R_{G}(x,y,z)=\frac{1}{4}\int_{0}^{\infty}\frac{1}{s(t)} \left(\frac{x}{t+x}+\frac{y}{t+y}+\frac{z}{t+z}\right)t\mathrm{d}t \]
         
-            Parameters:
-                x (T): first symmetric variable of the integral
-                y (T): second symmetric variable of the integral
-                z (T): second symmetric variable of the integral
+        Parameters:
+            x (T): first symmetric variable of the integral
+            y (T): second symmetric variable of the integral
+            z (T): second symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`G`
+        Returns:
+            Carlson elliptic integral R :sub:`G`
         
-            Compute Carlson elliptic integral R :sub:`G` .
+        Compute Carlson elliptic integral R :sub:`G` .
         
-            The Carlson elliptic integral R :sub:`G` is defined as \[ R_{G}(x,y,z)=\frac{1}{4}\int_{0}^{\infty}\frac{1}{s(t)}
-            \left(\frac{x}{t+x}+\frac{y}{t+y}+\frac{z}{t+z}\right)t\mathrm{d}t \]
+        The Carlson elliptic integral R :sub:`G` is defined as \[ R_{G}(x,y,z)=\frac{1}{4}\int_{0}^{\infty}\frac{1}{s(t)} \left(\frac{x}{t+x}+\frac{y}{t+y}+\frac{z}{t+z}\right)t\mathrm{d}t \]
         
-            Parameters:
-                x (:class:`~org.hipparchus.complex.FieldComplex`<T> x): first symmetric variable of the integral
-                y (:class:`~org.hipparchus.complex.FieldComplex`<T> y): second symmetric variable of the integral
-                z (:class:`~org.hipparchus.complex.FieldComplex`<T> z): second symmetric variable of the integral
+        Parameters:
+            x (FieldComplex<T> x): first symmetric variable of the integral
+            y (FieldComplex<T> y): second symmetric variable of the integral
+            z (FieldComplex<T> z): second symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`G`
+        Returns:
+            Carlson elliptic integral R :sub:`G`
         
         
         """
@@ -333,63 +306,59 @@ class CarlsonEllipticIntegral:
     @staticmethod
     def rJ(double: float, double2: float, double3: float, double4: float) -> float:
         """
-            Compute Carlson elliptic integral R :sub:`J` .
+        Compute Carlson elliptic integral R :sub:`J` .
         
-            The Carlson elliptic integral R :sub:`J` is defined as \[
-            R_J(x,y,z,p)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+p)} \]
+        The Carlson elliptic integral R :sub:`J` is defined as \[ R_J(x,y,z,p)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+p)} \]
         
-            Parameters:
-                x (double): first symmetric variable of the integral
-                y (double): second symmetric variable of the integral
-                z (double): third symmetric variable of the integral
-                p (double): fourth *not* symmetric variable of the integral
+        Parameters:
+            x (double): first symmetric variable of the integral
+            y (double): second symmetric variable of the integral
+            z (double): third symmetric variable of the integral
+            p (double): fourth not symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`J`
+        Returns:
+            Carlson elliptic integral R :sub:`J`
         
-            Compute Carlson elliptic integral R :sub:`J` .
+        Compute Carlson elliptic integral R :sub:`J` .
         
-            The Carlson elliptic integral R :sub:`J` is defined as \[
-            R_J(x,y,z,p)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+p)} \]
+        The Carlson elliptic integral R :sub:`J` is defined as \[ R_J(x,y,z,p)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+p)} \]
         
-            Parameters:
-                x (double): first symmetric variable of the integral
-                y (double): second symmetric variable of the integral
-                z (double): third symmetric variable of the integral
-                p (double): fourth *not* symmetric variable of the integral
-                delta (double): precomputed value of (p-x)(p-y)(p-z)
+        Parameters:
+            x (double): first symmetric variable of the integral
+            y (double): second symmetric variable of the integral
+            z (double): third symmetric variable of the integral
+            p (double): fourth not symmetric variable of the integral
+            delta (double): precomputed value of (p-x)(p-y)(p-z)
         
-            Returns:
-                Carlson elliptic integral R :sub:`J`
+        Returns:
+            Carlson elliptic integral R :sub:`J`
         
-            Compute Carlson elliptic integral R :sub:`J` .
+        Compute Carlson elliptic integral R :sub:`J` .
         
-            The Carlson elliptic integral R :sub:`J` is defined as \[
-            R_J(x,y,z,p)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+p)} \]
+        The Carlson elliptic integral R :sub:`J` is defined as \[ R_J(x,y,z,p)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+p)} \]
         
-            Parameters:
-                x (:class:`~org.hipparchus.complex.Complex`): first symmetric variable of the integral
-                y (:class:`~org.hipparchus.complex.Complex`): second symmetric variable of the integral
-                z (:class:`~org.hipparchus.complex.Complex`): third symmetric variable of the integral
-                p (:class:`~org.hipparchus.complex.Complex`): fourth *not* symmetric variable of the integral
+        Parameters:
+            x (Complex): first symmetric variable of the integral
+            y (Complex): second symmetric variable of the integral
+            z (Complex): third symmetric variable of the integral
+            p (Complex): fourth not symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`J`
+        Returns:
+            Carlson elliptic integral R :sub:`J`
         
-            Compute Carlson elliptic integral R :sub:`J` .
+        Compute Carlson elliptic integral R :sub:`J` .
         
-            The Carlson elliptic integral R :sub:`J` is defined as \[
-            R_J(x,y,z,p)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+p)} \]
+        The Carlson elliptic integral R :sub:`J` is defined as \[ R_J(x,y,z,p)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+p)} \]
         
-            Parameters:
-                x (:class:`~org.hipparchus.complex.Complex`): first symmetric variable of the integral
-                y (:class:`~org.hipparchus.complex.Complex`): second symmetric variable of the integral
-                z (:class:`~org.hipparchus.complex.Complex`): third symmetric variable of the integral
-                p (:class:`~org.hipparchus.complex.Complex`): fourth *not* symmetric variable of the integral
-                delta (:class:`~org.hipparchus.complex.Complex`): precomputed value of (p-x)(p-y)(p-z)
+        Parameters:
+            x (Complex): first symmetric variable of the integral
+            y (Complex): second symmetric variable of the integral
+            z (Complex): third symmetric variable of the integral
+            p (Complex): fourth not symmetric variable of the integral
+            delta (Complex): precomputed value of (p-x)(p-y)(p-z)
         
-            Returns:
-                Carlson elliptic integral R :sub:`J`
+        Returns:
+            Carlson elliptic integral R :sub:`J`
         
         """
         ...
@@ -400,69 +369,65 @@ class CarlsonEllipticIntegral:
     @staticmethod
     def rJ(t: _rJ_2__T, t2: _rJ_2__T, t3: _rJ_2__T, t4: _rJ_2__T) -> _rJ_2__T:
         """
-            Compute Carlson elliptic integral R :sub:`J` .
+        Compute Carlson elliptic integral R :sub:`J` .
         
-            The Carlson elliptic integral R :sub:`J` is defined as \[
-            R_J(x,y,z,p)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+p)} \]
+        The Carlson elliptic integral R :sub:`J` is defined as \[ R_J(x,y,z,p)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+p)} \]
         
-            Parameters:
-                x (T): first symmetric variable of the integral
-                y (T): second symmetric variable of the integral
-                z (T): third symmetric variable of the integral
-                p (T): fourth *not* symmetric variable of the integral
+        Parameters:
+            x (T): first symmetric variable of the integral
+            y (T): second symmetric variable of the integral
+            z (T): third symmetric variable of the integral
+            p (T): fourth not symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`J`
+        Returns:
+            Carlson elliptic integral R :sub:`J`
         
-            Compute Carlson elliptic integral R :sub:`J` .
+        Compute Carlson elliptic integral R :sub:`J` .
         
-            The Carlson elliptic integral R :sub:`J` is defined as \[
-            R_J(x,y,z,p)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+p)} \]
+        The Carlson elliptic integral R :sub:`J` is defined as \[ R_J(x,y,z,p)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+p)} \]
         
-            Parameters:
-                x (T): first symmetric variable of the integral
-                y (T): second symmetric variable of the integral
-                z (T): third symmetric variable of the integral
-                p (T): fourth *not* symmetric variable of the integral
-                delta (T): precomputed value of (p-x)(p-y)(p-z)
+        Parameters:
+            x (T): first symmetric variable of the integral
+            y (T): second symmetric variable of the integral
+            z (T): third symmetric variable of the integral
+            p (T): fourth not symmetric variable of the integral
+            delta (T): precomputed value of (p-x)(p-y)(p-z)
         
-            Returns:
-                Carlson elliptic integral R :sub:`J`
+        Returns:
+            Carlson elliptic integral R :sub:`J`
         
-            Compute Carlson elliptic integral R :sub:`J` .
+        Compute Carlson elliptic integral R :sub:`J` .
         
-            The Carlson elliptic integral R :sub:`J` is defined as \[
-            R_J(x,y,z,p)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+p)} \]
+        The Carlson elliptic integral R :sub:`J` is defined as \[ R_J(x,y,z,p)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+p)} \]
         
-            Parameters:
-                x (:class:`~org.hipparchus.complex.FieldComplex`<T> x): first symmetric variable of the integral
-                y (:class:`~org.hipparchus.complex.FieldComplex`<T> y): second symmetric variable of the integral
-                z (:class:`~org.hipparchus.complex.FieldComplex`<T> z): third symmetric variable of the integral
-                p (:class:`~org.hipparchus.complex.FieldComplex`<T> p): fourth *not* symmetric variable of the integral
+        Parameters:
+            x (FieldComplex<T> x): first symmetric variable of the integral
+            y (FieldComplex<T> y): second symmetric variable of the integral
+            z (FieldComplex<T> z): third symmetric variable of the integral
+            p (FieldComplex<T> p): fourth not symmetric variable of the integral
         
-            Returns:
-                Carlson elliptic integral R :sub:`J`
+        Returns:
+            Carlson elliptic integral R :sub:`J`
         
         """
         ...
     @typing.overload
     @staticmethod
-    def rJ(t: _rJ_3__T, t2: _rJ_3__T, t3: _rJ_3__T, t4: _rJ_3__T, t5: _rJ_3__T) -> _rJ_3__T:
+    def rJ(x: _rJ_3__T, y: _rJ_3__T, z: _rJ_3__T, p: _rJ_3__T, delta: _rJ_3__T) -> _rJ_3__T:
         """
-            Compute Carlson elliptic integral R :sub:`J` .
+        Compute Carlson elliptic integral R :sub:`J` .
         
-            The Carlson elliptic integral R :sub:`J` is defined as \[
-            R_J(x,y,z,p)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+p)} \]
+        The Carlson elliptic integral R :sub:`J` is defined as \[ R_J(x,y,z,p)=\frac{3}{2}\int_{0}^{\infty}\frac{\mathrm{d}t}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}(t+p)} \]
         
-            Parameters:
-                x (:class:`~org.hipparchus.complex.FieldComplex`<T> x): first symmetric variable of the integral
-                y (:class:`~org.hipparchus.complex.FieldComplex`<T> y): second symmetric variable of the integral
-                z (:class:`~org.hipparchus.complex.FieldComplex`<T> z): third symmetric variable of the integral
-                p (:class:`~org.hipparchus.complex.FieldComplex`<T> p): fourth *not* symmetric variable of the integral
-                delta (:class:`~org.hipparchus.complex.FieldComplex`<T> delta): precomputed value of (p-x)(p-y)(p-z)
+        Parameters:
+            x (FieldComplex<T> x): first symmetric variable of the integral
+            y (FieldComplex<T> y): second symmetric variable of the integral
+            z (FieldComplex<T> z): third symmetric variable of the integral
+            p (FieldComplex<T> p): fourth not symmetric variable of the integral
+            delta (FieldComplex<T> delta): precomputed value of (p-x)(p-y)(p-z)
         
-            Returns:
-                Carlson elliptic integral R :sub:`J`
+        Returns:
+            Carlson elliptic integral R :sub:`J`
         
         
         """

@@ -17,40 +17,71 @@ import typing
 
 class AstronomicalAmplitudeReader(org.orekit.data.DataLoader):
     """
-    public class AstronomicalAmplitudeReader extends :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataLoader`
+    Parser for tides astronomical amplitude H :sub:`f` .
     
-        Parser for tides astronomical amplitude H :sub:`f` .
-    
-        Since:
-            6.1
+    Since:
+        6.1
     """
-    def __init__(self, string: str, int: int, int2: int, int3: int, double: float): ...
-    def getAstronomicalAmplitudesMap(self) -> java.util.Map[int, float]: ...
-    def getSupportedNames(self) -> str:
+    def __init__(self, supportedNames: str, columns: int, columnDoodson: int, columnHf: int, scale: float):
         """
-            Get the regular expression for supported files names.
+        Simple constructor.
         
-            Returns:
-                regular expression for supported files names
+        Parameters:
+            supportedNames (String): regular expression for supported files names
+            columns (int): number of columns
+            columnDoodson (int): Doodson number column (counting from 1)
+            columnHf (int): H :sub:`f` column (counting from 1)
+            scale (double): scaling factor for astronomical amplitude
         
         
         """
         ...
-    def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
+    def getAstronomicalAmplitudesMap(self) -> java.util.Map[int, float]:
+        """
+        Get astronomical amplitudes map.
+        
+        Returns:
+            an unmodifiable map containing astronomical amplitudes H :sub:`f` from a Doodson number key
+        
+        
+        """
+        ...
+    def getSupportedNames(self) -> str:
+        """
+        Get the regular expression for supported files names.
+        
+        Returns:
+            regular expression for supported files names
+        
+        
+        """
+        ...
+    def loadData(self, input: java.io.InputStream, name: str) -> None:
+        """
+        Load data from a stream.
+        
+        Specified by: loadData in interface DataLoader
+        
+        Parameters:
+            input (InputStream): data input stream
+            name (String): name of the file (or zip entry)
+        
+        Raises:
+            IOException: if data can't be read
+        
+        
+        """
+        ...
     def stillAcceptsData(self) -> bool:
         """
-            Check if the loader still accepts new data.
+        Check if the loader still accepts new data.
         
-            This method is used to speed up data loading by interrupting crawling the data sets as soon as a loader has found the
-            data it was waiting for. For loaders that can merge data from any number of sources (for example JPL ephemerides or
-            Earth Orientation Parameters that are split among several files), this method should always return true to make sure no
-            data is left over.
+        This method is used to speed up data loading by interrupting crawling the data sets as soon as a loader has found the data it was waiting for. For loaders that can merge data from any number of sources (for example JPL ephemerides or Earth Orientation Parameters that are split among several files), this method should always return true to make sure no data is left over.
         
-            Specified by:
-                :meth:`~org.orekit.data.DataLoader.stillAcceptsData` in interface :class:`~org.orekit.data.DataLoader`
+        Specified by: stillAcceptsData in interface DataLoader
         
-            Returns:
-                true while the loader still accepts new data
+        Returns:
+            true while the loader still accepts new data
         
         
         """
@@ -58,139 +89,262 @@ class AstronomicalAmplitudeReader(org.orekit.data.DataLoader):
 
 class GravityFieldFactory:
     """
-    public class GravityFieldFactory extends :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    
-        Factory used to read gravity field files in several supported formats.
+    Factory used to read gravity field files in several supported formats.
     """
     ICGEM_FILENAME: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ICGEM_FILENAME
+    Default regular expression for ICGEM files.
     
-        Default regular expression for ICGEM files.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     SHM_FILENAME: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SHM_FILENAME
+    Default regular expression for SHM files.
     
-        Default regular expression for SHM files.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     EGM_FILENAME: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` EGM_FILENAME
+    Default regular expression for EGM files.
     
-        Default regular expression for EGM files.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     GRGS_FILENAME: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` GRGS_FILENAME
+    Default regular expression for GRGS files.
     
-        Default regular expression for GRGS files.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     SHA_FILENAME: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SHA_FILENAME
+    Default regular expression for SHA files.
     
-        Default regular expression for SHA files.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     FES_CNM_SNM_FILENAME: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` FES_CNM_SNM_FILENAME
+    Default regular expression for FES Cnm, Snm tides files.
     
-        Default regular expression for FES Cnm, Snm tides files.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     FES_CHAT_EPSILON_FILENAME: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` FES_CHAT_EPSILON_FILENAME
+    Default regular expression for FES C hat and epsilon tides files.
     
-        Default regular expression for FES C hat and epsilon tides files.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     FES_HF_FILENAME: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` FES_HF_FILENAME
+    Default regular expression for FES Hf tides files.
     
-        Default regular expression for FES Hf tides files.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     @staticmethod
-    def addDefaultOceanTidesReaders() -> None: ...
+    def addDefaultOceanTidesReaders() -> None:
+        """
+        Add the default READERS for ocean tides.
+        
+        The default READERS supports files similar to the fes2004_Cnm-Snm.dat and fes2004.dat as published by IERS, using the configureOceanLoadDeformationCoefficients ocean load deformation coefficients, which by default are the IERS 2010 coefficients, which are limited to degree 6. If higher degree coefficients are needed, the configureOceanLoadDeformationCoefficients method can be called prior to loading the ocean tides model with the GEGOUT computed by Pascal Gégout.
+        
+        WARNING: the files referenced in the published conventions have some errors. These errors have been corrected and the updated files can be found here: ` http://tai.bipm.org/iers/convupdt/convupdt_c6.html <http://tai.bipm.org/iers/convupdt/convupdt_c6.html>`.
+        
+        Also see:
+            addPotentialCoefficientsReader,
+            clearPotentialCoefficientsReaders,
+            configureOceanLoadDeformationCoefficients,
+            getOceanLoadDeformationCoefficients
+        
+        
+        """
+        ...
     @staticmethod
-    def addDefaultPotentialCoefficientsReaders() -> None: ...
+    def addDefaultPotentialCoefficientsReaders() -> None:
+        """
+        Add the default readers for gravity fields.
+        
+        The default READERS supports ICGEM, SHM, EGM, GRGS and SHA formats with the default names ICGEM_FILENAME, SHM_FILENAME, EGM_FILENAME, GRGS_FILENAME, SHA_FILENAME and don't allow missing coefficients.
+        
+        Also see:
+            addPotentialCoefficientsReader,
+            clearPotentialCoefficientsReaders
+        
+        
+        """
+        ...
     @staticmethod
-    def addOceanTidesReader(oceanTidesReader: 'OceanTidesReader') -> None: ...
+    def addOceanTidesReader(reader: 'OceanTidesReader') -> None:
+        """
+        Add a reader for ocean tides.
+        
+        Parameters:
+            reader (OceanTidesReader): custom reader to add for the gravity field
+        
+        Also see:
+            addDefaultPotentialCoefficientsReaders,
+            clearPotentialCoefficientsReaders
+        
+        
+        """
+        ...
     @staticmethod
-    def addPotentialCoefficientsReader(potentialCoefficientsReader: 'PotentialCoefficientsReader') -> None: ...
+    def addPotentialCoefficientsReader(reader: 'PotentialCoefficientsReader') -> None:
+        """
+        Add a reader for gravity fields.
+        
+        Parameters:
+            reader (PotentialCoefficientsReader): custom reader to add for the gravity field
+        
+        Also see:
+            addDefaultPotentialCoefficientsReaders,
+            clearPotentialCoefficientsReaders
+        
+        
+        """
+        ...
     @staticmethod
-    def clearOceanTidesReaders() -> None: ...
+    def clearOceanTidesReaders() -> None:
+        """
+        Clear ocean tides readers.
+        
+        Also see:
+            addPotentialCoefficientsReader,
+            addDefaultPotentialCoefficientsReaders
+        
+        
+        """
+        ...
     @staticmethod
-    def clearPotentialCoefficientsReaders() -> None: ...
+    def clearPotentialCoefficientsReaders() -> None:
+        """
+        Clear gravity field readers.
+        
+        Also see:
+            addPotentialCoefficientsReader,
+            addDefaultPotentialCoefficientsReaders
+        
+        
+        """
+        ...
     @staticmethod
-    def configureOceanLoadDeformationCoefficients(oceanLoadDeformationCoefficients: 'OceanLoadDeformationCoefficients') -> None: ...
+    def configureOceanLoadDeformationCoefficients(oldc: 'OceanLoadDeformationCoefficients') -> None:
+        """
+        Configure ocean load deformation coefficients.
+        
+        Parameters:
+            oldc (OceanLoadDeformationCoefficients): ocean load deformation coefficients
+        
+        Also see:
+            getOceanLoadDeformationCoefficients
+        
+        
+        """
+        ...
     @staticmethod
-    def getConstantNormalizedProvider(int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'NormalizedSphericalHarmonicsProvider': ...
+    def getConstantNormalizedProvider(degree: int, order: int, freezingDate: org.orekit.time.AbsoluteDate) -> 'NormalizedSphericalHarmonicsProvider':
+        """
+        Get the constant gravity field coefficients provider from the first supported file.
+        
+        If no PotentialCoefficientsReader has been added by calling addPotentialCoefficientsReader or if clearPotentialCoefficientsReaders has been called afterwards, the addDefaultPotentialCoefficientsReaders method will be called automatically.
+        
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
+            freezingDate (AbsoluteDate): freezing epoch
+        
+        Returns:
+            a gravity field coefficients provider containing already loaded data
+        
+        Since:
+            12.0
+        
+        Also see:
+            getNormalizedProvider
+        
+        
+        """
+        ...
     @staticmethod
-    def getConstantUnnormalizedProvider(int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'UnnormalizedSphericalHarmonicsProvider': ...
+    def getConstantUnnormalizedProvider(degree: int, order: int, freezingDate: org.orekit.time.AbsoluteDate) -> 'UnnormalizedSphericalHarmonicsProvider':
+        """
+        Get the constant gravity field coefficients provider from the first supported file.
+        
+        If no PotentialCoefficientsReader has been added by calling addPotentialCoefficientsReader or if clearPotentialCoefficientsReaders has been called afterwards, the addDefaultPotentialCoefficientsReaders method will be called automatically.
+        
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
+            freezingDate (AbsoluteDate): freezing epoch
+        
+        Returns:
+            a gravity field coefficients provider containing already loaded data
+        
+        Since:
+            6.0
+        
+        Also see:
+            getUnnormalizedProvider
+        
+        
+        """
+        ...
     @staticmethod
-    def getGravityFields() -> 'LazyLoadedGravityFields': ...
+    def getGravityFields() -> 'LazyLoadedGravityFields':
+        """
+        Get the instance of GravityFields that is called by the static methods of this class.
+        
+        Returns:
+            the gravity fields used by this factory.
+        
+        Since:
+            10.1
+        
+        
+        """
+        ...
     @typing.overload
     @staticmethod
-    def getNormalizedProvider(double: float, double2: float, tideSystem: 'TideSystem', doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> 'NormalizedSphericalHarmonicsProvider':
+    def getNormalizedProvider(ae: float, mu: float, tideSystem: 'TideSystem', normalizedC: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], normalizedS: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> 'NormalizedSphericalHarmonicsProvider':
         """
-            Create a time-independent :class:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider` from
-            canonical coefficients.
+        Create a time-independent NormalizedSphericalHarmonicsProvider from canonical coefficients.
         
-            Note that contrary to the other factory method, this one does not read any data, it simply uses the provided data
+        Note that contrary to the other factory method, this one does not read any data, it simply uses the provided data
         
-            Parameters:
-                ae (double): central body reference radius
-                mu (double): central body attraction coefficient
-                tideSystem (:class:`~org.orekit.forces.gravity.potential.TideSystem`): tide system
-                normalizedC (double[][]): normalized tesseral-sectorial coefficients (cosine part)
-                normalizedS (double[][]): normalized tesseral-sectorial coefficients (sine part)
+        Parameters:
+            ae (double): central body reference radius
+            mu (double): central body attraction coefficient
+            tideSystem (TideSystem): tide system
+            normalizedC (double[][]): normalized tesseral-sectorial coefficients (cosine part)
+            normalizedS (double[][]): normalized tesseral-sectorial coefficients (sine part)
         
-            Returns:
-                provider for normalized coefficients
+        Returns:
+            provider for normalized coefficients
         
-            Since:
-                6.0
+        Since:
+            6.0
         
         """
         ...
@@ -199,70 +353,102 @@ class GravityFieldFactory:
     def getNormalizedProvider(int: int, int2: int) -> 'NormalizedSphericalHarmonicsProvider': ...
     @typing.overload
     @staticmethod
-    def getNormalizedProvider(unnormalizedSphericalHarmonicsProvider: 'UnnormalizedSphericalHarmonicsProvider') -> 'NormalizedSphericalHarmonicsProvider':
+    def getNormalizedProvider(unnormalized: 'UnnormalizedSphericalHarmonicsProvider') -> 'NormalizedSphericalHarmonicsProvider':
         """
-            Create a :class:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider` from an
-            :class:`~org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider`.
+        Create a NormalizedSphericalHarmonicsProvider from an UnnormalizedSphericalHarmonicsProvider.
         
-            Note that contrary to the other factory method, this one does not read any data, it simply uses the provided data.
+        Note that contrary to the other factory method, this one does not read any data, it simply uses the provided data.
         
-            Parameters:
-                unnormalized (:class:`~org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider`): provider to normalize
+        Parameters:
+            unnormalized (UnnormalizedSphericalHarmonicsProvider): provider to normalize
         
-            Returns:
-                provider for normalized coefficients
+        Returns:
+            provider for normalized coefficients
         
-            Since:
-                6.0
+        Since:
+            6.0
         
         
         """
         ...
     @staticmethod
-    def getOceanLoadDeformationCoefficients() -> 'OceanLoadDeformationCoefficients': ...
-    @staticmethod
-    def getOceanTidesWaves(int: int, int2: int) -> java.util.List['OceanTidesWave']: ...
-    @staticmethod
-    def getUnnormalizationFactors(int: int, int2: int) -> typing.MutableSequence[typing.MutableSequence[float]]:
+    def getOceanLoadDeformationCoefficients() -> 'OceanLoadDeformationCoefficients':
         """
-            Get a un-normalization factors array.
+        Get the configured ocean load deformation coefficients.
         
-            Un-normalized coefficients are obtained by multiplying normalized coefficients by the factors array elements.
+        If configureOceanLoadDeformationCoefficients has never been called, the default value will be the IERS_2010 coefficients.
         
-            Parameters:
-                degree (int): maximal degree
-                order (int): maximal order
+        Returns:
+            ocean load deformation coefficients
         
-            Returns:
-                triangular un-normalization factors array
+        Also see:
+            configureOceanLoadDeformationCoefficients
         
-            Since:
-                6.0
+        
+        """
+        ...
+    @staticmethod
+    def getOceanTidesWaves(degree: int, order: int) -> java.util.List['OceanTidesWave']:
+        """
+        Get the ocean tides waves from the first supported file.
+        
+        If no OceanTidesReader has been added by calling addOceanTidesReader or if clearOceanTidesReaders has been called afterwards, the addDefaultOceanTidesReaders method will be called automatically.
+        
+        WARNING: as of 2013-11-17, there seem to be an inconsistency when loading one or the other file, for wave Sa (Doodson number 56.554) and P1 (Doodson number 163.555). The sign of the coefficients are different. We think the problem lies in the input files from IERS and not in the conversion (which works for all other waves), but cannot be sure. For this reason, ocean tides are still considered experimental at this date.
+        
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
+        
+        Returns:
+            list of tides waves containing already loaded data
+        
+        Since:
+            6.1
+        
+        
+        """
+        ...
+    @staticmethod
+    def getUnnormalizationFactors(degree: int, order: int) -> typing.MutableSequence[typing.MutableSequence[float]]:
+        """
+        Get a un-normalization factors array.
+        
+        Un-normalized coefficients are obtained by multiplying normalized coefficients by the factors array elements.
+        
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
+        
+        Returns:
+            triangular un-normalization factors array
+        
+        Since:
+            6.0
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def getUnnormalizedProvider(double: float, double2: float, tideSystem: 'TideSystem', doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> 'UnnormalizedSphericalHarmonicsProvider':
+    def getUnnormalizedProvider(ae: float, mu: float, tideSystem: 'TideSystem', unnormalizedC: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], unnormalizedS: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> 'UnnormalizedSphericalHarmonicsProvider':
         """
-            Create a time-independent :class:`~org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider` from
-            canonical coefficients.
+        Create a time-independent UnnormalizedSphericalHarmonicsProvider from canonical coefficients.
         
-            Note that contrary to the other factory method, this one does not read any data, it simply uses the provided data
+        Note that contrary to the other factory method, this one does not read any data, it simply uses the provided data
         
-            Parameters:
-                ae (double): central body reference radius
-                mu (double): central body attraction coefficient
-                tideSystem (:class:`~org.orekit.forces.gravity.potential.TideSystem`): tide system
-                unnormalizedC (double[][]): un-normalized tesseral-sectorial coefficients (cosine part)
-                unnormalizedS (double[][]): un-normalized tesseral-sectorial coefficients (sine part)
+        Parameters:
+            ae (double): central body reference radius
+            mu (double): central body attraction coefficient
+            tideSystem (TideSystem): tide system
+            unnormalizedC (double[][]): un-normalized tesseral-sectorial coefficients (cosine part)
+            unnormalizedS (double[][]): un-normalized tesseral-sectorial coefficients (sine part)
         
-            Returns:
-                provider for un-normalized coefficients
+        Returns:
+            provider for un-normalized coefficients
         
-            Since:
-                6.0
+        Since:
+            6.0
         
         """
         ...
@@ -271,119 +457,152 @@ class GravityFieldFactory:
     def getUnnormalizedProvider(int: int, int2: int) -> 'UnnormalizedSphericalHarmonicsProvider': ...
     @typing.overload
     @staticmethod
-    def getUnnormalizedProvider(normalizedSphericalHarmonicsProvider: 'NormalizedSphericalHarmonicsProvider') -> 'UnnormalizedSphericalHarmonicsProvider':
+    def getUnnormalizedProvider(normalized: 'NormalizedSphericalHarmonicsProvider') -> 'UnnormalizedSphericalHarmonicsProvider':
         """
-            Create an :class:`~org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider` from a
-            :class:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider`.
+        Create an UnnormalizedSphericalHarmonicsProvider from a NormalizedSphericalHarmonicsProvider.
         
-            Note that contrary to the other factory method, this one does not read any data, it simply uses the provided data.
+        Note that contrary to the other factory method, this one does not read any data, it simply uses the provided data.
         
-            Parameters:
-                normalized (:class:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider`): provider to un-normalize
+        Parameters:
+            normalized (NormalizedSphericalHarmonicsProvider): provider to un-normalize
         
-            Returns:
-                provider for un-normalized coefficients
+        Returns:
+            provider for un-normalized coefficients
         
-            Since:
-                6.0
+        Since:
+            6.0
         
         
         """
         ...
     @staticmethod
-    def readGravityField(int: int, int2: int) -> 'PotentialCoefficientsReader': ...
+    def readGravityField(maxParseDegree: int, maxParseOrder: int) -> 'PotentialCoefficientsReader':
+        """
+        Read a gravity field coefficients provider from the first supported file.
+        
+        If no PotentialCoefficientsReader has been added by calling addPotentialCoefficientsReader or if clearPotentialCoefficientsReaders has been called afterwards, the addDefaultPotentialCoefficientsReaders method will be called automatically.
+        
+        Parameters:
+            maxParseDegree (int): maximal degree to parse
+            maxParseOrder (int): maximal order to parse
+        
+        Returns:
+            a reader containing already loaded data
+        
+        Since:
+            6.0
+        
+        
+        """
+        ...
 
 class GravityFields:
     """
-    public interface GravityFields
+    Defines methods for obtaining gravity fields.
     
-        Defines methods for obtaining gravity fields.
+    Since:
+        10.1
     
-        Since:
-            10.1
-    
-        Also see:
-            :class:`~org.orekit.forces.gravity.potential.GravityFieldFactory`
+    Also see:
+        GravityFieldFactory
     """
-    def getConstantNormalizedProvider(self, int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'NormalizedSphericalHarmonicsProvider':
+    def getConstantNormalizedProvider(self, degree: int, order: int, freezingDate: org.orekit.time.AbsoluteDate) -> 'NormalizedSphericalHarmonicsProvider':
         """
-            Get a constant gravity field normalized coefficients provider frozen at a given epoch.
+        Get a constant gravity field normalized coefficients provider frozen at a given epoch.
         
-            Parameters:
-                degree (int): maximal degree
-                order (int): maximal order
-                freezingDate (:class:`~org.orekit.time.AbsoluteDate`): freezing epoch
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
+            freezingDate (AbsoluteDate): freezing epoch
         
-            Returns:
-                a gravity field coefficients provider containing already loaded data
+        Returns:
+            a gravity field coefficients provider containing already loaded data
         
-            Since:
-                12.0
+        Since:
+            12.0
         
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getNormalizedProvider`
-        
-        
-        """
-        ...
-    def getConstantUnnormalizedProvider(self, int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'UnnormalizedSphericalHarmonicsProvider':
-        """
-            Get a constant gravity field unnormalized coefficients provider frozen at a given epoch.
-        
-            Parameters:
-                degree (int): maximal degree
-                order (int): maximal order
-                freezingDate (:class:`~org.orekit.time.AbsoluteDate`): freezing epoch
-        
-            Returns:
-                a gravity field coefficients provider containing already loaded data
-        
-            Since:
-                12.0
-        
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getUnnormalizedProvider`
+        Also see:
+            getNormalizedProvider
         
         
         """
         ...
-    def getNormalizedProvider(self, int: int, int2: int) -> 'NormalizedSphericalHarmonicsProvider':
+    def getConstantUnnormalizedProvider(self, degree: int, order: int, freezingDate: org.orekit.time.AbsoluteDate) -> 'UnnormalizedSphericalHarmonicsProvider':
         """
-            Get a gravity field normalized coefficients provider.
+        Get a constant gravity field unnormalized coefficients provider frozen at a given epoch.
         
-            Parameters:
-                degree (int): maximal degree
-                order (int): maximal order
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
+            freezingDate (AbsoluteDate): freezing epoch
         
-            Returns:
-                a gravity field coefficients provider containing already loaded data
+        Returns:
+            a gravity field coefficients provider containing already loaded data
         
-            Since:
-                6.0
+        Since:
+            12.0
         
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantNormalizedProvider`
+        Also see:
+            getUnnormalizedProvider
         
         
         """
         ...
-    def getOceanTidesWaves(self, int: int, int2: int) -> java.util.List['OceanTidesWave']: ...
-    def getUnnormalizedProvider(self, int: int, int2: int) -> 'UnnormalizedSphericalHarmonicsProvider':
+    def getNormalizedProvider(self, degree: int, order: int) -> 'NormalizedSphericalHarmonicsProvider':
         """
-            Get a gravity field unnormalized coefficients provider.
+        Get a gravity field normalized coefficients provider.
         
-            Parameters:
-                degree (int): maximal degree
-                order (int): maximal order
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
         
-            Returns:
-                a gravity field coefficients provider containing already loaded data
+        Returns:
+            a gravity field coefficients provider containing already loaded data
         
-            Since:
-                6.0
+        Since:
+            6.0
         
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantUnnormalizedProvider`
+        Also see:
+            getConstantNormalizedProvider
+        
+        
+        """
+        ...
+    def getOceanTidesWaves(self, degree: int, order: int) -> java.util.List['OceanTidesWave']:
+        """
+        Get the ocean tides waves.
+        
+        WARNING: as of 2013-11-17, there seem to be an inconsistency when loading one or the other file, for wave Sa (Doodson number 56.554) and P1 (Doodson number 163.555). The sign of the coefficients are different. We think the problem lies in the input files from IERS and not in the conversion (which works for all other waves), but cannot be sure. For this reason, ocean tides are still considered experimental at this date.
+        
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
+        
+        Returns:
+            list of tides waves containing already loaded data
+        
+        Since:
+            6.1
+        
+        
+        """
+        ...
+    def getUnnormalizedProvider(self, degree: int, order: int) -> 'UnnormalizedSphericalHarmonicsProvider':
+        """
+        Get a gravity field unnormalized coefficients provider.
+        
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
+        
+        Returns:
+            a gravity field coefficients provider containing already loaded data
+        
+        Since:
+            6.0
+        
+        Also see:
+            getConstantUnnormalizedProvider
         
         
         """
@@ -391,15 +610,13 @@ class GravityFields:
 
 class OceanLoadDeformationCoefficients(java.lang.Enum['OceanLoadDeformationCoefficients']):
     """
-    public enum OceanLoadDeformationCoefficients extends :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.forces.gravity.potential.OceanLoadDeformationCoefficients`>
+    Supported Ocean load Deformation coefficients (Love numbers k' :sub:`i` ).
     
-        Supported Ocean load Deformation coefficients (Love numbers k' :sub:`i` ).
+    Since:
+        6.1
     
-        Since:
-            6.1
-    
-        Also see:
-            :class:`~org.orekit.forces.gravity.potential.GravityFields`
+    Also see:
+        GravityFields
     """
     IERS_1996: typing.ClassVar['OceanLoadDeformationCoefficients'] = ...
     IERS_2003: typing.ClassVar['OceanLoadDeformationCoefficients'] = ...
@@ -407,10 +624,10 @@ class OceanLoadDeformationCoefficients(java.lang.Enum['OceanLoadDeformationCoeff
     GEGOUT: typing.ClassVar['OceanLoadDeformationCoefficients'] = ...
     def getCoefficients(self) -> typing.MutableSequence[float]:
         """
-            Get the load deformation coefficients for ocean tides.
+        Get the load deformation coefficients for ocean tides.
         
-            Returns:
-                load deformation coefficients for ocean tides
+        Returns:
+            load deformation coefficients for ocean tides
         
         
         """
@@ -421,20 +638,19 @@ class OceanLoadDeformationCoefficients(java.lang.Enum['OceanLoadDeformationCoeff
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'OceanLoadDeformationCoefficients':
+    def valueOf(name: str) -> 'OceanLoadDeformationCoefficients':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -442,17 +658,15 @@ class OceanLoadDeformationCoefficients(java.lang.Enum['OceanLoadDeformationCoeff
     @staticmethod
     def values() -> typing.MutableSequence['OceanLoadDeformationCoefficients']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (OceanLoadDeformationCoefficients c : OceanLoadDeformationCoefficients.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (OceanLoadDeformationCoefficients c : OceanLoadDeformationCoefficients.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -460,126 +674,138 @@ class OceanLoadDeformationCoefficients(java.lang.Enum['OceanLoadDeformationCoeff
 
 class OceanTidesReader(org.orekit.data.DataLoader):
     """
-    public abstract class OceanTidesReader extends :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataLoader`
+    Reader for ocean tides coefficients.
     
-        Reader for ocean tides coefficients.
+    Since:
+        6.1
     
-        Since:
-            6.1
-    
-        Also see:
-            :class:`~org.orekit.forces.gravity.potential.OceanTidesWave`
+    Also see:
+        OceanTidesWave
     """
-    def __init__(self, string: str): ...
-    def canAdd(self, int: int, int2: int) -> bool:
+    def __init__(self, supportedNames: str):
         """
-            Check if coefficients can be added.
+        Simple constructor.
         
-            Parameters:
-                n (int): degree of the coefficients
-                m (int): order of the coefficients
+        Parameters:
+            supportedNames (String): regular expression for supported files names
         
-            Returns:
-                true if coefficients can be added
+        
+        """
+        ...
+    def canAdd(self, n: int, m: int) -> bool:
+        """
+        Check if coefficients can be added.
+        
+        Parameters:
+            n (int): degree of the coefficients
+            m (int): order of the coefficients
+        
+        Returns:
+            true if coefficients can be added
         
         
         """
         ...
     def getMaxAvailableDegree(self) -> int:
         """
-            Get the maximal degree available in the last file parsed.
+        Get the maximal degree available in the last file parsed.
         
-            Returns:
-                maximal degree available in the last file parsed
+        Returns:
+            maximal degree available in the last file parsed
         
-            Since:
-                12.0.1
+        Since:
+            12.0.1
         
         
         """
         ...
     def getMaxAvailableOrder(self) -> int:
         """
-            Get the maximal order available in the last file parsed.
+        Get the maximal order available in the last file parsed.
         
-            Returns:
-                maximal order available in the last file parsed
+        Returns:
+            maximal order available in the last file parsed
         
-            Since:
-                12.0.1
+        Since:
+            12.0.1
         
         
         """
         ...
     def getMaxParseDegree(self) -> int:
         """
-            Get the degree limit for the next file parsing.
+        Get the degree limit for the next file parsing.
         
-            Returns:
-                degree limit for the next file parsing
+        Returns:
+            degree limit for the next file parsing
         
         
         """
         ...
     def getMaxParseOrder(self) -> int:
         """
-            Get the order limit for the next file parsing.
+        Get the order limit for the next file parsing.
         
-            Returns:
-                order limit for the next file parsing
+        Returns:
+            order limit for the next file parsing
         
         
         """
         ...
     def getSupportedNames(self) -> str:
         """
-            Get the regular expression for supported files names.
+        Get the regular expression for supported files names.
         
-            Returns:
-                regular expression for supported files names
-        
-        
-        """
-        ...
-    def getWaves(self) -> java.util.List['OceanTidesWave']: ...
-    def setMaxParseDegree(self, int: int) -> None:
-        """
-            Set the degree limit for the next file parsing.
-        
-            Parameters:
-                maxParseDegree (int): maximal degree to parse (may be safely set to
-                    :meth:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer.html?is` to parse
-                    all available coefficients)
+        Returns:
+            regular expression for supported files names
         
         
         """
         ...
-    def setMaxParseOrder(self, int: int) -> None:
+    def getWaves(self) -> java.util.List['OceanTidesWave']:
         """
-            Set the order limit for the next file parsing.
+        Get the loaded waves.
         
-            Parameters:
-                maxParseOrder (int): maximal order to parse (may be safely set to
-                    :meth:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer.html?is` to parse
-                    all available coefficients)
+        Returns:
+            loaded waves
+        
+        
+        """
+        ...
+    def setMaxParseDegree(self, maxParseDegree: int) -> None:
+        """
+        Set the degree limit for the next file parsing.
+        
+        Parameters:
+            maxParseDegree (int): maximal degree to parse (may be safely set to
+                Integer to parse
+                all available coefficients)
+        
+        
+        """
+        ...
+    def setMaxParseOrder(self, maxParseOrder: int) -> None:
+        """
+        Set the order limit for the next file parsing.
+        
+        Parameters:
+            maxParseOrder (int): maximal order to parse (may be safely set to
+                Integer to parse
+                all available coefficients)
         
         
         """
         ...
     def stillAcceptsData(self) -> bool:
         """
-            Check if the loader still accepts new data.
+        Check if the loader still accepts new data.
         
-            This method is used to speed up data loading by interrupting crawling the data sets as soon as a loader has found the
-            data it was waiting for. For loaders that can merge data from any number of sources (for example JPL ephemerides or
-            Earth Orientation Parameters that are split among several files), this method should always return true to make sure no
-            data is left over.
+        This method is used to speed up data loading by interrupting crawling the data sets as soon as a loader has found the data it was waiting for. For loaders that can merge data from any number of sources (for example JPL ephemerides or Earth Orientation Parameters that are split among several files), this method should always return true to make sure no data is left over.
         
-            Specified by:
-                :meth:`~org.orekit.data.DataLoader.stillAcceptsData` in interface :class:`~org.orekit.data.DataLoader`
+        Specified by: stillAcceptsData in interface DataLoader
         
-            Returns:
-                true while the loader still accepts new data
+        Returns:
+            true while the loader still accepts new data
         
         
         """
@@ -587,55 +813,65 @@ class OceanTidesReader(org.orekit.data.DataLoader):
 
 class OceanTidesWave:
     """
-    public class OceanTidesWave extends :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Container for ocen tides coefficients for one tide wave.
     
-        Container for ocen tides coefficients for one tide wave.
+    Since:
+        6.1
     
-        Since:
-            6.1
-    
-        Also see:
-            :class:`~org.orekit.forces.gravity.OceanTides`, :class:`~org.orekit.forces.gravity.potential.OceanTidesReader`
+    Also see:
+        OceanTides, OceanTidesReader
     """
-    def __init__(self, int: int, int2: int, int3: int, doubleArray: typing.Union[typing.List[typing.MutableSequence[typing.MutableSequence[float]]], jpype.JArray]): ...
-    def addContribution(self, bodiesElements: org.orekit.data.BodiesElements, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None:
+    def __init__(self, doodson: int, degree: int, order: int, coefficients: typing.Union[typing.List[typing.MutableSequence[typing.MutableSequence[float]]], jpype.JArray]):
         """
-            Add the contribution of the wave to Stokes coefficients.
+        Simple constructor.
         
-            Parameters:
-                elements (:class:`~org.orekit.data.BodiesElements`): nutation elements
-                cnm (double[][]): spherical harmonic cosine coefficients table to add contribution too
-                snm (double[][]): spherical harmonic sine coefficients table to add contribution too
+        Parameters:
+            doodson (int): Doodson number for the wave
+            degree (int): max degree present in the coefficients array
+            order (int): max order present in the coefficients array
+            coefficients (double[][][]): C :sub:`n,m` :sup:`+` , S :sub:`n,m` :sup:`+` , C :sub:`n,m` :sup:`-` and S :sub:`n,m` :sup:`-` coefficients
+        
+        
+        """
+        ...
+    def addContribution(self, elements: org.orekit.data.BodiesElements, cnm: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], snm: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None:
+        """
+        Add the contribution of the wave to Stokes coefficients.
+        
+        Parameters:
+            elements (BodiesElements): nutation elements
+            cnm (double[][]): spherical harmonic cosine coefficients table to add contribution too
+            snm (double[][]): spherical harmonic sine coefficients table to add contribution too
         
         
         """
         ...
     def getDoodson(self) -> int:
         """
-            Get the Doodson number for the wave.
+        Get the Doodson number for the wave.
         
-            Returns:
-                Doodson number for the wave
+        Returns:
+            Doodson number for the wave
         
         
         """
         ...
     def getMaxDegree(self) -> int:
         """
-            Get the maximum supported degree.
+        Get the maximum supported degree.
         
-            Returns:
-                maximum supported degree
+        Returns:
+            maximum supported degree
         
         
         """
         ...
     def getMaxOrder(self) -> int:
         """
-            Get the maximum supported order.
+        Get the maximum supported order.
         
-            Returns:
-                maximum supported order
+        Returns:
+            maximum supported order
         
         
         """
@@ -643,153 +879,160 @@ class OceanTidesWave:
 
 class PotentialCoefficientsReader(org.orekit.data.DataLoader):
     """
-    public abstract class PotentialCoefficientsReader extends :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataLoader`
+    This abstract class represents a Gravitational Potential Coefficients file reader.
     
-        This abstract class represents a Gravitational Potential Coefficients file reader.
+    As it exits many different coefficients models and containers this interface represents all the methods that should be implemented by a reader. The proper way to use this interface is to call the GravityFieldFactory which will determine which reader to use with the selected potential coefficients file.
     
-        As it exits many different coefficients models and containers this interface represents all the methods that should be
-        implemented by a reader. The proper way to use this interface is to call the
-        :class:`~org.orekit.forces.gravity.potential.GravityFieldFactory` which will determine which reader to use with the
-        selected potential coefficients file.
-    
-        Also see:
-            :class:`~org.orekit.forces.gravity.potential.GravityFields`
+    Also see:
+        GravityFields
     """
     def getMaxAvailableDegree(self) -> int:
         """
-            Get the maximal degree available in the last file parsed.
+        Get the maximal degree available in the last file parsed.
         
-            Returns:
-                maximal degree available in the last file parsed
+        Returns:
+            maximal degree available in the last file parsed
         
-            Since:
-                6.0
+        Since:
+            6.0
         
         
         """
         ...
     def getMaxAvailableOrder(self) -> int:
         """
-            Get the maximal order available in the last file parsed.
+        Get the maximal order available in the last file parsed.
         
-            Returns:
-                maximal order available in the last file parsed
+        Returns:
+            maximal order available in the last file parsed
         
-            Since:
-                6.0
+        Since:
+            6.0
         
         
         """
         ...
     def getMaxParseDegree(self) -> int:
         """
-            Get the degree limit for the next file parsing.
+        Get the degree limit for the next file parsing.
         
-            Returns:
-                degree limit for the next file parsing
+        Returns:
+            degree limit for the next file parsing
         
-            Since:
-                6.0
+        Since:
+            6.0
         
         
         """
         ...
     def getMaxParseOrder(self) -> int:
         """
-            Get the order limit for the next file parsing.
+        Get the order limit for the next file parsing.
         
-            Returns:
-                order limit for the next file parsing
+        Returns:
+            order limit for the next file parsing
         
-            Since:
-                6.0
+        Since:
+            6.0
         
         
         """
         ...
-    def getProvider(self, boolean: bool, int: int, int2: int) -> 'RawSphericalHarmonicsProvider':
+    def getProvider(self, wantNormalized: bool, degree: int, order: int) -> 'RawSphericalHarmonicsProvider':
         """
-            Get a provider for read spherical harmonics coefficients.
+        Get a provider for read spherical harmonics coefficients.
         
-            Parameters:
-                wantNormalized (boolean): if true, the provider will provide normalized coefficients, otherwise it will provide un-normalized coefficients
-                degree (int): maximal degree
-                order (int): maximal order
+        Parameters:
+            wantNormalized (boolean): if true, the provider will provide normalized coefficients, otherwise it will provide un-normalized coefficients
+            degree (int): maximal degree
+            order (int): maximal order
         
-            Returns:
-                a new provider
+        Returns:
+            a new provider
         
-            Since:
-                6.0
+        Since:
+            6.0
         
         
         """
         ...
     def getSupportedNames(self) -> str:
         """
-            Get the regular expression for supported files names.
+        Get the regular expression for supported files names.
         
-            Returns:
-                regular expression for supported files names
+        Returns:
+            regular expression for supported files names
         
         
         """
         ...
-    def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
+    def loadData(self, input: java.io.InputStream, name: str) -> None:
+        """
+        Load data from a stream.
+        
+        Specified by: loadData in interface DataLoader
+        
+        Parameters:
+            input (InputStream): data input stream
+            name (String): name of the file (or zip entry)
+        
+        Raises:
+            IOException: if data can't be read
+            ParseException: if data can't be parsed or if some loader specific error occurs
+            OrekitException: 
+        
+        """
+        ...
     def missingCoefficientsAllowed(self) -> bool:
         """
-            Check if missing coefficients are allowed in the input data.
+        Check if missing coefficients are allowed in the input data.
         
-            Returns:
-                true if missing coefficients are allowed in the input data
-        
-        
-        """
-        ...
-    def setMaxParseDegree(self, int: int) -> None:
-        """
-            Set the degree limit for the next file parsing.
-        
-            Parameters:
-                maxParseDegree (int): maximal degree to parse (may be safely set to
-                    :meth:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer.html?is` to parse
-                    all available coefficients)
-        
-            Since:
-                6.0
+        Returns:
+            true if missing coefficients are allowed in the input data
         
         
         """
         ...
-    def setMaxParseOrder(self, int: int) -> None:
+    def setMaxParseDegree(self, maxParseDegree: int) -> None:
         """
-            Set the order limit for the next file parsing.
+        Set the degree limit for the next file parsing.
         
-            Parameters:
-                maxParseOrder (int): maximal order to parse (may be safely set to
-                    :meth:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer.html?is` to parse
-                    all available coefficients)
+        Parameters:
+            maxParseDegree (int): maximal degree to parse (may be safely set to
+                Integer to parse
+                all available coefficients)
         
-            Since:
-                6.0
+        Since:
+            6.0
+        
+        
+        """
+        ...
+    def setMaxParseOrder(self, maxParseOrder: int) -> None:
+        """
+        Set the order limit for the next file parsing.
+        
+        Parameters:
+            maxParseOrder (int): maximal order to parse (may be safely set to
+                Integer to parse
+                all available coefficients)
+        
+        Since:
+            6.0
         
         
         """
         ...
     def stillAcceptsData(self) -> bool:
         """
-            Check if the loader still accepts new data.
+        Check if the loader still accepts new data.
         
-            This method is used to speed up data loading by interrupting crawling the data sets as soon as a loader has found the
-            data it was waiting for. For loaders that can merge data from any number of sources (for example JPL ephemerides or
-            Earth Orientation Parameters that are split among several files), this method should always return true to make sure no
-            data is left over.
+        This method is used to speed up data loading by interrupting crawling the data sets as soon as a loader has found the data it was waiting for. For loaders that can merge data from any number of sources (for example JPL ephemerides or Earth Orientation Parameters that are split among several files), this method should always return true to make sure no data is left over.
         
-            Specified by:
-                :meth:`~org.orekit.data.DataLoader.stillAcceptsData` in interface :class:`~org.orekit.data.DataLoader`
+        Specified by: stillAcceptsData in interface DataLoader
         
-            Returns:
-                true while the loader still accepts new data
+        Returns:
+            true while the loader still accepts new data
         
         
         """
@@ -797,18 +1040,15 @@ class PotentialCoefficientsReader(org.orekit.data.DataLoader):
 
 class TideSystem(java.lang.Enum['TideSystem']):
     """
-    public enum TideSystem extends :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.forces.gravity.potential.TideSystem`>
+    Enumerate for tie systems.
     
-        Enumerate for tie systems.
+    Tide-systems are used to identify if the permanent tide is already present in the gravity field or if it should be handled when computing the solid tides force model.
     
-        Tide-systems are used to identify if the permanent tide is already present in the gravity field or if it should be
-        handled when computing the solid tides force model.
+    Since:
+        6.0
     
-        Since:
-            6.0
-    
-        Also see:
-            :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
+    Also see:
+        SphericalHarmonicsProvider
     """
     TIDE_FREE: typing.ClassVar['TideSystem'] = ...
     ZERO_TIDE: typing.ClassVar['TideSystem'] = ...
@@ -819,20 +1059,19 @@ class TideSystem(java.lang.Enum['TideSystem']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'TideSystem':
+    def valueOf(name: str) -> 'TideSystem':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -840,17 +1079,15 @@ class TideSystem(java.lang.Enum['TideSystem']):
     @staticmethod
     def values() -> typing.MutableSequence['TideSystem']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (TideSystem c : TideSystem.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (TideSystem c : TideSystem.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -858,19 +1095,17 @@ class TideSystem(java.lang.Enum['TideSystem']):
 
 class TideSystemProvider:
     """
-    public interface TideSystemProvider
+    Interface used to provide TideSystem.
     
-        Interface used to provide :class:`~org.orekit.forces.gravity.potential.TideSystem`.
-    
-        Since:
-            6.0
+    Since:
+        6.0
     """
     def getTideSystem(self) -> TideSystem:
         """
-            Get the :class:`~org.orekit.forces.gravity.potential.TideSystem` used in the gravity field.
+        Get the TideSystem used in the gravity field.
         
-            Returns:
-                tide system used in the gravity field
+        Returns:
+            tide system used in the gravity field
         
         
         """
@@ -878,433 +1113,491 @@ class TideSystemProvider:
 
 class EGMFormatReader(PotentialCoefficientsReader):
     """
-    public class EGMFormatReader extends :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader`
+    This reader is adapted to the EGM Format.
     
-        This reader is adapted to the EGM Format.
+    The proper way to use this class is to call the GravityFieldFactory which will determine which reader to use with the selected gravity field file.
     
-        The proper way to use this class is to call the :class:`~org.orekit.forces.gravity.potential.GravityFieldFactory` which
-        will determine which reader to use with the selected gravity field file.
-    
-        Also see:
-            :class:`~org.orekit.forces.gravity.potential.GravityFields`
+    Also see:
+        GravityFields
     """
     @typing.overload
     def __init__(self, string: str, boolean: bool): ...
     @typing.overload
     def __init__(self, string: str, boolean: bool, boolean2: bool): ...
-    def getProvider(self, boolean: bool, int: int, int2: int) -> 'RawSphericalHarmonicsProvider':
+    def getProvider(self, wantNormalized: bool, degree: int, order: int) -> 'RawSphericalHarmonicsProvider':
         """
-            Get a provider for read spherical harmonics coefficients.
+        Get a provider for read spherical harmonics coefficients.
         
-            EGM fields don't include time-dependent parts, so this method returns directly a constant provider.
+        EGM fields don't include time-dependent parts, so this method returns directly a constant provider.
         
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader.getProvider` in
-                class :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader`
+        Specified by: getProvider in class PotentialCoefficientsReader
         
-            Parameters:
-                wantNormalized (boolean): if true, the provider will provide normalized coefficients, otherwise it will provide un-normalized coefficients
-                degree (int): maximal degree
-                order (int): maximal order
+        Parameters:
+            wantNormalized (boolean): if true, the provider will provide normalized coefficients, otherwise it will provide un-normalized coefficients
+            degree (int): maximal degree
+            order (int): maximal order
         
-            Returns:
-                a new provider
+        Returns:
+            a new provider
         
-            Since:
-                6.0
+        Since:
+            6.0
         
         
         """
         ...
-    def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
+    def loadData(self, input: java.io.InputStream, name: str) -> None:
+        """
+        Load data from a stream.
+        
+        Specified by: loadData in interface DataLoader
+        
+        Specified by: loadData in class PotentialCoefficientsReader
+        
+        Parameters:
+            input (InputStream): data input stream
+            name (String): name of the file (or zip entry)
+        
+        Raises:
+            IOException: if data can't be read
+            ParseException: if data can't be parsed or if some loader specific error occurs
+            OrekitException: 
+        
+        """
+        ...
 
 class FESCHatEpsilonReader(OceanTidesReader):
     """
-    public class FESCHatEpsilonReader extends :class:`~org.orekit.forces.gravity.potential.OceanTidesReader`
+    Reader for ocean tides files following the fes2004.dat format.
     
-        Reader for ocean tides files following the fes2004.dat format.
-    
-        Since:
-            6.1
+    Since:
+        6.1
     """
-    def __init__(self, string: str, double: float, double2: float, oceanLoadDeformationCoefficients: OceanLoadDeformationCoefficients, map: typing.Union[java.util.Map[int, float], typing.Mapping[int, float]]): ...
-    def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
+    def __init__(self, supportedNames: str, scaleCHat: float, scaleEpsilon: float, oldc: OceanLoadDeformationCoefficients, astronomicalAmplitudes: typing.Union[java.util.Map[int, float], typing.Mapping[int, float]]):
+        """
+        Simple constructor.
+        
+        Parameters:
+            supportedNames (String): regular expression for supported files names
+            scaleCHat (double): scale of the CHat parameters
+            scaleEpsilon (double): scale of the epsilon parameters
+            oldc (OceanLoadDeformationCoefficients): load deformation coefficients for ocean tides
+            astronomicalAmplitudes (Map<Integer, Double> astronomicalAmplitudes): map for astronomical amplitudes
+        
+        Also see:
+            getAstronomicalAmplitudesMap
+        
+        
+        """
+        ...
+    def loadData(self, input: java.io.InputStream, name: str) -> None:
+        """
+        Load data from a stream.
+        
+        Parameters:
+            input (InputStream): data input stream
+            name (String): name of the file (or zip entry)
+        
+        Raises:
+            IOException: if data can't be read
+        
+        
+        """
+        ...
 
 class FESCnmSnmReader(OceanTidesReader):
     """
-    public class FESCnmSnmReader extends :class:`~org.orekit.forces.gravity.potential.OceanTidesReader`
+    Reader for ocean tides files following the fes2004_Cnm-Snm.dat format.
     
-        Reader for ocean tides files following the fes2004_Cnm-Snm.dat format.
-    
-        Since:
-            6.1
+    Since:
+        6.1
     """
-    def __init__(self, string: str, double: float): ...
-    def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
+    def __init__(self, supportedNames: str, scale: float):
+        """
+        Simple constructor.
+        
+        Parameters:
+            supportedNames (String): regular expression for supported files names
+            scale (double): scale of the Cnm, Snm parameters
+        
+        
+        """
+        ...
+    def loadData(self, input: java.io.InputStream, name: str) -> None:
+        """
+        Load data from a stream.
+        
+        Parameters:
+            input (InputStream): data input stream
+            name (String): name of the file (or zip entry)
+        
+        Raises:
+            IOException: if data can't be read
+        
+        
+        """
+        ...
 
 class GRGSFormatReader(PotentialCoefficientsReader):
     """
-    public class GRGSFormatReader extends :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader`
+    Reader for the GRGS gravity field format.
     
-        Reader for the GRGS gravity field format.
+    This format was used to describe various gravity fields at GRGS (Toulouse).
     
-        This format was used to describe various gravity fields at GRGS (Toulouse).
+    The proper way to use this class is to call the GravityFieldFactory which will determine which reader to use with the selected gravity field file.
     
-        The proper way to use this class is to call the :class:`~org.orekit.forces.gravity.potential.GravityFieldFactory` which
-        will determine which reader to use with the selected gravity field file.
-    
-        Also see:
-            :class:`~org.orekit.forces.gravity.potential.GravityFields`
+    Also see:
+        GravityFields
     """
     @typing.overload
     def __init__(self, string: str, boolean: bool): ...
     @typing.overload
     def __init__(self, string: str, boolean: bool, timeScale: org.orekit.time.TimeScale): ...
-    def getProvider(self, boolean: bool, int: int, int2: int) -> 'RawSphericalHarmonicsProvider':
+    def getProvider(self, wantNormalized: bool, degree: int, order: int) -> 'RawSphericalHarmonicsProvider':
         """
-            Get a provider for read spherical harmonics coefficients.
+        Get a provider for read spherical harmonics coefficients.
         
-            GRGS fields may include time-dependent parts which are taken into account in the returned provider.
+        GRGS fields may include time-dependent parts which are taken into account in the returned provider.
         
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader.getProvider` in
-                class :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader`
+        Specified by: getProvider in class PotentialCoefficientsReader
         
-            Parameters:
-                wantNormalized (boolean): if true, the provider will provide normalized coefficients, otherwise it will provide un-normalized coefficients
-                degree (int): maximal degree
-                order (int): maximal order
+        Parameters:
+            wantNormalized (boolean): if true, the provider will provide normalized coefficients, otherwise it will provide un-normalized coefficients
+            degree (int): maximal degree
+            order (int): maximal order
         
-            Returns:
-                a new provider
+        Returns:
+            a new provider
         
         
         """
         ...
-    def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
+    def loadData(self, input: java.io.InputStream, name: str) -> None:
+        """
+        Load data from a stream.
+        
+        Specified by: loadData in interface DataLoader
+        
+        Specified by: loadData in class PotentialCoefficientsReader
+        
+        Parameters:
+            input (InputStream): data input stream
+            name (String): name of the file (or zip entry)
+        
+        Raises:
+            IOException: if data can't be read
+            ParseException: if data can't be parsed or if some loader specific error occurs
+            OrekitException: 
+        
+        """
+        ...
 
 class ICGEMFormatReader(PotentialCoefficientsReader):
     """
-    public class ICGEMFormatReader extends :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader`
+    Reader for the ICGEM gravity field format.
     
-        Reader for the ICGEM gravity field format.
+    This format is used to describe the gravity field of EIGEN models published by the GFZ Potsdam since 2004. It is described in Franz Barthelmes and Christoph Förste paper: "the ICGEM-format". The 2006-02-28 version of this paper can be found `here <http://op.gfz-potsdam.de/grace/results/grav/g005_ICGEM-Format.pdf>` and the 2011-06-07 version of this paper can be found `here <http://icgem.gfz-potsdam.de/ICGEM-Format-2011.pdf>`. These versions differ in time-dependent coefficients, which are linear-only prior to 2011 (up to eigen-5 model) and have also harmonic effects after that date (starting with eigen-6 model). A third (undocumented as of 2018-05-14) version of the file format also adds a time-span for time-dependent coefficients, allowing for piecewise models. All three versions are supported by the class.
     
-        This format is used to describe the gravity field of EIGEN models published by the GFZ Potsdam since 2004. It is
-        described in Franz Barthelmes and Christoph Förste paper: "the ICGEM-format". The 2006-02-28 version of this paper can
-        be found `here <http://op.gfz-potsdam.de/grace/results/grav/g005_ICGEM-Format.pdf>` and the 2011-06-07 version of this
-        paper can be found `here <http://icgem.gfz-potsdam.de/ICGEM-Format-2011.pdf>`. These versions differ in time-dependent
-        coefficients, which are linear-only prior to 2011 (up to eigen-5 model) and have also harmonic effects after that date
-        (starting with eigen-6 model). A third (undocumented as of 2018-05-14) version of the file format also adds a time-span
-        for time-dependent coefficients, allowing for piecewise models. All three versions are supported by the class.
+    This reader uses relaxed check on the gravity constant key so any key ending in gravity_constant is accepted and not only earth_gravity_constant as specified in the previous documents. This allows to read also non Earth gravity fields as found in `ICGEM - Gravity Field Models of other Celestial Bodies <http://icgem.gfz-potsdam.de/tom_celestial>` page to be read.
     
-        This reader uses relaxed check on the gravity constant key so any key ending in gravity_constant is accepted and not
-        only earth_gravity_constant as specified in the previous documents. This allows to read also non Earth gravity fields as
-        found in `ICGEM - Gravity Field Models of other Celestial Bodies <http://icgem.gfz-potsdam.de/tom_celestial>` page to be
-        read.
+    The proper way to use this class is to call the GravityFieldFactory which will determine which reader to use with the selected gravity field file.
     
-        The proper way to use this class is to call the :class:`~org.orekit.forces.gravity.potential.GravityFieldFactory` which
-        will determine which reader to use with the selected gravity field file.
-    
-        Also see:
-            :class:`~org.orekit.forces.gravity.potential.GravityFields`
+    Also see:
+        GravityFields
     """
     @typing.overload
     def __init__(self, string: str, boolean: bool): ...
     @typing.overload
     def __init__(self, string: str, boolean: bool, timeScale: org.orekit.time.TimeScale): ...
-    def getProvider(self, boolean: bool, int: int, int2: int) -> 'RawSphericalHarmonicsProvider':
+    def getProvider(self, wantNormalized: bool, degree: int, order: int) -> 'RawSphericalHarmonicsProvider':
         """
-            Get a provider for read spherical harmonics coefficients.
+        Get a provider for read spherical harmonics coefficients.
         
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader.getProvider` in
-                class :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader`
+        Specified by: getProvider in class PotentialCoefficientsReader
         
-            Parameters:
-                wantNormalized (boolean): if true, the provider will provide normalized coefficients, otherwise it will provide un-normalized coefficients
-                degree (int): maximal degree
-                order (int): maximal order
+        Parameters:
+            wantNormalized (boolean): if true, the provider will provide normalized coefficients, otherwise it will provide un-normalized coefficients
+            degree (int): maximal degree
+            order (int): maximal order
         
-            Returns:
-                a new provider
+        Returns:
+            a new provider
         
         
         """
         ...
-    def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
+    def loadData(self, input: java.io.InputStream, name: str) -> None:
+        """
+        Load data from a stream.
+        
+        Specified by: loadData in interface DataLoader
+        
+        Specified by: loadData in class PotentialCoefficientsReader
+        
+        Parameters:
+            input (InputStream): data input stream
+            name (String): name of the file (or zip entry)
+        
+        Raises:
+            IOException: if data can't be read
+            ParseException: if data can't be parsed or if some loader specific error occurs
+            OrekitException: 
+        
+        """
+        ...
 
 class LazyLoadedGravityFields(GravityFields):
     """
-    public class LazyLoadedGravityFields extends :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.gravity.potential.GravityFields`
+    Loads gravity fields when first requested and can be configured until then. Designed to match the behavior of GravityFieldFactory in Orekit 10.0.
     
-        Loads gravity fields when first requested and can be configured until then. Designed to match the behavior of
-        :class:`~org.orekit.forces.gravity.potential.GravityFieldFactory` in Orekit 10.0.
+    Since:
+        10.1
     
-        Since:
-            10.1
-    
-        Also see:
-            :class:`~org.orekit.forces.gravity.potential.GravityFieldFactory`
+    Also see:
+        GravityFieldFactory
     """
-    def __init__(self, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScale: org.orekit.time.TimeScale):
+        """
+        Create a factory for gravity fields that uses the given data manager to load the gravity field files.
+        
+        Parameters:
+            dataProvidersManager (DataProvidersManager): provides access to auxiliary data files.
+            timeScale (TimeScale): use to parse dates for the
+                addDefaultPotentialCoefficientsReaders. In Orekit
+                10.0 it is TT.
+        
+        
+        """
+        ...
     def addDefaultOceanTidesReaders(self) -> None:
         """
-            Add the default readers for ocean tides.
+        Add the default readers for ocean tides.
         
-            The default readers support files similar to the fes2004_Cnm-Snm.dat and fes2004.dat as published by IERS, using the
-            :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.configureOceanLoadDeformationCoefficients` ocean
-            load deformation coefficients, which by default are the IERS 2010 coefficients, which are limited to degree 6. If higher
-            degree coefficients are needed, the
-            :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.configureOceanLoadDeformationCoefficients` method
-            can be called prior to loading the ocean tides model with the
-            :meth:`~org.orekit.forces.gravity.potential.OceanLoadDeformationCoefficients.GEGOUT` computed by Pascal Gégout.
+        The default readers support files similar to the fes2004_Cnm-Snm.dat and fes2004.dat as published by IERS, using the configureOceanLoadDeformationCoefficients ocean load deformation coefficients, which by default are the IERS 2010 coefficients, which are limited to degree 6. If higher degree coefficients are needed, the configureOceanLoadDeformationCoefficients method can be called prior to loading the ocean tides model with the GEGOUT computed by Pascal Gégout.
         
-            WARNING: the files referenced in the published conventions have some errors. These errors have been corrected and the
-            updated files can be found here: ` http://tai.bipm.org/iers/convupdt/convupdt_c6.html
-            <http://tai.bipm.org/iers/convupdt/convupdt_c6.html>`.
+        WARNING: the files referenced in the published conventions have some errors. These errors have been corrected and the updated files can be found here: ` http://tai.bipm.org/iers/convupdt/convupdt_c6.html <http://tai.bipm.org/iers/convupdt/convupdt_c6.html>`.
         
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addPotentialCoefficientsReader`,
-                :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.clearPotentialCoefficientsReaders`,
-                :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.configureOceanLoadDeformationCoefficients`,
-                :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.getOceanLoadDeformationCoefficients`
+        Also see:
+            addPotentialCoefficientsReader,
+            clearPotentialCoefficientsReaders,
+            configureOceanLoadDeformationCoefficients,
+            getOceanLoadDeformationCoefficients
         
         
         """
         ...
     def addDefaultPotentialCoefficientsReaders(self) -> None:
         """
-            Add the default readers for gravity fields.
+        Add the default readers for gravity fields.
         
-            The default readers support ICGEM, SHM, EGM, GRGS and SHA formats with the default names
-            :meth:`~org.orekit.forces.gravity.potential.GravityFieldFactory.ICGEM_FILENAME`,
-            :meth:`~org.orekit.forces.gravity.potential.GravityFieldFactory.SHM_FILENAME`,
-            :meth:`~org.orekit.forces.gravity.potential.GravityFieldFactory.EGM_FILENAME`,
-            :meth:`~org.orekit.forces.gravity.potential.GravityFieldFactory.GRGS_FILENAME`,
-            :meth:`~org.orekit.forces.gravity.potential.GravityFieldFactory.SHA_FILENAME` and don't allow missing coefficients.
+        The default readers support ICGEM, SHM, EGM, GRGS and SHA formats with the default names ICGEM_FILENAME, SHM_FILENAME, EGM_FILENAME, GRGS_FILENAME, SHA_FILENAME and don't allow missing coefficients.
         
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addPotentialCoefficientsReader`,
-                :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.clearPotentialCoefficientsReaders`
+        Also see:
+            addPotentialCoefficientsReader,
+            clearPotentialCoefficientsReaders
         
         
         """
         ...
-    def addOceanTidesReader(self, oceanTidesReader: OceanTidesReader) -> None:
+    def addOceanTidesReader(self, reader: OceanTidesReader) -> None:
         """
-            Add a reader for ocean tides.
+        Add a reader for ocean tides.
         
-            Parameters:
-                reader (:class:`~org.orekit.forces.gravity.potential.OceanTidesReader`): custom reader to add for the gravity field
+        Parameters:
+            reader (OceanTidesReader): custom reader to add for the gravity field
         
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addDefaultPotentialCoefficientsReaders`,
-                :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.clearPotentialCoefficientsReaders`
+        Also see:
+            addDefaultPotentialCoefficientsReaders,
+            clearPotentialCoefficientsReaders
         
         
         """
         ...
-    def addPotentialCoefficientsReader(self, potentialCoefficientsReader: PotentialCoefficientsReader) -> None:
+    def addPotentialCoefficientsReader(self, reader: PotentialCoefficientsReader) -> None:
         """
-            Add a reader for gravity fields.
+        Add a reader for gravity fields.
         
-            Parameters:
-                reader (:class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader`): custom reader to add for the gravity field
+        Parameters:
+            reader (PotentialCoefficientsReader): custom reader to add for the gravity field
         
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addDefaultPotentialCoefficientsReaders`,
-                :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.clearPotentialCoefficientsReaders`
+        Also see:
+            addDefaultPotentialCoefficientsReaders,
+            clearPotentialCoefficientsReaders
         
         
         """
         ...
     def clearOceanTidesReaders(self) -> None:
         """
-            Clear ocean tides readers.
+        Clear ocean tides readers.
         
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addPotentialCoefficientsReader`,
-                :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addDefaultPotentialCoefficientsReaders`
+        Also see:
+            addPotentialCoefficientsReader,
+            addDefaultPotentialCoefficientsReaders
         
         
         """
         ...
     def clearPotentialCoefficientsReaders(self) -> None:
         """
-            Clear gravity field readers.
+        Clear gravity field readers.
         
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addPotentialCoefficientsReader`,
-                :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addDefaultPotentialCoefficientsReaders`
-        
-        
-        """
-        ...
-    def configureOceanLoadDeformationCoefficients(self, oceanLoadDeformationCoefficients: OceanLoadDeformationCoefficients) -> None:
-        """
-            Configure ocean load deformation coefficients.
-        
-            Parameters:
-                oldc (:class:`~org.orekit.forces.gravity.potential.OceanLoadDeformationCoefficients`): ocean load deformation coefficients
-        
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.getOceanLoadDeformationCoefficients`
+        Also see:
+            addPotentialCoefficientsReader,
+            addDefaultPotentialCoefficientsReaders
         
         
         """
         ...
-    def getConstantNormalizedProvider(self, int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'NormalizedSphericalHarmonicsProvider':
+    def configureOceanLoadDeformationCoefficients(self, oldc: OceanLoadDeformationCoefficients) -> None:
         """
-            Get a constant gravity field normalized coefficients provider frozen at a given epoch.
+        Configure ocean load deformation coefficients.
         
-            If no :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader` has been added by calling
-            :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addPotentialCoefficientsReader` or if
-            :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.clearPotentialCoefficientsReaders` has been called
-            afterwards, the
-            :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addDefaultPotentialCoefficientsReaders` method will
-            be called automatically.
+        Parameters:
+            oldc (OceanLoadDeformationCoefficients): ocean load deformation coefficients
         
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantNormalizedProvider` in
-                interface :class:`~org.orekit.forces.gravity.potential.GravityFields`
-        
-            Parameters:
-                degree (int): maximal degree
-                order (int): maximal order
-                freezingDate (:class:`~org.orekit.time.AbsoluteDate`): freezing epoch
-        
-            Returns:
-                a gravity field coefficients provider containing already loaded data
-        
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getNormalizedProvider`
+        Also see:
+            getOceanLoadDeformationCoefficients
         
         
         """
         ...
-    def getConstantUnnormalizedProvider(self, int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'UnnormalizedSphericalHarmonicsProvider':
+    def getConstantNormalizedProvider(self, degree: int, order: int, freezingDate: org.orekit.time.AbsoluteDate) -> 'NormalizedSphericalHarmonicsProvider':
         """
-            Get a constant gravity field unnormalized coefficients provider frozen at a given epoch.
+        Get a constant gravity field normalized coefficients provider frozen at a given epoch.
         
-            If no :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader` has been added by calling
-            :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addPotentialCoefficientsReader` or if
-            :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.clearPotentialCoefficientsReaders` has been called
-            afterwards, the
-            :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addDefaultPotentialCoefficientsReaders` method will
-            be called automatically.
+        If no PotentialCoefficientsReader has been added by calling addPotentialCoefficientsReader or if clearPotentialCoefficientsReaders has been called afterwards, the addDefaultPotentialCoefficientsReaders method will be called automatically.
         
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantUnnormalizedProvider` in
-                interface :class:`~org.orekit.forces.gravity.potential.GravityFields`
+        Specified by: getConstantNormalizedProvider in interface GravityFields
         
-            Parameters:
-                degree (int): maximal degree
-                order (int): maximal order
-                freezingDate (:class:`~org.orekit.time.AbsoluteDate`): freezing epoch
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
+            freezingDate (AbsoluteDate): freezing epoch
         
-            Returns:
-                a gravity field coefficients provider containing already loaded data
+        Returns:
+            a gravity field coefficients provider containing already loaded data
         
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getUnnormalizedProvider`
+        Also see:
+            getNormalizedProvider
         
         
         """
         ...
-    def getNormalizedProvider(self, int: int, int2: int) -> 'NormalizedSphericalHarmonicsProvider':
+    def getConstantUnnormalizedProvider(self, degree: int, order: int, freezingDate: org.orekit.time.AbsoluteDate) -> 'UnnormalizedSphericalHarmonicsProvider':
         """
-            Get a gravity field normalized coefficients provider.
+        Get a constant gravity field unnormalized coefficients provider frozen at a given epoch.
         
-            If no :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader` has been added by calling
-            :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addPotentialCoefficientsReader` or if
-            :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.clearPotentialCoefficientsReaders` has been called
-            afterwards, the
-            :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addDefaultPotentialCoefficientsReaders` method will
-            be called automatically.
+        If no PotentialCoefficientsReader has been added by calling addPotentialCoefficientsReader or if clearPotentialCoefficientsReaders has been called afterwards, the addDefaultPotentialCoefficientsReaders method will be called automatically.
         
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getNormalizedProvider` in
-                interface :class:`~org.orekit.forces.gravity.potential.GravityFields`
+        Specified by: getConstantUnnormalizedProvider in interface GravityFields
         
-            Parameters:
-                degree (int): maximal degree
-                order (int): maximal order
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
+            freezingDate (AbsoluteDate): freezing epoch
         
-            Returns:
-                a gravity field coefficients provider containing already loaded data
+        Returns:
+            a gravity field coefficients provider containing already loaded data
         
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantNormalizedProvider`
+        Also see:
+            getUnnormalizedProvider
+        
+        
+        """
+        ...
+    def getNormalizedProvider(self, degree: int, order: int) -> 'NormalizedSphericalHarmonicsProvider':
+        """
+        Get a gravity field normalized coefficients provider.
+        
+        If no PotentialCoefficientsReader has been added by calling addPotentialCoefficientsReader or if clearPotentialCoefficientsReaders has been called afterwards, the addDefaultPotentialCoefficientsReaders method will be called automatically.
+        
+        Specified by: getNormalizedProvider in interface GravityFields
+        
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
+        
+        Returns:
+            a gravity field coefficients provider containing already loaded data
+        
+        Also see:
+            getConstantNormalizedProvider
         
         
         """
         ...
     def getOceanLoadDeformationCoefficients(self) -> OceanLoadDeformationCoefficients:
         """
-            Get the configured ocean load deformation coefficients.
+        Get the configured ocean load deformation coefficients.
         
-            If :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.configureOceanLoadDeformationCoefficients` has
-            never been called, the default value will be the
-            :meth:`~org.orekit.forces.gravity.potential.OceanLoadDeformationCoefficients.IERS_2010` coefficients.
+        If configureOceanLoadDeformationCoefficients has never been called, the default value will be the IERS_2010 coefficients.
         
-            Returns:
-                ocean load deformation coefficients
+        Returns:
+            ocean load deformation coefficients
         
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.configureOceanLoadDeformationCoefficients`
+        Also see:
+            configureOceanLoadDeformationCoefficients
         
         
         """
         ...
-    def getOceanTidesWaves(self, int: int, int2: int) -> java.util.List[OceanTidesWave]: ...
-    def getUnnormalizedProvider(self, int: int, int2: int) -> 'UnnormalizedSphericalHarmonicsProvider':
+    def getOceanTidesWaves(self, degree: int, order: int) -> java.util.List[OceanTidesWave]:
         """
-            Get a gravity field unnormalized coefficients provider.
+        Get the ocean tides waves.
         
-            If no :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader` has been added by calling
-            :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addPotentialCoefficientsReader` or if
-            :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.clearPotentialCoefficientsReaders` has been called
-            afterwards, the
-            :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addDefaultPotentialCoefficientsReaders` method will
-            be called automatically.
+        WARNING: as of 2013-11-17, there seem to be an inconsistency when loading one or the other file, for wave Sa (Doodson number 56.554) and P1 (Doodson number 163.555). The sign of the coefficients are different. We think the problem lies in the input files from IERS and not in the conversion (which works for all other waves), but cannot be sure. For this reason, ocean tides are still considered experimental at this date.
         
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getUnnormalizedProvider` in
-                interface :class:`~org.orekit.forces.gravity.potential.GravityFields`
+        If no OceanTidesReader has been added by calling addOceanTidesReader or if clearOceanTidesReaders has been called afterwards, the addDefaultOceanTidesReaders method will be called automatically.
         
-            Parameters:
-                degree (int): maximal degree
-                order (int): maximal order
+        Specified by: getOceanTidesWaves in interface GravityFields
         
-            Returns:
-                a gravity field coefficients provider containing already loaded data
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
         
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantUnnormalizedProvider`
+        Returns:
+            list of tides waves containing already loaded data
         
         
         """
         ...
-    def readGravityField(self, int: int, int2: int) -> PotentialCoefficientsReader:
+    def getUnnormalizedProvider(self, degree: int, order: int) -> 'UnnormalizedSphericalHarmonicsProvider':
         """
-            Read a gravity field coefficients provider from the first supported file.
+        Get a gravity field unnormalized coefficients provider.
         
-            If no :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader` has been added by calling
-            :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addPotentialCoefficientsReader` or if
-            :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.clearPotentialCoefficientsReaders` has been called
-            afterwards, the
-            :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addDefaultPotentialCoefficientsReaders` method will
-            be called automatically.
+        If no PotentialCoefficientsReader has been added by calling addPotentialCoefficientsReader or if clearPotentialCoefficientsReaders has been called afterwards, the addDefaultPotentialCoefficientsReaders method will be called automatically.
         
-            Parameters:
-                maxParseDegree (int): maximal degree to parse
-                maxParseOrder (int): maximal order to parse
+        Specified by: getUnnormalizedProvider in interface GravityFields
         
-            Returns:
-                a reader containing already loaded data
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
         
-            Since:
-                6.0
+        Returns:
+            a gravity field coefficients provider containing already loaded data
+        
+        Also see:
+            getConstantUnnormalizedProvider
+        
+        
+        """
+        ...
+    def readGravityField(self, maxParseDegree: int, maxParseOrder: int) -> PotentialCoefficientsReader:
+        """
+        Read a gravity field coefficients provider from the first supported file.
+        
+        If no PotentialCoefficientsReader has been added by calling addPotentialCoefficientsReader or if clearPotentialCoefficientsReaders has been called afterwards, the addDefaultPotentialCoefficientsReaders method will be called automatically.
+        
+        Parameters:
+            maxParseDegree (int): maximal degree to parse
+            maxParseOrder (int): maximal order to parse
+        
+        Returns:
+            a reader containing already loaded data
+        
+        Since:
+            6.0
         
         
         """
@@ -1312,12 +1605,114 @@ class LazyLoadedGravityFields(GravityFields):
 
 class PythonGravityFields(GravityFields):
     def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getConstantNormalizedProvider(self, int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'NormalizedSphericalHarmonicsProvider': ...
-    def getConstantUnnormalizedProvider(self, int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'UnnormalizedSphericalHarmonicsProvider': ...
-    def getNormalizedProvider(self, int: int, int2: int) -> 'NormalizedSphericalHarmonicsProvider': ...
-    def getOceanTidesWaves(self, int: int, int2: int) -> java.util.List[OceanTidesWave]: ...
-    def getUnnormalizedProvider(self, int: int, int2: int) -> 'UnnormalizedSphericalHarmonicsProvider': ...
+    def finalize(self) -> None:
+        """
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getConstantNormalizedProvider(self, degree: int, order: int, freezingDate: org.orekit.time.AbsoluteDate) -> 'NormalizedSphericalHarmonicsProvider':
+        """
+        Description copied from interface: getConstantNormalizedProvider Get a constant gravity field normalized coefficients provider frozen at a given epoch.
+        
+        Specified by: getConstantNormalizedProvider in interface GravityFields
+        
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
+            freezingDate (AbsoluteDate): freezing epoch
+        
+        Returns:
+            a gravity field coefficients provider containing already loaded data
+        
+        Also see:
+            getNormalizedProvider
+        
+        
+        """
+        ...
+    def getConstantUnnormalizedProvider(self, degree: int, order: int, freezingDate: org.orekit.time.AbsoluteDate) -> 'UnnormalizedSphericalHarmonicsProvider':
+        """
+        Description copied from interface: getConstantUnnormalizedProvider Get a constant gravity field unnormalized coefficients provider frozen at a given epoch.
+        
+        Specified by: getConstantUnnormalizedProvider in interface GravityFields
+        
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
+            freezingDate (AbsoluteDate): freezing epoch
+        
+        Returns:
+            a gravity field coefficients provider containing already loaded data
+        
+        Also see:
+            getUnnormalizedProvider
+        
+        
+        """
+        ...
+    def getNormalizedProvider(self, degree: int, order: int) -> 'NormalizedSphericalHarmonicsProvider':
+        """
+        Description copied from interface: getNormalizedProvider Get a gravity field normalized coefficients provider.
+        
+        Specified by: getNormalizedProvider in interface GravityFields
+        
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
+        
+        Returns:
+            a gravity field coefficients provider containing already loaded data
+        
+        Also see:
+            getConstantNormalizedProvider
+        
+        
+        """
+        ...
+    def getOceanTidesWaves(self, degree: int, order: int) -> java.util.List[OceanTidesWave]:
+        """
+        Get the ocean tides waves.
+        
+        WARNING: as of 2013-11-17, there seem to be an inconsistency when loading one or the other file, for wave Sa (Doodson number 56.554) and P1 (Doodson number 163.555). The sign of the coefficients are different. We think the problem lies in the input files from IERS and not in the conversion (which works for all other waves), but cannot be sure. For this reason, ocean tides are still considered experimental at this date.
+        
+        Specified by: getOceanTidesWaves in interface GravityFields
+        
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
+        
+        Returns:
+            list of tides waves containing already loaded data
+        
+        Since:
+            6.1
+        
+        
+        """
+        ...
+    def getUnnormalizedProvider(self, degree: int, order: int) -> 'UnnormalizedSphericalHarmonicsProvider':
+        """
+        Description copied from interface: getUnnormalizedProvider Get a gravity field unnormalized coefficients provider.
+        
+        Specified by: getUnnormalizedProvider in interface GravityFields
+        
+        Parameters:
+            degree (int): maximal degree
+            order (int): maximal order
+        
+        Returns:
+            a gravity field coefficients provider containing already loaded data
+        
+        Also see:
+            getConstantUnnormalizedProvider
+        
+        
+        """
+        ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
@@ -1329,190 +1724,305 @@ class PythonPotentialCoefficientsReader(PotentialCoefficientsReader):
     def __init__(self, string: str, boolean: bool): ...
     @typing.overload
     def __init__(self, string: str, boolean: bool, timeScale: org.orekit.time.TimeScale): ...
-    def finalize(self) -> None: ...
-    def getProvider(self, boolean: bool, int: int, int2: int) -> 'RawSphericalHarmonicsProvider': ...
-    def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
-    def pythonDecRef(self) -> None: ...
-    @typing.overload
-    def pythonExtension(self) -> int: ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-
-class PythonTideSystemProvider(TideSystemProvider):
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getTideSystem(self) -> TideSystem: ...
-    def pythonDecRef(self) -> None: ...
-    @typing.overload
-    def pythonExtension(self) -> int: ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-
-class SHAFormatReader(PotentialCoefficientsReader):
-    """
-    public class SHAFormatReader extends :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader`
-    
-        Reader for the SHA gravity field format.
-    
-        This format is used by some lunar gravity models distributed by NASA's Planetary Geology, Geophysics and Geochemistry
-        Laboratory such as GRGM1200B and GRGM1200L. It is a simple ASCII format, described in
-        :class:`~org.orekit.forces.gravity.potential.https:.pgda.gsfc.nasa.gov.products.75`. The first line contains 4
-        constants: model GM, mean radius, maximum degree and maximum order. All other lines contain 6 entries: degree, order,
-        Clm, Slm, sigma Clm and sigma Slm (formal errors of Clm and Slm).
-    
-        The proper way to use this class is to call the :class:`~org.orekit.forces.gravity.potential.GravityFieldFactory` which
-        will determine which reader to use with the selected gravity field file.
-    
-        Also see:
-            :class:`~org.orekit.forces.gravity.potential.GravityFields`
-    """
-    def __init__(self, string: str, boolean: bool): ...
-    def getProvider(self, boolean: bool, int: int, int2: int) -> 'RawSphericalHarmonicsProvider':
+    def finalize(self) -> None:
         """
-            Provider for read spherical harmonics coefficients. Like EGM fields, SHA fields don't include time-dependent parts, so
-            this method returns directly a constant provider.
+        Part of JCC Python interface to object
         
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader.getProvider` in
-                class :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader`
+        Overrides: Object in class Object
         
-            Parameters:
-                wantNormalized (boolean): if true, the provider will provide normalized coefficients, otherwise it will provide un-normalized coefficients
-                degree (int): maximal degree
-                order (int): maximal order
+        Raises:
+            Throwable: 
         
-            Returns:
-                a new provider
+        """
+        ...
+    def getProvider(self, wantNormalized: bool, degree: int, order: int) -> 'RawSphericalHarmonicsProvider':
+        """
+        Get a provider for read spherical harmonics coefficients.
         
-            Since:
-                12.2
+        Specified by: getProvider in class PotentialCoefficientsReader
+        
+        Parameters:
+            wantNormalized (boolean): if true, the provider will provide normalized coefficients, otherwise it will provide un-normalized coefficients
+            degree (int): maximal degree
+            order (int): maximal order
+        
+        Returns:
+            a new provider
+        
+        Since:
+            6.0
         
         
         """
         ...
-    def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
+    def loadData(self, inputStream: java.io.InputStream, string: str) -> None:
+        """
+        Load data from a stream.
+        
+        Specified by: loadData in interface DataLoader
+        
+        Specified by: loadData in class PotentialCoefficientsReader
+        
+        Parameters:
+            input (InputStream):         name (String): 
+        Raises:
+            IOException: if data can't be read
+            ParseException: if data can't be parsed or if some loader specific error occurs
+            OrekitException: 
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+
+class PythonTideSystemProvider(TideSystemProvider):
+    def __init__(self): ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getTideSystem(self) -> TideSystem:
+        """
+        Get the TideSystem used in the gravity field.
+        
+        Specified by: getTideSystem in interface TideSystemProvider
+        
+        Returns:
+            tide system used in the gravity field
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+
+class SHAFormatReader(PotentialCoefficientsReader):
+    """
+    Reader for the SHA gravity field format.
+    
+    This format is used by some lunar gravity models distributed by NASA's Planetary Geology, Geophysics and Geochemistry Laboratory such as GRGM1200B and GRGM1200L. It is a simple ASCII format, described in products. The first line contains 4 constants: model GM, mean radius, maximum degree and maximum order. All other lines contain 6 entries: degree, order, Clm, Slm, sigma Clm and sigma Slm (formal errors of Clm and Slm).
+    
+    The proper way to use this class is to call the GravityFieldFactory which will determine which reader to use with the selected gravity field file.
+    
+    Also see:
+        GravityFields
+    """
+    def __init__(self, supportedNames: str, missingCoefficientsAllowed: bool):
+        """
+        Simple constructor.
+        
+        Parameters:
+            supportedNames (String): regular expression for supported files names
+            missingCoefficientsAllowed (boolean): if true, allows missing coefficients in the input data
+        
+        Since:
+            12.2
+        
+        
+        """
+        ...
+    def getProvider(self, wantNormalized: bool, degree: int, order: int) -> 'RawSphericalHarmonicsProvider':
+        """
+        Provider for read spherical harmonics coefficients. Like EGM fields, SHA fields don't include time-dependent parts, so this method returns directly a constant provider.
+        
+        Specified by: getProvider in class PotentialCoefficientsReader
+        
+        Parameters:
+            wantNormalized (boolean): if true, the provider will provide normalized coefficients, otherwise it will provide un-normalized coefficients
+            degree (int): maximal degree
+            order (int): maximal order
+        
+        Returns:
+            a new provider
+        
+        Since:
+            12.2
+        
+        
+        """
+        ...
+    def loadData(self, input: java.io.InputStream, name: str) -> None:
+        """
+        Load data from a stream.
+        
+        Specified by: loadData in interface DataLoader
+        
+        Specified by: loadData in class PotentialCoefficientsReader
+        
+        Parameters:
+            input (InputStream): data input stream
+            name (String): name of the file (or zip entry)
+        
+        Raises:
+            IOException: if data can't be read
+            ParseException: if data can't be parsed or if some loader specific error occurs
+            OrekitException: 
+        
+        """
+        ...
 
 class SHMFormatReader(PotentialCoefficientsReader):
     """
-    public class SHMFormatReader extends :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader`
+    Reader for the SHM gravity field format.
     
-        Reader for the SHM gravity field format.
+    This format was used to describe the gravity field of EIGEN models published by the GFZ Potsdam up to 2003. It was then replaced by ICGEMFormatReader. The SHM format is described in ` Potsdam university website <http://op.gfz-potsdam.de/champ/docs_CHAMP/CH-FORMAT-REFLINKS.html>`.
     
-        This format was used to describe the gravity field of EIGEN models published by the GFZ Potsdam up to 2003. It was then
-        replaced by :class:`~org.orekit.forces.gravity.potential.ICGEMFormatReader`. The SHM format is described in ` Potsdam
-        university website <http://op.gfz-potsdam.de/champ/docs_CHAMP/CH-FORMAT-REFLINKS.html>`.
+    The proper way to use this class is to call the GravityFieldFactory which will determine which reader to use with the selected gravity field file.
     
-        The proper way to use this class is to call the :class:`~org.orekit.forces.gravity.potential.GravityFieldFactory` which
-        will determine which reader to use with the selected gravity field file.
-    
-        Also see:
-            :class:`~org.orekit.forces.gravity.potential.GravityFields`
+    Also see:
+        GravityFields
     """
     @typing.overload
     def __init__(self, string: str, boolean: bool): ...
     @typing.overload
     def __init__(self, string: str, boolean: bool, timeScale: org.orekit.time.TimeScale): ...
-    def getProvider(self, boolean: bool, int: int, int2: int) -> 'RawSphericalHarmonicsProvider':
+    def getProvider(self, wantNormalized: bool, degree: int, order: int) -> 'RawSphericalHarmonicsProvider':
         """
-            Get a provider for read spherical harmonics coefficients.
+        Get a provider for read spherical harmonics coefficients.
         
-            SHM fields do include time-dependent parts which are taken into account in the returned provider.
+        SHM fields do include time-dependent parts which are taken into account in the returned provider.
         
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader.getProvider` in
-                class :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader`
+        Specified by: getProvider in class PotentialCoefficientsReader
         
-            Parameters:
-                wantNormalized (boolean): if true, the provider will provide normalized coefficients, otherwise it will provide un-normalized coefficients
-                degree (int): maximal degree
-                order (int): maximal order
+        Parameters:
+            wantNormalized (boolean): if true, the provider will provide normalized coefficients, otherwise it will provide un-normalized coefficients
+            degree (int): maximal degree
+            order (int): maximal order
         
-            Returns:
-                a new provider
+        Returns:
+            a new provider
         
-            Since:
-                6.0
+        Since:
+            6.0
         
         
         """
         ...
-    def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
+    def loadData(self, input: java.io.InputStream, name: str) -> None:
+        """
+        Load data from a stream.
+        
+        Specified by: loadData in interface DataLoader
+        
+        Specified by: loadData in class PotentialCoefficientsReader
+        
+        Parameters:
+            input (InputStream): data input stream
+            name (String): name of the file (or zip entry)
+        
+        Raises:
+            IOException: if data can't be read
+            ParseException: if data can't be parsed or if some loader specific error occurs
+            OrekitException: 
+        
+        """
+        ...
 
 class SphericalHarmonicsProvider(TideSystemProvider):
     """
-    public interface SphericalHarmonicsProvider extends :class:`~org.orekit.forces.gravity.potential.TideSystemProvider`
+    Interface used to provide spherical harmonics coefficients.
     
-        Interface used to provide spherical harmonics coefficients.
+    Two interfaces are provided to distinguish between normalized and un-normalized coefficients: NormalizedSphericalHarmonicsProvider and UnnormalizedSphericalHarmonicsProvider. To account for gravity perturbations all providers are capable of providing the coefficients on specific dates, using the onDate methods.
     
-        Two interfaces are provided to distinguish between normalized and un-normalized coefficients:
-        :class:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider` and
-        :class:`~org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider`. To account for gravity
-        perturbations all providers are capable of providing the coefficients on specific dates, using the
-        :meth:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider.onDate` methods.
+    Typical usage when evaluating the geopotential:
     
-        Typical usage when evaluating the geopotential:
     
-        .. code-block: java
-        
-             NormalizedSphericalHarmonicsProvider provider = ...;
-             NormalizedSphericalHarmonics coeffs = provider.onDate(date);
-             double c20 = coeffs.getNormalizedCnm(2, 0);
-         
+         NormalizedSphericalHarmonicsProvider provider = ...;
+         NormalizedSphericalHarmonics coeffs = provider.onDate(date);
+         double c20 = coeffs.getNormalizedCnm(2, 0);
+     
     
-        Since:
-            6.0
+    Since:
+        6.0
     
-        Also see:
-            :class:`~org.orekit.forces.gravity.potential.GravityFields`
+    Also see:
+        GravityFields
     """
     def getAe(self) -> float:
         """
-            Get the value of the central body reference radius.
+        Get the value of the central body reference radius.
         
-            Returns:
-                ae (m)
+        Returns:
+            ae (m)
         
         
         """
         ...
     def getMaxDegree(self) -> int:
         """
-            Get the maximal supported degree.
+        Get the maximal supported degree.
         
-            Returns:
-                maximal supported degree
+        Returns:
+            maximal supported degree
         
         
         """
         ...
     def getMaxOrder(self) -> int:
         """
-            Get the maximal supported order.
+        Get the maximal supported order.
         
-            Returns:
-                maximal supported order
+        Returns:
+            maximal supported order
         
         
         """
         ...
     def getMu(self) -> float:
         """
-            Get the central body attraction coefficient.
+        Get the central body attraction coefficient.
         
-            Returns:
-                mu (m³/s²)
+        Returns:
+            mu (m³/s²)
         
         
         """
         ...
     def getReferenceDate(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the reference date for the harmonics.
+        Get the reference date for the harmonics.
         
-            For piecewise models, the latest reference date is returned.
+        For piecewise models, the latest reference date is returned.
         
-            Returns:
-                reference date for the harmonics (may be null if no reference date is defined)
+        Returns:
+            reference date for the harmonics (may be null if no reference date is defined)
         
         
         """
@@ -1520,44 +2030,42 @@ class SphericalHarmonicsProvider(TideSystemProvider):
 
 class NormalizedSphericalHarmonicsProvider(SphericalHarmonicsProvider):
     """
-    public interface NormalizedSphericalHarmonicsProvider extends :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
+    Interface used to provide normalized spherical harmonics coefficients.
     
-        Interface used to provide normalized spherical harmonics coefficients.
+    Since:
+        6.0
     
-        Since:
-            6.0
-    
-        Also see:
-            :class:`~org.orekit.forces.gravity.potential.GravityFields`
+    Also see:
+        GravityFields
     """
-    def getNormalizedC20(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+    def getNormalizedC20(self, date: org.orekit.time.AbsoluteDate) -> float:
         """
-            Get the normalized coefficient of degree 2 and order 0 at a specific instance in time.
+        Get the normalized coefficient of degree 2 and order 0 at a specific instance in time.
         
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): of evaluation (may be null if model is not time-dependent)
+        Parameters:
+            date (AbsoluteDate): of evaluation (may be null if model is not time-dependent)
         
-            Returns:
-                normalized C20 on :code:`date`.
+        Returns:
+            normalized C20 on date.
         
-            Since:
-                12.1
+        Since:
+            12.1
         
         
         """
         ...
-    def onDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'NormalizedSphericalHarmonicsProvider.NormalizedSphericalHarmonics':
+    def onDate(self, date: org.orekit.time.AbsoluteDate) -> 'NormalizedSphericalHarmonicsProvider.NormalizedSphericalHarmonics':
         """
-            Get the normalized spherical harmonic coefficients at a specific instance in time.
+        Get the normalized spherical harmonic coefficients at a specific instance in time.
         
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): of evaluation
+        Parameters:
+            date (AbsoluteDate): of evaluation
         
-            Returns:
-                normalized coefficients on :code:`date`.
+        Returns:
+            normalized coefficients on date.
         
-            Since:
-                6.1
+        Since:
+            6.1
         
         
         """
@@ -1568,13 +2076,89 @@ class NormalizedSphericalHarmonicsProvider(SphericalHarmonicsProvider):
 
 class PythonSphericalHarmonicsProvider(SphericalHarmonicsProvider):
     def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getAe(self) -> float: ...
-    def getMaxDegree(self) -> int: ...
-    def getMaxOrder(self) -> int: ...
-    def getMu(self) -> float: ...
-    def getReferenceDate(self) -> org.orekit.time.AbsoluteDate: ...
-    def getTideSystem(self) -> TideSystem: ...
+    def finalize(self) -> None:
+        """
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getAe(self) -> float:
+        """
+        Get the value of the central body reference radius.
+        
+        Specified by: getAe in interface SphericalHarmonicsProvider
+        
+        Returns:
+            ae (m)
+        
+        
+        """
+        ...
+    def getMaxDegree(self) -> int:
+        """
+        Description copied from interface: getMaxDegree Get the maximal supported degree.
+        
+        Specified by: getMaxDegree in interface SphericalHarmonicsProvider
+        
+        Returns:
+            maximal supported degree
+        
+        
+        """
+        ...
+    def getMaxOrder(self) -> int:
+        """
+        Get the maximal supported order.
+        
+        Specified by: getMaxOrder in interface SphericalHarmonicsProvider
+        
+        Returns:
+            maximal supported order
+        
+        
+        """
+        ...
+    def getMu(self) -> float:
+        """
+        Get the central body attraction coefficient.
+        
+        Specified by: getMu in interface SphericalHarmonicsProvider
+        
+        Returns:
+            mu (m³/s²)
+        
+        
+        """
+        ...
+    def getReferenceDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+        Get the reference date for the harmonics.
+        
+        For piecewise models, the latest reference date is returned.
+        
+        Specified by: getReferenceDate in interface SphericalHarmonicsProvider
+        
+        Returns:
+            reference date for the harmonics (may be null if no reference date is defined)
+        
+        
+        """
+        ...
+    def getTideSystem(self) -> TideSystem:
+        """
+        Get the TideSystem used in the gravity field.
+        
+        Specified by: getTideSystem in interface TideSystemProvider
+        
+        Returns:
+            tide system used in the gravity field
+        
+        
+        """
+        ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
@@ -1583,29 +2167,25 @@ class PythonSphericalHarmonicsProvider(SphericalHarmonicsProvider):
 
 class RawSphericalHarmonicsProvider(SphericalHarmonicsProvider):
     """
-    public interface RawSphericalHarmonicsProvider extends :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
+    Interface used to provide raw spherical harmonics coefficients.
     
-        Interface used to provide raw spherical harmonics coefficients.
+    This interface is intended to be used only as the workhorse for either NormalizedSphericalHarmonicsProvider or SphericalHarmonicsProvider implementations.
     
-        This interface is intended to be used only as the workhorse for either
-        :class:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider` or
-        :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider` implementations.
+    Since:
+        6.0
     
-        Since:
-            6.0
-    
-        Also see:
-            :class:`~org.orekit.forces.gravity.potential.GravityFields`
+    Also see:
+        GravityFields
     """
-    def onDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'RawSphericalHarmonicsProvider.RawSphericalHarmonics':
+    def onDate(self, date: org.orekit.time.AbsoluteDate) -> 'RawSphericalHarmonicsProvider.RawSphericalHarmonics':
         """
-            Get the raw spherical harmonic coefficients on a specific date.
+        Get the raw spherical harmonic coefficients on a specific date.
         
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): to evaluate the spherical harmonics
+        Parameters:
+            date (AbsoluteDate): to evaluate the spherical harmonics
         
-            Returns:
-                the raw spherical harmonics on :code:`date`.
+        Returns:
+            the raw spherical harmonics on date.
         
         
         """
@@ -1616,49 +2196,44 @@ class RawSphericalHarmonicsProvider(SphericalHarmonicsProvider):
 
 class UnnormalizedSphericalHarmonicsProvider(SphericalHarmonicsProvider):
     """
-    public interface UnnormalizedSphericalHarmonicsProvider extends :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
+    Interface used to provide un-normalized spherical harmonics coefficients.
     
-        Interface used to provide un-normalized spherical harmonics coefficients.
+    Un-normalized spherical harmonics coefficients are fine for small degrees. At high degree and order the un-normalized coefficients are not representable in a double. NormalizedSphericalHarmonicsProvider is recommended for high precision applications.
     
-        Un-normalized spherical harmonics coefficients are fine for small degrees. At high degree and order the un-normalized
-        coefficients are not representable in a :code:`double`.
-        :class:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider` is recommended for high precision
-        applications.
+    Since:
+        6.0
     
-        Since:
-            6.0
-    
-        Also see:
-            :class:`~org.orekit.forces.gravity.potential.GravityFields`
+    Also see:
+        GravityFields
     """
-    def getUnnormalizedC20(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+    def getUnnormalizedC20(self, date: org.orekit.time.AbsoluteDate) -> float:
         """
-            Get the un-normalized coefficient of degree 2 and order 0 at a specific instance in time.
+        Get the un-normalized coefficient of degree 2 and order 0 at a specific instance in time.
         
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): of evaluation (may be null if model is not time-dependent)
+        Parameters:
+            date (AbsoluteDate): of evaluation (may be null if model is not time-dependent)
         
-            Returns:
-                un-normalized C20 on :code:`date`.
+        Returns:
+            un-normalized C20 on date.
         
-            Since:
-                12.1
+        Since:
+            12.1
         
         
         """
         ...
-    def onDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'UnnormalizedSphericalHarmonicsProvider.UnnormalizedSphericalHarmonics':
+    def onDate(self, date: org.orekit.time.AbsoluteDate) -> 'UnnormalizedSphericalHarmonicsProvider.UnnormalizedSphericalHarmonics':
         """
-            Get the un-normalized spherical harmonic coefficients at a specific instance in time.
+        Get the un-normalized spherical harmonic coefficients at a specific instance in time.
         
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): of evaluation (may be null if model is not time-dependent)
+        Parameters:
+            date (AbsoluteDate): of evaluation (may be null if model is not time-dependent)
         
-            Returns:
-                un-normalized coefficients on :code:`date`.
+        Returns:
+            un-normalized coefficients on date.
         
-            Since:
-                6.1
+        Since:
+            6.1
         
         
         """
@@ -1669,121 +2244,117 @@ class UnnormalizedSphericalHarmonicsProvider(SphericalHarmonicsProvider):
 
 class CachedNormalizedSphericalHarmonicsProvider(NormalizedSphericalHarmonicsProvider):
     """
-    public class CachedNormalizedSphericalHarmonicsProvider extends :class:`~org.orekit.forces.gravity.potential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider`
+    Caching wrapper for NormalizedSphericalHarmonicsProvider.
     
-        Caching wrapper for :class:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider`.
+    This wrapper improves efficiency of NormalizedSphericalHarmonicsProvider by sampling the values at a user defined rate and using interpolation between samples. This is important with providers that have sub-daily frequencies and are computing intensive, such as tides fields.
     
-        This wrapper improves efficiency of :class:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider`
-        by sampling the values at a user defined rate and using interpolation between samples. This is important with providers
-        that have sub-daily frequencies and are computing intensive, such as tides fields.
+    Since:
+        6.1
     
-        Since:
-            6.1
-    
-        Also see:
-            :class:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider`,
-            :class:`~org.orekit.forces.gravity.SolidTides`, :class:`~org.orekit.utils.TimeStampedCache`
+    Also see:
+        NormalizedSphericalHarmonicsProvider,
+        SolidTides, TimeStampedCache
     """
-    def __init__(self, normalizedSphericalHarmonicsProvider: NormalizedSphericalHarmonicsProvider, double: float, int: int, int2: int, double2: float, double3: float): ...
+    def __init__(self, rawProvider: NormalizedSphericalHarmonicsProvider, step: float, nbPoints: int, maxSlots: int, maxSpan: float, newSlotInterval: float):
+        """
+        Simple constructor.
+        
+        Parameters:
+            rawProvider (NormalizedSphericalHarmonicsProvider): underlying raw provider
+            step (double): time step between sample points for interpolation
+            nbPoints (int): number of points to use for interpolation, must be at least 2
+            maxSlots (int): maximum number of independent cached time slots
+            maxSpan (double): maximum duration span in seconds of one slot (can be set to POSITIVE_INFINITY if desired)
+            newSlotInterval (double): time interval above which a new slot is created instead of extending an existing one
+        
+        
+        """
+        ...
     def getAe(self) -> float:
         """
-            Get the value of the central body reference radius.
+        Get the value of the central body reference radius.
         
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getAe` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
+        Specified by: getAe in interface SphericalHarmonicsProvider
         
-            Returns:
-                ae (m)
+        Returns:
+            ae (m)
         
         
         """
         ...
     def getMaxDegree(self) -> int:
         """
-            Get the maximal supported degree.
+        Get the maximal supported degree.
         
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getMaxDegree` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
+        Specified by: getMaxDegree in interface SphericalHarmonicsProvider
         
-            Returns:
-                maximal supported degree
+        Returns:
+            maximal supported degree
         
         
         """
         ...
     def getMaxOrder(self) -> int:
         """
-            Get the maximal supported order.
+        Get the maximal supported order.
         
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getMaxOrder` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
+        Specified by: getMaxOrder in interface SphericalHarmonicsProvider
         
-            Returns:
-                maximal supported order
+        Returns:
+            maximal supported order
         
         
         """
         ...
     def getMu(self) -> float:
         """
-            Get the central body attraction coefficient.
+        Get the central body attraction coefficient.
         
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getMu` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
+        Specified by: getMu in interface SphericalHarmonicsProvider
         
-            Returns:
-                mu (m³/s²)
+        Returns:
+            mu (m³/s²)
         
         
         """
         ...
     def getReferenceDate(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the reference date for the harmonics.
+        Get the reference date for the harmonics.
         
-            For piecewise models, the latest reference date is returned.
+        For piecewise models, the latest reference date is returned.
         
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getReferenceDate` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
+        Specified by: getReferenceDate in interface SphericalHarmonicsProvider
         
-            Returns:
-                reference date for the harmonics (may be null if no reference date is defined)
+        Returns:
+            reference date for the harmonics (may be null if no reference date is defined)
         
         
         """
         ...
     def getTideSystem(self) -> TideSystem:
         """
-            Get the :class:`~org.orekit.forces.gravity.potential.TideSystem` used in the gravity field.
+        Get the TideSystem used in the gravity field.
         
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.TideSystemProvider.getTideSystem` in
-                interface :class:`~org.orekit.forces.gravity.potential.TideSystemProvider`
+        Specified by: getTideSystem in interface TideSystemProvider
         
-            Returns:
-                tide system used in the gravity field
+        Returns:
+            tide system used in the gravity field
         
         
         """
         ...
-    def onDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> NormalizedSphericalHarmonicsProvider.NormalizedSphericalHarmonics:
+    def onDate(self, date: org.orekit.time.AbsoluteDate) -> NormalizedSphericalHarmonicsProvider.NormalizedSphericalHarmonics:
         """
-            Get the normalized spherical harmonic coefficients at a specific instance in time.
+        Get the normalized spherical harmonic coefficients at a specific instance in time.
         
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider.onDate` in
-                interface :class:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider`
+        Specified by: onDate in interface NormalizedSphericalHarmonicsProvider
         
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): of evaluation
+        Parameters:
+            date (AbsoluteDate): of evaluation
         
-            Returns:
-                normalized coefficients on :code:`date`.
+        Returns:
+            normalized coefficients on date.
         
         
         """
@@ -1791,30 +2362,225 @@ class CachedNormalizedSphericalHarmonicsProvider(NormalizedSphericalHarmonicsPro
 
 class PythonNormalizedSphericalHarmonicsProvider(NormalizedSphericalHarmonicsProvider):
     def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getAe(self) -> float: ...
-    def getMaxDegree(self) -> int: ...
-    def getMaxOrder(self) -> int: ...
-    def getMu(self) -> float: ...
-    def getReferenceDate(self) -> org.orekit.time.AbsoluteDate: ...
-    def getTideSystem(self) -> TideSystem: ...
-    def onDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> NormalizedSphericalHarmonicsProvider.NormalizedSphericalHarmonics: ...
-    def pythonDecRef(self) -> None: ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getAe(self) -> float:
+        """
+        Get the value of the central body reference radius.
+        
+        Specified by: getAe in interface SphericalHarmonicsProvider
+        
+        Returns:
+            ae (m)
+        
+        
+        """
+        ...
+    def getMaxDegree(self) -> int:
+        """
+        Get the maximal supported degree.
+        
+        Specified by: getMaxDegree in interface SphericalHarmonicsProvider
+        
+        Returns:
+            maximal supported degree
+        
+        
+        """
+        ...
+    def getMaxOrder(self) -> int:
+        """
+        Get the maximal supported order.
+        
+        Specified by: getMaxOrder in interface SphericalHarmonicsProvider
+        
+        Returns:
+            maximal supported order
+        
+        
+        """
+        ...
+    def getMu(self) -> float:
+        """
+        Get the central body attraction coefficient.
+        
+        Specified by: getMu in interface SphericalHarmonicsProvider
+        
+        Returns:
+            mu (m³/s²)
+        
+        
+        """
+        ...
+    def getReferenceDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+        Get the reference date for the harmonics.
+        
+        Specified by: getReferenceDate in interface SphericalHarmonicsProvider
+        
+        Returns:
+            reference date for the harmonics
+        
+        
+        """
+        ...
+    def getTideSystem(self) -> TideSystem:
+        """
+        Get the TideSystem used in the gravity field.
+        
+        Specified by: getTideSystem in interface TideSystemProvider
+        
+        Returns:
+            tide system used in the gravity field
+        
+        
+        """
+        ...
+    def onDate(self, date: org.orekit.time.AbsoluteDate) -> NormalizedSphericalHarmonicsProvider.NormalizedSphericalHarmonics:
+        """
+        Get the normalized spherical harmonic coefficients at a specific instance in time.
+        
+        Specified by: onDate in interface NormalizedSphericalHarmonicsProvider
+        
+        Parameters:
+            date (AbsoluteDate): of evaluation
+        
+        Returns:
+            normalized coefficients on date.
+        
+        Since:
+            6.1
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
 
 class PythonRawSphericalHarmonicsProvider(RawSphericalHarmonicsProvider):
     def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getAe(self) -> float: ...
-    def getMaxDegree(self) -> int: ...
-    def getMaxOrder(self) -> int: ...
-    def getMu(self) -> float: ...
-    def getReferenceDate(self) -> org.orekit.time.AbsoluteDate: ...
-    def getTideSystem(self) -> TideSystem: ...
-    def onDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> RawSphericalHarmonicsProvider.RawSphericalHarmonics: ...
+    def finalize(self) -> None:
+        """
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getAe(self) -> float:
+        """
+        Get the value of the central body reference radius.
+        
+        Specified by: getAe in interface SphericalHarmonicsProvider
+        
+        Returns:
+            ae (m)
+        
+        
+        """
+        ...
+    def getMaxDegree(self) -> int:
+        """
+        Get the maximal supported degree.
+        
+        Specified by: getMaxDegree in interface SphericalHarmonicsProvider
+        
+        Returns:
+            maximal supported degree
+        
+        
+        """
+        ...
+    def getMaxOrder(self) -> int:
+        """
+        Get the maximal supported order.
+        
+        Specified by: getMaxOrder in interface SphericalHarmonicsProvider
+        
+        Returns:
+            maximal supported order
+        
+        
+        """
+        ...
+    def getMu(self) -> float:
+        """
+        Get the central body attraction coefficient.
+        
+        Specified by: getMu in interface SphericalHarmonicsProvider
+        
+        Returns:
+            mu (m³/s²)
+        
+        
+        """
+        ...
+    def getReferenceDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+        Get the reference date for the harmonics.
+        
+        For piecewise models, the latest reference date is returned.
+        
+        Specified by: getReferenceDate in interface SphericalHarmonicsProvider
+        
+        Returns:
+            reference date for the harmonics (may be null if no reference date is defined)
+        
+        
+        """
+        ...
+    def getTideSystem(self) -> TideSystem:
+        """
+        Get the TideSystem used in the gravity field.
+        
+        Specified by: getTideSystem in interface TideSystemProvider
+        
+        Returns:
+            tide system used in the gravity field
+        
+        
+        """
+        ...
+    def onDate(self, date: org.orekit.time.AbsoluteDate) -> RawSphericalHarmonicsProvider.RawSphericalHarmonics:
+        """
+        Get the raw spherical harmonic coefficients on a specific date.
+        
+        Specified by: onDate in interface RawSphericalHarmonicsProvider
+        
+        Parameters:
+            date (AbsoluteDate): to evaluate the spherical harmonics
+        
+        Returns:
+            the raw spherical harmonics on date.
+        
+        
+        """
+        ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
@@ -1823,26 +2589,180 @@ class PythonRawSphericalHarmonicsProvider(RawSphericalHarmonicsProvider):
 
 class PythonUnnormalizedSphericalHarmonics(UnnormalizedSphericalHarmonicsProvider.UnnormalizedSphericalHarmonics):
     def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getDate(self) -> org.orekit.time.AbsoluteDate: ...
-    def getUnnormalizedCnm(self, int: int, int2: int) -> float: ...
-    def getUnnormalizedSnm(self, int: int, int2: int) -> float: ...
-    def pythonDecRef(self) -> None: ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+        Get the date.
+        
+        Specified by: getDate in interface TimeStamped
+        
+        Returns:
+            date attached to the object
+        
+        
+        """
+        ...
+    def getUnnormalizedCnm(self, n: int, m: int) -> float:
+        """
+        Get a spherical harmonic cosine coefficient.
+        
+        Specified by: meth:`~org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider.UnnormalizedSphericalHarmonics.getUnnormalizedCnm` in interface UnnormalizedSphericalHarmonics
+        
+        Parameters:
+            n (int): degree of the coefficient
+            m (int): order of the coefficient
+        
+        Returns:
+            un-normalized coefficient Cnm
+        
+        
+        """
+        ...
+    def getUnnormalizedSnm(self, n: int, m: int) -> float:
+        """
+        Get a spherical harmonic sine coefficient.
+        
+        Specified by: meth:`~org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider.UnnormalizedSphericalHarmonics.getUnnormalizedSnm` in interface UnnormalizedSphericalHarmonics
+        
+        Parameters:
+            n (int): degree of the coefficient
+            m (int): order of the coefficient
+        
+        Returns:
+            un-normalized coefficient Snm
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
 
 class PythonUnnormalizedSphericalHarmonicsProvider(UnnormalizedSphericalHarmonicsProvider):
     def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getAe(self) -> float: ...
-    def getMaxDegree(self) -> int: ...
-    def getMaxOrder(self) -> int: ...
-    def getMu(self) -> float: ...
-    def getReferenceDate(self) -> org.orekit.time.AbsoluteDate: ...
-    def getTideSystem(self) -> TideSystem: ...
-    def onDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> UnnormalizedSphericalHarmonicsProvider.UnnormalizedSphericalHarmonics: ...
+    def finalize(self) -> None:
+        """
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getAe(self) -> float:
+        """
+        Get the value of the central body reference radius.
+        
+        Specified by: getAe in interface SphericalHarmonicsProvider
+        
+        Returns:
+            ae (m)
+        
+        
+        """
+        ...
+    def getMaxDegree(self) -> int:
+        """
+        Get the maximal supported degree.
+        
+        Specified by: getMaxDegree in interface SphericalHarmonicsProvider
+        
+        Returns:
+            maximal supported degree
+        
+        
+        """
+        ...
+    def getMaxOrder(self) -> int:
+        """
+        Get the maximal supported order.
+        
+        Specified by: getMaxOrder in interface SphericalHarmonicsProvider
+        
+        Returns:
+            maximal supported order
+        
+        
+        """
+        ...
+    def getMu(self) -> float:
+        """
+        Get the central body attraction coefficient.
+        
+        Specified by: getMu in interface SphericalHarmonicsProvider
+        
+        Returns:
+            mu (m³/s²)
+        
+        
+        """
+        ...
+    def getReferenceDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+        Get the reference date for the harmonics.
+        
+        Specified by: getReferenceDate in interface SphericalHarmonicsProvider
+        
+        Returns:
+            reference date for the harmonics
+        
+        
+        """
+        ...
+    def getTideSystem(self) -> TideSystem:
+        """
+        Get the TideSystem used in the gravity field.
+        
+        Specified by: getTideSystem in interface TideSystemProvider
+        
+        Returns:
+            tide system used in the gravity field
+        
+        
+        """
+        ...
+    def onDate(self, date: org.orekit.time.AbsoluteDate) -> UnnormalizedSphericalHarmonicsProvider.UnnormalizedSphericalHarmonics:
+        """
+        Get the un-normalized spherical harmonic coefficients at a specific instance in time.
+        
+        Specified by: onDate in interface UnnormalizedSphericalHarmonicsProvider
+        
+        Parameters:
+            date (AbsoluteDate): of evaluation
+        
+        Returns:
+            un-normalized coefficients on date.
+        
+        Since:
+            6.1
+        
+        
+        """
+        ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...

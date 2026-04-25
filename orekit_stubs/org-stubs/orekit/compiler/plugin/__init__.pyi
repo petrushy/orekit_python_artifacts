@@ -12,51 +12,51 @@ import typing
 
 class DefaultDataContextPlugin(com.sun.source.util.Plugin, com.sun.source.util.TaskListener):
     """
-    :class:`~org.orekit.compiler.plugin.https:.docs.oracle.com.javase.8.docs.api.javax.annotation.processing.SupportedAnnotationTypes?is`("org.orekit.annotation.DefaultDataContext") :class:`~org.orekit.compiler.plugin.https:.docs.oracle.com.javase.8.docs.api.javax.annotation.processing.SupportedSourceVersion?is`(:meth:`~org.orekit.compiler.plugin.https:.docs.oracle.com.javase.8.docs.api.javax.lang.model.SourceVersion.html?is`) public class DefaultDataContextPlugin extends :class:`~org.orekit.compiler.plugin.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements com.sun.source.util.Plugin, com.sun.source.util.TaskListener
+    Processes DefaultDataContext to issue warnings at compile time.
     
-        Processes :class:`~org.orekit.annotation.DefaultDataContext` to issue warnings at compile time.
+    To use this plugin add -Xplugin:dataContextPlugin to the javac command line. Tested with OpenJDK 8 and 11.
     
-        To use this plugin add :code:`-Xplugin:dataContextPlugin` to the javac command line. Tested with OpenJDK 8 and 11.
+    Do not reference this class unless executing within javac or you have added jar to the class path. jar is part of the JDK, not JRE, and is typically located at jar.
     
-        Do not reference this class unless executing within :code:`javac` or you have added :code:`tools.jar` to the class path.
-        :code:`tools.jar` is part of the JDK, not JRE, and is typically located at :code:`JAVA_HOME/../lib/tools.jar`.
-    
-        Since:
-            10.1
+    Since:
+        10.1
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Empty constructor.
+        
+        This constructor is not strictly necessary, but it prevents spurious javadoc warnings with JDK 18 and later.
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
     def finished(self, taskEvent: com.sun.source.util.TaskEvent) -> None:
         """
-        
-            Specified by:
-                :code:`finished` in interface :code:`com.sun.source.util.TaskListener`
+        Specified by: finished in interface TaskListener
         
         
         """
         ...
     def getName(self) -> str:
         """
-        
-            Specified by:
-                :code:`getName` in interface :code:`com.sun.source.util.Plugin`
+        Specified by: getName in interface Plugin
         
         
         """
         ...
     def init(self, javacTask: com.sun.source.util.JavacTask, *string: str) -> None:
         """
-        
-            Specified by:
-                :code:`init` in interface :code:`com.sun.source.util.Plugin`
+        Specified by: init in interface Plugin
         
         
         """
         ...
     def started(self, taskEvent: com.sun.source.util.TaskEvent) -> None:
         """
-        
-            Specified by:
-                :code:`started` in interface :code:`com.sun.source.util.TaskListener`
+        Specified by: started in interface TaskListener
         
         
         """

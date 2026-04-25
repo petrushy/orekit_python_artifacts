@@ -18,25 +18,47 @@ import typing
 
 class STKEphemerisFile(org.orekit.files.general.EphemerisFile[org.orekit.utils.TimeStampedPVCoordinates, 'STKEphemerisFile.STKEphemerisSegment']):
     """
-    public class STKEphemerisFile extends :class:`~org.orekit.files.stk.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`, :class:`~org.orekit.files.stk.STKEphemerisFile.STKEphemerisSegment`>
+    STK ephemeris file.
     
-        STK ephemeris file.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
-    def __init__(self, string: str, string2: str, sTKEphemeris: 'STKEphemerisFile.STKEphemeris'): ...
-    def getSTKVersion(self) -> str:
+    def __init__(self, stkVersion: str, satelliteId: str, ephemeris: 'STKEphemerisFile.STKEphemeris'):
         """
-            Returns the STK version string.
+        Constructs a STKEphemerisFile instance.
         
-            Returns:
-                STK version string
+        Parameters:
+            stkVersion (String): STK version string (example: "stk.v.11.0")
+            satelliteId (String): satellite id
+            ephemeris (STKEphemeris): ephemeris
         
         
         """
         ...
-    def getSatellites(self) -> java.util.Map[str, 'STKEphemerisFile.STKEphemeris']: ...
+    def getSTKVersion(self) -> str:
+        """
+        Returns the STK version string.
+        
+        Returns:
+            STK version string
+        
+        
+        """
+        ...
+    def getSatellites(self) -> java.util.Map[str, 'STKEphemerisFile.STKEphemeris']:
+        """
+        Get the loaded ephemeris for each satellite in the file.
+        
+        STK ephemeris files define ephemeris for a single satellite, so the returned map will have a single entry.
+        
+        Specified by: getSatellites in interface EphemerisFile
+        
+        Returns:
+            a map from the satellite's ID to the information about that satellite contained in the file.
+        
+        
+        """
+        ...
     class STKCoordinateSystem(java.lang.Enum['STKEphemerisFile.STKCoordinateSystem']):
         ICRF: typing.ClassVar['STKEphemerisFile.STKCoordinateSystem'] = ...
         J2000: typing.ClassVar['STKEphemerisFile.STKCoordinateSystem'] = ...
@@ -75,44 +97,47 @@ class STKEphemerisFile(org.orekit.files.general.EphemerisFile[org.orekit.utils.T
 
 class STKEphemerisFileParser(org.orekit.files.general.EphemerisFileParser[STKEphemerisFile]):
     """
-    public class STKEphemerisFileParser extends :class:`~org.orekit.files.stk.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFileParser`<:class:`~org.orekit.files.stk.STKEphemerisFile`>
+    Parser of STKEphemerisFiles.
     
-        Parser of :class:`~org.orekit.files.stk.STKEphemerisFile`s.
+    The STK ephemeris file format specification is quite extensive and this implementation does not attempt (nor is it possible, given the lack of an STK scenario to provide context) to support all possible variations of the format. The following keywords are recognized (case-insensitive):
     
-        The STK ephemeris file format specification is quite extensive and this implementation does not attempt (nor is it
-        possible, given the lack of an STK scenario to provide context) to support all possible variations of the format. The
-        following keywords are recognized (case-insensitive):
+    Any keyword in the format specification which is not explicitly named in the above table is not recognized and will cause a parse exception. Those keywords that are listed above as recognized but not supported are simply ignored.
     
-        Any keyword in the format specification which is not explicitly named in the above table is not recognized and will
-        cause a parse exception. Those keywords that are listed above as recognized but not supported are simply ignored.
+    The following ephemeris formats are recognized and supported:
     
-        The following ephemeris formats are recognized and supported:
+      - EphemerisTimePos
+      - EphemerisTimePosVel
+      - EphemerisTimePosVelAcc
     
-          - EphemerisTimePos
-          - EphemerisTimePosVel
-          - EphemerisTimePosVelAcc
+    Any ephemeris format in the format specification which is not explicitly named in the above list is not recognized and will cause an exception.
     
-        Any ephemeris format in the format specification which is not explicitly named in the above list is not recognized and
-        will cause an exception.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
-    def __init__(self, string: str, double: float, uTCScale: org.orekit.time.UTCScale, map: typing.Union[java.util.Map[STKEphemerisFile.STKCoordinateSystem, org.orekit.frames.Frame], typing.Mapping[STKEphemerisFile.STKCoordinateSystem, org.orekit.frames.Frame]]): ...
-    def parse(self, dataSource: org.orekit.data.DataSource) -> STKEphemerisFile:
+    def __init__(self, satelliteId: str, mu: float, utc: org.orekit.time.UTCScale, frameMapping: typing.Union[java.util.Map[STKEphemerisFile.STKCoordinateSystem, org.orekit.frames.Frame], typing.Mapping[STKEphemerisFile.STKCoordinateSystem, org.orekit.frames.Frame]]):
         """
-            Description copied from interface: :meth:`~org.orekit.files.general.EphemerisFileParser.parse`
-            Parse an ephemeris file from a data source.
+        Constructs a STKEphemerisFileParser instance.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFileParser.parse` in
-                interface :class:`~org.orekit.files.general.EphemerisFileParser`
+        Parameters:
+            satelliteId (String): satellite id for satellites parsed by the parser
+            mu (double): gravitational parameter (m^3/s^2)
+            utc (UTCScale): UTC scale for parsed dates
+            frameMapping (Map<STKCoordinateSystem, Frame> frameMapping): mapping from STK coordinate system to Orekit frame
         
-            Parameters:
-                source (:class:`~org.orekit.data.DataSource`): source providing the data to parse
         
-            Returns:
-                a parsed ephemeris file.
+        """
+        ...
+    def parse(self, source: org.orekit.data.DataSource) -> STKEphemerisFile:
+        """
+        Description copied from interface: parse Parse an ephemeris file from a data source.
+        
+        Specified by: parse in interface EphemerisFileParser
+        
+        Parameters:
+            source (DataSource): source providing the data to parse
+        
+        Returns:
+            a parsed ephemeris file.
         
         
         """

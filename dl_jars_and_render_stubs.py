@@ -1,7 +1,9 @@
 # /// script
 # requires-python = ">=3.12"
 # dependencies = [
-#     "stubgenj",
+#     "jpype1==1.6.0",
+#     "stubgenj @ git+https://github.com/petrushy/stubgenj",
+#     "jdk4py",
 # ]
 # ///
 

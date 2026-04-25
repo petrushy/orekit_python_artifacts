@@ -14,76 +14,109 @@ import typing
 _ExtendedKalmanFilter__T = typing.TypeVar('_ExtendedKalmanFilter__T', bound=org.hipparchus.filtering.kalman.Measurement)  # <T>
 class ExtendedKalmanFilter(org.hipparchus.filtering.kalman.AbstractKalmanFilter[_ExtendedKalmanFilter__T], typing.Generic[_ExtendedKalmanFilter__T]):
     """
-    public classExtendedKalmanFilter<T extends :class:`~org.hipparchus.filtering.kalman.Measurement`> extends :class:`~org.hipparchus.filtering.kalman.AbstractKalmanFilter`<T>
+    Kalman filter for NonLinearProcess.
     
-        Kalman filter for :class:`~org.hipparchus.filtering.kalman.extended.NonLinearProcess`.
-    
-        Since:
-            1.3
+    Since:
+        1.3
     """
-    def __init__(self, matrixDecomposer: typing.Union[org.hipparchus.linear.MatrixDecomposer, typing.Callable], nonLinearProcess: 'NonLinearProcess'[_ExtendedKalmanFilter__T], processEstimate: org.hipparchus.filtering.kalman.ProcessEstimate): ...
-    def estimationStep(self, t: _ExtendedKalmanFilter__T) -> org.hipparchus.filtering.kalman.ProcessEstimate: ...
+    def __init__(self, decomposer: typing.Union[org.hipparchus.linear.MatrixDecomposer, typing.Callable], process: 'NonLinearProcess'[_ExtendedKalmanFilter__T], initialState: org.hipparchus.filtering.kalman.ProcessEstimate):
+        """
+        Simple constructor.
+        
+        Parameters:
+            decomposer (hipparchus): decomposer to use for the correction phase
+            process (NonLinearProcess<ExtendedKalmanFilter> process): non-linear process to estimate
+            initialState (ProcessEstimate): initial state
+        
+        
+        """
+        ...
+    def estimationStep(self, measurement: _ExtendedKalmanFilter__T) -> org.hipparchus.filtering.kalman.ProcessEstimate:
+        """
+        Perform one estimation step.
+        
+        Parameters:
+            measurement (ExtendedKalmanFilter): single measurement to handle
+        
+        Returns:
+            estimated state after measurement has been considered
+        
+        Raises:
+            hipparchus: if estimation fails
+        
+        
+        """
+        ...
 
 class NonLinearEvolution:
     """
-    public classNonLinearEvolution extends :class:`~org.hipparchus.filtering.kalman.extended.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Container for NonLinearProcess evolution data.
     
-        Container for :class:`~org.hipparchus.filtering.kalman.extended.NonLinearProcess` evolution data.
+    Since:
+        1.3
     
-        Since:
-            1.3
-    
-        Also see:
-    
-              - :class:`~org.hipparchus.filtering.kalman.extended.NonLinearProcess`
+          - NonLinearProcess
     """
-    def __init__(self, double: float, realVector: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix, realMatrix2: org.hipparchus.linear.RealMatrix, realMatrix3: org.hipparchus.linear.RealMatrix): ...
+    def __init__(self, currentTime: float, currentState: org.hipparchus.linear.RealVector, stateTransitionMatrix: org.hipparchus.linear.RealMatrix, processNoiseMatrix: org.hipparchus.linear.RealMatrix, measurementJacobian: org.hipparchus.linear.RealMatrix):
+        """
+        Simple constructor.
+        
+        Parameters:
+            currentTime (double): current time
+            currentState (hipparchus): state vector at current time
+            stateTransitionMatrix (hipparchus): state transition matrix between previous and current state
+            processNoiseMatrix (hipparchus): process noise
+            measurementJacobian (hipparchus): Jacobian of the measurement with respect to the state (may be null if measurement should be ignored)
+        
+        
+        """
+        ...
     def getCurrentState(self) -> org.hipparchus.linear.RealVector:
         """
-            Get current state.
+        Get current state.
         
-            Returns:
-                current state
+        Returns:
+            current state
         
         
         """
         ...
     def getCurrentTime(self) -> float:
         """
-            Get current time.
+        Get current time.
         
-            Returns:
-                current time
+        Returns:
+            current time
         
         
         """
         ...
     def getMeasurementJacobian(self) -> org.hipparchus.linear.RealMatrix:
         """
-            Get measurement Jacobian.
+        Get measurement Jacobian.
         
-            Returns:
-                Jacobian of the measurement with respect to the state (may be null if measurement should be ignored)
+        Returns:
+            Jacobian of the measurement with respect to the state (may be null if measurement should be ignored)
         
         
         """
         ...
     def getProcessNoiseMatrix(self) -> org.hipparchus.linear.RealMatrix:
         """
-            Get process noise.
+        Get process noise.
         
-            Returns:
-                process noise
+        Returns:
+            process noise
         
         
         """
         ...
     def getStateTransitionMatrix(self) -> org.hipparchus.linear.RealMatrix:
         """
-            Get state transition matrix between previous and current state.
+        Get state transition matrix between previous and current state.
         
-            Returns:
-                state transition matrix between previous and current state
+        Returns:
+            state transition matrix between previous and current state
         
         
         """
@@ -92,48 +125,44 @@ class NonLinearEvolution:
 _NonLinearProcess__T = typing.TypeVar('_NonLinearProcess__T', bound=org.hipparchus.filtering.kalman.Measurement)  # <T>
 class NonLinearProcess(typing.Generic[_NonLinearProcess__T]):
     """
-    public interfaceNonLinearProcess<T extends :class:`~org.hipparchus.filtering.kalman.Measurement`>
+    Non-linear process that can be estimated by a ExtendedKalmanFilter.
     
-        Non-linear process that can be estimated by a :class:`~org.hipparchus.filtering.kalman.extended.ExtendedKalmanFilter`.
+    This interface must be implemented by users to represent the behavior of the process to be estimated
     
-        This interface must be implemented by users to represent the behavior of the process to be estimated
+    Since:
+        1.3
     
-        Since:
-            1.3
-    
-        Also see:
-    
-              - :class:`~org.hipparchus.filtering.kalman.extended.ExtendedKalmanFilter`
-              - :class:`~org.hipparchus.filtering.kalman.linear.LinearProcess`
+          - ExtendedKalmanFilter
+          - LinearProcess
     """
-    def getEvolution(self, double: float, realVector: org.hipparchus.linear.RealVector, t: _NonLinearProcess__T) -> NonLinearEvolution:
+    def getEvolution(self, previousTime: float, previousState: org.hipparchus.linear.RealVector, measurement: _NonLinearProcess__T) -> NonLinearEvolution:
         """
-            Get the state evolution between two times.
+        Get the state evolution between two times.
         
-            Parameters:
-                previousTime (double): time of the previous state
-                previousState (:class:`~org.hipparchus.filtering.kalman.extended.https:.www.hipparchus.org.hipparchus`): process state at :code:`previousTime`
-                measurement (:class:`~org.hipparchus.filtering.kalman.extended.NonLinearProcess`): measurement to process
+        Parameters:
+            previousTime (double): time of the previous state
+            previousState (hipparchus): process state at previousTime
+            measurement (NonLinearProcess): measurement to process
         
-            Returns:
-                state evolution
+        Returns:
+            state evolution
         
         
         """
         ...
-    def getInnovation(self, t: _NonLinearProcess__T, nonLinearEvolution: NonLinearEvolution, realMatrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.RealVector:
+    def getInnovation(self, measurement: _NonLinearProcess__T, evolution: NonLinearEvolution, innovationCovarianceMatrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.RealVector:
         """
-            Get the innovation brought by a measurement.
+        Get the innovation brought by a measurement.
         
-            Parameters:
-                measurement (:class:`~org.hipparchus.filtering.kalman.extended.NonLinearProcess`): measurement to process
-                evolution (:class:`~org.hipparchus.filtering.kalman.extended.NonLinearEvolution`):             evolution returned by a previous call to :meth:`~org.hipparchus.filtering.kalman.extended.NonLinearProcess.getEvolution`
-                innovationCovarianceMatrix (:class:`~org.hipparchus.filtering.kalman.extended.https:.www.hipparchus.org.hipparchus`): innovation covariance matrix, defined as \(h.P.h^T + r\) where h is the
-                    :meth:`~org.hipparchus.filtering.kalman.extended.NonLinearEvolution.getMeasurementJacobian`, P is the predicted
-                    covariance and r is :meth:`~org.hipparchus.filtering.kalman.Measurement.getCovariance`
+        Parameters:
+            measurement (NonLinearProcess): measurement to process
+            evolution (NonLinearEvolution):             evolution returned by a previous call to getEvolution
+            innovationCovarianceMatrix (hipparchus): innovation covariance matrix, defined as \(h.P.h^T + r\) where h is the
+                getMeasurementJacobian, P is the predicted
+                covariance and r is getCovariance
         
-            Returns:
-                innovation brought by a measurement, may be null if measurement should be rejected
+        Returns:
+            innovation brought by a measurement, may be null if measurement should be rejected
         
         
         """

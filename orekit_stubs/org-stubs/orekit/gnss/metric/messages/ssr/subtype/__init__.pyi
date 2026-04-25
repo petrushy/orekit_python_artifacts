@@ -15,20 +15,29 @@ import typing
 
 class SsrIm201(org.orekit.gnss.metric.messages.ssr.SsrMessage['SsrIm201Header', 'SsrIm201Data']):
     """
-    public class SsrIm201 extends :class:`~org.orekit.gnss.metric.messages.ssr.SsrMessage`<:class:`~org.orekit.gnss.metric.messages.ssr.subtype.SsrIm201Header`, :class:`~org.orekit.gnss.metric.messages.ssr.subtype.SsrIm201Data`>
+    SSR Ionosphere VTEC Spherical Harmonics Message.
     
-        SSR Ionosphere VTEC Spherical Harmonics Message.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, int: int, ssrIm201Header: 'SsrIm201Header', list: java.util.List['SsrIm201Data']): ...
+    def __init__(self, typeCode: int, header: 'SsrIm201Header', data: java.util.List['SsrIm201Data']):
+        """
+        Constructor.
+        
+        Parameters:
+            typeCode (int): message number
+            header (SsrIm201Header): message header
+            data (List<SsrIm201Data> data): message data
+        
+        
+        """
+        ...
     def getIonosphericModel(self) -> org.orekit.models.earth.ionosphere.SsrVtecIonosphericModel:
         """
-            Get the ionospheric model adapted to the current IM201 message.
+        Get the ionospheric model adapted to the current IM201 message.
         
-            Returns:
-                the ionospheric model
+        Returns:
+            the ionospheric model
         
         
         """
@@ -36,116 +45,118 @@ class SsrIm201(org.orekit.gnss.metric.messages.ssr.SsrMessage['SsrIm201Header', 
 
 class SsrIm201Data(org.orekit.gnss.metric.messages.ssr.SsrData):
     """
-    public class SsrIm201Data extends :class:`~org.orekit.gnss.metric.messages.ssr.SsrData`
+    Container for SSR IM201 data.
     
-        Container for SSR IM201 data.
+    One instance of this class corresponds to one ionospheric layer.
     
-        One instance of this class corresponds to one ionospheric layer.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Constructor.
+        """
+        ...
     def getCnm(self) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
-            Get the cosine parameters of spherical harmonics expansion of degree N and order M.
+        Get the cosine parameters of spherical harmonics expansion of degree N and order M.
         
-            The size of the array is (N + 1) x (M + 1)
+        The size of the array is (N + 1) x (M + 1)
         
-            Returns:
-                the cosine parameters in TECU
+        Returns:
+            the cosine parameters in TECU
         
         
         """
         ...
     def getHeightIonosphericLayer(self) -> float:
         """
-            Get the height of the ionospheric layer.
+        Get the height of the ionospheric layer.
         
-            Returns:
-                the height of the ionospheric layer in meters
+        Returns:
+            the height of the ionospheric layer in meters
         
         
         """
         ...
     def getSnm(self) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
-            Get the sine parameters of spherical harmonics expansion of degree N and order M.
+        Get the sine parameters of spherical harmonics expansion of degree N and order M.
         
-            The size of the array is (N + 1) x (M + 1)
+        The size of the array is (N + 1) x (M + 1)
         
-            Returns:
-                the sine parameters in TECU
+        Returns:
+            the sine parameters in TECU
         
         
         """
         ...
     def getSphericalHarmonicsDegree(self) -> int:
         """
-            Get the degree of spherical harmonic expansion.
+        Get the degree of spherical harmonic expansion.
         
-            Returns:
-                the degree of spherical harmonic expansion
+        Returns:
+            the degree of spherical harmonic expansion
         
         
         """
         ...
     def getSphericalHarmonicsOrder(self) -> int:
         """
-            Get the order of spherical harmonic expansion.
+        Get the order of spherical harmonic expansion.
         
-            Returns:
-                the order the order of spherical harmonic expansion
-        
-        
-        """
-        ...
-    def setCnm(self, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None:
-        """
-            Set the cosine parameters of spherical harmonics expansion of degree N and order M.
-        
-            Parameters:
-                cnm (double[][]): the parameters to set
+        Returns:
+            the order the order of spherical harmonic expansion
         
         
         """
         ...
-    def setHeightIonosphericLayer(self, double: float) -> None:
+    def setCnm(self, cnm: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None:
         """
-            Set the height of the ionospheric layer.
+        Set the cosine parameters of spherical harmonics expansion of degree N and order M.
         
-            Parameters:
-                heightIonosphericLayer (double): the height to set in meters
-        
-        
-        """
-        ...
-    def setSnm(self, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None:
-        """
-            Set the sine parameters of spherical harmonics expansion of degree N and order M.
-        
-            Parameters:
-                snm (double[][]): the parameters to set
+        Parameters:
+            cnm (double[][]): the parameters to set
         
         
         """
         ...
-    def setSphericalHarmonicsDegree(self, int: int) -> None:
+    def setHeightIonosphericLayer(self, heightIonosphericLayer: float) -> None:
         """
-            Set the degree of spherical harmonic expansion.
+        Set the height of the ionospheric layer.
         
-            Parameters:
-                sphericalHarmonicsDegree (int): the degree to set
+        Parameters:
+            heightIonosphericLayer (double): the height to set in meters
         
         
         """
         ...
-    def setSphericalHarmonicsOrder(self, int: int) -> None:
+    def setSnm(self, snm: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None:
         """
-            Set the order of spherical harmonic expansion.
+        Set the sine parameters of spherical harmonics expansion of degree N and order M.
         
-            Parameters:
-                sphericalHarmonicsOrder (int): the order to set
+        Parameters:
+            snm (double[][]): the parameters to set
+        
+        
+        """
+        ...
+    def setSphericalHarmonicsDegree(self, sphericalHarmonicsDegree: int) -> None:
+        """
+        Set the degree of spherical harmonic expansion.
+        
+        Parameters:
+            sphericalHarmonicsDegree (int): the degree to set
+        
+        
+        """
+        ...
+    def setSphericalHarmonicsOrder(self, sphericalHarmonicsOrder: int) -> None:
+        """
+        Set the order of spherical harmonic expansion.
+        
+        Parameters:
+            sphericalHarmonicsOrder (int): the order to set
         
         
         """
@@ -153,50 +164,52 @@ class SsrIm201Data(org.orekit.gnss.metric.messages.ssr.SsrData):
 
 class SsrIm201Header(org.orekit.gnss.metric.messages.ssr.SsrHeader):
     """
-    public class SsrIm201Header extends :class:`~org.orekit.gnss.metric.messages.ssr.SsrHeader`
+    Container for SSR IM201 header.
     
-        Container for SSR IM201 header.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Constructor.
+        """
+        ...
     def getNumberOfIonosphericLayers(self) -> int:
         """
-            Get the number of ionospheric layers.
+        Get the number of ionospheric layers.
         
-            Returns:
-                the number of ionospheric layers
+        Returns:
+            the number of ionospheric layers
         
         
         """
         ...
     def getVtecQualityIndicator(self) -> float:
         """
-            Get the VTEC quality indicator.
+        Get the VTEC quality indicator.
         
-            Returns:
-                the VTEC quality indicator in TECU
-        
-        
-        """
-        ...
-    def setNumberOfIonosphericLayers(self, int: int) -> None:
-        """
-            Set the number of ionospheric layers.
-        
-            Parameters:
-                numberOfIonosphericLayers (int): the number to set
+        Returns:
+            the VTEC quality indicator in TECU
         
         
         """
         ...
-    def setVtecQualityIndicator(self, double: float) -> None:
+    def setNumberOfIonosphericLayers(self, numberOfIonosphericLayers: int) -> None:
         """
-            Set the VTEC quality indicator.
+        Set the number of ionospheric layers.
         
-            Parameters:
-                vtecQualityIndicator (double): the VTEC quality indicator to set in TECU
+        Parameters:
+            numberOfIonosphericLayers (int): the number to set
+        
+        
+        """
+        ...
+    def setVtecQualityIndicator(self, vtecQualityIndicator: float) -> None:
+        """
+        Set the VTEC quality indicator.
+        
+        Parameters:
+            vtecQualityIndicator (double): the VTEC quality indicator to set in TECU
         
         
         """

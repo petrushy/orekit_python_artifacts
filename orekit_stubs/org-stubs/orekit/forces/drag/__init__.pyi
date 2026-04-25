@@ -22,39 +22,36 @@ import typing
 
 class AbstractDragForceModel(org.orekit.forces.ForceModel):
     """
-    public abstract class AbstractDragForceModel extends :class:`~org.orekit.forces.drag.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
+    Base class for drag force models.
     
-        Base class for drag force models.
+    Since:
+        10.2
     
-        Since:
-            10.2
-    
-        Also see:
-            :class:`~org.orekit.forces.drag.DragForce`
+    Also see:
+        DragForce
     """
     def dependsOnPositionOnly(self) -> bool:
         """
-            Check if force model depends on position only at a given, fixed date.
+        Check if force model depends on position only at a given, fixed date.
         
-            Specified by:
-                :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
+        Specified by: dependsOnPositionOnly in interface ForceModel
         
-            Returns:
-                true if force model depends on position only, false if it depends on mass or velocity, either directly or due to a
-                dependency on attitude
+        Returns:
+            true if force model depends on position only, false if it depends on mass or velocity, either directly or due to a
+            dependency on attitude
         
         
         """
         ...
     def getAtmosphere(self) -> org.orekit.models.earth.atmosphere.Atmosphere:
         """
-            Get the atmospheric model.
+        Get the atmospheric model.
         
-            Returns:
-                atmosphere model
+        Returns:
+            atmosphere model
         
-            Since:
-                12.1
+        Since:
+            12.1
         
         
         """
@@ -62,124 +59,120 @@ class AbstractDragForceModel(org.orekit.forces.ForceModel):
 
 class DragSensitive:
     """
-    public interface DragSensitive
+    Interface for spacecraft that are sensitive to atmospheric drag forces.
     
-        Interface for spacecraft that are sensitive to atmospheric drag forces.
-    
-        Also see:
-            :class:`~org.orekit.forces.drag.DragForce`
+    Also see:
+        DragForce
     """
     GLOBAL_DRAG_FACTOR: typing.ClassVar[str] = ...
     """
-    static final :class:`~org.orekit.forces.drag.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` GLOBAL_DRAG_FACTOR
+    Parameter name for global multiplicative factor.
     
-        Parameter name for global multiplicative factor.
+    Since:
+        12.0
     
-        Since:
-            12.0
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     DRAG_COEFFICIENT: typing.ClassVar[str] = ...
     """
-    static final :class:`~org.orekit.forces.drag.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DRAG_COEFFICIENT
+    Parameter name for drag coefficient.
     
-        Parameter name for drag coefficient.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     LIFT_RATIO: typing.ClassVar[str] = ...
     """
-    static final :class:`~org.orekit.forces.drag.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` LIFT_RATIO
+    Parameter name for lift ration enabling Jacobian processing.
     
-        Parameter name for lift ration enabling Jacobian processing.
+    The lift ratio is the proportion of atmosphere modecules that will experience specular reflection when hitting spacecraft instead of experiencing diffuse reflection. The ratio is between 0 and 1, 0 meaning there are no specular reflection, only diffuse reflection, and hence no lift effect.
     
-        The lift ratio is the proportion of atmosphere modecules that will experience specular reflection when hitting
-        spacecraft instead of experiencing diffuse reflection. The ratio is between 0 and 1, 0 meaning there are no specular
-        reflection, only diffuse reflection, and hence no lift effect.
+    Since:
+        9.0
     
-        Since:
-            9.0
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     def dependsOnAttitudeRate(self) -> bool:
         """
-            Check if model depends on attitude's rotation rate or acceleration at a given, fixed date. If false, it essentially
-            means that at most the attitude's rotation is used when computing the acceleration vector. The default implementation
-            returns false as common models for orbital mechanics do not.
+        Check if model depends on attitude's rotation rate or acceleration at a given, fixed date. If false, it essentially means that at most the attitude's rotation is used when computing the acceleration vector. The default implementation returns false as common models for orbital mechanics do not.
         
-            Returns:
-                true if force model depends on attitude derivatives
+        Returns:
+            true if force model depends on attitude derivatives
         
-            Since:
-                12.1
+        Since:
+            12.1
         
         
         """
         ...
     _dragAcceleration_0__T = typing.TypeVar('_dragAcceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def dragAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_0__T], t: _dragAcceleration_0__T, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], tArray: typing.Union[typing.List[_dragAcceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]:
+    def dragAcceleration(self, state: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_0__T], density: _dragAcceleration_0__T, relativeVelocity: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], parameters: typing.Union[typing.List[_dragAcceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]:
         """
-            Compute the acceleration due to drag.
+        Compute the acceleration due to drag.
         
-            The computation includes all spacecraft specific characteristics like shape, area and coefficients.
+        The computation includes all spacecraft specific characteristics like shape, area and coefficients.
         
-            Parameters:
-                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state
-                density (T): atmospheric density at spacecraft position
-                relativeVelocity (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> relativeVelocity): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
-                parameters (T[]): values of the force model parameters
+        Parameters:
+            state (FieldSpacecraftState<T> state): current state
+            density (T): atmospheric density at spacecraft position
+            relativeVelocity (FieldVector3D<T> relativeVelocity): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
+            parameters (T[]): values of the force model parameters
         
-            Returns:
-                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
+        Returns:
+            spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     @typing.overload
-    def dragAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def dragAcceleration(self, state: org.orekit.propagation.SpacecraftState, density: float, relativeVelocity: org.hipparchus.geometry.euclidean.threed.Vector3D, parameters: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Compute the acceleration due to drag.
+        Compute the acceleration due to drag.
         
-            The computation includes all spacecraft specific characteristics like shape, area and coefficients.
+        The computation includes all spacecraft specific characteristics like shape, area and coefficients.
         
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
-                density (double): atmospheric density at spacecraft position
-                relativeVelocity (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
-                parameters (double[]): values of the force model parameters
+        Parameters:
+            state (SpacecraftState): current state
+            density (double): atmospheric density at spacecraft position
+            relativeVelocity (Vector3D): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
+            parameters (double[]): values of the force model parameters
         
-            Returns:
-                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
+        Returns:
+            spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         """
         ...
-    def getDragParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def getDragParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]:
+        """
+        Get the drivers for supported parameters.
+        
+        Returns:
+            parameters drivers
+        
+        Since:
+            8.0
+        
+        
+        """
+        ...
 
 class DragForce(AbstractDragForceModel):
     """
-    public class DragForce extends :class:`~org.orekit.forces.drag.AbstractDragForceModel`
-    
-        Atmospheric drag force model. The drag acceleration is computed as follows : γ = (1/2 * ρ * V² * S / Mass) *
-        DragCoefVector With DragCoefVector = {C :sub:`x` , C :sub:`y` , C :sub:`z` } and S given by the user through the
-        interface :class:`~org.orekit.forces.drag.DragSensitive`
+    Atmospheric drag force model. The drag acceleration is computed as follows : γ = (1/2 * ρ * V² * S / Mass) * DragCoefVector With DragCoefVector = {C :sub:`x` , C :sub:`y` , C :sub:`z` } and S given by the user through the interface DragSensitive
     """
     @typing.overload
     def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere, dragSensitive: DragSensitive): ...
@@ -187,53 +180,60 @@ class DragForce(AbstractDragForceModel):
     def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere, dragSensitive: DragSensitive, boolean: bool): ...
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
+    def acceleration(self, s: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], parameters: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
         """
-            Compute acceleration.
+        Compute acceleration.
         
-            Parameters:
-                s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
+        Parameters:
+            s (FieldSpacecraftState<T> s): current state information: date, kinematics, attitude
+            parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
-            Returns:
-                acceleration in same frame as state
+        Returns:
+            acceleration in same frame as state
         
         
         """
         ...
     @typing.overload
-    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def acceleration(self, s: org.orekit.propagation.SpacecraftState, parameters: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Compute acceleration.
+        Compute acceleration.
         
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
+        Parameters:
+            s (SpacecraftState): current state information: date, kinematics, attitude
+            parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
-            Returns:
-                acceleration in same frame as state
+        Returns:
+            acceleration in same frame as state
         
         """
         ...
     def dependsOnAttitudeRate(self) -> bool:
         """
-            Check if force model depends on attitude's rotation rate or acceleration at a given, fixed date. If false, it
-            essentially means that at most the attitude's rotation is used when computing the acceleration vector. The default
-            implementation returns false as common forces do not.
+        Check if force model depends on attitude's rotation rate or acceleration at a given, fixed date. If false, it essentially means that at most the attitude's rotation is used when computing the acceleration vector. The default implementation returns false as common forces do not.
         
-            Returns:
-                true if force model depends on attitude derivatives
+        Returns:
+            true if force model depends on attitude derivatives
         
         
         """
         ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]:
+        """
+        Get the drivers for parameters.
+        
+        Returns:
+            drivers for parameters
+        
+        
+        """
+        ...
     def getSpacecraft(self) -> DragSensitive:
         """
-            Get spacecraft that are sensitive to atmospheric drag forces.
+        Get spacecraft that are sensitive to atmospheric drag forces.
         
-            Returns:
-                drag sensitive spacecraft model
+        Returns:
+            drag sensitive spacecraft model
         
         
         """
@@ -241,19 +241,16 @@ class DragForce(AbstractDragForceModel):
 
 class IsotropicDrag(DragSensitive):
     """
-    public class IsotropicDrag extends :class:`~org.orekit.forces.drag.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.drag.DragSensitive`
+    This class models isotropic drag effects.
     
-        This class models isotropic drag effects.
+    The model of this spacecraft is a simple spherical model, this means that all coefficients are constant and do not depend on the direction.
     
-        The model of this spacecraft is a simple spherical model, this means that all coefficients are constant and do not
-        depend on the direction.
+    Since:
+        7.1
     
-        Since:
-            7.1
-    
-        Also see:
-            :class:`~org.orekit.forces.BoxAndSolarArraySpacecraft`,
-            :class:`~org.orekit.forces.radiation.IsotropicRadiationCNES95Convention`
+    Also see:
+        BoxAndSolarArraySpacecraft,
+        IsotropicRadiationCNES95Convention
     """
     @typing.overload
     def __init__(self, double: float, double2: float): ...
@@ -261,81 +258,217 @@ class IsotropicDrag(DragSensitive):
     def __init__(self, double: float, double2: float, double3: float, double4: float): ...
     _dragAcceleration_0__T = typing.TypeVar('_dragAcceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def dragAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_0__T], t: _dragAcceleration_0__T, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], tArray: typing.Union[typing.List[_dragAcceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]:
+    def dragAcceleration(self, state: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_0__T], density: _dragAcceleration_0__T, relativeVelocity: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], parameters: typing.Union[typing.List[_dragAcceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]:
         """
-            Compute the acceleration due to drag.
+        Compute the acceleration due to drag.
         
-            The computation includes all spacecraft specific characteristics like shape, area and coefficients.
+        The computation includes all spacecraft specific characteristics like shape, area and coefficients.
         
-            Specified by:
-                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration` in
-                interface :class:`~org.orekit.forces.drag.DragSensitive`
+        Specified by: dragAcceleration in interface DragSensitive
         
-            Parameters:
-                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state
-                density (T): atmospheric density at spacecraft position
-                relativeVelocity (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> relativeVelocity): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
-                parameters (T[]): values of the force model parameters
+        Parameters:
+            state (FieldSpacecraftState<T> state): current state
+            density (T): atmospheric density at spacecraft position
+            relativeVelocity (FieldVector3D<T> relativeVelocity): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
+            parameters (T[]): values of the force model parameters
         
-            Returns:
-                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
+        Returns:
+            spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
         
         
         """
         ...
     @typing.overload
-    def dragAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def dragAcceleration(self, state: org.orekit.propagation.SpacecraftState, density: float, relativeVelocity: org.hipparchus.geometry.euclidean.threed.Vector3D, parameters: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Compute the acceleration due to drag.
+        Compute the acceleration due to drag.
         
-            The computation includes all spacecraft specific characteristics like shape, area and coefficients.
+        The computation includes all spacecraft specific characteristics like shape, area and coefficients.
         
-            Specified by:
-                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration` in
-                interface :class:`~org.orekit.forces.drag.DragSensitive`
+        Specified by: dragAcceleration in interface DragSensitive
         
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
-                density (double): atmospheric density at spacecraft position
-                relativeVelocity (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
-                parameters (double[]): values of the force model parameters
+        Parameters:
+            state (SpacecraftState): current state
+            density (double): atmospheric density at spacecraft position
+            relativeVelocity (Vector3D): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
+            parameters (double[]): values of the force model parameters
         
-            Returns:
-                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
+        Returns:
+            spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
         
         """
         ...
-    def getDragParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def getDragParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]:
+        """
+        Get the drivers for supported parameters.
+        
+        Specified by: getDragParametersDrivers in interface DragSensitive
+        
+        Returns:
+            parameters drivers
+        
+        
+        """
+        ...
 
 class PythonAbstractDragForceModel(AbstractDragForceModel):
+    @typing.overload
     def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere): ...
+    @typing.overload
+    def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere, boolean: bool): ...
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]: ...
+    def acceleration(self, s: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], parameters: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
+        """
+        Compute acceleration.
+        
+        Parameters:
+            s (FieldSpacecraftState<T> s): current state information: date, kinematics, attitude
+            parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
+        
+        Returns:
+            acceleration in same frame as state
+        
+        
+        """
+        ...
     @typing.overload
-    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
-    def finalize(self) -> None: ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def pythonDecRef(self) -> None: ...
+    def acceleration(self, s: org.orekit.propagation.SpacecraftState, parameters: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+        Compute acceleration.
+        
+        Parameters:
+            s (SpacecraftState): current state information: date, kinematics, attitude
+            parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
+        
+        Returns:
+            acceleration in same frame as state
+        
+        """
+        ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]:
+        """
+        Get the drivers for parameters.
+        
+        Returns:
+            drivers for parameters
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
 
 class PythonDragSensitive(DragSensitive):
     def __init__(self): ...
     _dragAcceleration_0__T = typing.TypeVar('_dragAcceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def dragAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_0__T], t: _dragAcceleration_0__T, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], tArray: typing.Union[typing.List[_dragAcceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]: ...
+    def dragAcceleration(self, state: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_0__T], density: _dragAcceleration_0__T, relativeVelocity: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], parameters: typing.Union[typing.List[_dragAcceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]:
+        """
+        Compute the acceleration due to drag.
+        
+        The computation includes all spacecraft specific characteristics like shape, area and coefficients.
+        
+        Specified by: dragAcceleration in interface DragSensitive
+        
+        Parameters:
+            state (FieldSpacecraftState<T> state): current state
+            density (T): atmospheric density at spacecraft position
+            relativeVelocity (FieldVector3D<T> relativeVelocity): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
+            parameters (T[]): values of the force model parameters
+        
+        Returns:
+            spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
+        
+        
+        """
+        ...
     @typing.overload
-    def dragAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
-    def finalize(self) -> None: ...
-    def getDragParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def pythonDecRef(self) -> None: ...
+    def dragAcceleration(self, state: org.orekit.propagation.SpacecraftState, density: float, relativeVelocity: org.hipparchus.geometry.euclidean.threed.Vector3D, parameters: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+        Compute the acceleration due to drag.
+        
+        The computation includes all spacecraft specific characteristics like shape, area and coefficients.
+        
+        Specified by: dragAcceleration in interface DragSensitive
+        
+        Parameters:
+            state (SpacecraftState): current state
+            density (double): atmospheric density at spacecraft position
+            relativeVelocity (Vector3D): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
+            parameters (double[]): values of the force model parameters
+        
+        Returns:
+            spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
+        
+        """
+        ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getDragParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]:
+        """
+        Get the drivers for supported parameters.
+        
+        Specified by: getDragParametersDrivers in interface DragSensitive
+        
+        Returns:
+            parameters drivers
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
 
 class TimeSpanDragForce(AbstractDragForceModel):
     DATE_BEFORE: typing.ClassVar[str] = ...

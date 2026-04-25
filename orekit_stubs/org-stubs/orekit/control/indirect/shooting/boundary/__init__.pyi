@@ -13,36 +13,34 @@ import typing
 
 class CartesianBoundaryConditionChecker:
     """
-    public interface CartesianBoundaryConditionChecker
+    Interface defining convergence criterion when the terminal condition is on a Cartesian state.
     
-        Interface defining convergence criterion when the terminal condition is on a Cartesian state.
+    Since:
+        12.2
     
-        Since:
-            12.2
-    
-        Also see:
-            :class:`~org.orekit.control.indirect.shooting.AbstractFixedBoundaryCartesianSingleShooting`
+    Also see:
+        AbstractFixedBoundaryCartesianSingleShooting
     """
     def getMaximumIterationCount(self) -> int:
         """
-            Returns the maximum number of iterations.
+        Returns the maximum number of iterations.
         
-            Returns:
-                maximum iterations
+        Returns:
+            maximum iterations
         
         
         """
         ...
-    def isConverged(self, pVCoordinates: org.orekit.utils.PVCoordinates, pVCoordinates2: org.orekit.utils.PVCoordinates) -> bool:
+    def isConverged(self, targetPV: org.orekit.utils.PVCoordinates, actualPV: org.orekit.utils.PVCoordinates) -> bool:
         """
-            Asserts convergence.
+        Asserts convergence.
         
-            Parameters:
-                targetPV (:class:`~org.orekit.utils.PVCoordinates`): target position-velocity
-                actualPV (:class:`~org.orekit.utils.PVCoordinates`): actual position-velocity
+        Parameters:
+            targetPV (PVCoordinates): target position-velocity
+            actualPV (PVCoordinates): actual position-velocity
         
-            Returns:
-                convergence flag
+        Returns:
+            convergence flag
         
         
         """
@@ -50,39 +48,43 @@ class CartesianBoundaryConditionChecker:
 
 class FixedTimeBoundaryOrbits:
     """
-    public class FixedTimeBoundaryOrbits extends :class:`~org.orekit.control.indirect.shooting.boundary.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Defines two-point boundary values for indirect shooting methods with Cartesian coordinates. This class represents the case where the initial and terminal times are fixed as well as the full Cartesian coordinates (position and velocity vectors in some frame), using Orbit as data holder.
     
-        Defines two-point boundary values for indirect shooting methods with Cartesian coordinates. This class represents the
-        case where the initial and terminal times are fixed as well as the full Cartesian coordinates (position and velocity
-        vectors in some frame), using :class:`~org.orekit.orbits.Orbit` as data holder.
+    The terminal condition can be anterior in time to the initial one, it just means that the shooting method will perform backward propagation. Also note that any acceleration vector passed in the Orbit is ignored.
     
+    Since:
+        12.2
     
-        The terminal condition can be anterior in time to the initial one, it just means that the shooting method will perform
-        backward propagation. Also note that any acceleration vector passed in the :class:`~org.orekit.orbits.Orbit` is ignored.
-    
-        Since:
-            12.2
-    
-        Also see:
-            :class:`~org.orekit.control.indirect.shooting.boundary.FixedTimeCartesianBoundaryStates`
+    Also see:
+        FixedTimeCartesianBoundaryStates
     """
-    def __init__(self, orbit: org.orekit.orbits.Orbit, orbit2: org.orekit.orbits.Orbit): ...
+    def __init__(self, initialOrbit: org.orekit.orbits.Orbit, terminalOrbit: org.orekit.orbits.Orbit):
+        """
+        Constructor.
+        
+        Parameters:
+            initialOrbit (Orbit): initial condition
+            terminalOrbit (Orbit): terminal condition
+        
+        
+        """
+        ...
     def getInitialOrbit(self) -> org.orekit.orbits.Orbit:
         """
-            Getter for the initial condition.
+        Getter for the initial condition.
         
-            Returns:
-                initial condition
+        Returns:
+            initial condition
         
         
         """
         ...
     def getTerminalOrbit(self) -> org.orekit.orbits.Orbit:
         """
-            Getter for the terminal condition.
+        Getter for the terminal condition.
         
-            Returns:
-                terminal condition
+        Returns:
+            terminal condition
         
         
         """
@@ -90,40 +92,43 @@ class FixedTimeBoundaryOrbits:
 
 class FixedTimeCartesianBoundaryStates:
     """
-    public class FixedTimeCartesianBoundaryStates extends :class:`~org.orekit.control.indirect.shooting.boundary.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Defines two-point boundary values for indirect shooting methods with Cartesian coordinates. This class represents the case where the initial and terminal times are fixed as well as the full Cartesian coordinates (position and velocity vectors in some frame), using AbsolutePVCoordinates as data holder.
     
-        Defines two-point boundary values for indirect shooting methods with Cartesian coordinates. This class represents the
-        case where the initial and terminal times are fixed as well as the full Cartesian coordinates (position and velocity
-        vectors in some frame), using :class:`~org.orekit.utils.AbsolutePVCoordinates` as data holder.
+    The terminal condition can be anterior in time to the initial one, it just means that the shooting method will perform backward propagation. Also note that any acceleration vector passed in the AbsolutePVCoordinates is ignored.
     
+    Since:
+        12.2
     
-        The terminal condition can be anterior in time to the initial one, it just means that the shooting method will perform
-        backward propagation. Also note that any acceleration vector passed in the
-        :class:`~org.orekit.utils.AbsolutePVCoordinates` is ignored.
-    
-        Since:
-            12.2
-    
-        Also see:
-            :class:`~org.orekit.control.indirect.shooting.boundary.FixedTimeBoundaryOrbits`
+    Also see:
+        FixedTimeBoundaryOrbits
     """
-    def __init__(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates, absolutePVCoordinates2: org.orekit.utils.AbsolutePVCoordinates): ...
+    def __init__(self, initialCartesianState: org.orekit.utils.AbsolutePVCoordinates, terminalCartesianState: org.orekit.utils.AbsolutePVCoordinates):
+        """
+        Constructor.
+        
+        Parameters:
+            initialCartesianState (AbsolutePVCoordinates): initial condition
+            terminalCartesianState (AbsolutePVCoordinates): terminal condition
+        
+        
+        """
+        ...
     def getInitialCartesianState(self) -> org.orekit.utils.AbsolutePVCoordinates:
         """
-            Getter for the initial Cartesian condition.
+        Getter for the initial Cartesian condition.
         
-            Returns:
-                initial condition
+        Returns:
+            initial condition
         
         
         """
         ...
     def getTerminalCartesianState(self) -> org.orekit.utils.AbsolutePVCoordinates:
         """
-            Getter for the terminal Cartesian condition.
+        Getter for the terminal Cartesian condition.
         
-            Returns:
-                terminal condition
+        Returns:
+            terminal condition
         
         
         """
@@ -131,47 +136,114 @@ class FixedTimeCartesianBoundaryStates:
 
 class NormBasedCartesianConditionChecker(CartesianBoundaryConditionChecker):
     """
-    public class NormBasedCartesianConditionChecker extends :class:`~org.orekit.control.indirect.shooting.boundary.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.control.indirect.shooting.boundary.CartesianBoundaryConditionChecker`
+    Class defining convergence criterion on the norm of relative position and velocity vectors, with absolute tolerances.
     
-        Class defining convergence criterion on the norm of relative position and velocity vectors, with absolute tolerances.
+    Since:
+        12.2
     
-        Since:
-            12.2
-    
-        Also see:
-            :class:`~org.orekit.control.indirect.shooting.AbstractFixedBoundaryCartesianSingleShooting`
+    Also see:
+        AbstractFixedBoundaryCartesianSingleShooting
     """
-    def __init__(self, int: int, double: float, double2: float): ...
-    def getMaximumIterationCount(self) -> int:
+    def __init__(self, maximumIterationCount: int, absoluteToleranceDistance: float, absoluteToleranceSpeed: float):
         """
-            Returns the maximum number of iterations.
+        Constructor.
         
-            Specified by:
-                :meth:`~org.orekit.control.indirect.shooting.boundary.CartesianBoundaryConditionChecker.getMaximumIterationCount` in
-                interface :class:`~org.orekit.control.indirect.shooting.boundary.CartesianBoundaryConditionChecker`
-        
-            Returns:
-                maximum iterations
+        Parameters:
+            maximumIterationCount (int): maximum iteration count
+            absoluteToleranceDistance (double): absolute tolerance on distance
+            absoluteToleranceSpeed (double): absolute tolerance on speed
         
         
         """
         ...
-    def isConverged(self, pVCoordinates: org.orekit.utils.PVCoordinates, pVCoordinates2: org.orekit.utils.PVCoordinates) -> bool:
+    def getMaximumIterationCount(self) -> int:
         """
-            Asserts convergence.
+        Returns the maximum number of iterations.
         
-            Specified by:
-                :meth:`~org.orekit.control.indirect.shooting.boundary.CartesianBoundaryConditionChecker.isConverged` in
-                interface :class:`~org.orekit.control.indirect.shooting.boundary.CartesianBoundaryConditionChecker`
+        Specified by: getMaximumIterationCount in interface CartesianBoundaryConditionChecker
         
-            Parameters:
-                targetPV (:class:`~org.orekit.utils.PVCoordinates`): target position-velocity
-                actualPV (:class:`~org.orekit.utils.PVCoordinates`): actual position-velocity
-        
-            Returns:
-                convergence flag
+        Returns:
+            maximum iterations
         
         
+        """
+        ...
+    def isConverged(self, targetPV: org.orekit.utils.PVCoordinates, actualPV: org.orekit.utils.PVCoordinates) -> bool:
+        """
+        Asserts convergence.
+        
+        Specified by: isConverged in interface CartesianBoundaryConditionChecker
+        
+        Parameters:
+            targetPV (PVCoordinates): target position-velocity
+            actualPV (PVCoordinates): actual position-velocity
+        
+        Returns:
+            convergence flag
+        
+        
+        """
+        ...
+
+class PythonCartesianBoundaryConditionChecker(CartesianBoundaryConditionChecker):
+    """
+    Python implementation of the CartesianBoundaryConditionChecker interface. This class is part of the JCC Python interface and exposes all methods natively.
+    """
+    def __init__(self): ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: meth:`~org.orekit.control.indirect.shooting.boundary.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getMaximumIterationCount(self) -> int:
+        """
+        Returns the maximum number of iterations.
+        
+        Specified by: getMaximumIterationCount in interface CartesianBoundaryConditionChecker
+        
+        Returns:
+            maximum iterations
+        
+        
+        """
+        ...
+    def isConverged(self, targetPV: org.orekit.utils.PVCoordinates, actualPV: org.orekit.utils.PVCoordinates) -> bool:
+        """
+        Asserts convergence.
+        
+        Specified by: isConverged in interface CartesianBoundaryConditionChecker
+        
+        Parameters:
+            targetPV (PVCoordinates): target position-velocity
+            actualPV (PVCoordinates): actual position-velocity
+        
+        Returns:
+            convergence flag
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
         """
         ...
 
@@ -183,3 +255,4 @@ class __module_protocol__(Protocol):
     FixedTimeBoundaryOrbits: typing.Type[FixedTimeBoundaryOrbits]
     FixedTimeCartesianBoundaryStates: typing.Type[FixedTimeCartesianBoundaryStates]
     NormBasedCartesianConditionChecker: typing.Type[NormBasedCartesianConditionChecker]
+    PythonCartesianBoundaryConditionChecker: typing.Type[PythonCartesianBoundaryConditionChecker]

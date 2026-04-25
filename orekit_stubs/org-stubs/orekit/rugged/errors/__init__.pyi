@@ -24,21 +24,17 @@ import typing
 
 class DumpManager:
     """
-    public class DumpManager extends :class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Class managing debug dumps.
     
-        Class managing debug dumps.
-    
-        *WARNING*: this class is public only for technical reasons, it is not considered to belong to the public API of the
-        library and should not be called by user code. It is only intended to be called internally by the Rugged library itself.
-        This class may be changed or even removed at any time, so user code should not rely on it.
+    WARNING: this class is public only for technical reasons, it is not considered to belong to the public API of the library and should not be called by user code. It is only intended to be called internally by the Rugged library itself. This class may be changed or even removed at any time, so user code should not rely on it.
     """
     @staticmethod
     def activate(file: typing.Union[java.io.File, jpype.protocol.SupportsPath]) -> None:
         """
-            Activate debug dump.
+        Activate debug dump.
         
-            Parameters:
-                file (:class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.io.File?is`): dump file
+        Parameters:
+            file (File): dump file
         
         
         """
@@ -46,24 +42,23 @@ class DumpManager:
     @staticmethod
     def deactivate() -> None:
         """
-            Deactivate debug dump.
-        
+        Deactivate debug dump.
         """
         ...
     @typing.overload
     @staticmethod
     def dumpAlgorithm(algorithmId: org.orekit.rugged.api.AlgorithmId) -> None:
         """
-            Dump algorithm data.
+        Dump algorithm data.
         
-            Parameters:
-                algorithmId (:class:`~org.orekit.rugged.api.AlgorithmId`): algorithm ID
+        Parameters:
+            algorithmId (AlgorithmId): algorithm ID
         
-            Dump algorithm data.
+        Dump algorithm data.
         
-            Parameters:
-                algorithmId (:class:`~org.orekit.rugged.api.AlgorithmId`): algorithm ID
-                specific (double): algorithm specific extra data
+        Parameters:
+            algorithmId (AlgorithmId): algorithm ID
+            specific (double): algorithm specific extra data
         
         
         """
@@ -72,147 +67,147 @@ class DumpManager:
     @staticmethod
     def dumpAlgorithm(algorithmId: org.orekit.rugged.api.AlgorithmId, double: float) -> None: ...
     @staticmethod
-    def dumpDirectLocation(absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, boolean: bool, boolean2: bool, boolean3: bool) -> None:
+    def dumpDirectLocation(date: org.orekit.time.AbsoluteDate, sensorPosition: org.hipparchus.geometry.euclidean.threed.Vector3D, los: org.hipparchus.geometry.euclidean.threed.Vector3D, lightTimeCorrection: bool, aberrationOfLightCorrection: bool, refractionCorrection: bool) -> None:
         """
-            Dump a direct location computation.
+        Dump a direct location computation.
         
-            Parameters:
-                date (org.orekit.time.AbsoluteDate): date of the location
-                sensorPosition (org.hipparchus.geometry.euclidean.threed.Vector3D): sensor position in spacecraft frame
-                los (org.hipparchus.geometry.euclidean.threed.Vector3D): normalized line-of-sight in spacecraft frame
-                lightTimeCorrection (boolean): flag for light time correction
-                aberrationOfLightCorrection (boolean): flag for aberration of light correction
-                refractionCorrection (boolean): flag for refraction correction
-        
-        
-        """
-        ...
-    @staticmethod
-    def dumpDirectLocationResult(geodeticPoint: org.orekit.bodies.GeodeticPoint) -> None:
-        """
-            Dump a direct location result.
-        
-            Parameters:
-                gp (org.orekit.bodies.GeodeticPoint): resulting geodetic point
+        Parameters:
+            date (org.orekit.time.AbsoluteDate): date of the location
+            sensorPosition (org.hipparchus.geometry.euclidean.threed.Vector3D): sensor position in spacecraft frame
+            los (org.hipparchus.geometry.euclidean.threed.Vector3D): normalized line-of-sight in spacecraft frame
+            lightTimeCorrection (boolean): flag for light time correction
+            aberrationOfLightCorrection (boolean): flag for aberration of light correction
+            refractionCorrection (boolean): flag for refraction correction
         
         
         """
         ...
     @staticmethod
-    def dumpEllipsoid(extendedEllipsoid: org.orekit.rugged.utils.ExtendedEllipsoid) -> None:
+    def dumpDirectLocationResult(gp: org.orekit.bodies.GeodeticPoint) -> None:
         """
-            Dump ellipsoid data.
+        Dump a direct location result.
         
-            Parameters:
-                ellipsoid (:class:`~org.orekit.rugged.utils.ExtendedEllipsoid`): ellipsoid to dump
-        
-        
-        """
-        ...
-    @staticmethod
-    def dumpInverseLocation(lineSensor: org.orekit.rugged.linesensor.LineSensor, geodeticPoint: org.orekit.bodies.GeodeticPoint, extendedEllipsoid: org.orekit.rugged.utils.ExtendedEllipsoid, int: int, int2: int, boolean: bool, boolean2: bool, boolean3: bool) -> None:
-        """
-            Dump an inverse location computation.
-        
-            Parameters:
-                sensor (:class:`~org.orekit.rugged.linesensor.LineSensor`): sensor
-                point (org.orekit.bodies.GeodeticPoint): point to localize
-                ellipsoid (:class:`~org.orekit.rugged.utils.ExtendedEllipsoid`): the used ellipsoid
-                minLine (int): minimum line number
-                maxLine (int): maximum line number
-                lightTimeCorrection (boolean): flag for light time correction
-                aberrationOfLightCorrection (boolean): flag for aberration of light correction
-                refractionCorrection (boolean): flag for refraction correction
+        Parameters:
+            gp (org.orekit.bodies.GeodeticPoint): resulting geodetic point
         
         
         """
         ...
     @staticmethod
-    def dumpInverseLocationResult(sensorPixel: org.orekit.rugged.linesensor.SensorPixel) -> None:
+    def dumpEllipsoid(ellipsoid: org.orekit.rugged.utils.ExtendedEllipsoid) -> None:
         """
-            Dump an inverse location result.
+        Dump ellipsoid data.
         
-            Parameters:
-                pixel (:class:`~org.orekit.rugged.linesensor.SensorPixel`): resulting sensor pixel
-        
-        
-        """
-        ...
-    @staticmethod
-    def dumpSensorDatation(lineSensor: org.orekit.rugged.linesensor.LineSensor, double: float, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Dump a sensor datation.
-        
-            Parameters:
-                sensor (:class:`~org.orekit.rugged.linesensor.LineSensor`): sensor
-                lineNumber (double): line number
-                date (org.orekit.time.AbsoluteDate): date
+        Parameters:
+            ellipsoid (ExtendedEllipsoid): ellipsoid to dump
         
         
         """
         ...
     @staticmethod
-    def dumpSensorLOS(lineSensor: org.orekit.rugged.linesensor.LineSensor, absoluteDate: org.orekit.time.AbsoluteDate, int: int, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> None:
+    def dumpInverseLocation(sensor: org.orekit.rugged.linesensor.LineSensor, point: org.orekit.bodies.GeodeticPoint, ellipsoid: org.orekit.rugged.utils.ExtendedEllipsoid, minLine: int, maxLine: int, lightTimeCorrection: bool, aberrationOfLightCorrection: bool, refractionCorrection: bool) -> None:
         """
-            Dump a sensor LOS.
+        Dump an inverse location computation.
         
-            Parameters:
-                sensor (:class:`~org.orekit.rugged.linesensor.LineSensor`): sensor
-                date (org.orekit.time.AbsoluteDate): date
-                i (int): pixel index
-                los (org.hipparchus.geometry.euclidean.threed.Vector3D): pixel normalized line-of-sight
-        
-        
-        """
-        ...
-    @staticmethod
-    def dumpSensorMeanPlane(sensorMeanPlaneCrossing: org.orekit.rugged.linesensor.SensorMeanPlaneCrossing) -> None:
-        """
-            Dump a sensor mean plane.
-        
-            Parameters:
-                meanPlane (:class:`~org.orekit.rugged.linesensor.SensorMeanPlaneCrossing`): mean plane associated with sensor
+        Parameters:
+            sensor (LineSensor): sensor
+            point (org.orekit.bodies.GeodeticPoint): point to localize
+            ellipsoid (ExtendedEllipsoid): the used ellipsoid
+            minLine (int): minimum line number
+            maxLine (int): maximum line number
+            lightTimeCorrection (boolean): flag for light time correction
+            aberrationOfLightCorrection (boolean): flag for aberration of light correction
+            refractionCorrection (boolean): flag for refraction correction
         
         
         """
         ...
     @staticmethod
-    def dumpSensorRate(lineSensor: org.orekit.rugged.linesensor.LineSensor, double: float, double2: float) -> None:
+    def dumpInverseLocationResult(pixel: org.orekit.rugged.linesensor.SensorPixel) -> None:
         """
-            Dump a sensor rate.
+        Dump an inverse location result.
         
-            Parameters:
-                sensor (:class:`~org.orekit.rugged.linesensor.LineSensor`): sensor
-                lineNumber (double): line number
-                rate (double): lines rate
+        Parameters:
+            pixel (SensorPixel): resulting sensor pixel
         
         
         """
         ...
     @staticmethod
-    def dumpTileCell(tile: org.orekit.rugged.raster.Tile, int: int, int2: int, double: float) -> None:
+    def dumpSensorDatation(sensor: org.orekit.rugged.linesensor.LineSensor, lineNumber: float, date: org.orekit.time.AbsoluteDate) -> None:
         """
-            Dump DEM cell data.
+        Dump a sensor datation.
         
-            Parameters:
-                tile (:class:`~org.orekit.rugged.raster.Tile`): tile to which the cell belongs
-                latitudeIndex (int): latitude index of the cell
-                longitudeIndex (int): longitude index of the cell
-                elevation (double): elevation of the cell
+        Parameters:
+            sensor (LineSensor): sensor
+            lineNumber (double): line number
+            date (org.orekit.time.AbsoluteDate): date
         
         
         """
         ...
     @staticmethod
-    def dumpTransform(spacecraftToObservedBody: org.orekit.rugged.utils.SpacecraftToObservedBody, int: int, transform: org.orekit.frames.Transform, transform2: org.orekit.frames.Transform) -> None:
+    def dumpSensorLOS(sensor: org.orekit.rugged.linesensor.LineSensor, date: org.orekit.time.AbsoluteDate, i: int, los: org.hipparchus.geometry.euclidean.threed.Vector3D) -> None:
         """
-            Dump an observation transform transform.
+        Dump a sensor LOS.
         
-            Parameters:
-                scToBody (:class:`~org.orekit.rugged.utils.SpacecraftToObservedBody`): provider for observation
-                index (int): index of the transform
-                bodyToInertial (org.orekit.frames.Transform): transform from body frame to inertial frame
-                scToInertial (org.orekit.frames.Transform): transfrom from spacecraft frame to inertial frame
+        Parameters:
+            sensor (LineSensor): sensor
+            date (org.orekit.time.AbsoluteDate): date
+            i (int): pixel index
+            los (org.hipparchus.geometry.euclidean.threed.Vector3D): pixel normalized line-of-sight
+        
+        
+        """
+        ...
+    @staticmethod
+    def dumpSensorMeanPlane(meanPlane: org.orekit.rugged.linesensor.SensorMeanPlaneCrossing) -> None:
+        """
+        Dump a sensor mean plane.
+        
+        Parameters:
+            meanPlane (SensorMeanPlaneCrossing): mean plane associated with sensor
+        
+        
+        """
+        ...
+    @staticmethod
+    def dumpSensorRate(sensor: org.orekit.rugged.linesensor.LineSensor, lineNumber: float, rate: float) -> None:
+        """
+        Dump a sensor rate.
+        
+        Parameters:
+            sensor (LineSensor): sensor
+            lineNumber (double): line number
+            rate (double): lines rate
+        
+        
+        """
+        ...
+    @staticmethod
+    def dumpTileCell(tile: org.orekit.rugged.raster.Tile, latitudeIndex: int, longitudeIndex: int, elevation: float) -> None:
+        """
+        Dump DEM cell data.
+        
+        Parameters:
+            tile (Tile): tile to which the cell belongs
+            latitudeIndex (int): latitude index of the cell
+            longitudeIndex (int): longitude index of the cell
+            elevation (double): elevation of the cell
+        
+        
+        """
+        ...
+    @staticmethod
+    def dumpTransform(scToBody: org.orekit.rugged.utils.SpacecraftToObservedBody, index: int, bodyToInertial: org.orekit.frames.Transform, scToInertial: org.orekit.frames.Transform) -> None:
+        """
+        Dump an observation transform transform.
+        
+        Parameters:
+            scToBody (SpacecraftToObservedBody): provider for observation
+            index (int): index of the transform
+            bodyToInertial (org.orekit.frames.Transform): transform from body frame to inertial frame
+            scToInertial (org.orekit.frames.Transform): transfrom from spacecraft frame to inertial frame
         
         
         """
@@ -220,28 +215,27 @@ class DumpManager:
     @staticmethod
     def endNicely() -> None:
         """
-            In case dump is suspended and an exception is thrown, allows the dump to end nicely.
-        
+        In case dump is suspended and an exception is thrown, allows the dump to end nicely.
         """
         ...
     @staticmethod
     def isActive() -> bool:
         """
-            Check if dump is active for this thread.
+        Check if dump is active for this thread.
         
-            Returns:
-                true if dump is active for this thread
+        Returns:
+            true if dump is active for this thread
         
         
         """
         ...
     @staticmethod
-    def resume(boolean: bool) -> None:
+    def resume(wasSuspended: bool) -> None:
         """
-            Resume the dump, only if it was not already suspended.
+        Resume the dump, only if it was not already suspended.
         
-            Parameters:
-                wasSuspended (:class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Boolean?is`): flag to tell if the dump was already suspended (true; false otherwise)
+        Parameters:
+            wasSuspended (Boolean): flag to tell if the dump was already suspended (true; false otherwise)
         
         
         """
@@ -249,11 +243,10 @@ class DumpManager:
     @staticmethod
     def suspend() -> bool:
         """
-            Suspend the dump. In case the dump is already suspended, keep the previous status in order to correctly deal the resume
-            stage.
+        Suspend the dump. In case the dump is already suspended, keep the previous status in order to correctly deal the resume stage.
         
-            Returns:
-                a flag to tell if the dump is already suspended (true; false otherwise)
+        Returns:
+            a flag to tell if the dump is already suspended (true; false otherwise)
         
         
         """
@@ -261,45 +254,47 @@ class DumpManager:
 
 class DumpReplayer:
     """
-    public class DumpReplayer extends :class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Replayer for Rugged debug dumps.
     
-        Replayer for Rugged debug dumps.
-    
-        Also see:
-            :class:`~org.orekit.rugged.errors.DumpManager`, :code:`Dump`
+    Also see:
+        DumpManager, Dump
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Simple constructor.
+        """
+        ...
     def createRugged(self) -> org.orekit.rugged.api.Rugged:
         """
-            Create a Rugged instance from parsed data.
+        Create a Rugged instance from parsed data.
         
-            Returns:
-                rugged instance
+        Returns:
+            rugged instance
         
         
         """
         ...
     def execute(self, rugged: org.orekit.rugged.api.Rugged) -> typing.MutableSequence['DumpReplayer.Result']:
         """
-            Execute all dumped calls.
+        Execute all dumped calls.
         
-            The dumped calls correspond to computation methods like direct or inverse location.
+        The dumped calls correspond to computation methods like direct or inverse location.
         
-            Parameters:
-                rugged (:class:`~org.orekit.rugged.api.Rugged`): Rugged instance on which calls will be performed
+        Parameters:
+            rugged (Rugged): Rugged instance on which calls will be performed
         
-            Returns:
-                results of all dumped calls
+        Returns:
+            results of all dumped calls
         
         
         """
         ...
     def parse(self, file: typing.Union[java.io.File, jpype.protocol.SupportsPath]) -> None:
         """
-            Parse a dump file.
+        Parse a dump file.
         
-            Parameters:
-                file (:class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.io.File?is`): dump file to parse
+        Parameters:
+            file (File): dump file to parse
         
         
         """
@@ -310,14 +305,12 @@ class DumpReplayer:
 
 class RuggedException(java.lang.RuntimeException, org.hipparchus.exception.LocalizedException):
     """
-    public class RuggedException extends :class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.RuntimeException?is` implements org.hipparchus.exception.LocalizedException
+    This class is the base class for all specific exceptions thrown by the rugged library classes.
     
-        This class is the base class for all specific exceptions thrown by the rugged library classes.
+    This class is heavily based on OrekitException, which is distributed under the terms of the Apache License V2.
     
-        This class is heavily based on :code:`OrekitException`, which is distributed under the terms of the Apache License V2.
-    
-        Also see:
-            :meth:`~serialized`
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self, throwable: java.lang.Throwable, localizable: org.hipparchus.exception.Localizable, *object: typing.Any): ...
@@ -325,10 +318,7 @@ class RuggedException(java.lang.RuntimeException, org.hipparchus.exception.Local
     def __init__(self, localizable: org.hipparchus.exception.Localizable, *object: typing.Any): ...
     def getLocalizedMessage(self) -> str:
         """
-        
-            Overrides:
-                :meth:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
-                class :class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
+        Overrides: Throwable in class Throwable
         
         
         """
@@ -336,10 +326,7 @@ class RuggedException(java.lang.RuntimeException, org.hipparchus.exception.Local
     @typing.overload
     def getMessage(self) -> str:
         """
-        
-            Overrides:
-                :meth:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
-                class :class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
+        Overrides: Throwable in class Throwable
         
         
         """
@@ -347,34 +334,29 @@ class RuggedException(java.lang.RuntimeException, org.hipparchus.exception.Local
     @typing.overload
     def getMessage(self, locale: java.util.Locale) -> str:
         """
-        
-            Specified by:
-                :code:`getMessage` in interface :code:`org.hipparchus.exception.LocalizedException`
-        
+        Specified by: getMessage in interface LocalizedException
         """
         ...
     def getParts(self) -> typing.MutableSequence[typing.Any]:
         """
-            Get the variable parts of the error message.
+        Get the variable parts of the error message.
         
-            Specified by:
-                :code:`getParts` in interface :code:`org.hipparchus.exception.LocalizedException`
+        Specified by: getParts in interface LocalizedException
         
-            Returns:
-                a copy of the variable parts of the error message
+        Returns:
+            a copy of the variable parts of the error message
         
         
         """
         ...
     def getSpecifier(self) -> org.hipparchus.exception.Localizable:
         """
-            Get the localizable specifier of the error message.
+        Get the localizable specifier of the error message.
         
-            Specified by:
-                :code:`getSpecifier` in interface :code:`org.hipparchus.exception.LocalizedException`
+        Specified by: getSpecifier in interface LocalizedException
         
-            Returns:
-                localizable specifier of the error message
+        Returns:
+            localizable specifier of the error message
         
         
         """
@@ -382,30 +364,31 @@ class RuggedException(java.lang.RuntimeException, org.hipparchus.exception.Local
 
 class RuggedExceptionWrapper(java.lang.RuntimeException):
     """
-    :class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class RuggedExceptionWrapper extends :class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.RuntimeException?is`
+    Deprecated. as of 2.1, this class is not used anymore, as RuggedException is now an unchecked exception This class allows to wrap RuggedException instances in RuntimeException.
     
-        Deprecated.
-        as of 2.1, this class is not used anymore, as :class:`~org.orekit.rugged.errors.RuggedException` is now an unchecked
-        exception
-        This class allows to wrap :class:`~org.orekit.rugged.errors.RuggedException` instances in :code:`RuntimeException`.
+    Wrapping RuggedException instances is useful when a low level method throws one such exception and this method must be called from another one which does not allow this exception. Typical examples are propagation methods that are used inside Hipparchus optimizers, integrators or solvers.
     
-        Wrapping :class:`~org.orekit.rugged.errors.RuggedException` instances is useful when a low level method throws one such
-        exception and this method must be called from another one which does not allow this exception. Typical examples are
-        propagation methods that are used inside Hipparchus optimizers, integrators or solvers.
+    This class is heavily based on OrekitException, which is distributed under the terms of the Apache License V2.
     
-        This class is heavily based on :code:`OrekitException`, which is distributed under the terms of the Apache License V2.
-    
-        Also see:
-            :meth:`~serialized`
+    Also see:
+        serialized
     """
-    def __init__(self, ruggedException: RuggedException): ...
+    def __init__(self, wrappedException: RuggedException):
+        """
+        Deprecated. Simple constructor.
+        
+        Parameters:
+            wrappedException (RuggedException): Orekit exception to wrap
+        
+        
+        """
+        ...
     def getException(self) -> RuggedException:
         """
-            Deprecated.
-            Get the wrapped exception.
+        Deprecated. Get the wrapped exception.
         
-            Returns:
-                wrapped exception
+        Returns:
+            wrapped exception
         
         
         """
@@ -413,24 +396,27 @@ class RuggedExceptionWrapper(java.lang.RuntimeException):
 
 class RuggedInternalError(java.lang.RuntimeException, org.hipparchus.exception.LocalizedException):
     """
-    public class RuggedInternalError extends :class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.RuntimeException?is` implements org.hipparchus.exception.LocalizedException
+    Extension of Runtime with localized message for internal errors only.
     
-        Extension of :class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Runtime?is` with
-        localized message for internal errors only.
+    Since:
+        2.1
     
-        Since:
-            2.1
-    
-        Also see:
-            :meth:`~serialized`
+    Also see:
+        serialized
     """
-    def __init__(self, throwable: java.lang.Throwable): ...
+    def __init__(self, cause: java.lang.Throwable):
+        """
+        Create an exception with localized message.
+        
+        Parameters:
+            cause (Throwable): underlying cause
+        
+        
+        """
+        ...
     def getLocalizedMessage(self) -> str:
         """
-        
-            Overrides:
-                :meth:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
-                class :class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
+        Overrides: Throwable in class Throwable
         
         
         """
@@ -438,10 +424,7 @@ class RuggedInternalError(java.lang.RuntimeException, org.hipparchus.exception.L
     @typing.overload
     def getMessage(self) -> str:
         """
-        
-            Overrides:
-                :meth:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
-                class :class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
+        Overrides: Throwable in class Throwable
         
         
         """
@@ -449,26 +432,19 @@ class RuggedInternalError(java.lang.RuntimeException, org.hipparchus.exception.L
     @typing.overload
     def getMessage(self, locale: java.util.Locale) -> str:
         """
-        
-            Specified by:
-                :code:`getMessage` in interface :code:`org.hipparchus.exception.LocalizedException`
-        
+        Specified by: getMessage in interface LocalizedException
         """
         ...
     def getParts(self) -> typing.MutableSequence[typing.Any]:
         """
-        
-            Specified by:
-                :code:`getParts` in interface :code:`org.hipparchus.exception.LocalizedException`
+        Specified by: getParts in interface LocalizedException
         
         
         """
         ...
     def getSpecifier(self) -> org.hipparchus.exception.Localizable:
         """
-        
-            Specified by:
-                :code:`getSpecifier` in interface :code:`org.hipparchus.exception.LocalizedException`
+        Specified by: getSpecifier in interface LocalizedException
         
         
         """
@@ -476,17 +452,11 @@ class RuggedInternalError(java.lang.RuntimeException, org.hipparchus.exception.L
 
 class RuggedMessages(java.lang.Enum['RuggedMessages'], org.hipparchus.exception.Localizable):
     """
-    public enum RuggedMessages extends :class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.rugged.errors.RuggedMessages`> implements org.hipparchus.exception.Localizable
+    Enumeration for localized messages formats.
     
-        Enumeration for localized messages formats.
+    The constants in this enumeration represent the available formats as localized strings. These formats are intended to be localized using simple properties files, using the constant name as the key and the property value as the message format. The source English format is provided in the constants themselves to serve both as a reminder for developers to understand the parameters needed by each format, as a basis for translators to create localized properties files, and as a default format if some translation is missing.
     
-        The constants in this enumeration represent the available formats as localized strings. These formats are intended to be
-        localized using simple properties files, using the constant name as the key and the property value as the message
-        format. The source English format is provided in the constants themselves to serve both as a reminder for developers to
-        understand the parameters needed by each format, as a basis for translators to create localized properties files, and as
-        a default format if some translation is missing.
-    
-        This class is heavily based on :code:`OrekitMessages`, which is distributed under the terms of the Apache License V2.
+    This class is heavily based on OrekitMessages, which is distributed under the terms of the Apache License V2.
     """
     INTERNAL_ERROR: typing.ClassVar['RuggedMessages'] = ...
     OUT_OF_TILE_INDICES: typing.ClassVar['RuggedMessages'] = ...
@@ -528,18 +498,14 @@ class RuggedMessages(java.lang.Enum['RuggedMessages'], org.hipparchus.exception.
     @typing.overload
     def getLocalizedString(self, locale: java.util.Locale) -> str:
         """
-        
-            Specified by:
-                :code:`getLocalizedString` in interface :code:`org.hipparchus.exception.Localizable`
+        Specified by: getLocalizedString in interface Localizable
         
         
         """
         ...
     def getSourceString(self) -> str:
         """
-        
-            Specified by:
-                :code:`getSourceString` in interface :code:`org.hipparchus.exception.Localizable`
+        Specified by: getSourceString in interface Localizable
         
         
         """
@@ -550,20 +516,19 @@ class RuggedMessages(java.lang.Enum['RuggedMessages'], org.hipparchus.exception.
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'RuggedMessages':
+    def valueOf(name: str) -> 'RuggedMessages':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.rugged.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -571,17 +536,15 @@ class RuggedMessages(java.lang.Enum['RuggedMessages'], org.hipparchus.exception.
     @staticmethod
     def values() -> typing.MutableSequence['RuggedMessages']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (RuggedMessages c : RuggedMessages.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (RuggedMessages c : RuggedMessages.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """

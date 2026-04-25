@@ -14,156 +14,152 @@ import typing
 
 class RinexUtils:
     """
-    public class RinexUtils extends :class:`~org.orekit.files.rinex.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Utilities for RINEX various messages files.
     
-        Utilities for RINEX various messages files.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
     LABEL_INDEX: typing.ClassVar[int] = ...
     """
-    public static final int LABEL_INDEX
+    Index of label in header lines.
     
-        Index of label in header lines.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     @staticmethod
-    def convert2DigitsYear(int: int) -> int:
+    def convert2DigitsYear(yy: int) -> int:
         """
-            Convert a 2 digits year to a complete year.
+        Convert a 2 digits year to a complete year.
         
-            Parameters:
-                yy (int): year between 0 and 99
+        Parameters:
+            yy (int): year between 0 and 99
         
-            Returns:
-                complete year
+        Returns:
+            complete year
         
-            Since:
-                12.0
-        
-        
-        """
-        ...
-    @staticmethod
-    def getLabel(string: str) -> str:
-        """
-            Get the trimmed label from a header line.
-        
-            Parameters:
-                line (:class:`~org.orekit.files.rinex.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): header line to parse
-        
-            Returns:
-                trimmed label
+        Since:
+            12.0
         
         
         """
         ...
     @staticmethod
-    def matchesLabel(string: str, string2: str) -> bool:
+    def getLabel(line: str) -> str:
         """
-            Check if a header line matches an expected label.
+        Get the trimmed label from a header line.
         
-            Parameters:
-                line (:class:`~org.orekit.files.rinex.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): header line to check
-                label (:class:`~org.orekit.files.rinex.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): expected label
+        Parameters:
+            line (String): header line to parse
         
-            Returns:
-                true if line matches expected label
-        
-        
-        """
-        ...
-    @staticmethod
-    def parseComment(int: int, string: str, rinexFile: org.orekit.files.rinex.RinexFile[typing.Any]) -> None:
-        """
-            Parse a comment.
-        
-            Parameters:
-                lineNumber (int): line number
-                line (:class:`~org.orekit.files.rinex.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): line to parse
-                rinexFile (:class:`~org.orekit.files.rinex.RinexFile`<?> rinexFile): rinex file
+        Returns:
+            trimmed label
         
         
         """
         ...
     @staticmethod
-    def parseDouble(string: str, int: int, int2: int) -> float:
+    def matchesLabel(line: str, label: str) -> bool:
         """
-            Parse a double value.
+        Check if a header line matches an expected label.
         
-            Parameters:
-                line (:class:`~org.orekit.files.rinex.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): line to parse
-                startIndex (int): start index
-                size (int): size of the value
+        Parameters:
+            line (String): header line to check
+            label (String): expected label
         
-            Returns:
-                the parsed value
-        
-        
-        """
-        ...
-    @staticmethod
-    def parseInt(string: str, int: int, int2: int) -> int:
-        """
-            Parse an integer value.
-        
-            Parameters:
-                line (:class:`~org.orekit.files.rinex.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): line to parse
-                startIndex (int): start index
-                size (int): size of the value
-        
-            Returns:
-                the parsed value
+        Returns:
+            true if line matches expected label
         
         
         """
         ...
     @staticmethod
-    def parseProgramRunByDate(string: str, int: int, string2: str, timeScales: org.orekit.time.TimeScales, rinexBaseHeader: org.orekit.files.rinex.section.RinexBaseHeader) -> None:
+    def parseComment(lineNumber: int, line: str, rinexFile: org.orekit.files.rinex.RinexFile[typing.Any]) -> None:
         """
-            Parse program, run/by and date.
+        Parse a comment.
         
-            Parameters:
-                line (:class:`~org.orekit.files.rinex.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): line to parse
-                lineNumber (int): line number
-                name (:class:`~org.orekit.files.rinex.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): file name (for error message generation)
-                timeScales (:class:`~org.orekit.time.TimeScales`): the set of time scales used for parsing dates.
-                header (:class:`~org.orekit.files.rinex.section.RinexBaseHeader`): header to fill with parsed data
+        Parameters:
+            lineNumber (int): line number
+            line (String): line to parse
+            rinexFile (RinexFile<?> rinexFile): rinex file
         
         
         """
         ...
     @staticmethod
-    def parseString(string: str, int: int, int2: int) -> str:
+    def parseDouble(line: str, startIndex: int, size: int) -> float:
         """
-            Parse a string value.
+        Parse a double value.
         
-            Parameters:
-                line (:class:`~org.orekit.files.rinex.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): line to parse
-                startIndex (int): start index
-                size (int): size of the value
+        Parameters:
+            line (String): line to parse
+            startIndex (int): start index
+            size (int): size of the value
         
-            Returns:
-                the parsed value
+        Returns:
+            the parsed value
         
         
         """
         ...
     @staticmethod
-    def parseVersionFileTypeSatelliteSystem(string: str, string2: str, rinexBaseHeader: org.orekit.files.rinex.section.RinexBaseHeader, *double: float) -> None:
+    def parseInt(line: str, startIndex: int, size: int) -> int:
         """
-            Parse version, file type and satellite system.
+        Parse an integer value.
         
-            Parameters:
-                line (:class:`~org.orekit.files.rinex.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): line to parse
-                name (:class:`~org.orekit.files.rinex.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): file name (for error message generation)
-                header (:class:`~org.orekit.files.rinex.section.RinexBaseHeader`): header to fill with parsed data
-                supportedVersions (double...): supported versions
+        Parameters:
+            line (String): line to parse
+            startIndex (int): start index
+            size (int): size of the value
+        
+        Returns:
+            the parsed value
+        
+        
+        """
+        ...
+    @staticmethod
+    def parseProgramRunByDate(line: str, lineNumber: int, name: str, timeScales: org.orekit.time.TimeScales, header: org.orekit.files.rinex.section.RinexBaseHeader) -> None:
+        """
+        Parse program, run/by and date.
+        
+        Parameters:
+            line (String): line to parse
+            lineNumber (int): line number
+            name (String): file name (for error message generation)
+            timeScales (TimeScales): the set of time scales used for parsing dates.
+            header (RinexBaseHeader): header to fill with parsed data
+        
+        
+        """
+        ...
+    @staticmethod
+    def parseString(line: str, startIndex: int, size: int) -> str:
+        """
+        Parse a string value.
+        
+        Parameters:
+            line (String): line to parse
+            startIndex (int): start index
+            size (int): size of the value
+        
+        Returns:
+            the parsed value
+        
+        
+        """
+        ...
+    @staticmethod
+    def parseVersionFileTypeSatelliteSystem(line: str, name: str, header: org.orekit.files.rinex.section.RinexBaseHeader, *supportedVersions: float) -> None:
+        """
+        Parse version, file type and satellite system.
+        
+        Parameters:
+            line (String): line to parse
+            name (String): file name (for error message generation)
+            header (RinexBaseHeader): header to fill with parsed data
+            supportedVersions (double...): supported versions
         
         
         """

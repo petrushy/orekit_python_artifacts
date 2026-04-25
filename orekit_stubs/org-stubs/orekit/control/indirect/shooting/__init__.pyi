@@ -15,44 +15,40 @@ import typing
 
 class AbstractIndirectShooting:
     """
-    public abstract class AbstractIndirectShooting extends :class:`~org.orekit.control.indirect.shooting.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Abstract class for indirect shooting methods with numerical propagation.
     
-        Abstract class for indirect shooting methods with numerical propagation.
-    
-        Since:
-            12.2
+    Since:
+        12.2
     """
     DEFAULT_TOLERANCE_MASS_ADJOINT: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_TOLERANCE_MASS_ADJOINT
+    Default value for convergence tolerance on mass adjoint variable.
     
-        Default value for convergence tolerance on mass adjoint variable.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     def getPropagationSettings(self) -> org.orekit.control.indirect.shooting.propagation.ShootingPropagationSettings:
         """
-            Getter for the propagation settings.
+        Getter for the propagation settings.
         
-            Returns:
-                propagation settings
+        Returns:
+            propagation settings
         
         
         """
         ...
-    def solve(self, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> 'ShootingBoundaryOutput':
+    def solve(self, initialMass: float, initialGuess: typing.Union[typing.List[float], jpype.JArray]) -> 'ShootingBoundaryOutput':
         """
-            Solve for the boundary conditions, given an initial mass and an initial guess for the adjoint variables.
+        Solve for the boundary conditions, given an initial mass and an initial guess for the adjoint variables.
         
-            Parameters:
-                initialMass (double): initial mass
-                initialGuess (double[]): initial guess
+        Parameters:
+            initialMass (double): initial mass
+            initialGuess (double[]): initial guess
         
-            Returns:
-                boundary problem solution
+        Returns:
+            boundary problem solution
         
         
         """
@@ -60,63 +56,74 @@ class AbstractIndirectShooting:
 
 class ShootingBoundaryOutput:
     """
-    public class ShootingBoundaryOutput extends :class:`~org.orekit.control.indirect.shooting.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Data container for two-point boundary output of indirect shooting methods.
     
-        Data container for two-point boundary output of indirect shooting methods.
+    Since:
+        12.2
     
-        Since:
-            12.2
-    
-        Also see:
-            :class:`~org.orekit.control.indirect.shooting.AbstractIndirectShooting`
+    Also see:
+        AbstractIndirectShooting
     """
-    def __init__(self, boolean: bool, int: int, spacecraftState: org.orekit.propagation.SpacecraftState, shootingPropagationSettings: org.orekit.control.indirect.shooting.propagation.ShootingPropagationSettings, spacecraftState2: org.orekit.propagation.SpacecraftState): ...
+    def __init__(self, converged: bool, iterationCount: int, initialState: org.orekit.propagation.SpacecraftState, terminalState: org.orekit.control.indirect.shooting.propagation.ShootingPropagationSettings, shootingPropagationSettings: org.orekit.propagation.SpacecraftState):
+        """
+        Constructor.
+        
+        Parameters:
+            converged (boolean): convergence flag
+            iterationCount (int): iteration number
+            initialState (SpacecraftState): initial state
+            terminalState (ShootingPropagationSettings): terminal state
+            shootingPropagationSettings (SpacecraftState): propagation settings
+        
+        
+        """
+        ...
     def getInitialState(self) -> org.orekit.propagation.SpacecraftState:
         """
-            Getter for the initial state.
+        Getter for the initial state.
         
-            Returns:
-                initial state
+        Returns:
+            initial state
         
         
         """
         ...
     def getIterationCount(self) -> int:
         """
-            Getter for the iteration number.
+        Getter for the iteration number.
         
-            Returns:
-                count
+        Returns:
+            count
         
         
         """
         ...
     def getShootingPropagationSettings(self) -> org.orekit.control.indirect.shooting.propagation.ShootingPropagationSettings:
         """
-            Getter for the shooting propagation settings.
+        Getter for the shooting propagation settings.
         
-            Returns:
-                propagation settings
+        Returns:
+            propagation settings
         
         
         """
         ...
     def getTerminalState(self) -> org.orekit.propagation.SpacecraftState:
         """
-            Getter for the terminal state.
+        Getter for the terminal state.
         
-            Returns:
-                terminal state
+        Returns:
+            terminal state
         
         
         """
         ...
     def isConverged(self) -> bool:
         """
-            Getter for convergence flag.
+        Getter for convergence flag.
         
-            Returns:
-                convergence flag
+        Returns:
+            convergence flag
         
         
         """
@@ -124,38 +131,35 @@ class ShootingBoundaryOutput:
 
 class AbstractFixedInitialCartesianSingleShooting(AbstractIndirectShooting):
     """
-    public abstract class AbstractFixedInitialCartesianSingleShooting extends :class:`~org.orekit.control.indirect.shooting.AbstractIndirectShooting`
+    Abstract class for indirect single shooting methods with fixed initial Cartesian state. Inheritors must implement the iteration update, assuming derivatives are needed.
     
-        Abstract class for indirect single shooting methods with fixed initial Cartesian state. Inheritors must implement the
-        iteration update, assuming derivatives are needed.
+    Since:
+        13.0
     
-        Since:
-            13.0
-    
-        Also see:
-            :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointDerivativesProvider`,
-            :class:`~org.orekit.control.indirect.adjoint.FieldCartesianAdjointDerivativesProvider`
+    Also see:
+        CartesianAdjointDerivativesProvider,
+        FieldCartesianAdjointDerivativesProvider
     """
-    def computeCandidateSolution(self, spacecraftState: org.orekit.propagation.SpacecraftState, int: int) -> ShootingBoundaryOutput:
+    def computeCandidateSolution(self, initialState: org.orekit.propagation.SpacecraftState, iterationCount: int) -> ShootingBoundaryOutput:
         """
-            Form solution container with input initial state.
+        Form solution container with input initial state.
         
-            Parameters:
-                initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state
-                iterationCount (int): iteration count
+        Parameters:
+            initialState (SpacecraftState): initial state
+            iterationCount (int): iteration count
         
-            Returns:
-                candidate solution
+        Returns:
+            candidate solution
         
         
         """
         ...
     def getMaximumIterationCount(self) -> int:
         """
-            Returns the maximum number of iterations.
+        Returns the maximum number of iterations.
         
-            Returns:
-                maximum iterations
+        Returns:
+            maximum iterations
         
         
         """
@@ -163,29 +167,26 @@ class AbstractFixedInitialCartesianSingleShooting(AbstractIndirectShooting):
     @typing.overload
     def solve(self, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> ShootingBoundaryOutput:
         """
-            Solve for the boundary conditions, given an initial mass and an initial guess for the adjoint variables.
+        Solve for the boundary conditions, given an initial mass and an initial guess for the adjoint variables.
         
-            Specified by:
-                :meth:`~org.orekit.control.indirect.shooting.AbstractIndirectShooting.solve` in
-                class :class:`~org.orekit.control.indirect.shooting.AbstractIndirectShooting`
+        Specified by: solve in class AbstractIndirectShooting
         
-            Parameters:
-                initialMass (double): initial mass
-                initialGuess (double[]): initial guess
+        Parameters:
+            initialMass (double): initial mass
+            initialGuess (double[]): initial guess
         
-            Returns:
-                boundary problem solution
+        Returns:
+            boundary problem solution
         
-            Solve for the boundary conditions, given an initial mass and an initial guess for the adjoint variables. Uses scales for
-            automatic differentiation.
+        Solve for the boundary conditions, given an initial mass and an initial guess for the adjoint variables. Uses scales for automatic differentiation.
         
-            Parameters:
-                initialMass (double): initial mass
-                initialGuess (double[]): initial guess
-                userScales (double[]): scales
+        Parameters:
+            initialMass (double): initial mass
+            initialGuess (double[]): initial guess
+            userScales (double[]): scales
         
-            Returns:
-                boundary problem solution
+        Returns:
+            boundary problem solution
         
         
         """
@@ -195,83 +196,77 @@ class AbstractFixedInitialCartesianSingleShooting(AbstractIndirectShooting):
 
 class AbstractFixedBoundaryCartesianSingleShooting(AbstractFixedInitialCartesianSingleShooting):
     """
-    public abstract class AbstractFixedBoundaryCartesianSingleShooting extends :class:`~org.orekit.control.indirect.shooting.AbstractFixedInitialCartesianSingleShooting`
+    Abstract class for indirect single shooting methods with Cartesian coordinates for fixed time fixed boundary. Terminal mass is assumed to be free, thus corresponding adjoint must vanish at terminal time. On the other hand, other terminal adjoint variables are free because the Cartesian state is fixed.
     
-        Abstract class for indirect single shooting methods with Cartesian coordinates for fixed time fixed boundary. Terminal
-        mass is assumed to be free, thus corresponding adjoint must vanish at terminal time. On the other hand, other terminal
-        adjoint variables are free because the Cartesian state is fixed.
+    Since:
+        12.2
     
-        Since:
-            12.2
-    
-        Also see:
-            :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointDerivativesProvider`,
-            :class:`~org.orekit.control.indirect.adjoint.FieldCartesianAdjointDerivativesProvider`
+    Also see:
+        CartesianAdjointDerivativesProvider,
+        FieldCartesianAdjointDerivativesProvider
     """
-    def computeCandidateSolution(self, spacecraftState: org.orekit.propagation.SpacecraftState, int: int) -> ShootingBoundaryOutput:
+    def computeCandidateSolution(self, initialState: org.orekit.propagation.SpacecraftState, iterationCount: int) -> ShootingBoundaryOutput:
         """
-            Form solution container with input initial state.
+        Form solution container with input initial state.
         
-            Specified by:
-                :meth:`~org.orekit.control.indirect.shooting.AbstractFixedInitialCartesianSingleShooting.computeCandidateSolution` in
-                class :class:`~org.orekit.control.indirect.shooting.AbstractFixedInitialCartesianSingleShooting`
+        Specified by: computeCandidateSolution in class AbstractFixedInitialCartesianSingleShooting
         
-            Parameters:
-                initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state
-                iterationCount (int): iteration count
+        Parameters:
+            initialState (SpacecraftState): initial state
+            iterationCount (int): iteration count
         
-            Returns:
-                candidate solution
+        Returns:
+            candidate solution
         
         
         """
         ...
     def getScalePositionDefects(self) -> float:
         """
-            Getter for scale of position defects.
+        Getter for scale of position defects.
         
-            Returns:
-                scale
+        Returns:
+            scale
         
         
         """
         ...
     def getScaleVelocityDefects(self) -> float:
         """
-            Getter for scale of velocity defects.
+        Getter for scale of velocity defects.
         
-            Returns:
-                scale
-        
-        
-        """
-        ...
-    def setScalePositionDefects(self, double: float) -> None:
-        """
-            Setter for scale of position defects.
-        
-            Parameters:
-                scalePositionDefects (double): new scale
+        Returns:
+            scale
         
         
         """
         ...
-    def setScaleVelocityDefects(self, double: float) -> None:
+    def setScalePositionDefects(self, scalePositionDefects: float) -> None:
         """
-            Setter for scale of velocity defects.
+        Setter for scale of position defects.
         
-            Parameters:
-                scaleVelocityDefects (double): new scale
+        Parameters:
+            scalePositionDefects (double): new scale
         
         
         """
         ...
-    def setToleranceMassAdjoint(self, double: float) -> None:
+    def setScaleVelocityDefects(self, scaleVelocityDefects: float) -> None:
         """
-            Setter for mass adjoint tolerance.
+        Setter for scale of velocity defects.
         
-            Parameters:
-                toleranceMassAdjoint (double): new tolerance value
+        Parameters:
+            scaleVelocityDefects (double): new scale
+        
+        
+        """
+        ...
+    def setToleranceMassAdjoint(self, toleranceMassAdjoint: float) -> None:
+        """
+        Setter for mass adjoint tolerance.
+        
+        Parameters:
+            toleranceMassAdjoint (double): new tolerance value
         
         
         """
@@ -279,13 +274,10 @@ class AbstractFixedBoundaryCartesianSingleShooting(AbstractFixedInitialCartesian
 
 class NewtonFixedBoundaryCartesianSingleShooting(AbstractFixedBoundaryCartesianSingleShooting):
     """
-    public class NewtonFixedBoundaryCartesianSingleShooting extends :class:`~org.orekit.control.indirect.shooting.AbstractFixedBoundaryCartesianSingleShooting`
+    Class for indirect single shooting methods with Cartesian coordinates for fixed time fixed boundary. Update is the classical Newton-Raphson one. It is computed using an LU matrix decomposition.
     
-        Class for indirect single shooting methods with Cartesian coordinates for fixed time fixed boundary. Update is the
-        classical Newton-Raphson one. It is computed using an LU matrix decomposition.
-    
-        Since:
-            12.2
+    Since:
+        12.2
     """
     @typing.overload
     def __init__(self, shootingPropagationSettings: org.orekit.control.indirect.shooting.propagation.ShootingPropagationSettings, fixedTimeBoundaryOrbits: org.orekit.control.indirect.shooting.boundary.FixedTimeBoundaryOrbits, cartesianBoundaryConditionChecker: org.orekit.control.indirect.shooting.boundary.CartesianBoundaryConditionChecker): ...
@@ -293,55 +285,51 @@ class NewtonFixedBoundaryCartesianSingleShooting(AbstractFixedBoundaryCartesianS
     def __init__(self, shootingPropagationSettings: org.orekit.control.indirect.shooting.propagation.ShootingPropagationSettings, fixedTimeCartesianBoundaryStates: org.orekit.control.indirect.shooting.boundary.FixedTimeCartesianBoundaryStates, cartesianBoundaryConditionChecker: org.orekit.control.indirect.shooting.boundary.CartesianBoundaryConditionChecker): ...
     def getMaximumIterationCount(self) -> int:
         """
-            Description copied from
-            class: :meth:`~org.orekit.control.indirect.shooting.AbstractFixedInitialCartesianSingleShooting.getMaximumIterationCount`
-            Returns the maximum number of iterations.
+        Description copied from class: getMaximumIterationCount Returns the maximum number of iterations.
         
-            Specified by:
-                :meth:`~org.orekit.control.indirect.shooting.AbstractFixedInitialCartesianSingleShooting.getMaximumIterationCount` in
-                class :class:`~org.orekit.control.indirect.shooting.AbstractFixedInitialCartesianSingleShooting`
+        Specified by: getMaximumIterationCount in class AbstractFixedInitialCartesianSingleShooting
         
-            Returns:
-                maximum iterations
+        Returns:
+            maximum iterations
         
         
         """
         ...
     def getSingularityThreshold(self) -> float:
         """
-            Getter for singularity threshold in LU decomposition.
+        Getter for singularity threshold in LU decomposition.
         
-            Returns:
-                threshold
+        Returns:
+            threshold
         
-            Since:
-                13.0
-        
-        
-        """
-        ...
-    def setSingularityThreshold(self, double: float) -> None:
-        """
-            Setter for singularity threshold in LU decomposition.
-        
-            Parameters:
-                singularityThreshold (double): new threshold value
-        
-            Since:
-                13.0
+        Since:
+            13.0
         
         
         """
         ...
-    def setStepFactor(self, double: float) -> None:
+    def setSingularityThreshold(self, singularityThreshold: float) -> None:
         """
-            Setter for the step factor.
+        Setter for singularity threshold in LU decomposition.
         
-            Parameters:
-                stepFactor (double): new value for the step factor
+        Parameters:
+            singularityThreshold (double): new threshold value
         
-            Since:
-                13.0
+        Since:
+            13.0
+        
+        
+        """
+        ...
+    def setStepFactor(self, stepFactor: float) -> None:
+        """
+        Setter for the step factor.
+        
+        Parameters:
+            stepFactor (double): new value for the step factor
+        
+        Since:
+            13.0
         
         
         """

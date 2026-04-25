@@ -21,19 +21,17 @@ import typing
 
 class AdjointDynamicsProvider:
     """
-    public interface AdjointDynamicsProvider
+    Interface for adjoint derivatives provider (both standard and Field).
     
-        Interface for adjoint derivatives provider (both standard and Field).
-    
-        Since:
-            12.2
+    Since:
+        12.2
     """
     def buildAdditionalDerivativesProvider(self) -> org.orekit.propagation.integration.AdditionalDerivativesProvider:
         """
-            Builds adjoint derivatives provider.
+        Builds adjoint derivatives provider.
         
-            Returns:
-                derivatives provider
+        Returns:
+            derivatives provider
         
         
         """
@@ -41,33 +39,33 @@ class AdjointDynamicsProvider:
     _buildFieldAdditionalDerivativesProvider__T = typing.TypeVar('_buildFieldAdditionalDerivativesProvider__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def buildFieldAdditionalDerivativesProvider(self, field: org.hipparchus.Field[_buildFieldAdditionalDerivativesProvider__T]) -> org.orekit.propagation.integration.FieldAdditionalDerivativesProvider[_buildFieldAdditionalDerivativesProvider__T]:
         """
-            Builds Field adjoint derivatives provider.
+        Builds Field adjoint derivatives provider.
         
-            Parameters:
-                field (:class:`~org.orekit.control.indirect.shooting.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): input field
+        Parameters:
+            field (Field<T> field): input field
         
-            Returns:
-                derivatives provider
+        Returns:
+            derivatives provider
         
         
         """
         ...
     def getAdjointName(self) -> str:
         """
-            Getter for adjoint vector name.
+        Getter for adjoint vector name.
         
-            Returns:
-                name
+        Returns:
+            name
         
         
         """
         ...
     def getDimension(self) -> int:
         """
-            Getter for adjoint dimension.
+        Getter for adjoint dimension.
         
-            Returns:
-                dimension
+        Returns:
+            dimension
         
         
         """
@@ -75,134 +73,132 @@ class AdjointDynamicsProvider:
 
 class CartesianAdjointDynamicsProviderFactory:
     """
-    public class CartesianAdjointDynamicsProviderFactory extends :class:`~org.orekit.control.indirect.shooting.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Factory for common Cartesian adjoint dynamics providers.
     
-        Factory for common Cartesian adjoint dynamics providers.
+    Since:
+        13.0
     
-        Since:
-            13.0
-    
-        Also see:
-            :class:`~org.orekit.control.indirect.shooting.propagation.AdjointDynamicsProvider`
+    Also see:
+        AdjointDynamicsProvider
     """
     @staticmethod
-    def buildBoundedEnergyProvider(string: str, double: float, double2: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings, *cartesianAdjointEquationTerm: org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm) -> 'CartesianAdjointDynamicsProvider':
+    def buildBoundedEnergyProvider(adjointName: str, massFlowRateFactor: float, maximumThrustMagnitude: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings, *cartesianAdjointEquationTerms: org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm) -> 'CartesianAdjointDynamicsProvider':
         """
-            Method building a provider with bounded Cartesian energy as cost.
+        Method building a provider with bounded Cartesian energy as cost.
         
-            Parameters:
-                adjointName (:class:`~org.orekit.control.indirect.shooting.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): adjoint name
-                massFlowRateFactor (double): mass flow rate factor
-                maximumThrustMagnitude (double): maximum thrust magnitude
-                eventDetectionSettings (:class:`~org.orekit.propagation.events.EventDetectionSettings`): detection settings for adjoint-related events
-                cartesianAdjointEquationTerms (:class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`...): Cartesian adjoint equation terms
+        Parameters:
+            adjointName (String): adjoint name
+            massFlowRateFactor (double): mass flow rate factor
+            maximumThrustMagnitude (double): maximum thrust magnitude
+            eventDetectionSettings (EventDetectionSettings): detection settings for adjoint-related events
+            cartesianAdjointEquationTerms (CartesianAdjointEquationTerm...): Cartesian adjoint equation terms
         
-            Returns:
-                provider
-        
-        
-        """
-        ...
-    @staticmethod
-    def buildBoundedFuelCostProvider(string: str, double: float, double2: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings, *cartesianAdjointEquationTerm: org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm) -> 'CartesianAdjointDynamicsProvider':
-        """
-            Method building a provider with bounded Cartesian fuel as cost.
-        
-            Parameters:
-                adjointName (:class:`~org.orekit.control.indirect.shooting.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): adjoint name
-                massFlowRateFactor (double): mass flow rate factor
-                maximumThrustMagnitude (double): maximum thrust magnitude
-                eventDetectionSettings (:class:`~org.orekit.propagation.events.EventDetectionSettings`): detection settings for adjoint-related events
-                cartesianAdjointEquationTerms (:class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`...): Cartesian adjoint equation terms
-        
-            Returns:
-                provider
+        Returns:
+            provider
         
         
         """
         ...
     @staticmethod
-    def buildFlightDurationProvider(string: str, double: float, double2: float, *cartesianAdjointEquationTerm: org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm) -> 'CartesianAdjointDynamicsProvider':
+    def buildBoundedFuelCostProvider(adjointName: str, massFlowRateFactor: float, maximumThrustMagnitude: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings, *cartesianAdjointEquationTerms: org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm) -> 'CartesianAdjointDynamicsProvider':
         """
-            Method building a provider with unbounded Cartesian energy and vanishing mass flow as cost.
+        Method building a provider with bounded Cartesian fuel as cost.
         
-            Parameters:
-                adjointName (:class:`~org.orekit.control.indirect.shooting.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): adjoint name
-                massFlowRateFactor (double): mass flow rate factor
-                maximumThrustMagnitude (double): maximum thrust magnitude
-                cartesianAdjointEquationTerms (:class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`...): Cartesian adjoint equation terms
+        Parameters:
+            adjointName (String): adjoint name
+            massFlowRateFactor (double): mass flow rate factor
+            maximumThrustMagnitude (double): maximum thrust magnitude
+            eventDetectionSettings (EventDetectionSettings): detection settings for adjoint-related events
+            cartesianAdjointEquationTerms (CartesianAdjointEquationTerm...): Cartesian adjoint equation terms
         
-            Returns:
-                provider
-        
-        
-        """
-        ...
-    @staticmethod
-    def buildLogarithmicBarrierFuelCostProvider(string: str, double: float, double2: float, double3: float, *cartesianAdjointEquationTerm: org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm) -> 'CartesianAdjointDynamicsProvider':
-        """
-            Method building a provider with bounded Cartesian fuel penalized with a logarithmic barrier.
-        
-            Parameters:
-                adjointName (:class:`~org.orekit.control.indirect.shooting.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): adjoint name
-                massFlowRateFactor (double): mass flow rate factor
-                maximumThrustMagnitude (double): maximum thrust magnitude
-                epsilon (double): penalty weight
-                cartesianAdjointEquationTerms (:class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`...): Cartesian adjoint equation terms
-        
-            Returns:
-                provider
+        Returns:
+            provider
         
         
         """
         ...
     @staticmethod
-    def buildQuadraticPenaltyFuelCostProvider(string: str, double: float, double2: float, double3: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings, *cartesianAdjointEquationTerm: org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm) -> 'CartesianAdjointDynamicsProvider':
+    def buildFlightDurationProvider(adjointName: str, massFlowRateFactor: float, maximumThrustMagnitude: float, *cartesianAdjointEquationTerms: org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm) -> 'CartesianAdjointDynamicsProvider':
         """
-            Method building a provider with bounded Cartesian fuel penalized with a quadratic term.
+        Method building a provider with unbounded Cartesian energy and vanishing mass flow as cost.
         
-            Parameters:
-                adjointName (:class:`~org.orekit.control.indirect.shooting.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): adjoint name
-                massFlowRateFactor (double): mass flow rate factor
-                maximumThrustMagnitude (double): maximum thrust magnitude
-                epsilon (double): penalty weight
-                eventDetectionSettings (:class:`~org.orekit.propagation.events.EventDetectionSettings`): detection settings for adjoint-related events
-                cartesianAdjointEquationTerms (:class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`...): Cartesian adjoint equation terms
+        Parameters:
+            adjointName (String): adjoint name
+            massFlowRateFactor (double): mass flow rate factor
+            maximumThrustMagnitude (double): maximum thrust magnitude
+            cartesianAdjointEquationTerms (CartesianAdjointEquationTerm...): Cartesian adjoint equation terms
         
-            Returns:
-                provider
+        Returns:
+            provider
         
         
         """
         ...
     @staticmethod
-    def buildUnboundedEnergyProvider(string: str, double: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings, *cartesianAdjointEquationTerm: org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm) -> 'CartesianAdjointDynamicsProvider':
+    def buildLogarithmicBarrierFuelCostProvider(adjointName: str, massFlowRateFactor: float, maximumThrustMagnitude: float, epsilon: float, *cartesianAdjointEquationTerms: org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm) -> 'CartesianAdjointDynamicsProvider':
         """
-            Method building a provider with unbounded Cartesian energy as cost.
+        Method building a provider with bounded Cartesian fuel penalized with a logarithmic barrier.
         
-            Parameters:
-                adjointName (:class:`~org.orekit.control.indirect.shooting.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): adjoint name
-                massFlowRateFactor (double): mass flow rate factor
-                eventDetectionSettings (:class:`~org.orekit.propagation.events.EventDetectionSettings`): detection settings for adjoint-related events
-                cartesianAdjointEquationTerms (:class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`...): Cartesian adjoint equation terms
+        Parameters:
+            adjointName (String): adjoint name
+            massFlowRateFactor (double): mass flow rate factor
+            maximumThrustMagnitude (double): maximum thrust magnitude
+            epsilon (double): penalty weight
+            cartesianAdjointEquationTerms (CartesianAdjointEquationTerm...): Cartesian adjoint equation terms
         
-            Returns:
-                provider
+        Returns:
+            provider
         
         
         """
         ...
     @staticmethod
-    def buildUnboundedEnergyProviderNeglectingMass(string: str, *cartesianAdjointEquationTerm: org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm) -> 'CartesianAdjointDynamicsProvider':
+    def buildQuadraticPenaltyFuelCostProvider(adjointName: str, massFlowRateFactor: float, maximumThrustMagnitude: float, epsilon: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings, *cartesianAdjointEquationTerms: org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm) -> 'CartesianAdjointDynamicsProvider':
         """
-            Method building a provider with unbounded Cartesian energy and vanishing mass flow as cost.
+        Method building a provider with bounded Cartesian fuel penalized with a quadratic term.
         
-            Parameters:
-                adjointName (:class:`~org.orekit.control.indirect.shooting.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): adjoint name
-                cartesianAdjointEquationTerms (:class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`...): Cartesian adjoint equation terms
+        Parameters:
+            adjointName (String): adjoint name
+            massFlowRateFactor (double): mass flow rate factor
+            maximumThrustMagnitude (double): maximum thrust magnitude
+            epsilon (double): penalty weight
+            eventDetectionSettings (EventDetectionSettings): detection settings for adjoint-related events
+            cartesianAdjointEquationTerms (CartesianAdjointEquationTerm...): Cartesian adjoint equation terms
         
-            Returns:
-                provider
+        Returns:
+            provider
+        
+        
+        """
+        ...
+    @staticmethod
+    def buildUnboundedEnergyProvider(adjointName: str, massFlowRateFactor: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings, *cartesianAdjointEquationTerms: org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm) -> 'CartesianAdjointDynamicsProvider':
+        """
+        Method building a provider with unbounded Cartesian energy as cost.
+        
+        Parameters:
+            adjointName (String): adjoint name
+            massFlowRateFactor (double): mass flow rate factor
+            eventDetectionSettings (EventDetectionSettings): detection settings for adjoint-related events
+            cartesianAdjointEquationTerms (CartesianAdjointEquationTerm...): Cartesian adjoint equation terms
+        
+        Returns:
+            provider
+        
+        
+        """
+        ...
+    @staticmethod
+    def buildUnboundedEnergyProviderNeglectingMass(adjointName: str, *cartesianAdjointEquationTerms: org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm) -> 'CartesianAdjointDynamicsProvider':
+        """
+        Method building a provider with unbounded Cartesian energy and vanishing mass flow as cost.
+        
+        Parameters:
+            adjointName (String): adjoint name
+            cartesianAdjointEquationTerms (CartesianAdjointEquationTerm...): Cartesian adjoint equation terms
+        
+        Returns:
+            provider
         
         
         """
@@ -210,38 +206,36 @@ class CartesianAdjointDynamicsProviderFactory:
 
 class ShootingIntegrationSettings:
     """
-    public interface ShootingIntegrationSettings
+    Defines integration settings for indirect shooting methods. Gives standard and Field integrator builders.
     
-        Defines integration settings for indirect shooting methods. Gives standard and Field integrator builders.
+    Since:
+        12.2
     
-        Since:
-            12.2
-    
-        Also see:
-            :class:`~org.orekit.control.indirect.shooting.propagation.ShootingPropagationSettings`,
-            :class:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder`,
-            :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`
+    Also see:
+        ShootingPropagationSettings,
+        ExplicitRungeKuttaIntegratorBuilder,
+        FieldExplicitRungeKuttaIntegratorBuilder
     """
     _getFieldIntegratorBuilder__T = typing.TypeVar('_getFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def getFieldIntegratorBuilder(self, field: org.hipparchus.Field[_getFieldIntegratorBuilder__T]) -> org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder[_getFieldIntegratorBuilder__T]:
         """
-            Returns a Field ODE integrator builder based on an explicit Runge Kutta scheme.
+        Returns a Field ODE integrator builder based on an explicit Runge Kutta scheme.
         
-            Parameters:
-                field (:class:`~org.orekit.control.indirect.shooting.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field for builder
+        Parameters:
+            field (Field<T> field): field for builder
         
-            Returns:
-                builder
+        Returns:
+            builder
         
         
         """
         ...
     def getIntegratorBuilder(self) -> org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder:
         """
-            Returns an ODE integrator builder based on an explicit Runge Kutta scheme.
+        Returns an ODE integrator builder based on an explicit Runge Kutta scheme.
         
-            Returns:
-                builder
+        Returns:
+            builder
         
         
         """
@@ -249,86 +243,84 @@ class ShootingIntegrationSettings:
 
 class ShootingIntegrationSettingsFactory:
     """
-    public class ShootingIntegrationSettingsFactory extends :class:`~org.orekit.control.indirect.shooting.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Factory for some common schemes.
     
-        Factory for some common schemes.
+    Since:
+        13.0
     
-        Since:
-            13.0
-    
-        Also see:
-            :class:`~org.orekit.control.indirect.shooting.propagation.ShootingPropagationSettings`
+    Also see:
+        ShootingPropagationSettings
     """
     @staticmethod
-    def getClassicalRungeKuttaIntegratorSettings(double: float) -> ShootingIntegrationSettings:
+    def getClassicalRungeKuttaIntegratorSettings(step: float) -> ShootingIntegrationSettings:
         """
-            Returns shooting integration settings according to the classical Runge Kutta scheme.
+        Returns shooting integration settings according to the classical Runge Kutta scheme.
         
-            Parameters:
-                step (double): default step-size
+        Parameters:
+            step (double): default step-size
         
-            Returns:
-                integration settings
-        
-        
-        """
-        ...
-    @staticmethod
-    def getDormandPrince54IntegratorSettings(double: float, double2: float, toleranceProvider: org.orekit.propagation.ToleranceProvider) -> ShootingIntegrationSettings:
-        """
-            Returns shooting integration settings according to the Dormand Prince 5(4) scheme.
-        
-            Parameters:
-                minStep (double): minimum step-size
-                maxStep (double): maximum step-size
-                toleranceProvider (:class:`~org.orekit.propagation.ToleranceProvider`): tolerance provider
-        
-            Returns:
-                integration settings
+        Returns:
+            integration settings
         
         
         """
         ...
     @staticmethod
-    def getDormandPrince853IntegratorSettings(double: float, double2: float, toleranceProvider: org.orekit.propagation.ToleranceProvider) -> ShootingIntegrationSettings:
+    def getDormandPrince54IntegratorSettings(minStep: float, maxStep: float, toleranceProvider: org.orekit.propagation.ToleranceProvider) -> ShootingIntegrationSettings:
         """
-            Returns shooting integration settings according to the Dormand Prince 8(53) scheme.
+        Returns shooting integration settings according to the Dormand Prince 5(4) scheme.
         
-            Parameters:
-                minStep (double): minimum step-size
-                maxStep (double): maximum step-size
-                toleranceProvider (:class:`~org.orekit.propagation.ToleranceProvider`): tolerance provider
+        Parameters:
+            minStep (double): minimum step-size
+            maxStep (double): maximum step-size
+            toleranceProvider (ToleranceProvider): tolerance provider
         
-            Returns:
-                integration settings
-        
-        
-        """
-        ...
-    @staticmethod
-    def getLutherIntegratorSettings(double: float) -> ShootingIntegrationSettings:
-        """
-            Returns shooting integration settings according to the Luther Runge Kutta scheme.
-        
-            Parameters:
-                step (double): default step-size
-        
-            Returns:
-                integration settings
+        Returns:
+            integration settings
         
         
         """
         ...
     @staticmethod
-    def getMidpointIntegratorSettings(double: float) -> ShootingIntegrationSettings:
+    def getDormandPrince853IntegratorSettings(minStep: float, maxStep: float, toleranceProvider: org.orekit.propagation.ToleranceProvider) -> ShootingIntegrationSettings:
         """
-            Returns shooting integration settings according to the midpoint Runge Kutta scheme.
+        Returns shooting integration settings according to the Dormand Prince 8(53) scheme.
         
-            Parameters:
-                step (double): default step-size
+        Parameters:
+            minStep (double): minimum step-size
+            maxStep (double): maximum step-size
+            toleranceProvider (ToleranceProvider): tolerance provider
         
-            Returns:
-                integration settings
+        Returns:
+            integration settings
+        
+        
+        """
+        ...
+    @staticmethod
+    def getLutherIntegratorSettings(step: float) -> ShootingIntegrationSettings:
+        """
+        Returns shooting integration settings according to the Luther Runge Kutta scheme.
+        
+        Parameters:
+            step (double): default step-size
+        
+        Returns:
+            integration settings
+        
+        
+        """
+        ...
+    @staticmethod
+    def getMidpointIntegratorSettings(step: float) -> ShootingIntegrationSettings:
+        """
+        Returns shooting integration settings according to the midpoint Runge Kutta scheme.
+        
+        Parameters:
+            step (double): default step-size
+        
+        Returns:
+            integration settings
         
         
         """
@@ -336,19 +328,14 @@ class ShootingIntegrationSettingsFactory:
 
 class ShootingPropagationSettings:
     """
-    public class ShootingPropagationSettings extends :class:`~org.orekit.control.indirect.shooting.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Defines propagation settings for indirect shooting methods. The provided list of ForceModel should have their counterpart in the provided adjoint equations encapsulated in AdjointDynamicsProvider. Note that in case of orbit-based propagation (with a central body), the Newtonian term still needs to be passed explicitly (with its adjoint equivalent).
     
-        Defines propagation settings for indirect shooting methods. The provided list of :class:`~org.orekit.forces.ForceModel`
-        should have their counterpart in the provided adjoint equations encapsulated in
-        :class:`~org.orekit.control.indirect.shooting.propagation.AdjointDynamicsProvider`. Note that in case of orbit-based
-        propagation (with a central body), the Newtonian term still needs to be passed explicitly (with its adjoint equivalent).
+    Since:
+        12.2
     
-        Since:
-            12.2
-    
-        Also see:
-            :class:`~org.orekit.propagation.numerical.NumericalPropagator`,
-            :class:`~org.orekit.propagation.numerical.FieldNumericalPropagator`
+    Also see:
+        NumericalPropagator,
+        FieldNumericalPropagator
     """
     @typing.overload
     def __init__(self, list: java.util.List[org.orekit.forces.ForceModel], adjointDynamicsProvider: AdjointDynamicsProvider, shootingIntegrationSettings: typing.Union[ShootingIntegrationSettings, typing.Callable]): ...
@@ -356,41 +343,50 @@ class ShootingPropagationSettings:
     def __init__(self, list: java.util.List[org.orekit.forces.ForceModel], adjointDynamicsProvider: AdjointDynamicsProvider, frame: org.orekit.frames.Frame, shootingIntegrationSettings: typing.Union[ShootingIntegrationSettings, typing.Callable], attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
     def getAdjointDynamicsProvider(self) -> AdjointDynamicsProvider:
         """
-            Getter for adjoint dynamics provider.
+        Getter for adjoint dynamics provider.
         
-            Returns:
-                adjoint dynamics
+        Returns:
+            adjoint dynamics
         
         
         """
         ...
     def getAttitudeProvider(self) -> org.orekit.attitudes.AttitudeProvider:
         """
-            Getter for the attitude provider.
+        Getter for the attitude provider.
         
-            Returns:
-                attitude provider.
+        Returns:
+            attitude provider.
         
         
         """
         ...
-    def getForceModels(self) -> java.util.List[org.orekit.forces.ForceModel]: ...
+    def getForceModels(self) -> java.util.List[org.orekit.forces.ForceModel]:
+        """
+        Getter for the force models.
+        
+        Returns:
+            forces
+        
+        
+        """
+        ...
     def getIntegrationSettings(self) -> ShootingIntegrationSettings:
         """
-            Getter for the integration settings.
+        Getter for the integration settings.
         
-            Returns:
-                integration settings
+        Returns:
+            integration settings
         
         
         """
         ...
     def getPropagationFrame(self) -> org.orekit.frames.Frame:
         """
-            Getter for the propagation frame.
+        Getter for the propagation frame.
         
-            Returns:
-                propagation frame
+        Returns:
+            propagation frame
         
         
         """
@@ -398,58 +394,150 @@ class ShootingPropagationSettings:
 
 class CartesianAdjointDynamicsProvider(AdjointDynamicsProvider):
     """
-    public abstract class CartesianAdjointDynamicsProvider extends :class:`~org.orekit.control.indirect.shooting.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.control.indirect.shooting.propagation.AdjointDynamicsProvider`
+    Abstract class for Cartesian adjoint derivatives provider.
     
-        Abstract class for Cartesian adjoint derivatives provider.
+    Since:
+        12.2
     
-        Since:
-            12.2
-    
-        Also see:
-            :class:`~org.orekit.control.indirect.shooting.propagation.AdjointDynamicsProvider`
+    Also see:
+        AdjointDynamicsProvider
     """
     def buildAdditionalDerivativesProvider(self) -> org.orekit.control.indirect.adjoint.CartesianAdjointDerivativesProvider:
         """
-            Builds adjoint derivatives provider.
+        Builds adjoint derivatives provider.
         
-            Specified by:
-                :meth:`~org.orekit.control.indirect.shooting.propagation.AdjointDynamicsProvider.buildAdditionalDerivativesProvider` in
-                interface :class:`~org.orekit.control.indirect.shooting.propagation.AdjointDynamicsProvider`
+        Specified by: buildAdditionalDerivativesProvider in interface AdjointDynamicsProvider
         
-            Returns:
-                derivatives provider
+        Returns:
+            derivatives provider
         
         
         """
         ...
     _buildFieldAdditionalDerivativesProvider__T = typing.TypeVar('_buildFieldAdditionalDerivativesProvider__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def buildFieldAdditionalDerivativesProvider(self, field: org.hipparchus.Field[_buildFieldAdditionalDerivativesProvider__T]) -> org.orekit.control.indirect.adjoint.FieldCartesianAdjointDerivativesProvider[_buildFieldAdditionalDerivativesProvider__T]: ...
+    def buildFieldAdditionalDerivativesProvider(self, field: org.hipparchus.Field[_buildFieldAdditionalDerivativesProvider__T]) -> org.orekit.control.indirect.adjoint.FieldCartesianAdjointDerivativesProvider[_buildFieldAdditionalDerivativesProvider__T]:
+        """
+        Builds Field adjoint derivatives provider.
+        
+        Specified by: meth:`~org.orekit.control.indirect.shooting.propagation.AdjointDynamicsProvider.buildFieldAdditionalDerivativesProvider` in interface AdjointDynamicsProvider
+        
+        Parameters:
+            field (Field<T> field): input field
+        
+        Returns:
+            derivatives provider
+        
+        
+        """
+        ...
     def getAdjointName(self) -> str:
         """
-            Getter for adjoint vector name.
+        Getter for adjoint vector name.
         
-            Specified by:
-                :meth:`~org.orekit.control.indirect.shooting.propagation.AdjointDynamicsProvider.getAdjointName` in
-                interface :class:`~org.orekit.control.indirect.shooting.propagation.AdjointDynamicsProvider`
+        Specified by: getAdjointName in interface AdjointDynamicsProvider
         
-            Returns:
-                name
+        Returns:
+            name
         
         
         """
         ...
     def getDimension(self) -> int:
         """
-            Getter for adjoint dimension.
+        Getter for adjoint dimension.
         
-            Specified by:
-                :meth:`~org.orekit.control.indirect.shooting.propagation.AdjointDynamicsProvider.getDimension` in
-                interface :class:`~org.orekit.control.indirect.shooting.propagation.AdjointDynamicsProvider`
+        Specified by: getDimension in interface AdjointDynamicsProvider
         
-            Returns:
-                dimension
+        Returns:
+            dimension
         
         
+        """
+        ...
+
+class PythonAdjointDynamicsProvider(AdjointDynamicsProvider):
+    """
+    Python implementation of the AdjointDynamicsProvider interface. This class is part of the JCC Python interface and exposes all methods natively.
+    """
+    def __init__(self): ...
+    def buildAdditionalDerivativesProvider(self) -> org.orekit.propagation.integration.AdditionalDerivativesProvider:
+        """
+        Builds adjoint derivatives provider.
+        
+        Specified by: buildAdditionalDerivativesProvider in interface AdjointDynamicsProvider
+        
+        Returns:
+            derivatives provider
+        
+        
+        """
+        ...
+    _buildFieldAdditionalDerivativesProvider__T = typing.TypeVar('_buildFieldAdditionalDerivativesProvider__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def buildFieldAdditionalDerivativesProvider(self, field: org.hipparchus.Field[_buildFieldAdditionalDerivativesProvider__T]) -> org.orekit.propagation.integration.FieldAdditionalDerivativesProvider[_buildFieldAdditionalDerivativesProvider__T]:
+        """
+        Builds Field adjoint derivatives provider.
+        
+        Specified by: meth:`~org.orekit.control.indirect.shooting.propagation.AdjointDynamicsProvider.buildFieldAdditionalDerivativesProvider` in interface AdjointDynamicsProvider
+        
+        Parameters:
+            field (Field<T> field): input field
+        
+        Returns:
+            derivatives provider
+        
+        
+        """
+        ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: meth:`~org.orekit.control.indirect.shooting.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getAdjointName(self) -> str:
+        """
+        Getter for adjoint vector name.
+        
+        Specified by: getAdjointName in interface AdjointDynamicsProvider
+        
+        Returns:
+            name
+        
+        
+        """
+        ...
+    def getDimension(self) -> int:
+        """
+        Getter for adjoint dimension.
+        
+        Specified by: getDimension in interface AdjointDynamicsProvider
+        
+        Returns:
+            dimension
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
         """
         ...
 
@@ -460,6 +548,7 @@ class __module_protocol__(Protocol):
     AdjointDynamicsProvider: typing.Type[AdjointDynamicsProvider]
     CartesianAdjointDynamicsProvider: typing.Type[CartesianAdjointDynamicsProvider]
     CartesianAdjointDynamicsProviderFactory: typing.Type[CartesianAdjointDynamicsProviderFactory]
+    PythonAdjointDynamicsProvider: typing.Type[PythonAdjointDynamicsProvider]
     ShootingIntegrationSettings: typing.Type[ShootingIntegrationSettings]
     ShootingIntegrationSettingsFactory: typing.Type[ShootingIntegrationSettingsFactory]
     ShootingPropagationSettings: typing.Type[ShootingPropagationSettings]

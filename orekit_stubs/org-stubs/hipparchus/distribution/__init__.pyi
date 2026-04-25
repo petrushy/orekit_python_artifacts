@@ -19,60 +19,71 @@ import typing
 _EnumeratedDistribution__T = typing.TypeVar('_EnumeratedDistribution__T')  # <T>
 class EnumeratedDistribution(java.io.Serializable, typing.Generic[_EnumeratedDistribution__T]):
     """
-    public classEnumeratedDistribution<T> extends :class:`~org.hipparchus.distribution.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.distribution.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements Serializable
     
-        A generic implementation of a ` discrete probability distribution (Wikipedia)
-        <http://en.wikipedia.org/wiki/Probability_distribution#Discrete_probability_distribution>` over a finite sample space,
-        based on an enumerated list of <value, probability> pairs.
+    A generic implementation of a ` discrete probability distribution (Wikipedia) <http://en.wikipedia.org/wiki/Probability_distribution#Discrete_probability_distribution>` over a finite sample space, based on an enumerated list of <value, probability> pairs.
     
-        Input probabilities must all be non-negative, but zero values are allowed and their sum does not have to equal one.
-        Constructors will normalize input probabilities to make them sum to one.
+    Input probabilities must all be non-negative, but zero values are allowed and their sum does not have to equal one. Constructors will normalize input probabilities to make them sum to one.
     
-        The list of <value, probability> pairs does not, strictly speaking, have to be a function and it can contain null
-        values. The pmf created by the constructor will combine probabilities of equal values and will treat null values as
-        equal.
+    The list of <value, probability> pairs does not, strictly speaking, have to be a function and it can contain null values. The pmf created by the constructor will combine probabilities of equal values and will treat null values as equal.
     
-        For example, if the list of pairs <"dog", 0.2>, <null, 0.1>, <"pig", 0.2>, <"dog", 0.1>, <null, 0.4> is provided to the
-        constructor, the resulting pmf will assign mass of 0.5 to null, 0.3 to "dog" and 0.2 to null.
+    For example, if the list of pairs <"dog", 0.2>, <null, 0.1>, <"pig", 0.2>, <"dog", 0.1>, <null, 0.4> is provided to the constructor, the resulting pmf will assign mass of 0.5 to null, 0.3 to "dog" and 0.2 to null.
     
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
-    def __init__(self, list: java.util.List[org.hipparchus.util.Pair[_EnumeratedDistribution__T, float]]): ...
-    @staticmethod
-    def checkAndNormalize(doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
+    def __init__(self, pmf: java.util.List[org.hipparchus.util.Pair[_EnumeratedDistribution__T, float]]):
         """
-            Checks to make sure that weights is neither null nor empty and contains only non-negative, finite, non-NaN values and if
-            necessary normalizes it to sum to 1.
+        Create an enumerated distribution using the given probability mass function enumeration.
         
-            Parameters:
-                weights (double[]): input array to be used as the basis for the values of a PMF
+        Parameters:
+            pmf (List<Pair<EnumeratedDistribution,Double>>): probability mass function enumerated as a list of <T, probability> pairs.
         
-            Returns:
-                a possibly rescaled copy of the array that sums to 1 and contains only valid probability values
-        
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: of weights is null or empty or includes negative, NaN or infinite values or only 0's
+        Raises:
+            MathIllegalArgumentException: of weights includes negative, NaN or infinite values or only 0's
         
         
         """
         ...
-    def getPmf(self) -> java.util.List[org.hipparchus.util.Pair[_EnumeratedDistribution__T, float]]: ...
-    def probability(self, t: _EnumeratedDistribution__T) -> float:
+    @staticmethod
+    def checkAndNormalize(weights: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
         """
-            For a random variable :code:`X` whose values are distributed according to this distribution, this method returns
-            :code:`P(X = x)`. In other words, this method represents the probability mass function (PMF) for the distribution.
+        Checks to make sure that weights is neither null nor empty and contains only non-negative, finite, non-NaN values and if necessary normalizes it to sum to 1.
         
-            Note that if :code:`x1` and :code:`x2` satisfy :code:`x1.equals(x2)`, or both are null, then :code:`probability(x1) =
-            probability(x2)`.
+        Parameters:
+            weights (double[]): input array to be used as the basis for the values of a PMF
         
-            Parameters:
-                x (:class:`~org.hipparchus.distribution.EnumeratedDistribution`): the point at which the PMF is evaluated
+        Returns:
+            a possibly rescaled copy of the array that sums to 1 and contains only valid probability values
         
-            Returns:
-                the value of the probability mass function at :code:`x`
+        Raises:
+            MathIllegalArgumentException: of weights is null or empty or includes negative, NaN or infinite values or only 0's
+        
+        
+        """
+        ...
+    def getPmf(self) -> java.util.List[org.hipparchus.util.Pair[_EnumeratedDistribution__T, float]]:
+        """
+        Return the probability mass function as a list of (value, probability) pairs.
+        
+        Note that if duplicate and / or null values were provided to the constructor when creating this EnumeratedDistribution, the returned list will contain these values. If duplicates values exist, what is returned will not represent a pmf (i.e., it is up to the caller to consolidate duplicate mass points).
+        
+        Returns:
+            the probability mass function.
+        
+        
+        """
+        ...
+    def probability(self, x: _EnumeratedDistribution__T) -> float:
+        """
+        For a random variable X whose values are distributed according to this distribution, this method returns P(X = x). In other words, this method represents the probability mass function (PMF) for the distribution.
+        
+        Note that if x1 and x2 satisfy equals(x2), or both are null, then probability(x1) = probability(x2).
+        
+        Parameters:
+            x (EnumeratedDistribution): the point at which the PMF is evaluated
+        
+        Returns:
+            the value of the probability mass function at x
         
         
         """
@@ -80,96 +91,105 @@ class EnumeratedDistribution(java.io.Serializable, typing.Generic[_EnumeratedDis
 
 class IntegerDistribution:
     """
-    public interfaceIntegerDistribution
-    
-        Interface for discrete distributions.
+    Interface for discrete distributions.
     """
-    def cumulativeProbability(self, int: int) -> float:
+    def cumulativeProbability(self, x: int) -> float:
         """
-            For a random variable :code:`X` whose values are distributed according to this distribution, this method returns
-            :code:`P(X <= x)`. In other words, this method represents the (cumulative) distribution function (CDF) for this
-            distribution.
+        For a random variable X whose values are distributed according to this distribution, this method returns P(X <= x). In other words, this method represents the (cumulative) distribution function (CDF) for this distribution.
         
-            Parameters:
-                x (int): the point at which the CDF is evaluated
+        Parameters:
+            x (int): the point at which the CDF is evaluated
         
-            Returns:
-                the probability that a random variable with this distribution takes a value less than or equal to :code:`x`
+        Returns:
+            the probability that a random variable with this distribution takes a value less than or equal to x
         
         
         """
         ...
     def getNumericalMean(self) -> float:
         """
-            Use this method to get the numerical value of the mean of this distribution.
+        Use this method to get the numerical value of the mean of this distribution.
         
-            Returns:
-                the mean or :code:`Double.NaN` if it is not defined
+        Returns:
+            the mean or NaN if it is not defined
         
         
         """
         ...
     def getNumericalVariance(self) -> float:
         """
-            Use this method to get the numerical value of the variance of this distribution.
+        Use this method to get the numerical value of the variance of this distribution.
         
-            Returns:
-                the variance (possibly :code:`Double.POSITIVE_INFINITY` or :code:`Double.NaN` if it is not defined)
+        Returns:
+            the variance (possibly POSITIVE_INFINITY or NaN if it is not defined)
         
         
         """
         ...
     def getSupportLowerBound(self) -> int:
         """
-            Access the lower bound of the support. This method must return the same value as
-            :code:`inverseCumulativeProbability(0)`. In other words, this method must return
+        Access the lower bound of the support. This method must return the same value as inverseCumulativeProbability(0). In other words, this method must return
         
-            :code:`inf {x in Z | P(X <= x) > 0}`.
+        inf {x in Z | P(X <= x) > 0}.
         
-            Returns:
-                lower bound of the support (:code:`Integer.MIN_VALUE` for negative infinity)
+        Returns:
+            lower bound of the support (MIN_VALUE for negative infinity)
         
         
         """
         ...
     def getSupportUpperBound(self) -> int:
         """
-            Access the upper bound of the support. This method must return the same value as
-            :code:`inverseCumulativeProbability(1)`. In other words, this method must return
+        Access the upper bound of the support. This method must return the same value as inverseCumulativeProbability(1). In other words, this method must return
         
-            :code:`inf {x in R | P(X <= x) = 1}`.
+        inf {x in R | P(X <= x) = 1}.
         
-            Returns:
-                upper bound of the support (:code:`Integer.MAX_VALUE` for positive infinity)
+        Returns:
+            upper bound of the support (MAX_VALUE for positive infinity)
         
         
         """
         ...
-    def inverseCumulativeProbability(self, double: float) -> int: ...
+    def inverseCumulativeProbability(self, p: float) -> int:
+        """
+        Computes the quantile function of this distribution. For a random variable X distributed according to this distribution, the returned value is
+        
+          - inf{x in Z | P(X<=x) >= p} for 0 < p <= 1,
+          - inf{x in Z | P(X<=x) > 0} for p = 0.
+        
+        If the result exceeds the range of the data type int, then MIN_VALUE or MAX_VALUE is returned.
+        
+        Parameters:
+            p (double): the cumulative probability
+        
+        Returns:
+            the smallest p-quantile of this distribution (largest 0-quantile for p = 0)
+        
+        Raises:
+            MathIllegalArgumentException: if p < 0 or p > 1
+        
+        
+        """
+        ...
     def isSupportConnected(self) -> bool:
         """
-            Use this method to get information about whether the support is connected, i.e. whether all integers between the lower
-            and upper bound of the support are included in the support.
+        Use this method to get information about whether the support is connected, i.e. whether all integers between the lower and upper bound of the support are included in the support.
         
-            Returns:
-                whether the support is connected or not
+        Returns:
+            whether the support is connected or not
         
         
         """
         ...
-    def logProbability(self, int: int) -> float:
+    def logProbability(self, x: int) -> float:
         """
-            For a random variable :code:`X` whose values are distributed according to this distribution, this method returns
-            :code:`log(P(X = x))`, where :code:`log` is the natural logarithm. In other words, this method represents the logarithm
-            of the probability mass function (PMF) for the distribution. Note that due to the floating point precision and
-            under/overflow issues, this method will for some distributions be more precise and faster than computing the logarithm
-            of :meth:`~org.hipparchus.distribution.IntegerDistribution.probability`.
+        For a random variable X whose values are distributed according to this distribution, this method returns log(P(X = x)), where log is the natural logarithm. In other words, this method represents the logarithm of the probability mass function (PMF) for the distribution. Note that due to the floating point precision and under/overflow issues, this method will for some distributions be more precise and faster than computing the logarithm of probability.
         
-            Parameters:
-                x (int): the point at which the PMF is evaluated
+        Parameters:
+            x (int): the point at which the PMF is evaluated
         
-            Returns:
-                the logarithm of the value of the probability mass function at :code:`x`
+        Returns:
+            the logarithm of the value of the probability mass function at x
         
         
         """
@@ -177,30 +197,28 @@ class IntegerDistribution:
     @typing.overload
     def probability(self, int: int) -> float:
         """
-            For a random variable :code:`X` whose values are distributed according to this distribution, this method returns
-            :code:`P(X = x)`. In other words, this method represents the probability mass function (PMF) for the distribution.
+        For a random variable X whose values are distributed according to this distribution, this method returns P(X = x). In other words, this method represents the probability mass function (PMF) for the distribution.
         
-            Parameters:
-                x (int): the point at which the PMF is evaluated
+        Parameters:
+            x (int): the point at which the PMF is evaluated
         
-            Returns:
-                the value of the probability mass function at :code:`x`
+        Returns:
+            the value of the probability mass function at x
         
-        double probability(int x0, int x1) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        double probability(int x0, int x1) throws MathIllegalArgumentException
         
-            For a random variable :code:`X` whose values are distributed according to this distribution, this method returns
-            :code:`P(x0 < X <= x1)`.
+        For a random variable X whose values are distributed according to this distribution, this method returns P(x0 < X <= x1).
         
-            Parameters:
-                x0 (int): the exclusive lower bound
-                x1 (int): the inclusive upper bound
+        Parameters:
+            x0 (int): the exclusive lower bound
+            x1 (int): the inclusive upper bound
         
-            Returns:
-                the probability that a random variable with this distribution will take a value between :code:`x0` and :code:`x1`,
-                excluding the lower and including the upper endpoint
+        Returns:
+            the probability that a random variable with this distribution will take a value between x0 and x1,
+            excluding the lower and including the upper endpoint
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`x0 > x1`
+        Raises:
+            MathIllegalArgumentException: if x0 > x1
         
         
         """
@@ -210,46 +228,39 @@ class IntegerDistribution:
 
 class MultivariateRealDistribution:
     """
-    public interfaceMultivariateRealDistribution
+    Base interface for multivariate continuous distributions.
     
-        Base interface for multivariate continuous distributions.
-    
-        This is based largely on the RealDistribution interface, but cumulative distribution functions are not required because
-        they are often quite difficult to compute for multivariate distributions.
+    This is based largely on the RealDistribution interface, but cumulative distribution functions are not required because they are often quite difficult to compute for multivariate distributions.
     """
-    def density(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
+    def density(self, x: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
-            Returns the probability density function (PDF) of this distribution evaluated at the specified point :code:`x`. In
-            general, the PDF is the derivative of the cumulative distribution function. If the derivative does not exist at
-            :code:`x`, then an appropriate replacement should be returned, e.g. :code:`Double.POSITIVE_INFINITY`,
-            :code:`Double.NaN`, or the limit inferior or limit superior of the difference quotient.
+        Returns the probability density function (PDF) of this distribution evaluated at the specified point x. In general, the PDF is the derivative of the cumulative distribution function. If the derivative does not exist at x, then an appropriate replacement should be returned, e.g. POSITIVE_INFINITY, NaN, or the limit inferior or limit superior of the difference quotient.
         
-            Parameters:
-                x (double[]): Point at which the PDF is evaluated.
+        Parameters:
+            x (double[]): Point at which the PDF is evaluated.
         
-            Returns:
-                the value of the probability density function at point :code:`x`.
+        Returns:
+            the value of the probability density function at point x.
         
         
         """
         ...
     def getDimension(self) -> int:
         """
-            Gets the number of random variables of the distribution. It is the size of the array returned by the
-            :meth:`~org.hipparchus.distribution.MultivariateRealDistribution.sample` method.
+        Gets the number of random variables of the distribution. It is the size of the array returned by the sample method.
         
-            Returns:
-                the number of variables.
+        Returns:
+            the number of variables.
         
         
         """
         ...
-    def reseedRandomGenerator(self, long: int) -> None:
+    def reseedRandomGenerator(self, seed: int) -> None:
         """
-            Reseeds the random generator used to generate samples.
+        Reseeds the random generator used to generate samples.
         
-            Parameters:
-                seed (long): Seed with which to initialize the random number generator.
+        Parameters:
+            seed (long): Seed with which to initialize the random number generator.
         
         
         """
@@ -257,27 +268,25 @@ class MultivariateRealDistribution:
     @typing.overload
     def sample(self) -> typing.MutableSequence[float]:
         """
-            Generates a random value vector sampled from this distribution.
+        Generates a random value vector sampled from this distribution.
         
-            Returns:
-                a random value vector.
+        Returns:
+            a random value vector.
         
-        double[][] sample(int sampleSize) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        double[][] sample(int sampleSize) throws MathIllegalArgumentException
         
-            Generates a list of a random value vectors from the distribution.
+        Generates a list of a random value vectors from the distribution.
         
-            Parameters:
-                sampleSize (int): the number of random vectors to generate.
+        Parameters:
+            sampleSize (int): the number of random vectors to generate.
         
-            Returns:
-                an array representing the random samples.
+        Returns:
+            an array representing the random samples.
         
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`sampleSize` is not positive.
+        Raises:
+            MathIllegalArgumentException: if sampleSize is not positive.
         
-            Also see:
-        
-                  - :meth:`~org.hipparchus.distribution.MultivariateRealDistribution.sample`
+              - sample
         
         
         
@@ -288,121 +297,140 @@ class MultivariateRealDistribution:
 
 class RealDistribution:
     """
-    public interfaceRealDistribution
-    
-        Base interface for continuous distributions.
+    Base interface for continuous distributions.
     """
-    def cumulativeProbability(self, double: float) -> float:
+    def cumulativeProbability(self, x: float) -> float:
         """
-            For a random variable :code:`X` whose values are distributed according to this distribution, this method returns
-            :code:`P(X <= x)`. In other words, this method represents the (cumulative) distribution function (CDF) for this
-            distribution.
+        For a random variable X whose values are distributed according to this distribution, this method returns P(X <= x). In other words, this method represents the (cumulative) distribution function (CDF) for this distribution.
         
-            Parameters:
-                x (double): the point at which the CDF is evaluated
+        Parameters:
+            x (double): the point at which the CDF is evaluated
         
-            Returns:
-                the probability that a random variable with this distribution takes a value less than or equal to :code:`x`
+        Returns:
+            the probability that a random variable with this distribution takes a value less than or equal to x
         
         
         """
         ...
-    def density(self, double: float) -> float:
+    def density(self, x: float) -> float:
         """
-            Returns the probability density function (PDF) of this distribution evaluated at the specified point :code:`x`. In
-            general, the PDF is the derivative of the :meth:`~org.hipparchus.distribution.RealDistribution.cumulativeProbability`.
-            If the derivative does not exist at :code:`x`, then an appropriate replacement should be returned, e.g.
-            :code:`Double.POSITIVE_INFINITY`, :code:`Double.NaN`, or the limit inferior or limit superior of the difference
-            quotient.
+        Returns the probability density function (PDF) of this distribution evaluated at the specified point x. In general, the PDF is the derivative of the cumulativeProbability. If the derivative does not exist at x, then an appropriate replacement should be returned, e.g. POSITIVE_INFINITY, NaN, or the limit inferior or limit superior of the difference quotient.
         
-            Parameters:
-                x (double): the point at which the PDF is evaluated
+        Parameters:
+            x (double): the point at which the PDF is evaluated
         
-            Returns:
-                the value of the probability density function at point :code:`x`
+        Returns:
+            the value of the probability density function at point x
         
         
         """
         ...
     def getNumericalMean(self) -> float:
         """
-            Use this method to get the numerical value of the mean of this distribution.
+        Use this method to get the numerical value of the mean of this distribution.
         
-            Returns:
-                the mean or :code:`Double.NaN` if it is not defined
+        Returns:
+            the mean or NaN if it is not defined
         
         
         """
         ...
     def getNumericalVariance(self) -> float:
         """
-            Use this method to get the numerical value of the variance of this distribution.
+        Use this method to get the numerical value of the variance of this distribution.
         
-            Returns:
-                the variance (possibly :code:`Double.POSITIVE_INFINITY` as for certain cases in
-                :class:`~org.hipparchus.distribution.continuous.TDistribution`) or :code:`Double.NaN` if it is not defined
+        Returns:
+            the variance (possibly POSITIVE_INFINITY as for certain cases in
+            TDistribution) or NaN if it is not defined
         
         
         """
         ...
     def getSupportLowerBound(self) -> float:
         """
-            Access the lower bound of the support. This method must return the same value as
-            :code:`inverseCumulativeProbability(0)`. In other words, this method must return
+        Access the lower bound of the support. This method must return the same value as inverseCumulativeProbability(0). In other words, this method must return
         
-            :code:`inf {x in R | P(X <= x) > 0}`.
+        inf {x in R | P(X <= x) > 0}.
         
-            Returns:
-                lower bound of the support (might be :code:`Double.NEGATIVE_INFINITY`)
+        Returns:
+            lower bound of the support (might be NEGATIVE_INFINITY)
         
         
         """
         ...
     def getSupportUpperBound(self) -> float:
         """
-            Access the upper bound of the support. This method must return the same value as
-            :code:`inverseCumulativeProbability(1)`. In other words, this method must return
+        Access the upper bound of the support. This method must return the same value as inverseCumulativeProbability(1). In other words, this method must return
         
-            :code:`inf {x in R | P(X <= x) = 1}`.
+        inf {x in R | P(X <= x) = 1}.
         
-            Returns:
-                upper bound of the support (might be :code:`Double.POSITIVE_INFINITY`)
+        Returns:
+            upper bound of the support (might be POSITIVE_INFINITY)
         
         
         """
         ...
-    def inverseCumulativeProbability(self, double: float) -> float: ...
+    def inverseCumulativeProbability(self, p: float) -> float:
+        """
+        Computes the quantile function of this distribution. For a random variable X distributed according to this distribution, the returned value is
+        
+          - inf{x in R | P(X<=x) >= p} for 0 < p <= 1,
+          - inf{x in R | P(X<=x) > 0} for p = 0.
+        
+        
+        Parameters:
+            p (double): the cumulative probability
+        
+        Returns:
+            the smallest p-quantile of this distribution (largest 0-quantile for p = 0)
+        
+        Raises:
+            MathIllegalArgumentException: if p < 0 or p > 1
+        
+        
+        """
+        ...
     def isSupportConnected(self) -> bool:
         """
-            Use this method to get information about whether the support is connected, i.e. whether all values between the lower and
-            upper bound of the support are included in the support.
+        Use this method to get information about whether the support is connected, i.e. whether all values between the lower and upper bound of the support are included in the support.
         
-            Returns:
-                whether the support is connected or not
-        
-        
-        """
-        ...
-    def logDensity(self, double: float) -> float:
-        """
-            Returns the natural logarithm of the probability density function (PDF) of this distribution evaluated at the specified
-            point :code:`x`. In general, the PDF is the derivative of the
-            :meth:`~org.hipparchus.distribution.RealDistribution.cumulativeProbability`. If the derivative does not exist at
-            :code:`x`, then an appropriate replacement should be returned, e.g. :code:`Double.POSITIVE_INFINITY`,
-            :code:`Double.NaN`, or the limit inferior or limit superior of the difference quotient. Note that due to the floating
-            point precision and under/overflow issues, this method will for some distributions be more precise and faster than
-            computing the logarithm of :meth:`~org.hipparchus.distribution.RealDistribution.density`.
-        
-            Parameters:
-                x (double): the point at which the PDF is evaluated
-        
-            Returns:
-                the logarithm of the value of the probability density function at point :code:`x`
+        Returns:
+            whether the support is connected or not
         
         
         """
         ...
-    def probability(self, double: float, double2: float) -> float: ...
+    def logDensity(self, x: float) -> float:
+        """
+        Returns the natural logarithm of the probability density function (PDF) of this distribution evaluated at the specified point x. In general, the PDF is the derivative of the cumulativeProbability. If the derivative does not exist at x, then an appropriate replacement should be returned, e.g. POSITIVE_INFINITY, NaN, or the limit inferior or limit superior of the difference quotient. Note that due to the floating point precision and under/overflow issues, this method will for some distributions be more precise and faster than computing the logarithm of density.
+        
+        Parameters:
+            x (double): the point at which the PDF is evaluated
+        
+        Returns:
+            the logarithm of the value of the probability density function at point x
+        
+        
+        """
+        ...
+    def probability(self, x0: float, x1: float) -> float:
+        """
+        For a random variable X whose values are distributed according to this distribution, this method returns P(x0 < X <= x1).
+        
+        Parameters:
+            x0 (double): the exclusive lower bound
+            x1 (double): the inclusive upper bound
+        
+        Returns:
+            the probability that a random variable with this distribution takes a value between x0 and x1, excluding
+            the lower and including the upper endpoint
+        
+        Raises:
+            MathIllegalArgumentException: if x0 > x1
+        
+        
+        """
+        ...
 
 
 class __module_protocol__(Protocol):

@@ -21,600 +21,707 @@ import typing
 
 class RinexClock:
     """
-    public class RinexClock extends :class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Represents a parsed clock file from the IGS.
     
-        Represents a parsed clock file from the IGS.
+    A time system should be specified in the file. However, if it is not, default time system will be chosen regarding the satellite system. If it is mixed or not specified, default time system will be UTC.
     
-        A time system should be specified in the file. However, if it is not, default time system will be chosen regarding the
-        satellite system. If it is mixed or not specified, default time system will be UTC.
+    Some fields might be null after parsing. It is expected because of the numerous kind of data that can be stored in clock data file.
     
-        Some fields might be null after parsing. It is expected because of the numerous kind of data that can be stored in clock
-        data file.
+    Caution, files with missing information in header can lead to wrong data dates and station positions. It is advised to check the correctness and format compliance of the clock file to be parsed. Some values such as file time scale still can be set by user.
     
-        Caution, files with missing information in header can lead to wrong data dates and station positions. It is advised to
-        check the correctness and format compliance of the clock file to be parsed. Some values such as file time scale still
-        can be set by user.
+    Since:
+        11.0
     
-        Since:
-            11.0
-    
-        Also see:
-            :class:`~org.orekit.files.rinex.clock.https:.files.igs.org.pub.data.format.rinex_clock300.txt`,
-            :class:`~org.orekit.files.rinex.clock.https:.files.igs.org.pub.data.format.rinex_clock302.txt`,
-            :class:`~org.orekit.files.rinex.clock.https:.files.igs.org.pub.data.format.rinex_clock304.txt`
+    Also see:
+        txt,
+        txt,
+        txt
     """
-    def __init__(self, function: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]]): ...
+    def __init__(self, frameBuilder: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]]):
+        """
+        Constructor.
+        
+        Parameters:
+            frameBuilder (Function<? super String, ? extends Frame> frameBuilder): for constructing a reference frame from the identifier
+        
+        
+        """
+        ...
     def addAppliedDCBS(self, appliedDCBS: org.orekit.files.rinex.AppliedDCBS) -> None:
         """
-            Add an applied differencial code bias corrections.
+        Add an applied differencial code bias corrections.
         
-            Parameters:
-                appliedDCBS (:class:`~org.orekit.files.rinex.AppliedDCBS`): the applied differencial code bias corrections to add
+        Parameters:
+            appliedDCBS (AppliedDCBS): the applied differencial code bias corrections to add
         
         
         """
         ...
     def addAppliedPCVS(self, appliedPCVS: org.orekit.files.rinex.AppliedPCVS) -> None:
         """
-            Add an applied phase center variations.
+        Add an applied phase center variations.
         
-            Parameters:
-                appliedPCVS (:class:`~org.orekit.files.rinex.AppliedPCVS`): the phase center variations to add
+        Parameters:
+            appliedPCVS (AppliedPCVS): the phase center variations to add
         
         
         """
         ...
-    def addClockData(self, string: str, clockDataLine: 'RinexClock.ClockDataLine') -> None:
+    def addClockData(self, id: str, clockDataLine: 'RinexClock.ClockDataLine') -> None:
         """
-            Add a clock data line to a specified receiver/satellite.
+        Add a clock data line to a specified receiver/satellite.
         
-            Parameters:
-                id (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the satellite system to add observation type
-                clockDataLine (:class:`~org.orekit.files.rinex.clock.RinexClock.ClockDataLine`): the clock data line to add
+        Parameters:
+            id (String): the satellite system to add observation type
+            clockDataLine (ClockDataLine): the clock data line to add
         
         
         """
         ...
     def addClockDataType(self, clockDataType: 'RinexClock.ClockDataType') -> None:
         """
-            Add a clock data types.
+        Add a clock data types.
         
-            Parameters:
-                clockDataType (:class:`~org.orekit.files.rinex.clock.RinexClock.ClockDataType`): the clock data types to add
+        Parameters:
+            clockDataType (ClockDataType): the clock data types to add
         
         
         """
         ...
-    def addComment(self, string: str) -> None:
+    def addComment(self, comment: str) -> None:
         """
-            Add a comment line.
+        Add a comment line.
         
-            Parameters:
-                comment (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the comment line to add
+        Parameters:
+            comment (String): the comment line to add
         
         
         """
         ...
     def addReceiver(self, receiver: 'RinexClock.Receiver') -> None:
         """
-            Add a new receiver to the list of stored receivers.
+        Add a new receiver to the list of stored receivers.
         
-            Parameters:
-                receiver (:class:`~org.orekit.files.rinex.clock.RinexClock.Receiver`): the receiver
-        
-        
-        """
-        ...
-    def addReferenceClockList(self, list: java.util.List['RinexClock.ReferenceClock'], absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
-    def addSatellite(self, string: str) -> None:
-        """
-            Add a new satellite with a given identifier to the list of stored satellites.
-        
-            Parameters:
-                satId (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the satellite identifier
+        Parameters:
+            receiver (Receiver): the receiver
         
         
         """
         ...
-    def addSystemObservationType(self, satelliteSystem: org.orekit.gnss.SatelliteSystem, observationType: org.orekit.gnss.ObservationType) -> None:
+    def addReferenceClockList(self, referenceClockList: java.util.List['RinexClock.ReferenceClock'], startDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Add an observation type for a specified satellite system.
+        Add a list of reference clocks which will be used after a specified date. If the reference map has not been already created, it will be.
         
-            Parameters:
-                satSystem (:class:`~org.orekit.gnss.SatelliteSystem`): the satellite system to add observation type
-                observationType (:class:`~org.orekit.gnss.ObservationType`): the system observation type to set
+        Parameters:
+            referenceClockList (List<ReferenceClock> referenceClockList): the reference clock list
+            startDate (AbsoluteDate): the date the list will be valid after.
         
         
         """
         ...
-    def extractClockModel(self, string: str, int: int) -> org.orekit.time.SampledClockModel:
+    def addSatellite(self, satId: str) -> None:
         """
-            Extract the clock model.
+        Add a new satellite with a given identifier to the list of stored satellites.
         
-            Parameters:
-                name (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): receiver/satellite name
-                nbInterpolationPoints (int): number of points to use in interpolation
+        Parameters:
+            satId (String): the satellite identifier
         
-            Returns:
-                extracted clock model
         
-            Since:
-                12.1
+        """
+        ...
+    def addSystemObservationType(self, satSystem: org.orekit.gnss.SatelliteSystem, observationType: org.orekit.gnss.ObservationType) -> None:
+        """
+        Add an observation type for a specified satellite system.
+        
+        Parameters:
+            satSystem (SatelliteSystem): the satellite system to add observation type
+            observationType (ObservationType): the system observation type to set
+        
+        
+        """
+        ...
+    def extractClockModel(self, name: str, nbInterpolationPoints: int) -> org.orekit.time.SampledClockModel:
+        """
+        Extract the clock model.
+        
+        Parameters:
+            name (String): receiver/satellite name
+            nbInterpolationPoints (int): number of points to use in interpolation
+        
+        Returns:
+            extracted clock model
+        
+        Since:
+            12.1
         
         
         """
         ...
     def getAgencyName(self) -> str:
         """
-            Getter for the agency name.
+        Getter for the agency name.
         
-            Returns:
-                the agencyName
+        Returns:
+            the agencyName
         
         
         """
         ...
     def getAnalysisCenterID(self) -> str:
         """
-            Getter for the analysis center ID.
+        Getter for the analysis center ID.
         
-            Returns:
-                the analysis center ID
+        Returns:
+            the analysis center ID
         
         
         """
         ...
     def getAnalysisCenterName(self) -> str:
         """
-            Getter for the analysis center name.
+        Getter for the analysis center name.
         
-            Returns:
-                the analysis center name
+        Returns:
+            the analysis center name
         
         
         """
         ...
-    def getClockData(self) -> java.util.Map[str, java.util.List['RinexClock.ClockDataLine']]: ...
-    def getClockDataTypes(self) -> java.util.List['RinexClock.ClockDataType']: ...
+    def getClockData(self) -> java.util.Map[str, java.util.List['RinexClock.ClockDataLine']]:
+        """
+        Getter for an unmodifiable map of clock data.
+        
+        Returns:
+            the clock data
+        
+        
+        """
+        ...
+    def getClockDataTypes(self) -> java.util.List['RinexClock.ClockDataType']:
+        """
+        Getter for the different clock data types.
+        
+        Returns:
+            the list of the different clock data types
+        
+        
+        """
+        ...
     def getComments(self) -> str:
         """
-            Getter for the comments.
+        Getter for the comments.
         
-            Returns:
-                the comments
+        Returns:
+            the comments
         
         
         """
         ...
     def getCreationDate(self) -> org.orekit.time.AbsoluteDate:
         """
-            Getter for the creation date.
+        Getter for the creation date.
         
-            Returns:
-                the creation date
+        Returns:
+            the creation date
         
         
         """
         ...
     def getCreationDateString(self) -> str:
         """
-            Getter for the creation date of the file as a string.
+        Getter for the creation date of the file as a string.
         
-            Returns:
-                the creation date as a string
+        Returns:
+            the creation date as a string
         
         
         """
         ...
     def getCreationTimeString(self) -> str:
         """
-            Getter for the creation time of the file as a string.
+        Getter for the creation time of the file as a string.
         
-            Returns:
-                the creation time as a string
+        Returns:
+            the creation time as a string
         
         
         """
         ...
     def getCreationTimeZoneString(self) -> str:
         """
-            Getter for the creation time zone of the file as a string.
+        Getter for the creation time zone of the file as a string.
         
-            Returns:
-                the creation time zone as a string
+        Returns:
+            the creation time zone as a string
         
         
         """
         ...
     def getEarliestEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get earliest epoch from the :meth:`~org.orekit.files.rinex.clock.RinexClock.getClockData`.
+        Get earliest epoch from the getClockData.
         
-            Returns:
-                earliest epoch from the :meth:`~org.orekit.files.rinex.clock.RinexClock.getClockData`, or
-                :meth:`~org.orekit.time.AbsoluteDate.FUTURE_INFINITY` if no data has been added
+        Returns:
+            earliest epoch from the getClockData, or
+            FUTURE_INFINITY if no data has been added
         
-            Since:
-                12.1
+        Since:
+            12.1
         
         
         """
         ...
     def getExternalClockReference(self) -> str:
         """
-            Getter for the external clock reference.
+        Getter for the external clock reference.
         
-            Returns:
-                the external clock reference
+        Returns:
+            the external clock reference
         
         
         """
         ...
     def getFormatVersion(self) -> float:
         """
-            Getter for the format version.
+        Getter for the format version.
         
-            Returns:
-                the format version
+        Returns:
+            the format version
         
         
         """
         ...
     def getFrame(self) -> org.orekit.frames.Frame:
         """
-            Get the reference frame for the station positions.
+        Get the reference frame for the station positions.
         
-            Returns:
-                the reference frame for station positions
+        Returns:
+            the reference frame for station positions
         
         
         """
         ...
     def getFrameName(self) -> str:
         """
-            Getter for the frame name.
+        Getter for the frame name.
         
-            Returns:
-                the frame name
+        Returns:
+            the frame name
         
         
         """
         ...
     def getLatestEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get latest epoch from the :meth:`~org.orekit.files.rinex.clock.RinexClock.getClockData`.
+        Get latest epoch from the getClockData.
         
-            Returns:
-                latest epoch from the :meth:`~org.orekit.files.rinex.clock.RinexClock.getClockData`, or
-                :meth:`~org.orekit.time.AbsoluteDate.PAST_INFINITY` if no data has been added
+        Returns:
+            latest epoch from the getClockData, or
+            PAST_INFINITY if no data has been added
         
-            Since:
-                12.1
+        Since:
+            12.1
         
         
         """
         ...
-    def getListAppliedDCBS(self) -> java.util.List[org.orekit.files.rinex.AppliedDCBS]: ...
-    def getListAppliedPCVS(self) -> java.util.List[org.orekit.files.rinex.AppliedPCVS]: ...
+    def getListAppliedDCBS(self) -> java.util.List[org.orekit.files.rinex.AppliedDCBS]:
+        """
+        Getter for the applied differential code bias corrections.
+        
+        Returns:
+            the list of applied differential code bias corrections
+        
+        
+        """
+        ...
+    def getListAppliedPCVS(self) -> java.util.List[org.orekit.files.rinex.AppliedPCVS]:
+        """
+        Getter for the applied phase center variations.
+        
+        Returns:
+            the list of the applied phase center variations
+        
+        
+        """
+        ...
     def getNumberOfClockDataTypes(self) -> int:
         """
-            Get the number of different clock data types in the file.
+        Get the number of different clock data types in the file.
         
-            Returns:
-                the number of different clock data types
+        Returns:
+            the number of different clock data types
         
         
         """
         ...
     def getNumberOfLeapSeconds(self) -> int:
         """
-            Getter for the number of leap seconds.
+        Getter for the number of leap seconds.
         
-            Returns:
-                the number of leap seconds
+        Returns:
+            the number of leap seconds
         
         
         """
         ...
     def getNumberOfLeapSecondsGNSS(self) -> int:
         """
-            Getter for the number of leap second for GNSS time scales.
+        Getter for the number of leap second for GNSS time scales.
         
-            Returns:
-                the number of leap seconds for GNSS time scales
+        Returns:
+            the number of leap seconds for GNSS time scales
         
         
         """
         ...
     def getNumberOfReceivers(self) -> int:
         """
-            Get the number of receivers that are considered in the file.
+        Get the number of receivers that are considered in the file.
         
-            Returns:
-                the number of receivers that are considered in the file
+        Returns:
+            the number of receivers that are considered in the file
         
         
         """
         ...
     def getNumberOfSatellites(self) -> int:
         """
-            Get the number of satellites that are considered in the file.
+        Get the number of satellites that are considered in the file.
         
-            Returns:
-                the number of satellites that are considered in the file
+        Returns:
+            the number of satellites that are considered in the file
         
         
         """
         ...
     def getProgramName(self) -> str:
         """
-            Getter for the program name.
+        Getter for the program name.
         
-            Returns:
-                the program name
+        Returns:
+            the program name
         
         
         """
         ...
-    def getReceivers(self) -> java.util.List['RinexClock.Receiver']: ...
-    def getReferenceClocks(self) -> org.orekit.utils.TimeSpanMap[java.util.List['RinexClock.ReferenceClock']]: ...
+    def getReceivers(self) -> java.util.List['RinexClock.Receiver']:
+        """
+        Getter for the receivers.
+        
+        Returns:
+            the list of the receivers
+        
+        
+        """
+        ...
+    def getReferenceClocks(self) -> org.orekit.utils.TimeSpanMap[java.util.List['RinexClock.ReferenceClock']]:
+        """
+        Getter for the reference clocks.
+        
+        Returns:
+            the time span map of the different refence clocks
+        
+        
+        """
+        ...
     def getSatelliteSystem(self) -> org.orekit.gnss.SatelliteSystem:
         """
-            Getter for the satellite system.
+        Getter for the satellite system.
         
-            Returns:
-                the satellite system
+        Returns:
+            the satellite system
         
         
         """
         ...
-    def getSatellites(self) -> java.util.List[str]: ...
+    def getSatellites(self) -> java.util.List[str]:
+        """
+        Getter for the satellites.
+        
+        Returns:
+            the list of the satellites
+        
+        
+        """
+        ...
     def getStationIdentifier(self) -> str:
         """
-            Getter for the station identifier.
+        Getter for the station identifier.
         
-            Returns:
-                the station identifier
+        Returns:
+            the station identifier
         
         
         """
         ...
     def getStationName(self) -> str:
         """
-            Getter for the station name.
+        Getter for the station name.
         
-            Returns:
-                the station name
+        Returns:
+            the station name
         
         
         """
         ...
-    def getSystemObservationTypes(self) -> java.util.Map[org.orekit.gnss.SatelliteSystem, java.util.List[org.orekit.gnss.ObservationType]]: ...
+    def getSystemObservationTypes(self) -> java.util.Map[org.orekit.gnss.SatelliteSystem, java.util.List[org.orekit.gnss.ObservationType]]:
+        """
+        Getter for the different observation type for each satellite system.
+        
+        Returns:
+            the map of the different observation type per satellite system
+        
+        
+        """
+        ...
     def getTimeScale(self) -> org.orekit.time.TimeScale:
         """
-            Getter for the data time scale.
+        Getter for the data time scale.
         
-            Returns:
-                the data time scale
+        Returns:
+            the data time scale
         
         
         """
         ...
     def getTimeSystem(self) -> org.orekit.gnss.TimeSystem:
         """
-            Getter for the file time system.
+        Getter for the file time system.
         
-            Returns:
-                the file time system
+        Returns:
+            the file time system
         
         
         """
         ...
     def getTotalNumberOfDataLines(self) -> int:
         """
-            Get the total number of complete data lines in the file.
+        Get the total number of complete data lines in the file.
         
-            Returns:
-                the total number of complete data lines in the file
-        
-        
-        """
-        ...
-    def numberOfObsTypes(self, satelliteSystem: org.orekit.gnss.SatelliteSystem) -> int:
-        """
-            Get the number of observation types for a given system.
-        
-            Parameters:
-                system (:class:`~org.orekit.gnss.SatelliteSystem`): the satellite system to consider
-        
-            Returns:
-                the number of observation types for a given system
+        Returns:
+            the total number of complete data lines in the file
         
         
         """
         ...
-    def setAgencyName(self, string: str) -> None:
+    def numberOfObsTypes(self, system: org.orekit.gnss.SatelliteSystem) -> int:
         """
-            Setter for the agency name.
+        Get the number of observation types for a given system.
         
-            Parameters:
-                agencyName (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the agency name to set
+        Parameters:
+            system (SatelliteSystem): the satellite system to consider
         
-        
-        """
-        ...
-    def setAnalysisCenterID(self, string: str) -> None:
-        """
-            Setter for the analysis center ID.
-        
-            Parameters:
-                analysisCenterID (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the analysis center ID to set
+        Returns:
+            the number of observation types for a given system
         
         
         """
         ...
-    def setAnalysisCenterName(self, string: str) -> None:
+    def setAgencyName(self, agencyName: str) -> None:
         """
-            Setter for the analysis center name.
+        Setter for the agency name.
         
-            Parameters:
-                analysisCenterName (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the analysis center name to set
-        
-        
-        """
-        ...
-    def setCreationDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Setter for the creation date.
-        
-            Parameters:
-                creationDate (:class:`~org.orekit.time.AbsoluteDate`): the creation date to set
+        Parameters:
+            agencyName (String): the agency name to set
         
         
         """
         ...
-    def setCreationDateString(self, string: str) -> None:
+    def setAnalysisCenterID(self, analysisCenterID: str) -> None:
         """
-            Setter for the creation date as a string.
+        Setter for the analysis center ID.
         
-            Parameters:
-                creationDateString (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the creation date as a string to set
-        
-        
-        """
-        ...
-    def setCreationTimeString(self, string: str) -> None:
-        """
-            Setter for the creation time as a string.
-        
-            Parameters:
-                creationTimeString (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the creation time as a string to set
+        Parameters:
+            analysisCenterID (String): the analysis center ID to set
         
         
         """
         ...
-    def setCreationTimeZoneString(self, string: str) -> None:
+    def setAnalysisCenterName(self, analysisCenterName: str) -> None:
         """
-            Setter for the creation time zone.
+        Setter for the analysis center name.
         
-            Parameters:
-                creationTimeZoneString (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the creation time zone as a string to set
-        
-        
-        """
-        ...
-    def setExternalClockReference(self, string: str) -> None:
-        """
-            Setter for the external clock reference.
-        
-            Parameters:
-                externalClockReference (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the external clock reference to set
+        Parameters:
+            analysisCenterName (String): the analysis center name to set
         
         
         """
         ...
-    def setFormatVersion(self, double: float) -> None:
+    def setCreationDate(self, creationDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Setter for the format version.
+        Setter for the creation date.
         
-            Parameters:
-                formatVersion (double): the format version to set
-        
-        
-        """
-        ...
-    def setFrameName(self, string: str) -> None:
-        """
-            Setter for the frame name.
-        
-            Parameters:
-                frameName (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the frame name to set
+        Parameters:
+            creationDate (AbsoluteDate): the creation date to set
         
         
         """
         ...
-    def setNumberOfLeapSeconds(self, int: int) -> None:
+    def setCreationDateString(self, creationDateString: str) -> None:
         """
-            Setter for the number of leap seconds.
+        Setter for the creation date as a string.
         
-            Parameters:
-                numberOfLeapSeconds (int): the number of leap seconds to set
-        
-        
-        """
-        ...
-    def setNumberOfLeapSecondsGNSS(self, int: int) -> None:
-        """
-            Setter for the number of leap seconds for GNSS time scales.
-        
-            Parameters:
-                numberOfLeapSecondsGNSS (int): the number of leap seconds for GNSS time scales to set
+        Parameters:
+            creationDateString (String): the creation date as a string to set
         
         
         """
         ...
-    def setProgramName(self, string: str) -> None:
+    def setCreationTimeString(self, creationTimeString: str) -> None:
         """
-            Setter for the program name.
+        Setter for the creation time as a string.
         
-            Parameters:
-                programName (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the program name to set
+        Parameters:
+            creationTimeString (String): the creation time as a string to set
+        
+        
+        """
+        ...
+    def setCreationTimeZoneString(self, creationTimeZoneString: str) -> None:
+        """
+        Setter for the creation time zone.
+        
+        Parameters:
+            creationTimeZoneString (String): the creation time zone as a string to set
+        
+        
+        """
+        ...
+    def setExternalClockReference(self, externalClockReference: str) -> None:
+        """
+        Setter for the external clock reference.
+        
+        Parameters:
+            externalClockReference (String): the external clock reference to set
+        
+        
+        """
+        ...
+    def setFormatVersion(self, formatVersion: float) -> None:
+        """
+        Setter for the format version.
+        
+        Parameters:
+            formatVersion (double): the format version to set
+        
+        
+        """
+        ...
+    def setFrameName(self, frameName: str) -> None:
+        """
+        Setter for the frame name.
+        
+        Parameters:
+            frameName (String): the frame name to set
+        
+        
+        """
+        ...
+    def setNumberOfLeapSeconds(self, numberOfLeapSeconds: int) -> None:
+        """
+        Setter for the number of leap seconds.
+        
+        Parameters:
+            numberOfLeapSeconds (int): the number of leap seconds to set
+        
+        
+        """
+        ...
+    def setNumberOfLeapSecondsGNSS(self, numberOfLeapSecondsGNSS: int) -> None:
+        """
+        Setter for the number of leap seconds for GNSS time scales.
+        
+        Parameters:
+            numberOfLeapSecondsGNSS (int): the number of leap seconds for GNSS time scales to set
+        
+        
+        """
+        ...
+    def setProgramName(self, programName: str) -> None:
+        """
+        Setter for the program name.
+        
+        Parameters:
+            programName (String): the program name to set
         
         
         """
         ...
     def setSatelliteSystem(self, satelliteSystem: org.orekit.gnss.SatelliteSystem) -> None:
         """
-            Setter for the satellite system.
+        Setter for the satellite system.
         
-            Parameters:
-                satelliteSystem (:class:`~org.orekit.gnss.SatelliteSystem`): the satellite system to set
-        
-        
-        """
-        ...
-    def setStationIdentifier(self, string: str) -> None:
-        """
-            Setter for the station identifier.
-        
-            Parameters:
-                stationIdentifier (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the station identifier to set
+        Parameters:
+            satelliteSystem (SatelliteSystem): the satellite system to set
         
         
         """
         ...
-    def setStationName(self, string: str) -> None:
+    def setStationIdentifier(self, stationIdentifier: str) -> None:
         """
-            Setter for the station name.
+        Setter for the station identifier.
         
-            Parameters:
-                stationName (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the station name to set
+        Parameters:
+            stationIdentifier (String): the station identifier to set
+        
+        
+        """
+        ...
+    def setStationName(self, stationName: str) -> None:
+        """
+        Setter for the station name.
+        
+        Parameters:
+            stationName (String): the station name to set
         
         
         """
         ...
     def setTimeScale(self, timeScale: org.orekit.time.TimeScale) -> None:
         """
-            Setter for the data time scale.
+        Setter for the data time scale.
         
-            Parameters:
-                timeScale (:class:`~org.orekit.time.TimeScale`): the data time scale to set
+        Parameters:
+            timeScale (TimeScale): the data time scale to set
         
         
         """
         ...
     def setTimeSystem(self, timeSystem: org.orekit.gnss.TimeSystem) -> None:
         """
-            Setter for the file time system.
+        Setter for the file time system.
         
-            Parameters:
-                timeSystem (:class:`~org.orekit.gnss.TimeSystem`): the file time system to set
+        Parameters:
+            timeSystem (TimeSystem): the file time system to set
         
         
         """
         ...
     @staticmethod
-    def splice(collection: typing.Union[java.util.Collection['RinexClock'], typing.Sequence['RinexClock'], typing.Set['RinexClock']], double: float) -> 'RinexClock': ...
+    def splice(clocks: typing.Union[java.util.Collection['RinexClock'], typing.Sequence['RinexClock'], typing.Set['RinexClock']], maxGap: float) -> 'RinexClock':
+        """
+        Splice several Rinex clock files together.
+        
+        Splicing Rinex clock files is intended to be used when continuous computation covering more than one file is needed. The metadata (version number, agency, …) will be retrieved from the earliest file only. Receivers and satellites will be merged from all files. Some receivers or satellites may be missing in some files… Once sorted (which is done internally), if the gap between segments from two files is larger than maxGap, then an error will be triggered.
+        
+        The spliced file only contains the receivers and satellites that were present in all files. Receivers and satellites present in some files and absent from other files are silently dropped.
+        
+        Depending on producer, successive clock files either have a gap between the last entry of one file and the first entry of the next file (for example, files with a 5 minutes epoch interval may end at 23:55 and the next file start at 00:00), or both files have one point exactly at the splicing date (i.e. 24:00 one day and 00:00 next day). In the later case, the last point of the early file is dropped, and the first point of the late file takes precedence, hence only one point remains in the spliced file; this design choice is made to enforce continuity and regular interpolation.
+        
+        Parameters:
+            clocks (Collection<RinexClock> clocks): clock files to merge
+            maxGap (double): maximum time gap between files
+        
+        Returns:
+            merged clock file
+        
+        Since:
+            12.1
+        
+        
+        """
+        ...
     class ClockDataLine:
         def __init__(self, rinexClock: 'RinexClock', clockDataType: 'RinexClock.ClockDataType', string: str, dateComponents: org.orekit.time.DateComponents, timeComponents: org.orekit.time.TimeComponents, int: int, double: float, double2: float, double3: float, double4: float, double5: float, double6: float): ...
         def getClockAcceleration(self) -> float: ...
@@ -665,26 +772,21 @@ class RinexClock:
 
 class RinexClockParser:
     """
-    public class RinexClockParser extends :class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    A parser for the clock file from the IGS. This parser handles versions 2.0 to 3.04 of the RINEX clock files.
     
-        A parser for the clock file from the IGS. This parser handles versions 2.0 to 3.04 of the RINEX clock files.
+    It is able to manage some mistakes in file writing and format compliance such as wrong date format, misplaced header blocks or missing information.
     
-        It is able to manage some mistakes in file writing and format compliance such as wrong date format, misplaced header
-        blocks or missing information.
+    A time system should be specified in the file. However, if it is not, default time system will be chosen regarding the satellite system. If it is mixed or not specified, default time system will be UTC.
     
-        A time system should be specified in the file. However, if it is not, default time system will be chosen regarding the
-        satellite system. If it is mixed or not specified, default time system will be UTC.
+    Caution, files with missing information in header can lead to wrong data dates and station positions. It is advised to check the correctness and format compliance of the clock file to be parsed.
     
-        Caution, files with missing information in header can lead to wrong data dates and station positions. It is advised to
-        check the correctness and format compliance of the clock file to be parsed.
+    Since:
+        11.0
     
-        Since:
-            11.0
-    
-        Also see:
-            :class:`~org.orekit.files.rinex.clock.https:.files.igs.org.pub.data.format.rinex_clock300.txt`,
-            :class:`~org.orekit.files.rinex.clock.https:.files.igs.org.pub.data.format.rinex_clock302.txt`,
-            :class:`~org.orekit.files.rinex.clock.https:.files.igs.org.pub.data.format.rinex_clock304.txt`
+    Also see:
+        txt,
+        txt,
+        txt
     """
     @typing.overload
     def __init__(self): ...
@@ -693,73 +795,70 @@ class RinexClockParser:
     @typing.overload
     def __init__(self, function: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]], function2: typing.Union[java.util.function.Function[str, org.orekit.gnss.ObservationType], typing.Callable[[str], org.orekit.gnss.ObservationType]], timeScales: org.orekit.time.TimeScales): ...
     @typing.overload
-    def parse(self, bufferedReader: java.io.BufferedReader, string: str) -> RinexClock:
+    def parse(self, reader: java.io.BufferedReader, fileName: str) -> RinexClock:
         """
-            Parse an IGS clock file from a stream.
+        Parse an IGS clock file from a stream.
         
-            Parameters:
-                reader (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.io.BufferedReader?is`): containing the clock file
-                fileName (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): file name
+        Parameters:
+            reader (BufferedReader): containing the clock file
+            fileName (String): file name
         
-            Returns:
-                a parsed IGS clock file
+        Returns:
+            a parsed IGS clock file
         
-            Also see:
-                :meth:`~org.orekit.files.rinex.clock.RinexClockParser.parse`,
-                :meth:`~org.orekit.files.rinex.clock.RinexClockParser.parse`,
-                :meth:`~org.orekit.files.rinex.clock.RinexClockParser.parse`
+        Also see:
+            parse,
+            parse,
+            parse
         
         """
         ...
     @typing.overload
     def parse(self, inputStream: java.io.InputStream) -> RinexClock:
         """
-            Parse an IGS clock file from an input stream using the UTF-8 charset.
+        Parse an IGS clock file from an input stream using the UTF-8 charset.
         
-            This method creates a
-            :class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.io.BufferedReader?is` from the
-            stream and as such this method may read more data than necessary from :code:`stream` and the additional data will be
-            lost. The other parse methods do not have this issue.
+        This method creates a BufferedReader from the stream and as such this method may read more data than necessary from stream and the additional data will be lost. The other parse methods do not have this issue.
         
-            Parameters:
-                stream (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.io.InputStream?is`): to read the IGS clock file from
+        Parameters:
+            stream (InputStream): to read the IGS clock file from
         
-            Returns:
-                a parsed IGS clock file
+        Returns:
+            a parsed IGS clock file
         
-            Also see:
-                :meth:`~org.orekit.files.rinex.clock.RinexClockParser.parse`,
-                :meth:`~org.orekit.files.rinex.clock.RinexClockParser.parse`,
-                :meth:`~org.orekit.files.rinex.clock.RinexClockParser.parse`
+        Also see:
+            parse,
+            parse,
+            parse
         
-            Parse an IGS clock file from a file on the local file system.
+        Parse an IGS clock file from a file on the local file system.
         
-            Parameters:
-                fileName (:class:`~org.orekit.files.rinex.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): file name
+        Parameters:
+            fileName (String): file name
         
-            Returns:
-                a parsed IGS clock file
+        Returns:
+            a parsed IGS clock file
         
-            Also see:
-                :meth:`~org.orekit.files.rinex.clock.RinexClockParser.parse`,
-                :meth:`~org.orekit.files.rinex.clock.RinexClockParser.parse`,
-                :meth:`~org.orekit.files.rinex.clock.RinexClockParser.parse`
+        Also see:
+            parse,
+            parse,
+            parse
         
-            Parse an IGS clock file from a :class:`~org.orekit.data.DataSource`.
+        Parse an IGS clock file from a DataSource.
         
-            Parameters:
-                source (:class:`~org.orekit.data.DataSource`): source for clock file
+        Parameters:
+            source (DataSource): source for clock file
         
-            Returns:
-                a parsed IGS clock file
+        Returns:
+            a parsed IGS clock file
         
-            Since:
-                12.1
+        Since:
+            12.1
         
-            Also see:
-                :meth:`~org.orekit.files.rinex.clock.RinexClockParser.parse`,
-                :meth:`~org.orekit.files.rinex.clock.RinexClockParser.parse`,
-                :meth:`~org.orekit.files.rinex.clock.RinexClockParser.parse`
+        Also see:
+            parse,
+            parse,
+            parse
         
         
         """

@@ -19,26 +19,24 @@ import typing
 
 class Authentication(java.lang.Enum['Authentication']):
     """
-    public enum Authentication extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.ntrip.Authentication`>
+    Enumerate for authentication method in DataStreamRecord.
     
-        Enumerate for authentication method in :class:`~org.orekit.gnss.metric.ntrip.DataStreamRecord`.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     NONE: typing.ClassVar['Authentication'] = ...
     BASIC: typing.ClassVar['Authentication'] = ...
     DIGEST: typing.ClassVar['Authentication'] = ...
     @staticmethod
-    def getAuthentication(string: str) -> 'Authentication':
+    def getAuthentication(keyword: str) -> 'Authentication':
         """
-            Get the authentication type corresponding to a keyword.
+        Get the authentication type corresponding to a keyword.
         
-            Parameters:
-                keyword (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): authentication keyword
+        Parameters:
+            keyword (String): authentication keyword
         
-            Returns:
-                the authentication type corresponding to the keyword
+        Returns:
+            the authentication type corresponding to the keyword
         
         
         """
@@ -49,20 +47,19 @@ class Authentication(java.lang.Enum['Authentication']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'Authentication':
+    def valueOf(name: str) -> 'Authentication':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -70,17 +67,15 @@ class Authentication(java.lang.Enum['Authentication']):
     @staticmethod
     def values() -> typing.MutableSequence['Authentication']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (Authentication c : Authentication.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (Authentication c : Authentication.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -88,26 +83,24 @@ class Authentication(java.lang.Enum['Authentication']):
 
 class CarrierPhase(java.lang.Enum['CarrierPhase']):
     """
-    public enum CarrierPhase extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.ntrip.CarrierPhase`>
+    Enumerate for carrier phase in DataStreamRecord.
     
-        Enumerate for carrier phase in :class:`~org.orekit.gnss.metric.ntrip.DataStreamRecord`.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     NO: typing.ClassVar['CarrierPhase'] = ...
     L1: typing.ClassVar['CarrierPhase'] = ...
     L1_L2: typing.ClassVar['CarrierPhase'] = ...
     @staticmethod
-    def getCarrierPhase(string: str) -> 'CarrierPhase':
+    def getCarrierPhase(code: str) -> 'CarrierPhase':
         """
-            Get the carrier phase corresponding to a code.
+        Get the carrier phase corresponding to a code.
         
-            Parameters:
-                code (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): carrier phase code
+        Parameters:
+            code (String): carrier phase code
         
-            Returns:
-                the carrier phase corresponding to the code
+        Returns:
+            the carrier phase corresponding to the code
         
         
         """
@@ -118,20 +111,19 @@ class CarrierPhase(java.lang.Enum['CarrierPhase']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'CarrierPhase':
+    def valueOf(name: str) -> 'CarrierPhase':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -139,17 +131,15 @@ class CarrierPhase(java.lang.Enum['CarrierPhase']):
     @staticmethod
     def values() -> typing.MutableSequence['CarrierPhase']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (CarrierPhase c : CarrierPhase.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (CarrierPhase c : CarrierPhase.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -157,12 +147,10 @@ class CarrierPhase(java.lang.Enum['CarrierPhase']):
 
 class DataFormat(java.lang.Enum['DataFormat']):
     """
-    public enum DataFormat extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.ntrip.DataFormat`>
+    Enumerate for data format in DataStreamRecord.
     
-        Enumerate for data format in :class:`~org.orekit.gnss.metric.ntrip.DataStreamRecord`.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     RTCM_2: typing.ClassVar['DataFormat'] = ...
     RTCM_3: typing.ClassVar['DataFormat'] = ...
@@ -176,15 +164,15 @@ class DataFormat(java.lang.Enum['DataFormat']):
     SP3: typing.ClassVar['DataFormat'] = ...
     BINEX: typing.ClassVar['DataFormat'] = ...
     @staticmethod
-    def getDataFormat(string: str) -> 'DataFormat':
+    def getDataFormat(keyword: str) -> 'DataFormat':
         """
-            Get the message type corresponding to a keyword.
+        Get the message type corresponding to a keyword.
         
-            Parameters:
-                keyword (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): data format keyword
+        Parameters:
+            keyword (String): data format keyword
         
-            Returns:
-                the message type corresponding to the keyword
+        Returns:
+            the message type corresponding to the keyword
         
         
         """
@@ -195,20 +183,19 @@ class DataFormat(java.lang.Enum['DataFormat']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'DataFormat':
+    def valueOf(name: str) -> 'DataFormat':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -216,17 +203,15 @@ class DataFormat(java.lang.Enum['DataFormat']):
     @staticmethod
     def values() -> typing.MutableSequence['DataFormat']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (DataFormat c : DataFormat.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (DataFormat c : DataFormat.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -234,20 +219,25 @@ class DataFormat(java.lang.Enum['DataFormat']):
 
 class GnssData:
     """
-    public class GnssData extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    GNSS data retrieved from Ntrip caster.
     
-        GNSS data retrieved from Ntrip caster.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], int: int): ...
+    def __init__(self, data: typing.Union[typing.List[int], jpype.JArray, bytes], len: int):
+        """
+        Build a GNSS data bloc.
+        
+        Parameters:
+            data (byte[]): data bytes
+            len (int): length of the data (may be smaller than length
+        
+        
+        """
+        ...
     def toString(self) -> str:
         """
-        
-            Overrides:
-                :meth:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        Overrides: Object in class Object
         
         
         """
@@ -255,65 +245,53 @@ class GnssData:
 
 class MessageObserver:
     """
-    public interface MessageObserver
+    Interface for objects that needs to be notified when new encoded messages are available.
     
-        Interface for objects that needs to be notified when new encoded messages are available.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def messageAvailable(self, string: str, parsedMessage: org.orekit.gnss.metric.messages.ParsedMessage) -> None:
+    def messageAvailable(self, mountPoint: str, message: org.orekit.gnss.metric.messages.ParsedMessage) -> None:
         """
-            Notify that an encoded message is available.
+        Notify that an encoded message is available.
         
-            Beware that this method *will* be called from an internal dedicated stream-reading thread. Implementations *must* take
-            to:
+        Beware that this method will be called from an internal dedicated stream-reading thread. Implementations must take to:
         
-              - not perform long processing there to avoid blocking the stream-reading thread
-              - take care of thread-safety when extracting data from the message
+          - not perform long processing there to avoid blocking the stream-reading thread
+          - take care of thread-safety when extracting data from the message
         
+        The only filtering that can be specified when addObserver an observer to a NtripClient is based on message type and mount point. If additional filtering is needed (for example on message content like satellites ids, it must be performed by the observer itself when notified (see example below).
         
-            The only filtering that can be specified when :meth:`~org.orekit.gnss.metric.ntrip.NtripClient.addObserver` an observer
-            to a :class:`~org.orekit.gnss.metric.ntrip.NtripClient` is based on message type and mount point. If additional
-            filtering is needed (for example on message content like satellites ids, it must be performed by the observer itself
-            when notified (see example below).
+        The recommended way to implement this method is to simply build a domain object from the message fields (for example a gnss propagator) and to store it in the observer class as an instance field using a AtomicReference as follows:
         
-            The recommended way to implement this method is to simply build a domain object from the message fields (for example a
-            gnss propagator) and to store it in the observer class as an instance field using a
-            :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.util.concurrent.atomic.AtomicReference?is`
-            as follows:
+         public class GPSProvider implements PVCoordinatesProvider, RTCMMessageObserver {
         
-            .. code-block: java
-            
-             public class GPSProvider implements PVCoordinatesProvider, RTCMMessageObserver {
-            
-                 private final int                                filteringId;
-                 private final AtomicReference<GPSPropagator> propagator;
-            
-                 public void messageAvailable(String mountPoint, ParsedMessage message) {
-                     MessageXXX msg = (MessageXXX) message;
-                     GPSPropagator oldPropagator = propagator.get();
-                     if (msg.getSatId() == filteringId) {
-                         GPSPropagator newPropagator = new GPSPropagator(msg.get...(),
-                                                                         msg.get...(),
-                                                                         msg.get...());
-                         // only set propagator if no other observer was notified
-                         // while we were asleep
-                         propagator.compareAndSet(oldPropagator, newPropagator);
-                     }
+             private final int                                filteringId;
+             private final AtomicReference<GPSPropagator> propagator;
+        
+             public void messageAvailable(String mountPoint, ParsedMessage message) {
+                 MessageXXX msg = (MessageXXX) message;
+                 GPSPropagator oldPropagator = propagator.get();
+                 if (msg.getSatId() == filteringId) {
+                     GPSPropagator newPropagator = new GPSPropagator(msg.get...(),
+                                                                     msg.get...(),
+                                                                     msg.get...());
+                     // only set propagator if no other observer was notified
+                     // while we were asleep
+                     propagator.compareAndSet(oldPropagator, newPropagator);
                  }
-            
-                 public TimeStampedPVCoordinates getPVCoordinates(AbsoluteDate date, Frame frame) {
-                     GPSPropagator lastAvailablePropagator = propagator.get();
-                     // use the retrieved propagator to compute position-velocity
-                 }
-            
              }
-             
         
-            Parameters:
-                mountPoint (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): mount point from which the message comes
-                message (:class:`~org.orekit.gnss.metric.messages.ParsedMessage`): last available message
+             public TimeStampedPVCoordinates getPVCoordinates(AbsoluteDate date, Frame frame) {
+                 GPSPropagator lastAvailablePropagator = propagator.get();
+                 // use the retrieved propagator to compute position-velocity
+             }
+        
+         }
+         
+        
+        Parameters:
+            mountPoint (String): mount point from which the message comes
+            message (ParsedMessage): last available message
         
         
         """
@@ -321,12 +299,10 @@ class MessageObserver:
 
 class NavigationSystem(java.lang.Enum['NavigationSystem']):
     """
-    public enum NavigationSystem extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.ntrip.NavigationSystem`>
+    Enumerate for navigation system in DataStreamRecord.
     
-        Enumerate for navigation system in :class:`~org.orekit.gnss.metric.ntrip.DataStreamRecord`.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     GPS: typing.ClassVar['NavigationSystem'] = ...
     GLO: typing.ClassVar['NavigationSystem'] = ...
@@ -337,25 +313,22 @@ class NavigationSystem(java.lang.Enum['NavigationSystem']):
     IRS: typing.ClassVar['NavigationSystem'] = ...
     EMPTY: typing.ClassVar['NavigationSystem'] = ...
     @staticmethod
-    def getNavigationSystem(string: str) -> 'NavigationSystem':
+    def getNavigationSystem(keyword: str) -> 'NavigationSystem':
         """
-            Get the navigation system corresponding to a keyword.
+        Get the navigation system corresponding to a keyword.
         
-            Parameters:
-                keyword (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): navigation system keyword
+        Parameters:
+            keyword (String): navigation system keyword
         
-            Returns:
-                the navigation system corresponding to the keyword
+        Returns:
+            the navigation system corresponding to the keyword
         
         
         """
         ...
     def toString(self) -> str:
         """
-        
-            Overrides:
-                :meth:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum.html?is` in
-                class :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`
+        Overrides: Enum in class Enum
         
         
         """
@@ -366,20 +339,19 @@ class NavigationSystem(java.lang.Enum['NavigationSystem']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'NavigationSystem':
+    def valueOf(name: str) -> 'NavigationSystem':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -387,17 +359,15 @@ class NavigationSystem(java.lang.Enum['NavigationSystem']):
     @staticmethod
     def values() -> typing.MutableSequence['NavigationSystem']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (NavigationSystem c : NavigationSystem.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (NavigationSystem c : NavigationSystem.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -405,227 +375,224 @@ class NavigationSystem(java.lang.Enum['NavigationSystem']):
 
 class NtripClient:
     """
-    public class NtripClient extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Source table for ntrip streams retrieval.
     
-        Source table for ntrip streams retrieval.
+    Note that all authentication is performed automatically by just calling the standard Authenticator method to set up an authenticator.
     
-        Note that all authentication is performed automatically by just calling the standard
-        :meth:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.net.Authenticator.html?is` method to
-        set up an authenticator.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     DEFAULT_TIMEOUT: typing.ClassVar[int] = ...
     """
-    public static final int DEFAULT_TIMEOUT
+    Default timeout for connections and reads (ms).
     
-        Default timeout for connections and reads (ms).
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     DEFAULT_PORT: typing.ClassVar[int] = ...
     """
-    public static final int DEFAULT_PORT
+    Default port for ntrip communication.
     
-        Default port for ntrip communication.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     DEFAULT_RECONNECT_DELAY: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_RECONNECT_DELAY
+    Default delay before we reconnect after connection close (s).
     
-        Default delay before we reconnect after connection close (s).
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     DEFAULT_RECONNECT_DELAY_FACTOR: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_RECONNECT_DELAY_FACTOR
+    Default factor by which reconnection delay is multiplied after each attempt.
     
-        Default factor by which reconnection delay is multiplied after each attempt.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     DEFAULT_MAX_RECONNECT: typing.ClassVar[int] = ...
     """
-    public static final int DEFAULT_MAX_RECONNECT
+    Default maximum number of reconnect a attempts without readin any data.
     
-        Default maximum number of reconnect a attempts without readin any data.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, string: str, int: int, timeScales: org.orekit.time.TimeScales): ...
-    def addObserver(self, int: int, string: str, messageObserver: typing.Union[MessageObserver, typing.Callable]) -> None:
+    def __init__(self, host: str, port: int, timeScales: org.orekit.time.TimeScales):
         """
-            Add an observer for an encoded messages.
+        Build a client for NTRIP.
         
-            If messages of the specified type have already been retrieved from a stream, the observer will be immediately notified
-            with the last message from each mount point (in unspecified order) as a side effect of being added.
+        The default configuration uses default timeout, default reconnection parameters, no GPS fix and no proxy.
         
-            Parameters:
-                typeCode (int): code for the message type (if set to 0, notification will be triggered regardless of message type)
-                mountPoint (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): mountPoint from which data must come (if null, notification will be triggered regardless of mount point)
-                observer (:class:`~org.orekit.gnss.metric.ntrip.MessageObserver`): observer for this message type
+        Parameters:
+            host (String): caster host providing the source table
+            port (int): port to use for connection
+            timeScales (TimeScales): known time scales
+        
+        Since:
+            13.0 see DEFAULT_PORT
+        
+        
+        """
+        ...
+    def addObserver(self, typeCode: int, mountPoint: str, observer: typing.Union[MessageObserver, typing.Callable]) -> None:
+        """
+        Add an observer for an encoded messages.
+        
+        If messages of the specified type have already been retrieved from a stream, the observer will be immediately notified with the last message from each mount point (in unspecified order) as a side effect of being added.
+        
+        Parameters:
+            typeCode (int): code for the message type (if set to 0, notification will be triggered regardless of message type)
+            mountPoint (String): mountPoint from which data must come (if null, notification will be triggered regardless of mount point)
+            observer (MessageObserver): observer for this message type
         
         
         """
         ...
     def checkException(self) -> None:
         """
-            Check if any of the streaming thread has thrown an exception.
+        Check if any of the streaming thread has thrown an exception.
         
-            If a streaming thread has thrown an exception, it will be rethrown here
-        
+        If a streaming thread has thrown an exception, it will be rethrown here
         """
         ...
     def getHost(self) -> str:
         """
-            Get the caster host.
+        Get the caster host.
         
-            Returns:
-                caster host
+        Returns:
+            caster host
         
         
         """
         ...
     def getPort(self) -> int:
         """
-            Get the port to use for connection.
+        Get the port to use for connection.
         
-            Returns:
-                port to use for connection
+        Returns:
+            port to use for connection
         
         
         """
         ...
     def getProxy(self) -> java.net.Proxy:
         """
-            Get proxy.
+        Get proxy.
         
-            Returns:
-                proxy to use
+        Returns:
+            proxy to use
         
         
         """
         ...
     def getSourceTable(self) -> 'SourceTable':
         """
-            Get a sourcetable.
+        Get a sourcetable.
         
-            Returns:
-                source table from the caster
+        Returns:
+            source table from the caster
         
         
         """
         ...
     def getTimeScales(self) -> org.orekit.time.TimeScales:
         """
-            Get the known time scales.
+        Get the known time scales.
         
-            Returns:
-                known time scales
+        Returns:
+            known time scales
         
-            Since:
-                13.0
-        
-        
-        """
-        ...
-    def setFix(self, int: int, int2: int, double: float, double2: float, double3: float, double4: float, double5: float) -> None:
-        """
-            Set GPS fix data to send as NMEA sentence to Ntrip caster if required.
-        
-            Parameters:
-                hour (int): hour of the fix (UTC time)
-                minute (int): minute of the fix (UTC time)
-                second (double): second of the fix (UTC time)
-                latitude (double): latitude (radians)
-                longitude (double): longitude (radians)
-                ellAltitude (double): altitude above ellipsoid (m)
-                undulation (double): height of the geoid above ellipsoid (m)
+        Since:
+            13.0
         
         
         """
         ...
-    def setProxy(self, type: java.net.Proxy.Type, string: str, int: int) -> None:
+    def setFix(self, hour: int, minute: int, second: float, latitude: float, longitude: float, ellAltitude: float, undulation: float) -> None:
         """
-            Set proxy parameters.
+        Set GPS fix data to send as NMEA sentence to Ntrip caster if required.
         
-            Parameters:
-                type (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.net.Proxy.Type?is`): proxy type
-                proxyHost (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): host name of the proxy (ignored if :code:`type` is :code:`Proxy.Type.DIRECT`)
-                proxyPort (int): port number of the proxy (ignored if :code:`type` is :code:`Proxy.Type.DIRECT`)
-        
-        
-        """
-        ...
-    def setReconnectParameters(self, double: float, double2: float, int: int) -> None:
-        """
-            Set Reconnect parameters.
-        
-            Parameters:
-                delay (double): delay before we reconnect after connection close
-                delayFactor (double): factor by which reconnection delay is multiplied after each attempt
-                max (int): max number of reconnect a attempts without reading any data
+        Parameters:
+            hour (int): hour of the fix (UTC time)
+            minute (int): minute of the fix (UTC time)
+            second (double): second of the fix (UTC time)
+            latitude (double): latitude (radians)
+            longitude (double): longitude (radians)
+            ellAltitude (double): altitude above ellipsoid (m)
+            undulation (double): height of the geoid above ellipsoid (m)
         
         
         """
         ...
-    def setTimeout(self, int: int) -> None:
+    def setProxy(self, type: java.net.Proxy.Type, proxyHost: str, proxyPort: int) -> None:
         """
-            Set timeout for connections and reads.
+        Set proxy parameters.
         
-            Parameters:
-                timeout (int): timeout for connections and reads (ms)
-        
-        
-        """
-        ...
-    def startStreaming(self, string: str, type: 'Type', boolean: bool, boolean2: bool) -> None:
-        """
-            Connect to a mount point and start streaming data from it.
-        
-            This method sets up an internal dedicated thread for continuously monitoring data incoming from a mount point. When new
-            complete :class:`~org.orekit.gnss.metric.messages.ParsedMessage` becomes available, the
-            :class:`~org.orekit.gnss.metric.ntrip.MessageObserver` that have been registered using
-            :meth:`~org.orekit.gnss.metric.ntrip.NtripClient.addObserver` method will be notified about the message.
-        
-            This method must be called once for each stream to monitor.
-        
-            Parameters:
-                mountPoint (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): mount point providing the stream
-                type (:class:`~org.orekit.gnss.metric.ntrip.Type`): messages type of the mount point
-                requiresNMEA (boolean): if true, the mount point requires a NMEA GGA sentence in the request
-                ignoreUnknownMessageTypes (boolean): if true, unknown messages types are silently ignored
+        Parameters:
+            type (Type): proxy type
+            proxyHost (String): host name of the proxy (ignored if type is DIRECT)
+            proxyPort (int): port number of the proxy (ignored if type is DIRECT)
         
         
         """
         ...
-    def stopStreaming(self, int: int) -> None:
+    def setReconnectParameters(self, delay: float, delayFactor: float, max: int) -> None:
         """
-            Stop streaming data from all connected mount points.
+        Set Reconnect parameters.
         
-            If an exception was encountered during data streaming, it will be rethrown here
+        Parameters:
+            delay (double): delay before we reconnect after connection close
+            delayFactor (double): factor by which reconnection delay is multiplied after each attempt
+            max (int): max number of reconnect a attempts without reading any data
         
-            Parameters:
-                time (int): timeout for waiting underlying threads termination (ms)
+        
+        """
+        ...
+    def setTimeout(self, timeout: int) -> None:
+        """
+        Set timeout for connections and reads.
+        
+        Parameters:
+            timeout (int): timeout for connections and reads (ms)
+        
+        
+        """
+        ...
+    def startStreaming(self, mountPoint: str, type: 'Type', requiresNMEA: bool, ignoreUnknownMessageTypes: bool) -> None:
+        """
+        Connect to a mount point and start streaming data from it.
+        
+        This method sets up an internal dedicated thread for continuously monitoring data incoming from a mount point. When new complete ParsedMessage becomes available, the MessageObserver that have been registered using addObserver method will be notified about the message.
+        
+        This method must be called once for each stream to monitor.
+        
+        Parameters:
+            mountPoint (String): mount point providing the stream
+            type (Type): messages type of the mount point
+            requiresNMEA (boolean): if true, the mount point requires a NMEA GGA sentence in the request
+            ignoreUnknownMessageTypes (boolean): if true, unknown messages types are silently ignored
+        
+        
+        """
+        ...
+    def stopStreaming(self, time: int) -> None:
+        """
+        Stop streaming data from all connected mount points.
+        
+        If an exception was encountered during data streaming, it will be rethrown here
+        
+        Parameters:
+            time (int): timeout for waiting underlying threads termination (ms)
         
         
         """
@@ -633,29 +600,27 @@ class NtripClient:
 
 class Record:
     """
-    public abstract class Record extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Record in source table.
     
-        Record in source table.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     def getMisc(self) -> str:
         """
-            Get miscellaneous information.
+        Get miscellaneous information.
         
-            Returns:
-                miscellaneous information
+        Returns:
+            miscellaneous information
         
         
         """
         ...
     def getRecordType(self) -> 'RecordType':
         """
-            Get the type of record.
+        Get the type of record.
         
-            Returns:
-                type of record
+        Returns:
+            type of record
         
         
         """
@@ -663,9 +628,7 @@ class Record:
 
 class RecordType(java.lang.Enum['RecordType']):
     """
-    public enum RecordType extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.ntrip.RecordType`>
-    
-        Enumerate for record types in sourcetable.
+    Enumerate for record types in sourcetable.
     """
     STR: typing.ClassVar['RecordType'] = ...
     CAS: typing.ClassVar['RecordType'] = ...
@@ -676,20 +639,19 @@ class RecordType(java.lang.Enum['RecordType']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'RecordType':
+    def valueOf(name: str) -> 'RecordType':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -697,17 +659,15 @@ class RecordType(java.lang.Enum['RecordType']):
     @staticmethod
     def values() -> typing.MutableSequence['RecordType']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (RecordType c : RecordType.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (RecordType c : RecordType.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -715,22 +675,47 @@ class RecordType(java.lang.Enum['RecordType']):
 
 class SourceTable:
     """
-    public class SourceTable extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Source table for ntrip streams retrieval.
     
-        Source table for ntrip streams retrieval.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def getCasters(self) -> java.util.List['CasterRecord']: ...
-    def getDataStreams(self) -> java.util.List['DataStreamRecord']: ...
-    def getNetworks(self) -> java.util.List['NetworkRecord']: ...
+    def getCasters(self) -> java.util.List['CasterRecord']:
+        """
+        Get the casters records.
+        
+        Returns:
+            casters records
+        
+        
+        """
+        ...
+    def getDataStreams(self) -> java.util.List['DataStreamRecord']:
+        """
+        Get the data streams records.
+        
+        Returns:
+            data streams records
+        
+        
+        """
+        ...
+    def getNetworks(self) -> java.util.List['NetworkRecord']:
+        """
+        Get the networks records.
+        
+        Returns:
+            networks records
+        
+        
+        """
+        ...
     def getNtripFlags(self) -> str:
         """
-            Get the flags set by server.
+        Get the flags set by server.
         
-            Returns:
-                flags set by server
+        Returns:
+            flags set by server
         
         
         """
@@ -738,80 +723,87 @@ class SourceTable:
 
 class StreamMonitor(org.orekit.gnss.metric.parser.AbstractEncodedMessage, java.lang.Runnable):
     """
-    public class StreamMonitor extends :class:`~org.orekit.gnss.metric.parser.AbstractEncodedMessage` implements :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Runnable?is`
+    Monitor for retrieving streamed data from one mount point.
     
-        Monitor for retrieving streamed data from one mount point.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, ntripClient: NtripClient, string: str, type: 'Type', boolean: bool, boolean2: bool, double: float, double2: float, int: int): ...
-    def addObserver(self, int: int, messageObserver: typing.Union[MessageObserver, typing.Callable]) -> None:
+    def __init__(self, client: NtripClient, mountPoint: str, type: 'Type', requiresNMEA: bool, ignoreUnknownMessageTypes: bool, reconnectDelay: float, reconnectDelayFactor: float, maxRetries: int):
         """
-            Add an observer for encoded messages.
+        Build a monitor for streaming data from a mount point.
         
-            If messages of the specified type have already been retrieved from a stream, the observer will be immediately notified
-            with the last message as a side effect of being added.
+        Parameters:
+            client (NtripClient): associated NTRIP client
+            mountPoint (String): mount point providing the stream
+            type (Type): messages type of the mount point
+            requiresNMEA (boolean): if true, the mount point requires a NMEA GGA sentence in the request
+            ignoreUnknownMessageTypes (boolean): if true, unknown messages types are silently ignored
+            reconnectDelay (double): delay before we reconnect after connection close
+            reconnectDelayFactor (double): factor by which reconnection delay is multiplied after each attempt
+            maxRetries (int): max number of reconnect attempts without reading any data
         
-            Parameters:
-                typeCode (int): code for the message type (if set to 0, notification will be triggered regardless of message type)
-                observer (:class:`~org.orekit.gnss.metric.ntrip.MessageObserver`): observer for this message type
+        
+        """
+        ...
+    def addObserver(self, typeCode: int, observer: typing.Union[MessageObserver, typing.Callable]) -> None:
+        """
+        Add an observer for encoded messages.
+        
+        If messages of the specified type have already been retrieved from a stream, the observer will be immediately notified with the last message as a side effect of being added.
+        
+        Parameters:
+            typeCode (int): code for the message type (if set to 0, notification will be triggered regardless of message type)
+            observer (MessageObserver): observer for this message type
         
         
         """
         ...
     def getException(self) -> org.orekit.errors.OrekitException:
         """
-            Retrieve exception caught during monitoring.
+        Retrieve exception caught during monitoring.
         
-            Returns:
-                exception caught
+        Returns:
+            exception caught
         
         
         """
         ...
     def run(self) -> None:
         """
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Runnable.html?is` in
-                interface :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Runnable?is`
+        Specified by: Runnable in interface Runnable
         
         
         """
         ...
     def stopMonitoring(self) -> None:
         """
-            Stop monitoring.
-        
+        Stop monitoring.
         """
         ...
 
 class StreamedMessage:
     """
-    public class StreamedMessage extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Container for streamed messages meta-data.
     
-        Container for streamed messages meta-data.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     def getId(self) -> str:
         """
-            Get message id.
+        Get message id.
         
-            Returns:
-                message id
+        Returns:
+            message id
         
         
         """
         ...
     def getRate(self) -> int:
         """
-            Get refresh rate.
+        Get refresh rate.
         
-            Returns:
-                refresh rate in seconds, -1 if unknown
+        Returns:
+            refresh rate in seconds, -1 if unknown
         
         
         """
@@ -819,36 +811,49 @@ class StreamedMessage:
 
 class Type(java.lang.Enum['Type']):
     """
-    public enum Type extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.ntrip.Type`>
+    Enumerate for messages type.
     
-        Enumerate for messages type.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     RTCM: typing.ClassVar['Type'] = ...
     IGS_SSR: typing.ClassVar['Type'] = ...
-    def getParser(self, list: java.util.List[int], timeScales: org.orekit.time.TimeScales) -> org.orekit.gnss.metric.parser.MessagesParser: ...
+    def getParser(self, messages: java.util.List[int], timeScales: org.orekit.time.TimeScales) -> org.orekit.gnss.metric.parser.MessagesParser:
+        """
+        Get the message parser associated to the SSR type.
+        
+        Parameters:
+            messages (List<Integer> messages): list of needed messages
+            timeScales (TimeScales): known time scales
+        
+        Returns:
+            a configured message parser
+        
+        Since:
+            13.0
+        
+        
+        """
+        ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'Type':
+    def valueOf(name: str) -> 'Type':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -856,17 +861,15 @@ class Type(java.lang.Enum['Type']):
     @staticmethod
     def values() -> typing.MutableSequence['Type']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (Type c : Type.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (Type c : Type.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -874,123 +877,129 @@ class Type(java.lang.Enum['Type']):
 
 class CasterRecord(Record):
     """
-    public class CasterRecord extends :class:`~org.orekit.gnss.metric.ntrip.Record`
+    Caster record in source table.
     
-        Caster record in source table.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, string: str): ...
+    def __init__(self, line: str):
+        """
+        Build a caster record by parsing a source table line.
+        
+        Parameters:
+            line (String): source table line
+        
+        
+        """
+        ...
     def canReceiveNMEA(self) -> bool:
         """
-            Check if caster can receive NMEA messages.
+        Check if caster can receive NMEA messages.
         
-            Returns:
-                true if caster can receive NMEA messages
+        Returns:
+            true if caster can receive NMEA messages
         
         
         """
         ...
     def getCountry(self) -> str:
         """
-            Get the country.
+        Get the country.
         
-            Returns:
-                country
+        Returns:
+            country
         
         
         """
         ...
     def getFallbackHostOrIPAddress(self) -> str:
         """
-            Get the fallback host or IP address.
+        Get the fallback host or IP address.
         
-            Returns:
-                fallback host or IP address
+        Returns:
+            fallback host or IP address
         
         
         """
         ...
     def getFallbackPort(self) -> int:
         """
-            Get the fallback port number.
+        Get the fallback port number.
         
-            Returns:
-                fallback port number
+        Returns:
+            fallback port number
         
         
         """
         ...
     def getHostOrIPAddress(self) -> str:
         """
-            Get the host or IP address.
+        Get the host or IP address.
         
-            Returns:
-                host or IP address
+        Returns:
+            host or IP address
         
         
         """
         ...
     def getLatitude(self) -> float:
         """
-            Get the latitude.
+        Get the latitude.
         
-            Returns:
-                latitude (rad)
+        Returns:
+            latitude (rad)
         
         
         """
         ...
     def getLongitude(self) -> float:
         """
-            Get the longitude.
+        Get the longitude.
         
-            Returns:
-                longitude (rad)
+        Returns:
+            longitude (rad)
         
         
         """
         ...
     def getOperator(self) -> str:
         """
-            Get the institution/agency/company operating the caster.
+        Get the institution/agency/company operating the caster.
         
-            Returns:
-                institution/agency/company operating the caster
+        Returns:
+            institution/agency/company operating the caster
         
         
         """
         ...
     def getPort(self) -> int:
         """
-            Get the port number.
+        Get the port number.
         
-            Returns:
-                port number
+        Returns:
+            port number
         
         
         """
         ...
     def getRecordType(self) -> RecordType:
         """
-            Get the type of record.
+        Get the type of record.
         
-            Specified by:
-                :meth:`~org.orekit.gnss.metric.ntrip.Record.getRecordType` in class :class:`~org.orekit.gnss.metric.ntrip.Record`
+        Specified by: getRecordType in class Record
         
-            Returns:
-                type of record
+        Returns:
+            type of record
         
         
         """
         ...
     def getSourceIdentifier(self) -> str:
         """
-            Get the source identifier.
+        Get the source identifier.
         
-            Returns:
-                source identifier
+        Returns:
+            source identifier
         
         
         """
@@ -998,175 +1007,199 @@ class CasterRecord(Record):
 
 class DataStreamRecord(Record):
     """
-    public class DataStreamRecord extends :class:`~org.orekit.gnss.metric.ntrip.Record`
+    Data stream record in source table.
     
-        Data stream record in source table.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, string: str): ...
+    def __init__(self, line: str):
+        """
+        Build a data stream record by parsing a source table line.
+        
+        Parameters:
+            line (String): source table line
+        
+        
+        """
+        ...
     def areFeesRequired(self) -> bool:
         """
-            Check if fees are required.
+        Check if fees are required.
         
-            Returns:
-                true if fees are required
+        Returns:
+            true if fees are required
         
         
         """
         ...
     def getAuthentication(self) -> Authentication:
         """
-            Get the authentication method.
+        Get the authentication method.
         
-            Returns:
-                authentication method
+        Returns:
+            authentication method
         
         
         """
         ...
     def getBitRate(self) -> int:
         """
-            Get the bit rate.
+        Get the bit rate.
         
-            Returns:
-                bit rate
+        Returns:
+            bit rate
         
         
         """
         ...
     def getCarrierPhase(self) -> CarrierPhase:
         """
-            Get the carrier phase.
+        Get the carrier phase.
         
-            Returns:
-                carrier phase
+        Returns:
+            carrier phase
         
         
         """
         ...
     def getCompressionEncryption(self) -> str:
         """
-            Get the compression/encryption algorithm applied.
+        Get the compression/encryption algorithm applied.
         
-            Returns:
-                compression/encryption algorithm applied
+        Returns:
+            compression/encryption algorithm applied
         
         
         """
         ...
     def getCountry(self) -> str:
         """
-            Get the country.
+        Get the country.
         
-            Returns:
-                country
+        Returns:
+            country
         
         
         """
         ...
     def getFormat(self) -> DataFormat:
         """
-            Get the data format.
+        Get the data format.
         
-            Returns:
-                data format
+        Returns:
+            data format
         
         
         """
         ...
-    def getFormatDetails(self) -> java.util.List[StreamedMessage]: ...
+    def getFormatDetails(self) -> java.util.List[StreamedMessage]:
+        """
+        Get the format details.
+        
+        Returns:
+            format details
+        
+        
+        """
+        ...
     def getGenerator(self) -> str:
         """
-            Get the hardware or software generator.
+        Get the hardware or software generator.
         
-            Returns:
-                hardware or software generator
+        Returns:
+            hardware or software generator
         
         
         """
         ...
     def getLatitude(self) -> float:
         """
-            Get the latitude.
+        Get the latitude.
         
-            Returns:
-                latitude (rad)
+        Returns:
+            latitude (rad)
         
         
         """
         ...
     def getLongitude(self) -> float:
         """
-            Get the longitude.
+        Get the longitude.
         
-            Returns:
-                longitude (rad)
+        Returns:
+            longitude (rad)
         
         
         """
         ...
     def getMountPoint(self) -> str:
         """
-            Get the mount point.
+        Get the mount point.
         
-            Returns:
-                mount point
+        Returns:
+            mount point
         
         
         """
         ...
-    def getNavigationSystems(self) -> java.util.List[NavigationSystem]: ...
+    def getNavigationSystems(self) -> java.util.List[NavigationSystem]:
+        """
+        Get the navigation systems.
+        
+        Returns:
+            navigation systems
+        
+        
+        """
+        ...
     def getNetwork(self) -> str:
         """
-            Get the network.
+        Get the network.
         
-            Returns:
-                network
+        Returns:
+            network
         
         
         """
         ...
     def getRecordType(self) -> RecordType:
         """
-            Get the type of record.
+        Get the type of record.
         
-            Specified by:
-                :meth:`~org.orekit.gnss.metric.ntrip.Record.getRecordType` in class :class:`~org.orekit.gnss.metric.ntrip.Record`
+        Specified by: getRecordType in class Record
         
-            Returns:
-                type of record
+        Returns:
+            type of record
         
         
         """
         ...
     def getSourceIdentifier(self) -> str:
         """
-            Get the source identifier.
+        Get the source identifier.
         
-            Returns:
-                source identifier
+        Returns:
+            source identifier
         
         
         """
         ...
     def isNMEARequired(self) -> bool:
         """
-            Check if NMEA message must be sent to caster.
+        Check if NMEA message must be sent to caster.
         
-            Returns:
-                true if NMEA message must be sent to caster
+        Returns:
+            true if NMEA message must be sent to caster
         
         
         """
         ...
     def isNetworked(self) -> bool:
         """
-            Check if the stream is generated from a network of stations.
+        Check if the stream is generated from a network of stations.
         
-            Returns:
-                true if stream is generated from a network of stations
+        Returns:
+            true if stream is generated from a network of stations
         
         
         """
@@ -1174,93 +1207,99 @@ class DataStreamRecord(Record):
 
 class NetworkRecord(Record):
     """
-    public class NetworkRecord extends :class:`~org.orekit.gnss.metric.ntrip.Record`
+    Network record in source table.
     
-        Network record in source table.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, string: str): ...
+    def __init__(self, line: str):
+        """
+        Build a data stream record by parsing a source table line.
+        
+        Parameters:
+            line (String): source table line
+        
+        
+        """
+        ...
     def areFeesRequired(self) -> bool:
         """
-            Check if fees are required.
+        Check if fees are required.
         
-            Returns:
-                true if fees are required
+        Returns:
+            true if fees are required
         
         
         """
         ...
     def getAuthentication(self) -> Authentication:
         """
-            Get the authentication method.
+        Get the authentication method.
         
-            Returns:
-                authentication method
+        Returns:
+            authentication method
         
         
         """
         ...
     def getNetworkIdentifier(self) -> str:
         """
-            Get the network identifier.
+        Get the network identifier.
         
-            Returns:
-                network identifier
+        Returns:
+            network identifier
         
         
         """
         ...
     def getNetworkInfoAddress(self) -> str:
         """
-            Get the web address for network information.
+        Get the web address for network information.
         
-            Returns:
-                web address for network information
+        Returns:
+            web address for network information
         
         
         """
         ...
     def getOperator(self) -> str:
         """
-            Get the institution/agency/company operating the caster.
+        Get the institution/agency/company operating the caster.
         
-            Returns:
-                institution/agency/company operating the caster
+        Returns:
+            institution/agency/company operating the caster
         
         
         """
         ...
     def getRecordType(self) -> RecordType:
         """
-            Get the type of record.
+        Get the type of record.
         
-            Specified by:
-                :meth:`~org.orekit.gnss.metric.ntrip.Record.getRecordType` in class :class:`~org.orekit.gnss.metric.ntrip.Record`
+        Specified by: getRecordType in class Record
         
-            Returns:
-                type of record
+        Returns:
+            type of record
         
         
         """
         ...
     def getRegistrationAddress(self) -> str:
         """
-            Get the web or mail address for registration.
+        Get the web or mail address for registration.
         
-            Returns:
-                web or mail address for registration
+        Returns:
+            web or mail address for registration
         
         
         """
         ...
     def getStreamInfoAddress(self) -> str:
         """
-            Get the web address for stream information.
+        Get the web address for stream information.
         
-            Returns:
-                web address for stream information
+        Returns:
+            web address for stream information
         
         
         """
@@ -1268,13 +1307,82 @@ class NetworkRecord(Record):
 
 class PythonMessageObserver(MessageObserver):
     def __init__(self): ...
-    def finalize(self) -> None: ...
-    def messageAvailable(self, string: str, parsedMessage: org.orekit.gnss.metric.messages.ParsedMessage) -> None: ...
-    def pythonDecRef(self) -> None: ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def messageAvailable(self, mountPoint: str, message: org.orekit.gnss.metric.messages.ParsedMessage) -> None:
+        """
+        Notify that an encoded message is available.
+        
+        Beware that this method will be called from an internal dedicated stream-reading thread. Implementations must take to:
+        
+          - not perform long processing there to avoid blocking the stream-reading thread
+          - take care of thread-safety when extracting data from the message
+        
+        The only filtering that can be specified when addObserver an observer to a NtripClient is based on message type and mount point. If additional filtering is needed (for example on message content like satellites ids, it must be performed by the observer itself when notified (see example below).
+        
+        The recommended way to implement this method is to simply build a domain object from the message fields (for example a gnss propagator) and to store it in the observer class as an instance field using a AtomicReference as follows:
+        
+         public class GPSProvider implements PVCoordinatesProvider, RTCMMessageObserver {
+        
+             private final int                                filteringId;
+             private final AtomicReference<GPSPropagator> propagator;
+        
+             public void messageAvailable(String mountPoint, ParsedMessage message) {
+                 MessageXXX msg = (MessageXXX) message;
+                 GPSPropagator oldPropagator = propagator.get();
+                 if (msg.getSatId() == filteringId) {
+                     GPSPropagator newPropagator = new GPSPropagator(msg.get...(),
+                                                                     msg.get...(),
+                                                                     msg.get...());
+                     // only set propagator if no other observer was notified
+                     // while we were asleep
+                     propagator.compareAndSet(oldPropagator, newPropagator);
+                 }
+             }
+        
+             public TimeStampedPVCoordinates getPVCoordinates(AbsoluteDate date, Frame frame) {
+                 GPSPropagator lastAvailablePropagator = propagator.get();
+                 // use the retrieved propagator to compute position-velocity
+             }
+        
+         }
+         
+        
+        Specified by: messageAvailable in interface MessageObserver
+        
+        Parameters:
+            mountPoint (String): mount point from which the message comes
+            message (ParsedMessage): last available message
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
 
 
 class __module_protocol__(Protocol):

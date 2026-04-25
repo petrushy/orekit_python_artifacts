@@ -25,12 +25,10 @@ import typing
 
 class AngleType(java.lang.Enum['AngleType']):
     """
-    public enum AngleType extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.AngleType`>
+    Antenna geometry represented in the angle date.
     
-        Antenna geometry represented in the angle date.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     AZEL: typing.ClassVar['AngleType'] = ...
     RADEC: typing.ClassVar['AngleType'] = ...
@@ -42,20 +40,19 @@ class AngleType(java.lang.Enum['AngleType']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'AngleType':
+    def valueOf(name: str) -> 'AngleType':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -63,17 +60,15 @@ class AngleType(java.lang.Enum['AngleType']):
     @staticmethod
     def values() -> typing.MutableSequence['AngleType']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (AngleType c : AngleType.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (AngleType c : AngleType.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -81,12 +76,10 @@ class AngleType(java.lang.Enum['AngleType']):
 
 class CorrectionApplied(java.lang.Enum['CorrectionApplied']):
     """
-    public enum CorrectionApplied extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.CorrectionApplied`>
+    Indicator for corrections application.
     
-        Indicator for corrections application.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     YES: typing.ClassVar['CorrectionApplied'] = ...
     NO: typing.ClassVar['CorrectionApplied'] = ...
@@ -96,20 +89,19 @@ class CorrectionApplied(java.lang.Enum['CorrectionApplied']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'CorrectionApplied':
+    def valueOf(name: str) -> 'CorrectionApplied':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -117,17 +109,15 @@ class CorrectionApplied(java.lang.Enum['CorrectionApplied']):
     @staticmethod
     def values() -> typing.MutableSequence['CorrectionApplied']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (CorrectionApplied c : CorrectionApplied.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (CorrectionApplied c : CorrectionApplied.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -135,12 +125,10 @@ class CorrectionApplied(java.lang.Enum['CorrectionApplied']):
 
 class DataQuality(java.lang.Enum['DataQuality']):
     """
-    public enum DataQuality extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.DataQuality`>
+    Quality of the data.
     
-        Quality of the data.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     RAW: typing.ClassVar['DataQuality'] = ...
     VALIDATED: typing.ClassVar['DataQuality'] = ...
@@ -151,20 +139,19 @@ class DataQuality(java.lang.Enum['DataQuality']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'DataQuality':
+    def valueOf(name: str) -> 'DataQuality':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -172,17 +159,15 @@ class DataQuality(java.lang.Enum['DataQuality']):
     @staticmethod
     def values() -> typing.MutableSequence['DataQuality']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (DataQuality c : DataQuality.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (DataQuality c : DataQuality.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -190,12 +175,10 @@ class DataQuality(java.lang.Enum['DataQuality']):
 
 class IntegrationReference(java.lang.Enum['IntegrationReference']):
     """
-    public enum IntegrationReference extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.IntegrationReference`>
+    Relationship between time tag and integration interval.
     
-        Relationship between time tag and integration interval.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     START: typing.ClassVar['IntegrationReference'] = ...
     MIDDLE: typing.ClassVar['IntegrationReference'] = ...
@@ -206,20 +189,19 @@ class IntegrationReference(java.lang.Enum['IntegrationReference']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'IntegrationReference':
+    def valueOf(name: str) -> 'IntegrationReference':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -227,17 +209,15 @@ class IntegrationReference(java.lang.Enum['IntegrationReference']):
     @staticmethod
     def values() -> typing.MutableSequence['IntegrationReference']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (IntegrationReference c : IntegrationReference.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (IntegrationReference c : IntegrationReference.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -245,50 +225,54 @@ class IntegrationReference(java.lang.Enum['IntegrationReference']):
 
 class Observation:
     """
-    public class Observation extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    The Observation class contains the data from an observation line.
     
-        The Observation class contains the data from an observation line.
+    It is not an Orekit object yet. It is a simple container holding:
     
-        It is not an Orekit object yet. It is a simple container holding:
+      - a keyword, the type of the observation;
+      - a timetag, the epoch of the observation;
+      - a measurement, the value of the observation.
     
-          - a keyword, the type of the observation;
-          - a timetag, the epoch of the observation;
-          - a measurement, the value of the observation.
-    
-    
-        WARNING. The same class handles many different measurements types (range, Doppler, clocks, pressure, power to noise
-        ratio…). Since Orekit 11.0, it uses only SI units, so angular measurements have already been converted in radians,
-        range has been converted in meters (according to the :meth:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata.getRangeUnits`,
-        Doppler has been converted to meters per second. Up to Orekit 10.x, the measurements were raw measurements as read in
-        the TDM.
+    WARNING. The same class handles many different measurements types (range, Doppler, clocks, pressure, power to noise ratio…). Since Orekit 11.0, it uses only SI units, so angular measurements have already been converted in radians, range has been converted in meters (according to the getRangeUnits, Doppler has been converted to meters per second. Up to Orekit 10.x, the measurements were raw measurements as read in the TDM.
     """
-    def __init__(self, observationType: 'ObservationType', absoluteDate: org.orekit.time.AbsoluteDate, double: float): ...
+    def __init__(self, type: 'ObservationType', epoch: org.orekit.time.AbsoluteDate, measurement: float):
+        """
+        Simple constructor.
+        
+        Parameters:
+            type (ObservationType): type of the observation
+            epoch (AbsoluteDate): the timetag
+            measurement (double): the measurement (in SI units, converted from TDM)
+        
+        
+        """
+        ...
     def getEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Getter for the epoch.
+        Getter for the epoch.
         
-            Returns:
-                the epoch
+        Returns:
+            the epoch
         
         
         """
         ...
     def getMeasurement(self) -> float:
         """
-            Getter for the measurement.
+        Getter for the measurement.
         
-            Returns:
-                the measurement (in SI units, converted from TDM)
+        Returns:
+            the measurement (in SI units, converted from TDM)
         
         
         """
         ...
     def getType(self) -> 'ObservationType':
         """
-            Get the type of observation.
+        Get the type of observation.
         
-            Returns:
-                type of observation
+        Returns:
+            type of observation
         
         
         """
@@ -296,12 +280,10 @@ class Observation:
 
 class ObservationType(java.lang.Enum['ObservationType']):
     """
-    public enum ObservationType extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.ObservationType`>
+    Keys for Observation entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.tdm.Observation` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     CARRIER_POWER: typing.ClassVar['ObservationType'] = ...
     DOPPLER_COUNT: typing.ClassVar['ObservationType'] = ...
@@ -350,51 +332,51 @@ class ObservationType(java.lang.Enum['ObservationType']):
     PRESSURE: typing.ClassVar['ObservationType'] = ...
     RHUMIDITY: typing.ClassVar['ObservationType'] = ...
     TEMPERATURE: typing.ClassVar['ObservationType'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, rangeUnitsConverter: 'RangeUnitsConverter', tdmMetadata: 'TdmMetadata', observationsBlock: 'ObservationsBlock') -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, ruConverter: 'RangeUnitsConverter', metadata: 'TdmMetadata', observationsBlock: 'ObservationsBlock') -> bool:
         """
-            Process an observation line.
+        Process an observation line.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): parse token
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                ruConverter (:class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`): converter for :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU` (may be null)
-                metadata (:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`): metadata for current block
-                observationsBlock (:class:`~org.orekit.files.ccsds.ndm.tdm.ObservationsBlock`): observation block to fill
+        Parameters:
+            token (ParseToken): parse token
+            context (ContextBinding): context binding
+            ruConverter (RangeUnitsConverter): converter for RU (may be null)
+            metadata (TdmMetadata): metadata for current block
+            observationsBlock (ObservationsBlock): observation block to fill
         
-            Returns:
-                true if token was accepted
-        
-        
-        """
-        ...
-    def rawToSI(self, rangeUnitsConverter: 'RangeUnitsConverter', tdmMetadata: 'TdmMetadata', absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> float:
-        """
-            Convert a measurement to SI units.
-        
-            Parameters:
-                ruConverter (:class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`): converter for :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU` (may be null)
-                metadata (:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`): metadata corresponding to the observation
-                date (:class:`~org.orekit.time.AbsoluteDate`): observation date
-                rawValue (double): measurement raw value
-        
-            Returns:
-                measurement in SI units
+        Returns:
+            true if token was accepted
         
         
         """
         ...
-    def siToRaw(self, rangeUnitsConverter: 'RangeUnitsConverter', tdmMetadata: 'TdmMetadata', absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> float:
+    def rawToSI(self, ruConverter: 'RangeUnitsConverter', metadata: 'TdmMetadata', date: org.orekit.time.AbsoluteDate, rawValue: float) -> float:
         """
-            Convert a measurement from SI units.
+        Convert a measurement to SI units.
         
-            Parameters:
-                ruConverter (:class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`): converter for :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU` (may be null)
-                metadata (:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`): metadata corresponding to the observation
-                date (:class:`~org.orekit.time.AbsoluteDate`): observation date
-                siValue (double): measurement value in SI units
+        Parameters:
+            ruConverter (RangeUnitsConverter): converter for RU (may be null)
+            metadata (TdmMetadata): metadata corresponding to the observation
+            date (AbsoluteDate): observation date
+            rawValue (double): measurement raw value
         
-            Returns:
-                measurement raw value
+        Returns:
+            measurement in SI units
+        
+        
+        """
+        ...
+    def siToRaw(self, ruConverter: 'RangeUnitsConverter', metadata: 'TdmMetadata', date: org.orekit.time.AbsoluteDate, siValue: float) -> float:
+        """
+        Convert a measurement from SI units.
+        
+        Parameters:
+            ruConverter (RangeUnitsConverter): converter for RU (may be null)
+            metadata (TdmMetadata): metadata corresponding to the observation
+            date (AbsoluteDate): observation date
+            siValue (double): measurement value in SI units
+        
+        Returns:
+            measurement raw value
         
         
         """
@@ -405,20 +387,19 @@ class ObservationType(java.lang.Enum['ObservationType']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'ObservationType':
+    def valueOf(name: str) -> 'ObservationType':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -426,17 +407,15 @@ class ObservationType(java.lang.Enum['ObservationType']):
     @staticmethod
     def values() -> typing.MutableSequence['ObservationType']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (ObservationType c : ObservationType.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (ObservationType c : ObservationType.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -444,60 +423,68 @@ class ObservationType(java.lang.Enum['ObservationType']):
 
 class ObservationsBlock(org.orekit.files.ccsds.section.CommentsContainer, org.orekit.files.ccsds.section.Data):
     """
-    public class ObservationsBlock extends :class:`~org.orekit.files.ccsds.section.CommentsContainer` implements :class:`~org.orekit.files.ccsds.section.Data`
+    The Observations Block class contain metadata and the list of observation data lines.
     
-        The Observations Block class contain metadata and the list of observation data lines.
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
+    The reason for which the observations have been separated into blocks is that the different data blocks in a TDM file usually refers to different types of observations. An observation block is associated with a TDM metadata object and contains a list of observations. At this level, an observation is not an Orekit object, it is a custom object containing:
     
-        The reason for which the observations have been separated into blocks is that the different data blocks in a TDM file
-        usually refers to different types of observations. An observation block is associated with a TDM metadata object and
-        contains a list of observations. At this level, an observation is not an Orekit object, it is a custom object
-        containing:
-    
-          - a keyword, the type of the observation;
-          - a timetag, the date of the observation;
-          - a measurement, the value of the observation.
+      - a keyword, the type of the observation;
+      - a timetag, the date of the observation;
+      - a measurement, the value of the observation.
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        ObservationsBlock constructor.
+        """
+        ...
     @typing.overload
     def addObservation(self, observation: Observation) -> None:
         """
-            Adds an observation data line.
+        Adds an observation data line.
         
-            Parameters:
-                observation (:class:`~org.orekit.files.ccsds.ndm.tdm.Observation`): the observation to add to the list
+        Parameters:
+            observation (Observation): the observation to add to the list
         
-            Adds an observation data line.
+        Adds an observation data line.
         
-            Parameters:
-                type (:class:`~org.orekit.files.ccsds.ndm.tdm.ObservationType`): type of the observation
-                epoch (:class:`~org.orekit.time.AbsoluteDate`): the timetag
-                measurement (double): the measurement
+        Parameters:
+            type (ObservationType): type of the observation
+            epoch (AbsoluteDate): the timetag
+            measurement (double): the measurement
         
         
         """
         ...
     @typing.overload
     def addObservation(self, observationType: ObservationType, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> None: ...
-    def getObservations(self) -> java.util.List[Observation]: ...
-    def setObservations(self, list: java.util.List[Observation]) -> None: ...
+    def getObservations(self) -> java.util.List[Observation]:
+        """
+        Get the list of Observations data lines.
+        
+        Returns:
+            a reference to the internal list of Observations data lines
+        
+        
+        """
+        ...
+    def setObservations(self, observations: java.util.List[Observation]) -> None:
+        """
+        Set the list of Observations Data Lines.
+        
+        Parameters:
+            observations (List<Observation> observations): the list of Observations Data Lines to set
+        
+        
+        """
+        ...
 
 class RangeMode(java.lang.Enum['RangeMode']):
     """
-    public enum RangeMode extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.RangeMode`>
+    Type of range tones.
     
-        Type of range tones.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     COHERENT: typing.ClassVar['RangeMode'] = ...
     CONSTANT: typing.ClassVar['RangeMode'] = ...
@@ -508,20 +495,19 @@ class RangeMode(java.lang.Enum['RangeMode']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'RangeMode':
+    def valueOf(name: str) -> 'RangeMode':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -529,17 +515,15 @@ class RangeMode(java.lang.Enum['RangeMode']):
     @staticmethod
     def values() -> typing.MutableSequence['RangeMode']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (RangeMode c : RangeMode.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (RangeMode c : RangeMode.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -547,12 +531,10 @@ class RangeMode(java.lang.Enum['RangeMode']):
 
 class RangeUnits(java.lang.Enum['RangeUnits']):
     """
-    public enum RangeUnits extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits`>
+    Units of the range observable.
     
-        Units of the range observable.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     km: typing.ClassVar['RangeUnits'] = ...
     s: typing.ClassVar['RangeUnits'] = ...
@@ -563,20 +545,19 @@ class RangeUnits(java.lang.Enum['RangeUnits']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'RangeUnits':
+    def valueOf(name: str) -> 'RangeUnits':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -584,17 +565,15 @@ class RangeUnits(java.lang.Enum['RangeUnits']):
     @staticmethod
     def values() -> typing.MutableSequence['RangeUnits']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (RangeUnits c : RangeUnits.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (RangeUnits c : RangeUnits.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -602,44 +581,39 @@ class RangeUnits(java.lang.Enum['RangeUnits']):
 
 class RangeUnitsConverter:
     """
-    public interface RangeUnitsConverter
+    Interface for converting RU to meters.
     
-        Interface for converting :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU` to meters.
+    Implementations of this interface must be provided by user when dealing with Tdm that include range observations in RU. These units are intended for mission-specific measurements and must be described in an Interface Control Document.
     
-        Implementations of this interface must be provided by user when dealing with
-        :class:`~org.orekit.files.ccsds.ndm.tdm.Tdm` that include range observations in
-        :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`. These units are intended for mission-specific measurements and
-        must be described in an Interface Control Document.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def metersToRu(self, tdmMetadata: 'TdmMetadata', absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> float:
+    def metersToRu(self, metadata: 'TdmMetadata', date: org.orekit.time.AbsoluteDate, range: float) -> float:
         """
-            Convert a range expressed in meters.
+        Convert a range expressed in meters.
         
-            Parameters:
-                metadata (:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`): metadata corresponding to the observation
-                date (:class:`~org.orekit.time.AbsoluteDate`): observation date
-                range (double): range value in meters
+        Parameters:
+            metadata (TdmMetadata): metadata corresponding to the observation
+            date (AbsoluteDate): observation date
+            range (double): range value in meters
         
-            Returns:
-                range range value in :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`
+        Returns:
+            range range value in RU
         
         
         """
         ...
-    def ruToMeters(self, tdmMetadata: 'TdmMetadata', absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> float:
+    def ruToMeters(self, metadata: 'TdmMetadata', date: org.orekit.time.AbsoluteDate, range: float) -> float:
         """
-            Convert a range expressed in :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`.
+        Convert a range expressed in RU.
         
-            Parameters:
-                metadata (:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`): metadata corresponding to the observation
-                date (:class:`~org.orekit.time.AbsoluteDate`): observation date
-                range (double): range value in :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`
+        Parameters:
+            metadata (TdmMetadata): metadata corresponding to the observation
+            date (AbsoluteDate): observation date
+            range (double): range value in RU
         
-            Returns:
-                range range value in meters
+        Returns:
+            range range value in meters
         
         
         """
@@ -647,73 +621,74 @@ class RangeUnitsConverter:
 
 class Tdm(org.orekit.files.ccsds.ndm.NdmConstituent['TdmHeader', org.orekit.files.ccsds.section.Segment['TdmMetadata', ObservationsBlock]]):
     """
-    public class Tdm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmHeader`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`, :class:`~org.orekit.files.ccsds.ndm.tdm.ObservationsBlock`>>
+    This class stores all the information of the CCSDS Tracking Data Message parsed by TDMParser or TDMXMLParser.
     
-        This class stores all the information of the CCSDS Tracking Data Message parsed by TDMParser or TDMXMLParser.
+    It contains the header and a list of Observations Blocks each containing TDM metadata and a list of observation data lines.
     
-        It contains the header and a list of Observations Blocks each containing TDM metadata and a list of observation data
-        lines.
+    At this level the observations are not Orekit objects but custom object containing a keyword (type of observation), a timetag (date of the observation) and a measurement (value of the observation).
     
-        At this level the observations are not Orekit objects but custom object containing a keyword (type of observation), a
-        timetag (date of the observation) and a measurement (value of the observation).
+    It is up to the user to convert these observations to Orekit tracking object (Range, Angular, TurnAroundRange etc...).
     
-        It is up to the user to convert these observations to Orekit tracking object (Range, Angular, TurnAroundRange etc...).
+    References:
     
-        References:
+    pdf ("Tracking Data Message", Blue Book, Version 1.0, November 2007).
     
-        :class:`~org.orekit.files.ccsds.ndm.tdm.https:.public.ccsds.org.Pubs.503x0b1c1.pdf` ("Tracking Data Message", Blue Book,
-        Version 1.0, November 2007).
-    
-        Since:
-            9.0
+    Since:
+        9.0
     """
     ROOT: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ROOT
+    Root element for XML files.
     
-        Root element for XML files.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     FORMAT_VERSION_KEY: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` FORMAT_VERSION_KEY
+    Key for format version.
     
-        Key for format version.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, tdmHeader: 'TdmHeader', list: java.util.List[org.orekit.files.ccsds.section.Segment['TdmMetadata', ObservationsBlock]], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext): ...
+    def __init__(self, header: 'TdmHeader', segments: java.util.List[org.orekit.files.ccsds.section.Segment['TdmMetadata', ObservationsBlock]], conventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext):
+        """
+        Simple constructor.
+        
+        Parameters:
+            header (TdmHeader): file header
+            segments (List<Segment<TdmMetadata, ObservationsBlock>>): file segments
+            conventions (IERSConventions): IERS conventions
+            dataContext (DataContext): used for creating frames, time scales, etc.
+        
+        
+        """
+        ...
 
 class TdmDataKey(java.lang.Enum['TdmDataKey']):
     """
-    public enum TdmDataKey extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmDataKey`>
+    Keys for Observation entries, except the measurements themselves.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.tdm.Observation` entries, except the measurements themselves.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     observation: typing.ClassVar['TdmDataKey'] = ...
     COMMENT: typing.ClassVar['TdmDataKey'] = ...
     EPOCH: typing.ClassVar['TdmDataKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, observationsBlock: ObservationsBlock) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, observationsBlock: ObservationsBlock) -> bool:
         """
-            Process one token.
+        Process one token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                observationsBlock (:class:`~org.orekit.files.ccsds.ndm.tdm.ObservationsBlock`): observation block to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            observationsBlock (ObservationsBlock): observation block to fill
         
-            Returns:
-                true if token was accepted
+        Returns:
+            true if token was accepted
         
         
         """
@@ -724,20 +699,19 @@ class TdmDataKey(java.lang.Enum['TdmDataKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'TdmDataKey':
+    def valueOf(name: str) -> 'TdmDataKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -745,17 +719,15 @@ class TdmDataKey(java.lang.Enum['TdmDataKey']):
     @staticmethod
     def values() -> typing.MutableSequence['TdmDataKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (TdmDataKey c : TdmDataKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (TdmDataKey c : TdmDataKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -763,866 +735,957 @@ class TdmDataKey(java.lang.Enum['TdmDataKey']):
 
 class TdmHeader(org.orekit.files.ccsds.section.Header):
     """
-    public class TdmHeader extends :class:`~org.orekit.files.ccsds.section.Header`
+    Header of a CCSDS Tracking Data Message.
     
-        Header of a CCSDS Tracking Data Message.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Constructor.
+        """
+        ...
 
 class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
     """
-    public class TdmMetadata extends :class:`~org.orekit.files.ccsds.section.Metadata`
+    The TDMMetadata class gathers the meta-data present in the Tracking Data Message (TDM).
     
-        The TDMMetadata class gathers the meta-data present in the Tracking Data Message (TDM).
+    References:
     
-        References:
+    pdf. §3.3 ("Tracking Data Message", Blue Book, Version 1.0, November 2007).
     
-        :class:`~org.orekit.files.ccsds.ndm.tdm.https:.public.ccsds.org.Pubs.503x0b1c1.pdf`. §3.3 ("Tracking Data Message",
-        Blue Book, Version 1.0, November 2007).
-    
-        Since:
-            9.0
+    Since:
+        9.0
     """
-    def __init__(self): ...
-    def addEphemerisName(self, int: int, string: str) -> None:
+    def __init__(self):
         """
-            Adds an ephemeris name to the list.
+        Create a new TDM meta-data.
+        """
+        ...
+    def addEphemerisName(self, participantNumber: int, ephemerisName: str) -> None:
+        """
+        Adds an ephemeris name to the list.
         
-            Parameters:
-                participantNumber (int): the number of the participant
-                ephemerisName (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the ephemeris for the participant
+        Parameters:
+            participantNumber (int): the number of the participant
+            ephemerisName (String): name of the ephemeris for the participant
         
         
         """
         ...
-    def addParticipant(self, int: int, string: str) -> None:
+    def addParticipant(self, participantNumber: int, participant: str) -> None:
         """
-            Adds a participant to the list.
+        Adds a participant to the list.
         
-            Parameters:
-                participantNumber (int): the number of the participant to add
-                participant (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the participant to add
-        
-        
-        """
-        ...
-    def addReceiveDelay(self, int: int, double: float) -> None:
-        """
-            Adds a receive delay to the list.
-        
-            Parameters:
-                participantNumber (int): the number of the participants for which the receive delay is given
-                receiveDelay (double): the receive delay value to add
+        Parameters:
+            participantNumber (int): the number of the participant to add
+            participant (String): the name of the participant to add
         
         
         """
         ...
-    def addTransmitDelay(self, int: int, double: float) -> None:
+    def addReceiveDelay(self, participantNumber: int, receiveDelay: float) -> None:
         """
-            Adds a transmit delay to the list.
+        Adds a receive delay to the list.
         
-            Parameters:
-                participantNumber (int): the number of the participants for which the transmit delay is given
-                transmitDelay (double): the transmit delay value to add
+        Parameters:
+            participantNumber (int): the number of the participants for which the receive delay is given
+            receiveDelay (double): the receive delay value to add
+        
+        
+        """
+        ...
+    def addTransmitDelay(self, participantNumber: int, transmitDelay: float) -> None:
+        """
+        Adds a transmit delay to the list.
+        
+        Parameters:
+            participantNumber (int): the number of the participants for which the transmit delay is given
+            transmitDelay (double): the transmit delay value to add
         
         
         """
         ...
     def getAngleType(self) -> AngleType:
         """
-            Getter for angleType.
+        Getter for angleType.
         
-            Returns:
-                the angleType
+        Returns:
+            the angleType
         
         
         """
         ...
     def getCorrectionAberrationDiurnal(self) -> float:
         """
-            Getter for the diurnal aberration correction.
+        Getter for the diurnal aberration correction.
         
-            Returns:
-                the diurnal aberration correction in radians
+        Returns:
+            the diurnal aberration correction in radians
         
         
         """
         ...
     def getCorrectionAberrationYearly(self) -> float:
         """
-            Getter for the yearly aberration correction.
+        Getter for the yearly aberration correction.
         
-            Returns:
-                the yearly aberration correction in radians
+        Returns:
+            the yearly aberration correction in radians
         
         
         """
         ...
     def getCorrectionAngle1(self) -> float:
         """
-            Getter for the correctionAngle1.
+        Getter for the correctionAngle1.
         
-            Returns:
-                the correctionAngle1 (in radians)
+        Returns:
+            the correctionAngle1 (in radians)
         
         
         """
         ...
     def getCorrectionAngle2(self) -> float:
         """
-            Getter for the correctionAngle2.
+        Getter for the correctionAngle2.
         
-            Returns:
-                the correctionAngle2 (in radians)
+        Returns:
+            the correctionAngle2 (in radians)
         
         
         """
         ...
     def getCorrectionDoppler(self) -> float:
         """
-            Getter for the correctionDoppler.
+        Getter for the correctionDoppler.
         
-            Returns:
-                the correctionDoppler (in m/s)
+        Returns:
+            the correctionDoppler (in m/s)
         
         
         """
         ...
     def getCorrectionMagnitude(self) -> float:
         """
-            Getter for the magnitude correction.
+        Getter for the magnitude correction.
         
-            Returns:
-                the magnitude correction
+        Returns:
+            the magnitude correction
         
         
         """
         ...
-    def getCorrectionRange(self, rangeUnitsConverter: RangeUnitsConverter) -> float:
+    def getCorrectionRange(self, converter: RangeUnitsConverter) -> float:
         """
-            Getter for the raw correction for range in meters.
+        Getter for the raw correction for range in meters.
         
-            Parameters:
-                converter (:class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`): converter to use if :meth:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata.getRangeUnits` are set to
-                    :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`
+        Parameters:
+            converter (RangeUnitsConverter): converter to use if getRangeUnits are set to
+                RU
         
-            Returns:
-                the raw correction for range in meters
+        Returns:
+            the raw correction for range in meters
         
         
         """
         ...
     def getCorrectionRcs(self) -> float:
         """
-            Getter for the radar cross section correction.
+        Getter for the radar cross section correction.
         
-            Returns:
-                the radar cross section correction in m²
+        Returns:
+            the radar cross section correction in m²
         
         
         """
         ...
     def getCorrectionReceive(self) -> float:
         """
-            Getter for the correctionReceive.
+        Getter for the correctionReceive.
         
-            Returns:
-                the correctionReceive (in TDM units, without conversion)
+        Returns:
+            the correctionReceive (in TDM units, without conversion)
         
         
         """
         ...
     def getCorrectionTransmit(self) -> float:
         """
-            Getter for the correctionTransmit.
+        Getter for the correctionTransmit.
         
-            Returns:
-                the correctionTransmit (in TDM units, without conversion)
+        Returns:
+            the correctionTransmit (in TDM units, without conversion)
         
         
         """
         ...
     def getCorrectionsApplied(self) -> CorrectionApplied:
         """
-            Getter for the correctionApplied.
+        Getter for the correctionApplied.
         
-            Returns:
-                the correctionApplied (in TDM units, without conversion)
+        Returns:
+            the correctionApplied (in TDM units, without conversion)
         
         
         """
         ...
     def getDataQuality(self) -> DataQuality:
         """
-            Getter for the dataQuality.
+        Getter for the dataQuality.
         
-            Returns:
-                the dataQuality
+        Returns:
+            the dataQuality
         
         
         """
         ...
-    def getDataTypes(self) -> java.util.List[ObservationType]: ...
+    def getDataTypes(self) -> java.util.List[ObservationType]:
+        """
+        Getter for the data types in the data section.
+        
+        Returns:
+            data types in the data section
+        
+        
+        """
+        ...
     def getDopplerCountBias(self) -> float:
         """
-            Get the Doppler count bias.
+        Get the Doppler count bias.
         
-            Returns:
-                the Doppler count bias in Hz
+        Returns:
+            the Doppler count bias in Hz
         
         
         """
         ...
     def getDopplerCountScale(self) -> float:
         """
-            Get the Doppler count scale.
+        Get the Doppler count scale.
         
-            Returns:
-                the Doppler count scale
+        Returns:
+            the Doppler count scale
         
         
         """
         ...
-    def getEphemerisNames(self) -> java.util.Map[int, str]: ...
+    def getEphemerisNames(self) -> java.util.Map[int, str]:
+        """
+        Getter for external ephemeris names for participants.
+        
+        Returns:
+            external ephemeris names for participants
+        
+        
+        """
+        ...
     def getFreqOffset(self) -> float:
         """
-            Getter for the freqOffset.
+        Getter for the freqOffset.
         
-            Returns:
-                the freqOffset
+        Returns:
+            the freqOffset
         
         
         """
         ...
     def getIntegrationInterval(self) -> float:
         """
-            Getter for the integrationInterval.
+        Getter for the integrationInterval.
         
-            Returns:
-                the integrationInterval
+        Returns:
+            the integrationInterval
         
         
         """
         ...
     def getIntegrationRef(self) -> IntegrationReference:
         """
-            Getter for the integrationRef.
+        Getter for the integrationRef.
         
-            Returns:
-                the integrationRef
+        Returns:
+            the integrationRef
         
         
         """
         ...
     def getInterpolationDegree(self) -> int:
         """
-            Get the interpolation degree.
+        Get the interpolation degree.
         
-            Returns:
-                the interpolation degree
+        Returns:
+            the interpolation degree
         
         
         """
         ...
     def getInterpolationMethod(self) -> str:
         """
-            Get the interpolation method to be used.
+        Get the interpolation method to be used.
         
-            Returns:
-                the interpolation method
+        Returns:
+            the interpolation method
         
         
         """
         ...
     def getMode(self) -> 'TrackingMode':
         """
-            Getter for the mode.
+        Getter for the mode.
         
-            Returns:
-                the mode
+        Returns:
+            the mode
         
         
         """
         ...
-    def getParticipants(self) -> java.util.Map[int, str]: ...
+    def getParticipants(self) -> java.util.Map[int, str]:
+        """
+        Getter for the participants.
+        
+        Returns:
+            the participants
+        
+        
+        """
+        ...
     def getPath(self) -> typing.MutableSequence[int]:
         """
-            Getter for the path.
+        Getter for the path.
         
-            Returns:
-                the path
+        Returns:
+            the path
         
         
         """
         ...
     def getPath1(self) -> typing.MutableSequence[int]:
         """
-            Getter for the path1.
+        Getter for the path1.
         
-            Returns:
-                the path1
+        Returns:
+            the path1
         
         
         """
         ...
     def getPath2(self) -> typing.MutableSequence[int]:
         """
-            Getter for the path2.
+        Getter for the path2.
         
-            Returns:
-                the path2
+        Returns:
+            the path2
         
         
         """
         ...
     def getRangeMode(self) -> RangeMode:
         """
-            Getter for the rangeMode.
+        Getter for the rangeMode.
         
-            Returns:
-                the rangeMode
+        Returns:
+            the rangeMode
         
         
         """
         ...
-    def getRangeModulus(self, rangeUnitsConverter: RangeUnitsConverter) -> float:
+    def getRangeModulus(self, converter: RangeUnitsConverter) -> float:
         """
-            Getter for the range modulus in meters.
+        Getter for the range modulus in meters.
         
-            Parameters:
-                converter (:class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`): converter to use if :meth:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata.getRangeUnits` are set to
-                    :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`
+        Parameters:
+            converter (RangeUnitsConverter): converter to use if getRangeUnits are set to
+                RU
         
-            Returns:
-                the range modulus in meters
+        Returns:
+            the range modulus in meters
         
         
         """
         ...
     def getRangeUnits(self) -> RangeUnits:
         """
-            Getter for the rangeUnits.
+        Getter for the rangeUnits.
         
-            Returns:
-                the rangeUnits
+        Returns:
+            the rangeUnits
         
         
         """
         ...
     def getRawCorrectionRange(self) -> float:
         """
-            Getter for the raw correction for range.
+        Getter for the raw correction for range.
         
-            Returns:
-                the raw correction for range (in :meth:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata.getRangeUnits`)
+        Returns:
+            the raw correction for range (in getRangeUnits)
         
         
         """
         ...
     def getRawRangeModulus(self) -> float:
         """
-            Getter for the raw range modulus.
+        Getter for the raw range modulus.
         
-            Returns:
-                the raw range modulus in range units
+        Returns:
+            the raw range modulus in range units
         
         
         """
         ...
     def getReceiveBand(self) -> str:
         """
-            Getter for the receiveBand.
+        Getter for the receiveBand.
         
-            Returns:
-                the receiveBand
+        Returns:
+            the receiveBand
         
         
         """
         ...
-    def getReceiveDelays(self) -> java.util.Map[int, float]: ...
+    def getReceiveDelays(self) -> java.util.Map[int, float]:
+        """
+        Getter for receiveDelays.
+        
+        Returns:
+            the receiveDelays
+        
+        
+        """
+        ...
     def getReferenceFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
         """
-            Get the the value of :code:`REFERENCE_FRAME` as an Orekit :class:`~org.orekit.frames.Frame`.
+        Get the the value of REFERENCE_FRAME as an Orekit Frame.
         
-            Returns:
-                The reference frame specified by the :code:`REFERENCE_FRAME` keyword.
+        Returns:
+            The reference frame specified by the REFERENCE_FRAME keyword.
         
         
         """
         ...
     def getStartTime(self) -> org.orekit.time.AbsoluteDate:
         """
-            Getter for the startTime.
+        Getter for the startTime.
         
-            Returns:
-                the startTime
+        Returns:
+            the startTime
         
         
         """
         ...
     def getStopTime(self) -> org.orekit.time.AbsoluteDate:
         """
-            Getter for the stopTime.
+        Getter for the stopTime.
         
-            Returns:
-                the stopTime
+        Returns:
+            the stopTime
         
         
         """
         ...
     def getTimetagRef(self) -> 'TimetagReference':
         """
-            Getter for the timetagRef.
+        Getter for the timetagRef.
         
-            Returns:
-                the timetagRef
+        Returns:
+            the timetagRef
         
         
         """
         ...
     def getTrackId(self) -> str:
         """
-            Getter for the tracking data identifier.
+        Getter for the tracking data identifier.
         
-            Returns:
-                tracking data identifier
+        Returns:
+            tracking data identifier
         
         
         """
         ...
     def getTransmitBand(self) -> str:
         """
-            Getter for the transmitBand.
+        Getter for the transmitBand.
         
-            Returns:
-                the transmitBand
+        Returns:
+            the transmitBand
         
         
         """
         ...
-    def getTransmitDelays(self) -> java.util.Map[int, float]: ...
+    def getTransmitDelays(self) -> java.util.Map[int, float]:
+        """
+        Getter for the transmitDelays.
+        
+        Returns:
+            the transmitDelays
+        
+        
+        """
+        ...
     def getTurnaroundDenominator(self) -> int:
         """
-            Getter for the turnaroundDenominator.
+        Getter for the turnaroundDenominator.
         
-            Returns:
-                the turnaroundDenominator
+        Returns:
+            the turnaroundDenominator
         
         
         """
         ...
     def getTurnaroundNumerator(self) -> int:
         """
-            Getter for the turnaroundNumerator.
+        Getter for the turnaroundNumerator.
         
-            Returns:
-                the turnaroundNumerator
+        Returns:
+            the turnaroundNumerator
         
         
         """
         ...
     def hasDopplerCountRollover(self) -> bool:
         """
-            Check if there is a Doppler count rollover.
+        Check if there is a Doppler count rollover.
         
-            Returns:
-                true if there is a Doppler count rollover
+        Returns:
+            true if there is a Doppler count rollover
         
         
         """
         ...
     def setAngleType(self, angleType: AngleType) -> None:
         """
-            Setter for the angleType.
+        Setter for the angleType.
         
-            Parameters:
-                angleType (:class:`~org.orekit.files.ccsds.ndm.tdm.AngleType`): the angleType to set
-        
-        
-        """
-        ...
-    def setCorrectionAberrationDiurnal(self, double: float) -> None:
-        """
-            Setter for the diurnal aberration correction.
-        
-            Parameters:
-                correctionAberrationDiurnal (double): the diurnal aberration correction in radians to set
+        Parameters:
+            angleType (AngleType): the angleType to set
         
         
         """
         ...
-    def setCorrectionAberrationYearly(self, double: float) -> None:
+    def setCorrectionAberrationDiurnal(self, correctionAberrationDiurnal: float) -> None:
         """
-            Setter for the yearly aberration correction.
+        Setter for the diurnal aberration correction.
         
-            Parameters:
-                correctionAberrationYearly (double): the yearly aberration correction in radians to set
-        
-        
-        """
-        ...
-    def setCorrectionAngle1(self, double: float) -> None:
-        """
-            Setter for the correctionAngle1.
-        
-            Parameters:
-                correctionAngle1 (double): the correctionAngle1 to set (in radians)
+        Parameters:
+            correctionAberrationDiurnal (double): the diurnal aberration correction in radians to set
         
         
         """
         ...
-    def setCorrectionAngle2(self, double: float) -> None:
+    def setCorrectionAberrationYearly(self, correctionAberrationYearly: float) -> None:
         """
-            Setter for the correctionAngle2.
+        Setter for the yearly aberration correction.
         
-            Parameters:
-                correctionAngle2 (double): the correctionAngle2 to set (in radians)
-        
-        
-        """
-        ...
-    def setCorrectionDoppler(self, double: float) -> None:
-        """
-            Setter for the correctionDoppler.
-        
-            Parameters:
-                correctionDoppler (double): the correctionDoppler to set (in m/s)
+        Parameters:
+            correctionAberrationYearly (double): the yearly aberration correction in radians to set
         
         
         """
         ...
-    def setCorrectionMagnitude(self, double: float) -> None:
+    def setCorrectionAngle1(self, correctionAngle1: float) -> None:
         """
-            Setter for the magnitude correction.
+        Setter for the correctionAngle1.
         
-            Parameters:
-                correctionMagnitude (double): the magnitude correction to set
-        
-        
-        """
-        ...
-    def setCorrectionRcs(self, double: float) -> None:
-        """
-            Setter for the radar cross section correction.
-        
-            Parameters:
-                correctionRcs (double): the radar cross section correction in m² to set
+        Parameters:
+            correctionAngle1 (double): the correctionAngle1 to set (in radians)
         
         
         """
         ...
-    def setCorrectionReceive(self, double: float) -> None:
+    def setCorrectionAngle2(self, correctionAngle2: float) -> None:
         """
-            Setter for the correctionReceive.
+        Setter for the correctionAngle2.
         
-            Parameters:
-                correctionReceive (double): the correctionReceive to set (in TDM units, without conversion)
-        
-        
-        """
-        ...
-    def setCorrectionTransmit(self, double: float) -> None:
-        """
-            Setter for the correctionTransmit.
-        
-            Parameters:
-                correctionTransmit (double): the correctionTransmit to set (in TDM units, without conversion)
+        Parameters:
+            correctionAngle2 (double): the correctionAngle2 to set (in radians)
         
         
         """
         ...
-    def setCorrectionsApplied(self, correctionApplied: CorrectionApplied) -> None:
+    def setCorrectionDoppler(self, correctionDoppler: float) -> None:
         """
-            Setter for the correctionApplied.
+        Setter for the correctionDoppler.
         
-            Parameters:
-                correctionsApplied (:class:`~org.orekit.files.ccsds.ndm.tdm.CorrectionApplied`): the correctionApplied to set (in TDM units, without conversion)
+        Parameters:
+            correctionDoppler (double): the correctionDoppler to set (in m/s)
+        
+        
+        """
+        ...
+    def setCorrectionMagnitude(self, correctionMagnitude: float) -> None:
+        """
+        Setter for the magnitude correction.
+        
+        Parameters:
+            correctionMagnitude (double): the magnitude correction to set
+        
+        
+        """
+        ...
+    def setCorrectionRcs(self, correctionRcs: float) -> None:
+        """
+        Setter for the radar cross section correction.
+        
+        Parameters:
+            correctionRcs (double): the radar cross section correction in m² to set
+        
+        
+        """
+        ...
+    def setCorrectionReceive(self, correctionReceive: float) -> None:
+        """
+        Setter for the correctionReceive.
+        
+        Parameters:
+            correctionReceive (double): the correctionReceive to set (in TDM units, without conversion)
+        
+        
+        """
+        ...
+    def setCorrectionTransmit(self, correctionTransmit: float) -> None:
+        """
+        Setter for the correctionTransmit.
+        
+        Parameters:
+            correctionTransmit (double): the correctionTransmit to set (in TDM units, without conversion)
+        
+        
+        """
+        ...
+    def setCorrectionsApplied(self, correctionsApplied: CorrectionApplied) -> None:
+        """
+        Setter for the correctionApplied.
+        
+        Parameters:
+            correctionsApplied (CorrectionApplied): the correctionApplied to set (in TDM units, without conversion)
         
         
         """
         ...
     def setDataQuality(self, dataQuality: DataQuality) -> None:
         """
-            Setter for the dataQuality.
+        Setter for the dataQuality.
         
-            Parameters:
-                dataQuality (:class:`~org.orekit.files.ccsds.ndm.tdm.DataQuality`): the dataQuality to set
-        
-        
-        """
-        ...
-    def setDataTypes(self, list: java.util.List[ObservationType]) -> None: ...
-    def setDopplerCountBias(self, double: float) -> None:
-        """
-            Set the Doppler count bias.
-        
-            Parameters:
-                dopplerCountBias (double): Doppler count bias in Hz to set
+        Parameters:
+            dataQuality (DataQuality): the dataQuality to set
         
         
         """
         ...
-    def setDopplerCountRollover(self, boolean: bool) -> None:
+    def setDataTypes(self, dataTypes: java.util.List[ObservationType]) -> None:
         """
-            Set the indicator for Doppler count rollover.
+        Setter for the data types in the data section.
         
-            Parameters:
-                dopplerCountRollover (boolean): indicator for Doppler count rollover
-        
-        
-        """
-        ...
-    def setDopplerCountScale(self, double: float) -> None:
-        """
-            Set the Doppler count Scale.
-        
-            Parameters:
-                dopplerCountScale (double): Doppler count scale to set
+        Parameters:
+            dataTypes (List<ObservationType> dataTypes): data types in the data section
         
         
         """
         ...
-    def setEphemerisNames(self, map: typing.Union[java.util.Map[int, str], typing.Mapping[int, str]]) -> None: ...
-    def setFreqOffset(self, double: float) -> None:
+    def setDopplerCountBias(self, dopplerCountBias: float) -> None:
         """
-            Setter for the freqOffset.
+        Set the Doppler count bias.
         
-            Parameters:
-                freqOffset (double): the freqOffset to set
-        
-        
-        """
-        ...
-    def setIntegrationInterval(self, double: float) -> None:
-        """
-            Setter for the integrationInterval.
-        
-            Parameters:
-                integrationInterval (double): the integrationInterval to set
+        Parameters:
+            dopplerCountBias (double): Doppler count bias in Hz to set
         
         
         """
         ...
-    def setIntegrationRef(self, integrationReference: IntegrationReference) -> None:
+    def setDopplerCountRollover(self, dopplerCountRollover: bool) -> None:
         """
-            Setter for the integrationRef.
+        Set the indicator for Doppler count rollover.
         
-            Parameters:
-                integrationRef (:class:`~org.orekit.files.ccsds.ndm.tdm.IntegrationReference`): the integrationRef to set
-        
-        
-        """
-        ...
-    def setInterpolationDegree(self, int: int) -> None:
-        """
-            Set the interpolation degree.
-        
-            Parameters:
-                interpolationDegree (int): the interpolation degree to be set
+        Parameters:
+            dopplerCountRollover (boolean): indicator for Doppler count rollover
         
         
         """
         ...
-    def setInterpolationMethod(self, string: str) -> None:
+    def setDopplerCountScale(self, dopplerCountScale: float) -> None:
         """
-            Set the interpolation method to be used.
+        Set the Doppler count Scale.
         
-            Parameters:
-                interpolationMethod (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the interpolation method to be set
-        
-        
-        """
-        ...
-    def setMode(self, trackingMode: 'TrackingMode') -> None:
-        """
-            Setter for the mode.
-        
-            Parameters:
-                mode (:class:`~org.orekit.files.ccsds.ndm.tdm.TrackingMode`): the mode to set
+        Parameters:
+            dopplerCountScale (double): Doppler count scale to set
         
         
         """
         ...
-    def setParticipants(self, map: typing.Union[java.util.Map[int, str], typing.Mapping[int, str]]) -> None: ...
-    def setPath(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> None:
+    def setEphemerisNames(self, ephemerisNames: typing.Union[java.util.Map[int, str], typing.Mapping[int, str]]) -> None:
         """
-            Setter for the path.
+        Setter for the external ephemeris names for participants.
         
-            Parameters:
-                path (int[]): the path to set
-        
-        
-        """
-        ...
-    def setPath1(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> None:
-        """
-            Setter for the path1.
-        
-            Parameters:
-                path1 (int[]): the path1 to set
+        Parameters:
+            ephemerisNames (Map<Integer, String> ephemerisNames): external ephemeris names for participants
         
         
         """
         ...
-    def setPath2(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> None:
+    def setFreqOffset(self, freqOffset: float) -> None:
         """
-            Setter for the path2.
+        Setter for the freqOffset.
         
-            Parameters:
-                path2 (int[]): the path2 to set
+        Parameters:
+            freqOffset (double): the freqOffset to set
+        
+        
+        """
+        ...
+    def setIntegrationInterval(self, integrationInterval: float) -> None:
+        """
+        Setter for the integrationInterval.
+        
+        Parameters:
+            integrationInterval (double): the integrationInterval to set
+        
+        
+        """
+        ...
+    def setIntegrationRef(self, integrationRef: IntegrationReference) -> None:
+        """
+        Setter for the integrationRef.
+        
+        Parameters:
+            integrationRef (IntegrationReference): the integrationRef to set
+        
+        
+        """
+        ...
+    def setInterpolationDegree(self, interpolationDegree: int) -> None:
+        """
+        Set the interpolation degree.
+        
+        Parameters:
+            interpolationDegree (int): the interpolation degree to be set
+        
+        
+        """
+        ...
+    def setInterpolationMethod(self, interpolationMethod: str) -> None:
+        """
+        Set the interpolation method to be used.
+        
+        Parameters:
+            interpolationMethod (String): the interpolation method to be set
+        
+        
+        """
+        ...
+    def setMode(self, mode: 'TrackingMode') -> None:
+        """
+        Setter for the mode.
+        
+        Parameters:
+            mode (TrackingMode): the mode to set
+        
+        
+        """
+        ...
+    def setParticipants(self, participants: typing.Union[java.util.Map[int, str], typing.Mapping[int, str]]) -> None:
+        """
+        Setter for the participants.
+        
+        Parameters:
+            participants (Map<Integer, String> participants): the participants to set
+        
+        
+        """
+        ...
+    def setPath(self, path: typing.Union[typing.List[int], jpype.JArray]) -> None:
+        """
+        Setter for the path.
+        
+        Parameters:
+            path (int[]): the path to set
+        
+        
+        """
+        ...
+    def setPath1(self, path1: typing.Union[typing.List[int], jpype.JArray]) -> None:
+        """
+        Setter for the path1.
+        
+        Parameters:
+            path1 (int[]): the path1 to set
+        
+        
+        """
+        ...
+    def setPath2(self, path2: typing.Union[typing.List[int], jpype.JArray]) -> None:
+        """
+        Setter for the path2.
+        
+        Parameters:
+            path2 (int[]): the path2 to set
         
         
         """
         ...
     def setRangeMode(self, rangeMode: RangeMode) -> None:
         """
-            Setter for the rangeMode.
+        Setter for the rangeMode.
         
-            Parameters:
-                rangeMode (:class:`~org.orekit.files.ccsds.ndm.tdm.RangeMode`): the rangeMode to set
+        Parameters:
+            rangeMode (RangeMode): the rangeMode to set
         
         
         """
         ...
     def setRangeUnits(self, rangeUnits: RangeUnits) -> None:
         """
-            Setter for the rangeUnits.
+        Setter for the rangeUnits.
         
-            Parameters:
-                rangeUnits (:class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits`): the rangeUnits to set
-        
-        
-        """
-        ...
-    def setRawCorrectionRange(self, double: float) -> None:
-        """
-            Setter for the raw correction for range.
-        
-            Parameters:
-                rawCorrectionRange (double): the raw correction for range to set (in :meth:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata.getRangeUnits`)
+        Parameters:
+            rangeUnits (RangeUnits): the rangeUnits to set
         
         
         """
         ...
-    def setRawRangeModulus(self, double: float) -> None:
+    def setRawCorrectionRange(self, rawCorrectionRange: float) -> None:
         """
-            Setter for the raw range modulus.
+        Setter for the raw correction for range.
         
-            Parameters:
-                rawRangeModulus (double): the raw range modulus to set
-        
-        
-        """
-        ...
-    def setReceiveBand(self, string: str) -> None:
-        """
-            Setter for the receiveBand.
-        
-            Parameters:
-                receiveBand (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the receiveBand to set
+        Parameters:
+            rawCorrectionRange (double): the raw correction for range to set (in getRangeUnits)
         
         
         """
         ...
-    def setReceiveDelays(self, map: typing.Union[java.util.Map[int, float], typing.Mapping[int, float]]) -> None: ...
-    def setReferenceFrame(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
+    def setRawRangeModulus(self, rawRangeModulus: float) -> None:
         """
-            Set the reference frame in which data are given: used for RADEC tracking data.
+        Setter for the raw range modulus.
         
-            Parameters:
-                referenceFrame (:class:`~org.orekit.files.ccsds.definitions.FrameFacade`): the reference frame to be set
-        
-        
-        """
-        ...
-    def setStartTime(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Setter for the startTime.
-        
-            Parameters:
-                startTime (:class:`~org.orekit.time.AbsoluteDate`): the startTime to set
+        Parameters:
+            rawRangeModulus (double): the raw range modulus to set
         
         
         """
         ...
-    def setStopTime(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setReceiveBand(self, receiveBand: str) -> None:
         """
-            Setter for the stopTime.
+        Setter for the receiveBand.
         
-            Parameters:
-                stopTime (:class:`~org.orekit.time.AbsoluteDate`): the stopTime to set
-        
-        
-        """
-        ...
-    def setTimetagRef(self, timetagReference: 'TimetagReference') -> None:
-        """
-            Setter for the timetagRef.
-        
-            Parameters:
-                timetagRef (:class:`~org.orekit.files.ccsds.ndm.tdm.TimetagReference`): the timetagRef to set
+        Parameters:
+            receiveBand (String): the receiveBand to set
         
         
         """
         ...
-    def setTrackId(self, string: str) -> None:
+    def setReceiveDelays(self, receiveDelays: typing.Union[java.util.Map[int, float], typing.Mapping[int, float]]) -> None:
         """
-            Setter for the tracking data identifier.
+        Setter for the receiveDelays.
         
-            Parameters:
-                trackId (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): tracking data identifier
-        
-        
-        """
-        ...
-    def setTransmitBand(self, string: str) -> None:
-        """
-            Setter for the transmitBand.
-        
-            Parameters:
-                transmitBand (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the transmitBand to set
+        Parameters:
+            receiveDelays (Map<Integer, Double> receiveDelays): the receiveDelays to set
         
         
         """
         ...
-    def setTransmitDelays(self, map: typing.Union[java.util.Map[int, float], typing.Mapping[int, float]]) -> None: ...
-    def setTurnaroundDenominator(self, int: int) -> None:
+    def setReferenceFrame(self, referenceFrame: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
         """
-            Setter for the turnaroundDenominator.
+        Set the reference frame in which data are given: used for RADEC tracking data.
         
-            Parameters:
-                turnaroundDenominator (int): the turnaroundDenominator to set
-        
-        
-        """
-        ...
-    def setTurnaroundNumerator(self, int: int) -> None:
-        """
-            Setter for the turnaroundNumerator.
-        
-            Parameters:
-                turnaroundNumerator (int): the turnaroundNumerator to set
+        Parameters:
+            referenceFrame (FrameFacade): the reference frame to be set
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def setStartTime(self, startTime: org.orekit.time.AbsoluteDate) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Setter for the startTime.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            startTime (AbsoluteDate): the startTime to set
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.Metadata.validate` in class :class:`~org.orekit.files.ccsds.section.Metadata`
+        """
+        ...
+    def setStopTime(self, stopTime: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Setter for the stopTime.
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            stopTime (AbsoluteDate): the stopTime to set
+        
+        
+        """
+        ...
+    def setTimetagRef(self, timetagRef: 'TimetagReference') -> None:
+        """
+        Setter for the timetagRef.
+        
+        Parameters:
+            timetagRef (TimetagReference): the timetagRef to set
+        
+        
+        """
+        ...
+    def setTrackId(self, trackId: str) -> None:
+        """
+        Setter for the tracking data identifier.
+        
+        Parameters:
+            trackId (String): tracking data identifier
+        
+        
+        """
+        ...
+    def setTransmitBand(self, transmitBand: str) -> None:
+        """
+        Setter for the transmitBand.
+        
+        Parameters:
+            transmitBand (String): the transmitBand to set
+        
+        
+        """
+        ...
+    def setTransmitDelays(self, transmitDelays: typing.Union[java.util.Map[int, float], typing.Mapping[int, float]]) -> None:
+        """
+        Setter for the transmitDelays.
+        
+        Parameters:
+            transmitDelays (Map<Integer, Double> transmitDelays): the transmitDelays to set
+        
+        
+        """
+        ...
+    def setTurnaroundDenominator(self, turnaroundDenominator: int) -> None:
+        """
+        Setter for the turnaroundDenominator.
+        
+        Parameters:
+            turnaroundDenominator (int): the turnaroundDenominator to set
+        
+        
+        """
+        ...
+    def setTurnaroundNumerator(self, turnaroundNumerator: int) -> None:
+        """
+        Setter for the turnaroundNumerator.
+        
+        Parameters:
+            turnaroundNumerator (int): the turnaroundNumerator to set
+        
+        
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class Metadata
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -1630,12 +1693,10 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
 
 class TdmMetadataKey(java.lang.Enum['TdmMetadataKey']):
     """
-    public enum TdmMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadataKey`>
+    Keys for TdmMetadata entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     TRACK_ID: typing.ClassVar['TdmMetadataKey'] = ...
     DATA_TYPES: typing.ClassVar['TdmMetadataKey'] = ...
@@ -1695,17 +1756,17 @@ class TdmMetadataKey(java.lang.Enum['TdmMetadataKey']):
     CORRECTION_ABERRATION_YEARLY: typing.ClassVar['TdmMetadataKey'] = ...
     CORRECTION_ABERRATION_DIURNAL: typing.ClassVar['TdmMetadataKey'] = ...
     CORRECTIONS_APPLIED: typing.ClassVar['TdmMetadataKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, tdmMetadata: TdmMetadata) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: TdmMetadata) -> bool:
         """
-            Process an token.
+        Process an token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (TdmMetadata): container to fill
         
-            Returns:
-                true if token was accepted
+        Returns:
+            true if token was accepted
         
         
         """
@@ -1716,20 +1777,19 @@ class TdmMetadataKey(java.lang.Enum['TdmMetadataKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'TdmMetadataKey':
+    def valueOf(name: str) -> 'TdmMetadataKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -1737,17 +1797,15 @@ class TdmMetadataKey(java.lang.Enum['TdmMetadataKey']):
     @staticmethod
     def values() -> typing.MutableSequence['TdmMetadataKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (TdmMetadataKey c : TdmMetadataKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (TdmMetadataKey c : TdmMetadataKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -1755,183 +1813,178 @@ class TdmMetadataKey(java.lang.Enum['TdmMetadataKey']):
 
 class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[TdmHeader, Tdm, 'TdmParser']):
     """
-    public class TdmParser extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmHeader`, :class:`~org.orekit.files.ccsds.ndm.tdm.Tdm`, :class:`~org.orekit.files.ccsds.ndm.tdm.TdmParser`>
+    Class for CCSDS Tracking Data Message parsers.
     
-        Class for CCSDS Tracking Data Message parsers.
+    Note than starting with Orekit 11.0, CCSDS message parsers are mutable objects that gather the data being parsed, until the message is complete and the parseMessage method has returned. This implies that parsers should not be used in a multi-thread context. The recommended way to use parsers is to either dedicate one parser for each message and drop it afterwards, or to use a single-thread loop.
     
-        Note than starting with Orekit 11.0, CCSDS message parsers are mutable objects that gather the data being parsed, until
-        the message is complete and the :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser.parseMessage` method
-        has returned. This implies that parsers should *not* be used in a multi-thread context. The recommended way to use
-        parsers is to either dedicate one parser for each message and drop it afterwards, or to use a single-thread loop.
+    References:
     
-        References:
-    
-          - :class:`~org.orekit.files.ccsds.ndm.tdm.https:.public.ccsds.org.Pubs.503x0b1c1.pdf` ("Tracking Data Message", Blue Book,
-            Issue 1, November 2007)
-          - :class:`~org.orekit.files.ccsds.ndm.tdm.https:.public.ccsds.org.Pubs.505x0b1.pdf` ("XML Specification for Navigation
-            Data Message", Blue Book, Issue 1, December 2010)
+      - pdf ("Tracking Data Message", Blue Book,
+        Issue 1, November 2007)
+      - pdf ("XML Specification for Navigation
+        Data Message", Blue Book, Issue 1, December 2010)
     
     
-        Since:
-            9.0
+    Since:
+        9.0
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, rangeUnitsConverter: RangeUnitsConverter, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, converter: RangeUnitsConverter, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]):
+        """
+        Complete constructor.
+        
+        Calling this constructor directly is not recommended. Users should rather use buildTdmParser.
+        
+        Parameters:
+            conventions (IERSConventions): IERS Conventions
+            simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
+            dataContext (DataContext): used to retrieve frames, time scales, etc.
+            parsedUnitsBehavior (ParsedUnitsBehavior): behavior to adopt for handling parsed units
+            converter (RangeUnitsConverter): converter for RU (may be null if there are no range observations in
+                RU)
+            filters (Function<ParseToken, List<ParseToken>>[]): filters to apply to parse tokens
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
     def build(self) -> Tdm:
         """
-            Build the file from parsed entries.
+        Build the file from parsed entries.
         
-            Returns:
-                parsed file
+        Returns:
+            parsed file
         
         
         """
         ...
     def finalizeData(self) -> bool:
         """
-            Finalize data after parsing.
+        Finalize data after parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: finalizeData in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def finalizeHeader(self) -> bool:
         """
-            Finalize header after parsing.
+        Finalize header after parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: finalizeHeader in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def finalizeMetadata(self) -> bool:
         """
-            Finalize metadata after parsing.
+        Finalize metadata after parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: finalizeMetadata in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def getHeader(self) -> TdmHeader:
         """
-            Get file header to fill.
+        Get file header to fill.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: getHeader in class AbstractConstituentParser
         
-            Returns:
-                file header to fill
+        Returns:
+            file header to fill
         
         
         """
         ...
     def inData(self) -> bool:
         """
-            Acknowledge data parsing has started.
+        Acknowledge data parsing has started.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: inData in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def inHeader(self) -> bool:
         """
-            Acknowledge header parsing has started.
+        Acknowledge header parsing has started.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: inHeader in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def inMetadata(self) -> bool:
         """
-            Acknowledge metada parsing has started.
+        Acknowledge metada parsing has started.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: inMetadata in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def prepareData(self) -> bool:
         """
-            Prepare data for parsing.
+        Prepare data for parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: prepareData in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def prepareHeader(self) -> bool:
         """
-            Prepare header for parsing.
+        Prepare header for parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: prepareHeader in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def prepareMetadata(self) -> bool:
         """
-            Prepare metadata for parsing.
+        Prepare metadata for parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: prepareMetadata in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None:
         """
-            Reset parser to initial state before parsing.
+        Reset parser to initial state before parsing.
         
-            Parameters:
-                fileFormat (:class:`~org.orekit.files.ccsds.utils.FileFormat`): format of the file ready to be parsed
+        Parameters:
+            fileFormat (FileFormat): format of the file ready to be parsed
         
         
         """
@@ -1939,45 +1992,51 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
 
 class TdmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[TdmHeader, org.orekit.files.ccsds.section.Segment[TdmMetadata, ObservationsBlock], Tdm]):
     """
-    public class TdmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmHeader`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`, :class:`~org.orekit.files.ccsds.ndm.tdm.ObservationsBlock`>, :class:`~org.orekit.files.ccsds.ndm.tdm.Tdm`>
+    Writer for CCSDS Tracking Data Message.
     
-        Writer for CCSDS Tracking Data Message.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     CCSDS_TDM_VERS: typing.ClassVar[float] = ...
     """
-    public static final double CCSDS_TDM_VERS
+    Version number implemented.
     
-        Version number implemented.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     KVN_PADDING_WIDTH: typing.ClassVar[int] = ...
     """
-    public static final int KVN_PADDING_WIDTH
+    Padding width for aligning the '=' sign.
     
-        Padding width for aligning the '=' sign.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, rangeUnitsConverter: RangeUnitsConverter): ...
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, converter: RangeUnitsConverter):
+        """
+        Complete constructor.
+        
+        Calling this constructor directly is not recommended. Users should rather use buildTdmWriter.
+        
+        Parameters:
+            conventions (IERSConventions): IERS Conventions
+            dataContext (DataContext): used to retrieve frames, time scales, etc.
+            converter (RangeUnitsConverter): converter for RU (may be null if there are no range observations in
+                RU)
+        
+        
+        """
+        ...
 
 class TimetagReference(java.lang.Enum['TimetagReference']):
     """
-    public enum TimetagReference extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.TimetagReference`>
+    Reference for time tag.
     
-        Reference for time tag.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     TRANSMIT: typing.ClassVar['TimetagReference'] = ...
     RECEIVE: typing.ClassVar['TimetagReference'] = ...
@@ -1987,20 +2046,19 @@ class TimetagReference(java.lang.Enum['TimetagReference']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'TimetagReference':
+    def valueOf(name: str) -> 'TimetagReference':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -2008,17 +2066,15 @@ class TimetagReference(java.lang.Enum['TimetagReference']):
     @staticmethod
     def values() -> typing.MutableSequence['TimetagReference']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (TimetagReference c : TimetagReference.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (TimetagReference c : TimetagReference.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -2026,12 +2082,10 @@ class TimetagReference(java.lang.Enum['TimetagReference']):
 
 class TrackingMode(java.lang.Enum['TrackingMode']):
     """
-    public enum TrackingMode extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.TrackingMode`>
+    Tracking mode.
     
-        Tracking mode.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     SEQUENTIAL: typing.ClassVar['TrackingMode'] = ...
     SINGLE_DIFF: typing.ClassVar['TrackingMode'] = ...
@@ -2041,20 +2095,19 @@ class TrackingMode(java.lang.Enum['TrackingMode']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'TrackingMode':
+    def valueOf(name: str) -> 'TrackingMode':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -2062,17 +2115,15 @@ class TrackingMode(java.lang.Enum['TrackingMode']):
     @staticmethod
     def values() -> typing.MutableSequence['TrackingMode']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (TrackingMode c : TrackingMode.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (TrackingMode c : TrackingMode.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -2080,48 +2131,53 @@ class TrackingMode(java.lang.Enum['TrackingMode']):
 
 class IdentityConverter(RangeUnitsConverter):
     """
-    public class IdentityConverter extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
+    Identity converter for Range Units.
     
-        Identity converter for Range Units.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self): ...
-    def metersToRu(self, tdmMetadata: TdmMetadata, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> float:
+    def __init__(self):
         """
-            Convert a range expressed in meters.
+        Empty constructor.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter.metersToRu` in
-                interface :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
+        This constructor is not strictly necessary, but it prevents spurious javadoc warnings with JDK 18 and later.
         
-            Parameters:
-                metadata (:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`): metadata corresponding to the observation
-                date (:class:`~org.orekit.time.AbsoluteDate`): observation date
-                range (double): range value in meters
-        
-            Returns:
-                range range value in :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`
+        Since:
+            12.0
         
         
         """
         ...
-    def ruToMeters(self, tdmMetadata: TdmMetadata, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> float:
+    def metersToRu(self, metadata: TdmMetadata, date: org.orekit.time.AbsoluteDate, range: float) -> float:
         """
-            Convert a range expressed in :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`.
+        Convert a range expressed in meters.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter.ruToMeters` in
-                interface :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
+        Specified by: metersToRu in interface RangeUnitsConverter
         
-            Parameters:
-                metadata (:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`): metadata corresponding to the observation
-                date (:class:`~org.orekit.time.AbsoluteDate`): observation date
-                range (double): range value in :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`
+        Parameters:
+            metadata (TdmMetadata): metadata corresponding to the observation
+            date (AbsoluteDate): observation date
+            range (double): range value in meters
         
-            Returns:
-                range range value in meters
+        Returns:
+            range range value in RU
+        
+        
+        """
+        ...
+    def ruToMeters(self, metadata: TdmMetadata, date: org.orekit.time.AbsoluteDate, range: float) -> float:
+        """
+        Convert a range expressed in RU.
+        
+        Specified by: ruToMeters in interface RangeUnitsConverter
+        
+        Parameters:
+            metadata (TdmMetadata): metadata corresponding to the observation
+            date (AbsoluteDate): observation date
+            range (double): range value in RU
+        
+        Returns:
+            range range value in meters
         
         
         """
@@ -2129,14 +2185,68 @@ class IdentityConverter(RangeUnitsConverter):
 
 class PythonRangeUnitsConverter(RangeUnitsConverter):
     def __init__(self): ...
-    def finalize(self) -> None: ...
-    def metersToRu(self, tdmMetadata: TdmMetadata, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> float: ...
-    def pythonDecRef(self) -> None: ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def metersToRu(self, metadata: TdmMetadata, date: org.orekit.time.AbsoluteDate, range: float) -> float:
+        """
+        Convert a range expressed in meters.
+        
+        Specified by: metersToRu in interface RangeUnitsConverter
+        
+        Parameters:
+            metadata (TdmMetadata): metadata corresponding to the observation
+            date (AbsoluteDate): observation date
+            range (double): range value in meters
+        
+        Returns:
+            range range value in RU
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-    def ruToMeters(self, tdmMetadata: TdmMetadata, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> float: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    def ruToMeters(self, metadata: TdmMetadata, date: org.orekit.time.AbsoluteDate, range: float) -> float:
+        """
+        Convert a range expressed in RU.
+        
+        Specified by: ruToMeters in interface RangeUnitsConverter
+        
+        Parameters:
+            metadata (TdmMetadata): metadata corresponding to the observation
+            date (AbsoluteDate): observation date
+            range (double): range value in RU
+        
+        Returns:
+            range range value in meters
+        
+        
+        """
+        ...
 
 
 class __module_protocol__(Protocol):

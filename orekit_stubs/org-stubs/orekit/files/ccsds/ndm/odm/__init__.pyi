@@ -31,102 +31,99 @@ import typing
 
 class CartesianCovariance(org.orekit.files.ccsds.section.CommentsContainer, org.orekit.files.ccsds.section.Data):
     """
-    public class CartesianCovariance extends :class:`~org.orekit.files.ccsds.section.CommentsContainer` implements :class:`~org.orekit.files.ccsds.section.Data`
+    Container for OPM/OMM/OCM Cartesian covariance matrix.
     
-        Container for OPM/OMM/OCM Cartesian covariance matrix.
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
-    
-        Since:
-            6.1
+    Since:
+        6.1
     """
-    def __init__(self, supplier: typing.Union[java.util.function.Supplier[org.orekit.files.ccsds.definitions.FrameFacade], typing.Callable[[], org.orekit.files.ccsds.definitions.FrameFacade]]): ...
+    def __init__(self, defaultFrameSupplier: typing.Union[java.util.function.Supplier[org.orekit.files.ccsds.definitions.FrameFacade], typing.Callable[[], org.orekit.files.ccsds.definitions.FrameFacade]]):
+        """
+        Create an empty data set.
+        
+        Parameters:
+            defaultFrameSupplier (Supplier<FrameFacade> defaultFrameSupplier): supplier for default reference frame if no frame is specified in the CCSDS message
+        
+        
+        """
+        ...
     def getCovarianceMatrix(self) -> org.hipparchus.linear.RealMatrix:
         """
-            Get the Position/Velocity covariance matrix.
+        Get the Position/Velocity covariance matrix.
         
-            Returns:
-                the Position/Velocity covariance matrix
+        Returns:
+            the Position/Velocity covariance matrix
         
         
         """
         ...
     def getEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get matrix epoch.
+        Get matrix epoch.
         
-            Returns:
-                matrix epoch
+        Returns:
+            matrix epoch
         
         
         """
         ...
     def getReferenceFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
         """
-            Get the reference frame.
+        Get the reference frame.
         
-            Returns:
-                The reference frame specified by the :code:`COV_REF_FRAME` keyword or inherited from metadata
-        
-        
-        """
-        ...
-    def setCovarianceMatrixEntry(self, int: int, int2: int, double: float) -> None:
-        """
-            Set an entry in the Position/Velocity covariance matrix.
-        
-            Both m(j, k) and m(k, j) are set.
-        
-            Parameters:
-                j (int): row index (must be between 0 and 5 (inclusive)
-                k (int): column index (must be between 0 and 5 (inclusive)
-                entry (double): value of the matrix entry
+        Returns:
+            The reference frame specified by the COV_REF_FRAME keyword or inherited from metadata
         
         
         """
         ...
-    def setEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setCovarianceMatrixEntry(self, j: int, k: int, entry: float) -> None:
         """
-            Set matrix epoch.
+        Set an entry in the Position/Velocity covariance matrix.
         
-            Parameters:
-                epoch (:class:`~org.orekit.time.AbsoluteDate`): matrix epoch
+        Both m(j, k) and m(k, j) are set.
         
-        
-        """
-        ...
-    def setReferenceFrame(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
-        """
-            Set the reference frame in which data are given.
-        
-            Parameters:
-                referenceFrame (:class:`~org.orekit.files.ccsds.definitions.FrameFacade`): the reference frame to be set
+        Parameters:
+            j (int): row index (must be between 0 and 5 (inclusive)
+            k (int): column index (must be between 0 and 5 (inclusive)
+            entry (double): value of the matrix entry
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def setEpoch(self, epoch: org.orekit.time.AbsoluteDate) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set matrix epoch.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            epoch (AbsoluteDate): matrix epoch
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
-                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        """
+        ...
+    def setReferenceFrame(self, referenceFrame: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
+        """
+        Set the reference frame in which data are given.
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            referenceFrame (FrameFacade): the reference frame to be set
+        
+        
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class CommentsContainer
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -134,12 +131,10 @@ class CartesianCovariance(org.orekit.files.ccsds.section.CommentsContainer, org.
 
 class CartesianCovarianceKey(java.lang.Enum['CartesianCovarianceKey']):
     """
-    public enum CartesianCovarianceKey extends :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.CartesianCovarianceKey`>
+    Keys for CartesianCovariance entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.odm.CartesianCovariance` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     COMMENT: typing.ClassVar['CartesianCovarianceKey'] = ...
     EPOCH: typing.ClassVar['CartesianCovarianceKey'] = ...
@@ -165,17 +160,17 @@ class CartesianCovarianceKey(java.lang.Enum['CartesianCovarianceKey']):
     CZ_DOT_X_DOT: typing.ClassVar['CartesianCovarianceKey'] = ...
     CZ_DOT_Y_DOT: typing.ClassVar['CartesianCovarianceKey'] = ...
     CZ_DOT_Z_DOT: typing.ClassVar['CartesianCovarianceKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, cartesianCovariance: CartesianCovariance) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: CartesianCovariance) -> bool:
         """
-            Process one token.
+        Process one token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.odm.CartesianCovariance`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (CartesianCovariance): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -186,20 +181,19 @@ class CartesianCovarianceKey(java.lang.Enum['CartesianCovarianceKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'CartesianCovarianceKey':
+    def valueOf(name: str) -> 'CartesianCovarianceKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -207,17 +201,15 @@ class CartesianCovarianceKey(java.lang.Enum['CartesianCovarianceKey']):
     @staticmethod
     def values() -> typing.MutableSequence['CartesianCovarianceKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (CartesianCovarianceKey c : CartesianCovarianceKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (CartesianCovarianceKey c : CartesianCovarianceKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -225,39 +217,46 @@ class CartesianCovarianceKey(java.lang.Enum['CartesianCovarianceKey']):
 
 class CartesianCovarianceWriter(org.orekit.files.ccsds.section.AbstractWriter):
     """
-    public class CartesianCovarianceWriter extends :class:`~org.orekit.files.ccsds.section.AbstractWriter`
+    Writer for covariance matrix data.
     
-        Writer for covariance matrix data.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, string: str, string2: str, cartesianCovariance: CartesianCovariance): ...
+    def __init__(self, xmlTag: str, kvnTag: str, covariance: CartesianCovariance):
+        """
+        Create a writer.
+        
+        Parameters:
+            xmlTag (String): name of the XML tag surrounding the section
+            kvnTag (String): name of the KVN tag surrounding the section (may be null)
+            covariance (CartesianCovariance): covariance matrix to write
+        
+        
+        """
+        ...
 
 class CommonMetadataKey(java.lang.Enum['CommonMetadataKey']):
     """
-    public enum CommonMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadataKey`>
+    Keys for OdmCommonMetadata entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     OBJECT_ID: typing.ClassVar['CommonMetadataKey'] = ...
     CENTER_NAME: typing.ClassVar['CommonMetadataKey'] = ...
     REF_FRAME: typing.ClassVar['CommonMetadataKey'] = ...
     REF_FRAME_EPOCH: typing.ClassVar['CommonMetadataKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, odmCommonMetadata: 'OdmCommonMetadata') -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: 'OdmCommonMetadata') -> bool:
         """
-            Process one token.
+        Process one token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (OdmCommonMetadata): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -268,20 +267,19 @@ class CommonMetadataKey(java.lang.Enum['CommonMetadataKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'CommonMetadataKey':
+    def valueOf(name: str) -> 'CommonMetadataKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -289,17 +287,15 @@ class CommonMetadataKey(java.lang.Enum['CommonMetadataKey']):
     @staticmethod
     def values() -> typing.MutableSequence['CommonMetadataKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (CommonMetadataKey c : CommonMetadataKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (CommonMetadataKey c : CommonMetadataKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -307,264 +303,264 @@ class CommonMetadataKey(java.lang.Enum['CommonMetadataKey']):
 
 class CommonMetadataWriter(org.orekit.files.ccsds.section.AbstractWriter):
     """
-    public class CommonMetadataWriter extends :class:`~org.orekit.files.ccsds.section.AbstractWriter`
+    Writer for Common metadata for CCSDS Orbit Parameter/Ephemeris/Mean Messages.
     
-        Writer for Common metadata for CCSDS Orbit Parameter/Ephemeris/Mean Messages.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, odmCommonMetadata: 'OdmCommonMetadata', timeConverter: org.orekit.files.ccsds.definitions.TimeConverter): ...
+    def __init__(self, metadata: 'OdmCommonMetadata', timeConverter: org.orekit.files.ccsds.definitions.TimeConverter):
+        """
+        Simple constructor.
+        
+        Parameters:
+            metadata (OdmCommonMetadata): metadata to write
+            timeConverter (TimeConverter): converter for dates
+        
+        
+        """
+        ...
 
 class KeplerianElements(org.orekit.files.ccsds.section.CommentsContainer, org.orekit.files.ccsds.section.Data):
     """
-    public class KeplerianElements extends :class:`~org.orekit.files.ccsds.section.CommentsContainer` implements :class:`~org.orekit.files.ccsds.section.Data`
+    Container for Keplerian elements.
     
-        Container for Keplerian elements.
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
-    
-        Since:
-            6.1
+    Since:
+        6.1
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Simple constructor.
+        """
+        ...
     def generateKeplerianOrbit(self, frame: org.orekit.frames.Frame) -> org.orekit.orbits.KeplerianOrbit:
         """
-            Generate a keplerian orbit.
+        Generate a keplerian orbit.
         
-            Parameters:
-                frame (:class:`~org.orekit.frames.Frame`): inertial frame for orbit
+        Parameters:
+            frame (Frame): inertial frame for orbit
         
-            Returns:
-                generated orbit
+        Returns:
+            generated orbit
         
         
         """
         ...
     def getA(self) -> float:
         """
-            Get the orbit semi-major axis.
+        Get the orbit semi-major axis.
         
-            Returns:
-                the orbit semi-major axis
+        Returns:
+            the orbit semi-major axis
         
         
         """
         ...
     def getAnomaly(self) -> float:
         """
-            Get the orbit anomaly.
+        Get the orbit anomaly.
         
-            Returns:
-                the orbit anomaly
+        Returns:
+            the orbit anomaly
         
         
         """
         ...
     def getAnomalyType(self) -> org.orekit.orbits.PositionAngleType:
         """
-            Get the type of anomaly (true or mean).
+        Get the type of anomaly (true or mean).
         
-            Returns:
-                the type of anomaly
+        Returns:
+            the type of anomaly
         
         
         """
         ...
     def getE(self) -> float:
         """
-            Get the orbit eccentricity.
+        Get the orbit eccentricity.
         
-            Returns:
-                the orbit eccentricity
+        Returns:
+            the orbit eccentricity
         
         
         """
         ...
     def getEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get epoch of state vector, Keplerian elements and covariance matrix data.
+        Get epoch of state vector, Keplerian elements and covariance matrix data.
         
-            Returns:
-                epoch the epoch
+        Returns:
+            epoch the epoch
         
         
         """
         ...
     def getI(self) -> float:
         """
-            Get the orbit inclination.
+        Get the orbit inclination.
         
-            Returns:
-                the orbit inclination
+        Returns:
+            the orbit inclination
         
         
         """
         ...
     def getMeanMotion(self) -> float:
         """
-            Get the orbit mean motion.
+        Get the orbit mean motion.
         
-            Returns:
-                the orbit mean motion
+        Returns:
+            the orbit mean motion
         
         
         """
         ...
     def getMu(self) -> float:
         """
-            Get the gravitational coefficient.
+        Get the gravitational coefficient.
         
-            Returns:
-                gravitational coefficient
+        Returns:
+            gravitational coefficient
         
         
         """
         ...
     def getPa(self) -> float:
         """
-            Get the orbit argument of pericenter.
+        Get the orbit argument of pericenter.
         
-            Returns:
-                the orbit argument of pericenter
+        Returns:
+            the orbit argument of pericenter
         
         
         """
         ...
     def getRaan(self) -> float:
         """
-            Get the orbit right ascension of ascending node.
+        Get the orbit right ascension of ascending node.
         
-            Returns:
-                the orbit right ascension of ascending node
-        
-        
-        """
-        ...
-    def setA(self, double: float) -> None:
-        """
-            Set the orbit semi-major axis.
-        
-            Parameters:
-                a (double): the semi-major axis to be set
+        Returns:
+            the orbit right ascension of ascending node
         
         
         """
         ...
-    def setAnomaly(self, double: float) -> None:
+    def setA(self, a: float) -> None:
         """
-            Set the orbit anomaly.
+        Set the orbit semi-major axis.
         
-            Parameters:
-                anomaly (double): the anomaly to be set
-        
-        
-        """
-        ...
-    def setAnomalyType(self, positionAngleType: org.orekit.orbits.PositionAngleType) -> None:
-        """
-            Set the type of anomaly.
-        
-            Parameters:
-                anomalyType (:class:`~org.orekit.orbits.PositionAngleType`): the type of anomaly to be set
+        Parameters:
+            a (double): the semi-major axis to be set
         
         
         """
         ...
-    def setE(self, double: float) -> None:
+    def setAnomaly(self, anomaly: float) -> None:
         """
-            Set the orbit eccentricity.
+        Set the orbit anomaly.
         
-            Parameters:
-                e (double): the eccentricity to be set
-        
-        
-        """
-        ...
-    def setEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Set epoch of state vector, Keplerian elements and covariance matrix data.
-        
-            Parameters:
-                epoch (:class:`~org.orekit.time.AbsoluteDate`): the epoch to be set
+        Parameters:
+            anomaly (double): the anomaly to be set
         
         
         """
         ...
-    def setI(self, double: float) -> None:
+    def setAnomalyType(self, anomalyType: org.orekit.orbits.PositionAngleType) -> None:
         """
-            Set the orbit inclination.
+        Set the type of anomaly.
         
-            Parameters:
-                i (double): the inclination to be set
-        
-        
-        """
-        ...
-    def setMeanMotion(self, double: float) -> None:
-        """
-            Set the orbit mean motion.
-        
-            Parameters:
-                motion (double): the mean motion to be set
+        Parameters:
+            anomalyType (PositionAngleType): the type of anomaly to be set
         
         
         """
         ...
-    def setMu(self, double: float) -> None:
+    def setE(self, e: float) -> None:
         """
-            Set the gravitational coefficient.
+        Set the orbit eccentricity.
         
-            Parameters:
-                mu (double): the coefficient to be set
-        
-        
-        """
-        ...
-    def setPa(self, double: float) -> None:
-        """
-            Set the orbit argument of pericenter.
-        
-            Parameters:
-                pa (double): the argument of pericenter to be set
+        Parameters:
+            e (double): the eccentricity to be set
         
         
         """
         ...
-    def setRaan(self, double: float) -> None:
+    def setEpoch(self, epoch: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set the orbit right ascension of ascending node.
+        Set epoch of state vector, Keplerian elements and covariance matrix data.
         
-            Parameters:
-                raan (double): the right ascension of ascending node to be set
+        Parameters:
+            epoch (AbsoluteDate): the epoch to be set
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def setI(self, i: float) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set the orbit inclination.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            i (double): the inclination to be set
         
-            We check neither semi-major axis nor mean motion here, they must be checked separately in OPM and OMM parsers
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
+        """
+        ...
+    def setMeanMotion(self, motion: float) -> None:
+        """
+        Set the orbit mean motion.
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
-                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        Parameters:
+            motion (double): the mean motion to be set
         
-            Parameters:
-                version (double): format version
+        
+        """
+        ...
+    def setMu(self, mu: float) -> None:
+        """
+        Set the gravitational coefficient.
+        
+        Parameters:
+            mu (double): the coefficient to be set
+        
+        
+        """
+        ...
+    def setPa(self, pa: float) -> None:
+        """
+        Set the orbit argument of pericenter.
+        
+        Parameters:
+            pa (double): the argument of pericenter to be set
+        
+        
+        """
+        ...
+    def setRaan(self, raan: float) -> None:
+        """
+        Set the orbit right ascension of ascending node.
+        
+        Parameters:
+            raan (double): the right ascension of ascending node to be set
+        
+        
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        We check neither semi-major axis nor mean motion here, they must be checked separately in OPM and OMM parsers
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class CommentsContainer
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -572,12 +568,10 @@ class KeplerianElements(org.orekit.files.ccsds.section.CommentsContainer, org.or
 
 class KeplerianElementsKey(java.lang.Enum['KeplerianElementsKey']):
     """
-    public enum KeplerianElementsKey extends :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.KeplerianElementsKey`>
+    Keys for KeplerianElements entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.odm.KeplerianElements` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     COMMENT: typing.ClassVar['KeplerianElementsKey'] = ...
     EPOCH: typing.ClassVar['KeplerianElementsKey'] = ...
@@ -590,17 +584,17 @@ class KeplerianElementsKey(java.lang.Enum['KeplerianElementsKey']):
     TRUE_ANOMALY: typing.ClassVar['KeplerianElementsKey'] = ...
     MEAN_ANOMALY: typing.ClassVar['KeplerianElementsKey'] = ...
     GM: typing.ClassVar['KeplerianElementsKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, keplerianElements: KeplerianElements) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: KeplerianElements) -> bool:
         """
-            Process one token.
+        Process one token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.odm.KeplerianElements`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (KeplerianElements): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -611,20 +605,19 @@ class KeplerianElementsKey(java.lang.Enum['KeplerianElementsKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'KeplerianElementsKey':
+    def valueOf(name: str) -> 'KeplerianElementsKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -632,17 +625,15 @@ class KeplerianElementsKey(java.lang.Enum['KeplerianElementsKey']):
     @staticmethod
     def values() -> typing.MutableSequence['KeplerianElementsKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (KeplerianElementsKey c : KeplerianElementsKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (KeplerianElementsKey c : KeplerianElementsKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -650,40 +641,40 @@ class KeplerianElementsKey(java.lang.Enum['KeplerianElementsKey']):
 
 class OdmHeader(org.orekit.files.ccsds.section.Header):
     """
-    public class OdmHeader extends :class:`~org.orekit.files.ccsds.section.Header`
+    Header of a CCSDS Orbit Data Message.
     
-        Header of a CCSDS Orbit Data Message.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Constructor.
+        """
+        ...
 
 class OdmMetadata(org.orekit.files.ccsds.section.Metadata):
     """
-    public class OdmMetadata extends :class:`~org.orekit.files.ccsds.section.Metadata`
+    This class gathers the meta-data present in the Orbital Data Message (ODM).
     
-        This class gathers the meta-data present in the Orbital Data Message (ODM).
-    
-        Since:
-            6.1
+    Since:
+        6.1
     """
     def getObjectName(self) -> str:
         """
-            Get the spacecraft name for which the orbit state is provided.
+        Get the spacecraft name for which the orbit state is provided.
         
-            Returns:
-                the spacecraft name
+        Returns:
+            the spacecraft name
         
         
         """
         ...
-    def setObjectName(self, string: str) -> None:
+    def setObjectName(self, objectName: str) -> None:
         """
-            Set the spacecraft name for which the orbit state is provided.
+        Set the spacecraft name for which the orbit state is provided.
         
-            Parameters:
-                objectName (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the spacecraft name to be set
+        Parameters:
+            objectName (String): the spacecraft name to be set
         
         
         """
@@ -691,25 +682,23 @@ class OdmMetadata(org.orekit.files.ccsds.section.Metadata):
 
 class OdmMetadataKey(java.lang.Enum['OdmMetadataKey']):
     """
-    public enum OdmMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmMetadataKey`>
+    Keys for OdmMetadata entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.odm.OdmMetadata` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     OBJECT_NAME: typing.ClassVar['OdmMetadataKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, odmMetadata: OdmMetadata) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: OdmMetadata) -> bool:
         """
-            Process one token.
+        Process one token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.odm.OdmMetadata`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (OdmMetadata): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -720,20 +709,19 @@ class OdmMetadataKey(java.lang.Enum['OdmMetadataKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'OdmMetadataKey':
+    def valueOf(name: str) -> 'OdmMetadataKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -741,17 +729,15 @@ class OdmMetadataKey(java.lang.Enum['OdmMetadataKey']):
     @staticmethod
     def values() -> typing.MutableSequence['OdmMetadataKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (OdmMetadataKey c : OdmMetadataKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (OdmMetadataKey c : OdmMetadataKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -761,39 +747,32 @@ _OdmParser__T = typing.TypeVar('_OdmParser__T', bound=org.orekit.files.ccsds.ndm
 _OdmParser__P = typing.TypeVar('_OdmParser__P', bound='OdmParser')  # <P>
 class OdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[OdmHeader, _OdmParser__T, _OdmParser__P], typing.Generic[_OdmParser__T, _OdmParser__P]):
     """
-    public abstract class OdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmHeader`, ?>, P extends OdmParser<T, ?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmHeader`, T, P>
+    Common parser for Orbit Parameter/Ephemeris/Mean/Comprehensive Messages.
     
-        Common parser for Orbit Parameter/Ephemeris/Mean/Comprehensive Messages.
+    Note than starting with Orekit 11.0, CCSDS message parsers are mutable objects that gather the data being parsed, until the message is complete and the parseMessage method has returned. This implies that parsers should not be used in a multi-thread context. The recommended way to use parsers is to either dedicate one parser for each message and drop it afterwards, or to use a single-thread loop.
     
-        Note than starting with Orekit 11.0, CCSDS message parsers are mutable objects that gather the data being parsed, until
-        the message is complete and the :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser.parseMessage` method
-        has returned. This implies that parsers should *not* be used in a multi-thread context. The recommended way to use
-        parsers is to either dedicate one parser for each message and drop it afterwards, or to use a single-thread loop.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     def getMissionReferenceDate(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get reference date for Mission Elapsed Time and Mission Relative Time time systems.
+        Get reference date for Mission Elapsed Time and Mission Relative Time time systems.
         
-            Returns:
-                the reference date
+        Returns:
+            the reference date
         
         
         """
         ...
     def getSelectedMu(self) -> float:
         """
-            Select the gravitational coefficient to use. In order of decreasing priority, finalMU is set equal to:
+        Select the gravitational coefficient to use. In order of decreasing priority, finalMU is set equal to:
         
-              1.  the coefficient parsed in the file,
-              2.  the coefficient set by the user with the parser's method setMu,
-              3.  the coefficient created from the knowledge of the central body.
+          1.  the coefficient parsed in the file, 2.  the coefficient set by the user with the parser's method setMu, 3.  the coefficient created from the knowledge of the central body.
         
         
-            Returns:
-                selected gravitational coefficient
+        Returns:
+            selected gravitational coefficient
         
         
         """
@@ -801,138 +780,130 @@ class OdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[O
 
 class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer, org.orekit.files.ccsds.section.Data):
     """
-    public class SpacecraftParameters extends :class:`~org.orekit.files.ccsds.section.CommentsContainer` implements :class:`~org.orekit.files.ccsds.section.Data`
+    Container for spacecraft parameters.
     
-        Container for spacecraft parameters.
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
-    
-        Since:
-            6.1
+    Since:
+        6.1
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Create an empty state data set.
+        """
+        ...
     def getDragArea(self) -> float:
         """
-            Get the drag area.
+        Get the drag area.
         
-            Returns:
-                the drag area
+        Returns:
+            the drag area
         
         
         """
         ...
     def getDragCoeff(self) -> float:
         """
-            Get the drag coefficient.
+        Get the drag coefficient.
         
-            Returns:
-                the drag coefficient
+        Returns:
+            the drag coefficient
         
         
         """
         ...
     def getMass(self) -> float:
         """
-            Get the spacecraft mass.
+        Get the spacecraft mass.
         
-            Returns:
-                the spacecraft mass
+        Returns:
+            the spacecraft mass
         
         
         """
         ...
     def getSolarRadArea(self) -> float:
         """
-            Get the solar radiation pressure area.
+        Get the solar radiation pressure area.
         
-            Returns:
-                the solar radiation pressure area
+        Returns:
+            the solar radiation pressure area
         
         
         """
         ...
     def getSolarRadCoeff(self) -> float:
         """
-            Get the solar radiation pressure coefficient.
+        Get the solar radiation pressure coefficient.
         
-            Returns:
-                the solar radiation pressure coefficient
-        
-        
-        """
-        ...
-    def setDragArea(self, double: float) -> None:
-        """
-            Set the drag area.
-        
-            Parameters:
-                dragArea (double): the area to be set
+        Returns:
+            the solar radiation pressure coefficient
         
         
         """
         ...
-    def setDragCoeff(self, double: float) -> None:
+    def setDragArea(self, dragArea: float) -> None:
         """
-            Set the drag coefficient.
+        Set the drag area.
         
-            Parameters:
-                dragCoeff (double): the coefficient to be set
-        
-        
-        """
-        ...
-    def setMass(self, double: float) -> None:
-        """
-            Set the spacecraft mass.
-        
-            Parameters:
-                mass (double): the spacecraft mass to be set
+        Parameters:
+            dragArea (double): the area to be set
         
         
         """
         ...
-    def setSolarRadArea(self, double: float) -> None:
+    def setDragCoeff(self, dragCoeff: float) -> None:
         """
-            Set the solar radiation pressure area.
+        Set the drag coefficient.
         
-            Parameters:
-                solarRadArea (double): the area to be set
-        
-        
-        """
-        ...
-    def setSolarRadCoeff(self, double: float) -> None:
-        """
-            Get the solar radiation pressure coefficient.
-        
-            Parameters:
-                solarRadCoeff (double): the coefficient to be set
+        Parameters:
+            dragCoeff (double): the coefficient to be set
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def setMass(self, mass: float) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set the spacecraft mass.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            mass (double): the spacecraft mass to be set
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
-                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        """
+        ...
+    def setSolarRadArea(self, solarRadArea: float) -> None:
+        """
+        Set the solar radiation pressure area.
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            solarRadArea (double): the area to be set
+        
+        
+        """
+        ...
+    def setSolarRadCoeff(self, solarRadCoeff: float) -> None:
+        """
+        Get the solar radiation pressure coefficient.
+        
+        Parameters:
+            solarRadCoeff (double): the coefficient to be set
+        
+        
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class CommentsContainer
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -940,12 +911,10 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer, org
 
 class SpacecraftParametersKey(java.lang.Enum['SpacecraftParametersKey']):
     """
-    public enum SpacecraftParametersKey extends :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.SpacecraftParametersKey`>
+    Keys for SpacecraftParameters entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.odm.SpacecraftParameters` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     COMMENT: typing.ClassVar['SpacecraftParametersKey'] = ...
     MASS: typing.ClassVar['SpacecraftParametersKey'] = ...
@@ -953,17 +922,17 @@ class SpacecraftParametersKey(java.lang.Enum['SpacecraftParametersKey']):
     SOLAR_RAD_COEFF: typing.ClassVar['SpacecraftParametersKey'] = ...
     DRAG_AREA: typing.ClassVar['SpacecraftParametersKey'] = ...
     DRAG_COEFF: typing.ClassVar['SpacecraftParametersKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, spacecraftParameters: SpacecraftParameters) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: SpacecraftParameters) -> bool:
         """
-            Process one token.
+        Process one token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.odm.SpacecraftParameters`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (SpacecraftParameters): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -974,20 +943,19 @@ class SpacecraftParametersKey(java.lang.Enum['SpacecraftParametersKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'SpacecraftParametersKey':
+    def valueOf(name: str) -> 'SpacecraftParametersKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -995,17 +963,15 @@ class SpacecraftParametersKey(java.lang.Enum['SpacecraftParametersKey']):
     @staticmethod
     def values() -> typing.MutableSequence['SpacecraftParametersKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (SpacecraftParametersKey c : SpacecraftParametersKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (SpacecraftParametersKey c : SpacecraftParametersKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -1013,122 +979,123 @@ class SpacecraftParametersKey(java.lang.Enum['SpacecraftParametersKey']):
 
 class SpacecraftParametersWriter(org.orekit.files.ccsds.section.AbstractWriter):
     """
-    public class SpacecraftParametersWriter extends :class:`~org.orekit.files.ccsds.section.AbstractWriter`
+    Writer for spacecraft parameters data.
     
-        Writer for spacecraft parameters data.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, string: str, string2: str, spacecraftParameters: SpacecraftParameters): ...
+    def __init__(self, xmlTag: str, kvnTag: str, spacecraftParameters: SpacecraftParameters):
+        """
+        Create a writer.
+        
+        Parameters:
+            xmlTag (String): name of the XML tag surrounding the section
+            kvnTag (String): name of the KVN tag surrounding the section (may be null)
+            spacecraftParameters (SpacecraftParameters): spacecraft parameters to write
+        
+        
+        """
+        ...
 
 class StateVector(org.orekit.files.ccsds.section.CommentsContainer):
     """
-    public class StateVector extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    Container for state vector data.
     
-        Container for state vector data.
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Create an empty data set.
+        """
+        ...
     def getEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get epoch of state vector, Keplerian elements and covariance matrix data.
+        Get epoch of state vector, Keplerian elements and covariance matrix data.
         
-            Returns:
-                epoch the epoch
+        Returns:
+            epoch the epoch
         
         
         """
         ...
     def hasAcceleration(self) -> bool:
         """
-            Check if state contains acceleration data.
+        Check if state contains acceleration data.
         
-            Returns:
-                true is state contains acceleration data
-        
-        
-        """
-        ...
-    def setA(self, int: int, double: float) -> None:
-        """
-            Set acceleration component.
-        
-            Parameters:
-                index (int): component index (counting from 0)
-                value (double): acceleration component
+        Returns:
+            true is state contains acceleration data
         
         
         """
         ...
-    def setEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setA(self, index: int, value: float) -> None:
         """
-            Set epoch of state vector, Keplerian elements and covariance matrix data.
+        Set acceleration component.
         
-            Parameters:
-                epoch (:class:`~org.orekit.time.AbsoluteDate`): the epoch to be set
-        
-        
-        """
-        ...
-    def setP(self, int: int, double: float) -> None:
-        """
-            Set position component.
-        
-            Parameters:
-                index (int): component index (counting from 0)
-                value (double): position component
+        Parameters:
+            index (int): component index (counting from 0)
+            value (double): acceleration component
         
         
         """
         ...
-    def setV(self, int: int, double: float) -> None:
+    def setEpoch(self, epoch: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set velocity component.
+        Set epoch of state vector, Keplerian elements and covariance matrix data.
         
-            Parameters:
-                index (int): component index (counting from 0)
-                value (double): velocity component
+        Parameters:
+            epoch (AbsoluteDate): the epoch to be set
+        
+        
+        """
+        ...
+    def setP(self, index: int, value: float) -> None:
+        """
+        Set position component.
+        
+        Parameters:
+            index (int): component index (counting from 0)
+            value (double): position component
+        
+        
+        """
+        ...
+    def setV(self, index: int, value: float) -> None:
+        """
+        Set velocity component.
+        
+        Parameters:
+            index (int): component index (counting from 0)
+            value (double): velocity component
         
         
         """
         ...
     def toTimeStampedPVCoordinates(self) -> org.orekit.utils.TimeStampedPVCoordinates:
         """
-            Convert to :class:`~org.orekit.utils.TimeStampedPVCoordinates`.
+        Convert to TimeStampedPVCoordinates.
         
-            Returns:
-                a new :class:`~org.orekit.utils.TimeStampedPVCoordinates`
+        Returns:
+            a new TimeStampedPVCoordinates
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def validate(self, version: float) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Check is all mandatory entries have been initialized.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
+        Specified by: validate in interface Section
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
-                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        Overrides: validate in class CommentsContainer
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            version (double): format version
         
         
         """
@@ -1136,12 +1103,10 @@ class StateVector(org.orekit.files.ccsds.section.CommentsContainer):
 
 class StateVectorKey(java.lang.Enum['StateVectorKey']):
     """
-    public enum StateVectorKey extends :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.StateVectorKey`>
+    Keys for StateVector entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.odm.StateVector` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     COMMENT: typing.ClassVar['StateVectorKey'] = ...
     EPOCH: typing.ClassVar['StateVectorKey'] = ...
@@ -1154,17 +1119,17 @@ class StateVectorKey(java.lang.Enum['StateVectorKey']):
     X_DDOT: typing.ClassVar['StateVectorKey'] = ...
     Y_DDOT: typing.ClassVar['StateVectorKey'] = ...
     Z_DDOT: typing.ClassVar['StateVectorKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, stateVector: StateVector) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: StateVector) -> bool:
         """
-            Process one token.
+        Process one token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.odm.StateVector`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (StateVector): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -1175,20 +1140,19 @@ class StateVectorKey(java.lang.Enum['StateVectorKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'StateVectorKey':
+    def valueOf(name: str) -> 'StateVectorKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -1196,17 +1160,15 @@ class StateVectorKey(java.lang.Enum['StateVectorKey']):
     @staticmethod
     def values() -> typing.MutableSequence['StateVectorKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (StateVectorKey c : StateVectorKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (StateVectorKey c : StateVectorKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -1214,264 +1176,279 @@ class StateVectorKey(java.lang.Enum['StateVectorKey']):
 
 class StateVectorWriter(org.orekit.files.ccsds.section.AbstractWriter):
     """
-    public class StateVectorWriter extends :class:`~org.orekit.files.ccsds.section.AbstractWriter`
+    Writer for state vector data.
     
-        Writer for state vector data.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, string: str, string2: str, stateVector: StateVector, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter): ...
+    def __init__(self, xmlTag: str, kvnTag: str, stateVector: StateVector, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter):
+        """
+        Create a writer.
+        
+        Parameters:
+            xmlTag (String): name of the XML tag surrounding the section
+            kvnTag (String): name of the KVN tag surrounding the section (may be null)
+            stateVector (StateVector): state vector to write
+            timeConverter (TimeConverter): converter for dates
+        
+        
+        """
+        ...
 
 class UserDefined(org.orekit.files.ccsds.section.CommentsContainer):
     """
-    public class UserDefined extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    Container for user defined data.
     
-        Container for user defined data.
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     USER_DEFINED_XML_TAG: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` USER_DEFINED_XML_TAG
+    Tag name for user defined parameters keys.
     
-        Tag name for user defined parameters keys.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     USER_DEFINED_XML_ATTRIBUTE: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` USER_DEFINED_XML_ATTRIBUTE
+    Attribute name for user defined parameters keys.
     
-        Attribute name for user defined parameters keys.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     USER_DEFINED_PREFIX: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` USER_DEFINED_PREFIX
+    Prefix for user defined parameters keys.
     
-        Prefix for user defined parameters keys.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self): ...
-    def addEntry(self, string: str, string2: str) -> None:
+    def __init__(self):
         """
-            Add a key/value entry.
+        Create an empty data set.
+        """
+        ...
+    def addEntry(self, key: str, value: str) -> None:
+        """
+        Add a key/value entry.
         
-            Parameters:
-                key (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter key, with the :meth:`~org.orekit.files.ccsds.ndm.odm.UserDefined.USER_DEFINED_PREFIX` stripped away
-                value (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter value
+        Parameters:
+            key (String): parameter key, with the USER_DEFINED_PREFIX stripped away
+            value (String): parameter value
         
         
         """
         ...
-    def getParameters(self) -> java.util.Map[str, str]: ...
+    def getParameters(self) -> java.util.Map[str, str]:
+        """
+        Get all user defined parameters.
+        
+        The USER_DEFINED_PREFIX has been stripped away from the keys.
+        
+        Returns:
+            unmodifiable view of the map containing all user defined parameters
+        
+        
+        """
+        ...
 
 class UserDefinedWriter(org.orekit.files.ccsds.section.AbstractWriter):
     """
-    public class UserDefinedWriter extends :class:`~org.orekit.files.ccsds.section.AbstractWriter`
+    Writer for user defined parameters data.
     
-        Writer for user defined parameters data.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, string: str, string2: str, userDefined: UserDefined): ...
+    def __init__(self, xmlTag: str, kvnTag: str, userDefined: UserDefined):
+        """
+        Create a writer.
+        
+        Parameters:
+            xmlTag (String): name of the XML tag surrounding the section
+            kvnTag (String): name of the KVN tag surrounding the section (may be null)
+            userDefined (UserDefined): user defined parameters to write
+        
+        
+        """
+        ...
 
 class OdmCommonMetadata(OdmMetadata):
     """
-    public class OdmCommonMetadata extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmMetadata`
+    Common metadata for Orbit Parameter/Ephemeris/Mean Messages.
     
-        Common metadata for Orbit Parameter/Ephemeris/Mean Messages.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self): ...
-    def finalizeMetadata(self, contextBinding: org.orekit.files.ccsds.utils.ContextBinding) -> None:
+    def __init__(self):
         """
-            Finalize the metadata.
+        Simple constructor.
+        """
+        ...
+    def finalizeMetadata(self, context: org.orekit.files.ccsds.utils.ContextBinding) -> None:
+        """
+        Finalize the metadata.
         
-            ODM standard enforces :code:`TIME_SYSTEM` to appear *after* :code:`REF_FRAME_EPOCH`, despite it is needed to interpret
-            it. We have to wait until parsing end to finalize this date.
+        ODM standard enforces TIME_SYSTEM to appear after REF_FRAME_EPOCH, despite it is needed to interpret it. We have to wait until parsing end to finalize this date.
         
-            Parameters:
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
+        Parameters:
+            context (ContextBinding): context binding
         
         
         """
         ...
     def getCenter(self) -> org.orekit.files.ccsds.definitions.BodyFacade:
         """
-            Get the origin of reference frame.
+        Get the origin of reference frame.
         
-            Returns:
-                the origin of reference frame.
+        Returns:
+            the origin of reference frame.
         
         
         """
         ...
     def getFrame(self) -> org.orekit.frames.Frame:
         """
-            Get the reference frame in which data are given: used for state vector and Keplerian elements data (and for the
-            covariance reference frame if none is given).
+        Get the reference frame in which data are given: used for state vector and Keplerian elements data (and for the covariance reference frame if none is given).
         
-            Returns:
-                the reference frame
+        Returns:
+            the reference frame
         
         
         """
         ...
     def getFrameEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get epoch of reference frame, if not intrinsic to the definition of the reference frame.
+        Get epoch of reference frame, if not intrinsic to the definition of the reference frame.
         
-            Returns:
-                epoch of reference frame
+        Returns:
+            epoch of reference frame
         
         
         """
         ...
     def getLaunchNumber(self) -> int:
         """
-            Get the launch number.
+        Get the launch number.
         
-            Returns:
-                launch number
+        Returns:
+            launch number
         
         
         """
         ...
     def getLaunchPiece(self) -> str:
         """
-            Get the piece of launch.
+        Get the piece of launch.
         
-            Returns:
-                piece of launch
+        Returns:
+            piece of launch
         
         
         """
         ...
     def getLaunchYear(self) -> int:
         """
-            Get the launch year.
+        Get the launch year.
         
-            Returns:
-                launch year
+        Returns:
+            launch year
         
         
         """
         ...
     def getObjectID(self) -> str:
         """
-            Get the spacecraft ID for which the orbit state is provided.
+        Get the spacecraft ID for which the orbit state is provided.
         
-            Returns:
-                the spacecraft ID
+        Returns:
+            the spacecraft ID
         
         
         """
         ...
     def getReferenceFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
         """
-            Get the value of :code:`REF_FRAME` as an Orekit :class:`~org.orekit.frames.Frame`. The :code:`CENTER_NAME` key word has
-            not been applied yet, so the returned frame may not correspond to the reference frame of the data in the file.
+        Get the value of REF_FRAME as an Orekit Frame. The CENTER_NAME key word has not been applied yet, so the returned frame may not correspond to the reference frame of the data in the file.
         
-            Returns:
-                The reference frame specified by the :code:`REF_FRAME` keyword.
+        Returns:
+            The reference frame specified by the REF_FRAME keyword.
         
-            Also see:
-                :meth:`~org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata.getFrame`
-        
-        
-        """
-        ...
-    def setCenter(self, bodyFacade: org.orekit.files.ccsds.definitions.BodyFacade) -> None:
-        """
-            Set the origin of reference frame.
-        
-            Parameters:
-                center (:class:`~org.orekit.files.ccsds.definitions.BodyFacade`): origin of reference frame to be set
+        Also see:
+            getFrame
         
         
         """
         ...
-    def setFrameEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setCenter(self, center: org.orekit.files.ccsds.definitions.BodyFacade) -> None:
         """
-            Set epoch of reference frame, if not intrinsic to the definition of the reference frame.
+        Set the origin of reference frame.
         
-            Parameters:
-                frameEpoch (:class:`~org.orekit.time.AbsoluteDate`): the epoch of reference frame to be set
-        
-        
-        """
-        ...
-    def setFrameEpochString(self, string: str) -> None:
-        """
-            Set epoch of reference frame, if not intrinsic to the definition of the reference frame.
-        
-            Parameters:
-                frameEpochString (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the epoch of reference frame to be set
+        Parameters:
+            center (BodyFacade): origin of reference frame to be set
         
         
         """
         ...
-    def setObjectID(self, string: str) -> None:
+    def setFrameEpoch(self, frameEpoch: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set the spacecraft ID for which the orbit state is provided.
+        Set epoch of reference frame, if not intrinsic to the definition of the reference frame.
         
-            Parameters:
-                objectID (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the spacecraft ID to be set
-        
-        
-        """
-        ...
-    def setReferenceFrame(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
-        """
-            Set the reference frame in which data are given: used for state vector and Keplerian elements data (and for the
-            covariance reference frame if none is given).
-        
-            Parameters:
-                referenceFrame (:class:`~org.orekit.files.ccsds.definitions.FrameFacade`): the reference frame to be set
+        Parameters:
+            frameEpoch (AbsoluteDate): the epoch of reference frame to be set
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def setFrameEpochString(self, frameEpochString: str) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set epoch of reference frame, if not intrinsic to the definition of the reference frame.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            frameEpochString (String): the epoch of reference frame to be set
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.Metadata.validate` in class :class:`~org.orekit.files.ccsds.section.Metadata`
+        """
+        ...
+    def setObjectID(self, objectID: str) -> None:
+        """
+        Set the spacecraft ID for which the orbit state is provided.
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            objectID (String): the spacecraft ID to be set
+        
+        
+        """
+        ...
+    def setReferenceFrame(self, referenceFrame: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
+        """
+        Set the reference frame in which data are given: used for state vector and Keplerian elements data (and for the covariance reference frame if none is given).
+        
+        Parameters:
+            referenceFrame (FrameFacade): the reference frame to be set
+        
+        
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class Metadata
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -1480,29 +1457,245 @@ class OdmCommonMetadata(OdmMetadata):
 _PythonOdmParser__T = typing.TypeVar('_PythonOdmParser__T', bound=org.orekit.files.ccsds.ndm.NdmConstituent)  # <T>
 _PythonOdmParser__P = typing.TypeVar('_PythonOdmParser__P', bound=OdmParser)  # <P>
 class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typing.Generic[_PythonOdmParser__T, _PythonOdmParser__P]):
-    def __init__(self, string: str, string2: str, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, double: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
-    def build(self) -> _PythonOdmParser__T: ...
-    def finalize(self) -> None: ...
-    def finalizeData(self) -> bool: ...
-    def finalizeHeader(self) -> bool: ...
-    def finalizeMetadata(self) -> bool: ...
-    def getFileFormat(self) -> org.orekit.files.ccsds.utils.FileFormat: ...
-    def getHeader(self) -> OdmHeader: ...
-    def getMuSet(self) -> float: ...
-    def inData(self) -> bool: ...
-    def inHeader(self) -> bool: ...
-    def inMetadata(self) -> bool: ...
-    def prepareData(self) -> bool: ...
-    def prepareHeader(self) -> bool: ...
-    def prepareMetadata(self) -> bool: ...
-    def pythonDecRef(self) -> None: ...
+    def __init__(self, root: str, formatVersionKey: str, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate, mu: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]):
+        """
+        Complete constructor.
+        
+        Parameters:
+            root (String): root element for XML files
+            formatVersionKey (String): key for format version
+            conventions (IERSConventions): IERS Conventions
+            simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
+            dataContext (DataContext): used to retrieve frames and time scales
+            missionReferenceDate (AbsoluteDate): reference date for Mission Elapsed Time or Mission Relative Time time systems
+            mu (double): gravitational coefficient
+            parsedUnitsBehavior (ParsedUnitsBehavior): behavior to adopt for handling parsed units
+            filters (Function<ParseToken, List<ParseToken>>[]): filters to apply to parse tokens
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
+    def build(self) -> _PythonOdmParser__T:
+        """
+        Build the file from parsed entries.
+        
+        Returns:
+            parsed file
+        
+        
+        """
+        ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def finalizeData(self) -> bool:
+        """
+        Finalize data after parsing.
+        
+        Specified by: finalizeData in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def finalizeHeader(self) -> bool:
+        """
+        Finalize header after parsing.
+        
+        Specified by: finalizeHeader in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def finalizeMetadata(self) -> bool:
+        """
+        Finalize metadata after parsing.
+        
+        Specified by: finalizeMetadata in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def getFileFormat(self) -> org.orekit.files.ccsds.utils.FileFormat:
+        """
+        Get the file format.
+        
+        Specified by: getFileFormat in interface MessageParser
+        
+        Overrides: getFileFormat in class AbstractMessageParser
+        
+        Returns:
+            file format
+        
+        
+        """
+        ...
+    def getHeader(self) -> OdmHeader:
+        """
+        Get file header to fill.
+        
+        Specified by: getHeader in class AbstractConstituentParser
+        
+        Returns:
+            file header to fill
+        
+        
+        """
+        ...
+    def getMuSet(self) -> float:
+        """
+        Get the gravitational coefficient set at construction.
+        
+        Overrides: getMuSet in class OdmParser
+        
+        Returns:
+            gravitational coefficient set at construction
+        
+        
+        """
+        ...
+    def inData(self) -> bool:
+        """
+        Acknowledge data parsing has started.
+        
+        Specified by: inData in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def inHeader(self) -> bool:
+        """
+        Acknowledge header parsing has started.
+        
+        Specified by: inHeader in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def inMetadata(self) -> bool:
+        """
+        Acknowledge metada parsing has started.
+        
+        Specified by: inMetadata in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def prepareData(self) -> bool:
+        """
+        Prepare data for parsing.
+        
+        Specified by: prepareData in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def prepareHeader(self) -> bool:
+        """
+        Prepare header for parsing.
+        
+        Specified by: prepareHeader in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def prepareMetadata(self) -> bool:
+        """
+        Prepare metadata for parsing.
+        
+        Specified by: prepareMetadata in class AbstractConstituentParser
+        
+        Returns:
+            true if parser was able to perform the action
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-    def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None: ...
-    def setMuCreated(self, double: float) -> None: ...
-    def setMuParsed(self, double: float) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None:
+        """
+        Reset parser to initial state before parsing.
+        
+        Parameters:
+            fileFormat (FileFormat): format of the file ready to be parsed
+        
+        
+        """
+        ...
+    def setMuCreated(self, muCreated: float) -> None:
+        """
+        Set the gravitational coefficient created from the knowledge of the central body.
+        
+        Overrides: setMuCreated in class OdmParser
+        
+        Parameters:
+            muCreated (double): the coefficient to be set
+        
+        
+        """
+        ...
+    def setMuParsed(self, muParsed: float) -> None:
+        """
+        Set the gravitational coefficient parsed in the ODM File.
+        
+        Overrides: setMuParsed in class OdmParser
+        
+        Parameters:
+            muParsed (double): the coefficient to be set
+        
+        
+        """
+        ...
 
 
 class __module_protocol__(Protocol):

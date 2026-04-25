@@ -23,373 +23,378 @@ import typing
 
 class AbstractBatchLSModel(org.hipparchus.optim.nonlinear.vector.leastsquares.MultivariateJacobianFunction):
     """
-    public abstract class AbstractBatchLSModel extends :class:`~org.orekit.estimation.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.MultivariateJacobianFunction?is`
+    Bridge between ObservedMeasurement and LeastSquaresProblem.
     
-        Bridge between :class:`~org.orekit.estimation.measurements.ObservedMeasurement` and
-        :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem?is`.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, propagatorBuilderArray: typing.Union[typing.List[org.orekit.propagation.conversion.PropagatorBuilder], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union['ModelObserver', typing.Callable]): ...
-    def createPropagators(self, realVector: org.hipparchus.linear.RealVector) -> typing.MutableSequence[org.orekit.propagation.Propagator]:
+    def __init__(self, propagatorBuilders: typing.Union[typing.List[org.orekit.propagation.conversion.PropagatorBuilder], jpype.JArray], measurements: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], estimatedMeasurementsParameters: org.orekit.utils.ParameterDriversList, observer: typing.Union['ModelObserver', typing.Callable]):
         """
-            Create the propagators and parameters corresponding to an evaluation point.
+        Constructor.
         
-            Parameters:
-                point (:class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.RealVector?is`): evaluation point
-        
-            Returns:
-                an array of new propagators
+        Parameters:
+            propagatorBuilders (PropagatorBuilder[]): builders to use for propagation
+            measurements (List<ObservedMeasurement<?>>): measurements
+            estimatedMeasurementsParameters (ParameterDriversList): estimated measurements parameters
+            observer (ModelObserver): observer to be notified at model calls
         
         
         """
         ...
-    def fetchEvaluatedMeasurement(self, int: int, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]) -> None:
+    def createPropagators(self, point: org.hipparchus.linear.RealVector) -> typing.MutableSequence[org.orekit.propagation.Propagator]:
         """
-            Fetch a measurement that was evaluated during propagation.
+        Create the propagators and parameters corresponding to an evaluation point.
         
-            Parameters:
-                index (int): index of the measurement first component
-                evaluation (:class:`~org.orekit.estimation.measurements.EstimatedMeasurement`<?> evaluation): measurement evaluation
+        Parameters:
+            point (RealVector): evaluation point
+        
+        Returns:
+            an array of new propagators
+        
+        
+        """
+        ...
+    def fetchEvaluatedMeasurement(self, index: int, evaluation: org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]) -> None:
+        """
+        Fetch a measurement that was evaluated during propagation.
+        
+        Parameters:
+            index (int): index of the measurement first component
+            evaluation (EstimatedMeasurement<?> evaluation): measurement evaluation
         
         
         """
         ...
     def getEvaluationsCount(self) -> int:
         """
-            Get the evaluations count.
+        Get the evaluations count.
         
-            Returns:
-                evaluations count
+        Returns:
+            evaluations count
         
         
         """
         ...
     def getIterationsCount(self) -> int:
         """
-            Get the iterations count.
+        Get the iterations count.
         
-            Returns:
-                iterations count
-        
-        
-        """
-        ...
-    def getSelectedOrbitalParametersDriversForBuilder(self, int: int) -> org.orekit.utils.ParameterDriversList:
-        """
-            Get the selected orbital drivers for a propagatorBuilder.
-        
-            Parameters:
-                iBuilder (int): index of the builder in the builders' array
-        
-            Returns:
-                the list of selected orbital drivers for propagatorBuilder of index iBuilder
-        
-            Since:
-                11.1
+        Returns:
+            iterations count
         
         
         """
         ...
-    def getSelectedPropagationDriversForBuilder(self, int: int) -> org.orekit.utils.ParameterDriversList:
+    def getSelectedOrbitalParametersDriversForBuilder(self, iBuilder: int) -> org.orekit.utils.ParameterDriversList:
         """
-            Get the selected propagation drivers for a propagatorBuilder.
+        Get the selected orbital drivers for a propagatorBuilder.
         
-            Parameters:
-                iBuilder (int): index of the builder in the builders' array
+        Parameters:
+            iBuilder (int): index of the builder in the builders' array
         
-            Returns:
-                the list of selected propagation drivers for propagatorBuilder of index iBuilder
+        Returns:
+            the list of selected orbital drivers for propagatorBuilder of index iBuilder
+        
+        Since:
+            11.1
+        
+        
+        """
+        ...
+    def getSelectedPropagationDriversForBuilder(self, iBuilder: int) -> org.orekit.utils.ParameterDriversList:
+        """
+        Get the selected propagation drivers for a propagatorBuilder.
+        
+        Parameters:
+            iBuilder (int): index of the builder in the builders' array
+        
+        Returns:
+            the list of selected propagation drivers for propagatorBuilder of index iBuilder
         
         
         """
         ...
     def isForwardPropagation(self) -> bool:
         """
-            Return the forward propagation flag.
+        Return the forward propagation flag.
         
-            Returns:
-                the forward propagation flag
-        
-        
-        """
-        ...
-    def setEvaluationsCounter(self, incrementor: org.hipparchus.util.Incrementor) -> None:
-        """
-            Set the counter for evaluations.
-        
-            Parameters:
-                evaluationsCounter (:class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.util.Incrementor?is`): counter for evaluations
+        Returns:
+            the forward propagation flag
         
         
         """
         ...
-    def setIterationsCounter(self, incrementor: org.hipparchus.util.Incrementor) -> None:
+    def setEvaluationsCounter(self, evaluationsCounter: org.hipparchus.util.Incrementor) -> None:
         """
-            Set the counter for iterations.
+        Set the counter for evaluations.
         
-            Parameters:
-                iterationsCounter (:class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.util.Incrementor?is`): counter for iterations
+        Parameters:
+            evaluationsCounter (Incrementor): counter for evaluations
         
         
         """
         ...
-    def value(self, realVector: org.hipparchus.linear.RealVector) -> org.hipparchus.util.Pair[org.hipparchus.linear.RealVector, org.hipparchus.linear.RealMatrix]: ...
+    def setIterationsCounter(self, iterationsCounter: org.hipparchus.util.Incrementor) -> None:
+        """
+        Set the counter for iterations.
+        
+        Parameters:
+            iterationsCounter (Incrementor): counter for iterations
+        
+        
+        """
+        ...
+    def value(self, realVector: org.hipparchus.linear.RealVector) -> org.hipparchus.util.Pair[org.hipparchus.linear.RealVector, org.hipparchus.linear.RealMatrix]:
+        """
+        Specified by: meth:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.MultivariateJacobianFunction.html?is` in interface MultivariateJacobianFunction
+        
+        
+        """
+        ...
 
 class BatchLSEstimator:
     """
-    public class BatchLSEstimator extends :class:`~org.orekit.estimation.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Least squares estimator for orbit determination.
     
-        Least squares estimator for orbit determination.
+    The least squares estimator can be used with different orbit propagators in Orekit. Current propagators list of usable propagators are NumericalPropagator, DSSTPropagator, BrouwerLyddanePropagator, EcksteinHechlerPropagator, TLEPropagator, KeplerianPropagator, and Ephemeris.
     
-        The least squares estimator can be used with different orbit propagators in Orekit. Current propagators list of usable
-        propagators are :class:`~org.orekit.propagation.numerical.NumericalPropagator`,
-        :class:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator`,
-        :class:`~org.orekit.propagation.analytical.BrouwerLyddanePropagator`,
-        :class:`~org.orekit.propagation.analytical.EcksteinHechlerPropagator`,
-        :class:`~org.orekit.propagation.analytical.tle.TLEPropagator`,
-        :class:`~org.orekit.propagation.analytical.KeplerianPropagator`, and
-        :class:`~org.orekit.propagation.analytical.Ephemeris`.
-    
-        Since:
-            8.0
+    Since:
+        8.0
     """
-    def __init__(self, leastSquaresOptimizer: typing.Union[org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer, typing.Callable], *propagatorBuilder: org.orekit.propagation.conversion.PropagatorBuilder): ...
-    def addMeasurement(self, observedMeasurement: org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]) -> None:
+    def __init__(self, optimizer: typing.Union[org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer, typing.Callable], *propagatorBuilder: org.orekit.propagation.conversion.PropagatorBuilder):
         """
-            Add a measurement.
+        Simple constructor.
         
-            Parameters:
-                measurement (:class:`~org.orekit.estimation.measurements.ObservedMeasurement`<?> measurement): measurement to add
+        If multiple PropagatorBuilder are set up, the orbits of several spacecrafts will be used simultaneously. This is useful if the propagators share some model or measurements parameters (typically pole motion, prime meridian correction or ground stations positions).
+        
+        Setting up multiple PropagatorBuilder is also useful when inter-satellite measurements are used, even if only one of the orbit is estimated and the other ones are fixed. This is typically used when very high accuracy GNSS measurements are needed and the navigation bulletins are not considered accurate enough and the navigation constellation must be propagated numerically.
+        
+        Parameters:
+            optimizer (LeastSquaresOptimizer): solver for least squares problem
+            propagatorBuilder (PropagatorBuilder...): builders to use for propagation
+        
+        
+        """
+        ...
+    def addMeasurement(self, measurement: org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]) -> None:
+        """
+        Add a measurement.
+        
+        Parameters:
+            measurement (ObservedMeasurement<?> measurement): measurement to add
         
         
         """
         ...
     def estimate(self) -> typing.MutableSequence[org.orekit.propagation.Propagator]:
         """
-            Estimate the orbital, propagation and measurements parameters.
+        Estimate the orbital, propagation and measurements parameters.
         
-            The initial guess for all parameters must have been set before calling this method using
-            :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.getOrbitalParametersDrivers`,
-            :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.getPropagatorParametersDrivers`, and
-            :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.getMeasurementsParametersDrivers` and then
-            :meth:`~org.orekit.utils.ParameterDriver.setValue` of the parameters.
+        The initial guess for all parameters must have been set before calling this method using getOrbitalParametersDrivers, getPropagatorParametersDrivers, and getMeasurementsParametersDrivers and then setValue of the parameters.
         
-            For parameters whose reference date has not been set to a non-null date beforehand (i.e. the parameters for which
-            :meth:`~org.orekit.utils.ParameterDriver.getReferenceDate` returns :code:`null`, a default reference date will be set
-            automatically at the start of the estimation to the
-            :meth:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder.getInitialOrbitDate` of the first propagator
-            builder. For parameters whose reference date has been set to a non-null date, this reference date is untouched.
+        For parameters whose reference date has not been set to a non-null date beforehand (i.e. the parameters for which getReferenceDate returns null, a default reference date will be set automatically at the start of the estimation to the getInitialOrbitDate of the first propagator builder. For parameters whose reference date has been set to a non-null date, this reference date is untouched.
         
-            After this method returns, the estimated parameters can be retrieved using
-            :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.getOrbitalParametersDrivers`,
-            :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.getPropagatorParametersDrivers`, and
-            :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.getMeasurementsParametersDrivers` and then
-            :meth:`~org.orekit.utils.ParameterDriver.getValue` of the parameters.
+        After this method returns, the estimated parameters can be retrieved using getOrbitalParametersDrivers, getPropagatorParametersDrivers, and getMeasurementsParametersDrivers and then getValue of the parameters.
         
-            As a convenience, the method also returns a fully configured and ready to use propagator set up with all the estimated
-            values.
+        As a convenience, the method also returns a fully configured and ready to use propagator set up with all the estimated values.
         
-            For even more in-depth information, the :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.getOptimum` method
-            provides detailed elements (covariance matrix, estimated parameters standard deviation, weighted Jacobian, RMS, χ²,
-            residuals and more).
+        For even more in-depth information, the getOptimum method provides detailed elements (covariance matrix, estimated parameters standard deviation, weighted Jacobian, RMS, χ², residuals and more).
         
-            Returns:
-                propagators configured with estimated orbits as initial states, and all propagators estimated parameters also set
+        Returns:
+            propagators configured with estimated orbits as initial states, and all propagators estimated parameters also set
         
         
         """
         ...
     def getEvaluationsCount(self) -> int:
         """
-            Get the number of evaluations used for last estimation.
+        Get the number of evaluations used for last estimation.
         
-            Returns:
-                number of evaluations used for last estimation
+        Returns:
+            number of evaluations used for last estimation
         
-            Also see:
-                :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.setMaxEvaluations`
+        Also see:
+            setMaxEvaluations
         
         
         """
         ...
     def getIterationsCount(self) -> int:
         """
-            Get the number of iterations used for last estimation.
+        Get the number of iterations used for last estimation.
         
-            Returns:
-                number of iterations used for last estimation
+        Returns:
+            number of iterations used for last estimation
         
-            Also see:
-                :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.setMaxIterations`
+        Also see:
+            setMaxIterations
         
         
         """
         ...
-    def getLastEstimations(self) -> java.util.Map[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]]: ...
-    def getMeasurementsParametersDrivers(self, boolean: bool) -> org.orekit.utils.ParameterDriversList:
+    def getLastEstimations(self) -> java.util.Map[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]]:
         """
-            Get the measurements parameters supported by this estimator (including measurements and modifiers).
+        Get the last estimations performed.
         
-            Parameters:
-                estimatedOnly (boolean): if true, only estimated parameters are returned
+        Returns:
+            last estimations performed
         
-            Returns:
-                measurements parameters supported by this estimator
+        
+        """
+        ...
+    def getMeasurementsParametersDrivers(self, estimatedOnly: bool) -> org.orekit.utils.ParameterDriversList:
+        """
+        Get the measurements parameters supported by this estimator (including measurements and modifiers).
+        
+        Parameters:
+            estimatedOnly (boolean): if true, only estimated parameters are returned
+        
+        Returns:
+            measurements parameters supported by this estimator
         
         
         """
         ...
     def getOptimum(self) -> org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer.Optimum:
         """
-            Get the optimum found.
+        Get the optimum found.
         
-            The
-            :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer.Optimum?is`
-            object contains detailed elements (covariance matrix, estimated parameters standard deviation, weighted Jacobian, RMS,
-            χ², residuals and more).
+        The Optimum object contains detailed elements (covariance matrix, estimated parameters standard deviation, weighted Jacobian, RMS, χ², residuals and more).
         
-            Beware that the returned object is the raw view from the underlying mathematical library. At this raw level, parameters
-            have :meth:`~org.orekit.utils.ParameterDriver.getNormalizedValue` whereas the space flight parameters have
-            :meth:`~org.orekit.utils.ParameterDriver.getValue` with their units. So there are
-            :meth:`~org.orekit.utils.ParameterDriver.getScale` to apply when using these elements.
+        Beware that the returned object is the raw view from the underlying mathematical library. At this raw level, parameters have getNormalizedValue whereas the space flight parameters have getValue with their units. So there are getScale to apply when using these elements.
         
-            Returns:
-                optimum found after last call to :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.estimate`
+        Returns:
+            optimum found after last call to estimate
         
         
         """
         ...
-    def getOrbitalParametersDrivers(self, boolean: bool) -> org.orekit.utils.ParameterDriversList:
+    def getOrbitalParametersDrivers(self, estimatedOnly: bool) -> org.orekit.utils.ParameterDriversList:
         """
-            Get the orbital parameters supported by this estimator.
+        Get the orbital parameters supported by this estimator.
         
-            If there are more than one propagator builder, then the names of the drivers have an index marker in square brackets
-            appended to them in order to distinguish the various orbits. So for example with one builder generating Keplerian orbits
-            the names would be simply "a", "e", "i"... but if there are several builders the names would be "a[0]", "e[0]",
-            "i[0]"..."a[1]", "e[1]", "i[1]"...
+        If there are more than one propagator builder, then the names of the drivers have an index marker in square brackets appended to them in order to distinguish the various orbits. So for example with one builder generating Keplerian orbits the names would be simply "a", "e", "i"... but if there are several builders the names would be "a[0]", "e[0]", "i[0]"..."a[1]", "e[1]", "i[1]"...
         
-            Parameters:
-                estimatedOnly (boolean): if true, only estimated parameters are returned
+        Parameters:
+            estimatedOnly (boolean): if true, only estimated parameters are returned
         
-            Returns:
-                orbital parameters supported by this estimator
+        Returns:
+            orbital parameters supported by this estimator
         
         
         """
         ...
-    def getPhysicalCovariances(self, double: float) -> org.hipparchus.linear.RealMatrix:
+    def getPhysicalCovariances(self, threshold: float) -> org.hipparchus.linear.RealMatrix:
         """
-            Get the covariances matrix in space flight dynamics physical units.
+        Get the covariances matrix in space flight dynamics physical units.
         
-            This method retrieve the
-            :meth:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation.html?is`
-            from the [@link :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.getOptimum` and applies the scaling factors
-            to it in order to convert it from raw normalized values back to physical values.
+        This method retrieve the Evaluation from the [@link getOptimum and applies the scaling factors to it in order to convert it from raw normalized values back to physical values.
         
-            Parameters:
-                threshold (double): threshold to identify matrix singularity
+        Parameters:
+            threshold (double): threshold to identify matrix singularity
         
-            Returns:
-                covariances matrix in space flight dynamics physical units
+        Returns:
+            covariances matrix in space flight dynamics physical units
         
-            Since:
-                9.1
+        Since:
+            9.1
         
         
         """
         ...
-    def getPropagatorParametersDrivers(self, boolean: bool) -> org.orekit.utils.ParameterDriversList:
+    def getPropagatorParametersDrivers(self, estimatedOnly: bool) -> org.orekit.utils.ParameterDriversList:
         """
-            Get the propagator parameters supported by this estimator.
+        Get the propagator parameters supported by this estimator.
         
-            Parameters:
-                estimatedOnly (boolean): if true, only estimated parameters are returned
+        Parameters:
+            estimatedOnly (boolean): if true, only estimated parameters are returned
         
-            Returns:
-                propagator parameters supported by this estimator
-        
-        
-        """
-        ...
-    def setConvergenceChecker(self, convergenceChecker: typing.Union[org.hipparchus.optim.ConvergenceChecker[org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation], typing.Callable[[int, org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation, org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation], bool]]) -> None: ...
-    def setMaxEvaluations(self, int: int) -> None:
-        """
-            Set the maximum number of model evaluations.
-        
-            The evaluations correspond to the orbit propagations and measurements estimations performed with a set of estimated
-            parameters.
-        
-            For
-            :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.GaussNewtonOptimizer?is`
-            there is one evaluation at each iteration, so the maximum numbers may be set to the same value. For
-            :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LevenbergMarquardtOptimizer?is`,
-            there can be several evaluations at some iterations (typically for the first couple of iterations), so the maximum
-            number of evaluations may be set to a higher value than the maximum number of iterations.
-        
-            Parameters:
-                maxEvaluations (int): maximum number of model evaluations
-        
-            Also see:
-                :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.setMaxIterations`,
-                :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.getEvaluationsCount`
+        Returns:
+            propagator parameters supported by this estimator
         
         
         """
         ...
-    def setMaxIterations(self, int: int) -> None:
+    def setConvergenceChecker(self, convergenceChecker: typing.Union[org.hipparchus.optim.ConvergenceChecker[org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation], typing.Callable[[int, org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation, org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation], bool]]) -> None:
         """
-            Set the maximum number of iterations.
+        Set a custom convergence checker.
         
-            The iterations correspond to the top level iterations of the
-            :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer?is`.
+        Calling this method overrides any checker that could have been set beforehand by calling setParametersConvergenceThreshold. Both methods are mutually exclusive.
         
-            Parameters:
-                maxIterations (int): maxIterations maximum number of iterations
+        Parameters:
+            convergenceChecker (ConvergenceChecker<Evaluation> convergenceChecker): convergence checker to set
         
-            Also see:
-                :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.setMaxEvaluations`,
-                :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.getIterationsCount`
+        Since:
+            10.1
         
-        
-        """
-        ...
-    def setObserver(self, batchLSObserver: typing.Union['BatchLSObserver', typing.Callable]) -> None:
-        """
-            Set an observer for iterations.
-        
-            Parameters:
-                observer (:class:`~org.orekit.estimation.leastsquares.BatchLSObserver`): observer to be notified at the end of each iteration
+        Also see:
+            setParametersConvergenceThreshold
         
         
         """
         ...
-    def setParametersConvergenceThreshold(self, double: float) -> None:
+    def setMaxEvaluations(self, maxEvaluations: int) -> None:
         """
-            Set convergence threshold.
+        Set the maximum number of model evaluations.
         
-            The convergence used for estimation is based on the estimated parameters
-            :meth:`~org.orekit.utils.ParameterDriver.getNormalizedValue`. Convergence is considered to have been reached when the
-            difference between previous and current normalized value is less than the convergence threshold for all parameters. The
-            same value is used for all parameters since they are normalized and hence dimensionless.
+        The evaluations correspond to the orbit propagations and measurements estimations performed with a set of estimated parameters.
         
-            Normalized values are computed as :code:`(current - reference)/scale`, so convergence is reached when the following
-            condition holds for all estimated parameters: :code:`|current[i] - previous[i]| <= threshold * scale[i]`
+        For GaussNewtonOptimizer there is one evaluation at each iteration, so the maximum numbers may be set to the same value. For LevenbergMarquardtOptimizer, there can be several evaluations at some iterations (typically for the first couple of iterations), so the maximum number of evaluations may be set to a higher value than the maximum number of iterations.
         
-            So the convergence threshold specified here can be considered as a multiplication factor applied to scale. Since for all
-            parameters the scale is often small (typically about 1 m for orbital positions for example), then the threshold should
-            not be too small. A value of 10⁻³ is often quite accurate.
+        Parameters:
+            maxEvaluations (int): maximum number of model evaluations
         
-            Calling this method overrides any checker that could have been set beforehand by calling
-            :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.setConvergenceChecker`. Both methods are mutually exclusive.
+        Also see:
+            setMaxIterations,
+            getEvaluationsCount
         
-            Parameters:
-                parametersConvergenceThreshold (double): convergence threshold on normalized parameters (dimensionless, related to parameters scales)
         
-            Also see:
-                :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.setConvergenceChecker`,
-                :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.EvaluationRmsChecker?is`
+        """
+        ...
+    def setMaxIterations(self, maxIterations: int) -> None:
+        """
+        Set the maximum number of iterations.
+        
+        The iterations correspond to the top level iterations of the LeastSquaresOptimizer.
+        
+        Parameters:
+            maxIterations (int): maxIterations maximum number of iterations
+        
+        Also see:
+            setMaxEvaluations,
+            getIterationsCount
+        
+        
+        """
+        ...
+    def setObserver(self, observer: typing.Union['BatchLSObserver', typing.Callable]) -> None:
+        """
+        Set an observer for iterations.
+        
+        Parameters:
+            observer (BatchLSObserver): observer to be notified at the end of each iteration
+        
+        
+        """
+        ...
+    def setParametersConvergenceThreshold(self, parametersConvergenceThreshold: float) -> None:
+        """
+        Set convergence threshold.
+        
+        The convergence used for estimation is based on the estimated parameters getNormalizedValue. Convergence is considered to have been reached when the difference between previous and current normalized value is less than the convergence threshold for all parameters. The same value is used for all parameters since they are normalized and hence dimensionless.
+        
+        Normalized values are computed as (current - reference)/scale, so convergence is reached when the following condition holds for all estimated parameters: |current[i] - previous[i]| <= threshold * scale[i]
+        
+        So the convergence threshold specified here can be considered as a multiplication factor applied to scale. Since for all parameters the scale is often small (typically about 1 m for orbital positions for example), then the threshold should not be too small. A value of 10⁻³ is often quite accurate.
+        
+        Calling this method overrides any checker that could have been set beforehand by calling setConvergenceChecker. Both methods are mutually exclusive.
+        
+        Parameters:
+            parametersConvergenceThreshold (double): convergence threshold on normalized parameters (dimensionless, related to parameters scales)
+        
+        Also see:
+            setConvergenceChecker,
+            EvaluationRmsChecker
         
         
         """
@@ -397,30 +402,28 @@ class BatchLSEstimator:
 
 class BatchLSObserver:
     """
-    :class:`~org.orekit.estimation.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.FunctionalInterface?is` public interface BatchLSObserver
+    Observer for BatchLSEstimator iterations.
     
-        Observer for :class:`~org.orekit.estimation.leastsquares.BatchLSEstimator` iterations.
+    This interface is intended to be implemented by users to monitor the progress of the estimator during estimation.
     
-        This interface is intended to be implemented by users to monitor the progress of the estimator during estimation.
-    
-        Since:
-            8.0
+    Since:
+        8.0
     """
-    def evaluationPerformed(self, int: int, int2: int, orbitArray: typing.Union[typing.List[org.orekit.orbits.Orbit], jpype.JArray], parameterDriversList: org.orekit.utils.ParameterDriversList, parameterDriversList2: org.orekit.utils.ParameterDriversList, parameterDriversList3: org.orekit.utils.ParameterDriversList, estimationsProvider: org.orekit.estimation.measurements.EstimationsProvider, evaluation: org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation) -> None:
+    def evaluationPerformed(self, iterationsCount: int, evaluationsCount: int, orbits: typing.Union[typing.List[org.orekit.orbits.Orbit], jpype.JArray], estimatedOrbitalParameters: org.orekit.utils.ParameterDriversList, estimatedPropagatorParameters: org.orekit.utils.ParameterDriversList, estimatedMeasurementsParameters: org.orekit.utils.ParameterDriversList, evaluationsProvider: org.orekit.estimation.measurements.EstimationsProvider, lspEvaluation: org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation) -> None:
         """
-            Notification callback for the end of each evaluation.
+        Notification callback for the end of each evaluation.
         
-            Parameters:
-                iterationsCount (int): iterations count
-                evaluationsCount (int): evaluations count
-                orbits (:class:`~org.orekit.orbits.Orbit`[]): current estimated orbits
-                estimatedOrbitalParameters (:class:`~org.orekit.utils.ParameterDriversList`): estimated orbital parameters
-                estimatedPropagatorParameters (:class:`~org.orekit.utils.ParameterDriversList`): estimated propagator parameters
-                estimatedMeasurementsParameters (:class:`~org.orekit.utils.ParameterDriversList`): estimated measurements parameters
-                evaluationsProvider (:class:`~org.orekit.estimation.measurements.EstimationsProvider`): provider for measurements evaluations resulting from the current estimated orbit (this is an unmodifiable view of the
-                    current evaluations, its content is changed at each iteration)
-                lspEvaluation (:class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation?is`): current evaluation of the underlying
-                    :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem?is`
+        Parameters:
+            iterationsCount (int): iterations count
+            evaluationsCount (int): evaluations count
+            orbits (Orbit[]): current estimated orbits
+            estimatedOrbitalParameters (ParameterDriversList): estimated orbital parameters
+            estimatedPropagatorParameters (ParameterDriversList): estimated propagator parameters
+            estimatedMeasurementsParameters (ParameterDriversList): estimated measurements parameters
+            evaluationsProvider (EstimationsProvider): provider for measurements evaluations resulting from the current estimated orbit (this is an unmodifiable view of the
+                current evaluations, its content is changed at each iteration)
+            lspEvaluation (Evaluation): current evaluation of the underlying
+                LeastSquaresProblem
         
         
         """
@@ -428,158 +431,410 @@ class BatchLSObserver:
 
 class ModelObserver:
     """
-    :class:`~org.orekit.estimation.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.FunctionalInterface?is` public interface ModelObserver
+    Observer for BatchLSModel calls.
     
-        Observer for :class:`~org.orekit.estimation.leastsquares.BatchLSModel` calls.
+    This interface is an internal one intended to pass the orbit back from BatchLSModel to BatchLSEstimator.
     
-        This interface is an internal one intended to pass the orbit back from
-        :class:`~org.orekit.estimation.leastsquares.BatchLSModel` to
-        :class:`~org.orekit.estimation.leastsquares.BatchLSEstimator`.
-    
-        Since:
-            8.0
+    Since:
+        8.0
     """
-    def modelCalled(self, orbitArray: typing.Union[typing.List[org.orekit.orbits.Orbit], jpype.JArray], map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]], typing.Mapping[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]]]) -> None: ...
+    def modelCalled(self, orbits: typing.Union[typing.List[org.orekit.orbits.Orbit], jpype.JArray], estimations: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]], typing.Mapping[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]]]) -> None:
+        """
+        Notification callback for orbit changes.
+        
+        Parameters:
+            orbits (Orbit[]): current estimated orbits
+            estimations (Map<ObservedMeasurement<?>, EstimatedMeasurement<?>>): map of measurements estimations resulting from the current estimated orbit (this is an unmodifiable view of the current
+                estimations, its content is changed at each iteration)
+        
+        
+        """
+        ...
 
 class BatchLSModel(AbstractBatchLSModel):
     """
-    public class BatchLSModel extends :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
+    Bridge between ObservedMeasurement and LeastSquaresProblem.
     
-        Bridge between :class:`~org.orekit.estimation.measurements.ObservedMeasurement` and
-        :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem?is`.
-    
-        Since:
-            8.0
+    Since:
+        8.0
     """
-    def __init__(self, propagatorBuilderArray: typing.Union[typing.List[org.orekit.propagation.conversion.PropagatorBuilder], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union[ModelObserver, typing.Callable]): ...
+    def __init__(self, propagatorBuilders: typing.Union[typing.List[org.orekit.propagation.conversion.PropagatorBuilder], jpype.JArray], measurements: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], estimatedMeasurementsParameters: org.orekit.utils.ParameterDriversList, observer: typing.Union[ModelObserver, typing.Callable]):
+        """
+        Simple constructor.
+        
+        Parameters:
+            propagatorBuilders (PropagatorBuilder[]): builders to use for propagation
+            measurements (List<ObservedMeasurement<?>>): measurements
+            estimatedMeasurementsParameters (ParameterDriversList): estimated measurements parameters
+            observer (ModelObserver): observer to be notified at model calls
+        
+        
+        """
+        ...
 
 class DSSTBatchLSModel(AbstractBatchLSModel):
     """
-    public class DSSTBatchLSModel extends :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
+    Bridge between ObservedMeasurement and LeastSquaresProblem.
     
-        Bridge between :class:`~org.orekit.estimation.measurements.ObservedMeasurement` and
-        :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem?is`.
+    This class is an adaption of the BatchLSModel class for the DSSTPropagator.
     
-        This class is an adaption of the :class:`~org.orekit.estimation.leastsquares.BatchLSModel` class for the
-        :class:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator`.
-    
-        Since:
-            10.0
+    Since:
+        10.0
     """
-    def __init__(self, propagatorBuilderArray: typing.Union[typing.List[org.orekit.propagation.conversion.PropagatorBuilder], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union[ModelObserver, typing.Callable], propagationType: org.orekit.propagation.PropagationType): ...
+    def __init__(self, propagatorBuilders: typing.Union[typing.List[org.orekit.propagation.conversion.PropagatorBuilder], jpype.JArray], measurements: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], estimatedMeasurementsParameters: org.orekit.utils.ParameterDriversList, observer: typing.Union[ModelObserver, typing.Callable], propagationType: org.orekit.propagation.PropagationType):
+        """
+        Simple constructor.
+        
+        Parameters:
+            propagatorBuilders (PropagatorBuilder[]): builders to use for propagation
+            measurements (List<ObservedMeasurement<?>>): measurements
+            estimatedMeasurementsParameters (ParameterDriversList): estimated measurements parameters
+            observer (ModelObserver): observer to be notified at model calls
+            propagationType (PropagationType): type of the orbit used for the propagation (mean or osculating)
+        
+        
+        """
+        ...
 
 class PythonAbstractBatchLSModel(AbstractBatchLSModel):
     def __init__(self, propagatorBuilderArray: typing.Union[typing.List[org.orekit.propagation.conversion.PropagatorBuilder], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union[ModelObserver, typing.Callable]): ...
-    def configureHarvester(self, propagator: org.orekit.propagation.Propagator) -> org.orekit.propagation.MatricesHarvester: ...
-    def configureOrbits(self, matricesHarvester: org.orekit.propagation.MatricesHarvester, propagator: org.orekit.propagation.Propagator) -> org.orekit.orbits.Orbit: ...
-    def createPropagators(self, realVector: org.hipparchus.linear.RealVector) -> typing.MutableSequence[org.orekit.propagation.integration.AbstractIntegratedPropagator]: ...
-    def fetchEvaluatedMeasurement(self, int: int, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]) -> None: ...
-    def finalize(self) -> None: ...
-    def getEvaluationsCount(self) -> int: ...
-    def getIterationsCount(self) -> int: ...
-    def getSelectedPropagationDriversForBuilder(self, int: int) -> org.orekit.utils.ParameterDriversList: ...
-    def isForwardPropagation(self) -> bool: ...
-    def pythonDecRef(self) -> None: ...
+    def configureHarvester(self, propagator: org.orekit.propagation.Propagator) -> org.orekit.propagation.MatricesHarvester:
+        """
+        Configure the propagator to compute derivatives.
+        
+        Specified by: configureHarvester in class AbstractBatchLSModel
+        
+        Parameters:
+            propagator (Propagator): Propagator to configure
+        
+        Returns:
+            harvester harvester to retrive the State Transition Matrix and Jacobian Matrix
+        
+        
+        """
+        ...
+    def configureOrbits(self, harvester: org.orekit.propagation.MatricesHarvester, propagator: org.orekit.propagation.Propagator) -> org.orekit.orbits.Orbit:
+        """
+        Configure the current estimated orbits.
+        
+        For DSST orbit determination, short period derivatives are also calculated.
+        
+        Specified by: configureOrbits in class AbstractBatchLSModel
+        
+        Parameters:
+            harvester (MatricesHarvester): harvester for matrices
+            propagator (Propagator): the orbit propagator
+        
+        Returns:
+            the current estimated orbits
+        
+        
+        """
+        ...
+    def createPropagators(self, point: org.hipparchus.linear.RealVector) -> typing.MutableSequence[org.orekit.propagation.integration.AbstractIntegratedPropagator]:
+        """
+        Create the propagators and parameters corresponding to an evaluation point.
+        
+        Overrides: createPropagators in class AbstractBatchLSModel
+        
+        Parameters:
+            point (RealVector): evaluation point
+        
+        Returns:
+            an array of new propagators
+        
+        
+        """
+        ...
+    def fetchEvaluatedMeasurement(self, index: int, evaluation: org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]) -> None:
+        """
+        Fetch a measurement that was evaluated during propagation.
+        
+        Overrides: fetchEvaluatedMeasurement in class AbstractBatchLSModel
+        
+        Parameters:
+            index (int): index of the measurement first component
+            evaluation (EstimatedMeasurement<?> evaluation): measurement evaluation
+        
+        
+        """
+        ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getEvaluationsCount(self) -> int:
+        """
+        Get the evaluations count.
+        
+        Overrides: getEvaluationsCount in class AbstractBatchLSModel
+        
+        Returns:
+            evaluations count
+        
+        
+        """
+        ...
+    def getIterationsCount(self) -> int:
+        """
+        Get the iterations count.
+        
+        Overrides: getIterationsCount in class AbstractBatchLSModel
+        
+        Returns:
+            iterations count
+        
+        
+        """
+        ...
+    def getSelectedPropagationDriversForBuilder(self, iBuilder: int) -> org.orekit.utils.ParameterDriversList:
+        """
+        Get the selected propagation drivers for a propagatorBuilder.
+        
+        Overrides: getSelectedPropagationDriversForBuilder in class AbstractBatchLSModel
+        
+        Parameters:
+            iBuilder (int): index of the builder in the builders' array
+        
+        Returns:
+            the list of selected propagation drivers for propagatorBuilder of index iBuilder
+        
+        
+        """
+        ...
+    def isForwardPropagation(self) -> bool:
+        """
+        Return the forward propagation flag.
+        
+        Overrides: isForwardPropagation in class AbstractBatchLSModel
+        
+        Returns:
+            the forward propagation flag
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-    def setEvaluationsCounter(self, incrementor: org.hipparchus.util.Incrementor) -> None: ...
-    def setIterationsCounter(self, incrementor: org.hipparchus.util.Incrementor) -> None: ...
-    def value(self, realVector: org.hipparchus.linear.RealVector) -> org.hipparchus.util.Pair[org.hipparchus.linear.RealVector, org.hipparchus.linear.RealMatrix]: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    def setEvaluationsCounter(self, evaluationsCounter: org.hipparchus.util.Incrementor) -> None:
+        """
+        Set the counter for evaluations.
+        
+        Overrides: setEvaluationsCounter in class AbstractBatchLSModel
+        
+        Parameters:
+            evaluationsCounter (Incrementor): counter for evaluations
+        
+        
+        """
+        ...
+    def setIterationsCounter(self, iterationsCounter: org.hipparchus.util.Incrementor) -> None:
+        """
+        Set the counter for iterations.
+        
+        Overrides: setIterationsCounter in class AbstractBatchLSModel
+        
+        Parameters:
+            iterationsCounter (Incrementor): counter for iterations
+        
+        
+        """
+        ...
+    def value(self, realVector: org.hipparchus.linear.RealVector) -> org.hipparchus.util.Pair[org.hipparchus.linear.RealVector, org.hipparchus.linear.RealMatrix]:
+        """
+        Specified by: meth:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.MultivariateJacobianFunction.html?is` in interface MultivariateJacobianFunction
+        
+        Overrides: value in class AbstractBatchLSModel
+        
+        
+        """
+        ...
 
 class PythonBatchLSObserver(BatchLSObserver):
     def __init__(self): ...
-    def evaluationPerformed(self, int: int, int2: int, orbitArray: typing.Union[typing.List[org.orekit.orbits.Orbit], jpype.JArray], parameterDriversList: org.orekit.utils.ParameterDriversList, parameterDriversList2: org.orekit.utils.ParameterDriversList, parameterDriversList3: org.orekit.utils.ParameterDriversList, estimationsProvider: org.orekit.estimation.measurements.EstimationsProvider, evaluation: org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation) -> None: ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None: ...
+    def evaluationPerformed(self, iterationsCount: int, evaluationsCount: int, orbits: typing.Union[typing.List[org.orekit.orbits.Orbit], jpype.JArray], estimatedOrbitalParameters: org.orekit.utils.ParameterDriversList, estimatedPropagatorParameters: org.orekit.utils.ParameterDriversList, estimatedMeasurementsParameters: org.orekit.utils.ParameterDriversList, evaluationsProvider: org.orekit.estimation.measurements.EstimationsProvider, lspEvaluation: org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation) -> None:
+        """
+        Notification callback for the end of each evaluation. Extension point for Python.
+        
+        Specified by: evaluationPerformed in interface BatchLSObserver
+        
+        Parameters:
+            iterationsCount (int): iterations count
+            evaluationsCount (int): evaluations count
+            orbits (Orbit[]): current estimated orbits
+            estimatedOrbitalParameters (ParameterDriversList): estimated orbital parameters
+            estimatedPropagatorParameters (ParameterDriversList): estimated propagator parameters
+            estimatedMeasurementsParameters (ParameterDriversList): estimated measurements parameters
+            evaluationsProvider (EstimationsProvider): provider for measurements evaluations resulting from the current estimated orbit (this is an unmodifiable view of the
+                current evaluations, its content is changed at each iteration)
+            lspEvaluation (Evaluation): current evaluation of the underlying
+                LeastSquaresProblem
+        
+        
+        """
+        ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
 
 class PythonModelObserver(ModelObserver):
     def __init__(self): ...
-    def finalize(self) -> None: ...
-    def modelCalled(self, orbitArray: typing.Union[typing.List[org.orekit.orbits.Orbit], jpype.JArray], map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]], typing.Mapping[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]]]) -> None: ...
-    def pythonDecRef(self) -> None: ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def modelCalled(self, orbits: typing.Union[typing.List[org.orekit.orbits.Orbit], jpype.JArray], estimations: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]], typing.Mapping[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]]]) -> None:
+        """
+        Notification callback for orbit changes.
+        
+        Specified by: modelCalled in interface ModelObserver
+        
+        Parameters:
+            orbits (Orbit[]): current estimated orbits
+            estimations (Map<ObservedMeasurement<?>, EstimatedMeasurement<?>>): map of measurements estimations resulting from the current estimated orbit (this is an unmodifiable view of the
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
 
 class SequentialBatchLSEstimator(BatchLSEstimator):
     """
-    public class SequentialBatchLSEstimator extends :class:`~org.orekit.estimation.leastsquares.BatchLSEstimator`
+    Sequential least squares estimator for orbit determination.
     
-        Sequential least squares estimator for orbit determination.
+    When an orbit has already been estimated and new measurements are given, it is not efficient to re-optimize the whole problem. Only considering the new measures while optimizing will neither give good results as the old measurements will not be taken into account. Thus, a sequential estimator is used to estimate the orbit, which uses the old results of the estimation and the new measurements.
     
-        When an orbit has already been estimated and new measurements are given, it is not efficient to re-optimize the whole
-        problem. Only considering the new measures while optimizing will neither give good results as the old measurements will
-        not be taken into account. Thus, a sequential estimator is used to estimate the orbit, which uses the old results of the
-        estimation and the new measurements.
+    In order to perform a sequential optimization, the user must configure a SequentialGaussNewtonOptimizer. Depending if its input data are an empty Evaluation, a complete Evaluation or an a priori state and covariance, different configuration are possible.
     
-        In order to perform a sequential optimization, the user must configure a
-        :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer?is`.
-        Depending if its input data are an empty
-        :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation?is`,
-        a complete :code:`Evaluation` or an a priori state and covariance, different configuration are possible.
+    1. No input data from a previous estimation
     
-        **1. No input data from a previous estimation**
+    Then, the SequentialBatchLSEstimator can be used like a BatchLSEstimator to perform the estimation. The user can initialize the SequentialGaussNewtonOptimizer using the default constructor.
     
-        Then, the :class:`~org.orekit.estimation.leastsquares.SequentialBatchLSEstimator` can be used like a
-        :class:`~org.orekit.estimation.leastsquares.BatchLSEstimator` to perform the estimation. The user can initialize the
-        :code:`SequentialGaussNewtonOptimizer` using the default constructor.
+    final SequentialGaussNewtonOptimizer optimizer = new SequentialGaussNewtonOptimizer();
     
-        :code:`final SequentialGaussNewtonOptimizer optimizer = new SequentialGaussNewtonOptimizer();`
+    By default, a QRDecomposer is used as decomposition algorithm. In addition, normal equations are not form. It is possible to update these two default configurations by using:
     
-        By default, a
-        :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.QRDecomposer?is` is
-        used as decomposition algorithm. In addition, normal equations are not form. It is possible to update these two default
-        configurations by using:
+      - 
+        meth:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.html?is`
+        method: withDecomposer(newDecomposer);
+      - 
+        meth:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.html?is`
+        method: withFormNormalEquations(newFormNormalEquations);
     
-          - 
-            meth:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.html?is`
-            method: :code:`optimizer.withDecomposer(newDecomposer);`
-          - 
-            meth:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.html?is`
-            method: :code:`optimizer.withFormNormalEquations(newFormNormalEquations);`
+    2. Initialization using a previous Evalutation
     
+    In this situation, it is recommended to use the second constructor of the optimizer class.
     
-        **2. Initialization using a previous :code:`Evalutation`**
+    final SequentialGaussNewtonOptimizer optimizer = new SequentialGaussNewtonOptimizer(decomposer,
+    formNormalEquations, evaluation);
     
-        In this situation, it is recommended to use the second constructor of the optimizer class.
+    Using this constructor, the user can directly configure the MatrixDecomposer and set the flag for normal equations without calling the two previous presented methods.
     
-        :code:`final SequentialGaussNewtonOptimizer optimizer = new SequentialGaussNewtonOptimizer(decomposer,
-        formNormalEquations, evaluation);`
+    Note: This constructor can also be used to perform the initialization of 1. In this case, the Evaluation evaluation is null.
     
-        Using this constructor, the user can directly configure the MatrixDecomposer and set the flag for normal equations
-        without calling the two previous presented methods.
+    3. Initialization using an a priori estimated state and covariance
     
-        *Note:* This constructor can also be used to perform the initialization of **1.** In this case, the :code:`Evaluation
-        evaluation` is :code:`null`.
+    These situation is a classical satellite operation need. Indeed, a classical action is to use the results of a previous orbit determination (estimated state and covariance) performed a day before, to improve the initialization and the results of an orbit determination performed the current day. In this situation, the user can initialize the SequentialGaussNewtonOptimizer using the default constructor.
     
-        **3. Initialization using an a priori estimated state and covariance**
+    final SequentialGaussNewtonOptimizer optimizer = new SequentialGaussNewtonOptimizer();
     
-        These situation is a classical satellite operation need. Indeed, a classical action is to use the results of a previous
-        orbit determination (estimated state and covariance) performed a day before, to improve the initialization and the
-        results of an orbit determination performed the current day. In this situation, the user can initialize the
-        :code:`SequentialGaussNewtonOptimizer` using the default constructor.
+    The MatrixDecomposer and the flag about normal equations can again be updated using the two previous presented methods. The a priori state and covariance matrix can be set using:
     
-        :code:`final SequentialGaussNewtonOptimizer optimizer = new SequentialGaussNewtonOptimizer();`
-    
-        The MatrixDecomposer and the flag about normal equations can again be updated using the two previous presented methods.
-        The a priori state and covariance matrix can be set using:
-    
-          - 
-            meth:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.html?is`
-            method: :code:`optimizer.withAPrioriData(aPrioriState, aPrioriCovariance);`
+      - 
+        meth:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.html?is`
+        method: withAPrioriData(aPrioriState, aPrioriCovariance);
     
     
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, sequentialGaussNewtonOptimizer: org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer, *propagatorBuilder: org.orekit.propagation.conversion.PropagatorBuilder): ...
+    def __init__(self, sequentialOptimizer: org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer, *propagatorBuilder: org.orekit.propagation.conversion.PropagatorBuilder):
+        """
+        Simple constructor.
+        
+        If multiple PropagatorBuilder are set up, the orbits of several spacecrafts will be used simultaneously. This is useful if the propagators share some model or measurements parameters (typically pole motion, prime meridian correction or ground stations positions).
+        
+        Setting up multiple PropagatorBuilder is also useful when inter-satellite measurements are used, even if only one of the orbit is estimated and the other ones are fixed. This is typically used when very high accuracy GNSS measurements are needed and the navigation bulletins are not considered accurate enough and the navigation constellation must be propagated numerically.
+        
+        The solver used for sequential least squares problem is a SequentialGaussNewtonOptimizer. Details about how initialize it are given in the class JavaDoc.
+        
+        Parameters:
+            sequentialOptimizer (SequentialGaussNewtonOptimizer): solver for sequential least squares problem
+            propagatorBuilder (PropagatorBuilder...): builders to use for propagation.
+        
+        
+        """
+        ...
 
 
 class __module_protocol__(Protocol):

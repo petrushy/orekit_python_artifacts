@@ -22,87 +22,83 @@ import typing
 
 class AveragedOrbitalState(org.orekit.time.TimeStamped):
     """
-    public interface AveragedOrbitalState extends :class:`~org.orekit.time.TimeStamped`
+    Interface representing averaged orbital elements at a specific instant. Inheritors shall implement a conversion method to transform into an osculating Orbit.
     
-        Interface representing averaged orbital elements at a specific instant. Inheritors shall implement a conversion method
-        to transform into an osculating :class:`~org.orekit.orbits.Orbit`.
+    Since:
+        12.1
     
-        Since:
-            12.1
-    
-        Also see:
-            :class:`~org.orekit.time.TimeStamped`,
-            :class:`~org.orekit.propagation.conversion.averaging.elements.AveragedOrbitalElements`
+    Also see:
+        TimeStamped,
+        AveragedOrbitalElements
     """
     def getAveragedElements(self) -> org.orekit.propagation.conversion.averaging.elements.AveragedOrbitalElements:
         """
-            Getter for the averaged orbital elements.
+        Getter for the averaged orbital elements.
         
-            Returns:
-                averaged elements
+        Returns:
+            averaged elements
         
         
         """
         ...
     def getDate(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the date.
+        Get the date.
         
-            Specified by:
-                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+        Specified by: getDate in interface TimeStamped
         
-            Returns:
-                date attached to the object
+        Returns:
+            date attached to the object
         
         
         """
         ...
     def getFrame(self) -> org.orekit.frames.Frame:
         """
-            Getter for the reference frame.
+        Getter for the reference frame.
         
-            Returns:
-                frame
+        Returns:
+            frame
         
         
         """
         ...
     def getMu(self) -> float:
         """
-            Getter for the central body's gravitational constant.
+        Getter for the central body's gravitational constant.
         
-            Returns:
-                gravitational constant
+        Returns:
+            gravitational constant
         
         
         """
         ...
     def getOrbitType(self) -> org.orekit.orbits.OrbitType:
         """
-            Getter for the averaged orbit type.
+        Getter for the averaged orbit type.
         
-            Returns:
-                orbit type
+        Returns:
+            orbit type
         
         
         """
         ...
     def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType:
         """
-            Getter for the averaged position angle.
+        Getter for the averaged position angle.
         
-            Returns:
-                position angle type
+        Returns:
+            position angle type
         
         
         """
         ...
     def toOsculatingOrbit(self) -> org.orekit.orbits.Orbit:
         """
-            Convert instance to an osculating orbit.
+        Convert instance to an osculating orbit.
         
-            Returns:
-                osculating orbit
+        Returns:
+            osculating orbit
         
         
         """
@@ -110,43 +106,36 @@ class AveragedOrbitalState(org.orekit.time.TimeStamped):
 
 class AbstractAveragedOrbitalState(AveragedOrbitalState):
     """
-    public abstract class AbstractAveragedOrbitalState extends :class:`~org.orekit.propagation.conversion.averaging.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.averaging.AveragedOrbitalState`
+    Abstract class representing averaged orbital state. It is used to define the frame and the date.
     
-        Abstract class representing averaged orbital state. It is used to define the frame and the date.
+    Since:
+        12.1
     
-        Since:
-            12.1
-    
-        Also see:
-            :class:`~org.orekit.propagation.conversion.averaging.AveragedOrbitalState`
+    Also see:
+        AveragedOrbitalState
     """
     def getDate(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the date.
+        Get the date.
         
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.averaging.AveragedOrbitalState.getDate` in
-                interface :class:`~org.orekit.propagation.conversion.averaging.AveragedOrbitalState`
+        Specified by: getDate in interface AveragedOrbitalState
         
-            Specified by:
-                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+        Specified by: getDate in interface TimeStamped
         
-            Returns:
-                date attached to the object
+        Returns:
+            date attached to the object
         
         
         """
         ...
     def getFrame(self) -> org.orekit.frames.Frame:
         """
-            Getter for the reference frame.
+        Getter for the reference frame.
         
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.averaging.AveragedOrbitalState.getFrame` in
-                interface :class:`~org.orekit.propagation.conversion.averaging.AveragedOrbitalState`
+        Specified by: getFrame in interface AveragedOrbitalState
         
-            Returns:
-                frame
+        Returns:
+            frame
         
         
         """
@@ -154,48 +143,222 @@ class AbstractAveragedOrbitalState(AveragedOrbitalState):
 
 class PythonAveragedOrbitalState(AveragedOrbitalState):
     def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getAveragedElements(self) -> org.orekit.propagation.conversion.averaging.elements.AveragedOrbitalElements: ...
-    def getDate(self) -> org.orekit.time.AbsoluteDate: ...
-    def getFrame(self) -> org.orekit.frames.Frame: ...
-    def getMu(self) -> float: ...
-    def getOrbitType(self) -> org.orekit.orbits.OrbitType: ...
-    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType: ...
-    def pythonDecRef(self) -> None: ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: meth:`~org.orekit.propagation.conversion.averaging.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getAveragedElements(self) -> org.orekit.propagation.conversion.averaging.elements.AveragedOrbitalElements:
+        """
+        Description copied from interface: getAveragedElements Getter for the averaged orbital elements.
+        
+        Specified by: getAveragedElements in interface AveragedOrbitalState
+        
+        Returns:
+            averaged elements
+        
+        
+        """
+        ...
+    def getDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+        Description copied from interface: getDate Get the date.
+        
+        Specified by: getDate in interface AveragedOrbitalState
+        
+        Specified by: getDate in interface TimeStamped
+        
+        Returns:
+            date attached to the object
+        
+        
+        """
+        ...
+    def getFrame(self) -> org.orekit.frames.Frame:
+        """
+        Description copied from interface: getFrame Getter for the reference frame.
+        
+        Specified by: getFrame in interface AveragedOrbitalState
+        
+        Returns:
+            frame
+        
+        
+        """
+        ...
+    def getMu(self) -> float:
+        """
+        Description copied from interface: getMu Getter for the central body's gravitational constant.
+        
+        Specified by: getMu in interface AveragedOrbitalState
+        
+        Returns:
+            gravitational constant
+        
+        
+        """
+        ...
+    def getOrbitType(self) -> org.orekit.orbits.OrbitType:
+        """
+        Description copied from interface: getOrbitType Getter for the averaged orbit type.
+        
+        Specified by: getOrbitType in interface AveragedOrbitalState
+        
+        Returns:
+            orbit type
+        
+        
+        """
+        ...
+    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType:
+        """
+        Description copied from interface: getPositionAngleType Getter for the averaged position angle.
+        
+        Specified by: getPositionAngleType in interface AveragedOrbitalState
+        
+        Returns:
+            position angle type
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-    def toOsculatingOrbit(self) -> org.orekit.orbits.Orbit: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    def toOsculatingOrbit(self) -> org.orekit.orbits.Orbit:
+        """
+        Description copied from interface: toOsculatingOrbit Convert instance to an osculating orbit.
+        
+        Specified by: toOsculatingOrbit in interface AveragedOrbitalState
+        
+        Returns:
+            osculating orbit
+        
+        
+        """
+        ...
 
 class PythonAbstractAveragedOrbitalState(AbstractAveragedOrbitalState):
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame): ...
-    def finalize(self) -> None: ...
-    def getAveragedElements(self) -> org.orekit.propagation.conversion.averaging.elements.AveragedOrbitalElements: ...
-    def getMu(self) -> float: ...
-    def getOrbitType(self) -> org.orekit.orbits.OrbitType: ...
-    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType: ...
-    def pythonDecRef(self) -> None: ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame):
+        """
+        Protected constructor.
+        
+        Parameters:
+            date (AbsoluteDate): epoch
+            frame (Frame): reference frame
+        
+        
+        """
+        ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: meth:`~org.orekit.propagation.conversion.averaging.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getAveragedElements(self) -> org.orekit.propagation.conversion.averaging.elements.AveragedOrbitalElements:
+        """
+        Description copied from interface: getAveragedElements Getter for the averaged orbital elements.
+        
+        Returns:
+            averaged elements
+        
+        
+        """
+        ...
+    def getMu(self) -> float:
+        """
+        Description copied from interface: getMu Getter for the central body's gravitational constant.
+        
+        Returns:
+            gravitational constant
+        
+        
+        """
+        ...
+    def getOrbitType(self) -> org.orekit.orbits.OrbitType:
+        """
+        Description copied from interface: getOrbitType Getter for the averaged orbit type.
+        
+        Returns:
+            orbit type
+        
+        
+        """
+        ...
+    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType:
+        """
+        Description copied from interface: getPositionAngleType Getter for the averaged position angle.
+        
+        Returns:
+            position angle type
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-    def toOsculatingOrbit(self) -> org.orekit.orbits.Orbit: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    def toOsculatingOrbit(self) -> org.orekit.orbits.Orbit:
+        """
+        Description copied from interface: toOsculatingOrbit Convert instance to an osculating orbit.
+        
+        Returns:
+            osculating orbit
+        
+        
+        """
+        ...
 
 class SGP4OrbitalState(AbstractAveragedOrbitalState):
     """
-    public class SGP4OrbitalState extends :class:`~org.orekit.propagation.conversion.averaging.AbstractAveragedOrbitalState`
+    Class representing an averaged orbital state as in the TLE-related theory. Note it is the averaged mean motion that is written in a Two-Line Element and that, for now, conversions back and forth to averaged semi-major axis are approximated with the osculating ones.
     
-        Class representing an averaged orbital state as in the TLE-related theory. Note it is the averaged mean motion that is
-        written in a Two-Line Element and that, for now, conversions back and forth to averaged semi-major axis are approximated
-        with the osculating ones.
+    Since:
+        12.1
     
-        Since:
-            12.1
-    
-        Also see:
-            :class:`~org.orekit.propagation.conversion.averaging.AveragedOrbitalState`,
-            :class:`~org.orekit.propagation.analytical.tle.TLEPropagator`
+    Also see:
+        AveragedOrbitalState,
+        TLEPropagator
     """
     @typing.overload
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, averagedKeplerianWithMeanAngle: org.orekit.propagation.conversion.averaging.elements.AveragedKeplerianWithMeanAngle): ...
@@ -203,65 +366,65 @@ class SGP4OrbitalState(AbstractAveragedOrbitalState):
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, averagedKeplerianWithMeanAngle: org.orekit.propagation.conversion.averaging.elements.AveragedKeplerianWithMeanAngle, dataContext: org.orekit.data.DataContext): ...
     def getAveragedElements(self) -> org.orekit.propagation.conversion.averaging.elements.AveragedKeplerianWithMeanAngle:
         """
-            Getter for the averaged orbital elements.
+        Getter for the averaged orbital elements.
         
-            Returns:
-                averaged elements
+        Returns:
+            averaged elements
         
         
         """
         ...
     def getMu(self) -> float:
         """
-            Getter for the central body's gravitational constant.
+        Getter for the central body's gravitational constant.
         
-            Returns:
-                gravitational constant
+        Returns:
+            gravitational constant
         
         
         """
         ...
     def getOrbitType(self) -> org.orekit.orbits.OrbitType:
         """
-            Getter for the averaged orbit type.
+        Getter for the averaged orbit type.
         
-            Returns:
-                orbit type
+        Returns:
+            orbit type
         
         
         """
         ...
     def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType:
         """
-            Getter for the averaged position angle.
+        Getter for the averaged position angle.
         
-            Returns:
-                position angle type
+        Returns:
+            position angle type
         
         
         """
         ...
     @staticmethod
-    def of(tLE: org.orekit.propagation.analytical.tle.TLE, frame: org.orekit.frames.Frame) -> 'SGP4OrbitalState':
+    def of(tle: org.orekit.propagation.analytical.tle.TLE, teme: org.orekit.frames.Frame) -> 'SGP4OrbitalState':
         """
-            Static constructor. Input frame is implicitly assumed to be TEME (it is not checked).
+        Static constructor. Input frame is implicitly assumed to be TEME (it is not checked).
         
-            Parameters:
-                tle (:class:`~org.orekit.propagation.analytical.tle.TLE`): TLE
-                teme (:class:`~org.orekit.frames.Frame`): TEME frame (not checked)
+        Parameters:
+            tle (TLE): TLE
+            teme (Frame): TEME frame (not checked)
         
-            Returns:
-                TLE-based averaged orbital state
+        Returns:
+            TLE-based averaged orbital state
         
         
         """
         ...
     def toOsculatingOrbit(self) -> org.orekit.orbits.Orbit:
         """
-            Convert instance to an osculating orbit.
+        Convert instance to an osculating orbit.
         
-            Returns:
-                osculating orbit
+        Returns:
+            osculating orbit
         
         
         """
@@ -269,54 +432,64 @@ class SGP4OrbitalState(AbstractAveragedOrbitalState):
 
 class BrouwerLyddaneOrbitalState(org.orekit.propagation.conversion.averaging.AbstractHarmonicsBasedOrbitalState):
     """
-    public class BrouwerLyddaneOrbitalState extends :class:`~org.orekit.propagation.conversion.averaging.AbstractAveragedOrbitalState`
+    Class representing an averaged orbital state as in the Brouwer-Lyddane theory.
     
-        Class representing an averaged orbital state as in the Brouwer-Lyddane theory.
+    Since:
+        12.1
     
-        Since:
-            12.1
-    
-        Also see:
-            :class:`~org.orekit.propagation.conversion.averaging.AveragedOrbitalState`,
-            :class:`~org.orekit.propagation.analytical.BrouwerLyddanePropagator`
+    Also see:
+        AveragedOrbitalState,
+        BrouwerLyddanePropagator
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, averagedKeplerianWithMeanAngle: org.orekit.propagation.conversion.averaging.elements.AveragedKeplerianWithMeanAngle, frame: org.orekit.frames.Frame, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider): ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, elements: org.orekit.propagation.conversion.averaging.elements.AveragedKeplerianWithMeanAngle, frame: org.orekit.frames.Frame, harmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider):
+        """
+        Constructor.
+        
+        Parameters:
+            date (AbsoluteDate): epoch
+            elements (AveragedKeplerianWithMeanAngle): averaged orbital elements
+            frame (Frame): reference frame
+            harmonicsProvider (UnnormalizedSphericalHarmonicsProvider): spherical harmonics provider
+        
+        
+        """
+        ...
     def getAveragedElements(self) -> org.orekit.propagation.conversion.averaging.elements.AveragedKeplerianWithMeanAngle:
         """
-            Getter for the averaged orbital elements.
+        Getter for the averaged orbital elements.
         
-            Returns:
-                averaged elements
+        Returns:
+            averaged elements
         
         
         """
         ...
     def getOrbitType(self) -> org.orekit.orbits.OrbitType:
         """
-            Getter for the averaged orbit type.
+        Getter for the averaged orbit type.
         
-            Returns:
-                orbit type
+        Returns:
+            orbit type
         
         
         """
         ...
     def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType:
         """
-            Getter for the averaged position angle.
+        Getter for the averaged position angle.
         
-            Returns:
-                position angle type
+        Returns:
+            position angle type
         
         
         """
         ...
     def toOsculatingOrbit(self) -> org.orekit.orbits.Orbit:
         """
-            Convert instance to an osculating orbit.
+        Convert instance to an osculating orbit.
         
-            Returns:
-                osculating orbit
+        Returns:
+            osculating orbit
         
         
         """
@@ -324,58 +497,79 @@ class BrouwerLyddaneOrbitalState(org.orekit.propagation.conversion.averaging.Abs
 
 class DSST6X0OrbitalState(org.orekit.propagation.conversion.averaging.AbstractHarmonicsBasedOrbitalState):
     """
-    public class DSST6X0OrbitalState extends :class:`~org.orekit.propagation.conversion.averaging.AbstractAveragedOrbitalState`
+    Class representing an averaged orbital state as in the DSST theory using only the first 6 zonal harmonics as perturbations.
     
-        Class representing an averaged orbital state as in the DSST theory using only the first 6 zonal harmonics as
-        perturbations.
+    Since:
+        12.1
     
-        Since:
-            12.1
-    
-        Also see:
-            :class:`~org.orekit.propagation.conversion.averaging.AveragedOrbitalState`,
-            :class:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator`,
-            :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTZonal`
+    Also see:
+        AveragedOrbitalState,
+        DSSTPropagator,
+        DSSTZonal
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, averagedEquinoctialWithMeanAngle: org.orekit.propagation.conversion.averaging.elements.AveragedEquinoctialWithMeanAngle, frame: org.orekit.frames.Frame, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider): ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, elements: org.orekit.propagation.conversion.averaging.elements.AveragedEquinoctialWithMeanAngle, frame: org.orekit.frames.Frame, harmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider):
+        """
+        Constructor.
+        
+        Parameters:
+            date (AbsoluteDate): epoch
+            elements (AveragedEquinoctialWithMeanAngle): averaged orbital elements
+            frame (Frame): reference frame
+            harmonicsProvider (UnnormalizedSphericalHarmonicsProvider): spherical harmonics provider
+        
+        
+        """
+        ...
     @staticmethod
-    def createForces(unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider) -> java.util.Collection[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]: ...
+    def createForces(provider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider) -> java.util.Collection[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]:
+        """
+        Create collection of fist 6 zonal DSST forces.
+        
+        Parameters:
+            provider (UnnormalizedSphericalHarmonicsProvider): spherical harmonics provider
+        
+        Returns:
+            six first zonal forces
+        
+        
+        """
+        ...
     def getAveragedElements(self) -> org.orekit.propagation.conversion.averaging.elements.AveragedEquinoctialWithMeanAngle:
         """
-            Getter for the averaged orbital elements.
+        Getter for the averaged orbital elements.
         
-            Returns:
-                averaged elements
+        Returns:
+            averaged elements
         
         
         """
         ...
     def getOrbitType(self) -> org.orekit.orbits.OrbitType:
         """
-            Getter for the averaged orbit type.
+        Getter for the averaged orbit type.
         
-            Returns:
-                orbit type
+        Returns:
+            orbit type
         
         
         """
         ...
     def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType:
         """
-            Getter for the averaged position angle.
+        Getter for the averaged position angle.
         
-            Returns:
-                position angle type
+        Returns:
+            position angle type
         
         
         """
         ...
     def toOsculatingOrbit(self) -> org.orekit.orbits.Orbit:
         """
-            Convert instance to an osculating orbit.
+        Convert instance to an osculating orbit.
         
-            Returns:
-                osculating orbit
+        Returns:
+            osculating orbit
         
         
         """
@@ -383,71 +577,150 @@ class DSST6X0OrbitalState(org.orekit.propagation.conversion.averaging.AbstractHa
 
 class EcksteinHechlerOrbitalState(org.orekit.propagation.conversion.averaging.AbstractHarmonicsBasedOrbitalState):
     """
-    public class EcksteinHechlerOrbitalState extends :class:`~org.orekit.propagation.conversion.averaging.AbstractAveragedOrbitalState`
+    Class representing an averaged orbital state as in the Eckstein-Hechler theory.
     
-        Class representing an averaged orbital state as in the Eckstein-Hechler theory.
+    Since:
+        12.1
     
-        Since:
-            12.1
-    
-        Also see:
-            :class:`~org.orekit.propagation.conversion.averaging.AveragedOrbitalState`,
-            :class:`~org.orekit.propagation.analytical.EcksteinHechlerPropagator`
+    Also see:
+        AveragedOrbitalState,
+        EcksteinHechlerPropagator
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, averagedCircularWithMeanAngle: org.orekit.propagation.conversion.averaging.elements.AveragedCircularWithMeanAngle, frame: org.orekit.frames.Frame, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider): ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, elements: org.orekit.propagation.conversion.averaging.elements.AveragedCircularWithMeanAngle, frame: org.orekit.frames.Frame, harmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider):
+        """
+        Constructor.
+        
+        Parameters:
+            date (AbsoluteDate): epoch
+            elements (AveragedCircularWithMeanAngle): averaged orbital elements
+            frame (Frame): reference frame
+            harmonicsProvider (UnnormalizedSphericalHarmonicsProvider): spherical harmonics provider
+        
+        
+        """
+        ...
     def getAveragedElements(self) -> org.orekit.propagation.conversion.averaging.elements.AveragedCircularWithMeanAngle:
         """
-            Getter for the averaged orbital elements.
+        Getter for the averaged orbital elements.
         
-            Returns:
-                averaged elements
+        Returns:
+            averaged elements
         
         
         """
         ...
     def getOrbitType(self) -> org.orekit.orbits.OrbitType:
         """
-            Getter for the averaged orbit type.
+        Getter for the averaged orbit type.
         
-            Returns:
-                orbit type
+        Returns:
+            orbit type
         
         
         """
         ...
     def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType:
         """
-            Getter for the averaged position angle.
+        Getter for the averaged position angle.
         
-            Returns:
-                position angle type
+        Returns:
+            position angle type
         
         
         """
         ...
     def toOsculatingOrbit(self) -> org.orekit.orbits.Orbit:
         """
-            Convert instance to an osculating orbit.
+        Convert instance to an osculating orbit.
         
-            Returns:
-                osculating orbit
+        Returns:
+            osculating orbit
         
         
         """
         ...
 
 class PythonAbstractHarmonicsBasedOrbitalState(org.orekit.propagation.conversion.averaging.AbstractHarmonicsBasedOrbitalState):
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider): ...
-    def finalize(self) -> None: ...
-    def getAveragedElements(self) -> org.orekit.propagation.conversion.averaging.elements.AveragedOrbitalElements: ...
-    def getOrbitType(self) -> org.orekit.orbits.OrbitType: ...
-    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType: ...
-    def pythonDecRef(self) -> None: ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame, harmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider):
+        """
+        Protected constructor.
+        
+        Parameters:
+            date (AbsoluteDate): epoch
+            frame (Frame): reference frame
+            harmonicsProvider (UnnormalizedSphericalHarmonicsProvider): spherical harmonics provider
+        
+        
+        """
+        ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: meth:`~org.orekit.propagation.conversion.averaging.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getAveragedElements(self) -> org.orekit.propagation.conversion.averaging.elements.AveragedOrbitalElements:
+        """
+        Description copied from interface: getAveragedElements Getter for the averaged orbital elements.
+        
+        Returns:
+            averaged elements
+        
+        
+        """
+        ...
+    def getOrbitType(self) -> org.orekit.orbits.OrbitType:
+        """
+        Description copied from interface: getOrbitType Getter for the averaged orbit type.
+        
+        Returns:
+            orbit type
+        
+        
+        """
+        ...
+    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType:
+        """
+        Description copied from interface: getPositionAngleType Getter for the averaged position angle.
+        
+        Returns:
+            position angle type
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-    def toOsculatingOrbit(self) -> org.orekit.orbits.Orbit: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    def toOsculatingOrbit(self) -> org.orekit.orbits.Orbit:
+        """
+        Description copied from interface: toOsculatingOrbit Convert instance to an osculating orbit.
+        
+        Returns:
+            osculating orbit
+        
+        
+        """
+        ...
 
 class AbstractHarmonicsBasedOrbitalState: ...
 

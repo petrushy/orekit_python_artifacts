@@ -18,57 +18,84 @@ import typing
 
 class AklToussaintHeuristic:
     """
-    public final classAklToussaintHeuristic extends :class:`~org.hipparchus.geometry.euclidean.twod.hull.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    A simple heuristic to improve the performance of convex hull algorithms.
     
-        A simple heuristic to improve the performance of convex hull algorithms.
+    The heuristic is based on the idea of a convex quadrilateral, which is formed by four points with the lowest and highest x / y coordinates. Any point that lies inside this quadrilateral can not be part of the convex hull and can thus be safely discarded before generating the convex hull itself.
     
-        The heuristic is based on the idea of a convex quadrilateral, which is formed by four points with the lowest and highest
-        x / y coordinates. Any point that lies inside this quadrilateral can not be part of the convex hull and can thus be
-        safely discarded before generating the convex hull itself.
+    The complexity of the operation is O(n), and may greatly improve the time it takes to construct the convex hull afterwards, depending on the point distribution.
     
-        The complexity of the operation is O(n), and may greatly improve the time it takes to construct the convex hull
-        afterwards, depending on the point distribution.
-    
-        Also see:
-    
-              - ` Akl-Toussaint heuristic (Wikipedia) <http://en.wikipedia.org/wiki/Convex_hull_algorithms#Akl-Toussaint_heuristic>`
+          - ` Akl-Toussaint heuristic (Wikipedia) <http://en.wikipedia.org/wiki/Convex_hull_algorithms#Akl-Toussaint_heuristic>`
     """
     @staticmethod
-    def reducePoints(collection: typing.Union[java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Sequence[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Set[org.hipparchus.geometry.euclidean.twod.Vector2D]]) -> java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D]: ...
+    def reducePoints(points: typing.Union[java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Sequence[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Set[org.hipparchus.geometry.euclidean.twod.Vector2D]]) -> java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D]:
+        """
+        Returns a point set that is reduced by all points for which it is safe to assume that they are not part of the convex hull.
+        
+        Parameters:
+            points (Collection<Vector2D> points): the original point set
+        
+        Returns:
+            a reduced point set, useful as input for convex hull algorithms
+        
+        
+        """
+        ...
 
 class ConvexHull2D(org.hipparchus.geometry.hull.ConvexHull[org.hipparchus.geometry.euclidean.twod.Euclidean2D, org.hipparchus.geometry.euclidean.twod.Vector2D, org.hipparchus.geometry.euclidean.twod.Line, org.hipparchus.geometry.euclidean.twod.SubLine], java.io.Serializable):
     """
-    public classConvexHull2D extends :class:`~org.hipparchus.geometry.euclidean.twod.hull.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
-    implements :class:`~org.hipparchus.geometry.hull.ConvexHull`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`,:class:`~org.hipparchus.geometry.euclidean.twod.Vector2D`,:class:`~org.hipparchus.geometry.euclidean.twod.Line`,:class:`~org.hipparchus.geometry.euclidean.twod.SubLine`>, :class:`~org.hipparchus.geometry.euclidean.twod.hull.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    implements ConvexHull<Euclidean2D,Vector2D,Line,SubLine>, Serializable
     
-        This class represents a convex hull in an two-dimensional euclidean space.
+    This class represents a convex hull in an two-dimensional euclidean space.
     
-        Also see:
-    
-              - :meth:`~serialized`
+          - serialized
     """
-    def __init__(self, vector2DArray: typing.Union[typing.List[org.hipparchus.geometry.euclidean.twod.Vector2D], jpype.JArray], double: float): ...
-    def createRegion(self) -> org.hipparchus.geometry.partitioning.Region[org.hipparchus.geometry.euclidean.twod.Euclidean2D, org.hipparchus.geometry.euclidean.twod.Vector2D, org.hipparchus.geometry.euclidean.twod.Line, org.hipparchus.geometry.euclidean.twod.SubLine]: ...
+    def __init__(self, vertices: typing.Union[typing.List[org.hipparchus.geometry.euclidean.twod.Vector2D], jpype.JArray], tolerance: float):
+        """
+        Simple constructor.
+        
+        Parameters:
+            vertices (Vector2D[]): the vertices of the convex hull, must be ordered
+            tolerance (double): tolerance below which points are considered identical
+        
+        Raises:
+            hipparchus: if the vertices do not form a convex hull
+        
+        
+        """
+        ...
+    def createRegion(self) -> org.hipparchus.geometry.partitioning.Region[org.hipparchus.geometry.euclidean.twod.Euclidean2D, org.hipparchus.geometry.euclidean.twod.Vector2D, org.hipparchus.geometry.euclidean.twod.Line, org.hipparchus.geometry.euclidean.twod.SubLine]:
+        """
+        Returns a new region that is enclosed by the convex hull.
+        
+        Specified by: createRegion in interface ConvexHull
+        
+        Returns:
+            the region enclosed by the convex hull
+        
+        Raises:
+            hipparchus: if the number of vertices is not enough to build a region in the respective space
+        
+        
+        """
+        ...
     def getLineSegments(self) -> typing.MutableSequence[org.hipparchus.geometry.euclidean.twod.Segment]:
         """
-            Get the line segments of the convex hull, ordered.
+        Get the line segments of the convex hull, ordered.
         
-            Returns:
-                the line segments of the convex hull
+        Returns:
+            the line segments of the convex hull
         
         
         """
         ...
     def getVertices(self) -> typing.MutableSequence[org.hipparchus.geometry.euclidean.twod.Vector2D]:
         """
-            Get the vertices of the convex hull.
+        Get the vertices of the convex hull.
         
-            Specified by:
-                :meth:`~org.hipparchus.geometry.hull.ConvexHull.getVertices` in
-                interface :class:`~org.hipparchus.geometry.hull.ConvexHull`
+        Specified by: getVertices in interface ConvexHull
         
-            Returns:
-                vertices of the convex hull
+        Returns:
+            vertices of the convex hull
         
         
         """
@@ -76,34 +103,39 @@ class ConvexHull2D(org.hipparchus.geometry.hull.ConvexHull[org.hipparchus.geomet
 
 class ConvexHullGenerator2D(org.hipparchus.geometry.hull.ConvexHullGenerator[org.hipparchus.geometry.euclidean.twod.Euclidean2D, org.hipparchus.geometry.euclidean.twod.Vector2D, org.hipparchus.geometry.euclidean.twod.Line, org.hipparchus.geometry.euclidean.twod.SubLine]):
     """
-    public interfaceConvexHullGenerator2Dextends :class:`~org.hipparchus.geometry.hull.ConvexHullGenerator`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`,:class:`~org.hipparchus.geometry.euclidean.twod.Vector2D`,:class:`~org.hipparchus.geometry.euclidean.twod.Line`,:class:`~org.hipparchus.geometry.euclidean.twod.SubLine`>
-    
-        Interface for convex hull generators in the two-dimensional euclidean space.
+    Interface for convex hull generators in the two-dimensional euclidean space.
     """
-    def generate(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Sequence[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Set[org.hipparchus.geometry.euclidean.twod.Vector2D]]) -> ConvexHull2D: ...
+    def generate(self, points: typing.Union[java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Sequence[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Set[org.hipparchus.geometry.euclidean.twod.Vector2D]]) -> ConvexHull2D:
+        """
+        Builds the convex hull from the set of input points.
+        
+        Specified by: generate in interface ConvexHullGenerator
+        
+        Parameters:
+            points (Collection<Vector2D> points): the set of input points
+        
+        Returns:
+            the convex hull
+        
+        Raises:
+            hipparchus: if generator fails to generate a convex hull for the given set of input points
+        
+        
+        """
+        ...
 
 class MonotoneChain(org.hipparchus.geometry.euclidean.twod.hull.AbstractConvexHullGenerator2D):
     """
-    public classMonotoneChain extends :class:`~org.hipparchus.geometry.euclidean.twod.hull.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Implements Andrew's monotone chain method to generate the convex hull of a finite set of points in the two-dimensional euclidean space.
     
-        Implements Andrew's monotone chain method to generate the convex hull of a finite set of points in the two-dimensional
-        euclidean space.
+    The runtime complexity is O(n log n), with n being the number of input points. If the point set is already sorted (by x-coordinate), the runtime complexity is O(n).
     
-        The runtime complexity is O(n log n), with n being the number of input points. If the point set is already sorted (by
-        x-coordinate), the runtime complexity is O(n).
+    The implementation is not sensitive to collinear points on the hull. The parameter includeCollinearPoints allows to control the behavior with regard to collinear points. If true, all points on the boundary of the hull will be added to the hull vertices, otherwise only the extreme points will be present. By default, collinear points are not added as hull vertices.
     
-        The implementation is not sensitive to collinear points on the hull. The parameter :code:`includeCollinearPoints` allows
-        to control the behavior with regard to collinear points. If :code:`true`, all points on the boundary of the hull will be
-        added to the hull vertices, otherwise only the extreme points will be present. By default, collinear points are not
-        added as hull vertices.
+    The tolerance parameter (default: 1e-10) is used as epsilon criteria to determine identical and collinear points.
     
-        The :code:`tolerance` parameter (default: 1e-10) is used as epsilon criteria to determine identical and collinear
-        points.
-    
-        Also see:
-    
-              - ` Andrew's monotone chain algorithm (Wikibooks)
-                <http://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain>`
+          - ` Andrew's monotone chain algorithm (Wikibooks)
+            <http://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain>`
     """
     @typing.overload
     def __init__(self): ...
@@ -111,7 +143,19 @@ class MonotoneChain(org.hipparchus.geometry.euclidean.twod.hull.AbstractConvexHu
     def __init__(self, boolean: bool): ...
     @typing.overload
     def __init__(self, boolean: bool, double: float): ...
-    def findHullVertices(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Sequence[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Set[org.hipparchus.geometry.euclidean.twod.Vector2D]]) -> java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D]: ...
+    def findHullVertices(self, points: typing.Union[java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Sequence[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Set[org.hipparchus.geometry.euclidean.twod.Vector2D]]) -> java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D]:
+        """
+        Find the convex hull vertices from the set of input points.
+        
+        Parameters:
+            points (Collection<Vector2D> points): the set of input points
+        
+        Returns:
+            the convex hull vertices in CCW winding
+        
+        
+        """
+        ...
 
 class AbstractConvexHullGenerator2D: ...
 

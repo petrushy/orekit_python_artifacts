@@ -34,26 +34,17 @@ import typing
 
 class EphemerisOcmWriter(org.orekit.files.general.EphemerisFileWriter):
     """
-    public class EphemerisOcmWriter extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFileWriter`
+    An EphemerisFileWriter generating Ocm files.
     
-        An :class:`~org.orekit.files.general.EphemerisFileWriter` generating :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`
-        files.
+    This writer is intended to write only trajectory state history blocks. It does not writes physical properties, covariance data, maneuver data, perturbations parameters, orbit determination or user-defined parameters. If these blocks are needed, then OcmWriter must be used as it handles all OCM data blocks.
     
-        This writer is intended to write only trajectory state history blocks. It does not writes physical properties,
-        covariance data, maneuver data, perturbations parameters, orbit determination or user-defined parameters. If these
-        blocks are needed, then :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmWriter` must be used as it handles all OCM data
-        blocks.
+    The trajectory blocks metadata identifiers (TRAJ_ID, TRAJ_PREV_ID, TRAJ_NEXT_ID) are updated automatically using incrementTrajID, so users should generally only set setTrajID in the template.
     
-        The trajectory blocks metadata identifiers (:code:`TRAJ_ID`, :code:`TRAJ_PREV_ID`, :code:`TRAJ_NEXT_ID`) are updated
-        automatically using :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistoryMetadata.incrementTrajID`, so users
-        should generally only set :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistoryMetadata.setTrajID` in the
-        template.
+    Since:
+        12.0
     
-        Since:
-            12.0
-    
-        Also see:
-            :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmWriter`, :class:`~org.orekit.files.ccsds.ndm.odm.ocm.StreamingOcmWriter`
+    Also see:
+        OcmWriter, StreamingOcmWriter
     """
     @typing.overload
     def __init__(self, ocmWriter: 'OcmWriter', odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, ocmMetadata: 'OcmMetadata', trajectoryStateHistoryMetadata: 'TrajectoryStateHistoryMetadata', fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, double: float, int: int): ...
@@ -70,12 +61,10 @@ class EphemerisOcmWriter(org.orekit.files.general.EphemerisFileWriter):
 
 class ManBasis(java.lang.Enum['ManBasis']):
     """
-    public enum ManBasis extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ManBasis`>
+    Basis of maneuver used in CCSDS Ocm.
     
-        Basis of maneuver used in CCSDS :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     CANDIDATE: typing.ClassVar['ManBasis'] = ...
     PLANNED: typing.ClassVar['ManBasis'] = ...
@@ -90,20 +79,19 @@ class ManBasis(java.lang.Enum['ManBasis']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'ManBasis':
+    def valueOf(name: str) -> 'ManBasis':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -111,17 +99,15 @@ class ManBasis(java.lang.Enum['ManBasis']):
     @staticmethod
     def values() -> typing.MutableSequence['ManBasis']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (ManBasis c : ManBasis.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (ManBasis c : ManBasis.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -129,12 +115,10 @@ class ManBasis(java.lang.Enum['ManBasis']):
 
 class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
     """
-    public enum ManeuverFieldType extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ManeuverFieldType`>
+    Maneuver field type used in CCSDS Ocm.
     
-        Maneuver field type used in CCSDS :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     TIME_ABSOLUTE: typing.ClassVar['ManeuverFieldType'] = ...
     TIME_RELATIVE: typing.ClassVar['ManeuverFieldType'] = ...
@@ -168,32 +152,32 @@ class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
     DEPLOY_DIR_SIGMA: typing.ClassVar['ManeuverFieldType'] = ...
     DEPLOY_DV_RATIO: typing.ClassVar['ManeuverFieldType'] = ...
     DEPLOY_DV_CDA: typing.ClassVar['ManeuverFieldType'] = ...
-    def checkUnit(self, unit: org.orekit.utils.units.Unit) -> None:
+    def checkUnit(self, parsedUnit: org.orekit.utils.units.Unit) -> None:
         """
-            Check if parsed unit is compatible with field type.
+        Check if parsed unit is compatible with field type.
         
-            Parameters:
-                parsedUnit (:class:`~org.orekit.utils.units.Unit`): unit to check
+        Parameters:
+            parsedUnit (Unit): unit to check
         
         
         """
         ...
     def getUnit(self) -> org.orekit.utils.units.Unit:
         """
-            Get the field unit.
+        Get the field unit.
         
-            Returns:
-                field unit
+        Returns:
+            field unit
         
         
         """
         ...
     def isTime(self) -> bool:
         """
-            Check if a field is a time field.
+        Check if a field is a time field.
         
-            Returns:
-                true if field is a time field
+        Returns:
+            true if field is a time field
         
         
         """
@@ -201,43 +185,40 @@ class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
     @typing.overload
     def outputField(self, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, orbitManeuver: 'OrbitManeuver') -> str:
         """
-            Output one maneuver field.
+        Output one maneuver field.
         
-            Parameters:
-                converter (:class:`~org.orekit.files.ccsds.definitions.TimeConverter`): converter for dates
-                maneuver (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuver`): maneuver containing the field to output
-                formatter (:class:`~org.orekit.utils.Formatter`): used format doubles and dates to strings
+        Parameters:
+            converter (TimeConverter): converter for dates
+            maneuver (OrbitManeuver): maneuver containing the field to output
+            formatter (Formatter): used format doubles and dates to strings
         
-            Returns:
-                output field
+        Returns:
+            output field
         
-            Deprecated.
-            since 13.0, because formatter should be specified. Use
-            :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.ManeuverFieldType.outputField` instead.
-            Output one maneuver field.
+        Deprecated. since 13.0, because formatter should be specified. Use outputField instead. Output one maneuver field.
         
-            Parameters:
-                converter (:class:`~org.orekit.files.ccsds.definitions.TimeConverter`): converter for dates
-                maneuver (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuver`): maneuver containing the field to output
+        Parameters:
+            converter (TimeConverter): converter for dates
+            maneuver (OrbitManeuver): maneuver containing the field to output
         
-            Returns:
-                output field
+        Returns:
+            output field
         
         
         """
         ...
     @typing.overload
     def outputField(self, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, orbitManeuver: 'OrbitManeuver', formatter: org.orekit.utils.Formatter) -> str: ...
-    def process(self, string: str, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, orbitManeuver: 'OrbitManeuver', int: int, string2: str) -> None:
+    def process(self, field: str, context: org.orekit.files.ccsds.utils.ContextBinding, maneuver: 'OrbitManeuver', lineNumber: int, fileName: str) -> None:
         """
-            Process one field.
+        Process one field.
         
-            Parameters:
-                field (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): field to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                maneuver (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuver`): maneuver to fill
-                lineNumber (int): line number at which the field occurs
-                fileName (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the file in which the field occurs
+        Parameters:
+            field (String): field to process
+            context (ContextBinding): context binding
+            maneuver (OrbitManeuver): maneuver to fill
+            lineNumber (int): line number at which the field occurs
+            fileName (String): name of the file in which the field occurs
         
         
         """
@@ -248,20 +229,19 @@ class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'ManeuverFieldType':
+    def valueOf(name: str) -> 'ManeuverFieldType':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -269,17 +249,15 @@ class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
     @staticmethod
     def values() -> typing.MutableSequence['ManeuverFieldType']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (ManeuverFieldType c : ManeuverFieldType.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (ManeuverFieldType c : ManeuverFieldType.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -287,12 +265,10 @@ class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
 
 class ObjectType(java.lang.Enum['ObjectType']):
     """
-    public enum ObjectType extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ObjectType`>
+    Object type used in CCSDS Ocm.
     
-        Object type used in CCSDS :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     PAYLOAD: typing.ClassVar['ObjectType'] = ...
     ROCKET_BODY: typing.ClassVar['ObjectType'] = ...
@@ -305,20 +281,19 @@ class ObjectType(java.lang.Enum['ObjectType']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'ObjectType':
+    def valueOf(name: str) -> 'ObjectType':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -326,17 +301,15 @@ class ObjectType(java.lang.Enum['ObjectType']):
     @staticmethod
     def values() -> typing.MutableSequence['ObjectType']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (ObjectType c : ObjectType.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (ObjectType c : ObjectType.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -344,166 +317,225 @@ class ObjectType(java.lang.Enum['ObjectType']):
 
 class Ocm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.ndm.odm.OdmHeader, org.orekit.files.ccsds.section.Segment['OcmMetadata', 'OcmData']], org.orekit.files.general.EphemerisFile[org.orekit.utils.TimeStampedPVCoordinates, 'TrajectoryStateHistory']):
     """
-    public class Ocm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmHeader`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmData`>> implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`, :class:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistory`>
+    This class gathers the informations present in the Orbit Comprehensive Message (OCM).
     
-        This class gathers the informations present in the Orbit Comprehensive Message (OCM).
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     ROOT: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ROOT
+    Root element for XML messages.
     
-        Root element for XML messages.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     FORMAT_VERSION_KEY: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` FORMAT_VERSION_KEY
+    Key for format version.
     
-        Key for format version.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     TRAJ_LINE: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` TRAJ_LINE
+    Trajectory line element for XML messages.
     
-        Trajectory line element for XML messages.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     COV_LINE: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` COV_LINE
+    Covariance line element for XML messages.
     
-        Covariance line element for XML messages.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     MAN_LINE: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MAN_LINE
+    Maneuver line element for XML messages.
     
-        Maneuver line element for XML messages.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     UNKNOWN_OBJECT: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` UNKNOWN_OBJECT
+    Default name for unknown object.
     
-        Default name for unknown object.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, list: java.util.List[org.orekit.files.ccsds.section.Segment['OcmMetadata', 'OcmData']], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, double: float): ...
+    def __init__(self, header: org.orekit.files.ccsds.ndm.odm.OdmHeader, segments: java.util.List[org.orekit.files.ccsds.section.Segment['OcmMetadata', 'OcmData']], conventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, mu: float):
+        """
+        Simple constructor.
+        
+        Parameters:
+            header (OdmHeader): file header
+            segments (List<Segment<OcmMetadata, OcmData>>): ile segments
+            conventions (IERSConventions): IERS conventions
+            dataContext (DataContext): used for creating frames, time scales, etc.
+            mu (double): Gravitational coefficient to use for building Cartesian/Keplerian orbits.
+        
+        
+        """
+        ...
     def getData(self) -> 'OcmData':
         """
-            Get the data from the single :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getSegments`.
+        Get the data from the single getSegments.
         
-            Returns:
-                data from the single :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getSegments`
+        Returns:
+            data from the single getSegments
         
         
         """
         ...
     def getMetadata(self) -> 'OcmMetadata':
         """
-            Get the metadata from the single :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getSegments`.
+        Get the metadata from the single getSegments.
         
-            Returns:
-                metadata from the single :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getSegments`
+        Returns:
+            metadata from the single getSegments
         
         
         """
         ...
-    def getSatellites(self) -> java.util.Map[str, 'OcmSatelliteEphemeris']: ...
+    def getSatellites(self) -> java.util.Map[str, 'OcmSatelliteEphemeris']:
+        """
+        Get the loaded ephemeris for each satellite in the file.
+        
+        The metadata entries checked for use as the key are the following ones, the first non-null being used. The map from OCM files always contains only one object.
+        
+          - getObjectName
+          - getInternationalDesignator
+          - getObjectDesignator
+          - the default name UNKNOWN_OBJECT for unknown objects
+        
+        Specified by: getSatellites in interface EphemerisFile
+        
+        Returns:
+            a map from the satellite's ID to the information about that satellite contained in the file.
+        
+        
+        """
+        ...
 
 class OcmData(org.orekit.files.ccsds.section.Data):
     """
-    public class OcmData extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.section.Data`
+    Data container for Orbit Comprehensive Messages.
     
-        Data container for Orbit Comprehensive Messages.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, list: java.util.List['TrajectoryStateHistory'], orbitPhysicalProperties: 'OrbitPhysicalProperties', list2: java.util.List['OrbitCovarianceHistory'], list3: java.util.List['OrbitManeuverHistory'], perturbations: 'Perturbations', orbitDetermination: 'OrbitDetermination', userDefined: org.orekit.files.ccsds.ndm.odm.UserDefined): ...
-    def getCovarianceBlocks(self) -> java.util.List['OrbitCovarianceHistory']: ...
-    def getManeuverBlocks(self) -> java.util.List['OrbitManeuverHistory']: ...
+    def __init__(self, trajectoryBlocks: java.util.List['TrajectoryStateHistory'], physicBlock: 'OrbitPhysicalProperties', covarianceBlocks: java.util.List['OrbitCovarianceHistory'], maneuverBlocks: java.util.List['OrbitManeuverHistory'], perturbationsBlock: 'Perturbations', orbitDeterminationBlock: 'OrbitDetermination', userDefinedBlock: org.orekit.files.ccsds.ndm.odm.UserDefined):
+        """
+        Simple constructor.
+        
+        Parameters:
+            trajectoryBlocks (List<TrajectoryStateHistory> trajectoryBlocks): trajectory state histories logical blocks (may be empty)
+            physicBlock (OrbitPhysicalProperties): physical properties logical block (may be null)
+            covarianceBlocks (List<OrbitCovarianceHistory> covarianceBlocks): covariance logical blocks (may be empty)
+            maneuverBlocks (List<OrbitManeuverHistory> maneuverBlocks): maneuvers logical blocks (may be empty)
+            perturbationsBlock (Perturbations): perturbations logical block (may be null)
+            orbitDeterminationBlock (OrbitDetermination): orbit determination logical block (may be null)
+            userDefinedBlock (UserDefined): user defined parameters logical block (may be null)
+        
+        
+        """
+        ...
+    def getCovarianceBlocks(self) -> java.util.List['OrbitCovarianceHistory']:
+        """
+        Get covariance logical blocks.
+        
+        Returns:
+            covariance logical blocks (may be null)
+        
+        
+        """
+        ...
+    def getManeuverBlocks(self) -> java.util.List['OrbitManeuverHistory']:
+        """
+        Get maneuvers logical blocks.
+        
+        Returns:
+            maneuvers logical block (may be null)
+        
+        
+        """
+        ...
     def getOrbitDeterminationBlock(self) -> 'OrbitDetermination':
         """
-            Get orbit determination logical block.
+        Get orbit determination logical block.
         
-            Returns:
-                orbit determination logical block (may be null)
+        Returns:
+            orbit determination logical block (may be null)
         
         
         """
         ...
     def getPerturbationsBlock(self) -> 'Perturbations':
         """
-            Get perturbations logical block.
+        Get perturbations logical block.
         
-            Returns:
-                perturbations logical block (may be null)
+        Returns:
+            perturbations logical block (may be null)
         
         
         """
         ...
     def getPhysicBlock(self) -> 'OrbitPhysicalProperties':
         """
-            Get physical properties logical block.
+        Get physical properties logical block.
         
-            Returns:
-                physical properties logical block (may be null)
+        Returns:
+            physical properties logical block (may be null)
         
         
         """
         ...
-    def getTrajectoryBlocks(self) -> java.util.List['TrajectoryStateHistory']: ...
+    def getTrajectoryBlocks(self) -> java.util.List['TrajectoryStateHistory']:
+        """
+        Get trajectory state histories logical blocks.
+        
+        Returns:
+            trajectory state histories logical blocks (may be null)
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
     def getUserDefinedBlock(self) -> org.orekit.files.ccsds.ndm.odm.UserDefined:
         """
-            Get user defined parameters logical block.
+        Get user defined parameters logical block.
         
-            Returns:
-                user defined parameters logical block (may be null)
+        Returns:
+            user defined parameters logical block (may be null)
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def validate(self, version: float) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Check is all mandatory entries have been initialized.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
+        Specified by: validate in interface Section
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            version (double): format version
         
         
         """
@@ -511,12 +543,10 @@ class OcmData(org.orekit.files.ccsds.section.Data):
 
 class OcmDataSubStructureKey(java.lang.Enum['OcmDataSubStructureKey']):
     """
-    public enum OcmDataSubStructureKey extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmDataSubStructureKey`>
+    Keywords for OCM data sub-structure.
     
-        Keywords for OCM data sub-structure.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     TRAJ: typing.ClassVar['OcmDataSubStructureKey'] = ...
     traj: typing.ClassVar['OcmDataSubStructureKey'] = ...
@@ -532,16 +562,16 @@ class OcmDataSubStructureKey(java.lang.Enum['OcmDataSubStructureKey']):
     od: typing.ClassVar['OcmDataSubStructureKey'] = ...
     USER: typing.ClassVar['OcmDataSubStructureKey'] = ...
     user: typing.ClassVar['OcmDataSubStructureKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, ocmParser: 'OcmParser') -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, parser: 'OcmParser') -> bool:
         """
-            Process one token.
+        Process one token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                parser (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmParser`): OCM file parser
+        Parameters:
+            token (ParseToken): token to process
+            parser (OcmParser): OCM file parser
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -552,20 +582,19 @@ class OcmDataSubStructureKey(java.lang.Enum['OcmDataSubStructureKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'OcmDataSubStructureKey':
+    def valueOf(name: str) -> 'OcmDataSubStructureKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -573,17 +602,15 @@ class OcmDataSubStructureKey(java.lang.Enum['OcmDataSubStructureKey']):
     @staticmethod
     def values() -> typing.MutableSequence['OcmDataSubStructureKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (OcmDataSubStructureKey c : OcmDataSubStructureKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (OcmDataSubStructureKey c : OcmDataSubStructureKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -591,12 +618,10 @@ class OcmDataSubStructureKey(java.lang.Enum['OcmDataSubStructureKey']):
 
 class OcmElements(java.lang.Enum['OcmElements']):
     """
-    public enum OcmElements extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmElements`>
+    Data elements types used in CCSDS Ocm.
     
-        Data elements types used in CCSDS :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     """
     ORB: typing.ClassVar['OcmElements'] = ...
     PHYS: typing.ClassVar['OcmElements'] = ...
@@ -611,20 +636,19 @@ class OcmElements(java.lang.Enum['OcmElements']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'OcmElements':
+    def valueOf(name: str) -> 'OcmElements':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -632,17 +656,15 @@ class OcmElements(java.lang.Enum['OcmElements']):
     @staticmethod
     def values() -> typing.MutableSequence['OcmElements']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (OcmElements c : OcmElements.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (OcmElements c : OcmElements.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -650,966 +672,1001 @@ class OcmElements(java.lang.Enum['OcmElements']):
 
 class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
     """
-    public class OcmMetadata extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmMetadata`
+    Meta-data for OcmMetadata.
     
-        Meta-data for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata`.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     DEFAULT_SCLK_OFFSET_AT_EPOCH: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_SCLK_OFFSET_AT_EPOCH
+    Default value for SCLK_OFFSET_AT_EPOCH.
     
-        Default value for SCLK_OFFSET_AT_EPOCH.
+    Since:
+        12.0
     
-        Since:
-            12.0
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     DEFAULT_SCLK_SEC_PER_SI_SEC: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_SCLK_SEC_PER_SI_SEC
+    Default value for SCLK_SEC_PER_SI_SEC.
     
-        Default value for SCLK_SEC_PER_SI_SEC.
+    Since:
+        12.0
     
-        Since:
-            12.0
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, dataContext: org.orekit.data.DataContext): ...
-    def copy(self, double: float) -> 'OcmMetadata':
+    def __init__(self, dataContext: org.orekit.data.DataContext):
         """
-            Copy the instance, making sure mandatory fields have been initialized.
+        Create a new meta-data.
         
-            Message ID, previous/next references, start and stop times are not copied.
+        Parameters:
+            dataContext (DataContext): data context
         
-            Parameters:
-                version (double): format version
         
-            Returns:
-                a new copy
+        """
+        ...
+    def copy(self, version: float) -> 'OcmMetadata':
+        """
+        Copy the instance, making sure mandatory fields have been initialized.
         
-            Since:
-                12.0
+        Message ID, previous/next references, start and stop times are not copied.
+        
+        Parameters:
+            version (double): format version
+        
+        Returns:
+            a new copy
+        
+        Since:
+            12.0
         
         
         """
         ...
     def getAdmMessageLink(self) -> str:
         """
-            Get the Unique identifier of Attitude Data Message linked to this Orbit Data Message.
+        Get the Unique identifier of Attitude Data Message linked to this Orbit Data Message.
         
-            Returns:
-                Unique identifier of Attitude Data Message linked to this Orbit Data Message
+        Returns:
+            Unique identifier of Attitude Data Message linked to this Orbit Data Message
         
         
         """
         ...
-    def getAlternateNames(self) -> java.util.List[str]: ...
+    def getAlternateNames(self) -> java.util.List[str]:
+        """
+        Get the alternate names for this space object.
+        
+        Returns:
+            alternate names
+        
+        
+        """
+        ...
     def getCatalogName(self) -> str:
         """
-            Get the specification of satellite catalog source.
+        Get the specification of satellite catalog source.
         
-            Returns:
-                specification of satellite catalog source
+        Returns:
+            specification of satellite catalog source
         
         
         """
         ...
     def getCdmMessageLink(self) -> str:
         """
-            Get the Unique identifier of Conjunction Data Message linked to this Orbit Data Message.
+        Get the Unique identifier of Conjunction Data Message linked to this Orbit Data Message.
         
-            Returns:
-                Unique identifier of Conjunction Data Message linked to this Orbit Data Message
+        Returns:
+            Unique identifier of Conjunction Data Message linked to this Orbit Data Message
         
         
         """
         ...
     def getCelestialSource(self) -> str:
         """
-            Get the source and version of celestial body (e.g. Sun/Earth/Planetary).
+        Get the source and version of celestial body (e.g. Sun/Earth/Planetary).
         
-            Returns:
-                source and version of celestial body (e.g. Sun/Earth/Planetary)
+        Returns:
+            source and version of celestial body (e.g. Sun/Earth/Planetary)
         
         
         """
         ...
     def getConstellation(self) -> str:
         """
-            Get the name of the constellation this space object belongs to.
+        Get the name of the constellation this space object belongs to.
         
-            Returns:
-                name of the constellation this space object belongs to
+        Returns:
+            name of the constellation this space object belongs to
         
         
         """
         ...
     def getCountry(self) -> str:
         """
-            Get the name of the country where the space object owner is based.
+        Get the name of the country where the space object owner is based.
         
-            Returns:
-                name of the country where the space object owner is based
+        Returns:
+            name of the country where the space object owner is based
         
         
         """
         ...
     def getEopSource(self) -> str:
         """
-            Get the source and version of Earth Orientation Parameters.
+        Get the source and version of Earth Orientation Parameters.
         
-            Returns:
-                source and version of Earth Orientation Parameters
+        Returns:
+            source and version of Earth Orientation Parameters
         
         
         """
         ...
     def getEpochT0(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the epoch to which *all* relative times are referenced in data blocks.
+        Get the epoch to which all relative times are referenced in data blocks.
         
-            Returns:
-                epoch to which *all* relative times are referenced in data blocks
+        Returns:
+            epoch to which all relative times are referenced in data blocks
         
         
         """
         ...
     def getInternationalDesignator(self) -> str:
         """
-            Get the international designator for the object.
+        Get the international designator for the object.
         
-            Returns:
-                international designator for the object
+        Returns:
+            international designator for the object
         
         
         """
         ...
     def getInterpMethodEOP(self) -> str:
         """
-            Get the interpolation method for Earth Orientation Parameters.
+        Get the interpolation method for Earth Orientation Parameters.
         
-            Returns:
-                interpolation method for Earth Orientation Parameters
+        Returns:
+            interpolation method for Earth Orientation Parameters
         
         
         """
         ...
     def getNextLeapEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the epoch of next leap second.
+        Get the epoch of next leap second.
         
-            Returns:
-                epoch of next leap second
+        Returns:
+            epoch of next leap second
         
-            Since:
-                11.2
+        Since:
+            11.2
         
         
         """
         ...
     def getNextLeapTaimutc(self) -> float:
         """
-            Get the difference (TAI – UTC) in seconds incorporated at epoch
-            :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getNextLeapEpoch`.
+        Get the difference (TAI – UTC) in seconds incorporated at epoch getNextLeapEpoch.
         
-            Returns:
-                difference (TAI – UTC) in seconds incorporated at epoch
-                :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getNextLeapEpoch`
+        Returns:
+            difference (TAI – UTC) in seconds incorporated at epoch
+            getNextLeapEpoch
         
-            Since:
-                11.2
+        Since:
+            11.2
         
         
         """
         ...
     def getNextMessageEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the creation date of next message from a given originator.
+        Get the creation date of next message from a given originator.
         
-            Returns:
-                creation date of next message from a given originator
+        Returns:
+            creation date of next message from a given originator
         
         
         """
         ...
     def getNextMessageID(self) -> str:
         """
-            Get the unique ID identifying next message from a given originator.
+        Get the unique ID identifying next message from a given originator.
         
-            Returns:
-                unique ID identifying next message from a given originator
+        Returns:
+            unique ID identifying next message from a given originator
         
         
         """
         ...
     def getObjectDesignator(self) -> str:
         """
-            Get the unique satellite identification designator for the object.
+        Get the unique satellite identification designator for the object.
         
-            Returns:
-                unique satellite identification designator for the object.
+        Returns:
+            unique satellite identification designator for the object.
         
         
         """
         ...
     def getObjectType(self) -> ObjectType:
         """
-            Get the type of object.
+        Get the type of object.
         
-            Returns:
-                type of object
+        Returns:
+            type of object
         
         
         """
         ...
-    def getOcmDataElements(self) -> java.util.List[OcmElements]: ...
+    def getOcmDataElements(self) -> java.util.List[OcmElements]:
+        """
+        Get the list of elements of information data blocks included in this message.
+        
+        Returns:
+            list of elements of information data blocks included in this message
+        
+        
+        """
+        ...
     def getOperator(self) -> str:
         """
-            Get the operator of the space object.
+        Get the operator of the space object.
         
-            Returns:
-                operator of the space object
+        Returns:
+            operator of the space object
         
         
         """
         ...
     def getOpsStatus(self) -> 'OpsStatus':
         """
-            Get the operational status.
+        Get the operational status.
         
-            Returns:
-                operational status
+        Returns:
+            operational status
         
         
         """
         ...
     def getOrbitCategory(self) -> 'OrbitCategory':
         """
-            Get the orbit category.
+        Get the orbit category.
         
-            Returns:
-                orbit category
+        Returns:
+            orbit category
         
         
         """
         ...
     def getOriginatorAddress(self) -> str:
         """
-            Get the address of Programmatic Point Of Contact at originator.
+        Get the address of Programmatic Point Of Contact at originator.
         
-            Returns:
-                address of Programmatic Point Of Contact at originator
+        Returns:
+            address of Programmatic Point Of Contact at originator
         
         
         """
         ...
     def getOriginatorEmail(self) -> str:
         """
-            Get the email address of Programmatic Point Of Contact at originator.
+        Get the email address of Programmatic Point Of Contact at originator.
         
-            Returns:
-                email address of Programmatic Point Of Contact at originator
+        Returns:
+            email address of Programmatic Point Of Contact at originator
         
-            Since:
-                11.2
+        Since:
+            11.2
         
         
         """
         ...
     def getOriginatorPOC(self) -> str:
         """
-            Get the programmatic Point Of Contact at originator.
+        Get the programmatic Point Of Contact at originator.
         
-            Returns:
-                programmatic Point Of Contact at originator
+        Returns:
+            programmatic Point Of Contact at originator
         
         
         """
         ...
     def getOriginatorPhone(self) -> str:
         """
-            Get the phone number of Programmatic Point Of Contact at originator.
+        Get the phone number of Programmatic Point Of Contact at originator.
         
-            Returns:
-                phone number of Programmatic Point Of Contact at originator
+        Returns:
+            phone number of Programmatic Point Of Contact at originator
         
         
         """
         ...
     def getOriginatorPosition(self) -> str:
         """
-            Get the position of Programmatic Point Of Contact at originator.
+        Get the position of Programmatic Point Of Contact at originator.
         
-            Returns:
-                position of Programmatic Point Of Contact at originator
+        Returns:
+            position of Programmatic Point Of Contact at originator
         
         
         """
         ...
     def getOwner(self) -> str:
         """
-            Get the owner of the space object.
+        Get the owner of the space object.
         
-            Returns:
-                owner of the space object
+        Returns:
+            owner of the space object
         
         
         """
         ...
     def getPreviousMessageEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the creation date of previous message from a given originator.
+        Get the creation date of previous message from a given originator.
         
-            Returns:
-                creation date of previous message from a given originator
+        Returns:
+            creation date of previous message from a given originator
         
         
         """
         ...
     def getPreviousMessageID(self) -> str:
         """
-            Get the unique ID identifying previous message from a given originator.
+        Get the unique ID identifying previous message from a given originator.
         
-            Returns:
-                unique ID identifying previous message from a given originator
+        Returns:
+            unique ID identifying previous message from a given originator
         
         
         """
         ...
     def getPrmMessageLink(self) -> str:
         """
-            Get the Unique identifier of Pointing Request Message linked to this Orbit Data Message.
+        Get the Unique identifier of Pointing Request Message linked to this Orbit Data Message.
         
-            Returns:
-                Unique identifier of Pointing Request Message linked to this Orbit Data Message
+        Returns:
+            Unique identifier of Pointing Request Message linked to this Orbit Data Message
         
         
         """
         ...
     def getRdmMessageLink(self) -> str:
         """
-            Get the Unique identifier of Reentry Data Message linked to this Orbit Data Message.
+        Get the Unique identifier of Reentry Data Message linked to this Orbit Data Message.
         
-            Returns:
-                Unique identifier of Reentry Data Message linked to this Orbit Data Message
+        Returns:
+            Unique identifier of Reentry Data Message linked to this Orbit Data Message
         
         
         """
         ...
     def getSclkOffsetAtEpoch(self) -> float:
         """
-            Get the spacecraft clock count at :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`.
+        Get the spacecraft clock count at getEpochT0.
         
-            Returns:
-                spacecraft clock count at :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`
+        Returns:
+            spacecraft clock count at getEpochT0
         
         
         """
         ...
     def getSclkSecPerSISec(self) -> float:
         """
-            Get the number of spacecraft clock seconds occurring during one SI second.
+        Get the number of spacecraft clock seconds occurring during one SI second.
         
-            Returns:
-                number of spacecraft clock seconds occurring during one SI second
+        Returns:
+            number of spacecraft clock seconds occurring during one SI second
         
         
         """
         ...
     def getStartTime(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the time of the earliest data contained in the OCM.
+        Get the time of the earliest data contained in the OCM.
         
-            Returns:
-                time of the earliest data contained in the OCM
+        Returns:
+            time of the earliest data contained in the OCM
         
         
         """
         ...
     def getStopTime(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the time of the latest data contained in the OCM.
+        Get the time of the latest data contained in the OCM.
         
-            Returns:
-                time of the latest data contained in the OCM
+        Returns:
+            time of the latest data contained in the OCM
         
         
         """
         ...
     def getTaimutcT0(self) -> float:
         """
-            Get the difference (TAI – UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`.
+        Get the difference (TAI – UTC) in seconds at epoch getEpochT0.
         
-            Returns:
-                difference (TAI – UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`
+        Returns:
+            difference (TAI – UTC) in seconds at epoch getEpochT0
         
         
         """
         ...
     def getTdmMessageLink(self) -> str:
         """
-            Get the Unique identifier of Tracking Data Message linked to this Orbit Data Message.
+        Get the Unique identifier of Tracking Data Message linked to this Orbit Data Message.
         
-            Returns:
-                Unique identifier of Tracking Data Message linked to this Orbit Data Message
+        Returns:
+            Unique identifier of Tracking Data Message linked to this Orbit Data Message
         
         
         """
         ...
     def getTechAddress(self) -> str:
         """
-            Get the address of Technical Point Of Contact at originator.
+        Get the address of Technical Point Of Contact at originator.
         
-            Returns:
-                address of Technical Point Of Contact at originator
+        Returns:
+            address of Technical Point Of Contact at originator
         
         
         """
         ...
     def getTechEmail(self) -> str:
         """
-            Get the email address of Technical Point Of Contact at originator.
+        Get the email address of Technical Point Of Contact at originator.
         
-            Returns:
-                email address of Technical Point Of Contact at originator
+        Returns:
+            email address of Technical Point Of Contact at originator
         
-            Since:
-                11.2
+        Since:
+            11.2
         
         
         """
         ...
     def getTechOrg(self) -> str:
         """
-            Get the creating agency or operator.
+        Get the creating agency or operator.
         
-            Returns:
-                creating agency or operator
+        Returns:
+            creating agency or operator
         
         
         """
         ...
     def getTechPOC(self) -> str:
         """
-            Get the Technical Point Of Contact at originator.
+        Get the Technical Point Of Contact at originator.
         
-            Returns:
-                Technical Point Of Contact at originator
+        Returns:
+            Technical Point Of Contact at originator
         
         
         """
         ...
     def getTechPhone(self) -> str:
         """
-            Get the phone number of Technical Point Of Contact at originator.
+        Get the phone number of Technical Point Of Contact at originator.
         
-            Returns:
-                phone number of Technical Point Of Contact at originator
+        Returns:
+            phone number of Technical Point Of Contact at originator
         
         
         """
         ...
     def getTechPosition(self) -> str:
         """
-            Get the position of Technical Point Of Contact at originator.
+        Get the position of Technical Point Of Contact at originator.
         
-            Returns:
-                position of Technical Point Of Contact at originator
+        Returns:
+            position of Technical Point Of Contact at originator
         
         
         """
         ...
     def getTimeSpan(self) -> float:
         """
-            Get the span of time in seconds that the OCM covers.
+        Get the span of time in seconds that the OCM covers.
         
-            Returns:
-                span of time in seconds that the OCM covers
+        Returns:
+            span of time in seconds that the OCM covers
         
         
         """
         ...
     def getUt1mutcT0(self) -> float:
         """
-            Get the difference (UT1 – UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`.
+        Get the difference (UT1 – UTC) in seconds at epoch getEpochT0.
         
-            Returns:
-                difference (UT1 – UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`
-        
-        
-        """
-        ...
-    def setAdmMessageLink(self, string: str) -> None:
-        """
-            Set the Unique identifier of Attitude Data Message linked to this Orbit Data Message.
-        
-            Parameters:
-                admMessageLink (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): Unique identifier of Attitude Data Message linked to this Orbit Data Message
+        Returns:
+            difference (UT1 – UTC) in seconds at epoch getEpochT0
         
         
         """
         ...
-    def setAlternateNames(self, list: java.util.List[str]) -> None: ...
-    def setCatalogName(self, string: str) -> None:
+    def setAdmMessageLink(self, admMessageLink: str) -> None:
         """
-            Set the specification of satellite catalog source.
+        Set the Unique identifier of Attitude Data Message linked to this Orbit Data Message.
         
-            Parameters:
-                catalogName (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): specification of satellite catalog source
-        
-        
-        """
-        ...
-    def setCdmMessageLink(self, string: str) -> None:
-        """
-            Set the Unique identifier of Conjunction Data Message linked to this Orbit Data Message.
-        
-            Parameters:
-                cdmMessageLink (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): Unique identifier of Conjunction Data Message linked to this Orbit Data Message
+        Parameters:
+            admMessageLink (String): Unique identifier of Attitude Data Message linked to this Orbit Data Message
         
         
         """
         ...
-    def setCelestialSource(self, string: str) -> None:
+    def setAlternateNames(self, alternateNames: java.util.List[str]) -> None:
         """
-            Set the source and version of celestial body (e.g. Sun/Earth/Planetary).
+        Set the alternate names for this space object.
         
-            Parameters:
-                celestialSource (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): source and version of celestial body (e.g. Sun/Earth/Planetary)
-        
-        
-        """
-        ...
-    def setConstellation(self, string: str) -> None:
-        """
-            Set the name of the constellation this space object belongs to.
-        
-            Parameters:
-                constellation (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the constellation this space object belongs to
+        Parameters:
+            alternateNames (List<String> alternateNames): alternate names
         
         
         """
         ...
-    def setCountry(self, string: str) -> None:
+    def setCatalogName(self, catalogName: str) -> None:
         """
-            Set the name of the country where the space object owner is based.
+        Set the specification of satellite catalog source.
         
-            Parameters:
-                country (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the country where the space object owner is based
-        
-        
-        """
-        ...
-    def setEopSource(self, string: str) -> None:
-        """
-            Set the source and version of Earth Orientation Parameters.
-        
-            Parameters:
-                eopSource (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): source and version of Earth Orientation Parameters
+        Parameters:
+            catalogName (String): specification of satellite catalog source
         
         
         """
         ...
-    def setEpochT0(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setCdmMessageLink(self, cdmMessageLink: str) -> None:
         """
-            Set the epoch to which *all* relative times are referenced in data blocks.
+        Set the Unique identifier of Conjunction Data Message linked to this Orbit Data Message.
         
-            Parameters:
-                epochT0 (:class:`~org.orekit.time.AbsoluteDate`): epoch to which *all* relative times are referenced in data blocks
-        
-        
-        """
-        ...
-    def setInternationalDesignator(self, string: str) -> None:
-        """
-            Set the international designator for the object.
-        
-            Parameters:
-                internationalDesignator (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): international designator for the object
+        Parameters:
+            cdmMessageLink (String): Unique identifier of Conjunction Data Message linked to this Orbit Data Message
         
         
         """
         ...
-    def setInterpMethodEOP(self, string: str) -> None:
+    def setCelestialSource(self, celestialSource: str) -> None:
         """
-            Set the interpolation method for Earth Orientation Parameters.
+        Set the source and version of celestial body (e.g. Sun/Earth/Planetary).
         
-            Parameters:
-                interpMethodEOP (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): interpolation method for Earth Orientation Parameters
-        
-        
-        """
-        ...
-    def setNextLeapEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Set the epoch of next leap second.
-        
-            Parameters:
-                nextLeapEpoch (:class:`~org.orekit.time.AbsoluteDate`): epoch of next leap second
-        
-            Since:
-                11.2
+        Parameters:
+            celestialSource (String): source and version of celestial body (e.g. Sun/Earth/Planetary)
         
         
         """
         ...
-    def setNextLeapTaimutc(self, double: float) -> None:
+    def setConstellation(self, constellation: str) -> None:
         """
-            Set the difference (TAI – UTC) in seconds incorporated at epoch
-            :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getNextLeapEpoch`.
+        Set the name of the constellation this space object belongs to.
         
-            Parameters:
-                nextLeapTaimutc (double): difference (TAI – UTC) in seconds incorporated at epoch
-                    :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getNextLeapEpoch`
-        
-            Since:
-                11.2
+        Parameters:
+            constellation (String): name of the constellation this space object belongs to
         
         
         """
         ...
-    def setNextMessageEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setCountry(self, country: str) -> None:
         """
-            Set the creation date of next message from a given originator.
+        Set the name of the country where the space object owner is based.
         
-            Parameters:
-                nextMessageEpoch (:class:`~org.orekit.time.AbsoluteDate`): creation date of next message from a given originator
-        
-        
-        """
-        ...
-    def setNextMessageID(self, string: str) -> None:
-        """
-            Set the unique ID identifying next message from a given originator.
-        
-            Parameters:
-                nextMessageID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): unique ID identifying next message from a given originator
+        Parameters:
+            country (String): name of the country where the space object owner is based
         
         
         """
         ...
-    def setObjectDesignator(self, string: str) -> None:
+    def setEopSource(self, eopSource: str) -> None:
         """
-            Set the unique satellite identification designator for the object.
+        Set the source and version of Earth Orientation Parameters.
         
-            Parameters:
-                objectDesignator (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): unique satellite identification designator for the object
+        Parameters:
+            eopSource (String): source and version of Earth Orientation Parameters
+        
+        
+        """
+        ...
+    def setEpochT0(self, epochT0: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Set the epoch to which all relative times are referenced in data blocks.
+        
+        Parameters:
+            epochT0 (AbsoluteDate): epoch to which all relative times are referenced in data blocks
+        
+        
+        """
+        ...
+    def setInternationalDesignator(self, internationalDesignator: str) -> None:
+        """
+        Set the international designator for the object.
+        
+        Parameters:
+            internationalDesignator (String): international designator for the object
+        
+        
+        """
+        ...
+    def setInterpMethodEOP(self, interpMethodEOP: str) -> None:
+        """
+        Set the interpolation method for Earth Orientation Parameters.
+        
+        Parameters:
+            interpMethodEOP (String): interpolation method for Earth Orientation Parameters
+        
+        
+        """
+        ...
+    def setNextLeapEpoch(self, nextLeapEpoch: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Set the epoch of next leap second.
+        
+        Parameters:
+            nextLeapEpoch (AbsoluteDate): epoch of next leap second
+        
+        Since:
+            11.2
+        
+        
+        """
+        ...
+    def setNextLeapTaimutc(self, nextLeapTaimutc: float) -> None:
+        """
+        Set the difference (TAI – UTC) in seconds incorporated at epoch getNextLeapEpoch.
+        
+        Parameters:
+            nextLeapTaimutc (double): difference (TAI – UTC) in seconds incorporated at epoch
+                getNextLeapEpoch
+        
+        Since:
+            11.2
+        
+        
+        """
+        ...
+    def setNextMessageEpoch(self, nextMessageEpoch: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Set the creation date of next message from a given originator.
+        
+        Parameters:
+            nextMessageEpoch (AbsoluteDate): creation date of next message from a given originator
+        
+        
+        """
+        ...
+    def setNextMessageID(self, nextMessageID: str) -> None:
+        """
+        Set the unique ID identifying next message from a given originator.
+        
+        Parameters:
+            nextMessageID (String): unique ID identifying next message from a given originator
+        
+        
+        """
+        ...
+    def setObjectDesignator(self, objectDesignator: str) -> None:
+        """
+        Set the unique satellite identification designator for the object.
+        
+        Parameters:
+            objectDesignator (String): unique satellite identification designator for the object
         
         
         """
         ...
     def setObjectType(self, objectType: ObjectType) -> None:
         """
-            Set the type of object.
+        Set the type of object.
         
-            Parameters:
-                objectType (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ObjectType`): type of object
+        Parameters:
+            objectType (ObjectType): type of object
         
         
         """
         ...
-    def setOcmDataElements(self, list: java.util.List[OcmElements]) -> None: ...
-    def setOperator(self, string: str) -> None:
+    def setOcmDataElements(self, ocmDataElements: java.util.List[OcmElements]) -> None:
         """
-            Set the operator of the space object.
+        Set the list of elements of information data blocks included in this message.
         
-            Parameters:
-                operator (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): operator of the space object
+        Parameters:
+            ocmDataElements (List<OcmElements> ocmDataElements): list of elements of information data blocks included in this message
+        
+        
+        """
+        ...
+    def setOperator(self, operator: str) -> None:
+        """
+        Set the operator of the space object.
+        
+        Parameters:
+            operator (String): operator of the space object
         
         
         """
         ...
     def setOpsStatus(self, opsStatus: 'OpsStatus') -> None:
         """
-            Set the operational status.
+        Set the operational status.
         
-            Parameters:
-                opsStatus (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OpsStatus`): operational status
+        Parameters:
+            opsStatus (OpsStatus): operational status
         
         
         """
         ...
     def setOrbitCategory(self, orbitCategory: 'OrbitCategory') -> None:
         """
-            Set the orbit category.
+        Set the orbit category.
         
-            Parameters:
-                orbitCategory (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitCategory`): orbit category
-        
-        
-        """
-        ...
-    def setOriginatorAddress(self, string: str) -> None:
-        """
-            Set the address of Programmatic Point Of Contact at originator.
-        
-            Parameters:
-                originatorAddress (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): address of Programmatic Point Of Contact at originator
+        Parameters:
+            orbitCategory (OrbitCategory): orbit category
         
         
         """
         ...
-    def setOriginatorEmail(self, string: str) -> None:
+    def setOriginatorAddress(self, originatorAddress: str) -> None:
         """
-            Set the email address of Programmatic Point Of Contact at originator.
+        Set the address of Programmatic Point Of Contact at originator.
         
-            Parameters:
-                originatorEmail (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): email address of Programmatic Point Of Contact at originator
-        
-            Since:
-                11.2
+        Parameters:
+            originatorAddress (String): address of Programmatic Point Of Contact at originator
         
         
         """
         ...
-    def setOriginatorPOC(self, string: str) -> None:
+    def setOriginatorEmail(self, originatorEmail: str) -> None:
         """
-            Set the programmatic Point Of Contact at originator.
+        Set the email address of Programmatic Point Of Contact at originator.
         
-            Parameters:
-                originatorPOC (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): programmatic Point Of Contact at originator
+        Parameters:
+            originatorEmail (String): email address of Programmatic Point Of Contact at originator
         
-        
-        """
-        ...
-    def setOriginatorPhone(self, string: str) -> None:
-        """
-            Set the phone number of Programmatic Point Of Contact at originator.
-        
-            Parameters:
-                originatorPhone (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): phone number of Programmatic Point Of Contact at originator
+        Since:
+            11.2
         
         
         """
         ...
-    def setOriginatorPosition(self, string: str) -> None:
+    def setOriginatorPOC(self, originatorPOC: str) -> None:
         """
-            Set the position of Programmatic Point Of Contact at originator.
+        Set the programmatic Point Of Contact at originator.
         
-            Parameters:
-                originatorPosition (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): position of Programmatic Point Of Contact at originator
-        
-        
-        """
-        ...
-    def setOwner(self, string: str) -> None:
-        """
-            Set the owner of the space object.
-        
-            Parameters:
-                owner (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): owner of the space object
+        Parameters:
+            originatorPOC (String): programmatic Point Of Contact at originator
         
         
         """
         ...
-    def setPreviousMessageEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setOriginatorPhone(self, originatorPhone: str) -> None:
         """
-            Set the creation date of previous message from a given originator.
+        Set the phone number of Programmatic Point Of Contact at originator.
         
-            Parameters:
-                previousMessageEpoch (:class:`~org.orekit.time.AbsoluteDate`): creation date of previous message from a given originator
-        
-        
-        """
-        ...
-    def setPreviousMessageID(self, string: str) -> None:
-        """
-            Set the unique ID identifying previous message from a given originator.
-        
-            Parameters:
-                previousMessageID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): unique ID identifying previous message from a given originator
+        Parameters:
+            originatorPhone (String): phone number of Programmatic Point Of Contact at originator
         
         
         """
         ...
-    def setPrmMessageLink(self, string: str) -> None:
+    def setOriginatorPosition(self, originatorPosition: str) -> None:
         """
-            Set the Unique identifier of Pointing Request Message linked to this Orbit Data Message.
+        Set the position of Programmatic Point Of Contact at originator.
         
-            Parameters:
-                prmMessageLink (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): Unique identifier of Pointing Request Message linked to this Orbit Data Message
-        
-        
-        """
-        ...
-    def setRdmMessageLink(self, string: str) -> None:
-        """
-            Set the Unique identifier of Reentry Data Message linked to this Orbit Data Message.
-        
-            Parameters:
-                rdmMessageLink (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): Unique identifier of Reentry Data Message linked to this Orbit Data Message
+        Parameters:
+            originatorPosition (String): position of Programmatic Point Of Contact at originator
         
         
         """
         ...
-    def setSclkOffsetAtEpoch(self, double: float) -> None:
+    def setOwner(self, owner: str) -> None:
         """
-            Set the spacecraft clock count at :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`.
+        Set the owner of the space object.
         
-            Parameters:
-                sclkOffsetAtEpoch (double): spacecraft clock count at :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`
-        
-        
-        """
-        ...
-    def setSclkSecPerSISec(self, double: float) -> None:
-        """
-            Set the number of spacecraft clock seconds occurring during one SI second.
-        
-            Parameters:
-                secClockPerSISec (double): number of spacecraft clock seconds occurring during one SI second
+        Parameters:
+            owner (String): owner of the space object
         
         
         """
         ...
-    def setStartTime(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setPreviousMessageEpoch(self, previousMessageEpoch: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set the time of the earliest data contained in the OCM.
+        Set the creation date of previous message from a given originator.
         
-            Parameters:
-                startTime (:class:`~org.orekit.time.AbsoluteDate`): time of the earliest data contained in the OCM
-        
-        
-        """
-        ...
-    def setStopTime(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Set the time of the latest data contained in the OCM.
-        
-            Parameters:
-                stopTime (:class:`~org.orekit.time.AbsoluteDate`): time of the latest data contained in the OCM
+        Parameters:
+            previousMessageEpoch (AbsoluteDate): creation date of previous message from a given originator
         
         
         """
         ...
-    def setTaimutcT0(self, double: float) -> None:
+    def setPreviousMessageID(self, previousMessageID: str) -> None:
         """
-            Set the difference (TAI – UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`.
+        Set the unique ID identifying previous message from a given originator.
         
-            Parameters:
-                taimutcT0 (double): difference (TAI – UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`
-        
-        
-        """
-        ...
-    def setTdmMessageLink(self, string: str) -> None:
-        """
-            Set the Unique identifier of Tracking Data Message linked to this Orbit Data Message.
-        
-            Parameters:
-                tdmMessageLink (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): Unique identifier of Tracking Data Message linked to this Orbit Data Message
+        Parameters:
+            previousMessageID (String): unique ID identifying previous message from a given originator
         
         
         """
         ...
-    def setTechAddress(self, string: str) -> None:
+    def setPrmMessageLink(self, prmMessageLink: str) -> None:
         """
-            Set the address of Technical Point Of Contact at originator.
+        Set the Unique identifier of Pointing Request Message linked to this Orbit Data Message.
         
-            Parameters:
-                techAddress (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): address of Technical Point Of Contact at originator
-        
-        
-        """
-        ...
-    def setTechEmail(self, string: str) -> None:
-        """
-            Set the email address of Technical Point Of Contact at originator.
-        
-            Parameters:
-                techEmail (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): email address of Technical Point Of Contact at originator
-        
-            Since:
-                11.2
+        Parameters:
+            prmMessageLink (String): Unique identifier of Pointing Request Message linked to this Orbit Data Message
         
         
         """
         ...
-    def setTechOrg(self, string: str) -> None:
+    def setRdmMessageLink(self, rdmMessageLink: str) -> None:
         """
-            Set the creating agency or operator.
+        Set the Unique identifier of Reentry Data Message linked to this Orbit Data Message.
         
-            Parameters:
-                techOrg (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): creating agency or operator
-        
-        
-        """
-        ...
-    def setTechPOC(self, string: str) -> None:
-        """
-            Set the Technical Point Of Contact at originator.
-        
-            Parameters:
-                techPOC (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): Technical Point Of Contact at originator
+        Parameters:
+            rdmMessageLink (String): Unique identifier of Reentry Data Message linked to this Orbit Data Message
         
         
         """
         ...
-    def setTechPhone(self, string: str) -> None:
+    def setSclkOffsetAtEpoch(self, sclkOffsetAtEpoch: float) -> None:
         """
-            Set the phone number of Technical Point Of Contact at originator.
+        Set the spacecraft clock count at getEpochT0.
         
-            Parameters:
-                techPhone (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): phone number of Technical Point Of Contact at originator
-        
-        
-        """
-        ...
-    def setTechPosition(self, string: str) -> None:
-        """
-            Set the position of Technical Point Of Contact at originator.
-        
-            Parameters:
-                techPosition (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): position of Technical Point Of Contact at originator
+        Parameters:
+            sclkOffsetAtEpoch (double): spacecraft clock count at getEpochT0
         
         
         """
         ...
-    def setTimeSpan(self, double: float) -> None:
+    def setSclkSecPerSISec(self, secClockPerSISec: float) -> None:
         """
-            Set the span of time in seconds that the OCM covers.
+        Set the number of spacecraft clock seconds occurring during one SI second.
         
-            Parameters:
-                timeSpan (double): span of time in seconds that the OCM covers
-        
-        
-        """
-        ...
-    def setUt1mutcT0(self, double: float) -> None:
-        """
-            Set the difference (UT1 – UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`.
-        
-            Parameters:
-                ut1mutcT0 (double): difference (UT1 – UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`
+        Parameters:
+            secClockPerSISec (double): number of spacecraft clock seconds occurring during one SI second
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def setStartTime(self, startTime: org.orekit.time.AbsoluteDate) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set the time of the earliest data contained in the OCM.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            startTime (AbsoluteDate): time of the earliest data contained in the OCM
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.Metadata.validate` in class :class:`~org.orekit.files.ccsds.section.Metadata`
+        """
+        ...
+    def setStopTime(self, stopTime: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Set the time of the latest data contained in the OCM.
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            stopTime (AbsoluteDate): time of the latest data contained in the OCM
+        
+        
+        """
+        ...
+    def setTaimutcT0(self, taimutcT0: float) -> None:
+        """
+        Set the difference (TAI – UTC) in seconds at epoch getEpochT0.
+        
+        Parameters:
+            taimutcT0 (double): difference (TAI – UTC) in seconds at epoch getEpochT0
+        
+        
+        """
+        ...
+    def setTdmMessageLink(self, tdmMessageLink: str) -> None:
+        """
+        Set the Unique identifier of Tracking Data Message linked to this Orbit Data Message.
+        
+        Parameters:
+            tdmMessageLink (String): Unique identifier of Tracking Data Message linked to this Orbit Data Message
+        
+        
+        """
+        ...
+    def setTechAddress(self, techAddress: str) -> None:
+        """
+        Set the address of Technical Point Of Contact at originator.
+        
+        Parameters:
+            techAddress (String): address of Technical Point Of Contact at originator
+        
+        
+        """
+        ...
+    def setTechEmail(self, techEmail: str) -> None:
+        """
+        Set the email address of Technical Point Of Contact at originator.
+        
+        Parameters:
+            techEmail (String): email address of Technical Point Of Contact at originator
+        
+        Since:
+            11.2
+        
+        
+        """
+        ...
+    def setTechOrg(self, techOrg: str) -> None:
+        """
+        Set the creating agency or operator.
+        
+        Parameters:
+            techOrg (String): creating agency or operator
+        
+        
+        """
+        ...
+    def setTechPOC(self, techPOC: str) -> None:
+        """
+        Set the Technical Point Of Contact at originator.
+        
+        Parameters:
+            techPOC (String): Technical Point Of Contact at originator
+        
+        
+        """
+        ...
+    def setTechPhone(self, techPhone: str) -> None:
+        """
+        Set the phone number of Technical Point Of Contact at originator.
+        
+        Parameters:
+            techPhone (String): phone number of Technical Point Of Contact at originator
+        
+        
+        """
+        ...
+    def setTechPosition(self, techPosition: str) -> None:
+        """
+        Set the position of Technical Point Of Contact at originator.
+        
+        Parameters:
+            techPosition (String): position of Technical Point Of Contact at originator
+        
+        
+        """
+        ...
+    def setTimeSpan(self, timeSpan: float) -> None:
+        """
+        Set the span of time in seconds that the OCM covers.
+        
+        Parameters:
+            timeSpan (double): span of time in seconds that the OCM covers
+        
+        
+        """
+        ...
+    def setUt1mutcT0(self, ut1mutcT0: float) -> None:
+        """
+        Set the difference (UT1 – UTC) in seconds at epoch getEpochT0.
+        
+        Parameters:
+            ut1mutcT0 (double): difference (UT1 – UTC) in seconds at epoch getEpochT0
+        
+        
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class Metadata
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -1617,12 +1674,10 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
 
 class OcmMetadataKey(java.lang.Enum['OcmMetadataKey']):
     """
-    public enum OcmMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadataKey`>
+    Keys for OcmMetadata entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     INTERNATIONAL_DESIGNATOR: typing.ClassVar['OcmMetadataKey'] = ...
     CATALOG_NAME: typing.ClassVar['OcmMetadataKey'] = ...
@@ -1669,17 +1724,17 @@ class OcmMetadataKey(java.lang.Enum['OcmMetadataKey']):
     EOP_SOURCE: typing.ClassVar['OcmMetadataKey'] = ...
     INTERP_METHOD_EOP: typing.ClassVar['OcmMetadataKey'] = ...
     CELESTIAL_SOURCE: typing.ClassVar['OcmMetadataKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, ocmMetadata: OcmMetadata) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: OcmMetadata) -> bool:
         """
-            Process an token.
+        Process an token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (OcmMetadata): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -1690,20 +1745,19 @@ class OcmMetadataKey(java.lang.Enum['OcmMetadataKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'OcmMetadataKey':
+    def valueOf(name: str) -> 'OcmMetadataKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -1711,17 +1765,15 @@ class OcmMetadataKey(java.lang.Enum['OcmMetadataKey']):
     @staticmethod
     def values() -> typing.MutableSequence['OcmMetadataKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (OcmMetadataKey c : OcmMetadataKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (OcmMetadataKey c : OcmMetadataKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -1729,201 +1781,204 @@ class OcmMetadataKey(java.lang.Enum['OcmMetadataKey']):
 
 class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.orekit.files.general.EphemerisFileParser[Ocm]):
     """
-    public class OcmParser extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`, :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmParser`> implements :class:`~org.orekit.files.general.EphemerisFileParser`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`>
+    A parser for the CCSDS OCM (Orbit Comprehensive Message).
     
-        A parser for the CCSDS OCM (Orbit Comprehensive Message).
+    Note than starting with Orekit 11.0, CCSDS message parsers are mutable objects that gather the data being parsed, until the message is complete and the parseMessage method has returned. This implies that parsers should not be used in a multi-thread context. The recommended way to use parsers is to either dedicate one parser for each message and drop it afterwards, or to use a single-thread loop.
     
-        Note than starting with Orekit 11.0, CCSDS message parsers are mutable objects that gather the data being parsed, until
-        the message is complete and the :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser.parseMessage` method
-        has returned. This implies that parsers should *not* be used in a multi-thread context. The recommended way to use
-        parsers is to either dedicate one parser for each message and drop it afterwards, or to use a single-thread loop.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, double: float, double2: float, boolean: bool, dataContext: org.orekit.data.DataContext, double3: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, equatorialRadius: float, flattening: float, simpleEOP: bool, dataContext: org.orekit.data.DataContext, mu: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]):
+        """
+        Complete constructor.
+        
+        Calling this constructor directly is not recommended. Users should rather use buildOcmParser.
+        
+        Parameters:
+            conventions (IERSConventions): IERS Conventions
+            equatorialRadius (double): central body equatorial radius
+            flattening (double): central body flattening
+            simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
+            dataContext (DataContext): used to retrieve frames, time scales, etc.
+            mu (double): gravitational coefficient
+            parsedUnitsBehavior (ParsedUnitsBehavior): behavior to adopt for handling parsed units
+            filters (Function<ParseToken, List<ParseToken>>[]): filters to apply to parse tokens
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
     def build(self) -> Ocm:
         """
-            Build the file from parsed entries.
+        Build the file from parsed entries.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.build` in
-                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+        Specified by: build in interface MessageParser
         
-            Returns:
-                parsed file
+        Returns:
+            parsed file
         
         
         """
         ...
     def finalizeData(self) -> bool:
         """
-            Finalize data after parsing.
+        Finalize data after parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: finalizeData in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def finalizeHeader(self) -> bool:
         """
-            Finalize header after parsing.
+        Finalize header after parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: finalizeHeader in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def finalizeMetadata(self) -> bool:
         """
-            Finalize metadata after parsing.
+        Finalize metadata after parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: finalizeMetadata in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def getHeader(self) -> org.orekit.files.ccsds.ndm.odm.OdmHeader:
         """
-            Get file header to fill.
+        Get file header to fill.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: getHeader in class AbstractConstituentParser
         
-            Returns:
-                file header to fill
+        Returns:
+            file header to fill
         
         
         """
         ...
-    def getSpecialXmlElementsBuilders(self) -> java.util.Map[str, org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder]: ...
+    def getSpecialXmlElementsBuilders(self) -> java.util.Map[str, org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder]:
+        """
+        Get the non-default token builders for special XML elements.
+        
+        Specified by: getSpecialXmlElementsBuilders in interface MessageParser
+        
+        Overrides: getSpecialXmlElementsBuilders in class AbstractMessageParser
+        
+        Returns:
+            map of token builders for special XML elements (keyed by XML element name)
+        
+        
+        """
+        ...
     def inData(self) -> bool:
         """
-            Acknowledge data parsing has started.
+        Acknowledge data parsing has started.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: inData in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def inHeader(self) -> bool:
         """
-            Acknowledge header parsing has started.
+        Acknowledge header parsing has started.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: inHeader in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def inMetadata(self) -> bool:
         """
-            Acknowledge metada parsing has started.
+        Acknowledge metada parsing has started.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: inMetadata in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
-    def parse(self, dataSource: org.orekit.data.DataSource) -> Ocm:
+    def parse(self, source: org.orekit.data.DataSource) -> Ocm:
         """
-            Parse an ephemeris file from a data source.
+        Parse an ephemeris file from a data source.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFileParser.parse` in
-                interface :class:`~org.orekit.files.general.EphemerisFileParser`
+        Specified by: parse in interface EphemerisFileParser
         
-            Parameters:
-                source (:class:`~org.orekit.data.DataSource`): source providing the data to parse
+        Parameters:
+            source (DataSource): source providing the data to parse
         
-            Returns:
-                a parsed ephemeris file.
+        Returns:
+            a parsed ephemeris file.
         
         
         """
         ...
     def prepareData(self) -> bool:
         """
-            Prepare data for parsing.
+        Prepare data for parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: prepareData in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def prepareHeader(self) -> bool:
         """
-            Prepare header for parsing.
+        Prepare header for parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: prepareHeader in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def prepareMetadata(self) -> bool:
         """
-            Prepare metadata for parsing.
+        Prepare metadata for parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: prepareMetadata in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None:
         """
-            Reset parser to initial state before parsing.
+        Reset parser to initial state before parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.reset` in
-                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+        Specified by: reset in interface MessageParser
         
-            Parameters:
-                fileFormat (:class:`~org.orekit.files.ccsds.utils.FileFormat`): format of the file ready to be parsed
+        Parameters:
+            fileFormat (FileFormat): format of the file ready to be parsed
         
         
         """
@@ -1931,72 +1986,86 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
 
 class OcmSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, 'TrajectoryStateHistory']):
     """
-    public class OcmSatelliteEphemeris extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`, :class:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistory`>
+    OCM ephemeris blocks for a single satellite.
     
-        OCM ephemeris blocks for a single satellite.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, string: str, double: float, list: java.util.List['TrajectoryStateHistory']): ...
+    def __init__(self, name: str, mu: float, blocks: java.util.List['TrajectoryStateHistory']):
+        """
+        Create a container for the set of ephemeris blocks in the file that pertain to a single satellite.
+        
+        Parameters:
+            name (String): name of the object.
+            mu (double): gravitational coefficient to use for building Cartesian/Keplerian orbits
+            blocks (List<TrajectoryStateHistory> blocks): containing ephemeris data for the satellite.
+        
+        
+        """
+        ...
     def getId(self) -> str:
         """
-            Get the satellite ID. The satellite ID is unique only within the same ephemeris file.
+        Get the satellite ID. The satellite ID is unique only within the same ephemeris file.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getId` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+        Specified by: getId in interface SatelliteEphemeris
         
-            Returns:
-                the satellite's ID, never :code:`null`.
+        Returns:
+            the satellite's ID, never null.
         
         
         """
         ...
     def getMu(self) -> float:
         """
-            Get the standard gravitational parameter for the satellite.
+        Get the standard gravitational parameter for the satellite.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getMu` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+        Specified by: getMu in interface SatelliteEphemeris
         
-            Returns:
-                the gravitational parameter used in :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getPropagator`, in
-                m³/s².
+        Returns:
+            the gravitational parameter used in getPropagator, in
+            m³/s².
         
         
         """
         ...
-    def getSegments(self) -> java.util.List['TrajectoryStateHistory']: ...
+    def getSegments(self) -> java.util.List['TrajectoryStateHistory']:
+        """
+        Get the segments of the ephemeris.
+        
+        Ephemeris segments are typically used to split an ephemeris around discontinuous events, such as maneuvers.
+        
+        Specified by: getSegments in interface SatelliteEphemeris
+        
+        Returns:
+            the segments contained in the ephemeris file for this satellite.
+        
+        
+        """
+        ...
     def getStart(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the start date of the ephemeris.
+        Get the start date of the ephemeris.
         
-            The date returned by this method is equivalent to :code:`getPropagator().getMinDate()`.
+        The date returned by this method is equivalent to getMinDate().
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getStart` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+        Specified by: getStart in interface SatelliteEphemeris
         
-            Returns:
-                ephemeris start date.
+        Returns:
+            ephemeris start date.
         
         
         """
         ...
     def getStop(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the end date of the ephemeris.
+        Get the end date of the ephemeris.
         
-            The date returned by this method is equivalent to :code:`getPropagator().getMaxDate()`.
+        The date returned by this method is equivalent to getMaxDate().
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getStop` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+        Specified by: getStop in interface SatelliteEphemeris
         
-            Returns:
-                ephemeris end date.
+        Returns:
+            ephemeris end date.
         
         
         """
@@ -2004,62 +2073,70 @@ class OcmSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphe
 
 class OcmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.ndm.odm.OdmHeader, org.orekit.files.ccsds.section.Segment[OcmMetadata, OcmData], Ocm]):
     """
-    public class OcmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmHeader`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmData`>, :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`>
+    Writer for CCSDS Orbit Comprehensive Message.
     
-        Writer for CCSDS Orbit Comprehensive Message.
+    Since:
+        11.0
     
-        Since:
-            11.0
-    
-        Also see:
-            :class:`~org.orekit.files.ccsds.ndm.odm.ocm.EphemerisOcmWriter`,
-            :class:`~org.orekit.files.ccsds.ndm.odm.ocm.StreamingOcmWriter`
+    Also see:
+        EphemerisOcmWriter,
+        StreamingOcmWriter
     """
     CCSDS_OCM_VERS: typing.ClassVar[float] = ...
     """
-    public static final double CCSDS_OCM_VERS
+    Version number implemented.
     
-        Version number implemented.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     KVN_PADDING_WIDTH: typing.ClassVar[int] = ...
     """
-    public static final int KVN_PADDING_WIDTH
+    Padding width for aligning the '=' sign.
     
-        Padding width for aligning the '=' sign.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, double: float, double2: float, dataContext: org.orekit.data.DataContext): ...
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, equatorialRadius: float, flattening: float, dataContext: org.orekit.data.DataContext):
+        """
+        Complete constructor.
+        
+        Calling this constructor directly is not recommended. Users should rather use buildOcmWriter.
+        
+        Parameters:
+            conventions (IERSConventions): IERS Conventions
+            equatorialRadius (double): central body equatorial radius
+            flattening (double): central body flattening
+            dataContext (DataContext): used to retrieve frames, time scales, etc.
+        
+        
+        """
+        ...
     def getEquatorialRadius(self) -> float:
         """
-            Get the central body equatorial radius.
+        Get the central body equatorial radius.
         
-            Returns:
-                central body equatorial radius
+        Returns:
+            central body equatorial radius
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     def getFlattening(self) -> float:
         """
-            Get the central body flattening.
+        Get the central body flattening.
         
-            Returns:
-                central body flattening
+        Returns:
+            central body flattening
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
@@ -2067,12 +2144,10 @@ class OcmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[or
 
 class OpsStatus(java.lang.Enum['OpsStatus']):
     """
-    public enum OpsStatus extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OpsStatus`>
+    Operational status used in CCSDS Ocm.
     
-        Operational status used in CCSDS :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     OPERATIONAL: typing.ClassVar['OpsStatus'] = ...
     NONOPERATIONAL: typing.ClassVar['OpsStatus'] = ...
@@ -2085,10 +2160,7 @@ class OpsStatus(java.lang.Enum['OpsStatus']):
     UNKNOWN: typing.ClassVar['OpsStatus'] = ...
     def toString(self) -> str:
         """
-        
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum.html?is` in
-                class :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`
+        Overrides: Enum in class Enum
         
         
         """
@@ -2099,20 +2171,19 @@ class OpsStatus(java.lang.Enum['OpsStatus']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'OpsStatus':
+    def valueOf(name: str) -> 'OpsStatus':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -2120,17 +2191,15 @@ class OpsStatus(java.lang.Enum['OpsStatus']):
     @staticmethod
     def values() -> typing.MutableSequence['OpsStatus']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (OpsStatus c : OpsStatus.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (OpsStatus c : OpsStatus.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -2138,12 +2207,10 @@ class OpsStatus(java.lang.Enum['OpsStatus']):
 
 class OrbitCategory(java.lang.Enum['OrbitCategory']):
     """
-    public enum OrbitCategory extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitCategory`>
+    Orbit category used in CCSDS Ocm.
     
-        Orbit category used in CCSDS :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     EGO: typing.ClassVar['OrbitCategory'] = ...
     ESO: typing.ClassVar['OrbitCategory'] = ...
@@ -2162,10 +2229,7 @@ class OrbitCategory(java.lang.Enum['OrbitCategory']):
     UFO: typing.ClassVar['OrbitCategory'] = ...
     def toString(self) -> str:
         """
-        
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum.html?is` in
-                class :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`
+        Overrides: Enum in class Enum
         
         
         """
@@ -2176,20 +2240,19 @@ class OrbitCategory(java.lang.Enum['OrbitCategory']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'OrbitCategory':
+    def valueOf(name: str) -> 'OrbitCategory':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -2197,17 +2260,15 @@ class OrbitCategory(java.lang.Enum['OrbitCategory']):
     @staticmethod
     def values() -> typing.MutableSequence['OrbitCategory']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (OrbitCategory c : OrbitCategory.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (OrbitCategory c : OrbitCategory.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -2215,43 +2276,53 @@ class OrbitCategory(java.lang.Enum['OrbitCategory']):
 
 class OrbitCovariance(org.orekit.time.TimeStamped):
     """
-    public class OrbitCovariance extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
+    Covariance entry.
     
-        Covariance entry.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, orbitElementsType: 'OrbitElementsType', ordering: 'Ordering', absoluteDate: org.orekit.time.AbsoluteDate, stringArray: typing.Union[typing.List[str], jpype.JArray], int: int): ...
+    def __init__(self, type: 'OrbitElementsType', ordering: 'Ordering', date: org.orekit.time.AbsoluteDate, fields: typing.Union[typing.List[str], jpype.JArray], first: int):
+        """
+        Simple constructor.
+        
+        Parameters:
+            type (OrbitElementsType): type of the elements
+            ordering (Ordering): ordering to use
+            date (AbsoluteDate): entry date
+            fields (String[]): matrix elements
+            first (int): index of first field to consider
+        
+        
+        """
+        ...
     def getDate(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the date.
+        Get the date.
         
-            Specified by:
-                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+        Specified by: getDate in interface TimeStamped
         
-            Returns:
-                date attached to the object
+        Returns:
+            date attached to the object
         
         
         """
         ...
     def getMatrix(self) -> org.hipparchus.linear.RealMatrix:
         """
-            Get the covariance matrix.
+        Get the covariance matrix.
         
-            Returns:
-                covariance matrix
+        Returns:
+            covariance matrix
         
         
         """
         ...
     def getType(self) -> 'OrbitElementsType':
         """
-            Get the type of the elements.
+        Get the type of the elements.
         
-            Returns:
-                type of the elements
+        Returns:
+            type of the elements
         
         
         """
@@ -2259,21 +2330,38 @@ class OrbitCovariance(org.orekit.time.TimeStamped):
 
 class OrbitCovarianceHistory:
     """
-    public class OrbitCovarianceHistory extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Covariance history.
     
-        Covariance history.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, orbitCovarianceHistoryMetadata: 'OrbitCovarianceHistoryMetadata', list: java.util.List[OrbitCovariance]): ...
-    def getCovariances(self) -> java.util.List[OrbitCovariance]: ...
+    def __init__(self, metadata: 'OrbitCovarianceHistoryMetadata', covariances: java.util.List[OrbitCovariance]):
+        """
+        Simple constructor.
+        
+        Parameters:
+            metadata (OrbitCovarianceHistoryMetadata): metadata
+            covariances (List<OrbitCovariance> covariances): covariances
+        
+        
+        """
+        ...
+    def getCovariances(self) -> java.util.List[OrbitCovariance]:
+        """
+        Get the covariances.
+        
+        Returns:
+            covariances
+        
+        
+        """
+        ...
     def getMetadata(self) -> 'OrbitCovarianceHistoryMetadata':
         """
-            Get metadata.
+        Get metadata.
         
-            Returns:
-                metadata
+        Returns:
+            metadata
         
         
         """
@@ -2281,280 +2369,295 @@ class OrbitCovarianceHistory:
 
 class OrbitCovarianceHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer):
     """
-    public class OrbitCovarianceHistoryMetadata extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    Metadata for covariance history.
     
-        Metadata for covariance history.
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate): ...
+    def __init__(self, epochT0: org.orekit.time.AbsoluteDate):
+        """
+        Simple constructor.
+        
+        Parameters:
+            epochT0 (AbsoluteDate): T0 epoch from file metadata
+        
+        
+        """
+        ...
     def getCovBasis(self) -> str:
         """
-            Get basis of this covariance time history data.
+        Get basis of this covariance time history data.
         
-            Returns:
-                basis of this covariance time history data
+        Returns:
+            basis of this covariance time history data
         
         
         """
         ...
     def getCovBasisID(self) -> str:
         """
-            Get identification number of the orbit determination or simulation upon which this covariance is based.
+        Get identification number of the orbit determination or simulation upon which this covariance is based.
         
-            Returns:
-                identification number of the orbit determination or simulation upon which this covariance is based
+        Returns:
+            identification number of the orbit determination or simulation upon which this covariance is based
         
         
         """
         ...
     def getCovConfidence(self) -> float:
         """
-            Get the measure of confidence in covariance error matching reality.
+        Get the measure of confidence in covariance error matching reality.
         
-            Returns:
-                measure of confidence in covariance error matching reality
+        Returns:
+            measure of confidence in covariance error matching reality
         
         
         """
         ...
     def getCovFrameEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get epoch of the :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitCovarianceHistoryMetadata.getCovReferenceFrame`.
+        Get epoch of the getCovReferenceFrame.
         
-            Returns:
-                epoch of the :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitCovarianceHistoryMetadata.getCovReferenceFrame`
+        Returns:
+            epoch of the getCovReferenceFrame
         
         
         """
         ...
     def getCovID(self) -> str:
         """
-            Get covariance identification number.
+        Get covariance identification number.
         
-            Returns:
-                covariance identification number
+        Returns:
+            covariance identification number
         
         
         """
         ...
     def getCovNextID(self) -> str:
         """
-            Get identification number of next covariance.
+        Get identification number of next covariance.
         
-            Returns:
-                identification number of next covariance
+        Returns:
+            identification number of next covariance
         
         
         """
         ...
     def getCovOrdering(self) -> 'Ordering':
         """
-            Get covariance ordering.
+        Get covariance ordering.
         
-            Returns:
-                covariance ordering
+        Returns:
+            covariance ordering
         
         
         """
         ...
     def getCovPrevID(self) -> str:
         """
-            Get identification number of previous covariance.
+        Get identification number of previous covariance.
         
-            Returns:
-                identification number of previous covariance
+        Returns:
+            identification number of previous covariance
         
         
         """
         ...
     def getCovReferenceFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
         """
-            Get reference frame of the covariance.
+        Get reference frame of the covariance.
         
-            Returns:
-                reference frame of the covariance
+        Returns:
+            reference frame of the covariance
         
         
         """
         ...
     def getCovScaleMax(self) -> float:
         """
-            Get the maximum scale factor to apply to achieve realism.
+        Get the maximum scale factor to apply to achieve realism.
         
-            Returns:
-                maximum scale factor to apply to achieve realism
+        Returns:
+            maximum scale factor to apply to achieve realism
         
         
         """
         ...
     def getCovScaleMin(self) -> float:
         """
-            Get the minimum scale factor to apply to achieve realism.
+        Get the minimum scale factor to apply to achieve realism.
         
-            Returns:
-                minimum scale factor to apply to achieve realism
+        Returns:
+            minimum scale factor to apply to achieve realism
         
         
         """
         ...
     def getCovType(self) -> 'OrbitElementsType':
         """
-            Get covariance element set type.
+        Get covariance element set type.
         
-            Returns:
-                covariance element set type
-        
-        
-        """
-        ...
-    def getCovUnits(self) -> java.util.List[org.orekit.utils.units.Unit]: ...
-    def setCovBasis(self, string: str) -> None:
-        """
-            Set basis of this covariance time history data.
-        
-            Parameters:
-                covBasis (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): basis of this covariance time history data
+        Returns:
+            covariance element set type
         
         
         """
         ...
-    def setCovBasisID(self, string: str) -> None:
+    def getCovUnits(self) -> java.util.List[org.orekit.utils.units.Unit]:
         """
-            Set identification number of the orbit determination or simulation upon which this covariance is based.
+        Get covariance element set units.
         
-            Parameters:
-                covBasisID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of the orbit determination or simulation upon which this covariance is based
-        
-        
-        """
-        ...
-    def setCovConfidence(self, double: float) -> None:
-        """
-            Set the measure of confidence in covariance error matching reality.
-        
-            Parameters:
-                covConfidence (double): measure of confidence in covariance error matching reality
+        Returns:
+            covariance element set units
         
         
         """
         ...
-    def setCovFrameEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setCovBasis(self, covBasis: str) -> None:
         """
-            Set epoch of the :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitCovarianceHistoryMetadata.getCovReferenceFrame`.
+        Set basis of this covariance time history data.
         
-            Parameters:
-                covFrameEpoch (:class:`~org.orekit.time.AbsoluteDate`): epoch of the :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitCovarianceHistoryMetadata.getCovReferenceFrame`
-        
-        
-        """
-        ...
-    def setCovID(self, string: str) -> None:
-        """
-            Set covariance identification number.
-        
-            Parameters:
-                covID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): covariance identification number
+        Parameters:
+            covBasis (String): basis of this covariance time history data
         
         
         """
         ...
-    def setCovNextID(self, string: str) -> None:
+    def setCovBasisID(self, covBasisID: str) -> None:
         """
-            Set identification number of next covariance.
+        Set identification number of the orbit determination or simulation upon which this covariance is based.
         
-            Parameters:
-                covNextID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of next covariance
-        
-        
-        """
-        ...
-    def setCovOrdering(self, ordering: 'Ordering') -> None:
-        """
-            Set covariance ordering.
-        
-            Parameters:
-                covOrdering (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ordering`): covariance ordering
+        Parameters:
+            covBasisID (String): identification number of the orbit determination or simulation upon which this covariance is based
         
         
         """
         ...
-    def setCovPrevID(self, string: str) -> None:
+    def setCovConfidence(self, covConfidence: float) -> None:
         """
-            Set identification number of previous covariance.
+        Set the measure of confidence in covariance error matching reality.
         
-            Parameters:
-                covPrevID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of previous covariance
-        
-        
-        """
-        ...
-    def setCovReferenceFrame(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
-        """
-            Set reference frame of the covariance.
-        
-            Parameters:
-                covReferenceFrame (:class:`~org.orekit.files.ccsds.definitions.FrameFacade`): the reference frame to be set
+        Parameters:
+            covConfidence (double): measure of confidence in covariance error matching reality
         
         
         """
         ...
-    def setCovScaleMax(self, double: float) -> None:
+    def setCovFrameEpoch(self, covFrameEpoch: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set the maximum scale factor to apply to achieve realism.
+        Set epoch of the getCovReferenceFrame.
         
-            Parameters:
-                covScaleMax (double): maximum scale factor to apply to achieve realism
-        
-        
-        """
-        ...
-    def setCovScaleMin(self, double: float) -> None:
-        """
-            Set the minimum scale factor to apply to achieve realism.
-        
-            Parameters:
-                covScaleMin (double): minimum scale factor to apply to achieve realism
+        Parameters:
+            covFrameEpoch (AbsoluteDate): epoch of the getCovReferenceFrame
         
         
         """
         ...
-    def setCovType(self, orbitElementsType: 'OrbitElementsType') -> None:
+    def setCovID(self, covID: str) -> None:
         """
-            Set covariance element set type.
+        Set covariance identification number.
         
-            Parameters:
-                covType (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitElementsType`): covariance element set type
+        Parameters:
+            covID (String): covariance identification number
         
         
         """
         ...
-    def setCovUnits(self, list: java.util.List[org.orekit.utils.units.Unit]) -> None: ...
-    def validate(self, double: float) -> None:
+    def setCovNextID(self, covNextID: str) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set identification number of next covariance.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            covNextID (String): identification number of next covariance
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
-                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        """
+        ...
+    def setCovOrdering(self, covOrdering: 'Ordering') -> None:
+        """
+        Set covariance ordering.
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            covOrdering (Ordering): covariance ordering
+        
+        
+        """
+        ...
+    def setCovPrevID(self, covPrevID: str) -> None:
+        """
+        Set identification number of previous covariance.
+        
+        Parameters:
+            covPrevID (String): identification number of previous covariance
+        
+        
+        """
+        ...
+    def setCovReferenceFrame(self, covReferenceFrame: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
+        """
+        Set reference frame of the covariance.
+        
+        Parameters:
+            covReferenceFrame (FrameFacade): the reference frame to be set
+        
+        
+        """
+        ...
+    def setCovScaleMax(self, covScaleMax: float) -> None:
+        """
+        Set the maximum scale factor to apply to achieve realism.
+        
+        Parameters:
+            covScaleMax (double): maximum scale factor to apply to achieve realism
+        
+        
+        """
+        ...
+    def setCovScaleMin(self, covScaleMin: float) -> None:
+        """
+        Set the minimum scale factor to apply to achieve realism.
+        
+        Parameters:
+            covScaleMin (double): minimum scale factor to apply to achieve realism
+        
+        
+        """
+        ...
+    def setCovType(self, covType: 'OrbitElementsType') -> None:
+        """
+        Set covariance element set type.
+        
+        Parameters:
+            covType (OrbitElementsType): covariance element set type
+        
+        
+        """
+        ...
+    def setCovUnits(self, covUnits: java.util.List[org.orekit.utils.units.Unit]) -> None:
+        """
+        Set covariance element set units.
+        
+        Parameters:
+            covUnits (List<Unit> covUnits): covariance element set units
+        
+        
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class CommentsContainer
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -2562,12 +2665,10 @@ class OrbitCovarianceHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
 
 class OrbitCovarianceHistoryMetadataKey(java.lang.Enum['OrbitCovarianceHistoryMetadataKey']):
     """
-    public enum OrbitCovarianceHistoryMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitCovarianceHistoryMetadataKey`>
+    Keys for OrbitCovarianceHistoryMetadata entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitCovarianceHistoryMetadata` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     COMMENT: typing.ClassVar['OrbitCovarianceHistoryMetadataKey'] = ...
     COV_ID: typing.ClassVar['OrbitCovarianceHistoryMetadataKey'] = ...
@@ -2583,17 +2684,17 @@ class OrbitCovarianceHistoryMetadataKey(java.lang.Enum['OrbitCovarianceHistoryMe
     COV_TYPE: typing.ClassVar['OrbitCovarianceHistoryMetadataKey'] = ...
     COV_ORDERING: typing.ClassVar['OrbitCovarianceHistoryMetadataKey'] = ...
     COV_UNITS: typing.ClassVar['OrbitCovarianceHistoryMetadataKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, orbitCovarianceHistoryMetadata: OrbitCovarianceHistoryMetadata) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: OrbitCovarianceHistoryMetadata) -> bool:
         """
-            Process an token.
+        Process an token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitCovarianceHistoryMetadata`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (OrbitCovarianceHistoryMetadata): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -2604,20 +2705,19 @@ class OrbitCovarianceHistoryMetadataKey(java.lang.Enum['OrbitCovarianceHistoryMe
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'OrbitCovarianceHistoryMetadataKey':
+    def valueOf(name: str) -> 'OrbitCovarianceHistoryMetadataKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -2625,17 +2725,15 @@ class OrbitCovarianceHistoryMetadataKey(java.lang.Enum['OrbitCovarianceHistoryMe
     @staticmethod
     def values() -> typing.MutableSequence['OrbitCovarianceHistoryMetadataKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (OrbitCovarianceHistoryMetadataKey c : OrbitCovarianceHistoryMetadataKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (OrbitCovarianceHistoryMetadataKey c : OrbitCovarianceHistoryMetadataKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -2643,552 +2741,616 @@ class OrbitCovarianceHistoryMetadataKey(java.lang.Enum['OrbitCovarianceHistoryMe
 
 class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
     """
-    public class OrbitDetermination extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    Orbit determination data.
     
-        Orbit determination data.
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Simple constructor.
+        """
+        ...
     def getActualOdSpan(self) -> float:
         """
-            Get actual time span used for the OD of the object.
+        Get actual time span used for the OD of the object.
         
-            Returns:
-                actual time span used for the OD of the object
+        Returns:
+            actual time span used for the OD of the object
         
         
         """
         ...
     def getConfidence(self) -> float:
         """
-            Get confidence metric.
+        Get confidence metric.
         
-            Returns:
-                confidence metric
+        Returns:
+            confidence metric
         
         
         """
         ...
     def getConsiderN(self) -> int:
         """
-            Get number of consider parameters.
+        Get number of consider parameters.
         
-            Returns:
-                number of consider parameters
+        Returns:
+            number of consider parameters
         
         
         """
         ...
-    def getConsiderParameters(self) -> java.util.List[str]: ...
-    def getDataTypes(self) -> java.util.List[str]: ...
+    def getConsiderParameters(self) -> java.util.List[str]:
+        """
+        Get description of consider parameters.
+        
+        Returns:
+            description of consider parameters
+        
+        
+        """
+        ...
+    def getDataTypes(self) -> java.util.List[str]:
+        """
+        Get observation data types used.
+        
+        Returns:
+            observation data types used
+        
+        
+        """
+        ...
     def getEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get time tag for orbit determination solved-for state.
+        Get time tag for orbit determination solved-for state.
         
-            Returns:
-                time tag for orbit determination solved-for state
+        Returns:
+            time tag for orbit determination solved-for state
         
         
         """
         ...
     def getEpochEigenInt(self) -> float:
         """
-            Get positional error ellipsoid 1σ intermediate eigenvalue at the epoch of OD.
+        Get positional error ellipsoid 1σ intermediate eigenvalue at the epoch of OD.
         
-            Returns:
-                positional error ellipsoid 1σ intermediate eigenvalue at the epoch of OD
+        Returns:
+            positional error ellipsoid 1σ intermediate eigenvalue at the epoch of OD
         
         
         """
         ...
     def getEpochEigenMaj(self) -> float:
         """
-            Get positional error ellipsoid 1σ major eigenvalue at the epoch of OD.
+        Get positional error ellipsoid 1σ major eigenvalue at the epoch of OD.
         
-            Returns:
-                positional error ellipsoid 1σ major eigenvalue at the epoch of OD
+        Returns:
+            positional error ellipsoid 1σ major eigenvalue at the epoch of OD
         
         
         """
         ...
     def getEpochEigenMin(self) -> float:
         """
-            Get positional error ellipsoid 1σ minor eigenvalue at the epoch of OD.
+        Get positional error ellipsoid 1σ minor eigenvalue at the epoch of OD.
         
-            Returns:
-                positional error ellipsoid 1σ minor eigenvalue at the epoch of OD
+        Returns:
+            positional error ellipsoid 1σ minor eigenvalue at the epoch of OD
         
         
         """
         ...
     def getGdop(self) -> float:
         """
-            Get generalize Dilution Of Precision.
+        Get generalize Dilution Of Precision.
         
-            Returns:
-                generalize Dilution Of Precision
+        Returns:
+            generalize Dilution Of Precision
         
         
         """
         ...
     def getId(self) -> str:
         """
-            Get identification number.
+        Get identification number.
         
-            Returns:
-                identification number
+        Returns:
+            identification number
         
         
         """
         ...
     def getMaxPredictedEigenMaj(self) -> float:
         """
-            Get maximum predicted major eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM.
+        Get maximum predicted major eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM.
         
-            Returns:
-                maximum predicted major eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM
+        Returns:
+            maximum predicted major eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM
         
         
         """
         ...
     def getMaximumObsGap(self) -> float:
         """
-            Get maximum time between observations in the OD of the object.
+        Get maximum time between observations in the OD of the object.
         
-            Returns:
-                maximum time between observations in the OD of the object
+        Returns:
+            maximum time between observations in the OD of the object
         
         
         """
         ...
     def getMethod(self) -> org.orekit.files.ccsds.definitions.OdMethodFacade:
         """
-            Get orbit determination method.
+        Get orbit determination method.
         
-            Returns:
-                orbit determination method
+        Returns:
+            orbit determination method
         
         
         """
         ...
     def getMinPredictedEigenMin(self) -> float:
         """
-            Get minimum predicted minor eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM.
+        Get minimum predicted minor eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM.
         
-            Returns:
-                minimum predicted v eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM
+        Returns:
+            minimum predicted v eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM
         
         
         """
         ...
     def getObsAvailable(self) -> int:
         """
-            Get number of observations available within the actual OD span.
+        Get number of observations available within the actual OD span.
         
-            Returns:
-                number of observations available within the actual OD span
+        Returns:
+            number of observations available within the actual OD span
         
         
         """
         ...
     def getObsUsed(self) -> int:
         """
-            Get number of observations accepted within the actual OD span.
+        Get number of observations accepted within the actual OD span.
         
-            Returns:
-                number of observations accepted within the actual OD span
+        Returns:
+            number of observations accepted within the actual OD span
         
         
         """
         ...
     def getPrevId(self) -> str:
         """
-            Get identification of previous orbit determination.
+        Get identification of previous orbit determination.
         
-            Returns:
-                identification of previous orbit determination
+        Returns:
+            identification of previous orbit determination
         
         
         """
         ...
     def getRecommendedOdSpan(self) -> float:
         """
-            Get time span of observation recommended for the OD of the object.
+        Get time span of observation recommended for the OD of the object.
         
-            Returns:
-                time span of observation recommended for the OD of the object
+        Returns:
+            time span of observation recommended for the OD of the object
         
         
         """
         ...
     def getSedr(self) -> float:
         """
-            Get Specific Energy Dissipation Rate.
+        Get Specific Energy Dissipation Rate.
         
-            Returns:
-                Specific Energy Dissipation Rate
+        Returns:
+            Specific Energy Dissipation Rate
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
-    def getSensors(self) -> java.util.List[str]: ...
+    def getSensors(self) -> java.util.List[str]:
+        """
+        Get description of sensors used.
+        
+        Returns:
+            description of sensors used
+        
+        
+        """
+        ...
     def getSensorsN(self) -> int:
         """
-            Get number of sensors used.
+        Get number of sensors used.
         
-            Returns:
-                number of sensors used
+        Returns:
+            number of sensors used
         
         
         """
         ...
     def getSolveN(self) -> int:
         """
-            Get number of solved-for states.
+        Get number of solved-for states.
         
-            Returns:
-                number of solved-for states
+        Returns:
+            number of solved-for states
         
         
         """
         ...
-    def getSolveStates(self) -> java.util.List[str]: ...
+    def getSolveStates(self) -> java.util.List[str]:
+        """
+        Get description of state elements solved-for.
+        
+        Returns:
+            description of state elements solved-for
+        
+        
+        """
+        ...
     def getTimeSinceFirstObservation(self) -> float:
         """
-            Get time elapsed between first accepted observation on epoch.
+        Get time elapsed between first accepted observation on epoch.
         
-            Returns:
-                time elapsed between first accepted observation on epoch
+        Returns:
+            time elapsed between first accepted observation on epoch
         
         
         """
         ...
     def getTimeSinceLastObservation(self) -> float:
         """
-            Get time elapsed between last accepted observation on epoch.
+        Get time elapsed between last accepted observation on epoch.
         
-            Returns:
-                time elapsed between last accepted observation on epoch
+        Returns:
+            time elapsed between last accepted observation on epoch
         
         
         """
         ...
     def getTracksAvailable(self) -> int:
         """
-            Get number of sensors tracks available for the OD within the actual OD span.
+        Get number of sensors tracks available for the OD within the actual OD span.
         
-            Returns:
-                number of sensors tracks available for the OD within the actual OD span
+        Returns:
+            number of sensors tracks available for the OD within the actual OD span
         
         
         """
         ...
     def getTracksUsed(self) -> int:
         """
-            Get number of sensors tracks accepted for the OD within the actual OD span.
+        Get number of sensors tracks accepted for the OD within the actual OD span.
         
-            Returns:
-                number of sensors tracks accepted for the OD within the actual OD span
+        Returns:
+            number of sensors tracks accepted for the OD within the actual OD span
         
         
         """
         ...
     def getWeightedRms(self) -> float:
         """
-            Get weighted RMS residual ratio.
+        Get weighted RMS residual ratio.
         
-            Returns:
-                weighted RMS residual ratio
-        
-        
-        """
-        ...
-    def setActualOdSpan(self, double: float) -> None:
-        """
-            Set actual time span used for the OD of the object.
-        
-            Parameters:
-                actualOdSpan (double): actual time span used for the OD of the object
+        Returns:
+            weighted RMS residual ratio
         
         
         """
         ...
-    def setConfidence(self, double: float) -> None:
+    def setActualOdSpan(self, actualOdSpan: float) -> None:
         """
-            Set confidence metric.
+        Set actual time span used for the OD of the object.
         
-            Parameters:
-                confidence (double): confidence metric
-        
-        
-        """
-        ...
-    def setConsiderN(self, integer: int) -> None:
-        """
-            Set number of consider parameters.
-        
-            Parameters:
-                considerN (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`): number of consider parameters
+        Parameters:
+            actualOdSpan (double): actual time span used for the OD of the object
         
         
         """
         ...
-    def setConsiderParameters(self, list: java.util.List[str]) -> None: ...
-    def setDataTypes(self, list: java.util.List[str]) -> None: ...
-    def setEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setConfidence(self, confidence: float) -> None:
         """
-            Set time tag for orbit determination solved-for state.
+        Set confidence metric.
         
-            Parameters:
-                epoch (:class:`~org.orekit.time.AbsoluteDate`): time tag for orbit determination solved-for state
+        Parameters:
+            confidence (double): confidence metric
         
         
         """
         ...
-    def setEpochEigenInt(self, double: float) -> None:
+    def setConsiderN(self, considerN: int) -> None:
         """
-            Set positional error ellipsoid 1σ intermediate eigenvalue at the epoch of OD.
+        Set number of consider parameters.
         
-            Parameters:
-                epochEigenInt (double): positional error ellipsoid 1σ intermediate eigenvalue at the epoch of OD
-        
-        
-        """
-        ...
-    def setEpochEigenMaj(self, double: float) -> None:
-        """
-            Set positional error ellipsoid 1σ major eigenvalue at the epoch of OD.
-        
-            Parameters:
-                epochEigenMaj (double): positional error ellipsoid 1σ major eigenvalue at the epoch of OD
+        Parameters:
+            considerN (Integer): number of consider parameters
         
         
         """
         ...
-    def setEpochEigenMin(self, double: float) -> None:
+    def setConsiderParameters(self, considerParameters: java.util.List[str]) -> None:
         """
-            Set positional error ellipsoid 1σ minor eigenvalue at the epoch of OD.
+        Set description of consider parameters.
         
-            Parameters:
-                epochEigenMin (double): positional error ellipsoid 1σ minor eigenvalue at the epoch of OD
-        
-        
-        """
-        ...
-    def setGdop(self, double: float) -> None:
-        """
-            Set generalize Dilution Of Precision.
-        
-            Parameters:
-                gdop (double): generalize Dilution Of Precision
+        Parameters:
+            considerParameters (List<String> considerParameters): description of consider parameters
         
         
         """
         ...
-    def setId(self, string: str) -> None:
+    def setDataTypes(self, dataTypes: java.util.List[str]) -> None:
         """
-            Set identification number.
+        Set observation data types used.
         
-            Parameters:
-                id (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number
-        
-        
-        """
-        ...
-    def setMaxPredictedEigenMaj(self, double: float) -> None:
-        """
-            Set maximum predicted major eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM.
-        
-            Parameters:
-                maxPredictedEigenMaj (double): maximum predicted major eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM
+        Parameters:
+            dataTypes (List<String> dataTypes): observation data types used
         
         
         """
         ...
-    def setMaximumObsGap(self, double: float) -> None:
+    def setEpoch(self, epoch: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set maximum time between observations in the OD of the object.
+        Set time tag for orbit determination solved-for state.
         
-            Parameters:
-                maximumObsGap (double): maximum time between observations in the OD of the object
-        
-        
-        """
-        ...
-    def setMethod(self, odMethodFacade: org.orekit.files.ccsds.definitions.OdMethodFacade) -> None:
-        """
-            Set orbit determination method.
-        
-            Parameters:
-                method (:class:`~org.orekit.files.ccsds.definitions.OdMethodFacade`): orbit determination method
+        Parameters:
+            epoch (AbsoluteDate): time tag for orbit determination solved-for state
         
         
         """
         ...
-    def setMinPredictedEigenMin(self, double: float) -> None:
+    def setEpochEigenInt(self, epochEigenInt: float) -> None:
         """
-            Set minimum predicted minor eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM.
+        Set positional error ellipsoid 1σ intermediate eigenvalue at the epoch of OD.
         
-            Parameters:
-                minPredictedEigenMin (double): minimum predicted minor eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM
-        
-        
-        """
-        ...
-    def setObsAvailable(self, integer: int) -> None:
-        """
-            Set number of observations available within the actual OD span.
-        
-            Parameters:
-                obsAvailable (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`): number of observations available within the actual OD span
+        Parameters:
+            epochEigenInt (double): positional error ellipsoid 1σ intermediate eigenvalue at the epoch of OD
         
         
         """
         ...
-    def setObsUsed(self, integer: int) -> None:
+    def setEpochEigenMaj(self, epochEigenMaj: float) -> None:
         """
-            Set number of observations accepted within the actual OD span.
+        Set positional error ellipsoid 1σ major eigenvalue at the epoch of OD.
         
-            Parameters:
-                obsUsed (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`): number of observations accepted within the actual OD span
-        
-        
-        """
-        ...
-    def setPrevId(self, string: str) -> None:
-        """
-            Set identification of previous orbit determination.
-        
-            Parameters:
-                prevId (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification of previous orbit determination
+        Parameters:
+            epochEigenMaj (double): positional error ellipsoid 1σ major eigenvalue at the epoch of OD
         
         
         """
         ...
-    def setRecommendedOdSpan(self, double: float) -> None:
+    def setEpochEigenMin(self, epochEigenMin: float) -> None:
         """
-            Set time span of observation recommended for the OD of the object.
+        Set positional error ellipsoid 1σ minor eigenvalue at the epoch of OD.
         
-            Parameters:
-                recommendedOdSpan (double): time span of observation recommended for the OD of the object
-        
-        
-        """
-        ...
-    def setSedr(self, double: float) -> None:
-        """
-            Set Specific Energy Dissipation Rate.
-        
-            Parameters:
-                sedr (double): Specific Energy Dissipation Rate (W/kg)
-        
-            Since:
-                12.0
+        Parameters:
+            epochEigenMin (double): positional error ellipsoid 1σ minor eigenvalue at the epoch of OD
         
         
         """
         ...
-    def setSensors(self, list: java.util.List[str]) -> None: ...
-    def setSensorsN(self, integer: int) -> None:
+    def setGdop(self, gdop: float) -> None:
         """
-            Set number of sensors used.
+        Set generalize Dilution Of Precision.
         
-            Parameters:
-                sensorsN (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`): number of sensors used
-        
-        
-        """
-        ...
-    def setSolveN(self, integer: int) -> None:
-        """
-            Set number of solved-for states.
-        
-            Parameters:
-                solveN (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`): number of solved-for states
+        Parameters:
+            gdop (double): generalize Dilution Of Precision
         
         
         """
         ...
-    def setSolveStates(self, list: java.util.List[str]) -> None: ...
-    def setTimeSinceFirstObservation(self, double: float) -> None:
+    def setId(self, id: str) -> None:
         """
-            Set time elapsed between first accepted observation on epoch.
+        Set identification number.
         
-            Parameters:
-                timeSinceFirstObservation (double): time elapsed between first accepted observation on epoch
-        
-        
-        """
-        ...
-    def setTimeSinceLastObservation(self, double: float) -> None:
-        """
-            Set time elapsed between last accepted observation on epoch.
-        
-            Parameters:
-                timeSinceLastObservation (double): time elapsed between last accepted observation on epoch
+        Parameters:
+            id (String): identification number
         
         
         """
         ...
-    def setTracksAvailable(self, integer: int) -> None:
+    def setMaxPredictedEigenMaj(self, maxPredictedEigenMaj: float) -> None:
         """
-            Set number of sensors tracks available for the OD within the actual OD span.
+        Set maximum predicted major eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM.
         
-            Parameters:
-                tracksAvailable (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`): number of sensors tracks available for the OD within the actual OD span
-        
-        
-        """
-        ...
-    def setTracksUsed(self, integer: int) -> None:
-        """
-            Set number of sensors tracks accepted for the OD within the actual OD span.
-        
-            Parameters:
-                tracksUsed (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`): number of sensors tracks accepted for the OD within the actual OD span
+        Parameters:
+            maxPredictedEigenMaj (double): maximum predicted major eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM
         
         
         """
         ...
-    def setWeightedRms(self, double: float) -> None:
+    def setMaximumObsGap(self, maximumObsGap: float) -> None:
         """
-            Set weighted RMS residual ratio.
+        Set maximum time between observations in the OD of the object.
         
-            Parameters:
-                weightedRms (double): weighted RMS residual ratio
+        Parameters:
+            maximumObsGap (double): maximum time between observations in the OD of the object
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def setMethod(self, method: org.orekit.files.ccsds.definitions.OdMethodFacade) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set orbit determination method.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            method (OdMethodFacade): orbit determination method
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
-                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        """
+        ...
+    def setMinPredictedEigenMin(self, minPredictedEigenMin: float) -> None:
+        """
+        Set minimum predicted minor eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM.
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            minPredictedEigenMin (double): minimum predicted minor eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM
+        
+        
+        """
+        ...
+    def setObsAvailable(self, obsAvailable: int) -> None:
+        """
+        Set number of observations available within the actual OD span.
+        
+        Parameters:
+            obsAvailable (Integer): number of observations available within the actual OD span
+        
+        
+        """
+        ...
+    def setObsUsed(self, obsUsed: int) -> None:
+        """
+        Set number of observations accepted within the actual OD span.
+        
+        Parameters:
+            obsUsed (Integer): number of observations accepted within the actual OD span
+        
+        
+        """
+        ...
+    def setPrevId(self, prevId: str) -> None:
+        """
+        Set identification of previous orbit determination.
+        
+        Parameters:
+            prevId (String): identification of previous orbit determination
+        
+        
+        """
+        ...
+    def setRecommendedOdSpan(self, recommendedOdSpan: float) -> None:
+        """
+        Set time span of observation recommended for the OD of the object.
+        
+        Parameters:
+            recommendedOdSpan (double): time span of observation recommended for the OD of the object
+        
+        
+        """
+        ...
+    def setSedr(self, sedr: float) -> None:
+        """
+        Set Specific Energy Dissipation Rate.
+        
+        Parameters:
+            sedr (double): Specific Energy Dissipation Rate (W/kg)
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
+    def setSensors(self, sensors: java.util.List[str]) -> None:
+        """
+        Set description of sensors used.
+        
+        Parameters:
+            sensors (List<String> sensors): description of sensors used
+        
+        
+        """
+        ...
+    def setSensorsN(self, sensorsN: int) -> None:
+        """
+        Set number of sensors used.
+        
+        Parameters:
+            sensorsN (Integer): number of sensors used
+        
+        
+        """
+        ...
+    def setSolveN(self, solveN: int) -> None:
+        """
+        Set number of solved-for states.
+        
+        Parameters:
+            solveN (Integer): number of solved-for states
+        
+        
+        """
+        ...
+    def setSolveStates(self, solveStates: java.util.List[str]) -> None:
+        """
+        Set description of state elements solved-for.
+        
+        Parameters:
+            solveStates (List<String> solveStates): description of state elements solved-for
+        
+        
+        """
+        ...
+    def setTimeSinceFirstObservation(self, timeSinceFirstObservation: float) -> None:
+        """
+        Set time elapsed between first accepted observation on epoch.
+        
+        Parameters:
+            timeSinceFirstObservation (double): time elapsed between first accepted observation on epoch
+        
+        
+        """
+        ...
+    def setTimeSinceLastObservation(self, timeSinceLastObservation: float) -> None:
+        """
+        Set time elapsed between last accepted observation on epoch.
+        
+        Parameters:
+            timeSinceLastObservation (double): time elapsed between last accepted observation on epoch
+        
+        
+        """
+        ...
+    def setTracksAvailable(self, tracksAvailable: int) -> None:
+        """
+        Set number of sensors tracks available for the OD within the actual OD span.
+        
+        Parameters:
+            tracksAvailable (Integer): number of sensors tracks available for the OD within the actual OD span
+        
+        
+        """
+        ...
+    def setTracksUsed(self, tracksUsed: int) -> None:
+        """
+        Set number of sensors tracks accepted for the OD within the actual OD span.
+        
+        Parameters:
+            tracksUsed (Integer): number of sensors tracks accepted for the OD within the actual OD span
+        
+        
+        """
+        ...
+    def setWeightedRms(self, weightedRms: float) -> None:
+        """
+        Set weighted RMS residual ratio.
+        
+        Parameters:
+            weightedRms (double): weighted RMS residual ratio
+        
+        
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class CommentsContainer
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -3196,12 +3358,10 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
 
 class OrbitDeterminationKey(java.lang.Enum['OrbitDeterminationKey']):
     """
-    public enum OrbitDeterminationKey extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitDeterminationKey`>
+    Keys for OrbitDetermination entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitDetermination` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     COMMENT: typing.ClassVar['OrbitDeterminationKey'] = ...
     OD_ID: typing.ClassVar['OrbitDeterminationKey'] = ...
@@ -3233,17 +3393,17 @@ class OrbitDeterminationKey(java.lang.Enum['OrbitDeterminationKey']):
     SENSORS: typing.ClassVar['OrbitDeterminationKey'] = ...
     WEIGHTED_RMS: typing.ClassVar['OrbitDeterminationKey'] = ...
     DATA_TYPES: typing.ClassVar['OrbitDeterminationKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, orbitDetermination: OrbitDetermination) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: OrbitDetermination) -> bool:
         """
-            Process an token.
+        Process an token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitDetermination`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (OrbitDetermination): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -3254,20 +3414,19 @@ class OrbitDeterminationKey(java.lang.Enum['OrbitDeterminationKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'OrbitDeterminationKey':
+    def valueOf(name: str) -> 'OrbitDeterminationKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -3275,17 +3434,15 @@ class OrbitDeterminationKey(java.lang.Enum['OrbitDeterminationKey']):
     @staticmethod
     def values() -> typing.MutableSequence['OrbitDeterminationKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (OrbitDeterminationKey c : OrbitDeterminationKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (OrbitDeterminationKey c : OrbitDeterminationKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -3293,15 +3450,13 @@ class OrbitDeterminationKey(java.lang.Enum['OrbitDeterminationKey']):
 
 class OrbitElementsType(java.lang.Enum['OrbitElementsType']):
     """
-    public enum OrbitElementsType extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitElementsType`>
+    Orbit element set type used in CCSDS Ocm.
     
-        Orbit element set type used in CCSDS :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
+    Since:
+        11.0
     
-        Since:
-            11.0
-    
-        Also see:
-            :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.sanaregistry.org.r.orbital_elements`
+    Also see:
+        orbital_elements
     """
     ADBARV: typing.ClassVar['OrbitElementsType'] = ...
     CARTP: typing.ClassVar['OrbitElementsType'] = ...
@@ -3318,48 +3473,54 @@ class OrbitElementsType(java.lang.Enum['OrbitElementsType']):
     LDBARV: typing.ClassVar['OrbitElementsType'] = ...
     ONSTATION: typing.ClassVar['OrbitElementsType'] = ...
     POINCARE: typing.ClassVar['OrbitElementsType'] = ...
-    def getUnits(self) -> java.util.List[org.orekit.utils.units.Unit]: ...
-    def toCartesian(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double2: float) -> org.orekit.utils.TimeStampedPVCoordinates:
+    def getUnits(self) -> java.util.List[org.orekit.utils.units.Unit]:
         """
-            Convert to Cartesian coordinates.
+        Get the elements units.
         
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): elements date
-                elements (double[]): elements values in SI units
-                body (:class:`~org.orekit.bodies.OneAxisEllipsoid`): central body (may be null if type is *not* :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitElementsType.GEODETIC`)
-                mu (double): gravitational parameter in m³/s²
-        
-            Returns:
-                Cartesian coordinates
+        Returns:
+            elements units
         
         
         """
         ...
-    def toRawElements(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float) -> typing.MutableSequence[float]:
+    def toCartesian(self, date: org.orekit.time.AbsoluteDate, elements: typing.Union[typing.List[float], jpype.JArray], body: org.orekit.bodies.OneAxisEllipsoid, mu: float) -> org.orekit.utils.TimeStampedPVCoordinates:
         """
-            Convert to raw elements array.
+        Convert to Cartesian coordinates.
         
-            Parameters:
-                pv (:class:`~org.orekit.utils.TimeStampedPVCoordinates`): Cartesian coordinates
-                frame (:class:`~org.orekit.frames.Frame`): inertial frame where elements are defined
-                body (:class:`~org.orekit.bodies.OneAxisEllipsoid`): central body (may be null if type is *not* :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitElementsType.GEODETIC`)
-                mu (double): gravitational parameter in m³/s²
+        Parameters:
+            date (AbsoluteDate): elements date
+            elements (double[]): elements values in SI units
+            body (OneAxisEllipsoid): central body (may be null if type is not GEODETIC)
+            mu (double): gravitational parameter in m³/s²
         
-            Returns:
-                elements elements values in SI units
+        Returns:
+            Cartesian coordinates
         
-            Since:
-                12.0
+        
+        """
+        ...
+    def toRawElements(self, pv: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame, body: org.orekit.bodies.OneAxisEllipsoid, mu: float) -> typing.MutableSequence[float]:
+        """
+        Convert to raw elements array.
+        
+        Parameters:
+            pv (TimeStampedPVCoordinates): Cartesian coordinates
+            frame (Frame): inertial frame where elements are defined
+            body (OneAxisEllipsoid): central body (may be null if type is not GEODETIC)
+            mu (double): gravitational parameter in m³/s²
+        
+        Returns:
+            elements elements values in SI units
+        
+        Since:
+            12.0
         
         
         """
         ...
     def toString(self) -> str:
         """
-        
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum.html?is` in
-                class :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`
+        Overrides: Enum in class Enum
         
         
         """
@@ -3370,20 +3531,19 @@ class OrbitElementsType(java.lang.Enum['OrbitElementsType']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'OrbitElementsType':
+    def valueOf(name: str) -> 'OrbitElementsType':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -3391,17 +3551,15 @@ class OrbitElementsType(java.lang.Enum['OrbitElementsType']):
     @staticmethod
     def values() -> typing.MutableSequence['OrbitElementsType']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (OrbitElementsType c : OrbitElementsType.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (OrbitElementsType c : OrbitElementsType.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -3409,477 +3567,478 @@ class OrbitElementsType(java.lang.Enum['OrbitElementsType']):
 
 class OrbitManeuver(org.orekit.time.TimeStamped):
     """
-    public class OrbitManeuver extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
+    Maneuver entry.
     
-        Maneuver entry.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self): ...
+    def __init__(self):
+        """
+        Build an uninitialized maneuver.
+        """
+        ...
     def getAcceleration(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get acceleration.
+        Get acceleration.
         
-            Returns:
-                acceleration
+        Returns:
+            acceleration
         
         
         """
         ...
     def getAccelerationDirectionSigma(self) -> float:
         """
-            Get one σ angular off-nominal acceleration direction.
+        Get one σ angular off-nominal acceleration direction.
         
-            Returns:
-                one σ angular off-nominal acceleration direction
+        Returns:
+            one σ angular off-nominal acceleration direction
         
         
         """
         ...
     def getAccelerationInterpolation(self) -> org.orekit.files.ccsds.definitions.OnOff:
         """
-            Get interpolation mode between current and next acceleration line.
+        Get interpolation mode between current and next acceleration line.
         
-            Returns:
-                interpolation mode between current and next acceleration line
+        Returns:
+            interpolation mode between current and next acceleration line
         
         
         """
         ...
     def getAccelerationMagnitudeSigma(self) -> float:
         """
-            Get one σ percent error on acceleration magnitude.
+        Get one σ percent error on acceleration magnitude.
         
-            Returns:
-                one σ percent error on acceleration magnitude
+        Returns:
+            one σ percent error on acceleration magnitude
         
         
         """
         ...
     def getDate(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the date.
+        Get the date.
         
-            Specified by:
-                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+        Specified by: getDate in interface TimeStamped
         
-            Returns:
-                date attached to the object
+        Returns:
+            date attached to the object
         
         
         """
         ...
     def getDeltaMass(self) -> float:
         """
-            Get mass change.
+        Get mass change.
         
-            Returns:
-                mass change
+        Returns:
+            mass change
         
         
         """
         ...
     def getDeployDirSigma(self) -> float:
         """
-            Get one σ angular off-nominal deployment vector direction.
+        Get one σ angular off-nominal deployment vector direction.
         
-            Returns:
-                one σ angular off-nominal deployment vector direction
+        Returns:
+            one σ angular off-nominal deployment vector direction
         
         
         """
         ...
     def getDeployDv(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get velocity increment of deployed "child" object.
+        Get velocity increment of deployed "child" object.
         
-            Returns:
-                velocity increment of deployed "child" object
+        Returns:
+            velocity increment of deployed "child" object
         
         
         """
         ...
     def getDeployDvCda(self) -> float:
         """
-            Get typical (50th percentile) product of drag coefficient times cross-sectional area of deployed "child" object.
+        Get typical (50th percentile) product of drag coefficient times cross-sectional area of deployed "child" object.
         
-            Returns:
-                typical (50th percentile) product of drag coefficient times cross-sectional area of deployed "child" object
+        Returns:
+            typical (50th percentile) product of drag coefficient times cross-sectional area of deployed "child" object
         
         
         """
         ...
     def getDeployDvRatio(self) -> float:
         """
-            Get ratio of child-to-host ΔV vectors.
+        Get ratio of child-to-host ΔV vectors.
         
-            Returns:
-                ratio of child-to-host ΔV vectors
+        Returns:
+            ratio of child-to-host ΔV vectors
         
         
         """
         ...
     def getDeployDvSigma(self) -> float:
         """
-            Get one σ percent error on deployment ΔV magnitude.
+        Get one σ percent error on deployment ΔV magnitude.
         
-            Returns:
-                one σ percent error on deployment ΔV magnitude
+        Returns:
+            one σ percent error on deployment ΔV magnitude
         
         
         """
         ...
     def getDeployId(self) -> str:
         """
-            Get identifier of resulting "child" object deployed from this host.
+        Get identifier of resulting "child" object deployed from this host.
         
-            Returns:
-                identifier of resulting "child" object deployed from this host
+        Returns:
+            identifier of resulting "child" object deployed from this host
         
         
         """
         ...
     def getDeployMass(self) -> float:
         """
-            Get decrement in host mass as a result of deployment.
+        Get decrement in host mass as a result of deployment.
         
-            Returns:
-                decrement in host mass as a result of deployment (shall be ≤ 0)
+        Returns:
+            decrement in host mass as a result of deployment (shall be ≤ 0)
         
         
         """
         ...
     def getDuration(self) -> float:
         """
-            Get duration.
+        Get duration.
         
-            Returns:
-                duration
+        Returns:
+            duration
         
         
         """
         ...
     def getDv(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get velocity increment.
+        Get velocity increment.
         
-            Returns:
-                velocity increment
+        Returns:
+            velocity increment
         
         
         """
         ...
     def getDvDirSigma(self) -> float:
         """
-            Get one σ angular off-nominal ΔV direction.
+        Get one σ angular off-nominal ΔV direction.
         
-            Returns:
-                one σ angular off-nominal ΔV direction
+        Returns:
+            one σ angular off-nominal ΔV direction
         
         
         """
         ...
     def getDvMagSigma(self) -> float:
         """
-            Get one σ percent error on ΔV magnitude.
+        Get one σ percent error on ΔV magnitude.
         
-            Returns:
-                one σ percent error on ΔV magnitude
+        Returns:
+            one σ percent error on ΔV magnitude
         
         
         """
         ...
     def getThrust(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get thrust.
+        Get thrust.
         
-            Returns:
-                thrust
+        Returns:
+            thrust
         
         
         """
         ...
     def getThrustDirectionSigma(self) -> float:
         """
-            Get one σ angular off-nominal thrust direction.
+        Get one σ angular off-nominal thrust direction.
         
-            Returns:
-                one σ angular off-nominal thrust direction
+        Returns:
+            one σ angular off-nominal thrust direction
         
         
         """
         ...
     def getThrustEfficiency(self) -> float:
         """
-            Get thrust efficiency η.
+        Get thrust efficiency η.
         
-            Returns:
-                thrust efficiency η (typically between 0.0 and 1.0)
+        Returns:
+            thrust efficiency η (typically between 0.0 and 1.0)
         
         
         """
         ...
     def getThrustInterpolation(self) -> org.orekit.files.ccsds.definitions.OnOff:
         """
-            Get interpolation mode between current and next thrust line.
+        Get interpolation mode between current and next thrust line.
         
-            Returns:
-                interpolation mode between current and next thrust line
+        Returns:
+            interpolation mode between current and next thrust line
         
         
         """
         ...
     def getThrustIsp(self) -> float:
         """
-            Get thrust specific impulse.
+        Get thrust specific impulse.
         
-            Returns:
-                thrust specific impulse
+        Returns:
+            thrust specific impulse
         
         
         """
         ...
     def getThrustMagnitudeSigma(self) -> float:
         """
-            Get one σ percent error on thrust magnitude.
+        Get one σ percent error on thrust magnitude.
         
-            Returns:
-                one σ percent error on thrust magnitude
-        
-        
-        """
-        ...
-    def setAcceleration(self, int: int, double: float) -> None:
-        """
-            Set acceleration component.
-        
-            Parameters:
-                i (int): component index
-                ai (double): i :sup:`th` component of acceleration
+        Returns:
+            one σ percent error on thrust magnitude
         
         
         """
         ...
-    def setAccelerationDirectionSigma(self, double: float) -> None:
+    def setAcceleration(self, i: int, ai: float) -> None:
         """
-            Set one σ angular off-nominal acceleration direction.
+        Set acceleration component.
         
-            Parameters:
-                accelerationDirectionSigma (double): one σ angular off-nominal acceleration direction
-        
-        
-        """
-        ...
-    def setAccelerationInterpolation(self, onOff: org.orekit.files.ccsds.definitions.OnOff) -> None:
-        """
-            Set interpolation mode between current and next acceleration line.
-        
-            Parameters:
-                accelerationInterpolation (:class:`~org.orekit.files.ccsds.definitions.OnOff`): interpolation mode between current and next acceleration line
+        Parameters:
+            i (int): component index
+            ai (double): i :sup:`th` component of acceleration
         
         
         """
         ...
-    def setAccelerationMagnitudeSigma(self, double: float) -> None:
+    def setAccelerationDirectionSigma(self, accelerationDirectionSigma: float) -> None:
         """
-            Set one σ percent error on acceleration magnitude.
+        Set one σ angular off-nominal acceleration direction.
         
-            Parameters:
-                accelerationMagnitudeSigma (double): one σ percent error on acceleration magnitude
-        
-        
-        """
-        ...
-    def setDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Set date.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): maneuver date
+        Parameters:
+            accelerationDirectionSigma (double): one σ angular off-nominal acceleration direction
         
         
         """
         ...
-    def setDeltaMass(self, double: float) -> None:
+    def setAccelerationInterpolation(self, accelerationInterpolation: org.orekit.files.ccsds.definitions.OnOff) -> None:
         """
-            Set mass change.
+        Set interpolation mode between current and next acceleration line.
         
-            Parameters:
-                deltaMass (double): mass change
-        
-        
-        """
-        ...
-    def setDeployDirSigma(self, double: float) -> None:
-        """
-            Set one σ angular off-nominal deployment vector direction.
-        
-            Parameters:
-                deployDirSigma (double): one σ angular off-nominal deployment vector direction
+        Parameters:
+            accelerationInterpolation (OnOff): interpolation mode between current and next acceleration line
         
         
         """
         ...
-    def setDeployDv(self, int: int, double: float) -> None:
+    def setAccelerationMagnitudeSigma(self, accelerationMagnitudeSigma: float) -> None:
         """
-            Set velocity increment component of deployed "child" object.
+        Set one σ percent error on acceleration magnitude.
         
-            Parameters:
-                i (int): component index
-                deployDvi (double): i :sup:`th` component of velocity increment of deployed "child" object
-        
-        
-        """
-        ...
-    def setDeployDvCda(self, double: float) -> None:
-        """
-            Set typical (50th percentile) product of drag coefficient times cross-sectional area of deployed "child" object.
-        
-            Parameters:
-                deployDvCda (double): typical (50th percentile) product of drag coefficient times cross-sectional area of deployed "child" object
+        Parameters:
+            accelerationMagnitudeSigma (double): one σ percent error on acceleration magnitude
         
         
         """
         ...
-    def setDeployDvRatio(self, double: float) -> None:
+    def setDate(self, date: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set ratio of child-to-host ΔV vectors.
+        Set date.
         
-            Parameters:
-                deployDvRatio (double): ratio of child-to-host ΔV vectors
-        
-        
-        """
-        ...
-    def setDeployDvSigma(self, double: float) -> None:
-        """
-            Set one σ percent error on deployment ΔV magnitude.
-        
-            Parameters:
-                deployDvSigma (double): one σ percent error on deployment ΔV magnitude
+        Parameters:
+            date (AbsoluteDate): maneuver date
         
         
         """
         ...
-    def setDeployId(self, string: str) -> None:
+    def setDeltaMass(self, deltaMass: float) -> None:
         """
-            Set identifier of resulting "child" object deployed from this host.
+        Set mass change.
         
-            Parameters:
-                deployId (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identifier of resulting "child" object deployed from this host
-        
-        
-        """
-        ...
-    def setDeployMass(self, double: float) -> None:
-        """
-            Set decrement in host mass as a result of deployment.
-        
-            Parameters:
-                deployMass (double): decrement in host mass as a result of deployment (shall be ≤ 0)
+        Parameters:
+            deltaMass (double): mass change
         
         
         """
         ...
-    def setDuration(self, double: float) -> None:
+    def setDeployDirSigma(self, deployDirSigma: float) -> None:
         """
-            Set duration.
+        Set one σ angular off-nominal deployment vector direction.
         
-            Parameters:
-                duration (double): duration
-        
-        
-        """
-        ...
-    def setDv(self, int: int, double: float) -> None:
-        """
-            Set velocity increment component.
-        
-            Parameters:
-                i (int): component index
-                dVi (double): i :sup:`th` component of velocity increment
+        Parameters:
+            deployDirSigma (double): one σ angular off-nominal deployment vector direction
         
         
         """
         ...
-    def setDvDirSigma(self, double: float) -> None:
+    def setDeployDv(self, i: int, deployDvi: float) -> None:
         """
-            Set one σ angular off-nominal ΔV direction.
+        Set velocity increment component of deployed "child" object.
         
-            Parameters:
-                dvDirSigma (double): one σ angular off-nominal ΔV direction
-        
-        
-        """
-        ...
-    def setDvMagSigma(self, double: float) -> None:
-        """
-            Set one σ percent error on ΔV magnitude.
-        
-            Parameters:
-                dvMagSigma (double): one σ percent error on ΔV magnitude
+        Parameters:
+            i (int): component index
+            deployDvi (double): i :sup:`th` component of velocity increment of deployed "child" object
         
         
         """
         ...
-    def setThrust(self, int: int, double: float) -> None:
+    def setDeployDvCda(self, deployDvCda: float) -> None:
         """
-            Set thrust component.
+        Set typical (50th percentile) product of drag coefficient times cross-sectional area of deployed "child" object.
         
-            Parameters:
-                i (int): component index
-                ti (double): i :sup:`th` component of thrust
-        
-        
-        """
-        ...
-    def setThrustDirectionSigma(self, double: float) -> None:
-        """
-            Set one σ angular off-nominal thrust direction.
-        
-            Parameters:
-                thrustDirectionSigma (double): one σ angular off-nominal thrust direction
+        Parameters:
+            deployDvCda (double): typical (50th percentile) product of drag coefficient times cross-sectional area of deployed "child" object
         
         
         """
         ...
-    def setThrustEfficiency(self, double: float) -> None:
+    def setDeployDvRatio(self, deployDvRatio: float) -> None:
         """
-            Set thrust efficiency η.
+        Set ratio of child-to-host ΔV vectors.
         
-            Parameters:
-                thrustEfficiency (double): thrust efficiency η (typically between 0.0 and 1.0)
-        
-        
-        """
-        ...
-    def setThrustInterpolation(self, onOff: org.orekit.files.ccsds.definitions.OnOff) -> None:
-        """
-            Set interpolation mode between current and next thrust line.
-        
-            Parameters:
-                thrustInterpolation (:class:`~org.orekit.files.ccsds.definitions.OnOff`): interpolation mode between current and next thrust line
+        Parameters:
+            deployDvRatio (double): ratio of child-to-host ΔV vectors
         
         
         """
         ...
-    def setThrustIsp(self, double: float) -> None:
+    def setDeployDvSigma(self, deployDvSigma: float) -> None:
         """
-            Set thrust specific impulse.
+        Set one σ percent error on deployment ΔV magnitude.
         
-            Parameters:
-                thrustIsp (double): thrust specific impulse
+        Parameters:
+            deployDvSigma (double): one σ percent error on deployment ΔV magnitude
         
         
         """
         ...
-    def setThrustMagnitudeSigma(self, double: float) -> None:
+    def setDeployId(self, deployId: str) -> None:
         """
-            Set one σ percent error on thrust magnitude.
+        Set identifier of resulting "child" object deployed from this host.
         
-            Parameters:
-                thrustMagnitudeSigma (double): one σ percent error on thrust magnitude
+        Parameters:
+            deployId (String): identifier of resulting "child" object deployed from this host
+        
+        
+        """
+        ...
+    def setDeployMass(self, deployMass: float) -> None:
+        """
+        Set decrement in host mass as a result of deployment.
+        
+        Parameters:
+            deployMass (double): decrement in host mass as a result of deployment (shall be ≤ 0)
+        
+        
+        """
+        ...
+    def setDuration(self, duration: float) -> None:
+        """
+        Set duration.
+        
+        Parameters:
+            duration (double): duration
+        
+        
+        """
+        ...
+    def setDv(self, i: int, dVi: float) -> None:
+        """
+        Set velocity increment component.
+        
+        Parameters:
+            i (int): component index
+            dVi (double): i :sup:`th` component of velocity increment
+        
+        
+        """
+        ...
+    def setDvDirSigma(self, dvDirSigma: float) -> None:
+        """
+        Set one σ angular off-nominal ΔV direction.
+        
+        Parameters:
+            dvDirSigma (double): one σ angular off-nominal ΔV direction
+        
+        
+        """
+        ...
+    def setDvMagSigma(self, dvMagSigma: float) -> None:
+        """
+        Set one σ percent error on ΔV magnitude.
+        
+        Parameters:
+            dvMagSigma (double): one σ percent error on ΔV magnitude
+        
+        
+        """
+        ...
+    def setThrust(self, i: int, ti: float) -> None:
+        """
+        Set thrust component.
+        
+        Parameters:
+            i (int): component index
+            ti (double): i :sup:`th` component of thrust
+        
+        
+        """
+        ...
+    def setThrustDirectionSigma(self, thrustDirectionSigma: float) -> None:
+        """
+        Set one σ angular off-nominal thrust direction.
+        
+        Parameters:
+            thrustDirectionSigma (double): one σ angular off-nominal thrust direction
+        
+        
+        """
+        ...
+    def setThrustEfficiency(self, thrustEfficiency: float) -> None:
+        """
+        Set thrust efficiency η.
+        
+        Parameters:
+            thrustEfficiency (double): thrust efficiency η (typically between 0.0 and 1.0)
+        
+        
+        """
+        ...
+    def setThrustInterpolation(self, thrustInterpolation: org.orekit.files.ccsds.definitions.OnOff) -> None:
+        """
+        Set interpolation mode between current and next thrust line.
+        
+        Parameters:
+            thrustInterpolation (OnOff): interpolation mode between current and next thrust line
+        
+        
+        """
+        ...
+    def setThrustIsp(self, thrustIsp: float) -> None:
+        """
+        Set thrust specific impulse.
+        
+        Parameters:
+            thrustIsp (double): thrust specific impulse
+        
+        
+        """
+        ...
+    def setThrustMagnitudeSigma(self, thrustMagnitudeSigma: float) -> None:
+        """
+        Set one σ percent error on thrust magnitude.
+        
+        Parameters:
+            thrustMagnitudeSigma (double): one σ percent error on thrust magnitude
         
         
         """
@@ -3887,21 +4046,38 @@ class OrbitManeuver(org.orekit.time.TimeStamped):
 
 class OrbitManeuverHistory:
     """
-    public class OrbitManeuverHistory extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Maneuver history.
     
-        Maneuver history.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, orbitManeuverHistoryMetadata: 'OrbitManeuverHistoryMetadata', list: java.util.List[OrbitManeuver]): ...
-    def getManeuvers(self) -> java.util.List[OrbitManeuver]: ...
+    def __init__(self, metadata: 'OrbitManeuverHistoryMetadata', maneuvers: java.util.List[OrbitManeuver]):
+        """
+        Simple constructor.
+        
+        Parameters:
+            metadata (OrbitManeuverHistoryMetadata): metadata
+            maneuvers (List<OrbitManeuver> maneuvers): maneuvers
+        
+        
+        """
+        ...
+    def getManeuvers(self) -> java.util.List[OrbitManeuver]:
+        """
+        Get the maneuvers.
+        
+        Returns:
+            maneuvers
+        
+        
+        """
+        ...
     def getMetadata(self) -> 'OrbitManeuverHistoryMetadata':
         """
-            Get metadata.
+        Get metadata.
         
-            Returns:
-                metadata
+        Returns:
+            metadata
         
         
         """
@@ -3909,603 +4085,648 @@ class OrbitManeuverHistory:
 
 class OrbitManeuverHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer):
     """
-    public class OrbitManeuverHistoryMetadata extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    Metadata for maneuver history.
     
-        Metadata for maneuver history.
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     DEFAULT_DC_TYPE: typing.ClassVar[org.orekit.files.ccsds.definitions.DutyCycleType] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.definitions.DutyCycleType` DEFAULT_DC_TYPE
+    Default duty cycle type.
     
-        Default duty cycle type.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     
     
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate): ...
+    def __init__(self, epochT0: org.orekit.time.AbsoluteDate):
+        """
+        Simple constructor.
+        
+        Parameters:
+            epochT0 (AbsoluteDate): T0 epoch from file metadata
+        
+        
+        """
+        ...
     def getDcBodyFrame(self) -> org.orekit.files.ccsds.definitions.SpacecraftBodyFrame:
         """
-            Get spacecraft body frame in which
-            :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuverHistoryMetadata.getDcBodyTrigger` is specified.
+        Get spacecraft body frame in which getDcBodyTrigger is specified.
         
-            Returns:
-                spacecraft body frame in which :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuverHistoryMetadata.getDcBodyTrigger`
-                is specified
+        Returns:
+            spacecraft body frame in which getDcBodyTrigger
+            is specified
         
         
         """
         ...
     def getDcBodyTrigger(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get direction in :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuverHistoryMetadata.getDcBodyFrame` for triggering
-            duty cycle.
+        Get direction in getDcBodyFrame for triggering duty cycle.
         
-            Returns:
-                direction in :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuverHistoryMetadata.getDcBodyFrame` for triggering duty
-                cycle
+        Returns:
+            direction in getDcBodyFrame for triggering duty
+            cycle
         
         
         """
         ...
     def getDcExecStart(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the start time of initial duty cycle-based maneuver execution.
+        Get the start time of initial duty cycle-based maneuver execution.
         
-            Returns:
-                start time of initial duty cycle-based maneuver execution
+        Returns:
+            start time of initial duty cycle-based maneuver execution
         
         
         """
         ...
     def getDcExecStop(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the end time of final duty cycle-based maneuver execution.
+        Get the end time of final duty cycle-based maneuver execution.
         
-            Returns:
-                end time of final duty cycle-based maneuver execution
+        Returns:
+            end time of final duty cycle-based maneuver execution
         
         
         """
         ...
     def getDcMaxCycles(self) -> int:
         """
-            Get the maximum number of "ON" duty cycles.
+        Get the maximum number of "ON" duty cycles.
         
-            Returns:
-                maximum number of "ON" duty cycles (-1 if not set)
+        Returns:
+            maximum number of "ON" duty cycles (-1 if not set)
         
         
         """
         ...
     def getDcMinCycles(self) -> int:
         """
-            Get the minimum number of "ON" duty cycles.
+        Get the minimum number of "ON" duty cycles.
         
-            Returns:
-                minimum number of "ON" duty cycles (-1 if not set)
+        Returns:
+            minimum number of "ON" duty cycles (-1 if not set)
         
         
         """
         ...
     def getDcPhaseStartAngle(self) -> float:
         """
-            Get phase angle of pulse start.
+        Get phase angle of pulse start.
         
-            Returns:
-                phase angle of pulse start
+        Returns:
+            phase angle of pulse start
         
         
         """
         ...
     def getDcPhaseStopAngle(self) -> float:
         """
-            Get phase angle of pulse stop.
+        Get phase angle of pulse stop.
         
-            Returns:
-                phase angle of pulse stop
+        Returns:
+            phase angle of pulse stop
         
         
         """
         ...
     def getDcRefDir(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get reference direction for triggering duty cycle.
+        Get reference direction for triggering duty cycle.
         
-            Returns:
-                reference direction for triggering duty cycle
+        Returns:
+            reference direction for triggering duty cycle
         
         
         """
         ...
     def getDcRefTime(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get duty cycle thrust reference time.
+        Get duty cycle thrust reference time.
         
-            Returns:
-                duty cycle thrust reference time
+        Returns:
+            duty cycle thrust reference time
         
         
         """
         ...
     def getDcTimePulseDuration(self) -> float:
         """
-            Get duty cycle pulse "ON" duration.
+        Get duty cycle pulse "ON" duration.
         
-            Returns:
-                duty cycle pulse "ON" duration
+        Returns:
+            duty cycle pulse "ON" duration
         
         
         """
         ...
     def getDcTimePulsePeriod(self) -> float:
         """
-            Get duty cycle elapsed time between start of a pulse and start of next pulse.
+        Get duty cycle elapsed time between start of a pulse and start of next pulse.
         
-            Returns:
-                duty cycle elapsed time between start of a pulse and start of next pulse
+        Returns:
+            duty cycle elapsed time between start of a pulse and start of next pulse
         
         
         """
         ...
     def getDcType(self) -> org.orekit.files.ccsds.definitions.DutyCycleType:
         """
-            Get type of duty cycle.
+        Get type of duty cycle.
         
-            Returns:
-                type of duty cycle
+        Returns:
+            type of duty cycle
         
         
         """
         ...
     def getDcWindowClose(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the end time of duty cycle-based maneuver window.
+        Get the end time of duty cycle-based maneuver window.
         
-            Returns:
-                end time of duty cycle-based maneuver window
+        Returns:
+            end time of duty cycle-based maneuver window
         
         
         """
         ...
     def getDcWindowOpen(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the start time of duty cycle-based maneuver window.
+        Get the start time of duty cycle-based maneuver window.
         
-            Returns:
-                start time of duty cycle-based maneuver window
+        Returns:
+            start time of duty cycle-based maneuver window
         
         
         """
         ...
     def getGravitationalAssist(self) -> org.orekit.files.ccsds.definitions.BodyFacade:
         """
-            Get the origin of gravitational assist.
+        Get the origin of gravitational assist.
         
-            Returns:
-                the origin of gravitational assist.
+        Returns:
+            the origin of gravitational assist.
         
         
         """
         ...
     def getManBasis(self) -> ManBasis:
         """
-            Get basis of this maneuver history data.
+        Get basis of this maneuver history data.
         
-            Returns:
-                basis of this maneuver history data
+        Returns:
+            basis of this maneuver history data
         
         
         """
         ...
     def getManBasisID(self) -> str:
         """
-            Get identification number of the orbit determination or simulation upon which this maneuver is based.
+        Get identification number of the orbit determination or simulation upon which this maneuver is based.
         
-            Returns:
-                identification number of the orbit determination or simulation upon which this maneuver is based
+        Returns:
+            identification number of the orbit determination or simulation upon which this maneuver is based
         
         
         """
         ...
-    def getManComposition(self) -> java.util.List[ManeuverFieldType]: ...
+    def getManComposition(self) -> java.util.List[ManeuverFieldType]:
+        """
+        Get maneuver elements of information.
+        
+        Returns:
+            maneuver element of information
+        
+        
+        """
+        ...
     def getManDeviceID(self) -> str:
         """
-            Get identifier of the device used for this maneuver.
+        Get identifier of the device used for this maneuver.
         
-            Returns:
-                identifier of the device used for this maneuver
+        Returns:
+            identifier of the device used for this maneuver
         
         
         """
         ...
     def getManFrameEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get epoch of the :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuverHistoryMetadata.getManReferenceFrame`.
+        Get epoch of the getManReferenceFrame.
         
-            Returns:
-                epoch of the :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuverHistoryMetadata.getManReferenceFrame`
+        Returns:
+            epoch of the getManReferenceFrame
         
         
         """
         ...
     def getManID(self) -> str:
         """
-            Get maneuver identification number.
+        Get maneuver identification number.
         
-            Returns:
-                maneuver identification number
+        Returns:
+            maneuver identification number
         
         
         """
         ...
     def getManNextEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get start time of next maneuver.
+        Get start time of next maneuver.
         
-            Returns:
-                start time of next maneuver
+        Returns:
+            start time of next maneuver
         
         
         """
         ...
     def getManNextID(self) -> str:
         """
-            Get identification number of next maneuver.
+        Get identification number of next maneuver.
         
-            Returns:
-                identification number of next maneuver
+        Returns:
+            identification number of next maneuver
         
         
         """
         ...
     def getManPredSource(self) -> str:
         """
-            Get prediction source on which this maneuver is based.
+        Get prediction source on which this maneuver is based.
         
-            Returns:
-                prediction source on which this maneuver is based
+        Returns:
+            prediction source on which this maneuver is based
         
         
         """
         ...
     def getManPrevEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get completion time of previous maneuver.
+        Get completion time of previous maneuver.
         
-            Returns:
-                completion time of previous maneuver
+        Returns:
+            completion time of previous maneuver
         
         
         """
         ...
     def getManPrevID(self) -> str:
         """
-            Get identification number of previous maneuver.
+        Get identification number of previous maneuver.
         
-            Returns:
-                identification number of previous maneuver
+        Returns:
+            identification number of previous maneuver
         
         
         """
         ...
-    def getManPurpose(self) -> java.util.List[str]: ...
+    def getManPurpose(self) -> java.util.List[str]:
+        """
+        Get the purposes of the maneuver.
+        
+        Returns:
+            purposes of the maneuver
+        
+        
+        """
+        ...
     def getManReferenceFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
         """
-            Get reference frame of the maneuver.
+        Get reference frame of the maneuver.
         
-            Returns:
-                reference frame of the maneuver
-        
-        
-        """
-        ...
-    def getManUnits(self) -> java.util.List[org.orekit.utils.units.Unit]: ...
-    def setDcBodyFrame(self, spacecraftBodyFrame: org.orekit.files.ccsds.definitions.SpacecraftBodyFrame) -> None:
-        """
-            Set spacecraft body frame in which
-            :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuverHistoryMetadata.getDcBodyTrigger` is specified.
-        
-            Parameters:
-                dcBodyFrame (:class:`~org.orekit.files.ccsds.definitions.SpacecraftBodyFrame`): spacecraft body frame in which :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuverHistoryMetadata.getDcBodyTrigger`
-                    is specified
+        Returns:
+            reference frame of the maneuver
         
         
         """
         ...
-    def setDcBodyTrigger(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> None:
+    def getManUnits(self) -> java.util.List[org.orekit.utils.units.Unit]:
         """
-            Set direction in :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuverHistoryMetadata.getDcBodyFrame` for triggering
-            duty cycle.
+        Get maneuver elements of information units.
         
-            Parameters:
-                dcBodyTrigger (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): direction in :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuverHistoryMetadata.getDcBodyFrame` for triggering duty
-                    cycle
+        Returns:
+            maneuver element of information units
         
         
         """
         ...
-    def setDcExecStart(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setDcBodyFrame(self, dcBodyFrame: org.orekit.files.ccsds.definitions.SpacecraftBodyFrame) -> None:
         """
-            Set the start time of initial duty cycle-based maneuver execution.
+        Set spacecraft body frame in which getDcBodyTrigger is specified.
         
-            Parameters:
-                dcExecStart (:class:`~org.orekit.time.AbsoluteDate`): start time of initial duty cycle-based maneuver execution
-        
-        
-        """
-        ...
-    def setDcExecStop(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Set the end time of final duty cycle-based maneuver execution.
-        
-            Parameters:
-                dcExecStop (:class:`~org.orekit.time.AbsoluteDate`): end time of final duty cycle-based maneuver execution
+        Parameters:
+            dcBodyFrame (SpacecraftBodyFrame): spacecraft body frame in which getDcBodyTrigger
+                is specified
         
         
         """
         ...
-    def setDcMaxCycles(self, int: int) -> None:
+    def setDcBodyTrigger(self, dcBodyTrigger: org.hipparchus.geometry.euclidean.threed.Vector3D) -> None:
         """
-            Set the maximum number of "ON" duty cycles.
+        Set direction in getDcBodyFrame for triggering duty cycle.
         
-            Parameters:
-                dcMaxCycles (int): maximum number of "ON" duty cycles
-        
-        
-        """
-        ...
-    def setDcMinCycles(self, int: int) -> None:
-        """
-            Set the minimum number of "ON" duty cycles.
-        
-            Parameters:
-                dcMinCycles (int): minimum number of "ON" duty cycles
+        Parameters:
+            dcBodyTrigger (Vector3D): direction in getDcBodyFrame for triggering duty
+                cycle
         
         
         """
         ...
-    def setDcPhaseStartAngle(self, double: float) -> None:
+    def setDcExecStart(self, dcExecStart: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set phase angle of pulse start.
+        Set the start time of initial duty cycle-based maneuver execution.
         
-            Parameters:
-                dcPhaseStartAngle (double): phase angle of pulse start
-        
-        
-        """
-        ...
-    def setDcPhaseStopAngle(self, double: float) -> None:
-        """
-            Set phase angle of pulse stop.
-        
-            Parameters:
-                dcPhaseStopAngle (double): phase angle of pulse stop
+        Parameters:
+            dcExecStart (AbsoluteDate): start time of initial duty cycle-based maneuver execution
         
         
         """
         ...
-    def setDcRefDir(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> None:
+    def setDcExecStop(self, dcExecStop: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set reference direction for triggering duty cycle.
+        Set the end time of final duty cycle-based maneuver execution.
         
-            Parameters:
-                dcRefDir (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): reference direction for triggering duty cycle
-        
-        
-        """
-        ...
-    def setDcRefTime(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Set duty cycle thrust reference time.
-        
-            Parameters:
-                dcRefTime (:class:`~org.orekit.time.AbsoluteDate`): duty cycle thrust reference time
+        Parameters:
+            dcExecStop (AbsoluteDate): end time of final duty cycle-based maneuver execution
         
         
         """
         ...
-    def setDcTimePulseDuration(self, double: float) -> None:
+    def setDcMaxCycles(self, dcMaxCycles: int) -> None:
         """
-            Set duty cycle pulse "ON" duration.
+        Set the maximum number of "ON" duty cycles.
         
-            Parameters:
-                dcTimePulseDuration (double): duty cycle pulse "ON" duration
-        
-        
-        """
-        ...
-    def setDcTimePulsePeriod(self, double: float) -> None:
-        """
-            Set duty cycle elapsed time between start of a pulse and start of next pulse.
-        
-            Parameters:
-                dcTimePulsePeriod (double): duty cycle elapsed time between start of a pulse and start of next pulse
+        Parameters:
+            dcMaxCycles (int): maximum number of "ON" duty cycles
         
         
         """
         ...
-    def setDcType(self, dutyCycleType: org.orekit.files.ccsds.definitions.DutyCycleType) -> None:
+    def setDcMinCycles(self, dcMinCycles: int) -> None:
         """
-            Set type of duty cycle.
+        Set the minimum number of "ON" duty cycles.
         
-            Parameters:
-                dcType (:class:`~org.orekit.files.ccsds.definitions.DutyCycleType`): type of duty cycle
-        
-        
-        """
-        ...
-    def setDcWindowClose(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Set the end time of duty cycle-based maneuver window.
-        
-            Parameters:
-                dcWindowClose (:class:`~org.orekit.time.AbsoluteDate`): end time of duty cycle-based maneuver window
+        Parameters:
+            dcMinCycles (int): minimum number of "ON" duty cycles
         
         
         """
         ...
-    def setDcWindowOpen(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setDcPhaseStartAngle(self, dcPhaseStartAngle: float) -> None:
         """
-            Set the start time of duty cycle-based maneuver window.
+        Set phase angle of pulse start.
         
-            Parameters:
-                dcWindowOpen (:class:`~org.orekit.time.AbsoluteDate`): start time of duty cycle-based maneuver window
+        Parameters:
+            dcPhaseStartAngle (double): phase angle of pulse start
         
         
         """
         ...
-    def setGravitationalAssist(self, bodyFacade: org.orekit.files.ccsds.definitions.BodyFacade) -> None:
+    def setDcPhaseStopAngle(self, dcPhaseStopAngle: float) -> None:
         """
-            Set the origin of gravitational assist.
+        Set phase angle of pulse stop.
         
-            Parameters:
-                gravitationalAssist (:class:`~org.orekit.files.ccsds.definitions.BodyFacade`): origin of gravitational assist to be set
+        Parameters:
+            dcPhaseStopAngle (double): phase angle of pulse stop
+        
+        
+        """
+        ...
+    def setDcRefDir(self, dcRefDir: org.hipparchus.geometry.euclidean.threed.Vector3D) -> None:
+        """
+        Set reference direction for triggering duty cycle.
+        
+        Parameters:
+            dcRefDir (Vector3D): reference direction for triggering duty cycle
+        
+        
+        """
+        ...
+    def setDcRefTime(self, dcRefTime: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Set duty cycle thrust reference time.
+        
+        Parameters:
+            dcRefTime (AbsoluteDate): duty cycle thrust reference time
+        
+        
+        """
+        ...
+    def setDcTimePulseDuration(self, dcTimePulseDuration: float) -> None:
+        """
+        Set duty cycle pulse "ON" duration.
+        
+        Parameters:
+            dcTimePulseDuration (double): duty cycle pulse "ON" duration
+        
+        
+        """
+        ...
+    def setDcTimePulsePeriod(self, dcTimePulsePeriod: float) -> None:
+        """
+        Set duty cycle elapsed time between start of a pulse and start of next pulse.
+        
+        Parameters:
+            dcTimePulsePeriod (double): duty cycle elapsed time between start of a pulse and start of next pulse
+        
+        
+        """
+        ...
+    def setDcType(self, dcType: org.orekit.files.ccsds.definitions.DutyCycleType) -> None:
+        """
+        Set type of duty cycle.
+        
+        Parameters:
+            dcType (DutyCycleType): type of duty cycle
+        
+        
+        """
+        ...
+    def setDcWindowClose(self, dcWindowClose: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Set the end time of duty cycle-based maneuver window.
+        
+        Parameters:
+            dcWindowClose (AbsoluteDate): end time of duty cycle-based maneuver window
+        
+        
+        """
+        ...
+    def setDcWindowOpen(self, dcWindowOpen: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Set the start time of duty cycle-based maneuver window.
+        
+        Parameters:
+            dcWindowOpen (AbsoluteDate): start time of duty cycle-based maneuver window
+        
+        
+        """
+        ...
+    def setGravitationalAssist(self, gravitationalAssist: org.orekit.files.ccsds.definitions.BodyFacade) -> None:
+        """
+        Set the origin of gravitational assist.
+        
+        Parameters:
+            gravitationalAssist (BodyFacade): origin of gravitational assist to be set
         
         
         """
         ...
     def setManBasis(self, manBasis: ManBasis) -> None:
         """
-            Set basis of this maneuver history data.
+        Set basis of this maneuver history data.
         
-            Parameters:
-                manBasis (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ManBasis`): basis of this maneuver history data
-        
-        
-        """
-        ...
-    def setManBasisID(self, string: str) -> None:
-        """
-            Set identification number of the orbit determination or simulation upon which this maneuver is based.
-        
-            Parameters:
-                manBasisID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of the orbit determination or simulation upon which this maneuver is based
+        Parameters:
+            manBasis (ManBasis): basis of this maneuver history data
         
         
         """
         ...
-    def setManComposition(self, list: java.util.List[ManeuverFieldType]) -> None: ...
-    def setManDeviceID(self, string: str) -> None:
+    def setManBasisID(self, manBasisID: str) -> None:
         """
-            Set identifier of the device used for this maneuver.
+        Set identification number of the orbit determination or simulation upon which this maneuver is based.
         
-            Parameters:
-                manDeviceID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identifier of the device used for this maneuver
-        
-        
-        """
-        ...
-    def setManFrameEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Set epoch of the :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuverHistoryMetadata.getManReferenceFrame`.
-        
-            Parameters:
-                manFrameEpoch (:class:`~org.orekit.time.AbsoluteDate`): epoch of the :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuverHistoryMetadata.getManReferenceFrame`
+        Parameters:
+            manBasisID (String): identification number of the orbit determination or simulation upon which this maneuver is based
         
         
         """
         ...
-    def setManID(self, string: str) -> None:
+    def setManComposition(self, manComposition: java.util.List[ManeuverFieldType]) -> None:
         """
-            Set maneuver identification number.
+        Set maneuver element of information.
         
-            Parameters:
-                manID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): maneuver identification number
-        
-        
-        """
-        ...
-    def setManNextEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Set start time of next maneuver.
-        
-            Parameters:
-                manNextEpoch (:class:`~org.orekit.time.AbsoluteDate`): start time of next maneuver
+        Parameters:
+            manComposition (List<ManeuverFieldType> manComposition): maneuver element of information
         
         
         """
         ...
-    def setManNextID(self, string: str) -> None:
+    def setManDeviceID(self, manDeviceID: str) -> None:
         """
-            Set identification number of next maneuver.
+        Set identifier of the device used for this maneuver.
         
-            Parameters:
-                manNextID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of next maneuver
-        
-        
-        """
-        ...
-    def setManPredSource(self, string: str) -> None:
-        """
-            Set prediction source on which this maneuver is based.
-        
-            Parameters:
-                manPredSource (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): prediction source on which this maneuver is based
+        Parameters:
+            manDeviceID (String): identifier of the device used for this maneuver
         
         
         """
         ...
-    def setManPrevEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setManFrameEpoch(self, manFrameEpoch: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set completion time of previous maneuver.
+        Set epoch of the getManReferenceFrame.
         
-            Parameters:
-                manPrevEpoch (:class:`~org.orekit.time.AbsoluteDate`): completion time of previous maneuver
-        
-        
-        """
-        ...
-    def setManPrevID(self, string: str) -> None:
-        """
-            Set identification number of previous maneuver.
-        
-            Parameters:
-                manPrevID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of previous maneuver
+        Parameters:
+            manFrameEpoch (AbsoluteDate): epoch of the getManReferenceFrame
         
         
         """
         ...
-    def setManPurpose(self, list: java.util.List[str]) -> None: ...
-    def setManReferenceFrame(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
+    def setManID(self, manID: str) -> None:
         """
-            Set reference frame of the maneuver.
+        Set maneuver identification number.
         
-            Parameters:
-                manReferenceFrame (:class:`~org.orekit.files.ccsds.definitions.FrameFacade`): the reference frame to be set
+        Parameters:
+            manID (String): maneuver identification number
         
         
         """
         ...
-    def setManUnits(self, list: java.util.List[org.orekit.utils.units.Unit]) -> None: ...
-    def validate(self, double: float) -> None:
+    def setManNextEpoch(self, manNextEpoch: org.orekit.time.AbsoluteDate) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set start time of next maneuver.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            manNextEpoch (AbsoluteDate): start time of next maneuver
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
-                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        """
+        ...
+    def setManNextID(self, manNextID: str) -> None:
+        """
+        Set identification number of next maneuver.
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            manNextID (String): identification number of next maneuver
+        
+        
+        """
+        ...
+    def setManPredSource(self, manPredSource: str) -> None:
+        """
+        Set prediction source on which this maneuver is based.
+        
+        Parameters:
+            manPredSource (String): prediction source on which this maneuver is based
+        
+        
+        """
+        ...
+    def setManPrevEpoch(self, manPrevEpoch: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Set completion time of previous maneuver.
+        
+        Parameters:
+            manPrevEpoch (AbsoluteDate): completion time of previous maneuver
+        
+        
+        """
+        ...
+    def setManPrevID(self, manPrevID: str) -> None:
+        """
+        Set identification number of previous maneuver.
+        
+        Parameters:
+            manPrevID (String): identification number of previous maneuver
+        
+        
+        """
+        ...
+    def setManPurpose(self, manPurpose: java.util.List[str]) -> None:
+        """
+        Set the purposes of the maneuver.
+        
+        Parameters:
+            manPurpose (List<String> manPurpose): purposes of the maneuver
+        
+        
+        """
+        ...
+    def setManReferenceFrame(self, manReferenceFrame: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
+        """
+        Set reference frame of the maneuver.
+        
+        Parameters:
+            manReferenceFrame (FrameFacade): the reference frame to be set
+        
+        
+        """
+        ...
+    def setManUnits(self, manUnits: java.util.List[org.orekit.utils.units.Unit]) -> None:
+        """
+        Set maneuver element of information units.
+        
+        Parameters:
+            manUnits (List<Unit> manUnits): maneuver element of information units
+        
+        
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class CommentsContainer
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -4513,12 +4734,10 @@ class OrbitManeuverHistoryMetadata(org.orekit.files.ccsds.section.CommentsContai
 
 class OrbitManeuverHistoryMetadataKey(java.lang.Enum['OrbitManeuverHistoryMetadataKey']):
     """
-    public enum OrbitManeuverHistoryMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuverHistoryMetadataKey`>
+    Keys for OrbitManeuverHistoryMetadata entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuverHistoryMetadata` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     COMMENT: typing.ClassVar['OrbitManeuverHistoryMetadataKey'] = ...
     MAN_ID: typing.ClassVar['OrbitManeuverHistoryMetadataKey'] = ...
@@ -4551,17 +4770,17 @@ class OrbitManeuverHistoryMetadataKey(java.lang.Enum['OrbitManeuverHistoryMetada
     DC_PA_STOP_ANGLE: typing.ClassVar['OrbitManeuverHistoryMetadataKey'] = ...
     MAN_COMPOSITION: typing.ClassVar['OrbitManeuverHistoryMetadataKey'] = ...
     MAN_UNITS: typing.ClassVar['OrbitManeuverHistoryMetadataKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, orbitManeuverHistoryMetadata: OrbitManeuverHistoryMetadata) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: OrbitManeuverHistoryMetadata) -> bool:
         """
-            Process an token.
+        Process an token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuverHistoryMetadata`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (OrbitManeuverHistoryMetadata): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -4572,20 +4791,19 @@ class OrbitManeuverHistoryMetadataKey(java.lang.Enum['OrbitManeuverHistoryMetada
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'OrbitManeuverHistoryMetadataKey':
+    def valueOf(name: str) -> 'OrbitManeuverHistoryMetadataKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -4593,17 +4811,15 @@ class OrbitManeuverHistoryMetadataKey(java.lang.Enum['OrbitManeuverHistoryMetada
     @staticmethod
     def values() -> typing.MutableSequence['OrbitManeuverHistoryMetadataKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (OrbitManeuverHistoryMetadataKey c : OrbitManeuverHistoryMetadataKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (OrbitManeuverHistoryMetadataKey c : OrbitManeuverHistoryMetadataKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -4611,506 +4827,531 @@ class OrbitManeuverHistoryMetadataKey(java.lang.Enum['OrbitManeuverHistoryMetada
 
 class OrbitPhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
     """
-    public class OrbitPhysicalProperties extends :class:`~org.orekit.files.ccsds.ndm.CommonPhysicalProperties`
+    Spacecraft physical properties.
     
-        Spacecraft physical properties.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate): ...
+    def __init__(self, epochT0: org.orekit.time.AbsoluteDate):
+        """
+        Simple constructor.
+        
+        Parameters:
+            epochT0 (AbsoluteDate): T0 epoch from file metadata
+        
+        
+        """
+        ...
     def getAttitudeActuatorType(self) -> str:
         """
-            Get the type of actuator for attitude control.
+        Get the type of actuator for attitude control.
         
-            Returns:
-                type of actuator for attitude control
+        Returns:
+            type of actuator for attitude control
         
         
         """
         ...
     def getAttitudeControlAccuracy(self) -> float:
         """
-            Get the accuracy of attitude control.
+        Get the accuracy of attitude control.
         
-            Returns:
-                accuracy of attitude control
+        Returns:
+            accuracy of attitude control
         
         
         """
         ...
     def getAttitudeControlMode(self) -> str:
         """
-            Get the attitude control mode.
+        Get the attitude control mode.
         
-            Returns:
-                attitude control mode
+        Returns:
+            attitude control mode
         
         
         """
         ...
     def getAttitudeKnowledgeAccuracy(self) -> float:
         """
-            Get the accuracy of attitude knowledge.
+        Get the accuracy of attitude knowledge.
         
-            Returns:
-                accuracy of attitude knowledge
+        Returns:
+            accuracy of attitude knowledge
         
         
         """
         ...
     def getAttitudePointingAccuracy(self) -> float:
         """
-            Get the overall accuracy of spacecraft to maintain attitude.
+        Get the overall accuracy of spacecraft to maintain attitude.
         
-            Returns:
-                overall accuracy of spacecraft to maintain attitude
+        Returns:
+            overall accuracy of spacecraft to maintain attitude
         
         
         """
         ...
     def getBolDv(self) -> float:
         """
-            Get the total ΔV capability at beginning of life.
+        Get the total ΔV capability at beginning of life.
         
-            Returns:
-                total ΔV capability at beginning of life
+        Returns:
+            total ΔV capability at beginning of life
         
         
         """
         ...
     def getBusModel(self) -> str:
         """
-            Get the bus model name.
+        Get the bus model name.
         
-            Returns:
-                bus model name
+        Returns:
+            bus model name
         
         
         """
         ...
-    def getDockedWith(self) -> java.util.List[str]: ...
+    def getDockedWith(self) -> java.util.List[str]:
+        """
+        Get the other space objects this object is docked to.
+        
+        Returns:
+            the oother space objects this object is docked to
+        
+        
+        """
+        ...
     def getDragCoefficient(self) -> float:
         """
-            Get the nominal drag coefficient.
+        Get the nominal drag coefficient.
         
-            Returns:
-                the nominal drag coefficient
+        Returns:
+            the nominal drag coefficient
         
         
         """
         ...
     def getDragConstantArea(self) -> float:
         """
-            Get the attitude-independent drag cross-sectional area, not already into attitude-dependent area along OEB.
+        Get the attitude-independent drag cross-sectional area, not already into attitude-dependent area along OEB.
         
-            Returns:
-                attitude-independent drag cross-sectional area, not already into attitude-dependent area along OEB
+        Returns:
+            attitude-independent drag cross-sectional area, not already into attitude-dependent area along OEB
         
         
         """
         ...
     def getDragUncertainty(self) -> float:
         """
-            Get the drag coefficient 1σ uncertainty.
+        Get the drag coefficient 1σ uncertainty.
         
-            Returns:
-                drag coefficient 1σ uncertainty (in %)
+        Returns:
+            drag coefficient 1σ uncertainty (in %)
         
         
         """
         ...
     def getDryMass(self) -> float:
         """
-            Get the mass without propellant.
+        Get the mass without propellant.
         
-            Returns:
-                mass without propellant
+        Returns:
+            mass without propellant
         
         
         """
         ...
     def getInertiaMatrix(self) -> org.hipparchus.linear.RealMatrix:
         """
-            Get the inertia matrix.
+        Get the inertia matrix.
         
-            Returns:
-                the inertia matrix
+        Returns:
+            the inertia matrix
         
         
         """
         ...
     def getInitialWetMass(self) -> float:
         """
-            Get the total mass at beginning of life.
+        Get the total mass at beginning of life.
         
-            Returns:
-                total mass at beginning of life
+        Returns:
+            total mass at beginning of life
         
         
         """
         ...
     def getManeuversFrequency(self) -> float:
         """
-            Get the average frequency of orbit or attitude maneuvers (in SI units, hence per second).
+        Get the average frequency of orbit or attitude maneuvers (in SI units, hence per second).
         
-            Returns:
-                average frequency of orbit or attitude maneuvers (in SI units, hence per second).
+        Returns:
+            average frequency of orbit or attitude maneuvers (in SI units, hence per second).
         
         
         """
         ...
     def getManeuversPerYear(self) -> float:
         """
-            Get the average number of orbit or attitude maneuvers per year.
+        Get the average number of orbit or attitude maneuvers per year.
         
-            Returns:
-                average number of orbit or attitude maneuvers per year.
+        Returns:
+            average number of orbit or attitude maneuvers per year.
         
         
         """
         ...
     def getManufacturer(self) -> str:
         """
-            Get manufacturer name.
+        Get manufacturer name.
         
-            Returns:
-                manufacturer name
+        Returns:
+            manufacturer name
         
         
         """
         ...
     def getMaxAreaForCollisionProbability(self) -> float:
         """
-            Get the maximum cross-sectional area for collision probability estimation purposes.
+        Get the maximum cross-sectional area for collision probability estimation purposes.
         
-            Returns:
-                maximum cross-sectional area for collision probability estimation purposes
+        Returns:
+            maximum cross-sectional area for collision probability estimation purposes
         
         
         """
         ...
     def getMaxThrust(self) -> float:
         """
-            Get the maximum composite thrust the spacecraft can accomplish.
+        Get the maximum composite thrust the spacecraft can accomplish.
         
-            Returns:
-                maximum composite thrust the spacecraft can accomplish
+        Returns:
+            maximum composite thrust the spacecraft can accomplish
         
         
         """
         ...
     def getMinAreaForCollisionProbability(self) -> float:
         """
-            Get the minimum cross-sectional area for collision probability estimation purposes.
+        Get the minimum cross-sectional area for collision probability estimation purposes.
         
-            Returns:
-                minimum cross-sectional area for collision probability estimation purposes
+        Returns:
+            minimum cross-sectional area for collision probability estimation purposes
         
         
         """
         ...
     def getRemainingDv(self) -> float:
         """
-            Get the total ΔV remaining for spacecraft.
+        Get the total ΔV remaining for spacecraft.
         
-            Returns:
-                total ΔV remaining for spacecraft
+        Returns:
+            total ΔV remaining for spacecraft
         
         
         """
         ...
     def getSrpCoefficient(self) -> float:
         """
-            Get the nominal SRP coefficient.
+        Get the nominal SRP coefficient.
         
-            Returns:
-                nominal SRP coefficient
+        Returns:
+            nominal SRP coefficient
         
         
         """
         ...
     def getSrpConstantArea(self) -> float:
         """
-            Get the attitude-independent SRP area, not already into attitude-dependent area along OEB.
+        Get the attitude-independent SRP area, not already into attitude-dependent area along OEB.
         
-            Returns:
-                attitude-independent SRP area, not already into attitude-dependent area along OEB
+        Returns:
+            attitude-independent SRP area, not already into attitude-dependent area along OEB
         
         
         """
         ...
     def getSrpUncertainty(self) -> float:
         """
-            Get the SRP coefficient 1σ uncertainty.
+        Get the SRP coefficient 1σ uncertainty.
         
-            Returns:
-                SRP coefficient 1σ uncertainty
+        Returns:
+            SRP coefficient 1σ uncertainty
         
         
         """
         ...
     def getTypAreaForCollisionProbability(self) -> float:
         """
-            Get the typical (50th percentile) cross-sectional area for collision probability estimation purposes.
+        Get the typical (50th percentile) cross-sectional area for collision probability estimation purposes.
         
-            Returns:
-                typical (50th percentile) cross-sectional area for collision probability estimation purposes
+        Returns:
+            typical (50th percentile) cross-sectional area for collision probability estimation purposes
         
         
         """
         ...
     def getWetMass(self) -> float:
         """
-            Get the total mass at T₀.
+        Get the total mass at T₀.
         
-            Returns:
-                total mass at T₀
-        
-        
-        """
-        ...
-    def setAttitudeActuatorType(self, string: str) -> None:
-        """
-            Set the type of actuator for attitude control.
-        
-            Parameters:
-                attitudeActuatorType (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): type of actuator for attitude control
+        Returns:
+            total mass at T₀
         
         
         """
         ...
-    def setAttitudeControlAccuracy(self, double: float) -> None:
+    def setAttitudeActuatorType(self, attitudeActuatorType: str) -> None:
         """
-            Set the accuracy of attitude control.
+        Set the type of actuator for attitude control.
         
-            Parameters:
-                attitudeControlAccuracy (double): accuracy of attitude control
-        
-        
-        """
-        ...
-    def setAttitudeControlMode(self, string: str) -> None:
-        """
-            Set the attitude control mode.
-        
-            Parameters:
-                attitudeControlMode (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): attitude control mode
+        Parameters:
+            attitudeActuatorType (String): type of actuator for attitude control
         
         
         """
         ...
-    def setAttitudeKnowledgeAccuracy(self, double: float) -> None:
+    def setAttitudeControlAccuracy(self, attitudeControlAccuracy: float) -> None:
         """
-            Set the accuracy of attitude knowledge.
+        Set the accuracy of attitude control.
         
-            Parameters:
-                attitudeKnowledgeAccuracy (double): accuracy of attitude knowledge
-        
-        
-        """
-        ...
-    def setAttitudePointingAccuracy(self, double: float) -> None:
-        """
-            Set the overall accuracy of spacecraft to maintain attitude.
-        
-            Parameters:
-                attitudePointingAccuracy (double): overall accuracy of spacecraft to maintain attitude
+        Parameters:
+            attitudeControlAccuracy (double): accuracy of attitude control
         
         
         """
         ...
-    def setBolDv(self, double: float) -> None:
+    def setAttitudeControlMode(self, attitudeControlMode: str) -> None:
         """
-            Set the total ΔV capability at beginning of life.
+        Set the attitude control mode.
         
-            Parameters:
-                bolDv (double): total ΔV capability at beginning of life
-        
-        
-        """
-        ...
-    def setBusModel(self, string: str) -> None:
-        """
-            Set the bus model name.
-        
-            Parameters:
-                busModel (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): bus model name
+        Parameters:
+            attitudeControlMode (String): attitude control mode
         
         
         """
         ...
-    def setDockedWith(self, list: java.util.List[str]) -> None: ...
-    def setDragCoefficient(self, double: float) -> None:
+    def setAttitudeKnowledgeAccuracy(self, attitudeKnowledgeAccuracy: float) -> None:
         """
-            Set the the nominal drag coefficient.
+        Set the accuracy of attitude knowledge.
         
-            Parameters:
-                dragCoefficient (double): the nominal drag coefficient
-        
-        
-        """
-        ...
-    def setDragConstantArea(self, double: float) -> None:
-        """
-            Set the attitude-independent drag cross-sectional area, not already into attitude-dependent area along OEB.
-        
-            Parameters:
-                dragConstantArea (double): attitude-independent drag cross-sectional area, not already into attitude-dependent area along OEB
+        Parameters:
+            attitudeKnowledgeAccuracy (double): accuracy of attitude knowledge
         
         
         """
         ...
-    def setDragUncertainty(self, double: float) -> None:
+    def setAttitudePointingAccuracy(self, attitudePointingAccuracy: float) -> None:
         """
-            Set the drag coefficient 1σ uncertainty.
+        Set the overall accuracy of spacecraft to maintain attitude.
         
-            Parameters:
-                dragUncertainty (double): drag coefficient 1σ uncertainty (in %)
-        
-        
-        """
-        ...
-    def setDryMass(self, double: float) -> None:
-        """
-            Set the mass without propellant.
-        
-            Parameters:
-                dryMass (double): mass without propellant
+        Parameters:
+            attitudePointingAccuracy (double): overall accuracy of spacecraft to maintain attitude
         
         
         """
         ...
-    def setInertiaMatrixEntry(self, int: int, int2: int, double: float) -> None:
+    def setBolDv(self, bolDv: float) -> None:
         """
-            Set an entry in the inertia matrix.
+        Set the total ΔV capability at beginning of life.
         
-            Both I(j, k) and I(k, j) are set.
-        
-            Parameters:
-                j (int): row index (must be between 0 and 3 (inclusive)
-                k (int): column index (must be between 0 and 3 (inclusive)
-                entry (double): value of the matrix entry
+        Parameters:
+            bolDv (double): total ΔV capability at beginning of life
         
         
         """
         ...
-    def setInitialWetMass(self, double: float) -> None:
+    def setBusModel(self, busModel: str) -> None:
         """
-            Set the total mass at beginning of life.
+        Set the bus model name.
         
-            Parameters:
-                initialWetMass (double): total mass at beginning of life
-        
-        
-        """
-        ...
-    def setManeuversFrequency(self, double: float) -> None:
-        """
-            Set the average frequency of orbit or attitude maneuvers (in SI units, hence per second).
-        
-            Parameters:
-                maneuversFrequency (double): average frequency of orbit or attitude (in SI units, hence per second).
+        Parameters:
+            busModel (String): bus model name
         
         
         """
         ...
-    def setManufacturer(self, string: str) -> None:
+    def setDockedWith(self, dockedWith: java.util.List[str]) -> None:
         """
-            Set manufacturer name.
+        Set the other space objects this object is docked to.
         
-            Parameters:
-                manufacturer (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): manufacturer name
-        
-        
-        """
-        ...
-    def setMaxAreaForCollisionProbability(self, double: float) -> None:
-        """
-            Set the maximum cross-sectional area for collision probability estimation purposes.
-        
-            Parameters:
-                maxAreaForCollisionProbability (double): maximum cross-sectional area for collision probability estimation purposes
+        Parameters:
+            dockedWith (List<String> dockedWith): the other space objects this object is docked to
         
         
         """
         ...
-    def setMaxThrust(self, double: float) -> None:
+    def setDragCoefficient(self, dragCoefficient: float) -> None:
         """
-            Set the maximum composite thrust the spacecraft can accomplish.
+        Set the the nominal drag coefficient.
         
-            Parameters:
-                maxThrust (double): maximum composite thrust the spacecraft can accomplish
-        
-        
-        """
-        ...
-    def setMinAreaForCollisionProbability(self, double: float) -> None:
-        """
-            Set the minimum cross-sectional area for collision probability estimation purposes.
-        
-            Parameters:
-                minAreaForCollisionProbability (double): minimum cross-sectional area for collision probability estimation purposes
+        Parameters:
+            dragCoefficient (double): the nominal drag coefficient
         
         
         """
         ...
-    def setRemainingDv(self, double: float) -> None:
+    def setDragConstantArea(self, dragConstantArea: float) -> None:
         """
-            Set the total ΔV remaining for spacecraft.
+        Set the attitude-independent drag cross-sectional area, not already into attitude-dependent area along OEB.
         
-            Parameters:
-                remainingDv (double): total ΔV remaining for spacecraft
-        
-        
-        """
-        ...
-    def setSrpCoefficient(self, double: float) -> None:
-        """
-            Set the nominal SRP coefficient.
-        
-            Parameters:
-                srpCoefficient (double): nominal SRP coefficient
+        Parameters:
+            dragConstantArea (double): attitude-independent drag cross-sectional area, not already into attitude-dependent area along OEB
         
         
         """
         ...
-    def setSrpConstantArea(self, double: float) -> None:
+    def setDragUncertainty(self, dragUncertainty: float) -> None:
         """
-            Set the attitude-independent SRP area, not already into attitude-dependent area along OEB.
+        Set the drag coefficient 1σ uncertainty.
         
-            Parameters:
-                srpConstantArea (double): attitude-independent SRP area, not already into attitude-dependent area along OEB
-        
-        
-        """
-        ...
-    def setSrpUncertainty(self, double: float) -> None:
-        """
-            Set the SRP coefficient 1σ uncertainty.
-        
-            Parameters:
-                srpUncertainty (double): SRP coefficient 1σ uncertainty.
+        Parameters:
+            dragUncertainty (double): drag coefficient 1σ uncertainty (in %)
         
         
         """
         ...
-    def setTypAreaForCollisionProbability(self, double: float) -> None:
+    def setDryMass(self, dryMass: float) -> None:
         """
-            Get the typical (50th percentile) cross-sectional area for collision probability estimation purposes.
+        Set the mass without propellant.
         
-            Parameters:
-                typAreaForCollisionProbability (double): typical (50th percentile) cross-sectional area for collision probability estimation purposes
+        Parameters:
+            dryMass (double): mass without propellant
         
         
         """
         ...
-    def setWetMass(self, double: float) -> None:
+    def setInertiaMatrixEntry(self, j: int, k: int, entry: float) -> None:
         """
-            Set the total mass at T₀.
+        Set an entry in the inertia matrix.
         
-            Parameters:
-                wetMass (double): total mass at T₀
+        Both I(j, k) and I(k, j) are set.
+        
+        Parameters:
+            j (int): row index (must be between 0 and 3 (inclusive)
+            k (int): column index (must be between 0 and 3 (inclusive)
+            entry (double): value of the matrix entry
+        
+        
+        """
+        ...
+    def setInitialWetMass(self, initialWetMass: float) -> None:
+        """
+        Set the total mass at beginning of life.
+        
+        Parameters:
+            initialWetMass (double): total mass at beginning of life
+        
+        
+        """
+        ...
+    def setManeuversFrequency(self, maneuversFrequency: float) -> None:
+        """
+        Set the average frequency of orbit or attitude maneuvers (in SI units, hence per second).
+        
+        Parameters:
+            maneuversFrequency (double): average frequency of orbit or attitude (in SI units, hence per second).
+        
+        
+        """
+        ...
+    def setManufacturer(self, manufacturer: str) -> None:
+        """
+        Set manufacturer name.
+        
+        Parameters:
+            manufacturer (String): manufacturer name
+        
+        
+        """
+        ...
+    def setMaxAreaForCollisionProbability(self, maxAreaForCollisionProbability: float) -> None:
+        """
+        Set the maximum cross-sectional area for collision probability estimation purposes.
+        
+        Parameters:
+            maxAreaForCollisionProbability (double): maximum cross-sectional area for collision probability estimation purposes
+        
+        
+        """
+        ...
+    def setMaxThrust(self, maxThrust: float) -> None:
+        """
+        Set the maximum composite thrust the spacecraft can accomplish.
+        
+        Parameters:
+            maxThrust (double): maximum composite thrust the spacecraft can accomplish
+        
+        
+        """
+        ...
+    def setMinAreaForCollisionProbability(self, minAreaForCollisionProbability: float) -> None:
+        """
+        Set the minimum cross-sectional area for collision probability estimation purposes.
+        
+        Parameters:
+            minAreaForCollisionProbability (double): minimum cross-sectional area for collision probability estimation purposes
+        
+        
+        """
+        ...
+    def setRemainingDv(self, remainingDv: float) -> None:
+        """
+        Set the total ΔV remaining for spacecraft.
+        
+        Parameters:
+            remainingDv (double): total ΔV remaining for spacecraft
+        
+        
+        """
+        ...
+    def setSrpCoefficient(self, srpCoefficient: float) -> None:
+        """
+        Set the nominal SRP coefficient.
+        
+        Parameters:
+            srpCoefficient (double): nominal SRP coefficient
+        
+        
+        """
+        ...
+    def setSrpConstantArea(self, srpConstantArea: float) -> None:
+        """
+        Set the attitude-independent SRP area, not already into attitude-dependent area along OEB.
+        
+        Parameters:
+            srpConstantArea (double): attitude-independent SRP area, not already into attitude-dependent area along OEB
+        
+        
+        """
+        ...
+    def setSrpUncertainty(self, srpUncertainty: float) -> None:
+        """
+        Set the SRP coefficient 1σ uncertainty.
+        
+        Parameters:
+            srpUncertainty (double): SRP coefficient 1σ uncertainty.
+        
+        
+        """
+        ...
+    def setTypAreaForCollisionProbability(self, typAreaForCollisionProbability: float) -> None:
+        """
+        Get the typical (50th percentile) cross-sectional area for collision probability estimation purposes.
+        
+        Parameters:
+            typAreaForCollisionProbability (double): typical (50th percentile) cross-sectional area for collision probability estimation purposes
+        
+        
+        """
+        ...
+    def setWetMass(self, wetMass: float) -> None:
+        """
+        Set the total mass at T₀.
+        
+        Parameters:
+            wetMass (double): total mass at T₀
         
         
         """
@@ -5118,12 +5359,10 @@ class OrbitPhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalPropertie
 
 class OrbitPhysicalPropertiesKey(java.lang.Enum['OrbitPhysicalPropertiesKey']):
     """
-    public enum OrbitPhysicalPropertiesKey extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitPhysicalPropertiesKey`>
+    Keys for OrbitPhysicalProperties entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitPhysicalProperties` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     COMMENT: typing.ClassVar['OrbitPhysicalPropertiesKey'] = ...
     MANUFACTURER: typing.ClassVar['OrbitPhysicalPropertiesKey'] = ...
@@ -5176,17 +5415,17 @@ class OrbitPhysicalPropertiesKey(java.lang.Enum['OrbitPhysicalPropertiesKey']):
     IXY: typing.ClassVar['OrbitPhysicalPropertiesKey'] = ...
     IXZ: typing.ClassVar['OrbitPhysicalPropertiesKey'] = ...
     IYZ: typing.ClassVar['OrbitPhysicalPropertiesKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, orbitPhysicalProperties: OrbitPhysicalProperties) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, data: OrbitPhysicalProperties) -> bool:
         """
-            Process an token.
+        Process an token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                data (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitPhysicalProperties`): data to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            data (OrbitPhysicalProperties): data to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -5197,20 +5436,19 @@ class OrbitPhysicalPropertiesKey(java.lang.Enum['OrbitPhysicalPropertiesKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'OrbitPhysicalPropertiesKey':
+    def valueOf(name: str) -> 'OrbitPhysicalPropertiesKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -5218,17 +5456,15 @@ class OrbitPhysicalPropertiesKey(java.lang.Enum['OrbitPhysicalPropertiesKey']):
     @staticmethod
     def values() -> typing.MutableSequence['OrbitPhysicalPropertiesKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (OrbitPhysicalPropertiesKey c : OrbitPhysicalPropertiesKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (OrbitPhysicalPropertiesKey c : OrbitPhysicalPropertiesKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -5236,12 +5472,10 @@ class OrbitPhysicalPropertiesKey(java.lang.Enum['OrbitPhysicalPropertiesKey']):
 
 class Ordering(java.lang.Enum['Ordering']):
     """
-    public enum Ordering extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ordering`>
+    Keys for OrbitCovariance elements ordering.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitCovariance` elements ordering.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     LTM: typing.ClassVar['Ordering'] = ...
     UTM: typing.ClassVar['Ordering'] = ...
@@ -5254,20 +5488,19 @@ class Ordering(java.lang.Enum['Ordering']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'Ordering':
+    def valueOf(name: str) -> 'Ordering':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -5275,17 +5508,15 @@ class Ordering(java.lang.Enum['Ordering']):
     @staticmethod
     def values() -> typing.MutableSequence['Ordering']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (Ordering c : Ordering.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (Ordering c : Ordering.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -5293,585 +5524,621 @@ class Ordering(java.lang.Enum['Ordering']):
 
 class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
     """
-    public class Perturbations extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    Perturbation parameters.
     
-        Perturbation parameters.
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, celestialBodies: org.orekit.bodies.CelestialBodies): ...
+    def __init__(self, celestialBodies: org.orekit.bodies.CelestialBodies):
+        """
+        Simple constructor.
+        
+        Parameters:
+            celestialBodies (CelestialBodies): factory for celestial bodies
+        
+        
+        """
+        ...
     def getAlbedoGridSize(self) -> int:
         """
-            Get albedo grid size.
+        Get albedo grid size.
         
-            Returns:
-                albedo grid size
+        Returns:
+            albedo grid size
         
         
         """
         ...
     def getAlbedoModel(self) -> str:
         """
-            Get albedo model.
+        Get albedo model.
         
-            Returns:
-                albedo model
+        Returns:
+            albedo model
         
         
         """
         ...
     def getAtmosphericModel(self) -> str:
         """
-            Get name of atmospheric model.
+        Get name of atmospheric model.
         
-            Returns:
-                name of atmospheric model
+        Returns:
+            name of atmospheric model
         
         
         """
         ...
     def getCentralBodyRotation(self) -> float:
         """
-            Get central body angular rotation rate.
+        Get central body angular rotation rate.
         
-            Returns:
-                central body angular rotation rate
+        Returns:
+            central body angular rotation rate
         
         
         """
         ...
     def getEquatorialRadius(self) -> float:
         """
-            Get oblate spheroid equatorial radius of central body.
+        Get oblate spheroid equatorial radius of central body.
         
-            Returns:
-                oblate spheroid equatorial radius of central body
+        Returns:
+            oblate spheroid equatorial radius of central body
         
         
         """
         ...
     def getFixedF10P7(self) -> float:
         """
-            Get fixed (time invariant) value of the Solar Flux Unit daily proxy F10.7.
+        Get fixed (time invariant) value of the Solar Flux Unit daily proxy F10.7.
         
-            Returns:
-                fixed (time invariant) value of the Solar Flux Unit daily proxy F10.7
+        Returns:
+            fixed (time invariant) value of the Solar Flux Unit daily proxy F10.7
         
         
         """
         ...
     def getFixedF10P7Mean(self) -> float:
         """
-            Get fixed (time invariant) value of the Solar Flux Unit 81-day running center-average proxy F10.7.
+        Get fixed (time invariant) value of the Solar Flux Unit 81-day running center-average proxy F10.7.
         
-            Returns:
-                fixed (time invariant) value of the Solar Flux Unit 81-day running center-average proxy F10.7
+        Returns:
+            fixed (time invariant) value of the Solar Flux Unit 81-day running center-average proxy F10.7
         
         
         """
         ...
     def getFixedGeomagneticAp(self) -> float:
         """
-            Get fixed (time invariant) value of the planetary 3-hour-range geomagnetic index aₚ.
+        Get fixed (time invariant) value of the planetary 3-hour-range geomagnetic index aₚ.
         
-            Returns:
-                fixed (time invariant) value of the planetary 3-hour-range geomagnetic index aₚ
+        Returns:
+            fixed (time invariant) value of the planetary 3-hour-range geomagnetic index aₚ
         
         
         """
         ...
     def getFixedGeomagneticDst(self) -> float:
         """
-            Get fixed (time invariant) value of the planetary 1-hour-range geomagnetic index Dst.
+        Get fixed (time invariant) value of the planetary 1-hour-range geomagnetic index Dst.
         
-            Returns:
-                fixed (time invariant) value of the planetary 1-hour-range geomagnetic index Dst
+        Returns:
+            fixed (time invariant) value of the planetary 1-hour-range geomagnetic index Dst
         
         
         """
         ...
     def getFixedGeomagneticKp(self) -> float:
         """
-            Get fixed (time invariant) value of the planetary 3-hour-range geomagnetic index Kₚ.
+        Get fixed (time invariant) value of the planetary 3-hour-range geomagnetic index Kₚ.
         
-            Returns:
-                fixed (time invariant) value of the planetary 3-hour-range geomagnetic index Kₚ
+        Returns:
+            fixed (time invariant) value of the planetary 3-hour-range geomagnetic index Kₚ
         
         
         """
         ...
     def getFixedM10P7(self) -> float:
         """
-            Get fixed (time invariant) value of the Solar Flux daily proxy M10.7.
+        Get fixed (time invariant) value of the Solar Flux daily proxy M10.7.
         
-            Returns:
-                fixed (time invariant) value of the Solar Flux daily proxy M10.7
+        Returns:
+            fixed (time invariant) value of the Solar Flux daily proxy M10.7
         
         
         """
         ...
     def getFixedM10P7Mean(self) -> float:
         """
-            Get fixed (time invariant) value of the Solar Flux 81-day running center-average proxy M10.7.
+        Get fixed (time invariant) value of the Solar Flux 81-day running center-average proxy M10.7.
         
-            Returns:
-                fixed (time invariant) value of the Solar Flux 81-day running center-average proxy M10.7
+        Returns:
+            fixed (time invariant) value of the Solar Flux 81-day running center-average proxy M10.7
         
         
         """
         ...
     def getFixedS10P7(self) -> float:
         """
-            Get fixed (time invariant) value of the Solar Flux daily proxy S10.7.
+        Get fixed (time invariant) value of the Solar Flux daily proxy S10.7.
         
-            Returns:
-                fixed (time invariant) value of the Solar Flux daily proxy S10.7
+        Returns:
+            fixed (time invariant) value of the Solar Flux daily proxy S10.7
         
         
         """
         ...
     def getFixedS10P7Mean(self) -> float:
         """
-            Get fixed (time invariant) value of the Solar Flux 81-day running center-average proxy S10.7.
+        Get fixed (time invariant) value of the Solar Flux 81-day running center-average proxy S10.7.
         
-            Returns:
-                fixed (time invariant) value of the Solar Flux 81-day running center-average proxy S10.7
+        Returns:
+            fixed (time invariant) value of the Solar Flux 81-day running center-average proxy S10.7
         
         
         """
         ...
     def getFixedY10P7(self) -> float:
         """
-            Get fixed (time invariant) value of the Solar Flux daily proxy Y10.7.
+        Get fixed (time invariant) value of the Solar Flux daily proxy Y10.7.
         
-            Returns:
-                fixed (time invariant) value of the Solar Flux daily proxy Y10.7
+        Returns:
+            fixed (time invariant) value of the Solar Flux daily proxy Y10.7
         
         
         """
         ...
     def getFixedY10P7Mean(self) -> float:
         """
-            Get fixed (time invariant) value of the Solar Flux 81-day running center-average proxy Y10.7.
+        Get fixed (time invariant) value of the Solar Flux 81-day running center-average proxy Y10.7.
         
-            Returns:
-                fixed (time invariant) value of the Solar Flux 81-day running center-average proxy Y10.7
+        Returns:
+            fixed (time invariant) value of the Solar Flux 81-day running center-average proxy Y10.7
         
         
         """
         ...
     def getGm(self) -> float:
         """
-            Get gravitational coefficient of attracting body.
+        Get gravitational coefficient of attracting body.
         
-            Returns:
-                gravitational coefficient of attracting body
+        Returns:
+            gravitational coefficient of attracting body
         
         
         """
         ...
     def getGravityDegree(self) -> int:
         """
-            Get degree of the gravity model.
+        Get degree of the gravity model.
         
-            Returns:
-                degree of the gravity model
+        Returns:
+            degree of the gravity model
         
         
         """
         ...
     def getGravityModel(self) -> str:
         """
-            Get gravity model name.
+        Get gravity model name.
         
-            Returns:
-                gravity model name
+        Returns:
+            gravity model name
         
         
         """
         ...
     def getGravityOrder(self) -> int:
         """
-            Get order of the gravity model.
+        Get order of the gravity model.
         
-            Returns:
-                order of the gravity model
+        Returns:
+            order of the gravity model
         
         
         """
         ...
     def getInterpMethodSW(self) -> str:
         """
-            Get the interpolation method for Space Weather data.
+        Get the interpolation method for Space Weather data.
         
-            Returns:
-                interpolation method for Space Weather data
+        Returns:
+            interpolation method for Space Weather data
         
         
         """
         ...
-    def getNBodyPerturbations(self) -> java.util.List[org.orekit.files.ccsds.definitions.BodyFacade]: ...
+    def getNBodyPerturbations(self) -> java.util.List[org.orekit.files.ccsds.definitions.BodyFacade]:
+        """
+        Get n-body perturbation bodies.
+        
+        Returns:
+            n-body perturbation bodies
+        
+        
+        """
+        ...
     def getOblateFlattening(self) -> float:
         """
-            Get central body oblate spheroid oblateness.
+        Get central body oblate spheroid oblateness.
         
-            Returns:
-                central body oblate spheroid oblateness
+        Returns:
+            central body oblate spheroid oblateness
         
         
         """
         ...
     def getOceanTidesModel(self) -> str:
         """
-            Get ocean tides model.
+        Get ocean tides model.
         
-            Returns:
-                ocean tides model
+        Returns:
+            ocean tides model
         
         
         """
         ...
     def getReductionTheory(self) -> str:
         """
-            Get reduction theory used for precession and nutation modeling.
+        Get reduction theory used for precession and nutation modeling.
         
-            Returns:
-                reduction theory used for precession and nutation modeling
+        Returns:
+            reduction theory used for precession and nutation modeling
         
         
         """
         ...
-    def getShadowBodies(self) -> java.util.List[org.orekit.files.ccsds.definitions.BodyFacade]: ...
+    def getShadowBodies(self) -> java.util.List[org.orekit.files.ccsds.definitions.BodyFacade]:
+        """
+        Get celestial bodies casting shadows.
+        
+        Returns:
+            celestial bodies casting shadows
+        
+        
+        """
+        ...
     def getShadowModel(self) -> 'ShadowModel':
         """
-            Get shadow model used for solar radiation pressure.
+        Get shadow model used for solar radiation pressure.
         
-            Returns:
-                shadow model used for solar radiation pressure
+        Returns:
+            shadow model used for solar radiation pressure
         
         
         """
         ...
     def getSolidTidesModel(self) -> str:
         """
-            Get solid tides model.
+        Get solid tides model.
         
-            Returns:
-                solid tides model
+        Returns:
+            solid tides model
         
         
         """
         ...
     def getSpaceWeatherEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get epoch of the Space Weather data.
+        Get epoch of the Space Weather data.
         
-            Returns:
-                epoch of the Space Weather data
+        Returns:
+            epoch of the Space Weather data
         
         
         """
         ...
     def getSpaceWeatherSource(self) -> str:
         """
-            Get Space Weather data source.
+        Get Space Weather data source.
         
-            Returns:
-                Space Weather data source
+        Returns:
+            Space Weather data source
         
         
         """
         ...
     def getSrpModel(self) -> str:
         """
-            Get Solar Radiation Pressure model.
+        Get Solar Radiation Pressure model.
         
-            Returns:
-                Solar Radiation Pressure model
-        
-        
-        """
-        ...
-    def setAlbedoGridSize(self, integer: int) -> None:
-        """
-            Set albedo grid size.
-        
-            Parameters:
-                albedoGridSize (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`): albedo grid size
+        Returns:
+            Solar Radiation Pressure model
         
         
         """
         ...
-    def setAlbedoModel(self, string: str) -> None:
+    def setAlbedoGridSize(self, albedoGridSize: int) -> None:
         """
-            Set albedo model.
+        Set albedo grid size.
         
-            Parameters:
-                albedoModel (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): albedo model
-        
-        
-        """
-        ...
-    def setAtmosphericModel(self, string: str) -> None:
-        """
-            Set name of atmospheric model.
-        
-            Parameters:
-                atmosphericModel (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of atmospheric model
+        Parameters:
+            albedoGridSize (Integer): albedo grid size
         
         
         """
         ...
-    def setCentralBodyRotation(self, double: float) -> None:
+    def setAlbedoModel(self, albedoModel: str) -> None:
         """
-            Set central body angular rotation rate.
+        Set albedo model.
         
-            Parameters:
-                centralBodyRotation (double): central body angular rotation rate
-        
-        
-        """
-        ...
-    def setEquatorialRadius(self, double: float) -> None:
-        """
-            Set oblate spheroid equatorial radius of central body.
-        
-            Parameters:
-                equatorialRadius (double): oblate spheroid equatorial radius of central body
+        Parameters:
+            albedoModel (String): albedo model
         
         
         """
         ...
-    def setFixedF10P7(self, double: float) -> None:
+    def setAtmosphericModel(self, atmosphericModel: str) -> None:
         """
-            Set fixed (time invariant) value of the Solar Flux Unit daily proxy F10.7.
+        Set name of atmospheric model.
         
-            Parameters:
-                fixedF10P7 (double): fixed (time invariant) value of the Solar Flux Unit daily proxy F10.7
-        
-        
-        """
-        ...
-    def setFixedF10P7Mean(self, double: float) -> None:
-        """
-            Set fixed (time invariant) value of the Solar Flux Unit 81-day running center-average proxy F10.7.
-        
-            Parameters:
-                fixedF10P7Mean (double): fixed (time invariant) value of the Solar Flux Unit 81-day running center-average proxy F10.7
+        Parameters:
+            atmosphericModel (String): name of atmospheric model
         
         
         """
         ...
-    def setFixedGeomagneticAp(self, double: float) -> None:
+    def setCentralBodyRotation(self, centralBodyRotation: float) -> None:
         """
-            Set fixed (time invariant) value of the planetary 3-hour-range geomagnetic index aₚ.
+        Set central body angular rotation rate.
         
-            Parameters:
-                fixedGeomagneticAp (double): fixed (time invariant) value of the planetary 3-hour-range geomagnetic index aₚ
-        
-        
-        """
-        ...
-    def setFixedGeomagneticDst(self, double: float) -> None:
-        """
-            Set fixed (time invariant) value of the planetary 1-hour-range geomagnetic index Dst.
-        
-            Parameters:
-                fixedGeomagneticDst (double): fixed (time invariant) value of the planetary 1-hour-range geomagnetic index Dst
+        Parameters:
+            centralBodyRotation (double): central body angular rotation rate
         
         
         """
         ...
-    def setFixedGeomagneticKp(self, double: float) -> None:
+    def setEquatorialRadius(self, equatorialRadius: float) -> None:
         """
-            Set fixed (time invariant) value of the planetary 3-hour-range geomagnetic index Kₚ.
+        Set oblate spheroid equatorial radius of central body.
         
-            Parameters:
-                fixedGeomagneticKp (double): fixed (time invariant) value of the planetary 3-hour-range geomagnetic index Kₚ
-        
-        
-        """
-        ...
-    def setFixedM10P7(self, double: float) -> None:
-        """
-            Set fixed (time invariant) value of the Solar Flux daily proxy M10.7.
-        
-            Parameters:
-                fixedM10P7 (double): fixed (time invariant) value of the Solar Flux daily proxy M10.7
+        Parameters:
+            equatorialRadius (double): oblate spheroid equatorial radius of central body
         
         
         """
         ...
-    def setFixedM10P7Mean(self, double: float) -> None:
+    def setFixedF10P7(self, fixedF10P7: float) -> None:
         """
-            Set fixed (time invariant) value of the Solar Flux 81-day running center-average proxy M10.7.
+        Set fixed (time invariant) value of the Solar Flux Unit daily proxy F10.7.
         
-            Parameters:
-                fixedM10P7Mean (double): fixed (time invariant) value of the Solar Flux 81-day running center-average proxy M10.7
-        
-        
-        """
-        ...
-    def setFixedS10P7(self, double: float) -> None:
-        """
-            Set fixed (time invariant) value of the Solar Flux daily proxy S10.7.
-        
-            Parameters:
-                fixedS10P7 (double): fixed (time invariant) value of the Solar Flux daily proxy S10.7
+        Parameters:
+            fixedF10P7 (double): fixed (time invariant) value of the Solar Flux Unit daily proxy F10.7
         
         
         """
         ...
-    def setFixedS10P7Mean(self, double: float) -> None:
+    def setFixedF10P7Mean(self, fixedF10P7Mean: float) -> None:
         """
-            Set fixed (time invariant) value of the Solar Flux 81-day running center-average proxy S10.7.
+        Set fixed (time invariant) value of the Solar Flux Unit 81-day running center-average proxy F10.7.
         
-            Parameters:
-                fixedS10P7Mean (double): fixed (time invariant) value of the Solar Flux 81-day running center-average proxy S10.7
-        
-        
-        """
-        ...
-    def setFixedY10P7(self, double: float) -> None:
-        """
-            Set fixed (time invariant) value of the Solar Flux daily proxy Y10.7.
-        
-            Parameters:
-                fixedY10P7 (double): fixed (time invariant) value of the Solar Flux daily proxy Y10.7
+        Parameters:
+            fixedF10P7Mean (double): fixed (time invariant) value of the Solar Flux Unit 81-day running center-average proxy F10.7
         
         
         """
         ...
-    def setFixedY10P7Mean(self, double: float) -> None:
+    def setFixedGeomagneticAp(self, fixedGeomagneticAp: float) -> None:
         """
-            Set fixed (time invariant) value of the Solar Flux 81-day running center-average proxy Y10.7.
+        Set fixed (time invariant) value of the planetary 3-hour-range geomagnetic index aₚ.
         
-            Parameters:
-                fixedY10P7Mean (double): fixed (time invariant) value of the Solar Flux 81-day running center-average proxy Y10.7
-        
-        
-        """
-        ...
-    def setGm(self, double: float) -> None:
-        """
-            Set gravitational coefficient of attracting body.
-        
-            Parameters:
-                gm (double): gravitational coefficient of attracting body
+        Parameters:
+            fixedGeomagneticAp (double): fixed (time invariant) value of the planetary 3-hour-range geomagnetic index aₚ
         
         
         """
         ...
-    def setGravityModel(self, string: str, int: int, int2: int) -> None:
+    def setFixedGeomagneticDst(self, fixedGeomagneticDst: float) -> None:
         """
-            Set gravity model.
+        Set fixed (time invariant) value of the planetary 1-hour-range geomagnetic index Dst.
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the model
-                degree (int): degree of the model
-                order (int): order of the model
+        Parameters:
+            fixedGeomagneticDst (double): fixed (time invariant) value of the planetary 1-hour-range geomagnetic index Dst
         
         
         """
         ...
-    def setInterpMethodSW(self, string: str) -> None:
+    def setFixedGeomagneticKp(self, fixedGeomagneticKp: float) -> None:
         """
-            Set the interpolation method for Space Weather data.
+        Set fixed (time invariant) value of the planetary 3-hour-range geomagnetic index Kₚ.
         
-            Parameters:
-                interpMethodSW (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): interpolation method for Space Weather data
-        
-        
-        """
-        ...
-    def setNBodyPerturbations(self, list: java.util.List[org.orekit.files.ccsds.definitions.BodyFacade]) -> None: ...
-    def setOblateFlattening(self, double: float) -> None:
-        """
-            Set central body oblate spheroid oblateness.
-        
-            Parameters:
-                oblateFlattening (double): central body oblate spheroid oblateness
+        Parameters:
+            fixedGeomagneticKp (double): fixed (time invariant) value of the planetary 3-hour-range geomagnetic index Kₚ
         
         
         """
         ...
-    def setOceanTidesModel(self, string: str) -> None:
+    def setFixedM10P7(self, fixedM10P7: float) -> None:
         """
-            Set ocean tides model.
+        Set fixed (time invariant) value of the Solar Flux daily proxy M10.7.
         
-            Parameters:
-                oceanTidesModel (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): ocean tides model
-        
-        
-        """
-        ...
-    def setReductionTheory(self, string: str) -> None:
-        """
-            Set reduction theory used for precession and nutation modeling.
-        
-            Parameters:
-                reductionTheory (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): reduction theory used for precession and nutation modeling
+        Parameters:
+            fixedM10P7 (double): fixed (time invariant) value of the Solar Flux daily proxy M10.7
         
         
         """
         ...
-    def setShadowBodies(self, list: java.util.List[org.orekit.files.ccsds.definitions.BodyFacade]) -> None: ...
+    def setFixedM10P7Mean(self, fixedM10P7Mean: float) -> None:
+        """
+        Set fixed (time invariant) value of the Solar Flux 81-day running center-average proxy M10.7.
+        
+        Parameters:
+            fixedM10P7Mean (double): fixed (time invariant) value of the Solar Flux 81-day running center-average proxy M10.7
+        
+        
+        """
+        ...
+    def setFixedS10P7(self, fixedS10P7: float) -> None:
+        """
+        Set fixed (time invariant) value of the Solar Flux daily proxy S10.7.
+        
+        Parameters:
+            fixedS10P7 (double): fixed (time invariant) value of the Solar Flux daily proxy S10.7
+        
+        
+        """
+        ...
+    def setFixedS10P7Mean(self, fixedS10P7Mean: float) -> None:
+        """
+        Set fixed (time invariant) value of the Solar Flux 81-day running center-average proxy S10.7.
+        
+        Parameters:
+            fixedS10P7Mean (double): fixed (time invariant) value of the Solar Flux 81-day running center-average proxy S10.7
+        
+        
+        """
+        ...
+    def setFixedY10P7(self, fixedY10P7: float) -> None:
+        """
+        Set fixed (time invariant) value of the Solar Flux daily proxy Y10.7.
+        
+        Parameters:
+            fixedY10P7 (double): fixed (time invariant) value of the Solar Flux daily proxy Y10.7
+        
+        
+        """
+        ...
+    def setFixedY10P7Mean(self, fixedY10P7Mean: float) -> None:
+        """
+        Set fixed (time invariant) value of the Solar Flux 81-day running center-average proxy Y10.7.
+        
+        Parameters:
+            fixedY10P7Mean (double): fixed (time invariant) value of the Solar Flux 81-day running center-average proxy Y10.7
+        
+        
+        """
+        ...
+    def setGm(self, gm: float) -> None:
+        """
+        Set gravitational coefficient of attracting body.
+        
+        Parameters:
+            gm (double): gravitational coefficient of attracting body
+        
+        
+        """
+        ...
+    def setGravityModel(self, name: str, degree: int, order: int) -> None:
+        """
+        Set gravity model.
+        
+        Parameters:
+            name (String): name of the model
+            degree (int): degree of the model
+            order (int): order of the model
+        
+        
+        """
+        ...
+    def setInterpMethodSW(self, interpMethodSW: str) -> None:
+        """
+        Set the interpolation method for Space Weather data.
+        
+        Parameters:
+            interpMethodSW (String): interpolation method for Space Weather data
+        
+        
+        """
+        ...
+    def setNBodyPerturbations(self, nBody: java.util.List[org.orekit.files.ccsds.definitions.BodyFacade]) -> None:
+        """
+        Set n-body perturbation bodies.
+        
+        Parameters:
+            nBody (List<BodyFacade> nBody): n-body perturbation bodies
+        
+        
+        """
+        ...
+    def setOblateFlattening(self, oblateFlattening: float) -> None:
+        """
+        Set central body oblate spheroid oblateness.
+        
+        Parameters:
+            oblateFlattening (double): central body oblate spheroid oblateness
+        
+        
+        """
+        ...
+    def setOceanTidesModel(self, oceanTidesModel: str) -> None:
+        """
+        Set ocean tides model.
+        
+        Parameters:
+            oceanTidesModel (String): ocean tides model
+        
+        
+        """
+        ...
+    def setReductionTheory(self, reductionTheory: str) -> None:
+        """
+        Set reduction theory used for precession and nutation modeling.
+        
+        Parameters:
+            reductionTheory (String): reduction theory used for precession and nutation modeling
+        
+        
+        """
+        ...
+    def setShadowBodies(self, shadowBodies: java.util.List[org.orekit.files.ccsds.definitions.BodyFacade]) -> None:
+        """
+        Set celestial bodies casting shadows.
+        
+        Parameters:
+            shadowBodies (List<BodyFacade> shadowBodies): celestial bodies casting shadows
+        
+        
+        """
+        ...
     def setShadowModel(self, shadowModel: 'ShadowModel') -> None:
         """
-            Set shadow model used for solar radiation pressure.
+        Set shadow model used for solar radiation pressure.
         
-            Parameters:
-                shadowModel (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ShadowModel`): shadow model used for solar radiation pressure
-        
-        
-        """
-        ...
-    def setSolidTidesModel(self, string: str) -> None:
-        """
-            Set solid tides model.
-        
-            Parameters:
-                solidTidesModel (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): solid tides model
+        Parameters:
+            shadowModel (ShadowModel): shadow model used for solar radiation pressure
         
         
         """
         ...
-    def setSpaceWeatherEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setSolidTidesModel(self, solidTidesModel: str) -> None:
         """
-            Set epoch of the Space Weather data.
+        Set solid tides model.
         
-            Parameters:
-                spaceWeatherEpoch (:class:`~org.orekit.time.AbsoluteDate`): epoch of the Space Weather data
-        
-        
-        """
-        ...
-    def setSpaceWeatherSource(self, string: str) -> None:
-        """
-            Set Space Weather data source.
-        
-            Parameters:
-                spaceWeatherSource (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): Space Weather data source
+        Parameters:
+            solidTidesModel (String): solid tides model
         
         
         """
         ...
-    def setSrpModel(self, string: str) -> None:
+    def setSpaceWeatherEpoch(self, spaceWeatherEpoch: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set Solar Radiation Pressure model.
+        Set epoch of the Space Weather data.
         
-            Parameters:
-                srpModel (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): Solar Radiation Pressure model
+        Parameters:
+            spaceWeatherEpoch (AbsoluteDate): epoch of the Space Weather data
+        
+        
+        """
+        ...
+    def setSpaceWeatherSource(self, spaceWeatherSource: str) -> None:
+        """
+        Set Space Weather data source.
+        
+        Parameters:
+            spaceWeatherSource (String): Space Weather data source
+        
+        
+        """
+        ...
+    def setSrpModel(self, srpModel: str) -> None:
+        """
+        Set Solar Radiation Pressure model.
+        
+        Parameters:
+            srpModel (String): Solar Radiation Pressure model
         
         
         """
@@ -5879,12 +6146,10 @@ class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
 
 class PerturbationsKey(java.lang.Enum['PerturbationsKey']):
     """
-    public enum PerturbationsKey extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.PerturbationsKey`>
+    Keys for Perturbations entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Perturbations` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     COMMENT: typing.ClassVar['PerturbationsKey'] = ...
     ATMOSPHERIC_MODEL: typing.ClassVar['PerturbationsKey'] = ...
@@ -5916,17 +6181,17 @@ class PerturbationsKey(java.lang.Enum['PerturbationsKey']):
     FIXED_S10P7_MEAN: typing.ClassVar['PerturbationsKey'] = ...
     FIXED_Y10P7: typing.ClassVar['PerturbationsKey'] = ...
     FIXED_Y10P7_MEAN: typing.ClassVar['PerturbationsKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, perturbations: Perturbations) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: Perturbations) -> bool:
         """
-            Process an token.
+        Process an token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.Perturbations`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (Perturbations): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -5937,20 +6202,19 @@ class PerturbationsKey(java.lang.Enum['PerturbationsKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'PerturbationsKey':
+    def valueOf(name: str) -> 'PerturbationsKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -5958,17 +6222,15 @@ class PerturbationsKey(java.lang.Enum['PerturbationsKey']):
     @staticmethod
     def values() -> typing.MutableSequence['PerturbationsKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (PerturbationsKey c : PerturbationsKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (PerturbationsKey c : PerturbationsKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -5976,12 +6238,10 @@ class PerturbationsKey(java.lang.Enum['PerturbationsKey']):
 
 class ShadowModel(java.lang.Enum['ShadowModel']):
     """
-    public enum ShadowModel extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ShadowModel`>
+    Shadow model for solar radiation pressure.
     
-        Shadow model for solar radiation pressure.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     NONE: typing.ClassVar['ShadowModel'] = ...
     CYLINDRICAL: typing.ClassVar['ShadowModel'] = ...
@@ -5993,20 +6253,19 @@ class ShadowModel(java.lang.Enum['ShadowModel']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'ShadowModel':
+    def valueOf(name: str) -> 'ShadowModel':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -6014,17 +6273,15 @@ class ShadowModel(java.lang.Enum['ShadowModel']):
     @staticmethod
     def values() -> typing.MutableSequence['ShadowModel']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (ShadowModel c : ShadowModel.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (ShadowModel c : ShadowModel.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -6032,66 +6289,59 @@ class ShadowModel(java.lang.Enum['ShadowModel']):
 
 class StreamingOcmWriter(java.lang.AutoCloseable):
     """
-    public class StreamingOcmWriter extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.AutoCloseable?is`
+    A writer for OCM files.
     
-        A writer for OCM files.
+    Each instance corresponds to a single Orbit Comprehensive Message. A new OCM ephemeris trajectory state history block is started by calling newBlock.
     
-        Each instance corresponds to a single Orbit Comprehensive Message. A new OCM ephemeris trajectory state history block is
-        started by calling :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.StreamingOcmWriter.newBlock`.
+    This writer is intended to write only trajectory state history blocks. It does not writes physical properties, covariance data, maneuver data, perturbations parameters, orbit determination or user-defined parameters. If these blocks are needed, then OcmWriter must be used as it handles all OCM data blocks.
     
-        This writer is intended to write only trajectory state history blocks. It does not writes physical properties,
-        covariance data, maneuver data, perturbations parameters, orbit determination or user-defined parameters. If these
-        blocks are needed, then :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmWriter` must be used as it handles all OCM data
-        blocks.
+    The trajectory blocks metadata identifiers (TRAJ_ID, TRAJ_PREV_ID, TRAJ_NEXT_ID) are updated automatically using incrementTrajID, so users should generally only set setTrajID in the template.
     
-        The trajectory blocks metadata identifiers (:code:`TRAJ_ID`, :code:`TRAJ_PREV_ID`, :code:`TRAJ_NEXT_ID`) are updated
-        automatically using :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistoryMetadata.incrementTrajID`, so users
-        should generally only set :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistoryMetadata.setTrajID` in the
-        template.
+    The blocks returned by this class can be used as step handlers for a Propagator.
     
-        The blocks returned by this class can be used as step handlers for a :class:`~org.orekit.propagation.Propagator`.
+     Propagator propagator = ...; // pre-configured propagator OCMWriter  ocmWriter  = ...; // pre-configured writer try (Generator out = ...;  // set-up output stream StreamingOcmWriter sw = new StreamingOcmWriter(out, ocmWriter, header, metadata, template)) { // set-up streaming writer
     
-        .. code-block: java
-        
-         Propagator propagator = ...; // pre-configured propagator
-         OCMWriter  ocmWriter  = ...; // pre-configured writer
-           try (Generator out = ...;  // set-up output stream
-                StreamingOcmWriter sw = new StreamingOcmWriter(out, ocmWriter, header, metadata, template)) { // set-up streaming writer
-        
-             // write block 1
-             propagator.getMultiplexer().add(step, sw.newBlock());
-             propagator.propagate(startDate1, stopDate1);
-        
-             ...
-        
-             // write block n
-             propagator.getMultiplexer().clear();
-             propagator.getMultiplexer().add(step, sw.newBlock());
-             propagator.propagate(startDateN, stopDateN);
-        
-           }
-         
+         // write block 1
+         propagator.getMultiplexer().add(step, sw.newBlock());
+         propagator.propagate(startDate1, stopDate1);
     
-        Since:
-            12.0
+         ...
     
-        Also see:
-            :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmWriter`, :class:`~org.orekit.files.ccsds.ndm.odm.ocm.EphemerisOcmWriter`
+         // write block n
+         propagator.getMultiplexer().clear();
+         propagator.getMultiplexer().add(step, sw.newBlock());
+         propagator.propagate(startDateN, stopDateN);
+    
+       }
+     
+    
+    Since:
+        12.0
+    
+    Also see:
+        OcmWriter, EphemerisOcmWriter
     """
     @typing.overload
     def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, ocmWriter: OcmWriter, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, ocmMetadata: OcmMetadata, trajectoryStateHistoryMetadata: 'TrajectoryStateHistoryMetadata'): ...
     @typing.overload
     def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, ocmWriter: OcmWriter, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, ocmMetadata: OcmMetadata, trajectoryStateHistoryMetadata: 'TrajectoryStateHistoryMetadata', boolean: bool): ...
-    def close(self) -> None: ...
+    def close(self) -> None:
+        """
+        Specified by: AutoCloseable in interface AutoCloseable
+        
+        Raises:
+            IOException: 
+        
+        """
+        ...
     def newBlock(self) -> 'StreamingOcmWriter.BlockWriter':
         """
-            Create a writer for a new OCM trajectory state history block.
+        Create a writer for a new OCM trajectory state history block.
         
-            The returned writer can only write a single trajectory state history block in an OCM. This method must be called to
-            create a writer for each trajectory state history block.
+        The returned writer can only write a single trajectory state history block in an OCM. This method must be called to create a writer for each trajectory state history block.
         
-            Returns:
-                a new OCM trajectory state history block writer, ready for use.
+        Returns:
+            a new OCM trajectory state history block writer, ready for use.
         
         
         """
@@ -6104,12 +6354,10 @@ class StreamingOcmWriter(java.lang.AutoCloseable):
 
 class TrajectoryState(org.orekit.time.TimeStamped):
     """
-    public class TrajectoryState extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
+    Trajectory state entry.
     
-        Trajectory state entry.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     @typing.overload
     def __init__(self, orbitElementsType: OrbitElementsType, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray]): ...
@@ -6117,58 +6365,57 @@ class TrajectoryState(org.orekit.time.TimeStamped):
     def __init__(self, orbitElementsType: OrbitElementsType, absoluteDate: org.orekit.time.AbsoluteDate, stringArray: typing.Union[typing.List[str], jpype.JArray], int: int, list: java.util.List[org.orekit.utils.units.Unit]): ...
     def getAvailableDerivatives(self) -> org.orekit.utils.CartesianDerivativesFilter:
         """
-            Get which derivatives of position are available in this state.
+        Get which derivatives of position are available in this state.
         
-            Returns:
-                a value indicating if the file contains velocity and/or acceleration
+        Returns:
+            a value indicating if the file contains velocity and/or acceleration
         
         
         """
         ...
     def getDate(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the date.
+        Get the date.
         
-            Specified by:
-                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+        Specified by: getDate in interface TimeStamped
         
-            Returns:
-                date attached to the object
+        Returns:
+            date attached to the object
         
         
         """
         ...
     def getElements(self) -> typing.MutableSequence[float]:
         """
-            Get trajectory elements.
+        Get trajectory elements.
         
-            Returns:
-                trajectory elements
+        Returns:
+            trajectory elements
         
         
         """
         ...
     def getType(self) -> OrbitElementsType:
         """
-            Get the type of the elements.
+        Get the type of the elements.
         
-            Returns:
-                type of the elements
+        Returns:
+            type of the elements
         
         
         """
         ...
-    def toCartesian(self, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float) -> org.orekit.utils.TimeStampedPVCoordinates:
+    def toCartesian(self, body: org.orekit.bodies.OneAxisEllipsoid, mu: float) -> org.orekit.utils.TimeStampedPVCoordinates:
         """
-            Convert to Cartesian coordinates.
+        Convert to Cartesian coordinates.
         
-            Parameters:
-                body (:class:`~org.orekit.bodies.OneAxisEllipsoid`): central body (may be null if :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryState.getType` is *not*
-                    :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitElementsType.GEODETIC`)
-                mu (double): gravitational parameter in m³/s²
+        Parameters:
+            body (OneAxisEllipsoid): central body (may be null if getType is not
+                GEODETIC)
+            mu (double): gravitational parameter in m³/s²
         
-            Returns:
-                Cartesian coordinates
+        Returns:
+            Cartesian coordinates
         
         
         """
@@ -6176,592 +6423,612 @@ class TrajectoryState(org.orekit.time.TimeStamped):
 
 class TrajectoryStateHistory(org.orekit.files.general.EphemerisFile.EphemerisSegment[org.orekit.utils.TimeStampedPVCoordinates]):
     """
-    public class TrajectoryStateHistory extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`>
+    Trajectory state history.
     
-        Trajectory state history.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, trajectoryStateHistoryMetadata: 'TrajectoryStateHistoryMetadata', list: java.util.List[TrajectoryState], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float): ...
+    def __init__(self, metadata: 'TrajectoryStateHistoryMetadata', states: java.util.List[TrajectoryState], body: org.orekit.bodies.OneAxisEllipsoid, mu: float):
+        """
+        Simple constructor.
+        
+        Parameters:
+            metadata (TrajectoryStateHistoryMetadata): metadata
+            states (List<TrajectoryState> states): orbital states
+            body (OneAxisEllipsoid): central body (may be null if getTrajType is
+                not GEODETIC)
+            mu (double): gravitational parameter in m³/s²
+        
+        
+        """
+        ...
     def getAvailableDerivatives(self) -> org.orekit.utils.CartesianDerivativesFilter:
         """
-            Get which derivatives of position are available in this ephemeris segment.
+        Get which derivatives of position are available in this ephemeris segment.
         
-            While :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getCoordinates` always returns position, velocity,
-            and acceleration the return value from this method indicates which of those are in the ephemeris file and are actually
-            valid.
+        While getCoordinates always returns position, velocity, and acceleration the return value from this method indicates which of those are in the ephemeris file and are actually valid.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getAvailableDerivatives` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getAvailableDerivatives in interface EphemerisSegment
         
-            Returns:
-                a value indicating if the file contains velocity and/or acceleration data.
+        Returns:
+            a value indicating if the file contains velocity and/or acceleration data.
         
         
         """
         ...
     def getBody(self) -> org.orekit.bodies.OneAxisEllipsoid:
         """
-            Get central body.
+        Get central body.
         
-            Returns:
-                central body
+        Returns:
+            central body
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
-    def getCoordinates(self) -> java.util.List[org.orekit.utils.TimeStampedPVCoordinates]: ...
+    def getCoordinates(self) -> java.util.List[org.orekit.utils.TimeStampedPVCoordinates]:
+        """
+        Get the coordinates for this ephemeris segment in getFrame.
+        
+        Specified by: getCoordinates in interface EphemerisSegment
+        
+        Returns:
+            a list of state vectors in chronological order. The coordinates are not necessarily evenly spaced in time. The value of
+            getAvailableDerivatives indicates if the velocity or
+            accelerations were specified in the file. Any position, velocity, or acceleration coordinates that are not specified in
+            the ephemeris file are zero in the returned values.
+        
+        
+        """
+        ...
     def getFrame(self) -> org.orekit.frames.Frame:
         """
-            Get the reference frame for this ephemeris segment. The defining frame for
-            :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getCoordinates`.
+        Get the reference frame for this ephemeris segment. The defining frame for getCoordinates.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getFrame` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getFrame in interface EphemerisSegment
         
-            Returns:
-                the reference frame for this segment. Never :code:`null`.
+        Returns:
+            the reference frame for this segment. Never null.
         
         
         """
         ...
     def getInterpolationSamples(self) -> int:
         """
-            Get the number of samples to use in interpolation.
+        Get the number of samples to use in interpolation.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getInterpolationSamples` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getInterpolationSamples in interface EphemerisSegment
         
-            Returns:
-                the number of points to use for interpolation.
+        Returns:
+            the number of points to use for interpolation.
         
         
         """
         ...
     def getMetadata(self) -> 'TrajectoryStateHistoryMetadata':
         """
-            Get metadata.
+        Get metadata.
         
-            Returns:
-                metadata
+        Returns:
+            metadata
         
         
         """
         ...
     def getMu(self) -> float:
         """
-            Get the standard gravitational parameter for the satellite.
+        Get the standard gravitational parameter for the satellite.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getMu` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getMu in interface EphemerisSegment
         
-            Returns:
-                the gravitational parameter used in :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getPropagator`, in
-                m³/s².
+        Returns:
+            the gravitational parameter used in getPropagator, in
+            m³/s².
         
         
         """
         ...
     def getStart(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the start date of this ephemeris segment.
+        Get the start date of this ephemeris segment.
         
-            The date returned by this method is equivalent to :code:`getPropagator().getMinDate()`.
+        The date returned by this method is equivalent to getMinDate().
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getStart` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getStart in interface EphemerisSegment
         
-            Returns:
-                ephemeris segment start date.
+        Returns:
+            ephemeris segment start date.
         
         
         """
         ...
     def getStop(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the end date of this ephemeris segment.
+        Get the end date of this ephemeris segment.
         
-            The date returned by this method is equivalent to :code:`getPropagator().getMaxDate()`.
+        The date returned by this method is equivalent to getMaxDate().
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getStop` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getStop in interface EphemerisSegment
         
-            Returns:
-                ephemeris segment end date.
+        Returns:
+            ephemeris segment end date.
         
         
         """
         ...
-    def getTrajectoryStates(self) -> java.util.List[TrajectoryState]: ...
+    def getTrajectoryStates(self) -> java.util.List[TrajectoryState]:
+        """
+        Get the trajectory states.
+        
+        Returns:
+            trajectory states
+        
+        
+        """
+        ...
 
 class TrajectoryStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer):
     """
-    public class TrajectoryStateHistoryMetadata extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    Metadata for trajectory state history.
     
-        Metadata for trajectory state history.
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     DEFAULT_INTERPOLATION_METHOD: typing.ClassVar[org.orekit.files.ccsds.ndm.odm.oem.InterpolationMethod] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.odm.oem.InterpolationMethod` DEFAULT_INTERPOLATION_METHOD
+    Default interpolation method.
     
-        Default interpolation method.
-    
-        Since:
-            12.0
+    Since:
+        12.0
     
     
     """
     DEFAULT_INTERPOLATION_DEGREE: typing.ClassVar[int] = ...
     """
-    public static final int DEFAULT_INTERPOLATION_DEGREE
+    Default interpolation degree.
     
-        Default interpolation degree.
+    Since:
+        12.0
     
-        Since:
-            12.0
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, dataContext: org.orekit.data.DataContext): ...
-    def copy(self, double: float) -> 'TrajectoryStateHistoryMetadata':
+    def __init__(self, epochT0: org.orekit.time.AbsoluteDate, dataContext: org.orekit.data.DataContext):
         """
-            Copy the instance, making sure mandatory fields have been initialized.
+        Simple constructor.
         
-            Dates and orbit counter are not copied.
+        Parameters:
+            epochT0 (AbsoluteDate): T0 epoch from file metadata
+            dataContext (DataContext): data context
         
-            Parameters:
-                version (double): format version
         
-            Returns:
-                a new copy
+        """
+        ...
+    def copy(self, version: float) -> 'TrajectoryStateHistoryMetadata':
+        """
+        Copy the instance, making sure mandatory fields have been initialized.
         
-            Since:
-                12.0
+        Dates and orbit counter are not copied.
+        
+        Parameters:
+            version (double): format version
+        
+        Returns:
+            a new copy
+        
+        Since:
+            12.0
         
         
         """
         ...
     def getCenter(self) -> org.orekit.files.ccsds.definitions.BodyFacade:
         """
-            Get the origin of reference frame.
+        Get the origin of reference frame.
         
-            Returns:
-                the origin of reference frame.
+        Returns:
+            the origin of reference frame.
         
         
         """
         ...
     def getInterpolationDegree(self) -> int:
         """
-            Get the interpolation degree.
+        Get the interpolation degree.
         
-            Returns:
-                the interpolation degree
+        Returns:
+            the interpolation degree
         
         
         """
         ...
     def getInterpolationMethod(self) -> org.orekit.files.ccsds.ndm.odm.oem.InterpolationMethod:
         """
-            Get the interpolation method to be used.
+        Get the interpolation method to be used.
         
-            Returns:
-                the interpolation method
+        Returns:
+            the interpolation method
         
         
         """
         ...
     def getOrbAveraging(self) -> str:
         """
-            Get type of averaging (Osculating, mean Brouwer, other.
+        Get type of averaging (Osculating, mean Brouwer, other.
         
-            Returns:
-                type of averaging (Osculating, mean Brouwer, other)
+        Returns:
+            type of averaging (Osculating, mean Brouwer, other)
         
         
         """
         ...
     def getOrbRevNum(self) -> int:
         """
-            Get the integer orbit revolution number.
+        Get the integer orbit revolution number.
         
-            Returns:
-                integer orbit revolution number (-1 if not set)
+        Returns:
+            integer orbit revolution number (-1 if not set)
         
         
         """
         ...
     def getOrbRevNumBasis(self) -> int:
         """
-            Get the basis for orbit revolution number.
+        Get the basis for orbit revolution number.
         
-            This specifies if first launch/deployment is on orbit 0 or 1.
+        This specifies if first launch/deployment is on orbit 0 or 1.
         
-            Returns:
-                basis for orbit revolution number (-1 if not set)
+        Returns:
+            basis for orbit revolution number (-1 if not set)
         
         
         """
         ...
     def getPropagator(self) -> str:
         """
-            Get the orbit propagator used to generate this trajectory.
+        Get the orbit propagator used to generate this trajectory.
         
-            Returns:
-                orbit propagator used to generate this trajectory
+        Returns:
+            orbit propagator used to generate this trajectory
         
-            Since:
-                11.2
+        Since:
+            11.2
         
         
         """
         ...
     def getTrajBasis(self) -> str:
         """
-            Get basis of this trajectory state time history data.
+        Get basis of this trajectory state time history data.
         
-            Returns:
-                basis of this trajectory state time history data
+        Returns:
+            basis of this trajectory state time history data
         
         
         """
         ...
     def getTrajBasisID(self) -> str:
         """
-            Get identification number of the orbit determination or simulation upon which this trajectory is based.
+        Get identification number of the orbit determination or simulation upon which this trajectory is based.
         
-            Returns:
-                identification number of the orbit determination or simulation upon which this trajectory is based
+        Returns:
+            identification number of the orbit determination or simulation upon which this trajectory is based
         
         
         """
         ...
     def getTrajFrameEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get epoch of the :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistoryMetadata.getTrajReferenceFrame`.
+        Get epoch of the getTrajReferenceFrame.
         
-            Returns:
-                epoch of the :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistoryMetadata.getTrajReferenceFrame`
+        Returns:
+            epoch of the getTrajReferenceFrame
         
         
         """
         ...
     def getTrajID(self) -> str:
         """
-            Get trajectory identification number.
+        Get trajectory identification number.
         
-            Returns:
-                trajectory identification number
+        Returns:
+            trajectory identification number
         
         
         """
         ...
     def getTrajNextID(self) -> str:
         """
-            Get identification number of next trajectory.
+        Get identification number of next trajectory.
         
-            Returns:
-                identification number of next trajectory
+        Returns:
+            identification number of next trajectory
         
         
         """
         ...
     def getTrajPrevID(self) -> str:
         """
-            Get identification number of previous trajectory.
+        Get identification number of previous trajectory.
         
-            Returns:
-                identification number of previous trajectory
+        Returns:
+            identification number of previous trajectory
         
         
         """
         ...
     def getTrajReferenceFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
         """
-            Get reference frame of the trajectory.
+        Get reference frame of the trajectory.
         
-            Returns:
-                reference frame of the trajectory
+        Returns:
+            reference frame of the trajectory
         
         
         """
         ...
     def getTrajType(self) -> OrbitElementsType:
         """
-            Get trajectory element set type.
+        Get trajectory element set type.
         
-            Returns:
-                trajectory element set type
+        Returns:
+            trajectory element set type
         
         
         """
         ...
-    def getTrajUnits(self) -> java.util.List[org.orekit.utils.units.Unit]: ...
+    def getTrajUnits(self) -> java.util.List[org.orekit.utils.units.Unit]:
+        """
+        Get trajectory element set units.
+        
+        Returns:
+            trajectory element set units
+        
+        
+        """
+        ...
     def getUseableStartTime(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get start of useable time span covered by ephemerides data, it may be necessary to allow for proper interpolation.
+        Get start of useable time span covered by ephemerides data, it may be necessary to allow for proper interpolation.
         
-            Returns:
-                the useable start time
+        Returns:
+            the useable start time
         
         
         """
         ...
     def getUseableStopTime(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get end of useable time span covered by ephemerides data, it may be necessary to allow for proper interpolation.
+        Get end of useable time span covered by ephemerides data, it may be necessary to allow for proper interpolation.
         
-            Returns:
-                the useable stop time
+        Returns:
+            the useable stop time
         
         
         """
         ...
     @staticmethod
-    def incrementTrajID(string: str) -> str:
+    def incrementTrajID(original: str) -> str:
         """
-            Increments a trajectory ID.
+        Increments a trajectory ID.
         
-            The trajectory blocks metadata contains three identifiers (:code:`TRAJ_ID`, :code:`TRAJ_PREV_ID`, :code:`TRAJ_NEXT_ID`)
-            that link the various blocks together. This helper method allows to update one identifier based on the value of another
-            identifier. The update is performed by looking for an integer suffix at the end of the :code:`original` identifier and
-            incrementing it by one, taking care to use at least the same number of digits. If for example the original identifier is
-            set to :code:`trajectory 037`, then the updated identifier will be :code:`trajectory 038`.
+        The trajectory blocks metadata contains three identifiers (TRAJ_ID, TRAJ_PREV_ID, TRAJ_NEXT_ID) that link the various blocks together. This helper method allows to update one identifier based on the value of another identifier. The update is performed by looking for an integer suffix at the end of the original identifier and incrementing it by one, taking care to use at least the same number of digits. If for example the original identifier is set to trajectory 037, then the updated identifier will be trajectory 038.
         
-            This helper function is intended to be used by ephemeris generators like
-            :class:`~org.orekit.files.ccsds.ndm.odm.ocm.EphemerisOcmWriter` and
-            :class:`~org.orekit.files.ccsds.ndm.odm.ocm.StreamingOcmWriter`, allowing users to call only
-            :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistoryMetadata.setTrajBasisID` in the trajectory metadata
-            template. The ephemeris generators call
-            :code:`template.setTrajNextID(TrajectoryStateHistoryMetadata.incrementTrajID(template.getTrajID()))` before generating
-            each trajectory block and call both :code:`template.setTrajPrevID(template.getTrajID()))` and
-            :code:`template.setTrajID(template.getTrajNextID()))` after having generated each block.
+        This helper function is intended to be used by ephemeris generators like EphemerisOcmWriter and StreamingOcmWriter, allowing users to call only setTrajBasisID in the trajectory metadata template. The ephemeris generators call getTrajID())) before generating each trajectory block and call both getTrajID())) and getTrajNextID())) after having generated each block.
         
-            Parameters:
-                original (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): original ID (may be null)
+        Parameters:
+            original (String): original ID (may be null)
         
-            Returns:
-                incremented ID, or null if original was null
+        Returns:
+            incremented ID, or null if original was null
         
         
         """
         ...
-    def setCenter(self, bodyFacade: org.orekit.files.ccsds.definitions.BodyFacade) -> None:
+    def setCenter(self, center: org.orekit.files.ccsds.definitions.BodyFacade) -> None:
         """
-            Set the origin of reference frame.
+        Set the origin of reference frame.
         
-            Parameters:
-                center (:class:`~org.orekit.files.ccsds.definitions.BodyFacade`): origin of reference frame to be set
+        Parameters:
+            center (BodyFacade): origin of reference frame to be set
         
         
         """
         ...
-    def setInterpolationDegree(self, int: int) -> None:
+    def setInterpolationDegree(self, interpolationDegree: int) -> None:
         """
-            Set the interpolation degree.
+        Set the interpolation degree.
         
-            Parameters:
-                interpolationDegree (int): the interpolation degree to be set
+        Parameters:
+            interpolationDegree (int): the interpolation degree to be set
         
         
         """
         ...
     def setInterpolationMethod(self, interpolationMethod: org.orekit.files.ccsds.ndm.odm.oem.InterpolationMethod) -> None:
         """
-            Set the interpolation method to be used.
+        Set the interpolation method to be used.
         
-            Parameters:
-                interpolationMethod (:class:`~org.orekit.files.ccsds.ndm.odm.oem.InterpolationMethod`): the interpolation method to be set
-        
-        
-        """
-        ...
-    def setOrbAveraging(self, string: str) -> None:
-        """
-            Set type of averaging (Osculating, mean Brouwer, other.
-        
-            Parameters:
-                orbAveraging (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): type of averaging (Osculating, mean Brouwer, other).
+        Parameters:
+            interpolationMethod (InterpolationMethod): the interpolation method to be set
         
         
         """
         ...
-    def setOrbRevNum(self, int: int) -> None:
+    def setOrbAveraging(self, orbAveraging: str) -> None:
         """
-            Set the integer orbit revolution number.
+        Set type of averaging (Osculating, mean Brouwer, other.
         
-            Parameters:
-                orbRevNum (int): integer orbit revolution number
-        
-        
-        """
-        ...
-    def setOrbRevNumBasis(self, int: int) -> None:
-        """
-            Set the basis for orbit revolution number.
-        
-            This specifies if first launch/deployment is on orbit 0 or 1.
-        
-            Parameters:
-                orbRevNumBasis (int): basis for orbit revolution number
+        Parameters:
+            orbAveraging (String): type of averaging (Osculating, mean Brouwer, other).
         
         
         """
         ...
-    def setPropagator(self, string: str) -> None:
+    def setOrbRevNum(self, orbRevNum: int) -> None:
         """
-            Set the orbit propagator used to generate this trajectory.
+        Set the integer orbit revolution number.
         
-            Parameters:
-                propagator (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): orbit propagator used to generate this trajectory
-        
-            Since:
-                11.2
+        Parameters:
+            orbRevNum (int): integer orbit revolution number
         
         
         """
         ...
-    def setTrajBasis(self, string: str) -> None:
+    def setOrbRevNumBasis(self, orbRevNumBasis: int) -> None:
         """
-            Set basis of this trajectory state time history data.
+        Set the basis for orbit revolution number.
         
-            Parameters:
-                trajBasis (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): basis of this trajectory state time history data
+        This specifies if first launch/deployment is on orbit 0 or 1.
         
-        
-        """
-        ...
-    def setTrajBasisID(self, string: str) -> None:
-        """
-            Set identification number of the orbit determination or simulation upon which this trajectory is based.
-        
-            Parameters:
-                trajBasisID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of the orbit determination or simulation upon which this trajectory is based
+        Parameters:
+            orbRevNumBasis (int): basis for orbit revolution number
         
         
         """
         ...
-    def setTrajFrameEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setPropagator(self, propagator: str) -> None:
         """
-            Set epoch of the :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistoryMetadata.getTrajReferenceFrame`.
+        Set the orbit propagator used to generate this trajectory.
         
-            Parameters:
-                trajFrameEpoch (:class:`~org.orekit.time.AbsoluteDate`): epoch of the :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistoryMetadata.getTrajReferenceFrame`
+        Parameters:
+            propagator (String): orbit propagator used to generate this trajectory
         
-        
-        """
-        ...
-    def setTrajID(self, string: str) -> None:
-        """
-            Set trajectory identification number.
-        
-            Parameters:
-                trajID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): trajectory identification number
+        Since:
+            11.2
         
         
         """
         ...
-    def setTrajNextID(self, string: str) -> None:
+    def setTrajBasis(self, trajBasis: str) -> None:
         """
-            Set identification number of next trajectory.
+        Set basis of this trajectory state time history data.
         
-            Parameters:
-                trajNextID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of next trajectory
-        
-        
-        """
-        ...
-    def setTrajPrevID(self, string: str) -> None:
-        """
-            Set identification number of previous trajectory.
-        
-            Parameters:
-                trajPrevID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of previous trajectory
+        Parameters:
+            trajBasis (String): basis of this trajectory state time history data
         
         
         """
         ...
-    def setTrajReferenceFrame(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
+    def setTrajBasisID(self, trajBasisID: str) -> None:
         """
-            Set reference frame of the trajectory.
+        Set identification number of the orbit determination or simulation upon which this trajectory is based.
         
-            Parameters:
-                trajReferenceFrame (:class:`~org.orekit.files.ccsds.definitions.FrameFacade`): the reference frame to be set
-        
-        
-        """
-        ...
-    def setTrajType(self, orbitElementsType: OrbitElementsType) -> None:
-        """
-            Set trajectory element set type.
-        
-            Parameters:
-                trajType (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitElementsType`): trajectory element set type
+        Parameters:
+            trajBasisID (String): identification number of the orbit determination or simulation upon which this trajectory is based
         
         
         """
         ...
-    def setTrajUnits(self, list: java.util.List[org.orekit.utils.units.Unit]) -> None: ...
-    def setUseableStartTime(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setTrajFrameEpoch(self, trajFrameEpoch: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set start of useable time span covered by ephemerides data, it may be necessary to allow for proper interpolation.
+        Set epoch of the getTrajReferenceFrame.
         
-            Parameters:
-                useableStartTime (:class:`~org.orekit.time.AbsoluteDate`): the time to be set
-        
-        
-        """
-        ...
-    def setUseableStopTime(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Set end of useable time span covered by ephemerides data, it may be necessary to allow for proper interpolation.
-        
-            Parameters:
-                useableStopTime (:class:`~org.orekit.time.AbsoluteDate`): the time to be set
+        Parameters:
+            trajFrameEpoch (AbsoluteDate): epoch of the getTrajReferenceFrame
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def setTrajID(self, trajID: str) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set trajectory identification number.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            trajID (String): trajectory identification number
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
-                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        """
+        ...
+    def setTrajNextID(self, trajNextID: str) -> None:
+        """
+        Set identification number of next trajectory.
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            trajNextID (String): identification number of next trajectory
+        
+        
+        """
+        ...
+    def setTrajPrevID(self, trajPrevID: str) -> None:
+        """
+        Set identification number of previous trajectory.
+        
+        Parameters:
+            trajPrevID (String): identification number of previous trajectory
+        
+        
+        """
+        ...
+    def setTrajReferenceFrame(self, trajReferenceFrame: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
+        """
+        Set reference frame of the trajectory.
+        
+        Parameters:
+            trajReferenceFrame (FrameFacade): the reference frame to be set
+        
+        
+        """
+        ...
+    def setTrajType(self, trajType: OrbitElementsType) -> None:
+        """
+        Set trajectory element set type.
+        
+        Parameters:
+            trajType (OrbitElementsType): trajectory element set type
+        
+        
+        """
+        ...
+    def setTrajUnits(self, trajUnits: java.util.List[org.orekit.utils.units.Unit]) -> None:
+        """
+        Set trajectory element set units.
+        
+        Parameters:
+            trajUnits (List<Unit> trajUnits): trajectory element set units
+        
+        
+        """
+        ...
+    def setUseableStartTime(self, useableStartTime: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Set start of useable time span covered by ephemerides data, it may be necessary to allow for proper interpolation.
+        
+        Parameters:
+            useableStartTime (AbsoluteDate): the time to be set
+        
+        
+        """
+        ...
+    def setUseableStopTime(self, useableStopTime: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Set end of useable time span covered by ephemerides data, it may be necessary to allow for proper interpolation.
+        
+        Parameters:
+            useableStopTime (AbsoluteDate): the time to be set
+        
+        
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class CommentsContainer
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -6769,12 +7036,10 @@ class TrajectoryStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
 
 class TrajectoryStateHistoryMetadataKey(java.lang.Enum['TrajectoryStateHistoryMetadataKey']):
     """
-    public enum TrajectoryStateHistoryMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistoryMetadataKey`>
+    Keys for TrajectoryStateHistoryMetadata entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistoryMetadata` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     COMMENT: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
     TRAJ_ID: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
@@ -6795,17 +7060,17 @@ class TrajectoryStateHistoryMetadataKey(java.lang.Enum['TrajectoryStateHistoryMe
     ORB_AVERAGING: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
     TRAJ_TYPE: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
     TRAJ_UNITS: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, trajectoryStateHistoryMetadata: TrajectoryStateHistoryMetadata) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: TrajectoryStateHistoryMetadata) -> bool:
         """
-            Process an token.
+        Process an token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistoryMetadata`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (TrajectoryStateHistoryMetadata): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -6816,20 +7081,19 @@ class TrajectoryStateHistoryMetadataKey(java.lang.Enum['TrajectoryStateHistoryMe
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'TrajectoryStateHistoryMetadataKey':
+    def valueOf(name: str) -> 'TrajectoryStateHistoryMetadataKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -6837,17 +7101,15 @@ class TrajectoryStateHistoryMetadataKey(java.lang.Enum['TrajectoryStateHistoryMe
     @staticmethod
     def values() -> typing.MutableSequence['TrajectoryStateHistoryMetadataKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (TrajectoryStateHistoryMetadataKey c : TrajectoryStateHistoryMetadataKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (TrajectoryStateHistoryMetadataKey c : TrajectoryStateHistoryMetadataKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """

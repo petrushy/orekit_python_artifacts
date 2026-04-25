@@ -15,27 +15,20 @@ import typing
 
 class Preconditioner:
     """
-    public interfacePreconditioner
-    
-        This interface represents a preconditioner for differentiable scalar objective function optimizers.
+    This interface represents a preconditioner for differentiable scalar objective function optimizers.
     """
-    def precondition(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
+    def precondition(self, point: typing.Union[typing.List[float], jpype.JArray], r: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
         """
-            Precondition a search direction.
+        Precondition a search direction.
         
-            The returned preconditioned search direction must be computed fast or the algorithm performances will drop drastically.
-            A classical approach is to compute only the diagonal elements of the hessian and to divide the raw search direction by
-            these elements if they are all positive. If at least one of them is negative, it is safer to return a clone of the raw
-            search direction as if the hessian was the identity matrix. The rationale for this simplified choice is that a negative
-            diagonal element means the current point is far from the optimum and preconditioning will not be efficient anyway in
-            this case.
+        The returned preconditioned search direction must be computed fast or the algorithm performances will drop drastically. A classical approach is to compute only the diagonal elements of the hessian and to divide the raw search direction by these elements if they are all positive. If at least one of them is negative, it is safer to return a clone of the raw search direction as if the hessian was the identity matrix. The rationale for this simplified choice is that a negative diagonal element means the current point is far from the optimum and preconditioning will not be efficient anyway in this case.
         
-            Parameters:
-                point (double[]): current point at which the search direction was computed
-                r (double[]): raw search direction (i.e. opposite of the gradient)
+        Parameters:
+            point (double[]): current point at which the search direction was computed
+            r (double[]): raw search direction (i.e. opposite of the gradient)
         
-            Returns:
-                approximation of H :sup:`-1` r where H is the objective function hessian
+        Returns:
+            approximation of H :sup:`-1` r where H is the objective function hessian
         
         
         """
@@ -43,19 +36,11 @@ class Preconditioner:
 
 class NonLinearConjugateGradientOptimizer(org.hipparchus.optim.nonlinear.scalar.GradientMultivariateOptimizer):
     """
-    public classNonLinearConjugateGradientOptimizer extends :class:`~org.hipparchus.optim.nonlinear.scalar.GradientMultivariateOptimizer`
+    Non-linear conjugate gradient optimizer.
     
-        Non-linear conjugate gradient optimizer.
+    This class supports both the Fletcher-Reeves and the Polak-Ribière update formulas for the conjugate search directions. It also supports optional preconditioning.
     
-    
-        This class supports both the Fletcher-Reeves and the Polak-Ribière update formulas for the conjugate search directions.
-        It also supports optional preconditioning.
-    
-    
-        Constraints are not supported: the call to
-        :meth:`~org.hipparchus.optim.nonlinear.scalar.gradient.NonLinearConjugateGradientOptimizer.optimize` will throw
-        :class:`~org.hipparchus.optim.nonlinear.scalar.gradient.https:.www.hipparchus.org.hipparchus` if bounds are passed to
-        it.
+    Constraints are not supported: the call to optimize will throw hipparchus if bounds are passed to it.
     """
     @typing.overload
     def __init__(self, formula: 'NonLinearConjugateGradientOptimizer.Formula', convergenceChecker: typing.Union[org.hipparchus.optim.ConvergenceChecker[org.hipparchus.optim.PointValuePair], typing.Callable[[int, org.hipparchus.optim.PointValuePair, org.hipparchus.optim.PointValuePair], bool]]): ...

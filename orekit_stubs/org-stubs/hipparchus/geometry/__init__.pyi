@@ -22,25 +22,23 @@ import typing
 
 class Geometry:
     """
-    public classGeometry extends :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Utilities for geometry.
     
-        Utilities for geometry.
-    
-        Since:
-            4.0
+    Since:
+        4.0
     """
     _barycenter__S = typing.TypeVar('_barycenter__S', bound='Space')  # <S>
     _barycenter__P = typing.TypeVar('_barycenter__P', bound='Point')  # <P>
     @staticmethod
-    def barycenter(list: java.util.List[_barycenter__P]) -> _barycenter__P:
+    def barycenter(points: java.util.List[_barycenter__P]) -> _barycenter__P:
         """
-            Compute the barycenter of n points.
+        Compute the barycenter of n points.
         
-            Parameters:
-                points (:class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.util.List`<P> points): points generating the barycenter
+        Parameters:
+            points (List<P> points): points generating the barycenter
         
-            Returns:
-                barycenter of the points
+        Returns:
+            barycenter of the points
         
         
         """
@@ -48,16 +46,11 @@ class Geometry:
 
 class LocalizedGeometryFormats(java.lang.Enum['LocalizedGeometryFormats'], org.hipparchus.exception.Localizable):
     """
-    public enumLocalizedGeometryFormats extends :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum`<:class:`~org.hipparchus.geometry.LocalizedGeometryFormats`>
-    implements :class:`~org.hipparchus.geometry.https:.www.hipparchus.org.hipparchus`
+    implements hipparchus
     
-        Enumeration for localized messages formats used in exceptions messages.
+    Enumeration for localized messages formats used in exceptions messages.
     
-        The constants in this enumeration represent the available formats as localized strings. These formats are intended to be
-        localized using simple properties files, using the constant name as the key and the property value as the message
-        format. The source English format is provided in the constants themselves to serve both as a reminder for developers to
-        understand the parameters needed by each format, as a basis for translators to create localized properties files, and as
-        a default format if some translation is missing.
+    The constants in this enumeration represent the available formats as localized strings. These formats are intended to be localized using simple properties files, using the constant name as the key and the property value as the message format. The source English format is provided in the constants themselves to serve both as a reminder for developers to understand the parameters needed by each format, as a basis for translators to create localized properties files, and as a default format if some translation is missing.
     """
     CANNOT_NORMALIZE_A_ZERO_NORM_VECTOR: typing.ClassVar['LocalizedGeometryFormats'] = ...
     CLOSE_VERTICES: typing.ClassVar['LocalizedGeometryFormats'] = ...
@@ -85,20 +78,14 @@ class LocalizedGeometryFormats(java.lang.Enum['LocalizedGeometryFormats'], org.h
     @typing.overload
     def getLocalizedString(self, locale: java.util.Locale) -> str:
         """
-        
-            Specified by:
-                :meth:`~org.hipparchus.geometry.https:.www.hipparchus.org.hipparchus` in
-                interface :class:`~org.hipparchus.geometry.https:.www.hipparchus.org.hipparchus`
+        Specified by: hipparchus in interface hipparchus
         
         
         """
         ...
     def getSourceString(self) -> str:
         """
-        
-            Specified by:
-                :meth:`~org.hipparchus.geometry.https:.www.hipparchus.org.hipparchus` in
-                interface :class:`~org.hipparchus.geometry.https:.www.hipparchus.org.hipparchus`
+        Specified by: hipparchus in interface hipparchus
         
         
         """
@@ -109,20 +96,19 @@ class LocalizedGeometryFormats(java.lang.Enum['LocalizedGeometryFormats'], org.h
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'LocalizedGeometryFormats':
+    def valueOf(name: str) -> 'LocalizedGeometryFormats':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.String`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException`: if this enum type has no constant with the specified name
-                :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -130,10 +116,10 @@ class LocalizedGeometryFormats(java.lang.Enum['LocalizedGeometryFormats'], org.h
     @staticmethod
     def values() -> typing.MutableSequence['LocalizedGeometryFormats']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared.
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -143,64 +129,59 @@ _Point__S = typing.TypeVar('_Point__S', bound='Space')  # <S>
 _Point__P = typing.TypeVar('_Point__P', bound='Point')  # <P>
 class Point(java.io.Serializable, typing.Generic[_Point__S, _Point__P]):
     """
-    public interfacePoint<S extends :class:`~org.hipparchus.geometry.Space`,P extends Point<S,P>>extends :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    This interface represents a generic geometrical point.
     
-        This interface represents a generic geometrical point.
-    
-        Also see:
-    
-              - :class:`~org.hipparchus.geometry.Space`
-              - :class:`~org.hipparchus.geometry.Vector`
+          - Space
+          - Vector
     """
     def distance(self, p: _Point__P) -> float:
         """
-            Compute the distance between the instance and another point.
+        Compute the distance between the instance and another point.
         
-            Parameters:
-                p (:class:`~org.hipparchus.geometry.Point`): second point
+        Parameters:
+            p (Point): second point
         
-            Returns:
-                the distance between the instance and p
+        Returns:
+            the distance between the instance and p
         
         
         """
         ...
     def getSpace(self) -> 'Space':
         """
-            Get the space to which the point belongs.
+        Get the space to which the point belongs.
         
-            Returns:
-                containing space
+        Returns:
+            containing space
         
         
         """
         ...
     def isNaN(self) -> bool:
         """
-            Returns true if any coordinate of this point is NaN; false otherwise
+        Returns true if any coordinate of this point is NaN; false otherwise
         
-            Returns:
-                true if any coordinate of this point is NaN; false otherwise
+        Returns:
+            true if any coordinate of this point is NaN; false otherwise
         
         
         """
         ...
-    def moveTowards(self, p: _Point__P, double: float) -> _Point__P:
+    def moveTowards(self, other: _Point__P, ratio: float) -> _Point__P:
         """
-            Move towards another point.
+        Move towards another point.
         
-            Motion is linear (along space curvature) and based on a ratio where 0.0 stands for not moving at all, 0.5 stands for
-            moving halfway towards other point, and 1.0 stands for moving fully to the other point.
+        Motion is linear (along space curvature) and based on a ratio where 0.0 stands for not moving at all, 0.5 stands for moving halfway towards other point, and 1.0 stands for moving fully to the other point.
         
-            Parameters:
-                other (:class:`~org.hipparchus.geometry.Point`): other point
-                ratio (double): motion ratio,
+        Parameters:
+            other (Point): other point
+            ratio (double): motion ratio,
         
-            Returns:
-                moved point
+        Returns:
+            moved point
         
-            Since:
-                4.0
+        Since:
+            4.0
         
         
         """
@@ -208,99 +189,88 @@ class Point(java.io.Serializable, typing.Generic[_Point__S, _Point__P]):
 
 class Space(java.io.Serializable):
     """
-    public interfaceSpaceextends :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable`
+    This interface represents a generic space, with affine and vectorial counterparts.
     
-        This interface represents a generic space, with affine and vectorial counterparts.
-    
-        Also see:
-    
-              - :class:`~org.hipparchus.geometry.Vector`
+          - Vector
     """
     def getDimension(self) -> int:
         """
-            Get the dimension of the space.
+        Get the dimension of the space.
         
-            Returns:
-                dimension of the space
+        Returns:
+            dimension of the space
         
         
         """
         ...
-    def getSubSpace(self) -> 'Space': ...
+    def getSubSpace(self) -> 'Space':
+        """
+        Get the n-1 dimension subspace of this space.
+        
+        Returns:
+            n-1 dimension sub-space of this space
+        
+        Raises:
+            hipparchus: for dimension-1 spaces which do not have sub-spaces
+        
+              - getDimension
+        
+        
+        
+        """
+        ...
 
 _VectorFormat__S = typing.TypeVar('_VectorFormat__S', bound=Space)  # <S>
 _VectorFormat__V = typing.TypeVar('_VectorFormat__V', bound='Vector')  # <V>
 class VectorFormat(typing.Generic[_VectorFormat__S, _VectorFormat__V]):
     """
-    public abstract classVectorFormat<S extends :class:`~org.hipparchus.geometry.Space`,V extends :class:`~org.hipparchus.geometry.Vector`<S,V>> extends :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object`
+    Formats a vector in components list format "{x; y; ...}".
     
-        Formats a vector in components list format "{x; y; ...}".
+    The prefix and suffix "{" and "}" and the separator "; " can be replaced by any user-defined strings. The number format for components can be configured.
     
-        The prefix and suffix "{" and "}" and the separator "; " can be replaced by any user-defined strings. The number format
-        for components can be configured.
+    White space is ignored at parse time, even if it is in the prefix, suffix or separator specifications. So even if the default separator does include a space character that is used at format time, both input string "{1;1;1}" and " { 1 ; 1 ; 1 } " will be parsed without error and the same vector will be returned. In the second case, however, the parse position after parsing will be just after the closing curly brace, i.e. just before the trailing space.
     
-        White space is ignored at parse time, even if it is in the prefix, suffix or separator specifications. So even if the
-        default separator does include a space character that is used at format time, both input string "{1;1;1}" and " { 1 ; 1
-        ; 1 } " will be parsed without error and the same vector will be returned. In the second case, however, the parse
-        position after parsing will be just after the closing curly brace, i.e. just before the trailing space.
-    
-        **Note:** using "," as a separator may interfere with the grouping separator of the default
-        :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat` for the current
-        locale. Thus it is advised to use a
-        :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat` instance with disabled
-        grouping in such a case.
+    Note: using "," as a separator may interfere with the grouping separator of the default NumberFormat for the current locale. Thus it is advised to use a NumberFormat instance with disabled grouping in such a case.
     """
     DEFAULT_PREFIX: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.String` DEFAULT_PREFIX
+    The default prefix: "{".
     
-        The default prefix: "{".
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     DEFAULT_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.String` DEFAULT_SUFFIX
+    The default suffix: "}".
     
-        The default suffix: "}".
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     DEFAULT_SEPARATOR: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.String` DEFAULT_SEPARATOR
+    The default separator: ", ".
     
-        The default separator: ", ".
-    
-        Also see:
-    
-              - :meth:`~constant`
+          - constant
     
     
     
     """
     @typing.overload
-    def format(self, vector: 'Vector'[_VectorFormat__S, _VectorFormat__V], stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer:
+    def format(self, toAppendTo: 'Vector'[_VectorFormat__S, _VectorFormat__V], pos: java.lang.StringBuffer, coordinates: java.text.FieldPosition) -> java.lang.StringBuffer:
         """
-            Formats the coordinates of a :class:`~org.hipparchus.geometry.Vector` to produce a string.
+        Formats the coordinates of a Vector to produce a string.
         
-            Parameters:
-                toAppendTo (:class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer`): where the text is to be appended
-                pos (:class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition`): On input: an alignment field, if desired. On output: the offsets of the alignment field
-                coordinates (double...): coordinates of the object to format.
+        Parameters:
+            toAppendTo (StringBuffer): where the text is to be appended
+            pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+            coordinates (double...): coordinates of the object to format.
         
-            Returns:
-                the value passed in as toAppendTo.
+        Returns:
+            the value passed in as toAppendTo.
         
         
         """
@@ -310,53 +280,52 @@ class VectorFormat(typing.Generic[_VectorFormat__S, _VectorFormat__V]):
     @staticmethod
     def getAvailableLocales() -> typing.MutableSequence[java.util.Locale]:
         """
-            Get the set of locales for which point/vector formats are available.
+        Get the set of locales for which point/vector formats are available.
         
-            This is the same set as the
-            :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat` set.
+        This is the same set as the NumberFormat set.
         
-            Returns:
-                available point/vector format locales.
+        Returns:
+            available point/vector format locales.
         
         
         """
         ...
     def getFormat(self) -> java.text.NumberFormat:
         """
-            Get the components format.
+        Get the components format.
         
-            Returns:
-                components format.
+        Returns:
+            components format.
         
         
         """
         ...
     def getPrefix(self) -> str:
         """
-            Get the format prefix.
+        Get the format prefix.
         
-            Returns:
-                format prefix.
+        Returns:
+            format prefix.
         
         
         """
         ...
     def getSeparator(self) -> str:
         """
-            Get the format separator between components.
+        Get the format separator between components.
         
-            Returns:
-                format separator.
+        Returns:
+            format separator.
         
         
         """
         ...
     def getSuffix(self) -> str:
         """
-            Get the format suffix.
+        Get the format suffix.
         
-            Returns:
-                format suffix.
+        Returns:
+            format suffix.
         
         
         """
@@ -370,26 +339,22 @@ _Vector__S = typing.TypeVar('_Vector__S', bound=Space)  # <S>
 _Vector__V = typing.TypeVar('_Vector__V', bound='Vector')  # <V>
 class Vector(Point[_Vector__S, _Vector__V], org.hipparchus.util.Blendable[_Vector__V], typing.Generic[_Vector__S, _Vector__V]):
     """
-    public interfaceVector<S extends :class:`~org.hipparchus.geometry.Space`,V extends Vector<S,V>>extends :class:`~org.hipparchus.geometry.Point`<S,V>, :class:`~org.hipparchus.geometry.https:.www.hipparchus.org.hipparchus`<V>
+    This interface represents a generic vector in a vectorial space or a point in an affine space.
     
-        This interface represents a generic vector in a vectorial space or a point in an affine space.
-    
-        Also see:
-    
-              - :class:`~org.hipparchus.geometry.Space`
-              - :class:`~org.hipparchus.geometry.Point`
+          - Space
+          - Point
     """
     @typing.overload
-    def add(self, double: float, v: _Vector__V) -> _Vector__V:
+    def add(self, factor: float, v: _Vector__V) -> _Vector__V:
         """
-            Add a scaled vector to the instance.
+        Add a scaled vector to the instance.
         
-            Parameters:
-                factor (double): scale factor to apply to v before adding it
-                v (:class:`~org.hipparchus.geometry.Vector`): vector to add
+        Parameters:
+            factor (double): scale factor to apply to v before adding it
+            v (Vector): vector to add
         
-            Returns:
-                a new vector
+        Returns:
+            a new vector
         
         
         """
@@ -397,173 +362,190 @@ class Vector(Point[_Vector__S, _Vector__V], org.hipparchus.util.Blendable[_Vecto
     @typing.overload
     def add(self, v: _Vector__V) -> _Vector__V:
         """
-            Add a vector to the instance.
+        Add a vector to the instance.
         
-            Parameters:
-                v (:class:`~org.hipparchus.geometry.Vector`): vector to add
+        Parameters:
+            v (Vector): vector to add
         
-            Returns:
-                a new vector
+        Returns:
+            a new vector
         
         """
         ...
-    def blendArithmeticallyWith(self, v: _Vector__V, double: float) -> _Vector__V: ...
+    def blendArithmeticallyWith(self, v: _Vector__V, double: float) -> _Vector__V:
+        """
+        Specified by: hipparchus in interface hipparchus
+        
+        Raises:
+            hipparchus: 
+        
+        """
+        ...
     def distance1(self, v: _Vector__V) -> float:
         """
-            Compute the distance between the instance and another vector according to the L :sub:`1` norm.
+        Compute the distance between the instance and another vector according to the L :sub:`1` norm.
         
-            Calling this method is equivalent to calling: :code:`q.subtract(p).getNorm1()` except that no intermediate vector is
-            built
+        Calling this method is equivalent to calling: getNorm1() except that no intermediate vector is built
         
-            Parameters:
-                v (:class:`~org.hipparchus.geometry.Vector`): second vector
+        Parameters:
+            v (Vector): second vector
         
-            Returns:
-                the distance between the instance and p according to the L :sub:`1` norm
+        Returns:
+            the distance between the instance and p according to the L :sub:`1` norm
         
         
         """
         ...
     def distanceInf(self, v: _Vector__V) -> float:
         """
-            Compute the distance between the instance and another vector according to the L :sub:`∞` norm.
+        Compute the distance between the instance and another vector according to the L :sub:`∞` norm.
         
-            Calling this method is equivalent to calling: :code:`q.subtract(p).getNormInf()` except that no intermediate vector is
-            built
+        Calling this method is equivalent to calling: getNormInf() except that no intermediate vector is built
         
-            Parameters:
-                v (:class:`~org.hipparchus.geometry.Vector`): second vector
+        Parameters:
+            v (Vector): second vector
         
-            Returns:
-                the distance between the instance and p according to the L :sub:`∞` norm
+        Returns:
+            the distance between the instance and p according to the L :sub:`∞` norm
         
         
         """
         ...
     def distanceSq(self, v: _Vector__V) -> float:
         """
-            Compute the square of the distance between the instance and another vector.
+        Compute the square of the distance between the instance and another vector.
         
-            Calling this method is equivalent to calling: :code:`q.subtract(p).getNormSq()` except that no intermediate vector is
-            built
+        Calling this method is equivalent to calling: getNormSq() except that no intermediate vector is built
         
-            Parameters:
-                v (:class:`~org.hipparchus.geometry.Vector`): second vector
+        Parameters:
+            v (Vector): second vector
         
-            Returns:
-                the square of the distance between the instance and p
+        Returns:
+            the square of the distance between the instance and p
         
         
         """
         ...
     def dotProduct(self, v: _Vector__V) -> float:
         """
-            Compute the dot-product of the instance and another vector.
+        Compute the dot-product of the instance and another vector.
         
-            Parameters:
-                v (:class:`~org.hipparchus.geometry.Vector`): second vector
+        Parameters:
+            v (Vector): second vector
         
-            Returns:
-                the dot product this.v
+        Returns:
+            the dot product this.v
         
         
         """
         ...
     def getNorm(self) -> float:
         """
-            Get the L :sub:`2` norm for the vector.
+        Get the L :sub:`2` norm for the vector.
         
-            Returns:
-                Euclidean norm for the vector
+        Returns:
+            Euclidean norm for the vector
         
         
         """
         ...
     def getNorm1(self) -> float:
         """
-            Get the L :sub:`1` norm for the vector.
+        Get the L :sub:`1` norm for the vector.
         
-            Returns:
-                L :sub:`1` norm for the vector
+        Returns:
+            L :sub:`1` norm for the vector
         
         
         """
         ...
     def getNormInf(self) -> float:
         """
-            Get the L :sub:`∞` norm for the vector.
+        Get the L :sub:`∞` norm for the vector.
         
-            Returns:
-                L :sub:`∞` norm for the vector
+        Returns:
+            L :sub:`∞` norm for the vector
         
         
         """
         ...
     def getNormSq(self) -> float:
         """
-            Get the square of the norm for the vector.
+        Get the square of the norm for the vector.
         
-            Returns:
-                square of the Euclidean norm for the vector
+        Returns:
+            square of the Euclidean norm for the vector
         
         
         """
         ...
     def getZero(self) -> _Vector__V:
         """
-            Get the null vector of the vectorial space or origin point of the affine space.
+        Get the null vector of the vectorial space or origin point of the affine space.
         
-            Returns:
-                null vector of the vectorial space or origin point of the affine space
+        Returns:
+            null vector of the vectorial space or origin point of the affine space
         
         
         """
         ...
     def isInfinite(self) -> bool:
         """
-            Returns true if any coordinate of this vector is infinite and none are NaN; false otherwise
+        Returns true if any coordinate of this vector is infinite and none are NaN; false otherwise
         
-            Returns:
-                true if any coordinate of this vector is infinite and none are NaN; false otherwise
+        Returns:
+            true if any coordinate of this vector is infinite and none are NaN; false otherwise
         
         
         """
         ...
     def negate(self) -> _Vector__V:
         """
-            Get the opposite of the instance.
+        Get the opposite of the instance.
         
-            Returns:
-                a new vector which is opposite to the instance
+        Returns:
+            a new vector which is opposite to the instance
         
         
         """
         ...
-    def normalize(self) -> _Vector__V: ...
-    def scalarMultiply(self, double: float) -> _Vector__V:
+    def normalize(self) -> _Vector__V:
         """
-            Multiply the instance by a scalar.
+        Get a normalized vector aligned with the instance.
         
-            Parameters:
-                a (double): scalar
+        Returns:
+            a new normalized vector
         
-            Returns:
-                a new vector
+        Raises:
+            hipparchus: if the norm is zero
+        
+        
+        """
+        ...
+    def scalarMultiply(self, a: float) -> _Vector__V:
+        """
+        Multiply the instance by a scalar.
+        
+        Parameters:
+            a (double): scalar
+        
+        Returns:
+            a new vector
         
         
         """
         ...
     @typing.overload
-    def subtract(self, double: float, v: _Vector__V) -> _Vector__V:
+    def subtract(self, factor: float, v: _Vector__V) -> _Vector__V:
         """
-            Subtract a scaled vector from the instance.
+        Subtract a scaled vector from the instance.
         
-            Parameters:
-                factor (double): scale factor to apply to v before subtracting it
-                v (:class:`~org.hipparchus.geometry.Vector`): vector to subtract
+        Parameters:
+            factor (double): scale factor to apply to v before subtracting it
+            v (Vector): vector to subtract
         
-            Returns:
-                a new vector
+        Returns:
+            a new vector
         
         
         """
@@ -571,25 +553,25 @@ class Vector(Point[_Vector__S, _Vector__V], org.hipparchus.util.Blendable[_Vecto
     @typing.overload
     def subtract(self, v: _Vector__V) -> _Vector__V:
         """
-            Subtract a vector from the instance.
+        Subtract a vector from the instance.
         
-            Parameters:
-                v (:class:`~org.hipparchus.geometry.Vector`): vector to subtract
+        Parameters:
+            v (Vector): vector to subtract
         
-            Returns:
-                a new vector
+        Returns:
+            a new vector
         
         """
         ...
-    def toString(self, numberFormat: java.text.NumberFormat) -> str:
+    def toString(self, format: java.text.NumberFormat) -> str:
         """
-            Get a string representation of this vector.
+        Get a string representation of this vector.
         
-            Parameters:
-                format (:class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat`): the custom format for components
+        Parameters:
+            format (NumberFormat): the custom format for components
         
-            Returns:
-                a string representation of this vector
+        Returns:
+            a string representation of this vector
         
         
         """

@@ -28,18 +28,15 @@ import typing
 
 class EphemerisOemWriter(org.orekit.files.general.EphemerisFileWriter):
     """
-    public class EphemerisOemWriter extends :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFileWriter`
+    An EphemerisFileWriter generating Oem files.
     
-        An :class:`~org.orekit.files.general.EphemerisFileWriter` generating :class:`~org.orekit.files.ccsds.ndm.odm.oem.Oem`
-        files.
+    Since:
+        9.0
     
-        Since:
-            9.0
-    
-        Also see:
-            :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.public.ccsds.org.Pubs.502x0b2c1.pdf`,
-            :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.public.ccsds.org.Pubs.500x0g4.pdf`,
-            :class:`~org.orekit.files.ccsds.ndm.odm.oem.StreamingOemWriter`
+    Also see:
+        pdf,
+        pdf,
+        StreamingOemWriter
     """
     @typing.overload
     def __init__(self, oemWriter: 'OemWriter', odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, oemMetadata: 'OemMetadata', fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, double: float, int: int): ...
@@ -55,13 +52,24 @@ class EphemerisOemWriter(org.orekit.files.general.EphemerisFileWriter):
     def write(self, appendable: java.lang.Appendable, ephemerisFile: typing.Union[org.orekit.files.general.EphemerisFile[_write_1__C, _write_1__S], typing.Callable[[], java.util.Map[str, org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, org.orekit.files.general.EphemerisFile.EphemerisSegment]]]]) -> None: ...
     _writeSegment__C = typing.TypeVar('_writeSegment__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
     _writeSegment__S = typing.TypeVar('_writeSegment__S', bound=org.orekit.files.general.EphemerisFile.EphemerisSegment)  # <S>
-    def writeSegment(self, generator: org.orekit.files.ccsds.utils.generation.Generator, s2: _writeSegment__S) -> None: ...
+    def writeSegment(self, generator: org.orekit.files.ccsds.utils.generation.Generator, segment: _writeSegment__S) -> None:
+        """
+        Write one segment.
+        
+        Parameters:
+            generator (Generator): generator to use for producing output
+            segment (S): segment to write
+        
+        Raises:
+            IOException: if any buffer writing operations fails
+        
+        
+        """
+        ...
 
 class InterpolationMethod(java.lang.Enum['InterpolationMethod']):
     """
-    public enum InterpolationMethod extends :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.oem.InterpolationMethod`>
-    
-        OEM interpolation method.
+    OEM interpolation method.
     """
     HERMITE: typing.ClassVar['InterpolationMethod'] = ...
     LAGRANGE: typing.ClassVar['InterpolationMethod'] = ...
@@ -73,20 +81,19 @@ class InterpolationMethod(java.lang.Enum['InterpolationMethod']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'InterpolationMethod':
+    def valueOf(name: str) -> 'InterpolationMethod':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -94,17 +101,15 @@ class InterpolationMethod(java.lang.Enum['InterpolationMethod']):
     @staticmethod
     def values() -> typing.MutableSequence['InterpolationMethod']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (InterpolationMethod c : InterpolationMethod.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (InterpolationMethod c : InterpolationMethod.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -112,246 +117,288 @@ class InterpolationMethod(java.lang.Enum['InterpolationMethod']):
 
 class Oem(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.ndm.odm.OdmHeader, 'OemSegment'], org.orekit.files.general.EphemerisFile[org.orekit.utils.TimeStampedPVCoordinates, 'OemSegment']):
     """
-    public class Oem extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmHeader`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`> implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`>
+    This class stores all the information of the OEM File parsed by OEMParser.
     
-        This class stores all the information of the OEM File parsed by OEMParser.
+    It contains the header and a list of Ephemerides Blocks each containing metadata, a list of ephemerides data lines and optional covariance matrices (and their metadata).
     
-        It contains the header and a list of Ephemerides Blocks each containing metadata, a list of ephemerides data lines and
-        optional covariance matrices (and their metadata).
-    
-        Since:
-            6.1
+    Since:
+        6.1
     """
     ROOT: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ROOT
+    Root element for XML files.
     
-        Root element for XML files.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     FORMAT_VERSION_KEY: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` FORMAT_VERSION_KEY
+    Key for format version.
     
-        Key for format version.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, list: java.util.List['OemSegment'], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, double: float): ...
-    def checkTimeSystems(self) -> None:
+    def __init__(self, header: org.orekit.files.ccsds.ndm.odm.OdmHeader, segments: java.util.List['OemSegment'], conventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, mu: float):
         """
-            Check that, according to the CCSDS standard, every OEMBlock has the same time system.
+        Simple constructor.
+        
+        Parameters:
+            header (OdmHeader): file header
+            segments (List<OemSegment> segments): file segments
+            conventions (IERSConventions): IERS conventions
+            dataContext (DataContext): used for creating frames, time scales, etc.
+            mu (double): gravitational coefficient
+        
         
         """
         ...
-    def getSatellites(self) -> java.util.Map[str, 'OemSatelliteEphemeris']: ...
+    def checkTimeSystems(self) -> None:
+        """
+        Check that, according to the CCSDS standard, every OEMBlock has the same time system.
+        """
+        ...
+    def getSatellites(self) -> java.util.Map[str, 'OemSatelliteEphemeris']:
+        """
+        Get the loaded ephemeris for each satellite in the file.
+        
+        Specified by: getSatellites in interface EphemerisFile
+        
+        Returns:
+            a map from the satellite's ID to the information about that satellite contained in the file.
+        
+        
+        """
+        ...
 
 class OemData(org.orekit.files.ccsds.section.CommentsContainer, org.orekit.files.ccsds.section.Data):
     """
-    public class OemData extends :class:`~org.orekit.files.ccsds.section.CommentsContainer` implements :class:`~org.orekit.files.ccsds.section.Data`
+    The Ephemerides data blocks class contain list of orbital data points.
     
-        The Ephemerides data blocks class contain list of orbital data points.
-    
-        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
-        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
-        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
-        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
-        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
-        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
-        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
-        conversions.
+    Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these SI units into CCSDS mandatory units. The Unit class provides useful fromSI and toSI methods in case the callers already use CCSDS units instead of the API SI units. The general-purpose Unit class (without an 's') and the CCSDS-specific Units class (with an 's') also provide some predefined units. These predefined units and the fromSI and toSI conversion methods are indeed what the parsers and writers use for the conversions.
     """
-    def __init__(self): ...
-    def addCovarianceMatrix(self, cartesianCovariance: org.orekit.files.ccsds.ndm.odm.CartesianCovariance) -> None:
+    def __init__(self):
         """
-            Add a covariance matrix.
+        EphemeridesBlock constructor.
+        """
+        ...
+    def addCovarianceMatrix(self, covarianceMatrix: org.orekit.files.ccsds.ndm.odm.CartesianCovariance) -> None:
+        """
+        Add a covariance matrix.
         
-            Parameters:
-                covarianceMatrix (:class:`~org.orekit.files.ccsds.ndm.odm.CartesianCovariance`): covariance matrix to dd
+        Parameters:
+            covarianceMatrix (CartesianCovariance): covariance matrix to dd
         
         
         """
         ...
-    def addData(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, boolean: bool) -> bool:
+    def addData(self, data: org.orekit.utils.TimeStampedPVCoordinates, hasAcceleration: bool) -> bool:
         """
-            Add a data point.
+        Add a data point.
         
-            Parameters:
-                data (:class:`~org.orekit.utils.TimeStampedPVCoordinates`): data point to add
-                hasAcceleration (boolean): true if the current data point has acceleration data.
+        Parameters:
+            data (TimeStampedPVCoordinates): data point to add
+            hasAcceleration (boolean): true if the current data point has acceleration data.
         
-            Returns:
-                always return :code:`true`
+        Returns:
+            always return true
         
         
         """
         ...
     def getAvailableDerivatives(self) -> org.orekit.utils.CartesianDerivativesFilter:
         """
-            Get the derivatives available in the block.
+        Get the derivatives available in the block.
         
-            Returns:
-                derivatives available in the block
+        Returns:
+            derivatives available in the block
         
         
         """
         ...
-    def getCoordinates(self) -> java.util.List[org.orekit.utils.TimeStampedPVCoordinates]: ...
-    def getCovarianceMatrices(self) -> java.util.List[org.orekit.files.ccsds.ndm.odm.CartesianCovariance]: ...
-    def getEphemeridesDataLines(self) -> java.util.List[org.orekit.utils.TimeStampedPVCoordinates]: ...
+    def getCoordinates(self) -> java.util.List[org.orekit.utils.TimeStampedPVCoordinates]:
+        """
+        Get an unmodifiable view of the data points.
+        
+        Returns:
+            unmodifiable view of the data points
+        
+        
+        """
+        ...
+    def getCovarianceMatrices(self) -> java.util.List[org.orekit.files.ccsds.ndm.odm.CartesianCovariance]:
+        """
+        Get an unmodifiable view of Covariance Matrices.
+        
+        Returns:
+            unmodifiable view of Covariance Matrices
+        
+        
+        """
+        ...
+    def getEphemeridesDataLines(self) -> java.util.List[org.orekit.utils.TimeStampedPVCoordinates]:
+        """
+        Get the list of Ephemerides data lines.
+        
+        Returns:
+            a reference to the internal list of Ephemerides data lines
+        
+        
+        """
+        ...
 
 class OemMetadata(org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata):
     """
-    public class OemMetadata extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata`
+    Metadata for Orbit Ephemeris Messages.
     
-        Metadata for Orbit Ephemeris Messages.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, int: int): ...
+    def __init__(self, defaultInterpolationDegree: int):
+        """
+        Simple constructor.
+        
+        Parameters:
+            defaultInterpolationDegree (int): default interpolation degree
+        
+        
+        """
+        ...
     def getInterpolationDegree(self) -> int:
         """
-            Get the interpolation degree.
+        Get the interpolation degree.
         
-            Returns:
-                the interpolation degree
+        Returns:
+            the interpolation degree
         
         
         """
         ...
     def getInterpolationMethod(self) -> InterpolationMethod:
         """
-            Get the interpolation method to be used.
+        Get the interpolation method to be used.
         
-            Returns:
-                the interpolation method
+        Returns:
+            the interpolation method
         
         
         """
         ...
     def getStartTime(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get start of total time span covered by ephemerides data and covariance data.
+        Get start of total time span covered by ephemerides data and covariance data.
         
-            Returns:
-                the start time
+        Returns:
+            the start time
         
         
         """
         ...
     def getStopTime(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get end of total time span covered by ephemerides data and covariance data.
+        Get end of total time span covered by ephemerides data and covariance data.
         
-            Returns:
-                the stop time
+        Returns:
+            the stop time
         
         
         """
         ...
     def getUseableStartTime(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get start of useable time span covered by ephemerides data, it may be necessary to allow for proper interpolation.
+        Get start of useable time span covered by ephemerides data, it may be necessary to allow for proper interpolation.
         
-            Returns:
-                the useable start time
+        Returns:
+            the useable start time
         
         
         """
         ...
     def getUseableStopTime(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get end of useable time span covered by ephemerides data, it may be necessary to allow for proper interpolation.
+        Get end of useable time span covered by ephemerides data, it may be necessary to allow for proper interpolation.
         
-            Returns:
-                the useable stop time
+        Returns:
+            the useable stop time
         
         
         """
         ...
-    def setInterpolationDegree(self, int: int) -> None:
+    def setInterpolationDegree(self, interpolationDegree: int) -> None:
         """
-            Set the interpolation degree.
+        Set the interpolation degree.
         
-            Parameters:
-                interpolationDegree (int): the interpolation degree to be set
+        Parameters:
+            interpolationDegree (int): the interpolation degree to be set
         
         
         """
         ...
     def setInterpolationMethod(self, interpolationMethod: InterpolationMethod) -> None:
         """
-            Set the interpolation method to be used.
+        Set the interpolation method to be used.
         
-            Parameters:
-                interpolationMethod (:class:`~org.orekit.files.ccsds.ndm.odm.oem.InterpolationMethod`): the interpolation method to be set
-        
-        
-        """
-        ...
-    def setStartTime(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Set start of total time span covered by ephemerides data and covariance data.
-        
-            Parameters:
-                startTime (:class:`~org.orekit.time.AbsoluteDate`): the time to be set
+        Parameters:
+            interpolationMethod (InterpolationMethod): the interpolation method to be set
         
         
         """
         ...
-    def setStopTime(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setStartTime(self, startTime: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set end of total time span covered by ephemerides data and covariance data.
+        Set start of total time span covered by ephemerides data and covariance data.
         
-            Parameters:
-                stopTime (:class:`~org.orekit.time.AbsoluteDate`): the time to be set
-        
-        
-        """
-        ...
-    def setUseableStartTime(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Set start of useable time span covered by ephemerides data, it may be necessary to allow for proper interpolation.
-        
-            Parameters:
-                useableStartTime (:class:`~org.orekit.time.AbsoluteDate`): the time to be set
+        Parameters:
+            startTime (AbsoluteDate): the time to be set
         
         
         """
         ...
-    def setUseableStopTime(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def setStopTime(self, stopTime: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set end of useable time span covered by ephemerides data, it may be necessary to allow for proper interpolation.
+        Set end of total time span covered by ephemerides data and covariance data.
         
-            Parameters:
-                useableStopTime (:class:`~org.orekit.time.AbsoluteDate`): the time to be set
+        Parameters:
+            stopTime (AbsoluteDate): the time to be set
         
         
         """
         ...
-    def validate(self, double: float) -> None:
+    def setUseableStartTime(self, useableStartTime: org.orekit.time.AbsoluteDate) -> None:
         """
-            Check is all mandatory entries have been initialized.
+        Set start of useable time span covered by ephemerides data, it may be necessary to allow for proper interpolation.
         
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        Parameters:
+            useableStartTime (AbsoluteDate): the time to be set
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata.validate` in
-                class :class:`~org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata`
+        """
+        ...
+    def setUseableStopTime(self, useableStopTime: org.orekit.time.AbsoluteDate) -> None:
+        """
+        Set end of useable time span covered by ephemerides data, it may be necessary to allow for proper interpolation.
         
-            Parameters:
-                version (double): format version
+        Parameters:
+            useableStopTime (AbsoluteDate): the time to be set
+        
+        
+        """
+        ...
+    def validate(self, version: float) -> None:
+        """
+        Check is all mandatory entries have been initialized.
+        
+        This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+        Specified by: validate in interface Section
+        
+        Overrides: validate in class OdmCommonMetadata
+        
+        Parameters:
+            version (double): format version
         
         
         """
@@ -359,12 +406,10 @@ class OemMetadata(org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata):
 
 class OemMetadataKey(java.lang.Enum['OemMetadataKey']):
     """
-    public enum OemMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.oem.OemMetadataKey`>
+    Keys for OemMetadata entries.
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemMetadata` entries.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     START_TIME: typing.ClassVar['OemMetadataKey'] = ...
     STOP_TIME: typing.ClassVar['OemMetadataKey'] = ...
@@ -372,17 +417,17 @@ class OemMetadataKey(java.lang.Enum['OemMetadataKey']):
     USEABLE_STOP_TIME: typing.ClassVar['OemMetadataKey'] = ...
     INTERPOLATION: typing.ClassVar['OemMetadataKey'] = ...
     INTERPOLATION_DEGREE: typing.ClassVar['OemMetadataKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, oemMetadata: OemMetadata) -> bool:
+    def process(self, token: org.orekit.files.ccsds.utils.lexical.ParseToken, context: org.orekit.files.ccsds.utils.ContextBinding, container: OemMetadata) -> bool:
         """
-            Process an token.
+        Process an token.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.odm.oem.OemMetadata`): container to fill
+        Parameters:
+            token (ParseToken): token to process
+            context (ContextBinding): context binding
+            container (OemMetadata): container to fill
         
-            Returns:
-                true of token was accepted
+        Returns:
+            true of token was accepted
         
         
         """
@@ -393,20 +438,19 @@ class OemMetadataKey(java.lang.Enum['OemMetadataKey']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'OemMetadataKey':
+    def valueOf(name: str) -> 'OemMetadataKey':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -414,17 +458,15 @@ class OemMetadataKey(java.lang.Enum['OemMetadataKey']):
     @staticmethod
     def values() -> typing.MutableSequence['OemMetadataKey']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (OemMetadataKey c : OemMetadataKey.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (OemMetadataKey c : OemMetadataKey.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -432,200 +474,190 @@ class OemMetadataKey(java.lang.Enum['OemMetadataKey']):
 
 class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.orekit.files.general.EphemerisFileParser[Oem]):
     """
-    public class OemParser extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<:class:`~org.orekit.files.ccsds.ndm.odm.oem.Oem`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemParser`> implements :class:`~org.orekit.files.general.EphemerisFileParser`<:class:`~org.orekit.files.ccsds.ndm.odm.oem.Oem`>
+    A parser for the CCSDS OEM (Orbit Ephemeris Message).
     
-        A parser for the CCSDS OEM (Orbit Ephemeris Message).
+    Note than starting with Orekit 11.0, CCSDS message parsers are mutable objects that gather the data being parsed, until the message is complete and the parseMessage method has returned. This implies that parsers should not be used in a multi-thread context. The recommended way to use parsers is to either dedicate one parser for each message and drop it afterwards, or to use a single-thread loop.
     
-        Note than starting with Orekit 11.0, CCSDS message parsers are mutable objects that gather the data being parsed, until
-        the message is complete and the :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser.parseMessage` method
-        has returned. This implies that parsers should *not* be used in a multi-thread context. The recommended way to use
-        parsers is to either dedicate one parser for each message and drop it afterwards, or to use a single-thread loop.
-    
-        Since:
-            6.1
+    Since:
+        6.1
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, double: float, int: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate, mu: float, defaultInterpolationDegree: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]):
+        """
+        Complete constructor.
+        
+        Calling this constructor directly is not recommended. Users should rather use buildOemParser.
+        
+        Parameters:
+            conventions (IERSConventions): IERS Conventions
+            simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
+            dataContext (DataContext): used to retrieve frames, time scales, etc.
+            missionReferenceDate (AbsoluteDate): reference date for Mission Elapsed Time or Mission Relative Time time systems (may be null if time system is absolute)
+            mu (double): gravitational coefficient
+            defaultInterpolationDegree (int): default interpolation degree
+            parsedUnitsBehavior (ParsedUnitsBehavior): behavior to adopt for handling parsed units
+            filters (Function<ParseToken, List<ParseToken>>[]): filters to apply to parse tokens
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
     def build(self) -> Oem:
         """
-            Build the file from parsed entries.
+        Build the file from parsed entries.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.build` in
-                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+        Specified by: build in interface MessageParser
         
-            Returns:
-                parsed file
+        Returns:
+            parsed file
         
         
         """
         ...
     def finalizeData(self) -> bool:
         """
-            Finalize data after parsing.
+        Finalize data after parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: finalizeData in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def finalizeHeader(self) -> bool:
         """
-            Finalize header after parsing.
+        Finalize header after parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: finalizeHeader in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def finalizeMetadata(self) -> bool:
         """
-            Finalize metadata after parsing.
+        Finalize metadata after parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: finalizeMetadata in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def getHeader(self) -> org.orekit.files.ccsds.ndm.odm.OdmHeader:
         """
-            Get file header to fill.
+        Get file header to fill.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: getHeader in class AbstractConstituentParser
         
-            Returns:
-                file header to fill
+        Returns:
+            file header to fill
         
         
         """
         ...
     def inData(self) -> bool:
         """
-            Acknowledge data parsing has started.
+        Acknowledge data parsing has started.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: inData in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def inHeader(self) -> bool:
         """
-            Acknowledge header parsing has started.
+        Acknowledge header parsing has started.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: inHeader in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def inMetadata(self) -> bool:
         """
-            Acknowledge metada parsing has started.
+        Acknowledge metada parsing has started.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: inMetadata in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
-    def parse(self, dataSource: org.orekit.data.DataSource) -> Oem:
+    def parse(self, source: org.orekit.data.DataSource) -> Oem:
         """
-            Parse an ephemeris file from a data source.
+        Parse an ephemeris file from a data source.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFileParser.parse` in
-                interface :class:`~org.orekit.files.general.EphemerisFileParser`
+        Specified by: parse in interface EphemerisFileParser
         
-            Parameters:
-                source (:class:`~org.orekit.data.DataSource`): source providing the data to parse
+        Parameters:
+            source (DataSource): source providing the data to parse
         
-            Returns:
-                a parsed ephemeris file.
+        Returns:
+            a parsed ephemeris file.
         
         
         """
         ...
     def prepareData(self) -> bool:
         """
-            Prepare data for parsing.
+        Prepare data for parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: prepareData in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def prepareHeader(self) -> bool:
         """
-            Prepare header for parsing.
+        Prepare header for parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: prepareHeader in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def prepareMetadata(self) -> bool:
         """
-            Prepare metadata for parsing.
+        Prepare metadata for parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata` in
-                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+        Specified by: prepareMetadata in class AbstractConstituentParser
         
-            Returns:
-                true if parser was able to perform the action
+        Returns:
+            true if parser was able to perform the action
         
         
         """
         ...
     def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None:
         """
-            Reset parser to initial state before parsing.
+        Reset parser to initial state before parsing.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.reset` in
-                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+        Specified by: reset in interface MessageParser
         
-            Parameters:
-                fileFormat (:class:`~org.orekit.files.ccsds.utils.FileFormat`): format of the file ready to be parsed
+        Parameters:
+            fileFormat (FileFormat): format of the file ready to be parsed
         
         
         """
@@ -633,72 +665,86 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
 
 class OemSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, 'OemSegment']):
     """
-    public class OemSatelliteEphemeris extends :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`>
+    OEM ephemeris blocks for a single satellite.
     
-        OEM ephemeris blocks for a single satellite.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, string: str, double: float, list: java.util.List['OemSegment']): ...
+    def __init__(self, id: str, mu: float, blocks: java.util.List['OemSegment']):
+        """
+        Create a container for the set of ephemeris blocks in the file that pertain to a single satellite.
+        
+        Parameters:
+            id (String): id of the satellite.
+            mu (double): gravitational coefficient to use for building Cartesian/Keplerian orbits
+            blocks (List<OemSegment> blocks): containing ephemeris data for the satellite.
+        
+        
+        """
+        ...
     def getId(self) -> str:
         """
-            Get the satellite ID. The satellite ID is unique only within the same ephemeris file.
+        Get the satellite ID. The satellite ID is unique only within the same ephemeris file.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getId` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+        Specified by: getId in interface SatelliteEphemeris
         
-            Returns:
-                the satellite's ID, never :code:`null`.
+        Returns:
+            the satellite's ID, never null.
         
         
         """
         ...
     def getMu(self) -> float:
         """
-            Get the standard gravitational parameter for the satellite.
+        Get the standard gravitational parameter for the satellite.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getMu` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+        Specified by: getMu in interface SatelliteEphemeris
         
-            Returns:
-                the gravitational parameter used in :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getPropagator`, in
-                m³/s².
+        Returns:
+            the gravitational parameter used in getPropagator, in
+            m³/s².
         
         
         """
         ...
-    def getSegments(self) -> java.util.List['OemSegment']: ...
+    def getSegments(self) -> java.util.List['OemSegment']:
+        """
+        Get the segments of the ephemeris.
+        
+        Ephemeris segments are typically used to split an ephemeris around discontinuous events, such as maneuvers.
+        
+        Specified by: getSegments in interface SatelliteEphemeris
+        
+        Returns:
+            the segments contained in the ephemeris file for this satellite.
+        
+        
+        """
+        ...
     def getStart(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the start date of the ephemeris.
+        Get the start date of the ephemeris.
         
-            The date returned by this method is equivalent to :code:`getPropagator().getMinDate()`.
+        The date returned by this method is equivalent to getMinDate().
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getStart` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+        Specified by: getStart in interface SatelliteEphemeris
         
-            Returns:
-                ephemeris start date.
+        Returns:
+            ephemeris start date.
         
         
         """
         ...
     def getStop(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the end date of the ephemeris.
+        Get the end date of the ephemeris.
         
-            The date returned by this method is equivalent to :code:`getPropagator().getMaxDate()`.
+        The date returned by this method is equivalent to getMaxDate().
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getStop` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+        Specified by: getStop in interface SatelliteEphemeris
         
-            Returns:
-                ephemeris end date.
+        Returns:
+            ephemeris end date.
         
         
         """
@@ -706,129 +752,137 @@ class OemSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphe
 
 class OemSegment(org.orekit.files.ccsds.section.Segment[OemMetadata, OemData], org.orekit.files.general.EphemerisFile.EphemerisSegment[org.orekit.utils.TimeStampedPVCoordinates]):
     """
-    public class OemSegment extends :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.oem.OemMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemData`> implements :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`>
-    
-        The Ephemerides Blocks class contain metadata, the list of ephemerides data lines and optional covariance matrices (and
-        their metadata). The reason for which the ephemerides have been separated into blocks is that the ephemerides of two
-        different blocks are not suited for interpolation.
+    The Ephemerides Blocks class contain metadata, the list of ephemerides data lines and optional covariance matrices (and their metadata). The reason for which the ephemerides have been separated into blocks is that the ephemerides of two different blocks are not suited for interpolation.
     """
-    def __init__(self, oemMetadata: OemMetadata, oemData: OemData, double: float): ...
-    def getAvailableDerivatives(self) -> org.orekit.utils.CartesianDerivativesFilter:
+    def __init__(self, metadata: OemMetadata, data: OemData, mu: float):
         """
-            Get which derivatives of position are available in this ephemeris segment.
+        Simple constructor.
         
-            While :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getCoordinates` always returns position, velocity,
-            and acceleration the return value from this method indicates which of those are in the ephemeris file and are actually
-            valid.
-        
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getAvailableDerivatives` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
-        
-            Returns:
-                a value indicating if the file contains velocity and/or acceleration data.
+        Parameters:
+            metadata (OemMetadata): segment metadata
+            data (OemData): segment data
+            mu (double): gravitational parameter in m³/s²
         
         
         """
         ...
-    def getCoordinates(self) -> java.util.List[org.orekit.utils.TimeStampedPVCoordinates]: ...
-    def getCovarianceMatrices(self) -> java.util.List[org.orekit.files.ccsds.ndm.odm.CartesianCovariance]: ...
+    def getAvailableDerivatives(self) -> org.orekit.utils.CartesianDerivativesFilter:
+        """
+        Get which derivatives of position are available in this ephemeris segment.
+        
+        While getCoordinates always returns position, velocity, and acceleration the return value from this method indicates which of those are in the ephemeris file and are actually valid.
+        
+        Specified by: getAvailableDerivatives in interface EphemerisSegment
+        
+        Returns:
+            a value indicating if the file contains velocity and/or acceleration data.
+        
+        
+        """
+        ...
+    def getCoordinates(self) -> java.util.List[org.orekit.utils.TimeStampedPVCoordinates]:
+        """
+        Get the coordinates for this ephemeris segment in getFrame.
+        
+        Specified by: getCoordinates in interface EphemerisSegment
+        
+        Returns:
+            a list of state vectors in chronological order. The coordinates are not necessarily evenly spaced in time. The value of
+            getAvailableDerivatives indicates if the velocity or
+            accelerations were specified in the file. Any position, velocity, or acceleration coordinates that are not specified in
+            the ephemeris file are zero in the returned values.
+        
+        
+        """
+        ...
+    def getCovarianceMatrices(self) -> java.util.List[org.orekit.files.ccsds.ndm.odm.CartesianCovariance]:
+        """
+        Get an unmodifiable view of Covariance Matrices.
+        
+        Returns:
+            unmodifiable view of Covariance Matrices
+        
+        
+        """
+        ...
     def getFrame(self) -> org.orekit.frames.Frame:
         """
-            Get the reference frame for this ephemeris segment. The defining frame for
-            :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getCoordinates`.
+        Get the reference frame for this ephemeris segment. The defining frame for getCoordinates.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getFrame` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getFrame in interface EphemerisSegment
         
-            Returns:
-                the reference frame for this segment. Never :code:`null`.
+        Returns:
+            the reference frame for this segment. Never null.
         
         
         """
         ...
     def getInertialFrame(self) -> org.orekit.frames.Frame:
         """
-            Get the inertial reference frame for this ephemeris segment. Defines the propagation frame for
-            :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getPropagator`.
+        Get the inertial reference frame for this ephemeris segment. Defines the propagation frame for getPropagator.
         
-            The default implementation returns :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getFrame` if it is
-            inertial. Otherwise it returns :meth:`~org.orekit.frames.Frame.getRoot`. Implementors are encouraged to override this
-            default implementation if a more suitable inertial frame is available.
+        The default implementation returns getFrame if it is inertial. Otherwise it returns getRoot. Implementors are encouraged to override this default implementation if a more suitable inertial frame is available.
         
-            This implementation returns :meth:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment.getFrame` if it is
-            :meth:`~org.orekit.frames.Frame.isPseudoInertial`, or its closest :meth:`~org.orekit.frames.Frame.getParent` that is
-            pseudo-inertial.
+        This implementation returns getFrame if it is isPseudoInertial, or its closest getParent that is pseudo-inertial.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getInertialFrame` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getInertialFrame in interface EphemerisSegment
         
-            Returns:
-                an reference frame that is inertial, i.e. :meth:`~org.orekit.frames.Frame.isPseudoInertial` is :code:`true`. May be the
-                same as :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getFrame` if it is inertial.
+        Returns:
+            an reference frame that is inertial, i.e. isPseudoInertial is true. May be the
+            same as getFrame if it is inertial.
         
         
         """
         ...
     def getInterpolationSamples(self) -> int:
         """
-            Get the number of samples to use in interpolation.
+        Get the number of samples to use in interpolation.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getInterpolationSamples` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getInterpolationSamples in interface EphemerisSegment
         
-            Returns:
-                the number of points to use for interpolation.
+        Returns:
+            the number of points to use for interpolation.
         
         
         """
         ...
     def getMu(self) -> float:
         """
-            Get the standard gravitational parameter for the satellite.
+        Get the standard gravitational parameter for the satellite.
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getMu` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getMu in interface EphemerisSegment
         
-            Returns:
-                the gravitational parameter used in :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getPropagator`, in
-                m³/s².
+        Returns:
+            the gravitational parameter used in getPropagator, in
+            m³/s².
         
         
         """
         ...
     def getStart(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the start date of this ephemeris segment.
+        Get the start date of this ephemeris segment.
         
-            The date returned by this method is equivalent to :code:`getPropagator().getMinDate()`.
+        The date returned by this method is equivalent to getMinDate().
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getStart` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getStart in interface EphemerisSegment
         
-            Returns:
-                ephemeris segment start date.
+        Returns:
+            ephemeris segment start date.
         
         
         """
         ...
     def getStop(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the end date of this ephemeris segment.
+        Get the end date of this ephemeris segment.
         
-            The date returned by this method is equivalent to :code:`getPropagator().getMaxDate()`.
+        The date returned by this method is equivalent to getMaxDate().
         
-            Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getStop` in
-                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+        Specified by: getStop in interface EphemerisSegment
         
-            Returns:
-                ephemeris segment end date.
+        Returns:
+            ephemeris segment end date.
         
         
         """
@@ -836,109 +890,104 @@ class OemSegment(org.orekit.files.ccsds.section.Segment[OemMetadata, OemData], o
 
 class OemWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.ndm.odm.OdmHeader, OemSegment, Oem]):
     """
-    public class OemWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmHeader`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.Oem`>
+    A writer for Orbit Ephemeris Message (OEM) files.
     
-        A writer for Orbit Ephemeris Message (OEM) files.
+    Metadata ----------
     
-        Metadata
-    ----------
+    The OEM metadata used by this writer is described in the following table. Many metadata items are optional or have default values so they do not need to be specified. At a minimum the user must supply those values that are required and for which no default exits: OBJECT_NAME, and OBJECT_ID. The usage column in the table indicates where the metadata item is used, either in the OEM header or in the metadata section at the start of an OEM ephemeris segment.
     
+    The TIME_SYSTEM must be constant for the whole file and is used to interpret all dates except CREATION_DATE which is always in UTC. The guessing algorithm is not guaranteed to work so it is recommended to provide values for CENTER_NAME and TIME_SYSTEM to avoid any bugs associated with incorrect guesses.
     
-        The OEM metadata used by this writer is described in the following table. Many metadata items are optional or have
-        default values so they do not need to be specified. At a minimum the user must supply those values that are required and
-        for which no default exits: :meth:`~org.orekit.files.ccsds.ndm.odm.OdmMetadataKey.OBJECT_NAME`, and
-        :meth:`~org.orekit.files.ccsds.ndm.odm.CommonMetadataKey.OBJECT_ID`. The usage column in the table indicates where the
-        metadata item is used, either in the OEM header or in the metadata section at the start of an OEM ephemeris segment.
+    Standardized values for TIME_SYSTEM are GMST, GPS, MET, MRT, SCLK, TAI, TCB, TDB, TT, UT1, and UTC. Standardized values for reference frames are EME2000, GTOD, ICRF, ITRF2000, ITRF-93, ITRF-97, LVLH, RTN, QSW, TOD, TNW, NTW and RSW. Additionally ITRF followed by a four digit year may be used.
     
-        The :meth:`~org.orekit.files.ccsds.section.MetadataKey.TIME_SYSTEM` must be constant for the whole file and is used to
-        interpret all dates except :meth:`~org.orekit.files.ccsds.section.HeaderKey.CREATION_DATE` which is always in
-        :meth:`~org.orekit.files.ccsds.definitions.TimeSystem.UTC`. The guessing algorithm is not guaranteed to work so it is
-        recommended to provide values for :meth:`~org.orekit.files.ccsds.ndm.odm.CommonMetadataKey.CENTER_NAME` and
-        :meth:`~org.orekit.files.ccsds.section.MetadataKey.TIME_SYSTEM` to avoid any bugs associated with incorrect guesses.
+    Since:
+        9.0
     
-        Standardized values for :meth:`~org.orekit.files.ccsds.section.MetadataKey.TIME_SYSTEM` are GMST, GPS, MET, MRT, SCLK,
-        TAI, TCB, TDB, TT, UT1, and UTC. Standardized values for reference frames are EME2000, GTOD, ICRF, ITRF2000, ITRF-93,
-        ITRF-97, LVLH, RTN, QSW, TOD, TNW, NTW and RSW. Additionally ITRF followed by a four digit year may be used.
-    
-        Since:
-            9.0
-    
-        Also see:
-            :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.public.ccsds.org.Pubs.502x0b2c1.pdf`,
-            :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.public.ccsds.org.Pubs.500x0g4.pdf`,
-            :class:`~org.orekit.files.ccsds.ndm.odm.oem.StreamingOemWriter`
+    Also see:
+        pdf,
+        pdf,
+        StreamingOemWriter
     """
     CCSDS_OEM_VERS: typing.ClassVar[float] = ...
     """
-    public static final double CCSDS_OEM_VERS
+    Version number implemented.
     
-        Version number implemented.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     DEFAULT_FILE_NAME: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_FILE_NAME
+    Default file name for error messages.
     
-        Default file name for error messages.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
     KVN_PADDING_WIDTH: typing.ClassVar[int] = ...
     """
-    public static final int KVN_PADDING_WIDTH
+    Padding width for aligning the '=' sign.
     
-        Padding width for aligning the '=' sign.
-    
-        Also see:
-            :meth:`~constant`
+    Also see:
+        constant
     
     
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate): ...
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate):
+        """
+        Constructor used to create a new OEM writer configured with the necessary parameters to successfully fill in all required fields that aren't part of a standard object.
+        
+        If the mandatory header entries are not present (or if header is null), built-in defaults will be used
+        
+        The writer is built from the complete header and partial metadata. The template metadata is used to initialize and independent local copy, that will be updated as new segments are written (with at least the segment start and stop will change, but some other parts may change too). The template argument itself is not changed.
+        
+        Calling this constructor directly is not recommended. Users should rather use buildOemWriter.
+        
+        Parameters:
+            conventions (IERSConventions): IERS Conventions
+            dataContext (DataContext): used to retrieve frames, time scales, etc.
+            missionReferenceDate (AbsoluteDate): reference date for Mission Elapsed Time or Mission Relative Time time systems
+        
+        Since:
+            11.0
+        
+        Also see:
+            DEFAULT_FILE_NAME
+        
+        
+        """
+        ...
 
 class StreamingOemWriter(java.lang.AutoCloseable):
     """
-    public class StreamingOemWriter extends :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.AutoCloseable?is`
+    A writer for OEM files.
     
-        A writer for OEM files.
+    Each instance corresponds to a single OEM file. A new OEM ephemeris segment is started by calling newSegment.
     
-        Each instance corresponds to a single OEM file. A new OEM ephemeris segment is started by calling
-        :meth:`~org.orekit.files.ccsds.ndm.odm.oem.StreamingOemWriter.newSegment`.
+    The segments returned by this class can be used as step handlers for a Propagator.
     
-        The segments returned by this class can be used as step handlers for a :class:`~org.orekit.propagation.Propagator`.
+     Propagator propagator = ...; // pre-configured propagator OEMWriter  aemWriter  = ...; // pre-configured writer try (Generator out = ...;  // set-up output stream StreamingOemWriter sw = new StreamingOemWriter(out, oemWriter, header, metadata)) { // set-up streaming writer
     
-        .. code-block: java
-        
-         Propagator propagator = ...; // pre-configured propagator
-         OEMWriter  aemWriter  = ...; // pre-configured writer
-           try (Generator out = ...;  // set-up output stream
-                StreamingOemWriter sw = new StreamingOemWriter(out, oemWriter, header, metadata)) { // set-up streaming writer
-        
-             // write segment 1
-             propagator.getMultiplexer().add(step, sw.newSegment());
-             propagator.propagate(startDate1, stopDate1);
-        
-             ...
-        
-             // write segment n
-             propagator.getMultiplexer().clear();
-             propagator.getMultiplexer().add(step, sw.newSegment());
-             propagator.propagate(startDateN, stopDateN);
-        
-           }
-         
+         // write segment 1
+         propagator.getMultiplexer().add(step, sw.newSegment());
+         propagator.propagate(startDate1, stopDate1);
     
-        Also see:
-            :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.public.ccsds.org.Pubs.502x0b2c1.pdf`,
-            :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.public.ccsds.org.Pubs.500x0g4.pdf`,
-            :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemWriter`
+         ...
+    
+         // write segment n
+         propagator.getMultiplexer().clear();
+         propagator.getMultiplexer().add(step, sw.newSegment());
+         propagator.propagate(startDateN, stopDateN);
+    
+       }
+     
+    
+    Also see:
+        pdf,
+        pdf,
+        OemWriter
     """
     @typing.overload
     def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, oemWriter: OemWriter, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, oemMetadata: OemMetadata): ...
@@ -946,16 +995,23 @@ class StreamingOemWriter(java.lang.AutoCloseable):
     def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, oemWriter: OemWriter, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, oemMetadata: OemMetadata, boolean: bool): ...
     @typing.overload
     def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, oemWriter: OemWriter, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, oemMetadata: OemMetadata, boolean: bool, boolean2: bool): ...
-    def close(self) -> None: ...
+    def close(self) -> None:
+        """
+        Specified by: AutoCloseable in interface AutoCloseable
+        
+        Raises:
+            IOException: 
+        
+        """
+        ...
     def newSegment(self) -> 'StreamingOemWriter.SegmentWriter':
         """
-            Create a writer for a new OEM ephemeris segment.
+        Create a writer for a new OEM ephemeris segment.
         
-            The returned writer can only write a single ephemeris segment in an OEM. This method must be called to create a writer
-            for each ephemeris segment.
+        The returned writer can only write a single ephemeris segment in an OEM. This method must be called to create a writer for each ephemeris segment.
         
-            Returns:
-                a new OEM segment writer, ready for use.
+        Returns:
+            a new OEM segment writer, ready for use.
         
         
         """

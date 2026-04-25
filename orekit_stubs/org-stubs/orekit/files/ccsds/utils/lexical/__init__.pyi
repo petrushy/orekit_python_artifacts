@@ -24,29 +24,23 @@ import typing
 
 class LexicalAnalyzer:
     """
-    public interface LexicalAnalyzer
+    Interface for CCSDS messages lexical analysis.
     
-        Interface for CCSDS messages lexical analysis.
+    Lexical analyzer implementations split raw streams of characters into tokens and feed them to MessageParser. Each lexical analyzer knows about a basic character stream format (KvnLexicalAnalyzer or XmlLexicalAnalyzer) but knows nothing about the CCSDS messages themselves. The MessageParser know about CCSDS messages.
     
-        Lexical analyzer implementations split raw streams of characters into tokens and feed them to
-        :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`. Each lexical analyzer knows about a basic character stream
-        format (:class:`~org.orekit.files.ccsds.utils.lexical.KvnLexicalAnalyzer` or
-        :class:`~org.orekit.files.ccsds.utils.lexical.XmlLexicalAnalyzer`) but knows nothing about the CCSDS messages
-        themselves. The :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser` know about CCSDS messages.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     _accept__T = typing.TypeVar('_accept__T')  # <T>
     def accept(self, messageParser: 'MessageParser'[_accept__T]) -> _accept__T:
         """
-            Parse a CCSDS Message.
+        Parse a CCSDS Message.
         
-            Parameters:
-                messageParser (:class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`<T> messageParser): CCSDS Message parser to use
+        Parameters:
+            messageParser (MessageParser<T> messageParser): CCSDS Message parser to use
         
-            Returns:
-                parsed fileO
+        Returns:
+            parsed fileO
         
         
         """
@@ -54,90 +48,109 @@ class LexicalAnalyzer:
 
 class LexicalAnalyzerSelector:
     """
-    public class LexicalAnalyzerSelector extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Utility class for selecting either XmlLexicalAnalyzer or KvnLexicalAnalyzer depending on data first bytes.
     
-        Utility class for selecting either :class:`~org.orekit.files.ccsds.utils.lexical.XmlLexicalAnalyzer` or
-        :class:`~org.orekit.files.ccsds.utils.lexical.KvnLexicalAnalyzer` depending on data first bytes.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     @staticmethod
-    def select(dataSource: org.orekit.data.DataSource) -> LexicalAnalyzer: ...
+    def select(source: org.orekit.data.DataSource) -> LexicalAnalyzer:
+        """
+        Select a LexicalAnalyzer for a DataSource based on content.
+        
+        Parameters:
+            source (DataSource): data source to analyze
+        
+        Returns:
+            lexical analyzer suited for the data source format
+        
+        Raises:
+            IOException: if first bytes of source cannot be read
+        
+        
+        """
+        ...
 
 _MessageParser__T = typing.TypeVar('_MessageParser__T')  # <T>
 class MessageParser(typing.Generic[_MessageParser__T]):
     """
-    public interface MessageParser<T>
+    Parser for CCSDS messages.
     
-        Parser for CCSDS messages.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
     def build(self) -> _MessageParser__T:
         """
-            Build the file from parsed entries.
+        Build the file from parsed entries.
         
-            Returns:
-                parsed file
+        Returns:
+            parsed file
         
         
         """
         ...
     def getFileFormat(self) -> org.orekit.files.ccsds.utils.FileFormat:
         """
-            Get the file format of the last message parsed.
+        Get the file format of the last message parsed.
         
-            Returns:
-                file format of the last message parsed
+        Returns:
+            file format of the last message parsed
         
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
     def getFormatVersionKey(self) -> str:
         """
-            Get the key for format version.
+        Get the key for format version.
         
-            Returns:
-                format version key
-        
-        
-        """
-        ...
-    def getSpecialXmlElementsBuilders(self) -> java.util.Map[str, 'XmlTokenBuilder']: ...
-    def parseMessage(self, dataSource: org.orekit.data.DataSource) -> _MessageParser__T:
-        """
-            Parse a data source.
-        
-            Parameters:
-                source (:class:`~org.orekit.data.DataSource`): data source to parse
-        
-            Returns:
-                parsed file
+        Returns:
+            format version key
         
         
         """
         ...
-    def process(self, parseToken: 'ParseToken') -> None:
+    def getSpecialXmlElementsBuilders(self) -> java.util.Map[str, 'XmlTokenBuilder']:
         """
-            Process a parse token.
+        Get the non-default token builders for special XML elements.
         
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
+        Returns:
+            map of token builders for special XML elements (keyed by XML element name)
+        
+        
+        """
+        ...
+    def parseMessage(self, source: org.orekit.data.DataSource) -> _MessageParser__T:
+        """
+        Parse a data source.
+        
+        Parameters:
+            source (DataSource): data source to parse
+        
+        Returns:
+            parsed file
+        
+        
+        """
+        ...
+    def process(self, token: 'ParseToken') -> None:
+        """
+        Process a parse token.
+        
+        Parameters:
+            token (ParseToken): token to process
         
         
         """
         ...
     def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None:
         """
-            Reset parser to initial state before parsing.
+        Reset parser to initial state before parsing.
         
-            Parameters:
-                fileFormat (:class:`~org.orekit.files.ccsds.utils.FileFormat`): format of the file ready to be parsed
+        Parameters:
+            fileFormat (FileFormat): format of the file ready to be parsed
         
         
         """
@@ -147,655 +160,698 @@ _ParseToken__EnumConsumer__T = typing.TypeVar('_ParseToken__EnumConsumer__T', bo
 _ParseToken__EnumListConsumer__T = typing.TypeVar('_ParseToken__EnumListConsumer__T', bound=java.lang.Enum)  # <T>
 class ParseToken:
     """
-    public class ParseToken extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    Token occurring during CCSDS file parsing.
     
-        Token occurring during CCSDS file parsing.
+    Parse tokens correspond to:
     
-        Parse tokens correspond to:
-    
-          - bloc or entry start
-          - entry content
-          - bloc or entry end
-          - raw lines
+      - bloc or entry start
+      - entry content
+      - bloc or entry end
+      - raw lines
     
     
-        Since:
-            11.0
+    Since:
+        11.0
     
-        Also see:
-            :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+    Also see:
+        MessageParser
     """
-    def __init__(self, tokenType: 'TokenType', string: str, string2: str, unit: org.orekit.utils.units.Unit, int: int, string3: str): ...
-    def generateException(self, exception: java.lang.Exception) -> org.orekit.errors.OrekitException:
+    def __init__(self, type: 'TokenType', name: str, content: str, units: org.orekit.utils.units.Unit, lineNumber: int, fileName: str):
         """
-            Generate a parse exception for this entry.
+        Simple constructor.
         
-            Parameters:
-                cause (:class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Exception?is`): underlying cause exception (may be null)
+        Parameters:
+            type (TokenType): type of the token
+            name (String): name of the block or entry
+            content (String): entry content
+            units (Unit): units of the entry
+            lineNumber (int): number of the line in the CCSDS data message
+            fileName (String): name of the file
         
-            Returns:
-                exception for this entry
+        
+        """
+        ...
+    def generateException(self, cause: java.lang.Exception) -> org.orekit.errors.OrekitException:
+        """
+        Generate a parse exception for this entry.
+        
+        Parameters:
+            cause (Exception): underlying cause exception (may be null)
+        
+        Returns:
+            exception for this entry
         
         
         """
         ...
     def getContentAsBoolean(self) -> bool:
         """
-            Get the content of the entry as a boolean.
+        Get the content of the entry as a boolean.
         
-            Returns:
-                content as a boolean
+        Returns:
+            content as a boolean
         
         
         """
         ...
     def getContentAsDouble(self) -> float:
         """
-            Get the content of the entry as a double.
+        Get the content of the entry as a double.
         
-            Returns:
-                content as a double
+        Returns:
+            content as a double
         
         
         """
         ...
     _getContentAsEnum__T = typing.TypeVar('_getContentAsEnum__T', bound=java.lang.Enum)  # <T>
-    def getContentAsEnum(self, class_: typing.Type[_getContentAsEnum__T]) -> _getContentAsEnum__T:
+    def getContentAsEnum(self, cls: typing.Type[_getContentAsEnum__T]) -> _getContentAsEnum__T:
         """
-            Get the content of the entry as an enum.
+        Get the content of the entry as an enum.
         
-            Parameters:
-                cls (:class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Class?is`<T> cls): enum class
+        Parameters:
+            cls (Class<T> cls): enum class
         
-            Returns:
-                entry content
+        Returns:
+            entry content
         
         
         """
         ...
     _getContentAsEnumList__T = typing.TypeVar('_getContentAsEnumList__T', bound=java.lang.Enum)  # <T>
-    def getContentAsEnumList(self, class_: typing.Type[_getContentAsEnumList__T]) -> java.util.List[_getContentAsEnumList__T]:
+    def getContentAsEnumList(self, cls: typing.Type[_getContentAsEnumList__T]) -> java.util.List[_getContentAsEnumList__T]:
         """
-            Get the content of the entry as a list of enum.
+        Get the content of the entry as a list of enum.
         
-            Parameters:
-                cls (:class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Class?is`<T> cls): enum class
+        Parameters:
+            cls (Class<T> cls): enum class
         
-            Returns:
-                entry content
+        Returns:
+            entry content
         
         
         """
         ...
-    def getContentAsFreeTextList(self) -> java.util.List[str]: ...
+    def getContentAsFreeTextList(self) -> java.util.List[str]:
+        """
+        Get the content of the entry as a list of free-text strings.
+        
+        Returns:
+            content of the entry as a list of free-test strings
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
     def getContentAsInt(self) -> int:
         """
-            Get the content of the entry as an integer.
+        Get the content of the entry as an integer.
         
-            Returns:
-                content as an integer
+        Returns:
+            content as an integer
         
         
         """
         ...
-    def getContentAsNormalizedList(self) -> java.util.List[str]: ...
+    def getContentAsNormalizedList(self) -> java.util.List[str]:
+        """
+        Get the content of the entry as a list of normalized strings.
+        
+        Normalization is performed by replacing all occurrences of '_' with space, and collapsing several spaces as one space only.
+        
+        Returns:
+            content of the entry as a list of free-test strings
+        
+        
+        """
+        ...
     def getContentAsNormalizedString(self) -> str:
         """
-            Get the content of the entry.
+        Get the content of the entry.
         
-            Free-text strings are normalized by replacing all occurrences of '_' with space, and collapsing several spaces as one
-            space only.
+        Free-text strings are normalized by replacing all occurrences of '_' with space, and collapsing several spaces as one space only.
         
-            Returns:
-                entry content
+        Returns:
+            entry content
         
         
         """
         ...
     def getContentAsUppercaseCharacter(self) -> str:
         """
-            Get the content of the entry as an uppercase character.
+        Get the content of the entry as an uppercase character.
         
-            Returns:
-                content as an uppercase character
+        Returns:
+            content as an uppercase character
         
         
         """
         ...
-    def getContentAsUppercaseList(self) -> java.util.List[str]: ...
+    def getContentAsUppercaseList(self) -> java.util.List[str]:
+        """
+        Get the content of the entry as a list of normalized and uppercased strings.
+        
+        Returns:
+            content of the entry as a list of normalized and uppercased strings
+        
+        
+        """
+        ...
     def getContentAsUppercaseString(self) -> str:
         """
-            Get the content of the entry as normalized and uppercased.
+        Get the content of the entry as normalized and uppercased.
         
-            Returns:
-                entry normalized and uppercased content
+        Returns:
+            entry normalized and uppercased content
         
         
         """
         ...
     def getContentAsVector(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get the content of the entry as a vector.
+        Get the content of the entry as a vector.
         
-            Returns:
-                content as a vector
+        Returns:
+            content as a vector
         
         
         """
         ...
     def getFileName(self) -> str:
         """
-            Get the name of the file.
+        Get the name of the file.
         
-            Returns:
-                name of the file
+        Returns:
+            name of the file
         
         
         """
         ...
     def getLineNumber(self) -> int:
         """
-            Get the number of the line in the CCSDS data message.
+        Get the number of the line in the CCSDS data message.
         
-            Returns:
-                number of the line in the CCSDS data message
+        Returns:
+            number of the line in the CCSDS data message
         
         
         """
         ...
     def getName(self) -> str:
         """
-            Get the name of the block or entry.
+        Get the name of the block or entry.
         
-            Returns:
-                name of the block or entry
+        Returns:
+            name of the block or entry
         
         
         """
         ...
     def getRawContent(self) -> str:
         """
-            Get the raw content of the entry.
+        Get the raw content of the entry.
         
-            Returns:
-                entry raw content
+        Returns:
+            entry raw content
         
         
         """
         ...
     def getType(self) -> 'TokenType':
         """
-            Get the type of the token.
+        Get the type of the token.
         
-            Returns:
-                type of the token
+        Returns:
+            type of the token
         
         
         """
         ...
     def getUnits(self) -> org.orekit.utils.units.Unit:
         """
-            Get the units.
+        Get the units.
         
-            Returns:
-                units of the entry (may be null)
-        
-        
-        """
-        ...
-    def processAsBoolean(self, booleanConsumer: typing.Union['ParseToken.BooleanConsumer', typing.Callable]) -> bool:
-        """
-            Process the content as a boolean.
-        
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.BooleanConsumer`): consumer of the boolean
-        
-            Returns:
-                always returns :code:`true`
+        Returns:
+            units of the entry (may be null)
         
         
         """
         ...
-    def processAsCenter(self, centerConsumer: typing.Union['ParseToken.CenterConsumer', typing.Callable], celestialBodies: org.orekit.bodies.CelestialBodies) -> bool:
+    def processAsBoolean(self, consumer: typing.Union['ParseToken.BooleanConsumer', typing.Callable]) -> bool:
         """
-            Process the content as a body center.
+        Process the content as a boolean.
         
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.CenterConsumer`): consumer of the body center
-                celestialBodies (:class:`~org.orekit.bodies.CelestialBodies`): factory for celestial bodies
+        Parameters:
+            consumer (BooleanConsumer): consumer of the boolean
         
-            Returns:
-                always returns :code:`true`
-        
-        
-        """
-        ...
-    def processAsCenterList(self, centerListConsumer: typing.Union['ParseToken.CenterListConsumer', typing.Callable], celestialBodies: org.orekit.bodies.CelestialBodies) -> bool:
-        """
-            Process the content as a body center list.
-        
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.CenterListConsumer`): consumer of the body center list
-                celestialBodies (:class:`~org.orekit.bodies.CelestialBodies`): factory for celestial bodies
-        
-            Returns:
-                always returns :code:`true`
+        Returns:
+            always returns true
         
         
         """
         ...
-    def processAsDate(self, dateConsumer: typing.Union['ParseToken.DateConsumer', typing.Callable], contextBinding: org.orekit.files.ccsds.utils.ContextBinding) -> bool:
+    def processAsCenter(self, consumer: typing.Union['ParseToken.CenterConsumer', typing.Callable], celestialBodies: org.orekit.bodies.CelestialBodies) -> bool:
         """
-            Process the content as a date.
+        Process the content as a body center.
         
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.DateConsumer`): consumer of the date
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
+        Parameters:
+            consumer (CenterConsumer): consumer of the body center
+            celestialBodies (CelestialBodies): factory for celestial bodies
         
-            Returns:
-                always returns :code:`true` (or throws an exception)
-        
-        
-        """
-        ...
-    def processAsDouble(self, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, doubleConsumer: typing.Union['ParseToken.DoubleConsumer', typing.Callable]) -> bool:
-        """
-            Process the content as a double.
-        
-            Parameters:
-                standard (:class:`~org.orekit.utils.units.Unit`): units of parsed content as specified by CCSDS standard
-                behavior (:class:`~org.orekit.files.ccsds.ndm.ParsedUnitsBehavior`): behavior to adopt for parsed unit
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.DoubleConsumer`): consumer of the double
-        
-            Returns:
-                always returns :code:`true`
+        Returns:
+            always returns true
         
         
         """
         ...
-    def processAsDoubleArray(self, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, doubleArrayConsumer: typing.Union['ParseToken.DoubleArrayConsumer', typing.Callable]) -> bool:
+    def processAsCenterList(self, consumer: typing.Union['ParseToken.CenterListConsumer', typing.Callable], celestialBodies: org.orekit.bodies.CelestialBodies) -> bool:
         """
-            Process the content as an array of doubles.
+        Process the content as a body center list.
         
-            Parameters:
-                standard (:class:`~org.orekit.utils.units.Unit`): units of parsed content as specified by CCSDS standard
-                behavior (:class:`~org.orekit.files.ccsds.ndm.ParsedUnitsBehavior`): behavior to adopt for parsed unit
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.DoubleArrayConsumer`): consumer of the array
+        Parameters:
+            consumer (CenterListConsumer): consumer of the body center list
+            celestialBodies (CelestialBodies): factory for celestial bodies
         
-            Returns:
-                always returns :code:`true`
-        
-            Since:
-                12.0
+        Returns:
+            always returns true
         
         
         """
         ...
-    def processAsDoublyIndexedDouble(self, int: int, int2: int, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, doublyIndexedDoubleConsumer: typing.Union['ParseToken.DoublyIndexedDoubleConsumer', typing.Callable]) -> bool:
+    def processAsDate(self, consumer: typing.Union['ParseToken.DateConsumer', typing.Callable], context: org.orekit.files.ccsds.utils.ContextBinding) -> bool:
         """
-            Process the content as a doubly-indexed double.
+        Process the content as a date.
         
-            Parameters:
-                i (int): first index
-                j (int): second index
-                standard (:class:`~org.orekit.utils.units.Unit`): units of parsed content as specified by CCSDS standard
-                behavior (:class:`~org.orekit.files.ccsds.ndm.ParsedUnitsBehavior`): behavior to adopt for parsed unit
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.DoublyIndexedDoubleConsumer`): consumer of the doubly-indexed double
+        Parameters:
+            consumer (DateConsumer): consumer of the date
+            context (ContextBinding): context binding
         
-            Returns:
-                always returns :code:`true`
+        Returns:
+            always returns true (or throws an exception)
+        
+        
+        """
+        ...
+    def processAsDouble(self, standard: org.orekit.utils.units.Unit, behavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, consumer: typing.Union['ParseToken.DoubleConsumer', typing.Callable]) -> bool:
+        """
+        Process the content as a double.
+        
+        Parameters:
+            standard (Unit): units of parsed content as specified by CCSDS standard
+            behavior (ParsedUnitsBehavior): behavior to adopt for parsed unit
+            consumer (DoubleConsumer): consumer of the double
+        
+        Returns:
+            always returns true
+        
+        
+        """
+        ...
+    def processAsDoubleArray(self, standard: org.orekit.utils.units.Unit, behavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, consumer: typing.Union['ParseToken.DoubleArrayConsumer', typing.Callable]) -> bool:
+        """
+        Process the content as an array of doubles.
+        
+        Parameters:
+            standard (Unit): units of parsed content as specified by CCSDS standard
+            behavior (ParsedUnitsBehavior): behavior to adopt for parsed unit
+            consumer (DoubleArrayConsumer): consumer of the array
+        
+        Returns:
+            always returns true
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
+    def processAsDoublyIndexedDouble(self, i: int, j: int, standard: org.orekit.utils.units.Unit, behavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, consumer: typing.Union['ParseToken.DoublyIndexedDoubleConsumer', typing.Callable]) -> bool:
+        """
+        Process the content as a doubly-indexed double.
+        
+        Parameters:
+            i (int): first index
+            j (int): second index
+            standard (Unit): units of parsed content as specified by CCSDS standard
+            behavior (ParsedUnitsBehavior): behavior to adopt for parsed unit
+            consumer (DoublyIndexedDoubleConsumer): consumer of the doubly-indexed double
+        
+        Returns:
+            always returns true
         
         
         """
         ...
     _processAsEnum__T = typing.TypeVar('_processAsEnum__T', bound=java.lang.Enum)  # <T>
-    def processAsEnum(self, class_: typing.Type[_processAsEnum__T], enumConsumer: typing.Union['ParseToken.EnumConsumer'[_processAsEnum__T], typing.Callable[[_processAsEnum__T], None]]) -> bool:
+    def processAsEnum(self, cls: typing.Type[_processAsEnum__T], consumer: typing.Union['ParseToken.EnumConsumer'[_processAsEnum__T], typing.Callable[[_processAsEnum__T], None]]) -> bool:
         """
-            Process the content as an enum.
+        Process the content as an enum.
         
-            Parameters:
-                cls (:class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Class?is`<T> cls): enum class
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.EnumConsumer`<T> consumer): consumer of the enum
+        Parameters:
+            cls (Class<T> cls): enum class
+            consumer (EnumConsumer<T> consumer): consumer of the enum
         
-            Returns:
-                always returns :code:`true`
+        Returns:
+            always returns true
         
         
         """
         ...
     _processAsEnumsList__T = typing.TypeVar('_processAsEnumsList__T', bound=java.lang.Enum)  # <T>
-    def processAsEnumsList(self, class_: typing.Type[_processAsEnumsList__T], enumListConsumer: typing.Union['ParseToken.EnumListConsumer'[_processAsEnumsList__T], typing.Callable[[java.util.List[java.lang.Enum]], None]]) -> bool:
+    def processAsEnumsList(self, cls: typing.Type[_processAsEnumsList__T], consumer: typing.Union['ParseToken.EnumListConsumer'[_processAsEnumsList__T], typing.Callable[[java.util.List[java.lang.Enum]], None]]) -> bool:
         """
-            Process the content as a list of enums.
+        Process the content as a list of enums.
         
-            Parameters:
-                cls (:class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Class?is`<T> cls): enum class
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.EnumListConsumer`<T> consumer): consumer of the enums list
+        Parameters:
+            cls (Class<T> cls): enum class
+            consumer (EnumListConsumer<T> consumer): consumer of the enums list
         
-            Returns:
-                always returns :code:`true`
-        
-        
-        """
-        ...
-    def processAsFrame(self, frameConsumer: typing.Union['ParseToken.FrameConsumer', typing.Callable], contextBinding: org.orekit.files.ccsds.utils.ContextBinding, boolean: bool, boolean2: bool, boolean3: bool) -> bool:
-        """
-            Process the content as a frame.
-        
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.FrameConsumer`): consumer of the frame
-                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                allowCelestial (boolean): if true, :class:`~org.orekit.files.ccsds.definitions.CelestialBodyFrame` are allowed
-                allowOrbit (boolean): if true, :class:`~org.orekit.files.ccsds.definitions.OrbitRelativeFrame` are allowed
-                allowSpacecraft (boolean): if true, :class:`~org.orekit.files.ccsds.definitions.SpacecraftBodyFrame` are allowed
-        
-            Returns:
-                always returns :code:`true`
+        Returns:
+            always returns true
         
         
         """
         ...
-    def processAsFreeTextList(self, stringListConsumer: typing.Union['ParseToken.StringListConsumer', typing.Callable]) -> bool:
+    def processAsFrame(self, consumer: typing.Union['ParseToken.FrameConsumer', typing.Callable], context: org.orekit.files.ccsds.utils.ContextBinding, allowCelestial: bool, allowOrbit: bool, allowSpacecraft: bool) -> bool:
         """
-            Process the content as a list of free-text strings.
+        Process the content as a frame.
         
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.StringListConsumer`): consumer of the free-text strings list
+        Parameters:
+            consumer (FrameConsumer): consumer of the frame
+            context (ContextBinding): context binding
+            allowCelestial (boolean): if true, CelestialBodyFrame are allowed
+            allowOrbit (boolean): if true, OrbitRelativeFrame are allowed
+            allowSpacecraft (boolean): if true, SpacecraftBodyFrame are allowed
         
-            Returns:
-                always returns :code:`true`
-        
-            Since:
-                12.0
-        
-        
-        """
-        ...
-    def processAsFreeTextString(self, stringConsumer: typing.Union['ParseToken.StringConsumer', typing.Callable]) -> bool:
-        """
-            Process the content as free text string.
-        
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.StringConsumer`): consumer of the string
-        
-            Returns:
-                always returns :code:`true`
+        Returns:
+            always returns true
         
         
         """
         ...
-    def processAsIndexedDouble(self, int: int, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, indexedDoubleConsumer: typing.Union['ParseToken.IndexedDoubleConsumer', typing.Callable]) -> bool:
+    def processAsFreeTextList(self, consumer: typing.Union['ParseToken.StringListConsumer', typing.Callable]) -> bool:
         """
-            Process the content as an indexed double.
+        Process the content as a list of free-text strings.
         
-            Parameters:
-                i (int): index
-                standard (:class:`~org.orekit.utils.units.Unit`): units of parsed content as specified by CCSDS standard
-                behavior (:class:`~org.orekit.files.ccsds.ndm.ParsedUnitsBehavior`): behavior to adopt for parsed unit
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.IndexedDoubleConsumer`): consumer of the indexed double
+        Parameters:
+            consumer (StringListConsumer): consumer of the free-text strings list
         
-            Returns:
-                always returns :code:`true`
+        Returns:
+            always returns true
         
-        
-        """
-        ...
-    def processAsIndexedDoubleArray(self, int: int, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, indexedDoubleArrayConsumer: typing.Union['ParseToken.IndexedDoubleArrayConsumer', typing.Callable]) -> bool:
-        """
-            Process the content as an indexed double array.
-        
-            Parameters:
-                index (int): index
-                standard (:class:`~org.orekit.utils.units.Unit`): units of parsed content as specified by CCSDS standard
-                behavior (:class:`~org.orekit.files.ccsds.ndm.ParsedUnitsBehavior`): behavior to adopt for parsed unit
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.IndexedDoubleArrayConsumer`): consumer of the indexed double array
-        
-            Returns:
-                always returns :code:`true`
-        
-            Since:
-                12.0
+        Since:
+            12.0
         
         
         """
         ...
-    def processAsIndexedInteger(self, int: int, indexedIntConsumer: typing.Union['ParseToken.IndexedIntConsumer', typing.Callable]) -> bool:
+    def processAsFreeTextString(self, consumer: typing.Union['ParseToken.StringConsumer', typing.Callable]) -> bool:
         """
-            Process the content as an indexed integer.
+        Process the content as free text string.
         
-            Parameters:
-                index (int): index
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.IndexedIntConsumer`): consumer of the integer
+        Parameters:
+            consumer (StringConsumer): consumer of the string
         
-            Returns:
-                always returns :code:`true`
-        
-            Since:
-                12.0
+        Returns:
+            always returns true
         
         
         """
         ...
-    def processAsIndexedNormalizedString(self, int: int, indexedStringConsumer: typing.Union['ParseToken.IndexedStringConsumer', typing.Callable]) -> bool:
+    def processAsIndexedDouble(self, i: int, standard: org.orekit.utils.units.Unit, behavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, consumer: typing.Union['ParseToken.IndexedDoubleConsumer', typing.Callable]) -> bool:
         """
-            Process the content as an indexed normalized string.
+        Process the content as an indexed double.
         
-            Parameters:
-                index (int): index
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.IndexedStringConsumer`): consumer of the indexed normalized string
+        Parameters:
+            i (int): index
+            standard (Unit): units of parsed content as specified by CCSDS standard
+            behavior (ParsedUnitsBehavior): behavior to adopt for parsed unit
+            consumer (IndexedDoubleConsumer): consumer of the indexed double
         
-            Returns:
-                always returns :code:`true`
-        
-        
-        """
-        ...
-    def processAsIndexedUppercaseString(self, int: int, indexedStringConsumer: typing.Union['ParseToken.IndexedStringConsumer', typing.Callable]) -> bool:
-        """
-            Process the content as an indexed normalized uppercase string.
-        
-            Parameters:
-                index (int): index
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.IndexedStringConsumer`): consumer of the indexed normalized uppercase string
-        
-            Returns:
-                always returns :code:`true`
+        Returns:
+            always returns true
         
         
         """
         ...
-    def processAsInteger(self, intConsumer: typing.Union['ParseToken.IntConsumer', typing.Callable]) -> bool:
+    def processAsIndexedDoubleArray(self, index: int, standard: org.orekit.utils.units.Unit, behavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, consumer: typing.Union['ParseToken.IndexedDoubleArrayConsumer', typing.Callable]) -> bool:
         """
-            Process the content as an integer.
+        Process the content as an indexed double array.
         
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.IntConsumer`): consumer of the integer
+        Parameters:
+            index (int): index
+            standard (Unit): units of parsed content as specified by CCSDS standard
+            behavior (ParsedUnitsBehavior): behavior to adopt for parsed unit
+            consumer (IndexedDoubleArrayConsumer): consumer of the indexed double array
         
-            Returns:
-                always returns :code:`true`
+        Returns:
+            always returns true
         
-        
-        """
-        ...
-    def processAsIntegerArray(self, integerArrayConsumer: typing.Union['ParseToken.IntegerArrayConsumer', typing.Callable]) -> bool:
-        """
-            Process the content as an array of integers. Spaces are replaced by commas.
-        
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.IntegerArrayConsumer`): consumer of the array
-        
-            Returns:
-                always returns :code:`true`
+        Since:
+            12.0
         
         
         """
         ...
-    def processAsIntegerArrayNoSpace(self, integerArrayConsumer: typing.Union['ParseToken.IntegerArrayConsumer', typing.Callable]) -> bool:
+    def processAsIndexedInteger(self, index: int, consumer: typing.Union['ParseToken.IndexedIntConsumer', typing.Callable]) -> bool:
         """
-            Process the content as an array of integers. No spaces between commas are allowed.
+        Process the content as an indexed integer.
         
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.IntegerArrayConsumer`): consumer of the array
+        Parameters:
+            index (int): index
+            consumer (IndexedIntConsumer): consumer of the integer
         
-            Returns:
-                always returns :code:`true`
+        Returns:
+            always returns true
         
-        
-        """
-        ...
-    def processAsLabeledDouble(self, char: str, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, labeledDoubleConsumer: typing.Union['ParseToken.LabeledDoubleConsumer', typing.Callable]) -> bool:
-        """
-            Process the content as a labeled double.
-        
-            Parameters:
-                label (char): label
-                standard (:class:`~org.orekit.utils.units.Unit`): units of parsed content as specified by CCSDS standard
-                behavior (:class:`~org.orekit.files.ccsds.ndm.ParsedUnitsBehavior`): behavior to adopt for parsed unit
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.LabeledDoubleConsumer`): consumer of the indexed double
-        
-            Returns:
-                always returns :code:`true`
+        Since:
+            12.0
         
         
         """
         ...
-    def processAsManeuvrableEnum(self, maneuvrableConsumer: typing.Union['ParseToken.ManeuvrableConsumer', typing.Callable]) -> bool:
+    def processAsIndexedNormalizedString(self, index: int, consumer: typing.Union['ParseToken.IndexedStringConsumer', typing.Callable]) -> bool:
         """
-            Process the content of the Maneuvrable enum.
+        Process the content as an indexed normalized string.
         
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.ManeuvrableConsumer`): consumer of the enum
+        Parameters:
+            index (int): index
+            consumer (IndexedStringConsumer): consumer of the indexed normalized string
         
-            Returns:
-                always returns :code:`true`
-        
-        
-        """
-        ...
-    def processAsNormalizedCharacter(self, charConsumer: typing.Union['ParseToken.CharConsumer', typing.Callable]) -> bool:
-        """
-            Process the content as a normalized character.
-        
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.CharConsumer`): consumer of the normalized character
-        
-            Returns:
-                always returns :code:`true`
+        Returns:
+            always returns true
         
         
         """
         ...
-    def processAsNormalizedList(self, stringListConsumer: typing.Union['ParseToken.StringListConsumer', typing.Callable]) -> bool:
+    def processAsIndexedUppercaseString(self, index: int, consumer: typing.Union['ParseToken.IndexedStringConsumer', typing.Callable]) -> bool:
         """
-            Process the content as a list of normalized strings.
+        Process the content as an indexed normalized uppercase string.
         
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.StringListConsumer`): consumer of the normalized strings list
+        Parameters:
+            index (int): index
+            consumer (IndexedStringConsumer): consumer of the indexed normalized uppercase string
         
-            Returns:
-                always returns :code:`true`
-        
-        
-        """
-        ...
-    def processAsNormalizedString(self, stringConsumer: typing.Union['ParseToken.StringConsumer', typing.Callable]) -> bool:
-        """
-            Process the content as a normalized string.
-        
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.StringConsumer`): consumer of the normalized string
-        
-            Returns:
-                always returns :code:`true`
-        
-            Also see:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.ParseToken.processAsUppercaseString`
+        Returns:
+            always returns true
         
         
         """
         ...
-    def processAsRotationOrder(self, rotationOrderConsumer: typing.Union['ParseToken.RotationOrderConsumer', typing.Callable]) -> bool:
+    def processAsInteger(self, consumer: typing.Union['ParseToken.IntConsumer', typing.Callable]) -> bool:
         """
-            Process the content as a rotation sequence.
+        Process the content as an integer.
         
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.RotationOrderConsumer`): consumer of the rotation sequence
+        Parameters:
+            consumer (IntConsumer): consumer of the integer
         
-            Returns:
-                always returns :code:`true`
-        
-            Since:
-                12.0
+        Returns:
+            always returns true
         
         
         """
         ...
-    def processAsTimeSystem(self, timeSystemConsumer: typing.Union['ParseToken.TimeSystemConsumer', typing.Callable]) -> bool:
+    def processAsIntegerArray(self, consumer: typing.Union['ParseToken.IntegerArrayConsumer', typing.Callable]) -> bool:
         """
-            Process the content as a time system.
+        Process the content as an array of integers. Spaces are replaced by commas.
         
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.TimeSystemConsumer`): consumer of the time system
+        Parameters:
+            consumer (IntegerArrayConsumer): consumer of the array
         
-            Returns:
-                always returns :code:`true` (or throws an exception)
-        
-        
-        """
-        ...
-    def processAsUnitList(self, unitListConsumer: typing.Union['ParseToken.UnitListConsumer', typing.Callable]) -> bool:
-        """
-            Process the content as a list of units.
-        
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.UnitListConsumer`): consumer of the time scale
-        
-            Returns:
-                always returns :code:`true` (or throws an exception)
+        Returns:
+            always returns true
         
         
         """
         ...
-    def processAsUppercaseList(self, stringListConsumer: typing.Union['ParseToken.StringListConsumer', typing.Callable]) -> bool:
+    def processAsIntegerArrayNoSpace(self, consumer: typing.Union['ParseToken.IntegerArrayConsumer', typing.Callable]) -> bool:
         """
-            Process the content as a list of normalized uppercase strings.
+        Process the content as an array of integers. No spaces between commas are allowed.
         
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.StringListConsumer`): consumer of the normalized uppercase strings list
+        Parameters:
+            consumer (IntegerArrayConsumer): consumer of the array
         
-            Returns:
-                always returns :code:`true`
-        
-        
-        """
-        ...
-    def processAsUppercaseString(self, stringConsumer: typing.Union['ParseToken.StringConsumer', typing.Callable]) -> bool:
-        """
-            Process the content as a normalized uppercase string.
-        
-            Parameters:
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.StringConsumer`): consumer of the normalized uppercase string
-        
-            Returns:
-                always returns :code:`true`
-        
-            Also see:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.ParseToken.processAsNormalizedString`
+        Returns:
+            always returns true
         
         
         """
         ...
-    def processAsVector(self, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, vectorConsumer: typing.Union['ParseToken.VectorConsumer', typing.Callable]) -> bool:
+    def processAsLabeledDouble(self, label: str, standard: org.orekit.utils.units.Unit, behavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, consumer: typing.Union['ParseToken.LabeledDoubleConsumer', typing.Callable]) -> bool:
         """
-            Process the content as a vector.
+        Process the content as a labeled double.
         
-            Parameters:
-                standard (:class:`~org.orekit.utils.units.Unit`): units of parsed content as specified by CCSDS standard
-                behavior (:class:`~org.orekit.files.ccsds.ndm.ParsedUnitsBehavior`): behavior to adopt for parsed unit
-                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.VectorConsumer`): consumer of the vector
+        Parameters:
+            label (char): label
+            standard (Unit): units of parsed content as specified by CCSDS standard
+            behavior (ParsedUnitsBehavior): behavior to adopt for parsed unit
+            consumer (LabeledDoubleConsumer): consumer of the indexed double
         
-            Returns:
-                always returns :code:`true` (or throws an exception)
+        Returns:
+            always returns true
+        
+        
+        """
+        ...
+    def processAsManeuvrableEnum(self, consumer: typing.Union['ParseToken.ManeuvrableConsumer', typing.Callable]) -> bool:
+        """
+        Process the content of the Maneuvrable enum.
+        
+        Parameters:
+            consumer (ManeuvrableConsumer): consumer of the enum
+        
+        Returns:
+            always returns true
+        
+        
+        """
+        ...
+    def processAsNormalizedCharacter(self, consumer: typing.Union['ParseToken.CharConsumer', typing.Callable]) -> bool:
+        """
+        Process the content as a normalized character.
+        
+        Parameters:
+            consumer (CharConsumer): consumer of the normalized character
+        
+        Returns:
+            always returns true
+        
+        
+        """
+        ...
+    def processAsNormalizedList(self, consumer: typing.Union['ParseToken.StringListConsumer', typing.Callable]) -> bool:
+        """
+        Process the content as a list of normalized strings.
+        
+        Parameters:
+            consumer (StringListConsumer): consumer of the normalized strings list
+        
+        Returns:
+            always returns true
+        
+        
+        """
+        ...
+    def processAsNormalizedString(self, consumer: typing.Union['ParseToken.StringConsumer', typing.Callable]) -> bool:
+        """
+        Process the content as a normalized string.
+        
+        Parameters:
+            consumer (StringConsumer): consumer of the normalized string
+        
+        Returns:
+            always returns true
+        
+        Also see:
+            processAsUppercaseString
+        
+        
+        """
+        ...
+    def processAsRotationOrder(self, consumer: typing.Union['ParseToken.RotationOrderConsumer', typing.Callable]) -> bool:
+        """
+        Process the content as a rotation sequence.
+        
+        Parameters:
+            consumer (RotationOrderConsumer): consumer of the rotation sequence
+        
+        Returns:
+            always returns true
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
+    def processAsTimeSystem(self, consumer: typing.Union['ParseToken.TimeSystemConsumer', typing.Callable]) -> bool:
+        """
+        Process the content as a time system.
+        
+        Parameters:
+            consumer (TimeSystemConsumer): consumer of the time system
+        
+        Returns:
+            always returns true (or throws an exception)
+        
+        
+        """
+        ...
+    def processAsUnitList(self, consumer: typing.Union['ParseToken.UnitListConsumer', typing.Callable]) -> bool:
+        """
+        Process the content as a list of units.
+        
+        Parameters:
+            consumer (UnitListConsumer): consumer of the time scale
+        
+        Returns:
+            always returns true (or throws an exception)
+        
+        
+        """
+        ...
+    def processAsUppercaseList(self, consumer: typing.Union['ParseToken.StringListConsumer', typing.Callable]) -> bool:
+        """
+        Process the content as a list of normalized uppercase strings.
+        
+        Parameters:
+            consumer (StringListConsumer): consumer of the normalized uppercase strings list
+        
+        Returns:
+            always returns true
+        
+        
+        """
+        ...
+    def processAsUppercaseString(self, consumer: typing.Union['ParseToken.StringConsumer', typing.Callable]) -> bool:
+        """
+        Process the content as a normalized uppercase string.
+        
+        Parameters:
+            consumer (StringConsumer): consumer of the normalized uppercase string
+        
+        Returns:
+            always returns true
+        
+        Also see:
+            processAsNormalizedString
+        
+        
+        """
+        ...
+    def processAsVector(self, standard: org.orekit.utils.units.Unit, behavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, consumer: typing.Union['ParseToken.VectorConsumer', typing.Callable]) -> bool:
+        """
+        Process the content as a vector.
+        
+        Parameters:
+            standard (Unit): units of parsed content as specified by CCSDS standard
+            behavior (ParsedUnitsBehavior): behavior to adopt for parsed unit
+            consumer (VectorConsumer): consumer of the vector
+        
+        Returns:
+            always returns true (or throws an exception)
         
         
         """
@@ -853,22 +909,20 @@ class ParseToken:
 
 class TokenType(java.lang.Enum['TokenType']):
     """
-    public enum TokenType extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.utils.lexical.TokenType`>
+    Enumerate for tokens occurring during CCSDS file parsing.
     
-        Enumerate for tokens occurring during CCSDS file parsing.
+    Parse tokens correspond to:
     
-        Parse tokens correspond to:
-    
-          - bloc start
-          - entry content
-          - bloc end
+      - bloc start
+      - entry content
+      - bloc end
     
     
-        Since:
-            11.0
+    Since:
+        11.0
     
-        Also see:
-            :class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`
+    Also see:
+        ParseToken
     """
     START: typing.ClassVar['TokenType'] = ...
     ENTRY: typing.ClassVar['TokenType'] = ...
@@ -880,20 +934,19 @@ class TokenType(java.lang.Enum['TokenType']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'TokenType':
+    def valueOf(name: str) -> 'TokenType':
         """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        Parameters:
+            name (String): the name of the enum constant to be returned.
         
-            Returns:
-                the enum constant with the specified name
+        Returns:
+            the enum constant with the specified name
         
-            Raises:
-                :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        Raises:
+            IllegalArgumentException: if this enum type has no constant with the specified name
+            NullPointerException: if the argument is null
         
         
         """
@@ -901,17 +954,15 @@ class TokenType(java.lang.Enum['TokenType']):
     @staticmethod
     def values() -> typing.MutableSequence['TokenType']:
         """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
         
-            .. code-block: java
-            
-            for (TokenType c : TokenType.values())
-                System.out.println(c);
-            
         
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
+        for (TokenType c : TokenType.values())
+            System.out.println(c);
+        
+        
+        Returns:
+            an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -919,45 +970,65 @@ class TokenType(java.lang.Enum['TokenType']):
 
 class XmlTokenBuilder:
     """
-    public interface XmlTokenBuilder
+    Builder for building ParseToken from XML elements.
     
-        Builder for building :class:`~org.orekit.files.ccsds.utils.lexical.ParseToken` from XML elements.
+    The regular handling of regular XML elements is to used the element name as the token name, the element content as the token content and the "units" attribute for the units. In some cases however the token name should be extracted from attributes, and sometimes even the content. This interface allows to define all these behaviors, by providing specialized builders to the lexical analyzer when it calls their getSpecialXmlElementsBuilders method.
     
-        The regular handling of regular XML elements is to used the element name as the token name, the element content as the
-        token content and the "units" attribute for the units. In some cases however the token name should be extracted from
-        attributes, and sometimes even the content. This interface allows to define all these behaviors, by providing
-        specialized builders to the lexical analyzer when it calls their
-        :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.getSpecialXmlElementsBuilders` method.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def buildTokens(self, boolean: bool, boolean2: bool, string: str, string2: str, map: typing.Union[java.util.Map[str, str], typing.Mapping[str, str]], int: int, string3: str) -> java.util.List[ParseToken]: ...
+    def buildTokens(self, startTag: bool, isLeaf: bool, qName: str, content: str, attributes: typing.Union[java.util.Map[str, str], typing.Mapping[str, str]], lineNumber: int, fileName: str) -> java.util.List[ParseToken]:
+        """
+        Create a list of parse tokens.
+        
+        Parameters:
+            startTag (boolean): if true we are parsing the start tag from an XML element
+            isLeaf (boolean): if true and startTag is false, we are processing the end tag of a leaf XML element
+            qName (String): element qualified name
+            content (String): element content
+            attributes (Map<String, String> attributes): element attributes
+            lineNumber (int): number of the line in the CCSDS data message
+            fileName (String): name of the file
+        
+        Returns:
+            list of parse tokens
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
 
 class KvnLexicalAnalyzer(LexicalAnalyzer):
     """
-    public class KvnLexicalAnalyzer extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
+    Lexical analyzer for Key-Value Notation CCSDS messages.
     
-        Lexical analyzer for Key-Value Notation CCSDS messages.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, dataSource: org.orekit.data.DataSource): ...
+    def __init__(self, source: org.orekit.data.DataSource):
+        """
+        Simple constructor.
+        
+        Parameters:
+            source (DataSource): source providing the data to parse
+        
+        
+        """
+        ...
     _accept__T = typing.TypeVar('_accept__T')  # <T>
     def accept(self, messageParser: MessageParser[_accept__T]) -> _accept__T:
         """
-            Parse a CCSDS Message.
+        Parse a CCSDS Message.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer.accept` in
-                interface :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
+        Specified by: accept in interface LexicalAnalyzer
         
-            Parameters:
-                messageParser (:class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`<T> messageParser): CCSDS Message parser to use
+        Parameters:
+            messageParser (MessageParser<T> messageParser): CCSDS Message parser to use
         
-            Returns:
-                parsed fileO
+        Returns:
+            parsed fileO
         
         
         """
@@ -965,64 +1036,252 @@ class KvnLexicalAnalyzer(LexicalAnalyzer):
 
 class MessageVersionXmlTokenBuilder(XmlTokenBuilder):
     """
-    public class MessageVersionXmlTokenBuilder extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder`
+    Builder for the root element with CCSDS message version.
     
-        Builder for the root element with CCSDS message version.
+    All parsers for CCSDS ADM, ODM and TDM messages need to handle the root level XML element specially. OPM file for example have a root element of the form:
     
-        All parsers for CCSDS ADM, ODM and TDM messages need to handle the root level XML element specially. OPM file for
-        example have a root element of the form:
+       <opm id="CCSDS_OPM_VERS" verion="3.0">
     
-        .. code-block: java
-        
-           <opm id="CCSDS_OPM_VERS" verion="3.0">
-         
+    This XmlTokenBuilder will generate two ParseToken from this root element:
     
-        This :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder` will generate two
-        :class:`~org.orekit.files.ccsds.utils.lexical.ParseToken` from this root element:
-    
-          1.  one with name set to "opm", type set to :meth:`~org.orekit.files.ccsds.utils.lexical.TokenType.START` and no content
-          2.  one with name set to "CCSDS_OPM_VERS", type set to :meth:`~org.orekit.files.ccsds.utils.lexical.TokenType.ENTRY` and
-            content set to "3.0"
+      1.  one with name set to "opm", type set to START and no content 2.  one with name set to "CCSDS_OPM_VERS", type set to ENTRY and content set to "3.0"
     
     
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self): ...
-    def buildTokens(self, boolean: bool, boolean2: bool, string: str, string2: str, map: typing.Union[java.util.Map[str, str], typing.Mapping[str, str]], int: int, string3: str) -> java.util.List[ParseToken]: ...
+    def __init__(self):
+        """
+        Empty constructor.
+        
+        This constructor is not strictly necessary, but it prevents spurious javadoc warnings with JDK 18 and later.
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
+    def buildTokens(self, startTag: bool, isLeaf: bool, qName: str, content: str, attributes: typing.Union[java.util.Map[str, str], typing.Mapping[str, str]], lineNumber: int, fileName: str) -> java.util.List[ParseToken]:
+        """
+        Create a list of parse tokens.
+        
+        Specified by: buildTokens in interface XmlTokenBuilder
+        
+        Parameters:
+            startTag (boolean): if true we are parsing the start tag from an XML element
+            isLeaf (boolean): if true and startTag is false, we are processing the end tag of a leaf XML element
+            qName (String): element qualified name
+            content (String): element content
+            attributes (Map<String, String> attributes): element attributes
+            lineNumber (int): number of the line in the CCSDS data message
+            fileName (String): name of the file
+        
+        Returns:
+            list of parse tokens
+        
+        
+        """
+        ...
 
 class PythonLexicalAnalyzer(LexicalAnalyzer):
     def __init__(self): ...
     _accept__T = typing.TypeVar('_accept__T')  # <T>
-    def accept(self, messageParser: MessageParser[_accept__T]) -> _accept__T: ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None: ...
+    def accept(self, messageParser: MessageParser[_accept__T]) -> _accept__T:
+        """
+        Parse a CCSDS Message.
+        
+        Specified by: accept in interface LexicalAnalyzer
+        
+        Parameters:
+            messageParser (MessageParser<T> messageParser): CCSDS Message parser to use
+        
+        Returns:
+            parsed fileO
+        
+        
+        """
+        ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
 
 _PythonMessageParser__T = typing.TypeVar('_PythonMessageParser__T')  # <T>
 class PythonMessageParser(MessageParser[_PythonMessageParser__T], typing.Generic[_PythonMessageParser__T]):
     def __init__(self): ...
-    def build(self) -> _PythonMessageParser__T: ...
-    def finalize(self) -> None: ...
-    def getFileFormat(self) -> org.orekit.files.ccsds.utils.FileFormat: ...
-    def getFormatVersionKey(self) -> str: ...
-    def getSpecialXmlElementsBuilders(self) -> java.util.Map[str, XmlTokenBuilder]: ...
-    def parseMessage(self, dataSource: org.orekit.data.DataSource) -> _PythonMessageParser__T: ...
-    def process(self, parseToken: ParseToken) -> None: ...
-    def pythonDecRef(self) -> None: ...
+    def build(self) -> _PythonMessageParser__T:
+        """
+        Description copied from interface: build Build the file from parsed entries.
+        
+        Specified by: build in interface MessageParser
+        
+        Returns:
+            parsed file
+        
+        
+        """
+        ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getFileFormat(self) -> org.orekit.files.ccsds.utils.FileFormat:
+        """
+        Description copied from interface: getFileFormat Get the file format of the last message parsed.
+        
+        Specified by: getFileFormat in interface MessageParser
+        
+        Returns:
+            file format of the last message parsed
+        
+        
+        """
+        ...
+    def getFormatVersionKey(self) -> str:
+        """
+        Get the key for format version.
+        
+        Specified by: getFormatVersionKey in interface MessageParser
+        
+        Returns:
+            format version key
+        
+        
+        """
+        ...
+    def getSpecialXmlElementsBuilders(self) -> java.util.Map[str, XmlTokenBuilder]:
+        """
+        Get the non-default token builders for special XML elements.
+        
+        Specified by: getSpecialXmlElementsBuilders in interface MessageParser
+        
+        Returns:
+            map of token builders for special XML elements (keyed by XML element name)
+        
+        
+        """
+        ...
+    def parseMessage(self, source: org.orekit.data.DataSource) -> _PythonMessageParser__T:
+        """
+        Parse a data source.
+        
+        Specified by: parseMessage in interface MessageParser
+        
+        Parameters:
+            source (DataSource): data source to parse
+        
+        Returns:
+            parsed file
+        
+        
+        """
+        ...
+    def process(self, token: ParseToken) -> None:
+        """
+        Process a parse token.
+        
+        Specified by: process in interface MessageParser
+        
+        Parameters:
+            token (ParseToken): token to process
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-    def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
+    def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None:
+        """
+        Reset parser to initial state before parsing.
+        
+        Specified by: reset in interface MessageParser
+        
+        Parameters:
+            fileFormat (FileFormat): format of the file ready to be parsed
+        
+        
+        """
+        ...
 
 class PythonXmlTokenBuilder(XmlTokenBuilder):
     def __init__(self): ...
-    def buildTokens(self, boolean: bool, boolean2: bool, string: str, string2: str, map: typing.Union[java.util.Map[str, str], typing.Mapping[str, str]], int: int, string3: str) -> java.util.List[ParseToken]: ...
-    def finalize(self) -> None: ...
+    def buildTokens(self, startTag: bool, isLeaf: bool, qName: str, content: str, attributes: typing.Union[java.util.Map[str, str], typing.Mapping[str, str]], lineNumber: int, fileName: str) -> java.util.List[ParseToken]:
+        """
+        Create a list of parse tokens.
+        
+        Specified by: buildTokens in interface XmlTokenBuilder
+        
+        Parameters:
+            startTag (boolean): if true we are parsing the start tag from an XML element
+            isLeaf (boolean): if true and startTag is false, we are processing the end tag of a leaf XML element
+            qName (String): element qualified name
+            content (String): element content
+            attributes (Map<String, String> attributes): element attributes
+            lineNumber (int): number of the line in the CCSDS data message
+            fileName (String): name of the file
+        
+        Returns:
+            list of parse tokens
+        
+        
+        """
+        ...
+    def finalize(self) -> None:
+        """
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
@@ -1031,67 +1290,116 @@ class PythonXmlTokenBuilder(XmlTokenBuilder):
 
 class RegularXmlTokenBuilder(XmlTokenBuilder):
     """
-    public class RegularXmlTokenBuilder extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder`
+    Regular builder using XML elements names and content for tokens.
     
-        Regular builder using XML elements names and content for tokens.
+    Each tag generates exactly one token, either a START, or STOP token without content for non-leaf elements, or a ENTRY token with content for leaf elements.
     
-        Each tag generates exactly one token, either a :meth:`~org.orekit.files.ccsds.utils.lexical.TokenType.START`, or
-        :meth:`~org.orekit.files.ccsds.utils.lexical.TokenType.STOP` token without content for non-leaf elements, or a
-        :meth:`~org.orekit.files.ccsds.utils.lexical.TokenType.ENTRY` token with content for leaf elements.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self): ...
-    def buildTokens(self, boolean: bool, boolean2: bool, string: str, string2: str, map: typing.Union[java.util.Map[str, str], typing.Mapping[str, str]], int: int, string3: str) -> java.util.List[ParseToken]: ...
+    def __init__(self):
+        """
+        Simple constructor.
+        """
+        ...
+    def buildTokens(self, startTag: bool, isLeaf: bool, qName: str, content: str, attributes: typing.Union[java.util.Map[str, str], typing.Mapping[str, str]], lineNumber: int, fileName: str) -> java.util.List[ParseToken]:
+        """
+        Create a list of parse tokens.
+        
+        Specified by: buildTokens in interface XmlTokenBuilder
+        
+        Parameters:
+            startTag (boolean): if true we are parsing the start tag from an XML element
+            isLeaf (boolean): if true and startTag is false, we are processing the end tag of a leaf XML element
+            qName (String): element qualified name
+            content (String): element content
+            attributes (Map<String, String> attributes): element attributes
+            lineNumber (int): number of the line in the CCSDS data message
+            fileName (String): name of the file
+        
+        Returns:
+            list of parse tokens
+        
+        
+        """
+        ...
 
 class UserDefinedXmlTokenBuilder(XmlTokenBuilder):
     """
-    public class UserDefinedXmlTokenBuilder extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder`
+    Builder for user-defined parameters.
     
-        Builder for user-defined parameters.
+    User-defined elements are of the form:
     
-        User-defined elements are of the form:
+       <USER_DEFINED parameter="SOME_PARAMETER_NAME">value</USER_DEFINED>
     
-        .. code-block: java
-        
-           <USER_DEFINED parameter="SOME_PARAMETER_NAME">value</USER_DEFINED>
-         
+    This XmlTokenBuilder will generate a single ParseToken from this root element with name set to "SOME_PARAMETER_NAME", type set to ENTRY and content set to value.
     
-        This :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder` will generate a single
-        :class:`~org.orekit.files.ccsds.utils.lexical.ParseToken` from this root element with name set to "SOME_PARAMETER_NAME",
-        type set to :meth:`~org.orekit.files.ccsds.utils.lexical.TokenType.ENTRY` and content set to :code:`value`.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self): ...
-    def buildTokens(self, boolean: bool, boolean2: bool, string: str, string2: str, map: typing.Union[java.util.Map[str, str], typing.Mapping[str, str]], int: int, string3: str) -> java.util.List[ParseToken]: ...
+    def __init__(self):
+        """
+        Empty constructor.
+        
+        This constructor is not strictly necessary, but it prevents spurious javadoc warnings with JDK 18 and later.
+        
+        Since:
+            12.0
+        
+        
+        """
+        ...
+    def buildTokens(self, startTag: bool, isLeaf: bool, qName: str, content: str, attributes: typing.Union[java.util.Map[str, str], typing.Mapping[str, str]], lineNumber: int, fileName: str) -> java.util.List[ParseToken]:
+        """
+        Create a list of parse tokens.
+        
+        Specified by: buildTokens in interface XmlTokenBuilder
+        
+        Parameters:
+            startTag (boolean): if true we are parsing the start tag from an XML element
+            isLeaf (boolean): if true and startTag is false, we are processing the end tag of a leaf XML element
+            qName (String): element qualified name
+            content (String): element content
+            attributes (Map<String, String> attributes): element attributes
+            lineNumber (int): number of the line in the CCSDS data message
+            fileName (String): name of the file
+        
+        Returns:
+            list of parse tokens
+        
+        
+        """
+        ...
 
 class XmlLexicalAnalyzer(LexicalAnalyzer):
     """
-    public class XmlLexicalAnalyzer extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
+    Lexical analyzer for XML CCSDS messages.
     
-        Lexical analyzer for XML CCSDS messages.
-    
-        Since:
-            11.0
+    Since:
+        11.0
     """
-    def __init__(self, dataSource: org.orekit.data.DataSource): ...
+    def __init__(self, source: org.orekit.data.DataSource):
+        """
+        Simple constructor.
+        
+        Parameters:
+            source (DataSource): source providing the data to parse
+        
+        
+        """
+        ...
     _accept__T = typing.TypeVar('_accept__T')  # <T>
     def accept(self, messageParser: MessageParser[_accept__T]) -> _accept__T:
         """
-            Parse a CCSDS Message.
+        Parse a CCSDS Message.
         
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer.accept` in
-                interface :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
+        Specified by: accept in interface LexicalAnalyzer
         
-            Parameters:
-                messageParser (:class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`<T> messageParser): CCSDS Message parser to use
+        Parameters:
+            messageParser (MessageParser<T> messageParser): CCSDS Message parser to use
         
-            Returns:
-                parsed fileO
+        Returns:
+            parsed fileO
         
         
         """

@@ -13,37 +13,74 @@ import typing
 
 class AtmosphericRefractionModel(java.io.Serializable):
     """
-    public interface AtmosphericRefractionModel extends :class:`~org.orekit.models.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    Defines an refraction model that can be used to correct for the apparent position of an object due to atmospheric effects.
     
-        Defines an refraction model that can be used to correct for the apparent position of an object due to atmospheric
-        effects.
-    
-        Since:
-            6.1
+    Since:
+        6.1
     """
-    def getRefraction(self, double: float) -> float:
+    def getRefraction(self, trueElevation: float) -> float:
         """
-            Compute the refraction angle from the true (geometrical) elevation.
+        Compute the refraction angle from the true (geometrical) elevation.
         
-            Parameters:
-                trueElevation (double): true elevation (rad)
+        Parameters:
+            trueElevation (double): true elevation (rad)
         
-            Returns:
-                refraction angle (rad)
+        Returns:
+            refraction angle (rad)
         
         
         """
         ...
 
 class PythonAtmosphericRefractionModel(AtmosphericRefractionModel):
+    """
+    Also see:
+        serialized
+    """
     def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getRefraction(self, double: float) -> float: ...
-    def pythonDecRef(self) -> None: ...
+    def finalize(self) -> None:
+        """
+        Part of JCC Python interface to object
+        
+        Overrides: Object in class Object
+        
+        Raises:
+            Throwable: 
+        
+        """
+        ...
+    def getRefraction(self, trueElevation: float) -> float:
+        """
+        Compute the refraction angle from the true (geometrical) elevation. Extension point for Python.
+        
+        Specified by: getRefraction in interface AtmosphericRefractionModel
+        
+        Parameters:
+            trueElevation (double): true elevation (rad)
+        
+        Returns:
+            refraction angle (rad)
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        Part of JCC Python interface to object
+        """
+        ...
 
 
 class __module_protocol__(Protocol):
