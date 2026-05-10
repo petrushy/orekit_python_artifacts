@@ -5,9 +5,9 @@
   <version>0.0.1-SNAPSHOT</version>
   <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <orekit.version>13.1.4</orekit.version>
-      <rugged.version>4.0</rugged.version>
-      <hipparchus.version>4.0.1</hipparchus.version>
+      <orekit.version>13.1.5</orekit.version>
+      <rugged.version>4.0.1</rugged.version>
+      <hipparchus.version>4.0.3</hipparchus.version>
   </properties>
   <repositories>
     <repository>
