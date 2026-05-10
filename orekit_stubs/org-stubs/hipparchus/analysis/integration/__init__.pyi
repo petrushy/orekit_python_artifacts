@@ -193,8 +193,6 @@ class UnivariateIntegrator:
 _BaseAbstractFieldUnivariateIntegrator__T = typing.TypeVar('_BaseAbstractFieldUnivariateIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class BaseAbstractFieldUnivariateIntegrator(FieldUnivariateIntegrator[_BaseAbstractFieldUnivariateIntegrator__T], typing.Generic[_BaseAbstractFieldUnivariateIntegrator__T]):
     """
-    implements FieldUnivariateIntegrator<T>
-    
     Provide a default implementation for several generic functions.
     
     Since:
@@ -204,8 +202,8 @@ class BaseAbstractFieldUnivariateIntegrator(FieldUnivariateIntegrator[_BaseAbstr
     """
     Default absolute accuracy.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -213,8 +211,8 @@ class BaseAbstractFieldUnivariateIntegrator(FieldUnivariateIntegrator[_BaseAbstr
     """
     Default relative accuracy.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -222,8 +220,8 @@ class BaseAbstractFieldUnivariateIntegrator(FieldUnivariateIntegrator[_BaseAbstr
     """
     Default minimal iteration count.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -231,8 +229,8 @@ class BaseAbstractFieldUnivariateIntegrator(FieldUnivariateIntegrator[_BaseAbstr
     """
     Default maximal iteration count.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -336,7 +334,6 @@ class BaseAbstractFieldUnivariateIntegrator(FieldUnivariateIntegrator[_BaseAbstr
         Raises:
             MathIllegalArgumentException: if min > max or the endpoints do not satisfy the requirements specified by the integrator
             MathIllegalStateException: if the maximum number of function evaluations is exceeded
-            MathIllegalStateException: if the maximum iteration count is exceeded or the integrator detects convergence problems otherwise
             NullArgumentException: if f is null.
         
         
@@ -345,16 +342,14 @@ class BaseAbstractFieldUnivariateIntegrator(FieldUnivariateIntegrator[_BaseAbstr
 
 class BaseAbstractUnivariateIntegrator(UnivariateIntegrator):
     """
-    implements UnivariateIntegrator
-    
     Provide a default implementation for several generic functions.
     """
     DEFAULT_ABSOLUTE_ACCURACY: typing.ClassVar[float] = ...
     """
     Default absolute accuracy.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -362,8 +357,8 @@ class BaseAbstractUnivariateIntegrator(UnivariateIntegrator):
     """
     Default relative accuracy.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -371,8 +366,8 @@ class BaseAbstractUnivariateIntegrator(UnivariateIntegrator):
     """
     Default minimal iteration count.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -380,8 +375,8 @@ class BaseAbstractUnivariateIntegrator(UnivariateIntegrator):
     """
     Default maximal iteration count.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -475,7 +470,6 @@ class BaseAbstractUnivariateIntegrator(UnivariateIntegrator):
         Raises:
             MathIllegalArgumentException: if min > max or the endpoints do not satisfy the requirements specified by the integrator
             MathIllegalStateException: if the maximum number of function evaluations is exceeded
-            MathIllegalStateException: if the maximum iteration count is exceeded or the integrator detects convergence problems otherwise
             NullArgumentException: if f is null.
         
         
@@ -496,17 +490,17 @@ class FieldMidPointIntegrator(BaseAbstractFieldUnivariateIntegrator[_FieldMidPoi
     """
     Maximum number of iterations for midpoint.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldMidPointIntegrator__T]): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldMidPointIntegrator__T], double: float, double2: float, int: int, int2: int): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldMidPointIntegrator__T], relativeAccuracy: float, absoluteAccuracy: float, minimalIterationCount: int, maximalIterationCount: int): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldMidPointIntegrator__T], int: int, int2: int): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldMidPointIntegrator__T], minimalIterationCount: int, maximalIterationCount: int): ...
 
 _FieldRombergIntegrator__T = typing.TypeVar('_FieldRombergIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldRombergIntegrator(BaseAbstractFieldUnivariateIntegrator[_FieldRombergIntegrator__T], typing.Generic[_FieldRombergIntegrator__T]):
@@ -522,17 +516,17 @@ class FieldRombergIntegrator(BaseAbstractFieldUnivariateIntegrator[_FieldRomberg
     """
     Maximal number of iterations for Romberg.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldRombergIntegrator__T]): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldRombergIntegrator__T], double: float, double2: float, int: int, int2: int): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldRombergIntegrator__T], relativeAccuracy: float, absoluteAccuracy: float, minimalIterationCount: int, maximalIterationCount: int): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldRombergIntegrator__T], int: int, int2: int): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldRombergIntegrator__T], minimalIterationCount: int, maximalIterationCount: int): ...
 
 _FieldSimpsonIntegrator__T = typing.TypeVar('_FieldSimpsonIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldSimpsonIntegrator(BaseAbstractFieldUnivariateIntegrator[_FieldSimpsonIntegrator__T], typing.Generic[_FieldSimpsonIntegrator__T]):
@@ -548,17 +542,17 @@ class FieldSimpsonIntegrator(BaseAbstractFieldUnivariateIntegrator[_FieldSimpson
     """
     Maximal number of iterations for Simpson.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldSimpsonIntegrator__T]): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldSimpsonIntegrator__T], double: float, double2: float, int: int, int2: int): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldSimpsonIntegrator__T], relativeAccuracy: float, absoluteAccuracy: float, minimalIterationCount: int, maximalIterationCount: int): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldSimpsonIntegrator__T], int: int, int2: int): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldSimpsonIntegrator__T], minimalIterationCount: int, maximalIterationCount: int): ...
 
 _FieldTrapezoidIntegrator__T = typing.TypeVar('_FieldTrapezoidIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTrapezoidIntegrator(BaseAbstractFieldUnivariateIntegrator[_FieldTrapezoidIntegrator__T], typing.Generic[_FieldTrapezoidIntegrator__T]):
@@ -574,17 +568,17 @@ class FieldTrapezoidIntegrator(BaseAbstractFieldUnivariateIntegrator[_FieldTrape
     """
     Maximum number of iterations for trapezoid.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldTrapezoidIntegrator__T]): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldTrapezoidIntegrator__T], double: float, double2: float, int: int, int2: int): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldTrapezoidIntegrator__T], relativeAccuracy: float, absoluteAccuracy: float, minimalIterationCount: int, maximalIterationCount: int): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldTrapezoidIntegrator__T], int: int, int2: int): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldTrapezoidIntegrator__T], minimalIterationCount: int, maximalIterationCount: int): ...
 
 _IterativeLegendreFieldGaussIntegrator__T = typing.TypeVar('_IterativeLegendreFieldGaussIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class IterativeLegendreFieldGaussIntegrator(BaseAbstractFieldUnivariateIntegrator[_IterativeLegendreFieldGaussIntegrator__T], typing.Generic[_IterativeLegendreFieldGaussIntegrator__T]):
@@ -597,7 +591,7 @@ class IterativeLegendreFieldGaussIntegrator(BaseAbstractFieldUnivariateIntegrato
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_IterativeLegendreFieldGaussIntegrator__T], int: int, double: float, double2: float): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_IterativeLegendreFieldGaussIntegrator__T], int: int, double: float, double2: float, int2: int, int3: int): ...
+    def __init__(self, field: org.hipparchus.Field[_IterativeLegendreFieldGaussIntegrator__T], n: int, relativeAccuracy: float, absoluteAccuracy: float, minimalIterationCount: int, maximalIterationCount: int): ...
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_IterativeLegendreFieldGaussIntegrator__T], int: int, int2: int, int3: int): ...
 
@@ -608,7 +602,7 @@ class IterativeLegendreGaussIntegrator(BaseAbstractUnivariateIntegrator):
     @typing.overload
     def __init__(self, int: int, double: float, double2: float): ...
     @typing.overload
-    def __init__(self, int: int, double: float, double2: float, int2: int, int3: int): ...
+    def __init__(self, n: int, relativeAccuracy: float, absoluteAccuracy: float, minimalIterationCount: int, maximalIterationCount: int): ...
     @typing.overload
     def __init__(self, int: int, int2: int, int3: int): ...
 
@@ -622,17 +616,17 @@ class MidPointIntegrator(BaseAbstractUnivariateIntegrator):
     """
     Maximum number of iterations for midpoint.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, int: int, int2: int): ...
+    def __init__(self, relativeAccuracy: float, absoluteAccuracy: float, minimalIterationCount: int, maximalIterationCount: int): ...
     @typing.overload
-    def __init__(self, int: int, int2: int): ...
+    def __init__(self, minimalIterationCount: int, maximalIterationCount: int): ...
 
 class RombergIntegrator(BaseAbstractUnivariateIntegrator):
     """
@@ -644,17 +638,17 @@ class RombergIntegrator(BaseAbstractUnivariateIntegrator):
     """
     Maximal number of iterations for Romberg.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, int: int, int2: int): ...
+    def __init__(self, relativeAccuracy: float, absoluteAccuracy: float, minimalIterationCount: int, maximalIterationCount: int): ...
     @typing.overload
-    def __init__(self, int: int, int2: int): ...
+    def __init__(self, minimalIterationCount: int, maximalIterationCount: int): ...
 
 class SimpsonIntegrator(BaseAbstractUnivariateIntegrator):
     """
@@ -666,17 +660,17 @@ class SimpsonIntegrator(BaseAbstractUnivariateIntegrator):
     """
     Maximal number of iterations for Simpson.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, int: int, int2: int): ...
+    def __init__(self, relativeAccuracy: float, absoluteAccuracy: float, minimalIterationCount: int, maximalIterationCount: int): ...
     @typing.overload
-    def __init__(self, int: int, int2: int): ...
+    def __init__(self, minimalIterationCount: int, maximalIterationCount: int): ...
 
 class TrapezoidIntegrator(BaseAbstractUnivariateIntegrator):
     """
@@ -688,17 +682,17 @@ class TrapezoidIntegrator(BaseAbstractUnivariateIntegrator):
     """
     Maximum number of iterations for trapezoid.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, int: int, int2: int): ...
+    def __init__(self, relativeAccuracy: float, absoluteAccuracy: float, minimalIterationCount: int, maximalIterationCount: int): ...
     @typing.overload
-    def __init__(self, int: int, int2: int): ...
+    def __init__(self, minimalIterationCount: int, maximalIterationCount: int): ...
 
 
 class __module_protocol__(Protocol):

@@ -358,16 +358,10 @@ class AcmMetadata(org.orekit.files.ccsds.ndm.adm.AdmMetadata):
     Since:
         12.0
     """
-    def __init__(self, dataContext: org.orekit.data.DataContext):
-        """
-        Create a new meta-data.
-        
-        Parameters:
-            dataContext (DataContext): data context
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self, dataContext: org.orekit.data.DataContext): ...
+    @typing.overload
+    def __init__(self, ccsdsFrameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def getAcmDataElements(self) -> java.util.List[AcmElements]:
         """
         Get the list of elements of information data blocks included in this message.
@@ -792,25 +786,10 @@ class AcmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Acm, 'AcmParser'], org.
     Since:
         12.0
     """
-    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]):
-        """
-        Complete constructor.
-        
-        Calling this constructor directly is not recommended. Users should rather use buildAcmParser.
-        
-        Parameters:
-            conventions (IERSConventions): IERS Conventions
-            simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
-            dataContext (DataContext): used to retrieve frames, time scales, etc.
-            parsedUnitsBehavior (ParsedUnitsBehavior): behavior to adopt for handling parsed units
-            filters (Function<ParseToken, List<ParseToken>>[]): filters to apply to parse tokens
-        
-        Since:
-            12.0
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
+    @typing.overload
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray], frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def build(self) -> Acm:
         """
         Build the file from parsed entries.
@@ -1484,11 +1463,10 @@ class AttitudeDetermination(org.orekit.files.ccsds.section.CommentsContainer):
     Since:
         12.0
     """
-    def __init__(self):
-        """
-        Simple constructor.
-        """
-        ...
+    @typing.overload
+    def __init__(self): ...
+    @typing.overload
+    def __init__(self, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def addSensor(self, sensor: 'AttitudeDeterminationSensor') -> None:
         """
         Add a sensor used.
@@ -2943,11 +2921,10 @@ class AttitudeStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsContai
     Since:
         12.0
     """
-    def __init__(self):
-        """
-        Simple constructor.
-        """
-        ...
+    @typing.overload
+    def __init__(self): ...
+    @typing.overload
+    def __init__(self, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def getAttBasis(self) -> str:
         """
         Get basis of this attitude state time history data.

@@ -17,8 +17,6 @@ import typing
 
 class GeometricMean(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, org.hipparchus.stat.descriptive.AggregatableStatistic['GeometricMean'], java.io.Serializable):
     """
-    implements AggregatableStatistic<GeometricMean>, Serializable
-    
     Returns the ` geometric mean <http://www.xycoon.com/geometric_mean.htm>` of the available values.
     
     Uses a SumOfLogs instance to compute sum of logs and returns exp( 1/n (sum of logs) ) Therefore,
@@ -31,7 +29,8 @@ class GeometricMean(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateS
     
     Note that this implementation is not synchronized. If multiple threads access an instance of this class concurrently, and at least one of the threads invokes the increment() or clear() method, it must be synchronized externally.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -55,9 +54,9 @@ class GeometricMean(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateS
         """
         ...
     @typing.overload
-    def aggregate(self, *t: typing.Any) -> None: ...
+    def aggregate(self, *other: typing.Any) -> None: ...
     @typing.overload
-    def aggregate(self, geometricMean: 'GeometricMean') -> None: ...
+    def aggregate(self, other: 'GeometricMean') -> None: ...
     def clear(self) -> None:
         """
         Clears the internal state of the Statistic
@@ -88,7 +87,7 @@ class GeometricMean(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateS
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     def getN(self) -> int:
         """
         Returns the number of values that have been added.
@@ -132,8 +131,6 @@ class GeometricMean(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateS
 
 class Kurtosis(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, java.io.Serializable):
     """
-    implements Serializable
-    
     Computes the Kurtosis of the available values.
     
     We use the following (unbiased) formula to define kurtosis:
@@ -146,7 +143,8 @@ class Kurtosis(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatis
     
     Note that this implementation is not synchronized. If multiple threads access an instance of this class concurrently, and at least one of the threads invokes the increment() or clear() method, it must be synchronized externally.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -184,7 +182,7 @@ class Kurtosis(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatis
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     def getN(self) -> int:
         """
         Returns the number of values that have been added.
@@ -230,8 +228,6 @@ class Kurtosis(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatis
 
 class Mean(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, org.hipparchus.stat.descriptive.AggregatableStatistic['Mean'], org.hipparchus.stat.descriptive.WeightedEvaluation, java.io.Serializable):
     """
-    implements AggregatableStatistic<Mean>, WeightedEvaluation, Serializable
-    
     Computes the arithmetic mean of a set of values. Uses the definitional formula:
     
     mean = sum(x_i) / n
@@ -250,7 +246,8 @@ class Mean(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic,
     
     Note that this implementation is not synchronized. If multiple threads access an instance of this class concurrently, and at least one of the threads invokes the increment() or clear() method, it must be synchronized externally.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -274,9 +271,9 @@ class Mean(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic,
         """
         ...
     @typing.overload
-    def aggregate(self, *t: typing.Any) -> None: ...
+    def aggregate(self, *other: typing.Any) -> None: ...
     @typing.overload
-    def aggregate(self, mean: 'Mean') -> None: ...
+    def aggregate(self, other: 'Mean') -> None: ...
     def clear(self) -> None:
         """
         Clears the internal state of the Statistic
@@ -309,9 +306,9 @@ class Mean(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic,
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], weights: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     def getN(self) -> int:
         """
         Returns the number of values that have been added.
@@ -357,8 +354,6 @@ class Mean(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic,
 
 class SemiVariance(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, java.io.Serializable):
     """
-    implements Serializable
-    
     Computes the semivariance of a set of values with respect to a given cutoff value.
     
     We define the downside semivariance of a set of values x against the cutoff value cutoff to be
@@ -373,7 +368,8 @@ class SemiVariance(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, 
     
     Note that this class is not intended to be threadsafe. If multiple threads access an instance of this class concurrently, and one or more of these threads invoke property setters, external synchronization must be provided to ensure correct results.
     
-          - serialized
+    Also see:
+        serialized
     """
     UPSIDE_VARIANCE: typing.ClassVar['SemiVariance.Direction'] = ...
     """
@@ -388,7 +384,7 @@ class SemiVariance(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, 
     @typing.overload
     def __init__(self, boolean: bool): ...
     @typing.overload
-    def __init__(self, boolean: bool, direction: 'SemiVariance.Direction'): ...
+    def __init__(self, corrected: bool, direction: 'SemiVariance.Direction'): ...
     @typing.overload
     def __init__(self, direction: 'SemiVariance.Direction'): ...
     @typing.overload
@@ -416,7 +412,7 @@ class SemiVariance(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, 
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float, direction: 'SemiVariance.Direction') -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float, direction: 'SemiVariance.Direction', boolean: bool, int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], cutoff: float, direction: 'SemiVariance.Direction', corrected: bool, start: int, length: int) -> float: ...
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
     @typing.overload
@@ -482,8 +478,6 @@ class SemiVariance(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, 
 
 class Skewness(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, java.io.Serializable):
     """
-    implements Serializable
-    
     Computes the skewness of the available values.
     
     We use the following (unbiased) formula to define skewness:
@@ -496,7 +490,8 @@ class Skewness(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatis
     
     Note that this implementation is not synchronized. If multiple threads access an instance of this class concurrently, and at least one of the threads invokes the increment() or clear() method, it must be synchronized externally.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -534,7 +529,7 @@ class Skewness(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatis
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     def getN(self) -> int:
         """
         Returns the number of values that have been added.
@@ -582,8 +577,6 @@ class Skewness(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatis
 
 class StandardDeviation(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, java.io.Serializable):
     """
-    implements Serializable
-    
     Computes the sample standard deviation.
     
     The standard deviation is the positive square root of the variance. This implementation wraps a Variance instance.
@@ -592,14 +585,15 @@ class StandardDeviation(org.hipparchus.stat.descriptive.AbstractStorelessUnivari
     
     Note that this implementation is not synchronized. If multiple threads access an instance of this class concurrently, and at least one of the threads invokes the increment() or clear() method, it must be synchronized externally.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
     def __init__(self, boolean: bool): ...
     @typing.overload
-    def __init__(self, boolean: bool, secondMoment: 'SecondMoment'): ...
+    def __init__(self, isBiasCorrected: bool, m2: 'SecondMoment'): ...
     @typing.overload
     def __init__(self, secondMoment: 'SecondMoment'): ...
     @typing.overload
@@ -634,11 +628,11 @@ class StandardDeviation(org.hipparchus.stat.descriptive.AbstractStorelessUnivari
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], mean: float) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float, int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], mean: float, begin: int, length: int) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     def getN(self) -> int:
         """
         Returns the number of values that have been added.
@@ -705,8 +699,6 @@ class StandardDeviation(org.hipparchus.stat.descriptive.AbstractStorelessUnivari
 
 class Variance(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, org.hipparchus.stat.descriptive.AggregatableStatistic['Variance'], org.hipparchus.stat.descriptive.WeightedEvaluation, java.io.Serializable):
     """
-    implements AggregatableStatistic<Variance>, WeightedEvaluation, Serializable
-    
     Computes the variance of the available values. By default, the unbiased "sample variance" definitional formula is used:
     
     variance = sum((x_i - mean)^2) / (n - 1)
@@ -728,14 +720,15 @@ class Variance(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatis
     
     Note that this implementation is not synchronized. If multiple threads access an instance of this class concurrently, and at least one of the threads invokes the increment() or clear() method, it must be synchronized externally.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
     def __init__(self, boolean: bool): ...
     @typing.overload
-    def __init__(self, boolean: bool, secondMoment: 'SecondMoment'): ...
+    def __init__(self, isBiasCorrected: bool, m2: 'SecondMoment'): ...
     @typing.overload
     def __init__(self, secondMoment: 'SecondMoment'): ...
     @typing.overload
@@ -756,9 +749,9 @@ class Variance(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatis
         """
         ...
     @typing.overload
-    def aggregate(self, *t: typing.Any) -> None: ...
+    def aggregate(self, *other: typing.Any) -> None: ...
     @typing.overload
-    def aggregate(self, variance: 'Variance') -> None: ...
+    def aggregate(self, other: 'Variance') -> None: ...
     def clear(self) -> None:
         """
         Clears the internal state of the Statistic
@@ -789,15 +782,15 @@ class Variance(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatis
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], mean: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], mean: float) -> float: ...
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float, int: int, int2: int) -> float: ...
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], double3: float) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], double3: float, int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], weights: typing.Union[typing.List[float], jpype.JArray], mean: float, begin: int, length: int) -> float: ...
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
     @typing.overload
@@ -878,8 +871,6 @@ class ThirdMoment: ...
 
 class SecondMoment(FirstMoment, org.hipparchus.stat.descriptive.AggregatableStatistic['SecondMoment'], java.io.Serializable):
     """
-    implements AggregatableStatistic<SecondMoment>, Serializable
-    
     Computes a statistic related to the Second Central Moment. Specifically, what is computed is the sum of squared deviations from the sample mean.
     
     The following recursive updating formula is used:
@@ -897,14 +888,15 @@ class SecondMoment(FirstMoment, org.hipparchus.stat.descriptive.AggregatableStat
     
     Note that this implementation is not synchronized. If multiple threads access an instance of this class concurrently, and at least one of the threads invokes the increment() or clear() method, it must be synchronized externally.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, secondMoment: 'SecondMoment'): ...
+    def __init__(self, original: 'SecondMoment'): ...
     @typing.overload
-    def aggregate(self, iterable: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any], typing.Callable[[], java.util.Iterator[typing.Any]]]) -> None:
+    def aggregate(self, other: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any], typing.Callable[[], java.util.Iterator[typing.Any]]]) -> None:
         """
         Aggregates the provided instance into this instance.
         
@@ -924,9 +916,9 @@ class SecondMoment(FirstMoment, org.hipparchus.stat.descriptive.AggregatableStat
         """
         ...
     @typing.overload
-    def aggregate(self, *t: typing.Any) -> None: ...
+    def aggregate(self, *other: typing.Any) -> None: ...
     @typing.overload
-    def aggregate(self, secondMoment: 'SecondMoment') -> None: ...
+    def aggregate(self, other: 'SecondMoment') -> None: ...
     def clear(self) -> None:
         """
         Clears the internal state of the Statistic

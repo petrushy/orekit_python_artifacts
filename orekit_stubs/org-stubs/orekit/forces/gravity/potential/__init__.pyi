@@ -350,7 +350,7 @@ class GravityFieldFactory:
         ...
     @typing.overload
     @staticmethod
-    def getNormalizedProvider(int: int, int2: int) -> 'NormalizedSphericalHarmonicsProvider': ...
+    def getNormalizedProvider(degree: int, order: int) -> 'NormalizedSphericalHarmonicsProvider': ...
     @typing.overload
     @staticmethod
     def getNormalizedProvider(unnormalized: 'UnnormalizedSphericalHarmonicsProvider') -> 'NormalizedSphericalHarmonicsProvider':
@@ -454,7 +454,7 @@ class GravityFieldFactory:
         ...
     @typing.overload
     @staticmethod
-    def getUnnormalizedProvider(int: int, int2: int) -> 'UnnormalizedSphericalHarmonicsProvider': ...
+    def getUnnormalizedProvider(degree: int, order: int) -> 'UnnormalizedSphericalHarmonicsProvider': ...
     @typing.overload
     @staticmethod
     def getUnnormalizedProvider(normalized: 'NormalizedSphericalHarmonicsProvider') -> 'UnnormalizedSphericalHarmonicsProvider':
@@ -1121,9 +1121,9 @@ class EGMFormatReader(PotentialCoefficientsReader):
         GravityFields
     """
     @typing.overload
-    def __init__(self, string: str, boolean: bool): ...
+    def __init__(self, supportedNames: str, missingCoefficientsAllowed: bool): ...
     @typing.overload
-    def __init__(self, string: str, boolean: bool, boolean2: bool): ...
+    def __init__(self, supportedNames: str, missingCoefficientsAllowed: bool, useWgs84Coefficients: bool): ...
     def getProvider(self, wantNormalized: bool, degree: int, order: int) -> 'RawSphericalHarmonicsProvider':
         """
         Get a provider for read spherical harmonics coefficients.
@@ -1250,9 +1250,9 @@ class GRGSFormatReader(PotentialCoefficientsReader):
         GravityFields
     """
     @typing.overload
-    def __init__(self, string: str, boolean: bool): ...
+    def __init__(self, supportedNames: str, missingCoefficientsAllowed: bool): ...
     @typing.overload
-    def __init__(self, string: str, boolean: bool, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, supportedNames: str, missingCoefficientsAllowed: bool, timeScale: org.orekit.time.TimeScale): ...
     def getProvider(self, wantNormalized: bool, degree: int, order: int) -> 'RawSphericalHarmonicsProvider':
         """
         Get a provider for read spherical harmonics coefficients.
@@ -1306,9 +1306,9 @@ class ICGEMFormatReader(PotentialCoefficientsReader):
         GravityFields
     """
     @typing.overload
-    def __init__(self, string: str, boolean: bool): ...
+    def __init__(self, supportedNames: str, missingCoefficientsAllowed: bool): ...
     @typing.overload
-    def __init__(self, string: str, boolean: bool, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, supportedNames: str, missingCoefficientsAllowed: bool, timeScale: org.orekit.time.TimeScale): ...
     def getProvider(self, wantNormalized: bool, degree: int, order: int) -> 'RawSphericalHarmonicsProvider':
         """
         Get a provider for read spherical harmonics coefficients.
@@ -1717,13 +1717,13 @@ class PythonGravityFields(GravityFields):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 class PythonPotentialCoefficientsReader(PotentialCoefficientsReader):
     @typing.overload
-    def __init__(self, string: str, boolean: bool): ...
+    def __init__(self, supportedNames: str, missingCoefficientsAllowed: bool): ...
     @typing.overload
-    def __init__(self, string: str, boolean: bool, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, supportedNames: str, missingCoefficientsAllowed: bool, timeScale: org.orekit.time.TimeScale): ...
     def finalize(self) -> None:
         """
         Part of JCC Python interface to object
@@ -1755,7 +1755,7 @@ class PythonPotentialCoefficientsReader(PotentialCoefficientsReader):
         
         """
         ...
-    def loadData(self, inputStream: java.io.InputStream, string: str) -> None:
+    def loadData(self, input: java.io.InputStream, name: str) -> None:
         """
         Load data from a stream.
         
@@ -1784,7 +1784,7 @@ class PythonPotentialCoefficientsReader(PotentialCoefficientsReader):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1827,7 +1827,7 @@ class PythonTideSystemProvider(TideSystemProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1910,9 +1910,9 @@ class SHMFormatReader(PotentialCoefficientsReader):
         GravityFields
     """
     @typing.overload
-    def __init__(self, string: str, boolean: bool): ...
+    def __init__(self, supportedNames: str, missingCoefficientsAllowed: bool): ...
     @typing.overload
-    def __init__(self, string: str, boolean: bool, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, supportedNames: str, missingCoefficientsAllowed: bool, timeScale: org.orekit.time.TimeScale): ...
     def getProvider(self, wantNormalized: bool, degree: int, order: int) -> 'RawSphericalHarmonicsProvider':
         """
         Get a provider for read spherical harmonics coefficients.
@@ -2163,7 +2163,7 @@ class PythonSphericalHarmonicsProvider(SphericalHarmonicsProvider):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 class RawSphericalHarmonicsProvider(SphericalHarmonicsProvider):
     """
@@ -2475,7 +2475,7 @@ class PythonNormalizedSphericalHarmonicsProvider(NormalizedSphericalHarmonicsPro
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2585,7 +2585,7 @@ class PythonRawSphericalHarmonicsProvider(RawSphericalHarmonicsProvider):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 class PythonUnnormalizedSphericalHarmonics(UnnormalizedSphericalHarmonicsProvider.UnnormalizedSphericalHarmonics):
     def __init__(self): ...
@@ -2656,7 +2656,7 @@ class PythonUnnormalizedSphericalHarmonics(UnnormalizedSphericalHarmonicsProvide
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2767,7 +2767,7 @@ class PythonUnnormalizedSphericalHarmonicsProvider(UnnormalizedSphericalHarmonic
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 
 class __module_protocol__(Protocol):

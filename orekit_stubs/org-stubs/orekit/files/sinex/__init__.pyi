@@ -426,7 +426,20 @@ class DifferentialSignalBias:
         
         """
         ...
-    def getTimeSpanMap(self, observationType: org.orekit.gnss.ObservationType, observationType2: org.orekit.gnss.ObservationType) -> org.orekit.utils.TimeSpanMap[float]: ...
+    def getTimeSpanMap(self, obs1: org.orekit.gnss.ObservationType, obs2: org.orekit.gnss.ObservationType) -> org.orekit.utils.TimeSpanMap[float]:
+        """
+        Get the TimeSpanMap object for a given observation type pair, for further operation on the object directly.
+        
+        Parameters:
+            obs1 (ObservationType): first observation type
+            obs2 (ObservationType): second observation type
+        
+        Returns:
+            the time span map for a given observation type pair
+        
+        
+        """
+        ...
 
 _LineParser__T = typing.TypeVar('_LineParser__T', bound='ParseInfo')  # <T>
 class LineParser(typing.Generic[_LineParser__T]):
@@ -540,7 +553,19 @@ class ObservableSpecificSignalBias:
         
         """
         ...
-    def getTimeSpanMap(self, observationType: org.orekit.gnss.ObservationType) -> org.orekit.utils.TimeSpanMap[float]: ...
+    def getTimeSpanMap(self, obs: org.orekit.gnss.ObservationType) -> org.orekit.utils.TimeSpanMap[float]:
+        """
+        Get the TimeSpanMap object for a given observation type, for further operation on the object directly.
+        
+        Parameters:
+            obs (ObservationType): observation type
+        
+        Returns:
+            the time span map for a given observation code pair
+        
+        
+        """
+        ...
 
 _ParseInfo__T = typing.TypeVar('_ParseInfo__T', bound=AbstractSinex)  # <T>
 class ParseInfo(typing.Generic[_ParseInfo__T]):

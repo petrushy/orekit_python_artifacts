@@ -95,7 +95,7 @@ class DeSitterRelativity(org.orekit.forces.ForceModel):
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, celestialBody: org.orekit.bodies.CelestialBody, celestialBody2: org.orekit.bodies.CelestialBody): ...
+    def __init__(self, earth: org.orekit.bodies.CelestialBody, sun: org.orekit.bodies.CelestialBody): ...
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def acceleration(self, s: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], parameters: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
@@ -305,6 +305,8 @@ class HolmesFeatherstoneAttractionModel(org.orekit.forces.ForceModel, org.orekit
         """
         Compute the gradient of the non-central part of the gravity field.
         
+        If U represents the non-central part of the gravity field, this method returns the negative gradient of U (-grad(U)).
+        
         Parameters:
             date (AbsoluteDate): current date
             position (Vector3D): position at which gravity field is desired in body frame
@@ -319,6 +321,8 @@ class HolmesFeatherstoneAttractionModel(org.orekit.forces.ForceModel, org.orekit
     def gradient(self, date: org.orekit.time.FieldAbsoluteDate[_gradient_1__T], position: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_gradient_1__T], mu: _gradient_1__T) -> typing.MutableSequence[_gradient_1__T]:
         """
         Compute the gradient of the non-central part of the gravity field.
+        
+        If U represents the non-central part of the gravity field, this method returns the negative gradient of U (-grad(U)).
         
         Parameters:
             date (FieldAbsoluteDate<T> date): current date
@@ -375,7 +379,7 @@ class J2OnlyPerturbation(org.orekit.forces.ForceModel):
     @typing.overload
     def __init__(self, double: float, double2: float, timeScalarFunction: org.orekit.time.TimeScalarFunction, frame: org.orekit.frames.Frame): ...
     @typing.overload
-    def __init__(self, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, frame: org.orekit.frames.Frame): ...
+    def __init__(self, harmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, frame: org.orekit.frames.Frame): ...
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def acceleration(self, state: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], parameters: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
@@ -780,11 +784,11 @@ class OceanTides(org.orekit.forces.ForceModelModifier):
     
     """
     @typing.overload
-    def __init__(self, frame: org.orekit.frames.Frame, double: float, double2: float, boolean: bool, double3: float, int: int, int2: int, int3: int, iERSConventions: org.orekit.utils.IERSConventions, uT1Scale: org.orekit.time.UT1Scale): ...
+    def __init__(self, centralBodyFrame: org.orekit.frames.Frame, ae: float, mu: float, poleTide: bool, step: float, nbPoints: int, degree: int, order: int, conventions: org.orekit.utils.IERSConventions, ut1: org.orekit.time.UT1Scale): ...
     @typing.overload
-    def __init__(self, frame: org.orekit.frames.Frame, double: float, double2: float, boolean: bool, double3: float, int: int, int2: int, int3: int, iERSConventions: org.orekit.utils.IERSConventions, uT1Scale: org.orekit.time.UT1Scale, gravityFields: org.orekit.forces.gravity.potential.GravityFields): ...
+    def __init__(self, centralBodyFrame: org.orekit.frames.Frame, ae: float, mu: float, poleTide: bool, step: float, nbPoints: int, degree: int, order: int, conventions: org.orekit.utils.IERSConventions, ut1: org.orekit.time.UT1Scale, gravityFields: org.orekit.forces.gravity.potential.GravityFields): ...
     @typing.overload
-    def __init__(self, frame: org.orekit.frames.Frame, double: float, double2: float, int: int, int2: int, iERSConventions: org.orekit.utils.IERSConventions, uT1Scale: org.orekit.time.UT1Scale): ...
+    def __init__(self, centralBodyFrame: org.orekit.frames.Frame, ae: float, mu: float, degree: int, order: int, conventions: org.orekit.utils.IERSConventions, ut1: org.orekit.time.UT1Scale): ...
     def getUnderlyingModel(self) -> org.orekit.forces.ForceModel:
         """
         Description copied from interface: getUnderlyingModel Get the underlying force model.
@@ -904,9 +908,9 @@ class SolidTides(org.orekit.forces.ForceModelModifier):
     
     """
     @typing.overload
-    def __init__(self, frame: org.orekit.frames.Frame, double: float, double2: float, tideSystem: org.orekit.forces.gravity.potential.TideSystem, boolean: bool, double3: float, int: int, iERSConventions: org.orekit.utils.IERSConventions, uT1Scale: org.orekit.time.UT1Scale, *celestialBody: org.orekit.bodies.CelestialBody): ...
+    def __init__(self, centralBodyFrame: org.orekit.frames.Frame, ae: float, mu: float, centralTideSystem: org.orekit.forces.gravity.potential.TideSystem, poleTide: bool, step: float, nbPoints: int, conventions: org.orekit.utils.IERSConventions, ut1: org.orekit.time.UT1Scale, *bodies: org.orekit.bodies.CelestialBody): ...
     @typing.overload
-    def __init__(self, frame: org.orekit.frames.Frame, double: float, double2: float, tideSystem: org.orekit.forces.gravity.potential.TideSystem, iERSConventions: org.orekit.utils.IERSConventions, uT1Scale: org.orekit.time.UT1Scale, *celestialBody: org.orekit.bodies.CelestialBody): ...
+    def __init__(self, centralBodyFrame: org.orekit.frames.Frame, ae: float, mu: float, centralTideSystem: org.orekit.forces.gravity.potential.TideSystem, conventions: org.orekit.utils.IERSConventions, ut1: org.orekit.time.UT1Scale, *bodies: org.orekit.bodies.CelestialBody): ...
     def getUnderlyingModel(self) -> org.orekit.forces.ForceModel:
         """
         Description copied from interface: getUnderlyingModel Get the underlying force model.
@@ -940,9 +944,9 @@ class SingleBodyAbsoluteAttraction(AbstractBodyAttraction):
         InertialForces
     """
     @typing.overload
-    def __init__(self, celestialBody: org.orekit.bodies.CelestialBody): ...
+    def __init__(self, body: org.orekit.bodies.CelestialBody): ...
     @typing.overload
-    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], string: str, double: float): ...
+    def __init__(self, positionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], name: str, mu: float): ...
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def acceleration(self, s: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], parameters: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
@@ -979,9 +983,9 @@ class SingleBodyRelativeAttraction(AbstractBodyAttraction):
     Body attraction force model computed as relative acceleration towards frame center.
     """
     @typing.overload
-    def __init__(self, celestialBody: org.orekit.bodies.CelestialBody): ...
+    def __init__(self, body: org.orekit.bodies.CelestialBody): ...
     @typing.overload
-    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], string: str, double: float): ...
+    def __init__(self, positionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], name: str, mu: float): ...
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def acceleration(self, s: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], parameters: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
@@ -1018,9 +1022,9 @@ class ThirdBodyAttraction(AbstractBodyAttraction):
     Third body attraction force model.
     """
     @typing.overload
-    def __init__(self, celestialBody: org.orekit.bodies.CelestialBody): ...
+    def __init__(self, body: org.orekit.bodies.CelestialBody): ...
     @typing.overload
-    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], string: str, double: float): ...
+    def __init__(self, positionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], name: str, mu: float): ...
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def acceleration(self, s: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], parameters: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:

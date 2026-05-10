@@ -292,7 +292,24 @@ class EphemerisSegmentPropagator(org.orekit.propagation.analytical.AbstractAnaly
         
         """
         ...
-    def getVelocity(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def getVelocity(self, date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+        Description copied from interface: getVelocity Get the velocity of the body in the selected frame.
+        
+        Specified by: getVelocity in interface Propagator
+        
+        Specified by: getVelocity in interface PVCoordinatesProvider
+        
+        Parameters:
+            date (AbsoluteDate): current date
+            frame (Frame): the frame where to define the velocity
+        
+        Returns:
+            velocity of the body (m/s)
+        
+        
+        """
+        ...
     def propagateOrbit(self, date: org.orekit.time.AbsoluteDate) -> org.orekit.orbits.Orbit:
         """
         Description copied from class: propagateOrbit Extrapolate an orbit up to a specific target date.
@@ -481,7 +498,7 @@ class PythonAttitudeEphemerisFile(AttitudeEphemerisFile):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -544,7 +561,7 @@ class PythonAttitudeEphemerisFileParser(AttitudeEphemerisFileParser):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -575,7 +592,7 @@ class PythonAttitudeEphemerisFileWriter(AttitudeEphemerisFileWriter):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -583,9 +600,9 @@ class PythonAttitudeEphemerisFileWriter(AttitudeEphemerisFileWriter):
     _write_0__C = typing.TypeVar('_write_0__C', bound=org.orekit.utils.TimeStampedAngularCoordinates)  # <C>
     _write_0__S = typing.TypeVar('_write_0__S', bound=AttitudeEphemerisFile.AttitudeEphemerisSegment)  # <S>
     @typing.overload
-    def write(self, string: str, attitudeEphemerisFile: typing.Union[AttitudeEphemerisFile[_write_0__C, _write_0__S], typing.Callable[[], java.util.Map[str, AttitudeEphemerisFile.SatelliteAttitudeEphemeris[org.orekit.utils.TimeStampedAngularCoordinates, AttitudeEphemerisFile.AttitudeEphemerisSegment]]]]) -> None: ...
+    def write(self, writer: str, ephemerisFile: typing.Union[AttitudeEphemerisFile[_write_0__C, _write_0__S], typing.Callable[[], java.util.Map[str, AttitudeEphemerisFile.SatelliteAttitudeEphemeris[org.orekit.utils.TimeStampedAngularCoordinates, AttitudeEphemerisFile.AttitudeEphemerisSegment]]]]) -> None: ...
     @typing.overload
-    def write(self, appendable: java.lang.Appendable, attitudeEphemerisFile: typing.Union[AttitudeEphemerisFile, typing.Callable]) -> None: ...
+    def write(self, writer: java.lang.Appendable, ephemerisFile: typing.Union[AttitudeEphemerisFile, typing.Callable]) -> None: ...
 
 class PythonAttitudeEphemerisSegment(AttitudeEphemerisFile.AttitudeEphemerisSegment):
     def __init__(self): ...
@@ -708,7 +725,7 @@ class PythonAttitudeEphemerisSegment(AttitudeEphemerisFile.AttitudeEphemerisSegm
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -751,7 +768,7 @@ class PythonEphemerisFile(EphemerisFile):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -797,7 +814,7 @@ class PythonEphemerisFileParser(EphemerisFileParser):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -828,7 +845,7 @@ class PythonEphemerisFileWriter(EphemerisFileWriter):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -925,7 +942,7 @@ class PythonSatelliteAttitudeEphemeris(AttitudeEphemerisFile.SatelliteAttitudeEp
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

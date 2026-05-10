@@ -127,9 +127,9 @@ class ProcessEstimate:
         1.3
     """
     @typing.overload
-    def __init__(self, double: float, realVector: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix): ...
+    def __init__(self, time: float, state: org.hipparchus.linear.RealVector, covariance: org.hipparchus.linear.RealMatrix): ...
     @typing.overload
-    def __init__(self, double: float, realVector: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix, realMatrix2: org.hipparchus.linear.RealMatrix, realMatrix3: org.hipparchus.linear.RealMatrix, realMatrix4: org.hipparchus.linear.RealMatrix, realMatrix5: org.hipparchus.linear.RealMatrix): ...
+    def __init__(self, time: float, state: org.hipparchus.linear.RealVector, covariance: org.hipparchus.linear.RealMatrix, stateTransitionMatrix: org.hipparchus.linear.RealMatrix, measurementJacobian: org.hipparchus.linear.RealMatrix, innovationCovariance: org.hipparchus.linear.RealMatrix, kalmanGain: org.hipparchus.linear.RealMatrix): ...
     def getCovariance(self) -> org.hipparchus.linear.RealMatrix:
         """
         Get the state covariance.
@@ -252,8 +252,6 @@ class KalmanFilter(KalmanEstimate, typing.Generic[_KalmanFilter__T]):
 
 class KalmanSmoother(KalmanObserver):
     """
-    implements KalmanObserver
-    
     Kalman smoother for linear, extended or unscented filters.
     
     This implementation is attached to a filter using the observer mechanism. Once all measurements have been processed by the filter, the smoothing method can be called.
@@ -275,7 +273,8 @@ class KalmanSmoother(KalmanObserver):
          List<ProcessEstimate> smoothedStates = smoother.backwardsSmooth();
      
     
-          - "Särkkä, S. Bayesian Filtering and Smoothing. Cambridge 2013"
+    Also see:
+        "Särkkä, S. Bayesian Filtering and Smoothing. Cambridge 2013"
     """
     def __init__(self, decomposer: typing.Union[org.hipparchus.linear.MatrixDecomposer, typing.Callable]):
         """
@@ -325,8 +324,6 @@ class KalmanSmoother(KalmanObserver):
 _AbstractKalmanFilter__T = typing.TypeVar('_AbstractKalmanFilter__T', bound=Measurement)  # <T>
 class AbstractKalmanFilter(KalmanFilter[_AbstractKalmanFilter__T], typing.Generic[_AbstractKalmanFilter__T]):
     """
-    implements KalmanFilter<T>
-    
     Shared parts between linear and non-linear Kalman filters.
     
     Since:

@@ -147,6 +147,65 @@ class BodyFacade:
         """
         ...
 
+class CcsdsFrameMapper:
+    """
+    An interface for creating an Orekit Frame from the specification in a CCSDS NDM file. Note that CCSDS uses "frame" to mean only orientation, while Orekit uses "frame" to mean origin and orientation. Some NDM files provide different information, so there are several methods in the interface:
+    
+      - buildCcsdsFrame for when only an orientation is provided.
+        E.g. covariance section of an OEM.
+      - buildCcsdsFrame for when a center and orientation are
+        provided. E.g. in the trajectory section of an OEM.
+    
+    Notes for implementors: Orekit will shortcut frame transformations if frames are ==. So for best performance, memoize created frames, similar to how Frames is implemented. Also, getInertialFrame uses the closest frame ancestor by default, so it is better to do translations first, then rotations.
+    
+    Since:
+        13.1.5
+    """
+    @typing.overload
+    def buildCcsdsFrame(self, center: BodyFacade, orientation: 'FrameFacade', frameEpoch: org.orekit.time.AbsoluteDate) -> org.orekit.frames.Frame:
+        """
+        Create an Orekit Frame from the center, alignment, and epoch specified in a CCSDS NDM.
+        
+        Parameters:
+            center (BodyFacade): the origin of the returned frame.
+            orientation (FrameFacade): the attitude of the returned frame.
+            frameEpoch (AbsoluteDate): the epoch of the returned frame, if not intrinsic to the definition of the reference frame. May be null if not
+                specified in the file. Many frames will ignore this value.
+        
+        Returns:
+            a Frame with the given center and orientation. Never null.
+        
+        Raises:
+            OrekitException: if a frame cannot be constructed for the given center and orientation.
+        
+        Since:
+            13.1.5
+        
+        
+        """
+        ...
+    @typing.overload
+    def buildCcsdsFrame(self, orientation: 'FrameFacade', frameEpoch: org.orekit.time.AbsoluteDate) -> org.orekit.frames.Frame:
+        """
+        Create an Orekit Frame from the alignment specified in a CCSDS NDM.
+        
+        Parameters:
+            orientation (FrameFacade): the attitude of the returned frame.
+            frameEpoch (AbsoluteDate): the epoch of the returned frame, if not intrinsic to the definition of the reference frame. May be null if not
+                specified in the file. Many frames will ignore this value.
+        
+        Returns:
+            a Frame with the given orientation. Never null.
+        
+        Raises:
+            OrekitException: if a frame cannot be constructed for the given orientation.
+        
+        Since:
+            13.1.5
+        
+        """
+        ...
+
 class CelestialBodyFrame(java.lang.Enum['CelestialBodyFrame']):
     """
     Frames used in CCSDS Orbit Data Messages.
@@ -1515,12 +1574,72 @@ class YesNoUnknown(java.lang.Enum['YesNoUnknown']):
         """
         ...
 
+class OrekitCcsdsFrameMapper(CcsdsFrameMapper):
+    """
+    Orekit's default implementation of CcsdsFrameMapper.
+    
+    Since:
+        13.1.5
+    """
+    def __init__(self): ...
+    @typing.overload
+    def buildCcsdsFrame(self, center: BodyFacade, orientation: FrameFacade, frameEpoch: org.orekit.time.AbsoluteDate) -> org.orekit.frames.Frame:
+        """
+        Description copied from interface: buildCcsdsFrame Create an Orekit Frame from the center, alignment, and epoch specified in a CCSDS NDM.
+        
+        Specified by: buildCcsdsFrame in interface CcsdsFrameMapper
+        
+        Parameters:
+            center (BodyFacade): the origin of the returned frame.
+            orientation (FrameFacade): the attitude of the returned frame.
+            frameEpoch (AbsoluteDate): the epoch of the returned frame, if not intrinsic to the definition of the reference frame. May be null if not
+                specified in the file. Many frames will ignore this value.
+        
+        Returns:
+            a Frame with the given center and orientation. Never null.
+        
+        
+        """
+        ...
+    @typing.overload
+    def buildCcsdsFrame(self, orientation: FrameFacade, frameEpoch: org.orekit.time.AbsoluteDate) -> org.orekit.frames.Frame:
+        """
+        Description copied from interface: buildCcsdsFrame Create an Orekit Frame from the alignment specified in a CCSDS NDM.
+        
+        Specified by: buildCcsdsFrame in interface CcsdsFrameMapper
+        
+        Parameters:
+            orientation (FrameFacade): the attitude of the returned frame.
+            frameEpoch (AbsoluteDate): the epoch of the returned frame, if not intrinsic to the definition of the reference frame. May be null if not
+                specified in the file. Many frames will ignore this value.
+        
+        Returns:
+            a Frame with the given orientation. Never null.
+        
+        """
+        ...
+    def equals(self, obj: typing.Any) -> bool:
+        """
+        Overrides: Object in class Object
+        
+        
+        """
+        ...
+    def hashCode(self) -> int:
+        """
+        Overrides: Object in class Object
+        
+        
+        """
+        ...
+
 
 class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.definitions")``.
 
     AdMethodType: typing.Type[AdMethodType]
     BodyFacade: typing.Type[BodyFacade]
+    CcsdsFrameMapper: typing.Type[CcsdsFrameMapper]
     CelestialBodyFrame: typing.Type[CelestialBodyFrame]
     CenterName: typing.Type[CenterName]
     DutyCycleType: typing.Type[DutyCycleType]
@@ -1530,6 +1649,7 @@ class __module_protocol__(Protocol):
     OdMethodType: typing.Type[OdMethodType]
     OnOff: typing.Type[OnOff]
     OrbitRelativeFrame: typing.Type[OrbitRelativeFrame]
+    OrekitCcsdsFrameMapper: typing.Type[OrekitCcsdsFrameMapper]
     PocMethodFacade: typing.Type[PocMethodFacade]
     PocMethodType: typing.Type[PocMethodType]
     SpacecraftBodyFrame: typing.Type[SpacecraftBodyFrame]

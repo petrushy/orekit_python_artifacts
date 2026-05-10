@@ -673,7 +673,7 @@ class PythonAbstractWriter(AbstractWriter):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -719,7 +719,7 @@ class PythonSection(Section):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -883,6 +883,19 @@ class Metadata(CommentsContainer):
     Since:
         11.0
     """
+    def getFrameMapper(self) -> org.orekit.files.ccsds.definitions.CcsdsFrameMapper:
+        """
+        Get the mapping between a CCSDS frame and a Frame.
+        
+        Returns:
+            the frame mapper.
+        
+        Since:
+            13.1.5
+        
+        
+        """
+        ...
     def getTimeSystem(self) -> org.orekit.files.ccsds.definitions.TimeSystem:
         """
         Get the Time System that: for OPM, is used for metadata, state vector, maneuver and covariance data, for OMM, is used for metadata, orbit state and covariance data, for OEM, is used for metadata, ephemeris and covariance data.
@@ -945,7 +958,7 @@ class PyhonData(Data):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

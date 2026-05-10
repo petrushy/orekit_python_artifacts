@@ -137,7 +137,15 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
         
         """
         ...
-    def clearMatricesComputation(self) -> None: ...
+    def clearMatricesComputation(self) -> None:
+        """
+        Description copied from class: clearMatricesComputation Erases the internal matrices harvester.
+        
+        Overrides: clearMatricesComputation in class AbstractPropagator
+        
+        
+        """
+        ...
     def getAdditionalDerivativesProviders(self) -> java.util.List['AdditionalDerivativesProvider']:
         """
         Get an unmodifiable list of providers for additional derivatives.
@@ -297,7 +305,7 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
         """
         ...
     @typing.overload
-    def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.propagation.SpacecraftState:
+    def propagate(self, target: org.orekit.time.AbsoluteDate) -> org.orekit.propagation.SpacecraftState:
         """
         Propagate towards a target date.
         
@@ -328,7 +336,7 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
         """
         ...
     @typing.overload
-    def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> org.orekit.propagation.SpacecraftState: ...
+    def propagate(self, tStart: org.orekit.time.AbsoluteDate, tEnd: org.orekit.time.AbsoluteDate) -> org.orekit.propagation.SpacecraftState: ...
     @typing.overload
     def resetInitialState(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
         """
@@ -349,7 +357,7 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
         """
         ...
     @typing.overload
-    def resetInitialState(self, spacecraftState: org.orekit.propagation.SpacecraftState, propagationType: org.orekit.propagation.PropagationType) -> None: ...
+    def resetInitialState(self, state: org.orekit.propagation.SpacecraftState, stateType: org.orekit.propagation.PropagationType) -> None: ...
     def setAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None:
         """
         Set attitude provider.
@@ -742,13 +750,13 @@ class FieldAbstractIntegratedPropagator(org.orekit.propagation.FieldAbstractProp
         """
         ...
     @typing.overload
-    def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldAbstractIntegratedPropagator__T]) -> org.orekit.propagation.FieldSpacecraftState[_FieldAbstractIntegratedPropagator__T]: ...
+    def propagate(self, target: org.orekit.time.FieldAbsoluteDate[_FieldAbstractIntegratedPropagator__T]) -> org.orekit.propagation.FieldSpacecraftState[_FieldAbstractIntegratedPropagator__T]: ...
     @typing.overload
-    def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldAbstractIntegratedPropagator__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_FieldAbstractIntegratedPropagator__T]) -> org.orekit.propagation.FieldSpacecraftState[_FieldAbstractIntegratedPropagator__T]: ...
+    def propagate(self, tStart: org.orekit.time.FieldAbsoluteDate[_FieldAbstractIntegratedPropagator__T], tEnd: org.orekit.time.FieldAbsoluteDate[_FieldAbstractIntegratedPropagator__T]) -> org.orekit.propagation.FieldSpacecraftState[_FieldAbstractIntegratedPropagator__T]: ...
     @typing.overload
     def resetInitialState(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldAbstractIntegratedPropagator__T]) -> None: ...
     @typing.overload
-    def resetInitialState(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldAbstractIntegratedPropagator__T], propagationType: org.orekit.propagation.PropagationType) -> None: ...
+    def resetInitialState(self, state: org.orekit.propagation.FieldSpacecraftState[_FieldAbstractIntegratedPropagator__T], stateType: org.orekit.propagation.PropagationType) -> None: ...
     def setAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None:
         """
         Set attitude provider.
@@ -1185,7 +1193,7 @@ class FieldStateMapper(typing.Generic[_FieldStateMapper__T]):
     @typing.overload
     def mapDoubleToDate(self, t: _FieldStateMapper__T) -> org.orekit.time.FieldAbsoluteDate[_FieldStateMapper__T]: ...
     @typing.overload
-    def mapDoubleToDate(self, t: _FieldStateMapper__T, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldStateMapper__T]) -> org.orekit.time.FieldAbsoluteDate[_FieldStateMapper__T]: ...
+    def mapDoubleToDate(self, t: _FieldStateMapper__T, date: org.orekit.time.FieldAbsoluteDate[_FieldStateMapper__T]) -> org.orekit.time.FieldAbsoluteDate[_FieldStateMapper__T]: ...
     def mapStateToArray(self, state: org.orekit.propagation.FieldSpacecraftState[_FieldStateMapper__T], y: typing.Union[typing.List[_FieldStateMapper__T], jpype.JArray], yDot: typing.Union[typing.List[_FieldStateMapper__T], jpype.JArray]) -> None:
         """
         Map a spacecraft state to raw double components.
@@ -1458,7 +1466,7 @@ class StateMapper:
         """
         ...
     @typing.overload
-    def mapArrayToState(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.SpacecraftState:
+    def mapArrayToState(self, t: org.orekit.time.AbsoluteDate, y: typing.Union[typing.List[float], jpype.JArray], yDot: typing.Union[typing.List[float], jpype.JArray], type: org.orekit.propagation.PropagationType) -> org.orekit.propagation.SpacecraftState:
         """
         Map the raw double components to a spacecraft state.
         
@@ -1501,7 +1509,7 @@ class StateMapper:
         """
         ...
     @typing.overload
-    def mapDoubleToDate(self, double: float) -> org.orekit.time.AbsoluteDate:
+    def mapDoubleToDate(self, t: float) -> org.orekit.time.AbsoluteDate:
         """
         Map the raw double time offset to a date.
         
@@ -1525,7 +1533,7 @@ class StateMapper:
         """
         ...
     @typing.overload
-    def mapDoubleToDate(self, double: float, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.time.AbsoluteDate: ...
+    def mapDoubleToDate(self, t: float, date: org.orekit.time.AbsoluteDate) -> org.orekit.time.AbsoluteDate: ...
     def mapStateToArray(self, state: org.orekit.propagation.SpacecraftState, y: typing.Union[typing.List[float], jpype.JArray], yDot: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
         Map a spacecraft state to raw double components.
@@ -1561,7 +1569,7 @@ class PythonAbstractGradientConverter(AbstractGradientConverter):
         """
         ...
     @typing.overload
-    def extend(self, gradient: org.hipparchus.analysis.differentiation.Gradient, int: int) -> org.hipparchus.analysis.differentiation.Gradient:
+    def extend(self, original: org.hipparchus.analysis.differentiation.Gradient, freeParameters: int) -> org.hipparchus.analysis.differentiation.Gradient:
         """
         Add zero derivatives.
         
@@ -1604,9 +1612,9 @@ class PythonAbstractGradientConverter(AbstractGradientConverter):
         """
         ...
     @typing.overload
-    def extend(self, fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.Gradient], int: int) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def extend(self, original: org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.Gradient], freeParameters: int) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.Gradient]: ...
     @typing.overload
-    def extend(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.Gradient], int: int) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def extend(self, original: org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.Gradient], freeParameters: int) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.Gradient]: ...
     def finalize(self) -> None:
         """
         Part of JCC Python interface to object
@@ -1642,14 +1650,14 @@ class PythonAbstractGradientConverter(AbstractGradientConverter):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
         ...
 
 class PythonAbstractIntegratedPropagator(AbstractIntegratedPropagator):
-    def __init__(self, oDEIntegrator: org.hipparchus.ode.ODEIntegrator, propagationType: org.orekit.propagation.PropagationType): ...
+    def __init__(self, integrator: org.hipparchus.ode.ODEIntegrator, propagationType: org.orekit.propagation.PropagationType): ...
     def createMapper(self, referenceDate: org.orekit.time.AbsoluteDate, mu: float, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame: org.orekit.frames.Frame) -> StateMapper:
         """
         Create a mapper between raw double components and spacecraft state. /** Simple constructor.
@@ -1710,7 +1718,7 @@ class PythonAbstractIntegratedPropagator(AbstractIntegratedPropagator):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1794,7 +1802,7 @@ class PythonAdditionalDerivativesProvider(AdditionalDerivativesProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1828,7 +1836,7 @@ class PythonAdditionalDerivativesProvider(AdditionalDerivativesProvider):
 
 _PythonFieldAbstractIntegratedPropagator__T = typing.TypeVar('_PythonFieldAbstractIntegratedPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldAbstractIntegratedPropagator(FieldAbstractIntegratedPropagator[_PythonFieldAbstractIntegratedPropagator__T], typing.Generic[_PythonFieldAbstractIntegratedPropagator__T]):
-    def __init__(self, integrator: org.hipparchus.Field[_PythonFieldAbstractIntegratedPropagator__T], propagationType: org.hipparchus.ode.FieldODEIntegrator[_PythonFieldAbstractIntegratedPropagator__T], field: org.orekit.propagation.PropagationType):
+    def __init__(self, field: org.hipparchus.Field[_PythonFieldAbstractIntegratedPropagator__T], integrator: org.hipparchus.ode.FieldODEIntegrator[_PythonFieldAbstractIntegratedPropagator__T], propagationType: org.orekit.propagation.PropagationType):
         """
         Build a new instance.
         
@@ -1900,7 +1908,7 @@ class PythonFieldAbstractIntegratedPropagator(FieldAbstractIntegratedPropagator[
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1975,7 +1983,7 @@ class PythonFieldAdditionalDerivativesProvider(FieldAdditionalDerivativesProvide
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
     def yields(self, state: org.orekit.propagation.FieldSpacecraftState[_PythonFieldAdditionalDerivativesProvider__T]) -> bool:
         """
         Description copied from interface: yields Check if this provider should yield so another provider has an opportunity to add missing parts.
@@ -2034,9 +2042,9 @@ class PythonFieldStateMapper(FieldStateMapper[_PythonFieldStateMapper__T], typin
         """
         ...
     @typing.overload
-    def mapArrayToState(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldStateMapper__T], tArray: typing.Union[typing.List[_PythonFieldStateMapper__T], jpype.JArray], tArray2: typing.Union[typing.List[_PythonFieldStateMapper__T], jpype.JArray], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.FieldSpacecraftState[_PythonFieldStateMapper__T]: ...
+    def mapArrayToState(self, date: org.orekit.time.FieldAbsoluteDate[_PythonFieldStateMapper__T], y: typing.Union[typing.List[_PythonFieldStateMapper__T], jpype.JArray], yDot: typing.Union[typing.List[_PythonFieldStateMapper__T], jpype.JArray], type: org.orekit.propagation.PropagationType) -> org.orekit.propagation.FieldSpacecraftState[_PythonFieldStateMapper__T]: ...
     @typing.overload
-    def mapArrayToState(self, t: _PythonFieldStateMapper__T, tArray: typing.Union[typing.List[_PythonFieldStateMapper__T], jpype.JArray], tArray2: typing.Union[typing.List[_PythonFieldStateMapper__T], jpype.JArray], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.FieldSpacecraftState[_PythonFieldStateMapper__T]: ...
+    def mapArrayToState(self, date: _PythonFieldStateMapper__T, y: typing.Union[typing.List[_PythonFieldStateMapper__T], jpype.JArray], yDot: typing.Union[typing.List[_PythonFieldStateMapper__T], jpype.JArray], type: org.orekit.propagation.PropagationType) -> org.orekit.propagation.FieldSpacecraftState[_PythonFieldStateMapper__T]: ...
     def mapStateToArray(self, state: org.orekit.propagation.FieldSpacecraftState[_PythonFieldStateMapper__T], y: typing.Union[typing.List[_PythonFieldStateMapper__T], jpype.JArray], yDot: typing.Union[typing.List[_PythonFieldStateMapper__T], jpype.JArray]) -> None:
         """
         Map a spacecraft state to raw double components.
@@ -2063,7 +2071,7 @@ class PythonFieldStateMapper(FieldStateMapper[_PythonFieldStateMapper__T], typin
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2119,7 +2127,7 @@ class PythonStateMapper(StateMapper):
         """
         ...
     @typing.overload
-    def mapArrayToState(self, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.SpacecraftState: ...
+    def mapArrayToState(self, date: float, y: typing.Union[typing.List[float], jpype.JArray], yDot: typing.Union[typing.List[float], jpype.JArray], type: org.orekit.propagation.PropagationType) -> org.orekit.propagation.SpacecraftState: ...
     def mapStateToArray(self, state: org.orekit.propagation.SpacecraftState, y: typing.Union[typing.List[float], jpype.JArray], yDot: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
         Map a spacecraft state to raw double components.
@@ -2146,7 +2154,7 @@ class PythonStateMapper(StateMapper):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

@@ -161,7 +161,7 @@ class NeQuickModel(org.orekit.models.earth.ionosphere.IonosphericModel, org.orek
     _electronDensity_2__T = typing.TypeVar('_electronDensity_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _electronDensity_3__T = typing.TypeVar('_electronDensity_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def electronDensity(self, fourierTimeSeries: FourierTimeSeries, double: float, double2: float, double3: float) -> float:
+    def electronDensity(self, fourierTimeSeries: FourierTimeSeries, latitude: float, longitude: float, h: float) -> float:
         """
         Computes the electron density at a given height.
         
@@ -195,9 +195,9 @@ class NeQuickModel(org.orekit.models.earth.ionosphere.IonosphericModel, org.orek
         """
         ...
     @typing.overload
-    def electronDensity(self, dateTimeComponents: org.orekit.time.DateTimeComponents, double: float, double2: float, double3: float, double4: float) -> float: ...
+    def electronDensity(self, dateTime: org.orekit.time.DateTimeComponents, az: float, latitude: float, longitude: float, h: float) -> float: ...
     @typing.overload
-    def electronDensity(self, fieldFourierTimeSeries: FieldFourierTimeSeries[_electronDensity_2__T], t: _electronDensity_2__T, t2: _electronDensity_2__T, t3: _electronDensity_2__T) -> _electronDensity_2__T:
+    def electronDensity(self, fourierTimeSeries: FieldFourierTimeSeries[_electronDensity_2__T], latitude: _electronDensity_2__T, longitude: _electronDensity_2__T, h: _electronDensity_2__T) -> _electronDensity_2__T:
         """
         Computes the electron density at a given height.
         
@@ -232,7 +232,7 @@ class NeQuickModel(org.orekit.models.earth.ionosphere.IonosphericModel, org.orek
         """
         ...
     @typing.overload
-    def electronDensity(self, dateTimeComponents: org.orekit.time.DateTimeComponents, t: _electronDensity_3__T, t2: _electronDensity_3__T, t3: _electronDensity_3__T, t4: _electronDensity_3__T) -> _electronDensity_3__T: ...
+    def electronDensity(self, dateTime: org.orekit.time.DateTimeComponents, az: _electronDensity_3__T, latitude: _electronDensity_3__T, longitude: _electronDensity_3__T, h: _electronDensity_3__T) -> _electronDensity_3__T: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]:
         """
         Get the drivers for parameters.
@@ -261,7 +261,7 @@ class NeQuickModel(org.orekit.models.earth.ionosphere.IonosphericModel, org.orek
     _pathDelay_2__T = typing.TypeVar('_pathDelay_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _pathDelay_3__T = typing.TypeVar('_pathDelay_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
+    def pathDelay(self, state: org.orekit.propagation.SpacecraftState, baseFrame: org.orekit.frames.TopocentricFrame, frequency: float, parameters: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
         Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
@@ -301,9 +301,9 @@ class NeQuickModel(org.orekit.models.earth.ionosphere.IonosphericModel, org.orek
         """
         ...
     @typing.overload
-    def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, absoluteDate: org.orekit.time.AbsoluteDate, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def pathDelay(self, state: org.orekit.propagation.SpacecraftState, baseFrame: org.orekit.frames.TopocentricFrame, receptionDate: org.orekit.time.AbsoluteDate, frequency: float, parameters: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_2__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.Union[typing.List[_pathDelay_2__T], jpype.JArray]) -> _pathDelay_2__T:
+    def pathDelay(self, state: org.orekit.propagation.FieldSpacecraftState[_pathDelay_2__T], baseFrame: org.orekit.frames.TopocentricFrame, frequency: float, parameters: typing.Union[typing.List[_pathDelay_2__T], jpype.JArray]) -> _pathDelay_2__T:
         """
         Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
@@ -344,7 +344,7 @@ class NeQuickModel(org.orekit.models.earth.ionosphere.IonosphericModel, org.orek
         """
         ...
     @typing.overload
-    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_3__T], topocentricFrame: org.orekit.frames.TopocentricFrame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_3__T], double: float, tArray: typing.Union[typing.List[_pathDelay_3__T], jpype.JArray]) -> _pathDelay_3__T: ...
+    def pathDelay(self, state: org.orekit.propagation.FieldSpacecraftState[_pathDelay_3__T], baseFrame: org.orekit.frames.TopocentricFrame, receptionDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_3__T], frequency: float, parameters: typing.Union[typing.List[_pathDelay_3__T], jpype.JArray]) -> _pathDelay_3__T: ...
     _stec_1__T = typing.TypeVar('_stec_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def stec(self, date: org.orekit.time.AbsoluteDate, recP: org.orekit.bodies.GeodeticPoint, satP: org.orekit.bodies.GeodeticPoint) -> float:
@@ -386,9 +386,9 @@ class NeQuickParameters:
         Frequency Users. 1.2.", R
     """
     @typing.overload
-    def __init__(self, fourierTimeSeries: FourierTimeSeries, double: float, double2: float, double3: float): ...
+    def __init__(self, fourierTimeSeries: FourierTimeSeries, latitude: float, longitude: float, modip: float): ...
     @typing.overload
-    def __init__(self, dateTimeComponents: org.orekit.time.DateTimeComponents, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], double3: float, double4: float, double5: float, double6: float): ...
+    def __init__(self, dateTime: org.orekit.time.DateTimeComponents, flattenF2: typing.Union[typing.List[float], jpype.JArray], flattenFm3: typing.Union[typing.List[float], jpype.JArray], latitude: float, longitude: float, az: float, modip: float): ...
     def getAzr(self) -> float:
         """
         Get effective sunspot number.
@@ -725,9 +725,9 @@ class NeQuickGalileo(NeQuickModel):
         13.0
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, alpha: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, alpha: typing.Union[typing.List[float], jpype.JArray], utc: org.orekit.time.TimeScale): ...
     def getAlpha(self) -> typing.MutableSequence[float]:
         """
         Get effective ionisation level coefficients.

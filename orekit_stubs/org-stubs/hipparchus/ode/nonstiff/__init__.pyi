@@ -19,31 +19,10 @@ class AdamsFieldIntegrator(org.hipparchus.ode.MultistepFieldIntegrator[_AdamsFie
     """
     Base class for AdamsBashforthFieldIntegrator and AdamsMoultonFieldIntegrator integrators.
     """
-    def integrate(self, equations: org.hipparchus.ode.FieldExpandableODE[_AdamsFieldIntegrator__T], initialState: org.hipparchus.ode.FieldODEState[_AdamsFieldIntegrator__T], finalTime: _AdamsFieldIntegrator__T) -> org.hipparchus.ode.FieldODEStateAndDerivative[_AdamsFieldIntegrator__T]:
-        """
-        Integrate the differential equations up to the given time.
-        
-        This method solves an Initial Value Problem (IVP).
-        
-        Since this method stores some internal state variables made available in its public interface during integration (getCurrentSignedStepsize), it is not thread-safe.
-        
-        Parameters:
-            equations (FieldExpandableODE<AdamsFieldIntegrator> equations): differential equations to integrate
-            initialState (FieldODEState<AdamsFieldIntegrator> initialState): initial state (time, primary and secondary state vectors)
-            finalTime (AdamsFieldIntegrator): target time for the integration (can be set to a value smaller than t0 for backward integration)
-        
-        Returns:
-            final state, its time will be the same as finalTime if integration reached its target, but may be different if
-            some FieldODEEventHandler stops it at some point.
-        
-        Raises:
-            hipparchus: if integration step is too small
-            hipparchus: if the location of an event cannot be bracketed
-            hipparchus: if the number of functions evaluations is exceeded
-        
-        
-        """
-        ...
+    @typing.overload
+    def integrate(self, equations: org.hipparchus.ode.FieldOrdinaryDifferentialEquation[_AdamsFieldIntegrator__T], initialState: org.hipparchus.ode.FieldODEState[_AdamsFieldIntegrator__T], finalTime: _AdamsFieldIntegrator__T) -> org.hipparchus.ode.FieldODEStateAndDerivative[_AdamsFieldIntegrator__T]: ...
+    @typing.overload
+    def integrate(self, equations: org.hipparchus.ode.FieldExpandableODE[_AdamsFieldIntegrator__T], initialState: org.hipparchus.ode.FieldODEState[_AdamsFieldIntegrator__T], finalTime: _AdamsFieldIntegrator__T) -> org.hipparchus.ode.FieldODEStateAndDerivative[_AdamsFieldIntegrator__T]: ...
     def updateHighOrderDerivativesPhase1(self, highOrder: org.hipparchus.linear.Array2DRowFieldMatrix[_AdamsFieldIntegrator__T]) -> org.hipparchus.linear.Array2DRowFieldMatrix[_AdamsFieldIntegrator__T]:
         """
         Update the high order scaled derivatives for Adams integrators (phase 1).
@@ -56,8 +35,8 @@ class AdamsFieldIntegrator(org.hipparchus.ode.MultistepFieldIntegrator[_AdamsFie
         Returns:
             updated high order derivatives
         
-              - updateHighOrderDerivativesPhase2
-        
+        Also see:
+            updateHighOrderDerivativesPhase2
         
         
         """
@@ -75,8 +54,8 @@ class AdamsFieldIntegrator(org.hipparchus.ode.MultistepFieldIntegrator[_AdamsFie
             end (AdamsFieldIntegrator[]): first order scaled derivatives at step end
             highOrder (hipparchus<AdamsFieldIntegrator> highOrder): high order scaled derivatives, will be modified (h :sup:`2` /2 y''... h :sup:`k` /k! y(k))
         
-              - updateHighOrderDerivativesPhase1
-        
+        Also see:
+            updateHighOrderDerivativesPhase1
         
         
         """
@@ -87,9 +66,9 @@ class AdamsIntegrator(org.hipparchus.ode.MultistepIntegrator):
     Base class for AdamsBashforthIntegrator and AdamsMoultonIntegrator integrators.
     """
     @typing.overload
-    def integrate(self, ordinaryDifferentialEquation: org.hipparchus.ode.OrdinaryDifferentialEquation, oDEState: org.hipparchus.ode.ODEState, double: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
+    def integrate(self, equations: org.hipparchus.ode.OrdinaryDifferentialEquation, initialState: org.hipparchus.ode.ODEState, finalTime: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
     @typing.overload
-    def integrate(self, expandableODE: org.hipparchus.ode.ExpandableODE, oDEState: org.hipparchus.ode.ODEState, double: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
+    def integrate(self, equations: org.hipparchus.ode.ExpandableODE, initialState: org.hipparchus.ode.ODEState, finalTime: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
     def updateHighOrderDerivativesPhase1(self, highOrder: org.hipparchus.linear.Array2DRowRealMatrix) -> org.hipparchus.linear.Array2DRowRealMatrix:
         """
         Update the high order scaled derivatives for Adams integrators (phase 1).
@@ -102,8 +81,8 @@ class AdamsIntegrator(org.hipparchus.ode.MultistepIntegrator):
         Returns:
             updated high order derivatives
         
-              - updateHighOrderDerivativesPhase2
-        
+        Also see:
+            updateHighOrderDerivativesPhase2
         
         
         """
@@ -121,8 +100,8 @@ class AdamsIntegrator(org.hipparchus.ode.MultistepIntegrator):
             end (double[]): first order scaled derivatives at step end
             highOrder (hipparchus): high order scaled derivatives, will be modified (h :sup:`2` /2 y''... h :sup:`k` /k! y(k))
         
-              - updateHighOrderDerivativesPhase1
-        
+        Also see:
+            updateHighOrderDerivativesPhase1
         
         
         """
@@ -216,8 +195,8 @@ class AdamsNordsieckFieldTransformer(typing.Generic[_AdamsNordsieckFieldTransfor
         Returns:
             updated high order derivatives
         
-              - updateHighOrderDerivativesPhase2
-        
+        Also see:
+            updateHighOrderDerivativesPhase2
         
         
         """
@@ -235,8 +214,8 @@ class AdamsNordsieckFieldTransformer(typing.Generic[_AdamsNordsieckFieldTransfor
             end (AdamsNordsieckFieldTransformer[]): first order scaled derivatives at step end
             highOrder (hipparchus<AdamsNordsieckFieldTransformer> highOrder): high order scaled derivatives, will be modified (h :sup:`2` /2 y''... h :sup:`k` /k! y(k))
         
-              - updateHighOrderDerivativesPhase1
-        
+        Also see:
+            updateHighOrderDerivativesPhase1
         
         
         """
@@ -327,8 +306,8 @@ class AdamsNordsieckTransformer:
         Returns:
             updated high order derivatives
         
-              - updateHighOrderDerivativesPhase2
-        
+        Also see:
+            updateHighOrderDerivativesPhase2
         
         
         """
@@ -346,8 +325,8 @@ class AdamsNordsieckTransformer:
             end (double[]): first order scaled derivatives at step end
             highOrder (hipparchus): high order scaled derivatives, will be modified (h :sup:`2` /2 y''... h :sup:`k` /k! y(k))
         
-              - updateHighOrderDerivativesPhase1
-        
+        Also see:
+            updateHighOrderDerivativesPhase1
         
         
         """
@@ -426,7 +405,7 @@ class AdaptiveStepsizeFieldIntegrator(org.hipparchus.ode.AbstractFieldIntegrator
         """
         ...
     @typing.overload
-    def setStepSizeControl(self, double: float, double2: float, double3: float, double4: float) -> None:
+    def setStepSizeControl(self, minimalStep: float, maximalStep: float, absoluteTolerance: float, relativeTolerance: float) -> None:
         """
         Set the adaptive step size control parameters.
         
@@ -452,7 +431,7 @@ class AdaptiveStepsizeFieldIntegrator(org.hipparchus.ode.AbstractFieldIntegrator
         """
         ...
     @typing.overload
-    def setStepSizeControl(self, double: float, double2: float, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
+    def setStepSizeControl(self, minimalStep: float, maximalStep: float, absoluteTolerance: typing.Union[typing.List[float], jpype.JArray], relativeTolerance: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
 
 class AdaptiveStepsizeIntegrator(org.hipparchus.ode.AbstractIntegrator):
     """
@@ -526,7 +505,7 @@ class AdaptiveStepsizeIntegrator(org.hipparchus.ode.AbstractIntegrator):
         """
         ...
     @typing.overload
-    def setStepSizeControl(self, double: float, double2: float, double3: float, double4: float) -> None:
+    def setStepSizeControl(self, minimalStep: float, maximalStep: float, absoluteTolerance: float, relativeTolerance: float) -> None:
         """
         Set the adaptive step size control parameters.
         
@@ -552,14 +531,15 @@ class AdaptiveStepsizeIntegrator(org.hipparchus.ode.AbstractIntegrator):
         """
         ...
     @typing.overload
-    def setStepSizeControl(self, double: float, double2: float, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
+    def setStepSizeControl(self, minimalStep: float, maximalStep: float, absoluteTolerance: typing.Union[typing.List[float], jpype.JArray], relativeTolerance: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
 
 class ButcherArrayProvider:
     """
     This interface represents an integrator based on Butcher arrays.
     
-          - FixedStepRungeKuttaIntegrator
-          - EmbeddedRungeKuttaIntegrator
+    Also see:
+        FixedStepRungeKuttaIntegrator,
+        EmbeddedRungeKuttaIntegrator
     """
     def getA(self) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
@@ -597,8 +577,9 @@ class FieldButcherArrayProvider(typing.Generic[_FieldButcherArrayProvider__T]):
     """
     This interface represents an integrator based on Butcher arrays.
     
-          - FixedStepRungeKuttaFieldIntegrator
-          - EmbeddedRungeKuttaFieldIntegrator
+    Also see:
+        FixedStepRungeKuttaFieldIntegrator,
+        EmbeddedRungeKuttaFieldIntegrator
     """
     def getA(self) -> typing.MutableSequence[typing.MutableSequence[_FieldButcherArrayProvider__T]]:
         """
@@ -644,9 +625,9 @@ class StepsizeHelper:
     def __init__(self, double: float, double2: float, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]): ...
     _filterStep_1__T = typing.TypeVar('_filterStep_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def filterStep(self, double: float, boolean: bool, boolean2: bool) -> float: ...
+    def filterStep(self, h: float, forward: bool, acceptSmall: bool) -> float: ...
     @typing.overload
-    def filterStep(self, t: _filterStep_1__T, boolean: bool, boolean2: bool) -> _filterStep_1__T: ...
+    def filterStep(self, h: _filterStep_1__T, forward: bool, acceptSmall: bool) -> _filterStep_1__T: ...
     def getDummyStepsize(self) -> float:
         """
         Get a dummy step size.
@@ -804,8 +785,8 @@ class AdamsBashforthFieldIntegrator(AdamsFieldIntegrator[_AdamsBashforthFieldInt
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -862,8 +843,8 @@ class AdamsBashforthIntegrator(AdamsIntegrator):
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -933,8 +914,8 @@ class AdamsMoultonFieldIntegrator(AdamsFieldIntegrator[_AdamsMoultonFieldIntegra
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1003,8 +984,8 @@ class AdamsMoultonIntegrator(AdamsIntegrator):
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1024,9 +1005,10 @@ class ExplicitRungeKuttaIntegrator(ButcherArrayProvider, org.hipparchus.ode.ODEI
     Since:
         3.1
     
-          - ButcherArrayProvider
-          - FixedStepRungeKuttaIntegrator
-          - EmbeddedRungeKuttaIntegrator
+    Also see:
+        ButcherArrayProvider,
+        FixedStepRungeKuttaIntegrator,
+        EmbeddedRungeKuttaIntegrator
     """
     @staticmethod
     def applyExternalButcherWeights(y0: typing.Union[typing.List[float], jpype.JArray], yDotK: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], h: float, b: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
@@ -1034,8 +1016,8 @@ class ExplicitRungeKuttaIntegrator(ButcherArrayProvider, org.hipparchus.ode.ODEI
         Apply external weights of Butcher array, assuming internal ones have been applied.
         
         Parameters:
-            y0 (double[]): initial value of the state vector at t0
-            yDotK (double[][]): output of stages
+            yDotK (double[]): output of stages
+            y0 (double[][]): initial value of the state vector at t0
             h (double): step size
             b (double[]): external weights of Butcher array
         
@@ -1107,21 +1089,22 @@ class FieldExplicitRungeKuttaIntegrator(FieldButcherArrayProvider[_FieldExplicit
     Since:
         3.1
     
-          - FieldButcherArrayProvider
-          - FixedStepRungeKuttaFieldIntegrator
-          - EmbeddedRungeKuttaFieldIntegrator
+    Also see:
+        FieldButcherArrayProvider,
+        FixedStepRungeKuttaFieldIntegrator,
+        EmbeddedRungeKuttaFieldIntegrator
     """
     _applyExternalButcherWeights_0__T = typing.TypeVar('_applyExternalButcherWeights_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _applyExternalButcherWeights_1__T = typing.TypeVar('_applyExternalButcherWeights_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def applyExternalButcherWeights(tArray: typing.Union[typing.List[_applyExternalButcherWeights_0__T], jpype.JArray], tArray2: typing.Union[typing.List[typing.MutableSequence[_applyExternalButcherWeights_0__T]], jpype.JArray], t3: _applyExternalButcherWeights_0__T, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[_applyExternalButcherWeights_0__T]:
+    def applyExternalButcherWeights(y0: typing.Union[typing.List[_applyExternalButcherWeights_0__T], jpype.JArray], yDotK: typing.Union[typing.List[typing.MutableSequence[_applyExternalButcherWeights_0__T]], jpype.JArray], h: _applyExternalButcherWeights_0__T, b: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[_applyExternalButcherWeights_0__T]:
         """
         Apply external weights of Butcher array, assuming internal ones have been applied.
         
         Parameters:
-            y0 (T[]): initial value of the state vector at t0
-            yDotK (T[][]): output of stages
+            yDotK (T[]): output of stages
+            y0 (T[][]): initial value of the state vector at t0
             h (T): step size
             b (T[]): external weights of Butcher array
         
@@ -1131,8 +1114,8 @@ class FieldExplicitRungeKuttaIntegrator(FieldButcherArrayProvider[_FieldExplicit
         Apply external weights of Butcher array, assuming internal ones have been applied. Version with real Butcher array (non-Field version).
         
         Parameters:
-            y0 (T[]): initial value of the state vector at t0
-            yDotK (T[][]): output of stages
+            yDotK (T[]): output of stages
+            y0 (T[][]): initial value of the state vector at t0
             h (T): step size
             b (double[]): external weights of Butcher array
         
@@ -1144,12 +1127,12 @@ class FieldExplicitRungeKuttaIntegrator(FieldButcherArrayProvider[_FieldExplicit
         ...
     @typing.overload
     @staticmethod
-    def applyExternalButcherWeights(tArray: typing.Union[typing.List[_applyExternalButcherWeights_1__T], jpype.JArray], tArray2: typing.Union[typing.List[typing.MutableSequence[_applyExternalButcherWeights_1__T]], jpype.JArray], t3: _applyExternalButcherWeights_1__T, tArray3: typing.Union[typing.List[_applyExternalButcherWeights_1__T], jpype.JArray]) -> typing.MutableSequence[_applyExternalButcherWeights_1__T]: ...
+    def applyExternalButcherWeights(y0: typing.Union[typing.List[_applyExternalButcherWeights_1__T], jpype.JArray], yDotK: typing.Union[typing.List[typing.MutableSequence[_applyExternalButcherWeights_1__T]], jpype.JArray], h: _applyExternalButcherWeights_1__T, b: typing.Union[typing.List[_applyExternalButcherWeights_1__T], jpype.JArray]) -> typing.MutableSequence[_applyExternalButcherWeights_1__T]: ...
     _applyInternalButcherWeights_0__T = typing.TypeVar('_applyInternalButcherWeights_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _applyInternalButcherWeights_1__T = typing.TypeVar('_applyInternalButcherWeights_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def applyInternalButcherWeights(fieldExpandableODE: org.hipparchus.ode.FieldExpandableODE[_applyInternalButcherWeights_0__T], t: _applyInternalButcherWeights_0__T, tArray: typing.Union[typing.List[_applyInternalButcherWeights_0__T], jpype.JArray], t3: _applyInternalButcherWeights_0__T, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], tArray2: typing.Union[typing.List[typing.MutableSequence[_applyInternalButcherWeights_0__T]], jpype.JArray]) -> None:
+    def applyInternalButcherWeights(equations: org.hipparchus.ode.FieldExpandableODE[_applyInternalButcherWeights_0__T], t0: _applyInternalButcherWeights_0__T, y0: typing.Union[typing.List[_applyInternalButcherWeights_0__T], jpype.JArray], h: _applyInternalButcherWeights_0__T, a: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], c: typing.Union[typing.List[float], jpype.JArray], yDotK: typing.Union[typing.List[typing.MutableSequence[_applyInternalButcherWeights_0__T]], jpype.JArray]) -> None:
         """
         Apply internal weights of Butcher array, with corresponding times.
         
@@ -1178,12 +1161,12 @@ class FieldExplicitRungeKuttaIntegrator(FieldButcherArrayProvider[_FieldExplicit
         ...
     @typing.overload
     @staticmethod
-    def applyInternalButcherWeights(fieldExpandableODE: org.hipparchus.ode.FieldExpandableODE[_applyInternalButcherWeights_1__T], t: _applyInternalButcherWeights_1__T, tArray: typing.Union[typing.List[_applyInternalButcherWeights_1__T], jpype.JArray], t3: _applyInternalButcherWeights_1__T, tArray2: typing.Union[typing.List[typing.MutableSequence[_applyInternalButcherWeights_1__T]], jpype.JArray], tArray3: typing.Union[typing.List[_applyInternalButcherWeights_1__T], jpype.JArray], tArray4: typing.Union[typing.List[typing.MutableSequence[_applyInternalButcherWeights_1__T]], jpype.JArray]) -> None: ...
+    def applyInternalButcherWeights(equations: org.hipparchus.ode.FieldExpandableODE[_applyInternalButcherWeights_1__T], t0: _applyInternalButcherWeights_1__T, y0: typing.Union[typing.List[_applyInternalButcherWeights_1__T], jpype.JArray], h: _applyInternalButcherWeights_1__T, a: typing.Union[typing.List[typing.MutableSequence[_applyInternalButcherWeights_1__T]], jpype.JArray], c: typing.Union[typing.List[_applyInternalButcherWeights_1__T], jpype.JArray], yDotK: typing.Union[typing.List[typing.MutableSequence[_applyInternalButcherWeights_1__T]], jpype.JArray]) -> None: ...
     _fraction_0__T = typing.TypeVar('_fraction_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _fraction_1__T = typing.TypeVar('_fraction_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def fraction(field: org.hipparchus.Field[_fraction_0__T], double: float, double2: float) -> _fraction_0__T:
+    def fraction(field: org.hipparchus.Field[_fraction_0__T], p: float, q: float) -> _fraction_0__T:
         """
         Create a fraction from integers.
         
@@ -1210,7 +1193,7 @@ class FieldExplicitRungeKuttaIntegrator(FieldButcherArrayProvider[_FieldExplicit
         ...
     @typing.overload
     @staticmethod
-    def fraction(field: org.hipparchus.Field[_fraction_1__T], int: int, int2: int) -> _fraction_1__T: ...
+    def fraction(field: org.hipparchus.Field[_fraction_1__T], p: int, q: int) -> _fraction_1__T: ...
     def getNumberOfStages(self) -> int:
         """
         Getter for the number of stages corresponding to the Butcher array.
@@ -1309,8 +1292,8 @@ class GraggBulirschStoerIntegrator(AdaptiveStepsizeIntegrator):
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1319,9 +1302,9 @@ class GraggBulirschStoerIntegrator(AdaptiveStepsizeIntegrator):
     @typing.overload
     def __init__(self, double: float, double2: float, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def integrate(self, ordinaryDifferentialEquation: org.hipparchus.ode.OrdinaryDifferentialEquation, oDEState: org.hipparchus.ode.ODEState, double: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
+    def integrate(self, equations: org.hipparchus.ode.OrdinaryDifferentialEquation, initialState: org.hipparchus.ode.ODEState, finalTime: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
     @typing.overload
-    def integrate(self, expandableODE: org.hipparchus.ode.ExpandableODE, oDEState: org.hipparchus.ode.ODEState, double: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
+    def integrate(self, equations: org.hipparchus.ode.ExpandableODE, initialState: org.hipparchus.ode.ODEState, finalTime: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
     def setControlFactors(self, control1: float, control2: float, control3: float, control4: float) -> None:
         """
         Set the step size control factors.
@@ -1401,8 +1384,6 @@ class GraggBulirschStoerIntegrator(AdaptiveStepsizeIntegrator):
 _EmbeddedRungeKuttaFieldIntegrator__T = typing.TypeVar('_EmbeddedRungeKuttaFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class EmbeddedRungeKuttaFieldIntegrator(AdaptiveStepsizeFieldIntegrator[_EmbeddedRungeKuttaFieldIntegrator__T], FieldExplicitRungeKuttaIntegrator[_EmbeddedRungeKuttaFieldIntegrator__T], typing.Generic[_EmbeddedRungeKuttaFieldIntegrator__T]):
     """
-    implements FieldExplicitRungeKuttaIntegrator<T>
-    
     This class implements the common part of all embedded Runge-Kutta integrators for Ordinary Differential Equations.
     
     These methods are embedded explicit Runge-Kutta methods with two sets of coefficients allowing to estimate the error, their Butcher arrays are as follows :
@@ -1465,33 +1446,10 @@ class EmbeddedRungeKuttaFieldIntegrator(AdaptiveStepsizeFieldIntegrator[_Embedde
         
         """
         ...
-    def integrate(self, equations: org.hipparchus.ode.FieldExpandableODE[_EmbeddedRungeKuttaFieldIntegrator__T], initialState: org.hipparchus.ode.FieldODEState[_EmbeddedRungeKuttaFieldIntegrator__T], finalTime: _EmbeddedRungeKuttaFieldIntegrator__T) -> org.hipparchus.ode.FieldODEStateAndDerivative[_EmbeddedRungeKuttaFieldIntegrator__T]:
-        """
-        Integrate the differential equations up to the given time.
-        
-        This method solves an Initial Value Problem (IVP).
-        
-        Since this method stores some internal state variables made available in its public interface during integration (getCurrentSignedStepsize), it is not thread-safe.
-        
-        Specified by: integrate in interface FieldODEIntegrator
-        
-        Parameters:
-            equations (FieldExpandableODE<EmbeddedRungeKuttaFieldIntegrator> equations): differential equations to integrate
-            initialState (FieldODEState<EmbeddedRungeKuttaFieldIntegrator> initialState): initial state (time, primary and secondary state vectors)
-            finalTime (EmbeddedRungeKuttaFieldIntegrator): target time for the integration (can be set to a value smaller than t0 for backward integration)
-        
-        Returns:
-            final state, its time will be the same as finalTime if integration reached its target, but may be different if
-            some FieldODEEventHandler stops it at some point.
-        
-        Raises:
-            hipparchus: if integration step is too small
-            hipparchus: if the location of an event cannot be bracketed
-            hipparchus: if the number of functions evaluations is exceeded
-        
-        
-        """
-        ...
+    @typing.overload
+    def integrate(self, equations: org.hipparchus.ode.FieldOrdinaryDifferentialEquation[_EmbeddedRungeKuttaFieldIntegrator__T], initialState: org.hipparchus.ode.FieldODEState[_EmbeddedRungeKuttaFieldIntegrator__T], finalTime: _EmbeddedRungeKuttaFieldIntegrator__T) -> org.hipparchus.ode.FieldODEStateAndDerivative[_EmbeddedRungeKuttaFieldIntegrator__T]: ...
+    @typing.overload
+    def integrate(self, equations: org.hipparchus.ode.FieldExpandableODE[_EmbeddedRungeKuttaFieldIntegrator__T], initialState: org.hipparchus.ode.FieldODEState[_EmbeddedRungeKuttaFieldIntegrator__T], finalTime: _EmbeddedRungeKuttaFieldIntegrator__T) -> org.hipparchus.ode.FieldODEStateAndDerivative[_EmbeddedRungeKuttaFieldIntegrator__T]: ...
     def isUsingFieldCoefficients(self) -> bool:
         """
         Getter for the flag between real or Field coefficients in the Butcher array.
@@ -1547,8 +1505,6 @@ class EmbeddedRungeKuttaFieldIntegrator(AdaptiveStepsizeFieldIntegrator[_Embedde
 
 class EmbeddedRungeKuttaIntegrator(AdaptiveStepsizeIntegrator, ExplicitRungeKuttaIntegrator):
     """
-    implements ExplicitRungeKuttaIntegrator
-    
     This class implements the common part of all embedded Runge-Kutta integrators for Ordinary Differential Equations.
     
     These methods are embedded explicit Runge-Kutta methods with two sets of coefficients allowing to estimate the error, their Butcher arrays are as follows :
@@ -1600,9 +1556,9 @@ class EmbeddedRungeKuttaIntegrator(AdaptiveStepsizeIntegrator, ExplicitRungeKutt
         """
         ...
     @typing.overload
-    def integrate(self, ordinaryDifferentialEquation: org.hipparchus.ode.OrdinaryDifferentialEquation, oDEState: org.hipparchus.ode.ODEState, double: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
+    def integrate(self, equations: org.hipparchus.ode.OrdinaryDifferentialEquation, initialState: org.hipparchus.ode.ODEState, finalTime: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
     @typing.overload
-    def integrate(self, expandableODE: org.hipparchus.ode.ExpandableODE, oDEState: org.hipparchus.ode.ODEState, double: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
+    def integrate(self, equations: org.hipparchus.ode.ExpandableODE, initialState: org.hipparchus.ode.ODEState, finalTime: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
     def setMaxGrowth(self, maxGrowth: float) -> None:
         """
         Set the maximal growth factor for stepsize control.
@@ -1637,18 +1593,16 @@ class EmbeddedRungeKuttaIntegrator(AdaptiveStepsizeIntegrator, ExplicitRungeKutt
 _FixedStepRungeKuttaFieldIntegrator__T = typing.TypeVar('_FixedStepRungeKuttaFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FixedStepRungeKuttaFieldIntegrator(org.hipparchus.ode.AbstractFieldIntegrator[_FixedStepRungeKuttaFieldIntegrator__T], FieldExplicitRungeKuttaIntegrator[_FixedStepRungeKuttaFieldIntegrator__T], typing.Generic[_FixedStepRungeKuttaFieldIntegrator__T]):
     """
-    implements FieldExplicitRungeKuttaIntegrator<T>
-    
     This class implements the common part of all fixed step Runge-Kutta integrators for Ordinary Differential Equations.
     
     These methods are explicit Runge-Kutta methods, their Butcher arrays are as follows :
     
         0  | c2  | a21 c3  | a31  a32 ... |        ... cs  | as1  as2  ...  ass-1 |-------------------------- |  b1   b2  ...   bs-1  bs
     
-          - EulerFieldIntegrator
-          - ClassicalRungeKuttaFieldIntegrator
-          - GillFieldIntegrator
-          - MidpointFieldIntegrator
+    Also see:
+        EulerFieldIntegrator,
+        ClassicalRungeKuttaFieldIntegrator,
+        GillFieldIntegrator, MidpointFieldIntegrator
     """
     def getDefaultStep(self) -> _FixedStepRungeKuttaFieldIntegrator__T:
         """
@@ -1672,33 +1626,10 @@ class FixedStepRungeKuttaFieldIntegrator(org.hipparchus.ode.AbstractFieldIntegra
         
         """
         ...
-    def integrate(self, equations: org.hipparchus.ode.FieldExpandableODE[_FixedStepRungeKuttaFieldIntegrator__T], initialState: org.hipparchus.ode.FieldODEState[_FixedStepRungeKuttaFieldIntegrator__T], finalTime: _FixedStepRungeKuttaFieldIntegrator__T) -> org.hipparchus.ode.FieldODEStateAndDerivative[_FixedStepRungeKuttaFieldIntegrator__T]:
-        """
-        Integrate the differential equations up to the given time.
-        
-        This method solves an Initial Value Problem (IVP).
-        
-        Since this method stores some internal state variables made available in its public interface during integration (getCurrentSignedStepsize), it is not thread-safe.
-        
-        Specified by: integrate in interface FieldODEIntegrator
-        
-        Parameters:
-            equations (FieldExpandableODE<FixedStepRungeKuttaFieldIntegrator> equations): differential equations to integrate
-            initialState (FieldODEState<FixedStepRungeKuttaFieldIntegrator> initialState): initial state (time, primary and secondary state vectors)
-            finalTime (FixedStepRungeKuttaFieldIntegrator): target time for the integration (can be set to a value smaller than t0 for backward integration)
-        
-        Returns:
-            final state, its time will be the same as finalTime if integration reached its target, but may be different if
-            some FieldODEEventHandler stops it at some point.
-        
-        Raises:
-            hipparchus: if integration step is too small
-            hipparchus: if the location of an event cannot be bracketed
-            hipparchus: if the number of functions evaluations is exceeded
-        
-        
-        """
-        ...
+    @typing.overload
+    def integrate(self, equations: org.hipparchus.ode.FieldOrdinaryDifferentialEquation[_FixedStepRungeKuttaFieldIntegrator__T], initialState: org.hipparchus.ode.FieldODEState[_FixedStepRungeKuttaFieldIntegrator__T], finalTime: _FixedStepRungeKuttaFieldIntegrator__T) -> org.hipparchus.ode.FieldODEStateAndDerivative[_FixedStepRungeKuttaFieldIntegrator__T]: ...
+    @typing.overload
+    def integrate(self, equations: org.hipparchus.ode.FieldExpandableODE[_FixedStepRungeKuttaFieldIntegrator__T], initialState: org.hipparchus.ode.FieldODEState[_FixedStepRungeKuttaFieldIntegrator__T], finalTime: _FixedStepRungeKuttaFieldIntegrator__T) -> org.hipparchus.ode.FieldODEStateAndDerivative[_FixedStepRungeKuttaFieldIntegrator__T]: ...
     def isUsingFieldCoefficients(self) -> bool:
         """
         Getter for the flag between real or Field coefficients in the Butcher array.
@@ -1724,18 +1655,16 @@ class FixedStepRungeKuttaFieldIntegrator(org.hipparchus.ode.AbstractFieldIntegra
 
 class FixedStepRungeKuttaIntegrator(org.hipparchus.ode.AbstractIntegrator, ExplicitRungeKuttaIntegrator):
     """
-    implements ExplicitRungeKuttaIntegrator
-    
     This class implements the common part of all fixed step Runge-Kutta integrators for Ordinary Differential Equations.
     
     These methods are explicit Runge-Kutta methods, their Butcher arrays are as follows :
     
         0  | c2  | a21 c3  | a31  a32 ... |        ... cs  | as1  as2  ...  ass-1 |-------------------------- |  b1   b2  ...   bs-1  bs
     
-          - EulerIntegrator
-          - ClassicalRungeKuttaIntegrator
-          - GillIntegrator
-          - MidpointIntegrator
+    Also see:
+        EulerIntegrator,
+        ClassicalRungeKuttaIntegrator,
+        GillIntegrator, MidpointIntegrator
     """
     def getDefaultStep(self) -> float:
         """
@@ -1748,9 +1677,9 @@ class FixedStepRungeKuttaIntegrator(org.hipparchus.ode.AbstractIntegrator, Expli
         """
         ...
     @typing.overload
-    def integrate(self, ordinaryDifferentialEquation: org.hipparchus.ode.OrdinaryDifferentialEquation, oDEState: org.hipparchus.ode.ODEState, double: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
+    def integrate(self, equations: org.hipparchus.ode.OrdinaryDifferentialEquation, initialState: org.hipparchus.ode.ODEState, finalTime: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
     @typing.overload
-    def integrate(self, expandableODE: org.hipparchus.ode.ExpandableODE, oDEState: org.hipparchus.ode.ODEState, double: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
+    def integrate(self, equations: org.hipparchus.ode.ExpandableODE, initialState: org.hipparchus.ode.ODEState, finalTime: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
 
 _ClassicalRungeKuttaFieldIntegrator__T = typing.TypeVar('_ClassicalRungeKuttaFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class ClassicalRungeKuttaFieldIntegrator(FixedStepRungeKuttaFieldIntegrator[_ClassicalRungeKuttaFieldIntegrator__T], typing.Generic[_ClassicalRungeKuttaFieldIntegrator__T]):
@@ -1761,18 +1690,18 @@ class ClassicalRungeKuttaFieldIntegrator(FixedStepRungeKuttaFieldIntegrator[_Cla
     
         0  |  0    0    0    0 1/2 | 1/2   0    0    0 1/2 |  0   1/2   0    0 1  |  0    0    1    0 |-------------------- | 1/6  1/3  1/3  1/6
     
-          - EulerFieldIntegrator
-          - GillFieldIntegrator
-          - MidpointFieldIntegrator
-          - ThreeEighthesFieldIntegrator
-          - LutherFieldIntegrator
+    Also see:
+        EulerFieldIntegrator, GillFieldIntegrator,
+        MidpointFieldIntegrator,
+        ThreeEighthesFieldIntegrator,
+        LutherFieldIntegrator
     """
     METHOD_NAME: typing.ClassVar[str] = ...
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1826,18 +1755,17 @@ class ClassicalRungeKuttaIntegrator(FixedStepRungeKuttaIntegrator):
     
         0  |  0    0    0    0 1/2 | 1/2   0    0    0 1/2 |  0   1/2   0    0 1  |  0    0    1    0 |-------------------- | 1/6  1/3  1/3  1/6
     
-          - EulerIntegrator
-          - GillIntegrator
-          - MidpointIntegrator
-          - ThreeEighthesIntegrator
-          - LutherIntegrator
+    Also see:
+        EulerIntegrator, GillIntegrator,
+        MidpointIntegrator, ThreeEighthesIntegrator,
+        LutherIntegrator
     """
     METHOD_NAME: typing.ClassVar[str] = ...
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1897,8 +1825,8 @@ class DormandPrince54FieldIntegrator(EmbeddedRungeKuttaFieldIntegrator[_DormandP
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1963,8 +1891,8 @@ class DormandPrince54Integrator(EmbeddedRungeKuttaIntegrator):
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -2028,8 +1956,8 @@ class DormandPrince853FieldIntegrator(EmbeddedRungeKuttaFieldIntegrator[_Dormand
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -2092,8 +2020,8 @@ class DormandPrince853Integrator(EmbeddedRungeKuttaIntegrator):
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -2155,18 +2083,19 @@ class EulerFieldIntegrator(FixedStepRungeKuttaFieldIntegrator[_EulerFieldIntegra
     
     This algorithm is almost never used and has been included in this package only as a comparison reference for more useful integrators.
     
-          - MidpointFieldIntegrator
-          - ClassicalRungeKuttaFieldIntegrator
-          - GillFieldIntegrator
-          - ThreeEighthesFieldIntegrator
-          - LutherFieldIntegrator
+    Also see:
+        MidpointFieldIntegrator,
+        ClassicalRungeKuttaFieldIntegrator,
+        GillFieldIntegrator,
+        ThreeEighthesFieldIntegrator,
+        LutherFieldIntegrator
     """
     METHOD_NAME: typing.ClassVar[str] = ...
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -2222,18 +2151,18 @@ class EulerIntegrator(FixedStepRungeKuttaIntegrator):
     
     This algorithm is almost never used and has been included in this package only as a comparison reference for more useful integrators.
     
-          - MidpointIntegrator
-          - ClassicalRungeKuttaIntegrator
-          - GillIntegrator
-          - ThreeEighthesIntegrator
-          - LutherIntegrator
+    Also see:
+        MidpointIntegrator,
+        ClassicalRungeKuttaIntegrator,
+        GillIntegrator, ThreeEighthesIntegrator,
+        LutherIntegrator
     """
     METHOD_NAME: typing.ClassVar[str] = ...
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -2289,18 +2218,19 @@ class GillFieldIntegrator(FixedStepRungeKuttaFieldIntegrator[_GillFieldIntegrato
     
     where q = sqrt(2)
     
-          - EulerFieldIntegrator
-          - ClassicalRungeKuttaFieldIntegrator
-          - MidpointFieldIntegrator
-          - ThreeEighthesFieldIntegrator
-          - LutherFieldIntegrator
+    Also see:
+        EulerFieldIntegrator,
+        ClassicalRungeKuttaFieldIntegrator,
+        MidpointFieldIntegrator,
+        ThreeEighthesFieldIntegrator,
+        LutherFieldIntegrator
     """
     METHOD_NAME: typing.ClassVar[str] = ...
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -2356,18 +2286,18 @@ class GillIntegrator(FixedStepRungeKuttaIntegrator):
     
     where q = sqrt(2)
     
-          - EulerIntegrator
-          - ClassicalRungeKuttaIntegrator
-          - MidpointIntegrator
-          - ThreeEighthesIntegrator
-          - LutherIntegrator
+    Also see:
+        EulerIntegrator,
+        ClassicalRungeKuttaIntegrator,
+        MidpointIntegrator, ThreeEighthesIntegrator,
+        LutherIntegrator
     """
     METHOD_NAME: typing.ClassVar[str] = ...
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -2423,8 +2353,8 @@ class HighamHall54FieldIntegrator(EmbeddedRungeKuttaFieldIntegrator[_HighamHall5
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -2485,8 +2415,8 @@ class HighamHall54Integrator(EmbeddedRungeKuttaIntegrator):
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -2550,18 +2480,19 @@ class LutherFieldIntegrator(FixedStepRungeKuttaFieldIntegrator[_LutherFieldInteg
     
     where q = √21
     
-          - EulerFieldIntegrator
-          - ClassicalRungeKuttaFieldIntegrator
-          - GillFieldIntegrator
-          - MidpointFieldIntegrator
-          - ThreeEighthesFieldIntegrator
+    Also see:
+        EulerFieldIntegrator,
+        ClassicalRungeKuttaFieldIntegrator,
+        GillFieldIntegrator,
+        MidpointFieldIntegrator,
+        ThreeEighthesFieldIntegrator
     """
     METHOD_NAME: typing.ClassVar[str] = ...
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -2619,18 +2550,18 @@ class LutherIntegrator(FixedStepRungeKuttaIntegrator):
     
     where q = √21
     
-          - EulerIntegrator
-          - ClassicalRungeKuttaIntegrator
-          - GillIntegrator
-          - MidpointIntegrator
-          - ThreeEighthesIntegrator
+    Also see:
+        EulerIntegrator,
+        ClassicalRungeKuttaIntegrator,
+        GillIntegrator, MidpointIntegrator,
+        ThreeEighthesIntegrator
     """
     METHOD_NAME: typing.ClassVar[str] = ...
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -2684,18 +2615,19 @@ class MidpointFieldIntegrator(FixedStepRungeKuttaFieldIntegrator[_MidpointFieldI
     
         0  |  0    0 1/2 | 1/2   0 |---------- |  0    1
     
-          - EulerFieldIntegrator
-          - ClassicalRungeKuttaFieldIntegrator
-          - GillFieldIntegrator
-          - ThreeEighthesFieldIntegrator
-          - LutherFieldIntegrator
+    Also see:
+        EulerFieldIntegrator,
+        ClassicalRungeKuttaFieldIntegrator,
+        GillFieldIntegrator,
+        ThreeEighthesFieldIntegrator,
+        LutherFieldIntegrator
     """
     METHOD_NAME: typing.ClassVar[str] = ...
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -2749,18 +2681,18 @@ class MidpointIntegrator(FixedStepRungeKuttaIntegrator):
     
         0  |  0    0 1/2 | 1/2   0 |---------- |  0    1
     
-          - EulerIntegrator
-          - ClassicalRungeKuttaIntegrator
-          - GillIntegrator
-          - ThreeEighthesIntegrator
-          - LutherIntegrator
+    Also see:
+        EulerIntegrator,
+        ClassicalRungeKuttaIntegrator,
+        GillIntegrator, ThreeEighthesIntegrator,
+        LutherIntegrator
     """
     METHOD_NAME: typing.ClassVar[str] = ...
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -2814,18 +2746,19 @@ class ThreeEighthesFieldIntegrator(FixedStepRungeKuttaFieldIntegrator[_ThreeEigh
     
         0  |  0    0    0    0 1/3 | 1/3   0    0    0 2/3 |-1/3   1    0    0 1  |  1   -1    1    0 |-------------------- | 1/8  3/8  3/8  1/8
     
-          - EulerFieldIntegrator
-          - ClassicalRungeKuttaFieldIntegrator
-          - GillFieldIntegrator
-          - MidpointFieldIntegrator
-          - LutherFieldIntegrator
+    Also see:
+        EulerFieldIntegrator,
+        ClassicalRungeKuttaFieldIntegrator,
+        GillFieldIntegrator,
+        MidpointFieldIntegrator,
+        LutherFieldIntegrator
     """
     METHOD_NAME: typing.ClassVar[str] = ...
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -2879,18 +2812,18 @@ class ThreeEighthesIntegrator(FixedStepRungeKuttaIntegrator):
     
         0  |  0    0    0    0 1/3 | 1/3   0    0    0 2/3 |-1/3   1    0    0 1  |  1   -1    1    0 |-------------------- | 1/8  3/8  3/8  1/8
     
-          - EulerIntegrator
-          - ClassicalRungeKuttaIntegrator
-          - GillIntegrator
-          - MidpointIntegrator
-          - LutherIntegrator
+    Also see:
+        EulerIntegrator,
+        ClassicalRungeKuttaIntegrator,
+        GillIntegrator, MidpointIntegrator,
+        LutherIntegrator
     """
     METHOD_NAME: typing.ClassVar[str] = ...
     """
     Name of integration scheme.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """

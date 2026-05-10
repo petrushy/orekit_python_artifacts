@@ -39,9 +39,9 @@ class Covariance:
     @typing.overload
     def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, boolean: bool): ...
     @typing.overload
-    def covariance(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def covariance(self, xArray: typing.Union[typing.List[float], jpype.JArray], yArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def covariance(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], boolean: bool) -> float: ...
+    def covariance(self, xArray: typing.Union[typing.List[float], jpype.JArray], yArray: typing.Union[typing.List[float], jpype.JArray], biasCorrected: bool) -> float: ...
     def getCovarianceMatrix(self) -> org.hipparchus.linear.RealMatrix:
         """
         Returns the covariance matrix
@@ -83,9 +83,10 @@ class KendallsCorrelation:
     
     This implementation uses the O(n log n) algorithm described in William R. Knight's 1966 paper "A Computer Method for Calculating Kendall's Tau with Ungrouped Data" in the Journal of the American Statistical Association.
     
-          - ` Kendall tau rank correlation coefficient (Wikipedia)
-            <http://en.wikipedia.org/wiki/Kendall_tau_rank_correlation_coefficient>`
-          - `A Computer Method for Calculating Kendall's Tau with Ungrouped Data <http://www.jstor.org/stable/2282833>`
+    Also see:
+        ` Kendall tau rank correlation coefficient (Wikipedia)
+        <http://en.wikipedia.org/wiki/Kendall_tau_rank_correlation_coefficient>`, `A Computer Method for Calculating Kendall's
+        Tau with Ungrouped Data <http://www.jstor.org/stable/2282833>`
     """
     @typing.overload
     def __init__(self): ...
@@ -94,7 +95,7 @@ class KendallsCorrelation:
     @typing.overload
     def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix): ...
     @typing.overload
-    def computeCorrelationMatrix(self, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> org.hipparchus.linear.RealMatrix:
+    def computeCorrelationMatrix(self, matrix: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> org.hipparchus.linear.RealMatrix:
         """
         Computes the Kendall's Tau rank correlation matrix for the columns of the input matrix.
         
@@ -116,7 +117,7 @@ class KendallsCorrelation:
         """
         ...
     @typing.overload
-    def computeCorrelationMatrix(self, realMatrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.RealMatrix: ...
+    def computeCorrelationMatrix(self, matrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.RealMatrix: ...
     def correlation(self, xArray: typing.Union[typing.List[float], jpype.JArray], yArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
         Computes the Kendall's Tau rank correlation coefficient between the two arrays.
@@ -164,11 +165,11 @@ class PearsonsCorrelation:
     @typing.overload
     def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix): ...
     @typing.overload
-    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, int: int): ...
+    def __init__(self, covarianceMatrix: org.hipparchus.linear.RealMatrix, numberOfObservations: int): ...
     @typing.overload
     def __init__(self, covariance: Covariance): ...
     @typing.overload
-    def computeCorrelationMatrix(self, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> org.hipparchus.linear.RealMatrix:
+    def computeCorrelationMatrix(self, matrix: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> org.hipparchus.linear.RealMatrix:
         """
         Computes the correlation matrix for the columns of the input matrix, using correlation. Throws MathIllegalArgumentException if the matrix does not have at least two columns and two rows. Pairwise correlations are set to NaN if one of the correlates has zero variance.
         
@@ -181,7 +182,8 @@ class PearsonsCorrelation:
         Raises:
             hipparchus: if the matrix does not contain sufficient data
         
-              - correlation
+        Also see:
+            correlation
         
         Computes the correlation matrix for the columns of the input rectangular array. The columns of the array represent values of variables to be correlated. Throws MathIllegalArgumentException if the matrix does not have at least two columns and two rows or if the array is not rectangular. Pairwise correlations are set to NaN if one of the correlates has zero variance.
         
@@ -194,8 +196,8 @@ class PearsonsCorrelation:
         Raises:
             hipparchus: if the array does not contain sufficient data
         
-              - correlation
-        
+        Also see:
+            correlation
         
         
         """
@@ -306,11 +308,11 @@ class SpearmansCorrelation:
     @typing.overload
     def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix): ...
     @typing.overload
-    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, rankingAlgorithm: typing.Union[org.hipparchus.stat.ranking.RankingAlgorithm, typing.Callable]): ...
+    def __init__(self, dataMatrix: org.hipparchus.linear.RealMatrix, rankingAlgorithm: typing.Union[org.hipparchus.stat.ranking.RankingAlgorithm, typing.Callable]): ...
     @typing.overload
     def __init__(self, rankingAlgorithm: typing.Union[org.hipparchus.stat.ranking.RankingAlgorithm, typing.Callable]): ...
     @typing.overload
-    def computeCorrelationMatrix(self, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> org.hipparchus.linear.RealMatrix:
+    def computeCorrelationMatrix(self, matrix: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> org.hipparchus.linear.RealMatrix:
         """
         Computes the Spearman's rank correlation matrix for the columns of the input matrix.
         
@@ -332,7 +334,7 @@ class SpearmansCorrelation:
         """
         ...
     @typing.overload
-    def computeCorrelationMatrix(self, realMatrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.RealMatrix: ...
+    def computeCorrelationMatrix(self, matrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.RealMatrix: ...
     def correlation(self, xArray: typing.Union[typing.List[float], jpype.JArray], yArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
         Computes the Spearman's rank correlation coefficient between the two arrays.
@@ -386,9 +388,9 @@ class StorelessCovariance(Covariance):
     Note: the underlying covariance matrix is symmetric, thus only the upper triangular part of the matrix is stored and updated each increment.
     """
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, dim: int): ...
     @typing.overload
-    def __init__(self, int: int, boolean: bool): ...
+    def __init__(self, dim: int, biasCorrected: bool): ...
     def append(self, sc: 'StorelessCovariance') -> None:
         """
         Appends sc to this, effectively aggregating the computations in sc with this. After invoking this method, covariances returned should be close to what would have been obtained by performing all of the increment operations in sc directly on this.

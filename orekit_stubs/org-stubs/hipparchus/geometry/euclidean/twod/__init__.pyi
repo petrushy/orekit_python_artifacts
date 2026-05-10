@@ -22,8 +22,6 @@ import typing
 
 class DiskGenerator(org.hipparchus.geometry.enclosing.SupportBallGenerator['Euclidean2D', 'Vector2D']):
     """
-    implements SupportBallGenerator<Euclidean2D,Vector2D>
-    
     Class generating an enclosing ball from its support points.
     """
     def __init__(self):
@@ -56,11 +54,10 @@ class DiskGenerator(org.hipparchus.geometry.enclosing.SupportBallGenerator['Eucl
 
 class Euclidean2D(java.io.Serializable, org.hipparchus.geometry.Space):
     """
-    implements Serializable, Space
-    
     This class implements a two-dimensional space.
     
-          - serialized
+    Also see:
+        serialized
     """
     def getDimension(self) -> int:
         """
@@ -94,8 +91,8 @@ class Euclidean2D(java.io.Serializable, org.hipparchus.geometry.Space):
         Returns:
             n-1 dimension sub-space of this space
         
-              - getDimension
-        
+        Also see:
+            getDimension
         
         
         """
@@ -114,57 +111,57 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
     @typing.overload
     def __init__(self, double: float, fieldVector2D: 'FieldVector2D'[_FieldVector2D__T]): ...
     @typing.overload
-    def __init__(self, double: float, fieldVector2D: 'FieldVector2D'[_FieldVector2D__T], double2: float, fieldVector2D2: 'FieldVector2D'[_FieldVector2D__T]): ...
+    def __init__(self, a1: float, u1: 'FieldVector2D'[_FieldVector2D__T], a2: float, u2: 'FieldVector2D'[_FieldVector2D__T]): ...
     @typing.overload
-    def __init__(self, double: float, fieldVector2D: 'FieldVector2D'[_FieldVector2D__T], double2: float, fieldVector2D2: 'FieldVector2D'[_FieldVector2D__T], double3: float, fieldVector2D3: 'FieldVector2D'[_FieldVector2D__T]): ...
+    def __init__(self, a1: float, u1: 'FieldVector2D'[_FieldVector2D__T], a2: float, u2: 'FieldVector2D'[_FieldVector2D__T], a3: float, u3: 'FieldVector2D'[_FieldVector2D__T]): ...
     @typing.overload
-    def __init__(self, double: float, fieldVector2D: 'FieldVector2D'[_FieldVector2D__T], double2: float, fieldVector2D2: 'FieldVector2D'[_FieldVector2D__T], double3: float, fieldVector2D3: 'FieldVector2D'[_FieldVector2D__T], double4: float, fieldVector2D4: 'FieldVector2D'[_FieldVector2D__T]): ...
+    def __init__(self, a1: float, u1: 'FieldVector2D'[_FieldVector2D__T], a2: float, u2: 'FieldVector2D'[_FieldVector2D__T], a3: float, u3: 'FieldVector2D'[_FieldVector2D__T], a4: float, u4: 'FieldVector2D'[_FieldVector2D__T]): ...
     @typing.overload
     def __init__(self, t: _FieldVector2D__T, t2: _FieldVector2D__T): ...
     @typing.overload
     def __init__(self, t: _FieldVector2D__T, fieldVector2D: 'FieldVector2D'[_FieldVector2D__T]): ...
     @typing.overload
-    def __init__(self, t: _FieldVector2D__T, fieldVector2D: 'FieldVector2D'[_FieldVector2D__T], t2: _FieldVector2D__T, fieldVector2D2: 'FieldVector2D'[_FieldVector2D__T]): ...
+    def __init__(self, a1: _FieldVector2D__T, u1: 'FieldVector2D'[_FieldVector2D__T], a2: _FieldVector2D__T, u2: 'FieldVector2D'[_FieldVector2D__T]): ...
     @typing.overload
-    def __init__(self, t: _FieldVector2D__T, fieldVector2D: 'FieldVector2D'[_FieldVector2D__T], t2: _FieldVector2D__T, fieldVector2D2: 'FieldVector2D'[_FieldVector2D__T], t3: _FieldVector2D__T, fieldVector2D3: 'FieldVector2D'[_FieldVector2D__T]): ...
+    def __init__(self, a1: _FieldVector2D__T, u1: 'FieldVector2D'[_FieldVector2D__T], a2: _FieldVector2D__T, u2: 'FieldVector2D'[_FieldVector2D__T], a3: _FieldVector2D__T, u3: 'FieldVector2D'[_FieldVector2D__T]): ...
     @typing.overload
-    def __init__(self, t: _FieldVector2D__T, fieldVector2D: 'FieldVector2D'[_FieldVector2D__T], t2: _FieldVector2D__T, fieldVector2D2: 'FieldVector2D'[_FieldVector2D__T], t3: _FieldVector2D__T, fieldVector2D3: 'FieldVector2D'[_FieldVector2D__T], t4: _FieldVector2D__T, fieldVector2D4: 'FieldVector2D'[_FieldVector2D__T]): ...
+    def __init__(self, a1: _FieldVector2D__T, u1: 'FieldVector2D'[_FieldVector2D__T], a2: _FieldVector2D__T, u2: 'FieldVector2D'[_FieldVector2D__T], a3: _FieldVector2D__T, u3: 'FieldVector2D'[_FieldVector2D__T], a4: _FieldVector2D__T, u4: 'FieldVector2D'[_FieldVector2D__T]): ...
     @typing.overload
     def __init__(self, t: _FieldVector2D__T, vector2D: 'Vector2D'): ...
     @typing.overload
-    def __init__(self, t: _FieldVector2D__T, vector2D: 'Vector2D', t2: _FieldVector2D__T, vector2D2: 'Vector2D'): ...
+    def __init__(self, a1: _FieldVector2D__T, u1: 'Vector2D', a2: _FieldVector2D__T, u2: 'Vector2D'): ...
     @typing.overload
-    def __init__(self, t: _FieldVector2D__T, vector2D: 'Vector2D', t2: _FieldVector2D__T, vector2D2: 'Vector2D', t3: _FieldVector2D__T, vector2D3: 'Vector2D'): ...
+    def __init__(self, a1: _FieldVector2D__T, u1: 'Vector2D', a2: _FieldVector2D__T, u2: 'Vector2D', a3: _FieldVector2D__T, u3: 'Vector2D'): ...
     @typing.overload
-    def __init__(self, t: _FieldVector2D__T, vector2D: 'Vector2D', t2: _FieldVector2D__T, vector2D2: 'Vector2D', t3: _FieldVector2D__T, vector2D3: 'Vector2D', t4: _FieldVector2D__T, vector2D4: 'Vector2D'): ...
+    def __init__(self, a1: _FieldVector2D__T, u1: 'Vector2D', a2: _FieldVector2D__T, u2: 'Vector2D', a3: _FieldVector2D__T, u3: 'Vector2D', a4: _FieldVector2D__T, u4: 'Vector2D'): ...
     @typing.overload
-    def __init__(self, tArray: typing.Union[typing.List[_FieldVector2D__T], jpype.JArray]): ...
+    def __init__(self, v: typing.Union[typing.List[_FieldVector2D__T], jpype.JArray]): ...
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldVector2D__T], vector2D: 'Vector2D'): ...
     @typing.overload
-    def add(self, double: float, fieldVector2D: 'FieldVector2D'[_FieldVector2D__T]) -> 'FieldVector2D'[_FieldVector2D__T]: ...
+    def add(self, factor: float, v: 'FieldVector2D'[_FieldVector2D__T]) -> 'FieldVector2D'[_FieldVector2D__T]: ...
     @typing.overload
-    def add(self, double: float, vector2D: 'Vector2D') -> 'FieldVector2D'[_FieldVector2D__T]: ...
+    def add(self, factor: float, v: 'Vector2D') -> 'FieldVector2D'[_FieldVector2D__T]: ...
     @typing.overload
-    def add(self, t: _FieldVector2D__T, fieldVector2D: 'FieldVector2D'[_FieldVector2D__T]) -> 'FieldVector2D'[_FieldVector2D__T]: ...
+    def add(self, factor: _FieldVector2D__T, v: 'FieldVector2D'[_FieldVector2D__T]) -> 'FieldVector2D'[_FieldVector2D__T]: ...
     @typing.overload
-    def add(self, t: _FieldVector2D__T, vector2D: 'Vector2D') -> 'FieldVector2D'[_FieldVector2D__T]: ...
+    def add(self, factor: _FieldVector2D__T, v: 'Vector2D') -> 'FieldVector2D'[_FieldVector2D__T]: ...
     @typing.overload
-    def add(self, fieldVector2D: 'FieldVector2D'[_FieldVector2D__T]) -> 'FieldVector2D'[_FieldVector2D__T]: ...
+    def add(self, v: 'FieldVector2D'[_FieldVector2D__T]) -> 'FieldVector2D'[_FieldVector2D__T]: ...
     @typing.overload
-    def add(self, vector2D: 'Vector2D') -> 'FieldVector2D'[_FieldVector2D__T]: ...
+    def add(self, v: 'Vector2D') -> 'FieldVector2D'[_FieldVector2D__T]: ...
     _angle_0__T = typing.TypeVar('_angle_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _angle_1__T = typing.TypeVar('_angle_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _angle_2__T = typing.TypeVar('_angle_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def angle(fieldVector2D: 'FieldVector2D'[_angle_0__T], fieldVector2D2: 'FieldVector2D'[_angle_0__T]) -> _angle_0__T: ...
+    def angle(v1: 'FieldVector2D'[_angle_0__T], v2: 'FieldVector2D'[_angle_0__T]) -> _angle_0__T: ...
     @typing.overload
     @staticmethod
-    def angle(fieldVector2D: 'FieldVector2D'[_angle_1__T], vector2D: 'Vector2D') -> _angle_1__T: ...
+    def angle(v1: 'FieldVector2D'[_angle_1__T], v2: 'Vector2D') -> _angle_1__T: ...
     @typing.overload
     @staticmethod
-    def angle(vector2D: 'Vector2D', fieldVector2D: 'FieldVector2D'[_angle_2__T]) -> _angle_2__T: ...
+    def angle(v1: 'Vector2D', v2: 'FieldVector2D'[_angle_2__T]) -> _angle_2__T: ...
     @typing.overload
     def crossProduct(self, p1: 'FieldVector2D'[_FieldVector2D__T], p2: 'FieldVector2D'[_FieldVector2D__T]) -> _FieldVector2D__T:
         """
@@ -181,14 +178,14 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
         Returns:
             the cross-product
         
-              - `Cross product (Wikipedia) <http://en.wikipedia.org/wiki/Cross_product>`
-        
+        Also see:
+            `Cross product (Wikipedia) <http://en.wikipedia.org/wiki/Cross_product>`
         
         
         """
         ...
     @typing.overload
-    def crossProduct(self, vector2D: 'Vector2D', vector2D2: 'Vector2D') -> _FieldVector2D__T: ...
+    def crossProduct(self, p1: 'Vector2D', p2: 'Vector2D') -> _FieldVector2D__T: ...
     _distance_2__T = typing.TypeVar('_distance_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _distance_3__T = typing.TypeVar('_distance_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _distance_4__T = typing.TypeVar('_distance_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -208,10 +205,10 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
         """
         ...
     @typing.overload
-    def distance(self, vector2D: 'Vector2D') -> _FieldVector2D__T: ...
+    def distance(self, v: 'Vector2D') -> _FieldVector2D__T: ...
     @typing.overload
     @staticmethod
-    def distance(fieldVector2D: 'FieldVector2D'[_distance_2__T], fieldVector2D2: 'FieldVector2D'[_distance_2__T]) -> _distance_2__T:
+    def distance(p1: 'FieldVector2D'[_distance_2__T], p2: 'FieldVector2D'[_distance_2__T]) -> _distance_2__T:
         """
         Compute the distance between two vectors according to the L :sub:`2` norm.
         
@@ -251,10 +248,10 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
         ...
     @typing.overload
     @staticmethod
-    def distance(fieldVector2D: 'FieldVector2D'[_distance_3__T], vector2D: 'Vector2D') -> _distance_3__T: ...
+    def distance(p1: 'FieldVector2D'[_distance_3__T], p2: 'Vector2D') -> _distance_3__T: ...
     @typing.overload
     @staticmethod
-    def distance(vector2D: 'Vector2D', fieldVector2D: 'FieldVector2D'[_distance_4__T]) -> _distance_4__T: ...
+    def distance(p1: 'Vector2D', p2: 'FieldVector2D'[_distance_4__T]) -> _distance_4__T: ...
     _distance1_2__T = typing.TypeVar('_distance1_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _distance1_3__T = typing.TypeVar('_distance1_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _distance1_4__T = typing.TypeVar('_distance1_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -274,10 +271,10 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
         """
         ...
     @typing.overload
-    def distance1(self, vector2D: 'Vector2D') -> _FieldVector2D__T: ...
+    def distance1(self, v: 'Vector2D') -> _FieldVector2D__T: ...
     @typing.overload
     @staticmethod
-    def distance1(fieldVector2D: 'FieldVector2D'[_distance1_2__T], fieldVector2D2: 'FieldVector2D'[_distance1_2__T]) -> _distance1_2__T:
+    def distance1(p1: 'FieldVector2D'[_distance1_2__T], p2: 'FieldVector2D'[_distance1_2__T]) -> _distance1_2__T:
         """
         Compute the distance between two vectors according to the L :sub:`2` norm.
         
@@ -317,10 +314,10 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
         ...
     @typing.overload
     @staticmethod
-    def distance1(fieldVector2D: 'FieldVector2D'[_distance1_3__T], vector2D: 'Vector2D') -> _distance1_3__T: ...
+    def distance1(p1: 'FieldVector2D'[_distance1_3__T], p2: 'Vector2D') -> _distance1_3__T: ...
     @typing.overload
     @staticmethod
-    def distance1(vector2D: 'Vector2D', fieldVector2D: 'FieldVector2D'[_distance1_4__T]) -> _distance1_4__T: ...
+    def distance1(p1: 'Vector2D', p2: 'FieldVector2D'[_distance1_4__T]) -> _distance1_4__T: ...
     _distanceInf_2__T = typing.TypeVar('_distanceInf_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _distanceInf_3__T = typing.TypeVar('_distanceInf_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _distanceInf_4__T = typing.TypeVar('_distanceInf_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -340,10 +337,10 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
         """
         ...
     @typing.overload
-    def distanceInf(self, vector2D: 'Vector2D') -> _FieldVector2D__T: ...
+    def distanceInf(self, v: 'Vector2D') -> _FieldVector2D__T: ...
     @typing.overload
     @staticmethod
-    def distanceInf(fieldVector2D: 'FieldVector2D'[_distanceInf_2__T], fieldVector2D2: 'FieldVector2D'[_distanceInf_2__T]) -> _distanceInf_2__T:
+    def distanceInf(p1: 'FieldVector2D'[_distanceInf_2__T], p2: 'FieldVector2D'[_distanceInf_2__T]) -> _distanceInf_2__T:
         """
         Compute the distance between two vectors according to the L :sub:`∞` norm.
         
@@ -383,10 +380,10 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
         ...
     @typing.overload
     @staticmethod
-    def distanceInf(fieldVector2D: 'FieldVector2D'[_distanceInf_3__T], vector2D: 'Vector2D') -> _distanceInf_3__T: ...
+    def distanceInf(p1: 'FieldVector2D'[_distanceInf_3__T], p2: 'Vector2D') -> _distanceInf_3__T: ...
     @typing.overload
     @staticmethod
-    def distanceInf(vector2D: 'Vector2D', fieldVector2D: 'FieldVector2D'[_distanceInf_4__T]) -> _distanceInf_4__T: ...
+    def distanceInf(p1: 'Vector2D', p2: 'FieldVector2D'[_distanceInf_4__T]) -> _distanceInf_4__T: ...
     _distanceSq_2__T = typing.TypeVar('_distanceSq_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _distanceSq_3__T = typing.TypeVar('_distanceSq_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _distanceSq_4__T = typing.TypeVar('_distanceSq_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -406,10 +403,10 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
         """
         ...
     @typing.overload
-    def distanceSq(self, vector2D: 'Vector2D') -> _FieldVector2D__T: ...
+    def distanceSq(self, v: 'Vector2D') -> _FieldVector2D__T: ...
     @typing.overload
     @staticmethod
-    def distanceSq(fieldVector2D: 'FieldVector2D'[_distanceSq_2__T], fieldVector2D2: 'FieldVector2D'[_distanceSq_2__T]) -> _distanceSq_2__T:
+    def distanceSq(p1: 'FieldVector2D'[_distanceSq_2__T], p2: 'FieldVector2D'[_distanceSq_2__T]) -> _distanceSq_2__T:
         """
         Compute the square of the distance between two vectors.
         
@@ -449,10 +446,10 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
         ...
     @typing.overload
     @staticmethod
-    def distanceSq(fieldVector2D: 'FieldVector2D'[_distanceSq_3__T], vector2D: 'Vector2D') -> _distanceSq_3__T: ...
+    def distanceSq(p1: 'FieldVector2D'[_distanceSq_3__T], p2: 'Vector2D') -> _distanceSq_3__T: ...
     @typing.overload
     @staticmethod
-    def distanceSq(vector2D: 'Vector2D', fieldVector2D: 'FieldVector2D'[_distanceSq_4__T]) -> _distanceSq_4__T: ...
+    def distanceSq(p1: 'Vector2D', p2: 'FieldVector2D'[_distanceSq_4__T]) -> _distanceSq_4__T: ...
     @typing.overload
     def dotProduct(self, v: 'FieldVector2D'[_FieldVector2D__T]) -> _FieldVector2D__T:
         """
@@ -466,14 +463,14 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
         Returns:
             the dot product this.v
         
-              - hipparchus
-        
+        Also see:
+            hipparchus
         
         
         """
         ...
     @typing.overload
-    def dotProduct(self, vector2D: 'Vector2D') -> _FieldVector2D__T: ...
+    def dotProduct(self, v: 'Vector2D') -> _FieldVector2D__T: ...
     def equals(self, other: typing.Any) -> bool:
         """
         Test for the equality of two 2D vectors.
@@ -482,7 +479,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
         
         NaN coordinates are considered to affect globally the vector and be equals to each other - i.e, if either (or all) real part of the coordinates of the 3D vector are NaN, the 2D vector is NaN.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality to this
@@ -646,9 +643,6 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
         Returns:
             abscissa of the vector
         
-              - 
-        
-        
         
         """
         ...
@@ -658,9 +652,6 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
         
         Returns:
             ordinate of the vector
-        
-              - 
-        
         
         
         """
@@ -686,7 +677,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
         
         All NaN values have the same hash code.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -759,30 +750,27 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
         """
         ...
     @typing.overload
-    def scalarMultiply(self, double: float) -> 'FieldVector2D'[_FieldVector2D__T]: ...
+    def scalarMultiply(self, a: float) -> 'FieldVector2D'[_FieldVector2D__T]: ...
     @typing.overload
-    def scalarMultiply(self, t: _FieldVector2D__T) -> 'FieldVector2D'[_FieldVector2D__T]: ...
+    def scalarMultiply(self, a: _FieldVector2D__T) -> 'FieldVector2D'[_FieldVector2D__T]: ...
     @typing.overload
-    def subtract(self, double: float, fieldVector2D: 'FieldVector2D'[_FieldVector2D__T]) -> 'FieldVector2D'[_FieldVector2D__T]: ...
+    def subtract(self, factor: float, v: 'FieldVector2D'[_FieldVector2D__T]) -> 'FieldVector2D'[_FieldVector2D__T]: ...
     @typing.overload
-    def subtract(self, double: float, vector2D: 'Vector2D') -> 'FieldVector2D'[_FieldVector2D__T]: ...
+    def subtract(self, factor: float, v: 'Vector2D') -> 'FieldVector2D'[_FieldVector2D__T]: ...
     @typing.overload
-    def subtract(self, t: _FieldVector2D__T, fieldVector2D: 'FieldVector2D'[_FieldVector2D__T]) -> 'FieldVector2D'[_FieldVector2D__T]: ...
+    def subtract(self, factor: _FieldVector2D__T, v: 'FieldVector2D'[_FieldVector2D__T]) -> 'FieldVector2D'[_FieldVector2D__T]: ...
     @typing.overload
-    def subtract(self, t: _FieldVector2D__T, vector2D: 'Vector2D') -> 'FieldVector2D'[_FieldVector2D__T]: ...
+    def subtract(self, factor: _FieldVector2D__T, v: 'Vector2D') -> 'FieldVector2D'[_FieldVector2D__T]: ...
     @typing.overload
-    def subtract(self, fieldVector2D: 'FieldVector2D'[_FieldVector2D__T]) -> 'FieldVector2D'[_FieldVector2D__T]: ...
+    def subtract(self, v: 'FieldVector2D'[_FieldVector2D__T]) -> 'FieldVector2D'[_FieldVector2D__T]: ...
     @typing.overload
-    def subtract(self, vector2D: 'Vector2D') -> 'FieldVector2D'[_FieldVector2D__T]: ...
+    def subtract(self, v: 'Vector2D') -> 'FieldVector2D'[_FieldVector2D__T]: ...
     def toArray(self) -> typing.MutableSequence[_FieldVector2D__T]:
         """
         Get the vector coordinates as a dimension 2 array.
         
         Returns:
             vector coordinates
-        
-              - 
-        
         
         
         """
@@ -792,7 +780,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
         """
         Get a string representation of this vector.
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Returns:
             a string representation of this vector
@@ -826,8 +814,6 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
 
 class Line(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean2D, 'Vector2D', 'Line', 'SubLine'], org.hipparchus.geometry.partitioning.Embedding[Euclidean2D, 'Vector2D', org.hipparchus.geometry.euclidean.oned.Euclidean1D, org.hipparchus.geometry.euclidean.oned.Vector1D]):
     """
-    implements Hyperplane<Euclidean2D,Vector2D,Line,SubLine>, Embedding<Euclidean2D,Vector2D,Euclidean1D,Vector1D>
-    
     This class represents an oriented line in the 2D plane.
     
     An oriented line can be defined either by prolongating a line segment between two points past these points, or by one point and an angular direction (in trigonometric orientation).
@@ -1082,7 +1068,7 @@ class Line(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean2D, 'Vector2
         """
         ...
     @typing.overload
-    def reset(self, vector2D: 'Vector2D', double: float) -> None:
+    def reset(self, p1: 'Vector2D', p2: float) -> None:
         """
         Reset the instance as if built from two points.
         
@@ -1157,8 +1143,8 @@ class Line(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean2D, 'Vector2
         Returns:
             n-dimension point of the space corresponding to the specified sub-space point
         
-              - toSubSpace
-        
+        Also see:
+            toSubSpace
         
         
         """
@@ -1175,8 +1161,8 @@ class Line(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean2D, 'Vector2
         Returns:
             (n-1)-dimension point of the sub-space corresponding to the specified space point
         
-              - toSpace
-        
+        Also see:
+            toSpace
         
         
         """
@@ -1221,9 +1207,9 @@ class PolygonsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclidean2
     This class represents a 2D region: a set of polygons.
     """
     @typing.overload
-    def __init__(self, double: float): ...
+    def __init__(self, tolerance: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float): ...
+    def __init__(self, xMin: float, xMax: float, yMin: float, yMax: float, tolerance: float): ...
     @typing.overload
     def __init__(self, double: float, *vector2D: 'Vector2D'): ...
     @typing.overload
@@ -1243,7 +1229,7 @@ class PolygonsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclidean2
         Specified by: buildNew in class AbstractRegion
         
         Parameters:
-            tree (BSPTree<Euclidean2D,Vector2D,Line,SubLine> tree): inside/outside BSP tree representing the new region
+            tree (BSPTree<Euclidean2D, Vector2D, Line, SubLine> tree): inside/outside BSP tree representing the new region
         
         Returns:
             the built region
@@ -1350,11 +1336,11 @@ class SubLine(org.hipparchus.geometry.partitioning.AbstractSubHyperplane[Euclide
     This class represents a sub-hyperplane for Line.
     """
     @typing.overload
-    def __init__(self, line: Line, region: org.hipparchus.geometry.partitioning.Region[org.hipparchus.geometry.euclidean.oned.Euclidean1D, org.hipparchus.geometry.euclidean.oned.Vector1D, org.hipparchus.geometry.euclidean.oned.OrientedPoint, org.hipparchus.geometry.euclidean.oned.SubOrientedPoint]): ...
+    def __init__(self, hyperplane: Line, remainingRegion: org.hipparchus.geometry.partitioning.Region[org.hipparchus.geometry.euclidean.oned.Euclidean1D, org.hipparchus.geometry.euclidean.oned.Vector1D, org.hipparchus.geometry.euclidean.oned.OrientedPoint, org.hipparchus.geometry.euclidean.oned.SubOrientedPoint]): ...
     @typing.overload
     def __init__(self, segment: Segment): ...
     @typing.overload
-    def __init__(self, vector2D: 'Vector2D', vector2D2: 'Vector2D', double: float): ...
+    def __init__(self, start: 'Vector2D', end: 'Vector2D', tolerance: float): ...
     def getInteriorPoint(self) -> 'Vector2D':
         """
         Get an interior point.
@@ -1416,13 +1402,12 @@ class SubLine(org.hipparchus.geometry.partitioning.AbstractSubHyperplane[Euclide
 
 class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']):
     """
-    implements Vector<Euclidean2D,Vector2D>
-    
     This class represents a 2D vector.
     
     Instances of this class are guaranteed to be immutable.
     
-          - serialized
+    Also see:
+        serialized
     """
     ZERO: typing.ClassVar['Vector2D'] = ...
     """
@@ -1481,13 +1466,13 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']):
     @typing.overload
     def __init__(self, double: float, vector2D: 'Vector2D'): ...
     @typing.overload
-    def __init__(self, double: float, vector2D: 'Vector2D', double2: float, vector2D2: 'Vector2D'): ...
+    def __init__(self, a1: float, u1: 'Vector2D', a2: float, u2: 'Vector2D'): ...
     @typing.overload
-    def __init__(self, double: float, vector2D: 'Vector2D', double2: float, vector2D2: 'Vector2D', double3: float, vector2D3: 'Vector2D'): ...
+    def __init__(self, a1: float, u1: 'Vector2D', a2: float, u2: 'Vector2D', a3: float, u3: 'Vector2D'): ...
     @typing.overload
-    def __init__(self, double: float, vector2D: 'Vector2D', double2: float, vector2D2: 'Vector2D', double3: float, vector2D3: 'Vector2D', double4: float, vector2D4: 'Vector2D'): ...
+    def __init__(self, a1: float, u1: 'Vector2D', a2: float, u2: 'Vector2D', a3: float, u3: 'Vector2D', a4: float, u4: 'Vector2D'): ...
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, v: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
     def add(self, factor: float, v: 'Vector2D') -> 'Vector2D':
         """
@@ -1555,14 +1540,14 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']):
         Returns:
             the cross-product
         
-              - `Cross product (Wikipedia) <http://en.wikipedia.org/wiki/Cross_product>`
-        
+        Also see:
+            `Cross product (Wikipedia) <http://en.wikipedia.org/wiki/Cross_product>`
         
         
         """
         ...
     @typing.overload
-    def distance(self, vector2D: 'Vector2D') -> float:
+    def distance(self, p: 'Vector2D') -> float:
         """
         Compute the distance between the instance and another point.
         
@@ -1590,9 +1575,9 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']):
         ...
     @typing.overload
     @staticmethod
-    def distance(vector2D: 'Vector2D', vector2D2: 'Vector2D') -> float: ...
+    def distance(p1: 'Vector2D', p2: 'Vector2D') -> float: ...
     @typing.overload
-    def distance1(self, vector2D: 'Vector2D') -> float:
+    def distance1(self, p: 'Vector2D') -> float:
         """
         Compute the distance between the instance and another vector according to the L :sub:`1` norm.
         
@@ -1625,9 +1610,9 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']):
         ...
     @typing.overload
     @staticmethod
-    def distance1(vector2D: 'Vector2D', vector2D2: 'Vector2D') -> float: ...
+    def distance1(p1: 'Vector2D', p2: 'Vector2D') -> float: ...
     @typing.overload
-    def distanceInf(self, vector2D: 'Vector2D') -> float:
+    def distanceInf(self, p: 'Vector2D') -> float:
         """
         Compute the distance between the instance and another vector according to the L :sub:`∞` norm.
         
@@ -1657,9 +1642,9 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']):
         ...
     @typing.overload
     @staticmethod
-    def distanceInf(vector2D: 'Vector2D', vector2D2: 'Vector2D') -> float: ...
+    def distanceInf(p1: 'Vector2D', p2: 'Vector2D') -> float: ...
     @typing.overload
-    def distanceSq(self, vector2D: 'Vector2D') -> float:
+    def distanceSq(self, p: 'Vector2D') -> float:
         """
         Compute the square of the distance between the instance and another vector.
         
@@ -1689,7 +1674,7 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']):
         ...
     @typing.overload
     @staticmethod
-    def distanceSq(vector2D: 'Vector2D', vector2D2: 'Vector2D') -> float: ...
+    def distanceSq(p1: 'Vector2D', p2: 'Vector2D') -> float: ...
     def dotProduct(self, v: 'Vector2D') -> float:
         """
         Compute the dot-product of the instance and another vector.
@@ -1713,7 +1698,7 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']):
         
         NaN coordinates are considered to affect globally the vector and be equals to each other - i.e, if either (or all) coordinates of the 2D vector are equal to NaN, the 2D vector is equal to NaN.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality to this
@@ -1813,9 +1798,6 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']):
         Returns:
             abscissa of the vector
         
-              - 
-        
-        
         
         """
         ...
@@ -1825,9 +1807,6 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']):
         
         Returns:
             ordinate of the vector
-        
-              - 
-        
         
         
         """
@@ -1850,7 +1829,7 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']):
         
         All NaN values have the same hash code.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -1986,9 +1965,6 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']):
         Returns:
             vector coordinates
         
-              - 
-        
-        
         
         """
         ...
@@ -1997,7 +1973,7 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']):
         """
         Get a string representation of this vector.
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Returns:
             a string representation of this vector
@@ -2034,15 +2010,15 @@ class Vector2DFormat(org.hipparchus.geometry.VectorFormat[Euclidean2D, Vector2D]
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, string: str, string2: str, string3: str): ...
+    def __init__(self, prefix: str, suffix: str, separator: str): ...
     @typing.overload
-    def __init__(self, string: str, string2: str, string3: str, numberFormat: java.text.NumberFormat): ...
+    def __init__(self, prefix: str, suffix: str, separator: str, format: java.text.NumberFormat): ...
     @typing.overload
-    def __init__(self, numberFormat: java.text.NumberFormat): ...
+    def __init__(self, format: java.text.NumberFormat): ...
     @typing.overload
     def format(self, vector: org.hipparchus.geometry.Vector[org.hipparchus.geometry.Space, org.hipparchus.geometry.Vector]) -> str: ...
     @typing.overload
-    def format(self, vector: org.hipparchus.geometry.Vector[Euclidean2D, Vector2D], stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer: ...
+    def format(self, vector: org.hipparchus.geometry.Vector[Euclidean2D, Vector2D], toAppendTo: java.lang.StringBuffer, pos: java.text.FieldPosition) -> java.lang.StringBuffer: ...
     @typing.overload
     @staticmethod
     def getVector2DFormat() -> 'Vector2DFormat':
@@ -2072,7 +2048,7 @@ class Vector2DFormat(org.hipparchus.geometry.VectorFormat[Euclidean2D, Vector2D]
         """
         ...
     @typing.overload
-    def parse(self, string: str) -> Vector2D:
+    def parse(self, source: str) -> Vector2D:
         """
         Parses a string to produce a Vector object.
         
@@ -2089,7 +2065,7 @@ class Vector2DFormat(org.hipparchus.geometry.VectorFormat[Euclidean2D, Vector2D]
         """
         ...
     @typing.overload
-    def parse(self, string: str, parsePosition: java.text.ParsePosition) -> Vector2D: ...
+    def parse(self, source: str, pos: java.text.ParsePosition) -> Vector2D: ...
 
 
 class __module_protocol__(Protocol):

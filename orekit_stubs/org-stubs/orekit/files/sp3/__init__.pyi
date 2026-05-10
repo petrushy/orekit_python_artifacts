@@ -137,7 +137,7 @@ class NsgfV00Filter(org.orekit.data.DataFilter):
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, string: str, function: typing.Union[java.util.function.Function[str, str], typing.Callable[[str], str]]): ...
+    def __init__(self, nameRegexp: str, renaming: typing.Union[java.util.function.Function[str, str], typing.Callable[[str], str]]): ...
     def filter(self, original: org.orekit.data.DataSource) -> org.orekit.data.DataSource:
         """
         Filter the data source.
@@ -168,9 +168,9 @@ class SP3(org.orekit.files.general.EphemerisFile['SP3Coordinate', 'SP3Segment'])
     Represents a parsed SP3 orbit file.
     """
     @typing.overload
-    def __init__(self, double: float, int: int, frame: org.orekit.frames.Frame): ...
+    def __init__(self, mu: float, interpolationSamples: int, frame: org.orekit.frames.Frame): ...
     @typing.overload
-    def __init__(self, sP3Header: 'SP3Header', double: float, int: int, frame: org.orekit.frames.Frame): ...
+    def __init__(self, header: 'SP3Header', mu: float, interpolationSamples: int, frame: org.orekit.frames.Frame): ...
     def addSatellite(self, satId: str) -> None:
         """
         Add a new satellite with a given identifier to the list of stored satellites.
@@ -213,7 +213,7 @@ class SP3(org.orekit.files.general.EphemerisFile['SP3Coordinate', 'SP3Segment'])
         """
         ...
     @typing.overload
-    def getEphemeris(self, int: int) -> 'SP3Ephemeris':
+    def getEphemeris(self, index: int) -> 'SP3Ephemeris':
         """
         Get an ephemeris.
         
@@ -454,7 +454,7 @@ class SP3CoordinateHermiteInterpolator(org.orekit.time.AbstractTimeInterpolator[
     """
     Interpolator for SP3Coordinate.
     
-    As this implementation of interpolation is polynomial, it should be used only with small number of interpolation points (about 10-20 points) in order to avoid `Runge's phenomenon <http://en.wikipedia.org/wiki/Runge%27s_phenomenon>` and numerical problems (including NaN appearing).
+    As this implementation of interpolation is polynomial, it should be used only with small number of interpolation points (about 10-20 points) in order to avoid and numerical problems (including NaN appearing).
     
     If some clock or clock rate are present in the SP3 files as default values (999999.999999), then they are replaced by NaN during parsing, so the interpolation will exhibit NaNs, but the positions will be properly interpolated.
     
@@ -467,7 +467,7 @@ class SP3CoordinateHermiteInterpolator(org.orekit.time.AbstractTimeInterpolator[
         """
         Constructor.
         
-        As this implementation of interpolation is polynomial, it should be used only with small number of interpolation points (about 10-20 points) in order to avoid `Runge's phenomenon <http://en.wikipedia.org/wiki/Runge%27s_phenomenon>` and numerical problems (including NaN appearing).
+        As this implementation of interpolation is polynomial, it should be used only with small number of interpolation points (about 10-20 points) in order to avoid and numerical problems (including NaN appearing).
         
         Parameters:
             interpolationPoints (int): number of interpolation points
@@ -1228,9 +1228,9 @@ class SP3Parser(org.orekit.files.general.EphemerisFileParser[SP3]):
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, int: int, function: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]]): ...
+    def __init__(self, mu: float, interpolationSamples: int, frameBuilder: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]]): ...
     @typing.overload
-    def __init__(self, double: float, int: int, function: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]], timeScales: org.orekit.time.TimeScales): ...
+    def __init__(self, mu: float, interpolationSamples: int, frameBuilder: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]], timeScales: org.orekit.time.TimeScales): ...
     def parse(self, source: org.orekit.data.DataSource) -> SP3:
         """
         Description copied from interface: parse Parse an ephemeris file from a data source.

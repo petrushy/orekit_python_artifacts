@@ -15,11 +15,10 @@ import typing
 
 class VectorialCovariance(java.io.Serializable):
     """
-    implements Serializable
-    
     Returns the covariance matrix of the available vectors.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self, dimension: int, isBiasCorrected: bool):
         """
@@ -37,9 +36,9 @@ class VectorialCovariance(java.io.Serializable):
         Clears the internal state of the Statistic
         """
         ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, obj: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -66,7 +65,7 @@ class VectorialCovariance(java.io.Serializable):
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -87,11 +86,10 @@ class VectorialCovariance(java.io.Serializable):
 
 class VectorialStorelessStatistic(org.hipparchus.stat.descriptive.StorelessMultivariateStatistic, java.io.Serializable):
     """
-    implements StorelessMultivariateStatistic, Serializable
-    
     Uses an independent StorelessUnivariateStatistic instance for each component of a vector.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self, dimension: int, univariateStatistic: org.hipparchus.stat.descriptive.StorelessUnivariateStatistic):
         """
@@ -116,9 +114,9 @@ class VectorialStorelessStatistic(org.hipparchus.stat.descriptive.StorelessMulti
         
         """
         ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, obj: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -161,7 +159,7 @@ class VectorialStorelessStatistic(org.hipparchus.stat.descriptive.StorelessMulti
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """

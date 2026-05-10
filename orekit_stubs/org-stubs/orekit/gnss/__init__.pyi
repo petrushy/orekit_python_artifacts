@@ -29,9 +29,6 @@ class DOP:
     
     Since:
         8.0
-    
-    Also see:
-        `Dilution of precision <http://en.wikipedia.org/wiki/Dilution_of_precision_%28GPS%29>`
     """
     def __init__(self, location: org.orekit.bodies.GeodeticPoint, date: org.orekit.time.AbsoluteDate, gnssNb: int, gdop: float, pdop: float, hdop: float, vdop: float, tdop: float):
         """
@@ -137,9 +134,6 @@ class DOPComputer:
     
     Since:
         8.0
-    
-    Also see:
-        `Dilution of precision <http://en.wikipedia.org/wiki/Dilution_of_precision_%28GPS%29>`
     """
     DOP_MIN_ELEVATION: typing.ClassVar[float] = ...
     """
@@ -268,7 +262,7 @@ class IGSUtils:
         ...
     @typing.overload
     @staticmethod
-    def guessFrame(string: str) -> org.orekit.frames.Frame:
+    def guessFrame(name: str) -> org.orekit.frames.Frame:
         """
         Default string to Frame conversion for SP3Parser or RinexClockParser.
         
@@ -298,7 +292,7 @@ class IGSUtils:
         ...
     @typing.overload
     @staticmethod
-    def guessFrame(frames: org.orekit.frames.Frames, string: str) -> org.orekit.frames.Frame: ...
+    def guessFrame(frames: org.orekit.frames.Frames, name: str) -> org.orekit.frames.Frame: ...
 
 class MeasurementType(java.lang.Enum['MeasurementType']):
     """
@@ -490,7 +484,7 @@ class RadioWave:
     
     """
     @typing.overload
-    def closeTo(self, radioWave: typing.Union['RadioWave', typing.Callable]) -> bool:
+    def closeTo(self, other: typing.Union['RadioWave', typing.Callable]) -> bool:
         """
         Check if two radio waves are closer than ONE_MILLI_HERTZ.
         
@@ -525,7 +519,7 @@ class RadioWave:
         """
         ...
     @typing.overload
-    def closeTo(self, radioWave: typing.Union['RadioWave', typing.Callable], double: float) -> bool: ...
+    def closeTo(self, other: typing.Union['RadioWave', typing.Callable], tolerance: float) -> bool: ...
     def getFrequency(self) -> float:
         """
         Get the value of the frequency in Hz.
@@ -565,9 +559,9 @@ class SEMParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.DataL
         8.0
     """
     @typing.overload
-    def __init__(self, string: str): ...
+    def __init__(self, supportedNames: str): ...
     @typing.overload
-    def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScales: org.orekit.time.TimeScales): ...
+    def __init__(self, supportedNames: str, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScales: org.orekit.time.TimeScales): ...
     def getAlmanacs(self) -> java.util.List[org.orekit.propagation.analytical.gnss.data.GPSAlmanac]:
         """
         Gets all the GPSAlmanac read from the file.
@@ -628,7 +622,7 @@ class SEMParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.DataL
         """
         ...
     @typing.overload
-    def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
+    def loadData(self, input: java.io.InputStream, name: str) -> None: ...
     def stillAcceptsData(self) -> bool:
         """
         Description copied from interface: stillAcceptsData Check if the loader still accepts new data.
@@ -661,9 +655,9 @@ class SatInSystem:
     
     """
     @typing.overload
-    def __init__(self, string: str): ...
+    def __init__(self, rinexCode: str): ...
     @typing.overload
-    def __init__(self, satelliteSystem: 'SatelliteSystem', int: int): ...
+    def __init__(self, system: 'SatelliteSystem', prn: int): ...
     def equals(self, object: typing.Any) -> bool:
         """
         Overrides: Object in class Object
@@ -1094,9 +1088,9 @@ class YUMAParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.Data
         8.0
     """
     @typing.overload
-    def __init__(self, string: str): ...
+    def __init__(self, supportedNames: str): ...
     @typing.overload
-    def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScales: org.orekit.time.TimeScales): ...
+    def __init__(self, supportedNames: str, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScales: org.orekit.time.TimeScales): ...
     def getAlmanacs(self) -> java.util.List[org.orekit.propagation.analytical.gnss.data.GPSAlmanac]:
         """
         Gets all the GPSAlmanac read from the file.
@@ -1157,7 +1151,7 @@ class YUMAParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.Data
         """
         ...
     @typing.overload
-    def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
+    def loadData(self, input: java.io.InputStream, name: str) -> None: ...
     def stillAcceptsData(self) -> bool:
         """
         Description copied from interface: stillAcceptsData Check if the loader still accepts new data.
@@ -1723,7 +1717,7 @@ class PythonObservationType(ObservationType):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1769,7 +1763,7 @@ class PythonRadioWave(RadioWave):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1992,7 +1986,7 @@ class PythonGnssSignal(GnssSignal):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

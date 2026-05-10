@@ -9,6 +9,7 @@ import java.util
 import java.util.function
 import jpype
 import org.orekit.data
+import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
@@ -232,6 +233,19 @@ class AbstractConstituentParser(AbstractMessageParser[_AbstractConstituentParser
         
         """
         ...
+    def getFrameMapper(self) -> org.orekit.files.ccsds.definitions.CcsdsFrameMapper:
+        """
+        Get the mapping between a CCSDS frame and a Frame.
+        
+        Returns:
+            the frame mapper.
+        
+        Since:
+            13.1.5
+        
+        
+        """
+        ...
     def getHeader(self) -> _AbstractConstituentParser__H:
         """
         Get file header to fill.
@@ -362,7 +376,7 @@ class ErrorState(ProcessingState):
 
 _PythonAbstractMessageParser__T = typing.TypeVar('_PythonAbstractMessageParser__T')  # <T>
 class PythonAbstractMessageParser(AbstractMessageParser[_PythonAbstractMessageParser__T], typing.Generic[_PythonAbstractMessageParser__T]):
-    def __init__(self, string: str, string2: str, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]):
+    def __init__(self, root: str, formatVersionKey: str, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]):
         """
         Simple constructor.
         
@@ -406,7 +420,7 @@ class PythonAbstractMessageParser(AbstractMessageParser[_PythonAbstractMessagePa
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -452,13 +466,13 @@ class PythonProcessingState(ProcessingState):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 _PythonAbstractConstituentParser__H = typing.TypeVar('_PythonAbstractConstituentParser__H', bound=org.orekit.files.ccsds.section.Header)  # <H>
 _PythonAbstractConstituentParser__T = typing.TypeVar('_PythonAbstractConstituentParser__T', bound=org.orekit.files.ccsds.ndm.NdmConstituent)  # <T>
 _PythonAbstractConstituentParser__P = typing.TypeVar('_PythonAbstractConstituentParser__P', bound=AbstractConstituentParser)  # <P>
 class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractConstituentParser__H, _PythonAbstractConstituentParser__T, _PythonAbstractConstituentParser__P], typing.Generic[_PythonAbstractConstituentParser__H, _PythonAbstractConstituentParser__T, _PythonAbstractConstituentParser__P]):
-    def __init__(self, string: str, string2: str, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
+    def __init__(self, root: str, formatVersionKey: str, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
     def build(self) -> _PythonAbstractConstituentParser__T:
         """
         Build the file from parsed entries.
@@ -612,7 +626,7 @@ class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractC
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

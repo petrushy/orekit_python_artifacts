@@ -33,7 +33,8 @@ class Field(typing.Generic[_Field__T]):
     
     Classes implementing this interface will often be singletons.
     
-          - FieldElement
+    Also see:
+        FieldElement
     """
     def getOne(self) -> _Field__T:
         """
@@ -75,7 +76,8 @@ class FieldElement(typing.Generic[_FieldElement__T]):
     """
     Interface representing `field <http://mathworld.wolfram.com/Field.html>` elements.
     
-          - Field
+    Also see:
+        Field
     """
     def add(self, a: _FieldElement__T) -> _FieldElement__T:
         """
@@ -146,7 +148,7 @@ class FieldElement(typing.Generic[_FieldElement__T]):
         """
         ...
     @typing.overload
-    def multiply(self, int: int) -> _FieldElement__T:
+    def multiply(self, n: int) -> _FieldElement__T:
         """
         Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} = \sum_{i=1}^n \mathrm{this} \]
         
@@ -156,7 +158,7 @@ class FieldElement(typing.Generic[_FieldElement__T]):
         Returns:
             A new element representing n × this.
         
-        FieldElement multiply(FieldElement a) throws NullArgumentException
+        FieldElement multiply (FieldElement a) throws NullArgumentException
         
         Compute this × a.
         
@@ -222,7 +224,8 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
     Since:
         1.7
     
-          - FieldElement
+    Also see:
+        FieldElement
     """
     def abs(self) -> _CalculusFieldElement__T:
         """
@@ -269,7 +272,7 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         """
         ...
     @typing.overload
-    def add(self, double: float) -> _CalculusFieldElement__T: ...
+    def add(self, a: float) -> _CalculusFieldElement__T: ...
     def asin(self) -> _CalculusFieldElement__T:
         """
         Arc sine operation.
@@ -349,7 +352,7 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         """
         ...
     @typing.overload
-    def copySign(self, t: _CalculusFieldElement__T) -> _CalculusFieldElement__T:
+    def copySign(self, sign: _CalculusFieldElement__T) -> _CalculusFieldElement__T:
         """
         Returns the instance with the sign of the argument. A NaN sign argument is treated as positive.
         
@@ -371,7 +374,7 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         """
         ...
     @typing.overload
-    def copySign(self, double: float) -> _CalculusFieldElement__T: ...
+    def copySign(self, sign: float) -> _CalculusFieldElement__T: ...
     def cos(self) -> _CalculusFieldElement__T:
         """
         Cosine operation.
@@ -393,7 +396,7 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         """
         ...
     @typing.overload
-    def divide(self, double: float) -> _CalculusFieldElement__T:
+    def divide(self, a: float) -> _CalculusFieldElement__T:
         """
         '÷' operator.
         
@@ -417,7 +420,7 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         """
         ...
     @typing.overload
-    def divide(self, t: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
+    def divide(self, a: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
     def exp(self) -> _CalculusFieldElement__T:
         """
         Exponential.
@@ -544,7 +547,7 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         """
         ...
     @typing.overload
-    def linearCombination(self, t: _CalculusFieldElement__T, t2: _CalculusFieldElement__T, t3: _CalculusFieldElement__T, t4: _CalculusFieldElement__T) -> _CalculusFieldElement__T:
+    def linearCombination(self, a1: _CalculusFieldElement__T, b1: _CalculusFieldElement__T, a2: _CalculusFieldElement__T, b2: _CalculusFieldElement__T) -> _CalculusFieldElement__T:
         """
         Compute a linear combination.
         
@@ -557,8 +560,9 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -571,8 +575,9 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -587,8 +592,9 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -603,8 +609,9 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -621,8 +628,9 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -639,27 +647,27 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-              - linearCombination
-              - linearCombination
-        
+        Also see:
+            linearCombination,
+            linearCombination
         
         
         """
         ...
     @typing.overload
-    def linearCombination(self, t: _CalculusFieldElement__T, t2: _CalculusFieldElement__T, t3: _CalculusFieldElement__T, t4: _CalculusFieldElement__T, t5: _CalculusFieldElement__T, t6: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
+    def linearCombination(self, a1: _CalculusFieldElement__T, b1: _CalculusFieldElement__T, a2: _CalculusFieldElement__T, b2: _CalculusFieldElement__T, a3: _CalculusFieldElement__T, b3: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
     @typing.overload
-    def linearCombination(self, t: _CalculusFieldElement__T, t2: _CalculusFieldElement__T, t3: _CalculusFieldElement__T, t4: _CalculusFieldElement__T, t5: _CalculusFieldElement__T, t6: _CalculusFieldElement__T, t7: _CalculusFieldElement__T, t8: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
+    def linearCombination(self, a1: _CalculusFieldElement__T, b1: _CalculusFieldElement__T, a2: _CalculusFieldElement__T, b2: _CalculusFieldElement__T, a3: _CalculusFieldElement__T, b3: _CalculusFieldElement__T, a4: _CalculusFieldElement__T, b4: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
     @typing.overload
-    def linearCombination(self, tArray: typing.Union[typing.List[_CalculusFieldElement__T], jpype.JArray], tArray2: typing.Union[typing.List[_CalculusFieldElement__T], jpype.JArray]) -> _CalculusFieldElement__T: ...
+    def linearCombination(self, a: typing.Union[typing.List[_CalculusFieldElement__T], jpype.JArray], b: typing.Union[typing.List[_CalculusFieldElement__T], jpype.JArray]) -> _CalculusFieldElement__T: ...
     @typing.overload
-    def linearCombination(self, double: float, t: _CalculusFieldElement__T, double2: float, t2: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
+    def linearCombination(self, a1: float, b1: _CalculusFieldElement__T, a2: float, b2: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
     @typing.overload
-    def linearCombination(self, double: float, t: _CalculusFieldElement__T, double2: float, t2: _CalculusFieldElement__T, double3: float, t3: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
+    def linearCombination(self, a1: float, b1: _CalculusFieldElement__T, a2: float, b2: _CalculusFieldElement__T, a3: float, b3: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
     @typing.overload
-    def linearCombination(self, double: float, t: _CalculusFieldElement__T, double2: float, t2: _CalculusFieldElement__T, double3: float, t3: _CalculusFieldElement__T, double4: float, t4: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
+    def linearCombination(self, a1: float, b1: _CalculusFieldElement__T, a2: float, b2: _CalculusFieldElement__T, a3: float, b3: _CalculusFieldElement__T, a4: float, b4: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
     @typing.overload
-    def linearCombination(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], tArray: typing.Union[typing.List[_CalculusFieldElement__T], jpype.JArray]) -> _CalculusFieldElement__T: ...
+    def linearCombination(self, a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List[_CalculusFieldElement__T], jpype.JArray]) -> _CalculusFieldElement__T: ...
     def log(self) -> _CalculusFieldElement__T:
         """
         Natural logarithm.
@@ -691,7 +699,7 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         """
         ...
     @typing.overload
-    def multiply(self, t: _CalculusFieldElement__T) -> _CalculusFieldElement__T:
+    def multiply(self, a: _CalculusFieldElement__T) -> _CalculusFieldElement__T:
         """
         '×' operator.
         
@@ -745,7 +753,7 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         """
         ...
     @typing.overload
-    def pow(self, t: _CalculusFieldElement__T) -> _CalculusFieldElement__T:
+    def pow(self, p: _CalculusFieldElement__T) -> _CalculusFieldElement__T:
         """
         Power operation.
         
@@ -763,7 +771,7 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         Returns:
             this :sup:`n`
         
-        CalculusFieldElement pow(CalculusFieldElement e) throws MathIllegalArgumentException
+        CalculusFieldElement pow (CalculusFieldElement e) throws MathIllegalArgumentException
         
         Power operation.
         
@@ -784,7 +792,7 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
     @typing.overload
     def pow(self, int: int) -> _CalculusFieldElement__T: ...
     @typing.overload
-    def remainder(self, double: float) -> _CalculusFieldElement__T:
+    def remainder(self, a: float) -> _CalculusFieldElement__T:
         """
         IEEE remainder operator.
         
@@ -806,7 +814,7 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         """
         ...
     @typing.overload
-    def remainder(self, t: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
+    def remainder(self, a: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
     def rint(self) -> _CalculusFieldElement__T:
         """
         Get the whole number that is the nearest to the instance, or the even one if x is exactly half way between two integers.
@@ -933,7 +941,7 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         """
         ...
     @typing.overload
-    def subtract(self, double: float) -> _CalculusFieldElement__T:
+    def subtract(self, a: float) -> _CalculusFieldElement__T:
         """
         '-' operator.
         
@@ -957,7 +965,7 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         """
         ...
     @typing.overload
-    def subtract(self, t: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
+    def subtract(self, a: _CalculusFieldElement__T) -> _CalculusFieldElement__T: ...
     def tan(self) -> _CalculusFieldElement__T:
         """
         Tangent operation.

@@ -47,7 +47,7 @@ class DefaultDataContextPlugin(com.sun.source.util.Plugin, com.sun.source.util.T
         
         """
         ...
-    def init(self, javacTask: com.sun.source.util.JavacTask, *string: str) -> None:
+    def init(self, javacTask: com.sun.source.util.JavacTask, *args: str) -> None:
         """
         Specified by: init in interface Plugin
         

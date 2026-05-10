@@ -47,8 +47,9 @@ class ComplexODEConverter:
     Since:
         1.4
     
-          - ComplexOrdinaryDifferentialEquation
-          - OrdinaryDifferentialEquation
+    Also see:
+        ComplexOrdinaryDifferentialEquation,
+        OrdinaryDifferentialEquation
     """
     def __init__(self):
         """
@@ -89,7 +90,7 @@ class ComplexODEConverter:
         """
         ...
     @typing.overload
-    def convertState(self, oDEStateAndDerivative: 'ODEStateAndDerivative') -> 'ComplexODEStateAndDerivative':
+    def convertState(self, state: 'ODEStateAndDerivative') -> 'ComplexODEStateAndDerivative':
         """
         Parameters:
             state (ComplexODEState): state to convert
@@ -109,27 +110,23 @@ class ComplexODEConverter:
         """
         ...
     @typing.overload
-    def convertState(self, complexODEState: 'ComplexODEState') -> 'ODEState': ...
+    def convertState(self, state: 'ComplexODEState') -> 'ODEState': ...
 
 class ComplexODEState(java.io.Serializable):
     """
-    implements Serializable
-    
     Container for time, main and secondary state vectors.
     
     Since:
         1.4
     
-          - ComplexOrdinaryDifferentialEquation
-          - SecondaryODE
-          - ODEIntegrator
-          - ODEStateAndDerivative
-          - serialized
+    Also see:
+        ComplexOrdinaryDifferentialEquation, SecondaryODE,
+        ODEIntegrator, ODEStateAndDerivative, serialized
     """
     @typing.overload
-    def __init__(self, double: float, complexArray: typing.Union[typing.List[org.hipparchus.complex.Complex], jpype.JArray]): ...
+    def __init__(self, time: float, primaryState: typing.Union[typing.List[org.hipparchus.complex.Complex], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, double: float, complexArray: typing.Union[typing.List[org.hipparchus.complex.Complex], jpype.JArray], complexArray2: typing.Union[typing.List[typing.MutableSequence[org.hipparchus.complex.Complex]], jpype.JArray]): ...
+    def __init__(self, time: float, primaryState: typing.Union[typing.List[org.hipparchus.complex.Complex], jpype.JArray], secondaryState: typing.Union[typing.List[typing.MutableSequence[org.hipparchus.complex.Complex]], jpype.JArray]): ...
     def getCompleteState(self) -> typing.MutableSequence[org.hipparchus.complex.Complex]:
         """
         Get complete state at time.
@@ -138,9 +135,9 @@ class ComplexODEState(java.io.Serializable):
             complete state at time, starting with getPrimaryState, followed by all
             getSecondaryState in increasing index order
         
-              - getPrimaryState
-              - getSecondaryState
-        
+        Also see:
+            getPrimaryState,
+            getSecondaryState
         
         
         """
@@ -154,9 +151,9 @@ class ComplexODEState(java.io.Serializable):
         Returns:
             dimension of the complete set of equations
         
-              - getPrimaryStateDimension
-              - getSecondaryStateDimension
-        
+        Also see:
+            getPrimaryStateDimension,
+            getSecondaryStateDimension
         
         
         """
@@ -178,9 +175,9 @@ class ComplexODEState(java.io.Serializable):
         Returns:
             primary state at time
         
-              - getSecondaryState
-              - getCompleteState
-        
+        Also see:
+            getSecondaryState,
+            getCompleteState
         
         
         """
@@ -192,9 +189,9 @@ class ComplexODEState(java.io.Serializable):
         Returns:
             primary state dimension
         
-              - getSecondaryStateDimension
-              - getCompleteStateDimension
-        
+        Also see:
+            getSecondaryStateDimension,
+            getCompleteStateDimension
         
         
         """
@@ -210,9 +207,9 @@ class ComplexODEState(java.io.Serializable):
         Returns:
             secondary state at time
         
-              - getPrimaryState
-              - getCompleteState
-        
+        Also see:
+            getPrimaryState,
+            getCompleteState
         
         
         """
@@ -228,9 +225,9 @@ class ComplexODEState(java.io.Serializable):
         Returns:
             secondary state dimension
         
-              - getPrimaryStateDimension
-              - getCompleteStateDimension
-        
+        Also see:
+            getPrimaryStateDimension,
+            getCompleteStateDimension
         
         
         """
@@ -253,8 +250,8 @@ class ComplexOrdinaryDifferentialEquation:
     Since:
         1.4
     
-          - OrdinaryDifferentialEquation
-          - ComplexODEConverter
+    Also see:
+        OrdinaryDifferentialEquation, ComplexODEConverter
     """
     def computeDerivatives(self, t: float, y: typing.Union[typing.List[org.hipparchus.complex.Complex], jpype.JArray]) -> typing.MutableSequence[org.hipparchus.complex.Complex]:
         """
@@ -308,8 +305,8 @@ class ComplexSecondaryODE:
     Since:
         1.4
     
-          - ExpandableODE
-          - ComplexODEConverter
+    Also see:
+        ExpandableODE, ComplexODEConverter
     """
     def computeDerivatives(self, t: float, primary: typing.Union[typing.List[org.hipparchus.complex.Complex], jpype.JArray], primaryDot: typing.Union[typing.List[org.hipparchus.complex.Complex], jpype.JArray], secondary: typing.Union[typing.List[org.hipparchus.complex.Complex], jpype.JArray]) -> typing.MutableSequence[org.hipparchus.complex.Complex]:
         """
@@ -364,8 +361,6 @@ class ComplexSecondaryODE:
 
 class DenseOutputModel(org.hipparchus.ode.sampling.ODEStepHandler, java.io.Serializable):
     """
-    implements ODEStepHandler, Serializable
-    
     This class stores all information provided by an ODE integrator during the integration process and build a continuous model of the solution from this.
     
     This class act as a step handler from the integrator point of view. It is called iteratively during the integration process and stores a copy of all steps information in a sorted collection for later use. Once the integration process is over, the user can use the getInterpolatedState method to retrieve this information at any time. It is important to wait for the integration to be over before attempting to call getInterpolatedState because some internal variables are set only once the last step has been handled.
@@ -378,9 +373,9 @@ class DenseOutputModel(org.hipparchus.ode.sampling.ODEStepHandler, java.io.Seria
     
     One should be aware that the amount of data stored in a DenseOutputModel instance can be important if the state vector is large, if the integration interval is long or if the steps are small (which can result from small tolerance settings in AdaptiveStepsizeIntegrator).
     
-          - ODEStepHandler
-          - ODEStateInterpolator
-          - serialized
+    Also see:
+        ODEStepHandler, ODEStateInterpolator,
+        serialized
     """
     def __init__(self):
         """
@@ -479,14 +474,12 @@ class DenseOutputModel(org.hipparchus.ode.sampling.ODEStepHandler, java.io.Seria
 
 class EquationsMapper(java.io.Serializable):
     """
-    implements Serializable
-    
     Class mapping the part of a complete state or derivative that pertains to a specific differential equation.
     
     Instances of this class are guaranteed to be immutable.
     
-          - SecondaryODE
-          - serialized
+    Also see:
+        SecondaryODE, serialized
     """
     def extractEquationData(self, index: int, complete: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
         """
@@ -572,8 +565,8 @@ class ExpandableODE:
     
     We want the integrator to use only the primary set to estimate the errors and hence the step sizes. It should not use the secondary equations in this computation. The AbstractIntegrator will be able to know where the primary set ends and so where the secondary sets begin.
     
-          - OrdinaryDifferentialEquation
-          - VariationalEquation
+    Also see:
+        OrdinaryDifferentialEquation, VariationalEquation
     """
     def __init__(self, primary: 'OrdinaryDifferentialEquation'):
         """
@@ -658,8 +651,6 @@ class ExpandableODE:
 _FieldDenseOutputModel__T = typing.TypeVar('_FieldDenseOutputModel__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldDenseOutputModel(org.hipparchus.ode.sampling.FieldODEStepHandler[_FieldDenseOutputModel__T], typing.Generic[_FieldDenseOutputModel__T]):
     """
-    implements FieldODEStepHandler<T>
-    
     This class stores all information provided by an ODE integrator during the integration process and build a continuous model of the solution from this.
     
     This class act as a step handler from the integrator point of view. It is called iteratively during the integration process and stores a copy of all steps information in a sorted collection for later use. Once the integration process is over, the user can use the getInterpolatedState method to retrieve this information at any time. It is important to wait for the integration to be over before attempting to call getInterpolatedState because some internal variables are set only once the last step has been handled.
@@ -670,8 +661,9 @@ class FieldDenseOutputModel(org.hipparchus.ode.sampling.FieldODEStepHandler[_Fie
     
     One should be aware that the amount of data stored in a FieldDenseOutputModel instance can be important if the state vector is large, if the integration interval is long or if the steps are small (which can result from small tolerance settings in AdaptiveStepsizeFieldIntegrator).
     
-          - FieldODEStepHandler
-          - FieldODEStateInterpolator
+    Also see:
+        FieldODEStepHandler,
+        FieldODEStateInterpolator
     """
     def __init__(self):
         """
@@ -772,14 +764,12 @@ class FieldDenseOutputModel(org.hipparchus.ode.sampling.FieldODEStepHandler[_Fie
 _FieldEquationsMapper__T = typing.TypeVar('_FieldEquationsMapper__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEquationsMapper(java.io.Serializable, typing.Generic[_FieldEquationsMapper__T]):
     """
-    implements Serializable
-    
     Class mapping the part of a complete state or derivative that pertains to a set of differential equations.
     
     Instances of this class are guaranteed to be immutable.
     
-          - FieldExpandableODE
-          - serialized
+    Also see:
+        FieldExpandableODE, serialized
     """
     def extractEquationData(self, index: int, complete: typing.Union[typing.List[_FieldEquationsMapper__T], jpype.JArray]) -> typing.MutableSequence[_FieldEquationsMapper__T]:
         """
@@ -866,8 +856,8 @@ class FieldExpandableODE(typing.Generic[_FieldExpandableODE__T]):
     
     We want the integrator to use only the primary set to estimate the errors and hence the step sizes. It should not use the secondary equations in this computation. The FieldODEIntegrator will be able to know where the primary set ends and so where the secondary sets begin.
     
-          - FieldOrdinaryDifferentialEquation
-          - FieldSecondaryODE
+    Also see:
+        FieldOrdinaryDifferentialEquation, FieldSecondaryODE
     """
     def __init__(self, primary: 'FieldOrdinaryDifferentialEquation'[_FieldExpandableODE__T]):
         """
@@ -959,7 +949,8 @@ class FieldODEIntegrator(typing.Generic[_FieldODEIntegrator__T]):
     
     The classes which are devoted to solve first order differential equations should implement this interface. The problems which can be handled should implement the FieldOrdinaryDifferentialEquation interface.
     
-          - FieldOrdinaryDifferentialEquation
+    Also see:
+        FieldOrdinaryDifferentialEquation
     """
     def addEventDetector(self, detector: org.hipparchus.ode.events.FieldODEEventDetector[_FieldODEIntegrator__T]) -> None:
         """
@@ -971,9 +962,9 @@ class FieldODEIntegrator(typing.Generic[_FieldODEIntegrator__T]):
         Since:
             3.0
         
-              - getEventDetectors
-              - clearEventDetectors
-        
+        Also see:
+            getEventDetectors,
+            clearEventDetectors
         
         
         """
@@ -990,9 +981,9 @@ class FieldODEIntegrator(typing.Generic[_FieldODEIntegrator__T]):
         Since:
             3.0
         
-              - getStepEndHandlers
-              - clearStepEndHandlers
-        
+        Also see:
+            getStepEndHandlers,
+            clearStepEndHandlers
         
         
         """
@@ -1006,9 +997,9 @@ class FieldODEIntegrator(typing.Generic[_FieldODEIntegrator__T]):
         Parameters:
             handler (FieldODEStepHandler<FieldODEIntegrator> handler): handler for the accepted steps
         
-              - getStepHandlers
-              - clearStepHandlers
-        
+        Also see:
+            getStepHandlers,
+            clearStepHandlers
         
         
         """
@@ -1020,9 +1011,9 @@ class FieldODEIntegrator(typing.Generic[_FieldODEIntegrator__T]):
         Since:
             3.0
         
-              - addEventDetector
-              - getEventDetectors
-        
+        Also see:
+            addEventDetector,
+            getEventDetectors
         
         
         """
@@ -1034,9 +1025,9 @@ class FieldODEIntegrator(typing.Generic[_FieldODEIntegrator__T]):
         Since:
             3.0
         
-              - addStepEndHandler
-              - getStepEndHandlers
-        
+        Also see:
+            addStepEndHandler,
+            getStepEndHandlers
         
         
         """
@@ -1045,9 +1036,9 @@ class FieldODEIntegrator(typing.Generic[_FieldODEIntegrator__T]):
         """
         Remove all the step handlers that have been added to the integrator.
         
-              - addStepHandler
-              - getStepHandlers
-        
+        Also see:
+            addStepHandler,
+            getStepHandlers
         
         
         """
@@ -1088,9 +1079,9 @@ class FieldODEIntegrator(typing.Generic[_FieldODEIntegrator__T]):
         Since:
             3.0
         
-              - addEventDetector
-              - clearEventDetectors
-        
+        Also see:
+            addEventDetector,
+            clearEventDetectors
         
         
         """
@@ -1125,9 +1116,9 @@ class FieldODEIntegrator(typing.Generic[_FieldODEIntegrator__T]):
         Since:
             3.0
         
-              - addStepEndHandler
-              - clearStepEndHandlers
-        
+        Also see:
+            addStepEndHandler,
+            clearStepEndHandlers
         
         
         """
@@ -1139,9 +1130,9 @@ class FieldODEIntegrator(typing.Generic[_FieldODEIntegrator__T]):
         Returns:
             an unmodifiable collection of the added events handlers
         
-              - addStepHandler
-              - clearStepHandlers
-        
+        Also see:
+            addStepHandler,
+            clearStepHandlers
         
         
         """
@@ -1160,31 +1151,10 @@ class FieldODEIntegrator(typing.Generic[_FieldODEIntegrator__T]):
         
         """
         ...
-    def integrate(self, equations: FieldExpandableODE[_FieldODEIntegrator__T], initialState: 'FieldODEState'[_FieldODEIntegrator__T], finalTime: _FieldODEIntegrator__T) -> 'FieldODEStateAndDerivative'[_FieldODEIntegrator__T]:
-        """
-        Integrate the differential equations up to the given time.
-        
-        This method solves an Initial Value Problem (IVP).
-        
-        Since this method stores some internal state variables made available in its public interface during integration (getCurrentSignedStepsize), it is not thread-safe.
-        
-        Parameters:
-            equations (FieldExpandableODE<FieldODEIntegrator> equations): differential equations to integrate
-            initialState (FieldODEState<FieldODEIntegrator> initialState): initial state (time, primary and secondary state vectors)
-            finalTime (FieldODEIntegrator): target time for the integration (can be set to a value smaller than t0 for backward integration)
-        
-        Returns:
-            final state, its time will be the same as finalTime if integration reached its target, but may be different if
-            some FieldODEEventHandler stops it at some point.
-        
-        Raises:
-            hipparchus: if integration step is too small
-            hipparchus: if the number of functions evaluations is exceeded
-            hipparchus: if the location of an event cannot be bracketed
-        
-        
-        """
-        ...
+    @typing.overload
+    def integrate(self, equations: FieldExpandableODE[_FieldODEIntegrator__T], initialState: 'FieldODEState'[_FieldODEIntegrator__T], finalTime: _FieldODEIntegrator__T) -> 'FieldODEStateAndDerivative'[_FieldODEIntegrator__T]: ...
+    @typing.overload
+    def integrate(self, equations: 'FieldOrdinaryDifferentialEquation'[_FieldODEIntegrator__T], initialState: 'FieldODEState'[_FieldODEIntegrator__T], finalTime: _FieldODEIntegrator__T) -> 'FieldODEStateAndDerivative'[_FieldODEIntegrator__T]: ...
     def setMaxEvaluations(self, maxEvaluations: int) -> None:
         """
         Set the maximal number of differential equations function evaluations.
@@ -1204,15 +1174,14 @@ class FieldODEState(typing.Generic[_FieldODEState__T]):
     """
     Container for time, main and secondary state vectors.
     
-          - FieldOrdinaryDifferentialEquation
-          - FieldSecondaryODE
-          - FieldODEIntegrator
-          - FieldODEStateAndDerivative
+    Also see:
+        FieldOrdinaryDifferentialEquation, FieldSecondaryODE,
+        FieldODEIntegrator, FieldODEStateAndDerivative
     """
     @typing.overload
-    def __init__(self, t: _FieldODEState__T, tArray: typing.Union[typing.List[_FieldODEState__T], jpype.JArray]): ...
+    def __init__(self, time: _FieldODEState__T, primaryState: typing.Union[typing.List[_FieldODEState__T], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, t: _FieldODEState__T, tArray: typing.Union[typing.List[_FieldODEState__T], jpype.JArray], tArray2: typing.Union[typing.List[typing.MutableSequence[_FieldODEState__T]], jpype.JArray]): ...
+    def __init__(self, time: _FieldODEState__T, primaryState: typing.Union[typing.List[_FieldODEState__T], jpype.JArray], secondaryState: typing.Union[typing.List[typing.MutableSequence[_FieldODEState__T]], jpype.JArray]): ...
     def getCompleteState(self) -> typing.MutableSequence[_FieldODEState__T]:
         """
         Get complete state at time.
@@ -1221,9 +1190,8 @@ class FieldODEState(typing.Generic[_FieldODEState__T]):
             complete state at time, starting with getPrimaryState, followed by all
             getSecondaryState in increasing index order
         
-              - getPrimaryState
-              - getSecondaryState
-        
+        Also see:
+            getPrimaryState, getSecondaryState
         
         
         """
@@ -1257,9 +1225,8 @@ class FieldODEState(typing.Generic[_FieldODEState__T]):
         Returns:
             primary state at time
         
-              - getSecondaryState
-              - getCompleteState
-        
+        Also see:
+            getSecondaryState, getCompleteState
         
         
         """
@@ -1271,9 +1238,9 @@ class FieldODEState(typing.Generic[_FieldODEState__T]):
         Returns:
             primary state dimension
         
-              - getSecondaryStateDimension
-              - getCompleteStateDimension
-        
+        Also see:
+            getSecondaryStateDimension,
+            getCompleteStateDimension
         
         
         """
@@ -1328,7 +1295,8 @@ class FieldOrdinaryDifferentialEquation(typing.Generic[_FieldOrdinaryDifferentia
     
     For real problems, the derivative depends also on parameters that do not belong to the state vector (dynamical model constants for example). These constants are completely outside of the scope of this interface, the classes that implement it are allowed to handle them as they want.
     
-          - FieldODEIntegrator
+    Also see:
+        FieldODEIntegrator
     """
     def computeDerivatives(self, t: _FieldOrdinaryDifferentialEquation__T, y: typing.Union[typing.List[_FieldOrdinaryDifferentialEquation__T], jpype.JArray]) -> typing.MutableSequence[_FieldOrdinaryDifferentialEquation__T]:
         """
@@ -1380,8 +1348,8 @@ class FieldSecondaryODE(typing.Generic[_FieldSecondaryODE__T]):
     
     This interface allows users to add such equations to a primary set of FieldOrdinaryDifferentialEquation thanks to the addSecondaryEquations method.
     
-          - FieldOrdinaryDifferentialEquation
-          - FieldExpandableODE
+    Also see:
+        FieldOrdinaryDifferentialEquation, FieldExpandableODE
     """
     def computeDerivatives(self, t: _FieldSecondaryODE__T, primary: typing.Union[typing.List[_FieldSecondaryODE__T], jpype.JArray], primaryDot: typing.Union[typing.List[_FieldSecondaryODE__T], jpype.JArray], secondary: typing.Union[typing.List[_FieldSecondaryODE__T], jpype.JArray]) -> typing.MutableSequence[_FieldSecondaryODE__T]:
         """
@@ -1436,8 +1404,6 @@ class FieldSecondaryODE(typing.Generic[_FieldSecondaryODE__T]):
 
 class LocalizedODEFormats(java.lang.Enum['LocalizedODEFormats'], org.hipparchus.exception.Localizable):
     """
-    implements hipparchus
-    
     Enumeration for localized messages formats used in exceptions messages.
     
     The constants in this enumeration represent the available formats as localized strings. These formats are intended to be localized using simple properties files, using the constant name as the key and the property value as the message format. The source English format is provided in the constants themselves to serve both as a reminder for developers to understand the parameters needed by each format, as a basis for translators to create localized properties files, and as a default format if some translation is missing.
@@ -1495,7 +1461,12 @@ class LocalizedODEFormats(java.lang.Enum['LocalizedODEFormats'], org.hipparchus.
     @staticmethod
     def values() -> typing.MutableSequence['LocalizedODEFormats']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (LocalizedODEFormats c : LocalizedODEFormats.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -1515,8 +1486,9 @@ class MultistepFieldIntegrator(org.hipparchus.ode.nonstiff.AdaptiveStepsizeField
     
     Multistep integrators with Nordsieck representation are highly sensitive to large step changes because when the step is multiplied by factor a, the k :sup:`th` component of the Nordsieck vector is multiplied by a :sup:`k` and the last components are the least accurate ones. The default max growth factor is therefore set to a quite low value: 2 :sup:`1/order` .
     
-          - AdamsBashforthFieldIntegrator
-          - AdamsMoultonFieldIntegrator
+    Also see:
+        AdamsBashforthFieldIntegrator,
+        AdamsMoultonFieldIntegrator
     """
     def getMaxGrowth(self) -> float:
         """
@@ -1621,8 +1593,9 @@ class MultistepIntegrator(org.hipparchus.ode.nonstiff.AdaptiveStepsizeIntegrator
     
     Multistep integrators with Nordsieck representation are highly sensitive to large step changes because when the step is multiplied by factor a, the k :sup:`th` component of the Nordsieck vector is multiplied by a :sup:`k` and the last components are the least accurate ones. The default max growth factor is therefore set to a quite low value: 2 :sup:`1/order` .
     
-          - AdamsBashforthIntegrator
-          - AdamsMoultonIntegrator
+    Also see:
+        AdamsBashforthIntegrator,
+        AdamsMoultonIntegrator
     """
     def getMaxGrowth(self) -> float:
         """
@@ -1723,9 +1696,9 @@ class ODEIntegrator:
     
     The classes which are devoted to solve first order differential equations should implement this interface. The problems which can be handled should implement the OrdinaryDifferentialEquation interface.
     
-          - OrdinaryDifferentialEquation
-          - ODEStepHandler
-          - ODEEventHandler
+    Also see:
+        OrdinaryDifferentialEquation, ODEStepHandler,
+        ODEEventHandler
     """
     def addEventDetector(self, detector: org.hipparchus.ode.events.ODEEventDetector) -> None:
         """
@@ -1737,9 +1710,9 @@ class ODEIntegrator:
         Since:
             3.0
         
-              - getEventDetectors
-              - clearEventDetectors
-        
+        Also see:
+            getEventDetectors,
+            clearEventDetectors
         
         
         """
@@ -1756,9 +1729,9 @@ class ODEIntegrator:
         Since:
             3.0
         
-              - getStepEndHandlers
-              - clearStepEndHandlers
-        
+        Also see:
+            getStepEndHandlers,
+            clearStepEndHandlers
         
         
         """
@@ -1772,9 +1745,8 @@ class ODEIntegrator:
         Parameters:
             handler (ODEStepHandler): handler for the accepted steps
         
-              - getStepHandlers
-              - clearStepHandlers
-        
+        Also see:
+            getStepHandlers, clearStepHandlers
         
         
         """
@@ -1786,9 +1758,8 @@ class ODEIntegrator:
         Since:
             3.0
         
-              - addEventDetector
-              - getEventDetectors
-        
+        Also see:
+            addEventDetector, getEventDetectors
         
         
         """
@@ -1800,9 +1771,9 @@ class ODEIntegrator:
         Since:
             3.0
         
-              - addStepEndHandler
-              - getStepEndHandlers
-        
+        Also see:
+            addStepEndHandler,
+            getStepEndHandlers
         
         
         """
@@ -1811,9 +1782,8 @@ class ODEIntegrator:
         """
         Remove all the step handlers that have been added to the integrator.
         
-              - addStepHandler
-              - getStepHandlers
-        
+        Also see:
+            addStepHandler, getStepHandlers
         
         
         """
@@ -1854,9 +1824,9 @@ class ODEIntegrator:
         Since:
             3.0
         
-              - addEventDetector
-              - clearEventDetectors
-        
+        Also see:
+            addEventDetector,
+            clearEventDetectors
         
         
         """
@@ -1891,9 +1861,9 @@ class ODEIntegrator:
         Since:
             3.0
         
-              - addStepEndHandler
-              - clearStepEndHandlers
-        
+        Also see:
+            addStepEndHandler,
+            clearStepEndHandlers
         
         
         """
@@ -1905,9 +1875,8 @@ class ODEIntegrator:
         Returns:
             an unmodifiable collection of the added events handlers
         
-              - addStepHandler
-              - clearStepHandlers
-        
+        Also see:
+            addStepHandler, clearStepHandlers
         
         
         """
@@ -1927,9 +1896,9 @@ class ODEIntegrator:
         """
         ...
     @typing.overload
-    def integrate(self, expandableODE: ExpandableODE, oDEState: 'ODEState', double: float) -> 'ODEStateAndDerivative': ...
+    def integrate(self, equations: ExpandableODE, initialState: 'ODEState', finalTime: float) -> 'ODEStateAndDerivative': ...
     @typing.overload
-    def integrate(self, ordinaryDifferentialEquation: 'OrdinaryDifferentialEquation', oDEState: 'ODEState', double: float) -> 'ODEStateAndDerivative': ...
+    def integrate(self, equations: 'OrdinaryDifferentialEquation', initialState: 'ODEState', finalTime: float) -> 'ODEStateAndDerivative': ...
     def setMaxEvaluations(self, maxEvaluations: int) -> None:
         """
         Set the maximal number of differential equations function evaluations.
@@ -1946,20 +1915,16 @@ class ODEIntegrator:
 
 class ODEState(java.io.Serializable):
     """
-    implements Serializable
-    
     Container for time, main and secondary state vectors.
     
-          - OrdinaryDifferentialEquation
-          - SecondaryODE
-          - ODEIntegrator
-          - ODEStateAndDerivative
-          - serialized
+    Also see:
+        OrdinaryDifferentialEquation, SecondaryODE,
+        ODEIntegrator, ODEStateAndDerivative, serialized
     """
     @typing.overload
-    def __init__(self, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, time: float, primaryState: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]): ...
+    def __init__(self, time: float, primaryState: typing.Union[typing.List[float], jpype.JArray], secondaryState: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]): ...
     def getCompleteState(self) -> typing.MutableSequence[float]:
         """
         Get complete state at time.
@@ -1968,9 +1933,8 @@ class ODEState(java.io.Serializable):
             complete state at time, starting with getPrimaryState, followed by all
             getSecondaryState in increasing index order
         
-              - getPrimaryState
-              - getSecondaryState
-        
+        Also see:
+            getPrimaryState, getSecondaryState
         
         
         """
@@ -1984,9 +1948,9 @@ class ODEState(java.io.Serializable):
         Returns:
             dimension of the complete set of equations
         
-              - getPrimaryStateDimension
-              - getSecondaryStateDimension
-        
+        Also see:
+            getPrimaryStateDimension,
+            getSecondaryStateDimension
         
         
         """
@@ -2008,9 +1972,8 @@ class ODEState(java.io.Serializable):
         Returns:
             primary state at time
         
-              - getSecondaryState
-              - getCompleteState
-        
+        Also see:
+            getSecondaryState, getCompleteState
         
         
         """
@@ -2022,9 +1985,9 @@ class ODEState(java.io.Serializable):
         Returns:
             primary state dimension
         
-              - getSecondaryStateDimension
-              - getCompleteStateDimension
-        
+        Also see:
+            getSecondaryStateDimension,
+            getCompleteStateDimension
         
         
         """
@@ -2040,9 +2003,8 @@ class ODEState(java.io.Serializable):
         Returns:
             secondary state at time
         
-              - getPrimaryState
-              - getCompleteState
-        
+        Also see:
+            getPrimaryState, getCompleteState
         
         
         """
@@ -2058,9 +2020,9 @@ class ODEState(java.io.Serializable):
         Returns:
             secondary state dimension
         
-              - getPrimaryStateDimension
-              - getCompleteStateDimension
-        
+        Also see:
+            getPrimaryStateDimension,
+            getCompleteStateDimension
         
         
         """
@@ -2086,9 +2048,9 @@ class OrdinaryDifferentialEquation:
     
     For real problems, the derivative depends also on parameters that do not belong to the state vector (dynamical model constants for example). These constants are completely outside of the scope of this interface, the classes that implement it are allowed to handle them as they want.
     
-          - ODEIntegrator
-          - FirstOrderConverter
-          - SecondOrderODE
+    Also see:
+        ODEIntegrator, FirstOrderConverter,
+        SecondOrderODE
     """
     def computeDerivatives(self, t: float, y: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
         """
@@ -2169,8 +2131,8 @@ class Parameterizable:
         Returns:
             parameters names
         
-              - isSupported
-        
+        Also see:
+            isSupported
         
         
         """
@@ -2187,8 +2149,8 @@ class Parameterizable:
         Returns:
             true if the parameter is supported
         
-              - getParametersNames
-        
+        Also see:
+            getParametersNames
         
         
         """
@@ -2204,8 +2166,8 @@ class SecondOrderODE:
     
     For real problems, the derivative depends also on parameters that do not belong to the state vector (dynamical model constants for example). These constants are completely outside of the scope of this interface, the classes that implement it are allowed to handle them as they want.
     
-          - FirstOrderConverter
-          - OrdinaryDifferentialEquation
+    Also see:
+        FirstOrderConverter, OrdinaryDifferentialEquation
     """
     def computeSecondDerivatives(self, t: float, y: typing.Union[typing.List[float], jpype.JArray], yDot: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
         """
@@ -2241,7 +2203,8 @@ class SecondaryODE:
     
     This interface allows users to add such equations to a primary set of OrdinaryDifferentialEquation thanks to the addSecondaryEquations method.
     
-          - ExpandableODE
+    Also see:
+        ExpandableODE
     """
     def computeDerivatives(self, t: float, primary: typing.Union[typing.List[float], jpype.JArray], primaryDot: typing.Union[typing.List[float], jpype.JArray], secondary: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
         """
@@ -2329,16 +2292,15 @@ class VariationalEquation:
     
     The most important part is to not forget to call setUpInitialState to add the secondary state with the initial matrices to the ODEState used in the integrate method. Forgetting to do this and passing only a ODEState without the secondary state set up will trigger an error as the state vector will not have the correct dimension.
     
-          - ExpandableODE
-          - ODEJacobiansProvider
-          - OrdinaryDifferentialEquation
-          - NamedParameterJacobianProvider
-          - ParametersController
+    Also see:
+        ExpandableODE, ODEJacobiansProvider,
+        OrdinaryDifferentialEquation, NamedParameterJacobianProvider,
+        ParametersController
     """
     @typing.overload
-    def __init__(self, expandableODE: ExpandableODE, oDEJacobiansProvider: 'ODEJacobiansProvider'): ...
+    def __init__(self, expandable: ExpandableODE, jode: 'ODEJacobiansProvider'): ...
     @typing.overload
-    def __init__(self, expandableODE: ExpandableODE, ordinaryDifferentialEquation: OrdinaryDifferentialEquation, doubleArray: typing.Union[typing.List[float], jpype.JArray], parametersController: 'ParametersController', *parameterConfiguration: ParameterConfiguration): ...
+    def __init__(self, expandable: ExpandableODE, ode: OrdinaryDifferentialEquation, hY: typing.Union[typing.List[float], jpype.JArray], controller: 'ParametersController', *paramsAndSteps: ParameterConfiguration): ...
     def extractMainSetJacobian(self, state: ODEState) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
         Extract the Jacobian matrix with respect to state.
@@ -2425,8 +2387,6 @@ class VariationalEquation:
 _AbstractFieldIntegrator__T = typing.TypeVar('_AbstractFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], typing.Generic[_AbstractFieldIntegrator__T]):
     """
-    implements FieldODEIntegrator<T>
-    
     Base class managing common boilerplate for all integrators.
     """
     def addEventDetector(self, detector: org.hipparchus.ode.events.FieldODEEventDetector[_AbstractFieldIntegrator__T]) -> None:
@@ -2438,9 +2398,9 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
         Parameters:
             detector (FieldODEEventDetector<AbstractFieldIntegrator> detector): event detector
         
-              - getEventDetectors
-              - clearEventDetectors
-        
+        Also see:
+            getEventDetectors,
+            clearEventDetectors
         
         
         """
@@ -2456,9 +2416,9 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
         Parameters:
             handler (FieldODEStepEndHandler<AbstractFieldIntegrator> handler): handler for step ends
         
-              - getStepEndHandlers
-              - clearStepEndHandlers
-        
+        Also see:
+            getStepEndHandlers,
+            clearStepEndHandlers
         
         
         """
@@ -2474,9 +2434,9 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
         Parameters:
             handler (FieldODEStepHandler<AbstractFieldIntegrator> handler): handler for the accepted steps
         
-              - getStepHandlers
-              - clearStepHandlers
-        
+        Also see:
+            getStepHandlers,
+            clearStepHandlers
         
         
         """
@@ -2487,9 +2447,9 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
         
         Specified by: clearEventDetectors in interface FieldODEIntegrator
         
-              - addEventDetector
-              - getEventDetectors
-        
+        Also see:
+            addEventDetector,
+            getEventDetectors
         
         
         """
@@ -2500,9 +2460,9 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
         
         Specified by: clearStepEndHandlers in interface FieldODEIntegrator
         
-              - addStepEndHandler
-              - getStepEndHandlers
-        
+        Also see:
+            addStepEndHandler,
+            getStepEndHandlers
         
         
         """
@@ -2513,9 +2473,9 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
         
         Specified by: clearStepHandlers in interface FieldODEIntegrator
         
-              - addStepHandler
-              - getStepHandlers
-        
+        Also see:
+            addStepHandler,
+            getStepHandlers
         
         
         """
@@ -2579,9 +2539,9 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
         Returns:
             an unmodifiable collection of the added events detectors
         
-              - addEventDetector
-              - clearEventDetectors
-        
+        Also see:
+            addEventDetector,
+            clearEventDetectors
         
         
         """
@@ -2629,9 +2589,9 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
         Returns:
             an unmodifiable list of the added step end handlers
         
-              - addStepEndHandler
-              - clearStepEndHandlers
-        
+        Also see:
+            addStepEndHandler,
+            clearStepEndHandlers
         
         
         """
@@ -2645,9 +2605,9 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
         Returns:
             an unmodifiable collection of the added events handlers
         
-              - addStepHandler
-              - clearStepHandlers
-        
+        Also see:
+            addStepHandler,
+            clearStepHandlers
         
         
         """
@@ -2686,8 +2646,6 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
 
 class AbstractIntegrator(ODEIntegrator):
     """
-    implements ODEIntegrator
-    
     Base class managing common boilerplate for all integrators.
     """
     def addEventDetector(self, detector: org.hipparchus.ode.events.ODEEventDetector) -> None:
@@ -2699,9 +2657,9 @@ class AbstractIntegrator(ODEIntegrator):
         Parameters:
             detector (ODEEventDetector): event detector
         
-              - getEventDetectors
-              - clearEventDetectors
-        
+        Also see:
+            getEventDetectors,
+            clearEventDetectors
         
         
         """
@@ -2717,9 +2675,9 @@ class AbstractIntegrator(ODEIntegrator):
         Parameters:
             handler (ODEStepEndHandler): handler for step ends
         
-              - getStepEndHandlers
-              - clearStepEndHandlers
-        
+        Also see:
+            getStepEndHandlers,
+            clearStepEndHandlers
         
         
         """
@@ -2735,9 +2693,8 @@ class AbstractIntegrator(ODEIntegrator):
         Parameters:
             handler (ODEStepHandler): handler for the accepted steps
         
-              - getStepHandlers
-              - clearStepHandlers
-        
+        Also see:
+            getStepHandlers, clearStepHandlers
         
         
         """
@@ -2748,9 +2705,8 @@ class AbstractIntegrator(ODEIntegrator):
         
         Specified by: clearEventDetectors in interface ODEIntegrator
         
-              - addEventDetector
-              - getEventDetectors
-        
+        Also see:
+            addEventDetector, getEventDetectors
         
         
         """
@@ -2761,9 +2717,9 @@ class AbstractIntegrator(ODEIntegrator):
         
         Specified by: clearStepEndHandlers in interface ODEIntegrator
         
-              - addStepEndHandler
-              - getStepEndHandlers
-        
+        Also see:
+            addStepEndHandler,
+            getStepEndHandlers
         
         
         """
@@ -2774,9 +2730,8 @@ class AbstractIntegrator(ODEIntegrator):
         
         Specified by: clearStepHandlers in interface ODEIntegrator
         
-              - addStepHandler
-              - getStepHandlers
-        
+        Also see:
+            addStepHandler, getStepHandlers
         
         
         """
@@ -2840,9 +2795,9 @@ class AbstractIntegrator(ODEIntegrator):
         Returns:
             an unmodifiable list of the added events detectors
         
-              - addEventDetector
-              - clearEventDetectors
-        
+        Also see:
+            addEventDetector,
+            clearEventDetectors
         
         
         """
@@ -2880,9 +2835,9 @@ class AbstractIntegrator(ODEIntegrator):
         Returns:
             an unmodifiable list of the added step end handlers
         
-              - addStepEndHandler
-              - clearStepEndHandlers
-        
+        Also see:
+            addStepEndHandler,
+            clearStepEndHandlers
         
         
         """
@@ -2896,9 +2851,8 @@ class AbstractIntegrator(ODEIntegrator):
         Returns:
             an unmodifiable collection of the added events handlers
         
-              - addStepHandler
-              - clearStepHandlers
-        
+        Also see:
+            addStepHandler, clearStepHandlers
         
         
         """
@@ -2937,8 +2891,6 @@ class AbstractIntegrator(ODEIntegrator):
 
 class AbstractParameterizable(Parameterizable):
     """
-    implements Parameterizable
-    
     This abstract class provides boilerplate parameters list.
     """
     def complainIfNotSupported(self, name: str) -> None:
@@ -2951,8 +2903,8 @@ class AbstractParameterizable(Parameterizable):
         Raises:
             hipparchus: if the parameter is not supported
         
-              - isSupported
-        
+        Also see:
+            isSupported
         
         
         """
@@ -2966,8 +2918,8 @@ class AbstractParameterizable(Parameterizable):
         Returns:
             parameters names
         
-              - isSupported
-        
+        Also see:
+            isSupported
         
         
         """
@@ -2986,8 +2938,8 @@ class AbstractParameterizable(Parameterizable):
         Returns:
             true if the parameter is supported
         
-              - getParametersNames
-        
+        Also see:
+            getParametersNames
         
         
         """
@@ -2997,15 +2949,14 @@ class ComplexODEStateAndDerivative(ComplexODEState):
     """
     Container for time, main and secondary state vectors as well as their derivatives.
     
-          - ComplexOrdinaryDifferentialEquation
-          - ComplexSecondaryODE
-          - ODEIntegrator
-          - serialized
+    Also see:
+        ComplexOrdinaryDifferentialEquation, ComplexSecondaryODE,
+        ODEIntegrator, serialized
     """
     @typing.overload
-    def __init__(self, double: float, complexArray: typing.Union[typing.List[org.hipparchus.complex.Complex], jpype.JArray], complexArray2: typing.Union[typing.List[org.hipparchus.complex.Complex], jpype.JArray]): ...
+    def __init__(self, time: float, primaryState: typing.Union[typing.List[org.hipparchus.complex.Complex], jpype.JArray], primaryDerivative: typing.Union[typing.List[org.hipparchus.complex.Complex], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, double: float, complexArray: typing.Union[typing.List[org.hipparchus.complex.Complex], jpype.JArray], complexArray2: typing.Union[typing.List[org.hipparchus.complex.Complex], jpype.JArray], complexArray3: typing.Union[typing.List[typing.MutableSequence[org.hipparchus.complex.Complex]], jpype.JArray], complexArray4: typing.Union[typing.List[typing.MutableSequence[org.hipparchus.complex.Complex]], jpype.JArray]): ...
+    def __init__(self, time: float, primaryState: typing.Union[typing.List[org.hipparchus.complex.Complex], jpype.JArray], primaryDerivative: typing.Union[typing.List[org.hipparchus.complex.Complex], jpype.JArray], secondaryState: typing.Union[typing.List[typing.MutableSequence[org.hipparchus.complex.Complex]], jpype.JArray], secondaryDerivative: typing.Union[typing.List[typing.MutableSequence[org.hipparchus.complex.Complex]], jpype.JArray]): ...
     def getCompleteDerivative(self) -> typing.MutableSequence[org.hipparchus.complex.Complex]:
         """
         Get complete derivative at time.
@@ -3015,9 +2966,9 @@ class ComplexODEStateAndDerivative(ComplexODEState):
             getPrimaryDerivative, followed by all
             getSecondaryDerivative in increasing index order
         
-              - getPrimaryDerivative
-              - getSecondaryDerivative
-        
+        Also see:
+            getPrimaryDerivative,
+            getSecondaryDerivative
         
         
         """
@@ -3029,9 +2980,9 @@ class ComplexODEStateAndDerivative(ComplexODEState):
         Returns:
             derivative of the primary state at time
         
-              - getSecondaryDerivative
-              - getCompleteDerivative
-        
+        Also see:
+            getSecondaryDerivative,
+            getCompleteDerivative
         
         
         """
@@ -3047,9 +2998,9 @@ class ComplexODEStateAndDerivative(ComplexODEState):
         Returns:
             derivative of the secondary state at time
         
-              - getPrimaryDerivative
-              - getCompleteDerivative
-        
+        Also see:
+            getPrimaryDerivative,
+            getCompleteDerivative
         
         
         """
@@ -3060,14 +3011,14 @@ class FieldODEStateAndDerivative(FieldODEState[_FieldODEStateAndDerivative__T], 
     """
     Container for time, main and secondary state vectors as well as their derivatives.
     
-          - FieldOrdinaryDifferentialEquation
-          - FieldSecondaryODE
-          - FieldODEIntegrator
+    Also see:
+        FieldOrdinaryDifferentialEquation, FieldSecondaryODE,
+        FieldODEIntegrator
     """
     @typing.overload
-    def __init__(self, t: _FieldODEStateAndDerivative__T, tArray: typing.Union[typing.List[_FieldODEStateAndDerivative__T], jpype.JArray], tArray2: typing.Union[typing.List[_FieldODEStateAndDerivative__T], jpype.JArray]): ...
+    def __init__(self, time: _FieldODEStateAndDerivative__T, primaryState: typing.Union[typing.List[_FieldODEStateAndDerivative__T], jpype.JArray], primaryDerivative: typing.Union[typing.List[_FieldODEStateAndDerivative__T], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, t: _FieldODEStateAndDerivative__T, tArray: typing.Union[typing.List[_FieldODEStateAndDerivative__T], jpype.JArray], tArray2: typing.Union[typing.List[_FieldODEStateAndDerivative__T], jpype.JArray], tArray3: typing.Union[typing.List[typing.MutableSequence[_FieldODEStateAndDerivative__T]], jpype.JArray], tArray4: typing.Union[typing.List[typing.MutableSequence[_FieldODEStateAndDerivative__T]], jpype.JArray]): ...
+    def __init__(self, time: _FieldODEStateAndDerivative__T, primaryState: typing.Union[typing.List[_FieldODEStateAndDerivative__T], jpype.JArray], primaryDerivative: typing.Union[typing.List[_FieldODEStateAndDerivative__T], jpype.JArray], secondaryState: typing.Union[typing.List[typing.MutableSequence[_FieldODEStateAndDerivative__T]], jpype.JArray], secondaryDerivative: typing.Union[typing.List[typing.MutableSequence[_FieldODEStateAndDerivative__T]], jpype.JArray]): ...
     def getCompleteDerivative(self) -> typing.MutableSequence[_FieldODEStateAndDerivative__T]:
         """
         Get complete derivative at time.
@@ -3076,9 +3027,9 @@ class FieldODEStateAndDerivative(FieldODEState[_FieldODEStateAndDerivative__T], 
             complete derivative at time, starting with getPrimaryDerivative,
             followed by all getSecondaryDerivative in increasing index order
         
-              - getPrimaryDerivative
-              - getSecondaryDerivative
-        
+        Also see:
+            getPrimaryDerivative,
+            getSecondaryDerivative
         
         
         """
@@ -3090,9 +3041,9 @@ class FieldODEStateAndDerivative(FieldODEState[_FieldODEStateAndDerivative__T], 
         Returns:
             derivative of the primary state at time
         
-              - getSecondaryDerivative
-              - getCompleteDerivative
-        
+        Also see:
+            getSecondaryDerivative,
+            getCompleteDerivative
         
         
         """
@@ -3108,9 +3059,9 @@ class FieldODEStateAndDerivative(FieldODEState[_FieldODEStateAndDerivative__T], 
         Returns:
             derivative of the secondary state at time
         
-              - getPrimaryDerivative
-              - getCompleteDerivative
-        
+        Also see:
+            getPrimaryDerivative,
+            getCompleteDerivative
         
         
         """
@@ -3118,8 +3069,6 @@ class FieldODEStateAndDerivative(FieldODEState[_FieldODEStateAndDerivative__T], 
 
 class FirstOrderConverter(OrdinaryDifferentialEquation):
     """
-    implements OrdinaryDifferentialEquation
-    
     This class converts second order differential equations to first order ones.
     
     This class is a wrapper around a SecondOrderODE which allow to use a ODEIntegrator to integrate it.
@@ -3128,9 +3077,9 @@ class FirstOrderConverter(OrdinaryDifferentialEquation):
     
     One should be aware that the data is duplicated during the transformation process and that for each call to computeDerivatives, this wrapper does copy 4n scalars : 2n before the call to computeSecondDerivatives in order to dispatch the y state vector into z and zDot, and 2n after the call to gather zDot and zDDot into yDot. Since the underlying problem by itself perhaps also needs to copy data and dispatch the arrays into domain objects, this has an impact on both memory and CPU usage. The only way to avoid this duplication is to perform the transformation at the problem level, i.e. to implement the problem as a first order one and then avoid using this class.
     
-          - ODEIntegrator
-          - OrdinaryDifferentialEquation
-          - SecondOrderODE
+    Also see:
+        ODEIntegrator, OrdinaryDifferentialEquation,
+        SecondOrderODE
     """
     def __init__(self, equations: SecondOrderODE):
         """
@@ -3205,15 +3154,14 @@ class ODEStateAndDerivative(ODEState):
     """
     Container for time, main and secondary state vectors as well as their derivatives.
     
-          - OrdinaryDifferentialEquation
-          - SecondaryODE
-          - ODEIntegrator
-          - serialized
+    Also see:
+        OrdinaryDifferentialEquation, SecondaryODE,
+        ODEIntegrator, serialized
     """
     @typing.overload
-    def __init__(self, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, time: float, primaryState: typing.Union[typing.List[float], jpype.JArray], primaryDerivative: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], doubleArray3: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray4: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]): ...
+    def __init__(self, time: float, primaryState: typing.Union[typing.List[float], jpype.JArray], primaryDerivative: typing.Union[typing.List[float], jpype.JArray], secondaryState: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], secondaryDerivative: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]): ...
     def getCompleteDerivative(self) -> typing.MutableSequence[float]:
         """
         Get complete derivative at time.
@@ -3222,9 +3170,9 @@ class ODEStateAndDerivative(ODEState):
             complete derivative at time, starting with getPrimaryDerivative,
             followed by all getSecondaryDerivative in increasing index order
         
-              - getPrimaryDerivative
-              - getSecondaryDerivative
-        
+        Also see:
+            getPrimaryDerivative,
+            getSecondaryDerivative
         
         
         """
@@ -3236,9 +3184,9 @@ class ODEStateAndDerivative(ODEState):
         Returns:
             derivative of the primary state at time
         
-              - getSecondaryDerivative
-              - getCompleteDerivative
-        
+        Also see:
+            getSecondaryDerivative,
+            getCompleteDerivative
         
         
         """
@@ -3254,9 +3202,9 @@ class ODEStateAndDerivative(ODEState):
         Returns:
             derivative of the secondary state at time
         
-              - getPrimaryDerivative
-              - getCompleteDerivative
-        
+        Also see:
+            getPrimaryDerivative,
+            getCompleteDerivative
         
         
         """
@@ -3341,7 +3289,6 @@ class ODEJacobiansProvider(OrdinaryDifferentialEquation, NamedParameterJacobianP
         
         Raises:
             hipparchus: if arrays dimensions do not match equations settings
-            hipparchus: if the parameter is not supported
         
         
         """
@@ -3357,8 +3304,8 @@ class ODEJacobiansProvider(OrdinaryDifferentialEquation, NamedParameterJacobianP
         Returns:
             parameters names
         
-              - isSupported
-        
+        Also see:
+            isSupported
         
         
         """
@@ -3379,8 +3326,8 @@ class ODEJacobiansProvider(OrdinaryDifferentialEquation, NamedParameterJacobianP
         Returns:
             true if the parameter is supported
         
-              - getParametersNames
-        
+        Also see:
+            getParametersNames
         
         
         """

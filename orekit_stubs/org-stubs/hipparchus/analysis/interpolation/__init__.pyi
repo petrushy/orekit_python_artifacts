@@ -18,8 +18,6 @@ import typing
 
 class BicubicInterpolatingFunction(org.hipparchus.analysis.BivariateFunction):
     """
-    implements BivariateFunction
-    
     Function that implements the ` bicubic spline interpolation <http://en.wikipedia.org/wiki/Bicubic_interpolation>`.
     """
     def __init__(self, x: typing.Union[typing.List[float], jpype.JArray], y: typing.Union[typing.List[float], jpype.JArray], f: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], dFdX: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], dFdY: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], d2FdXdY: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]):
@@ -77,8 +75,6 @@ class BicubicInterpolatingFunction(org.hipparchus.analysis.BivariateFunction):
 
 class BilinearInterpolatingFunction(org.hipparchus.analysis.BivariateFunction, org.hipparchus.analysis.FieldBivariateFunction, java.io.Serializable):
     """
-    implements BivariateFunction, FieldBivariateFunction, Serializable
-    
     Interpolate grid data using bi-linear interpolation.
     
     This interpolator is thread-safe.
@@ -86,7 +82,8 @@ class BilinearInterpolatingFunction(org.hipparchus.analysis.BivariateFunction, o
     Since:
         1.4
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self, xVal: typing.Union[typing.List[float], jpype.JArray], yVal: typing.Union[typing.List[float], jpype.JArray], fVal: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]):
         """
@@ -210,8 +207,6 @@ class BivariateGridInterpolator:
 _FieldBilinearInterpolatingFunction__T = typing.TypeVar('_FieldBilinearInterpolatingFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldBilinearInterpolatingFunction(org.hipparchus.analysis.CalculusFieldBivariateFunction[_FieldBilinearInterpolatingFunction__T], typing.Generic[_FieldBilinearInterpolatingFunction__T]):
     """
-    implements CalculusFieldBivariateFunction<T>
-    
     Interpolate grid data using bi-linear interpolation.
     
     This interpolator is thread-safe.
@@ -520,8 +515,6 @@ class FieldUnivariateInterpolator:
 
 class GridAxis(java.io.Serializable):
     """
-    implements Serializable
-    
     Helper for finding interpolation nodes along one axis of grid data.
     
     This class is intended to be used for interpolating inside grids. It works on any sorted data without duplication and size at least n where n is the number of points required for interpolation (i.e. 2 for linear interpolation, 3 for quadratic...)
@@ -533,7 +526,8 @@ class GridAxis(java.io.Serializable):
     Since:
         1.4
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self, grid: typing.Union[typing.List[float], jpype.JArray], n: int):
         """
@@ -622,8 +616,6 @@ class GridAxis(java.io.Serializable):
 
 class HermiteInterpolator(org.hipparchus.analysis.differentiation.UnivariateDifferentiableVectorFunction):
     """
-    implements UnivariateDifferentiableVectorFunction
-    
     Polynomial interpolator using both sample values and sample derivatives.
     
     The interpolation polynomials match all sample points, including both values and provided derivatives. There is one polynomial for each component of the values vector. All polynomials have the same degree. The degree of the polynomials depends on the number of points and number of derivatives at each point. For example the interpolation polynomials for n sample points without any derivatives all have degree n-1. The interpolation polynomials for n sample points with the two extreme points having value and first derivative and the remaining points having value only all have degree n+1. The interpolation polynomial for n sample points with value, first and second derivative for all points all have degree 3n-1.
@@ -687,15 +679,15 @@ class HermiteInterpolator(org.hipparchus.analysis.differentiation.UnivariateDiff
         ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> typing.MutableSequence[float]: ...
+    def value(self, x: float) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> typing.MutableSequence[_value_1__T]: ...
+    def value(self, x: _value_1__T) -> typing.MutableSequence[_value_1__T]: ...
 
 class InterpolatingMicrosphere:
     """
     Utility class for the MicrosphereProjectionInterpolator algorithm.
     """
-    def __init__(self, int: int, int2: int, double: float, double2: float, double3: float, unitSphereRandomVectorGenerator: org.hipparchus.random.UnitSphereRandomVectorGenerator):
+    def __init__(self, dimension: int, size: int, maxDarkFraction: float, darkThreshold: float, background: float, rand: org.hipparchus.random.UnitSphereRandomVectorGenerator):
         """
         Create an unitialiazed sphere. Sub-classes are responsible for calling the add(double[]) add method in order to initialize all the sphere's facets.
         
@@ -712,18 +704,18 @@ class InterpolatingMicrosphere:
             MathIllegalArgumentException: if darkThreshold < 0.
             MathIllegalArgumentException: if maxDarkFraction does not belong to the interval [0, 1].
         
-        public InterpolatingMicrosphere(int dimension, int size, double maxDarkFraction, double darkThreshold, double background, UnitSphereRandomVectorGenerator rand)
+        public InterpolatingMicrosphere (int dimension, int size, double maxDarkFraction, double darkThreshold, double background, UnitSphereRandomVectorGenerator rand)
         
         Create a sphere from randomly sampled vectors.
         
         Parameters:
             dimension (int): Dimension of the data space.
             size (int): Number of surface elements of the sphere.
+            rand (double): Unit vector generator for creating the microsphere.
             maxDarkFraction (double): Maximum fraction of the facets that can be dark. If the fraction of "non-illuminated" facets is larger, no estimation of
                 the value will be performed, and the background value will be returned instead.
             darkThreshold (double): Value of the illumination below which a facet is considered dark.
-            background (double): Value returned when the maxDarkFraction threshold is exceeded.
-            rand (UnitSphereRandomVectorGenerator): Unit vector generator for creating the microsphere.
+            background (UnitSphereRandomVectorGenerator): Value returned when the maxDarkFraction threshold is exceeded.
         
         Raises:
             MathIllegalArgumentException: if the size of the generated vectors does not match the dimension set in the constructor.
@@ -731,7 +723,7 @@ class InterpolatingMicrosphere:
             MathIllegalArgumentException: if darkThreshold < 0.
             MathIllegalArgumentException: if maxDarkFraction does not belong to the interval [0, 1].
         
-        protected InterpolatingMicrosphere(InterpolatingMicrosphere other)
+        protected InterpolatingMicrosphere (InterpolatingMicrosphere other)
         
         Copy constructor.
         
@@ -822,8 +814,6 @@ class MultivariateInterpolator:
 
 class PiecewiseBicubicSplineInterpolatingFunction(org.hipparchus.analysis.BivariateFunction, org.hipparchus.analysis.FieldBivariateFunction):
     """
-    implements BivariateFunction, FieldBivariateFunction
-    
     Function that implements the `bicubic spline <http://www.paulinternet.nl/?page=bicubic>` interpolation. This implementation currently uses AkimaSplineInterpolator as the underlying one-dimensional interpolator, which requires 5 sample points; insufficient data will raise an exception when the value method is called.
     """
     def __init__(self, x: typing.Union[typing.List[float], jpype.JArray], y: typing.Union[typing.List[float], jpype.JArray], f: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]):
@@ -860,14 +850,12 @@ class PiecewiseBicubicSplineInterpolatingFunction(org.hipparchus.analysis.Bivari
         ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def value(self, double: float, double2: float) -> float: ...
+    def value(self, x: float, y: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T, t2: _value_1__T) -> _value_1__T: ...
+    def value(self, x: _value_1__T, y: _value_1__T) -> _value_1__T: ...
 
 class TricubicInterpolatingFunction(org.hipparchus.analysis.TrivariateFunction):
     """
-    implements TrivariateFunction
-    
     Function that implements the ` tricubic spline interpolation <http://en.wikipedia.org/wiki/Tricubic_interpolation>`, as proposed in Tricubic interpolation in three dimensions
     
         F. Lekien and J. Marsden
@@ -987,8 +975,6 @@ class UnivariateInterpolator:
 
 class AkimaSplineInterpolator(UnivariateInterpolator, FieldUnivariateInterpolator):
     """
-    implements UnivariateInterpolator, FieldUnivariateInterpolator
-    
     Computes a cubic spline interpolation for the data set using the Akima algorithm, as originally formulated by Hiroshi Akima in his 1970 paper `A New Method of Interpolation and Smooth Curve Fitting Based on Local Procedures. <http://doi.acm.org/10.1145/321607.321609>` J. ACM 17, 4 (October 1970), 589-602. DOI=10.1145/321607.321609
     
     This implementation is based on the Akima implementation in the CubicSpline class in the Math.NET Numerics library. The method referenced is CubicSpline.InterpolateAkimaSorted
@@ -998,17 +984,15 @@ class AkimaSplineInterpolator(UnivariateInterpolator, FieldUnivariateInterpolato
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, boolean: bool): ...
+    def __init__(self, useModifiedWeights: bool): ...
     _interpolate_0__T = typing.TypeVar('_interpolate_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def interpolate(self, tArray: typing.Union[typing.List[_interpolate_0__T], jpype.JArray], tArray2: typing.Union[typing.List[_interpolate_0__T], jpype.JArray]) -> org.hipparchus.analysis.polynomials.FieldPolynomialSplineFunction[_interpolate_0__T]: ...
+    def interpolate(self, xvals: typing.Union[typing.List[_interpolate_0__T], jpype.JArray], yvals: typing.Union[typing.List[_interpolate_0__T], jpype.JArray]) -> org.hipparchus.analysis.polynomials.FieldPolynomialSplineFunction[_interpolate_0__T]: ...
     @typing.overload
-    def interpolate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.analysis.polynomials.PolynomialSplineFunction: ...
+    def interpolate(self, xvals: typing.Union[typing.List[float], jpype.JArray], yvals: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.analysis.polynomials.PolynomialSplineFunction: ...
 
 class BicubicInterpolator(BivariateGridInterpolator):
     """
-    implements BivariateGridInterpolator
-    
     Generates a BicubicInterpolatingFunction.
     
     Caveat: Because the interpolation scheme requires that derivatives be specified at the sample points, those are approximated with finite differences (using the 2-points symmetric formulae). Since their values are undefined at the borders of the provided interpolation ranges, the interpolated values will be wrong at the edges of the patch. The interpolate method will return a function that overrides isValidPoint to indicate points where the interpolation will be inaccurate.
@@ -1041,9 +1025,6 @@ class BicubicInterpolator(BivariateGridInterpolator):
         
         Raises:
             MathIllegalArgumentException: if any of the arrays has zero length.
-            MathIllegalArgumentException: if the array lengths are inconsistent.
-            MathIllegalArgumentException: if the array is not sorted.
-            MathIllegalArgumentException: if the number of points is too small for the order of the interpolation
         
         
         """
@@ -1051,8 +1032,6 @@ class BicubicInterpolator(BivariateGridInterpolator):
 
 class BilinearInterpolator(BivariateGridInterpolator):
     """
-    implements BivariateGridInterpolator
-    
     Interpolate grid data using bi-linear interpolation.
     
     Since:
@@ -1086,9 +1065,6 @@ class BilinearInterpolator(BivariateGridInterpolator):
         
         Raises:
             MathIllegalArgumentException: if any of the arrays has zero length.
-            MathIllegalArgumentException: if the array lengths are inconsistent.
-            MathIllegalArgumentException: if the array is not sorted.
-            MathIllegalArgumentException: if the number of points is too small for the order of the interpolation
         
         
         """
@@ -1096,13 +1072,12 @@ class BilinearInterpolator(BivariateGridInterpolator):
 
 class DividedDifferenceInterpolator(UnivariateInterpolator, java.io.Serializable):
     """
-    implements UnivariateInterpolator, Serializable
-    
     Implements the ` Divided Difference Algorithm <http://mathworld.wolfram.com/NewtonsDividedDifferenceInterpolationFormula.html>` for interpolation of real univariate functions. For reference, see Introduction to Numerical Analysis, ISBN 038795452X, chapter 2.
     
     The actual code of Neville's evaluation is in PolynomialFunctionLagrangeForm, this class provides an easy-to-use interface to it.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self):
         """
@@ -1141,8 +1116,6 @@ class DividedDifferenceInterpolator(UnivariateInterpolator, java.io.Serializable
 _FieldBilinearInterpolator__T = typing.TypeVar('_FieldBilinearInterpolator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldBilinearInterpolator(FieldBivariateGridInterpolator[_FieldBilinearInterpolator__T], typing.Generic[_FieldBilinearInterpolator__T]):
     """
-    implements FieldBivariateGridInterpolator<T>
-    
     Interpolate grid data using bi-linear interpolation.
     
     Since:
@@ -1176,9 +1149,6 @@ class FieldBilinearInterpolator(FieldBivariateGridInterpolator[_FieldBilinearInt
         
         Raises:
             MathIllegalArgumentException: if any of the arrays has zero length.
-            MathIllegalArgumentException: if the array lengths are inconsistent.
-            MathIllegalArgumentException: if the array is not sorted.
-            MathIllegalArgumentException: if the number of points is too small for the order of the interpolation
         
         
         """
@@ -1188,7 +1158,7 @@ class InterpolatingMicrosphere2D(InterpolatingMicrosphere):
     """
     Utility class for the MicrosphereProjectionInterpolator algorithm. For 2D interpolation, this class constructs the microsphere as a series of evenly spaced facets (rather than generating random normals as in the base implementation).
     """
-    def __init__(self, int: int, double: float, double2: float, double3: float):
+    def __init__(self, size: int, maxDarkFraction: float, darkThreshold: float, background: float):
         """
         Create a sphere from vectors regularly sampled around a circle.
         
@@ -1204,7 +1174,7 @@ class InterpolatingMicrosphere2D(InterpolatingMicrosphere):
             MathIllegalArgumentException: if darkThreshold < 0.
             MathIllegalArgumentException: if maxDarkFraction does not belong to the interval [0, 1].
         
-        protected InterpolatingMicrosphere2D(InterpolatingMicrosphere2D other)
+        protected InterpolatingMicrosphere2D (InterpolatingMicrosphere2D other)
         
         Copy constructor.
         
@@ -1229,8 +1199,6 @@ class InterpolatingMicrosphere2D(InterpolatingMicrosphere):
 
 class LinearInterpolator(UnivariateInterpolator, FieldUnivariateInterpolator):
     """
-    implements UnivariateInterpolator, FieldUnivariateInterpolator
-    
     Implements a linear function for interpolation of real univariate functions.
     """
     def __init__(self):
@@ -1247,28 +1215,27 @@ class LinearInterpolator(UnivariateInterpolator, FieldUnivariateInterpolator):
         ...
     _interpolate_0__T = typing.TypeVar('_interpolate_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def interpolate(self, tArray: typing.Union[typing.List[_interpolate_0__T], jpype.JArray], tArray2: typing.Union[typing.List[_interpolate_0__T], jpype.JArray]) -> org.hipparchus.analysis.polynomials.FieldPolynomialSplineFunction[_interpolate_0__T]: ...
+    def interpolate(self, x: typing.Union[typing.List[_interpolate_0__T], jpype.JArray], y: typing.Union[typing.List[_interpolate_0__T], jpype.JArray]) -> org.hipparchus.analysis.polynomials.FieldPolynomialSplineFunction[_interpolate_0__T]: ...
     @typing.overload
-    def interpolate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.analysis.polynomials.PolynomialSplineFunction: ...
+    def interpolate(self, x: typing.Union[typing.List[float], jpype.JArray], y: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.analysis.polynomials.PolynomialSplineFunction: ...
 
 class LoessInterpolator(UnivariateInterpolator, java.io.Serializable):
     """
-    implements UnivariateInterpolator, Serializable
-    
     Implements the ` Local Regression Algorithm <http://en.wikipedia.org/wiki/Local_regression>` (also Loess, Lowess) for interpolation of real univariate functions.
     
     For reference, see ` William S. Cleveland - Robust Locally Weighted Regression and Smoothing Scatterplots <http://amstat.tandfonline.com/doi/abs/10.1080/01621459.1979.10481038>`
     
     This class implements both the loess method and serves as an interpolation adapter to it, allowing one to build a spline on the obtained loess fit.
     
-          - serialized
+    Also see:
+        serialized
     """
     DEFAULT_BANDWIDTH: typing.ClassVar[float] = ...
     """
     Default value of the bandwidth parameter.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1276,8 +1243,8 @@ class LoessInterpolator(UnivariateInterpolator, java.io.Serializable):
     """
     Default value of the number of robustness iterations.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1285,17 +1252,17 @@ class LoessInterpolator(UnivariateInterpolator, java.io.Serializable):
     """
     Default value for accuracy.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, int: int): ...
+    def __init__(self, bandwidth: float, robustnessIters: int): ...
     @typing.overload
-    def __init__(self, double: float, int: int, double2: float): ...
+    def __init__(self, bandwidth: float, robustnessIters: int, accuracy: float): ...
     def interpolate(self, xval: typing.Union[typing.List[float], jpype.JArray], yval: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.analysis.polynomials.PolynomialSplineFunction:
         """
         Compute an interpolating function by performing a loess fit on the data at the original abscissae and then building a cubic spline with a SplineInterpolator on the resulting fit.
@@ -1320,20 +1287,18 @@ class LoessInterpolator(UnivariateInterpolator, java.io.Serializable):
         """
         ...
     @typing.overload
-    def smooth(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
+    def smooth(self, xval: typing.Union[typing.List[float], jpype.JArray], yval: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def smooth(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], doubleArray3: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
+    def smooth(self, xval: typing.Union[typing.List[float], jpype.JArray], yval: typing.Union[typing.List[float], jpype.JArray], weights: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
 
 class MicrosphereProjectionInterpolator(MultivariateInterpolator):
     """
-    implements MultivariateInterpolator
-    
     Interpolator that implements the algorithm described in William Dudziak's `MS thesis <http://www.dudziak.com/microsphere.pdf>`.
     """
     @typing.overload
-    def __init__(self, int: int, int2: int, double: float, double2: float, double3: float, double4: float, boolean: bool, double5: float): ...
+    def __init__(self, dimension: int, elements: int, maxDarkFraction: float, darkThreshold: float, background: float, exponent: float, sharedSphere: bool, noInterpolationTolerance: float): ...
     @typing.overload
-    def __init__(self, interpolatingMicrosphere: InterpolatingMicrosphere, double: float, boolean: bool, double2: float): ...
+    def __init__(self, microsphere: InterpolatingMicrosphere, exponent: float, sharedSphere: bool, noInterpolationTolerance: float): ...
     def interpolate(self, xval: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], yval: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.analysis.MultivariateFunction:
         """
         Computes an interpolating function for the data set.
@@ -1359,13 +1324,12 @@ class MicrosphereProjectionInterpolator(MultivariateInterpolator):
 
 class NevilleInterpolator(UnivariateInterpolator, java.io.Serializable):
     """
-    implements UnivariateInterpolator, Serializable
-    
     Implements the ` Neville's Algorithm <http://mathworld.wolfram.com/NevillesAlgorithm.html>` for interpolation of real univariate functions. For reference, see Introduction to Numerical Analysis, ISBN 038795452X, chapter 2.
     
     The actual code of Neville's algorithm is in PolynomialFunctionLagrangeForm, this class provides an easy-to-use interface to it.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self):
         """
@@ -1403,8 +1367,6 @@ class NevilleInterpolator(UnivariateInterpolator, java.io.Serializable):
 
 class PiecewiseBicubicSplineInterpolator(BivariateGridInterpolator):
     """
-    implements BivariateGridInterpolator
-    
     Generates a piecewise-bicubic interpolating function.
     """
     def __init__(self):
@@ -1435,9 +1397,6 @@ class PiecewiseBicubicSplineInterpolator(BivariateGridInterpolator):
         
         Raises:
             MathIllegalArgumentException: if any of the arrays has zero length.
-            MathIllegalArgumentException: if the array lengths are inconsistent.
-            MathIllegalArgumentException: if the array is not sorted.
-            MathIllegalArgumentException: if the number of points is too small for the order of the interpolation
             NullArgumentException: 
         
         """
@@ -1453,8 +1412,6 @@ class SplineInterpolator(UnivariateInterpolator, FieldUnivariateInterpolator):
 
 class TricubicInterpolator(TrivariateGridInterpolator):
     """
-    implements TrivariateGridInterpolator
-    
     Generates a tricubic interpolating function.
     """
     def __init__(self):
@@ -1486,9 +1443,6 @@ class TricubicInterpolator(TrivariateGridInterpolator):
         
         Raises:
             MathIllegalArgumentException: if any of the arrays has zero length.
-            MathIllegalArgumentException: if the array lengths are inconsistent.
-            MathIllegalArgumentException: if arrays are not sorted
-            MathIllegalArgumentException: if the number of points is too small for the order of the interpolation
         
         
         """
@@ -1496,23 +1450,21 @@ class TricubicInterpolator(TrivariateGridInterpolator):
 
 class UnivariatePeriodicInterpolator(UnivariateInterpolator):
     """
-    implements UnivariateInterpolator
-    
     Adapter for classes implementing the UnivariateInterpolator interface. The data to be interpolated is assumed to be periodic. Thus values that are outside of the range can be passed to the interpolation function: They will be wrapped into the initial range before being passed to the class that actually computes the interpolation.
     """
     DEFAULT_EXTEND: typing.ClassVar[int] = ...
     """
     Default number of extension points of the samples array.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
-    def __init__(self, univariateInterpolator: typing.Union[UnivariateInterpolator, typing.Callable], double: float): ...
+    def __init__(self, interpolator: typing.Union[UnivariateInterpolator, typing.Callable], period: float): ...
     @typing.overload
-    def __init__(self, univariateInterpolator: typing.Union[UnivariateInterpolator, typing.Callable], double: float, int: int): ...
+    def __init__(self, interpolator: typing.Union[UnivariateInterpolator, typing.Callable], period: float, extend: int): ...
     def interpolate(self, xval: typing.Union[typing.List[float], jpype.JArray], yval: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.analysis.UnivariateFunction:
         """
         Compute an interpolating function for the dataset.

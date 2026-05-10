@@ -50,7 +50,12 @@ class Action(java.lang.Enum['Action']):
     @staticmethod
     def values() -> typing.MutableSequence['Action']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (Action c : Action.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -61,14 +66,13 @@ class Action(java.lang.Enum['Action']):
 
 class AdaptableInterval:
     """
-    FunctionalInterfacepublic interfaceAdaptableInterval
-    
     This interface represents an event checking interval that depends on state.
     
     Since:
         3.0
     
-          - ODEEventDetector
+    Also see:
+        ODEEventDetector
     """
     def currentInterval(self, state: org.hipparchus.ode.ODEStateAndDerivative, isForward: bool) -> float:
         """
@@ -222,14 +226,13 @@ class EventState:
 _FieldAdaptableInterval__T = typing.TypeVar('_FieldAdaptableInterval__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAdaptableInterval(typing.Generic[_FieldAdaptableInterval__T]):
     """
-    FunctionalInterfacepublic interfaceFieldAdaptableInterval<T extends hipparchus<T>>
-    
     This interface represents an event checking interval that depends on state.
     
     Since:
         3.0
     
-          - ODEEventDetector
+    Also see:
+        ODEEventDetector
     """
     def currentInterval(self, state: org.hipparchus.ode.FieldODEStateAndDerivative[_FieldAdaptableInterval__T], isForward: bool) -> float:
         """
@@ -396,7 +399,8 @@ class FieldODEEventDetector(typing.Generic[_FieldODEEventDetector__T]):
     Since:
         3.0
     
-          - package
+    Also see:
+        package
     """
     def g(self, state: org.hipparchus.ode.FieldODEStateAndDerivative[_FieldODEEventDetector__T]) -> _FieldODEEventDetector__T:
         """
@@ -506,7 +510,8 @@ class FieldODEEventHandler(typing.Generic[_FieldODEEventHandler__T]):
     
     Note that prior to Hipparchus 3.0, some of the methods that are now in FieldODEEventDetector were in this interface (and the remaining ones were in the defunct FieldEventHandlerConfiguration interface). The interfaces have been reorganized to allow different objects to be used in event detection and event handling, hence allowing users to reuse predefined events detectors with custom handlers.
     
-          - package
+    Also see:
+        package
     """
     def eventOccurred(self, state: org.hipparchus.ode.FieldODEStateAndDerivative[_FieldODEEventHandler__T], detector: FieldODEEventDetector[_FieldODEEventHandler__T], increasing: bool) -> Action:
         """
@@ -585,7 +590,8 @@ class FieldODEStepEndHandler(typing.Generic[_FieldODEStepEndHandler__T]):
     Since:
         3.0
     
-          - package
+    Also see:
+        package
     """
     def init(self, initialState: org.hipparchus.ode.FieldODEStateAndDerivative[_FieldODEStepEndHandler__T], finalTime: _FieldODEStepEndHandler__T) -> None:
         """
@@ -684,7 +690,12 @@ class FilterType(java.lang.Enum['FilterType']):
     @staticmethod
     def values() -> typing.MutableSequence['FilterType']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (FilterType c : FilterType.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -708,7 +719,8 @@ class ODEEventDetector:
     Since:
         3.0
     
-          - package
+    Also see:
+        package
     """
     def g(self, state: org.hipparchus.ode.ODEStateAndDerivative) -> float:
         """
@@ -728,8 +740,8 @@ class ODEEventDetector:
         Returns:
             value of the g switching function
         
-              - package
-        
+        Also see:
+            package
         
         
         """
@@ -823,7 +835,8 @@ class ODEEventHandler:
     Since:
         3.0
     
-          - package
+    Also see:
+        package
     """
     def eventOccurred(self, state: org.hipparchus.ode.ODEStateAndDerivative, detector: ODEEventDetector, increasing: bool) -> Action:
         """
@@ -901,7 +914,8 @@ class ODEStepEndHandler:
     Since:
         3.0
     
-          - package
+    Also see:
+        package
     """
     def init(self, initialState: org.hipparchus.ode.ODEStateAndDerivative, finalTime: float) -> None:
         """
@@ -972,8 +986,6 @@ _AbstractFieldODEDetector__T = typing.TypeVar('_AbstractFieldODEDetector__T', bo
 _AbstractFieldODEDetector__E = typing.TypeVar('_AbstractFieldODEDetector__E', bound=org.hipparchus.CalculusFieldElement)  # <E>
 class AbstractFieldODEDetector(FieldODEEventDetector[_AbstractFieldODEDetector__E], typing.Generic[_AbstractFieldODEDetector__T, _AbstractFieldODEDetector__E]):
     """
-    implements FieldODEEventDetector<E>
-    
     Base class for #@link FieldODEEventDetector.
     
     Since:
@@ -983,8 +995,8 @@ class AbstractFieldODEDetector(FieldODEEventDetector[_AbstractFieldODEDetector__
     """
     Default maximum checking interval (s).
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -992,8 +1004,8 @@ class AbstractFieldODEDetector(FieldODEEventDetector[_AbstractFieldODEDetector__
     """
     Default convergence threshold (s).
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1001,8 +1013,8 @@ class AbstractFieldODEDetector(FieldODEEventDetector[_AbstractFieldODEDetector__
     """
     Default maximum number of iterations in the event time search.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1099,7 +1111,7 @@ class AbstractFieldODEDetector(FieldODEEventDetector[_AbstractFieldODEDetector__
         """
         ...
     @typing.overload
-    def withMaxCheck(self, e: _AbstractFieldODEDetector__E) -> _AbstractFieldODEDetector__T:
+    def withMaxCheck(self, newMaxCheck: _AbstractFieldODEDetector__E) -> _AbstractFieldODEDetector__T:
         """
         Setup the maximum checking interval.
         
@@ -1111,7 +1123,7 @@ class AbstractFieldODEDetector(FieldODEEventDetector[_AbstractFieldODEDetector__
         Returns:
             a new detector with updated configuration (the instance is not changed)
         
-        public AbstractFieldODEDetector withMaxCheck(FieldAdaptableInterval<AbstractFieldODEDetector> newMaxCheck)
+        public AbstractFieldODEDetector withMaxCheck (FieldAdaptableInterval<AbstractFieldODEDetector> newMaxCheck)
         
         Setup the maximum checking interval.
         
@@ -1130,7 +1142,7 @@ class AbstractFieldODEDetector(FieldODEEventDetector[_AbstractFieldODEDetector__
         """
         ...
     @typing.overload
-    def withMaxCheck(self, fieldAdaptableInterval: typing.Union[FieldAdaptableInterval[_AbstractFieldODEDetector__E], typing.Callable[[org.hipparchus.ode.FieldODEStateAndDerivative[org.hipparchus.CalculusFieldElement], bool], float]]) -> _AbstractFieldODEDetector__T: ...
+    def withMaxCheck(self, newMaxCheck: typing.Union[FieldAdaptableInterval[_AbstractFieldODEDetector__E], typing.Callable[[org.hipparchus.ode.FieldODEStateAndDerivative[org.hipparchus.CalculusFieldElement], bool], float]]) -> _AbstractFieldODEDetector__T: ...
     def withMaxIter(self, newMaxIter: int) -> _AbstractFieldODEDetector__T:
         """
         Setup the maximum number of iterations in the event time search.
@@ -1158,8 +1170,8 @@ class AbstractFieldODEDetector(FieldODEEventDetector[_AbstractFieldODEDetector__
         Returns:
             a new detector with updated configuration (the instance is not changed)
         
-              - withThreshold
-        
+        Also see:
+            withThreshold
         
         
         """
@@ -1176,8 +1188,8 @@ class AbstractFieldODEDetector(FieldODEEventDetector[_AbstractFieldODEDetector__
         Returns:
             a new detector with updated configuration (the instance is not changed)
         
-              - withSolver
-        
+        Also see:
+            withSolver
         
         
         """
@@ -1186,8 +1198,6 @@ class AbstractFieldODEDetector(FieldODEEventDetector[_AbstractFieldODEDetector__
 _AbstractODEDetector__T = typing.TypeVar('_AbstractODEDetector__T', bound='AbstractODEDetector')  # <T>
 class AbstractODEDetector(ODEEventDetector, typing.Generic[_AbstractODEDetector__T]):
     """
-    implements ODEEventDetector
-    
     Base class for #@link ODEEventDetector.
     
     Since:
@@ -1197,8 +1207,8 @@ class AbstractODEDetector(ODEEventDetector, typing.Generic[_AbstractODEDetector_
     """
     Default maximum checking interval (s).
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1206,8 +1216,8 @@ class AbstractODEDetector(ODEEventDetector, typing.Generic[_AbstractODEDetector_
     """
     Default convergence threshold (s).
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1215,8 +1225,8 @@ class AbstractODEDetector(ODEEventDetector, typing.Generic[_AbstractODEDetector_
     """
     Default maximum number of iterations in the event time search.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1313,7 +1323,7 @@ class AbstractODEDetector(ODEEventDetector, typing.Generic[_AbstractODEDetector_
         """
         ...
     @typing.overload
-    def withMaxCheck(self, double: float) -> _AbstractODEDetector__T:
+    def withMaxCheck(self, newMaxCheck: float) -> _AbstractODEDetector__T:
         """
         Setup the maximum checking interval.
         
@@ -1342,7 +1352,7 @@ class AbstractODEDetector(ODEEventDetector, typing.Generic[_AbstractODEDetector_
         """
         ...
     @typing.overload
-    def withMaxCheck(self, adaptableInterval: typing.Union[AdaptableInterval, typing.Callable]) -> _AbstractODEDetector__T: ...
+    def withMaxCheck(self, newMaxCheck: typing.Union[AdaptableInterval, typing.Callable]) -> _AbstractODEDetector__T: ...
     def withMaxIter(self, newMaxIter: int) -> _AbstractODEDetector__T:
         """
         Setup the maximum number of iterations in the event time search.
@@ -1370,8 +1380,8 @@ class AbstractODEDetector(ODEEventDetector, typing.Generic[_AbstractODEDetector_
         Returns:
             a new detector with updated configuration (the instance is not changed)
         
-              - withThreshold
-        
+        Also see:
+            withThreshold
         
         
         """
@@ -1388,8 +1398,8 @@ class AbstractODEDetector(ODEEventDetector, typing.Generic[_AbstractODEDetector_
         Returns:
             a new detector with updated configuration (the instance is not changed)
         
-              - withSolver
-        
+        Also see:
+            withSolver
         
         
         """
@@ -1397,8 +1407,6 @@ class AbstractODEDetector(ODEEventDetector, typing.Generic[_AbstractODEDetector_
 
 class DetectorBasedEventState(EventState):
     """
-    implements EventState
-    
     This class handles the state for one ODEEventHandler during integration steps.
     
     Each time the integrator proposes a step, the event handler switching function should be checked. This class handles the state of one handler during one integration step, with references to the state at the end of the preceding step. This information is used to decide if the handler should trigger an event or not during the proposed step.
@@ -1528,8 +1536,6 @@ class DetectorBasedEventState(EventState):
 _FieldDetectorBasedEventState__T = typing.TypeVar('_FieldDetectorBasedEventState__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldDetectorBasedEventState(FieldEventState[_FieldDetectorBasedEventState__T], typing.Generic[_FieldDetectorBasedEventState__T]):
     """
-    implements FieldEventState<T>
-    
     This class handles the state for one FieldODEEventHandler during integration steps.
     
     Each time the integrator proposes a step, the event handler switching function should be checked. This class handles the state of one handler during one integration step, with references to the state at the end of the preceding step. This information is used to decide if the handler should trigger an event or not during the proposed step.
@@ -1659,8 +1665,6 @@ class FieldDetectorBasedEventState(FieldEventState[_FieldDetectorBasedEventState
 _FieldStepEndEventState__T = typing.TypeVar('_FieldStepEndEventState__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldStepEndEventState(FieldEventState[_FieldStepEndEventState__T], typing.Generic[_FieldStepEndEventState__T]):
     """
-    implements FieldEventState<T>
-    
     This class handles the state for one ODEEventHandler that triggers at step end.
     
     Since:
@@ -1760,8 +1764,6 @@ class FieldStepEndEventState(FieldEventState[_FieldStepEndEventState__T], typing
 
 class StepEndEventState(EventState):
     """
-    implements EventState
-    
     This class handles the state for one ODEEventHandler that triggers at step end.
     
     Since:
@@ -1905,8 +1907,8 @@ class EventSlopeFilter(AbstractODEDetector['EventSlopeFilter'[_EventSlopeFilter_
         Returns:
             value of the g switching function
         
-              - package
-        
+        Also see:
+            package
         
         
         """

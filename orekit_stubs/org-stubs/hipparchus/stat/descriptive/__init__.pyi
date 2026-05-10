@@ -27,7 +27,7 @@ class AggregatableStatistic(typing.Generic[_AggregatableStatistic__T]):
     An interface for statistics that can aggregate results.
     """
     @typing.overload
-    def aggregate(self, t: _AggregatableStatistic__T) -> None:
+    def aggregate(self, others: _AggregatableStatistic__T) -> None:
         """
         Aggregates the results from the provided instances into this instance.
         
@@ -39,7 +39,7 @@ class AggregatableStatistic(typing.Generic[_AggregatableStatistic__T]):
         Raises:
             hipparchus: if either others or any instance is null
         
-        default void aggregate(Iterable<AggregatableStatistic> others)
+        default void aggregate (Iterable<AggregatableStatistic> others)
         
         Aggregates the results from the provided instances into this instance.
         
@@ -180,7 +180,7 @@ class StatisticalSummary:
     """
     @typing.overload
     @staticmethod
-    def aggregate(iterable: typing.Union[java.lang.Iterable['StatisticalSummary'], typing.Sequence['StatisticalSummary'], typing.Set['StatisticalSummary'], typing.Callable[[], java.util.Iterator[typing.Any]]]) -> 'StatisticalSummary':
+    def aggregate(statistics: typing.Union[java.lang.Iterable['StatisticalSummary'], typing.Sequence['StatisticalSummary'], typing.Set['StatisticalSummary'], typing.Callable[[], java.util.Iterator[typing.Any]]]) -> 'StatisticalSummary':
         """
         Computes aggregated statistical summaries.
         
@@ -195,7 +195,7 @@ class StatisticalSummary:
         Raises:
             hipparchus: if the input is null
         
-        static StatisticalSummary aggregate(Iterable<? extends StatisticalSummary> statistics)
+        static StatisticalSummary aggregate (Iterable<? extends StatisticalSummary> statistics)
         
         Computes aggregated statistical summaries.
         
@@ -215,7 +215,7 @@ class StatisticalSummary:
         ...
     @typing.overload
     @staticmethod
-    def aggregate(*statisticalSummary: 'StatisticalSummary') -> 'StatisticalSummary': ...
+    def aggregate(*statistics: 'StatisticalSummary') -> 'StatisticalSummary': ...
     def getMax(self) -> float:
         """
         Returns the maximum of the available values
@@ -352,23 +352,21 @@ class UnivariateStatistic(org.hipparchus.util.MathArrays.Function):
         """
         ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
 
 class WeightedEvaluation:
     """
     Weighted evaluation for statistics.
     """
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], weights: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], weights: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
 
 class AbstractUnivariateStatistic(UnivariateStatistic):
     """
-    implements UnivariateStatistic
-    
     Abstract base class for implementations of the UnivariateStatistic interface.
     """
     def copy(self) -> UnivariateStatistic:
@@ -384,7 +382,7 @@ class AbstractUnivariateStatistic(UnivariateStatistic):
         """
         ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
@@ -400,7 +398,7 @@ class AbstractUnivariateStatistic(UnivariateStatistic):
         """
         ...
     @typing.overload
-    def setData(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
+    def setData(self, values: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
         Set the data array.
         
@@ -409,9 +407,10 @@ class AbstractUnivariateStatistic(UnivariateStatistic):
         Parameters:
             values (double[]): data array to store (may be null to remove stored data)
         
-              - evaluate
+        Also see:
+            evaluate
         
-        public void setData(double[] values, int begin, int length) throws hipparchus
+        public void setData (double[] values, int begin, int length) throws hipparchus
         
         Set the data array. The input array is copied, not referenced.
         
@@ -423,19 +422,17 @@ class AbstractUnivariateStatistic(UnivariateStatistic):
         Raises:
             hipparchus: if values is null or the indices are not valid
         
-              - evaluate
-        
+        Also see:
+            evaluate
         
         
         """
         ...
     @typing.overload
-    def setData(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> None: ...
+    def setData(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> None: ...
 
 class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsumer, java.io.Serializable):
     """
-    implements StatisticalSummary, DoubleConsumer, Serializable
-    
     Maintains a dataset of values of a single variable and computes descriptive statistics based on stored data.
     
     The getWindowSize property sets a limit on the number of values that can be stored in the dataset. The default value, INFINITE_WINDOW, puts no limit on the size of the dataset. This value should be used with caution, as the backing store will grow without bound in this case.
@@ -444,7 +441,8 @@ class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsume
     
     Note: this class is not threadsafe.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -452,9 +450,9 @@ class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsume
     def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
     def __init__(self, int: int): ...
-    def accept(self, double: float) -> None:
+    def accept(self, v: float) -> None:
         """
-        Specified by: meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.util.function.DoubleConsumer.accept` in interface DoubleConsumer
+        Specified by: meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.util.function.DoubleConsumer.html?is` in interface DoubleConsumer
         
         
         """
@@ -519,8 +517,8 @@ class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsume
         Returns:
             The geometricMean, Double.NaN if no values have been added, or if any negative values have been added.
         
-              - ` Geometric mean <http://www.xycoon.com/geometric_mean.htm>`
-        
+        Also see:
+            ` Geometric mean <http://www.xycoon.com/geometric_mean.htm>`
         
         
         """
@@ -614,8 +612,8 @@ class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsume
         Returns:
             The population variance, Double.NaN if no values have been added, or 0.0 for a single value set.
         
-              - ` Population variance <http://en.wikibooks.org/wiki/Statistics/Summary/Variance>`
-        
+        Also see:
+            ` Population variance <http://en.wikibooks.org/wiki/Statistics/Summary/Variance>`
         
         
         """
@@ -627,8 +625,8 @@ class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsume
         Returns:
             The quadratic mean or NaN if no values have been added.
         
-              - ` Root Mean Square <http://mathworld.wolfram.com/Root-Mean-Square.html>`
-        
+        Also see:
+            ` Root Mean Square <http://mathworld.wolfram.com/Root-Mean-Square.html>`
         
         
         """
@@ -763,7 +761,7 @@ class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsume
         """
         Generates a text report displaying univariate statistics from values that have been added. Each statistic is displayed on a separate line.
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Returns:
             String with line feeds displaying statistics
@@ -774,20 +772,19 @@ class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsume
 
 class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Serializable):
     """
-    implements StatisticalMultivariateSummary, Serializable
-    
     Computes summary statistics for a stream of n-tuples added using the addValue method. The data values are not stored in memory, so this class can be used to compute statistics for very large n-tuple streams.
     
     To compute statistics for a stream of n-tuples, construct a MultivariateSummaryStatistics instance with dimension n and then use addValue to add n-tuples. The getXxx methods where Xxx is a statistic return an array of double values, where for ,n-1 the i :sup:`th` array element is the value of the given statistic for data range consisting of the i :sup:`th` element of each of the input n-tuples. For example, if addValue is called with actual parameters {0, 1, 2}, then {3, 4, 5} and finally {6, 7, 8}, getSum will return a three-element array with values {0+3+6, 1+4+7, 2+5+8}
     
     Note: This class is not thread-safe.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, dimension: int): ...
     @typing.overload
-    def __init__(self, int: int, boolean: bool): ...
+    def __init__(self, dimension: int, covarianceBiasCorrection: bool): ...
     def addValue(self, value: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
         Add an n-tuple to the data
@@ -810,7 +807,7 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
         """
         Returns true iff object is a MultivariateSummaryStatistics instance and all statistics have the same values as this.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             object (Object): the object to test equality against.
@@ -957,7 +954,7 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
         """
         Returns hash code based on values of statistics
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             hash code
@@ -969,7 +966,7 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
         """
         Generates a text report displaying summary statistics from values that have been added.
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Returns:
             String with line feeds displaying statistics
@@ -980,11 +977,10 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
 
 class StatisticalSummaryValues(java.io.Serializable, StatisticalSummary):
     """
-    implements Serializable, StatisticalSummary
-    
     Value object representing the results of a univariate statistical summary.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self, mean: float, variance: float, n: int, max: float, min: float, sum: float):
         """
@@ -1005,7 +1001,7 @@ class StatisticalSummaryValues(java.io.Serializable, StatisticalSummary):
         """
         Returns true iff object is a StatisticalSummary instance and all statistics have the same values as this.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             object (Object): the object to test equality against.
@@ -1104,7 +1100,7 @@ class StatisticalSummaryValues(java.io.Serializable, StatisticalSummary):
         """
         Returns hash code based on values of statistics
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             hash code
@@ -1116,7 +1112,7 @@ class StatisticalSummaryValues(java.io.Serializable, StatisticalSummary):
         """
         Generates a text report displaying values of statistics. Each statistic is displayed on a separate line.
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Returns:
             String with line feeds displaying statistics
@@ -1133,9 +1129,9 @@ class StorelessUnivariateStatistic(UnivariateStatistic, java.util.function.Doubl
     
     Note: unless otherwise stated, the evaluate and evaluate methods do NOT alter the internal state of the respective statistic.
     """
-    def accept(self, double: float) -> None:
+    def accept(self, value: float) -> None:
         """
-        Specified by: meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.util.function.DoubleConsumer.accept` in interface DoubleConsumer
+        Specified by: meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.util.function.DoubleConsumer.html?is` in interface DoubleConsumer
         
         
         """
@@ -1158,7 +1154,7 @@ class StorelessUnivariateStatistic(UnivariateStatistic, java.util.function.Doubl
         """
         ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     def getN(self) -> int:
@@ -1192,29 +1188,28 @@ class StorelessUnivariateStatistic(UnivariateStatistic, java.util.function.Doubl
         """
         ...
     @typing.overload
-    def incrementAll(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
+    def incrementAll(self, values: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
     @typing.overload
-    def incrementAll(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> None: ...
+    def incrementAll(self, values: typing.Union[typing.List[float], jpype.JArray], start: int, length: int) -> None: ...
 
 class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingStatistics'], java.util.function.DoubleConsumer, java.io.Serializable):
     """
-    implements StatisticalSummary, AggregatableStatistic<StreamingStatistics>, DoubleConsumer, Serializable
-    
     Computes summary statistics for a stream of data values added using the addValue method. The data values are not stored in memory, so this class can be used to compute statistics for very large data streams.
     
     By default, all statistics other than percentiles are maintained. Percentile calculations use an embedded RandomPercentile which carries more memory and compute overhead than the other statistics, so it is disabled by default. To enable percentiles, either pass true to the constructor or use a StreamingStatisticsBuilder to configure an instance with percentiles turned on. Other stats can also be selectively disabled using StreamingStatisticsBulder.
     
     Note: This class is not thread-safe.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, randomGenerator: org.hipparchus.random.RandomGenerator): ...
-    def accept(self, double: float) -> None:
+    def __init__(self, epsilon: float, randomGenerator: org.hipparchus.random.RandomGenerator): ...
+    def accept(self, value: float) -> None:
         """
-        Specified by: meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.util.function.DoubleConsumer.accept` in interface DoubleConsumer
+        Specified by: meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.util.function.DoubleConsumer.html?is` in interface DoubleConsumer
         
         
         """
@@ -1245,9 +1240,9 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
         """
         ...
     @typing.overload
-    def aggregate(self, *t: typing.Any) -> None: ...
+    def aggregate(self, *other: typing.Any) -> None: ...
     @typing.overload
-    def aggregate(self, streamingStatistics: 'StreamingStatistics') -> None: ...
+    def aggregate(self, other: 'StreamingStatistics') -> None: ...
     @staticmethod
     def builder() -> 'StreamingStatistics.StreamingStatisticsBuilder':
         """
@@ -1278,7 +1273,7 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
         """
         Returns true iff object is a StreamingStatistics instance and all statistics have the same values as this.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             object (Object): the object to test equality against.
@@ -1482,7 +1477,7 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
         """
         Returns hash code based on values of statistics.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             hash code
@@ -1494,7 +1489,7 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
         """
         Generates a text report displaying summary statistics from values that have been added.
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Returns:
             String with line feeds displaying statistics
@@ -1513,8 +1508,6 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
 
 class AbstractStorelessUnivariateStatistic(StorelessUnivariateStatistic):
     """
-    implements StorelessUnivariateStatistic
-    
     Abstract base class for implementations of the StorelessUnivariateStatistic interface.
     
     Provides default hashCode() and equals(Object) implementations.
@@ -1546,7 +1539,7 @@ class AbstractStorelessUnivariateStatistic(StorelessUnivariateStatistic):
         """
         Returns true iff object is the same type of StorelessUnivariateStatistic (the object's class equals this instance) returning the same values as this for getResult() and getN().
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             object (Object): object to test equality against.
@@ -1573,7 +1566,7 @@ class AbstractStorelessUnivariateStatistic(StorelessUnivariateStatistic):
         """
         Returns hash code based on getResult() and getN().
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             hash code
@@ -1595,7 +1588,7 @@ class AbstractStorelessUnivariateStatistic(StorelessUnivariateStatistic):
         ...
     def toString(self) -> str:
         """
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         
         """

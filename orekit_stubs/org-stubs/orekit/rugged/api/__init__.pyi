@@ -1032,7 +1032,7 @@ class RuggedBuilder:
         """
         ...
     @typing.overload
-    def setDigitalElevationModel(self, tileUpdater: typing.Union[org.orekit.rugged.raster.TileUpdater, typing.Callable], int: int) -> 'RuggedBuilder':
+    def setDigitalElevationModel(self, newTileUpdater: typing.Union[org.orekit.rugged.raster.TileUpdater, typing.Callable], newMaxCachedTiles: int) -> 'RuggedBuilder':
         """
         Set the user-provided TileUpdater.
         
@@ -1077,9 +1077,9 @@ class RuggedBuilder:
         """
         ...
     @typing.overload
-    def setDigitalElevationModel(self, tileUpdater: typing.Union[org.orekit.rugged.raster.TileUpdater, typing.Callable], int: int, boolean: bool) -> 'RuggedBuilder': ...
+    def setDigitalElevationModel(self, newTileUpdater: typing.Union[org.orekit.rugged.raster.TileUpdater, typing.Callable], newMaxCachedTiles: int, newIsOverlappingTiles: bool) -> 'RuggedBuilder': ...
     @typing.overload
-    def setEllipsoid(self, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid) -> 'RuggedBuilder':
+    def setEllipsoid(self, newEllipsoid: org.orekit.bodies.OneAxisEllipsoid) -> 'RuggedBuilder':
         """
         Set the reference ellipsoid.
         
@@ -1108,7 +1108,7 @@ class RuggedBuilder:
         """
         ...
     @typing.overload
-    def setEllipsoid(self, ellipsoidId: EllipsoidId, bodyRotatingFrameId: BodyRotatingFrameId) -> 'RuggedBuilder': ...
+    def setEllipsoid(self, ellipsoidID: EllipsoidId, bodyRotatingFrameID: BodyRotatingFrameId) -> 'RuggedBuilder': ...
     def setLightTimeCorrection(self, newLightTimeCorrection: bool) -> 'RuggedBuilder':
         """
         Set flag for light time correction.
@@ -1197,7 +1197,7 @@ class RuggedBuilder:
         """
         ...
     @typing.overload
-    def setTrajectory(self, double: float, int: int, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, propagator: org.orekit.propagation.Propagator) -> 'RuggedBuilder':
+    def setTrajectory(self, interpolationStep: float, interpolationNumber: int, pvFilter: org.orekit.utils.CartesianDerivativesFilter, aFilter: org.orekit.utils.AngularDerivativesFilter, propagator: org.orekit.propagation.Propagator) -> 'RuggedBuilder':
         """
         Set the spacecraft trajectory.
         

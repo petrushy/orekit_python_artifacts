@@ -18,8 +18,6 @@ import typing
 _FieldPolynomialFunction__T = typing.TypeVar('_FieldPolynomialFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldPolynomialFunction(org.hipparchus.analysis.CalculusFieldUnivariateFunction[_FieldPolynomialFunction__T], typing.Generic[_FieldPolynomialFunction__T]):
     """
-    implements CalculusFieldUnivariateFunction<T>
-    
     Immutable representation of a real polynomial function with real coefficients.
     
     `Horner's Method <http://mathworld.wolfram.com/HornersMethod.html>` is used to evaluate the function.
@@ -99,7 +97,7 @@ class FieldPolynomialFunction(org.hipparchus.analysis.CalculusFieldUnivariateFun
         """
         ...
     @typing.overload
-    def integrate(self, double: float, double2: float) -> _FieldPolynomialFunction__T:
+    def integrate(self, lower: float, upper: float) -> _FieldPolynomialFunction__T:
         """
         Returns the definite integral of this polymomial over the given interval.
         
@@ -133,7 +131,7 @@ class FieldPolynomialFunction(org.hipparchus.analysis.CalculusFieldUnivariateFun
         """
         ...
     @typing.overload
-    def integrate(self, t: _FieldPolynomialFunction__T, t2: _FieldPolynomialFunction__T) -> _FieldPolynomialFunction__T: ...
+    def integrate(self, lower: _FieldPolynomialFunction__T, upper: _FieldPolynomialFunction__T) -> _FieldPolynomialFunction__T: ...
     def multiply(self, p: 'FieldPolynomialFunction'[_FieldPolynomialFunction__T]) -> 'FieldPolynomialFunction'[_FieldPolynomialFunction__T]:
         """
         Multiply the instance by a polynomial.
@@ -181,7 +179,7 @@ class FieldPolynomialFunction(org.hipparchus.analysis.CalculusFieldUnivariateFun
         """
         ...
     @typing.overload
-    def value(self, double: float) -> _FieldPolynomialFunction__T:
+    def value(self, x: float) -> _FieldPolynomialFunction__T:
         """
         Compute the value of the function for the given argument.
         
@@ -195,7 +193,8 @@ class FieldPolynomialFunction(org.hipparchus.analysis.CalculusFieldUnivariateFun
         Returns:
             the value of the polynomial at the given point.
         
-              - value
+        Also see:
+            value
         
         Compute the value of the function for the given argument.
         
@@ -211,20 +210,18 @@ class FieldPolynomialFunction(org.hipparchus.analysis.CalculusFieldUnivariateFun
         Returns:
             the value of the polynomial at the given point.
         
-              - value
-        
+        Also see:
+            value
         
         
         """
         ...
     @typing.overload
-    def value(self, t: _FieldPolynomialFunction__T) -> _FieldPolynomialFunction__T: ...
+    def value(self, x: _FieldPolynomialFunction__T) -> _FieldPolynomialFunction__T: ...
 
 _FieldPolynomialFunctionLagrangeForm__T = typing.TypeVar('_FieldPolynomialFunctionLagrangeForm__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldPolynomialFunctionLagrangeForm(org.hipparchus.analysis.CalculusFieldUnivariateFunction[_FieldPolynomialFunctionLagrangeForm__T], typing.Generic[_FieldPolynomialFunctionLagrangeForm__T]):
     """
-    implements CalculusFieldUnivariateFunction<T>
-    
     Implements the representation of a real polynomial function in ` Lagrange Form <http://mathworld.wolfram.com/LagrangeInterpolatingPolynomial.html>`. For reference, see Introduction to Numerical Analysis, ISBN 038795452X, chapter 2.
     
     The approximated function should be smooth enough for Lagrange polynomial to work well. Otherwise, consider using splines instead.
@@ -232,7 +229,8 @@ class FieldPolynomialFunctionLagrangeForm(org.hipparchus.analysis.CalculusFieldU
     Since:
         4.0
     
-          - PolynomialFunctionLagrangeForm
+    Also see:
+        PolynomialFunctionLagrangeForm
     """
     def __init__(self, x: typing.Union[typing.List[_FieldPolynomialFunctionLagrangeForm__T], jpype.JArray], y: typing.Union[typing.List[_FieldPolynomialFunctionLagrangeForm__T], jpype.JArray]):
         """
@@ -325,8 +323,6 @@ class FieldPolynomialFunctionLagrangeForm(org.hipparchus.analysis.CalculusFieldU
 _FieldPolynomialSplineFunction__T = typing.TypeVar('_FieldPolynomialSplineFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldPolynomialSplineFunction(org.hipparchus.analysis.CalculusFieldUnivariateFunction[_FieldPolynomialSplineFunction__T], typing.Generic[_FieldPolynomialSplineFunction__T]):
     """
-    implements CalculusFieldUnivariateFunction<T>
-    
     Represents a polynomial spline function.
     
     A polynomial spline function consists of a set of interpolating polynomials and an ascending array of domain knot points, determining the intervals over which the spline function is defined by the constituent polynomials. The polynomials are assumed to have been computed to match the values of another function at the knot points. The value consistency constraints are not currently enforced by PolynomialSplineFunction itself, but are assumed to hold among the polynomials and knot points passed to the constructor.
@@ -424,7 +420,7 @@ class FieldPolynomialSplineFunction(org.hipparchus.analysis.CalculusFieldUnivari
         """
         ...
     @typing.overload
-    def value(self, double: float) -> _FieldPolynomialSplineFunction__T:
+    def value(self, v: float) -> _FieldPolynomialSplineFunction__T:
         """
         Compute the value for the function. See FieldPolynomialSplineFunction for details on the algorithm for computing the value of the function.
         
@@ -456,7 +452,7 @@ class FieldPolynomialSplineFunction(org.hipparchus.analysis.CalculusFieldUnivari
         """
         ...
     @typing.overload
-    def value(self, t: _FieldPolynomialSplineFunction__T) -> _FieldPolynomialSplineFunction__T: ...
+    def value(self, v: _FieldPolynomialSplineFunction__T) -> _FieldPolynomialSplineFunction__T: ...
 
 class JacobiKey:
     """
@@ -480,7 +476,7 @@ class JacobiKey:
         """
         Check if the instance represent the same key as another instance.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             key (Object): other key
@@ -495,7 +491,7 @@ class JacobiKey:
         """
         Get hash code.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             hash code
@@ -506,13 +502,12 @@ class JacobiKey:
 
 class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction, org.hipparchus.analysis.FieldUnivariateFunction, java.io.Serializable):
     """
-    implements UnivariateDifferentiableFunction, FieldUnivariateFunction, Serializable
-    
     Immutable representation of a real polynomial function with real coefficients.
     
     `Horner's Method <http://mathworld.wolfram.com/HornersMethod.html>` is used to evaluate the function.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self, *c: float):
         """
@@ -563,9 +558,9 @@ class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDiffe
         
         """
         ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, obj: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -584,7 +579,7 @@ class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDiffe
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -660,7 +655,7 @@ class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDiffe
         
         The representation is user oriented. Terms are displayed lowest degrees first. The multiplications signs, coefficients equals to one and null terms are not displayed (except if the polynomial is 0, in which case the 0 constant term is displayed). Addition of terms with negative coefficients are replaced by subtraction of terms with positive coefficients except for the first displayed term (i.e. we display -3 for a constant negative polynomial, but 1 - 3 x + x^2 if the negative coefficient is not the first one displayed).
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Returns:
             a string representation of the polynomial.
@@ -671,7 +666,7 @@ class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDiffe
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _value_2__T = typing.TypeVar('_value_2__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
+    def value(self, x: float) -> float:
         """
         Compute the value of the function for the given argument.
         
@@ -687,9 +682,10 @@ class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDiffe
         Returns:
             the value of the polynomial at the given point.
         
-              - value
+        Also see:
+            value
         
-        public <T extends Derivative<T>> T value(T t) throws MathIllegalArgumentException, NullArgumentException
+        public <T extends Derivative<T>> T value (T t) throws MathIllegalArgumentException, NullArgumentException
         
         Compute the value for the function.
         
@@ -705,7 +701,7 @@ class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDiffe
             MathIllegalArgumentException: if coefficients is empty.
             NullArgumentException: if coefficients is null.
         
-        public <T extends CalculusFieldElement<T>> T value(T t) throws MathIllegalArgumentException, NullArgumentException
+        public <T extends CalculusFieldElement<T>> T value (T t) throws MathIllegalArgumentException, NullArgumentException
         
         Compute the value of the function.
         
@@ -738,8 +734,6 @@ class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDiffe
 
 class PolynomialFunctionLagrangeForm(org.hipparchus.analysis.UnivariateFunction):
     """
-    implements UnivariateFunction
-    
     Implements the representation of a real polynomial function in ` Lagrange Form <http://mathworld.wolfram.com/LagrangeInterpolatingPolynomial.html>`. For reference, see Introduction to Numerical Analysis, ISBN 038795452X, chapter 2.
     
     The approximated function should be smooth enough for Lagrange polynomial to work well. Otherwise, consider using splines instead.
@@ -869,9 +863,9 @@ class PolynomialFunctionLagrangeForm(org.hipparchus.analysis.UnivariateFunction)
             MathIllegalArgumentException: if the number of points is less than 2.
             MathIllegalArgumentException: if x is not sorted in strictly increasing order and abort is true.
         
-              - evaluate
-              - computeCoefficients
-        
+        Also see:
+            evaluate,
+            computeCoefficients
         
         
         """
@@ -879,8 +873,6 @@ class PolynomialFunctionLagrangeForm(org.hipparchus.analysis.UnivariateFunction)
 
 class PolynomialFunctionNewtonForm(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction, org.hipparchus.analysis.FieldUnivariateFunction):
     """
-    implements UnivariateDifferentiableFunction, FieldUnivariateFunction
-    
     Implements the representation of a real polynomial function in Newton Form. For reference, see Elementary Numerical Analysis, ISBN 0070124477, chapter 2.
     
     The formula of polynomial in Newton form is p(x) = a[0] + a[1](x-c[0]) + a[2](x-c[0])(x-c[1]) + ... + a[n](x-c[0])(x-c[1])...(x-c[n-1]) Note that the length of a[] is one more than the length of c[]
@@ -1018,8 +1010,6 @@ class PolynomialFunctionNewtonForm(org.hipparchus.analysis.differentiation.Univa
 
 class PolynomialSplineFunction(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction, org.hipparchus.analysis.FieldUnivariateFunction):
     """
-    implements UnivariateDifferentiableFunction, FieldUnivariateFunction
-    
     Represents a polynomial spline function.
     
     A polynomial spline function consists of a set of interpolating polynomials and an ascending array of domain knot points, determining the intervals over which the spline function is defined by the constituent polynomials. The polynomials are assumed to have been computed to match the values of another function at the knot points. The value consistency constraints are not currently enforced by PolynomialSplineFunction itself, but are assumed to hold among the polynomials and knot points passed to the constructor.

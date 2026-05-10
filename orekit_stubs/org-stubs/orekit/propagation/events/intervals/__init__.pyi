@@ -39,7 +39,7 @@ class AdaptableInterval:
         ...
     @typing.overload
     @staticmethod
-    def of(double: float) -> 'AdaptableInterval':
+    def of(constantInterval: float) -> 'AdaptableInterval':
         """
         Method creating a constant interval provider.
         
@@ -69,7 +69,7 @@ class AdaptableInterval:
         ...
     @typing.overload
     @staticmethod
-    def of(double: float, *adaptableInterval: typing.Union['AdaptableInterval', typing.Callable]) -> 'AdaptableInterval': ...
+    def of(defaultMaxCheck: float, *adaptableIntervals: typing.Union['AdaptableInterval', typing.Callable]) -> 'AdaptableInterval': ...
 
 class ApsideDetectionAdaptableIntervalFactory:
     """
@@ -345,7 +345,7 @@ class FieldAdaptableInterval(typing.Generic[_FieldAdaptableInterval__T]):
     _of_2__T = typing.TypeVar('_of_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def of(double: float) -> 'FieldAdaptableInterval'[_of_0__T]:
+    def of(constantInterval: float) -> 'FieldAdaptableInterval'[_of_0__T]:
         """
         Method creating a constant interval provider.
         
@@ -388,7 +388,7 @@ class FieldAdaptableInterval(typing.Generic[_FieldAdaptableInterval__T]):
         ...
     @typing.overload
     @staticmethod
-    def of(double: float, *fieldAdaptableInterval: typing.Union['FieldAdaptableInterval'[_of_1__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], bool], float]]) -> 'FieldAdaptableInterval'[_of_1__T]: ...
+    def of(defaultMaxCheck: float, *adaptableIntervals: typing.Union['FieldAdaptableInterval'[_of_1__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], bool], float]]) -> 'FieldAdaptableInterval'[_of_1__T]: ...
     @typing.overload
     @staticmethod
     def of(adaptableInterval: typing.Union[AdaptableInterval, typing.Callable]) -> 'FieldAdaptableInterval'[_of_2__T]: ...
@@ -434,7 +434,7 @@ class PythonAdaptableInterval(AdaptableInterval):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -482,7 +482,7 @@ class PythonFieldAdaptableInterval(FieldAdaptableInterval[_PythonFieldAdaptableI
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

@@ -41,7 +41,7 @@ class Localizable(java.io.Serializable):
         """
         ...
     @typing.overload
-    def getLocalizedString(self, string: str, string2: str, locale: java.util.Locale) -> str: ...
+    def getLocalizedString(self, baseName: str, key: str, locale: java.util.Locale) -> str: ...
     def getSourceString(self) -> str:
         """
         Gets the source (non-localized) string.
@@ -111,9 +111,9 @@ class UTF8Control(java.util.ResourceBundle.Control):
         
         """
         ...
-    def newBundle(self, string: str, locale: java.util.Locale, string2: str, classLoader: java.lang.ClassLoader, boolean: bool) -> java.util.ResourceBundle:
+    def newBundle(self, baseName: str, locale: java.util.Locale, format: str, loader: java.lang.ClassLoader, reload: bool) -> java.util.ResourceBundle:
         """
-        Overrides: meth:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.util.ResourceBundle.Control.newBundle` in class Control
+        Overrides: Control in class Control
         
         Raises:
             IllegalAccessException:         InstantiationException:         IOException: 
@@ -123,11 +123,10 @@ class UTF8Control(java.util.ResourceBundle.Control):
 
 class DummyLocalizable(Localizable):
     """
-    implements Localizable
-    
     Dummy implementation of the Localizable interface, without localization.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self, source: str):
         """
@@ -171,7 +170,7 @@ class DummyLocalizable(Localizable):
         ...
     def toString(self) -> str:
         """
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -179,8 +178,6 @@ class DummyLocalizable(Localizable):
 
 class LocalizedCoreFormats(java.lang.Enum['LocalizedCoreFormats'], Localizable):
     """
-    implements Localizable
-    
     Enumeration for localized messages formats used in exceptions messages.
     
     The constants in this enumeration represent the available formats as localized strings. These formats are intended to be localized using simple properties files, using the constant name as the key and the property value as the message format. The source English format is provided in the constants themselves to serve both as a reminder for developers to understand the parameters needed by each format, as a basis for translators to create localized properties files, and as a default format if some translation is missing.
@@ -425,7 +422,12 @@ class LocalizedCoreFormats(java.lang.Enum['LocalizedCoreFormats'], Localizable):
     @staticmethod
     def values() -> typing.MutableSequence['LocalizedCoreFormats']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (LocalizedCoreFormats c : LocalizedCoreFormats.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -436,16 +438,15 @@ class LocalizedCoreFormats(java.lang.Enum['LocalizedCoreFormats'], Localizable):
 
 class MathRuntimeException(java.lang.RuntimeException, LocalizedException):
     """
-    implements LocalizedException
-    
     All exceptions thrown by the Hipparchus code inherit from this class.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
-    def __init__(self, throwable: java.lang.Throwable, localizable: Localizable, *object: typing.Any): ...
+    def __init__(self, cause: java.lang.Throwable, specifier: Localizable, *parts: typing.Any): ...
     @typing.overload
-    def __init__(self, localizable: Localizable, *object: typing.Any): ...
+    def __init__(self, specifier: Localizable, *parts: typing.Any): ...
     @typing.overload
     @staticmethod
     def createInternalError() -> 'MathRuntimeException':
@@ -474,7 +475,7 @@ class MathRuntimeException(java.lang.RuntimeException, LocalizedException):
         ...
     def getLocalizedMessage(self) -> str:
         """
-        Overrides: getLocalizedMessage in class Throwable
+        Overrides: Throwable in class Throwable
         
         
         """
@@ -482,7 +483,7 @@ class MathRuntimeException(java.lang.RuntimeException, LocalizedException):
     @typing.overload
     def getMessage(self) -> str:
         """
-        Overrides: getMessage in class Throwable
+        Overrides: Throwable in class Throwable
         
         
         """
@@ -529,21 +530,20 @@ class MathRuntimeException(java.lang.RuntimeException, LocalizedException):
 
 class NullArgumentException(java.lang.NullPointerException, LocalizedException):
     """
-    implements LocalizedException
-    
     All conditions checks that fail due to a null argument must throw this exception. This class is meant to signal a precondition violation ("null is an illegal argument") and so does not extend the standard NullPointerException. Propagation of NullPointerException from within Hipparchus is construed to be a bug.
     
     Note: from 1.0 onwards, this class extends NullPointerException instead of MathIllegalArgumentException.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, localizable: Localizable, *object: typing.Any): ...
+    def __init__(self, specifier: Localizable, *parts: typing.Any): ...
     def getLocalizedMessage(self) -> str:
         """
-        Overrides: getLocalizedMessage in class Throwable
+        Overrides: Throwable in class Throwable
         
         
         """
@@ -551,7 +551,7 @@ class NullArgumentException(java.lang.NullPointerException, LocalizedException):
     @typing.overload
     def getMessage(self) -> str:
         """
-        Overrides: getMessage in class NullPointerException
+        Overrides: Throwable in class Throwable
         
         
         """
@@ -600,23 +600,25 @@ class MathIllegalArgumentException(MathRuntimeException):
     """
     Base class for all preconditions violation exceptions. In most cases, this class should not be instantiated directly: it should serve as a base class to create all the exceptions that have the semantics of the standard IllegalArgumentException.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
-    def __init__(self, throwable: java.lang.Throwable, localizable: Localizable, *object: typing.Any): ...
+    def __init__(self, cause: java.lang.Throwable, specifier: Localizable, *parts: typing.Any): ...
     @typing.overload
-    def __init__(self, localizable: Localizable, *object: typing.Any): ...
+    def __init__(self, pattern: Localizable, *args: typing.Any): ...
 
 class MathIllegalStateException(MathRuntimeException):
     """
     Base class for all exceptions that signal that the process throwing the exception is in a state that does not comply with the set of states that it is designed to be in.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
-    def __init__(self, throwable: java.lang.Throwable, localizable: Localizable, *object: typing.Any): ...
+    def __init__(self, cause: java.lang.Throwable, pattern: Localizable, *args: typing.Any): ...
     @typing.overload
-    def __init__(self, localizable: Localizable, *object: typing.Any): ...
+    def __init__(self, pattern: Localizable, *args: typing.Any): ...
 
 
 class __module_protocol__(Protocol):

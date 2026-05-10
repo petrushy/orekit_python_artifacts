@@ -270,11 +270,10 @@ class AdditionalParameters(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
     Since:
         11.2
     """
-    def __init__(self):
-        """
-        Simple constructor.
-        """
-        ...
+    @typing.overload
+    def __init__(self): ...
+    @typing.overload
+    def __init__(self, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def getApoapsisAltitude(self) -> float:
         """
         Get the distance of the furthest point in the objects orbit above the equatorial radius of the central body.
@@ -875,9 +874,9 @@ class CdmData(org.orekit.files.ccsds.section.Data):
         11.2
     """
     @typing.overload
-    def __init__(self, commentsContainer: org.orekit.files.ccsds.section.CommentsContainer, oDParameters: 'ODParameters', additionalParameters: AdditionalParameters, stateVector: 'StateVector', rTNCovariance: 'RTNCovariance'): ...
+    def __init__(self, commentsBlock: org.orekit.files.ccsds.section.CommentsContainer, ODParametersBlock: 'ODParameters', additionalParametersBlock: AdditionalParameters, stateVectorBlock: 'StateVector', covarianceMatrixBlock: 'RTNCovariance'): ...
     @typing.overload
-    def __init__(self, commentsContainer: org.orekit.files.ccsds.section.CommentsContainer, oDParameters: 'ODParameters', additionalParameters: AdditionalParameters, stateVector: 'StateVector', rTNCovariance: 'RTNCovariance', additionalCovarianceMetadata: AdditionalCovarianceMetadata): ...
+    def __init__(self, commentsBlock: org.orekit.files.ccsds.section.CommentsContainer, ODParametersBlock: 'ODParameters', additionalParametersBlock: AdditionalParameters, stateVectorBlock: 'StateVector', covarianceMatrixBlock: 'RTNCovariance', additionalCovMetadata: AdditionalCovarianceMetadata): ...
     @typing.overload
     def __init__(self, commentsContainer: org.orekit.files.ccsds.section.CommentsContainer, oDParameters: 'ODParameters', additionalParameters: AdditionalParameters, stateVector: 'StateVector', rTNCovariance: 'RTNCovariance', sigmaEigenvectorsCovariance: 'SigmaEigenvectorsCovariance', additionalCovarianceMetadata: AdditionalCovarianceMetadata): ...
     @typing.overload
@@ -1385,12 +1384,31 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
     def __init__(self): ...
     @typing.overload
     def __init__(self, dataContext: org.orekit.data.DataContext): ...
+    @typing.overload
+    def __init__(self, dataContext: org.orekit.data.DataContext, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def getAdmMsgLink(self) -> str:
         """
         Get the unique identifier of Attitude Data Message(s) that are linked (relevant) to this Conjunction Data Message.
         
         Returns:
             the admMsgLink
+        
+        
+        """
+        ...
+    def getAltCovFrame(self) -> org.orekit.frames.Frame:
+        """
+        Get the reference frame in which the alternative covariance data is given.
+        
+        Returns:
+            alternative covariance reference frame.
+        
+        Since:
+            13.1.5
+        
+        Also see:
+            getAltCovType,
+            getAltCovRefFrame
         
         
         """
@@ -2110,25 +2128,10 @@ class CdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[C
     Since:
         11.2
     """
-    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]):
-        """
-        Complete constructor.
-        
-        Calling this constructor directly is not recommended. Users should rather use buildCdmParser.
-        
-        Parameters:
-            conventions (IERSConventions): IERS Conventions
-            simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
-            dataContext (DataContext): used to retrieve frames, time scales, etc.
-            parsedUnitsBehavior (ParsedUnitsBehavior): behavior to adopt for handling parsed units
-            filters (Function<ParseToken, List<ParseToken>>[]): filters to apply to parse tokens
-        
-        Since:
-            12.0
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
+    @typing.overload
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray], frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def build(self) -> Cdm:
         """
         Build the file from parsed entries.

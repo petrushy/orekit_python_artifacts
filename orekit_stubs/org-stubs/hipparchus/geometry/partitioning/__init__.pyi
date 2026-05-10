@@ -44,9 +44,9 @@ class BSPTree(typing.Generic[_BSPTree__S, _BSPTree__P, _BSPTree__H, _BSPTree__I]
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, object: typing.Any): ...
+    def __init__(self, attribute: typing.Any): ...
     @typing.overload
-    def __init__(self, i: _BSPTree__I, bSPTree: 'BSPTree'[_BSPTree__S, _BSPTree__P, _BSPTree__H, _BSPTree__I], bSPTree2: 'BSPTree'[_BSPTree__S, _BSPTree__P, _BSPTree__H, _BSPTree__I], object: typing.Any): ...
+    def __init__(self, cut: _BSPTree__I, plus: 'BSPTree'[_BSPTree__S, _BSPTree__P, _BSPTree__H, _BSPTree__I], minus: 'BSPTree'[_BSPTree__S, _BSPTree__P, _BSPTree__H, _BSPTree__I], attribute: typing.Any): ...
     def copySelf(self) -> 'BSPTree'[_BSPTree__S, _BSPTree__P, _BSPTree__H, _BSPTree__I]:
         """
         Copy the instance.
@@ -67,8 +67,8 @@ class BSPTree(typing.Generic[_BSPTree__S, _BSPTree__P, _BSPTree__H, _BSPTree__I]
             attribute associated with the node or null if no attribute has been explicitly set using the
             setAttribute method
         
-              - setAttribute
-        
+        Also see:
+            setAttribute
         
         
         """
@@ -159,9 +159,6 @@ class BSPTree(typing.Generic[_BSPTree__S, _BSPTree__P, _BSPTree__H, _BSPTree__I]
         Returns:
             true if a cut sub-hyperplane has been inserted (i.e. if the cell now has two leaf child nodes)
         
-              - 
-        
-        
         
         """
         ...
@@ -172,13 +169,13 @@ class BSPTree(typing.Generic[_BSPTree__S, _BSPTree__P, _BSPTree__H, _BSPTree__I]
         The instance itself is modified so its former parent should not be used anymore.
         
         Parameters:
-            parentTree (BSPTree<BSPTree,BSPTree,BSPTree,BSPTree> parentTree): parent tree to connect to (may be null)
+            parentTree (BSPTree<BSPTree, BSPTree, BSPTree, BSPTree> parentTree): parent tree to connect to (may be null)
             isPlusChild (boolean): if true and if parentTree is not null, the resulting tree should be the plus child of its parent, ignored if parentTree
                 is null
-            vanishingHandler (VanishingCutHandler<BSPTree,BSPTree,BSPTree,BSPTree> vanishingHandler): handler to use for handling very rare corner cases of vanishing cut sub-hyperplanes in internal nodes during merging
+            vanishingHandler (VanishingCutHandler<BSPTree, BSPTree, BSPTree, BSPTree> vanishingHandler): handler to use for handling very rare corner cases of vanishing cut sub-hyperplanes in internal nodes during merging
         
-              - LeafMerger
-        
+        Also see:
+            LeafMerger
         
         
         """
@@ -192,8 +189,8 @@ class BSPTree(typing.Generic[_BSPTree__S, _BSPTree__P, _BSPTree__H, _BSPTree__I]
         The algorithm used here is directly derived from the one described in the Naylor, Amanatides and Thibault paper (section III, Binary Partitioning of a BSP Tree).
         
         Parameters:
-            tree (BSPTree<BSPTree,BSPTree,BSPTree,BSPTree> tree): other tree to merge with the instance (will be unusable after the operation, as well as the instance itself)
-            leafMerger (LeafMerger<BSPTree,BSPTree,BSPTree,BSPTree> leafMerger): object implementing the final merging phase (this is where the semantic of the operation occurs, generally depending on
+            tree (BSPTree<BSPTree, BSPTree, BSPTree, BSPTree> tree): other tree to merge with the instance (will be unusable after the operation, as well as the instance itself)
+            leafMerger (LeafMerger<BSPTree, BSPTree, BSPTree, BSPTree> leafMerger): object implementing the final merging phase (this is where the semantic of the operation occurs, generally depending on
                 the attribute of the leaf node)
         
         Returns:
@@ -228,8 +225,8 @@ class BSPTree(typing.Generic[_BSPTree__S, _BSPTree__P, _BSPTree__H, _BSPTree__I]
         Parameters:
             attribute (Object): attribute to associate with the node
         
-              - getAttribute
-        
+        Also see:
+            getAttribute
         
         
         """
@@ -260,7 +257,7 @@ class BSPTree(typing.Generic[_BSPTree__S, _BSPTree__P, _BSPTree__H, _BSPTree__I]
         Visit the BSP tree nodes.
         
         Parameters:
-            visitor (BSPTreeVisitor<BSPTree,BSPTree,BSPTree,BSPTree> visitor): object visiting the tree nodes
+            visitor (BSPTreeVisitor<BSPTree, BSPTree, BSPTree, BSPTree> visitor): object visiting the tree nodes
         
         
         """
@@ -293,8 +290,8 @@ class BSPTreeVisitor(typing.Generic[_BSPTreeVisitor__S, _BSPTreeVisitor__P, _BSP
         exactly once.
     
     
-          - BSPTree
-          - SubHyperplane
+    Also see:
+        BSPTree, SubHyperplane
     """
     def visitInternalNode(self, node: BSPTree[_BSPTreeVisitor__S, _BSPTreeVisitor__P, _BSPTreeVisitor__H, _BSPTreeVisitor__I]) -> None:
         """
@@ -303,10 +300,10 @@ class BSPTreeVisitor(typing.Generic[_BSPTreeVisitor__S, _BSPTreeVisitor__P, _BSP
         It is guaranteed that this method will be called after visitOrder has been called for a given node, it wil be called exactly once for each internal node.
         
         Parameters:
-            node (BSPTree<BSPTreeVisitor,BSPTreeVisitor,BSPTreeVisitor,BSPTreeVisitor> node): BSP node guaranteed to have a non-null cut sub-hyperplane
+            node (BSPTree<BSPTreeVisitor, BSPTreeVisitor, BSPTreeVisitor, BSPTreeVisitor> node): BSP node guaranteed to have a non-null cut sub-hyperplane
         
-              - visitLeafNode
-        
+        Also see:
+            visitLeafNode
         
         
         """
@@ -316,10 +313,10 @@ class BSPTreeVisitor(typing.Generic[_BSPTreeVisitor__S, _BSPTreeVisitor__P, _BSP
         Visit a leaf BSP tree node node having a null sub-hyperplane.
         
         Parameters:
-            node (BSPTree<BSPTreeVisitor,BSPTreeVisitor,BSPTreeVisitor,BSPTreeVisitor> node): leaf BSP node having a null sub-hyperplane
+            node (BSPTree<BSPTreeVisitor, BSPTreeVisitor, BSPTreeVisitor, BSPTreeVisitor> node): leaf BSP node having a null sub-hyperplane
         
-              - visitInternalNode
-        
+        Also see:
+            visitInternalNode
         
         
         """
@@ -331,7 +328,7 @@ class BSPTreeVisitor(typing.Generic[_BSPTreeVisitor__S, _BSPTreeVisitor__P, _BSP
         Before attempting to visit an internal node, this method is called to determine the desired ordering of the visit. It is guaranteed that this method will be called before visitInternalNode for a given node, it will be called exactly once for each internal node.
         
         Parameters:
-            node (BSPTree<BSPTreeVisitor,BSPTreeVisitor,BSPTreeVisitor,BSPTreeVisitor> node): BSP node guaranteed to have a non-null cut sub-hyperplane
+            node (BSPTree<BSPTreeVisitor, BSPTreeVisitor, BSPTreeVisitor, BSPTreeVisitor> node): BSP node guaranteed to have a non-null cut sub-hyperplane
         
         Returns:
             desired visit order, must be one of PLUS_MINUS_SUB,
@@ -373,7 +370,8 @@ class BoundaryAttribute(typing.Generic[_BoundaryAttribute__S, _BoundaryAttribute
     
     This class is a simple placeholder, it does not provide any processing methods.
     
-          - getTree
+    Also see:
+        getTree
     """
     def getPlusInside(self) -> _BoundaryAttribute__I:
         """
@@ -418,7 +416,8 @@ class BoundaryProjection(typing.Generic[_BoundaryProjection__S, _BoundaryProject
     
     Instances of this class are guaranteed to be immutable
     
-          - projectToBoundary
+    Also see:
+        projectToBoundary
     """
     def __init__(self, original: _BoundaryProjection__P, projected: _BoundaryProjection__P, offset: float):
         """
@@ -481,7 +480,8 @@ class Embedding(typing.Generic[_Embedding__S, _Embedding__P, _Embedding__T, _Emb
     
     Note that this interface is not intended to be implemented by Hipparchus users, it is only intended to be implemented within the library itself. New methods may be added even for minor versions, which breaks compatibility for external implementations.
     
-          - Hyperplane
+    Also see:
+        Hyperplane
     """
     def toSpace(self, point: _Embedding__Q) -> _Embedding__P:
         """
@@ -493,8 +493,8 @@ class Embedding(typing.Generic[_Embedding__S, _Embedding__P, _Embedding__T, _Emb
         Returns:
             n-dimension point of the space corresponding to the specified sub-space point
         
-              - toSubSpace
-        
+        Also see:
+            toSubSpace
         
         
         """
@@ -509,8 +509,8 @@ class Embedding(typing.Generic[_Embedding__S, _Embedding__P, _Embedding__T, _Emb
         Returns:
             (n-1)-dimension point of the sub-space corresponding to the specified space point
         
-              - toSpace
-        
+        Also see:
+            toSpace
         
         
         """
@@ -665,11 +665,10 @@ _NodesSet__H = typing.TypeVar('_NodesSet__H', bound=Hyperplane)  # <H>
 _NodesSet__I = typing.TypeVar('_NodesSet__I', bound='SubHyperplane')  # <I>
 class NodesSet(java.lang.Iterable[BSPTree[_NodesSet__S, _NodesSet__P, _NodesSet__H, _NodesSet__I]], typing.Generic[_NodesSet__S, _NodesSet__P, _NodesSet__H, _NodesSet__I]):
     """
-    implements Iterable<BSPTree<S,P,H,I>>
-    
     Set of BSPTree nodes.
     
-          - BoundaryAttribute
+    Also see:
+        BoundaryAttribute
     """
     def __init__(self):
         """
@@ -681,7 +680,7 @@ class NodesSet(java.lang.Iterable[BSPTree[_NodesSet__S, _NodesSet__P, _NodesSet_
         Add a node if not already known.
         
         Parameters:
-            node (BSPTree<NodesSet,NodesSet,NodesSet,NodesSet> node): node to add
+            node (BSPTree<NodesSet, NodesSet, NodesSet, NodesSet> node): node to add
         
         
         """
@@ -691,14 +690,14 @@ class NodesSet(java.lang.Iterable[BSPTree[_NodesSet__S, _NodesSet__P, _NodesSet_
         Add nodes if they are not already known.
         
         Parameters:
-            iterator (Iterable<BSPTree<NodesSet,NodesSet,NodesSet,NodesSet>>): nodes iterator
+            iterator (Iterable<BSPTree<NodesSet, NodesSet, NodesSet, NodesSet>>): nodes iterator
         
         
         """
         ...
     def iterator(self) -> java.util.Iterator[BSPTree[_NodesSet__S, _NodesSet__P, _NodesSet__H, _NodesSet__I]]:
         """
-        Specified by: iterator in interface Iterable
+        Specified by: Iterable in interface Iterable
         
         
         """
@@ -729,7 +728,7 @@ class Region(typing.Generic[_Region__S, _Region__P, _Region__H, _Region__I]):
         The leaf nodes of the BSP tree must have a Boolean attribute representing the inside status of the corresponding cell (true for inside cells, false for outside cells). In order to avoid building too many small objects, it is recommended to use the predefined constants TRUE and FALSE. The tree also must have either null internal nodes or internal nodes representing the boundary as specified in the getTree method).
         
         Parameters:
-            newTree (BSPTree<Region,Region,Region,Region> newTree): inside/outside BSP tree representing the new region
+            newTree (BSPTree<Region, Region, Region, Region> newTree): inside/outside BSP tree representing the new region
         
         Returns:
             the built region
@@ -757,7 +756,7 @@ class Region(typing.Generic[_Region__S, _Region__P, _Region__H, _Region__I]):
         Check if the instance entirely contains another region.
         
         Parameters:
-            region (Region<Region,Region,Region,Region> region): region to check against the instance
+            region (Region<Region, Region, Region, Region> region): region to check against the instance
         
         Returns:
             true if the instance contains the specified tree
@@ -837,8 +836,8 @@ class Region(typing.Generic[_Region__S, _Region__P, _Region__H, _Region__I]):
         Returns:
             underlying BSP tree
         
-              - BoundaryAttribute
-        
+        Also see:
+            BoundaryAttribute
         
         
         """
@@ -866,12 +865,12 @@ class Region(typing.Generic[_Region__S, _Region__P, _Region__H, _Region__I]):
         Returns:
             true if the instance is empty
         
-        boolean isEmpty(BSPTree<Region,Region,Region,Region> node)
+        boolean isEmpty (BSPTree<Region, Region, Region, Region> node)
         
         Check if the sub-tree starting at a given node is empty.
         
         Parameters:
-            node (BSPTree<Region,Region,Region,Region> node): root node of the sub-tree (must have Region tree semantics, i.e. the
+            node (BSPTree<Region, Region, Region, Region> node): root node of the sub-tree (must have Region tree semantics, i.e. the
                 leaf nodes must have Boolean attributes representing an inside/outside property)
         
         Returns:
@@ -881,7 +880,7 @@ class Region(typing.Generic[_Region__S, _Region__P, _Region__H, _Region__I]):
         """
         ...
     @typing.overload
-    def isEmpty(self, bSPTree: BSPTree[_Region__S, _Region__P, _Region__H, _Region__I]) -> bool: ...
+    def isEmpty(self, node: BSPTree[_Region__S, _Region__P, _Region__H, _Region__I]) -> bool: ...
     @typing.overload
     def isFull(self) -> bool:
         """
@@ -890,12 +889,12 @@ class Region(typing.Generic[_Region__S, _Region__P, _Region__H, _Region__I]):
         Returns:
             true if the instance covers the full space
         
-        boolean isFull(BSPTree<Region,Region,Region,Region> node)
+        boolean isFull (BSPTree<Region, Region, Region, Region> node)
         
         Check if the sub-tree starting at a given node covers the full space.
         
         Parameters:
-            node (BSPTree<Region,Region,Region,Region> node): root node of the sub-tree (must have Region tree semantics, i.e. the
+            node (BSPTree<Region, Region, Region, Region> node): root node of the sub-tree (must have Region tree semantics, i.e. the
                 leaf nodes must have Boolean attributes representing an inside/outside property)
         
         Returns:
@@ -905,7 +904,7 @@ class Region(typing.Generic[_Region__S, _Region__P, _Region__H, _Region__I]):
         """
         ...
     @typing.overload
-    def isFull(self, bSPTree: BSPTree[_Region__S, _Region__P, _Region__H, _Region__I]) -> bool: ...
+    def isFull(self, node: BSPTree[_Region__S, _Region__P, _Region__H, _Region__I]) -> bool: ...
     def projectToBoundary(self, point: _Region__P) -> BoundaryProjection[_Region__S, _Region__P]:
         """
         Project a point on the boundary of the region.
@@ -964,8 +963,8 @@ class RegionFactory(typing.Generic[_RegionFactory__S, _RegionFactory__P, _Region
         Compute the difference of two regions.
         
         Parameters:
-            region1 (Region<RegionFactory,RegionFactory,RegionFactory,RegionFactory> region1): first region (will be unusable after the operation as parts of it will be reused in the new region)
-            region2 (Region<RegionFactory,RegionFactory,RegionFactory,RegionFactory> region2): second region (will be unusable after the operation as parts of it will be reused in the new region)
+            region1 (Region<RegionFactory, RegionFactory, RegionFactory, RegionFactory> region1): first region (will be unusable after the operation as parts of it will be reused in the new region)
+            region2 (Region<RegionFactory, RegionFactory, RegionFactory, RegionFactory> region2): second region (will be unusable after the operation as parts of it will be reused in the new region)
         
         Returns:
             a new region, result of region1 minus region2
@@ -978,7 +977,7 @@ class RegionFactory(typing.Generic[_RegionFactory__S, _RegionFactory__P, _Region
         Get the complement of the region (exchanged interior/exterior).
         
         Parameters:
-            region (Region<RegionFactory,RegionFactory,RegionFactory,RegionFactory> region): region to complement, it will not be modified, a new region independent region will be built
+            region (Region<RegionFactory, RegionFactory, RegionFactory, RegionFactory> region): region to complement, it will not be modified, a new region independent region will be built
         
         Returns:
             a new region, complement of the specified one
@@ -991,8 +990,8 @@ class RegionFactory(typing.Generic[_RegionFactory__S, _RegionFactory__P, _Region
         Compute the intersection of two regions.
         
         Parameters:
-            region1 (Region<RegionFactory,RegionFactory,RegionFactory,RegionFactory> region1): first region (will be unusable after the operation as parts of it will be reused in the new region)
-            region2 (Region<RegionFactory,RegionFactory,RegionFactory,RegionFactory> region2): second region (will be unusable after the operation as parts of it will be reused in the new region)
+            region1 (Region<RegionFactory, RegionFactory, RegionFactory, RegionFactory> region1): first region (will be unusable after the operation as parts of it will be reused in the new region)
+            region2 (Region<RegionFactory, RegionFactory, RegionFactory, RegionFactory> region2): second region (will be unusable after the operation as parts of it will be reused in the new region)
         
         Returns:
             a new region, result of region1 intersection region2
@@ -1005,8 +1004,8 @@ class RegionFactory(typing.Generic[_RegionFactory__S, _RegionFactory__P, _Region
         Compute the union of two regions.
         
         Parameters:
-            region1 (Region<RegionFactory,RegionFactory,RegionFactory,RegionFactory> region1): first region (will be unusable after the operation as parts of it will be reused in the new region)
-            region2 (Region<RegionFactory,RegionFactory,RegionFactory,RegionFactory> region2): second region (will be unusable after the operation as parts of it will be reused in the new region)
+            region1 (Region<RegionFactory, RegionFactory, RegionFactory, RegionFactory> region1): first region (will be unusable after the operation as parts of it will be reused in the new region)
+            region2 (Region<RegionFactory, RegionFactory, RegionFactory, RegionFactory> region2): second region (will be unusable after the operation as parts of it will be reused in the new region)
         
         Returns:
             a new region, result of region1 union region2
@@ -1019,8 +1018,8 @@ class RegionFactory(typing.Generic[_RegionFactory__S, _RegionFactory__P, _Region
         Compute the symmetric difference (exclusive or) of two regions.
         
         Parameters:
-            region1 (Region<RegionFactory,RegionFactory,RegionFactory,RegionFactory> region1): first region (will be unusable after the operation as parts of it will be reused in the new region)
-            region2 (Region<RegionFactory,RegionFactory,RegionFactory,RegionFactory> region2): second region (will be unusable after the operation as parts of it will be reused in the new region)
+            region1 (Region<RegionFactory, RegionFactory, RegionFactory, RegionFactory> region1): first region (will be unusable after the operation as parts of it will be reused in the new region)
+            region2 (Region<RegionFactory, RegionFactory, RegionFactory, RegionFactory> region2): second region (will be unusable after the operation as parts of it will be reused in the new region)
         
         Returns:
             a new region, result of region1 xor region2
@@ -1063,7 +1062,12 @@ class Side(java.lang.Enum['Side']):
     @staticmethod
     def values() -> typing.MutableSequence['Side']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (Side c : Side.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -1200,7 +1204,7 @@ class Transform(typing.Generic[_Transform__S, _Transform__P, _Transform__H, _Tra
         apply method
     """
     @typing.overload
-    def apply(self, p: _Transform__P) -> _Transform__P:
+    def apply(self, point: _Transform__P) -> _Transform__P:
         """
         Transform a point of a space.
         
@@ -1236,7 +1240,7 @@ class Transform(typing.Generic[_Transform__S, _Transform__P, _Transform__H, _Tra
     @typing.overload
     def apply(self, h: _Transform__H) -> _Transform__H: ...
     @typing.overload
-    def apply(self, j: _Transform__J, h: _Transform__H, h2: _Transform__H) -> _Transform__J: ...
+    def apply(self, sub: _Transform__J, original: _Transform__H, transformed: _Transform__H) -> _Transform__J: ...
 
 _AbstractRegion__S = typing.TypeVar('_AbstractRegion__S', bound=org.hipparchus.geometry.Space)  # <S>
 _AbstractRegion__P = typing.TypeVar('_AbstractRegion__P', bound=org.hipparchus.geometry.Point)  # <P>
@@ -1248,8 +1252,6 @@ _AbstractRegion__F = typing.TypeVar('_AbstractRegion__F', bound=Hyperplane)  # <
 _AbstractRegion__J = typing.TypeVar('_AbstractRegion__J', bound=SubHyperplane)  # <J>
 class AbstractRegion(Region[_AbstractRegion__S, _AbstractRegion__P, _AbstractRegion__H, _AbstractRegion__I], typing.Generic[_AbstractRegion__S, _AbstractRegion__P, _AbstractRegion__H, _AbstractRegion__I, _AbstractRegion__T, _AbstractRegion__Q, _AbstractRegion__F, _AbstractRegion__J]):
     """
-    implements Region<S,P,H,I>
-    
     Abstract class for all regions, independently of geometry type or dimension.
     """
     def __init__(self, hArray: typing.Union[typing.List[_AbstractRegion__H], jpype.JArray], double: float):
@@ -1259,17 +1261,17 @@ class AbstractRegion(Region[_AbstractRegion__S, _AbstractRegion__P, _AbstractReg
         Parameters:
             tolerance (double): tolerance below which points are considered identical.
         
-        protected AbstractRegion(BSPTree<AbstractRegion,AbstractRegion,AbstractRegion,AbstractRegion> tree, double tolerance)
+        protected AbstractRegion (BSPTree<AbstractRegion, AbstractRegion, AbstractRegion, AbstractRegion> tree, double tolerance)
         
         Build a region from an inside/outside BSP tree.
         
         The leaf nodes of the BSP tree must have a Boolean attribute representing the inside status of the corresponding cell (true for inside cells, false for outside cells). In order to avoid building too many small objects, it is recommended to use the predefined constants TRUE and FALSE. The tree also must have either null internal nodes or internal nodes representing the boundary as specified in the getTree method).
         
         Parameters:
-            tree (BSPTree<AbstractRegion,AbstractRegion,AbstractRegion,AbstractRegion> tree): inside/outside BSP tree representing the region
+            tree (BSPTree<AbstractRegion, AbstractRegion, AbstractRegion, AbstractRegion> tree): inside/outside BSP tree representing the region
             tolerance (double): tolerance below which points are considered identical.
         
-        protected AbstractRegion(Collection<AbstractRegion> boundary, double tolerance)
+        protected AbstractRegion (Collection<AbstractRegion> boundary, double tolerance)
         
         Build a Region from a Boundary REPresentation (B-rep).
         
@@ -1283,7 +1285,7 @@ class AbstractRegion(Region[_AbstractRegion__S, _AbstractRegion__P, _AbstractReg
             boundary (Collection<AbstractRegion> boundary):             collection of boundary elements, as a collection of SubHyperplane objects
             tolerance (double): tolerance below which points are considered identical.
         
-        public AbstractRegion(AbstractRegion[] hyperplanes, double tolerance)
+        public AbstractRegion (AbstractRegion[] hyperplanes, double tolerance)
         
         Build a convex region from an array of bounding hyperplanes.
         
@@ -1301,7 +1303,7 @@ class AbstractRegion(Region[_AbstractRegion__S, _AbstractRegion__P, _AbstractReg
         Applying a transform to a region consist in applying the transform to all the hyperplanes of the underlying BSP tree and of the boundary (and also to the sub-hyperplanes embedded in these hyperplanes) and to the barycenter. The instance is not modified, a new instance is built.
         
         Parameters:
-            transform (Transform<AbstractRegion,AbstractRegion,AbstractRegion,AbstractRegion,AbstractRegion,AbstractRegion,AbstractRegion,AbstractRegion> transform): transform to apply
+            transform (Transform<AbstractRegion, AbstractRegion, AbstractRegion, AbstractRegion, AbstractRegion, AbstractRegion, AbstractRegion, AbstractRegion> transform): transform to apply
         
         Returns:
             a new region, resulting from the application of the transform to the instance
@@ -1320,7 +1322,7 @@ class AbstractRegion(Region[_AbstractRegion__S, _AbstractRegion__P, _AbstractReg
         Specified by: buildNew in interface Region
         
         Parameters:
-            newTree (BSPTree<AbstractRegion,AbstractRegion,AbstractRegion,AbstractRegion> newTree): inside/outside BSP tree representing the new region
+            newTree (BSPTree<AbstractRegion, AbstractRegion, AbstractRegion, AbstractRegion> newTree): inside/outside BSP tree representing the new region
         
         Returns:
             the built region
@@ -1328,7 +1330,7 @@ class AbstractRegion(Region[_AbstractRegion__S, _AbstractRegion__P, _AbstractReg
         
         """
         ...
-    def checkPoint(self, p: _AbstractRegion__P) -> Region.Location:
+    def checkPoint(self, point: _AbstractRegion__P) -> Region.Location:
         """
         Check a point with respect to the region.
         
@@ -1342,12 +1344,12 @@ class AbstractRegion(Region[_AbstractRegion__S, _AbstractRegion__P, _AbstractReg
             OUTSIDE or
             BOUNDARY
         
-        protected Location checkPoint(BSPTree<AbstractRegion,AbstractRegion,AbstractRegion,AbstractRegion> node, AbstractRegion point)
+        protected Location checkPoint (BSPTree<AbstractRegion, AbstractRegion, AbstractRegion, AbstractRegion> node, AbstractRegion point)
         
         Check a point with respect to the region starting at a given node.
         
         Parameters:
-            node (BSPTree<AbstractRegion,AbstractRegion,AbstractRegion,AbstractRegion> node): root node of the region
+            node (BSPTree<AbstractRegion, AbstractRegion, AbstractRegion, AbstractRegion> node): root node of the region
             point (AbstractRegion): point to check
         
         Returns:
@@ -1365,7 +1367,7 @@ class AbstractRegion(Region[_AbstractRegion__S, _AbstractRegion__P, _AbstractReg
         Specified by: contains in interface Region
         
         Parameters:
-            region (Region<AbstractRegion,AbstractRegion,AbstractRegion,AbstractRegion> region): region to check against the instance
+            region (Region<AbstractRegion, AbstractRegion, AbstractRegion, AbstractRegion> region): region to check against the instance
         
         Returns:
             true if the instance contains the specified tree
@@ -1452,8 +1454,8 @@ class AbstractRegion(Region[_AbstractRegion__S, _AbstractRegion__P, _AbstractReg
         Returns:
             underlying BSP tree
         
-              - BoundaryAttribute
-        
+        Also see:
+            BoundaryAttribute
         
         
         """
@@ -1485,14 +1487,14 @@ class AbstractRegion(Region[_AbstractRegion__S, _AbstractRegion__P, _AbstractReg
         Returns:
             true if the instance is empty
         
-        public boolean isEmpty(BSPTree<AbstractRegion,AbstractRegion,AbstractRegion,AbstractRegion> node)
+        public boolean isEmpty (BSPTree<AbstractRegion, AbstractRegion, AbstractRegion, AbstractRegion> node)
         
         Check if the sub-tree starting at a given node is empty.
         
         Specified by: isEmpty in interface Region
         
         Parameters:
-            node (BSPTree<AbstractRegion,AbstractRegion,AbstractRegion,AbstractRegion> node): root node of the sub-tree (must have Region tree semantics, i.e. the
+            node (BSPTree<AbstractRegion, AbstractRegion, AbstractRegion, AbstractRegion> node): root node of the sub-tree (must have Region tree semantics, i.e. the
                 leaf nodes must have Boolean attributes representing an inside/outside property)
         
         Returns:
@@ -1502,7 +1504,7 @@ class AbstractRegion(Region[_AbstractRegion__S, _AbstractRegion__P, _AbstractReg
         """
         ...
     @typing.overload
-    def isEmpty(self, bSPTree: BSPTree[_AbstractRegion__S, _AbstractRegion__P, _AbstractRegion__H, _AbstractRegion__I]) -> bool: ...
+    def isEmpty(self, node: BSPTree[_AbstractRegion__S, _AbstractRegion__P, _AbstractRegion__H, _AbstractRegion__I]) -> bool: ...
     @typing.overload
     def isFull(self) -> bool:
         """
@@ -1513,14 +1515,14 @@ class AbstractRegion(Region[_AbstractRegion__S, _AbstractRegion__P, _AbstractReg
         Returns:
             true if the instance covers the full space
         
-        public boolean isFull(BSPTree<AbstractRegion,AbstractRegion,AbstractRegion,AbstractRegion> node)
+        public boolean isFull (BSPTree<AbstractRegion, AbstractRegion, AbstractRegion, AbstractRegion> node)
         
         Check if the sub-tree starting at a given node covers the full space.
         
         Specified by: isFull in interface Region
         
         Parameters:
-            node (BSPTree<AbstractRegion,AbstractRegion,AbstractRegion,AbstractRegion> node): root node of the sub-tree (must have Region tree semantics, i.e. the
+            node (BSPTree<AbstractRegion, AbstractRegion, AbstractRegion, AbstractRegion> node): root node of the sub-tree (must have Region tree semantics, i.e. the
                 leaf nodes must have Boolean attributes representing an inside/outside property)
         
         Returns:
@@ -1530,7 +1532,7 @@ class AbstractRegion(Region[_AbstractRegion__S, _AbstractRegion__P, _AbstractReg
         """
         ...
     @typing.overload
-    def isFull(self, bSPTree: BSPTree[_AbstractRegion__S, _AbstractRegion__P, _AbstractRegion__H, _AbstractRegion__I]) -> bool: ...
+    def isFull(self, node: BSPTree[_AbstractRegion__S, _AbstractRegion__P, _AbstractRegion__H, _AbstractRegion__I]) -> bool: ...
     def projectToBoundary(self, point: _AbstractRegion__P) -> BoundaryProjection[_AbstractRegion__S, _AbstractRegion__P]:
         """
         Project a point on the boundary of the region.
@@ -1557,8 +1559,6 @@ _AbstractSubHyperplane__F = typing.TypeVar('_AbstractSubHyperplane__F', bound=Hy
 _AbstractSubHyperplane__J = typing.TypeVar('_AbstractSubHyperplane__J', bound=SubHyperplane)  # <J>
 class AbstractSubHyperplane(SubHyperplane[_AbstractSubHyperplane__S, _AbstractSubHyperplane__P, _AbstractSubHyperplane__H, _AbstractSubHyperplane__I], typing.Generic[_AbstractSubHyperplane__S, _AbstractSubHyperplane__P, _AbstractSubHyperplane__H, _AbstractSubHyperplane__I, _AbstractSubHyperplane__T, _AbstractSubHyperplane__Q, _AbstractSubHyperplane__F, _AbstractSubHyperplane__J]):
     """
-    implements SubHyperplane<S,P,H,I>
-    
     This class implements the dimension-independent parts of SubHyperplane.
     
     sub-hyperplanes are obtained when parts of an Hyperplane are chopped off by other hyperplanes that intersect it. The remaining part is a convex region. Such objects appear in BSPTree as the intersection of a cut hyperplane with the convex region which it splits, the chopping hyperplanes are the cut hyperplanes closer to the tree root.
@@ -1570,7 +1570,7 @@ class AbstractSubHyperplane(SubHyperplane[_AbstractSubHyperplane__S, _AbstractSu
         The instance must be a (D-1)-dimension sub-hyperplane with respect to the transform not a (D-2)-dimension sub-hyperplane the transform knows how to transform by itself. The transform will consist in transforming first the hyperplane and then the all region using the various methods provided by the transform.
         
         Parameters:
-            transform (Transform<AbstractSubHyperplane,AbstractSubHyperplane,AbstractSubHyperplane,AbstractSubHyperplane,AbstractSubHyperplane,AbstractSubHyperplane,AbstractSubHyperplane,AbstractSubHyperplane> transform): D-dimension transform to apply
+            transform (Transform<AbstractSubHyperplane, AbstractSubHyperplane, AbstractSubHyperplane, AbstractSubHyperplane, AbstractSubHyperplane, AbstractSubHyperplane, AbstractSubHyperplane, AbstractSubHyperplane> transform): D-dimension transform to apply
         
         Returns:
             the transformed instance
@@ -1678,8 +1678,6 @@ _InteriorPointFinder__H = typing.TypeVar('_InteriorPointFinder__H', bound=Hyperp
 _InteriorPointFinder__I = typing.TypeVar('_InteriorPointFinder__I', bound=SubHyperplane)  # <I>
 class InteriorPointFinder(BSPTreeVisitor[_InteriorPointFinder__S, _InteriorPointFinder__P, _InteriorPointFinder__H, _InteriorPointFinder__I], typing.Generic[_InteriorPointFinder__S, _InteriorPointFinder__P, _InteriorPointFinder__H, _InteriorPointFinder__I]):
     """
-    implements BSPTreeVisitor<S,P,H,I>
-    
     Finder for interior points.
     
     Since:
@@ -1714,10 +1712,10 @@ class InteriorPointFinder(BSPTreeVisitor[_InteriorPointFinder__S, _InteriorPoint
         Specified by: visitInternalNode in interface BSPTreeVisitor
         
         Parameters:
-            node (BSPTree<InteriorPointFinder,InteriorPointFinder,InteriorPointFinder,InteriorPointFinder> node): BSP node guaranteed to have a non-null cut sub-hyperplane
+            node (BSPTree<InteriorPointFinder, InteriorPointFinder, InteriorPointFinder, InteriorPointFinder> node): BSP node guaranteed to have a non-null cut sub-hyperplane
         
-              - visitLeafNode
-        
+        Also see:
+            visitLeafNode
         
         
         """
@@ -1729,10 +1727,10 @@ class InteriorPointFinder(BSPTreeVisitor[_InteriorPointFinder__S, _InteriorPoint
         Specified by: visitLeafNode in interface BSPTreeVisitor
         
         Parameters:
-            node (BSPTree<InteriorPointFinder,InteriorPointFinder,InteriorPointFinder,InteriorPointFinder> node): leaf BSP node having a null sub-hyperplane
+            node (BSPTree<InteriorPointFinder, InteriorPointFinder, InteriorPointFinder, InteriorPointFinder> node): leaf BSP node having a null sub-hyperplane
         
-              - visitInternalNode
-        
+        Also see:
+            visitInternalNode
         
         
         """
@@ -1746,7 +1744,7 @@ class InteriorPointFinder(BSPTreeVisitor[_InteriorPointFinder__S, _InteriorPoint
         Specified by: visitOrder in interface BSPTreeVisitor
         
         Parameters:
-            node (BSPTree<InteriorPointFinder,InteriorPointFinder,InteriorPointFinder,InteriorPointFinder> node): BSP node guaranteed to have a non-null cut sub-hyperplane
+            node (BSPTree<InteriorPointFinder, InteriorPointFinder, InteriorPointFinder, InteriorPointFinder> node): BSP node guaranteed to have a non-null cut sub-hyperplane
         
         Returns:
             desired visit order, must be one of PLUS_MINUS_SUB,

@@ -691,7 +691,7 @@ class ViennaModelCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader, o
     
     A bilinear interpolation is performed the case of the user initialize the latitude and the longitude with values that are not contained in the stream.
     
-    The coefficients are obtained from `Vienna Mapping Functions Open Access Data <http://vmf.geo.tuwien.ac.at/trop_products/GRID/>`. Find more on the files at the `VMF Model Documentation <http://vmf.geo.tuwien.ac.at/readme.txt>`.
+    The coefficients are obtained from GRID. Find more on the files at the at.
     
     The files have to be extracted to UTF-8 text files before being read by this loader.
     
@@ -701,7 +701,7 @@ class ViennaModelCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader, o
     
     Example:
     
-     ! Version:            1.0 ! Source:             J. Boehm, TU Vienna (created: 2018-11-20) ! Data_types:         VMF1 (lat lon ah aw zhd zwd) ! Epoch:              2018 11 19 18 00  0.0 ! Scale_factor:       1.e+00 ! Range/resolution:   -90 90 0 360 2 2.5 ! Comment:            http://vmf.geo.tuwien.ac.at/trop_products/GRID/2.5x2/VMF1/VMF1_OP/ 90.0   0.0 0.00116059  0.00055318  2.3043  0.0096 90.0   2.5 0.00116059  0.00055318  2.3043  0.0096 90.0   5.0 0.00116059  0.00055318  2.3043  0.0096 90.0   7.5 0.00116059  0.00055318  2.3043  0.0096 90.0  10.0 0.00116059  0.00055318  2.3043  0.0096 90.0  12.5 0.00116059  0.00055318  2.3043  0.0096 90.0  15.0 0.00116059  0.00055318  2.3043  0.0096 90.0  17.5 0.00116059  0.00055318  2.3043  0.0096 90.0  20.0 0.00116059  0.00055318  2.3043  0.0096 90.0  22.5 0.00116059  0.00055318  2.3043  0.0096 90.0  25.0 0.00116059  0.00055318  2.3043  0.0096 90.0  27.5 0.00116059  0.00055318  2.3043  0.0096
+     ! Version:            1.0 ! Source:             J. Boehm, TU Vienna (created: 2018-11-20) ! Data_types:         VMF1 (lat lon ah aw zhd zwd) ! Epoch:              2018 11 19 18 00  0.0 ! Scale_factor:       1.e+00 ! Range/resolution:   -90 90 0 360 2 2.5 ! Comment:            https://vmf.geo.tuwien.ac.at/trop_products/GRID/2.5x2/VMF1/VMF1_OP/ 90.0   0.0 0.00116059  0.00055318  2.3043  0.0096 90.0   2.5 0.00116059  0.00055318  2.3043  0.0096 90.0   5.0 0.00116059  0.00055318  2.3043  0.0096 90.0   7.5 0.00116059  0.00055318  2.3043  0.0096 90.0  10.0 0.00116059  0.00055318  2.3043  0.0096 90.0  12.5 0.00116059  0.00055318  2.3043  0.0096 90.0  15.0 0.00116059  0.00055318  2.3043  0.0096 90.0  17.5 0.00116059  0.00055318  2.3043  0.0096 90.0  20.0 0.00116059  0.00055318  2.3043  0.0096 90.0  22.5 0.00116059  0.00055318  2.3043  0.0096 90.0  25.0 0.00116059  0.00055318  2.3043  0.0096 90.0  27.5 0.00116059  0.00055318  2.3043  0.0096
     
     It is not safe for multiple threads to share a single instance of this class.
     """
@@ -715,11 +715,11 @@ class ViennaModelCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader, o
     
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, viennaModelType: 'ViennaModelType'): ...
+    def __init__(self, latitude: float, longitude: float, type: 'ViennaModelType'): ...
     @typing.overload
-    def __init__(self, string: str, double: float, double2: float, viennaModelType: 'ViennaModelType'): ...
+    def __init__(self, supportedNames: str, latitude: float, longitude: float, type: 'ViennaModelType'): ...
     @typing.overload
-    def __init__(self, string: str, double: float, double2: float, viennaModelType: 'ViennaModelType', dataProvidersManager: org.orekit.data.DataProvidersManager): ...
+    def __init__(self, supportedNames: str, latitude: float, longitude: float, type: 'ViennaModelType', dataProvidersManager: org.orekit.data.DataProvidersManager): ...
     def getA(self) -> typing.MutableSequence[float]:
         """
         Returns the a coefficients array.
@@ -1088,7 +1088,7 @@ class CanonicalSaastamoinenModel(TroposphericModel):
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, pressureTemperatureHumidityProvider: org.orekit.models.earth.weather.PressureTemperatureHumidityProvider): ...
+    def __init__(self, pthProvider: org.orekit.models.earth.weather.PressureTemperatureHumidityProvider): ...
     def getLowElevationThreshold(self) -> float:
         """
         Get the low elevation threshold value for path delay computation.
@@ -1444,11 +1444,11 @@ class EstimatedModel(TroposphericModel):
     
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, troposphereMappingFunction: TroposphereMappingFunction, double4: float): ...
+    def __init__(self, h0: float, t0: float, p0: float, model: TroposphereMappingFunction, totalDelay: float): ...
     @typing.overload
-    def __init__(self, troposphereMappingFunction: TroposphereMappingFunction, double: float): ...
+    def __init__(self, model: TroposphereMappingFunction, totalDelay: float): ...
     @typing.overload
-    def __init__(self, troposphericModel: TroposphericModel, troposphereMappingFunction: TroposphereMappingFunction, double: float): ...
+    def __init__(self, hydrostatic: TroposphericModel, model: TroposphereMappingFunction, totalDelay: float): ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]:
         """
         Get the drivers for parameters.
@@ -1505,11 +1505,11 @@ class FixedTroposphericDelay(TroposphericModel):
     A static tropospheric model that interpolates the actual tropospheric delay based on values read from a configuration file (tropospheric-delay.txt) via the DataProvidersManager.
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], doubleArray3: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]): ...
+    def __init__(self, xArr: typing.Union[typing.List[float], jpype.JArray], yArr: typing.Union[typing.List[float], jpype.JArray], fArr: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, string: str): ...
+    def __init__(self, supportedName: str): ...
     @typing.overload
-    def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
+    def __init__(self, supportedName: str, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
     @staticmethod
     def getDefaultModel() -> 'FixedTroposphericDelay':
         """
@@ -1592,7 +1592,7 @@ class GlobalMappingFunctionModel(TroposphereMappingFunction):
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, utc: org.orekit.time.TimeScale): ...
     _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, point: org.orekit.bodies.GeodeticPoint, date: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
@@ -1861,11 +1861,11 @@ class ModifiedSaastamoinenModel(TroposphericModel):
     Provider for water pressure.
     """
     @typing.overload
-    def __init__(self, pressureTemperatureHumidityProvider: org.orekit.models.earth.weather.PressureTemperatureHumidityProvider): ...
+    def __init__(self, pth0Provider: org.orekit.models.earth.weather.PressureTemperatureHumidityProvider): ...
     @typing.overload
-    def __init__(self, pressureTemperatureHumidityProvider: org.orekit.models.earth.weather.PressureTemperatureHumidityProvider, string: str): ...
+    def __init__(self, pth0Provider: org.orekit.models.earth.weather.PressureTemperatureHumidityProvider, deltaRFileName: str): ...
     @typing.overload
-    def __init__(self, pressureTemperatureHumidityProvider: org.orekit.models.earth.weather.PressureTemperatureHumidityProvider, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
+    def __init__(self, pth0Provider: org.orekit.models.earth.weather.PressureTemperatureHumidityProvider, deltaRFileName: str, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
     def getLowElevationThreshold(self) -> float:
         """
         Get the low elevation threshold value for path delay computation.
@@ -2008,7 +2008,7 @@ class NiellMappingFunctionModel(TroposphereMappingFunction):
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, utc: org.orekit.time.TimeScale): ...
     _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, point: org.orekit.bodies.GeodeticPoint, date: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
@@ -2111,7 +2111,7 @@ class PythonAzimuthalGradientProvider(AzimuthalGradientProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2184,7 +2184,7 @@ class PythonTroposphereMappingFunction(TroposphereMappingFunction):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2265,7 +2265,7 @@ class PythonTroposphericModel(TroposphericModel):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2336,7 +2336,7 @@ class PythonViennaAProvider(ViennaAProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2376,9 +2376,9 @@ class TimeSpanEstimatedModel(TroposphericModel):
     
     """
     @typing.overload
-    def __init__(self, estimatedModel: EstimatedModel): ...
+    def __init__(self, model: EstimatedModel): ...
     @typing.overload
-    def __init__(self, estimatedModel: EstimatedModel, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, model: EstimatedModel, timeScale: org.orekit.time.TimeScale): ...
     def addTroposphericModelValidAfter(self, model: EstimatedModel, earliestValidityDate: org.orekit.time.AbsoluteDate) -> None:
         """
         Add a EstimatedTroposphericModel entry valid after a limit date.
@@ -2608,7 +2608,7 @@ class PythonAbstractVienna(AbstractVienna):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

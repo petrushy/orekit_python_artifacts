@@ -13,8 +13,9 @@ class BinomialProportion:
     """
     Utility methods to generate confidence intervals for a binomial proportion.
     
-          - ` Binomial proportion confidence interval (Wikipedia)
-            <http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval>`
+    Also see:
+        ` Binomial proportion confidence interval (Wikipedia)
+        <http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval>`
     """
     @staticmethod
     def getAgrestiCoullInterval(numberOfTrials: int, probabilityOfSuccess: float, confidenceLevel: float) -> 'ConfidenceInterval':
@@ -41,9 +42,9 @@ class BinomialProportion:
             hipparchus: if probabilityOfSuccess is not in the interval [0, 1].
             hipparchus: if confidenceLevel is not in the interval (0, 1).
         
-              - ` Agresti-Coull interval (Wikipedia)
-                <http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Agresti-Coull_Interval>`
-        
+        Also see:
+            ` Agresti-Coull interval (Wikipedia)
+            <http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Agresti-Coull_Interval>`
         
         
         """
@@ -73,9 +74,9 @@ class BinomialProportion:
             hipparchus: if probabilityOfSuccess is not in the interval [0, 1].
             hipparchus: if confidenceLevel is not in the interval (0, 1).
         
-              - ` Clopper-Pearson interval (Wikipedia)
-                <http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Clopper-Pearson_interval>`
-        
+        Also see:
+            ` Clopper-Pearson interval (Wikipedia)
+            <http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Clopper-Pearson_interval>`
         
         
         """
@@ -105,9 +106,9 @@ class BinomialProportion:
             hipparchus: if probabilityOfSuccess is not in the interval [0, 1].
             hipparchus: if confidenceLevel is not in the interval (0, 1).
         
-              - ` Normal approximation interval (Wikipedia)
-                <http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Normal_approximation_interval>`
-        
+        Also see:
+            ` Normal approximation interval (Wikipedia)
+            <http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Normal_approximation_interval>`
         
         
         """
@@ -137,9 +138,9 @@ class BinomialProportion:
             hipparchus: if probabilityOfSuccess is not in the interval [0, 1].
             hipparchus: if confidenceLevel is not in the interval (0, 1).
         
-              - ` Wilson score interval (Wikipedia)
-                <http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Wilson_score_interval>`
-        
+        Also see:
+            ` Wilson score interval (Wikipedia)
+            <http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Wilson_score_interval>`
         
         
         """
@@ -204,7 +205,7 @@ class ConfidenceInterval:
         """
         Get String representation of the confidence interval.
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Returns:
             String representation of the confidence interval

@@ -215,7 +215,7 @@ class RandomGenerator:
         """
         ...
     @typing.overload
-    def setSeed(self, int: int) -> None:
+    def setSeed(self, seed: int) -> None:
         """
         Sets the seed of the underlying random number generator using an int seed.
         
@@ -242,9 +242,9 @@ class RandomGenerator:
         """
         ...
     @typing.overload
-    def setSeed(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
+    def setSeed(self, seed: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
     @typing.overload
-    def setSeed(self, long: int) -> None: ...
+    def setSeed(self, seed: int) -> None: ...
 
 class RandomVectorGenerator:
     """
@@ -263,8 +263,6 @@ class RandomVectorGenerator:
 
 class CorrelatedRandomVectorGenerator(RandomVectorGenerator):
     """
-    implements RandomVectorGenerator
-    
     A RandomVectorGenerator that generates vectors with with correlated components.
     
     Random vectors with correlated components are built by combining the uncorrelated components of another random vector in such a way that the resulting correlations are the ones specified by a positive definite covariance matrix.
@@ -274,9 +272,9 @@ class CorrelatedRandomVectorGenerator(RandomVectorGenerator):
     Sometimes, the covariance matrix for a given simulation is not strictly positive definite. This means that the correlations are not all independent from each other. In this case, however, the non strictly positive elements found during the Cholesky decomposition of the covariance matrix should not be negative either, they should be null. Another non-conventional extension handling this case is used here. Rather than computing T` .U` where C is the covariance matrix and U is an upper-triangular matrix, we compute C = BT`` where B is a rectangular matrix having more rows than columns. The number of columns of B is the rank of the covariance matrix, and it is the dimension of the uncorrelated random vector that is needed to compute the component of the correlated vector. This class handles this situation automatically.
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], realMatrix: org.hipparchus.linear.RealMatrix, double2: float, normalizedRandomGenerator: typing.Union[NormalizedRandomGenerator, typing.Callable]): ...
+    def __init__(self, mean: typing.Union[typing.List[float], jpype.JArray], covariance: org.hipparchus.linear.RealMatrix, small: float, generator: typing.Union[NormalizedRandomGenerator, typing.Callable]): ...
     @typing.overload
-    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, double: float, normalizedRandomGenerator: typing.Union[NormalizedRandomGenerator, typing.Callable]): ...
+    def __init__(self, covariance: org.hipparchus.linear.RealMatrix, small: float, generator: typing.Union[NormalizedRandomGenerator, typing.Callable]): ...
     def getGenerator(self) -> NormalizedRandomGenerator:
         """
         Get the underlying normalized components generator.
@@ -294,8 +292,8 @@ class CorrelatedRandomVectorGenerator(RandomVectorGenerator):
         Returns:
             rank of the square matrix.
         
-              - getRootMatrix
-        
+        Also see:
+            getRootMatrix
         
         
         """
@@ -307,8 +305,8 @@ class CorrelatedRandomVectorGenerator(RandomVectorGenerator):
         Returns:
             root of the square matrix
         
-              - getRank
-        
+        Also see:
+            getRank
         
         
         """
@@ -329,8 +327,6 @@ class CorrelatedRandomVectorGenerator(RandomVectorGenerator):
 
 class GaussianRandomGenerator(NormalizedRandomGenerator):
     """
-    implements NormalizedRandomGenerator
-    
     This class is a gaussian normalized random generator for scalars.
     
     This class is a simple wrapper around the nextGaussian method.
@@ -360,8 +356,6 @@ class GaussianRandomGenerator(NormalizedRandomGenerator):
 
 class HaltonSequenceGenerator(RandomVectorGenerator):
     """
-    implements RandomVectorGenerator
-    
     Implementation of a Halton sequence.
     
     A Halton sequence is a low-discrepancy sequence generating points in the interval [0, 1] according to
@@ -380,13 +374,14 @@ class HaltonSequenceGenerator(RandomVectorGenerator):
       - random access to the i-th point in the sequence: skipTo
     
     
-          - `Halton sequence (Wikipedia) <http://en.wikipedia.org/wiki/Halton_sequence>`
-          - pdf
+    Also see:
+        `Halton sequence (Wikipedia) <http://en.wikipedia.org/wiki/Halton_sequence>`,
+        pdf
     """
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, dimension: int): ...
     @typing.overload
-    def __init__(self, int: int, intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]): ...
+    def __init__(self, dimension: int, bases: typing.Union[typing.List[int], jpype.JArray], weights: typing.Union[typing.List[int], jpype.JArray]): ...
     def getNextIndex(self) -> int:
         """
         Returns the index i of the next point in the Halton sequence that will be returned by calling nextVector.
@@ -430,11 +425,10 @@ class HaltonSequenceGenerator(RandomVectorGenerator):
 
 class RandomAdaptor(java.util.Random, RandomGenerator):
     """
-    implements RandomGenerator
-    
     Extension of Random wrapping a RandomGenerator.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self, randomGenerator: RandomGenerator):
         """
@@ -455,9 +449,7 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
         
         Specified by: nextBoolean in interface RandomGenerator
         
-        Specified by: nextBoolean in interface RandomGenerator
-        
-        Overrides: nextBoolean in class Random
+        Overrides: Random in class Random
         
         Returns:
             the next pseudorandom, uniformly distributed boolean value from this random number generator's sequence
@@ -472,9 +464,7 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
         
         Specified by: nextBytes in interface RandomGenerator
         
-        Specified by: nextBytes in interface RandomGenerator
-        
-        Overrides: nextBytes in class Random
+        Overrides: Random in class Random
         
         Parameters:
             bytes (byte[]): the non-null byte array in which to put the random bytes
@@ -502,9 +492,7 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
         
         Specified by: nextDouble in interface RandomGenerator
         
-        Specified by: nextDouble in interface RandomGenerator
-        
-        Overrides: nextDouble in class Random
+        Overrides: Random in class Random
         
         Returns:
             the next pseudorandom, uniformly distributed double value between  and  from this random
@@ -519,9 +507,7 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
         
         Specified by: nextFloat in interface RandomGenerator
         
-        Specified by: nextFloat in interface RandomGenerator
-        
-        Overrides: nextFloat in class Random
+        Overrides: Random in class Random
         
         Returns:
             the next pseudorandom, uniformly distributed float value between  and  from this random
@@ -536,9 +522,7 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
         
         Specified by: nextGaussian in interface RandomGenerator
         
-        Specified by: nextGaussian in interface RandomGenerator
-        
-        Overrides: nextGaussian in class Random
+        Overrides: Random in class Random
         
         Returns:
             the next pseudorandom, Gaussian ("normally") distributed double value with mean  and standard
@@ -554,9 +538,7 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
         
         Specified by: nextInt in interface RandomGenerator
         
-        Specified by: nextInt in interface RandomGenerator
-        
-        Overrides: nextInt in class Random
+        Overrides: Random in class Random
         
         Returns:
             the next pseudorandom, uniformly distributed int value from this random number generator's sequence
@@ -570,9 +552,7 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
         
         Specified by: nextInt in interface RandomGenerator
         
-        Specified by: nextInt in interface RandomGenerator
-        
-        Overrides: nextInt in class Random
+        Overrides: Random in class Random
         
         Parameters:
             n (int): the bound on the random number to be returned. Must be positive.
@@ -593,9 +573,7 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
         
         Specified by: nextLong in interface RandomGenerator
         
-        Specified by: nextLong in interface RandomGenerator
-        
-        Overrides: nextLong in class Random
+        Overrides: Random in class Random
         
         Returns:
             the next pseudorandom, uniformly distributed long value from this random number generator's sequence
@@ -606,8 +584,6 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
     def nextLong(self, n: int) -> int:
         """
         (exclusive), drawn from this random number generator's sequence.
-        
-        Specified by: nextLong in interface RandomGenerator
         
         Specified by: nextLong in interface RandomGenerator
         
@@ -635,7 +611,7 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
         """
         ...
     @typing.overload
-    def setSeed(self, int: int) -> None:
+    def setSeed(self, seed: int) -> None:
         """
         Sets the seed of the underlying random number generator using an int seed.
         
@@ -661,7 +637,7 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
         
         Specified by: setSeed in interface RandomGenerator
         
-        Overrides: setSeed in class Random
+        Overrides: Random in class Random
         
         Parameters:
             seed (long): the seed value
@@ -670,14 +646,12 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
         """
         ...
     @typing.overload
-    def setSeed(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
+    def setSeed(self, seed: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
     @typing.overload
-    def setSeed(self, long: int) -> None: ...
+    def setSeed(self, seed: int) -> None: ...
 
 class SobolSequenceGenerator(RandomVectorGenerator):
     """
-    implements RandomVectorGenerator
-    
     Implementation of a Sobol sequence.
     
     A Sobol sequence is a low-discrepancy sequence with the property that for all values of N, its subsequence (x1... xN) has a low discrepancy. It can be used to generate pseudo-random points in a space S, which are equi-distributed.
@@ -690,13 +664,14 @@ class SobolSequenceGenerator(RandomVectorGenerator):
       - random access to the i-th point in the sequence: skipTo
     
     
-          - `Sobol sequence (Wikipedia) <http://en.wikipedia.org/wiki/Sobol_sequence>`
-          - `Sobol sequence direction numbers <http://web.maths.unsw.edu.au/~fkuo/sobol/>`
+    Also see:
+        `Sobol sequence (Wikipedia) <http://en.wikipedia.org/wiki/Sobol_sequence>`, `Sobol sequence direction numbers
+        <http://web.maths.unsw.edu.au/~fkuo/sobol/>`
     """
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, dimension: int): ...
     @typing.overload
-    def __init__(self, int: int, inputStream: java.io.InputStream): ...
+    def __init__(self, dimension: int, is_: java.io.InputStream): ...
     def getNextIndex(self) -> int:
         """
         Returns the index i of the next point in the Sobol sequence that will be returned by calling nextVector.
@@ -740,8 +715,6 @@ class SobolSequenceGenerator(RandomVectorGenerator):
 
 class StableRandomGenerator(NormalizedRandomGenerator):
     """
-    implements NormalizedRandomGenerator
-    
     This class provides a stable normalized random generator. It samples from a stable distribution with location parameter 0 and scale 1.
     
     The implementation uses the Chambers-Mallows-Stuck method as described in Handbook of computational statistics: concepts and methods by James E. Gentle, Wolfgang Härdle, Yuichi Mori.
@@ -777,8 +750,6 @@ class StableRandomGenerator(NormalizedRandomGenerator):
 
 class SynchronizedRandomGenerator(RandomGenerator):
     """
-    implements RandomGenerator
-    
     Any RandomGenerator implementation can be thread-safe if it is used through an instance of this class. This is achieved by enclosing calls to the methods of the actual generator inside the overridden synchronized methods of this class.
     """
     def __init__(self, rng: RandomGenerator):
@@ -929,7 +900,7 @@ class SynchronizedRandomGenerator(RandomGenerator):
         """
         ...
     @typing.overload
-    def setSeed(self, int: int) -> None:
+    def setSeed(self, seed: int) -> None:
         """
         Sets the seed of the underlying random number generator using an int seed.
         
@@ -962,22 +933,20 @@ class SynchronizedRandomGenerator(RandomGenerator):
         """
         ...
     @typing.overload
-    def setSeed(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
+    def setSeed(self, seed: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
     @typing.overload
-    def setSeed(self, long: int) -> None: ...
+    def setSeed(self, seed: int) -> None: ...
 
 class UncorrelatedRandomVectorGenerator(RandomVectorGenerator):
     """
-    implements RandomVectorGenerator
-    
     A RandomVectorGenerator that generates vectors with uncorrelated components.
     
     Components of generated vectors follow (independent) Gaussian distributions, with parameters supplied in the constructor.
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], normalizedRandomGenerator: typing.Union[NormalizedRandomGenerator, typing.Callable]): ...
+    def __init__(self, mean: typing.Union[typing.List[float], jpype.JArray], standardDeviation: typing.Union[typing.List[float], jpype.JArray], generator: typing.Union[NormalizedRandomGenerator, typing.Callable]): ...
     @typing.overload
-    def __init__(self, int: int, normalizedRandomGenerator: typing.Union[NormalizedRandomGenerator, typing.Callable]): ...
+    def __init__(self, dimension: int, generator: typing.Union[NormalizedRandomGenerator, typing.Callable]): ...
     def nextVector(self) -> typing.MutableSequence[float]:
         """
         Generate an uncorrelated random vector.
@@ -993,8 +962,6 @@ class UncorrelatedRandomVectorGenerator(RandomVectorGenerator):
 
 class UniformRandomGenerator(NormalizedRandomGenerator):
     """
-    implements NormalizedRandomGenerator
-    
     This class implements a normalized uniform random generator.
     
     Since it is a normalized random generator, it generates values from a uniform distribution with mean equal to 0 and standard deviation equal to 1. Generated values fall in the range [-x0221A;3, +x0221A;3].
@@ -1026,14 +993,12 @@ class UniformRandomGenerator(NormalizedRandomGenerator):
 
 class UnitSphereRandomVectorGenerator(RandomVectorGenerator):
     """
-    implements RandomVectorGenerator
-    
     Generate random vectors isotropically located on the surface of a sphere.
     """
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, dimension: int): ...
     @typing.overload
-    def __init__(self, int: int, randomGenerator: RandomGenerator): ...
+    def __init__(self, dimension: int, rand: RandomGenerator): ...
     def nextVector(self) -> typing.MutableSequence[float]:
         """
         Generate a random vector.
@@ -1049,14 +1014,12 @@ class UnitSphereRandomVectorGenerator(RandomVectorGenerator):
 
 class AbstractWell(org.hipparchus.random.IntRandomGenerator, java.io.Serializable):
     """
-    implements Serializable
-    
     This abstract class implements the WELL class of pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto Matsumoto.
     
     This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto ` Improved Long-Period Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
     
-          - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
-          - serialized
+    Also see:
+        `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`, serialized
     """
     def nextInt(self) -> int:
         """
@@ -1067,7 +1030,7 @@ class AbstractWell(org.hipparchus.random.IntRandomGenerator, java.io.Serializabl
         Returns:
             the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws IllegalArgumentException
+        public int nextInt (int n) throws IllegalArgumentException
         
         Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
@@ -1085,7 +1048,7 @@ class AbstractWell(org.hipparchus.random.IntRandomGenerator, java.io.Serializabl
         
         """
         ...
-    def setSeed(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> None:
+    def setSeed(self, seed: typing.Union[typing.List[int], jpype.JArray]) -> None:
         """
         Reinitialize the generator as if just built with the given int array seed.
         
@@ -1097,7 +1060,7 @@ class AbstractWell(org.hipparchus.random.IntRandomGenerator, java.io.Serializabl
             seed (int[]): the initial seed (32 bits integers array). If null the seed of the generator will be the system time plus the system
                 identity hash code of the instance.
         
-        public void setSeed(int seed)
+        public void setSeed (int seed)
         
         Sets the seed of the underlying random number generator using an int seed.
         
@@ -1108,7 +1071,7 @@ class AbstractWell(org.hipparchus.random.IntRandomGenerator, java.io.Serializabl
         Parameters:
             seed (int): the seed value
         
-        public void setSeed(long seed)
+        public void setSeed (long seed)
         
         Sets the seed of the underlying random number generator using a long seed.
         
@@ -1125,23 +1088,22 @@ class AbstractWell(org.hipparchus.random.IntRandomGenerator, java.io.Serializabl
 
 class ISAACRandom(org.hipparchus.random.IntRandomGenerator, java.io.Serializable):
     """
-    implements Serializable
-    
     A fast cryptographic pseudo-random number generator.
     
     ISAAC (Indirection, Shift, Accumulate, Add, and Count) generates 32-bit random numbers. ISAAC has been designed to be cryptographically secure and is inspired by RC4. Cycles are guaranteed to be at least 2 :sup:`40` values long, and they are 2 :sup:`8295` values long on average. The results are uniformly distributed, unbiased, and unpredictable unless you know the seed.
     
     This code is based (with minor changes and improvements) on the original implementation of the algorithm by Bob Jenkins.
     
-          - ` ISAAC: a fast cryptographic pseudo-random number generator <http://burtleburtle.net/bob/rand/isaacafa.html>`
-          - serialized
+    Also see:
+        ` ISAAC: a fast cryptographic pseudo-random number generator <http://burtleburtle.net/bob/rand/isaacafa.html>`,
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, intArray: typing.Union[typing.List[int], jpype.JArray]): ...
+    def __init__(self, seed: typing.Union[typing.List[int], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, long: int): ...
+    def __init__(self, seed: int): ...
     def nextInt(self) -> int:
         """
         Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
@@ -1153,7 +1115,7 @@ class ISAACRandom(org.hipparchus.random.IntRandomGenerator, java.io.Serializable
         Returns:
             the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws IllegalArgumentException
+        public int nextInt (int n) throws IllegalArgumentException
         
         Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
@@ -1171,7 +1133,7 @@ class ISAACRandom(org.hipparchus.random.IntRandomGenerator, java.io.Serializable
         
         """
         ...
-    def setSeed(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> None:
+    def setSeed(self, seed: typing.Union[typing.List[int], jpype.JArray]) -> None:
         """
         Sets the seed of the underlying random number generator using an int array seed.
         
@@ -1182,7 +1144,7 @@ class ISAACRandom(org.hipparchus.random.IntRandomGenerator, java.io.Serializable
         Parameters:
             seed (int[]): the seed value
         
-        public void setSeed(int seed)
+        public void setSeed (int seed)
         
         Sets the seed of the underlying random number generator using an int seed.
         
@@ -1193,7 +1155,7 @@ class ISAACRandom(org.hipparchus.random.IntRandomGenerator, java.io.Serializable
         Parameters:
             seed (int): the seed value
         
-        public void setSeed(long seed)
+        public void setSeed (long seed)
         
         Sets the seed of the underlying random number generator using a long seed.
         
@@ -1210,11 +1172,10 @@ class ISAACRandom(org.hipparchus.random.IntRandomGenerator, java.io.Serializable
 
 class JDKRandomGenerator(org.hipparchus.random.IntRandomGenerator, java.io.Serializable):
     """
-    implements Serializable
-    
     A RandomGenerator adapter that delegates the random number generation to the standard Random class.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -1234,7 +1195,7 @@ class JDKRandomGenerator(org.hipparchus.random.IntRandomGenerator, java.io.Seria
         
         """
         ...
-    def nextBytes(self, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes]) -> None:
+    def nextBytes(self, bytes: typing.Union[typing.List[int], jpype.JArray, bytes]) -> None:
         """
         Generates random bytes and places them into a user-supplied byte array. The number of random bytes produced is equal to the length of the byte array.
         
@@ -1243,7 +1204,7 @@ class JDKRandomGenerator(org.hipparchus.random.IntRandomGenerator, java.io.Seria
         Parameters:
             bytes (byte[]): the non-null byte array in which to put the random bytes
         
-        public void nextBytes(byte[] bytes, int start, int len)
+        public void nextBytes (byte[] bytes, int start, int len)
         
         Generates random bytes and places them into a user-supplied byte array.
         
@@ -1333,7 +1294,7 @@ class JDKRandomGenerator(org.hipparchus.random.IntRandomGenerator, java.io.Seria
         Returns:
             the next pseudorandom, uniformly distributed long value from this random number generator's sequence
         
-        public long nextLong(long n)
+        public long nextLong (long n)
         
         Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
@@ -1349,7 +1310,7 @@ class JDKRandomGenerator(org.hipparchus.random.IntRandomGenerator, java.io.Seria
         """
         ...
     @typing.overload
-    def setSeed(self, int: int) -> None:
+    def setSeed(self, seed: int) -> None:
         """
         Sets the seed of the underlying random number generator using an int seed.
         
@@ -1382,14 +1343,12 @@ class JDKRandomGenerator(org.hipparchus.random.IntRandomGenerator, java.io.Seria
         """
         ...
     @typing.overload
-    def setSeed(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
+    def setSeed(self, seed: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
     @typing.overload
-    def setSeed(self, long: int) -> None: ...
+    def setSeed(self, seed: int) -> None: ...
 
 class MersenneTwister(org.hipparchus.random.IntRandomGenerator, java.io.Serializable):
     """
-    implements Serializable
-    
     This class implements a powerful pseudo-random number generator developed by Makoto Matsumoto and Takuji Nishimura during 1996-1997.
     
     Caveat: It is recommended to use one of WELL generators rather than the MersenneTwister generator (see ` this paper <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>` for more information).
@@ -1408,16 +1367,17 @@ class MersenneTwister(org.hipparchus.random.IntRandomGenerator, java.io.Serializ
     
         THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, seed: int): ...
     @typing.overload
-    def __init__(self, intArray: typing.Union[typing.List[int], jpype.JArray]): ...
+    def __init__(self, seed: typing.Union[typing.List[int], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, long: int): ...
+    def __init__(self, seed: int): ...
     def nextInt(self) -> int:
         """
         Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
@@ -1429,7 +1389,7 @@ class MersenneTwister(org.hipparchus.random.IntRandomGenerator, java.io.Serializ
         Returns:
             the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws IllegalArgumentException
+        public int nextInt (int n) throws IllegalArgumentException
         
         Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
@@ -1448,7 +1408,7 @@ class MersenneTwister(org.hipparchus.random.IntRandomGenerator, java.io.Serializ
         """
         ...
     @typing.overload
-    def setSeed(self, int: int) -> None:
+    def setSeed(self, seed: int) -> None:
         """
         Reinitialize the generator as if just built with the given int seed.
         
@@ -1482,20 +1442,19 @@ class MersenneTwister(org.hipparchus.random.IntRandomGenerator, java.io.Serializ
         """
         ...
     @typing.overload
-    def setSeed(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
+    def setSeed(self, seed: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
 
 class RandomDataGenerator(org.hipparchus.random.ForwardingRandomGenerator, RandomGenerator, java.io.Serializable):
     """
-    implements RandomGenerator, Serializable
-    
     A class for generating random data.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, long: int): ...
+    def __init__(self, seed: int): ...
     def nextBeta(self, alpha: float, beta: float) -> float:
         """
         Returns the next pseudo-random beta-distributed value with the given shape and scale parameters.
@@ -1511,7 +1470,7 @@ class RandomDataGenerator(org.hipparchus.random.ForwardingRandomGenerator, Rando
         """
         ...
     @typing.overload
-    def nextDeviate(self, realDistribution: org.hipparchus.distribution.RealDistribution) -> float:
+    def nextDeviate(self, dist: org.hipparchus.distribution.RealDistribution) -> float:
         """
         Returns a random deviate from the given distribution.
         
@@ -1533,9 +1492,9 @@ class RandomDataGenerator(org.hipparchus.random.ForwardingRandomGenerator, Rando
         """
         ...
     @typing.overload
-    def nextDeviate(self, integerDistribution: org.hipparchus.distribution.IntegerDistribution) -> int: ...
+    def nextDeviate(self, dist: org.hipparchus.distribution.IntegerDistribution) -> int: ...
     @typing.overload
-    def nextDeviates(self, realDistribution: org.hipparchus.distribution.RealDistribution, int: int) -> typing.MutableSequence[float]:
+    def nextDeviates(self, dist: org.hipparchus.distribution.RealDistribution, size: int) -> typing.MutableSequence[float]:
         """
         Returns an array of random deviates from the given distribution.
         
@@ -1559,7 +1518,7 @@ class RandomDataGenerator(org.hipparchus.random.ForwardingRandomGenerator, Rando
         """
         ...
     @typing.overload
-    def nextDeviates(self, integerDistribution: org.hipparchus.distribution.IntegerDistribution, int2: int) -> typing.MutableSequence[int]: ...
+    def nextDeviates(self, dist: org.hipparchus.distribution.IntegerDistribution, size: int) -> typing.MutableSequence[int]: ...
     def nextExponential(self, mean: float) -> float:
         """
         Returns the next pseudo-random, exponentially distributed deviate.
@@ -1610,7 +1569,7 @@ class RandomDataGenerator(org.hipparchus.random.ForwardingRandomGenerator, Rando
         
         """
         ...
-    def nextInt(self, int: int, int2: int) -> int:
+    def nextInt(self, lower: int, upper: int) -> int:
         """
         Returns a uniformly distributed random integer between lower and upper (inclusive).
         
@@ -1635,7 +1594,7 @@ class RandomDataGenerator(org.hipparchus.random.ForwardingRandomGenerator, Rando
         Returns:
             the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n)
+        public int nextInt (int n)
         
         Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
@@ -1664,7 +1623,7 @@ class RandomDataGenerator(org.hipparchus.random.ForwardingRandomGenerator, Rando
         
         """
         ...
-    def nextLong(self, long: int, long2: int) -> int:
+    def nextLong(self, lower: int, upper: int) -> int:
         """
         Returns a uniformly distributed random long integer between lower and upper (inclusive).
         
@@ -1687,7 +1646,7 @@ class RandomDataGenerator(org.hipparchus.random.ForwardingRandomGenerator, Rando
         Returns:
             the next pseudorandom, uniformly distributed long value from this random number generator's sequence
         
-        public long nextLong(long n)
+        public long nextLong (long n)
         
         Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
@@ -1832,17 +1791,17 @@ class Well1024a(AbstractWell):
     
     This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
     
-          - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
-          - serialized
+    Also see:
+        `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`, serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, seed: int): ...
     @typing.overload
-    def __init__(self, intArray: typing.Union[typing.List[int], jpype.JArray]): ...
+    def __init__(self, seed: typing.Union[typing.List[int], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, long: int): ...
+    def __init__(self, seed: int): ...
     def nextInt(self) -> int:
         """
         Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
@@ -1854,7 +1813,7 @@ class Well1024a(AbstractWell):
         Returns:
             the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws IllegalArgumentException
+        public int nextInt (int n) throws IllegalArgumentException
         
         Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
@@ -1879,17 +1838,17 @@ class Well19937a(AbstractWell):
     
     This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
     
-          - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
-          - serialized
+    Also see:
+        `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`, serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, seed: int): ...
     @typing.overload
-    def __init__(self, intArray: typing.Union[typing.List[int], jpype.JArray]): ...
+    def __init__(self, seed: typing.Union[typing.List[int], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, long: int): ...
+    def __init__(self, seed: int): ...
     def nextInt(self) -> int:
         """
         Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
@@ -1901,7 +1860,7 @@ class Well19937a(AbstractWell):
         Returns:
             the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws IllegalArgumentException
+        public int nextInt (int n) throws IllegalArgumentException
         
         Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
@@ -1926,17 +1885,17 @@ class Well19937c(AbstractWell):
     
     This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
     
-          - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
-          - serialized
+    Also see:
+        `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`, serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, seed: int): ...
     @typing.overload
-    def __init__(self, intArray: typing.Union[typing.List[int], jpype.JArray]): ...
+    def __init__(self, seed: typing.Union[typing.List[int], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, long: int): ...
+    def __init__(self, seed: int): ...
     def nextInt(self) -> int:
         """
         Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
@@ -1948,7 +1907,7 @@ class Well19937c(AbstractWell):
         Returns:
             the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws IllegalArgumentException
+        public int nextInt (int n) throws IllegalArgumentException
         
         Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
@@ -1973,17 +1932,17 @@ class Well44497a(AbstractWell):
     
     This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
     
-          - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
-          - serialized
+    Also see:
+        `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`, serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, seed: int): ...
     @typing.overload
-    def __init__(self, intArray: typing.Union[typing.List[int], jpype.JArray]): ...
+    def __init__(self, seed: typing.Union[typing.List[int], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, long: int): ...
+    def __init__(self, seed: int): ...
     def nextInt(self) -> int:
         """
         Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
@@ -1995,7 +1954,7 @@ class Well44497a(AbstractWell):
         Returns:
             the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws IllegalArgumentException
+        public int nextInt (int n) throws IllegalArgumentException
         
         Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
@@ -2020,17 +1979,17 @@ class Well44497b(AbstractWell):
     
     This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
     
-          - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
-          - serialized
+    Also see:
+        `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`, serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, seed: int): ...
     @typing.overload
-    def __init__(self, intArray: typing.Union[typing.List[int], jpype.JArray]): ...
+    def __init__(self, seed: typing.Union[typing.List[int], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, long: int): ...
+    def __init__(self, seed: int): ...
     def nextInt(self) -> int:
         """
         Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
@@ -2042,7 +2001,7 @@ class Well44497b(AbstractWell):
         Returns:
             the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws IllegalArgumentException
+        public int nextInt (int n) throws IllegalArgumentException
         
         Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         
@@ -2067,17 +2026,17 @@ class Well512a(AbstractWell):
     
     This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
     
-          - `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`
-          - serialized
+    Also see:
+        `WELL Random number generator <http://www.iro.umontreal.ca/~panneton/WELLRNG.html>`, serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, seed: int): ...
     @typing.overload
-    def __init__(self, intArray: typing.Union[typing.List[int], jpype.JArray]): ...
+    def __init__(self, seed: typing.Union[typing.List[int], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, long: int): ...
+    def __init__(self, seed: int): ...
     def nextInt(self) -> int:
         """
         Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.
@@ -2089,7 +2048,7 @@ class Well512a(AbstractWell):
         Returns:
             the next pseudorandom, uniformly distributed int value from this random number generator's sequence
         
-        public int nextInt(int n) throws IllegalArgumentException
+        public int nextInt (int n) throws IllegalArgumentException
         
         Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive), drawn from this random number generator's sequence.
         

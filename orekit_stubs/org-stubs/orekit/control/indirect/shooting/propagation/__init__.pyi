@@ -338,9 +338,9 @@ class ShootingPropagationSettings:
         FieldNumericalPropagator
     """
     @typing.overload
-    def __init__(self, list: java.util.List[org.orekit.forces.ForceModel], adjointDynamicsProvider: AdjointDynamicsProvider, shootingIntegrationSettings: typing.Union[ShootingIntegrationSettings, typing.Callable]): ...
+    def __init__(self, forceModels: java.util.List[org.orekit.forces.ForceModel], adjointDynamicsProvider: AdjointDynamicsProvider, integrationSettings: typing.Union[ShootingIntegrationSettings, typing.Callable]): ...
     @typing.overload
-    def __init__(self, list: java.util.List[org.orekit.forces.ForceModel], adjointDynamicsProvider: AdjointDynamicsProvider, frame: org.orekit.frames.Frame, shootingIntegrationSettings: typing.Union[ShootingIntegrationSettings, typing.Callable], attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
+    def __init__(self, forceModels: java.util.List[org.orekit.forces.ForceModel], adjointDynamicsProvider: AdjointDynamicsProvider, propagationFrame: org.orekit.frames.Frame, integrationSettings: typing.Union[ShootingIntegrationSettings, typing.Callable], attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
     def getAdjointDynamicsProvider(self) -> AdjointDynamicsProvider:
         """
         Getter for adjoint dynamics provider.
@@ -535,7 +535,7 @@ class PythonAdjointDynamicsProvider(AdjointDynamicsProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

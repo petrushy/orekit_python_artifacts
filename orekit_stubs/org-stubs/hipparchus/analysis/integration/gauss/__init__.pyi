@@ -22,9 +22,9 @@ class FieldGaussIntegrator(typing.Generic[_FieldGaussIntegrator__T]):
         2.0
     """
     @typing.overload
-    def __init__(self, tArray: typing.Union[typing.List[_FieldGaussIntegrator__T], jpype.JArray], tArray2: typing.Union[typing.List[_FieldGaussIntegrator__T], jpype.JArray]): ...
+    def __init__(self, points: typing.Union[typing.List[_FieldGaussIntegrator__T], jpype.JArray], weights: typing.Union[typing.List[_FieldGaussIntegrator__T], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, pair: org.hipparchus.util.Pair[typing.Union[typing.List[_FieldGaussIntegrator__T], jpype.JArray], typing.Union[typing.List[_FieldGaussIntegrator__T], jpype.JArray]]): ...
+    def __init__(self, pointsAndWeights: org.hipparchus.util.Pair[typing.Union[typing.List[_FieldGaussIntegrator__T], jpype.JArray], typing.Union[typing.List[_FieldGaussIntegrator__T], jpype.JArray]]): ...
     def getNumberOfPoints(self) -> int:
         """
         Get order of the integration rule.
@@ -120,9 +120,9 @@ class FieldGaussIntegratorFactory(typing.Generic[_FieldGaussIntegratorFactory__T
         """
         ...
     @typing.overload
-    def legendre(self, int: int) -> FieldGaussIntegrator[_FieldGaussIntegratorFactory__T]: ...
+    def legendre(self, numberOfPoints: int) -> FieldGaussIntegrator[_FieldGaussIntegratorFactory__T]: ...
     @typing.overload
-    def legendre(self, int: int, t: _FieldGaussIntegratorFactory__T, t2: _FieldGaussIntegratorFactory__T) -> FieldGaussIntegrator[_FieldGaussIntegratorFactory__T]: ...
+    def legendre(self, numberOfPoints: int, lowerBound: _FieldGaussIntegratorFactory__T, upperBound: _FieldGaussIntegratorFactory__T) -> FieldGaussIntegrator[_FieldGaussIntegratorFactory__T]: ...
 
 _FieldRuleFactory__T = typing.TypeVar('_FieldRuleFactory__T', bound=org.hipparchus.FieldElement)  # <T>
 class FieldRuleFactory(typing.Generic[_FieldRuleFactory__T]):
@@ -156,9 +156,9 @@ class GaussIntegrator:
     Class that implements the Gaussian rule for integrate a weighted function.
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, points: typing.Union[typing.List[float], jpype.JArray], weights: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, pair: org.hipparchus.util.Pair[typing.Union[typing.List[float], jpype.JArray], typing.Union[typing.List[float], jpype.JArray]]): ...
+    def __init__(self, pointsAndWeights: org.hipparchus.util.Pair[typing.Union[typing.List[float], jpype.JArray], typing.Union[typing.List[float], jpype.JArray]]): ...
     def getNumberOfPoints(self) -> int:
         """
         Get the order of the integration rule.
@@ -217,15 +217,15 @@ class GaussIntegratorFactory:
     """
     Number of digits for Legendre high precision.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, decimalDigits: int): ...
     def hermite(self, numberOfPoints: int) -> 'SymmetricGaussIntegrator':
         """
         Creates a Gauss-Hermite integrator of the given order. The call to the integrate method will perform a weighted integration on the interval \([-\infty, +\infty]\): the computed value is the improper integral of \(e^{-x^2}f(x)\) where \(f(x)\) is the function passed to the integrate method.
@@ -253,7 +253,7 @@ class GaussIntegratorFactory:
         """
         ...
     @typing.overload
-    def legendre(self, int: int) -> GaussIntegrator:
+    def legendre(self, numberOfPoints: int) -> GaussIntegrator:
         """
         Creates a Gauss-Legendre integrator of the given order. The call to the integrate method will perform an integration on the natural interval [-1 , 1].
         
@@ -263,7 +263,7 @@ class GaussIntegratorFactory:
         Returns:
             a Gauss-Legendre integrator.
         
-        public GaussIntegrator legendre(int numberOfPoints, double lowerBound, double upperBound) throws MathIllegalArgumentException
+        public GaussIntegrator legendre (int numberOfPoints, double lowerBound, double upperBound) throws MathIllegalArgumentException
         
         Creates a Gauss-Legendre integrator of the given order. The call to the integrate method will perform an integration on the given interval.
         
@@ -282,11 +282,11 @@ class GaussIntegratorFactory:
         """
         ...
     @typing.overload
-    def legendre(self, int: int, double: float, double2: float) -> GaussIntegrator: ...
+    def legendre(self, numberOfPoints: int, lowerBound: float, upperBound: float) -> GaussIntegrator: ...
     @typing.overload
-    def legendreHighPrecision(self, int: int) -> GaussIntegrator: ...
+    def legendreHighPrecision(self, numberOfPoints: int) -> GaussIntegrator: ...
     @typing.overload
-    def legendreHighPrecision(self, int: int, double: float, double2: float) -> GaussIntegrator: ...
+    def legendreHighPrecision(self, numberOfPoints: int, lowerBound: float, upperBound: float) -> GaussIntegrator: ...
 
 class RuleFactory:
     """
@@ -316,8 +316,6 @@ class RuleFactory:
 
 class AbstractRuleFactory(RuleFactory):
     """
-    implements RuleFactory
-    
     Base class for rules that determines the integration nodes and their weights. Subclasses must implement the computeRule method.
     
     Since:
@@ -337,8 +335,6 @@ class AbstractRuleFactory(RuleFactory):
         
         Raises:
             MathIllegalArgumentException: if numberOfPoints < 1.
-            MathIllegalArgumentException: if numberOfPoints > 1000.
-            MathIllegalArgumentException: if the elements of the rule pair do not have the same length.
         
         
         """
@@ -347,8 +343,6 @@ class AbstractRuleFactory(RuleFactory):
 _FieldAbstractRuleFactory__T = typing.TypeVar('_FieldAbstractRuleFactory__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAbstractRuleFactory(FieldRuleFactory[_FieldAbstractRuleFactory__T], typing.Generic[_FieldAbstractRuleFactory__T]):
     """
-    implements FieldRuleFactory<T>
-    
     Base class for rules that determines the integration nodes and their weights. Subclasses must implement the computeRule method.
     
     Since:
@@ -378,8 +372,6 @@ class FieldAbstractRuleFactory(FieldRuleFactory[_FieldAbstractRuleFactory__T], t
         
         Raises:
             MathIllegalArgumentException: if numberOfPoints < 1.
-            MathIllegalArgumentException: if numberOfPoints > 1000.
-            MathIllegalArgumentException: if the elements of the rule pair do not have the same length.
         
         
         """
@@ -394,9 +386,9 @@ class SymmetricFieldGaussIntegrator(FieldGaussIntegrator[_SymmetricFieldGaussInt
         2.0
     """
     @typing.overload
-    def __init__(self, tArray: typing.Union[typing.List[_SymmetricFieldGaussIntegrator__T], jpype.JArray], tArray2: typing.Union[typing.List[_SymmetricFieldGaussIntegrator__T], jpype.JArray]): ...
+    def __init__(self, points: typing.Union[typing.List[_SymmetricFieldGaussIntegrator__T], jpype.JArray], weights: typing.Union[typing.List[_SymmetricFieldGaussIntegrator__T], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, pair: org.hipparchus.util.Pair[typing.Union[typing.List[_SymmetricFieldGaussIntegrator__T], jpype.JArray], typing.Union[typing.List[_SymmetricFieldGaussIntegrator__T], jpype.JArray]]): ...
+    def __init__(self, pointsAndWeights: org.hipparchus.util.Pair[typing.Union[typing.List[_SymmetricFieldGaussIntegrator__T], jpype.JArray], typing.Union[typing.List[_SymmetricFieldGaussIntegrator__T], jpype.JArray]]): ...
     def integrate(self, f: typing.Union[org.hipparchus.analysis.CalculusFieldUnivariateFunction[_SymmetricFieldGaussIntegrator__T], typing.Callable[[_SymmetricFieldGaussIntegrator__T], _SymmetricFieldGaussIntegrator__T]]) -> _SymmetricFieldGaussIntegrator__T:
         """
         Returns an estimate of the integral of f(x) * w(x), where w is a weight function that depends on the actual flavor of the Gauss integration scheme. The algorithm uses the points and associated weights, as passed to the .
@@ -418,9 +410,9 @@ class SymmetricGaussIntegrator(GaussIntegrator):
     This class's implements integrate method assuming that the integral is symmetric about 0. This allows to reduce numerical errors.
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, points: typing.Union[typing.List[float], jpype.JArray], weights: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, pair: org.hipparchus.util.Pair[typing.Union[typing.List[float], jpype.JArray], typing.Union[typing.List[float], jpype.JArray]]): ...
+    def __init__(self, pointsAndWeights: org.hipparchus.util.Pair[typing.Union[typing.List[float], jpype.JArray], typing.Union[typing.List[float], jpype.JArray]]): ...
     def integrate(self, f: typing.Union[org.hipparchus.analysis.UnivariateFunction, typing.Callable]) -> float:
         """
         Returns an estimate of the integral of f(x) * w(x), where w is a weight function that depends on the actual flavor of the Gauss integration scheme. The algorithm uses the points and associated weights, as passed to the .
@@ -489,7 +481,8 @@ class FieldLaguerreRuleFactory(FieldAbstractRuleFactory[_FieldLaguerreRuleFactor
     Since:
         2.0
     
-          - `Gauss-Laguerre quadrature (Wikipedia) <http://en.wikipedia.org/wiki/Gauss%E2%80%93Laguerre_quadrature>`
+    Also see:
+        `Gauss-Laguerre quadrature (Wikipedia) <http://en.wikipedia.org/wiki/Gauss%E2%80%93Laguerre_quadrature>`
     """
     def __init__(self, field: org.hipparchus.Field[_FieldLaguerreRuleFactory__T]):
         """
@@ -582,7 +575,8 @@ class LaguerreRuleFactory(AbstractRuleFactory):
     """
     Factory that creates Gauss-type quadrature rule using Laguerre polynomials.
     
-          - `Gauss-Laguerre quadrature (Wikipedia) <http://en.wikipedia.org/wiki/Gauss%E2%80%93Laguerre_quadrature>`
+    Also see:
+        `Gauss-Laguerre quadrature (Wikipedia) <http://en.wikipedia.org/wiki/Gauss%E2%80%93Laguerre_quadrature>`
     """
     def __init__(self):
         """

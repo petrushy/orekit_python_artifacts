@@ -60,9 +60,9 @@ class AbstractStateCovarianceInterpolator(org.orekit.time.AbstractTimeInterpolat
     
     """
     @typing.overload
-    def __init__(self, int: int, double: float, timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], frame: org.orekit.frames.Frame, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType): ...
+    def __init__(self, interpolationPoints: int, extrapolationThreshold: float, orbitInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], outFrame: org.orekit.frames.Frame, outOrbitType: org.orekit.orbits.OrbitType, outPositionAngleType: org.orekit.orbits.PositionAngleType): ...
     @typing.overload
-    def __init__(self, int: int, double: float, timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], lOFType: org.orekit.frames.LOFType): ...
+    def __init__(self, interpolationPoints: int, extrapolationThreshold: float, orbitInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], outLOF: org.orekit.frames.LOFType): ...
     def getOrbitInterpolator(self) -> org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit]:
         """
         Get orbit interpolator.
@@ -113,13 +113,28 @@ class AbstractStateCovarianceInterpolator(org.orekit.time.AbstractTimeInterpolat
         
         """
         ...
-    def getSubInterpolators(self) -> java.util.List[org.orekit.time.TimeInterpolator[org.orekit.time.TimeStamped]]: ...
+    def getSubInterpolators(self) -> java.util.List[org.orekit.time.TimeInterpolator[org.orekit.time.TimeStamped]]:
+        """
+        Get all lowest level interpolators implemented by this instance, otherwise return a list with this instance only.
+        
+        An example would be the spacecraft state interpolator which can use different interpolators for each of its attributes (orbit, absolute position-velocity-acceleration coordinates, mass...). In this case, it would return the list of all of these interpolators (or possibly all of their sub-interpolators if they were to use multiple interpolators themselves).
+        
+        Specified by: getSubInterpolators in interface TimeInterpolator
+        
+        Overrides: getSubInterpolators in class AbstractTimeInterpolator
+        
+        Returns:
+            list of interpolators
+        
+        
+        """
+        ...
     @typing.overload
     def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.TimeStamped], typing.Sequence[org.orekit.time.TimeStamped], typing.Set[org.orekit.time.TimeStamped]]) -> org.orekit.time.TimeStamped: ...
     @typing.overload
     def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream[org.orekit.time.TimeStamped]) -> org.orekit.time.TimeStamped: ...
     @typing.overload
-    def interpolate(self, abstractTimeInterpolator: org.orekit.time.AbstractTimeInterpolator.InterpolationData) -> org.orekit.time.TimeStampedPair[org.orekit.orbits.Orbit, 'StateCovariance']: ...
+    def interpolate(self, interpolationData: org.orekit.time.AbstractTimeInterpolator.InterpolationData) -> org.orekit.time.TimeStampedPair[org.orekit.orbits.Orbit, 'StateCovariance']: ...
 
 _AdditionalDataProvider__T = typing.TypeVar('_AdditionalDataProvider__T')  # <T>
 class AdditionalDataProvider(typing.Generic[_AdditionalDataProvider__T]):
@@ -288,7 +303,7 @@ class CartesianToleranceProvider:
         """
         ...
     @typing.overload
-    def getTolerances(self, fieldCartesianOrbit: org.orekit.orbits.FieldCartesianOrbit[_getTolerances_3__T]) -> typing.MutableSequence[typing.MutableSequence[float]]:
+    def getTolerances(self, cartesianOrbit: org.orekit.orbits.FieldCartesianOrbit[_getTolerances_3__T]) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
         Retrieve the integration tolerances given a reference Cartesian orbit.
         
@@ -315,7 +330,7 @@ class CartesianToleranceProvider:
     def getTolerances(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_getTolerances_5__T]) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
     @staticmethod
-    def of(double: float) -> 'CartesianToleranceProvider':
+    def of(dP: float) -> 'CartesianToleranceProvider':
         """
         Build a provider based on expected errors for position, velocity and mass respectively.
         
@@ -344,7 +359,7 @@ class CartesianToleranceProvider:
         ...
     @typing.overload
     @staticmethod
-    def of(double: float, double2: float, double3: float) -> 'CartesianToleranceProvider': ...
+    def of(dP: float, dV: float, dM: float) -> 'CartesianToleranceProvider': ...
 
 class EphemerisGenerator:
     """
@@ -698,7 +713,22 @@ class FieldPropagator(org.orekit.utils.FieldPVCoordinatesProvider[_FieldPropagat
         
         """
         ...
-    def getVelocity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldPropagator__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldPropagator__T]: ...
+    def getVelocity(self, date: org.orekit.time.FieldAbsoluteDate[_FieldPropagator__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldPropagator__T]:
+        """
+        Get the velocity of the body in the selected frame.
+        
+        Specified by: getVelocity in interface FieldPVCoordinatesProvider
+        
+        Parameters:
+            date (FieldAbsoluteDate<FieldPropagator> date): current date
+            frame (Frame): the frame where to define the velocity
+        
+        Returns:
+            velocity of the body (m/s)
+        
+        
+        """
+        ...
     def isAdditionalDataManaged(self, name: str) -> bool:
         """
         Check if an additional data is managed.
@@ -717,9 +747,9 @@ class FieldPropagator(org.orekit.utils.FieldPVCoordinatesProvider[_FieldPropagat
         """
         ...
     @typing.overload
-    def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldPropagator__T]) -> 'FieldSpacecraftState'[_FieldPropagator__T]: ...
+    def propagate(self, target: org.orekit.time.FieldAbsoluteDate[_FieldPropagator__T]) -> 'FieldSpacecraftState'[_FieldPropagator__T]: ...
     @typing.overload
-    def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldPropagator__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_FieldPropagator__T]) -> 'FieldSpacecraftState'[_FieldPropagator__T]: ...
+    def propagate(self, start: org.orekit.time.FieldAbsoluteDate[_FieldPropagator__T], target: org.orekit.time.FieldAbsoluteDate[_FieldPropagator__T]) -> 'FieldSpacecraftState'[_FieldPropagator__T]: ...
     def resetInitialState(self, state: 'FieldSpacecraftState'[_FieldPropagator__T]) -> None:
         """
         Reset the propagator initial state.
@@ -741,9 +771,9 @@ class FieldPropagator(org.orekit.utils.FieldPVCoordinatesProvider[_FieldPropagat
         """
         ...
     @typing.overload
-    def setStepHandler(self, t: _FieldPropagator__T, fieldOrekitFixedStepHandler: typing.Union[org.orekit.propagation.sampling.FieldOrekitFixedStepHandler[_FieldPropagator__T], typing.Callable[['FieldSpacecraftState'[org.hipparchus.CalculusFieldElement]], None]]) -> None: ...
+    def setStepHandler(self, h: _FieldPropagator__T, handler: typing.Union[org.orekit.propagation.sampling.FieldOrekitFixedStepHandler[_FieldPropagator__T], typing.Callable[['FieldSpacecraftState'[org.hipparchus.CalculusFieldElement]], None]]) -> None: ...
     @typing.overload
-    def setStepHandler(self, fieldOrekitStepHandler: typing.Union[org.orekit.propagation.sampling.FieldOrekitStepHandler[_FieldPropagator__T], typing.Callable[[org.orekit.propagation.sampling.FieldOrekitStepInterpolator[org.hipparchus.CalculusFieldElement]], None]]) -> None: ...
+    def setStepHandler(self, handler: typing.Union[org.orekit.propagation.sampling.FieldOrekitStepHandler[_FieldPropagator__T], typing.Callable[[org.orekit.propagation.sampling.FieldOrekitStepInterpolator[org.hipparchus.CalculusFieldElement]], None]]) -> None: ...
 
 _FieldSpacecraftState__T = typing.TypeVar('_FieldSpacecraftState__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftState__T], org.orekit.time.FieldTimeShiftable['FieldSpacecraftState'[_FieldSpacecraftState__T], _FieldSpacecraftState__T], typing.Generic[_FieldSpacecraftState__T]):
@@ -1015,11 +1045,11 @@ class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftStat
     @typing.overload
     def getPVCoordinates(self) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldSpacecraftState__T]: ...
     @typing.overload
-    def getPVCoordinates(self, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldSpacecraftState__T]: ...
+    def getPVCoordinates(self, outputFrame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldSpacecraftState__T]: ...
     @typing.overload
     def getPosition(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldSpacecraftState__T]: ...
     @typing.overload
-    def getPosition(self, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldSpacecraftState__T]: ...
+    def getPosition(self, outputFrame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldSpacecraftState__T]: ...
     def getVelocity(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldSpacecraftState__T]:
         """
         Get the velocity in state definition frame.
@@ -1084,11 +1114,11 @@ class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftStat
         """
         ...
     @typing.overload
-    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> _FieldSpacecraftState__T: ...
+    def shiftedBy(self, dt: org.orekit.time.TimeOffset) -> _FieldSpacecraftState__T: ...
     @typing.overload
-    def shiftedBy(self, double: float) -> 'FieldSpacecraftState'[_FieldSpacecraftState__T]: ...
+    def shiftedBy(self, dt: float) -> 'FieldSpacecraftState'[_FieldSpacecraftState__T]: ...
     @typing.overload
-    def shiftedBy(self, t: _FieldSpacecraftState__T) -> 'FieldSpacecraftState'[_FieldSpacecraftState__T]: ...
+    def shiftedBy(self, dt: _FieldSpacecraftState__T) -> 'FieldSpacecraftState'[_FieldSpacecraftState__T]: ...
     def toSpacecraftState(self) -> 'SpacecraftState':
         """
         To convert a FieldSpacecraftState instance into a SpacecraftState instance.
@@ -1212,17 +1242,17 @@ class FieldSpacecraftStateInterpolator(org.orekit.time.AbstractFieldTimeInterpol
     @typing.overload
     def __init__(self, int: int, double: float, frame: org.orekit.frames.Frame): ...
     @typing.overload
-    def __init__(self, int: int, double: float, frame: org.orekit.frames.Frame, frame2: org.orekit.frames.Frame): ...
+    def __init__(self, interpolationPoints: int, extrapolationThreshold: float, outputFrame: org.orekit.frames.Frame, attitudeReferenceFrame: org.orekit.frames.Frame): ...
     @typing.overload
-    def __init__(self, int: int, double: float, frame: org.orekit.frames.Frame, frame2: org.orekit.frames.Frame, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter): ...
+    def __init__(self, interpolationPoints: int, extrapolationThreshold: float, outputFrame: org.orekit.frames.Frame, attitudeReferenceFrame: org.orekit.frames.Frame, pvaFilter: org.orekit.utils.CartesianDerivativesFilter, angularFilter: org.orekit.utils.AngularDerivativesFilter): ...
     @typing.overload
-    def __init__(self, int: int, double: float, frame: org.orekit.frames.Frame, fieldTimeInterpolator: org.orekit.time.FieldTimeInterpolator[org.orekit.orbits.FieldOrbit[_FieldSpacecraftStateInterpolator__KK], _FieldSpacecraftStateInterpolator__KK], fieldTimeInterpolator2: org.orekit.time.FieldTimeInterpolator[org.orekit.utils.FieldAbsolutePVCoordinates[_FieldSpacecraftStateInterpolator__KK], _FieldSpacecraftStateInterpolator__KK], fieldTimeInterpolator3: org.orekit.time.FieldTimeInterpolator[org.orekit.time.TimeStampedField[_FieldSpacecraftStateInterpolator__KK], _FieldSpacecraftStateInterpolator__KK], fieldTimeInterpolator4: org.orekit.time.FieldTimeInterpolator[org.orekit.attitudes.FieldAttitude[_FieldSpacecraftStateInterpolator__KK], _FieldSpacecraftStateInterpolator__KK], fieldTimeInterpolator5: org.orekit.time.FieldTimeInterpolator[org.orekit.time.TimeStampedField[_FieldSpacecraftStateInterpolator__KK], _FieldSpacecraftStateInterpolator__KK]): ...
+    def __init__(self, interpolationPoints: int, extrapolationThreshold: float, outputFrame: org.orekit.frames.Frame, orbitInterpolator: org.orekit.time.FieldTimeInterpolator[org.orekit.orbits.FieldOrbit[_FieldSpacecraftStateInterpolator__KK], _FieldSpacecraftStateInterpolator__KK], absPVAInterpolator: org.orekit.time.FieldTimeInterpolator[org.orekit.utils.FieldAbsolutePVCoordinates[_FieldSpacecraftStateInterpolator__KK], _FieldSpacecraftStateInterpolator__KK], massInterpolator: org.orekit.time.FieldTimeInterpolator[org.orekit.time.TimeStampedField[_FieldSpacecraftStateInterpolator__KK], _FieldSpacecraftStateInterpolator__KK], attitudeInterpolator: org.orekit.time.FieldTimeInterpolator[org.orekit.attitudes.FieldAttitude[_FieldSpacecraftStateInterpolator__KK], _FieldSpacecraftStateInterpolator__KK], additionalStateInterpolator: org.orekit.time.FieldTimeInterpolator[org.orekit.time.TimeStampedField[_FieldSpacecraftStateInterpolator__KK], _FieldSpacecraftStateInterpolator__KK]): ...
     @typing.overload
-    def __init__(self, int: int, frame: org.orekit.frames.Frame): ...
+    def __init__(self, interpolationPoints: int, outputFrame: org.orekit.frames.Frame): ...
     @typing.overload
     def __init__(self, int: int, frame: org.orekit.frames.Frame, frame2: org.orekit.frames.Frame): ...
     @typing.overload
-    def __init__(self, frame: org.orekit.frames.Frame): ...
+    def __init__(self, outputFrame: org.orekit.frames.Frame): ...
     def getAbsPVAInterpolator(self) -> java.util.Optional[org.orekit.time.FieldTimeInterpolator[org.orekit.utils.FieldAbsolutePVCoordinates[_FieldSpacecraftStateInterpolator__KK], _FieldSpacecraftStateInterpolator__KK]]:
         """
         Get absolute position-velocity-acceleration interpolator.
@@ -1315,13 +1345,13 @@ class FieldSpacecraftStateInterpolator(org.orekit.time.AbstractFieldTimeInterpol
         """
         ...
     @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.FieldTimeStamped], typing.Sequence[org.orekit.time.FieldTimeStamped], typing.Set[org.orekit.time.FieldTimeStamped]]) -> org.orekit.time.FieldTimeStamped: ...
+    def interpolate(self, interpolationDate: org.orekit.time.AbsoluteDate, sample: typing.Union[java.util.Collection[org.orekit.time.FieldTimeStamped], typing.Sequence[org.orekit.time.FieldTimeStamped], typing.Set[org.orekit.time.FieldTimeStamped]]) -> org.orekit.time.FieldTimeStamped: ...
     @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream[org.orekit.time.FieldTimeStamped]) -> org.orekit.time.FieldTimeStamped: ...
+    def interpolate(self, interpolationDate: org.orekit.time.AbsoluteDate, sample: java.util.stream.Stream[org.orekit.time.FieldTimeStamped]) -> org.orekit.time.FieldTimeStamped: ...
     @typing.overload
-    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldSpacecraftStateInterpolator__KK], collection: typing.Union[java.util.Collection[FieldSpacecraftState[_FieldSpacecraftStateInterpolator__KK]], typing.Sequence[FieldSpacecraftState[_FieldSpacecraftStateInterpolator__KK]], typing.Set[FieldSpacecraftState[_FieldSpacecraftStateInterpolator__KK]]]) -> FieldSpacecraftState[_FieldSpacecraftStateInterpolator__KK]: ...
+    def interpolate(self, interpolationDate: org.orekit.time.FieldAbsoluteDate[_FieldSpacecraftStateInterpolator__KK], sample: typing.Union[java.util.Collection[FieldSpacecraftState[_FieldSpacecraftStateInterpolator__KK]], typing.Sequence[FieldSpacecraftState[_FieldSpacecraftStateInterpolator__KK]], typing.Set[FieldSpacecraftState[_FieldSpacecraftStateInterpolator__KK]]]) -> FieldSpacecraftState[_FieldSpacecraftStateInterpolator__KK]: ...
     @typing.overload
-    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldSpacecraftStateInterpolator__KK], stream: java.util.stream.Stream[org.orekit.time.FieldTimeStamped]) -> org.orekit.time.FieldTimeStamped: ...
+    def interpolate(self, interpolationDate: org.orekit.time.FieldAbsoluteDate[_FieldSpacecraftStateInterpolator__KK], sample: java.util.stream.Stream[org.orekit.time.FieldTimeStamped]) -> org.orekit.time.FieldTimeStamped: ...
 
 _FieldStateCovariance__T = typing.TypeVar('_FieldStateCovariance__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldStateCovariance(org.orekit.time.FieldTimeStamped[_FieldStateCovariance__T], typing.Generic[_FieldStateCovariance__T]):
@@ -1338,9 +1368,9 @@ class FieldStateCovariance(org.orekit.time.FieldTimeStamped[_FieldStateCovarianc
         12.0
     """
     @typing.overload
-    def __init__(self, fieldMatrix: org.hipparchus.linear.FieldMatrix[_FieldStateCovariance__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldStateCovariance__T], frame: org.orekit.frames.Frame, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType): ...
+    def __init__(self, orbitalCovariance: org.hipparchus.linear.FieldMatrix[_FieldStateCovariance__T], epoch: org.orekit.time.FieldAbsoluteDate[_FieldStateCovariance__T], covarianceFrame: org.orekit.frames.Frame, orbitType: org.orekit.orbits.OrbitType, angleType: org.orekit.orbits.PositionAngleType): ...
     @typing.overload
-    def __init__(self, fieldMatrix: org.hipparchus.linear.FieldMatrix[_FieldStateCovariance__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldStateCovariance__T], lOF: org.orekit.frames.LOF): ...
+    def __init__(self, orbitalCovariance: org.hipparchus.linear.FieldMatrix[_FieldStateCovariance__T], epoch: org.orekit.time.FieldAbsoluteDate[_FieldStateCovariance__T], lof: org.orekit.frames.LOF): ...
     @typing.overload
     def changeCovarianceFrame(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_FieldStateCovariance__T], frame: org.orekit.frames.Frame) -> 'FieldStateCovariance'[_FieldStateCovariance__T]: ...
     @typing.overload
@@ -1893,7 +1923,22 @@ class Propagator(org.orekit.utils.PVCoordinatesProvider):
         
         """
         ...
-    def getVelocity(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def getVelocity(self, date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+        Get the velocity of the body in the selected frame.
+        
+        Specified by: getVelocity in interface PVCoordinatesProvider
+        
+        Parameters:
+            date (AbsoluteDate): current date
+            frame (Frame): the frame where to define the velocity
+        
+        Returns:
+            velocity of the body (m/s)
+        
+        
+        """
+        ...
     def isAdditionalDataManaged(self, name: str) -> bool:
         """
         Check if an additional data is managed.
@@ -1912,7 +1957,7 @@ class Propagator(org.orekit.utils.PVCoordinatesProvider):
         """
         ...
     @typing.overload
-    def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'SpacecraftState':
+    def propagate(self, target: org.orekit.time.AbsoluteDate) -> 'SpacecraftState':
         """
         Propagate towards a target date.
         
@@ -1939,7 +1984,7 @@ class Propagator(org.orekit.utils.PVCoordinatesProvider):
         """
         ...
     @typing.overload
-    def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> 'SpacecraftState': ...
+    def propagate(self, start: org.orekit.time.AbsoluteDate, target: org.orekit.time.AbsoluteDate) -> 'SpacecraftState': ...
     def resetInitialState(self, state: 'SpacecraftState') -> None:
         """
         Reset the propagator initial state.
@@ -2046,9 +2091,9 @@ class PropagatorsParallelizer:
         9.0
     """
     @typing.overload
-    def __init__(self, list: java.util.List[Propagator], double: float, multiSatFixedStepHandler: typing.Union[org.orekit.propagation.sampling.MultiSatFixedStepHandler, typing.Callable]): ...
+    def __init__(self, propagators: java.util.List[Propagator], h: float, globalHandler: typing.Union[org.orekit.propagation.sampling.MultiSatFixedStepHandler, typing.Callable]): ...
     @typing.overload
-    def __init__(self, list: java.util.List[Propagator], multiSatStepHandler: typing.Union[org.orekit.propagation.sampling.MultiSatStepHandler, typing.Callable]): ...
+    def __init__(self, propagators: java.util.List[Propagator], globalHandler: typing.Union[org.orekit.propagation.sampling.MultiSatStepHandler, typing.Callable]): ...
     def getPropagators(self) -> java.util.List[Propagator]:
         """
         Get an unmodifiable list of the underlying mono-satellite propagators.
@@ -2489,7 +2534,7 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
         """
         ...
     @typing.overload
-    def shiftedBy(self, double: float) -> 'SpacecraftState':
+    def shiftedBy(self, dt: float) -> 'SpacecraftState':
         """
         Get a time-shifted state.
         
@@ -2528,7 +2573,7 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
         """
         ...
     @typing.overload
-    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> 'SpacecraftState': ...
+    def shiftedBy(self, dt: org.orekit.time.TimeOffset) -> 'SpacecraftState': ...
     def toStaticTransform(self) -> org.orekit.frames.StaticTransform:
         """
         Compute the static transform from state defining frame to spacecraft frame.
@@ -2641,17 +2686,17 @@ class SpacecraftStateInterpolator(org.orekit.time.AbstractTimeInterpolator[Space
     @typing.overload
     def __init__(self, int: int, double: float, frame: org.orekit.frames.Frame): ...
     @typing.overload
-    def __init__(self, int: int, double: float, frame: org.orekit.frames.Frame, frame2: org.orekit.frames.Frame): ...
+    def __init__(self, interpolationPoints: int, extrapolationThreshold: float, outputFrame: org.orekit.frames.Frame, attitudeReferenceFrame: org.orekit.frames.Frame): ...
     @typing.overload
-    def __init__(self, int: int, double: float, frame: org.orekit.frames.Frame, frame2: org.orekit.frames.Frame, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter): ...
+    def __init__(self, interpolationPoints: int, extrapolationThreshold: float, outputFrame: org.orekit.frames.Frame, attitudeReferenceFrame: org.orekit.frames.Frame, pvaFilter: org.orekit.utils.CartesianDerivativesFilter, angularFilter: org.orekit.utils.AngularDerivativesFilter): ...
     @typing.overload
-    def __init__(self, int: int, double: float, frame: org.orekit.frames.Frame, timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], timeInterpolator2: org.orekit.time.TimeInterpolator[org.orekit.utils.AbsolutePVCoordinates], timeInterpolator3: org.orekit.time.TimeInterpolator[org.orekit.time.TimeStampedDouble], timeInterpolator4: org.orekit.time.TimeInterpolator[org.orekit.attitudes.Attitude], timeInterpolator5: org.orekit.time.TimeInterpolator[org.orekit.time.TimeStampedDouble]): ...
+    def __init__(self, interpolationPoints: int, extrapolationThreshold: float, outputFrame: org.orekit.frames.Frame, orbitInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], absPVAInterpolator: org.orekit.time.TimeInterpolator[org.orekit.utils.AbsolutePVCoordinates], massInterpolator: org.orekit.time.TimeInterpolator[org.orekit.time.TimeStampedDouble], attitudeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.attitudes.Attitude], additionalStateInterpolator: org.orekit.time.TimeInterpolator[org.orekit.time.TimeStampedDouble]): ...
     @typing.overload
-    def __init__(self, int: int, frame: org.orekit.frames.Frame): ...
+    def __init__(self, interpolationPoints: int, outputFrame: org.orekit.frames.Frame): ...
     @typing.overload
     def __init__(self, int: int, frame: org.orekit.frames.Frame, frame2: org.orekit.frames.Frame): ...
     @typing.overload
-    def __init__(self, frame: org.orekit.frames.Frame): ...
+    def __init__(self, outputFrame: org.orekit.frames.Frame): ...
     @staticmethod
     def checkSampleAndInterpolatorConsistency(sample: java.util.List[SpacecraftState], orbitInterpolatorIsPresent: bool, absPVInterpolatorIsPresent: bool) -> None:
         """
@@ -2771,9 +2816,9 @@ class SpacecraftStateInterpolator(org.orekit.time.AbstractTimeInterpolator[Space
         """
         ...
     @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[SpacecraftState], typing.Sequence[SpacecraftState], typing.Set[SpacecraftState]]) -> SpacecraftState: ...
+    def interpolate(self, interpolationDate: org.orekit.time.AbsoluteDate, sample: typing.Union[java.util.Collection[SpacecraftState], typing.Sequence[SpacecraftState], typing.Set[SpacecraftState]]) -> SpacecraftState: ...
     @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream[org.orekit.time.TimeStamped]) -> org.orekit.time.TimeStamped: ...
+    def interpolate(self, interpolationDate: org.orekit.time.AbsoluteDate, sample: java.util.stream.Stream[org.orekit.time.TimeStamped]) -> org.orekit.time.TimeStamped: ...
 
 class StateCovariance(org.orekit.time.TimeStamped):
     """
@@ -2798,11 +2843,11 @@ class StateCovariance(org.orekit.time.TimeStamped):
     
     """
     @typing.overload
-    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType): ...
+    def __init__(self, orbitalCovariance: org.hipparchus.linear.RealMatrix, epoch: org.orekit.time.AbsoluteDate, covarianceFrame: org.orekit.frames.Frame, orbitType: org.orekit.orbits.OrbitType, angleType: org.orekit.orbits.PositionAngleType): ...
     @typing.overload
-    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, absoluteDate: org.orekit.time.AbsoluteDate, lOF: org.orekit.frames.LOF): ...
+    def __init__(self, orbitalCovariance: org.hipparchus.linear.RealMatrix, epoch: org.orekit.time.AbsoluteDate, lof: org.orekit.frames.LOF): ...
     @typing.overload
-    def changeCovarianceFrame(self, orbit: org.orekit.orbits.Orbit, frame: org.orekit.frames.Frame) -> 'StateCovariance':
+    def changeCovarianceFrame(self, orbit: org.orekit.orbits.Orbit, lofOut: org.orekit.frames.Frame) -> 'StateCovariance':
         """
         Get the covariance in a given local orbital frame.
         
@@ -3601,7 +3646,7 @@ class FieldAbstractPropagator(FieldPropagator[_FieldAbstractPropagator__T], typi
     @typing.overload
     def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldAbstractPropagator__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_FieldAbstractPropagator__T]) -> FieldSpacecraftState[_FieldAbstractPropagator__T]: ...
     @typing.overload
-    def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldAbstractPropagator__T]) -> FieldSpacecraftState[_FieldAbstractPropagator__T]: ...
+    def propagate(self, target: org.orekit.time.FieldAbsoluteDate[_FieldAbstractPropagator__T]) -> FieldSpacecraftState[_FieldAbstractPropagator__T]: ...
     def removeAdditionalDataProvider(self, name: str) -> None:
         """
         Remove an additional data provider.
@@ -3744,9 +3789,9 @@ class PythonAbstractStateCovarianceInterpolator(AbstractStateCovarianceInterpola
     Python implementation of the AbstractStateCovarianceInterpolator class. This class is part of the JCC Python interface and exposes abstract methods natively.
     """
     @typing.overload
-    def __init__(self, int: int, double: float, timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], frame: org.orekit.frames.Frame, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType): ...
+    def __init__(self, interpolationPoints: int, extrapolationThreshold: float, orbitInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], outFrame: org.orekit.frames.Frame, outOrbitType: org.orekit.orbits.OrbitType, outPositionAngleType: org.orekit.orbits.PositionAngleType): ...
     @typing.overload
-    def __init__(self, int: int, double: float, timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], lOFType: org.orekit.frames.LOFType): ...
+    def __init__(self, interpolationPoints: int, extrapolationThreshold: float, orbitInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], outLOF: org.orekit.frames.LOFType): ...
     def computeInterpolatedCovarianceInOrbitFrame(self, uncertainStates: java.util.List[org.orekit.time.TimeStampedPair[org.orekit.orbits.Orbit, StateCovariance]], interpolatedOrbit: org.orekit.orbits.Orbit) -> StateCovariance:
         """
         Compute the interpolated covariance expressed in the interpolated orbit frame.
@@ -3786,7 +3831,7 @@ class PythonAbstractStateCovarianceInterpolator(AbstractStateCovarianceInterpola
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -3850,7 +3895,7 @@ class PythonAdditionalDataProvider(AdditionalDataProvider[_PythonAdditionalDataP
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -3876,7 +3921,7 @@ class PythonCartesianToleranceProvider(CartesianToleranceProvider):
     _getTolerances_2__T = typing.TypeVar('_getTolerances_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getTolerances_4__T = typing.TypeVar('_getTolerances_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getTolerances(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTolerances_0__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTolerances_0__T]) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def getTolerances(self, position: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTolerances_0__T], velocity: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTolerances_0__T]) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
     def getTolerances(self, cartesianOrbit: org.orekit.orbits.CartesianOrbit) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
@@ -3901,7 +3946,7 @@ class PythonCartesianToleranceProvider(CartesianToleranceProvider):
     @typing.overload
     def getTolerances(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_getTolerances_4__T]) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
-    def getTolerances(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def getTolerances(self, position: org.hipparchus.geometry.euclidean.threed.Vector3D, velocity: org.hipparchus.geometry.euclidean.threed.Vector3D) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     def pythonDecRef(self) -> None:
         """
         Part of JCC Python interface to object
@@ -3914,7 +3959,7 @@ class PythonCartesianToleranceProvider(CartesianToleranceProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -3957,7 +4002,7 @@ class PythonEphemerisGenerator(EphemerisGenerator):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -4019,7 +4064,7 @@ class PythonFieldAdditionalDataProvider(FieldAdditionalDataProvider[_PythonField
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -4063,7 +4108,7 @@ class PythonFieldEphemerisGenerator(FieldEphemerisGenerator[_PythonFieldEphemeri
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -4280,9 +4325,9 @@ class PythonFieldPropagator(FieldPropagator[_PythonFieldPropagator__T], typing.G
         """
         ...
     @typing.overload
-    def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldPropagator__T]) -> FieldSpacecraftState[_PythonFieldPropagator__T]: ...
+    def propagate(self, target: org.orekit.time.FieldAbsoluteDate[_PythonFieldPropagator__T]) -> FieldSpacecraftState[_PythonFieldPropagator__T]: ...
     @typing.overload
-    def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldPropagator__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_PythonFieldPropagator__T]) -> FieldSpacecraftState[_PythonFieldPropagator__T]: ...
+    def propagate(self, start: org.orekit.time.FieldAbsoluteDate[_PythonFieldPropagator__T], target: org.orekit.time.FieldAbsoluteDate[_PythonFieldPropagator__T]) -> FieldSpacecraftState[_PythonFieldPropagator__T]: ...
     def pythonDecRef(self) -> None:
         """
         Part of JCC Python interface to object
@@ -4295,7 +4340,7 @@ class PythonFieldPropagator(FieldPropagator[_PythonFieldPropagator__T], typing.G
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -4423,7 +4468,7 @@ class PythonMatricesHarvester(MatricesHarvester):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -4651,7 +4696,7 @@ class PythonPropagator(Propagator):
         """
         ...
     @typing.overload
-    def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> SpacecraftState:
+    def propagate(self, target: org.orekit.time.AbsoluteDate) -> SpacecraftState:
         """
         Propagate towards a target date.
         
@@ -4682,12 +4727,12 @@ class PythonPropagator(Propagator):
         """
         ...
     @typing.overload
-    def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> SpacecraftState: ...
+    def propagate(self, start: org.orekit.time.AbsoluteDate, target: org.orekit.time.AbsoluteDate) -> SpacecraftState: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
     def resetInitialState(self, state: SpacecraftState) -> None:
         """
         Reset the propagator initial state.
@@ -4750,9 +4795,9 @@ class StateCovarianceBlender(AbstractStateCovarianceInterpolator):
         class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.polynomials.SmoothStepFactory?is`, SmoothStepFunction
     """
     @typing.overload
-    def __init__(self, smoothStepFunction: org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction, timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], frame: org.orekit.frames.Frame, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType): ...
+    def __init__(self, blendingFunction: org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction, orbitInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], outFrame: org.orekit.frames.Frame, outOrbitType: org.orekit.orbits.OrbitType, outPositionAngleType: org.orekit.orbits.PositionAngleType): ...
     @typing.overload
-    def __init__(self, smoothStepFunction: org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction, timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], lOFType: org.orekit.frames.LOFType): ...
+    def __init__(self, blendingFunction: org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction, orbitInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], outLOF: org.orekit.frames.LOFType): ...
 
 class StateCovarianceKeplerianHermiteInterpolator(AbstractStateCovarianceInterpolator):
     """
@@ -4767,21 +4812,21 @@ class StateCovarianceKeplerianHermiteInterpolator(AbstractStateCovarianceInterpo
         class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.interpolation.HermiteInterpolator?is`, StateCovarianceBlender
     """
     @typing.overload
-    def __init__(self, int: int, double: float, timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, frame: org.orekit.frames.Frame, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType): ...
+    def __init__(self, interpolationPoints: int, extrapolationThreshold: float, orbitInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], filter: org.orekit.utils.CartesianDerivativesFilter, outFrame: org.orekit.frames.Frame, outOrbitType: org.orekit.orbits.OrbitType, outPositionAngleType: org.orekit.orbits.PositionAngleType): ...
     @typing.overload
     def __init__(self, int: int, double: float, timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, lOFType: org.orekit.frames.LOFType): ...
     @typing.overload
     def __init__(self, int: int, timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], frame: org.orekit.frames.Frame, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType): ...
     @typing.overload
-    def __init__(self, int: int, timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], lOFType: org.orekit.frames.LOFType): ...
+    def __init__(self, interpolationPoints: int, orbitInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], outLOF: org.orekit.frames.LOFType): ...
     @typing.overload
-    def __init__(self, int: int, timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, frame: org.orekit.frames.Frame, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType): ...
+    def __init__(self, interpolationPoints: int, orbitInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], filter: org.orekit.utils.CartesianDerivativesFilter, outFrame: org.orekit.frames.Frame, outOrbitType: org.orekit.orbits.OrbitType, outPositionAngleType: org.orekit.orbits.PositionAngleType): ...
     @typing.overload
     def __init__(self, int: int, timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, lOFType: org.orekit.frames.LOFType): ...
     @typing.overload
     def __init__(self, timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], frame: org.orekit.frames.Frame, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType): ...
     @typing.overload
-    def __init__(self, timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], lOFType: org.orekit.frames.LOFType): ...
+    def __init__(self, orbitInterpolator: org.orekit.time.TimeInterpolator[org.orekit.orbits.Orbit], outLOF: org.orekit.frames.LOFType): ...
     def getFilter(self) -> org.orekit.utils.CartesianDerivativesFilter:
         """
         Get Filter defining if only the state covariance value are used or if first or/and second Keplerian derivatives should be used.
@@ -4798,7 +4843,7 @@ class StateCovarianceMatrixProvider(AdditionalDataProvider[org.hipparchus.linear
     """
     Additional state provider for state covariance matrix.
     
-    This additional state provider allows computing a propagated covariance matrix based on a user defined input state covariance matrix. The computation of the propagated covariance matrix uses the State Transition Matrix between the propagated spacecraft state and the initial state. As a result, the user must define the name of the provider for the State Transition Matrix.
+    This additional state provider allows computing a propagated covariance matrix based on a user defined input state covariance matrix. The computation of the propagated covariance matrix uses the State Transition Matrix between the propagated spacecraft state and the initial state. As a result, the user must define the name of the provider for the State Transition Matrix. The STM is assumed to be the identity at the covariance epoch, if it is not, results will not be consistent.
     
     As the State Transition Matrix and the input state covariance matrix can be expressed in different orbit types, the user must specify both orbit types when building the covariance provider. In addition, the position angle used in both matrices must also be specified.
     
@@ -4806,10 +4851,12 @@ class StateCovarianceMatrixProvider(AdditionalDataProvider[org.hipparchus.linear
     
     For a given propagated spacecraft state, the propagated state covariance matrix is accessible through the method getStateCovariance
     
+    The provider must be initialized with the same epoch as the reference covariance. This means either that the very first propagation must start from this date or the init (SpacecraftState) must be called manually once before use. Failure to do so will result in an NullPointerException.
+    
     Since:
         11.3
     """
-    def __init__(self, additionalName: str, stmName: str, harvester: MatricesHarvester, covInit: StateCovariance):
+    def __init__(self, additionalName: str, stmName: str, harvester: MatricesHarvester, covRef: StateCovariance):
         """
         Constructor.
         
@@ -4817,7 +4864,7 @@ class StateCovarianceMatrixProvider(AdditionalDataProvider[org.hipparchus.linear
             additionalName (String): name of the additional state
             stmName (String): name of the state for State Transition Matrix
             harvester (MatricesHarvester): matrix harvester as returned by setupMatricesComputation(stmName, null, null)
-            covInit (StateCovariance): initial state covariance
+            covRef (StateCovariance): reference state covariance
         
         
         """
@@ -4862,9 +4909,9 @@ class StateCovarianceMatrixProvider(AdditionalDataProvider[org.hipparchus.linear
         """
         ...
     @typing.overload
-    def getStateCovariance(self, spacecraftState: SpacecraftState) -> StateCovariance:
+    def getStateCovariance(self, state: SpacecraftState) -> StateCovariance:
         """
-        Get the state covariance in the same frame/local orbital frame, orbit type and position angle as the initial covariance.
+        Get the state covariance in the same frame/local orbital frame, orbit type and position angle as the reference covariance.
         
         Parameters:
             state (SpacecraftState): spacecraft state to which the covariance matrix should correspond
@@ -4909,9 +4956,9 @@ class StateCovarianceMatrixProvider(AdditionalDataProvider[org.hipparchus.linear
         """
         ...
     @typing.overload
-    def getStateCovariance(self, spacecraftState: SpacecraftState, frame: org.orekit.frames.Frame) -> StateCovariance: ...
+    def getStateCovariance(self, state: SpacecraftState, frame: org.orekit.frames.Frame) -> StateCovariance: ...
     @typing.overload
-    def getStateCovariance(self, spacecraftState: SpacecraftState, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> StateCovariance: ...
+    def getStateCovariance(self, state: SpacecraftState, orbitType: org.orekit.orbits.OrbitType, angleType: org.orekit.orbits.PositionAngleType) -> StateCovariance: ...
     def init(self, initialState: SpacecraftState, target: org.orekit.time.AbsoluteDate) -> None:
         """
         Initialize the additional data provider at the start of propagation.
@@ -4988,7 +5035,7 @@ class ToleranceProvider(CartesianToleranceProvider):
     _getTolerances_7__T = typing.TypeVar('_getTolerances_7__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getTolerances_8__T = typing.TypeVar('_getTolerances_8__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getTolerances(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D) -> typing.MutableSequence[typing.MutableSequence[float]]:
+    def getTolerances(self, referenceOrbit: org.hipparchus.geometry.euclidean.threed.Vector3D, propagationOrbitType: org.hipparchus.geometry.euclidean.threed.Vector3D) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
         Retrieve the integration tolerances given a reference orbit.
         
@@ -5012,9 +5059,9 @@ class ToleranceProvider(CartesianToleranceProvider):
         """
         ...
     @typing.overload
-    def getTolerances(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def getTolerances(self, referenceOrbit: org.orekit.orbits.Orbit, propagationOrbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
-    def getTolerances(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTolerances_2__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTolerances_2__T]) -> typing.MutableSequence[typing.MutableSequence[float]]:
+    def getTolerances(self, referenceOrbit: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTolerances_2__T], propagationOrbitType: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTolerances_2__T]) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
         Retrieve the integration tolerances given a reference Field orbit.
         
@@ -5047,11 +5094,11 @@ class ToleranceProvider(CartesianToleranceProvider):
     @typing.overload
     def getTolerances(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_getTolerances_6__T]) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
-    def getTolerances(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_getTolerances_7__T], orbitType: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def getTolerances(self, referenceOrbit: org.orekit.orbits.FieldOrbit[_getTolerances_7__T], propagationOrbitType: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
-    def getTolerances(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_getTolerances_8__T], orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def getTolerances(self, referenceOrbit: org.orekit.orbits.FieldOrbit[_getTolerances_8__T], propagationOrbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
-    def getTolerances(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def getTolerances(self, referenceOrbit: org.orekit.orbits.Orbit, propagationOrbitType: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
     @staticmethod
     def of(absoluteTolerance: float, relativeTolerance: float) -> 'ToleranceProvider':
@@ -5074,7 +5121,6 @@ class ToleranceProvider(CartesianToleranceProvider):
         Build a provider based on a tolerance provider for Cartesian coordinates.
         
         Orbits Jacobian matrices are used to get consistent errors on orbital parameters.
-        
         
         Parameters:
             cartesianToleranceProvider (CartesianToleranceProvider): tolerance provider dedicated to Cartesian propagation
@@ -5172,7 +5218,7 @@ class PythonAbstractMatricesHarvester(AbstractMatricesHarvester):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -5284,7 +5330,7 @@ class PythonAbstractPropagator(AbstractPropagator):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -5330,7 +5376,7 @@ class PythonAbstractStateModifier(AbstractStateModifier):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -5570,7 +5616,7 @@ class PythonBoundedPropagator(BoundedPropagator):
         """
         ...
     @typing.overload
-    def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> SpacecraftState:
+    def propagate(self, target: org.orekit.time.AbsoluteDate) -> SpacecraftState:
         """
         Propagate towards a target date.
         
@@ -5601,7 +5647,7 @@ class PythonBoundedPropagator(BoundedPropagator):
         """
         ...
     @typing.overload
-    def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> SpacecraftState: ...
+    def propagate(self, start: org.orekit.time.AbsoluteDate, target: org.orekit.time.AbsoluteDate) -> SpacecraftState: ...
     def pythonDecRef(self) -> None:
         """
         Part of JCC Python interface to object
@@ -5614,7 +5660,7 @@ class PythonBoundedPropagator(BoundedPropagator):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -5729,7 +5775,7 @@ class PythonFieldAbstractPropagator(FieldAbstractPropagator[_PythonFieldAbstract
         """
         ...
     @typing.overload
-    def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldAbstractPropagator__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_PythonFieldAbstractPropagator__T]) -> FieldSpacecraftState[_PythonFieldAbstractPropagator__T]: ...
+    def propagate(self, start: org.orekit.time.FieldAbsoluteDate[_PythonFieldAbstractPropagator__T], target: org.orekit.time.FieldAbsoluteDate[_PythonFieldAbstractPropagator__T]) -> FieldSpacecraftState[_PythonFieldAbstractPropagator__T]: ...
     @typing.overload
     def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldAbstractPropagator__T]) -> FieldSpacecraftState[_PythonFieldAbstractPropagator__T]: ...
     def pythonDecRef(self) -> None:
@@ -5744,7 +5790,7 @@ class PythonFieldAbstractPropagator(FieldAbstractPropagator[_PythonFieldAbstract
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -5985,9 +6031,9 @@ class PythonFieldBoundedPropagator(FieldBoundedPropagator[_PythonFieldBoundedPro
         """
         ...
     @typing.overload
-    def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldBoundedPropagator__T]) -> FieldSpacecraftState[_PythonFieldBoundedPropagator__T]: ...
+    def propagate(self, target: org.orekit.time.FieldAbsoluteDate[_PythonFieldBoundedPropagator__T]) -> FieldSpacecraftState[_PythonFieldBoundedPropagator__T]: ...
     @typing.overload
-    def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldBoundedPropagator__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_PythonFieldBoundedPropagator__T]) -> FieldSpacecraftState[_PythonFieldBoundedPropagator__T]: ...
+    def propagate(self, start: org.orekit.time.FieldAbsoluteDate[_PythonFieldBoundedPropagator__T], target: org.orekit.time.FieldAbsoluteDate[_PythonFieldBoundedPropagator__T]) -> FieldSpacecraftState[_PythonFieldBoundedPropagator__T]: ...
     def pythonDecRef(self) -> None:
         """
         Part of JCC Python interface to object
@@ -6000,7 +6046,7 @@ class PythonFieldBoundedPropagator(FieldBoundedPropagator[_PythonFieldBoundedPro
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -6049,7 +6095,7 @@ class PythonToleranceProvider(ToleranceProvider):
     _getTolerances_5__T = typing.TypeVar('_getTolerances_5__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getTolerances_6__T = typing.TypeVar('_getTolerances_6__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getTolerances(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTolerances_0__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTolerances_0__T]) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def getTolerances(self, position: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTolerances_0__T], velocity: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTolerances_0__T]) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
     def getTolerances(self, cartesianOrbit: org.orekit.orbits.CartesianOrbit) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
@@ -6086,15 +6132,15 @@ class PythonToleranceProvider(ToleranceProvider):
     @typing.overload
     def getTolerances(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_getTolerances_4__T]) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
-    def getTolerances(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_getTolerances_5__T], orbitType: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def getTolerances(self, position: org.orekit.orbits.FieldOrbit[_getTolerances_5__T], velocity: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
-    def getTolerances(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_getTolerances_6__T], orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def getTolerances(self, referenceOrbit: org.orekit.orbits.FieldOrbit[_getTolerances_6__T], propagationOrbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
-    def getTolerances(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def getTolerances(self, position: org.orekit.orbits.Orbit, velocity: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
-    def getTolerances(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def getTolerances(self, position: org.hipparchus.geometry.euclidean.threed.Vector3D, velocity: org.hipparchus.geometry.euclidean.threed.Vector3D) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
-    def getTolerances(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def getTolerances(self, referenceOrbit: org.orekit.orbits.Orbit, propagationOrbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     def pythonDecRef(self) -> None:
         """
         Part of JCC Python interface to object
@@ -6107,7 +6153,7 @@ class PythonToleranceProvider(ToleranceProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

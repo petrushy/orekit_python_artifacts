@@ -10,6 +10,7 @@ import java.util
 import java.util.function
 import jpype
 import org.orekit.data
+import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.odm
 import org.orekit.files.ccsds.section
@@ -260,18 +261,10 @@ class OmmMetadata(org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata):
     
     
     """
-    def __init__(self):
-        """
-        Empty constructor.
-        
-        This constructor is not strictly necessary, but it prevents spurious javadoc warnings with JDK 18 and later.
-        
-        Since:
-            12.0
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self): ...
+    @typing.overload
+    def __init__(self, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def getMeanElementTheory(self) -> str:
         """
         Get the description of the Mean Element Theory.
@@ -375,28 +368,10 @@ class OmmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Omm, 'OmmParser']):
     Since:
         6.1
     """
-    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate, mu: float, defaultMass: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]):
-        """
-        Complete constructor.
-        
-        Calling this constructor directly is not recommended. Users should rather use buildOmmParser.
-        
-        Parameters:
-            conventions (IERSConventions): IERS Conventions
-            simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
-            dataContext (DataContext): used to retrieve frames, time scales, etc.
-            missionReferenceDate (AbsoluteDate): reference date for Mission Elapsed Time or Mission Relative Time time systems
-            mu (double): gravitational coefficient
-            defaultMass (double): default mass to use if there are no spacecraft parameters block logical block in the file
-            parsedUnitsBehavior (ParsedUnitsBehavior): behavior to adopt for handling parsed units
-            filters (Function<ParseToken, List<ParseToken>>[]): filters to apply to parse tokens
-        
-        Since:
-            12.0
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate, mu: float, defaultMass: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
+    @typing.overload
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate, mu: float, defaultMass: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray], frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def build(self) -> Omm:
         """
         Build the file from parsed entries.

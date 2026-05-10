@@ -615,7 +615,7 @@ class PythonCartesianCost(CartesianCost):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -719,9 +719,9 @@ class CartesianFuelCost(AbstractCartesianCost):
         CartesianCost
     """
     @typing.overload
-    def __init__(self, string: str, double: float, double2: float): ...
+    def __init__(self, name: str, massFlowRateFactor: float, maximumThrustMagnitude: float): ...
     @typing.overload
-    def __init__(self, string: str, double: float, double2: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings): ...
+    def __init__(self, name: str, massFlowRateFactor: float, maximumThrustMagnitude: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings): ...
     def getEventDetectionSettings(self) -> org.orekit.propagation.events.EventDetectionSettings:
         """
         Getter for event detection settings.
@@ -890,9 +890,9 @@ class FieldCartesianFuelCost(FieldAbstractCartesianCost[_FieldCartesianFuelCost_
         CartesianCost
     """
     @typing.overload
-    def __init__(self, string: str, t: _FieldCartesianFuelCost__T, t2: _FieldCartesianFuelCost__T): ...
+    def __init__(self, name: str, massFlowRateFactor: _FieldCartesianFuelCost__T, maximumThrustMagnitude: _FieldCartesianFuelCost__T): ...
     @typing.overload
-    def __init__(self, string: str, t: _FieldCartesianFuelCost__T, t2: _FieldCartesianFuelCost__T, fieldEventDetectionSettings: org.orekit.propagation.events.FieldEventDetectionSettings[_FieldCartesianFuelCost__T]): ...
+    def __init__(self, name: str, massFlowRateFactor: _FieldCartesianFuelCost__T, maximumThrustMagnitude: _FieldCartesianFuelCost__T, eventDetectionSettings: org.orekit.propagation.events.FieldEventDetectionSettings[_FieldCartesianFuelCost__T]): ...
     def getEventDetectionSettings(self) -> org.orekit.propagation.events.FieldEventDetectionSettings[_FieldCartesianFuelCost__T]:
         """
         Getter for event detection settings.
@@ -1150,7 +1150,7 @@ class PythonAbstractCartesianCost(AbstractCartesianCost):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1321,9 +1321,9 @@ class FieldQuadraticPenaltyCartesianFuel(FieldPenalizedCartesianFuelCost[_FieldQ
         BoundedCartesianEnergy
     """
     @typing.overload
-    def __init__(self, string: str, t: _FieldQuadraticPenaltyCartesianFuel__T, t2: _FieldQuadraticPenaltyCartesianFuel__T, t3: _FieldQuadraticPenaltyCartesianFuel__T): ...
+    def __init__(self, name: str, massFlowRateFactor: _FieldQuadraticPenaltyCartesianFuel__T, maximumThrustMagnitude: _FieldQuadraticPenaltyCartesianFuel__T, epsilon: _FieldQuadraticPenaltyCartesianFuel__T): ...
     @typing.overload
-    def __init__(self, string: str, t: _FieldQuadraticPenaltyCartesianFuel__T, t2: _FieldQuadraticPenaltyCartesianFuel__T, t3: _FieldQuadraticPenaltyCartesianFuel__T, fieldEventDetectionSettings: org.orekit.propagation.events.FieldEventDetectionSettings[_FieldQuadraticPenaltyCartesianFuel__T]): ...
+    def __init__(self, name: str, massFlowRateFactor: _FieldQuadraticPenaltyCartesianFuel__T, maximumThrustMagnitude: _FieldQuadraticPenaltyCartesianFuel__T, epsilon: _FieldQuadraticPenaltyCartesianFuel__T, eventDetectionSettings: org.orekit.propagation.events.FieldEventDetectionSettings[_FieldQuadraticPenaltyCartesianFuel__T]): ...
     def evaluateFieldPenaltyFunction(self, controlNorm: _FieldQuadraticPenaltyCartesianFuel__T) -> _FieldQuadraticPenaltyCartesianFuel__T:
         """
         Evaluate the penalty term (without the weight), assumed to be a function of the control norm.
@@ -1472,9 +1472,9 @@ class QuadraticPenaltyCartesianFuel(PenalizedCartesianFuelCost):
         BoundedCartesianEnergy
     """
     @typing.overload
-    def __init__(self, string: str, double: float, double2: float, double3: float): ...
+    def __init__(self, name: str, massFlowRateFactor: float, maximumThrustMagnitude: float, epsilon: float): ...
     @typing.overload
-    def __init__(self, string: str, double: float, double2: float, double3: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings): ...
+    def __init__(self, name: str, massFlowRateFactor: float, maximumThrustMagnitude: float, epsilon: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings): ...
     def evaluatePenaltyFunction(self, controlNorm: float) -> float:
         """
         Evaluate the penalty term (without the weight), assumed to be a function of the control norm.
@@ -1548,9 +1548,9 @@ class BoundedCartesianEnergy(org.orekit.control.indirect.adjoint.cost.CartesianE
         UnboundedCartesianEnergy
     """
     @typing.overload
-    def __init__(self, string: str, double: float, double2: float): ...
+    def __init__(self, name: str, massFlowRateFactor: float, maximumThrustMagnitude: float): ...
     @typing.overload
-    def __init__(self, string: str, double: float, double2: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings): ...
+    def __init__(self, name: str, massFlowRateFactor: float, maximumThrustMagnitude: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings): ...
     def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]:
         """
         Get the detectors needed for propagation.
@@ -1588,9 +1588,9 @@ class FieldBoundedCartesianEnergy(org.orekit.control.indirect.adjoint.cost.Field
         BoundedCartesianEnergy
     """
     @typing.overload
-    def __init__(self, string: str, t: _FieldBoundedCartesianEnergy__T, t2: _FieldBoundedCartesianEnergy__T): ...
+    def __init__(self, name: str, massFlowRateFactor: _FieldBoundedCartesianEnergy__T, maximumThrustMagnitude: _FieldBoundedCartesianEnergy__T): ...
     @typing.overload
-    def __init__(self, string: str, t: _FieldBoundedCartesianEnergy__T, t2: _FieldBoundedCartesianEnergy__T, fieldEventDetectionSettings: org.orekit.propagation.events.FieldEventDetectionSettings[_FieldBoundedCartesianEnergy__T]): ...
+    def __init__(self, name: str, massFlowRateFactor: _FieldBoundedCartesianEnergy__T, maximumThrustMagnitude: _FieldBoundedCartesianEnergy__T, eventDetectionSettings: org.orekit.propagation.events.FieldEventDetectionSettings[_FieldBoundedCartesianEnergy__T]): ...
     def getFieldEventDetectors(self, field: org.hipparchus.Field[_FieldBoundedCartesianEnergy__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_FieldBoundedCartesianEnergy__T]]:
         """
         Get the detectors needed for propagation.
@@ -1638,9 +1638,9 @@ class FieldUnboundedCartesianEnergy(org.orekit.control.indirect.adjoint.cost.Fie
         UnboundedCartesianEnergy
     """
     @typing.overload
-    def __init__(self, string: str, t: _FieldUnboundedCartesianEnergy__T): ...
+    def __init__(self, name: str, massFlowRateFactor: _FieldUnboundedCartesianEnergy__T): ...
     @typing.overload
-    def __init__(self, string: str, t: _FieldUnboundedCartesianEnergy__T, fieldEventDetectionSettings: org.orekit.propagation.events.FieldEventDetectionSettings[_FieldUnboundedCartesianEnergy__T]): ...
+    def __init__(self, name: str, massFlowRateFactor: _FieldUnboundedCartesianEnergy__T, eventDetectionSettings: org.orekit.propagation.events.FieldEventDetectionSettings[_FieldUnboundedCartesianEnergy__T]): ...
     def getFieldEventDetectors(self, field: org.hipparchus.Field[_FieldUnboundedCartesianEnergy__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_FieldUnboundedCartesianEnergy__T]]:
         """
         Get the detectors needed for propagation.
@@ -1676,9 +1676,9 @@ class UnboundedCartesianEnergy(org.orekit.control.indirect.adjoint.cost.Cartesia
         UnboundedCartesianEnergyNeglectingMass
     """
     @typing.overload
-    def __init__(self, string: str, double: float): ...
+    def __init__(self, name: str, massFlowRateFactor: float): ...
     @typing.overload
-    def __init__(self, string: str, double: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings): ...
+    def __init__(self, name: str, massFlowRateFactor: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings): ...
     def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]:
         """
         Get the detectors needed for propagation.

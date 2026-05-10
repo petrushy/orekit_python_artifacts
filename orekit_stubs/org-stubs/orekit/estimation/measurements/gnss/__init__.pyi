@@ -684,7 +684,7 @@ class IntegerLeastSquareComparator(java.util.Comparator['IntegerLeastSquareSolut
         Simple constructor.
         """
         ...
-    def compare(self, integerLeastSquareSolution: 'IntegerLeastSquareSolution', integerLeastSquareSolution2: 'IntegerLeastSquareSolution') -> int:
+    def compare(self, ilss1: 'IntegerLeastSquareSolution', ilss2: 'IntegerLeastSquareSolution') -> int:
         """
         The comparison is based on the squared distance to the float solution.
         
@@ -1531,9 +1531,9 @@ class PythonAbstractOnBoardMeasurement(AbstractOnBoardMeasurement[_PythonAbstrac
         """
         ...
     @typing.overload
-    def getRemotePV(self, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray], int: int) -> org.orekit.utils.FieldPVCoordinatesProvider[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def getRemotePV(self, states: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray], freeParameters: int) -> org.orekit.utils.FieldPVCoordinatesProvider[org.hipparchus.analysis.differentiation.Gradient]: ...
     @typing.overload
-    def getRemotePV(self, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.utils.PVCoordinatesProvider:
+    def getRemotePV(self, states: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.utils.PVCoordinatesProvider:
         """
         Description copied from class: getRemotePV Get emitting satellite position/velocity provider.
         
@@ -1573,7 +1573,7 @@ class PythonAbstractOnBoardMeasurement(AbstractOnBoardMeasurement[_PythonAbstrac
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1674,7 +1674,7 @@ class PythonAbstractWindUp(AbstractWindUp[_PythonAbstractWindUp__T], typing.Gene
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1748,7 +1748,7 @@ class PythonAmbiguityAcceptance(AmbiguityAcceptance):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1794,7 +1794,7 @@ class PythonCycleSlipDetectors(CycleSlipDetectors):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1825,7 +1825,7 @@ class PythonIntegerLeastSquareSolver(IntegerLeastSquareSolver):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1901,7 +1901,7 @@ class PythonMeasurementCombination(MeasurementCombination):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2454,7 +2454,7 @@ class PythonAbstractCycleSlipDetector(AbstractCycleSlipDetector):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2545,7 +2545,7 @@ class PythonAbstractDualFrequencyCombination(AbstractDualFrequencyCombination):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2591,7 +2591,7 @@ class PythonAbstractInterSatellitesMeasurement(AbstractInterSatellitesMeasuremen
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2695,7 +2695,7 @@ class PythonAbstractLambdaMethod(AbstractLambdaMethod):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2751,7 +2751,7 @@ class PythonAbstractOneWayGNSSMeasurement(AbstractOneWayGNSSMeasurement[_PythonA
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2852,7 +2852,7 @@ class PythonAbstractSingleFrequencyCombination(AbstractSingleFrequencyCombinatio
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

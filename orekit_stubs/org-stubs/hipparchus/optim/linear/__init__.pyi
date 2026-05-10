@@ -19,8 +19,6 @@ import typing
 
 class LinearConstraint(java.io.Serializable):
     """
-    implements Serializable
-    
     A linear constraint for a linear optimization problem.
     
     * A linear constraint has one of the forms:
@@ -37,19 +35,20 @@ class LinearConstraint(java.io.Serializable):
     
     The c :sub:`i` , l :sub:`i` or r :sub:`i` are the coefficients of the constraints, the x :sub:`i` are the coordinates of the current point and v is the value of the constraint.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float, relationship: 'Relationship', doubleArray2: typing.Union[typing.List[float], jpype.JArray], double4: float): ...
+    def __init__(self, lhsCoefficients: typing.Union[typing.List[float], jpype.JArray], lhsConstant: float, relationship: 'Relationship', rhsCoefficients: typing.Union[typing.List[float], jpype.JArray], rhsConstant: float): ...
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], relationship: 'Relationship', double2: float): ...
+    def __init__(self, coefficients: typing.Union[typing.List[float], jpype.JArray], relationship: 'Relationship', value: float): ...
     @typing.overload
-    def __init__(self, realVector: org.hipparchus.linear.RealVector, double: float, relationship: 'Relationship', realVector2: org.hipparchus.linear.RealVector, double2: float): ...
+    def __init__(self, lhsCoefficients: org.hipparchus.linear.RealVector, lhsConstant: float, relationship: 'Relationship', rhsCoefficients: org.hipparchus.linear.RealVector, rhsConstant: float): ...
     @typing.overload
-    def __init__(self, realVector: org.hipparchus.linear.RealVector, relationship: 'Relationship', double: float): ...
-    def equals(self, object: typing.Any) -> bool:
+    def __init__(self, coefficients: org.hipparchus.linear.RealVector, relationship: 'Relationship', value: float): ...
+    def equals(self, other: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -86,7 +85,7 @@ class LinearConstraint(java.io.Serializable):
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -94,14 +93,12 @@ class LinearConstraint(java.io.Serializable):
 
 class LinearConstraintSet(org.hipparchus.optim.OptimizationData):
     """
-    implements OptimizationData
-    
     Class that represents a set of LinearConstraint.
     """
     @typing.overload
-    def __init__(self, collection: typing.Union[java.util.Collection[LinearConstraint], typing.Sequence[LinearConstraint], typing.Set[LinearConstraint]]): ...
+    def __init__(self, constraints: typing.Union[java.util.Collection[LinearConstraint], typing.Sequence[LinearConstraint], typing.Set[LinearConstraint]]): ...
     @typing.overload
-    def __init__(self, *linearConstraint: LinearConstraint): ...
+    def __init__(self, *constraints: LinearConstraint): ...
     def getConstraints(self) -> java.util.Collection[LinearConstraint]:
         """
         Gets the set of linear constraints.
@@ -115,21 +112,20 @@ class LinearConstraintSet(org.hipparchus.optim.OptimizationData):
 
 class LinearObjectiveFunction(org.hipparchus.analysis.MultivariateFunction, org.hipparchus.optim.OptimizationData, java.io.Serializable):
     """
-    implements hipparchus, OptimizationData, Serializable
-    
     An objective function for a linear optimization problem.
     
     A linear objective function has one the form: \[ c_1 x_1 + \ldots c_n x_n + d \] The c :sub:`i` and d are the coefficients of the equation, the x :sub:`i` are the coordinates of the current point.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float): ...
+    def __init__(self, coefficients: typing.Union[typing.List[float], jpype.JArray], constantTerm: float): ...
     @typing.overload
-    def __init__(self, realVector: org.hipparchus.linear.RealVector, double: float): ...
-    def equals(self, object: typing.Any) -> bool:
+    def __init__(self, coefficients: org.hipparchus.linear.RealVector, constantTerm: float): ...
+    def equals(self, other: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -156,13 +152,13 @@ class LinearObjectiveFunction(org.hipparchus.analysis.MultivariateFunction, org.
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
         ...
     @typing.overload
-    def value(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
+    def value(self, point: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
         Computes the value of the linear equation at the current point.
         
@@ -186,7 +182,7 @@ class LinearObjectiveFunction(org.hipparchus.analysis.MultivariateFunction, org.
         """
         ...
     @typing.overload
-    def value(self, realVector: org.hipparchus.linear.RealVector) -> float: ...
+    def value(self, point: org.hipparchus.linear.RealVector) -> float: ...
 
 class LinearOptimizer(org.hipparchus.optim.nonlinear.scalar.MultivariateOptimizer):
     """
@@ -195,12 +191,10 @@ class LinearOptimizer(org.hipparchus.optim.nonlinear.scalar.MultivariateOptimize
     @typing.overload
     def optimize(self) -> typing.Any: ...
     @typing.overload
-    def optimize(self, *optimizationData: org.hipparchus.optim.OptimizationData) -> org.hipparchus.optim.PointValuePair: ...
+    def optimize(self, *optData: org.hipparchus.optim.OptimizationData) -> org.hipparchus.optim.PointValuePair: ...
 
 class NonNegativeConstraint(org.hipparchus.optim.OptimizationData):
     """
-    implements OptimizationData
-    
     A constraint for a linear optimization problem indicating whether all variables must be restricted to non-negative values.
     """
     def __init__(self, restricted: bool):
@@ -226,8 +220,6 @@ class NonNegativeConstraint(org.hipparchus.optim.OptimizationData):
 
 class PivotSelectionRule(java.lang.Enum['PivotSelectionRule'], org.hipparchus.optim.OptimizationData):
     """
-    implements OptimizationData
-    
     Pivot selection rule to the use for a Simplex solver.
     """
     DANTZIG: typing.ClassVar['PivotSelectionRule'] = ...
@@ -258,7 +250,12 @@ class PivotSelectionRule(java.lang.Enum['PivotSelectionRule'], org.hipparchus.op
     @staticmethod
     def values() -> typing.MutableSequence['PivotSelectionRule']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (PivotSelectionRule c : PivotSelectionRule.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -286,7 +283,7 @@ class Relationship(java.lang.Enum['Relationship']):
         ...
     def toString(self) -> str:
         """
-        Overrides: toString in class Enum
+        Overrides: Enum in class Enum
         
         
         """
@@ -317,7 +314,12 @@ class Relationship(java.lang.Enum['Relationship']):
     @staticmethod
     def values() -> typing.MutableSequence['Relationship']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (Relationship c : Relationship.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -328,8 +330,6 @@ class Relationship(java.lang.Enum['Relationship']):
 
 class SolutionCallback(org.hipparchus.optim.OptimizationData):
     """
-    implements OptimizationData
-    
     A callback object that can be provided to a linear optimizer to keep track of the best solution found.
     """
     def __init__(self):
@@ -383,7 +383,7 @@ class SimplexSolver(LinearOptimizer):
         DANTZIG
       - callback for the best solution: SolutionCallback - optional
       - maximum number of iterations: MaxIter - optional, default:
-        MAX_VALUE
+        Integer
     
     Note: Depending on the problem definition, the default convergence criteria may be too strict, resulting in hipparchus or hipparchus. In such a case it is advised to adjust these criteria with more appropriate values, e.g. relaxing the epsilon value.
     
@@ -398,11 +398,11 @@ class SimplexSolver(LinearOptimizer):
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float): ...
+    def __init__(self, epsilon: float): ...
     @typing.overload
-    def __init__(self, double: float, int: int): ...
+    def __init__(self, epsilon: float, maxUlps: int): ...
     @typing.overload
-    def __init__(self, double: float, int: int, double2: float): ...
+    def __init__(self, epsilon: float, maxUlps: int, cutOff: float): ...
     def doOptimize(self) -> org.hipparchus.optim.PointValuePair:
         """
         Performs the bulk of the optimization algorithm.
@@ -420,7 +420,7 @@ class SimplexSolver(LinearOptimizer):
     @typing.overload
     def optimize(self) -> typing.Any: ...
     @typing.overload
-    def optimize(self, *optimizationData: org.hipparchus.optim.OptimizationData) -> org.hipparchus.optim.PointValuePair: ...
+    def optimize(self, *optData: org.hipparchus.optim.OptimizationData) -> org.hipparchus.optim.PointValuePair: ...
 
 
 class __module_protocol__(Protocol):

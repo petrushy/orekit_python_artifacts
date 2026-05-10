@@ -791,9 +791,9 @@ class RinexClockParser:
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, function: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]]): ...
+    def __init__(self, frameBuilder: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]]): ...
     @typing.overload
-    def __init__(self, function: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]], function2: typing.Union[java.util.function.Function[str, org.orekit.gnss.ObservationType], typing.Callable[[str], org.orekit.gnss.ObservationType]], timeScales: org.orekit.time.TimeScales): ...
+    def __init__(self, frameBuilder: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]], typeBuilder: typing.Union[java.util.function.Function[str, org.orekit.gnss.ObservationType], typing.Callable[[str], org.orekit.gnss.ObservationType]], timeScales: org.orekit.time.TimeScales): ...
     @typing.overload
     def parse(self, reader: java.io.BufferedReader, fileName: str) -> RinexClock:
         """
@@ -814,7 +814,7 @@ class RinexClockParser:
         """
         ...
     @typing.overload
-    def parse(self, inputStream: java.io.InputStream) -> RinexClock:
+    def parse(self, stream: java.io.InputStream) -> RinexClock:
         """
         Parse an IGS clock file from an input stream using the UTF-8 charset.
         

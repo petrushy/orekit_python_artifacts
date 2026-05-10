@@ -16,13 +16,12 @@ import typing
 
 class AbstractRealDistribution(org.hipparchus.distribution.RealDistribution, java.io.Serializable):
     """
-    implements RealDistribution, Serializable
-    
     Base class for probability distributions on the reals.
     
     Default implementations are provided for some of the methods that do not vary from distribution to distribution.
     
-          - serialized
+    Also see:
+        serialized
     """
     def inverseCumulativeProbability(self, p: float) -> float:
         """
@@ -92,13 +91,13 @@ class BetaDistribution(AbstractRealDistribution):
     """
     Implements the Beta distribution.
     
-          - `Beta distribution <http://en.wikipedia.org/wiki/Beta_distribution>`
-          - serialized
+    Also see:
+        `Beta distribution <http://en.wikipedia.org/wiki/Beta_distribution>`, serialized
     """
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, alpha: float, beta: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
+    def __init__(self, alpha: float, beta: float, inverseCumAccuracy: float): ...
     def cumulativeProbability(self, x: float) -> float:
         """
         For a random variable X whose values are distributed according to this distribution, this method returns P(X <= x). In other words, this method represents the (cumulative) distribution function (CDF) for this distribution.
@@ -224,14 +223,14 @@ class CauchyDistribution(AbstractRealDistribution):
     """
     Implementation of the Cauchy distribution.
     
-          - `Cauchy distribution (Wikipedia) <http://en.wikipedia.org/wiki/Cauchy_distribution>`
-          - `Cauchy Distribution (MathWorld) <http://mathworld.wolfram.com/CauchyDistribution.html>`
-          - serialized
+    Also see:
+        `Cauchy distribution (Wikipedia) <http://en.wikipedia.org/wiki/Cauchy_distribution>`, `Cauchy Distribution (MathWorld)
+        <http://mathworld.wolfram.com/CauchyDistribution.html>`, serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, median: float, scale: float): ...
     def cumulativeProbability(self, x: float) -> float:
         """
         For a random variable X whose values are distributed according to this distribution, this method returns P(X <= x). In other words, this method represents the (cumulative) distribution function (CDF) for this distribution.
@@ -367,14 +366,14 @@ class ChiSquaredDistribution(AbstractRealDistribution):
     """
     Implementation of the chi-squared distribution.
     
-          - `Chi-squared distribution (Wikipedia) <http://en.wikipedia.org/wiki/Chi-squared_distribution>`
-          - `Chi-squared Distribution (MathWorld) <http://mathworld.wolfram.com/Chi-SquaredDistribution.html>`
-          - serialized
+    Also see:
+        `Chi-squared distribution (Wikipedia) <http://en.wikipedia.org/wiki/Chi-squared_distribution>`, `Chi-squared
+        Distribution (MathWorld) <http://mathworld.wolfram.com/Chi-SquaredDistribution.html>`, serialized
     """
     @typing.overload
-    def __init__(self, double: float): ...
+    def __init__(self, degreesOfFreedom: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, degreesOfFreedom: float, inverseCumAccuracy: float): ...
     def cumulativeProbability(self, x: float) -> float:
         """
         For a random variable X whose values are distributed according to this distribution, this method returns P(X <= x). In other words, this method represents the (cumulative) distribution function (CDF) for this distribution.
@@ -489,7 +488,8 @@ class ConstantRealDistribution(AbstractRealDistribution):
     """
     Implementation of the constant real distribution.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self, value: float):
         """
@@ -619,12 +619,13 @@ class EnumeratedRealDistribution(AbstractRealDistribution):
     
     Duplicate values are allowed. Probabilities of duplicate values are combined when computing cumulative probabilities and statistics.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, data: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, singletons: typing.Union[typing.List[float], jpype.JArray], probabilities: typing.Union[typing.List[float], jpype.JArray]): ...
     def cumulativeProbability(self, x: float) -> float:
         """
         For a random variable X whose values are distributed according to this distribution, this method returns P(X <= x). In other words, this method represents the (cumulative) distribution function (CDF) for this distribution.
@@ -766,9 +767,9 @@ class ExponentialDistribution(AbstractRealDistribution):
     """
     Implementation of the exponential distribution.
     
-          - `Exponential distribution (Wikipedia) <http://en.wikipedia.org/wiki/Exponential_distribution>`
-          - `Exponential distribution (MathWorld) <http://mathworld.wolfram.com/ExponentialDistribution.html>`
-          - serialized
+    Also see:
+        `Exponential distribution (Wikipedia) <http://en.wikipedia.org/wiki/Exponential_distribution>`, `Exponential
+        distribution (MathWorld) <http://mathworld.wolfram.com/ExponentialDistribution.html>`, serialized
     """
     def __init__(self, mean: float):
         """
@@ -931,14 +932,14 @@ class FDistribution(AbstractRealDistribution):
     """
     Implementation of the F-distribution.
     
-          - `F-distribution (Wikipedia) <http://en.wikipedia.org/wiki/F-distribution>`
-          - `F-distribution (MathWorld) <http://mathworld.wolfram.com/F-Distribution.html>`
-          - serialized
+    Also see:
+        `F-distribution (Wikipedia) <http://en.wikipedia.org/wiki/F-distribution>`, `F-distribution (MathWorld)
+        <http://mathworld.wolfram.com/F-Distribution.html>`, serialized
     """
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, numeratorDegreesOfFreedom: float, denominatorDegreesOfFreedom: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
+    def __init__(self, numeratorDegreesOfFreedom: float, denominatorDegreesOfFreedom: float, inverseCumAccuracy: float): ...
     def cumulativeProbability(self, x: float) -> float:
         """
         For a random variable X whose values are distributed according to this distribution, this method returns P(X <= x). In other words, this method represents the (cumulative) distribution function (CDF) for this distribution. The implementation of this method is based on
@@ -1075,14 +1076,14 @@ class GammaDistribution(AbstractRealDistribution):
     """
     Implementation of the Gamma distribution.
     
-          - `Gamma distribution (Wikipedia) <http://en.wikipedia.org/wiki/Gamma_distribution>`
-          - `Gamma distribution (MathWorld) <http://mathworld.wolfram.com/GammaDistribution.html>`
-          - serialized
+    Also see:
+        `Gamma distribution (Wikipedia) <http://en.wikipedia.org/wiki/Gamma_distribution>`, `Gamma distribution (MathWorld)
+        <http://mathworld.wolfram.com/GammaDistribution.html>`, serialized
     """
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, shape: float, scale: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
+    def __init__(self, shape: float, scale: float, inverseCumAccuracy: float): ...
     def cumulativeProbability(self, x: float) -> float:
         """
         For a random variable X whose values are distributed according to this distribution, this method returns P(X <= x). In other words, this method represents the (cumulative) distribution function (CDF) for this distribution. The implementation of this method is based on:
@@ -1212,9 +1213,9 @@ class GumbelDistribution(AbstractRealDistribution):
     """
     This class implements the Gumbel distribution.
     
-          - `Gumbel Distribution (Wikipedia) <http://en.wikipedia.org/wiki/Gumbel_distribution>`
-          - `Gumbel Distribution (Mathworld) <http://mathworld.wolfram.com/GumbelDistribution.html>`
-          - serialized
+    Also see:
+        `Gumbel Distribution (Wikipedia) <http://en.wikipedia.org/wiki/Gumbel_distribution>`, `Gumbel Distribution (Mathworld)
+        <http://mathworld.wolfram.com/GumbelDistribution.html>`, serialized
     """
     def __init__(self, mu: float, beta: float):
         """
@@ -1364,8 +1365,8 @@ class LaplaceDistribution(AbstractRealDistribution):
     """
     This class implements the Laplace distribution.
     
-          - `Laplace distribution (Wikipedia) <http://en.wikipedia.org/wiki/Laplace_distribution>`
-          - serialized
+    Also see:
+        `Laplace distribution (Wikipedia) <http://en.wikipedia.org/wiki/Laplace_distribution>`, serialized
     """
     def __init__(self, mu: float, beta: float):
         """
@@ -1515,7 +1516,8 @@ class LevyDistribution(AbstractRealDistribution):
     """
     This class implements the ` Lévy distribution <http://en.wikipedia.org/wiki/L%C3%A9vy_distribution>`.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self, mu: float, c: float):
         """
@@ -1699,16 +1701,16 @@ class LogNormalDistribution(AbstractRealDistribution):
         distribution.
     
     
-          - ` Log-normal distribution (Wikipedia) <http://en.wikipedia.org/wiki/Log-normal_distribution>`
-          - ` Log Normal distribution (MathWorld) <http://mathworld.wolfram.com/LogNormalDistribution.html>`
-          - serialized
+    Also see:
+        ` Log-normal distribution (Wikipedia) <http://en.wikipedia.org/wiki/Log-normal_distribution>`, ` Log Normal distribution
+        (MathWorld) <http://mathworld.wolfram.com/LogNormalDistribution.html>`, serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, location: float, shape: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
+    def __init__(self, location: float, shape: float, inverseCumAccuracy: float): ...
     def cumulativeProbability(self, x: float) -> float:
         """
         For a random variable X whose values are distributed according to this distribution, this method returns P(X <= x). In other words, this method represents the (cumulative) distribution function (CDF) for this distribution. For location m, and shape s of this distribution, the CDF is given by
@@ -1871,9 +1873,9 @@ class LogisticDistribution(AbstractRealDistribution):
     """
     This class implements the Logistic distribution.
     
-          - `Logistic Distribution (Wikipedia) <http://en.wikipedia.org/wiki/Logistic_distribution>`
-          - `Logistic Distribution (Mathworld) <http://mathworld.wolfram.com/LogisticDistribution.html>`
-          - serialized
+    Also see:
+        `Logistic Distribution (Wikipedia) <http://en.wikipedia.org/wiki/Logistic_distribution>`, `Logistic Distribution
+        (Mathworld) <http://mathworld.wolfram.com/LogisticDistribution.html>`, serialized
     """
     def __init__(self, mu: float, s: float):
         """
@@ -2023,13 +2025,13 @@ class NakagamiDistribution(AbstractRealDistribution):
     """
     This class implements the Nakagami distribution.
     
-          - `Nakagami Distribution (Wikipedia) <http://en.wikipedia.org/wiki/Nakagami_distribution>`
-          - serialized
+    Also see:
+        `Nakagami Distribution (Wikipedia) <http://en.wikipedia.org/wiki/Nakagami_distribution>`, serialized
     """
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, mu: float, omega: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
+    def __init__(self, mu: float, omega: float, inverseAbsoluteAccuracy: float): ...
     def cumulativeProbability(self, x: float) -> float:
         """
         For a random variable X whose values are distributed according to this distribution, this method returns P(X <= x). In other words, this method represents the (cumulative) distribution function (CDF) for this distribution.
@@ -2136,14 +2138,14 @@ class NormalDistribution(AbstractRealDistribution):
     """
     Implementation of the normal (gaussian) distribution.
     
-          - `Normal distribution (Wikipedia) <http://en.wikipedia.org/wiki/Normal_distribution>`
-          - `Normal distribution (MathWorld) <http://mathworld.wolfram.com/NormalDistribution.html>`
-          - serialized
+    Also see:
+        `Normal distribution (Wikipedia) <http://en.wikipedia.org/wiki/Normal_distribution>`, `Normal distribution (MathWorld)
+        <http://mathworld.wolfram.com/NormalDistribution.html>`, serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, mean: float, sd: float): ...
     def cumulativeProbability(self, x: float) -> float:
         """
         For a random variable X whose values are distributed according to this distribution, this method returns P(X <= x). In other words, this method represents the (cumulative) distribution function (CDF) for this distribution. If x is more than 40 standard deviations from the mean, 0 or 1 is returned, as in these cases the actual value is within MIN_VALUE of 0 or 1.
@@ -2327,16 +2329,16 @@ class ParetoDistribution(AbstractRealDistribution):
       - α is the shape parameter: this is the Pareto index
     
     
-          - ` Pareto distribution (Wikipedia) <http://en.wikipedia.org/wiki/Pareto_distribution>`
-          - ` Pareto distribution (MathWorld) <http://mathworld.wolfram.com/ParetoDistribution.html>`
-          - serialized
+    Also see:
+        ` Pareto distribution (Wikipedia) <http://en.wikipedia.org/wiki/Pareto_distribution>`, ` Pareto distribution (MathWorld)
+        <http://mathworld.wolfram.com/ParetoDistribution.html>`, serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, scale: float, shape: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
+    def __init__(self, scale: float, shape: float, inverseCumAccuracy: float): ...
     def cumulativeProbability(self, x: float) -> float:
         """
         For a random variable X whose values are distributed according to this distribution, this method returns P(X <= x). In other words, this method represents the (cumulative) distribution function (CDF) for this distribution.
@@ -2492,12 +2494,13 @@ class TDistribution(AbstractRealDistribution):
     """
     Implementation of Student's t-distribution.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
-    def __init__(self, double: float): ...
+    def __init__(self, degreesOfFreedom: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, degreesOfFreedom: float, inverseCumAccuracy: float): ...
     def cumulativeProbability(self, x: float) -> float:
         """
         For a random variable X whose values are distributed according to this distribution, this method returns P(X <= x). In other words, this method represents the (cumulative) distribution function (CDF) for this distribution.
@@ -2622,8 +2625,8 @@ class TriangularDistribution(AbstractRealDistribution):
     """
     Implementation of the triangular real distribution.
     
-          - ` Triangular distribution (Wikipedia) <http://en.wikipedia.org/wiki/Triangular_distribution>`
-          - serialized
+    Also see:
+        ` Triangular distribution (Wikipedia) <http://en.wikipedia.org/wiki/Triangular_distribution>`, serialized
     """
     def __init__(self, a: float, c: float, b: float):
         """
@@ -2631,8 +2634,8 @@ class TriangularDistribution(AbstractRealDistribution):
         
         Parameters:
             a (double): Lower limit of this distribution (inclusive).
-            c (double): Mode of this distribution.
             b (double): Upper limit of this distribution (inclusive).
+            c (double): Mode of this distribution.
         
         Raises:
             MathIllegalArgumentException: if a >= b or if c > b.
@@ -2778,13 +2781,14 @@ class UniformRealDistribution(AbstractRealDistribution):
     """
     Implementation of the uniform real distribution.
     
-          - ` Uniform distribution (continuous), at Wikipedia <http://en.wikipedia.org/wiki/Uniform_distribution_(continuous)>`
-          - serialized
+    Also see:
+        ` Uniform distribution (continuous), at Wikipedia <http://en.wikipedia.org/wiki/Uniform_distribution_(continuous)>`,
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, lower: float, upper: float): ...
     def cumulativeProbability(self, x: float) -> float:
         """
         For a random variable X whose values are distributed according to this distribution, this method returns P(X <= x). In other words, this method represents the (cumulative) distribution function (CDF) for this distribution.
@@ -2899,9 +2903,9 @@ class WeibullDistribution(AbstractRealDistribution):
     """
     Implementation of the Weibull distribution. This implementation uses the two parameter form of the distribution defined by ` Weibull Distribution <http://mathworld.wolfram.com/WeibullDistribution.html>`, equations (1) and (2).
     
-          - `Weibull distribution (Wikipedia) <http://en.wikipedia.org/wiki/Weibull_distribution>`
-          - `Weibull distribution (MathWorld) <http://mathworld.wolfram.com/WeibullDistribution.html>`
-          - serialized
+    Also see:
+        `Weibull distribution (Wikipedia) <http://en.wikipedia.org/wiki/Weibull_distribution>`, `Weibull distribution
+        (MathWorld) <http://mathworld.wolfram.com/WeibullDistribution.html>`, serialized
     """
     def __init__(self, alpha: float, beta: float):
         """

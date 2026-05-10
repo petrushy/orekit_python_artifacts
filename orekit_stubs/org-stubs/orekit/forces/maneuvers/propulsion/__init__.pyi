@@ -353,7 +353,7 @@ class PythonPropulsionModel(PropulsionModel):
         ...
     _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None: ...
+    def init(self, initialState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], target: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None: ...
     @typing.overload
     def init(self, initialState: org.orekit.propagation.SpacecraftState, target: org.orekit.time.AbsoluteDate) -> None:
         """
@@ -378,7 +378,7 @@ class PythonPropulsionModel(PropulsionModel):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -443,7 +443,7 @@ class PythonThrustVectorProvider(ThrustVectorProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -526,7 +526,7 @@ class ThrustPropulsionModel(PropulsionModel):
         ...
     _getFlowRate_2__T = typing.TypeVar('_getFlowRate_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
+    def getFlowRate(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Parameters:
             s (SpacecraftState): current spacecraft state
@@ -546,7 +546,7 @@ class ThrustPropulsionModel(PropulsionModel):
         """
         ...
     @typing.overload
-    def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def getFlowRate(self, s: org.orekit.propagation.SpacecraftState, parameters: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
     def getFlowRate(self, s: org.orekit.propagation.FieldSpacecraftState[_getFlowRate_2__T], parameters: typing.Union[typing.List[_getFlowRate_2__T], jpype.JArray]) -> _getFlowRate_2__T:
         """
@@ -622,7 +622,7 @@ class ThrustPropulsionModel(PropulsionModel):
         """
         ...
     @typing.overload
-    def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getThrustVector(self, s: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
         Parameters:
             s (SpacecraftState): current spacecraft state
@@ -642,7 +642,7 @@ class ThrustPropulsionModel(PropulsionModel):
         """
         ...
     @typing.overload
-    def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def getThrustVector(self, s: org.orekit.propagation.SpacecraftState, parameters: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
 
 class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
     """
@@ -689,7 +689,7 @@ class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
         """
         ...
     @typing.overload
-    def getDirection(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def getDirection(self, date: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     _getFlowRate_3__T = typing.TypeVar('_getFlowRate_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getFlowRate_6__T = typing.TypeVar('_getFlowRate_6__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
@@ -701,7 +701,7 @@ class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
         """
         ...
     @typing.overload
-    def getFlowRate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
+    def getFlowRate(self, s: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
         Specified by: getFlowRate in interface ThrustPropulsionModel
         
@@ -759,7 +759,7 @@ class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
     @typing.overload
     def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float: ...
     @typing.overload
-    def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def getFlowRate(self, s: org.orekit.propagation.SpacecraftState, parameters: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
     def getFlowRate(self, s: org.orekit.propagation.FieldSpacecraftState[_getFlowRate_6__T], parameters: typing.Union[typing.List[_getFlowRate_6__T], jpype.JArray]) -> _getFlowRate_6__T:
         """
@@ -800,7 +800,7 @@ class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
         """
         ...
     @typing.overload
-    def getIsp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
+    def getIsp(self, date: org.orekit.time.AbsoluteDate) -> float: ...
     def getName(self) -> str:
         """
         Get the maneuver name.
@@ -847,7 +847,7 @@ class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
         """
         ...
     @typing.overload
-    def getThrustVector(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getThrustVector(self, s: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
         Specified by: getThrustVector in interface ThrustPropulsionModel
         
@@ -917,7 +917,7 @@ class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
     @typing.overload
     def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     @typing.overload
-    def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def getThrustVector(self, s: org.orekit.propagation.SpacecraftState, parameters: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
 
 class ProfileThrustPropulsionModel(ThrustPropulsionModel):
     """
@@ -927,9 +927,9 @@ class ProfileThrustPropulsionModel(ThrustPropulsionModel):
         12.0
     """
     @typing.overload
-    def __init__(self, timeSpanMap: org.orekit.utils.TimeSpanMap[ThrustVectorProvider], double: float, string: str): ...
+    def __init__(self, profile: org.orekit.utils.TimeSpanMap[ThrustVectorProvider], isp: float, name: str): ...
     @typing.overload
-    def __init__(self, timeSpanMap: org.orekit.utils.TimeSpanMap[ThrustVectorProvider], double: float, control3DVectorCostType: org.orekit.forces.maneuvers.Control3DVectorCostType, string: str): ...
+    def __init__(self, profile: org.orekit.utils.TimeSpanMap[ThrustVectorProvider], isp: float, control3DVectorCostType: org.orekit.forces.maneuvers.Control3DVectorCostType, name: str): ...
     def getActiveProvider(self, date: org.orekit.time.AbsoluteDate) -> ThrustVectorProvider:
         """
         Getter for active provider at input date.
@@ -970,7 +970,7 @@ class ProfileThrustPropulsionModel(ThrustPropulsionModel):
     def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
     _getFlowRate_2__T = typing.TypeVar('_getFlowRate_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
+    def getFlowRate(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Specified by: getFlowRate in interface ThrustPropulsionModel
         
@@ -994,7 +994,7 @@ class ProfileThrustPropulsionModel(ThrustPropulsionModel):
         """
         ...
     @typing.overload
-    def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def getFlowRate(self, s: org.orekit.propagation.SpacecraftState, parameters: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
     def getFlowRate(self, s: org.orekit.propagation.FieldSpacecraftState[_getFlowRate_2__T], parameters: typing.Union[typing.List[_getFlowRate_2__T], jpype.JArray]) -> _getFlowRate_2__T:
         """
@@ -1051,7 +1051,7 @@ class ProfileThrustPropulsionModel(ThrustPropulsionModel):
         """
         ...
     @typing.overload
-    def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getThrustVector(self, s: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
         Specified by: getThrustVector in interface ThrustPropulsionModel
         
@@ -1075,10 +1075,10 @@ class ProfileThrustPropulsionModel(ThrustPropulsionModel):
         """
         ...
     @typing.overload
-    def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def getThrustVector(self, s: org.orekit.propagation.SpacecraftState, parameters: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     _of__T = typing.TypeVar('_of__T', bound=ThrustVectorProvider)  # <T>
     @staticmethod
-    def of(profile: org.orekit.utils.TimeSpanMap[_of__T], isp: float, name: org.orekit.forces.maneuvers.Control3DVectorCostType, control3DVectorCostType: str) -> 'ProfileThrustPropulsionModel':
+    def of(profile: org.orekit.utils.TimeSpanMap[_of__T], isp: float, control3DVectorCostType: org.orekit.forces.maneuvers.Control3DVectorCostType, name: str) -> 'ProfileThrustPropulsionModel':
         """
         Build with customized profile.
         
@@ -1123,7 +1123,7 @@ class PythonThrustPropulsionModel(ThrustPropulsionModel):
         ...
     _getFlowRate_2__T = typing.TypeVar('_getFlowRate_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
+    def getFlowRate(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Specified by: getFlowRate in interface ThrustPropulsionModel
         
@@ -1147,7 +1147,7 @@ class PythonThrustPropulsionModel(ThrustPropulsionModel):
         """
         ...
     @typing.overload
-    def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def getFlowRate(self, s: org.orekit.propagation.SpacecraftState, parameters: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
     def getFlowRate(self, s: org.orekit.propagation.FieldSpacecraftState[_getFlowRate_2__T], parameters: typing.Union[typing.List[_getFlowRate_2__T], jpype.JArray]) -> _getFlowRate_2__T:
         """
@@ -1192,7 +1192,7 @@ class PythonThrustPropulsionModel(ThrustPropulsionModel):
         """
         ...
     @typing.overload
-    def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getThrustVector(self, s: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
         Specified by: getThrustVector in interface ThrustPropulsionModel
         
@@ -1216,10 +1216,10 @@ class PythonThrustPropulsionModel(ThrustPropulsionModel):
         """
         ...
     @typing.overload
-    def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def getThrustVector(self, s: org.orekit.propagation.SpacecraftState, parameters: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None: ...
+    def init(self, initialState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], target: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None: ...
     @typing.overload
     def init(self, initialState: org.orekit.propagation.SpacecraftState, target: org.orekit.time.AbsoluteDate) -> None:
         """
@@ -1236,7 +1236,7 @@ class PythonThrustPropulsionModel(ThrustPropulsionModel):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 class BasicConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
     """
@@ -1276,13 +1276,13 @@ class BasicConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
     We use a power of 2 to avoid numeric noise introduction in the multiplications/divisions sequences.
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, string: str): ...
+    def __init__(self, thrust: float, isp: float, direction: org.hipparchus.geometry.euclidean.threed.Vector3D, name: str): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, control3DVectorCostType: org.orekit.forces.maneuvers.Control3DVectorCostType, string: str): ...
+    def __init__(self, thrust: float, isp: float, direction: org.hipparchus.geometry.euclidean.threed.Vector3D, control3DVectorCostType: org.orekit.forces.maneuvers.Control3DVectorCostType, name: str): ...
     _getFlowRate_5__T = typing.TypeVar('_getFlowRate_5__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getFlowRate_6__T = typing.TypeVar('_getFlowRate_6__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
+    def getFlowRate(self, date: org.orekit.propagation.SpacecraftState) -> float:
         """
         Specified by: getFlowRate in class AbstractConstantThrustPropulsionModel
         
@@ -1366,7 +1366,7 @@ class BasicConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
         """
         ...
     @typing.overload
-    def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getThrustVector(self, date: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
         Specified by: getThrustVector in class AbstractConstantThrustPropulsionModel
         
@@ -1408,9 +1408,9 @@ class BasicConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
 
 class PythonAbstractConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
     @typing.overload
-    def __init__(self, double: float, double2: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, string: str): ...
+    def __init__(self, thrust: float, isp: float, direction: org.hipparchus.geometry.euclidean.threed.Vector3D, name: str): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, control3DVectorCostType: org.orekit.forces.maneuvers.Control3DVectorCostType, string: str): ...
+    def __init__(self, thrust: float, isp: float, direction: org.hipparchus.geometry.euclidean.threed.Vector3D, control3DVectorCostType: org.orekit.forces.maneuvers.Control3DVectorCostType, name: str): ...
     def finalize(self) -> None:
         """
         Overrides: Object in class Object
@@ -1423,7 +1423,7 @@ class PythonAbstractConstantThrustPropulsionModel(AbstractConstantThrustPropulsi
     _getFlowRate_5__T = typing.TypeVar('_getFlowRate_5__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getFlowRate_6__T = typing.TypeVar('_getFlowRate_6__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
+    def getFlowRate(self, date: org.orekit.propagation.SpacecraftState) -> float:
         """
         Specified by: getFlowRate in class AbstractConstantThrustPropulsionModel
         
@@ -1515,7 +1515,7 @@ class PythonAbstractConstantThrustPropulsionModel(AbstractConstantThrustPropulsi
         """
         ...
     @typing.overload
-    def getThrustVector(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getThrustVector(self, date: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
         Description copied from class: getThrustVector Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
         
@@ -1552,7 +1552,7 @@ class PythonAbstractConstantThrustPropulsionModel(AbstractConstantThrustPropulsi
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 class ScaledConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
     """
@@ -1604,7 +1604,7 @@ class ScaledConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel)
     _getFlowRate_5__T = typing.TypeVar('_getFlowRate_5__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getFlowRate_6__T = typing.TypeVar('_getFlowRate_6__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
+    def getFlowRate(self, date: org.orekit.propagation.SpacecraftState) -> float:
         """
         Specified by: getFlowRate in class AbstractConstantThrustPropulsionModel
         
@@ -1688,7 +1688,7 @@ class ScaledConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel)
         """
         ...
     @typing.overload
-    def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getThrustVector(self, date: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
         Specified by: getThrustVector in class AbstractConstantThrustPropulsionModel
         
@@ -1772,13 +1772,13 @@ class SphericalConstantThrustPropulsionModel(AbstractConstantThrustPropulsionMod
     We use a power of 2 to avoid numeric noise introduction in the multiplications/divisions sequences.
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, string: str): ...
+    def __init__(self, isp: float, thrustMagnitude: float, thrustDirection: org.hipparchus.geometry.euclidean.threed.Vector3D, name: str): ...
     @typing.overload
-    def __init__(self, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, string: str): ...
+    def __init__(self, isp: float, thrustVector: org.hipparchus.geometry.euclidean.threed.Vector3D, name: str): ...
     _getFlowRate_5__T = typing.TypeVar('_getFlowRate_5__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getFlowRate_6__T = typing.TypeVar('_getFlowRate_6__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getFlowRate(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
+    def getFlowRate(self, date: org.orekit.propagation.SpacecraftState) -> float:
         """
         Specified by: getFlowRate in class AbstractConstantThrustPropulsionModel
         
@@ -1862,7 +1862,7 @@ class SphericalConstantThrustPropulsionModel(AbstractConstantThrustPropulsionMod
         """
         ...
     @typing.overload
-    def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getThrustVector(self, date: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
         Specified by: getThrustVector in class AbstractConstantThrustPropulsionModel
         

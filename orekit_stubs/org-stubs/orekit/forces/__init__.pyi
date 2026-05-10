@@ -36,9 +36,9 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
     Each Panel has its own set of radiation and drag coefficients. In orbit determination context, it would not be possible to estimate each panel individually, therefore getDragParametersDrivers returns a single ParameterDriver representing a GLOBAL_DRAG_FACTOR that applies to all panels drag coefficients and the getRadiationParametersDrivers returns a single ParameterDriver representing a GLOBAL_RADIATION_FACTOR that applies to all panels radiation coefficients.
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], double4: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double5: float, double6: float, double7: float, double8: float): ...
+    def __init__(self, xLength: float, yLength: float, zLength: float, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], solarArrayArea: float, solarArrayAxis: org.hipparchus.geometry.euclidean.threed.Vector3D, dragCoeff: float, liftRatio: float, absorptionCoeff: float, reflectionCoeff: float): ...
     @typing.overload
-    def __init__(self, list: java.util.List['Panel']): ...
+    def __init__(self, panels: java.util.List['Panel']): ...
     @staticmethod
     def buildBox(xLength: float, yLength: float, zLength: float, drag: float, liftRatio: float, absorption: float, reflection: float) -> java.util.List['Panel']:
         """
@@ -435,9 +435,9 @@ class Panel:
         ...
     _getNormal_0__T = typing.TypeVar('_getNormal_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getNormal(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getNormal_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getNormal_0__T]: ...
+    def getNormal(self, state: org.orekit.propagation.FieldSpacecraftState[_getNormal_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getNormal_0__T]: ...
     @typing.overload
-    def getNormal(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getNormal(self, state: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
         Get panel normal in spacecraft frame.
         
@@ -883,7 +883,7 @@ class PythonForceModel(ForceModel):
     _getParameters_1__T = typing.TypeVar('_getParameters_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getParameters_3__T = typing.TypeVar('_getParameters_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getParameters(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]: ...
+    def getParameters(self, field: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]: ...
     @typing.overload
     def getParameters(self, field: org.hipparchus.Field[_getParameters_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getParameters_1__T]) -> typing.MutableSequence[_getParameters_1__T]: ...
     @typing.overload
@@ -932,7 +932,7 @@ class PythonForceModel(ForceModel):
         ...
     _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None: ...
+    def init(self, initialState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], target: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None: ...
     @typing.overload
     def init(self, initialState: org.orekit.propagation.SpacecraftState, target: org.orekit.time.AbsoluteDate) -> None:
         """
@@ -981,7 +981,7 @@ class PythonForceModel(ForceModel):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1093,7 +1093,7 @@ class PythonForceModelModifier(ForceModelModifier):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

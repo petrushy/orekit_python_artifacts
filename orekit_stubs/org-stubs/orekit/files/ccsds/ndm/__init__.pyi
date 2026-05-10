@@ -28,6 +28,7 @@ import org.orekit.files.ccsds.utils
 import org.orekit.files.ccsds.utils.generation
 import org.orekit.files.ccsds.utils.lexical
 import org.orekit.files.ccsds.utils.parsing
+import org.orekit.frames
 import org.orekit.time
 import org.orekit.utils
 import org.orekit.utils.units
@@ -193,9 +194,21 @@ class CommonPhysicalProperties(org.orekit.files.ccsds.section.CommentsContainer)
     Since:
         11.3
     """
-    def __init__(self):
+    @typing.overload
+    def __init__(self): ...
+    @typing.overload
+    def __init__(self, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
+    def getFrameMapper(self) -> org.orekit.files.ccsds.definitions.CcsdsFrameMapper:
         """
-        Simple constructor.
+        Get the mapping between a CCSDS frame and a Frame.
+        
+        Returns:
+            the frame mapper.
+        
+        Since:
+            13.1.5
+        
+        
         """
         ...
     def getMaxRcs(self) -> float:
@@ -274,6 +287,24 @@ class CommonPhysicalProperties(org.orekit.files.ccsds.section.CommentsContainer)
         
         Returns:
             dimensions the minimum physical dimension of the OEB.
+        
+        
+        """
+        ...
+    def getOebParent(self) -> org.orekit.frames.Frame:
+        """
+        Get the frame OEB parent frame. Note that only the orientation of the returned frame is significant, the position of the returned frame is irrelevant and should be ignored.
+        
+        Returns:
+            Orekit frame for this covariance history.
+        
+        Since:
+            13.1.5
+        
+        Also see:
+            getOebParentFrame,
+            getOebParentFrameEpoch,
+            getFrameMapper
         
         
         """
@@ -1031,6 +1062,19 @@ class ParserBuilder(AbstractBuilder['ParserBuilder']):
         
         """
         ...
+    def getFrameMapper(self) -> org.orekit.files.ccsds.definitions.CcsdsFrameMapper:
+        """
+        Get the mapping between CCSDS NDM center and frame and a Frame.
+        
+        Returns:
+            the frame mapper.
+        
+        Since:
+            13.1.5
+        
+        
+        """
+        ...
     def getMu(self) -> float:
         """
         Get the gravitational coefficient.
@@ -1173,6 +1217,22 @@ class ParserBuilder(AbstractBuilder['ParserBuilder']):
         
         """
         ...
+    def withFrameMapper(self, newFrameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper) -> 'ParserBuilder':
+        """
+        Set the mapping between CCSDS NDM center and frame and a Frame.
+        
+        Parameters:
+            newFrameMapper (CcsdsFrameMapper): the frame mapper.
+        
+        Returns:
+            a new builder with updated configuration (the instance is not changed)
+        
+        Since:
+            13.1.5
+        
+        
+        """
+        ...
     def withMu(self, newMu: float) -> 'ParserBuilder':
         """
         Set up the gravitational coefficient.
@@ -1215,7 +1275,7 @@ class ParserBuilder(AbstractBuilder['ParserBuilder']):
 
 _PythonAbstractBuilder__T = typing.TypeVar('_PythonAbstractBuilder__T', bound=AbstractBuilder)  # <T>
 class PythonAbstractBuilder(AbstractBuilder[_PythonAbstractBuilder__T], typing.Generic[_PythonAbstractBuilder__T]):
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, double: float, double2: float, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, rangeUnitsConverter: org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter):
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, equatorialRadius: float, flattening: float, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate, rangeUnitsConverter: org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter):
         """
         Complete constructor.
         
@@ -1271,7 +1331,7 @@ class PythonAbstractBuilder(AbstractBuilder[_PythonAbstractBuilder__T], typing.G
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1370,7 +1430,7 @@ class PythonNdmConstituent(NdmConstituent[_PythonNdmConstituent__H, _PythonNdmCo
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

@@ -122,11 +122,11 @@ class AntexLoader:
     
     """
     @typing.overload
-    def __init__(self, string: str): ...
+    def __init__(self, supportedNames: str): ...
     @typing.overload
-    def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, supportedNames: str, dataProvidersManager: org.orekit.data.DataProvidersManager, gps: org.orekit.time.TimeScale): ...
     @typing.overload
-    def __init__(self, dataSource: org.orekit.data.DataSource, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, source: org.orekit.data.DataSource, gps: org.orekit.time.TimeScale): ...
     def findSatelliteAntenna(self, satInSystem: org.orekit.gnss.SatInSystem) -> org.orekit.utils.TimeSpanMap['SatelliteAntenna']:
         """
         Find the time map for a specific satellite antenna.
@@ -445,7 +445,7 @@ class PythonPhaseCenterVariationFunction(PhaseCenterVariationFunction):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

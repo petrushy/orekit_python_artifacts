@@ -19,7 +19,8 @@ class Encloser(typing.Generic[_Encloser__S, _Encloser__P]):
     """
     Interface for algorithms computing enclosing balls.
     
-          - EnclosingBall
+    Also see:
+        EnclosingBall
     """
     def enclose(self, points: typing.Union[java.lang.Iterable[_Encloser__P], typing.Sequence[_Encloser__P], typing.Set[_Encloser__P], typing.Callable[[], java.util.Iterator[typing.Any]]]) -> 'EnclosingBall'[_Encloser__S, _Encloser__P]:
         """
@@ -39,14 +40,11 @@ _EnclosingBall__S = typing.TypeVar('_EnclosingBall__S', bound=org.hipparchus.geo
 _EnclosingBall__P = typing.TypeVar('_EnclosingBall__P', bound=org.hipparchus.geometry.Point)  # <P>
 class EnclosingBall(java.io.Serializable, typing.Generic[_EnclosingBall__S, _EnclosingBall__P]):
     """
-    implements Serializable
-    
     This class represents a ball enclosing some points.
     
-          - Space
-          - Point
-          - Encloser
-          - serialized
+    Also see:
+        Space, Point,
+        Encloser, serialized
     """
     def __init__(self, center: _EnclosingBall__P, radius: float, *support: _EnclosingBall__P):
         """
@@ -61,7 +59,7 @@ class EnclosingBall(java.io.Serializable, typing.Generic[_EnclosingBall__S, _Enc
         """
         ...
     @typing.overload
-    def contains(self, p: _EnclosingBall__P) -> bool:
+    def contains(self, point: _EnclosingBall__P) -> bool:
         """
         Check if a point is within the ball or at boundary.
         
@@ -84,7 +82,7 @@ class EnclosingBall(java.io.Serializable, typing.Generic[_EnclosingBall__S, _Enc
         """
         ...
     @typing.overload
-    def contains(self, p: _EnclosingBall__P, double: float) -> bool: ...
+    def contains(self, point: _EnclosingBall__P, margin: float) -> bool: ...
     def getCenter(self) -> _EnclosingBall__P:
         """
         Get the center of the ball.
@@ -134,7 +132,8 @@ class SupportBallGenerator(typing.Generic[_SupportBallGenerator__S, _SupportBall
     
     This generator is used in the WelzlEncloser algorithm and its derivatives.
     
-          - EnclosingBall
+    Also see:
+        EnclosingBall
     """
     def ballOnSupport(self, support: java.util.List[_SupportBallGenerator__P]) -> EnclosingBall[_SupportBallGenerator__S, _SupportBallGenerator__P]:
         """
@@ -154,8 +153,6 @@ _WelzlEncloser__S = typing.TypeVar('_WelzlEncloser__S', bound=org.hipparchus.geo
 _WelzlEncloser__P = typing.TypeVar('_WelzlEncloser__P', bound=org.hipparchus.geometry.Point)  # <P>
 class WelzlEncloser(Encloser[_WelzlEncloser__S, _WelzlEncloser__P], typing.Generic[_WelzlEncloser__S, _WelzlEncloser__P]):
     """
-    implements Encloser<S,P>
-    
     Class implementing Emo Welzl algorithm to find the smallest enclosing ball in linear time.
     
     The class implements the algorithm described in paper `Smallest Enclosing Disks (Balls and Ellipsoids) <http://www.inf.ethz.ch/personal/emo/PublFiles/SmallEnclDisk_LNCS555_91.pdf>` by Emo Welzl, Lecture Notes in Computer Science 555 (1991) 359-370. The pivoting improvement published in the paper `Fast and Robust Smallest Enclosing Balls <http://www.inf.ethz.ch/personal/gaertner/texts/own_work/esa99_final.pdf>`, by Bernd Gärtner and further modified in paper ` Efficient Computation of Smallest Enclosing Balls in Three Dimensions <http://www.idt.mdh.se/kurser/ct3340/ht12/MINICONFERENCE/FinalPapers/ircse12_submission_30.pdf>` by Linus Källberg to avoid performing local copies of data have been included.
@@ -166,7 +163,7 @@ class WelzlEncloser(Encloser[_WelzlEncloser__S, _WelzlEncloser__P], typing.Gener
         
         Parameters:
             tolerance (double): below which points are consider to be identical
-            generator (SupportBallGenerator<WelzlEncloser,WelzlEncloser> generator): generator for balls on support
+            generator (SupportBallGenerator<WelzlEncloser, WelzlEncloser> generator): generator for balls on support
         
         
         """
@@ -192,7 +189,7 @@ class WelzlEncloser(Encloser[_WelzlEncloser__S, _WelzlEncloser__P], typing.Gener
         
         Parameters:
             points (Iterable<WelzlEncloser> points): points to be enclosed
-            ball (EnclosingBall<WelzlEncloser,WelzlEncloser> ball): current ball
+            ball (EnclosingBall<WelzlEncloser, WelzlEncloser> ball): current ball
         
         Returns:
             farthest point

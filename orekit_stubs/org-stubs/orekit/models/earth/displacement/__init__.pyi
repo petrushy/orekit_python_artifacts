@@ -221,9 +221,9 @@ class OceanLoadingCoefficientsBLQFactory(org.orekit.data.AbstractSelfFeedingLoad
     
     """
     @typing.overload
-    def __init__(self, string: str): ...
+    def __init__(self, supportedNames: str): ...
     @typing.overload
-    def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
+    def __init__(self, supportedNames: str, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
     def getCoefficients(self, site: str) -> OceanLoadingCoefficients:
         """
         Get the coefficients for a given site.
@@ -474,9 +474,9 @@ class Tide:
     Ssa tide.
     """
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, doodsonNumber: int): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, int3: int, int4: int, int5: int, int6: int): ...
+    def __init__(self, cTau: int, cS: int, cH: int, cP: int, cNprime: int, cPs: int): ...
     def equals(self, object: typing.Any) -> bool:
         """
         Overrides: Object in class Object
@@ -729,7 +729,7 @@ class PythonStationDisplacement(StationDisplacement):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -747,7 +747,7 @@ class TectonicsDisplacement(StationDisplacement):
     Also see:
         GroundStation, package
     """
-    def __init__(self, velocity: org.orekit.time.AbsoluteDate, epoch: org.hipparchus.geometry.euclidean.threed.Vector3D):
+    def __init__(self, epoch: org.orekit.time.AbsoluteDate, velocity: org.hipparchus.geometry.euclidean.threed.Vector3D):
         """
         Simple constructor.
         

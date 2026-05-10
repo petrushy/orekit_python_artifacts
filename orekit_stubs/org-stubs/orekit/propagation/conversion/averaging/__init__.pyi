@@ -240,7 +240,7 @@ class PythonAveragedOrbitalState(AveragedOrbitalState):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -333,7 +333,7 @@ class PythonAbstractAveragedOrbitalState(AbstractAveragedOrbitalState):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -361,9 +361,9 @@ class SGP4OrbitalState(AbstractAveragedOrbitalState):
         TLEPropagator
     """
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, averagedKeplerianWithMeanAngle: org.orekit.propagation.conversion.averaging.elements.AveragedKeplerianWithMeanAngle): ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, elements: org.orekit.propagation.conversion.averaging.elements.AveragedKeplerianWithMeanAngle): ...
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, averagedKeplerianWithMeanAngle: org.orekit.propagation.conversion.averaging.elements.AveragedKeplerianWithMeanAngle, dataContext: org.orekit.data.DataContext): ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, elements: org.orekit.propagation.conversion.averaging.elements.AveragedKeplerianWithMeanAngle, dataContext: org.orekit.data.DataContext): ...
     def getAveragedElements(self) -> org.orekit.propagation.conversion.averaging.elements.AveragedKeplerianWithMeanAngle:
         """
         Getter for the averaged orbital elements.
@@ -706,7 +706,7 @@ class PythonAbstractHarmonicsBasedOrbitalState(org.orekit.propagation.conversion
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

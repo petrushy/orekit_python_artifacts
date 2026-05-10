@@ -55,7 +55,8 @@ class NonLinearEvolution:
     Since:
         1.3
     
-          - NonLinearProcess
+    Also see:
+        NonLinearProcess
     """
     def __init__(self, currentTime: float, currentState: org.hipparchus.linear.RealVector, stateTransitionMatrix: org.hipparchus.linear.RealMatrix, processNoiseMatrix: org.hipparchus.linear.RealMatrix, measurementJacobian: org.hipparchus.linear.RealMatrix):
         """
@@ -132,8 +133,9 @@ class NonLinearProcess(typing.Generic[_NonLinearProcess__T]):
     Since:
         1.3
     
-          - ExtendedKalmanFilter
-          - LinearProcess
+    Also see:
+        ExtendedKalmanFilter,
+        LinearProcess
     """
     def getEvolution(self, previousTime: float, previousState: org.hipparchus.linear.RealVector, measurement: _NonLinearProcess__T) -> NonLinearEvolution:
         """

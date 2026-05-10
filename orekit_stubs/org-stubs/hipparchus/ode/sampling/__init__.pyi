@@ -20,9 +20,9 @@ class FieldODEFixedStepHandler(typing.Generic[_FieldODEFixedStepHandler__T]):
     
     This interface should be implemented by anyone who is interested in getting the solution of an ordinary differential equation at fixed time steps. Objects implementing this interface should be wrapped within an instance of FieldStepNormalizer that itself is used as the general FieldODEStepHandler by the integrator. The FieldStepNormalizer object is called according to the integrator internal algorithms and it calls objects implementing this interface as necessary at fixed time steps.
     
-          - FieldODEStepHandler
-          - FieldStepNormalizer
-          - FieldODEStateInterpolator
+    Also see:
+        FieldODEStepHandler, FieldStepNormalizer,
+        FieldODEStateInterpolator
     """
     def handleStep(self, state: org.hipparchus.ode.FieldODEStateAndDerivative[_FieldODEFixedStepHandler__T], isLast: bool) -> None:
         """
@@ -61,8 +61,8 @@ class FieldODEStateInterpolator(typing.Generic[_FieldODEStateInterpolator__T]):
     
     The various ODE integrators provide objects implementing this interface to the step handlers. These objects are often custom objects tightly bound to the integrator internal algorithms. The handlers can use these objects to retrieve the state vector at intermediate times between the previous and the current grid points (this feature is often called dense output).
     
-          - FieldODEIntegrator
-          - FieldODEStepHandler
+    Also see:
+        FieldODEIntegrator, FieldODEStepHandler
     """
     def getCurrentState(self) -> org.hipparchus.ode.FieldODEStateAndDerivative[_FieldODEStateInterpolator__T]:
         """
@@ -150,9 +150,9 @@ class FieldODEStateInterpolator(typing.Generic[_FieldODEStateInterpolator__T]):
         Returns:
             restricted version of the instance
         
-              - getPreviousState
-              - getCurrentState
-        
+        Also see:
+            getPreviousState,
+            getCurrentState
         
         
         """
@@ -165,8 +165,8 @@ class FieldODEStepHandler(typing.Generic[_FieldODEStepHandler__T]):
     
     The ODE integrators compute the evolution of the state vector at some grid points that depend on their own internal algorithm. Once they have found a new grid point (possibly after having computed several evaluation of the derivative at intermediate points), they provide it to objects implementing this interface. These objects typically either ignore the intermediate steps and wait for the last one, store the points in an ephemeris, or forward them to specialized processing or output methods.
     
-          - FieldODEIntegrator
-          - FieldODEStateInterpolator
+    Also see:
+        FieldODEIntegrator, FieldODEStateInterpolator
     """
     def finish(self, finalState: org.hipparchus.ode.FieldODEStateAndDerivative[_FieldODEStepHandler__T]) -> None:
         """
@@ -206,6 +206,19 @@ class FieldODEStepHandler(typing.Generic[_FieldODEStepHandler__T]):
         
         """
         ...
+    def updateOnStep(self, interpolator: FieldODEStateInterpolator[_FieldODEStepHandler__T]) -> None:
+        """
+        Update the handler at the beginning of the step
+        
+        Parameters:
+            interpolator (FieldODEStateInterpolator<FieldODEStepHandler> interpolator): interpolator for the current step
+        
+        Since:
+            4.0.3
+        
+        
+        """
+        ...
 
 class ODEFixedStepHandler:
     """
@@ -213,8 +226,8 @@ class ODEFixedStepHandler:
     
     This interface should be implemented by anyone who is interested in getting the solution of an ordinary differential equation at fixed time steps. Objects implementing this interface should be wrapped within an instance of StepNormalizer that itself is used as the general ODEStepHandler by the integrator. The StepNormalizer object is called according to the integrator internal algorithms and it calls objects implementing this interface as necessary at fixed time steps.
     
-          - ODEStepHandler
-          - StepNormalizer
+    Also see:
+        ODEStepHandler, StepNormalizer
     """
     def handleStep(self, state: org.hipparchus.ode.ODEStateAndDerivative, isLast: bool) -> None:
         """
@@ -249,8 +262,8 @@ class ODEStateInterpolator(java.io.Serializable):
     
     The various ODE integrators provide objects implementing this interface to the step handlers. These objects are often custom objects tightly bound to the integrator internal algorithms. The handlers can use these objects to retrieve the state vector at intermediate times between the previous and the current grid points (this feature is often called dense output).
     
-          - ODEIntegrator
-          - ODEStepHandler
+    Also see:
+        ODEIntegrator, ODEStepHandler
     """
     def getCurrentState(self) -> org.hipparchus.ode.ODEStateAndDerivative:
         """
@@ -338,9 +351,9 @@ class ODEStateInterpolator(java.io.Serializable):
         Returns:
             restricted version of the instance
         
-              - getPreviousState
-              - getCurrentState
-        
+        Also see:
+            getPreviousState,
+            getCurrentState
         
         
         """
@@ -352,8 +365,8 @@ class ODEStepHandler:
     
     The ODE integrators compute the evolution of the state vector at some grid points that depend on their own internal algorithm. Once they have found a new grid point (possibly after having computed several evaluation of the derivative at intermediate points), they provide it to objects implementing this interface. These objects typically either ignore the intermediate steps and wait for the last one, store the points in an ephemeris, or forward them to specialized processing or output methods.
     
-          - ODEIntegrator
-          - ODEStateInterpolator
+    Also see:
+        ODEIntegrator, ODEStateInterpolator
     """
     def finish(self, finalState: org.hipparchus.ode.ODEStateAndDerivative) -> None:
         """
@@ -393,14 +406,27 @@ class ODEStepHandler:
         
         """
         ...
+    def updateOnStep(self, interpolator: ODEStateInterpolator) -> None:
+        """
+        Update the handler at the beginning of the step
+        
+        Parameters:
+            interpolator (ODEStateInterpolator): interpolator for the current step
+        
+        Since:
+            4.0.3
+        
+        
+        """
+        ...
 
 class StepNormalizerBounds(java.lang.Enum['StepNormalizerBounds']):
     """
     StepNormalizer bounds settings. They influence whether the underlying fixed step size step handler is called for the first and last points. Note that if the last point coincides with a normalized point, then the underlying fixed step size step handler is always called, regardless of these settings.
     
-          - FieldStepNormalizer
-          - StepNormalizer
-          - StepNormalizerMode
+    Also see:
+        FieldStepNormalizer, StepNormalizer,
+        StepNormalizerMode
     """
     NEITHER: typing.ClassVar['StepNormalizerBounds'] = ...
     FIRST: typing.ClassVar['StepNormalizerBounds'] = ...
@@ -452,7 +478,12 @@ class StepNormalizerBounds(java.lang.Enum['StepNormalizerBounds']):
     @staticmethod
     def values() -> typing.MutableSequence['StepNormalizerBounds']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (StepNormalizerBounds c : StepNormalizerBounds.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -465,9 +496,9 @@ class StepNormalizerMode(java.lang.Enum['StepNormalizerMode']):
     """
     StepNormalizer modes. Determines how the step size is interpreted.
     
-          - FieldStepNormalizer
-          - StepNormalizer
-          - StepNormalizerBounds
+    Also see:
+        FieldStepNormalizer, StepNormalizer,
+        StepNormalizerBounds
     """
     INCREMENT: typing.ClassVar['StepNormalizerMode'] = ...
     MULTIPLES: typing.ClassVar['StepNormalizerMode'] = ...
@@ -497,7 +528,12 @@ class StepNormalizerMode(java.lang.Enum['StepNormalizerMode']):
     @staticmethod
     def values() -> typing.MutableSequence['StepNormalizerMode']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (StepNormalizerMode c : StepNormalizerMode.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -509,14 +545,12 @@ class StepNormalizerMode(java.lang.Enum['StepNormalizerMode']):
 _AbstractFieldODEStateInterpolator__T = typing.TypeVar('_AbstractFieldODEStateInterpolator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class AbstractFieldODEStateInterpolator(FieldODEStateInterpolator[_AbstractFieldODEStateInterpolator__T], typing.Generic[_AbstractFieldODEStateInterpolator__T]):
     """
-    implements FieldODEStateInterpolator<T>
-    
     This abstract class represents an interpolator over the last step during an ODE integration.
     
     The various ODE integrators provide objects extending this class to the step handlers. The handlers can use these objects to retrieve the state vector at intermediate times between the previous and the current grid points (dense output).
     
-          - FieldODEIntegrator
-          - FieldODEStepHandler
+    Also see:
+        FieldODEIntegrator, FieldODEStepHandler
     """
     def getCurrentState(self) -> org.hipparchus.ode.FieldODEStateAndDerivative[_AbstractFieldODEStateInterpolator__T]:
         """
@@ -638,9 +672,9 @@ class AbstractFieldODEStateInterpolator(FieldODEStateInterpolator[_AbstractField
         Returns:
             restricted version of the instance
         
-              - getPreviousState
-              - getCurrentState
-        
+        Also see:
+            getPreviousState,
+            getCurrentState
         
         
         """
@@ -648,15 +682,12 @@ class AbstractFieldODEStateInterpolator(FieldODEStateInterpolator[_AbstractField
 
 class AbstractODEStateInterpolator(ODEStateInterpolator):
     """
-    implements ODEStateInterpolator
-    
     This abstract class represents an interpolator over the last step during an ODE integration.
     
     The various ODE integrators provide objects extending this class to the step handlers. The handlers can use these objects to retrieve the state vector at intermediate times between the previous and the current grid points (dense output).
     
-          - ODEIntegrator
-          - ODEStepHandler
-          - serialized
+    Also see:
+        ODEIntegrator, ODEStepHandler, serialized
     """
     def getCurrentState(self) -> org.hipparchus.ode.ODEStateAndDerivative:
         """
@@ -778,9 +809,9 @@ class AbstractODEStateInterpolator(ODEStateInterpolator):
         Returns:
             restricted version of the instance
         
-              - getPreviousState
-              - getCurrentState
-        
+        Also see:
+            getPreviousState,
+            getCurrentState
         
         
         """
@@ -789,8 +820,6 @@ class AbstractODEStateInterpolator(ODEStateInterpolator):
 _FieldStepNormalizer__T = typing.TypeVar('_FieldStepNormalizer__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldStepNormalizer(FieldODEStepHandler[_FieldStepNormalizer__T], typing.Generic[_FieldStepNormalizer__T]):
     """
-    implements FieldODEStepHandler<T>
-    
     This class wraps an object implementing FieldODEFixedStepHandler into a FieldODEStepHandler.
     
     This wrapper allows to use fixed step handlers with general integrators which cannot guaranty their integration steps will remain constant and therefore only accept general step handlers.
@@ -799,19 +828,19 @@ class FieldStepNormalizer(FieldODEStepHandler[_FieldStepNormalizer__T], typing.G
     
     There is no constraint on the integrator, it can use any time step it needs (time steps longer or shorter than the fixed time step and non-integer ratios are all allowed).
     
-          - FieldODEStepHandler
-          - FieldODEFixedStepHandler
-          - StepNormalizerMode
-          - StepNormalizerBounds
+    Also see:
+        FieldODEStepHandler,
+        FieldODEFixedStepHandler,
+        StepNormalizerMode, StepNormalizerBounds
     """
     @typing.overload
-    def __init__(self, double: float, fieldODEFixedStepHandler: typing.Union[FieldODEFixedStepHandler[_FieldStepNormalizer__T], typing.Callable[[org.hipparchus.ode.FieldODEStateAndDerivative[org.hipparchus.CalculusFieldElement], bool], None]]): ...
+    def __init__(self, h: float, handler: typing.Union[FieldODEFixedStepHandler[_FieldStepNormalizer__T], typing.Callable[[org.hipparchus.ode.FieldODEStateAndDerivative[org.hipparchus.CalculusFieldElement], bool], None]]): ...
     @typing.overload
     def __init__(self, double: float, fieldODEFixedStepHandler: typing.Union[FieldODEFixedStepHandler[_FieldStepNormalizer__T], typing.Callable[[org.hipparchus.ode.FieldODEStateAndDerivative[org.hipparchus.CalculusFieldElement], bool], None]], stepNormalizerBounds: StepNormalizerBounds): ...
     @typing.overload
     def __init__(self, double: float, fieldODEFixedStepHandler: typing.Union[FieldODEFixedStepHandler[_FieldStepNormalizer__T], typing.Callable[[org.hipparchus.ode.FieldODEStateAndDerivative[org.hipparchus.CalculusFieldElement], bool], None]], stepNormalizerMode: StepNormalizerMode): ...
     @typing.overload
-    def __init__(self, double: float, fieldODEFixedStepHandler: typing.Union[FieldODEFixedStepHandler[_FieldStepNormalizer__T], typing.Callable[[org.hipparchus.ode.FieldODEStateAndDerivative[org.hipparchus.CalculusFieldElement], bool], None]], stepNormalizerMode: StepNormalizerMode, stepNormalizerBounds: StepNormalizerBounds): ...
+    def __init__(self, h: float, handler: typing.Union[FieldODEFixedStepHandler[_FieldStepNormalizer__T], typing.Callable[[org.hipparchus.ode.FieldODEStateAndDerivative[org.hipparchus.CalculusFieldElement], bool], None]], mode: StepNormalizerMode, bounds: StepNormalizerBounds): ...
     def finish(self, finalState: org.hipparchus.ode.FieldODEStateAndDerivative[_FieldStepNormalizer__T]) -> None:
         """
         Finalize integration.
@@ -856,8 +885,6 @@ class FieldStepNormalizer(FieldODEStepHandler[_FieldStepNormalizer__T], typing.G
 
 class StepNormalizer(ODEStepHandler):
     """
-    implements ODEStepHandler
-    
     This class wraps an object implementing ODEFixedStepHandler into a ODEStepHandler.
     
     This wrapper allows to use fixed step handlers with general integrators which cannot guaranty their integration steps will remain constant and therefore only accept general step handlers.
@@ -866,19 +893,18 @@ class StepNormalizer(ODEStepHandler):
     
     There is no constraint on the integrator, it can use any time step it needs (time steps longer or shorter than the fixed time step and non-integer ratios are all allowed).
     
-          - ODEStepHandler
-          - ODEFixedStepHandler
-          - StepNormalizerMode
-          - StepNormalizerBounds
+    Also see:
+        ODEStepHandler, ODEFixedStepHandler,
+        StepNormalizerMode, StepNormalizerBounds
     """
     @typing.overload
-    def __init__(self, double: float, oDEFixedStepHandler: typing.Union[ODEFixedStepHandler, typing.Callable]): ...
+    def __init__(self, h: float, handler: typing.Union[ODEFixedStepHandler, typing.Callable]): ...
     @typing.overload
     def __init__(self, double: float, oDEFixedStepHandler: typing.Union[ODEFixedStepHandler, typing.Callable], stepNormalizerBounds: StepNormalizerBounds): ...
     @typing.overload
     def __init__(self, double: float, oDEFixedStepHandler: typing.Union[ODEFixedStepHandler, typing.Callable], stepNormalizerMode: StepNormalizerMode): ...
     @typing.overload
-    def __init__(self, double: float, oDEFixedStepHandler: typing.Union[ODEFixedStepHandler, typing.Callable], stepNormalizerMode: StepNormalizerMode, stepNormalizerBounds: StepNormalizerBounds): ...
+    def __init__(self, h: float, handler: typing.Union[ODEFixedStepHandler, typing.Callable], mode: StepNormalizerMode, bounds: StepNormalizerBounds): ...
     def finish(self, finalState: org.hipparchus.ode.ODEStateAndDerivative) -> None:
         """
         Finalize integration.

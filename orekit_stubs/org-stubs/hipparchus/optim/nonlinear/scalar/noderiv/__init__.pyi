@@ -18,15 +18,14 @@ import typing
 
 class AbstractSimplex(org.hipparchus.optim.OptimizationData):
     """
-    implements OptimizationData
-    
     This class implements the simplex concept. It is intended to be used in conjunction with SimplexOptimizer.
     
     The initial configuration of the simplex is set by the constructors or . The other will set all steps to 1, thus building a default configuration from a unit hypercube.
     
     Users must call the build method in order to create the data structure that will be acted on by the other methods of this class.
     
-          - SimplexOptimizer
+    Also see:
+        SimplexOptimizer
     """
     def build(self, startPoint: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
@@ -123,8 +122,8 @@ class BOBYQAOptimizer(org.hipparchus.optim.nonlinear.scalar.MultivariateOptimize
     """
     Minimum dimension of the problem: 2
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -132,8 +131,8 @@ class BOBYQAOptimizer(org.hipparchus.optim.nonlinear.scalar.MultivariateOptimize
     """
     Default value for initialTrustRegionRadius: 10.0 .
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -141,15 +140,15 @@ class BOBYQAOptimizer(org.hipparchus.optim.nonlinear.scalar.MultivariateOptimize
     """
     Default value for stoppingTrustRegionRadius: 1.0E-8 .
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, numberOfInterpolationPoints: int): ...
     @typing.overload
-    def __init__(self, int: int, double: float, double2: float): ...
+    def __init__(self, numberOfInterpolationPoints: int, initialTrustRegionRadius: float, stoppingTrustRegionRadius: float): ...
 
 class CMAESOptimizer(org.hipparchus.optim.nonlinear.scalar.MultivariateOptimizer):
     """
@@ -229,7 +228,7 @@ class CMAESOptimizer(org.hipparchus.optim.nonlinear.scalar.MultivariateOptimizer
     @typing.overload
     def optimize(self) -> typing.Any: ...
     @typing.overload
-    def optimize(self, *optimizationData: org.hipparchus.optim.OptimizationData) -> org.hipparchus.optim.PointValuePair: ...
+    def optimize(self, *optData: org.hipparchus.optim.OptimizationData) -> org.hipparchus.optim.PointValuePair: ...
     class PopulationSize(org.hipparchus.optim.OptimizationData):
         def __init__(self, int: int): ...
         def getPopulationSize(self) -> int: ...
@@ -248,13 +247,13 @@ class PowellOptimizer(org.hipparchus.optim.nonlinear.scalar.MultivariateOptimize
     Constraints are not supported: the call to optimize optimize} will throw hipparchus if bounds are passed to it. In order to impose simple constraints, the objective function must be wrapped in an adapter like MultivariateFunctionMappingAdapter or MultivariateFunctionPenaltyAdapter.
     """
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, rel: float, abs: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float): ...
+    def __init__(self, rel: float, abs: float, lineRel: float, lineAbs: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float, convergenceChecker: typing.Union[org.hipparchus.optim.ConvergenceChecker[org.hipparchus.optim.PointValuePair], typing.Callable[[int, org.hipparchus.optim.PointValuePair, org.hipparchus.optim.PointValuePair], bool]]): ...
+    def __init__(self, rel: float, abs: float, lineRel: float, lineAbs: float, checker: typing.Union[org.hipparchus.optim.ConvergenceChecker[org.hipparchus.optim.PointValuePair], typing.Callable[[int, org.hipparchus.optim.PointValuePair, org.hipparchus.optim.PointValuePair], bool]]): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, convergenceChecker: typing.Union[org.hipparchus.optim.ConvergenceChecker[org.hipparchus.optim.PointValuePair], typing.Callable[[int, org.hipparchus.optim.PointValuePair, org.hipparchus.optim.PointValuePair], bool]]): ...
+    def __init__(self, rel: float, abs: float, checker: typing.Union[org.hipparchus.optim.ConvergenceChecker[org.hipparchus.optim.PointValuePair], typing.Callable[[int, org.hipparchus.optim.PointValuePair, org.hipparchus.optim.PointValuePair], bool]]): ...
 
 class SimplexOptimizer(org.hipparchus.optim.nonlinear.scalar.MultivariateOptimizer):
     """
@@ -275,9 +274,9 @@ class SimplexOptimizer(org.hipparchus.optim.nonlinear.scalar.MultivariateOptimiz
     The call to optimize will throw hipparchus if bounds are passed to it.
     """
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, rel: float, abs: float): ...
     @typing.overload
-    def __init__(self, convergenceChecker: typing.Union[org.hipparchus.optim.ConvergenceChecker[org.hipparchus.optim.PointValuePair], typing.Callable[[int, org.hipparchus.optim.PointValuePair, org.hipparchus.optim.PointValuePair], bool]]): ...
+    def __init__(self, checker: typing.Union[org.hipparchus.optim.ConvergenceChecker[org.hipparchus.optim.PointValuePair], typing.Callable[[int, org.hipparchus.optim.PointValuePair, org.hipparchus.optim.PointValuePair], bool]]): ...
     @typing.overload
     def optimize(self) -> typing.Any: ...
     @typing.overload
@@ -323,11 +322,11 @@ class MultiDirectionalSimplex(AbstractSimplex):
     @typing.overload
     def __init__(self, int: int): ...
     @typing.overload
-    def __init__(self, int: int, double: float): ...
+    def __init__(self, n: int, sideLength: float): ...
     @typing.overload
     def __init__(self, int: int, double: float, double2: float): ...
     @typing.overload
-    def __init__(self, int: int, double: float, double2: float, double3: float): ...
+    def __init__(self, n: int, sideLength: float, khi: float, gamma: float): ...
     def iterate(self, evaluationFunction: typing.Union[org.hipparchus.analysis.MultivariateFunction, typing.Callable], comparator: typing.Union[java.util.Comparator[org.hipparchus.optim.PointValuePair], typing.Callable[[org.hipparchus.optim.PointValuePair, org.hipparchus.optim.PointValuePair], int]]) -> None:
         """
         Compute the next simplex of the algorithm.
@@ -357,11 +356,11 @@ class NelderMeadSimplex(AbstractSimplex):
     @typing.overload
     def __init__(self, int: int): ...
     @typing.overload
-    def __init__(self, int: int, double: float): ...
+    def __init__(self, n: int, sideLength: float): ...
     @typing.overload
     def __init__(self, int: int, double: float, double2: float, double3: float, double4: float): ...
     @typing.overload
-    def __init__(self, int: int, double: float, double2: float, double3: float, double4: float, double5: float): ...
+    def __init__(self, n: int, sideLength: float, rho: float, khi: float, gamma: float, sigma: float): ...
     def iterate(self, evaluationFunction: typing.Union[org.hipparchus.analysis.MultivariateFunction, typing.Callable], comparator: typing.Union[java.util.Comparator[org.hipparchus.optim.PointValuePair], typing.Callable[[org.hipparchus.optim.PointValuePair, org.hipparchus.optim.PointValuePair], int]]) -> None:
         """
         Compute the next simplex of the algorithm.

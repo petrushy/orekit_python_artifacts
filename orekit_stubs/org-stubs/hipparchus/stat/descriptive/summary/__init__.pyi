@@ -16,20 +16,19 @@ import typing
 
 class Product(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, org.hipparchus.stat.descriptive.AggregatableStatistic['Product'], org.hipparchus.stat.descriptive.WeightedEvaluation, java.io.Serializable):
     """
-    implements AggregatableStatistic<Product>, WeightedEvaluation, Serializable
-    
     Returns the product of the available values.
     
     If there are no values in the dataset, then 1 is returned. If any of the values are NaN, then NaN is returned.
     
     Note that this implementation is not synchronized. If multiple threads access an instance of this class concurrently, and at least one of the threads invokes the increment() or clear() method, it must be synchronized externally.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, product: 'Product'): ...
+    def __init__(self, original: 'Product'): ...
     @typing.overload
     def aggregate(self, other: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any], typing.Callable[[], java.util.Iterator[typing.Any]]]) -> None:
         """
@@ -46,9 +45,9 @@ class Product(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatist
         """
         ...
     @typing.overload
-    def aggregate(self, *t: typing.Any) -> None: ...
+    def aggregate(self, *other: typing.Any) -> None: ...
     @typing.overload
-    def aggregate(self, product: 'Product') -> None: ...
+    def aggregate(self, other: 'Product') -> None: ...
     def clear(self) -> None:
         """
         Clears the internal state of the Statistic
@@ -81,9 +80,9 @@ class Product(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatist
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], weights: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     def getN(self) -> int:
         """
         Returns the number of values that have been added.
@@ -127,20 +126,19 @@ class Product(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatist
 
 class Sum(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, org.hipparchus.stat.descriptive.AggregatableStatistic['Sum'], org.hipparchus.stat.descriptive.WeightedEvaluation, java.io.Serializable):
     """
-    implements AggregatableStatistic<Sum>, WeightedEvaluation, Serializable
-    
     Returns the sum of the available values.
     
     If there are no values in the dataset, then 0 is returned. If any of the values are NaN, then NaN is returned.
     
     Note that this implementation is not synchronized. If multiple threads access an instance of this class concurrently, and at least one of the threads invokes the increment() or clear() method, it must be synchronized externally.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, sum: 'Sum'): ...
+    def __init__(self, original: 'Sum'): ...
     @typing.overload
     def aggregate(self, other: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any], typing.Callable[[], java.util.Iterator[typing.Any]]]) -> None:
         """
@@ -157,9 +155,9 @@ class Sum(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
         """
         ...
     @typing.overload
-    def aggregate(self, *t: typing.Any) -> None: ...
+    def aggregate(self, *other: typing.Any) -> None: ...
     @typing.overload
-    def aggregate(self, sum: 'Sum') -> None: ...
+    def aggregate(self, other: 'Sum') -> None: ...
     def clear(self) -> None:
         """
         Clears the internal state of the Statistic
@@ -192,9 +190,9 @@ class Sum(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], weights: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     def getN(self) -> int:
         """
         Returns the number of values that have been added.
@@ -238,8 +236,6 @@ class Sum(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
 
 class SumOfLogs(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, org.hipparchus.stat.descriptive.AggregatableStatistic['SumOfLogs'], java.io.Serializable):
     """
-    implements AggregatableStatistic<SumOfLogs>, Serializable
-    
     Returns the sum of the natural logs for this collection of values.
     
     Uses hipparchus to compute the logs. Therefore,
@@ -252,12 +248,13 @@ class SumOfLogs(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStati
     
     Note that this implementation is not synchronized. If multiple threads access an instance of this class concurrently, and at least one of the threads invokes the increment() or clear() method, it must be synchronized externally.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, sumOfLogs: 'SumOfLogs'): ...
+    def __init__(self, original: 'SumOfLogs'): ...
     @typing.overload
     def aggregate(self, other: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any], typing.Callable[[], java.util.Iterator[typing.Any]]]) -> None:
         """
@@ -274,9 +271,9 @@ class SumOfLogs(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStati
         """
         ...
     @typing.overload
-    def aggregate(self, *t: typing.Any) -> None: ...
+    def aggregate(self, *other: typing.Any) -> None: ...
     @typing.overload
-    def aggregate(self, sumOfLogs: 'SumOfLogs') -> None: ...
+    def aggregate(self, other: 'SumOfLogs') -> None: ...
     def clear(self) -> None:
         """
         Clears the internal state of the Statistic
@@ -307,7 +304,7 @@ class SumOfLogs(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStati
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     def getN(self) -> int:
         """
         Returns the number of values that have been added.
@@ -351,20 +348,19 @@ class SumOfLogs(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStati
 
 class SumOfSquares(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, org.hipparchus.stat.descriptive.AggregatableStatistic['SumOfSquares'], java.io.Serializable):
     """
-    implements AggregatableStatistic<SumOfSquares>, Serializable
-    
     Returns the sum of the squares of the available values.
     
     If there are no values in the dataset, then 0 is returned. If any of the values are NaN, then NaN is returned.
     
     Note that this implementation is not synchronized. If multiple threads access an instance of this class concurrently, and at least one of the threads invokes the increment() or clear() method, it must be synchronized externally.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, sumOfSquares: 'SumOfSquares'): ...
+    def __init__(self, original: 'SumOfSquares'): ...
     @typing.overload
     def aggregate(self, other: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any], typing.Callable[[], java.util.Iterator[typing.Any]]]) -> None:
         """
@@ -381,9 +377,9 @@ class SumOfSquares(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateSt
         """
         ...
     @typing.overload
-    def aggregate(self, *t: typing.Any) -> None: ...
+    def aggregate(self, *other: typing.Any) -> None: ...
     @typing.overload
-    def aggregate(self, sumOfSquares: 'SumOfSquares') -> None: ...
+    def aggregate(self, other: 'SumOfSquares') -> None: ...
     def clear(self) -> None:
         """
         Clears the internal state of the Statistic
@@ -414,7 +410,7 @@ class SumOfSquares(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateSt
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     def getN(self) -> int:
         """
         Returns the number of values that have been added.

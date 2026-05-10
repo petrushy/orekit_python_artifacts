@@ -38,16 +38,10 @@ class CartesianCovariance(org.orekit.files.ccsds.section.CommentsContainer, org.
     Since:
         6.1
     """
-    def __init__(self, defaultFrameSupplier: typing.Union[java.util.function.Supplier[org.orekit.files.ccsds.definitions.FrameFacade], typing.Callable[[], org.orekit.files.ccsds.definitions.FrameFacade]]):
-        """
-        Create an empty data set.
-        
-        Parameters:
-            defaultFrameSupplier (Supplier<FrameFacade> defaultFrameSupplier): supplier for default reference frame if no frame is specified in the CCSDS message
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self, defaultFrameSupplier: typing.Union[java.util.function.Supplier[org.orekit.files.ccsds.definitions.FrameFacade], typing.Callable[[], org.orekit.files.ccsds.definitions.FrameFacade]]): ...
+    @typing.overload
+    def __init__(self, defaultFrameSupplier: typing.Union[java.util.function.Supplier[org.orekit.files.ccsds.definitions.FrameFacade], typing.Callable[[], org.orekit.files.ccsds.definitions.FrameFacade]], frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def getCovarianceMatrix(self) -> org.hipparchus.linear.RealMatrix:
         """
         Get the Position/Velocity covariance matrix.
@@ -64,6 +58,36 @@ class CartesianCovariance(org.orekit.files.ccsds.section.CommentsContainer, org.
         
         Returns:
             matrix epoch
+        
+        
+        """
+        ...
+    def getFrame(self) -> org.orekit.frames.Frame:
+        """
+        Get the frame in which this covariance matrix is defined. Note that only the orientation of the returned frame is significant, the position of the returned frame is irrelevant and should be ignored.
+        
+        Returns:
+            Orekit frame for this covariance matrix.
+        
+        Since:
+            13.1.5
+        
+        Also see:
+            getReferenceFrame,
+            getFrameMapper
+        
+        
+        """
+        ...
+    def getFrameMapper(self) -> org.orekit.files.ccsds.definitions.CcsdsFrameMapper:
+        """
+        Get the mapping between a CCSDS frame and a Frame.
+        
+        Returns:
+            the frame mapper.
+        
+        Since:
+            13.1.5
         
         
         """
@@ -1287,11 +1311,10 @@ class OdmCommonMetadata(OdmMetadata):
     Since:
         11.0
     """
-    def __init__(self):
-        """
-        Simple constructor.
-        """
-        ...
+    @typing.overload
+    def __init__(self): ...
+    @typing.overload
+    def __init__(self, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def finalizeMetadata(self, context: org.orekit.files.ccsds.utils.ContextBinding) -> None:
         """
         Finalize the metadata.
@@ -1320,6 +1343,9 @@ class OdmCommonMetadata(OdmMetadata):
         
         Returns:
             the reference frame
+        
+        Also see:
+            getFrameMapper
         
         
         """
@@ -1657,7 +1683,7 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

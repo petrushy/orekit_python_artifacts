@@ -16,14 +16,12 @@ import typing
 
 class EvaluationRmsChecker(org.hipparchus.optim.ConvergenceChecker['LeastSquaresProblem.Evaluation']):
     """
-    implements ConvergenceChecker<Evaluation>
-    
     Check if an optimization has converged based on the change in computed RMS.
     """
     @typing.overload
-    def __init__(self, double: float): ...
+    def __init__(self, tol: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, relTol: float, absTol: float): ...
     def converged(self, iteration: int, previous: 'LeastSquaresProblem.Evaluation', current: 'LeastSquaresProblem.Evaluation') -> bool:
         """
         Check if the optimization algorithm has converged.
@@ -46,7 +44,8 @@ class LeastSquaresBuilder:
     """
     A mutable builder for LeastSquaresProblems.
     
-          - LeastSquaresFactory
+    Also see:
+        LeastSquaresFactory
     """
     def __init__(self):
         """
@@ -179,7 +178,7 @@ class LeastSquaresBuilder:
         """
         ...
     @typing.overload
-    def start(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> 'LeastSquaresBuilder':
+    def start(self, newStart: typing.Union[typing.List[float], jpype.JArray]) -> 'LeastSquaresBuilder':
         """
         Configure the initial guess.
         
@@ -201,9 +200,9 @@ class LeastSquaresBuilder:
         """
         ...
     @typing.overload
-    def start(self, realVector: org.hipparchus.linear.RealVector) -> 'LeastSquaresBuilder': ...
+    def start(self, newStart: org.hipparchus.linear.RealVector) -> 'LeastSquaresBuilder': ...
     @typing.overload
-    def target(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> 'LeastSquaresBuilder':
+    def target(self, newTarget: typing.Union[typing.List[float], jpype.JArray]) -> 'LeastSquaresBuilder':
         """
         Configure the observed data.
         
@@ -225,7 +224,7 @@ class LeastSquaresBuilder:
         """
         ...
     @typing.overload
-    def target(self, realVector: org.hipparchus.linear.RealVector) -> 'LeastSquaresBuilder': ...
+    def target(self, newTarget: org.hipparchus.linear.RealVector) -> 'LeastSquaresBuilder': ...
     def weight(self, newWeight: org.hipparchus.linear.RealMatrix) -> 'LeastSquaresBuilder':
         """
         Configure the weight matrix.
@@ -261,16 +260,16 @@ class LeastSquaresFactory:
         ...
     @typing.overload
     @staticmethod
-    def create(multivariateVectorFunction: typing.Union[org.hipparchus.analysis.MultivariateVectorFunction, typing.Callable], multivariateMatrixFunction: typing.Union[org.hipparchus.analysis.MultivariateMatrixFunction, typing.Callable], doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], realMatrix: org.hipparchus.linear.RealMatrix, convergenceChecker: typing.Union[org.hipparchus.optim.ConvergenceChecker['LeastSquaresProblem.Evaluation'], typing.Callable[[int, 'LeastSquaresProblem.Evaluation', 'LeastSquaresProblem.Evaluation'], bool]], int: int, int2: int) -> 'LeastSquaresProblem': ...
+    def create(model: typing.Union[org.hipparchus.analysis.MultivariateVectorFunction, typing.Callable], jacobian: typing.Union[org.hipparchus.analysis.MultivariateMatrixFunction, typing.Callable], observed: typing.Union[typing.List[float], jpype.JArray], start: typing.Union[typing.List[float], jpype.JArray], weight: org.hipparchus.linear.RealMatrix, checker: typing.Union[org.hipparchus.optim.ConvergenceChecker['LeastSquaresProblem.Evaluation'], typing.Callable[[int, 'LeastSquaresProblem.Evaluation', 'LeastSquaresProblem.Evaluation'], bool]], maxEvaluations: int, maxIterations: int) -> 'LeastSquaresProblem': ...
     @typing.overload
     @staticmethod
-    def create(multivariateJacobianFunction: typing.Union['MultivariateJacobianFunction', typing.Callable], realVector: org.hipparchus.linear.RealVector, realVector2: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix, convergenceChecker: typing.Union[org.hipparchus.optim.ConvergenceChecker['LeastSquaresProblem.Evaluation'], typing.Callable[[int, 'LeastSquaresProblem.Evaluation', 'LeastSquaresProblem.Evaluation'], bool]], int: int, int2: int) -> 'LeastSquaresProblem': ...
+    def create(model: typing.Union['MultivariateJacobianFunction', typing.Callable], observed: org.hipparchus.linear.RealVector, start: org.hipparchus.linear.RealVector, weight: org.hipparchus.linear.RealMatrix, checker: typing.Union[org.hipparchus.optim.ConvergenceChecker['LeastSquaresProblem.Evaluation'], typing.Callable[[int, 'LeastSquaresProblem.Evaluation', 'LeastSquaresProblem.Evaluation'], bool]], maxEvaluations: int, maxIterations: int) -> 'LeastSquaresProblem': ...
     @typing.overload
     @staticmethod
-    def create(multivariateJacobianFunction: typing.Union['MultivariateJacobianFunction', typing.Callable], realVector: org.hipparchus.linear.RealVector, realVector2: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix, convergenceChecker: typing.Union[org.hipparchus.optim.ConvergenceChecker['LeastSquaresProblem.Evaluation'], typing.Callable[[int, 'LeastSquaresProblem.Evaluation', 'LeastSquaresProblem.Evaluation'], bool]], int: int, int2: int, boolean: bool, parameterValidator: typing.Union['ParameterValidator', typing.Callable]) -> 'LeastSquaresProblem': ...
+    def create(model: typing.Union['MultivariateJacobianFunction', typing.Callable], observed: org.hipparchus.linear.RealVector, start: org.hipparchus.linear.RealVector, weight: org.hipparchus.linear.RealMatrix, checker: typing.Union[org.hipparchus.optim.ConvergenceChecker['LeastSquaresProblem.Evaluation'], typing.Callable[[int, 'LeastSquaresProblem.Evaluation', 'LeastSquaresProblem.Evaluation'], bool]], maxEvaluations: int, maxIterations: int, lazyEvaluation: bool, paramValidator: typing.Union['ParameterValidator', typing.Callable]) -> 'LeastSquaresProblem': ...
     @typing.overload
     @staticmethod
-    def create(multivariateJacobianFunction: typing.Union['MultivariateJacobianFunction', typing.Callable], realVector: org.hipparchus.linear.RealVector, realVector2: org.hipparchus.linear.RealVector, convergenceChecker: typing.Union[org.hipparchus.optim.ConvergenceChecker['LeastSquaresProblem.Evaluation'], typing.Callable[[int, 'LeastSquaresProblem.Evaluation', 'LeastSquaresProblem.Evaluation'], bool]], int: int, int2: int) -> 'LeastSquaresProblem': ...
+    def create(model: typing.Union['MultivariateJacobianFunction', typing.Callable], observed: org.hipparchus.linear.RealVector, start: org.hipparchus.linear.RealVector, checker: typing.Union[org.hipparchus.optim.ConvergenceChecker['LeastSquaresProblem.Evaluation'], typing.Callable[[int, 'LeastSquaresProblem.Evaluation', 'LeastSquaresProblem.Evaluation'], bool]], maxEvaluations: int, maxIterations: int) -> 'LeastSquaresProblem': ...
     @staticmethod
     def evaluationChecker(checker: typing.Union[org.hipparchus.optim.ConvergenceChecker[org.hipparchus.optim.PointVectorValuePair], typing.Callable[[int, org.hipparchus.optim.PointVectorValuePair, org.hipparchus.optim.PointVectorValuePair], bool]]) -> org.hipparchus.optim.ConvergenceChecker['LeastSquaresProblem.Evaluation']:
         """
@@ -341,9 +340,10 @@ class LeastSquaresProblem(org.hipparchus.optim.OptimizationProblem['LeastSquares
     
     Instances are typically either created progressively using a LeastSquaresBuilder or created at once using a LeastSquaresFactory.
     
-          - LeastSquaresBuilder
-          - LeastSquaresFactory
-          - LeastSquaresAdapter
+    Also see:
+        LeastSquaresBuilder,
+        LeastSquaresFactory,
+        LeastSquaresAdapter
     """
     def evaluate(self, point: org.hipparchus.linear.RealVector) -> 'LeastSquaresProblem.Evaluation':
         """
@@ -440,8 +440,6 @@ class ParameterValidator:
 
 class AbstractEvaluation(LeastSquaresProblem.Evaluation):
     """
-    implements Evaluation
-    
     An implementation of Evaluation that is designed for extension. All of the methods implemented here use the methods that are left unimplemented.
     """
     def getChiSquare(self) -> float:
@@ -453,9 +451,9 @@ class AbstractEvaluation(LeastSquaresProblem.Evaluation):
         Returns:
             the cost.
         
-              - getResiduals
-              - getCost
-        
+        Also see:
+            getResiduals,
+            getCost
         
         
         """
@@ -469,9 +467,9 @@ class AbstractEvaluation(LeastSquaresProblem.Evaluation):
         Returns:
             the cost.
         
-              - getResiduals
-              - getChiSquare
-        
+        Also see:
+            getResiduals,
+            getChiSquare
         
         
         """
@@ -539,8 +537,6 @@ class AbstractEvaluation(LeastSquaresProblem.Evaluation):
 
 class LeastSquaresAdapter(LeastSquaresProblem):
     """
-    implements LeastSquaresProblem
-    
     An adapter that delegates to another implementation of LeastSquaresProblem.
     """
     def __init__(self, problem: LeastSquaresProblem):
@@ -697,8 +693,6 @@ class ValueAndJacobianFunction(MultivariateJacobianFunction):
 
 class GaussNewtonOptimizer(LeastSquaresOptimizer):
     """
-    implements LeastSquaresOptimizer
-    
     Gauss-Newton least-squares solver.
     
     This class solve a least-square problem by solving the normal equations of the linearized problem at each iteration. Either LU decomposition or Cholesky decomposition can be used to solve the normal equations, or QR decomposition or SVD decomposition can be used to solve the linear system. Cholesky/LU decomposition is faster but QR decomposition is more robust for difficult problems, and SVD can compute a solution for rank-deficient problems.
@@ -706,7 +700,7 @@ class GaussNewtonOptimizer(LeastSquaresOptimizer):
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, matrixDecomposer: typing.Union[org.hipparchus.linear.MatrixDecomposer, typing.Callable], boolean: bool): ...
+    def __init__(self, decomposer: typing.Union[org.hipparchus.linear.MatrixDecomposer, typing.Callable], formNormalEquations: bool): ...
     def getDecomposer(self) -> org.hipparchus.linear.MatrixDecomposer:
         """
         Get the matrix decomposition algorithm.
@@ -745,7 +739,7 @@ class GaussNewtonOptimizer(LeastSquaresOptimizer):
         ...
     def toString(self) -> str:
         """
-        Overrides: meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.toString` in class Object
+        Overrides: meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in class Object
         
         
         """
@@ -781,8 +775,6 @@ class GaussNewtonOptimizer(LeastSquaresOptimizer):
 
 class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
     """
-    implements LeastSquaresOptimizer
-    
     This class solves a least-squares problem using the Levenberg-Marquardt algorithm.
     
     This implementation should work even for over-determined systems (i.e. systems having more point than equations). Over-determined systems are solved by ignoring the point which have the smallest impact according to their jacobian column norm. Only the rank of the matrix and some loop bounds are changed to implement this.
@@ -807,7 +799,7 @@ class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float): ...
+    def __init__(self, initialStepBoundFactor: float, costRelativeTolerance: float, parRelativeTolerance: float, orthoTolerance: float, qrRankingThreshold: float): ...
     def getCostRelativeTolerance(self) -> float:
         """
         Gets the value of a tuning parameter.
@@ -815,8 +807,8 @@ class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
         Returns:
             the parameter's value.
         
-              - withCostRelativeTolerance
-        
+        Also see:
+            withCostRelativeTolerance
         
         
         """
@@ -828,8 +820,8 @@ class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
         Returns:
             the parameter's value.
         
-              - withInitialStepBoundFactor
-        
+        Also see:
+            withInitialStepBoundFactor
         
         
         """
@@ -841,8 +833,8 @@ class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
         Returns:
             the parameter's value.
         
-              - withOrthoTolerance
-        
+        Also see:
+            withOrthoTolerance
         
         
         """
@@ -854,8 +846,8 @@ class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
         Returns:
             the parameter's value.
         
-              - withParameterRelativeTolerance
-        
+        Also see:
+            withParameterRelativeTolerance
         
         
         """
@@ -867,8 +859,8 @@ class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
         Returns:
             the parameter's value.
         
-              - withRankingThreshold
-        
+        Also see:
+            withRankingThreshold
         
         
         """
@@ -960,8 +952,6 @@ class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
 
 class SequentialGaussNewtonOptimizer(LeastSquaresOptimizer):
     """
-    implements LeastSquaresOptimizer
-    
     Sequential Gauss-Newton least-squares solver.
     
     This class solve a least-square problem by solving the normal equations of the linearized problem at each iteration.
@@ -969,7 +959,7 @@ class SequentialGaussNewtonOptimizer(LeastSquaresOptimizer):
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, matrixDecomposer: typing.Union[org.hipparchus.linear.MatrixDecomposer, typing.Callable], boolean: bool, evaluation: LeastSquaresProblem.Evaluation): ...
+    def __init__(self, decomposer: typing.Union[org.hipparchus.linear.MatrixDecomposer, typing.Callable], formNormalEquations: bool, evaluation: LeastSquaresProblem.Evaluation): ...
     def getDecomposer(self) -> org.hipparchus.linear.MatrixDecomposer:
         """
         Get the matrix decomposition algorithm.
@@ -1018,13 +1008,13 @@ class SequentialGaussNewtonOptimizer(LeastSquaresOptimizer):
         ...
     def toString(self) -> str:
         """
-        Overrides: meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.toString` in class Object
+        Overrides: meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in class Object
         
         
         """
         ...
     @typing.overload
-    def withAPrioriData(self, realVector: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix) -> 'SequentialGaussNewtonOptimizer':
+    def withAPrioriData(self, aPrioriState: org.hipparchus.linear.RealVector, aPrioriCovariance: org.hipparchus.linear.RealMatrix) -> 'SequentialGaussNewtonOptimizer':
         """
         Configure from a priori state and covariance.
         
@@ -1039,7 +1029,8 @@ class SequentialGaussNewtonOptimizer(LeastSquaresOptimizer):
         Returns:
             a new instance.
         
-              - withAPrioriData
+        Also see:
+            withAPrioriData
         
         Configure from a priori state and covariance.
         
@@ -1063,7 +1054,7 @@ class SequentialGaussNewtonOptimizer(LeastSquaresOptimizer):
         """
         ...
     @typing.overload
-    def withAPrioriData(self, realVector: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix, double: float, double2: float) -> 'SequentialGaussNewtonOptimizer': ...
+    def withAPrioriData(self, aPrioriState: org.hipparchus.linear.RealVector, aPrioriCovariance: org.hipparchus.linear.RealMatrix, relativeSymmetryThreshold: float, absolutePositivityThreshold: float) -> 'SequentialGaussNewtonOptimizer': ...
     def withDecomposer(self, newDecomposer: typing.Union[org.hipparchus.linear.MatrixDecomposer, typing.Callable]) -> 'SequentialGaussNewtonOptimizer':
         """
         Configure the matrix decomposition algorithm.

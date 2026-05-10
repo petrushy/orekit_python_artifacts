@@ -63,7 +63,7 @@ class EllipsoidTessellator:
         ...
     @typing.overload
     @staticmethod
-    def buildSimpleZone(double: float, *geodeticPoint: org.orekit.bodies.GeodeticPoint) -> org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet: ...
+    def buildSimpleZone(tolerance: float, *points: org.orekit.bodies.GeodeticPoint) -> org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet: ...
     def sample(self, zone: org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet, width: float, length: float) -> java.util.List[java.util.List[org.orekit.bodies.GeodeticPoint]]:
         """
         Sample a zone of interest into a grid sample of GeodeticPoint.
@@ -214,7 +214,7 @@ class TileAiming:
         """
         Get points at which aiming direction cannot be computed.
         
-        As per Brouwer's `hairy ball theorem <http://mathworld.wolfram.com/HairyBallTheorem.html>`, any vector field on the 2-sphere has at least one zero. This implies that any implementation of this interface has at least one point where the aiming direction cannot be computed. The most typical example is aiming always towards North pole, for which both poles are singular points.
+        As per Brouwer's HairyBallTheorem, any vector field on the 2-sphere has at least one zero. This implies that any implementation of this interface has at least one point where the aiming direction cannot be computed. The most typical example is aiming always towards North pole, for which both poles are singular points.
         
         Returns:
             a non-empty (as per hairy ball theorem) list of points where aiming direction is either zero or cannot be computed
@@ -266,7 +266,7 @@ class AlongTrackAiming(TileAiming):
         """
         Get points at which aiming direction cannot be computed.
         
-        As per Brouwer's `hairy ball theorem <http://mathworld.wolfram.com/HairyBallTheorem.html>`, any vector field on the 2-sphere has at least one zero. This implies that any implementation of this interface has at least one point where the aiming direction cannot be computed. The most typical example is aiming always towards North pole, for which both poles are singular points.
+        As per Brouwer's HairyBallTheorem, any vector field on the 2-sphere has at least one zero. This implies that any implementation of this interface has at least one point where the aiming direction cannot be computed. The most typical example is aiming always towards North pole, for which both poles are singular points.
         
         Specified by: getSingularPoints in interface TileAiming
         
@@ -316,7 +316,7 @@ class ConstantAzimuthAiming(TileAiming):
         """
         Get points at which aiming direction cannot be computed.
         
-        As per Brouwer's `hairy ball theorem <http://mathworld.wolfram.com/HairyBallTheorem.html>`, any vector field on the 2-sphere has at least one zero. This implies that any implementation of this interface has at least one point where the aiming direction cannot be computed. The most typical example is aiming always towards North pole, for which both poles are singular points.
+        As per Brouwer's HairyBallTheorem, any vector field on the 2-sphere has at least one zero. This implies that any implementation of this interface has at least one point where the aiming direction cannot be computed. The most typical example is aiming always towards North pole, for which both poles are singular points.
         
         Specified by: getSingularPoints in interface TileAiming
         
@@ -367,7 +367,7 @@ class DivertedSingularityAiming(TileAiming):
         """
         Get points at which aiming direction cannot be computed.
         
-        As per Brouwer's `hairy ball theorem <http://mathworld.wolfram.com/HairyBallTheorem.html>`, any vector field on the 2-sphere has at least one zero. This implies that any implementation of this interface has at least one point where the aiming direction cannot be computed. The most typical example is aiming always towards North pole, for which both poles are singular points.
+        As per Brouwer's HairyBallTheorem, any vector field on the 2-sphere has at least one zero. This implies that any implementation of this interface has at least one point where the aiming direction cannot be computed. The most typical example is aiming always towards North pole, for which both poles are singular points.
         
         Specified by: getSingularPoints in interface TileAiming
         
@@ -436,7 +436,7 @@ class PythonTileAiming(TileAiming):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

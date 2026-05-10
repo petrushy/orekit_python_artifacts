@@ -486,7 +486,7 @@ class PythonCartesianAdjointEquationTerm(CartesianAdjointEquationTerm):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -575,7 +575,7 @@ class CartesianAdjointInertialTerm(AbstractCartesianAdjointEquationTerm):
         
         """
         ...
-    def getAcceleration(self, transform: org.orekit.frames.Transform, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getAcceleration(self, inertialToPropagationFrame: org.orekit.frames.Transform, stateVariables: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
         Compute the acceleration vector.
         

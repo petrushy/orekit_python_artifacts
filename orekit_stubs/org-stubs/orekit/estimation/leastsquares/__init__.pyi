@@ -144,7 +144,7 @@ class AbstractBatchLSModel(org.hipparchus.optim.nonlinear.vector.leastsquares.Mu
         
         """
         ...
-    def value(self, realVector: org.hipparchus.linear.RealVector) -> org.hipparchus.util.Pair[org.hipparchus.linear.RealVector, org.hipparchus.linear.RealMatrix]:
+    def value(self, point: org.hipparchus.linear.RealVector) -> org.hipparchus.util.Pair[org.hipparchus.linear.RealVector, org.hipparchus.linear.RealMatrix]:
         """
         Specified by: meth:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.MultivariateJacobianFunction.html?is` in interface MultivariateJacobianFunction
         
@@ -497,7 +497,7 @@ class DSSTBatchLSModel(AbstractBatchLSModel):
         ...
 
 class PythonAbstractBatchLSModel(AbstractBatchLSModel):
-    def __init__(self, propagatorBuilderArray: typing.Union[typing.List[org.orekit.propagation.conversion.PropagatorBuilder], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union[ModelObserver, typing.Callable]): ...
+    def __init__(self, propagatorBuilders: typing.Union[typing.List[org.orekit.propagation.conversion.PropagatorBuilder], jpype.JArray], measurements: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], estimatedMeasurementsParameters: org.orekit.utils.ParameterDriversList, observer: typing.Union[ModelObserver, typing.Callable]): ...
     def configureHarvester(self, propagator: org.orekit.propagation.Propagator) -> org.orekit.propagation.MatricesHarvester:
         """
         Configure the propagator to compute derivatives.
@@ -633,7 +633,7 @@ class PythonAbstractBatchLSModel(AbstractBatchLSModel):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -718,7 +718,7 @@ class PythonBatchLSObserver(BatchLSObserver):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -762,7 +762,7 @@ class PythonModelObserver(ModelObserver):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

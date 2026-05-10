@@ -71,15 +71,16 @@ class CholeskyDecomposition:
         and the equivalent method provided by the returned DecompositionSolver.
     
     
-          - `MathWorld <http://mathworld.wolfram.com/CholeskyDecomposition.html>`
-          - `Wikipedia <http://en.wikipedia.org/wiki/Cholesky_decomposition>`
+    Also see:
+        `MathWorld <http://mathworld.wolfram.com/CholeskyDecomposition.html>`, `Wikipedia
+        <http://en.wikipedia.org/wiki/Cholesky_decomposition>`
     """
     DEFAULT_RELATIVE_SYMMETRY_THRESHOLD: typing.ClassVar[float] = ...
     """
     Default threshold above which off-diagonal elements are considered too different and matrix not symmetric.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -87,15 +88,15 @@ class CholeskyDecomposition:
     """
     Default threshold below which diagonal elements are considered null and matrix not positive definite.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix'): ...
+    def __init__(self, matrix: 'RealMatrix'): ...
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix', double: float, double2: float): ...
+    def __init__(self, matrix: 'RealMatrix', relativeSymmetryThreshold: float, absolutePositivityThreshold: float): ...
     def getDeterminant(self) -> float:
         """
         Return the determinant of the matrix
@@ -155,8 +156,8 @@ class ComplexEigenDecomposition:
     """
     Default threshold below which eigenvectors are considered equal.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -164,8 +165,8 @@ class ComplexEigenDecomposition:
     """
     Default value to use for internal epsilon.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -173,15 +174,15 @@ class ComplexEigenDecomposition:
     """
     Internally used epsilon criteria for final AV=VD check.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix'): ...
+    def __init__(self, matrix: 'RealMatrix'): ...
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix', double: float, double2: float, double3: float): ...
+    def __init__(self, matrix: 'RealMatrix', eigenVectorsEquality: float, epsilon: float, epsilonAVVDCheck: float): ...
     def getD(self) -> 'FieldMatrix'[org.hipparchus.complex.Complex]:
         """
         Getter D.
@@ -322,9 +323,9 @@ class DecompositionSolver:
         """
         ...
     @typing.overload
-    def solve(self, realMatrix: 'RealMatrix') -> 'RealMatrix': ...
+    def solve(self, b: 'RealMatrix') -> 'RealMatrix': ...
     @typing.overload
-    def solve(self, realVector: 'RealVector') -> 'RealVector': ...
+    def solve(self, b: 'RealVector') -> 'RealVector': ...
 
 class DependentVectorsHandler(java.lang.Enum['DependentVectorsHandler']):
     """
@@ -338,9 +339,9 @@ class DependentVectorsHandler(java.lang.Enum['DependentVectorsHandler']):
     REDUCE_BASE_TO_SPAN: typing.ClassVar['DependentVectorsHandler'] = ...
     _manageDependent_1__T = typing.TypeVar('_manageDependent_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def manageDependent(self, int: int, list: java.util.List['RealVector']) -> int: ...
+    def manageDependent(self, index: int, basis: java.util.List['RealVector']) -> int: ...
     @typing.overload
-    def manageDependent(self, field: org.hipparchus.Field[_manageDependent_1__T], int: int, list: java.util.List['FieldVector'[_manageDependent_1__T]]) -> int: ...
+    def manageDependent(self, field: org.hipparchus.Field[_manageDependent_1__T], index: int, basis: java.util.List['FieldVector'[_manageDependent_1__T]]) -> int: ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
@@ -367,7 +368,12 @@ class DependentVectorsHandler(java.lang.Enum['DependentVectorsHandler']):
     @staticmethod
     def values() -> typing.MutableSequence['DependentVectorsHandler']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (DependentVectorsHandler c : DependentVectorsHandler.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -404,22 +410,23 @@ class EigenDecompositionNonSymmetric:
     Since:
         3.0
     
-          - `MathWorld <http://mathworld.wolfram.com/EigenDecomposition.html>`
-          - `Wikipedia <http://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix>`
+    Also see:
+        `MathWorld <http://mathworld.wolfram.com/EigenDecomposition.html>`, `Wikipedia
+        <http://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix>`
     """
     DEFAULT_EPSILON: typing.ClassVar[float] = ...
     """
     Default epsilon value to use for internal epsilon
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix'): ...
+    def __init__(self, matrix: 'RealMatrix'): ...
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix', double: float): ...
+    def __init__(self, matrix: 'RealMatrix', epsilon: float): ...
     def getD(self) -> 'RealMatrix':
         """
         Gets the block diagonal matrix D of the decomposition. D is a block diagonal matrix. Real eigenvalues are on the diagonal while complex values are on 2x2 blocks { {real +imaginary}, {-imaginary, real} }.
@@ -450,9 +457,9 @@ class EigenDecompositionNonSymmetric:
         Returns:
             i :sup:`th` eigenvalue of the original matrix.
         
-              - getD
-              - getEigenvalues
-        
+        Also see:
+            getD,
+            getEigenvalues
         
         
         """
@@ -464,9 +471,9 @@ class EigenDecompositionNonSymmetric:
         Returns:
             a copy of the eigenvalues of the original matrix.
         
-              - getD
-              - getEigenvalue
-        
+        Also see:
+            getD,
+            getEigenvalue
         
         
         """
@@ -483,8 +490,8 @@ class EigenDecompositionNonSymmetric:
         Returns:
             a copy of the i :sup:`th` eigenvector of the original matrix.
         
-              - getD
-        
+        Also see:
+            getD
         
         
         """
@@ -540,26 +547,27 @@ class EigenDecompositionSymmetric:
     
     The columns of \(V\) represent the eigenvectors in the sense that \(A V = V D\), i.e. multiply(V) equals multiply(D). The matrix \(V\) may be badly conditioned, or even singular, so the validity of the equation \(A = V D V^{-1}\) depends upon the condition of \(V\). This implementation is based on the paper by A. Drubrulle, R.S. Martin and J.H. Wilkinson "The Implicit QL Algorithm" in Wilksinson and Reinsch (1971) Handbook for automatic computation, vol. 2, Linear algebra, Springer-Verlag, New-York.
     
-          - `MathWorld <http://mathworld.wolfram.com/EigenDecomposition.html>`
-          - `Wikipedia <http://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix>`
+    Also see:
+        `MathWorld <http://mathworld.wolfram.com/EigenDecomposition.html>`, `Wikipedia
+        <http://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix>`
     """
     DEFAULT_EPSILON: typing.ClassVar[float] = ...
     """
     Default epsilon value to use for internal epsilon
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, main: typing.Union[typing.List[float], jpype.JArray], secondary: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], double3: float, boolean: bool): ...
+    def __init__(self, main: typing.Union[typing.List[float], jpype.JArray], secondary: typing.Union[typing.List[float], jpype.JArray], epsilon: float, decreasing: bool): ...
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix'): ...
+    def __init__(self, matrix: 'RealMatrix'): ...
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix', double: float, boolean: bool): ...
+    def __init__(self, matrix: 'RealMatrix', epsilon: float, decreasing: bool): ...
     def getD(self) -> 'DiagonalMatrix':
         """
         Gets the diagonal matrix D of the decomposition. D is a diagonal matrix.
@@ -567,8 +575,8 @@ class EigenDecompositionSymmetric:
         Returns:
             the D matrix.
         
-              - getEigenvalues
-        
+        Also see:
+            getEigenvalues
         
         
         """
@@ -593,9 +601,9 @@ class EigenDecompositionSymmetric:
         Returns:
             real part of the i :sup:`th` eigenvalue of the original matrix.
         
-              - getD
-              - getEigenvalues
-        
+        Also see:
+            getD,
+            getEigenvalues
         
         
         """
@@ -607,9 +615,9 @@ class EigenDecompositionSymmetric:
         Returns:
             a copy of the eigenvalues of the original matrix.
         
-              - getD
-              - getEigenvalue
-        
+        Also see:
+            getD,
+            getEigenvalue
         
         
         """
@@ -626,8 +634,8 @@ class EigenDecompositionSymmetric:
         Returns:
             a copy of the i :sup:`th` eigenvector of the original matrix.
         
-              - getD
-        
+        Also see:
+            getD
         
         
         """
@@ -745,9 +753,9 @@ class FieldDecompositionSolver(typing.Generic[_FieldDecompositionSolver__T]):
         """
         ...
     @typing.overload
-    def solve(self, fieldMatrix: 'FieldMatrix'[_FieldDecompositionSolver__T]) -> 'FieldMatrix'[_FieldDecompositionSolver__T]: ...
+    def solve(self, b: 'FieldMatrix'[_FieldDecompositionSolver__T]) -> 'FieldMatrix'[_FieldDecompositionSolver__T]: ...
     @typing.overload
-    def solve(self, fieldVector: 'FieldVector'[_FieldDecompositionSolver__T]) -> 'FieldVector'[_FieldDecompositionSolver__T]: ...
+    def solve(self, b: 'FieldVector'[_FieldDecompositionSolver__T]) -> 'FieldVector'[_FieldDecompositionSolver__T]: ...
 
 _FieldLUDecomposition__T = typing.TypeVar('_FieldLUDecomposition__T', bound=org.hipparchus.FieldElement)  # <T>
 class FieldLUDecomposition(typing.Generic[_FieldLUDecomposition__T]):
@@ -767,15 +775,16 @@ class FieldLUDecomposition(typing.Generic[_FieldLUDecomposition__T]):
         DecompositionSolver.
     
     
-          - `MathWorld <http://mathworld.wolfram.com/LUDecomposition.html>`
-          - `Wikipedia <http://en.wikipedia.org/wiki/LU_decomposition>`
+    Also see:
+        `MathWorld <http://mathworld.wolfram.com/LUDecomposition.html>`, `Wikipedia
+        <http://en.wikipedia.org/wiki/LU_decomposition>`
     """
     @typing.overload
-    def __init__(self, fieldMatrix: 'FieldMatrix'[_FieldLUDecomposition__T]): ...
+    def __init__(self, matrix: 'FieldMatrix'[_FieldLUDecomposition__T]): ...
     @typing.overload
-    def __init__(self, fieldMatrix: 'FieldMatrix'[_FieldLUDecomposition__T], predicate: typing.Union[java.util.function.Predicate[_FieldLUDecomposition__T], typing.Callable[[_FieldLUDecomposition__T], bool]]): ...
+    def __init__(self, matrix: 'FieldMatrix'[_FieldLUDecomposition__T], zeroChecker: typing.Union[java.util.function.Predicate[_FieldLUDecomposition__T], typing.Callable[[_FieldLUDecomposition__T], bool]]): ...
     @typing.overload
-    def __init__(self, fieldMatrix: 'FieldMatrix'[_FieldLUDecomposition__T], predicate: typing.Union[java.util.function.Predicate[_FieldLUDecomposition__T], typing.Callable[[_FieldLUDecomposition__T], bool]], boolean: bool): ...
+    def __init__(self, matrix: 'FieldMatrix'[_FieldLUDecomposition__T], zeroChecker: typing.Union[java.util.function.Predicate[_FieldLUDecomposition__T], typing.Callable[[_FieldLUDecomposition__T], bool]], numericPermutationChoice: bool): ...
     def getDeterminant(self) -> _FieldLUDecomposition__T:
         """
         Return the determinant of the matrix.
@@ -809,8 +818,8 @@ class FieldLUDecomposition(typing.Generic[_FieldLUDecomposition__T]):
         Returns:
             the P rows permutation matrix (or null if decomposed matrix is singular)
         
-              - getPivot
-        
+        Also see:
+            getPivot
         
         
         """
@@ -822,8 +831,8 @@ class FieldLUDecomposition(typing.Generic[_FieldLUDecomposition__T]):
         Returns:
             the pivot permutation vector
         
-              - getP
-        
+        Also see:
+            getP
         
         
         """
@@ -986,15 +995,16 @@ class FieldQRDecomposition(typing.Generic[_FieldQRDecomposition__T]):
     
     This class is based on the class QRDecomposition.
     
-          - `MathWorld <http://mathworld.wolfram.com/QRDecomposition.html>`
-          - `Wikipedia <http://en.wikipedia.org/wiki/QR_decomposition>`
+    Also see:
+        `MathWorld <http://mathworld.wolfram.com/QRDecomposition.html>`, `Wikipedia
+        <http://en.wikipedia.org/wiki/QR_decomposition>`
     """
     @typing.overload
-    def __init__(self, fieldMatrix: 'FieldMatrix'[_FieldQRDecomposition__T]): ...
+    def __init__(self, matrix: 'FieldMatrix'[_FieldQRDecomposition__T]): ...
     @typing.overload
-    def __init__(self, fieldMatrix: 'FieldMatrix'[_FieldQRDecomposition__T], t: _FieldQRDecomposition__T): ...
+    def __init__(self, matrix: 'FieldMatrix'[_FieldQRDecomposition__T], threshold: _FieldQRDecomposition__T): ...
     @typing.overload
-    def __init__(self, fieldMatrix: 'FieldMatrix'[_FieldQRDecomposition__T], t: _FieldQRDecomposition__T, predicate: typing.Union[java.util.function.Predicate[_FieldQRDecomposition__T], typing.Callable[[_FieldQRDecomposition__T], bool]]): ...
+    def __init__(self, matrix: 'FieldMatrix'[_FieldQRDecomposition__T], threshold: _FieldQRDecomposition__T, zeroChecker: typing.Union[java.util.function.Predicate[_FieldQRDecomposition__T], typing.Callable[[_FieldQRDecomposition__T], bool]]): ...
     def getH(self) -> 'FieldMatrix'[_FieldQRDecomposition__T]:
         """
         Returns the Householder reflector vectors.
@@ -1173,8 +1183,8 @@ class FieldVector(typing.Generic[_FieldVector__T]):
         Raises:
             MathIllegalArgumentException: if the index is not valid.
         
-              - setEntry
-        
+        Also see:
+            setEntry
         
         
         """
@@ -1424,8 +1434,8 @@ class FieldVector(typing.Generic[_FieldVector__T]):
         Raises:
             MathIllegalArgumentException: if the index is not valid.
         
-              - getEntry
-        
+        Also see:
+            getEntry
         
         
         """
@@ -1564,8 +1574,9 @@ class HessenbergTransformer:
     
     This class is based on the method orthes in class EigenvalueDecomposition from the `JAMA <http://math.nist.gov/javanumerics/jama/>` library.
     
-          - `MathWorld <http://mathworld.wolfram.com/HessenbergDecomposition.html>`
-          - `Householder Transformations <http://en.wikipedia.org/wiki/Householder_transformation>`
+    Also see:
+        `MathWorld <http://mathworld.wolfram.com/HessenbergDecomposition.html>`, `Householder Transformations
+        <http://en.wikipedia.org/wiki/Householder_transformation>`
     """
     def __init__(self, matrix: 'RealMatrix'):
         """
@@ -1630,9 +1641,9 @@ class IterativeLinearSolver:
         """
         ...
     @typing.overload
-    def solve(self, realLinearOperator: 'RealLinearOperator', realVector: 'RealVector') -> 'RealVector': ...
+    def solve(self, a: 'RealLinearOperator', b: 'RealVector') -> 'RealVector': ...
     @typing.overload
-    def solve(self, realLinearOperator: 'RealLinearOperator', realVector: 'RealVector', realVector2: 'RealVector') -> 'RealVector': ...
+    def solve(self, a: 'RealLinearOperator', b: 'RealVector', x0: 'RealVector') -> 'RealVector': ...
     def solveInPlace(self, a: 'RealLinearOperator', b: 'RealVector', x0: 'RealVector') -> 'RealVector':
         """
         Returns an estimate of the solution to the linear system A · x = b. The solution is computed in-place (initial guess is modified).
@@ -1660,7 +1671,8 @@ class IterativeLinearSolverEvent(org.hipparchus.util.IterationEvent):
     """
     This is the base class for all events occurring during the iterations of a IterativeLinearSolver.
     
-          - serialized
+    Also see:
+        serialized
     """
     def getNormOfResidual(self) -> float:
         """
@@ -1738,13 +1750,14 @@ class LUDecomposition:
         DecompositionSolver.
     
     
-          - `MathWorld <http://mathworld.wolfram.com/LUDecomposition.html>`
-          - `Wikipedia <http://en.wikipedia.org/wiki/LU_decomposition>`
+    Also see:
+        `MathWorld <http://mathworld.wolfram.com/LUDecomposition.html>`, `Wikipedia
+        <http://en.wikipedia.org/wiki/LU_decomposition>`
     """
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix'): ...
+    def __init__(self, matrix: 'RealMatrix'): ...
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix', double: float): ...
+    def __init__(self, matrix: 'RealMatrix', singularityThreshold: float): ...
     def getDeterminant(self) -> float:
         """
         Return the determinant of the matrix
@@ -1778,8 +1791,8 @@ class LUDecomposition:
         Returns:
             the P rows permutation matrix (or null if decomposed matrix is singular)
         
-              - getPivot
-        
+        Also see:
+            getPivot
         
         
         """
@@ -1791,8 +1804,8 @@ class LUDecomposition:
         Returns:
             the pivot permutation vector
         
-              - getP
-        
+        Also see:
+            getP
         
         
         """
@@ -2003,10 +2016,10 @@ class MatrixUtils:
         ...
     @typing.overload
     @staticmethod
-    def checkSubMatrixIndex(anyMatrix: AnyMatrix, int: int, int2: int, int3: int, int4: int) -> None: ...
+    def checkSubMatrixIndex(m: AnyMatrix, startRow: int, endRow: int, startColumn: int, endColumn: int) -> None: ...
     @typing.overload
     @staticmethod
-    def checkSubMatrixIndex(anyMatrix: AnyMatrix, intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
+    def checkSubMatrixIndex(m: AnyMatrix, selectedRows: typing.Union[typing.List[int], jpype.JArray], selectedColumns: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
     @staticmethod
     def checkSubtractionCompatible(left: AnyMatrix, right: AnyMatrix) -> None:
         """
@@ -2113,7 +2126,7 @@ class MatrixUtils:
     _createFieldMatrix_1__T = typing.TypeVar('_createFieldMatrix_1__T', bound=org.hipparchus.FieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def createFieldMatrix(field: org.hipparchus.Field[_createFieldMatrix_0__T], int: int, int2: int) -> 'FieldMatrix'[_createFieldMatrix_0__T]:
+    def createFieldMatrix(field: org.hipparchus.Field[_createFieldMatrix_0__T], rows: int, columns: int) -> 'FieldMatrix'[_createFieldMatrix_0__T]:
         """
         Returns a FieldMatrix with specified dimensions.
         
@@ -2129,9 +2142,10 @@ class MatrixUtils:
         Returns:
             FieldMatrix with specified dimensions
         
-              - createFieldMatrix
+        Also see:
+            createFieldMatrix
         
-        public static <T extends FieldElement<T>> FieldMatrix<T> createFieldMatrix(T[][] data) throws MathIllegalArgumentException, NullArgumentException
+        public static <T extends FieldElement<T>> FieldMatrix<T> createFieldMatrix (T[][] data) throws MathIllegalArgumentException, NullArgumentException
         
         Returns a FieldMatrix whose entries are the the values in the the input array.
         
@@ -2150,15 +2164,15 @@ class MatrixUtils:
             MathIllegalArgumentException: if a row or column is empty.
             NullArgumentException: if either data or data[0] is null.
         
-              - createFieldMatrix
-        
+        Also see:
+            createFieldMatrix
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def createFieldMatrix(tArray: typing.Union[typing.List[typing.MutableSequence[_createFieldMatrix_1__T]], jpype.JArray]) -> 'FieldMatrix'[_createFieldMatrix_1__T]: ...
+    def createFieldMatrix(data: typing.Union[typing.List[typing.MutableSequence[_createFieldMatrix_1__T]], jpype.JArray]) -> 'FieldMatrix'[_createFieldMatrix_1__T]: ...
     _createFieldVector_0__T = typing.TypeVar('_createFieldVector_0__T', bound=org.hipparchus.FieldElement)  # <T>
     _createFieldVector_1__T = typing.TypeVar('_createFieldVector_1__T', bound=org.hipparchus.FieldElement)  # <T>
     @typing.overload
@@ -2182,7 +2196,7 @@ class MatrixUtils:
         ...
     @typing.overload
     @staticmethod
-    def createFieldVector(tArray: typing.Union[typing.List[_createFieldVector_1__T], jpype.JArray]) -> FieldVector[_createFieldVector_1__T]: ...
+    def createFieldVector(data: typing.Union[typing.List[_createFieldVector_1__T], jpype.JArray]) -> FieldVector[_createFieldVector_1__T]: ...
     @staticmethod
     def createRealDiagonalMatrix(diagonal: typing.Union[typing.List[float], jpype.JArray]) -> 'RealMatrix':
         """
@@ -2216,7 +2230,7 @@ class MatrixUtils:
         ...
     @typing.overload
     @staticmethod
-    def createRealMatrix(doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> 'RealMatrix':
+    def createRealMatrix(data: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> 'RealMatrix':
         """
         Returns a RealMatrix with specified dimensions.
         
@@ -2231,9 +2245,10 @@ class MatrixUtils:
         Returns:
             RealMatrix with specified dimensions
         
-              - createRealMatrix
+        Also see:
+            createRealMatrix
         
-        public static RealMatrix createRealMatrix(double[][] data) throws MathIllegalArgumentException, NullArgumentException
+        public static RealMatrix createRealMatrix (double[][] data) throws MathIllegalArgumentException, NullArgumentException
         
         Returns a RealMatrix whose entries are the the values in the the input array.
         
@@ -2253,15 +2268,15 @@ class MatrixUtils:
             NullArgumentException: if either data or data[0] is null.
             MathIllegalArgumentException: if data is not rectangular.
         
-              - createRealMatrix
-        
+        Also see:
+            createRealMatrix
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def createRealMatrix(int: int, int2: int) -> 'RealMatrix': ...
+    def createRealMatrix(rows: int, columns: int) -> 'RealMatrix': ...
     @typing.overload
     @staticmethod
     def createRealVector(dimension: typing.Union[typing.List[float], jpype.JArray]) -> 'RealVector':
@@ -2336,10 +2351,10 @@ class MatrixUtils:
         ...
     @typing.overload
     @staticmethod
-    def inverse(realMatrix: 'RealMatrix') -> 'RealMatrix': ...
+    def inverse(matrix: 'RealMatrix') -> 'RealMatrix': ...
     @typing.overload
     @staticmethod
-    def inverse(realMatrix: 'RealMatrix', double: float) -> 'RealMatrix': ...
+    def inverse(matrix: 'RealMatrix', threshold: float) -> 'RealMatrix': ...
     @staticmethod
     def isSymmetric(matrix: 'RealMatrix', eps: float) -> bool:
         """
@@ -2377,10 +2392,10 @@ class MatrixUtils:
     _orthonormalize_1__T = typing.TypeVar('_orthonormalize_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def orthonormalize(list: java.util.List['RealVector'], double: float, dependentVectorsHandler: DependentVectorsHandler) -> java.util.List['RealVector']: ...
+    def orthonormalize(independent: java.util.List['RealVector'], threshold: float, handler: DependentVectorsHandler) -> java.util.List['RealVector']: ...
     @typing.overload
     @staticmethod
-    def orthonormalize(field: org.hipparchus.Field[_orthonormalize_1__T], list: java.util.List[FieldVector[_orthonormalize_1__T]], t: _orthonormalize_1__T, dependentVectorsHandler: DependentVectorsHandler) -> java.util.List[FieldVector[_orthonormalize_1__T]]: ...
+    def orthonormalize(field: org.hipparchus.Field[_orthonormalize_1__T], independent: java.util.List[FieldVector[_orthonormalize_1__T]], threshold: _orthonormalize_1__T, handler: DependentVectorsHandler) -> java.util.List[FieldVector[_orthonormalize_1__T]]: ...
     @staticmethod
     def solveLowerTriangularSystem(rm: 'RealMatrix', b: 'RealVector') -> None:
         """
@@ -2440,13 +2455,14 @@ class QRDecomposition:
         DecompositionSolver.
     
     
-          - `MathWorld <http://mathworld.wolfram.com/QRDecomposition.html>`
-          - `Wikipedia <http://en.wikipedia.org/wiki/QR_decomposition>`
+    Also see:
+        `MathWorld <http://mathworld.wolfram.com/QRDecomposition.html>`, `Wikipedia
+        <http://en.wikipedia.org/wiki/QR_decomposition>`
     """
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix'): ...
+    def __init__(self, matrix: 'RealMatrix'): ...
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix', double: float): ...
+    def __init__(self, matrix: 'RealMatrix', threshold: float): ...
     def getH(self) -> 'RealMatrix':
         """
         Returns the Householder reflector vectors.
@@ -2590,7 +2606,8 @@ class RealMatrixChangingVisitor:
     """
     Interface defining a visitor for matrix entries.
     
-          - DefaultRealMatrixChangingVisitor
+    Also see:
+        DefaultRealMatrixChangingVisitor
     """
     def end(self) -> float:
         """
@@ -2650,13 +2667,13 @@ class RealMatrixFormat:
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, string: str, string2: str, string3: str, string4: str, string5: str, string6: str): ...
+    def __init__(self, prefix: str, suffix: str, rowPrefix: str, rowSuffix: str, rowSeparator: str, columnSeparator: str): ...
     @typing.overload
-    def __init__(self, string: str, string2: str, string3: str, string4: str, string5: str, string6: str, numberFormat: java.text.NumberFormat): ...
+    def __init__(self, prefix: str, suffix: str, rowPrefix: str, rowSuffix: str, rowSeparator: str, columnSeparator: str, format: java.text.NumberFormat): ...
     @typing.overload
-    def __init__(self, numberFormat: java.text.NumberFormat): ...
+    def __init__(self, format: java.text.NumberFormat): ...
     @typing.overload
-    def format(self, realMatrix: 'RealMatrix') -> str:
+    def format(self, m: 'RealMatrix') -> str:
         """
         This method calls format.
         
@@ -2680,7 +2697,7 @@ class RealMatrixFormat:
         """
         ...
     @typing.overload
-    def format(self, realMatrix: 'RealMatrix', stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer: ...
+    def format(self, matrix: 'RealMatrix', toAppendTo: java.lang.StringBuffer, pos: java.text.FieldPosition) -> java.lang.StringBuffer: ...
     @staticmethod
     def getAvailableLocales() -> typing.MutableSequence[java.util.Locale]:
         """
@@ -2793,7 +2810,7 @@ class RealMatrixFormat:
         """
         ...
     @typing.overload
-    def parse(self, string: str) -> 'RealMatrix':
+    def parse(self, source: str) -> 'RealMatrix':
         """
         Parse a string to produce a RealMatrix object.
         
@@ -2819,13 +2836,14 @@ class RealMatrixFormat:
         """
         ...
     @typing.overload
-    def parse(self, string: str, parsePosition: java.text.ParsePosition) -> 'RealMatrix': ...
+    def parse(self, source: str, pos: java.text.ParsePosition) -> 'RealMatrix': ...
 
 class RealMatrixPreservingVisitor:
     """
     Interface defining a visitor for matrix entries.
     
-          - DefaultRealMatrixPreservingVisitor
+    Also see:
+        DefaultRealMatrixPreservingVisitor
     """
     def end(self) -> float:
         """
@@ -2911,7 +2929,7 @@ class RealVector:
         """
         ...
     @typing.overload
-    def append(self, double: float) -> 'RealVector':
+    def append(self, v: float) -> 'RealVector':
         """
         Construct a new vector by appending a vector to this vector.
         
@@ -3051,7 +3069,7 @@ class RealVector:
         
         This method must be overriden by concrete subclasses of RealVector (the current implementation throws an exception).
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality.
@@ -3091,10 +3109,9 @@ class RealVector:
         Raises:
             MathIllegalArgumentException: if v is not the same size as this vector.
         
-              - getL1Distance
-              - getLInfDistance
-              - getNorm
-        
+        Also see:
+            getL1Distance, getLInfDistance,
+            getNorm
         
         
         """
@@ -3112,8 +3129,8 @@ class RealVector:
         Raises:
             MathIllegalArgumentException: if the index is not valid.
         
-              - setEntry
-        
+        Also see:
+            setEntry
         
         
         """
@@ -3145,10 +3162,9 @@ class RealVector:
         Returns:
             the norm.
         
-              - getNorm
-              - getLInfNorm
-              - getL1Distance
-        
+        Also see:
+            getNorm, getLInfNorm,
+            getL1Distance
         
         
         """
@@ -3168,10 +3184,9 @@ class RealVector:
         Raises:
             MathIllegalArgumentException: if v is not the same size as this vector.
         
-              - getDistance
-              - getL1Distance
-              - getLInfNorm
-        
+        Also see:
+            getDistance, getL1Distance,
+            getLInfNorm
         
         
         """
@@ -3185,10 +3200,9 @@ class RealVector:
         Returns:
             the norm.
         
-              - getNorm
-              - getL1Norm
-              - getLInfDistance
-        
+        Also see:
+            getNorm, getL1Norm,
+            getLInfDistance
         
         
         """
@@ -3242,10 +3256,9 @@ class RealVector:
         Returns:
             the norm.
         
-              - getL1Norm
-              - getLInfNorm
-              - getDistance
-        
+        Also see:
+            getL1Norm, getLInfNorm,
+            getDistance
         
         
         """
@@ -3272,7 +3285,7 @@ class RealVector:
         """
         . This method must be overriden by concrete subclasses of RealVector (current implementation throws an exception).
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Raises:
             MathRuntimeException: if this method is not overridden.
@@ -3304,7 +3317,7 @@ class RealVector:
         """
         Generic dense iterator. Iteration is in increasing order of the vector index.
         
-        Note: derived classes are required to return an Iterator that returns non-null Entry objects as long as hasNext returns true.
+        Note: derived classes are required to return an Iterator that returns non-null Entry objects as long as Iterator returns true.
         
         Returns:
             a dense iterator.
@@ -3506,8 +3519,8 @@ class RealVector:
         Raises:
             MathIllegalArgumentException: if the index is not valid.
         
-              - getEntry
-        
+        Also see:
+            getEntry
         
         
         """
@@ -3530,7 +3543,7 @@ class RealVector:
         """
         Create a sparse iterator over the vector, which may omit some entries. The ommitted entries are either exact zeroes (for dense implementations) or are the entries which are not stored (for real sparse vectors). No guarantees are made about order of iteration.
         
-        Note: derived classes are required to return an Iterator that returns non-null Entry objects as long as hasNext returns true.
+        Note: derived classes are required to return an Iterator that returns non-null Entry objects as long as Iterator returns true.
         
         Returns:
             a sparse iterator.
@@ -3610,7 +3623,7 @@ class RealVector:
         """
         ...
     @typing.overload
-    def walkInDefaultOrder(self, realVectorChangingVisitor: 'RealVectorChangingVisitor') -> float:
+    def walkInDefaultOrder(self, visitor: 'RealVectorChangingVisitor') -> float:
         """
         Parameters:
             visitor (RealVectorPreservingVisitor): the visitor to be used to process the entries of this vector
@@ -3618,7 +3631,7 @@ class RealVector:
         Returns:
             the value returned by end at the end of the walk
         
-        public double walkInDefaultOrder(RealVectorPreservingVisitor visitor, int start, int end) throws MathIllegalArgumentException
+        public double walkInDefaultOrder (RealVectorPreservingVisitor visitor, int start, int end) throws MathIllegalArgumentException
         
         Visits (but does not alter) some entries of this vector in default order (increasing index).
         
@@ -3642,7 +3655,7 @@ class RealVector:
         Returns:
             the value returned by end at the end of the walk
         
-        public double walkInDefaultOrder(RealVectorChangingVisitor visitor, int start, int end) throws MathIllegalArgumentException
+        public double walkInDefaultOrder (RealVectorChangingVisitor visitor, int start, int end) throws MathIllegalArgumentException
         
         Visits (and possibly alters) some entries of this vector in default order (increasing index).
         
@@ -3662,13 +3675,13 @@ class RealVector:
         """
         ...
     @typing.overload
-    def walkInDefaultOrder(self, realVectorChangingVisitor: 'RealVectorChangingVisitor', int: int, int2: int) -> float: ...
+    def walkInDefaultOrder(self, visitor: 'RealVectorChangingVisitor', start: int, end: int) -> float: ...
     @typing.overload
-    def walkInDefaultOrder(self, realVectorPreservingVisitor: 'RealVectorPreservingVisitor') -> float: ...
+    def walkInDefaultOrder(self, visitor: 'RealVectorPreservingVisitor') -> float: ...
     @typing.overload
-    def walkInDefaultOrder(self, realVectorPreservingVisitor: 'RealVectorPreservingVisitor', int: int, int2: int) -> float: ...
+    def walkInDefaultOrder(self, visitor: 'RealVectorPreservingVisitor', start: int, end: int) -> float: ...
     @typing.overload
-    def walkInOptimizedOrder(self, realVectorChangingVisitor: 'RealVectorChangingVisitor') -> float:
+    def walkInOptimizedOrder(self, visitor: 'RealVectorChangingVisitor') -> float:
         """
         Visits (but does not alter) all entries of this vector in optimized order. The order in which the entries are visited is selected so as to lead to the most efficient implementation; it might depend on the concrete implementation of this abstract class.
         
@@ -3678,7 +3691,7 @@ class RealVector:
         Returns:
             the value returned by end at the end of the walk
         
-        public double walkInOptimizedOrder(RealVectorPreservingVisitor visitor, int start, int end) throws MathIllegalArgumentException
+        public double walkInOptimizedOrder (RealVectorPreservingVisitor visitor, int start, int end) throws MathIllegalArgumentException
         
         Visits (but does not alter) some entries of this vector in optimized order. The order in which the entries are visited is selected so as to lead to the most efficient implementation; it might depend on the concrete implementation of this abstract class.
         
@@ -3702,7 +3715,7 @@ class RealVector:
         Returns:
             the value returned by end at the end of the walk
         
-        public double walkInOptimizedOrder(RealVectorChangingVisitor visitor, int start, int end) throws MathIllegalArgumentException
+        public double walkInOptimizedOrder (RealVectorChangingVisitor visitor, int start, int end) throws MathIllegalArgumentException
         
         Visits (and possibly change) some entries of this vector in optimized order. The order in which the entries are visited is selected so as to lead to the most efficient implementation; it might depend on the concrete implementation of this abstract class.
         
@@ -3722,11 +3735,11 @@ class RealVector:
         """
         ...
     @typing.overload
-    def walkInOptimizedOrder(self, realVectorChangingVisitor: 'RealVectorChangingVisitor', int: int, int2: int) -> float: ...
+    def walkInOptimizedOrder(self, visitor: 'RealVectorChangingVisitor', start: int, end: int) -> float: ...
     @typing.overload
-    def walkInOptimizedOrder(self, realVectorPreservingVisitor: 'RealVectorPreservingVisitor') -> float: ...
+    def walkInOptimizedOrder(self, visitor: 'RealVectorPreservingVisitor') -> float: ...
     @typing.overload
-    def walkInOptimizedOrder(self, realVectorPreservingVisitor: 'RealVectorPreservingVisitor', int: int, int2: int) -> float: ...
+    def walkInOptimizedOrder(self, visitor: 'RealVectorPreservingVisitor', start: int, end: int) -> float: ...
     class Entry:
         def __init__(self, realVector: 'RealVector'): ...
         def getIndex(self) -> int: ...
@@ -3789,13 +3802,13 @@ class RealVectorFormat:
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, string: str, string2: str, string3: str): ...
+    def __init__(self, prefix: str, suffix: str, separator: str): ...
     @typing.overload
-    def __init__(self, string: str, string2: str, string3: str, numberFormat: java.text.NumberFormat): ...
+    def __init__(self, prefix: str, suffix: str, separator: str, format: java.text.NumberFormat): ...
     @typing.overload
-    def __init__(self, numberFormat: java.text.NumberFormat): ...
+    def __init__(self, format: java.text.NumberFormat): ...
     @typing.overload
-    def format(self, realVector: RealVector) -> str:
+    def format(self, v: RealVector) -> str:
         """
         This method calls format.
         
@@ -3819,7 +3832,7 @@ class RealVectorFormat:
         """
         ...
     @typing.overload
-    def format(self, realVector: RealVector, stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer: ...
+    def format(self, vector: RealVector, toAppendTo: java.lang.StringBuffer, pos: java.text.FieldPosition) -> java.lang.StringBuffer: ...
     @staticmethod
     def getAvailableLocales() -> typing.MutableSequence[java.util.Locale]:
         """
@@ -3902,7 +3915,7 @@ class RealVectorFormat:
         """
         ...
     @typing.overload
-    def parse(self, string: str) -> 'ArrayRealVector':
+    def parse(self, source: str) -> 'ArrayRealVector':
         """
         Parse a string to produce a RealVector object.
         
@@ -3928,7 +3941,7 @@ class RealVectorFormat:
         """
         ...
     @typing.overload
-    def parse(self, string: str, parsePosition: java.text.ParsePosition) -> 'ArrayRealVector': ...
+    def parse(self, source: str, pos: java.text.ParsePosition) -> 'ArrayRealVector': ...
 
 class RealVectorPreservingVisitor:
     """
@@ -3981,13 +3994,14 @@ class RectangularCholeskyDecomposition:
     
     Rectangular Cholesky decomposition is not suited for solving linear systems, so it does not provide any DecompositionSolver.
     
-          - `MathWorld <http://mathworld.wolfram.com/CholeskyDecomposition.html>`
-          - `Wikipedia <http://en.wikipedia.org/wiki/Cholesky_decomposition>`
+    Also see:
+        `MathWorld <http://mathworld.wolfram.com/CholeskyDecomposition.html>`, `Wikipedia
+        <http://en.wikipedia.org/wiki/Cholesky_decomposition>`
     """
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix'): ...
+    def __init__(self, matrix: 'RealMatrix'): ...
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix', double: float): ...
+    def __init__(self, matrix: 'RealMatrix', small: float): ...
     def getRank(self) -> int:
         """
         Get the rank of the symmetric positive semidefinite matrix. The r is the number of independent rows in the symmetric positive semidefinite matrix, it is also the number of columns of the rectangular matrix of the decomposition.
@@ -3995,8 +4009,8 @@ class RectangularCholeskyDecomposition:
         Returns:
             r of the square matrix.
         
-              - getRootMatrix
-        
+        Also see:
+            getRootMatrix
         
         
         """
@@ -4008,8 +4022,8 @@ class RectangularCholeskyDecomposition:
         Returns:
             root of the square matrix
         
-              - getRank
-        
+        Also see:
+            getRank
         
         
         """
@@ -4050,14 +4064,15 @@ class SchurTransformer:
     
     This class is based on the method hqr2 in class EigenvalueDecomposition from the `JAMA <http://math.nist.gov/javanumerics/jama/>` library.
     
-          - `Schur Decomposition - MathWorld <http://mathworld.wolfram.com/SchurDecomposition.html>`
-          - `Schur Decomposition - Wikipedia <http://en.wikipedia.org/wiki/Schur_decomposition>`
-          - `Householder Transformations <http://en.wikipedia.org/wiki/Householder_transformation>`
+    Also see:
+        `Schur Decomposition - MathWorld <http://mathworld.wolfram.com/SchurDecomposition.html>`, `Schur Decomposition -
+        Wikipedia <http://en.wikipedia.org/wiki/Schur_decomposition>`, `Householder Transformations
+        <http://en.wikipedia.org/wiki/Householder_transformation>`
     """
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix'): ...
+    def __init__(self, matrix: 'RealMatrix'): ...
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix', double: float): ...
+    def __init__(self, matrix: 'RealMatrix', epsilon: float): ...
     def getP(self) -> 'RealMatrix':
         """
         Returns the matrix P of the transform.
@@ -4102,22 +4117,23 @@ class SemiDefinitePositiveCholeskyDecomposition:
     Since:
         2.2
     
-          - "J. Hartikainen, A. Solin, and S. Särkkä. Optimal ﬁltering with Kalman ﬁlters and smoothers, Dept. of Biomedica
-            Engineering and Computational Sciences, Aalto University School of Science, Aug. 2011."
+    Also see:
+        "J. Hartikainen, A. Solin, and S. Särkkä. Optimal ﬁltering with Kalman ﬁlters and smoothers, Dept. of Biomedica
+        Engineering and Computational Sciences, Aalto University School of Science, Aug. 2011."
     """
     POSITIVITY_THRESHOLD: typing.ClassVar[float] = ...
     """
     Default threshold below which elements are not considered positive.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix'): ...
+    def __init__(self, matrix: 'RealMatrix'): ...
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix', double: float): ...
+    def __init__(self, matrix: 'RealMatrix', positivityThreshold: float): ...
     def getL(self) -> 'RealMatrix':
         """
         Returns the matrix L of the decomposition.
@@ -4161,8 +4177,9 @@ class SingularValueDecomposition:
       - a getCovariance method has been added.
     
     
-          - `MathWorld <http://mathworld.wolfram.com/SingularValueDecomposition.html>`
-          - `Wikipedia <http://en.wikipedia.org/wiki/Singular_value_decomposition>`
+    Also see:
+        `MathWorld <http://mathworld.wolfram.com/SingularValueDecomposition.html>`, `Wikipedia
+        <http://en.wikipedia.org/wiki/Singular_value_decomposition>`
     """
     def __init__(self, matrix: 'RealMatrix'):
         """
@@ -4279,8 +4296,8 @@ class SingularValueDecomposition:
         Returns:
             the U matrix
         
-              - getUT
-        
+        Also see:
+            getUT
         
         
         """
@@ -4294,8 +4311,8 @@ class SingularValueDecomposition:
         Returns:
             the U matrix (or null if decomposed matrix is singular)
         
-              - getU
-        
+        Also see:
+            getU
         
         
         """
@@ -4309,8 +4326,8 @@ class SingularValueDecomposition:
         Returns:
             the V matrix (or null if decomposed matrix is singular)
         
-              - getVT
-        
+        Also see:
+            getVT
         
         
         """
@@ -4324,8 +4341,8 @@ class SingularValueDecomposition:
         Returns:
             the V matrix (or null if decomposed matrix is singular)
         
-              - getV
-        
+        Also see:
+            getV
         
         
         """
@@ -4334,11 +4351,10 @@ class SingularValueDecomposition:
 _ArrayFieldVector__T = typing.TypeVar('_ArrayFieldVector__T', bound=org.hipparchus.FieldElement)  # <T>
 class ArrayFieldVector(FieldVector[_ArrayFieldVector__T], java.io.Serializable, typing.Generic[_ArrayFieldVector__T]):
     """
-    implements FieldVector<T>, Serializable
-    
     This class implements the FieldVector interface with a FieldElement array.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self, int: int, t: _ArrayFieldVector__T): ...
@@ -4351,7 +4367,7 @@ class ArrayFieldVector(FieldVector[_ArrayFieldVector__T], java.io.Serializable, 
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_ArrayFieldVector__T], tArray: typing.Union[typing.List[_ArrayFieldVector__T], jpype.JArray], boolean: bool): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_ArrayFieldVector__T], tArray: typing.Union[typing.List[_ArrayFieldVector__T], jpype.JArray], int: int, int2: int): ...
+    def __init__(self, field: org.hipparchus.Field[_ArrayFieldVector__T], d: typing.Union[typing.List[_ArrayFieldVector__T], jpype.JArray], pos: int, size: int): ...
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_ArrayFieldVector__T], tArray: typing.Union[typing.List[_ArrayFieldVector__T], jpype.JArray], tArray2: typing.Union[typing.List[_ArrayFieldVector__T], jpype.JArray]): ...
     @typing.overload
@@ -4375,9 +4391,9 @@ class ArrayFieldVector(FieldVector[_ArrayFieldVector__T], java.io.Serializable, 
     @typing.overload
     def __init__(self, fieldVector: FieldVector[_ArrayFieldVector__T], fieldVector2: FieldVector[_ArrayFieldVector__T]): ...
     @typing.overload
-    def add(self, arrayFieldVector: 'ArrayFieldVector'[_ArrayFieldVector__T]) -> 'ArrayFieldVector'[_ArrayFieldVector__T]: ...
+    def add(self, v: 'ArrayFieldVector'[_ArrayFieldVector__T]) -> 'ArrayFieldVector'[_ArrayFieldVector__T]: ...
     @typing.overload
-    def add(self, fieldVector: FieldVector[_ArrayFieldVector__T]) -> FieldVector[_ArrayFieldVector__T]: ...
+    def add(self, v: FieldVector[_ArrayFieldVector__T]) -> FieldVector[_ArrayFieldVector__T]: ...
     @typing.overload
     def append(self, arrayFieldVector: 'ArrayFieldVector'[_ArrayFieldVector__T]) -> 'ArrayFieldVector'[_ArrayFieldVector__T]: ...
     @typing.overload
@@ -4397,22 +4413,22 @@ class ArrayFieldVector(FieldVector[_ArrayFieldVector__T], java.io.Serializable, 
         """
         ...
     @typing.overload
-    def dotProduct(self, arrayFieldVector: 'ArrayFieldVector'[_ArrayFieldVector__T]) -> _ArrayFieldVector__T: ...
+    def dotProduct(self, v: 'ArrayFieldVector'[_ArrayFieldVector__T]) -> _ArrayFieldVector__T: ...
     @typing.overload
-    def dotProduct(self, fieldVector: FieldVector[_ArrayFieldVector__T]) -> _ArrayFieldVector__T: ...
+    def dotProduct(self, v: FieldVector[_ArrayFieldVector__T]) -> _ArrayFieldVector__T: ...
     @typing.overload
-    def ebeDivide(self, arrayFieldVector: 'ArrayFieldVector'[_ArrayFieldVector__T]) -> 'ArrayFieldVector'[_ArrayFieldVector__T]: ...
+    def ebeDivide(self, v: 'ArrayFieldVector'[_ArrayFieldVector__T]) -> 'ArrayFieldVector'[_ArrayFieldVector__T]: ...
     @typing.overload
-    def ebeDivide(self, fieldVector: FieldVector[_ArrayFieldVector__T]) -> FieldVector[_ArrayFieldVector__T]: ...
+    def ebeDivide(self, v: FieldVector[_ArrayFieldVector__T]) -> FieldVector[_ArrayFieldVector__T]: ...
     @typing.overload
-    def ebeMultiply(self, arrayFieldVector: 'ArrayFieldVector'[_ArrayFieldVector__T]) -> 'ArrayFieldVector'[_ArrayFieldVector__T]: ...
+    def ebeMultiply(self, v: 'ArrayFieldVector'[_ArrayFieldVector__T]) -> 'ArrayFieldVector'[_ArrayFieldVector__T]: ...
     @typing.overload
-    def ebeMultiply(self, fieldVector: FieldVector[_ArrayFieldVector__T]) -> FieldVector[_ArrayFieldVector__T]: ...
+    def ebeMultiply(self, v: FieldVector[_ArrayFieldVector__T]) -> FieldVector[_ArrayFieldVector__T]: ...
     def equals(self, other: typing.Any) -> bool:
         """
         Test for the equality of two vectors.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality.
@@ -4459,8 +4475,8 @@ class ArrayFieldVector(FieldVector[_ArrayFieldVector__T], java.io.Serializable, 
         Returns:
             the vector entry at index.
         
-              - setEntry
-        
+        Also see:
+            setEntry
         
         
         """
@@ -4492,7 +4508,6 @@ class ArrayFieldVector(FieldVector[_ArrayFieldVector__T], java.io.Serializable, 
         
         Raises:
             MathIllegalArgumentException: if the index is not valid.
-            MathIllegalArgumentException: if the number of elements if not positive.
         
         
         """
@@ -4503,7 +4518,7 @@ class ArrayFieldVector(FieldVector[_ArrayFieldVector__T], java.io.Serializable, 
         
         All NaN values have the same hash code.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -4698,15 +4713,15 @@ class ArrayFieldVector(FieldVector[_ArrayFieldVector__T], java.io.Serializable, 
         """
         ...
     @typing.overload
-    def outerProduct(self, arrayFieldVector: 'ArrayFieldVector'[_ArrayFieldVector__T]) -> 'FieldMatrix'[_ArrayFieldVector__T]: ...
+    def outerProduct(self, v: 'ArrayFieldVector'[_ArrayFieldVector__T]) -> 'FieldMatrix'[_ArrayFieldVector__T]: ...
     @typing.overload
-    def outerProduct(self, fieldVector: FieldVector[_ArrayFieldVector__T]) -> 'FieldMatrix'[_ArrayFieldVector__T]: ...
+    def outerProduct(self, v: FieldVector[_ArrayFieldVector__T]) -> 'FieldMatrix'[_ArrayFieldVector__T]: ...
     @typing.overload
-    def projection(self, arrayFieldVector: 'ArrayFieldVector'[_ArrayFieldVector__T]) -> 'ArrayFieldVector'[_ArrayFieldVector__T]: ...
+    def projection(self, v: 'ArrayFieldVector'[_ArrayFieldVector__T]) -> 'ArrayFieldVector'[_ArrayFieldVector__T]: ...
     @typing.overload
-    def projection(self, fieldVector: FieldVector[_ArrayFieldVector__T]) -> FieldVector[_ArrayFieldVector__T]: ...
+    def projection(self, v: FieldVector[_ArrayFieldVector__T]) -> FieldVector[_ArrayFieldVector__T]: ...
     @typing.overload
-    def set(self, int: int, arrayFieldVector: 'ArrayFieldVector'[_ArrayFieldVector__T]) -> None: ...
+    def set(self, index: int, v: 'ArrayFieldVector'[_ArrayFieldVector__T]) -> None: ...
     @typing.overload
     def set(self, value: _ArrayFieldVector__T) -> None:
         """
@@ -4730,8 +4745,8 @@ class ArrayFieldVector(FieldVector[_ArrayFieldVector__T], java.io.Serializable, 
             index (int): element index.
             value (ArrayFieldVector): new value for the element.
         
-              - getEntry
-        
+        Also see:
+            getEntry
         
         
         """
@@ -4753,9 +4768,9 @@ class ArrayFieldVector(FieldVector[_ArrayFieldVector__T], java.io.Serializable, 
         """
         ...
     @typing.overload
-    def subtract(self, arrayFieldVector: 'ArrayFieldVector'[_ArrayFieldVector__T]) -> 'ArrayFieldVector'[_ArrayFieldVector__T]: ...
+    def subtract(self, v: 'ArrayFieldVector'[_ArrayFieldVector__T]) -> 'ArrayFieldVector'[_ArrayFieldVector__T]: ...
     @typing.overload
-    def subtract(self, fieldVector: FieldVector[_ArrayFieldVector__T]) -> FieldVector[_ArrayFieldVector__T]: ...
+    def subtract(self, v: FieldVector[_ArrayFieldVector__T]) -> FieldVector[_ArrayFieldVector__T]: ...
     def toArray(self) -> typing.MutableSequence[_ArrayFieldVector__T]:
         """
         Convert the vector to a T array.
@@ -4772,7 +4787,7 @@ class ArrayFieldVector(FieldVector[_ArrayFieldVector__T], java.io.Serializable, 
         ...
     def toString(self) -> str:
         """
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Since:
             2.0
@@ -4781,29 +4796,28 @@ class ArrayFieldVector(FieldVector[_ArrayFieldVector__T], java.io.Serializable, 
         """
         ...
     @typing.overload
-    def walkInDefaultOrder(self, fieldVectorChangingVisitor: FieldVectorChangingVisitor[_ArrayFieldVector__T]) -> _ArrayFieldVector__T: ...
+    def walkInDefaultOrder(self, visitor: FieldVectorChangingVisitor[_ArrayFieldVector__T]) -> _ArrayFieldVector__T: ...
     @typing.overload
-    def walkInDefaultOrder(self, fieldVectorChangingVisitor: FieldVectorChangingVisitor[_ArrayFieldVector__T], int: int, int2: int) -> _ArrayFieldVector__T: ...
+    def walkInDefaultOrder(self, visitor: FieldVectorChangingVisitor[_ArrayFieldVector__T], start: int, end: int) -> _ArrayFieldVector__T: ...
     @typing.overload
-    def walkInDefaultOrder(self, fieldVectorPreservingVisitor: FieldVectorPreservingVisitor[_ArrayFieldVector__T]) -> _ArrayFieldVector__T: ...
+    def walkInDefaultOrder(self, visitor: FieldVectorPreservingVisitor[_ArrayFieldVector__T]) -> _ArrayFieldVector__T: ...
     @typing.overload
-    def walkInDefaultOrder(self, fieldVectorPreservingVisitor: FieldVectorPreservingVisitor[_ArrayFieldVector__T], int: int, int2: int) -> _ArrayFieldVector__T: ...
+    def walkInDefaultOrder(self, visitor: FieldVectorPreservingVisitor[_ArrayFieldVector__T], start: int, end: int) -> _ArrayFieldVector__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldVectorChangingVisitor: FieldVectorChangingVisitor[_ArrayFieldVector__T]) -> _ArrayFieldVector__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldVectorChangingVisitor[_ArrayFieldVector__T]) -> _ArrayFieldVector__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldVectorChangingVisitor: FieldVectorChangingVisitor[_ArrayFieldVector__T], int: int, int2: int) -> _ArrayFieldVector__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldVectorChangingVisitor[_ArrayFieldVector__T], start: int, end: int) -> _ArrayFieldVector__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldVectorPreservingVisitor: FieldVectorPreservingVisitor[_ArrayFieldVector__T]) -> _ArrayFieldVector__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldVectorPreservingVisitor[_ArrayFieldVector__T]) -> _ArrayFieldVector__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldVectorPreservingVisitor: FieldVectorPreservingVisitor[_ArrayFieldVector__T], int: int, int2: int) -> _ArrayFieldVector__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldVectorPreservingVisitor[_ArrayFieldVector__T], start: int, end: int) -> _ArrayFieldVector__T: ...
 
 class ArrayRealVector(RealVector, java.io.Serializable):
     """
-    implements Serializable
-    
     This class implements the RealVector interface with a double array.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -4814,7 +4828,7 @@ class ArrayRealVector(RealVector, java.io.Serializable):
     @typing.overload
     def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int): ...
+    def __init__(self, d: typing.Union[typing.List[float], jpype.JArray], pos: int, size: int): ...
     @typing.overload
     def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], arrayRealVector: 'ArrayRealVector'): ...
     @typing.overload
@@ -4824,7 +4838,7 @@ class ArrayRealVector(RealVector, java.io.Serializable):
     @typing.overload
     def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int): ...
+    def __init__(self, d: typing.Union[typing.List[float], jpype.JArray], pos: int, size: int): ...
     @typing.overload
     def __init__(self, arrayRealVector: 'ArrayRealVector'): ...
     @typing.overload
@@ -4874,7 +4888,7 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         """
         ...
     @typing.overload
-    def append(self, arrayRealVector: 'ArrayRealVector') -> 'ArrayRealVector':
+    def append(self, v: 'ArrayRealVector') -> 'ArrayRealVector':
         """
         Construct a new vector by appending a vector to this vector.
         
@@ -5074,10 +5088,9 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         Raises:
             MathIllegalArgumentException: if v is not the same size as this vector.
         
-              - getL1Distance
-              - getLInfDistance
-              - getNorm
-        
+        Also see:
+            getL1Distance, getLInfDistance,
+            getNorm
         
         
         """
@@ -5097,8 +5110,8 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         Raises:
             MathIllegalArgumentException: if the index is not valid.
         
-              - setEntry
-        
+        Also see:
+            setEntry
         
         
         """
@@ -5134,10 +5147,9 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         Returns:
             the norm.
         
-              - getNorm
-              - getLInfNorm
-              - getL1Distance
-        
+        Also see:
+            getNorm, getLInfNorm,
+            getL1Distance
         
         
         """
@@ -5159,10 +5171,9 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         Raises:
             MathIllegalArgumentException: if v is not the same size as this vector.
         
-              - getDistance
-              - getL1Distance
-              - getLInfNorm
-        
+        Also see:
+            getDistance, getL1Distance,
+            getLInfNorm
         
         
         """
@@ -5178,10 +5189,9 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         Returns:
             the norm.
         
-              - getNorm
-              - getL1Norm
-              - getLInfDistance
-        
+        Also see:
+            getNorm, getL1Norm,
+            getLInfDistance
         
         
         """
@@ -5197,10 +5207,9 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         Returns:
             the norm.
         
-              - getL1Norm
-              - getLInfNorm
-              - getDistance
-        
+        Also see:
+            getL1Norm, getLInfNorm,
+            getDistance
         
         
         """
@@ -5220,7 +5229,6 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if the index is not valid.
-            MathIllegalArgumentException: if the number of elements is not positive.
         
         
         """
@@ -5401,16 +5409,16 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         Raises:
             MathIllegalArgumentException: if the index is not valid.
         
-              - getEntry
-        
+        Also see:
+            getEntry
         
         
         """
         ...
     @typing.overload
-    def setSubVector(self, int: int, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
+    def setSubVector(self, index: int, v: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
     @typing.overload
-    def setSubVector(self, int: int, realVector: RealVector) -> None: ...
+    def setSubVector(self, index: int, v: RealVector) -> None: ...
     def subtract(self, v: RealVector) -> 'ArrayRealVector':
         """
         Subtract v from this vector. Returns a new vector. Does not change instance data.
@@ -5443,13 +5451,13 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         ...
     def toString(self) -> str:
         """
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         
         """
         ...
     @typing.overload
-    def walkInDefaultOrder(self, realVectorChangingVisitor: RealVectorChangingVisitor) -> float:
+    def walkInDefaultOrder(self, visitor: RealVectorChangingVisitor) -> float:
         """
         Overrides: walkInDefaultOrder in class RealVector
         
@@ -5459,7 +5467,7 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         Returns:
             the value returned by end at the end of the walk
         
-        public double walkInDefaultOrder(RealVectorPreservingVisitor visitor, int start, int end) throws MathIllegalArgumentException
+        public double walkInDefaultOrder (RealVectorPreservingVisitor visitor, int start, int end) throws MathIllegalArgumentException
         
         Visits (but does not alter) some entries of this vector in default order (increasing index).
         
@@ -5475,7 +5483,6 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if end < start.
-            MathIllegalArgumentException: if the indices are not valid.
         
         Visits (and possibly alters) all entries of this vector in default order (increasing index).
         
@@ -5487,7 +5494,7 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         Returns:
             the value returned by end at the end of the walk
         
-        public double walkInDefaultOrder(RealVectorChangingVisitor visitor, int start, int end) throws MathIllegalArgumentException
+        public double walkInDefaultOrder (RealVectorChangingVisitor visitor, int start, int end) throws MathIllegalArgumentException
         
         Visits (and possibly alters) some entries of this vector in default order (increasing index).
         
@@ -5503,19 +5510,18 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if end < start.
-            MathIllegalArgumentException: if the indices are not valid.
         
         
         """
         ...
     @typing.overload
-    def walkInDefaultOrder(self, realVectorChangingVisitor: RealVectorChangingVisitor, int: int, int2: int) -> float: ...
+    def walkInDefaultOrder(self, visitor: RealVectorChangingVisitor, start: int, end: int) -> float: ...
     @typing.overload
-    def walkInDefaultOrder(self, realVectorPreservingVisitor: RealVectorPreservingVisitor) -> float: ...
+    def walkInDefaultOrder(self, visitor: RealVectorPreservingVisitor) -> float: ...
     @typing.overload
-    def walkInDefaultOrder(self, realVectorPreservingVisitor: RealVectorPreservingVisitor, int: int, int2: int) -> float: ...
+    def walkInDefaultOrder(self, visitor: RealVectorPreservingVisitor, start: int, end: int) -> float: ...
     @typing.overload
-    def walkInOptimizedOrder(self, realVectorChangingVisitor: RealVectorChangingVisitor) -> float:
+    def walkInOptimizedOrder(self, visitor: RealVectorChangingVisitor) -> float:
         """
         Visits (but does not alter) all entries of this vector in optimized order. The order in which the entries are visited is selected so as to lead to the most efficient implementation; it might depend on the concrete implementation of this abstract class. In this implementation, the optimized order is the default order.
         
@@ -5527,7 +5533,7 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         Returns:
             the value returned by end at the end of the walk
         
-        public double walkInOptimizedOrder(RealVectorPreservingVisitor visitor, int start, int end) throws MathIllegalArgumentException
+        public double walkInOptimizedOrder (RealVectorPreservingVisitor visitor, int start, int end) throws MathIllegalArgumentException
         
         Visits (but does not alter) some entries of this vector in optimized order. The order in which the entries are visited is selected so as to lead to the most efficient implementation; it might depend on the concrete implementation of this abstract class. In this implementation, the optimized order is the default order.
         
@@ -5543,7 +5549,6 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if end < start.
-            MathIllegalArgumentException: if the indices are not valid.
         
         Visits (and possibly alters) all entries of this vector in optimized order. The order in which the entries are visited is selected so as to lead to the most efficient implementation; it might depend on the concrete implementation of this abstract class. In this implementation, the optimized order is the default order.
         
@@ -5555,7 +5560,7 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         Returns:
             the value returned by end at the end of the walk
         
-        public double walkInOptimizedOrder(RealVectorChangingVisitor visitor, int start, int end) throws MathIllegalArgumentException
+        public double walkInOptimizedOrder (RealVectorChangingVisitor visitor, int start, int end) throws MathIllegalArgumentException
         
         Visits (and possibly change) some entries of this vector in optimized order. The order in which the entries are visited is selected so as to lead to the most efficient implementation; it might depend on the concrete implementation of this abstract class. In this implementation, the optimized order is the default order.
         
@@ -5571,22 +5576,19 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if end < start.
-            MathIllegalArgumentException: if the indices are not valid.
         
         
         """
         ...
     @typing.overload
-    def walkInOptimizedOrder(self, realVectorChangingVisitor: RealVectorChangingVisitor, int: int, int2: int) -> float: ...
+    def walkInOptimizedOrder(self, visitor: RealVectorChangingVisitor, start: int, end: int) -> float: ...
     @typing.overload
-    def walkInOptimizedOrder(self, realVectorPreservingVisitor: RealVectorPreservingVisitor) -> float: ...
+    def walkInOptimizedOrder(self, visitor: RealVectorPreservingVisitor) -> float: ...
     @typing.overload
-    def walkInOptimizedOrder(self, realVectorPreservingVisitor: RealVectorPreservingVisitor, int: int, int2: int) -> float: ...
+    def walkInOptimizedOrder(self, visitor: RealVectorPreservingVisitor, start: int, end: int) -> float: ...
 
 class CholeskyDecomposer(MatrixDecomposer):
     """
-    implements MatrixDecomposer
-    
     Matrix decomposer using Cholseky decomposition.
     
     Since:
@@ -5622,8 +5624,6 @@ class CholeskyDecomposer(MatrixDecomposer):
 _DefaultFieldMatrixChangingVisitor__T = typing.TypeVar('_DefaultFieldMatrixChangingVisitor__T', bound=org.hipparchus.FieldElement)  # <T>
 class DefaultFieldMatrixChangingVisitor(FieldMatrixChangingVisitor[_DefaultFieldMatrixChangingVisitor__T], typing.Generic[_DefaultFieldMatrixChangingVisitor__T]):
     """
-    implements FieldMatrixChangingVisitor<T>
-    
     Default implementation of the FieldMatrixChangingVisitor interface.
     
     This class is a convenience to create custom visitors without defining all methods. This class provides default implementations that do nothing.
@@ -5692,8 +5692,6 @@ class DefaultFieldMatrixChangingVisitor(FieldMatrixChangingVisitor[_DefaultField
 _DefaultFieldMatrixPreservingVisitor__T = typing.TypeVar('_DefaultFieldMatrixPreservingVisitor__T', bound=org.hipparchus.FieldElement)  # <T>
 class DefaultFieldMatrixPreservingVisitor(FieldMatrixPreservingVisitor[_DefaultFieldMatrixPreservingVisitor__T], typing.Generic[_DefaultFieldMatrixPreservingVisitor__T]):
     """
-    implements FieldMatrixPreservingVisitor<T>
-    
     Default implementation of the FieldMatrixPreservingVisitor interface.
     
     This class is a convenience to create custom visitors without defining all methods. This class provides default implementations that do nothing.
@@ -5760,12 +5758,13 @@ class DefaultIterativeLinearSolverEvent(IterativeLinearSolverEvent):
     """
     A default concrete implementation of the abstract class IterativeLinearSolverEvent.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
-    def __init__(self, object: typing.Any, int: int, realVector: RealVector, realVector2: RealVector, double: float): ...
+    def __init__(self, source: typing.Any, iterations: int, x: RealVector, b: RealVector, rnorm: float): ...
     @typing.overload
-    def __init__(self, object: typing.Any, int: int, realVector: RealVector, realVector2: RealVector, realVector3: RealVector, double: float): ...
+    def __init__(self, source: typing.Any, iterations: int, x: RealVector, b: RealVector, r: RealVector, rnorm: float): ...
     def getNormOfResidual(self) -> float:
         """
         Returns the norm of the residual. The returned value is not required to be exact. Instead, the norm of the so-called updated residual (if available) should be returned. For example, the ConjugateGradient method computes a sequence of residuals, the norm of which is cheap to compute. However, due to accumulation of round-off errors, this residual might differ from the true residual after some iterations. See e.g. A. Greenbaum and Z. Strakos, Predicting the Behavior of Finite Precision Lanzos and Conjugate Gradient Computations, Technical Report 538, Department of Computer Science, New York University, 1991 (available `here <http://www.archive.org/details/predictingbehavi00gree>`).
@@ -5834,8 +5833,6 @@ class DefaultIterativeLinearSolverEvent(IterativeLinearSolverEvent):
 
 class DefaultRealMatrixChangingVisitor(RealMatrixChangingVisitor):
     """
-    implements RealMatrixChangingVisitor
-    
     Default implementation of the RealMatrixChangingVisitor interface.
     
     This class is a convenience to create custom visitors without defining all methods. This class provides default implementations that do nothing.
@@ -5905,8 +5902,6 @@ class DefaultRealMatrixChangingVisitor(RealMatrixChangingVisitor):
 
 class DefaultRealMatrixPreservingVisitor(RealMatrixPreservingVisitor):
     """
-    implements RealMatrixPreservingVisitor
-    
     Default implementation of the RealMatrixPreservingVisitor interface.
     
     This class is a convenience to create custom visitors without defining all methods. This class provides default implementations that do nothing.
@@ -5974,8 +5969,6 @@ class DefaultRealMatrixPreservingVisitor(RealMatrixPreservingVisitor):
 _FieldLUDecomposer__T = typing.TypeVar('_FieldLUDecomposer__T', bound=org.hipparchus.FieldElement)  # <T>
 class FieldLUDecomposer(FieldMatrixDecomposer[_FieldLUDecomposer__T], typing.Generic[_FieldLUDecomposer__T]):
     """
-    implements FieldMatrixDecomposer<T>
-    
     Matrix decomposer using LU-decomposition.
     
     Since:
@@ -6072,9 +6065,9 @@ class FieldMatrix(AnyMatrix, org.hipparchus.util.FieldBlendable['FieldMatrix'[_F
         """
         ...
     @typing.overload
-    def copySubMatrix(self, int: int, int2: int, int3: int, int4: int, tArray: typing.Union[typing.List[typing.MutableSequence[_FieldMatrix__T]], jpype.JArray]) -> None: ...
+    def copySubMatrix(self, startRow: int, endRow: int, startColumn: int, endColumn: int, destination: typing.Union[typing.List[typing.MutableSequence[_FieldMatrix__T]], jpype.JArray]) -> None: ...
     @typing.overload
-    def copySubMatrix(self, intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray], tArray: typing.Union[typing.List[typing.MutableSequence[_FieldMatrix__T]], jpype.JArray]) -> None: ...
+    def copySubMatrix(self, selectedRows: typing.Union[typing.List[int], jpype.JArray], selectedColumns: typing.Union[typing.List[int], jpype.JArray], destination: typing.Union[typing.List[typing.MutableSequence[_FieldMatrix__T]], jpype.JArray]) -> None: ...
     def createMatrix(self, rowDimension: int, columnDimension: int) -> 'FieldMatrix'[_FieldMatrix__T]:
         """
         Create a new FieldMatrix of the same type as the instance with the supplied row and column dimensions.
@@ -6226,9 +6219,9 @@ class FieldMatrix(AnyMatrix, org.hipparchus.util.FieldBlendable['FieldMatrix'[_F
         """
         ...
     @typing.overload
-    def getSubMatrix(self, int: int, int2: int, int3: int, int4: int) -> 'FieldMatrix'[_FieldMatrix__T]: ...
+    def getSubMatrix(self, startRow: int, endRow: int, startColumn: int, endColumn: int) -> 'FieldMatrix'[_FieldMatrix__T]: ...
     @typing.overload
-    def getSubMatrix(self, intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]) -> 'FieldMatrix'[_FieldMatrix__T]: ...
+    def getSubMatrix(self, selectedRows: typing.Union[typing.List[int], jpype.JArray], selectedColumns: typing.Union[typing.List[int], jpype.JArray]) -> 'FieldMatrix'[_FieldMatrix__T]: ...
     def getTrace(self) -> _FieldMatrix__T:
         """
         Returns the ` trace <http://mathworld.wolfram.com/MatrixTrace.html>` of the matrix (the sum of the elements on the main diagonal).
@@ -6252,7 +6245,7 @@ class FieldMatrix(AnyMatrix, org.hipparchus.util.FieldBlendable['FieldMatrix'[_F
         Returns a new matrix. Does not change instance data.
         
         Parameters:
-            function (Function<FieldMatrix,FieldMatrix> function): Function to apply to each entry.
+            function (Function<FieldMatrix, FieldMatrix> function): Function to apply to each entry.
         
         Returns:
             a new matrix.
@@ -6268,7 +6261,7 @@ class FieldMatrix(AnyMatrix, org.hipparchus.util.FieldBlendable['FieldMatrix'[_F
         Replace each entry by the result of applying the function to it.
         
         Parameters:
-            function (Function<FieldMatrix,FieldMatrix> function): Function to apply to each entry.
+            function (Function<FieldMatrix, FieldMatrix> function): Function to apply to each entry.
         
         Returns:
             a reference to this matrix.
@@ -6332,9 +6325,9 @@ class FieldMatrix(AnyMatrix, org.hipparchus.util.FieldBlendable['FieldMatrix'[_F
         """
         ...
     @typing.overload
-    def operate(self, tArray: typing.Union[typing.List[_FieldMatrix__T], jpype.JArray]) -> typing.MutableSequence[_FieldMatrix__T]: ...
+    def operate(self, v: typing.Union[typing.List[_FieldMatrix__T], jpype.JArray]) -> typing.MutableSequence[_FieldMatrix__T]: ...
     @typing.overload
-    def operate(self, fieldVector: FieldVector[_FieldMatrix__T]) -> FieldVector[_FieldMatrix__T]: ...
+    def operate(self, v: FieldVector[_FieldMatrix__T]) -> FieldVector[_FieldMatrix__T]: ...
     def power(self, p: int) -> 'FieldMatrix'[_FieldMatrix__T]:
         """
         Returns the result multiplying this with itself p times. Depending on the type of the field elements, T, instability for high powers might occur.
@@ -6565,35 +6558,33 @@ class FieldMatrix(AnyMatrix, org.hipparchus.util.FieldBlendable['FieldMatrix'[_F
         """
         ...
     @typing.overload
-    def walkInColumnOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_FieldMatrix__T]) -> _FieldMatrix__T: ...
+    def walkInColumnOrder(self, visitor: FieldMatrixChangingVisitor[_FieldMatrix__T]) -> _FieldMatrix__T: ...
     @typing.overload
-    def walkInColumnOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_FieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _FieldMatrix__T: ...
+    def walkInColumnOrder(self, visitor: FieldMatrixChangingVisitor[_FieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _FieldMatrix__T: ...
     @typing.overload
-    def walkInColumnOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_FieldMatrix__T]) -> _FieldMatrix__T: ...
+    def walkInColumnOrder(self, visitor: FieldMatrixPreservingVisitor[_FieldMatrix__T]) -> _FieldMatrix__T: ...
     @typing.overload
-    def walkInColumnOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_FieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _FieldMatrix__T: ...
+    def walkInColumnOrder(self, visitor: FieldMatrixPreservingVisitor[_FieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _FieldMatrix__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_FieldMatrix__T]) -> _FieldMatrix__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldMatrixChangingVisitor[_FieldMatrix__T]) -> _FieldMatrix__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_FieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _FieldMatrix__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldMatrixChangingVisitor[_FieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _FieldMatrix__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_FieldMatrix__T]) -> _FieldMatrix__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldMatrixPreservingVisitor[_FieldMatrix__T]) -> _FieldMatrix__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_FieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _FieldMatrix__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldMatrixPreservingVisitor[_FieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _FieldMatrix__T: ...
     @typing.overload
-    def walkInRowOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_FieldMatrix__T]) -> _FieldMatrix__T: ...
+    def walkInRowOrder(self, visitor: FieldMatrixChangingVisitor[_FieldMatrix__T]) -> _FieldMatrix__T: ...
     @typing.overload
-    def walkInRowOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_FieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _FieldMatrix__T: ...
+    def walkInRowOrder(self, visitor: FieldMatrixChangingVisitor[_FieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _FieldMatrix__T: ...
     @typing.overload
-    def walkInRowOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_FieldMatrix__T]) -> _FieldMatrix__T: ...
+    def walkInRowOrder(self, visitor: FieldMatrixPreservingVisitor[_FieldMatrix__T]) -> _FieldMatrix__T: ...
     @typing.overload
-    def walkInRowOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_FieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _FieldMatrix__T: ...
+    def walkInRowOrder(self, visitor: FieldMatrixPreservingVisitor[_FieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _FieldMatrix__T: ...
 
 _FieldQRDecomposer__T = typing.TypeVar('_FieldQRDecomposer__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldQRDecomposer(FieldMatrixDecomposer[_FieldQRDecomposer__T], typing.Generic[_FieldQRDecomposer__T]):
     """
-    implements FieldMatrixDecomposer<T>
-    
     Matrix decomposer using QR-decomposition.
     
     Since:
@@ -6627,8 +6618,6 @@ class FieldQRDecomposer(FieldMatrixDecomposer[_FieldQRDecomposer__T], typing.Gen
 
 class JacobiPreconditioner(RealLinearOperator):
     """
-    implements RealLinearOperator
-    
     This class implements the standard Jacobi (diagonal) preconditioner. For a matrix A :sub:`ij` , this preconditioner is M = diag(1 / A :sub:`11` , 1 / A :sub:`22` , …).
     """
     def __init__(self, diag: typing.Union[typing.List[float], jpype.JArray], deep: bool):
@@ -6711,8 +6700,6 @@ class JacobiPreconditioner(RealLinearOperator):
 
 class LUDecomposer(MatrixDecomposer):
     """
-    implements MatrixDecomposer
-    
     Matrix decomposer using LU-decomposition.
     
     Since:
@@ -6749,11 +6736,11 @@ class OrderedComplexEigenDecomposition(ComplexEigenDecomposition):
     Given a matrix A, it computes a complex eigen decomposition A = VDV^{T}. It ensures that eigen values in the diagonal of D are in ascending order.
     """
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix'): ...
+    def __init__(self, matrix: 'RealMatrix'): ...
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix', double: float, double2: float, double3: float): ...
+    def __init__(self, matrix: 'RealMatrix', eigenVectorsEquality: float, epsilon: float, epsilonAVVDCheck: float): ...
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix', double: float, double2: float, double3: float, comparator: typing.Union[java.util.Comparator[org.hipparchus.complex.Complex], typing.Callable[[org.hipparchus.complex.Complex, org.hipparchus.complex.Complex], int]]): ...
+    def __init__(self, matrix: 'RealMatrix', eigenVectorsEquality: float, epsilon: float, epsilonAVVDCheck: float, eigenValuesComparator: typing.Union[java.util.Comparator[org.hipparchus.complex.Complex], typing.Callable[[org.hipparchus.complex.Complex, org.hipparchus.complex.Complex], int]]): ...
     def getVT(self) -> FieldMatrix[org.hipparchus.complex.Complex]:
         """
         Getter VT.
@@ -6775,14 +6762,14 @@ class PreconditionedIterativeLinearSolver(IterativeLinearSolver):
     
     Concrete implementations of this abstract class must be provided with the preconditioner M, as a RealLinearOperator.
     """
-    def __init__(self, iterationManager: org.hipparchus.util.IterationManager):
+    def __init__(self, maxIterations: org.hipparchus.util.IterationManager):
         """
         Creates a new instance of this class, with default iteration manager.
         
         Parameters:
             maxIterations (int): the maximum number of iterations
         
-        public PreconditionedIterativeLinearSolver(IterationManager manager) throws NullArgumentException
+        public PreconditionedIterativeLinearSolver (IterationManager manager) throws NullArgumentException
         
         Creates a new instance of this class, with custom iteration manager.
         
@@ -6798,20 +6785,18 @@ class PreconditionedIterativeLinearSolver(IterativeLinearSolver):
     @typing.overload
     def solve(self, realLinearOperator: RealLinearOperator, realLinearOperator2: RealLinearOperator, realVector: RealVector) -> RealVector: ...
     @typing.overload
-    def solve(self, realLinearOperator: RealLinearOperator, realLinearOperator2: RealLinearOperator, realVector: RealVector, realVector2: RealVector) -> RealVector: ...
+    def solve(self, a: RealLinearOperator, m: RealLinearOperator, b: RealVector, x0: RealVector) -> RealVector: ...
     @typing.overload
-    def solve(self, realLinearOperator: RealLinearOperator, realVector: RealVector) -> RealVector: ...
+    def solve(self, a: RealLinearOperator, b: RealVector) -> RealVector: ...
     @typing.overload
     def solve(self, realLinearOperator: RealLinearOperator, realVector: RealVector, realVector2: RealVector) -> RealVector: ...
     @typing.overload
-    def solveInPlace(self, realLinearOperator: RealLinearOperator, realLinearOperator2: RealLinearOperator, realVector: RealVector, realVector2: RealVector) -> RealVector: ...
+    def solveInPlace(self, a: RealLinearOperator, m: RealLinearOperator, b: RealVector, x0: RealVector) -> RealVector: ...
     @typing.overload
-    def solveInPlace(self, realLinearOperator: RealLinearOperator, realVector: RealVector, realVector2: RealVector) -> RealVector: ...
+    def solveInPlace(self, a: RealLinearOperator, b: RealVector, x0: RealVector) -> RealVector: ...
 
 class QRDecomposer(MatrixDecomposer):
     """
-    implements MatrixDecomposer
-    
     Matrix decomposer using QR-decomposition.
     
     Since:
@@ -6863,13 +6848,14 @@ class RRQRDecomposition(QRDecomposition):
         DecompositionSolver.
     
     
-          - `MathWorld <http://mathworld.wolfram.com/QRDecomposition.html>`
-          - `Wikipedia <http://en.wikipedia.org/wiki/QR_decomposition>`
+    Also see:
+        `MathWorld <http://mathworld.wolfram.com/QRDecomposition.html>`, `Wikipedia
+        <http://en.wikipedia.org/wiki/QR_decomposition>`
     """
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix'): ...
+    def __init__(self, matrix: 'RealMatrix'): ...
     @typing.overload
-    def __init__(self, realMatrix: 'RealMatrix', double: float): ...
+    def __init__(self, matrix: 'RealMatrix', threshold: float): ...
     def getP(self) -> 'RealMatrix':
         """
         Returns the pivot matrix, P, used in the QR Decomposition of matrix A such that AP = QR. If no pivoting is used in this decomposition then P is equal to the identity matrix.
@@ -6980,9 +6966,9 @@ class RealMatrix(AnyMatrix, org.hipparchus.util.Blendable['RealMatrix']):
         """
         ...
     @typing.overload
-    def copySubMatrix(self, int: int, int2: int, int3: int, int4: int, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None: ...
+    def copySubMatrix(self, startRow: int, endRow: int, startColumn: int, endColumn: int, destination: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None: ...
     @typing.overload
-    def copySubMatrix(self, intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray], doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None: ...
+    def copySubMatrix(self, selectedRows: typing.Union[typing.List[int], jpype.JArray], selectedColumns: typing.Union[typing.List[int], jpype.JArray], destination: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None: ...
     def createMatrix(self, rowDimension: int, columnDimension: int) -> 'RealMatrix':
         """
         Create a new RealMatrix of the same type as the instance with the supplied row and column dimensions.
@@ -7154,9 +7140,9 @@ class RealMatrix(AnyMatrix, org.hipparchus.util.Blendable['RealMatrix']):
         """
         ...
     @typing.overload
-    def getSubMatrix(self, int: int, int2: int, int3: int, int4: int) -> 'RealMatrix': ...
+    def getSubMatrix(self, startRow: int, endRow: int, startColumn: int, endColumn: int) -> 'RealMatrix': ...
     @typing.overload
-    def getSubMatrix(self, intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]) -> 'RealMatrix': ...
+    def getSubMatrix(self, selectedRows: typing.Union[typing.List[int], jpype.JArray], selectedColumns: typing.Union[typing.List[int], jpype.JArray]) -> 'RealMatrix': ...
     def getTrace(self) -> float:
         """
         Returns the ` trace <http://mathworld.wolfram.com/MatrixTrace.html>` of the matrix (the sum of the elements on the main diagonal).
@@ -7260,9 +7246,9 @@ class RealMatrix(AnyMatrix, org.hipparchus.util.Blendable['RealMatrix']):
         """
         ...
     @typing.overload
-    def operate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
+    def operate(self, v: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def operate(self, realVector: RealVector) -> RealVector: ...
+    def operate(self, v: RealVector) -> RealVector: ...
     def power(self, p: int) -> 'RealMatrix':
         """
         Returns the result of multiplying this with itself p times. Depending on the underlying storage, instability for high powers might occur.
@@ -7495,7 +7481,7 @@ class RealMatrix(AnyMatrix, org.hipparchus.util.Blendable['RealMatrix']):
         """
         ...
     @typing.overload
-    def walkInColumnOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor) -> float:
+    def walkInColumnOrder(self, visitor: RealMatrixChangingVisitor) -> float:
         """
         Visit (and possibly change) all matrix entries in column order.
         
@@ -7507,17 +7493,16 @@ class RealMatrix(AnyMatrix, org.hipparchus.util.Blendable['RealMatrix']):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         Visit (but don't change) all matrix entries in column order.
         
@@ -7529,19 +7514,18 @@ class RealMatrix(AnyMatrix, org.hipparchus.util.Blendable['RealMatrix']):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        double walkInColumnOrder(RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        double walkInColumnOrder (RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (and possibly change) some matrix entries in column order.
         
@@ -7561,19 +7545,18 @@ class RealMatrix(AnyMatrix, org.hipparchus.util.Blendable['RealMatrix']):
             MathIllegalArgumentException: if the indices are not valid.
             MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        double walkInColumnOrder(RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        double walkInColumnOrder (RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (but don't change) some matrix entries in column order.
         
@@ -7593,30 +7576,28 @@ class RealMatrix(AnyMatrix, org.hipparchus.util.Blendable['RealMatrix']):
             MathIllegalArgumentException: if the indices are not valid.
             MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-        
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         
         """
         ...
     @typing.overload
-    def walkInColumnOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInColumnOrder(self, visitor: RealMatrixChangingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
     @typing.overload
-    def walkInColumnOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor) -> float: ...
+    def walkInColumnOrder(self, visitor: RealMatrixPreservingVisitor) -> float: ...
     @typing.overload
-    def walkInColumnOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInColumnOrder(self, visitor: RealMatrixPreservingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
     @typing.overload
-    def walkInOptimizedOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor) -> float:
+    def walkInOptimizedOrder(self, visitor: RealMatrixChangingVisitor) -> float:
         """
         Visit (and possibly change) all matrix entries using the fastest possible order.
         
@@ -7628,17 +7609,16 @@ class RealMatrix(AnyMatrix, org.hipparchus.util.Blendable['RealMatrix']):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         Visit (but don't change) all matrix entries using the fastest possible order.
         
@@ -7650,19 +7630,18 @@ class RealMatrix(AnyMatrix, org.hipparchus.util.Blendable['RealMatrix']):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        double walkInOptimizedOrder(RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        double walkInOptimizedOrder (RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (and possibly change) some matrix entries using the fastest possible order.
         
@@ -7682,19 +7661,18 @@ class RealMatrix(AnyMatrix, org.hipparchus.util.Blendable['RealMatrix']):
             MathIllegalArgumentException: if the indices are not valid.
             MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        double walkInOptimizedOrder(RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        double walkInOptimizedOrder (RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (but don't change) some matrix entries using the fastest possible order.
         
@@ -7714,30 +7692,28 @@ class RealMatrix(AnyMatrix, org.hipparchus.util.Blendable['RealMatrix']):
             MathIllegalArgumentException: if the indices are not valid.
             MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-        
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         
         """
         ...
     @typing.overload
-    def walkInOptimizedOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInOptimizedOrder(self, visitor: RealMatrixChangingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
     @typing.overload
-    def walkInOptimizedOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor) -> float: ...
+    def walkInOptimizedOrder(self, visitor: RealMatrixPreservingVisitor) -> float: ...
     @typing.overload
-    def walkInOptimizedOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInOptimizedOrder(self, visitor: RealMatrixPreservingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
     @typing.overload
-    def walkInRowOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor) -> float:
+    def walkInRowOrder(self, visitor: RealMatrixChangingVisitor) -> float:
         """
         Visit (and possibly change) all matrix entries in row order.
         
@@ -7749,17 +7725,16 @@ class RealMatrix(AnyMatrix, org.hipparchus.util.Blendable['RealMatrix']):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         Visit (but don't change) all matrix entries in row order.
         
@@ -7771,19 +7746,18 @@ class RealMatrix(AnyMatrix, org.hipparchus.util.Blendable['RealMatrix']):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        double walkInRowOrder(RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        double walkInRowOrder (RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (and possibly change) some matrix entries in row order.
         
@@ -7803,19 +7777,18 @@ class RealMatrix(AnyMatrix, org.hipparchus.util.Blendable['RealMatrix']):
             MathIllegalArgumentException: if the indices are not valid.
             MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        double walkInRowOrder(RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        double walkInRowOrder (RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (but don't change) some matrix entries in row order.
         
@@ -7835,33 +7808,29 @@ class RealMatrix(AnyMatrix, org.hipparchus.util.Blendable['RealMatrix']):
             MathIllegalArgumentException: if the indices are not valid.
             MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-        
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         
         """
         ...
     @typing.overload
-    def walkInRowOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInRowOrder(self, visitor: RealMatrixChangingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
     @typing.overload
-    def walkInRowOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor) -> float: ...
+    def walkInRowOrder(self, visitor: RealMatrixPreservingVisitor) -> float: ...
     @typing.overload
-    def walkInRowOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInRowOrder(self, visitor: RealMatrixPreservingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
 
 class RiccatiEquationSolverImpl(RiccatiEquationSolver):
     """
-    implements RiccatiEquationSolver
-    
     This solver computes the solution using the following approach: 1. Compute the Hamiltonian matrix 2. Extract its complex eigen vectors (not the best solution, a better solution would be ordered Schur transformation) 3. Approximate the initial solution given by 2 using the Kleinman algorithm (an iterative method)
     """
     def __init__(self, A: RealMatrix, B: RealMatrix, Q: RealMatrix, R: RealMatrix):
@@ -7904,8 +7873,6 @@ class RiccatiEquationSolverImpl(RiccatiEquationSolver):
 
 class SingularValueDecomposer(MatrixDecomposer):
     """
-    implements MatrixDecomposer
-    
     Matrix decomposer using Singular Value Decomposition.
     
     Since:
@@ -7942,28 +7909,27 @@ class SingularValueDecomposer(MatrixDecomposer):
 _SparseFieldVector__T = typing.TypeVar('_SparseFieldVector__T', bound=org.hipparchus.FieldElement)  # <T>
 class SparseFieldVector(FieldVector[_SparseFieldVector__T], java.io.Serializable, typing.Generic[_SparseFieldVector__T]):
     """
-    implements FieldVector<T>, Serializable
-    
     This class implements the FieldVector interface with a OpenIntToFieldHashMap backing store.
     
     Caveat: This implementation assumes that, for any x, the equality x * 0d == 0d holds. But it is is not true for NaN. Moreover, zero entries will lose their sign. Some operations (that involve NaN and/or infinities) may thus give incorrect results.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_SparseFieldVector__T]): ...
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_SparseFieldVector__T], int: int): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_SparseFieldVector__T], int: int, int2: int): ...
+    def __init__(self, field: org.hipparchus.Field[_SparseFieldVector__T], dimension: int, expectedSize: int): ...
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_SparseFieldVector__T], tArray: typing.Union[typing.List[_SparseFieldVector__T], jpype.JArray]): ...
     @typing.overload
     def __init__(self, sparseFieldVector: 'SparseFieldVector'[_SparseFieldVector__T]): ...
     @typing.overload
-    def add(self, fieldVector: FieldVector[_SparseFieldVector__T]) -> FieldVector[_SparseFieldVector__T]: ...
+    def add(self, v: FieldVector[_SparseFieldVector__T]) -> FieldVector[_SparseFieldVector__T]: ...
     @typing.overload
-    def add(self, sparseFieldVector: 'SparseFieldVector'[_SparseFieldVector__T]) -> FieldVector[_SparseFieldVector__T]: ...
+    def add(self, v: 'SparseFieldVector'[_SparseFieldVector__T]) -> FieldVector[_SparseFieldVector__T]: ...
     @typing.overload
     def append(self, t: _SparseFieldVector__T) -> FieldVector[_SparseFieldVector__T]: ...
     @typing.overload
@@ -8013,6 +7979,7 @@ class SparseFieldVector(FieldVector[_SparseFieldVector__T], java.io.Serializable
             a vector containing this[i] / v[i] for all i
         
         Raises:
+            MathIllegalArgumentException: if v is not the same size as this
             MathRuntimeException: if one entry of v is zero.
         
         
@@ -8036,9 +8003,9 @@ class SparseFieldVector(FieldVector[_SparseFieldVector__T], java.io.Serializable
         
         """
         ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, obj: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -8070,8 +8037,8 @@ class SparseFieldVector(FieldVector[_SparseFieldVector__T], java.io.Serializable
         Raises:
             MathIllegalArgumentException: if the index is not valid.
         
-              - setEntry
-        
+        Also see:
+            setEntry
         
         
         """
@@ -8103,14 +8070,13 @@ class SparseFieldVector(FieldVector[_SparseFieldVector__T], java.io.Serializable
         
         Raises:
             MathIllegalArgumentException: if the index is not valid.
-            MathIllegalArgumentException: if the number of elements if not positive.
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -8302,9 +8268,9 @@ class SparseFieldVector(FieldVector[_SparseFieldVector__T], java.io.Serializable
         """
         ...
     @typing.overload
-    def outerProduct(self, fieldVector: FieldVector[_SparseFieldVector__T]) -> FieldMatrix[_SparseFieldVector__T]: ...
+    def outerProduct(self, v: FieldVector[_SparseFieldVector__T]) -> FieldMatrix[_SparseFieldVector__T]: ...
     @typing.overload
-    def outerProduct(self, sparseFieldVector: 'SparseFieldVector'[_SparseFieldVector__T]) -> FieldMatrix[_SparseFieldVector__T]: ...
+    def outerProduct(self, v: 'SparseFieldVector'[_SparseFieldVector__T]) -> FieldMatrix[_SparseFieldVector__T]: ...
     def projection(self, v: FieldVector[_SparseFieldVector__T]) -> FieldVector[_SparseFieldVector__T]:
         """
         Find the orthogonal projection of this vector onto another vector.
@@ -8318,6 +8284,7 @@ class SparseFieldVector(FieldVector[_SparseFieldVector__T], java.io.Serializable
             projection of this onto v
         
         Raises:
+            MathIllegalArgumentException: if v is not the same size as this
             MathRuntimeException: if v is the null vector.
         
         
@@ -8352,8 +8319,8 @@ class SparseFieldVector(FieldVector[_SparseFieldVector__T], java.io.Serializable
             NullArgumentException: if value is null
             MathIllegalArgumentException: if the index is not valid.
         
-              - getEntry
-        
+        Also see:
+            getEntry
         
         
         """
@@ -8375,9 +8342,9 @@ class SparseFieldVector(FieldVector[_SparseFieldVector__T], java.io.Serializable
         """
         ...
     @typing.overload
-    def subtract(self, fieldVector: FieldVector[_SparseFieldVector__T]) -> FieldVector[_SparseFieldVector__T]: ...
+    def subtract(self, v: FieldVector[_SparseFieldVector__T]) -> FieldVector[_SparseFieldVector__T]: ...
     @typing.overload
-    def subtract(self, sparseFieldVector: 'SparseFieldVector'[_SparseFieldVector__T]) -> 'SparseFieldVector'[_SparseFieldVector__T]: ...
+    def subtract(self, v: 'SparseFieldVector'[_SparseFieldVector__T]) -> 'SparseFieldVector'[_SparseFieldVector__T]: ...
     def toArray(self) -> typing.MutableSequence[_SparseFieldVector__T]:
         """
         Convert the vector to a T array.
@@ -8393,21 +8360,21 @@ class SparseFieldVector(FieldVector[_SparseFieldVector__T], java.io.Serializable
         """
         ...
     @typing.overload
-    def walkInDefaultOrder(self, fieldVectorChangingVisitor: FieldVectorChangingVisitor[_SparseFieldVector__T]) -> _SparseFieldVector__T: ...
+    def walkInDefaultOrder(self, visitor: FieldVectorChangingVisitor[_SparseFieldVector__T]) -> _SparseFieldVector__T: ...
     @typing.overload
-    def walkInDefaultOrder(self, fieldVectorChangingVisitor: FieldVectorChangingVisitor[_SparseFieldVector__T], int: int, int2: int) -> _SparseFieldVector__T: ...
+    def walkInDefaultOrder(self, visitor: FieldVectorChangingVisitor[_SparseFieldVector__T], start: int, end: int) -> _SparseFieldVector__T: ...
     @typing.overload
-    def walkInDefaultOrder(self, fieldVectorPreservingVisitor: FieldVectorPreservingVisitor[_SparseFieldVector__T]) -> _SparseFieldVector__T: ...
+    def walkInDefaultOrder(self, visitor: FieldVectorPreservingVisitor[_SparseFieldVector__T]) -> _SparseFieldVector__T: ...
     @typing.overload
-    def walkInDefaultOrder(self, fieldVectorPreservingVisitor: FieldVectorPreservingVisitor[_SparseFieldVector__T], int: int, int2: int) -> _SparseFieldVector__T: ...
+    def walkInDefaultOrder(self, visitor: FieldVectorPreservingVisitor[_SparseFieldVector__T], start: int, end: int) -> _SparseFieldVector__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldVectorChangingVisitor: FieldVectorChangingVisitor[_SparseFieldVector__T]) -> _SparseFieldVector__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldVectorChangingVisitor[_SparseFieldVector__T]) -> _SparseFieldVector__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldVectorChangingVisitor: FieldVectorChangingVisitor[_SparseFieldVector__T], int: int, int2: int) -> _SparseFieldVector__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldVectorChangingVisitor[_SparseFieldVector__T], start: int, end: int) -> _SparseFieldVector__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldVectorPreservingVisitor: FieldVectorPreservingVisitor[_SparseFieldVector__T]) -> _SparseFieldVector__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldVectorPreservingVisitor[_SparseFieldVector__T]) -> _SparseFieldVector__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldVectorPreservingVisitor: FieldVectorPreservingVisitor[_SparseFieldVector__T], int: int, int2: int) -> _SparseFieldVector__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldVectorPreservingVisitor[_SparseFieldVector__T], start: int, end: int) -> _SparseFieldVector__T: ...
 
 class SparseRealVector(RealVector):
     """
@@ -8420,8 +8387,6 @@ class SparseRealVector(RealVector):
 _AbstractFieldMatrix__T = typing.TypeVar('_AbstractFieldMatrix__T', bound=org.hipparchus.FieldElement)  # <T>
 class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_AbstractFieldMatrix__T]):
     """
-    implements FieldMatrix<T>
-    
     Basic implementation of FieldMatrix methods regardless of the underlying storage.
     
     All the methods implemented here use getEntry to access matrix elements. Derived class can provide faster implementations.
@@ -8474,9 +8439,9 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
         """
         ...
     @typing.overload
-    def copySubMatrix(self, int: int, int2: int, int3: int, int4: int, tArray: typing.Union[typing.List[typing.MutableSequence[_AbstractFieldMatrix__T]], jpype.JArray]) -> None: ...
+    def copySubMatrix(self, startRow: int, endRow: int, startColumn: int, endColumn: int, destination: typing.Union[typing.List[typing.MutableSequence[_AbstractFieldMatrix__T]], jpype.JArray]) -> None: ...
     @typing.overload
-    def copySubMatrix(self, intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray], tArray: typing.Union[typing.List[typing.MutableSequence[_AbstractFieldMatrix__T]], jpype.JArray]) -> None: ...
+    def copySubMatrix(self, selectedRows: typing.Union[typing.List[int], jpype.JArray], selectedColumns: typing.Union[typing.List[int], jpype.JArray], destination: typing.Union[typing.List[typing.MutableSequence[_AbstractFieldMatrix__T]], jpype.JArray]) -> None: ...
     def createMatrix(self, rowDimension: int, columnDimension: int) -> FieldMatrix[_AbstractFieldMatrix__T]:
         """
         Create a new FieldMatrix of the same type as the instance with the supplied row and column dimensions.
@@ -8500,7 +8465,7 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
         """
         Returns true iff object is a FieldMatrix instance with the same dimensions as this and all corresponding matrix entries are equal.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             object (Object): the object to test equality against.
@@ -8687,9 +8652,9 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
         """
         ...
     @typing.overload
-    def getSubMatrix(self, int: int, int2: int, int3: int, int4: int) -> FieldMatrix[_AbstractFieldMatrix__T]: ...
+    def getSubMatrix(self, startRow: int, endRow: int, startColumn: int, endColumn: int) -> FieldMatrix[_AbstractFieldMatrix__T]: ...
     @typing.overload
-    def getSubMatrix(self, intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]) -> FieldMatrix[_AbstractFieldMatrix__T]: ...
+    def getSubMatrix(self, selectedRows: typing.Union[typing.List[int], jpype.JArray], selectedColumns: typing.Union[typing.List[int], jpype.JArray]) -> FieldMatrix[_AbstractFieldMatrix__T]: ...
     def getTrace(self) -> _AbstractFieldMatrix__T:
         """
         Returns the ` trace <http://mathworld.wolfram.com/MatrixTrace.html>` of the matrix (the sum of the elements on the main diagonal).
@@ -8709,7 +8674,7 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
         """
         Computes a hashcode for the matrix.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             hashcode for matrix
@@ -8765,9 +8730,9 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
         """
         ...
     @typing.overload
-    def operate(self, tArray: typing.Union[typing.List[_AbstractFieldMatrix__T], jpype.JArray]) -> typing.MutableSequence[_AbstractFieldMatrix__T]: ...
+    def operate(self, v: typing.Union[typing.List[_AbstractFieldMatrix__T], jpype.JArray]) -> typing.MutableSequence[_AbstractFieldMatrix__T]: ...
     @typing.overload
-    def operate(self, fieldVector: FieldVector[_AbstractFieldMatrix__T]) -> FieldVector[_AbstractFieldMatrix__T]: ...
+    def operate(self, v: FieldVector[_AbstractFieldMatrix__T]) -> FieldVector[_AbstractFieldMatrix__T]: ...
     def power(self, p: int) -> FieldMatrix[_AbstractFieldMatrix__T]:
         """
         Returns the result multiplying this with itself p times. Depending on the type of the field elements, T, instability for high powers might occur.
@@ -8782,7 +8747,6 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
         
         Raises:
             MathIllegalArgumentException: if p < 0
-            MathIllegalArgumentException: if this matrix is not square
         
         
         """
@@ -8835,7 +8799,6 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
         
         Raises:
             MathIllegalArgumentException: if the specified column index is invalid.
-            MathIllegalArgumentException: if the array size does not match one instance column.
         
         
         """
@@ -8852,7 +8815,6 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
         
         Raises:
             MathIllegalArgumentException: if the specified column index is invalid.
-            MathIllegalArgumentException: if the matrix dimensions do not match one instance column.
         
         
         """
@@ -8869,7 +8831,6 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
         
         Raises:
             MathIllegalArgumentException: if the specified column index is invalid.
-            MathIllegalArgumentException: if the vector dimension does not match one instance column.
         
         
         """
@@ -8903,7 +8864,6 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
         
         Raises:
             MathIllegalArgumentException: if the specified row index is invalid.
-            MathIllegalArgumentException: if the array size does not match one instance row.
         
         
         """
@@ -8920,7 +8880,6 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
         
         Raises:
             MathIllegalArgumentException: if the specified row index is invalid.
-            MathIllegalArgumentException: if the matrix dimensions do not match one instance row.
         
         
         """
@@ -8937,7 +8896,6 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
         
         Raises:
             MathIllegalArgumentException: if the specified row index is invalid.
-            MathIllegalArgumentException: if the vector dimension does not match one instance row.
         
         
         """
@@ -8965,8 +8923,6 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
         
         Raises:
             MathIllegalArgumentException: if subMatrix does not fit into this matrix from element in (row, column).
-            MathIllegalArgumentException: if a row or column of subMatrix is empty.
-            MathIllegalArgumentException: if subMatrix is not rectangular (not all rows have the same length).
             NullArgumentException: if subMatrix is null.
         
         
@@ -8994,7 +8950,7 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
         """
         Get a string representation for this matrix.
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Returns:
             a string representation for this matrix
@@ -9015,34 +8971,32 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
         """
         ...
     @typing.overload
-    def walkInColumnOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_AbstractFieldMatrix__T]) -> _AbstractFieldMatrix__T: ...
+    def walkInColumnOrder(self, visitor: FieldMatrixChangingVisitor[_AbstractFieldMatrix__T]) -> _AbstractFieldMatrix__T: ...
     @typing.overload
-    def walkInColumnOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_AbstractFieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _AbstractFieldMatrix__T: ...
+    def walkInColumnOrder(self, visitor: FieldMatrixChangingVisitor[_AbstractFieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _AbstractFieldMatrix__T: ...
     @typing.overload
-    def walkInColumnOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_AbstractFieldMatrix__T]) -> _AbstractFieldMatrix__T: ...
+    def walkInColumnOrder(self, visitor: FieldMatrixPreservingVisitor[_AbstractFieldMatrix__T]) -> _AbstractFieldMatrix__T: ...
     @typing.overload
-    def walkInColumnOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_AbstractFieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _AbstractFieldMatrix__T: ...
+    def walkInColumnOrder(self, visitor: FieldMatrixPreservingVisitor[_AbstractFieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _AbstractFieldMatrix__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_AbstractFieldMatrix__T]) -> _AbstractFieldMatrix__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldMatrixChangingVisitor[_AbstractFieldMatrix__T]) -> _AbstractFieldMatrix__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_AbstractFieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _AbstractFieldMatrix__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldMatrixChangingVisitor[_AbstractFieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _AbstractFieldMatrix__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_AbstractFieldMatrix__T]) -> _AbstractFieldMatrix__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldMatrixPreservingVisitor[_AbstractFieldMatrix__T]) -> _AbstractFieldMatrix__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_AbstractFieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _AbstractFieldMatrix__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldMatrixPreservingVisitor[_AbstractFieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _AbstractFieldMatrix__T: ...
     @typing.overload
-    def walkInRowOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_AbstractFieldMatrix__T]) -> _AbstractFieldMatrix__T: ...
+    def walkInRowOrder(self, visitor: FieldMatrixChangingVisitor[_AbstractFieldMatrix__T]) -> _AbstractFieldMatrix__T: ...
     @typing.overload
-    def walkInRowOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_AbstractFieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _AbstractFieldMatrix__T: ...
+    def walkInRowOrder(self, visitor: FieldMatrixChangingVisitor[_AbstractFieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _AbstractFieldMatrix__T: ...
     @typing.overload
-    def walkInRowOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_AbstractFieldMatrix__T]) -> _AbstractFieldMatrix__T: ...
+    def walkInRowOrder(self, visitor: FieldMatrixPreservingVisitor[_AbstractFieldMatrix__T]) -> _AbstractFieldMatrix__T: ...
     @typing.overload
-    def walkInRowOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_AbstractFieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _AbstractFieldMatrix__T: ...
+    def walkInRowOrder(self, visitor: FieldMatrixPreservingVisitor[_AbstractFieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _AbstractFieldMatrix__T: ...
 
 class AbstractRealMatrix(RealMatrix, RealLinearOperator):
     """
-    implements RealMatrix, RealLinearOperator
-    
     Basic implementation of RealMatrix methods regardless of the underlying storage.
     
     All the methods implemented here use getEntry to access matrix elements. Derived class can provide faster implementations.
@@ -9095,9 +9049,9 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         """
         ...
     @typing.overload
-    def copySubMatrix(self, int: int, int2: int, int3: int, int4: int, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None: ...
+    def copySubMatrix(self, startRow: int, endRow: int, startColumn: int, endColumn: int, destination: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None: ...
     @typing.overload
-    def copySubMatrix(self, intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray], doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None: ...
+    def copySubMatrix(self, selectedRows: typing.Union[typing.List[int], jpype.JArray], selectedColumns: typing.Union[typing.List[int], jpype.JArray], destination: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None: ...
     def createMatrix(self, rowDimension: int, columnDimension: int) -> RealMatrix:
         """
         Create a new RealMatrix of the same type as the instance with the supplied row and column dimensions.
@@ -9121,7 +9075,7 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         """
         Returns true iff object is a RealMatrix instance with the same dimensions as this and all corresponding matrix entries are equal.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             object (Object): the object to test equality against.
@@ -9312,9 +9266,9 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         """
         ...
     @typing.overload
-    def getSubMatrix(self, int: int, int2: int, int3: int, int4: int) -> RealMatrix: ...
+    def getSubMatrix(self, startRow: int, endRow: int, startColumn: int, endColumn: int) -> RealMatrix: ...
     @typing.overload
-    def getSubMatrix(self, intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]) -> RealMatrix: ...
+    def getSubMatrix(self, selectedRows: typing.Union[typing.List[int], jpype.JArray], selectedColumns: typing.Union[typing.List[int], jpype.JArray]) -> RealMatrix: ...
     def getTrace(self) -> float:
         """
         Returns the ` trace <http://mathworld.wolfram.com/MatrixTrace.html>` of the matrix (the sum of the elements on the main diagonal).
@@ -9334,7 +9288,7 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         """
         Computes a hashcode for the matrix.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             hashcode for matrix
@@ -9390,9 +9344,9 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         """
         ...
     @typing.overload
-    def operate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
+    def operate(self, v: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def operate(self, realVector: RealVector) -> RealVector: ...
+    def operate(self, v: RealVector) -> RealVector: ...
     def power(self, p: int) -> RealMatrix:
         """
         Returns the result of multiplying this with itself p times. Depending on the underlying storage, instability for high powers might occur.
@@ -9407,7 +9361,6 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         
         Raises:
             MathIllegalArgumentException: if p < 0
-            MathIllegalArgumentException: if the matrix is not square
         
         
         """
@@ -9460,7 +9413,6 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         
         Raises:
             MathIllegalArgumentException: if the specified column index is invalid.
-            MathIllegalArgumentException: if the array length does not match the row dimension of this matrix.
         
         
         """
@@ -9477,8 +9429,6 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         
         Raises:
             MathIllegalArgumentException: if the specified column index is invalid.
-            MathIllegalArgumentException: if the column dimension of the matrix is not , or the row dimensions of this and matrix
-                do not match.
         
         
         """
@@ -9495,7 +9445,6 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         
         Raises:
             MathIllegalArgumentException: if the specified column index is invalid.
-            MathIllegalArgumentException: if the vector dimension does not match the row dimension of this matrix.
         
         
         """
@@ -9529,7 +9478,6 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         
         Raises:
             MathIllegalArgumentException: if the specified row index is invalid.
-            MathIllegalArgumentException: if the array length does not match the column dimension of this matrix.
         
         
         """
@@ -9546,8 +9494,6 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         
         Raises:
             MathIllegalArgumentException: if the specified row index is invalid.
-            MathIllegalArgumentException: if the row dimension of the matrix is not , or the column dimensions of this and matrix
-                do not match.
         
         
         """
@@ -9564,7 +9510,6 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         
         Raises:
             MathIllegalArgumentException: if the specified row index is invalid.
-            MathIllegalArgumentException: if the vector dimension does not match the column dimension of this matrix.
         
         
         """
@@ -9592,8 +9537,6 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         
         Raises:
             MathIllegalArgumentException: if subMatrix is empty.
-            MathIllegalArgumentException: if subMatrix does not fit into this matrix from element in (row, column).
-            MathIllegalArgumentException: if subMatrix is not rectangular (not all rows have the same length) or empty.
             NullArgumentException: if subMatrix is null.
         
         
@@ -9621,7 +9564,7 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         """
         Get a string representation for this matrix.
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Returns:
             a string representation for this matrix
@@ -9642,7 +9585,7 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         """
         ...
     @typing.overload
-    def walkInColumnOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor) -> float:
+    def walkInColumnOrder(self, visitor: RealMatrixChangingVisitor) -> float:
         """
         Visit (and possibly change) all matrix entries in column order.
         
@@ -9656,17 +9599,16 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         Visit (but don't change) all matrix entries in column order.
         
@@ -9680,19 +9622,18 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        public double walkInColumnOrder(RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        public double walkInColumnOrder (RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (and possibly change) some matrix entries in column order.
         
@@ -9712,21 +9653,19 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         
         Raises:
             MathIllegalArgumentException: if the indices are not valid.
-            MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        public double walkInColumnOrder(RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        public double walkInColumnOrder (RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (but don't change) some matrix entries in column order.
         
@@ -9746,32 +9685,29 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         
         Raises:
             MathIllegalArgumentException: if the indices are not valid.
-            MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-        
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         
         """
         ...
     @typing.overload
-    def walkInColumnOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInColumnOrder(self, visitor: RealMatrixChangingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
     @typing.overload
-    def walkInColumnOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor) -> float: ...
+    def walkInColumnOrder(self, visitor: RealMatrixPreservingVisitor) -> float: ...
     @typing.overload
-    def walkInColumnOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInColumnOrder(self, visitor: RealMatrixPreservingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
     @typing.overload
-    def walkInOptimizedOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor) -> float:
+    def walkInOptimizedOrder(self, visitor: RealMatrixChangingVisitor) -> float:
         """
         Visit (and possibly change) all matrix entries using the fastest possible order.
         
@@ -9785,17 +9721,16 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         Visit (but don't change) all matrix entries using the fastest possible order.
         
@@ -9809,19 +9744,18 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        public double walkInOptimizedOrder(RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        public double walkInOptimizedOrder (RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (and possibly change) some matrix entries using the fastest possible order.
         
@@ -9841,21 +9775,19 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         
         Raises:
             MathIllegalArgumentException: if the indices are not valid.
-            MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        public double walkInOptimizedOrder(RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        public double walkInOptimizedOrder (RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (but don't change) some matrix entries using the fastest possible order.
         
@@ -9875,32 +9807,29 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         
         Raises:
             MathIllegalArgumentException: if the indices are not valid.
-            MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-        
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         
         """
         ...
     @typing.overload
-    def walkInOptimizedOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInOptimizedOrder(self, visitor: RealMatrixChangingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
     @typing.overload
-    def walkInOptimizedOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor) -> float: ...
+    def walkInOptimizedOrder(self, visitor: RealMatrixPreservingVisitor) -> float: ...
     @typing.overload
-    def walkInOptimizedOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInOptimizedOrder(self, visitor: RealMatrixPreservingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
     @typing.overload
-    def walkInRowOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor) -> float:
+    def walkInRowOrder(self, visitor: RealMatrixChangingVisitor) -> float:
         """
         Visit (and possibly change) all matrix entries in row order.
         
@@ -9914,17 +9843,16 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         Visit (but don't change) all matrix entries in row order.
         
@@ -9938,19 +9866,18 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        public double walkInRowOrder(RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        public double walkInRowOrder (RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (and possibly change) some matrix entries in row order.
         
@@ -9970,21 +9897,19 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         
         Raises:
             MathIllegalArgumentException: if the indices are not valid.
-            MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        public double walkInRowOrder(RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        public double walkInRowOrder (RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (but don't change) some matrix entries in row order.
         
@@ -10004,30 +9929,27 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
         
         Raises:
             MathIllegalArgumentException: if the indices are not valid.
-            MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-        
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         
         """
         ...
     @typing.overload
-    def walkInRowOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInRowOrder(self, visitor: RealMatrixChangingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
     @typing.overload
-    def walkInRowOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor) -> float: ...
+    def walkInRowOrder(self, visitor: RealMatrixPreservingVisitor) -> float: ...
     @typing.overload
-    def walkInRowOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInRowOrder(self, visitor: RealMatrixPreservingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
 
 class ConjugateGradient(PreconditionedIterativeLinearSolver):
     """
@@ -10058,8 +9980,8 @@ class ConjugateGradient(PreconditionedIterativeLinearSolver):
     """
     Key for the context.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -10067,8 +9989,8 @@ class ConjugateGradient(PreconditionedIterativeLinearSolver):
     """
     Key for the context.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -10090,26 +10012,25 @@ class ConjugateGradient(PreconditionedIterativeLinearSolver):
         """
         ...
     @typing.overload
-    def solveInPlace(self, realLinearOperator: RealLinearOperator, realLinearOperator2: RealLinearOperator, realVector: RealVector, realVector2: RealVector) -> RealVector: ...
+    def solveInPlace(self, a: RealLinearOperator, m: RealLinearOperator, b: RealVector, x0: RealVector) -> RealVector: ...
     @typing.overload
     def solveInPlace(self, realLinearOperator: RealLinearOperator, realVector: RealVector, realVector2: RealVector) -> RealVector: ...
 
 class OpenMapRealVector(SparseRealVector, java.io.Serializable):
     """
-    implements Serializable
-    
     This class implements the RealVector interface with a OpenIntToDoubleHashMap backing store.
     
     Caveat: This implementation assumes that, for any x, the equality x * 0d == 0d holds. But it is is not true for NaN. Moreover, zero entries will lose their sign. Some operations (that involve NaN and/or infinities) may thus give incorrect results, like multiplications, divisions or functions mapping.
     
-          - serialized
+    Also see:
+        serialized
     """
     DEFAULT_ZERO_TOLERANCE: typing.ClassVar[float] = ...
     """
     Default Tolerance for having a value considered zero.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -10126,7 +10047,7 @@ class OpenMapRealVector(SparseRealVector, java.io.Serializable):
     @typing.overload
     def __init__(self, int: int, int2: int): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, double: float): ...
+    def __init__(self, dimension: int, expectedSize: int, epsilon: float): ...
     @typing.overload
     def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
@@ -10136,11 +10057,11 @@ class OpenMapRealVector(SparseRealVector, java.io.Serializable):
     @typing.overload
     def __init__(self, realVector: RealVector): ...
     @typing.overload
-    def add(self, openMapRealVector: 'OpenMapRealVector') -> 'OpenMapRealVector': ...
+    def add(self, v: 'OpenMapRealVector') -> 'OpenMapRealVector': ...
     @typing.overload
-    def add(self, realVector: RealVector) -> RealVector: ...
+    def add(self, v: RealVector) -> RealVector: ...
     @typing.overload
-    def append(self, double: float) -> 'OpenMapRealVector':
+    def append(self, v: float) -> 'OpenMapRealVector':
         """
         Optimized method to append a OpenMapRealVector.
         
@@ -10256,9 +10177,9 @@ class OpenMapRealVector(SparseRealVector, java.io.Serializable):
         """
         ...
     @typing.overload
-    def getDistance(self, openMapRealVector: 'OpenMapRealVector') -> float: ...
+    def getDistance(self, v: 'OpenMapRealVector') -> float: ...
     @typing.overload
-    def getDistance(self, realVector: RealVector) -> float: ...
+    def getDistance(self, v: RealVector) -> float: ...
     def getEntry(self, index: int) -> float:
         """
         Return the entry at the specified index.
@@ -10274,16 +10195,16 @@ class OpenMapRealVector(SparseRealVector, java.io.Serializable):
         Raises:
             MathIllegalArgumentException: if the index is not valid.
         
-              - setEntry
-        
+        Also see:
+            setEntry
         
         
         """
         ...
     @typing.overload
-    def getL1Distance(self, openMapRealVector: 'OpenMapRealVector') -> float: ...
+    def getL1Distance(self, v: 'OpenMapRealVector') -> float: ...
     @typing.overload
-    def getL1Distance(self, realVector: RealVector) -> float: ...
+    def getL1Distance(self, v: RealVector) -> float: ...
     def getLInfDistance(self, v: RealVector) -> float:
         """
         Distance between two vectors.
@@ -10301,10 +10222,9 @@ class OpenMapRealVector(SparseRealVector, java.io.Serializable):
         Raises:
             MathIllegalArgumentException: if v is not the same size as this vector.
         
-              - getDistance
-              - getL1Distance
-              - getLInfNorm
-        
+        Also see:
+            getDistance, getL1Distance,
+            getLInfNorm
         
         
         """
@@ -10334,7 +10254,6 @@ class OpenMapRealVector(SparseRealVector, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if the index is not valid.
-            MathIllegalArgumentException: if the number of elements is not positive.
         
         
         """
@@ -10427,8 +10346,8 @@ class OpenMapRealVector(SparseRealVector, java.io.Serializable):
         Raises:
             MathIllegalArgumentException: if the index is not valid.
         
-              - getEntry
-        
+        Also see:
+            getEntry
         
         
         """
@@ -10453,7 +10372,7 @@ class OpenMapRealVector(SparseRealVector, java.io.Serializable):
         """
         Create a sparse iterator over the vector, which may omit some entries. The ommitted entries are either exact zeroes (for dense implementations) or are the entries which are not stored (for real sparse vectors). No guarantees are made about order of iteration.
         
-        Note: derived classes are required to return an Iterator that returns non-null Entry objects as long as hasNext returns true.
+        Note: derived classes are required to return an Iterator that returns non-null Entry objects as long as Iterator returns true.
         
         Overrides: sparseIterator in class RealVector
         
@@ -10464,9 +10383,9 @@ class OpenMapRealVector(SparseRealVector, java.io.Serializable):
         """
         ...
     @typing.overload
-    def subtract(self, openMapRealVector: 'OpenMapRealVector') -> 'OpenMapRealVector': ...
+    def subtract(self, v: 'OpenMapRealVector') -> 'OpenMapRealVector': ...
     @typing.overload
-    def subtract(self, realVector: RealVector) -> RealVector: ...
+    def subtract(self, v: RealVector) -> RealVector: ...
     def toArray(self) -> typing.MutableSequence[float]:
         """
         Convert the vector to an array of doubles. The array is independent from this vector data: the elements are copied.
@@ -10582,32 +10501,31 @@ class SymmLQ(PreconditionedIterativeLinearSolver):
     @typing.overload
     def solve(self, realLinearOperator: RealLinearOperator, realLinearOperator2: RealLinearOperator, realVector: RealVector) -> RealVector: ...
     @typing.overload
-    def solve(self, realLinearOperator: RealLinearOperator, realLinearOperator2: RealLinearOperator, realVector: RealVector, boolean: bool, double: float) -> RealVector: ...
+    def solve(self, a: RealLinearOperator, m: RealLinearOperator, b: RealVector, goodb: bool, shift: float) -> RealVector: ...
     @typing.overload
     def solve(self, realLinearOperator: RealLinearOperator, realLinearOperator2: RealLinearOperator, realVector: RealVector, realVector2: RealVector) -> RealVector: ...
     @typing.overload
-    def solve(self, realLinearOperator: RealLinearOperator, realVector: RealVector) -> RealVector: ...
+    def solve(self, a: RealLinearOperator, b: RealVector) -> RealVector: ...
     @typing.overload
     def solve(self, realLinearOperator: RealLinearOperator, realVector: RealVector, boolean: bool, double: float) -> RealVector: ...
     @typing.overload
     def solve(self, realLinearOperator: RealLinearOperator, realVector: RealVector, realVector2: RealVector) -> RealVector: ...
     @typing.overload
-    def solveInPlace(self, realLinearOperator: RealLinearOperator, realLinearOperator2: RealLinearOperator, realVector: RealVector, realVector2: RealVector) -> RealVector: ...
+    def solveInPlace(self, a: RealLinearOperator, m: RealLinearOperator, b: RealVector, x: RealVector) -> RealVector: ...
     @typing.overload
-    def solveInPlace(self, realLinearOperator: RealLinearOperator, realLinearOperator2: RealLinearOperator, realVector: RealVector, realVector2: RealVector, boolean: bool, double: float) -> RealVector: ...
+    def solveInPlace(self, a: RealLinearOperator, m: RealLinearOperator, b: RealVector, x: RealVector, goodb: bool, shift: float) -> RealVector: ...
     @typing.overload
-    def solveInPlace(self, realLinearOperator: RealLinearOperator, realVector: RealVector, realVector2: RealVector) -> RealVector: ...
+    def solveInPlace(self, a: RealLinearOperator, b: RealVector, x: RealVector) -> RealVector: ...
 
 _Array2DRowFieldMatrix__T = typing.TypeVar('_Array2DRowFieldMatrix__T', bound=org.hipparchus.FieldElement)  # <T>
 class Array2DRowFieldMatrix(AbstractFieldMatrix[_Array2DRowFieldMatrix__T], java.io.Serializable, typing.Generic[_Array2DRowFieldMatrix__T]):
     """
-    implements Serializable
-    
     Implementation of FieldMatrix using a FieldElement[][] array to store entries.
     
     As specified in the FieldMatrix interface, matrix element indexing is 0-based -- e.g., getEntry(0, 0) returns the element in the first row, first column of the matrix
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_Array2DRowFieldMatrix__T]): ...
@@ -10626,9 +10544,9 @@ class Array2DRowFieldMatrix(AbstractFieldMatrix[_Array2DRowFieldMatrix__T], java
     @typing.overload
     def __init__(self, tArray: typing.Union[typing.List[typing.MutableSequence[_Array2DRowFieldMatrix__T]], jpype.JArray], boolean: bool): ...
     @typing.overload
-    def add(self, array2DRowFieldMatrix: 'Array2DRowFieldMatrix'[_Array2DRowFieldMatrix__T]) -> 'Array2DRowFieldMatrix'[_Array2DRowFieldMatrix__T]: ...
+    def add(self, m: 'Array2DRowFieldMatrix'[_Array2DRowFieldMatrix__T]) -> 'Array2DRowFieldMatrix'[_Array2DRowFieldMatrix__T]: ...
     @typing.overload
-    def add(self, fieldMatrix: FieldMatrix[_Array2DRowFieldMatrix__T]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
+    def add(self, m: FieldMatrix[_Array2DRowFieldMatrix__T]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
     def addToEntry(self, row: int, column: int, increment: _Array2DRowFieldMatrix__T) -> None:
         """
         Change an entry in the specified row and column.
@@ -10779,11 +10697,11 @@ class Array2DRowFieldMatrix(AbstractFieldMatrix[_Array2DRowFieldMatrix__T], java
     @typing.overload
     def getSubMatrix(self, intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
     @typing.overload
-    def getSubMatrix(self, int: int, int2: int, int3: int, int4: int) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
+    def getSubMatrix(self, startRow: int, endRow: int, startColumn: int, endColumn: int) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
     @typing.overload
-    def multiply(self, array2DRowFieldMatrix: 'Array2DRowFieldMatrix'[_Array2DRowFieldMatrix__T]) -> 'Array2DRowFieldMatrix'[_Array2DRowFieldMatrix__T]: ...
+    def multiply(self, m: 'Array2DRowFieldMatrix'[_Array2DRowFieldMatrix__T]) -> 'Array2DRowFieldMatrix'[_Array2DRowFieldMatrix__T]: ...
     @typing.overload
-    def multiply(self, fieldMatrix: FieldMatrix[_Array2DRowFieldMatrix__T]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
+    def multiply(self, m: FieldMatrix[_Array2DRowFieldMatrix__T]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
     def multiplyEntry(self, row: int, column: int, factor: _Array2DRowFieldMatrix__T) -> None:
         """
         Change an entry in the specified row and column.
@@ -10804,19 +10722,19 @@ class Array2DRowFieldMatrix(AbstractFieldMatrix[_Array2DRowFieldMatrix__T], java
         """
         ...
     @typing.overload
-    def multiplyTransposed(self, array2DRowFieldMatrix: 'Array2DRowFieldMatrix'[_Array2DRowFieldMatrix__T]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
+    def multiplyTransposed(self, m: 'Array2DRowFieldMatrix'[_Array2DRowFieldMatrix__T]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
     @typing.overload
-    def multiplyTransposed(self, fieldMatrix: FieldMatrix[_Array2DRowFieldMatrix__T]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
+    def multiplyTransposed(self, m: FieldMatrix[_Array2DRowFieldMatrix__T]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
     @typing.overload
-    def operate(self, tArray: typing.Union[typing.List[_Array2DRowFieldMatrix__T], jpype.JArray]) -> typing.MutableSequence[_Array2DRowFieldMatrix__T]: ...
+    def operate(self, v: typing.Union[typing.List[_Array2DRowFieldMatrix__T], jpype.JArray]) -> typing.MutableSequence[_Array2DRowFieldMatrix__T]: ...
     @typing.overload
-    def operate(self, fieldVector: FieldVector[_Array2DRowFieldMatrix__T]) -> FieldVector[_Array2DRowFieldMatrix__T]: ...
+    def operate(self, v: FieldVector[_Array2DRowFieldMatrix__T]) -> FieldVector[_Array2DRowFieldMatrix__T]: ...
     @typing.overload
-    def preMultiply(self, tArray: typing.Union[typing.List[_Array2DRowFieldMatrix__T], jpype.JArray]) -> typing.MutableSequence[_Array2DRowFieldMatrix__T]: ...
+    def preMultiply(self, v: typing.Union[typing.List[_Array2DRowFieldMatrix__T], jpype.JArray]) -> typing.MutableSequence[_Array2DRowFieldMatrix__T]: ...
     @typing.overload
-    def preMultiply(self, fieldMatrix: FieldMatrix[_Array2DRowFieldMatrix__T]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
+    def preMultiply(self, v: FieldMatrix[_Array2DRowFieldMatrix__T]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
     @typing.overload
-    def preMultiply(self, fieldVector: FieldVector[_Array2DRowFieldMatrix__T]) -> FieldVector[_Array2DRowFieldMatrix__T]: ...
+    def preMultiply(self, v: FieldVector[_Array2DRowFieldMatrix__T]) -> FieldVector[_Array2DRowFieldMatrix__T]: ...
     def setEntry(self, row: int, column: int, value: _Array2DRowFieldMatrix__T) -> None:
         """
         Set the entry in the specified row and column.
@@ -10850,7 +10768,6 @@ class Array2DRowFieldMatrix(AbstractFieldMatrix[_Array2DRowFieldMatrix__T], java
         
         Raises:
             MathIllegalArgumentException: if the specified row index is invalid.
-            MathIllegalArgumentException: if the array size does not match one instance row.
         
         
         """
@@ -10880,45 +10797,42 @@ class Array2DRowFieldMatrix(AbstractFieldMatrix[_Array2DRowFieldMatrix__T], java
         
         Raises:
             MathIllegalArgumentException: if subMatrix does not fit into this matrix from element in (row, column).
-            MathIllegalArgumentException: if a row or column of subMatrix is empty.
-            MathIllegalArgumentException: if subMatrix is not rectangular (not all rows have the same length).
             NullArgumentException: if subMatrix is null.
         
         
         """
         ...
     @typing.overload
-    def subtract(self, array2DRowFieldMatrix: 'Array2DRowFieldMatrix'[_Array2DRowFieldMatrix__T]) -> 'Array2DRowFieldMatrix'[_Array2DRowFieldMatrix__T]: ...
+    def subtract(self, m: 'Array2DRowFieldMatrix'[_Array2DRowFieldMatrix__T]) -> 'Array2DRowFieldMatrix'[_Array2DRowFieldMatrix__T]: ...
     @typing.overload
-    def subtract(self, fieldMatrix: FieldMatrix[_Array2DRowFieldMatrix__T]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
+    def subtract(self, m: FieldMatrix[_Array2DRowFieldMatrix__T]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
     @typing.overload
-    def transposeMultiply(self, array2DRowFieldMatrix: 'Array2DRowFieldMatrix'[_Array2DRowFieldMatrix__T]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
+    def transposeMultiply(self, m: 'Array2DRowFieldMatrix'[_Array2DRowFieldMatrix__T]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
     @typing.overload
-    def transposeMultiply(self, fieldMatrix: FieldMatrix[_Array2DRowFieldMatrix__T]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
+    def transposeMultiply(self, m: FieldMatrix[_Array2DRowFieldMatrix__T]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
     @typing.overload
-    def walkInColumnOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_Array2DRowFieldMatrix__T]) -> _Array2DRowFieldMatrix__T: ...
+    def walkInColumnOrder(self, visitor: FieldMatrixChangingVisitor[_Array2DRowFieldMatrix__T]) -> _Array2DRowFieldMatrix__T: ...
     @typing.overload
-    def walkInColumnOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_Array2DRowFieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _Array2DRowFieldMatrix__T: ...
+    def walkInColumnOrder(self, visitor: FieldMatrixChangingVisitor[_Array2DRowFieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _Array2DRowFieldMatrix__T: ...
     @typing.overload
-    def walkInColumnOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_Array2DRowFieldMatrix__T]) -> _Array2DRowFieldMatrix__T: ...
+    def walkInColumnOrder(self, visitor: FieldMatrixPreservingVisitor[_Array2DRowFieldMatrix__T]) -> _Array2DRowFieldMatrix__T: ...
     @typing.overload
-    def walkInColumnOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_Array2DRowFieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _Array2DRowFieldMatrix__T: ...
+    def walkInColumnOrder(self, visitor: FieldMatrixPreservingVisitor[_Array2DRowFieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _Array2DRowFieldMatrix__T: ...
     @typing.overload
-    def walkInRowOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_Array2DRowFieldMatrix__T]) -> _Array2DRowFieldMatrix__T: ...
+    def walkInRowOrder(self, visitor: FieldMatrixChangingVisitor[_Array2DRowFieldMatrix__T]) -> _Array2DRowFieldMatrix__T: ...
     @typing.overload
-    def walkInRowOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_Array2DRowFieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _Array2DRowFieldMatrix__T: ...
+    def walkInRowOrder(self, visitor: FieldMatrixChangingVisitor[_Array2DRowFieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _Array2DRowFieldMatrix__T: ...
     @typing.overload
-    def walkInRowOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_Array2DRowFieldMatrix__T]) -> _Array2DRowFieldMatrix__T: ...
+    def walkInRowOrder(self, visitor: FieldMatrixPreservingVisitor[_Array2DRowFieldMatrix__T]) -> _Array2DRowFieldMatrix__T: ...
     @typing.overload
-    def walkInRowOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_Array2DRowFieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _Array2DRowFieldMatrix__T: ...
+    def walkInRowOrder(self, visitor: FieldMatrixPreservingVisitor[_Array2DRowFieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _Array2DRowFieldMatrix__T: ...
 
 class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
     """
-    implements Serializable
-    
     Implementation of RealMatrix using a double[][] array to store entries.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -10931,9 +10845,9 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
     @typing.overload
     def __init__(self, int: int, int2: int): ...
     @typing.overload
-    def add(self, array2DRowRealMatrix: 'Array2DRowRealMatrix') -> 'Array2DRowRealMatrix': ...
+    def add(self, m: 'Array2DRowRealMatrix') -> 'Array2DRowRealMatrix': ...
     @typing.overload
-    def add(self, realMatrix: RealMatrix) -> RealMatrix: ...
+    def add(self, m: RealMatrix) -> RealMatrix: ...
     def addToEntry(self, row: int, column: int, increment: float) -> None:
         """
         Adds (in place) the specified value to the specified entry of this matrix. Row and column indices start at 0.
@@ -11088,7 +11002,7 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
     @typing.overload
     def getSubMatrix(self, intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]) -> RealMatrix: ...
     @typing.overload
-    def getSubMatrix(self, int: int, int2: int, int3: int, int4: int) -> RealMatrix: ...
+    def getSubMatrix(self, startRow: int, endRow: int, startColumn: int, endColumn: int) -> RealMatrix: ...
     def kroneckerProduct(self, b: RealMatrix) -> RealMatrix:
         """
         Kronecker product of the current matrix and the parameter matrix.
@@ -11103,9 +11017,9 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
         """
         ...
     @typing.overload
-    def multiply(self, array2DRowRealMatrix: 'Array2DRowRealMatrix') -> 'Array2DRowRealMatrix': ...
+    def multiply(self, m: 'Array2DRowRealMatrix') -> 'Array2DRowRealMatrix': ...
     @typing.overload
-    def multiply(self, realMatrix: RealMatrix) -> RealMatrix: ...
+    def multiply(self, m: RealMatrix) -> RealMatrix: ...
     def multiplyEntry(self, row: int, column: int, factor: float) -> None:
         """
         Multiplies (in place) the specified entry of this matrix by the specified value. Row and column indices start at 0.
@@ -11144,17 +11058,17 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
         """
         ...
     @typing.overload
-    def multiplyTransposed(self, realMatrix: RealMatrix) -> RealMatrix: ...
+    def multiplyTransposed(self, m: RealMatrix) -> RealMatrix: ...
     @typing.overload
-    def operate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
+    def operate(self, v: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def operate(self, realVector: RealVector) -> RealVector: ...
+    def operate(self, v: RealVector) -> RealVector: ...
     @typing.overload
-    def preMultiply(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
+    def preMultiply(self, v: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def preMultiply(self, realMatrix: RealMatrix) -> RealMatrix: ...
+    def preMultiply(self, v: RealMatrix) -> RealMatrix: ...
     @typing.overload
-    def preMultiply(self, realVector: RealVector) -> RealVector: ...
+    def preMultiply(self, v: RealVector) -> RealVector: ...
     def setEntry(self, row: int, column: int, value: float) -> None:
         """
         Set the entry in the specified row and column. Row and column indices start at 0.
@@ -11188,7 +11102,6 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if the specified row index is invalid.
-            MathIllegalArgumentException: if the array length does not match the column dimension of this matrix.
         
         
         """
@@ -11218,8 +11131,6 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if subMatrix is empty.
-            MathIllegalArgumentException: if subMatrix does not fit into this matrix from element in (row, column).
-            MathIllegalArgumentException: if subMatrix is not rectangular (not all rows have the same length) or empty.
             NullArgumentException: if subMatrix is null.
         
         
@@ -11236,9 +11147,9 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
         """
         ...
     @typing.overload
-    def subtract(self, array2DRowRealMatrix: 'Array2DRowRealMatrix') -> 'Array2DRowRealMatrix': ...
+    def subtract(self, m: 'Array2DRowRealMatrix') -> 'Array2DRowRealMatrix': ...
     @typing.overload
-    def subtract(self, realMatrix: RealMatrix) -> RealMatrix: ...
+    def subtract(self, m: RealMatrix) -> RealMatrix: ...
     @typing.overload
     def transposeMultiply(self, m: 'Array2DRowRealMatrix') -> RealMatrix:
         """
@@ -11258,7 +11169,7 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
         """
         ...
     @typing.overload
-    def transposeMultiply(self, realMatrix: RealMatrix) -> RealMatrix: ...
+    def transposeMultiply(self, m: RealMatrix) -> RealMatrix: ...
     def unstackSquare(self) -> RealMatrix:
         """
         Transforms a one-column stacked matrix into a squared matrix (devectorization).
@@ -11270,7 +11181,7 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
         """
         ...
     @typing.overload
-    def walkInColumnOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor) -> float:
+    def walkInColumnOrder(self, visitor: RealMatrixChangingVisitor) -> float:
         """
         Visit (and possibly change) all matrix entries in column order.
         
@@ -11286,17 +11197,16 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         Visit (but don't change) all matrix entries in column order.
         
@@ -11312,19 +11222,18 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        public double walkInColumnOrder(RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        public double walkInColumnOrder (RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (and possibly change) some matrix entries in column order.
         
@@ -11346,21 +11255,19 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if the indices are not valid.
-            MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        public double walkInColumnOrder(RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        public double walkInColumnOrder (RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (but don't change) some matrix entries in column order.
         
@@ -11382,32 +11289,29 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if the indices are not valid.
-            MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-        
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         
         """
         ...
     @typing.overload
-    def walkInColumnOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInColumnOrder(self, visitor: RealMatrixChangingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
     @typing.overload
-    def walkInColumnOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor) -> float: ...
+    def walkInColumnOrder(self, visitor: RealMatrixPreservingVisitor) -> float: ...
     @typing.overload
-    def walkInColumnOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInColumnOrder(self, visitor: RealMatrixPreservingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
     @typing.overload
-    def walkInRowOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor) -> float:
+    def walkInRowOrder(self, visitor: RealMatrixChangingVisitor) -> float:
         """
         Visit (and possibly change) all matrix entries in row order.
         
@@ -11423,17 +11327,16 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         Visit (but don't change) all matrix entries in row order.
         
@@ -11449,19 +11352,18 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        public double walkInRowOrder(RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        public double walkInRowOrder (RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (and possibly change) some matrix entries in row order.
         
@@ -11483,21 +11385,19 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if the indices are not valid.
-            MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        public double walkInRowOrder(RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        public double walkInRowOrder (RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (but don't change) some matrix entries in row order.
         
@@ -11519,36 +11419,31 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if the indices are not valid.
-            MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-        
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         
         """
         ...
     @typing.overload
-    def walkInRowOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInRowOrder(self, visitor: RealMatrixChangingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
     @typing.overload
-    def walkInRowOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor) -> float: ...
+    def walkInRowOrder(self, visitor: RealMatrixPreservingVisitor) -> float: ...
     @typing.overload
-    def walkInRowOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInRowOrder(self, visitor: RealMatrixPreservingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
 
 _BlockFieldMatrix__T = typing.TypeVar('_BlockFieldMatrix__T', bound=org.hipparchus.FieldElement)  # <T>
 class BlockFieldMatrix(AbstractFieldMatrix[_BlockFieldMatrix__T], java.io.Serializable, typing.Generic[_BlockFieldMatrix__T]):
     """
-    implements Serializable
-    
     Cache-friendly implementation of FieldMatrix using a flat arrays to store square blocks of the matrix.
     
     This implementation is specially designed to be cache-friendly. Square blocks are stored as small arrays and allow efficient traversal of data both in row major direction and columns major direction, one block at a time. This greatly increases performances for algorithms that use crossed directions loops like multiplication or transposition.
@@ -11561,27 +11456,28 @@ class BlockFieldMatrix(AbstractFieldMatrix[_BlockFieldMatrix__T], java.io.Serial
     
     The layout complexity overhead versus simple mapping of matrices to java arrays is negligible for small matrices (about 1%). The gain from cache efficiency leads to up to 3-fold improvements for matrices of moderate to large size.
     
-          - serialized
+    Also see:
+        serialized
     """
     BLOCK_SIZE: typing.ClassVar[int] = ...
     """
     Block size.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
-    def __init__(self, int: int, int2: int, tArray: typing.Union[typing.List[typing.MutableSequence[_BlockFieldMatrix__T]], jpype.JArray], boolean: bool): ...
+    def __init__(self, rows: int, columns: int, blockData: typing.Union[typing.List[typing.MutableSequence[_BlockFieldMatrix__T]], jpype.JArray], copyArray: bool): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_BlockFieldMatrix__T], int: int, int2: int): ...
+    def __init__(self, field: org.hipparchus.Field[_BlockFieldMatrix__T], rows: int, columns: int): ...
     @typing.overload
-    def __init__(self, tArray: typing.Union[typing.List[typing.MutableSequence[_BlockFieldMatrix__T]], jpype.JArray]): ...
+    def __init__(self, rawData: typing.Union[typing.List[typing.MutableSequence[_BlockFieldMatrix__T]], jpype.JArray]): ...
     @typing.overload
-    def add(self, blockFieldMatrix: 'BlockFieldMatrix'[_BlockFieldMatrix__T]) -> 'BlockFieldMatrix'[_BlockFieldMatrix__T]: ...
+    def add(self, m: 'BlockFieldMatrix'[_BlockFieldMatrix__T]) -> 'BlockFieldMatrix'[_BlockFieldMatrix__T]: ...
     @typing.overload
-    def add(self, fieldMatrix: FieldMatrix[_BlockFieldMatrix__T]) -> FieldMatrix[_BlockFieldMatrix__T]: ...
+    def add(self, m: FieldMatrix[_BlockFieldMatrix__T]) -> FieldMatrix[_BlockFieldMatrix__T]: ...
     def addToEntry(self, row: int, column: int, increment: _BlockFieldMatrix__T) -> None:
         """
         Change an entry in the specified row and column.
@@ -11631,9 +11527,9 @@ class BlockFieldMatrix(AbstractFieldMatrix[_BlockFieldMatrix__T], java.io.Serial
         Returns:
             a new data array in blocks layout.
         
-              - toBlocksLayout
-              - 
-        
+        Also see:
+            toBlocksLayout,
+            
         
         
         """
@@ -11845,11 +11741,11 @@ class BlockFieldMatrix(AbstractFieldMatrix[_BlockFieldMatrix__T], java.io.Serial
     @typing.overload
     def getSubMatrix(self, intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]) -> FieldMatrix[_BlockFieldMatrix__T]: ...
     @typing.overload
-    def getSubMatrix(self, int: int, int2: int, int3: int, int4: int) -> FieldMatrix[_BlockFieldMatrix__T]: ...
+    def getSubMatrix(self, startRow: int, endRow: int, startColumn: int, endColumn: int) -> FieldMatrix[_BlockFieldMatrix__T]: ...
     @typing.overload
-    def multiply(self, blockFieldMatrix: 'BlockFieldMatrix'[_BlockFieldMatrix__T]) -> 'BlockFieldMatrix'[_BlockFieldMatrix__T]: ...
+    def multiply(self, m: 'BlockFieldMatrix'[_BlockFieldMatrix__T]) -> 'BlockFieldMatrix'[_BlockFieldMatrix__T]: ...
     @typing.overload
-    def multiply(self, fieldMatrix: FieldMatrix[_BlockFieldMatrix__T]) -> FieldMatrix[_BlockFieldMatrix__T]: ...
+    def multiply(self, m: FieldMatrix[_BlockFieldMatrix__T]) -> FieldMatrix[_BlockFieldMatrix__T]: ...
     def multiplyEntry(self, row: int, column: int, factor: _BlockFieldMatrix__T) -> None:
         """
         Change an entry in the specified row and column.
@@ -11870,19 +11766,19 @@ class BlockFieldMatrix(AbstractFieldMatrix[_BlockFieldMatrix__T], java.io.Serial
         """
         ...
     @typing.overload
-    def multiplyTransposed(self, blockFieldMatrix: 'BlockFieldMatrix'[_BlockFieldMatrix__T]) -> 'BlockFieldMatrix'[_BlockFieldMatrix__T]: ...
+    def multiplyTransposed(self, m: 'BlockFieldMatrix'[_BlockFieldMatrix__T]) -> 'BlockFieldMatrix'[_BlockFieldMatrix__T]: ...
     @typing.overload
-    def multiplyTransposed(self, fieldMatrix: FieldMatrix[_BlockFieldMatrix__T]) -> 'BlockFieldMatrix'[_BlockFieldMatrix__T]: ...
+    def multiplyTransposed(self, m: FieldMatrix[_BlockFieldMatrix__T]) -> 'BlockFieldMatrix'[_BlockFieldMatrix__T]: ...
     @typing.overload
-    def operate(self, tArray: typing.Union[typing.List[_BlockFieldMatrix__T], jpype.JArray]) -> typing.MutableSequence[_BlockFieldMatrix__T]: ...
+    def operate(self, v: typing.Union[typing.List[_BlockFieldMatrix__T], jpype.JArray]) -> typing.MutableSequence[_BlockFieldMatrix__T]: ...
     @typing.overload
-    def operate(self, fieldVector: FieldVector[_BlockFieldMatrix__T]) -> FieldVector[_BlockFieldMatrix__T]: ...
+    def operate(self, v: FieldVector[_BlockFieldMatrix__T]) -> FieldVector[_BlockFieldMatrix__T]: ...
     @typing.overload
-    def preMultiply(self, tArray: typing.Union[typing.List[_BlockFieldMatrix__T], jpype.JArray]) -> typing.MutableSequence[_BlockFieldMatrix__T]: ...
+    def preMultiply(self, v: typing.Union[typing.List[_BlockFieldMatrix__T], jpype.JArray]) -> typing.MutableSequence[_BlockFieldMatrix__T]: ...
     @typing.overload
-    def preMultiply(self, fieldMatrix: FieldMatrix[_BlockFieldMatrix__T]) -> FieldMatrix[_BlockFieldMatrix__T]: ...
+    def preMultiply(self, v: FieldMatrix[_BlockFieldMatrix__T]) -> FieldMatrix[_BlockFieldMatrix__T]: ...
     @typing.overload
-    def preMultiply(self, fieldVector: FieldVector[_BlockFieldMatrix__T]) -> FieldVector[_BlockFieldMatrix__T]: ...
+    def preMultiply(self, v: FieldVector[_BlockFieldMatrix__T]) -> FieldVector[_BlockFieldMatrix__T]: ...
     def scalarAdd(self, d: _BlockFieldMatrix__T) -> FieldMatrix[_BlockFieldMatrix__T]:
         """
         Increment each entry of this matrix.
@@ -11931,7 +11827,6 @@ class BlockFieldMatrix(AbstractFieldMatrix[_BlockFieldMatrix__T], java.io.Serial
         
         Raises:
             MathIllegalArgumentException: if the specified column index is invalid.
-            MathIllegalArgumentException: if the array size does not match one instance column.
         
         
         """
@@ -11950,7 +11845,6 @@ class BlockFieldMatrix(AbstractFieldMatrix[_BlockFieldMatrix__T], java.io.Serial
         
         Raises:
             MathIllegalArgumentException: if the specified column index is invalid.
-            MathIllegalArgumentException: if the matrix dimensions do not match one instance column.
         
         
         """
@@ -11969,7 +11863,6 @@ class BlockFieldMatrix(AbstractFieldMatrix[_BlockFieldMatrix__T], java.io.Serial
         
         Raises:
             MathIllegalArgumentException: if the specified column index is invalid.
-            MathIllegalArgumentException: if the vector dimension does not match one instance column.
         
         
         """
@@ -12007,15 +11900,14 @@ class BlockFieldMatrix(AbstractFieldMatrix[_BlockFieldMatrix__T], java.io.Serial
         
         Raises:
             MathIllegalArgumentException: if the specified row index is invalid.
-            MathIllegalArgumentException: if the array size does not match one instance row.
         
         
         """
         ...
     @typing.overload
-    def setRowMatrix(self, int: int, blockFieldMatrix: 'BlockFieldMatrix'[_BlockFieldMatrix__T]) -> None: ...
+    def setRowMatrix(self, row: int, matrix: 'BlockFieldMatrix'[_BlockFieldMatrix__T]) -> None: ...
     @typing.overload
-    def setRowMatrix(self, int: int, fieldMatrix: FieldMatrix[_BlockFieldMatrix__T]) -> None: ...
+    def setRowMatrix(self, row: int, matrix: FieldMatrix[_BlockFieldMatrix__T]) -> None: ...
     def setRowVector(self, row: int, vector: FieldVector[_BlockFieldMatrix__T]) -> None:
         """
         Set the entries in row number row as a vector.
@@ -12030,7 +11922,6 @@ class BlockFieldMatrix(AbstractFieldMatrix[_BlockFieldMatrix__T], java.io.Serial
         
         Raises:
             MathIllegalArgumentException: if the specified row index is invalid.
-            MathIllegalArgumentException: if the vector dimension does not match one instance row.
         
         
         """
@@ -12060,17 +11951,15 @@ class BlockFieldMatrix(AbstractFieldMatrix[_BlockFieldMatrix__T], java.io.Serial
         
         Raises:
             MathIllegalArgumentException: if subMatrix does not fit into this matrix from element in (row, column).
-            MathIllegalArgumentException: if a row or column of subMatrix is empty.
-            MathIllegalArgumentException: if subMatrix is not rectangular (not all rows have the same length).
             NullArgumentException: if subMatrix is null.
         
         
         """
         ...
     @typing.overload
-    def subtract(self, blockFieldMatrix: 'BlockFieldMatrix'[_BlockFieldMatrix__T]) -> 'BlockFieldMatrix'[_BlockFieldMatrix__T]: ...
+    def subtract(self, m: 'BlockFieldMatrix'[_BlockFieldMatrix__T]) -> 'BlockFieldMatrix'[_BlockFieldMatrix__T]: ...
     @typing.overload
-    def subtract(self, fieldMatrix: FieldMatrix[_BlockFieldMatrix__T]) -> FieldMatrix[_BlockFieldMatrix__T]: ...
+    def subtract(self, m: FieldMatrix[_BlockFieldMatrix__T]) -> FieldMatrix[_BlockFieldMatrix__T]: ...
     _toBlocksLayout__T = typing.TypeVar('_toBlocksLayout__T', bound=org.hipparchus.FieldElement)  # <T>
     @staticmethod
     def toBlocksLayout(rawData: typing.Union[typing.List[typing.MutableSequence[_toBlocksLayout__T]], jpype.JArray]) -> typing.MutableSequence[typing.MutableSequence[_toBlocksLayout__T]]:
@@ -12090,9 +11979,9 @@ class BlockFieldMatrix(AbstractFieldMatrix[_BlockFieldMatrix__T], java.io.Serial
         Raises:
             MathIllegalArgumentException: if rawData is not rectangular (not all rows have the same length).
         
-              - createBlocksLayout
-              - 
-        
+        Also see:
+            createBlocksLayout,
+            
         
         
         """
@@ -12112,30 +12001,28 @@ class BlockFieldMatrix(AbstractFieldMatrix[_BlockFieldMatrix__T], java.io.Serial
         """
         ...
     @typing.overload
-    def transposeMultiply(self, blockFieldMatrix: 'BlockFieldMatrix'[_BlockFieldMatrix__T]) -> 'BlockFieldMatrix'[_BlockFieldMatrix__T]: ...
+    def transposeMultiply(self, m: 'BlockFieldMatrix'[_BlockFieldMatrix__T]) -> 'BlockFieldMatrix'[_BlockFieldMatrix__T]: ...
     @typing.overload
-    def transposeMultiply(self, fieldMatrix: FieldMatrix[_BlockFieldMatrix__T]) -> 'BlockFieldMatrix'[_BlockFieldMatrix__T]: ...
+    def transposeMultiply(self, m: FieldMatrix[_BlockFieldMatrix__T]) -> 'BlockFieldMatrix'[_BlockFieldMatrix__T]: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_BlockFieldMatrix__T]) -> _BlockFieldMatrix__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldMatrixChangingVisitor[_BlockFieldMatrix__T]) -> _BlockFieldMatrix__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_BlockFieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _BlockFieldMatrix__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldMatrixChangingVisitor[_BlockFieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _BlockFieldMatrix__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_BlockFieldMatrix__T]) -> _BlockFieldMatrix__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldMatrixPreservingVisitor[_BlockFieldMatrix__T]) -> _BlockFieldMatrix__T: ...
     @typing.overload
-    def walkInOptimizedOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_BlockFieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _BlockFieldMatrix__T: ...
+    def walkInOptimizedOrder(self, visitor: FieldMatrixPreservingVisitor[_BlockFieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _BlockFieldMatrix__T: ...
     @typing.overload
-    def walkInRowOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_BlockFieldMatrix__T]) -> _BlockFieldMatrix__T: ...
+    def walkInRowOrder(self, visitor: FieldMatrixChangingVisitor[_BlockFieldMatrix__T]) -> _BlockFieldMatrix__T: ...
     @typing.overload
-    def walkInRowOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_BlockFieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _BlockFieldMatrix__T: ...
+    def walkInRowOrder(self, visitor: FieldMatrixChangingVisitor[_BlockFieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _BlockFieldMatrix__T: ...
     @typing.overload
-    def walkInRowOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_BlockFieldMatrix__T]) -> _BlockFieldMatrix__T: ...
+    def walkInRowOrder(self, visitor: FieldMatrixPreservingVisitor[_BlockFieldMatrix__T]) -> _BlockFieldMatrix__T: ...
     @typing.overload
-    def walkInRowOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_BlockFieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _BlockFieldMatrix__T: ...
+    def walkInRowOrder(self, visitor: FieldMatrixPreservingVisitor[_BlockFieldMatrix__T], startRow: int, endRow: int, startColumn: int, endColumn: int) -> _BlockFieldMatrix__T: ...
 
 class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
     """
-    implements Serializable
-    
     Cache-friendly implementation of RealMatrix using a flat arrays to store square blocks of the matrix.
     
     This implementation is specially designed to be cache-friendly. Square blocks are stored as small arrays and allow efficient traversal of data both in row major direction and columns major direction, one block at a time. This greatly increases performances for algorithms that use crossed directions loops like multiplication or transposition.
@@ -12148,27 +12035,28 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
     
     The layout complexity overhead versus simple mapping of matrices to java arrays is negligible for small matrices (about 1%). The gain from cache efficiency leads to up to 3-fold improvements for matrices of moderate to large size.
     
-          - serialized
+    Also see:
+        serialized
     """
     BLOCK_SIZE: typing.ClassVar[int] = ...
     """
     Block size.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]): ...
+    def __init__(self, rawData: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, int: int, int2: int): ...
+    def __init__(self, rows: int, columns: int): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], boolean: bool): ...
+    def __init__(self, rows: int, columns: int, blockData: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], copyArray: bool): ...
     @typing.overload
-    def add(self, blockRealMatrix: 'BlockRealMatrix') -> 'BlockRealMatrix': ...
+    def add(self, m: 'BlockRealMatrix') -> 'BlockRealMatrix': ...
     @typing.overload
-    def add(self, realMatrix: RealMatrix) -> 'BlockRealMatrix': ...
+    def add(self, m: RealMatrix) -> 'BlockRealMatrix': ...
     def addToEntry(self, row: int, column: int, increment: float) -> None:
         """
         Adds (in place) the specified value to the specified entry of this matrix. Row and column indices start at 0.
@@ -12216,9 +12104,8 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         Returns:
             a new data array in blocks layout.
         
-              - toBlocksLayout
-              - 
-        
+        Also see:
+            toBlocksLayout, 
         
         
         """
@@ -12470,13 +12357,13 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         """
         ...
     @typing.overload
-    def getSubMatrix(self, int: int, int2: int, int3: int, int4: int) -> 'BlockRealMatrix': ...
+    def getSubMatrix(self, startRow: int, endRow: int, startColumn: int, endColumn: int) -> 'BlockRealMatrix': ...
     @typing.overload
     def getSubMatrix(self, intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]) -> RealMatrix: ...
     @typing.overload
-    def multiply(self, blockRealMatrix: 'BlockRealMatrix') -> 'BlockRealMatrix': ...
+    def multiply(self, m: 'BlockRealMatrix') -> 'BlockRealMatrix': ...
     @typing.overload
-    def multiply(self, realMatrix: RealMatrix) -> 'BlockRealMatrix': ...
+    def multiply(self, m: RealMatrix) -> 'BlockRealMatrix': ...
     def multiplyEntry(self, row: int, column: int, factor: float) -> None:
         """
         Multiplies (in place) the specified entry of this matrix by the specified value. Row and column indices start at 0.
@@ -12497,19 +12384,19 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         """
         ...
     @typing.overload
-    def multiplyTransposed(self, blockRealMatrix: 'BlockRealMatrix') -> 'BlockRealMatrix': ...
+    def multiplyTransposed(self, m: 'BlockRealMatrix') -> 'BlockRealMatrix': ...
     @typing.overload
-    def multiplyTransposed(self, realMatrix: RealMatrix) -> 'BlockRealMatrix': ...
+    def multiplyTransposed(self, m: RealMatrix) -> 'BlockRealMatrix': ...
     @typing.overload
-    def operate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
+    def operate(self, v: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def operate(self, realVector: RealVector) -> RealVector: ...
+    def operate(self, v: RealVector) -> RealVector: ...
     @typing.overload
-    def preMultiply(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
+    def preMultiply(self, v: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def preMultiply(self, realMatrix: RealMatrix) -> RealMatrix: ...
+    def preMultiply(self, v: RealMatrix) -> RealMatrix: ...
     @typing.overload
-    def preMultiply(self, realVector: RealVector) -> RealVector: ...
+    def preMultiply(self, v: RealVector) -> RealVector: ...
     def scalarAdd(self, d: float) -> 'BlockRealMatrix':
         """
         Returns the result of adding d to each entry of this.
@@ -12558,7 +12445,6 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if the specified column index is invalid.
-            MathIllegalArgumentException: if the array length does not match the row dimension of this matrix.
         
         
         """
@@ -12577,8 +12463,6 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if the specified column index is invalid.
-            MathIllegalArgumentException: if the column dimension of the matrix is not , or the row dimensions of this and matrix
-                do not match.
         
         
         """
@@ -12597,7 +12481,6 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if the specified column index is invalid.
-            MathIllegalArgumentException: if the vector dimension does not match the row dimension of this matrix.
         
         
         """
@@ -12635,15 +12518,14 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if the specified row index is invalid.
-            MathIllegalArgumentException: if the array length does not match the column dimension of this matrix.
         
         
         """
         ...
     @typing.overload
-    def setRowMatrix(self, int: int, blockRealMatrix: 'BlockRealMatrix') -> None: ...
+    def setRowMatrix(self, row: int, matrix: 'BlockRealMatrix') -> None: ...
     @typing.overload
-    def setRowMatrix(self, int: int, realMatrix: RealMatrix) -> None: ...
+    def setRowMatrix(self, row: int, matrix: RealMatrix) -> None: ...
     def setRowVector(self, row: int, vector: RealVector) -> None:
         """
         Sets the specified row of this matrix to the entries of the specified vector. Row indices start at 0.
@@ -12658,7 +12540,6 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if the specified row index is invalid.
-            MathIllegalArgumentException: if the vector dimension does not match the column dimension of this matrix.
         
         
         """
@@ -12688,17 +12569,15 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if subMatrix is empty.
-            MathIllegalArgumentException: if subMatrix does not fit into this matrix from element in (row, column).
-            MathIllegalArgumentException: if subMatrix is not rectangular (not all rows have the same length) or empty.
             NullArgumentException: if subMatrix is null.
         
         
         """
         ...
     @typing.overload
-    def subtract(self, blockRealMatrix: 'BlockRealMatrix') -> 'BlockRealMatrix': ...
+    def subtract(self, m: 'BlockRealMatrix') -> 'BlockRealMatrix': ...
     @typing.overload
-    def subtract(self, realMatrix: RealMatrix) -> 'BlockRealMatrix': ...
+    def subtract(self, m: RealMatrix) -> 'BlockRealMatrix': ...
     @staticmethod
     def toBlocksLayout(rawData: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
@@ -12717,9 +12596,9 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         Raises:
             MathIllegalArgumentException: if rawData is not rectangular.
         
-              - createBlocksLayout
-              - 
-        
+        Also see:
+            createBlocksLayout,
+            
         
         
         """
@@ -12739,11 +12618,11 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         """
         ...
     @typing.overload
-    def transposeMultiply(self, blockRealMatrix: 'BlockRealMatrix') -> 'BlockRealMatrix': ...
+    def transposeMultiply(self, m: 'BlockRealMatrix') -> 'BlockRealMatrix': ...
     @typing.overload
-    def transposeMultiply(self, realMatrix: RealMatrix) -> 'BlockRealMatrix': ...
+    def transposeMultiply(self, m: RealMatrix) -> 'BlockRealMatrix': ...
     @typing.overload
-    def walkInOptimizedOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor) -> float:
+    def walkInOptimizedOrder(self, visitor: RealMatrixChangingVisitor) -> float:
         """
         Visit (and possibly change) all matrix entries using the fastest possible order.
         
@@ -12759,17 +12638,16 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         Visit (but don't change) all matrix entries using the fastest possible order.
         
@@ -12785,19 +12663,18 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        public double walkInOptimizedOrder(RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        public double walkInOptimizedOrder (RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (and possibly change) some matrix entries using the fastest possible order.
         
@@ -12819,21 +12696,19 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if the indices are not valid.
-            MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        public double walkInOptimizedOrder(RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        public double walkInOptimizedOrder (RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (but don't change) some matrix entries using the fastest possible order.
         
@@ -12855,32 +12730,29 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if the indices are not valid.
-            MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-        
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInRowOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         
         """
         ...
     @typing.overload
-    def walkInOptimizedOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInOptimizedOrder(self, visitor: RealMatrixChangingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
     @typing.overload
-    def walkInOptimizedOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor) -> float: ...
+    def walkInOptimizedOrder(self, visitor: RealMatrixPreservingVisitor) -> float: ...
     @typing.overload
-    def walkInOptimizedOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInOptimizedOrder(self, visitor: RealMatrixPreservingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
     @typing.overload
-    def walkInRowOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor) -> float:
+    def walkInRowOrder(self, visitor: RealMatrixChangingVisitor) -> float:
         """
         Visit (and possibly change) all matrix entries in row order.
         
@@ -12896,17 +12768,16 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         Visit (but don't change) all matrix entries in row order.
         
@@ -12922,19 +12793,18 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         Returns:
             the value returned by end at the end of the walk
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        public double walkInRowOrder(RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        public double walkInRowOrder (RealMatrixChangingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (and possibly change) some matrix entries in row order.
         
@@ -12956,21 +12826,19 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if the indices are not valid.
-            MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
-        public double walkInRowOrder(RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
+        public double walkInRowOrder (RealMatrixPreservingVisitor visitor, int startRow, int endRow, int startColumn, int endColumn) throws MathIllegalArgumentException
         
         Visit (but don't change) some matrix entries in row order.
         
@@ -12992,49 +12860,45 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if the indices are not valid.
-            MathIllegalArgumentException: if endRow < startRow or endColumn < startColumn.
         
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInRowOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInColumnOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-              - walkInOptimizedOrder
-        
+        Also see:
+            walkInRowOrder, walkInRowOrder,
+            walkInRowOrder, walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInColumnOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder,
+            walkInOptimizedOrder
         
         
         """
         ...
     @typing.overload
-    def walkInRowOrder(self, realMatrixChangingVisitor: RealMatrixChangingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInRowOrder(self, visitor: RealMatrixChangingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
     @typing.overload
-    def walkInRowOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor) -> float: ...
+    def walkInRowOrder(self, visitor: RealMatrixPreservingVisitor) -> float: ...
     @typing.overload
-    def walkInRowOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
+    def walkInRowOrder(self, visitor: RealMatrixPreservingVisitor, startRow: int, endRow: int, startColumn: int, endColumn: int) -> float: ...
 
 class DiagonalMatrix(AbstractRealMatrix, java.io.Serializable):
     """
-    implements Serializable
-    
     Implementation of a diagonal matrix.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], boolean: bool): ...
+    def __init__(self, d: typing.Union[typing.List[float], jpype.JArray], copyArray: bool): ...
     @typing.overload
     def __init__(self, int: int): ...
     @typing.overload
-    def add(self, diagonalMatrix: 'DiagonalMatrix') -> 'DiagonalMatrix': ...
+    def add(self, m: 'DiagonalMatrix') -> 'DiagonalMatrix': ...
     @typing.overload
-    def add(self, realMatrix: RealMatrix) -> RealMatrix: ...
+    def add(self, m: RealMatrix) -> RealMatrix: ...
     def addToEntry(self, row: int, column: int, increment: float) -> None:
         """
         Adds (in place) the specified value to the specified entry of this matrix. Row and column indices start at 0.
@@ -13169,7 +13033,7 @@ class DiagonalMatrix(AbstractRealMatrix, java.io.Serializable):
     @typing.overload
     def inverse(self) -> 'DiagonalMatrix': ...
     @typing.overload
-    def inverse(self, double: float) -> 'DiagonalMatrix': ...
+    def inverse(self, threshold: float) -> 'DiagonalMatrix': ...
     def isSingular(self, threshold: float) -> bool:
         """
         Returns whether this diagonal matrix is singular, i.e. any diagonal entry is equal to  within the given threshold.
@@ -13184,9 +13048,9 @@ class DiagonalMatrix(AbstractRealMatrix, java.io.Serializable):
         """
         ...
     @typing.overload
-    def multiply(self, diagonalMatrix: 'DiagonalMatrix') -> 'DiagonalMatrix': ...
+    def multiply(self, m: 'DiagonalMatrix') -> 'DiagonalMatrix': ...
     @typing.overload
-    def multiply(self, realMatrix: RealMatrix) -> RealMatrix: ...
+    def multiply(self, m: RealMatrix) -> RealMatrix: ...
     def multiplyEntry(self, row: int, column: int, factor: float) -> None:
         """
         Multiplies (in place) the specified entry of this matrix by the specified value. Row and column indices start at 0.
@@ -13207,19 +13071,19 @@ class DiagonalMatrix(AbstractRealMatrix, java.io.Serializable):
         """
         ...
     @typing.overload
-    def multiplyTransposed(self, diagonalMatrix: 'DiagonalMatrix') -> 'DiagonalMatrix': ...
+    def multiplyTransposed(self, m: 'DiagonalMatrix') -> 'DiagonalMatrix': ...
     @typing.overload
-    def multiplyTransposed(self, realMatrix: RealMatrix) -> RealMatrix: ...
+    def multiplyTransposed(self, m: RealMatrix) -> RealMatrix: ...
     @typing.overload
-    def operate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
+    def operate(self, v: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def operate(self, realVector: RealVector) -> RealVector: ...
+    def operate(self, v: RealVector) -> RealVector: ...
     @typing.overload
-    def preMultiply(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
+    def preMultiply(self, v: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def preMultiply(self, realMatrix: RealMatrix) -> RealMatrix: ...
+    def preMultiply(self, v: RealMatrix) -> RealMatrix: ...
     @typing.overload
-    def preMultiply(self, realVector: RealVector) -> RealVector: ...
+    def preMultiply(self, v: RealVector) -> RealVector: ...
     def setEntry(self, row: int, column: int, value: float) -> None:
         """
         Set the entry in the specified row and column. Row and column indices start at 0.
@@ -13240,9 +13104,9 @@ class DiagonalMatrix(AbstractRealMatrix, java.io.Serializable):
         """
         ...
     @typing.overload
-    def subtract(self, diagonalMatrix: 'DiagonalMatrix') -> 'DiagonalMatrix': ...
+    def subtract(self, m: 'DiagonalMatrix') -> 'DiagonalMatrix': ...
     @typing.overload
-    def subtract(self, realMatrix: RealMatrix) -> RealMatrix: ...
+    def subtract(self, m: RealMatrix) -> RealMatrix: ...
     @typing.overload
     def transposeMultiply(self, m: 'DiagonalMatrix') -> 'DiagonalMatrix':
         """
@@ -13262,26 +13126,25 @@ class DiagonalMatrix(AbstractRealMatrix, java.io.Serializable):
         """
         ...
     @typing.overload
-    def transposeMultiply(self, realMatrix: RealMatrix) -> RealMatrix: ...
+    def transposeMultiply(self, m: RealMatrix) -> RealMatrix: ...
 
 class OpenMapRealMatrix(AbstractRealMatrix, SparseRealMatrix, java.io.Serializable):
     """
-    implements SparseRealMatrix, Serializable
-    
     Sparse matrix implementation based on an open addressed map.
     
     Caveat: This implementation assumes that, for any x, the equality x * 0d == 0d holds. But it is is not true for NaN. Moreover, zero entries will lose their sign. Some operations (that involve NaN and/or infinities) may thus give incorrect results.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
-    def __init__(self, int: int, int2: int): ...
+    def __init__(self, rowDimension: int, columnDimension: int): ...
     @typing.overload
-    def __init__(self, openMapRealMatrix: 'OpenMapRealMatrix'): ...
+    def __init__(self, matrix: 'OpenMapRealMatrix'): ...
     @typing.overload
-    def add(self, openMapRealMatrix: 'OpenMapRealMatrix') -> 'OpenMapRealMatrix': ...
+    def add(self, m: 'OpenMapRealMatrix') -> 'OpenMapRealMatrix': ...
     @typing.overload
-    def add(self, realMatrix: RealMatrix) -> RealMatrix: ...
+    def add(self, m: RealMatrix) -> RealMatrix: ...
     def addToEntry(self, row: int, column: int, increment: float) -> None:
         """
         Adds (in place) the specified value to the specified entry of this matrix. Row and column indices start at 0.
@@ -13390,9 +13253,9 @@ class OpenMapRealMatrix(AbstractRealMatrix, SparseRealMatrix, java.io.Serializab
         """
         ...
     @typing.overload
-    def multiply(self, openMapRealMatrix: 'OpenMapRealMatrix') -> 'OpenMapRealMatrix': ...
+    def multiply(self, m: 'OpenMapRealMatrix') -> 'OpenMapRealMatrix': ...
     @typing.overload
-    def multiply(self, realMatrix: RealMatrix) -> RealMatrix: ...
+    def multiply(self, m: RealMatrix) -> RealMatrix: ...
     def multiplyEntry(self, row: int, column: int, factor: float) -> None:
         """
         Multiplies (in place) the specified entry of this matrix by the specified value. Row and column indices start at 0.
@@ -13453,9 +13316,9 @@ class OpenMapRealMatrix(AbstractRealMatrix, SparseRealMatrix, java.io.Serializab
         """
         ...
     @typing.overload
-    def subtract(self, openMapRealMatrix: 'OpenMapRealMatrix') -> 'OpenMapRealMatrix': ...
+    def subtract(self, m: 'OpenMapRealMatrix') -> 'OpenMapRealMatrix': ...
     @typing.overload
-    def subtract(self, realMatrix: RealMatrix) -> 'OpenMapRealMatrix': ...
+    def subtract(self, m: RealMatrix) -> 'OpenMapRealMatrix': ...
     def transposeMultiply(self, m: RealMatrix) -> RealMatrix:
         """
         Returns the result of postmultiplying this^T by m.
@@ -13488,7 +13351,7 @@ class SparseFieldMatrix(AbstractFieldMatrix[_SparseFieldMatrix__T], typing.Gener
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_SparseFieldMatrix__T]): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_SparseFieldMatrix__T], int: int, int2: int): ...
+    def __init__(self, field: org.hipparchus.Field[_SparseFieldMatrix__T], rowDimension: int, columnDimension: int): ...
     @typing.overload
     def __init__(self, fieldMatrix: FieldMatrix[_SparseFieldMatrix__T]): ...
     @typing.overload

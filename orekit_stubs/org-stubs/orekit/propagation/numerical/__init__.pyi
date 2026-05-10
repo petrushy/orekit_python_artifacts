@@ -122,7 +122,7 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
         """
         ...
     @typing.overload
-    def setInitialJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> org.orekit.propagation.SpacecraftState:
+    def setInitialJacobians(self, s1: org.orekit.propagation.SpacecraftState, dY1dY0: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], dY1dP: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> org.orekit.propagation.SpacecraftState:
         """
         Set the initial value of the Jacobian with respect to state and parameter.
         
@@ -152,7 +152,7 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
         """
         ...
     @typing.overload
-    def setInitialJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray3: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
+    def setInitialJacobians(self, state: org.orekit.propagation.SpacecraftState, dY1dY0: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], dY1dP: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], p: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
 
 _FieldNumericalPropagator__T = typing.TypeVar('_FieldNumericalPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractIntegratedPropagator[_FieldNumericalPropagator__T], typing.Generic[_FieldNumericalPropagator__T]):
@@ -223,9 +223,9 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
         FieldTimeDerivativesEquations
     """
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldNumericalPropagator__T], fieldODEIntegrator: org.hipparchus.ode.FieldODEIntegrator[_FieldNumericalPropagator__T]): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldNumericalPropagator__T], integrator: org.hipparchus.ode.FieldODEIntegrator[_FieldNumericalPropagator__T]): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldNumericalPropagator__T], fieldODEIntegrator: org.hipparchus.ode.FieldODEIntegrator[_FieldNumericalPropagator__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldNumericalPropagator__T], integrator: org.hipparchus.ode.FieldODEIntegrator[_FieldNumericalPropagator__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
     def addForceModel(self, model: org.orekit.forces.ForceModel) -> None:
         """
         Add a force model to the global perturbation model.
@@ -298,7 +298,7 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
     @typing.overload
     def resetInitialState(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldNumericalPropagator__T], propagationType: org.orekit.propagation.PropagationType) -> None: ...
     @typing.overload
-    def resetInitialState(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldNumericalPropagator__T]) -> None: ...
+    def resetInitialState(self, state: org.orekit.propagation.FieldSpacecraftState[_FieldNumericalPropagator__T]) -> None: ...
     def setIgnoreCentralAttraction(self, ignoreCentralAttraction: bool) -> None:
         """
         Set the flag to ignore or not the creation of a NewtonianAttraction.
@@ -367,10 +367,10 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
     _tolerances_1__T = typing.TypeVar('_tolerances_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def tolerances(t: _tolerances_0__T, t2: _tolerances_0__T, fieldOrbit: org.orekit.orbits.FieldOrbit[_tolerances_0__T], orbitType: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def tolerances(dP: _tolerances_0__T, dV: _tolerances_0__T, orbit: org.orekit.orbits.FieldOrbit[_tolerances_0__T], type: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
     @staticmethod
-    def tolerances(t: _tolerances_1__T, fieldOrbit: org.orekit.orbits.FieldOrbit[_tolerances_1__T], orbitType: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def tolerances(dP: _tolerances_1__T, orbit: org.orekit.orbits.FieldOrbit[_tolerances_1__T], type: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
 
 _FieldTimeDerivativesEquations__T = typing.TypeVar('_FieldTimeDerivativesEquations__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTimeDerivativesEquations(typing.Generic[_FieldTimeDerivativesEquations__T]):
@@ -500,9 +500,9 @@ class GLONASSNumericalPropagatorBuilder:
         11.0
     """
     @typing.overload
-    def __init__(self, classicalRungeKuttaIntegrator: org.hipparchus.ode.nonstiff.ClassicalRungeKuttaIntegrator, gLONASSOrbitalElements: typing.Union[org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements, typing.Callable], boolean: bool): ...
+    def __init__(self, integrator: org.hipparchus.ode.nonstiff.ClassicalRungeKuttaIntegrator, glonassOrbElt: typing.Union[org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements, typing.Callable], isAccAvailable: bool): ...
     @typing.overload
-    def __init__(self, classicalRungeKuttaIntegrator: org.hipparchus.ode.nonstiff.ClassicalRungeKuttaIntegrator, gLONASSOrbitalElements: typing.Union[org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements, typing.Callable], boolean: bool, dataContext: org.orekit.data.DataContext): ...
+    def __init__(self, integrator: org.hipparchus.ode.nonstiff.ClassicalRungeKuttaIntegrator, glonassOrbElt: typing.Union[org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements, typing.Callable], isAccAvailable: bool, context: org.orekit.data.DataContext): ...
     def attitudeProvider(self, userProvider: org.orekit.attitudes.AttitudeProvider) -> 'GLONASSNumericalPropagatorBuilder':
         """
         Sets the attitude provider.
@@ -629,9 +629,9 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
     Default position angle type.
     """
     @typing.overload
-    def __init__(self, oDEIntegrator: org.hipparchus.ode.ODEIntegrator): ...
+    def __init__(self, integrator: org.hipparchus.ode.ODEIntegrator): ...
     @typing.overload
-    def __init__(self, oDEIntegrator: org.hipparchus.ode.ODEIntegrator, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
+    def __init__(self, integrator: org.hipparchus.ode.ODEIntegrator, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
     def addForceModel(self, model: org.orekit.forces.ForceModel) -> None:
         """
         Add a force model.
@@ -653,7 +653,7 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
         """
         Erases the internal matrices harvester.
         
-        Overrides: clearMatricesComputation in class AbstractPropagator
+        Overrides: clearMatricesComputation in class AbstractIntegratedPropagator
         
         
         """
@@ -793,13 +793,13 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
         ...
     @typing.overload
     @staticmethod
-    def tolerances(double: float, double2: float, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def tolerances(dP: float, dV: float, orbit: org.orekit.orbits.Orbit, type: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
     @staticmethod
-    def tolerances(double: float, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def tolerances(dP: float, orbit: org.orekit.orbits.Orbit, type: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
     @staticmethod
-    def tolerances(double: float, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def tolerances(dP: float, absPva: org.orekit.utils.AbsolutePVCoordinates) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
 
 class TimeDerivativesEquations:
     """
@@ -921,7 +921,7 @@ class PythonFieldTimeDerivativesEquations(FieldTimeDerivativesEquations[_PythonF
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -996,7 +996,7 @@ class PythonTimeDerivativesEquations(TimeDerivativesEquations):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

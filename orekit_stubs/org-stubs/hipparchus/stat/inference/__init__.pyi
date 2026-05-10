@@ -48,7 +48,12 @@ class AlternativeHypothesis(java.lang.Enum['AlternativeHypothesis']):
     @staticmethod
     def values() -> typing.MutableSequence['AlternativeHypothesis']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (AlternativeHypothesis c : AlternativeHypothesis.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -63,7 +68,8 @@ class BinomialTest:
     
     Exact test for the statistical significance of deviations from a theoretically expected distribution of observations into two categories.
     
-          - `Binomial test (Wikipedia) <http://en.wikipedia.org/wiki/Binomial_test>`
+    Also see:
+        `Binomial test (Wikipedia) <http://en.wikipedia.org/wiki/Binomial_test>`
     """
     def __init__(self):
         """
@@ -105,8 +111,8 @@ class BinomialTest:
             hipparchus: if probability is not between 0 and 1
             hipparchus: if numberOfTrials < numberOfSuccesses or if alternateHypothesis is null.
         
-              - AlternativeHypothesis
-        
+        Also see:
+            AlternativeHypothesis
         
         """
         ...
@@ -141,8 +147,8 @@ class BinomialTest:
             hipparchus: if probability is not between 0 and 1
             hipparchus: if numberOfTrials < numberOfSuccesses or if alternateHypothesis is null.
         
-              - AlternativeHypothesis
-        
+        Also see:
+            AlternativeHypothesis
         
         
         """
@@ -169,9 +175,9 @@ class ChiSquareTest:
         """
         ...
     @typing.overload
-    def chiSquare(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], longArray: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
+    def chiSquare(self, expected: typing.Union[typing.List[float], jpype.JArray], observed: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
     @typing.overload
-    def chiSquare(self, longArray: typing.Union[typing.List[typing.MutableSequence[int]], jpype.JArray]) -> float: ...
+    def chiSquare(self, counts: typing.Union[typing.List[typing.MutableSequence[int]], jpype.JArray]) -> float: ...
     def chiSquareDataSetsComparison(self, observed1: typing.Union[typing.List[int], jpype.JArray], observed2: typing.Union[typing.List[int], jpype.JArray]) -> float:
         """
         Computes a ` Chi-Square two sample test statistic <http://www.itl.nist.gov/div898/software/dataplot/refman1/auxillar/chi2samp.htm>` comparing bin frequency counts in observed1 and observed2.
@@ -208,17 +214,17 @@ class ChiSquareTest:
         """
         ...
     @typing.overload
-    def chiSquareTest(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], longArray: typing.Union[typing.List[int], jpype.JArray], double2: float) -> bool: ...
+    def chiSquareTest(self, expected: typing.Union[typing.List[float], jpype.JArray], observed: typing.Union[typing.List[int], jpype.JArray], alpha: float) -> bool: ...
     @typing.overload
     def chiSquareTest(self, longArray: typing.Union[typing.List[typing.MutableSequence[int]], jpype.JArray], double: float) -> bool: ...
     @typing.overload
     def chiSquareTest(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], longArray: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
     @typing.overload
-    def chiSquareTest(self, longArray: typing.Union[typing.List[typing.MutableSequence[int]], jpype.JArray]) -> float: ...
+    def chiSquareTest(self, counts: typing.Union[typing.List[typing.MutableSequence[int]], jpype.JArray]) -> float: ...
     @typing.overload
-    def chiSquareTestDataSetsComparison(self, longArray: typing.Union[typing.List[int], jpype.JArray], longArray2: typing.Union[typing.List[int], jpype.JArray], double: float) -> bool: ...
+    def chiSquareTestDataSetsComparison(self, observed1: typing.Union[typing.List[int], jpype.JArray], observed2: typing.Union[typing.List[int], jpype.JArray], alpha: float) -> bool: ...
     @typing.overload
-    def chiSquareTestDataSetsComparison(self, longArray: typing.Union[typing.List[int], jpype.JArray], longArray2: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
+    def chiSquareTestDataSetsComparison(self, observed1: typing.Union[typing.List[int], jpype.JArray], observed2: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
 
 class GTest:
     """
@@ -257,8 +263,8 @@ class GTest:
         Note:This implementation rescales the expected array if necessary to ensure that the sum of the expected and observed counts are equal.
         
         Parameters:
-            expected (double[]): array of expected frequency counts
-            observed (long[]): array of observed frequency counts
+            observed (double[]): array of observed frequency counts
+            expected (long[]): array of expected frequency counts
         
         Returns:
             G-Test statistic
@@ -316,13 +322,13 @@ class GTest:
         """
         ...
     @typing.overload
-    def gTest(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], longArray: typing.Union[typing.List[int], jpype.JArray], double2: float) -> bool: ...
+    def gTest(self, expected: typing.Union[typing.List[float], jpype.JArray], observed: typing.Union[typing.List[int], jpype.JArray], alpha: float) -> bool: ...
     @typing.overload
-    def gTest(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], longArray: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
+    def gTest(self, expected: typing.Union[typing.List[float], jpype.JArray], observed: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
     @typing.overload
-    def gTestDataSetsComparison(self, longArray: typing.Union[typing.List[int], jpype.JArray], longArray2: typing.Union[typing.List[int], jpype.JArray], double: float) -> bool: ...
+    def gTestDataSetsComparison(self, observed1: typing.Union[typing.List[int], jpype.JArray], observed2: typing.Union[typing.List[int], jpype.JArray], alpha: float) -> bool: ...
     @typing.overload
-    def gTestDataSetsComparison(self, longArray: typing.Union[typing.List[int], jpype.JArray], longArray2: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
+    def gTestDataSetsComparison(self, observed1: typing.Union[typing.List[int], jpype.JArray], observed2: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
     def gTestIntrinsic(self, expected: typing.Union[typing.List[float], jpype.JArray], observed: typing.Union[typing.List[int], jpype.JArray]) -> float:
         """
         Returns the intrinsic (Hardy-Weinberg proportions) p-Value, as described in p64-69 of McDonald, J.H. 2009. Handbook of Biological Statistics (2nd ed.). Sparky House Publishing, Baltimore, Maryland.
@@ -330,8 +336,8 @@ class GTest:
         The probability returned is the tail probability beyond g in the ChiSquare distribution with degrees of freedom two less than the common length of expected and observed.
         
         Parameters:
-            expected (double[]): array of expected frequency counts
-            observed (long[]): array of observed frequency counts
+            observed (double[]): array of observed frequency counts
+            expected (long[]): array of expected frequency counts
         
         Returns:
             p-value
@@ -396,10 +402,10 @@ class InferenceTestUtils:
         ...
     @typing.overload
     @staticmethod
-    def chiSquare(doubleArray: typing.Union[typing.List[float], jpype.JArray], longArray: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
+    def chiSquare(expected: typing.Union[typing.List[float], jpype.JArray], observed: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
     @typing.overload
     @staticmethod
-    def chiSquare(longArray: typing.Union[typing.List[typing.MutableSequence[int]], jpype.JArray]) -> float: ...
+    def chiSquare(counts: typing.Union[typing.List[typing.MutableSequence[int]], jpype.JArray]) -> float: ...
     @staticmethod
     def chiSquareDataSetsComparison(observed1: typing.Union[typing.List[int], jpype.JArray], observed2: typing.Union[typing.List[int], jpype.JArray]) -> float:
         """
@@ -438,7 +444,7 @@ class InferenceTestUtils:
         ...
     @typing.overload
     @staticmethod
-    def chiSquareTest(doubleArray: typing.Union[typing.List[float], jpype.JArray], longArray: typing.Union[typing.List[int], jpype.JArray], double2: float) -> bool: ...
+    def chiSquareTest(expected: typing.Union[typing.List[float], jpype.JArray], observed: typing.Union[typing.List[int], jpype.JArray], alpha: float) -> bool: ...
     @typing.overload
     @staticmethod
     def chiSquareTest(longArray: typing.Union[typing.List[typing.MutableSequence[int]], jpype.JArray], double: float) -> bool: ...
@@ -447,13 +453,13 @@ class InferenceTestUtils:
     def chiSquareTest(doubleArray: typing.Union[typing.List[float], jpype.JArray], longArray: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
     @typing.overload
     @staticmethod
-    def chiSquareTest(longArray: typing.Union[typing.List[typing.MutableSequence[int]], jpype.JArray]) -> float: ...
+    def chiSquareTest(counts: typing.Union[typing.List[typing.MutableSequence[int]], jpype.JArray]) -> float: ...
     @typing.overload
     @staticmethod
-    def chiSquareTestDataSetsComparison(longArray: typing.Union[typing.List[int], jpype.JArray], longArray2: typing.Union[typing.List[int], jpype.JArray], double: float) -> bool: ...
+    def chiSquareTestDataSetsComparison(observed1: typing.Union[typing.List[int], jpype.JArray], observed2: typing.Union[typing.List[int], jpype.JArray], alpha: float) -> bool: ...
     @typing.overload
     @staticmethod
-    def chiSquareTestDataSetsComparison(longArray: typing.Union[typing.List[int], jpype.JArray], longArray2: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
+    def chiSquareTestDataSetsComparison(observed1: typing.Union[typing.List[int], jpype.JArray], observed2: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
     @staticmethod
     def exactP(d: float, m: int, n: int, strict: bool) -> float:
         """
@@ -463,8 +469,8 @@ class InferenceTestUtils:
         
         Parameters:
             d (double): D-statistic value
-            m (int): second sample size
             n (int): first sample size
+            m (int): second sample size
             strict (boolean): whether or not the probability to compute is expressed as a strict inequality
         
         Returns:
@@ -492,8 +498,8 @@ class InferenceTestUtils:
         Note:This implementation rescales the expected array if necessary to ensure that the sum of the expected and observed counts are equal.
         
         Parameters:
-            expected (double[]): array of expected frequency counts
-            observed (long[]): array of observed frequency counts
+            observed (double[]): array of observed frequency counts
+            expected (long[]): array of expected frequency counts
         
         Returns:
             G-Test statistic
@@ -553,16 +559,16 @@ class InferenceTestUtils:
         ...
     @typing.overload
     @staticmethod
-    def gTest(doubleArray: typing.Union[typing.List[float], jpype.JArray], longArray: typing.Union[typing.List[int], jpype.JArray], double2: float) -> bool: ...
+    def gTest(expected: typing.Union[typing.List[float], jpype.JArray], observed: typing.Union[typing.List[int], jpype.JArray], alpha: float) -> bool: ...
     @typing.overload
     @staticmethod
-    def gTest(doubleArray: typing.Union[typing.List[float], jpype.JArray], longArray: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
+    def gTest(expected: typing.Union[typing.List[float], jpype.JArray], observed: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
     @typing.overload
     @staticmethod
-    def gTestDataSetsComparison(longArray: typing.Union[typing.List[int], jpype.JArray], longArray2: typing.Union[typing.List[int], jpype.JArray], double: float) -> bool: ...
+    def gTestDataSetsComparison(observed1: typing.Union[typing.List[int], jpype.JArray], observed2: typing.Union[typing.List[int], jpype.JArray], alpha: float) -> bool: ...
     @typing.overload
     @staticmethod
-    def gTestDataSetsComparison(longArray: typing.Union[typing.List[int], jpype.JArray], longArray2: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
+    def gTestDataSetsComparison(observed1: typing.Union[typing.List[int], jpype.JArray], observed2: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
     @staticmethod
     def gTestIntrinsic(expected: typing.Union[typing.List[float], jpype.JArray], observed: typing.Union[typing.List[int], jpype.JArray]) -> float:
         """
@@ -571,8 +577,8 @@ class InferenceTestUtils:
         The probability returned is the tail probability beyond g in the ChiSquare distribution with degrees of freedom two less than the common length of expected and observed.
         
         Parameters:
-            expected (double[]): array of expected frequency counts
-            observed (long[]): array of observed frequency counts
+            observed (double[]): array of observed frequency counts
+            expected (long[]): array of expected frequency counts
         
         Returns:
             p-value
@@ -594,7 +600,7 @@ class InferenceTestUtils:
     def homoscedasticT(statisticalSummary: org.hipparchus.stat.descriptive.StatisticalSummary, statisticalSummary2: org.hipparchus.stat.descriptive.StatisticalSummary) -> float: ...
     @typing.overload
     @staticmethod
-    def homoscedasticTTest(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], double3: float) -> bool: ...
+    def homoscedasticTTest(sample1: typing.Union[typing.List[float], jpype.JArray], sample2: typing.Union[typing.List[float], jpype.JArray], alpha: float) -> bool: ...
     @typing.overload
     @staticmethod
     def homoscedasticTTest(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
@@ -756,10 +762,10 @@ class InferenceTestUtils:
         ...
     @typing.overload
     @staticmethod
-    def pairedTTest(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], double3: float) -> bool: ...
+    def pairedTTest(sample1: typing.Union[typing.List[float], jpype.JArray], sample2: typing.Union[typing.List[float], jpype.JArray], alpha: float) -> bool: ...
     @typing.overload
     @staticmethod
-    def pairedTTest(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def pairedTTest(sample1: typing.Union[typing.List[float], jpype.JArray], sample2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @staticmethod
     def rootLogLikelihoodRatio(k11: int, k12: int, k21: int, k22: int) -> float:
         """
@@ -872,7 +878,7 @@ class KolmogorovSmirnovTest:
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, long: int): ...
+    def __init__(self, seed: int): ...
     def approximateP(self, d: float, n: int, m: int) -> float:
         """
         Uses the Kolmogorov-Smirnov distribution to approximate \(P(D_{n,m} > d)\) where \(D_{n,m}\) is the 2-sample Kolmogorov-Smirnov statistic. See kolmogorovSmirnovStatistic for the definition of \(D_{n,m}\).
@@ -891,7 +897,7 @@ class KolmogorovSmirnovTest:
         """
         ...
     @typing.overload
-    def bootstrap(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], int: int) -> float:
+    def bootstrap(self, x: typing.Union[typing.List[float], jpype.JArray], y: typing.Union[typing.List[float], jpype.JArray], iterations: int) -> float:
         """
         Estimates the p-value of a two-sample ` Kolmogorov-Smirnov test <http://en.wikipedia.org/wiki/Kolmogorov-Smirnov_test>` evaluating the null hypothesis that x and y are samples drawn from the same probability distribution. This method estimates the p-value by repeatedly sampling sets of size length and length from the empirical distribution of the combined sample. When strict is true, this is equivalent to the algorithm implemented in the R function boot, described in
         
@@ -920,11 +926,11 @@ class KolmogorovSmirnovTest:
         """
         ...
     @typing.overload
-    def bootstrap(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], int: int, boolean: bool) -> float: ...
+    def bootstrap(self, x: typing.Union[typing.List[float], jpype.JArray], y: typing.Union[typing.List[float], jpype.JArray], iterations: int, strict: bool) -> float: ...
     @typing.overload
-    def cdf(self, double: float, int: int) -> float: ...
+    def cdf(self, d: float, n: int) -> float: ...
     @typing.overload
-    def cdf(self, double: float, int: int, boolean: bool) -> float: ...
+    def cdf(self, d: float, n: int, exact: bool) -> float: ...
     def cdfExact(self, d: float, n: int) -> float:
         """
         Calculates P(D_n < d). The result is exact in the sense that BigFraction/BigReal is used everywhere at the expense of very slow execution time. Almost never choose this in real applications unless you are very sure; this is almost solely for verification purposes. Normally, you would choose cdf. See the class javadoc for definitions and algorithm description.
@@ -964,7 +970,7 @@ class KolmogorovSmirnovTest:
         """
         ...
     @typing.overload
-    def kolmogorovSmirnovStatistic(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float:
+    def kolmogorovSmirnovStatistic(self, distribution: typing.Union[typing.List[float], jpype.JArray], data: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
         Computes the one-sample Kolmogorov-Smirnov test statistic, \(D_n=\sup_x |F_n(x)-F(x)|\) where \(F\) is the distribution (cdf) function associated with distribution, \(n\) is the length of data and \(F_n\) is the empirical distribution that puts mass \(1/n\) at each of the values in data.
         
@@ -999,7 +1005,7 @@ class KolmogorovSmirnovTest:
     @typing.overload
     def kolmogorovSmirnovStatistic(self, realDistribution: org.hipparchus.distribution.RealDistribution, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def kolmogorovSmirnovTest(self, realDistribution: org.hipparchus.distribution.RealDistribution, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float) -> bool:
+    def kolmogorovSmirnovTest(self, distribution: org.hipparchus.distribution.RealDistribution, data: typing.Union[typing.List[float], jpype.JArray], exact: float) -> bool:
         """
         Computes the p-value, or observed significance level, of a one-sample ` Kolmogorov-Smirnov test <http://en.wikipedia.org/wiki/Kolmogorov-Smirnov_test>` evaluating the null hypothesis that data conforms to distribution. If exact is true, the distribution used to compute the p-value is computed using extended precision. See cdfExact.
         
@@ -1041,7 +1047,8 @@ class KolmogorovSmirnovTest:
             hipparchus: if either x or y does not have length at least 2
             hipparchus: if either x or y is null
         
-              - bootstrap
+        Also see:
+            bootstrap
         
         Performs a ` Kolmogorov-Smirnov test <http://en.wikipedia.org/wiki/Kolmogorov-Smirnov_test>` evaluating the null hypothesis that data conforms to distribution.
         
@@ -1062,7 +1069,7 @@ class KolmogorovSmirnovTest:
         """
         ...
     @typing.overload
-    def kolmogorovSmirnovTest(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float:
+    def kolmogorovSmirnovTest(self, x: typing.Union[typing.List[float], jpype.JArray], y: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
         Computes the p-value, or observed significance level, of a two-sample ` Kolmogorov-Smirnov test <http://en.wikipedia.org/wiki/Kolmogorov-Smirnov_test>` evaluating the null hypothesis that x and y are samples drawn from the same probability distribution. Assumes the strict form of the inequality used to compute the p-value. See kolmogorovSmirnovTest.
         
@@ -1142,7 +1149,7 @@ class MannWhitneyUTest:
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, naNStrategy: org.hipparchus.stat.ranking.NaNStrategy, tiesStrategy: org.hipparchus.stat.ranking.TiesStrategy): ...
+    def __init__(self, nanStrategy: org.hipparchus.stat.ranking.NaNStrategy, tiesStrategy: org.hipparchus.stat.ranking.TiesStrategy): ...
     def mannWhitneyU(self, x: typing.Union[typing.List[float], jpype.JArray], y: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
         Computes the ` Mann-Whitney U statistic <http://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U>` comparing means for two independent samples possibly of different lengths.
@@ -1172,9 +1179,9 @@ class MannWhitneyUTest:
         """
         ...
     @typing.overload
-    def mannWhitneyUTest(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def mannWhitneyUTest(self, x: typing.Union[typing.List[float], jpype.JArray], y: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def mannWhitneyUTest(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], boolean: bool) -> float: ...
+    def mannWhitneyUTest(self, x: typing.Union[typing.List[float], jpype.JArray], y: typing.Union[typing.List[float], jpype.JArray], exact: bool) -> float: ...
 
 class OneWayAnova:
     """
@@ -1235,9 +1242,9 @@ class OneWayAnova:
         """
         ...
     @typing.overload
-    def anovaPValue(self, collection: typing.Union[java.util.Collection[typing.Union[typing.List[float], jpype.JArray]], typing.Sequence[typing.Union[typing.List[float], jpype.JArray]], typing.Set[typing.Union[typing.List[float], jpype.JArray]]]) -> float: ...
+    def anovaPValue(self, categoryData: typing.Union[java.util.Collection[typing.Union[typing.List[float], jpype.JArray]], typing.Sequence[typing.Union[typing.List[float], jpype.JArray]], typing.Set[typing.Union[typing.List[float], jpype.JArray]]]) -> float: ...
     @typing.overload
-    def anovaPValue(self, collection: typing.Union[java.util.Collection[org.hipparchus.stat.descriptive.StreamingStatistics], typing.Sequence[org.hipparchus.stat.descriptive.StreamingStatistics], typing.Set[org.hipparchus.stat.descriptive.StreamingStatistics]], boolean: bool) -> float: ...
+    def anovaPValue(self, categoryData: typing.Union[java.util.Collection[org.hipparchus.stat.descriptive.StreamingStatistics], typing.Sequence[org.hipparchus.stat.descriptive.StreamingStatistics], typing.Set[org.hipparchus.stat.descriptive.StreamingStatistics]], allowOneElementData: bool) -> float: ...
     def anovaTest(self, categoryData: typing.Union[java.util.Collection[typing.Union[typing.List[float], jpype.JArray]], typing.Sequence[typing.Union[typing.List[float], jpype.JArray]], typing.Set[typing.Union[typing.List[float], jpype.JArray]]], alpha: float) -> bool:
         """
         Performs an ANOVA test, evaluating the null hypothesis that there is no difference among the means of the data categories.
@@ -1328,7 +1335,7 @@ class TTest:
     @typing.overload
     def homoscedasticT(self, statisticalSummary: org.hipparchus.stat.descriptive.StatisticalSummary, statisticalSummary2: org.hipparchus.stat.descriptive.StatisticalSummary) -> float: ...
     @typing.overload
-    def homoscedasticTTest(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], double3: float) -> bool: ...
+    def homoscedasticTTest(self, sample1: typing.Union[typing.List[float], jpype.JArray], sample2: typing.Union[typing.List[float], jpype.JArray], alpha: float) -> bool: ...
     @typing.overload
     def homoscedasticTTest(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
@@ -1359,9 +1366,9 @@ class TTest:
         """
         ...
     @typing.overload
-    def pairedTTest(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], double3: float) -> bool: ...
+    def pairedTTest(self, sample1: typing.Union[typing.List[float], jpype.JArray], sample2: typing.Union[typing.List[float], jpype.JArray], alpha: float) -> bool: ...
     @typing.overload
-    def pairedTTest(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def pairedTTest(self, sample1: typing.Union[typing.List[float], jpype.JArray], sample2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
     def t(self, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
@@ -1424,7 +1431,7 @@ class WilcoxonSignedRankTest:
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, naNStrategy: org.hipparchus.stat.ranking.NaNStrategy, tiesStrategy: org.hipparchus.stat.ranking.TiesStrategy): ...
+    def __init__(self, nanStrategy: org.hipparchus.stat.ranking.NaNStrategy, tiesStrategy: org.hipparchus.stat.ranking.TiesStrategy): ...
     def wilcoxonSignedRank(self, x: typing.Union[typing.List[float], jpype.JArray], y: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
         Computes the ` Wilcoxon signed ranked statistic <http://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test>` comparing means for two related samples or repeated measurements on a single sample.

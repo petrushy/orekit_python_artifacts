@@ -29,8 +29,10 @@ class AbstractSolarActivityData(org.orekit.models.earth.atmosphere.DTM2000InputP
     Also see:
         serialized
     """
-    def __init__(self, dataSource: org.orekit.data.DataSource, d2: _AbstractSolarActivityData__D, timeScale: org.orekit.time.TimeScale, int: int, double: float, double2: float, double3: float):
+    def __init__(self, source: org.orekit.data.DataSource, loader: _AbstractSolarActivityData__D, utc: org.orekit.time.TimeScale, maxSlots: int, maxSpan: float, maxInterval: float, minimumStep: float):
         """
+        Constructor.
+        
         Parameters:
             supportedNames (String): regular expression for supported AGI/CSSI space weather files names
             loader (AbstractSolarActivityData): data loader
@@ -327,11 +329,11 @@ class JB2008SpaceEnvironmentData(org.orekit.models.earth.atmosphere.JB2008InputP
     @typing.overload
     def __init__(self, string: str, string2: str): ...
     @typing.overload
-    def __init__(self, string: str, string2: str, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, supportedNamesSOL: str, supportedNamesDTC: str, dataProvidersManager: org.orekit.data.DataProvidersManager, utc: org.orekit.time.TimeScale): ...
     @typing.overload
     def __init__(self, dataSource: org.orekit.data.DataSource, dataSource2: org.orekit.data.DataSource): ...
     @typing.overload
-    def __init__(self, dataSource: org.orekit.data.DataSource, dataSource2: org.orekit.data.DataSource, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, sourceSolfsmy: org.orekit.data.DataSource, sourceDtc: org.orekit.data.DataSource, utc: org.orekit.time.TimeScale): ...
     def getDSTDTC(self, date: org.orekit.time.AbsoluteDate) -> float:
         """
         Get the temperature change computed from Dst index.
@@ -604,7 +606,7 @@ class CssiSpaceWeatherData(AbstractSolarActivityData['CssiSpaceWeatherDataLoader
     """
     This class provides three-hourly and daily solar activity data needed by atmospheric models: F107 solar flux, Ap and Kp indexes. The DataLoader implementation and the parsing is handled by the class CssiSpaceWeatherDataLoader.
     
-    The data are retrieved through space weather files offered by AGI/CSSI on the AGI SpaceWeather as well as on the CelesTrack `website <http://celestrak.com/SpaceData/>`. These files are updated several times a day by using several sources mentioned in the `Celestrak space weather data documentation <http://celestrak.com/SpaceData/SpaceWx-format.php>`.
+    The data are retrieved through space weather files offered by AGI/CSSI on the AGI SpaceWeather as well as on the CelesTrack SpaceData. These files are updated several times a day by using several sources mentioned in the SpaceWx.
     
     Since:
         10.2
@@ -626,17 +628,17 @@ class CssiSpaceWeatherData(AbstractSolarActivityData['CssiSpaceWeatherDataLoader
     @typing.overload
     def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScale: org.orekit.time.TimeScale): ...
     @typing.overload
-    def __init__(self, string: str, cssiSpaceWeatherDataLoader: 'CssiSpaceWeatherDataLoader', dataProvidersManager: org.orekit.data.DataProvidersManager, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, supportedNames: str, loader: 'CssiSpaceWeatherDataLoader', dataProvidersManager: org.orekit.data.DataProvidersManager, utc: org.orekit.time.TimeScale): ...
     @typing.overload
-    def __init__(self, string: str, cssiSpaceWeatherDataLoader: 'CssiSpaceWeatherDataLoader', dataProvidersManager: org.orekit.data.DataProvidersManager, timeScale: org.orekit.time.TimeScale, int: int, double: float, double2: float): ...
+    def __init__(self, supportedNames: str, loader: 'CssiSpaceWeatherDataLoader', dataProvidersManager: org.orekit.data.DataProvidersManager, utc: org.orekit.time.TimeScale, maxSlots: int, maxSpan: float, maxInterval: float): ...
     @typing.overload
     def __init__(self, dataSource: org.orekit.data.DataSource): ...
     @typing.overload
     def __init__(self, dataSource: org.orekit.data.DataSource, cssiSpaceWeatherDataLoader: 'CssiSpaceWeatherDataLoader', timeScale: org.orekit.time.TimeScale): ...
     @typing.overload
-    def __init__(self, dataSource: org.orekit.data.DataSource, cssiSpaceWeatherDataLoader: 'CssiSpaceWeatherDataLoader', timeScale: org.orekit.time.TimeScale, int: int, double: float, double2: float): ...
+    def __init__(self, source: org.orekit.data.DataSource, loader: 'CssiSpaceWeatherDataLoader', utc: org.orekit.time.TimeScale, maxSlots: int, maxSpan: float, maxInterval: float): ...
     @typing.overload
-    def __init__(self, dataSource: org.orekit.data.DataSource, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, source: org.orekit.data.DataSource, utc: org.orekit.time.TimeScale): ...
     def get24HoursKp(self, date: org.orekit.time.AbsoluteDate) -> float:
         """
         Get the last 24H mean geomagnetic index.
@@ -744,7 +746,7 @@ class CssiSpaceWeatherDataLoader(AbstractSolarActivityDataLoader['CssiSpaceWeath
     """
     This class reads solar activity data from CSSI Space Weather files for the class CssiSpaceWeatherData.
     
-    The data are retrieved through space weather files offered by CSSI/AGI. The data can be retrieved on the AGI SpaceWeather. This file is updated several times a day by using several sources mentioned in the ` Celestrak space weather data documentation <http://celestrak.com/SpaceData/SpaceWx-format.php>`.
+    The data are retrieved through space weather files offered by CSSI/AGI. The data can be retrieved on the AGI SpaceWeather. This file is updated several times a day by using several sources mentioned in the SpaceWx.
     
     Since:
         10.2
@@ -868,20 +870,20 @@ class MarshallSolarActivityFutureEstimation(AbstractSolarActivityData['MarshallS
     @typing.overload
     def __init__(self, string: str, strengthLevel: 'MarshallSolarActivityFutureEstimation.StrengthLevel'): ...
     @typing.overload
-    def __init__(self, string: str, strengthLevel: 'MarshallSolarActivityFutureEstimation.StrengthLevel', dataProvidersManager: org.orekit.data.DataProvidersManager, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, supportedNames: str, strengthLevel: 'MarshallSolarActivityFutureEstimation.StrengthLevel', dataProvidersManager: org.orekit.data.DataProvidersManager, utc: org.orekit.time.TimeScale): ...
     @typing.overload
-    def __init__(self, string: str, strengthLevel: 'MarshallSolarActivityFutureEstimation.StrengthLevel', dataProvidersManager: org.orekit.data.DataProvidersManager, timeScale: org.orekit.time.TimeScale, int: int, double: float, double2: float, double3: float): ...
+    def __init__(self, supportedNames: str, strengthLevel: 'MarshallSolarActivityFutureEstimation.StrengthLevel', dataProvidersManager: org.orekit.data.DataProvidersManager, utc: org.orekit.time.TimeScale, maxSlots: int, maxSpan: float, maxInterval: float, minimumStep: float): ...
     @typing.overload
     def __init__(self, dataSource: org.orekit.data.DataSource, strengthLevel: 'MarshallSolarActivityFutureEstimation.StrengthLevel'): ...
     @typing.overload
-    def __init__(self, dataSource: org.orekit.data.DataSource, strengthLevel: 'MarshallSolarActivityFutureEstimation.StrengthLevel', timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, source: org.orekit.data.DataSource, strengthLevel: 'MarshallSolarActivityFutureEstimation.StrengthLevel', utc: org.orekit.time.TimeScale): ...
     @typing.overload
-    def __init__(self, dataSource: org.orekit.data.DataSource, strengthLevel: 'MarshallSolarActivityFutureEstimation.StrengthLevel', timeScale: org.orekit.time.TimeScale, int: int, double: float, double2: float, double3: float): ...
+    def __init__(self, source: org.orekit.data.DataSource, strengthLevel: 'MarshallSolarActivityFutureEstimation.StrengthLevel', utc: org.orekit.time.TimeScale, maxSlots: int, maxSpan: float, maxInterval: float, minimumStep: float): ...
     def get24HoursKp(self, date: org.orekit.time.AbsoluteDate) -> float:
         """
         The Kp index is derived from the Ap index.
         
-        The method used is explained on ` NOAA website. <http://www.ngdc.noaa.gov/stp/GEOMAG/kp_ap.html>` as follows:
+        The method used is explained on kp_ap as follows:
         
         The scale is 0 to 9 expressed in thirds of a unit, e.g. 5- is 4 2/3, 5 is 5 and 5+ is 5 1/3. The ap (equivalent range) index is derived from the Kp index as follows:
         
@@ -1037,7 +1039,7 @@ class MarshallSolarActivityFutureEstimationLoader(AbstractSolarActivityDataLoade
     @typing.overload
     def __init__(self, strengthLevel: MarshallSolarActivityFutureEstimation.StrengthLevel): ...
     @typing.overload
-    def __init__(self, strengthLevel: MarshallSolarActivityFutureEstimation.StrengthLevel, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, strengthLevel: MarshallSolarActivityFutureEstimation.StrengthLevel, utc: org.orekit.time.TimeScale): ...
     def getDataSet(self) -> java.util.SortedSet['MarshallSolarActivityFutureEstimationLoader.LineParameters']:
         """
         Description copied from class: getDataSet Get the data set.
@@ -1080,7 +1082,7 @@ class PythonAbstractSolarActivityData(AbstractSolarActivityData[_PythonAbstractS
     Also see:
         serialized
     """
-    def __init__(self, string: str, d: _PythonAbstractSolarActivityData__D, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScale: org.orekit.time.TimeScale, int: int, double: float, double2: float, double3: float): ...
+    def __init__(self, supportedNames: str, loader: _PythonAbstractSolarActivityData__D, dataProvidersManager: org.orekit.data.DataProvidersManager, utc: org.orekit.time.TimeScale, maxSlots: int, maxSpan: float, maxInterval: float, minimumStep: float): ...
     def finalize(self) -> None:
         """
         Part of JCC Python interface to object
@@ -1206,7 +1208,7 @@ class PythonAbstractSolarActivityData(AbstractSolarActivityData[_PythonAbstractS
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

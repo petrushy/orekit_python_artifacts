@@ -37,11 +37,10 @@ class AngularVelocity(org.orekit.files.ccsds.section.CommentsContainer):
     Since:
         12.0
     """
-    def __init__(self):
-        """
-        Simple constructor.
-        """
-        ...
+    @typing.overload
+    def __init__(self): ...
+    @typing.overload
+    def __init__(self, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def getAngVelX(self) -> float:
         """
         Get the angular velocity around X axis (rad/s).
@@ -484,26 +483,10 @@ class ApmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Apm, 'ApmParser']):
     Since:
         10.2
     """
-    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]):
-        """
-        Complete constructor.
-        
-        Calling this constructor directly is not recommended. Users should rather use buildApmParser.
-        
-        Parameters:
-            conventions (IERSConventions): IERS Conventions
-            simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
-            dataContext (DataContext): used to retrieve frames, time scales, etc.
-            missionReferenceDate (AbsoluteDate): reference date for Mission Elapsed Time or Mission Relative Time time systems (may be null if time system is absolute)
-            parsedUnitsBehavior (ParsedUnitsBehavior): behavior to adopt for handling parsed units
-            filters (Function<ParseToken, List<ParseToken>>[]): filters to apply to parse tokens
-        
-        Since:
-            12.0
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
+    @typing.overload
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray], frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def build(self) -> Apm:
         """
         Build the file from parsed entries.
@@ -654,11 +637,10 @@ class ApmQuaternion(org.orekit.files.ccsds.section.CommentsContainer):
     Since:
         10.2
     """
-    def __init__(self):
-        """
-        Simple constructor.
-        """
-        ...
+    @typing.overload
+    def __init__(self): ...
+    @typing.overload
+    def __init__(self, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def getEndpoints(self) -> org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints:
         """
         Get the endpoints (i.e. frames A, B and their relationship).
@@ -868,11 +850,10 @@ class Euler(org.orekit.files.ccsds.section.CommentsContainer):
     Since:
         10.2
     """
-    def __init__(self):
-        """
-        Simple constructor.
-        """
-        ...
+    @typing.overload
+    def __init__(self): ...
+    @typing.overload
+    def __init__(self, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def getEndpoints(self) -> org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints:
         """
         Get the endpoints (i.e. frames A, B and their relationship).
@@ -1148,11 +1129,10 @@ class Inertia(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
     Since:
         12.0
     """
-    def __init__(self):
-        """
-        Simple constructor.
-        """
-        ...
+    @typing.overload
+    def __init__(self): ...
+    @typing.overload
+    def __init__(self, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def getFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
         """
         Get frame in which inertia is specified.
@@ -1510,11 +1490,10 @@ class SpinStabilized(org.orekit.files.ccsds.section.CommentsContainer):
     Since:
         10.2
     """
-    def __init__(self):
-        """
-        Simple constructor.
-        """
-        ...
+    @typing.overload
+    def __init__(self): ...
+    @typing.overload
+    def __init__(self, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def getEndpoints(self) -> org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints:
         """
         Get the endpoints (i.e. frames A, B and their relationship).

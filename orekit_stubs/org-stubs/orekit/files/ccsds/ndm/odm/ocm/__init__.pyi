@@ -47,15 +47,15 @@ class EphemerisOcmWriter(org.orekit.files.general.EphemerisFileWriter):
         OcmWriter, StreamingOcmWriter
     """
     @typing.overload
-    def __init__(self, ocmWriter: 'OcmWriter', odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, ocmMetadata: 'OcmMetadata', trajectoryStateHistoryMetadata: 'TrajectoryStateHistoryMetadata', fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, double: float, int: int): ...
+    def __init__(self, writer: 'OcmWriter', header: org.orekit.files.ccsds.ndm.odm.OdmHeader, metadata: 'OcmMetadata', template: 'TrajectoryStateHistoryMetadata', fileFormat: org.orekit.files.ccsds.utils.FileFormat, outputName: str, maxRelativeOffset: float, unitsColumn: int): ...
     @typing.overload
-    def __init__(self, ocmWriter: 'OcmWriter', odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, ocmMetadata: 'OcmMetadata', trajectoryStateHistoryMetadata: 'TrajectoryStateHistoryMetadata', fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, double: float, int: int, formatter: org.orekit.utils.Formatter): ...
+    def __init__(self, writer: 'OcmWriter', header: org.orekit.files.ccsds.ndm.odm.OdmHeader, metadata: 'OcmMetadata', template: 'TrajectoryStateHistoryMetadata', fileFormat: org.orekit.files.ccsds.utils.FileFormat, outputName: str, maxRelativeOffset: float, unitsColumn: int, formatter: org.orekit.utils.Formatter): ...
     _write_0__C = typing.TypeVar('_write_0__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
     _write_0__S = typing.TypeVar('_write_0__S', bound=org.orekit.files.general.EphemerisFile.EphemerisSegment)  # <S>
     _write_1__C = typing.TypeVar('_write_1__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
     _write_1__S = typing.TypeVar('_write_1__S', bound=org.orekit.files.general.EphemerisFile.EphemerisSegment)  # <S>
     @typing.overload
-    def write(self, string: str, ephemerisFile: typing.Union[org.orekit.files.general.EphemerisFile[_write_0__C, _write_0__S], typing.Callable[[], java.util.Map[str, org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, org.orekit.files.general.EphemerisFile.EphemerisSegment]]]]) -> None: ...
+    def write(self, appendable: str, ephemerisFile: typing.Union[org.orekit.files.general.EphemerisFile[_write_0__C, _write_0__S], typing.Callable[[], java.util.Map[str, org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, org.orekit.files.general.EphemerisFile.EphemerisSegment]]]]) -> None: ...
     @typing.overload
     def write(self, appendable: java.lang.Appendable, ephemerisFile: typing.Union[org.orekit.files.general.EphemerisFile[_write_1__C, _write_1__S], typing.Callable[[], java.util.Map[str, org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, org.orekit.files.general.EphemerisFile.EphemerisSegment]]]]) -> None: ...
 
@@ -183,7 +183,7 @@ class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
         """
         ...
     @typing.overload
-    def outputField(self, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, orbitManeuver: 'OrbitManeuver') -> str:
+    def outputField(self, converter: org.orekit.files.ccsds.definitions.TimeConverter, maneuver: 'OrbitManeuver') -> str:
         """
         Output one maneuver field.
         
@@ -208,7 +208,7 @@ class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
         """
         ...
     @typing.overload
-    def outputField(self, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, orbitManeuver: 'OrbitManeuver', formatter: org.orekit.utils.Formatter) -> str: ...
+    def outputField(self, converter: org.orekit.files.ccsds.definitions.TimeConverter, maneuver: 'OrbitManeuver', formatter: org.orekit.utils.Formatter) -> str: ...
     def process(self, field: str, context: org.orekit.files.ccsds.utils.ContextBinding, maneuver: 'OrbitManeuver', lineNumber: int, fileName: str) -> None:
         """
         Process one field.
@@ -701,16 +701,10 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
     
     
     """
-    def __init__(self, dataContext: org.orekit.data.DataContext):
-        """
-        Create a new meta-data.
-        
-        Parameters:
-            dataContext (DataContext): data context
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self, dataContext: org.orekit.data.DataContext): ...
+    @typing.overload
+    def __init__(self, dataContext: org.orekit.data.DataContext, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def copy(self, version: float) -> 'OcmMetadata':
         """
         Copy the instance, making sure mandatory fields have been initialized.
@@ -1788,28 +1782,10 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
     Since:
         11.0
     """
-    def __init__(self, conventions: org.orekit.utils.IERSConventions, equatorialRadius: float, flattening: float, simpleEOP: bool, dataContext: org.orekit.data.DataContext, mu: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]):
-        """
-        Complete constructor.
-        
-        Calling this constructor directly is not recommended. Users should rather use buildOcmParser.
-        
-        Parameters:
-            conventions (IERSConventions): IERS Conventions
-            equatorialRadius (double): central body equatorial radius
-            flattening (double): central body flattening
-            simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
-            dataContext (DataContext): used to retrieve frames, time scales, etc.
-            mu (double): gravitational coefficient
-            parsedUnitsBehavior (ParsedUnitsBehavior): behavior to adopt for handling parsed units
-            filters (Function<ParseToken, List<ParseToken>>[]): filters to apply to parse tokens
-        
-        Since:
-            12.0
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, equatorialRadius: float, flattening: float, simpleEOP: bool, dataContext: org.orekit.data.DataContext, mu: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
+    @typing.overload
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, equatorialRadius: float, flattening: float, simpleEOP: bool, dataContext: org.orekit.data.DataContext, mu: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray], frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def build(self) -> Ocm:
         """
         Build the file from parsed entries.
@@ -2376,16 +2352,10 @@ class OrbitCovarianceHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
     Since:
         11.0
     """
-    def __init__(self, epochT0: org.orekit.time.AbsoluteDate):
-        """
-        Simple constructor.
-        
-        Parameters:
-            epochT0 (AbsoluteDate): T0 epoch from file metadata
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self, epochT0: org.orekit.time.AbsoluteDate): ...
+    @typing.overload
+    def __init__(self, epochT0: org.orekit.time.AbsoluteDate, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def getCovBasis(self) -> str:
         """
         Get basis of this covariance time history data.
@@ -2412,6 +2382,24 @@ class OrbitCovarianceHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
         
         Returns:
             measure of confidence in covariance error matching reality
+        
+        
+        """
+        ...
+    def getCovFrame(self) -> org.orekit.frames.Frame:
+        """
+        Get the frame in which this covariance matrix is defined. Note that only the orientation of the returned frame is significant, the position of the returned frame is irrelevant and should be ignored.
+        
+        Returns:
+            Orekit frame for this covariance history.
+        
+        Since:
+            13.1.5
+        
+        Also see:
+            getCovReferenceFrame,
+            getCovFrameEpoch,
+            getFrameMapper
         
         
         """
@@ -2512,6 +2500,19 @@ class OrbitCovarianceHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
         
         Returns:
             covariance element set units
+        
+        
+        """
+        ...
+    def getFrameMapper(self) -> org.orekit.files.ccsds.definitions.CcsdsFrameMapper:
+        """
+        Get the mapping between a CCSDS frame and a Frame.
+        
+        Returns:
+            the frame mapper.
+        
+        Since:
+            13.1.5
         
         
         """
@@ -4101,16 +4102,10 @@ class OrbitManeuverHistoryMetadata(org.orekit.files.ccsds.section.CommentsContai
     
     
     """
-    def __init__(self, epochT0: org.orekit.time.AbsoluteDate):
-        """
-        Simple constructor.
-        
-        Parameters:
-            epochT0 (AbsoluteDate): T0 epoch from file metadata
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self, epochT0: org.orekit.time.AbsoluteDate): ...
+    @typing.overload
+    def __init__(self, epochT0: org.orekit.time.AbsoluteDate, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def getDcBodyFrame(self) -> org.orekit.files.ccsds.definitions.SpacecraftBodyFrame:
         """
         Get spacecraft body frame in which getDcBodyTrigger is specified.
@@ -4263,6 +4258,19 @@ class OrbitManeuverHistoryMetadata(org.orekit.files.ccsds.section.CommentsContai
         
         """
         ...
+    def getFrameMapper(self) -> org.orekit.files.ccsds.definitions.CcsdsFrameMapper:
+        """
+        Get the mapping between a CCSDS frame and a Frame.
+        
+        Returns:
+            the frame mapper.
+        
+        Since:
+            13.1.5
+        
+        
+        """
+        ...
     def getGravitationalAssist(self) -> org.orekit.files.ccsds.definitions.BodyFacade:
         """
         Get the origin of gravitational assist.
@@ -4309,6 +4317,24 @@ class OrbitManeuverHistoryMetadata(org.orekit.files.ccsds.section.CommentsContai
         
         Returns:
             identifier of the device used for this maneuver
+        
+        
+        """
+        ...
+    def getManFrame(self) -> org.orekit.frames.Frame:
+        """
+        Get the frame in which this maneuver is defined. Note that only the orientation of the returned frame is significant, the position of the returned frame is irrelevant and should be ignored.
+        
+        Returns:
+            Orekit frame for this covariance history.
+        
+        Since:
+            13.1.5
+        
+        Also see:
+            getManReferenceFrame,
+            getManFrameEpoch,
+            getFrameMapper
         
         
         """
@@ -4832,16 +4858,10 @@ class OrbitPhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalPropertie
     Since:
         11.0
     """
-    def __init__(self, epochT0: org.orekit.time.AbsoluteDate):
-        """
-        Simple constructor.
-        
-        Parameters:
-            epochT0 (AbsoluteDate): T0 epoch from file metadata
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self, epochT0: org.orekit.time.AbsoluteDate): ...
+    @typing.overload
+    def __init__(self, epochT0: org.orekit.time.AbsoluteDate, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def getAttitudeActuatorType(self) -> str:
         """
         Get the type of actuator for attitude control.
@@ -6322,9 +6342,9 @@ class StreamingOcmWriter(java.lang.AutoCloseable):
         OcmWriter, EphemerisOcmWriter
     """
     @typing.overload
-    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, ocmWriter: OcmWriter, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, ocmMetadata: OcmMetadata, trajectoryStateHistoryMetadata: 'TrajectoryStateHistoryMetadata'): ...
+    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, writer: OcmWriter, header: org.orekit.files.ccsds.ndm.odm.OdmHeader, metadata: OcmMetadata, template: 'TrajectoryStateHistoryMetadata'): ...
     @typing.overload
-    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, ocmWriter: OcmWriter, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, ocmMetadata: OcmMetadata, trajectoryStateHistoryMetadata: 'TrajectoryStateHistoryMetadata', boolean: bool): ...
+    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, writer: OcmWriter, header: org.orekit.files.ccsds.ndm.odm.OdmHeader, metadata: OcmMetadata, template: 'TrajectoryStateHistoryMetadata', useAttitudeFrame: bool): ...
     def close(self) -> None:
         """
         Specified by: AutoCloseable in interface AutoCloseable
@@ -6360,9 +6380,9 @@ class TrajectoryState(org.orekit.time.TimeStamped):
         11.0
     """
     @typing.overload
-    def __init__(self, orbitElementsType: OrbitElementsType, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, type: OrbitElementsType, date: org.orekit.time.AbsoluteDate, elements: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, orbitElementsType: OrbitElementsType, absoluteDate: org.orekit.time.AbsoluteDate, stringArray: typing.Union[typing.List[str], jpype.JArray], int: int, list: java.util.List[org.orekit.utils.units.Unit]): ...
+    def __init__(self, type: OrbitElementsType, date: org.orekit.time.AbsoluteDate, fields: typing.Union[typing.List[str], jpype.JArray], first: int, units: java.util.List[org.orekit.utils.units.Unit]): ...
     def getAvailableDerivatives(self) -> org.orekit.utils.CartesianDerivativesFilter:
         """
         Get which derivatives of position are available in this state.
@@ -6600,17 +6620,10 @@ class TrajectoryStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
     
     
     """
-    def __init__(self, epochT0: org.orekit.time.AbsoluteDate, dataContext: org.orekit.data.DataContext):
-        """
-        Simple constructor.
-        
-        Parameters:
-            epochT0 (AbsoluteDate): T0 epoch from file metadata
-            dataContext (DataContext): data context
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self, epochT0: org.orekit.time.AbsoluteDate, dataContext: org.orekit.data.DataContext): ...
+    @typing.overload
+    def __init__(self, epochT0: org.orekit.time.AbsoluteDate, dataContext: org.orekit.data.DataContext, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def copy(self, version: float) -> 'TrajectoryStateHistoryMetadata':
         """
         Copy the instance, making sure mandatory fields have been initialized.
@@ -6635,6 +6648,35 @@ class TrajectoryStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
         
         Returns:
             the origin of reference frame.
+        
+        
+        """
+        ...
+    def getFrame(self) -> org.orekit.frames.Frame:
+        """
+        Use the getFrameMapper to create a Frame from getCenter, getTrajReferenceFrame, and getTrajFrameEpoch.
+        
+        Returns:
+            the frame for this trajectory state history.
+        
+        Since:
+            13.1.5
+        
+        
+        """
+        ...
+    def getFrameMapper(self) -> org.orekit.files.ccsds.definitions.CcsdsFrameMapper:
+        """
+        Get the frame mapper used to create a Frame from getCenter, getTrajReferenceFrame, and getTrajFrameEpoch.
+        
+        Returns:
+            the frame mapper.
+        
+        Since:
+            13.1.5
+        
+        Also see:
+            getFrame
         
         
         """

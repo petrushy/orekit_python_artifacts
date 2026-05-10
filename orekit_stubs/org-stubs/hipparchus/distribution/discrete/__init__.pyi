@@ -16,13 +16,12 @@ import typing
 
 class AbstractIntegerDistribution(org.hipparchus.distribution.IntegerDistribution, java.io.Serializable):
     """
-    implements IntegerDistribution, Serializable
-    
     Base class for integer-valued discrete distributions.
     
     Default implementations are provided for some of the methods that do not vary from distribution to distribution.
     
-          - serialized
+    Also see:
+        serialized
     """
     def inverseCumulativeProbability(self, p: float) -> int:
         """
@@ -72,15 +71,15 @@ class AbstractIntegerDistribution(org.hipparchus.distribution.IntegerDistributio
     @typing.overload
     def probability(self, int: int) -> float: ...
     @typing.overload
-    def probability(self, int: int, int2: int) -> float: ...
+    def probability(self, x0: int, x1: int) -> float: ...
 
 class BinomialDistribution(AbstractIntegerDistribution):
     """
     Implementation of the binomial distribution.
     
-          - `Binomial distribution (Wikipedia) <http://en.wikipedia.org/wiki/Binomial_distribution>`
-          - `Binomial Distribution (MathWorld) <http://mathworld.wolfram.com/BinomialDistribution.html>`
-          - serialized
+    Also see:
+        `Binomial distribution (Wikipedia) <http://en.wikipedia.org/wiki/Binomial_distribution>`, `Binomial Distribution
+        (MathWorld) <http://mathworld.wolfram.com/BinomialDistribution.html>`, serialized
     """
     def __init__(self, trials: int, p: float):
         """
@@ -228,12 +227,13 @@ class EnumeratedIntegerDistribution(AbstractIntegerDistribution):
     
     Duplicate values are allowed. Probabilities of duplicate values are combined when computing cumulative probabilities and statistics.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
-    def __init__(self, intArray: typing.Union[typing.List[int], jpype.JArray]): ...
+    def __init__(self, data: typing.Union[typing.List[int], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, intArray: typing.Union[typing.List[int], jpype.JArray], doubleArray: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, singletons: typing.Union[typing.List[int], jpype.JArray], probabilities: typing.Union[typing.List[float], jpype.JArray]): ...
     def cumulativeProbability(self, x: int) -> float:
         """
         For a random variable X whose values are distributed according to this distribution, this method returns P(X <= x). In other words, this method represents the (cumulative) distribution function (CDF) for this distribution.
@@ -332,9 +332,9 @@ class GeometricDistribution(AbstractIntegerDistribution):
     """
     Implementation of the geometric distribution.
     
-          - `Geometric distribution (Wikipedia) <http://en.wikipedia.org/wiki/Geometric_distribution>`
-          - `Geometric Distribution (MathWorld) <http://mathworld.wolfram.com/GeometricDistribution.html>`
-          - serialized
+    Also see:
+        `Geometric distribution (Wikipedia) <http://en.wikipedia.org/wiki/Geometric_distribution>`, `Geometric Distribution
+        (MathWorld) <http://mathworld.wolfram.com/GeometricDistribution.html>`, serialized
     """
     def __init__(self, p: float):
         """
@@ -496,9 +496,9 @@ class HypergeometricDistribution(AbstractIntegerDistribution):
     """
     Implementation of the hypergeometric distribution.
     
-          - `Hypergeometric distribution (Wikipedia) <http://en.wikipedia.org/wiki/Hypergeometric_distribution>`
-          - `Hypergeometric distribution (MathWorld) <http://mathworld.wolfram.com/HypergeometricDistribution.html>`
-          - serialized
+    Also see:
+        `Hypergeometric distribution (Wikipedia) <http://en.wikipedia.org/wiki/Hypergeometric_distribution>`, `Hypergeometric
+        distribution (MathWorld) <http://mathworld.wolfram.com/HypergeometricDistribution.html>`, serialized
     """
     def __init__(self, populationSize: int, numberOfSuccesses: int, sampleSize: int):
         """
@@ -683,9 +683,9 @@ class PascalDistribution(AbstractIntegerDistribution):
     
     P(X <= k) = I(p, r, k + 1), where I is the regularized incomplete Beta function.
     
-          - ` Negative binomial distribution (Wikipedia) <http://en.wikipedia.org/wiki/Negative_binomial_distribution>`
-          - ` Negative binomial distribution (MathWorld) <http://mathworld.wolfram.com/NegativeBinomialDistribution.html>`
-          - serialized
+    Also see:
+        ` Negative binomial distribution (Wikipedia) <http://en.wikipedia.org/wiki/Negative_binomial_distribution>`, ` Negative
+        binomial distribution (MathWorld) <http://mathworld.wolfram.com/NegativeBinomialDistribution.html>`, serialized
     """
     def __init__(self, r: int, p: float):
         """
@@ -829,16 +829,16 @@ class PoissonDistribution(AbstractIntegerDistribution):
     """
     Implementation of the Poisson distribution.
     
-          - `Poisson distribution (Wikipedia) <http://en.wikipedia.org/wiki/Poisson_distribution>`
-          - `Poisson distribution (MathWorld) <http://mathworld.wolfram.com/PoissonDistribution.html>`
-          - serialized
+    Also see:
+        `Poisson distribution (Wikipedia) <http://en.wikipedia.org/wiki/Poisson_distribution>`, `Poisson distribution
+        (MathWorld) <http://mathworld.wolfram.com/PoissonDistribution.html>`, serialized
     """
     DEFAULT_MAX_ITERATIONS: typing.ClassVar[int] = ...
     """
     Default maximum number of iterations for cumulative probability calculations.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -846,17 +846,17 @@ class PoissonDistribution(AbstractIntegerDistribution):
     """
     Default convergence criterion.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
-    def __init__(self, double: float): ...
+    def __init__(self, p: float): ...
     @typing.overload
     def __init__(self, double: float, double2: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, int: int): ...
+    def __init__(self, p: float, epsilon: float, maxIterations: int): ...
     @typing.overload
     def __init__(self, double: float, int: int): ...
     def cumulativeProbability(self, x: int) -> float:
@@ -989,8 +989,9 @@ class UniformIntegerDistribution(AbstractIntegerDistribution):
     """
     Implementation of the uniform integer distribution.
     
-          - ` Uniform distribution (discrete), at Wikipedia <http://en.wikipedia.org/wiki/Uniform_distribution_(discrete)>`
-          - serialized
+    Also see:
+        ` Uniform distribution (discrete), at Wikipedia <http://en.wikipedia.org/wiki/Uniform_distribution_(discrete)>`,
+        serialized
     """
     def __init__(self, lower: int, upper: int):
         """
@@ -1104,9 +1105,10 @@ class ZipfDistribution(AbstractIntegerDistribution):
       - s is the exponent
     
     
-          - Zipf's_law
-          - Harmonic_number
-          - serialized
+    Also see:
+        Zipf's_law,
+        Harmonic_number,
+        serialized
     """
     def __init__(self, numberOfElements: int, exponent: float):
         """

@@ -14,8 +14,6 @@ import typing
 
 class Abs(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Absolute value function.
     """
     def __init__(self):
@@ -65,8 +63,6 @@ class Abs(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
 
 class Acos(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Arc-cosine function.
     """
     def __init__(self):
@@ -116,8 +112,6 @@ class Acos(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Acosh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Hyperbolic arc-cosine function.
     """
     def __init__(self):
@@ -167,8 +161,6 @@ class Acosh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Add(org.hipparchus.analysis.BivariateFunction):
     """
-    implements BivariateFunction
-    
     Add the two operands.
     """
     def __init__(self):
@@ -202,8 +194,6 @@ class Add(org.hipparchus.analysis.BivariateFunction):
 
 class Asin(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Arc-sine function.
     """
     def __init__(self):
@@ -253,8 +243,6 @@ class Asin(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Asinh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Hyperbolic arc-sine function.
     """
     def __init__(self):
@@ -304,8 +292,6 @@ class Asinh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Atan(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Arc-tangent function.
     """
     def __init__(self):
@@ -355,8 +341,6 @@ class Atan(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Atan2(org.hipparchus.analysis.BivariateFunction):
     """
-    implements BivariateFunction
-    
     Arc-tangent function.
     """
     def __init__(self):
@@ -390,8 +374,6 @@ class Atan2(org.hipparchus.analysis.BivariateFunction):
 
 class Atanh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Hyperbolic arc-tangent function.
     """
     def __init__(self):
@@ -441,8 +423,6 @@ class Atanh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Cbrt(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Cube root function.
     """
     def __init__(self):
@@ -492,8 +472,6 @@ class Cbrt(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Ceil(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     ceil function.
     """
     def __init__(self):
@@ -543,8 +521,6 @@ class Ceil(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Constant(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Constant function.
     """
     def __init__(self, c: float):
@@ -592,8 +568,6 @@ class Constant(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
 
 class Cos(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Cosine function.
     """
     def __init__(self):
@@ -643,8 +617,6 @@ class Cos(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
 
 class Cosh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Hyperbolic cosine function.
     """
     def __init__(self):
@@ -694,8 +666,6 @@ class Cosh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Divide(org.hipparchus.analysis.BivariateFunction):
     """
-    implements BivariateFunction
-    
     Divide the first operand by the second.
     """
     def __init__(self):
@@ -729,8 +699,6 @@ class Divide(org.hipparchus.analysis.BivariateFunction):
 
 class Exp(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Exponential function.
     """
     def __init__(self):
@@ -780,8 +748,6 @@ class Exp(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
 
 class Expm1(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     x` -1` function.
     """
     def __init__(self):
@@ -831,8 +797,6 @@ class Expm1(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Floor(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     floor function.
     """
     def __init__(self):
@@ -882,19 +846,17 @@ class Floor(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Gaussian(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     ` Gaussian <http://en.wikipedia.org/wiki/Gaussian_function>` function.
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, mean: float, sigma: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
+    def __init__(self, norm: float, mean: float, sigma: float): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
+    def value(self, x: float) -> float:
         """
         Compute the value of the function.
         
@@ -906,7 +868,7 @@ class Gaussian(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
         Returns:
             the value of the function.
         
-        public <T extends Derivative<T>> T value(T t) throws MathIllegalArgumentException
+        public <T extends Derivative<T>> T value (T t) throws MathIllegalArgumentException
         
         Compute the value for the function.
         
@@ -934,8 +896,6 @@ class Gaussian(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
 
 class HarmonicOscillator(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     ` simple harmonic oscillator <http://en.wikipedia.org/wiki/Harmonic_oscillator>` function.
     """
     def __init__(self, amplitude: float, omega: float, phase: float):
@@ -952,7 +912,7 @@ class HarmonicOscillator(org.hipparchus.analysis.differentiation.UnivariateDiffe
         ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
+    def value(self, x: float) -> float:
         """
         Compute the value of the function.
         
@@ -964,7 +924,7 @@ class HarmonicOscillator(org.hipparchus.analysis.differentiation.UnivariateDiffe
         Returns:
             the value of the function.
         
-        public <T extends Derivative<T>> T value(T t) throws MathIllegalArgumentException
+        public <T extends Derivative<T>> T value (T t) throws MathIllegalArgumentException
         
         Compute the value for the function.
         
@@ -992,8 +952,6 @@ class HarmonicOscillator(org.hipparchus.analysis.differentiation.UnivariateDiffe
 
 class Identity(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Identity function.
     """
     def __init__(self):
@@ -1043,8 +1001,6 @@ class Identity(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
 
 class Inverse(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Inverse function.
     """
     def __init__(self):
@@ -1094,8 +1050,6 @@ class Inverse(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFu
 
 class Log(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Natural logarithm function.
     """
     def __init__(self):
@@ -1145,8 +1099,6 @@ class Log(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
 
 class Log10(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Base 10 logarithm function.
     """
     def __init__(self):
@@ -1196,8 +1148,6 @@ class Log10(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Log1p(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     log(1 + p) function.
     """
     def __init__(self):
@@ -1247,8 +1197,6 @@ class Log1p(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Logistic(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     ` Generalised logistic <http://en.wikipedia.org/wiki/Generalised_logistic_function>` function.
     """
     def __init__(self, k: float, m: float, b: float, q: float, a: float, n: float):
@@ -1310,14 +1258,12 @@ class Logistic(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
 
 class Logit(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     ` Logit <http://en.wikipedia.org/wiki/Logit>` function. It is the inverse of the Sigmoid function.
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, lo: float, hi: float): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
     def value(self, double: float) -> float: ...
@@ -1330,8 +1276,6 @@ class Logit(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Max(org.hipparchus.analysis.BivariateFunction):
     """
-    implements BivariateFunction
-    
     Maximum function.
     """
     def __init__(self):
@@ -1365,8 +1309,6 @@ class Max(org.hipparchus.analysis.BivariateFunction):
 
 class Min(org.hipparchus.analysis.BivariateFunction):
     """
-    implements BivariateFunction
-    
     Minimum function.
     """
     def __init__(self):
@@ -1400,8 +1342,6 @@ class Min(org.hipparchus.analysis.BivariateFunction):
 
 class Minus(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Minus function.
     """
     def __init__(self):
@@ -1451,8 +1391,6 @@ class Minus(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Multiply(org.hipparchus.analysis.BivariateFunction):
     """
-    implements BivariateFunction
-    
     Multiply the two operands.
     """
     def __init__(self):
@@ -1486,8 +1424,6 @@ class Multiply(org.hipparchus.analysis.BivariateFunction):
 
 class Pow(org.hipparchus.analysis.BivariateFunction):
     """
-    implements BivariateFunction
-    
     Power function.
     """
     def __init__(self):
@@ -1521,8 +1457,6 @@ class Pow(org.hipparchus.analysis.BivariateFunction):
 
 class Power(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Power function.
     """
     def __init__(self, p: float):
@@ -1570,8 +1504,6 @@ class Power(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Rint(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     rint function.
     """
     def __init__(self):
@@ -1621,17 +1553,15 @@ class Rint(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Sigmoid(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     ` Sigmoid <http://en.wikipedia.org/wiki/Sigmoid_function>` function. It is the inverse of the Logit function. A more flexible version, the generalised logistic, is implemented by the Logistic class.
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, lo: float, hi: float): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
+    def value(self, x: float) -> float:
         """
         Compute the value of the function.
         
@@ -1643,7 +1573,7 @@ class Sigmoid(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFu
         Returns:
             the value of the function.
         
-        public <T extends Derivative<T>> T value(T t) throws MathIllegalArgumentException
+        public <T extends Derivative<T>> T value (T t) throws MathIllegalArgumentException
         
         Compute the value for the function.
         
@@ -1671,8 +1601,6 @@ class Sigmoid(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFu
 
 class Sin(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Sine function.
     """
     def __init__(self):
@@ -1722,8 +1650,6 @@ class Sin(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
 
 class Sinc(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     `Sinc <http://en.wikipedia.org/wiki/Sinc_function>` function, defined by
     
        sinc(x) = 1            if x = 0, sin(x) / x   otherwise.
@@ -1731,10 +1657,10 @@ class Sinc(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, boolean: bool): ...
+    def __init__(self, normalized: bool): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
+    def value(self, x: float) -> float:
         """
         Compute the value of the function.
         
@@ -1746,7 +1672,7 @@ class Sinc(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
         Returns:
             the value of the function.
         
-        public <T extends Derivative<T>> T value(T t) throws MathIllegalArgumentException
+        public <T extends Derivative<T>> T value (T t) throws MathIllegalArgumentException
         
         Compute the value for the function.
         
@@ -1770,8 +1696,6 @@ class Sinc(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Sinh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Hyperbolic sine function.
     """
     def __init__(self):
@@ -1821,8 +1745,6 @@ class Sinh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Sqrt(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Square-root function.
     """
     def __init__(self):
@@ -1872,8 +1794,6 @@ class Sqrt(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class StepFunction(org.hipparchus.analysis.UnivariateFunction):
     """
-    implements UnivariateFunction
-    
     ` Step function <http://en.wikipedia.org/wiki/Step_function>`.
     """
     def __init__(self, x: typing.Union[typing.List[float], jpype.JArray], y: typing.Union[typing.List[float], jpype.JArray]):
@@ -1913,8 +1833,6 @@ class StepFunction(org.hipparchus.analysis.UnivariateFunction):
 
 class Subtract(org.hipparchus.analysis.BivariateFunction):
     """
-    implements BivariateFunction
-    
     Subtract the second operand from the first.
     """
     def __init__(self):
@@ -1948,8 +1866,6 @@ class Subtract(org.hipparchus.analysis.BivariateFunction):
 
 class Tan(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Tangent function.
     """
     def __init__(self):
@@ -1999,8 +1915,6 @@ class Tan(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
 
 class Tanh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    implements UnivariateDifferentiableFunction
-    
     Hyperbolic tangent function.
     """
     def __init__(self):
@@ -2050,8 +1964,6 @@ class Tanh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Ulp(org.hipparchus.analysis.UnivariateFunction):
     """
-    implements UnivariateFunction
-    
     ulp function.
     """
     def __init__(self):

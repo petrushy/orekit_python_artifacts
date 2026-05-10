@@ -19,8 +19,6 @@ import typing
 
 class Max(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, org.hipparchus.stat.descriptive.AggregatableStatistic['Max'], java.io.Serializable):
     """
-    implements AggregatableStatistic<Max>, Serializable
-    
     Returns the maximum of the available values.
     
       - The result is NaN iff all values are NaN (i.e. NaN values have no impact on the value of the
@@ -29,12 +27,13 @@ class Max(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
     
     Note that this implementation is not synchronized. If multiple threads access an instance of this class concurrently, and at least one of the threads invokes the increment() or clear() method, it must be synchronized externally.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, max: 'Max'): ...
+    def __init__(self, original: 'Max'): ...
     @typing.overload
     def aggregate(self, other: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any], typing.Callable[[], java.util.Iterator[typing.Any]]]) -> None:
         """
@@ -51,9 +50,9 @@ class Max(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
         """
         ...
     @typing.overload
-    def aggregate(self, *t: typing.Any) -> None: ...
+    def aggregate(self, *other: typing.Any) -> None: ...
     @typing.overload
-    def aggregate(self, max: 'Max') -> None: ...
+    def aggregate(self, other: 'Max') -> None: ...
     def clear(self) -> None:
         """
         Clears the internal state of the Statistic
@@ -84,7 +83,7 @@ class Max(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     def getN(self) -> int:
         """
         Returns the number of values that have been added.
@@ -128,13 +127,12 @@ class Max(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
 
 class Median(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, java.io.Serializable):
     """
-    implements Serializable
-    
     Returns the median of the available values. This is the same as the 50th percentile. See Percentile for a description of the algorithm used.
     
     Note that this implementation is not synchronized. If multiple threads access an instance of this class concurrently, and at least one of the threads invokes the increment() or clear() method, it must be synchronized externally.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self):
         """
@@ -160,7 +158,7 @@ class Median(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, java.i
     @typing.overload
     def evaluate(self) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     def getEstimationType(self) -> 'Percentile.EstimationType':
         """
         Get the estimation EstimationType used for computation.
@@ -242,8 +240,6 @@ class Median(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, java.i
 
 class Min(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, org.hipparchus.stat.descriptive.AggregatableStatistic['Min'], java.io.Serializable):
     """
-    implements AggregatableStatistic<Min>, Serializable
-    
     Returns the minimum of the available values.
     
       - The result is NaN iff all values are NaN (i.e. NaN values have no impact on the value of the
@@ -252,12 +248,13 @@ class Min(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
     
     Note that this implementation is not synchronized. If multiple threads access an instance of this class concurrently, and at least one of the threads invokes the increment() or clear() method, it must be synchronized externally.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, min: 'Min'): ...
+    def __init__(self, original: 'Min'): ...
     @typing.overload
     def aggregate(self, other: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any], typing.Callable[[], java.util.Iterator[typing.Any]]]) -> None:
         """
@@ -274,9 +271,9 @@ class Min(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
         """
         ...
     @typing.overload
-    def aggregate(self, *t: typing.Any) -> None: ...
+    def aggregate(self, *other: typing.Any) -> None: ...
     @typing.overload
-    def aggregate(self, min: 'Min') -> None: ...
+    def aggregate(self, other: 'Min') -> None: ...
     def clear(self) -> None:
         """
         Clears the internal state of the Statistic
@@ -307,7 +304,7 @@ class Min(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
     @typing.overload
     def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     def getN(self) -> int:
         """
         Returns the number of values that have been added.
@@ -370,15 +367,13 @@ class PSquarePercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivari
 
 class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, java.io.Serializable):
     """
-    implements Serializable
-    
     Provides percentile computation.
     
     There are several commonly used methods for estimating percentiles (a.k.a. quantiles) based on sample data. For large samples, the different methods agree closely, but when sample sizes are small, different methods will give significantly different results. The algorithm implemented here works as follows:
     
       1.  Let n be the length of the (sorted) array and 0 < p <= 100 be the desired percentile. 2.  If n = 1 return the unique array element (regardless of the value of p); otherwise 3.  Compute the estimated percentile position pos = p * (n + 1) / 100 and the difference, d between pos and floor(pos) (i.e. the fractional part of pos). 4.  If pos < 1 return the smallest element in the array. 5.  Else if pos >= n return the largest element in the array. 6.  Else let lower be the element in position floor(pos) in the array and let upper be the next element in the array. Return lower + d * (upper - lower)
     
-    To compute percentiles, the data must be at least partially ordered. Input arrays are copied and recursively partitioned using an ordering definition. The ordering used by sort(double[]) is the one determined by compareTo. This ordering makes NaN larger than any other value (including POSITIVE_INFINITY). Therefore, for example, the median (50th percentile) of NaN} evaluates to
+    To compute percentiles, the data must be at least partially ordered. Input arrays are copied and recursively partitioned using an ordering definition. The ordering used by sort(double[]) is the one determined by Double. This ordering makes NaN larger than any other value (including POSITIVE_INFINITY). Therefore, for example, the median (50th percentile) of NaN} evaluates to
     
     Since percentile estimation usually involves interpolation between array elements, arrays containing NaN or infinite values will often result in NaN or infinite values returned.
     
@@ -388,7 +383,8 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
     
     Note that this implementation is not synchronized. If multiple threads access an instance of this class concurrently, and at least one of the threads invokes the increment() or clear() method, it must be synchronized externally.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -411,17 +407,17 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
         """
         ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def evaluate(self, p: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
     def evaluate(self) -> float: ...
     @typing.overload
-    def evaluate(self, double: float) -> float: ...
+    def evaluate(self, p: float) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], p: float) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], start: int, length: int) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int, double2: float) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int, p: float) -> float: ...
     def getEstimationType(self) -> 'Percentile.EstimationType':
         """
         Get the estimation EstimationType used for computation.
@@ -473,7 +469,7 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
         """
         ...
     @typing.overload
-    def setData(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
+    def setData(self, values: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
         Set the data array.
         
@@ -484,9 +480,10 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
         Parameters:
             values (double[]): data array to store (may be null to remove stored data)
         
-              - evaluate
+        Also see:
+            evaluate
         
-        public void setData(double[] values, int begin, int length) throws hipparchus
+        public void setData (double[] values, int begin, int length) throws hipparchus
         
         Set the data array. The input array is copied, not referenced.
         
@@ -500,14 +497,14 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
         Raises:
             hipparchus: if values is null or the indices are not valid
         
-              - evaluate
-        
+        Also see:
+            evaluate
         
         
         """
         ...
     @typing.overload
-    def setData(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> None: ...
+    def setData(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> None: ...
     def setQuantile(self, p: float) -> None:
         """
         Sets the value of the quantile field (determines what percentile is computed when evaluate() is called with no quantile argument).
@@ -626,8 +623,6 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
 
 class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, org.hipparchus.stat.descriptive.StorelessUnivariateStatistic, org.hipparchus.stat.descriptive.AggregatableStatistic['RandomPercentile'], java.io.Serializable):
     """
-    implements StorelessUnivariateStatistic, AggregatableStatistic<RandomPercentile>, Serializable
-    
     A StorelessUnivariateStatistic estimating percentiles using the `RANDOM <http:/dimacs.rutgers.edu/~graham/pubs/papers/nquantiles.pdf>` Algorithm.
     
     Storage requirements for the RANDOM algorithm depend on the desired accuracy of quantile estimates. Quantile estimate accuracy is defined as follows.
@@ -651,14 +646,15 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
     
     Note: This implementation is not thread-safe.
     
-          - serialized
+    Also see:
+        serialized
     """
     DEFAULT_EPSILON: typing.ClassVar[float] = ...
     """
     Default quantile estimation error setting
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -667,17 +663,17 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
     @typing.overload
     def __init__(self, double: float): ...
     @typing.overload
-    def __init__(self, double: float, randomGenerator: org.hipparchus.random.RandomGenerator): ...
+    def __init__(self, epsilon: float, randomGenerator: org.hipparchus.random.RandomGenerator): ...
     @typing.overload
     def __init__(self, randomGenerator: org.hipparchus.random.RandomGenerator): ...
     @typing.overload
     def __init__(self, randomPercentile: 'RandomPercentile'): ...
     @typing.overload
-    def aggregate(self, iterable: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any], typing.Callable[[], java.util.Iterator[typing.Any]]]) -> None: ...
+    def aggregate(self, other: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any], typing.Callable[[], java.util.Iterator[typing.Any]]]) -> None: ...
     @typing.overload
-    def aggregate(self, *t: typing.Any) -> None: ...
+    def aggregate(self, *other: typing.Any) -> None: ...
     @typing.overload
-    def aggregate(self, randomPercentile: 'RandomPercentile') -> None: ...
+    def aggregate(self, other: 'RandomPercentile') -> None: ...
     def clear(self) -> None:
         """
         Description copied from class: clear Clears the internal state of the Statistic
@@ -711,8 +707,8 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
         Returns an estimate of percentile over the given array.
         
         Parameters:
-            percentile (double): desired percentile (scaled 0 - 100)
-            values (double[]): source of input data
+            values (double): source of input data
+            percentile (double[]): desired percentile (scaled 0 - 100)
         
         Returns:
             estimated percentile
@@ -724,7 +720,7 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
         """
         ...
     @typing.overload
-    def evaluate(self, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
+    def evaluate(self, percentile: float, values: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
         Returns an estimate of the median, computed using the designated array segment as input data.
         
@@ -745,15 +741,15 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
         Raises:
             hipparchus: if percentile is out of the range [0, 100]
         
-              - evaluate
-        
+        Also see:
+            evaluate
         
         """
         ...
     @typing.overload
-    def evaluate(self, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, percentile: float, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @typing.overload
-    def evaluate(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def evaluate(self, values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     def getAggregateN(self, aggregates: typing.Union[java.util.Collection['RandomPercentile'], typing.Sequence['RandomPercentile'], typing.Set['RandomPercentile']]) -> float:
         """
         Returns the total number of values that have been consumed by the aggregates.

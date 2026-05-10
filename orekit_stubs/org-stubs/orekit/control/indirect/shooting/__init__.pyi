@@ -64,7 +64,7 @@ class ShootingBoundaryOutput:
     Also see:
         AbstractIndirectShooting
     """
-    def __init__(self, converged: bool, iterationCount: int, initialState: org.orekit.propagation.SpacecraftState, terminalState: org.orekit.control.indirect.shooting.propagation.ShootingPropagationSettings, shootingPropagationSettings: org.orekit.propagation.SpacecraftState):
+    def __init__(self, converged: bool, iterationCount: int, initialState: org.orekit.propagation.SpacecraftState, shootingPropagationSettings: org.orekit.control.indirect.shooting.propagation.ShootingPropagationSettings, terminalState: org.orekit.propagation.SpacecraftState):
         """
         Constructor.
         
@@ -165,7 +165,7 @@ class AbstractFixedInitialCartesianSingleShooting(AbstractIndirectShooting):
         """
         ...
     @typing.overload
-    def solve(self, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> ShootingBoundaryOutput:
+    def solve(self, initialMass: float, initialGuess: typing.Union[typing.List[float], jpype.JArray]) -> ShootingBoundaryOutput:
         """
         Solve for the boundary conditions, given an initial mass and an initial guess for the adjoint variables.
         
@@ -192,7 +192,7 @@ class AbstractFixedInitialCartesianSingleShooting(AbstractIndirectShooting):
         """
         ...
     @typing.overload
-    def solve(self, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> ShootingBoundaryOutput: ...
+    def solve(self, initialMass: float, initialGuess: typing.Union[typing.List[float], jpype.JArray], userScales: typing.Union[typing.List[float], jpype.JArray]) -> ShootingBoundaryOutput: ...
 
 class AbstractFixedBoundaryCartesianSingleShooting(AbstractFixedInitialCartesianSingleShooting):
     """
@@ -280,9 +280,9 @@ class NewtonFixedBoundaryCartesianSingleShooting(AbstractFixedBoundaryCartesianS
         12.2
     """
     @typing.overload
-    def __init__(self, shootingPropagationSettings: org.orekit.control.indirect.shooting.propagation.ShootingPropagationSettings, fixedTimeBoundaryOrbits: org.orekit.control.indirect.shooting.boundary.FixedTimeBoundaryOrbits, cartesianBoundaryConditionChecker: org.orekit.control.indirect.shooting.boundary.CartesianBoundaryConditionChecker): ...
+    def __init__(self, propagationSettings: org.orekit.control.indirect.shooting.propagation.ShootingPropagationSettings, boundaryConditions: org.orekit.control.indirect.shooting.boundary.FixedTimeBoundaryOrbits, convergenceChecker: org.orekit.control.indirect.shooting.boundary.CartesianBoundaryConditionChecker): ...
     @typing.overload
-    def __init__(self, shootingPropagationSettings: org.orekit.control.indirect.shooting.propagation.ShootingPropagationSettings, fixedTimeCartesianBoundaryStates: org.orekit.control.indirect.shooting.boundary.FixedTimeCartesianBoundaryStates, cartesianBoundaryConditionChecker: org.orekit.control.indirect.shooting.boundary.CartesianBoundaryConditionChecker): ...
+    def __init__(self, propagationSettings: org.orekit.control.indirect.shooting.propagation.ShootingPropagationSettings, boundaryConditions: org.orekit.control.indirect.shooting.boundary.FixedTimeCartesianBoundaryStates, convergenceChecker: org.orekit.control.indirect.shooting.boundary.CartesianBoundaryConditionChecker): ...
     def getMaximumIterationCount(self) -> int:
         """
         Description copied from class: getMaximumIterationCount Returns the maximum number of iterations.

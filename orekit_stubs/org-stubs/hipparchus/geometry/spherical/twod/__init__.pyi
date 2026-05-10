@@ -18,8 +18,6 @@ import typing
 
 class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D', 'S2Point', 'Circle', 'SubCircle'], org.hipparchus.geometry.partitioning.Embedding['Sphere2D', 'S2Point', org.hipparchus.geometry.spherical.oned.Sphere1D, org.hipparchus.geometry.spherical.oned.S1Point]):
     """
-    implements Hyperplane<Sphere2D,S2Point,Circle,SubCircle>, Embedding<Sphere2D,S2Point,Sphere1D,S1Point>
-    
     This class represents an oriented great circle on the 2-sphere.
     
     An oriented circle can be defined by a center point. The circle is the set of points that are in the normal plan the center.
@@ -27,11 +25,11 @@ class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D', 'S2Poin
     Since it is oriented the two spherical caps at its two sides are unambiguously identified as a left cap and a right cap. This can be used to identify the interior and the exterior in a simple way by local properties only when part of a line is used to define part of a spherical polygon boundary.
     """
     @typing.overload
-    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
+    def __init__(self, pole: org.hipparchus.geometry.euclidean.threed.Vector3D, tolerance: float): ...
     @typing.overload
     def __init__(self, circle: 'Circle'): ...
     @typing.overload
-    def __init__(self, s2Point: 'S2Point', s2Point2: 'S2Point', double: float): ...
+    def __init__(self, first: 'S2Point', second: 'S2Point', tolerance: float): ...
     def arbitraryPoint(self) -> 'S2Point':
         """
         Get an arbitrary point in the hyperplane.
@@ -98,7 +96,7 @@ class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D', 'S2Poin
         """
         ...
     @typing.overload
-    def getOffset(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> float:
+    def getOffset(self, point: org.hipparchus.geometry.euclidean.threed.Vector3D) -> float:
         """
         The offset is 0 if the point is on the underlying hyperplane, it is positive if the point is on one particular side of the hyperplane, and it is negative if the point is on the other side, according to the hyperplane natural orientation.
         
@@ -110,7 +108,8 @@ class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D', 'S2Poin
         Returns:
             offset of the point
         
-              - getOffset
+        Also see:
+            getOffset
         
         Get the offset (oriented distance) of a direction.
         
@@ -122,8 +121,8 @@ class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D', 'S2Poin
         Returns:
             offset of the direction
         
-              - getOffset
-        
+        Also see:
+            getOffset
         
         
         """
@@ -142,8 +141,8 @@ class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D', 'S2Poin
         Returns:
             phase angle of the direction around the circle
         
-              - toSubSpace
-        
+        Also see:
+            toSubSpace
         
         
         """
@@ -158,10 +157,10 @@ class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D', 'S2Poin
         Returns:
             circle point on the sphere
         
-              - toSpace
-              - getXAxis
-              - getYAxis
-        
+        Also see:
+            toSpace,
+            getXAxis,
+            getYAxis
         
         
         """
@@ -175,9 +174,9 @@ class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D', 'S2Poin
         Returns:
             pole of the circle
         
-              - getXAxis
-              - getYAxis
-        
+        Also see:
+            getXAxis,
+            getYAxis
         
         
         """
@@ -231,10 +230,10 @@ class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D', 'S2Poin
         Returns:
             an arbitrary x axis on the circle
         
-              - getPointAt
-              - getYAxis
-              - getPole
-        
+        Also see:
+            getPointAt,
+            getYAxis,
+            getPole
         
         
         """
@@ -248,10 +247,10 @@ class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D', 'S2Poin
         Returns:
             an arbitrary y axis point on the circle
         
-              - getPointAt
-              - getXAxis
-              - getPole
-        
+        Also see:
+            getPointAt,
+            getXAxis,
+            getPole
         
         
         """
@@ -335,8 +334,8 @@ class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D', 'S2Poin
         Returns:
             n-dimension point of the space corresponding to the specified sub-space point
         
-              - getPointAt
-        
+        Also see:
+            getPointAt
         
         
         """
@@ -353,8 +352,8 @@ class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D', 'S2Poin
         Returns:
             (n-1)-dimension point of the sub-space corresponding to the specified space point
         
-              - getPhase
-        
+        Also see:
+            getPhase
         
         
         """
@@ -389,8 +388,9 @@ class Edge:
     """
     Spherical polygons boundary edge.
     
-          - getBoundaryLoops
-          - Vertex
+    Also see:
+        getBoundaryLoops,
+        Vertex
     """
     def getCircle(self) -> Circle:
         """
@@ -450,15 +450,14 @@ class Edge:
 
 class S2Point(org.hipparchus.geometry.Point['Sphere2D', 'S2Point']):
     """
-    implements Point<Sphere2D,S2Point>
-    
     This class represents a point on the 2-sphere.
     
     We use the mathematical convention to use the azimuthal angle \( \theta \) in the x-y plane as the first coordinate, and the polar angle \( \varphi \) as the second coordinate (see `Spherical Coordinates <http://mathworld.wolfram.com/SphericalCoordinates.html>` in MathWorld).
     
     Instances of this class are guaranteed to be immutable.
     
-          - serialized
+    Also see:
+        serialized
     """
     PLUS_I: typing.ClassVar['S2Point'] = ...
     """
@@ -489,11 +488,11 @@ class S2Point(org.hipparchus.geometry.Point['Sphere2D', 'S2Point']):
     A vector with all coordinates set to NaN.
     """
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, theta: float, phi: float): ...
     @typing.overload
-    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
+    def __init__(self, vector: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
     @typing.overload
-    def distance(self, s2Point: 'S2Point') -> float:
+    def distance(self, point: 'S2Point') -> float:
         """
         Compute the distance between the instance and another point.
         
@@ -519,7 +518,7 @@ class S2Point(org.hipparchus.geometry.Point['Sphere2D', 'S2Point']):
         ...
     @typing.overload
     @staticmethod
-    def distance(s2Point: 'S2Point', s2Point2: 'S2Point') -> float: ...
+    def distance(p1: 'S2Point', p2: 'S2Point') -> float: ...
     def equals(self, other: typing.Any) -> bool:
         """
         Test for the equality of two points on the 2-sphere.
@@ -528,7 +527,7 @@ class S2Point(org.hipparchus.geometry.Point['Sphere2D', 'S2Point']):
         
         NaN coordinates are considered to affect globally the point and be equals to each other - i.e, if either (or all) coordinates of the point are equal to NaN, the point is equal to NaN.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality to this
@@ -568,9 +567,6 @@ class S2Point(org.hipparchus.geometry.Point['Sphere2D', 'S2Point']):
         Returns:
             polar angle \( \varphi \)
         
-              - 
-        
-        
         
         """
         ...
@@ -593,9 +589,6 @@ class S2Point(org.hipparchus.geometry.Point['Sphere2D', 'S2Point']):
         Returns:
             azimuthal angle \( \theta \) in the x-y plane
         
-              - 
-        
-        
         
         """
         ...
@@ -615,7 +608,7 @@ class S2Point(org.hipparchus.geometry.Point['Sphere2D', 'S2Point']):
         
         All NaN values have the same hash code.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -665,7 +658,7 @@ class S2Point(org.hipparchus.geometry.Point['Sphere2D', 'S2Point']):
         ...
     def toString(self) -> str:
         """
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -673,13 +666,12 @@ class S2Point(org.hipparchus.geometry.Point['Sphere2D', 'S2Point']):
 
 class Sphere2D(java.io.Serializable, org.hipparchus.geometry.Space):
     """
-    implements Serializable, Space
-    
     This class implements a two-dimensional sphere (i.e. the regular sphere).
     
     We use here the topologists definition of the 2-sphere (see `Sphere <http://mathworld.wolfram.com/Sphere.html>` on MathWorld), i.e. the 2-sphere is the two-dimensional surface defined in 3D as x :sup:`2` +y :sup:`2` +z :sup:`2` =1.
     
-          - serialized
+    Also see:
+        serialized
     """
     SMALLEST_TOLERANCE: typing.ClassVar[float] = ...
     """
@@ -738,8 +730,8 @@ class Sphere2D(java.io.Serializable, org.hipparchus.geometry.Space):
         Returns:
             n-1 dimension sub-space of this space
         
-              - getDimension
-        
+        Also see:
+            getDimension
         
         
         """
@@ -750,7 +742,7 @@ class SphericalPolygonsSet(org.hipparchus.geometry.partitioning.AbstractRegion[S
     This class represents a region on the 2-sphere: a set of spherical polygons.
     """
     @typing.overload
-    def __init__(self, double: float): ...
+    def __init__(self, tolerance: float): ...
     @typing.overload
     def __init__(self, double: float, *s2Point: S2Point): ...
     @typing.overload
@@ -758,7 +750,7 @@ class SphericalPolygonsSet(org.hipparchus.geometry.partitioning.AbstractRegion[S
     @typing.overload
     def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
     @typing.overload
-    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, int: int, double2: float): ...
+    def __init__(self, center: org.hipparchus.geometry.euclidean.threed.Vector3D, meridian: org.hipparchus.geometry.euclidean.threed.Vector3D, outsideRadius: float, n: int, tolerance: float): ...
     @typing.overload
     def __init__(self, bSPTree: org.hipparchus.geometry.partitioning.BSPTree[Sphere2D, S2Point, Circle, 'SubCircle'], double: float): ...
     def buildNew(self, tree: org.hipparchus.geometry.partitioning.BSPTree[Sphere2D, S2Point, Circle, 'SubCircle']) -> 'SphericalPolygonsSet':
@@ -774,7 +766,7 @@ class SphericalPolygonsSet(org.hipparchus.geometry.partitioning.AbstractRegion[S
         Specified by: buildNew in class AbstractRegion
         
         Parameters:
-            tree (BSPTree<Sphere2D,S2Point,Circle,SubCircle> tree): inside/outside BSP tree representing the new region
+            tree (BSPTree<Sphere2D, S2Point, Circle, SubCircle> tree): inside/outside BSP tree representing the new region
         
         Returns:
             the built region
@@ -800,9 +792,8 @@ class SphericalPolygonsSet(org.hipparchus.geometry.partitioning.AbstractRegion[S
         Raises:
             hipparchus: if the tolerance setting does not allow to build a clean non-ambiguous boundary
         
-              - Vertex
-              - Edge
-        
+        Also see:
+            Vertex, Edge
         
         
         """
@@ -868,7 +859,7 @@ class SubCircle(org.hipparchus.geometry.partitioning.AbstractSubHyperplane[Spher
         
         Parameters:
             hyperplane (Circle): underlying hyperplane
-            remainingRegion (Region<Sphere1D,S1Point,LimitAngle,SubLimitAngle> remainingRegion): remaining region of the hyperplane
+            remainingRegion (Region<Sphere1D, S1Point, LimitAngle, SubLimitAngle> remainingRegion): remaining region of the hyperplane
         
         
         """
@@ -906,8 +897,9 @@ class Vertex:
     """
     Spherical polygons boundary vertex.
     
-          - getBoundaryLoops
-          - Edge
+    Also see:
+        getBoundaryLoops,
+        Edge
     """
     def getIncoming(self) -> Edge:
         """

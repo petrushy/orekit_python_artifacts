@@ -30,7 +30,7 @@ class CarlsonEllipticIntegral:
     _rC_3__T = typing.TypeVar('_rC_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def rC(double: float, double2: float) -> float:
+    def rC(x: float, y: float) -> float:
         """
         Compute Carlson elliptic integral R :sub:`C` .
         
@@ -58,7 +58,7 @@ class CarlsonEllipticIntegral:
         ...
     @typing.overload
     @staticmethod
-    def rC(t: _rC_1__T, t2: _rC_1__T) -> _rC_1__T:
+    def rC(x: _rC_1__T, y: _rC_1__T) -> _rC_1__T:
         """
         Compute Carlson elliptic integral R :sub:`C` .
         
@@ -87,15 +87,15 @@ class CarlsonEllipticIntegral:
         ...
     @typing.overload
     @staticmethod
-    def rC(complex: org.hipparchus.complex.Complex, complex2: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
+    def rC(x: org.hipparchus.complex.Complex, y: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def rC(fieldComplex: org.hipparchus.complex.FieldComplex[_rC_3__T], fieldComplex2: org.hipparchus.complex.FieldComplex[_rC_3__T]) -> org.hipparchus.complex.FieldComplex[_rC_3__T]: ...
+    def rC(x: org.hipparchus.complex.FieldComplex[_rC_3__T], y: org.hipparchus.complex.FieldComplex[_rC_3__T]) -> org.hipparchus.complex.FieldComplex[_rC_3__T]: ...
     _rD_1__T = typing.TypeVar('_rD_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _rD_3__T = typing.TypeVar('_rD_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def rD(double: float, double2: float, double3: float) -> float:
+    def rD(x: float, y: float, z: float) -> float:
         """
         Compute Carlson elliptic integral R :sub:`D` .
         
@@ -125,7 +125,7 @@ class CarlsonEllipticIntegral:
         ...
     @typing.overload
     @staticmethod
-    def rD(t: _rD_1__T, t2: _rD_1__T, t3: _rD_1__T) -> _rD_1__T:
+    def rD(x: _rD_1__T, y: _rD_1__T, z: _rD_1__T) -> _rD_1__T:
         """
         Compute Carlson elliptic integral R :sub:`D` .
         
@@ -156,15 +156,15 @@ class CarlsonEllipticIntegral:
         ...
     @typing.overload
     @staticmethod
-    def rD(complex: org.hipparchus.complex.Complex, complex2: org.hipparchus.complex.Complex, complex3: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
+    def rD(x: org.hipparchus.complex.Complex, y: org.hipparchus.complex.Complex, z: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def rD(fieldComplex: org.hipparchus.complex.FieldComplex[_rD_3__T], fieldComplex2: org.hipparchus.complex.FieldComplex[_rD_3__T], fieldComplex3: org.hipparchus.complex.FieldComplex[_rD_3__T]) -> org.hipparchus.complex.FieldComplex[_rD_3__T]: ...
+    def rD(x: org.hipparchus.complex.FieldComplex[_rD_3__T], y: org.hipparchus.complex.FieldComplex[_rD_3__T], z: org.hipparchus.complex.FieldComplex[_rD_3__T]) -> org.hipparchus.complex.FieldComplex[_rD_3__T]: ...
     _rF_1__T = typing.TypeVar('_rF_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _rF_3__T = typing.TypeVar('_rF_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def rF(double: float, double2: float, double3: float) -> float:
+    def rF(x: float, y: float, z: float) -> float:
         """
         Compute Carlson elliptic integral R :sub:`F` .
         
@@ -194,7 +194,7 @@ class CarlsonEllipticIntegral:
         ...
     @typing.overload
     @staticmethod
-    def rF(t: _rF_1__T, t2: _rF_1__T, t3: _rF_1__T) -> _rF_1__T:
+    def rF(x: _rF_1__T, y: _rF_1__T, z: _rF_1__T) -> _rF_1__T:
         """
         Compute Carlson elliptic integral R :sub:`F` .
         
@@ -225,15 +225,15 @@ class CarlsonEllipticIntegral:
         ...
     @typing.overload
     @staticmethod
-    def rF(complex: org.hipparchus.complex.Complex, complex2: org.hipparchus.complex.Complex, complex3: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
+    def rF(x: org.hipparchus.complex.Complex, y: org.hipparchus.complex.Complex, z: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def rF(fieldComplex: org.hipparchus.complex.FieldComplex[_rF_3__T], fieldComplex2: org.hipparchus.complex.FieldComplex[_rF_3__T], fieldComplex3: org.hipparchus.complex.FieldComplex[_rF_3__T]) -> org.hipparchus.complex.FieldComplex[_rF_3__T]: ...
+    def rF(x: org.hipparchus.complex.FieldComplex[_rF_3__T], y: org.hipparchus.complex.FieldComplex[_rF_3__T], z: org.hipparchus.complex.FieldComplex[_rF_3__T]) -> org.hipparchus.complex.FieldComplex[_rF_3__T]: ...
     _rG_1__T = typing.TypeVar('_rG_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _rG_3__T = typing.TypeVar('_rG_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def rG(double: float, double2: float, double3: float) -> float:
+    def rG(x: float, y: float, z: float) -> float:
         """
         Compute Carlson elliptic integral R :sub:`G` .
         
@@ -263,7 +263,7 @@ class CarlsonEllipticIntegral:
         ...
     @typing.overload
     @staticmethod
-    def rG(t: _rG_1__T, t2: _rG_1__T, t3: _rG_1__T) -> _rG_1__T:
+    def rG(x: _rG_1__T, y: _rG_1__T, z: _rG_1__T) -> _rG_1__T:
         """
         Compute Carlson elliptic integral R :sub:`G` .
         
@@ -294,17 +294,17 @@ class CarlsonEllipticIntegral:
         ...
     @typing.overload
     @staticmethod
-    def rG(complex: org.hipparchus.complex.Complex, complex2: org.hipparchus.complex.Complex, complex3: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
+    def rG(x: org.hipparchus.complex.Complex, y: org.hipparchus.complex.Complex, z: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def rG(fieldComplex: org.hipparchus.complex.FieldComplex[_rG_3__T], fieldComplex2: org.hipparchus.complex.FieldComplex[_rG_3__T], fieldComplex3: org.hipparchus.complex.FieldComplex[_rG_3__T]) -> org.hipparchus.complex.FieldComplex[_rG_3__T]: ...
+    def rG(x: org.hipparchus.complex.FieldComplex[_rG_3__T], y: org.hipparchus.complex.FieldComplex[_rG_3__T], z: org.hipparchus.complex.FieldComplex[_rG_3__T]) -> org.hipparchus.complex.FieldComplex[_rG_3__T]: ...
     _rJ_2__T = typing.TypeVar('_rJ_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _rJ_3__T = typing.TypeVar('_rJ_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _rJ_6__T = typing.TypeVar('_rJ_6__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _rJ_7__T = typing.TypeVar('_rJ_7__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def rJ(double: float, double2: float, double3: float, double4: float) -> float:
+    def rJ(x: float, y: float, z: float, p: float) -> float:
         """
         Compute Carlson elliptic integral R :sub:`J` .
         
@@ -364,10 +364,10 @@ class CarlsonEllipticIntegral:
         ...
     @typing.overload
     @staticmethod
-    def rJ(double: float, double2: float, double3: float, double4: float, double5: float) -> float: ...
+    def rJ(x: float, y: float, z: float, p: float, delta: float) -> float: ...
     @typing.overload
     @staticmethod
-    def rJ(t: _rJ_2__T, t2: _rJ_2__T, t3: _rJ_2__T, t4: _rJ_2__T) -> _rJ_2__T:
+    def rJ(x: _rJ_2__T, y: _rJ_2__T, z: _rJ_2__T, p: _rJ_2__T) -> _rJ_2__T:
         """
         Compute Carlson elliptic integral R :sub:`J` .
         
@@ -434,16 +434,16 @@ class CarlsonEllipticIntegral:
         ...
     @typing.overload
     @staticmethod
-    def rJ(complex: org.hipparchus.complex.Complex, complex2: org.hipparchus.complex.Complex, complex3: org.hipparchus.complex.Complex, complex4: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
+    def rJ(x: org.hipparchus.complex.Complex, y: org.hipparchus.complex.Complex, z: org.hipparchus.complex.Complex, p: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def rJ(complex: org.hipparchus.complex.Complex, complex2: org.hipparchus.complex.Complex, complex3: org.hipparchus.complex.Complex, complex4: org.hipparchus.complex.Complex, complex5: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
+    def rJ(x: org.hipparchus.complex.Complex, y: org.hipparchus.complex.Complex, z: org.hipparchus.complex.Complex, p: org.hipparchus.complex.Complex, delta: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def rJ(fieldComplex: org.hipparchus.complex.FieldComplex[_rJ_6__T], fieldComplex2: org.hipparchus.complex.FieldComplex[_rJ_6__T], fieldComplex3: org.hipparchus.complex.FieldComplex[_rJ_6__T], fieldComplex4: org.hipparchus.complex.FieldComplex[_rJ_6__T]) -> org.hipparchus.complex.FieldComplex[_rJ_6__T]: ...
+    def rJ(x: org.hipparchus.complex.FieldComplex[_rJ_6__T], y: org.hipparchus.complex.FieldComplex[_rJ_6__T], z: org.hipparchus.complex.FieldComplex[_rJ_6__T], p: org.hipparchus.complex.FieldComplex[_rJ_6__T]) -> org.hipparchus.complex.FieldComplex[_rJ_6__T]: ...
     @typing.overload
     @staticmethod
-    def rJ(fieldComplex: org.hipparchus.complex.FieldComplex[_rJ_7__T], fieldComplex2: org.hipparchus.complex.FieldComplex[_rJ_7__T], fieldComplex3: org.hipparchus.complex.FieldComplex[_rJ_7__T], fieldComplex4: org.hipparchus.complex.FieldComplex[_rJ_7__T], fieldComplex5: org.hipparchus.complex.FieldComplex[_rJ_7__T]) -> org.hipparchus.complex.FieldComplex[_rJ_7__T]: ...
+    def rJ(x: org.hipparchus.complex.FieldComplex[_rJ_7__T], y: org.hipparchus.complex.FieldComplex[_rJ_7__T], z: org.hipparchus.complex.FieldComplex[_rJ_7__T], p: org.hipparchus.complex.FieldComplex[_rJ_7__T], delta: org.hipparchus.complex.FieldComplex[_rJ_7__T]) -> org.hipparchus.complex.FieldComplex[_rJ_7__T]: ...
 
 
 class __module_protocol__(Protocol):

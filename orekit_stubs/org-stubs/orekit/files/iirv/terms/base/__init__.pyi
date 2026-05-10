@@ -18,14 +18,14 @@ class IIRVVectorTerm(java.lang.Comparable['IIRVVectorTerm'[typing.Any]], typing.
     Since:
         13.0
     """
-    def compareTo(self, iIRVVectorTerm: 'IIRVVectorTerm'[typing.Any]) -> int:
+    def compareTo(self, o: 'IIRVVectorTerm'[typing.Any]) -> int:
         """
         Specified by: Comparable in interface Comparable
         
         
         """
         ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, o: typing.Any) -> bool:
         """
         Overrides: Object in class Object
         
@@ -130,9 +130,9 @@ class DoubleValuedIIRVTerm(IIRVVectorTerm[float]):
         13.0
     """
     @typing.overload
-    def __init__(self, string: str, double: float, int: int, int2: int, boolean: bool): ...
+    def __init__(self, pattern: str, value: float, length: int, nCharsAfterDecimalPlace: int, isSigned: bool): ...
     @typing.overload
-    def __init__(self, string: str, string2: str, int: int, int2: int, boolean: bool): ...
+    def __init__(self, pattern: str, value: str, length: int, nCharsAfterDecimalPlace: int, isSigned: bool): ...
     @staticmethod
     def computeValueFromString(value: str, nCharsAfterDecimalPlace: int) -> float:
         """
@@ -175,9 +175,9 @@ class LongValuedIIRVTerm(IIRVVectorTerm[int]):
         13.0
     """
     @typing.overload
-    def __init__(self, string: str, string2: str, int: int, boolean: bool): ...
+    def __init__(self, pattern: str, value: str, length: int, isSigned: bool): ...
     @typing.overload
-    def __init__(self, string: str, long: int, int: int, boolean: bool): ...
+    def __init__(self, pattern: str, value: int, length: int, isSigned: bool): ...
     @staticmethod
     def computeValueFromString(value: str) -> int:
         """

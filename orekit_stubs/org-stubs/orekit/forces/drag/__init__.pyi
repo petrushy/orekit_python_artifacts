@@ -175,9 +175,9 @@ class DragForce(AbstractDragForceModel):
     Atmospheric drag force model. The drag acceleration is computed as follows : γ = (1/2 * ρ * V² * S / Mass) * DragCoefVector With DragCoefVector = {C :sub:`x` , C :sub:`y` , C :sub:`z` } and S given by the user through the interface DragSensitive
     """
     @typing.overload
-    def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere, dragSensitive: DragSensitive): ...
+    def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere, spacecraft: DragSensitive): ...
     @typing.overload
-    def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere, dragSensitive: DragSensitive, boolean: bool): ...
+    def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere, spacecraft: DragSensitive, useFiniteDifferencesOnDensityWrtPosition: bool): ...
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def acceleration(self, s: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], parameters: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
@@ -253,9 +253,9 @@ class IsotropicDrag(DragSensitive):
         IsotropicRadiationCNES95Convention
     """
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, crossSection: float, dragCoeff: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float): ...
+    def __init__(self, crossSection: float, dragCoeff: float, dragCoeffMin: float, dragCoeffMax: float): ...
     _dragAcceleration_0__T = typing.TypeVar('_dragAcceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def dragAcceleration(self, state: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_0__T], density: _dragAcceleration_0__T, relativeVelocity: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], parameters: typing.Union[typing.List[_dragAcceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]:
@@ -315,7 +315,7 @@ class PythonAbstractDragForceModel(AbstractDragForceModel):
     @typing.overload
     def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere): ...
     @typing.overload
-    def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere, boolean: bool): ...
+    def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere, useFiniteDifferencesOnDensityWrtPosition: bool): ...
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def acceleration(self, s: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], parameters: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
@@ -379,7 +379,7 @@ class PythonAbstractDragForceModel(AbstractDragForceModel):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -464,7 +464,7 @@ class PythonDragSensitive(DragSensitive):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

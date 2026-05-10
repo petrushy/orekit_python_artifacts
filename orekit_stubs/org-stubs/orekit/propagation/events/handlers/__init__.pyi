@@ -490,7 +490,7 @@ class FieldRecordAndContinue(FieldEventHandler[_FieldRecordAndContinue__T], typi
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, list: java.util.List['FieldRecordAndContinue.Event'[_FieldRecordAndContinue__T]]): ...
+    def __init__(self, events: java.util.List['FieldRecordAndContinue.Event'[_FieldRecordAndContinue__T]]): ...
     def clear(self) -> None:
         """
         Clear all stored events.
@@ -758,7 +758,7 @@ class PythonEventHandler(EventHandler):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -861,7 +861,7 @@ class PythonFieldEventHandler(FieldEventHandler[_PythonFieldEventHandler__T], ty
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -997,7 +997,7 @@ class RecordAndContinue(EventHandler):
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, list: java.util.List['RecordAndContinue.Event']): ...
+    def __init__(self, events: java.util.List['RecordAndContinue.Event']): ...
     def clear(self) -> None:
         """
         Clear all stored events.
@@ -1208,7 +1208,7 @@ class CountAndContinue(org.orekit.propagation.events.handlers.CountingHandler):
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, startingCount: int): ...
 
 class CountingHandler(org.orekit.propagation.events.handlers.AbstractGenericCountingHandler, EventHandler):
     """
@@ -1281,7 +1281,7 @@ class FieldCountingHandler(org.orekit.propagation.events.handlers.AbstractGeneri
         ...
 
 class PythonAbstractGenericCountingHandler(org.orekit.propagation.events.handlers.AbstractGenericCountingHandler):
-    def __init__(self, int: int, action: org.hipparchus.ode.events.Action):
+    def __init__(self, startingCount: int, action: org.hipparchus.ode.events.Action):
         """
         Constructor.
         """
@@ -1334,7 +1334,7 @@ class PythonAbstractGenericCountingHandler(org.orekit.propagation.events.handler
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1356,7 +1356,7 @@ class PythonAbstractGenericCountingHandler(org.orekit.propagation.events.handler
         ...
 
 class PythonCountingHandler(CountingHandler):
-    def __init__(self, int: int, action: org.hipparchus.ode.events.Action):
+    def __init__(self, startingCount: int, action: org.hipparchus.ode.events.Action):
         """
         Constructor.
         """
@@ -1401,14 +1401,14 @@ class PythonCountingHandler(CountingHandler):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
         ...
 
 class PythonFieldCountingHandler(FieldCountingHandler):
-    def __init__(self, int: int, action: org.hipparchus.ode.events.Action):
+    def __init__(self, startingCount: int, action: org.hipparchus.ode.events.Action):
         """
         Constructor.
         """
@@ -1453,7 +1453,7 @@ class PythonFieldCountingHandler(FieldCountingHandler):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

@@ -20,7 +20,8 @@ class Arc:
     """
     This class represents an arc on a circle.
     
-          - ArcsSet
+    Also see:
+        ArcsSet
     """
     def __init__(self, lower: float, upper: float, tolerance: float):
         """
@@ -76,7 +77,7 @@ class Arc:
         """
         ...
     @typing.overload
-    def getOffset(self, double: float) -> float:
+    def getOffset(self, point: float) -> float:
         """
         This method does not use getTolerance.
         
@@ -104,7 +105,7 @@ class Arc:
         """
         ...
     @typing.overload
-    def getOffset(self, s1Point: 'S1Point') -> float: ...
+    def getOffset(self, point: 'S1Point') -> float: ...
     def getSize(self) -> float:
         """
         Get the angular size of the arc.
@@ -139,16 +140,14 @@ class Arc:
 
 class ArcsSet(org.hipparchus.geometry.partitioning.AbstractRegion['Sphere1D', 'S1Point', 'LimitAngle', 'SubLimitAngle', 'Sphere1D', 'S1Point', 'LimitAngle', 'SubLimitAngle'], java.lang.Iterable[typing.MutableSequence[float]]):
     """
-    implements Iterable<double[]>
-    
     This class represents a region of a circle: a set of arcs.
     
     Note that due to the wrapping around \(2 \pi\), barycenter is ill-defined here. It was defined only in order to fulfill the requirements of the Region interface, but its use is discouraged.
     """
     @typing.overload
-    def __init__(self, double: float): ...
+    def __init__(self, tolerance: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
+    def __init__(self, lower: float, upper: float, tolerance: float): ...
     @typing.overload
     def __init__(self, collection: typing.Union[java.util.Collection['SubLimitAngle'], typing.Sequence['SubLimitAngle'], typing.Set['SubLimitAngle']], double: float): ...
     @typing.overload
@@ -178,7 +177,7 @@ class ArcsSet(org.hipparchus.geometry.partitioning.AbstractRegion['Sphere1D', 'S
         Specified by: buildNew in class AbstractRegion
         
         Parameters:
-            tree (BSPTree<Sphere1D,S1Point,LimitAngle,SubLimitAngle> tree): inside/outside BSP tree representing the new region
+            tree (BSPTree<Sphere1D, S1Point, LimitAngle, SubLimitAngle> tree): inside/outside BSP tree representing the new region
         
         Returns:
             the built region
@@ -204,7 +203,7 @@ class ArcsSet(org.hipparchus.geometry.partitioning.AbstractRegion['Sphere1D', 'S
         
         The iterator does not support the optional remove operation.
         
-        Specified by: iterator in interface Iterable
+        Specified by: Iterable in interface Iterable
         
         
         """
@@ -249,8 +248,6 @@ class ArcsSet(org.hipparchus.geometry.partitioning.AbstractRegion['Sphere1D', 'S
 
 class LimitAngle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere1D', 'S1Point', 'LimitAngle', 'SubLimitAngle']):
     """
-    implements Hyperplane<Sphere1D,S1Point,LimitAngle,SubLimitAngle>
-    
     This class represents a 1D oriented hyperplane on the circle.
     
     An hyperplane on the 1-sphere is an angle with an orientation.
@@ -452,13 +449,12 @@ class LimitAngle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere1D', 'S1
 
 class S1Point(org.hipparchus.geometry.Point['Sphere1D', 'S1Point']):
     """
-    implements Point<Sphere1D,S1Point>
-    
     This class represents a point on the 1-sphere.
     
     Instances of this class are guaranteed to be immutable.
     
-          - serialized
+    Also see:
+        serialized
     """
     NaN: typing.ClassVar['S1Point'] = ...
     """
@@ -471,14 +467,14 @@ class S1Point(org.hipparchus.geometry.Point['Sphere1D', 'S1Point']):
         Parameters:
             alpha (double): azimuthal angle \( \alpha \)
         
-              - getAlpha
-        
+        Also see:
+            getAlpha
         
         
         """
         ...
     @typing.overload
-    def distance(self, s1Point: 'S1Point') -> float:
+    def distance(self, point: 'S1Point') -> float:
         """
         Compute the distance between the instance and another point.
         
@@ -504,7 +500,7 @@ class S1Point(org.hipparchus.geometry.Point['Sphere1D', 'S1Point']):
         ...
     @typing.overload
     @staticmethod
-    def distance(s1Point: 'S1Point', s1Point2: 'S1Point') -> float: ...
+    def distance(p1: 'S1Point', p2: 'S1Point') -> float: ...
     def equals(self, other: typing.Any) -> bool:
         """
         Test for the equality of two points on the 1-sphere.
@@ -513,7 +509,7 @@ class S1Point(org.hipparchus.geometry.Point['Sphere1D', 'S1Point']):
         
         NaN coordinates are considered to affect globally the point and be equals to each other - i.e, if either (or all) coordinates of the point are equal to NaN, the point is equal to NaN.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality to this
@@ -553,9 +549,6 @@ class S1Point(org.hipparchus.geometry.Point['Sphere1D', 'S1Point']):
         Returns:
             azimuthal angle \( \alpha \)
         
-              - 
-        
-        
         
         """
         ...
@@ -587,7 +580,7 @@ class S1Point(org.hipparchus.geometry.Point['Sphere1D', 'S1Point']):
         
         All NaN values have the same hash code.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -628,13 +621,12 @@ class S1Point(org.hipparchus.geometry.Point['Sphere1D', 'S1Point']):
 
 class Sphere1D(java.io.Serializable, org.hipparchus.geometry.Space):
     """
-    implements Serializable, Space
-    
     This class implements a one-dimensional sphere (i.e. a circle).
     
     We use here the topologists definition of the 1-sphere (see `Sphere <http://mathworld.wolfram.com/Sphere.html>` on MathWorld), i.e. the 1-sphere is the one-dimensional closed curve defined in 2D as x :sup:`2` +y :sup:`2` =1.
     
-          - serialized
+    Also see:
+        serialized
     """
     SMALLEST_TOLERANCE: typing.ClassVar[float] = ...
     """
@@ -698,8 +690,8 @@ class Sphere1D(java.io.Serializable, org.hipparchus.geometry.Space):
         Raises:
             NoSubSpaceException: in all cases
         
-              - getDimension
-        
+        Also see:
+            getDimension
         
         
         """
@@ -717,7 +709,7 @@ class SubLimitAngle(org.hipparchus.geometry.partitioning.AbstractSubHyperplane[S
         
         Parameters:
             hyperplane (LimitAngle): underlying hyperplane
-            remainingRegion (Region<Sphere1D,S1Point,LimitAngle,SubLimitAngle> remainingRegion): remaining region of the hyperplane
+            remainingRegion (Region<Sphere1D, S1Point, LimitAngle, SubLimitAngle> remainingRegion): remaining region of the hyperplane
         
         
         """

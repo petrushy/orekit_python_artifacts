@@ -55,7 +55,12 @@ class NaNStrategy(java.lang.Enum['NaNStrategy']):
     @staticmethod
     def values() -> typing.MutableSequence['NaNStrategy']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (NaNStrategy c : NaNStrategy.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -130,7 +135,12 @@ class TiesStrategy(java.lang.Enum['TiesStrategy']):
     @staticmethod
     def values() -> typing.MutableSequence['TiesStrategy']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (TiesStrategy c : TiesStrategy.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -141,8 +151,6 @@ class TiesStrategy(java.lang.Enum['TiesStrategy']):
 
 class NaturalRanking(RankingAlgorithm):
     """
-    implements RankingAlgorithm
-    
     Ranking based on the natural ordering on doubles.
     
     NaNs are treated according to the configured NaNStrategy and ties are handled using the selected TiesStrategy. Configuration settings are supplied in optional constructor arguments. Defaults are FAILED and AVERAGE, respectively. When using RANDOM, a hipparchus may be supplied as a constructor argument.
@@ -201,8 +209,8 @@ class NaturalRanking(RankingAlgorithm):
         
         Raises:
             hipparchus: if the selected NaNStrategy is FAILED and a
-                NaN is encountered in the
-                input data
+                Double is encountered in
+                the input data
         
         
         """

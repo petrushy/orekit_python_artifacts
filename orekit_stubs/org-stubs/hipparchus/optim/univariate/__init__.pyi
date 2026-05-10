@@ -21,7 +21,7 @@ class BracketFinder:
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, int: int): ...
+    def __init__(self, growLimit: float, maxEvaluations: int): ...
     def getEvaluations(self) -> int:
         """
         Get number of evaluations.
@@ -69,8 +69,8 @@ class BracketFinder:
         Returns:
             the higher bound of the bracket
         
-              - getFHi
-        
+        Also see:
+            getFHi
         
         
         """
@@ -82,8 +82,8 @@ class BracketFinder:
         Returns:
             the lower bound of the bracket
         
-              - getFLo
-        
+        Also see:
+            getFLo
         
         
         """
@@ -105,8 +105,8 @@ class BracketFinder:
         Returns:
             a point in the middle of the bracket
         
-              - getFMid
-        
+        Also see:
+            getFMid
         
         
         """
@@ -130,16 +130,14 @@ class BracketFinder:
 
 class SearchInterval(org.hipparchus.optim.OptimizationData):
     """
-    implements OptimizationData
-    
     Search interval and (optional) start value.
     
     Immutable class.
     """
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, lo: float, hi: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
+    def __init__(self, lo: float, hi: float, init: float): ...
     def getMax(self) -> float:
         """
         Gets the upper bound.
@@ -178,9 +176,9 @@ class SimpleUnivariateValueChecker(org.hipparchus.optim.AbstractConvergenceCheck
     The converged method will also return true if the number of iterations has been set (see ).
     """
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, relativeThreshold: float, absoluteThreshold: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, int: int): ...
+    def __init__(self, relativeThreshold: float, absoluteThreshold: float, maxIter: int): ...
     def converged(self, iteration: int, previous: 'UnivariatePointValuePair', current: 'UnivariatePointValuePair') -> bool:
         """
         Check if the optimization algorithm has converged considering the last two points. This method may be called several time from the same algorithm iteration with different points. This can be detected by checking the iteration number at each call if needed. Each time this method is called, the previous and current point correspond to points with the same role at each iteration, so they can be compared. As an example, simplex-based algorithms call this method for all points of the simplex, not only for the best or worst ones.
@@ -203,8 +201,6 @@ class SimpleUnivariateValueChecker(org.hipparchus.optim.AbstractConvergenceCheck
 
 class UnivariateObjectiveFunction(org.hipparchus.optim.OptimizationData):
     """
-    implements OptimizationData
-    
     Scalar function to be optimized.
     """
     def __init__(self, f: typing.Union[org.hipparchus.analysis.UnivariateFunction, typing.Callable]):
@@ -275,15 +271,14 @@ class UnivariateOptimizer(org.hipparchus.optim.BaseOptimizer['UnivariatePointVal
     @typing.overload
     def optimize(self) -> typing.Any: ...
     @typing.overload
-    def optimize(self, *optimizationData: org.hipparchus.optim.OptimizationData) -> 'UnivariatePointValuePair': ...
+    def optimize(self, *optData: org.hipparchus.optim.OptimizationData) -> 'UnivariatePointValuePair': ...
 
 class UnivariatePointValuePair(java.io.Serializable):
     """
-    implements Serializable
-    
     This class holds a point and the value of an objective function at this point. This is a simple immutable container.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self, point: float, value: float):
         """
@@ -327,9 +322,9 @@ class BrentOptimizer(UnivariateOptimizer):
       - to ensure that the best point encountered is the one returned.
     """
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, rel: float, abs: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, convergenceChecker: typing.Union[org.hipparchus.optim.ConvergenceChecker[UnivariatePointValuePair], typing.Callable[[int, UnivariatePointValuePair, UnivariatePointValuePair], bool]]): ...
+    def __init__(self, rel: float, abs: float, checker: typing.Union[org.hipparchus.optim.ConvergenceChecker[UnivariatePointValuePair], typing.Callable[[int, UnivariatePointValuePair, UnivariatePointValuePair], bool]]): ...
 
 class MultiStartUnivariateOptimizer(UnivariateOptimizer):
     """

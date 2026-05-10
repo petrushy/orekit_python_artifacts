@@ -19,8 +19,6 @@ import typing
 _EnumeratedDistribution__T = typing.TypeVar('_EnumeratedDistribution__T')  # <T>
 class EnumeratedDistribution(java.io.Serializable, typing.Generic[_EnumeratedDistribution__T]):
     """
-    implements Serializable
-    
     A generic implementation of a ` discrete probability distribution (Wikipedia) <http://en.wikipedia.org/wiki/Probability_distribution#Discrete_probability_distribution>` over a finite sample space, based on an enumerated list of <value, probability> pairs.
     
     Input probabilities must all be non-negative, but zero values are allowed and their sum does not have to equal one. Constructors will normalize input probabilities to make them sum to one.
@@ -29,14 +27,15 @@ class EnumeratedDistribution(java.io.Serializable, typing.Generic[_EnumeratedDis
     
     For example, if the list of pairs <"dog", 0.2>, <null, 0.1>, <"pig", 0.2>, <"dog", 0.1>, <null, 0.4> is provided to the constructor, the resulting pmf will assign mass of 0.5 to null, 0.3 to "dog" and 0.2 to null.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self, pmf: java.util.List[org.hipparchus.util.Pair[_EnumeratedDistribution__T, float]]):
         """
         Create an enumerated distribution using the given probability mass function enumeration.
         
         Parameters:
-            pmf (List<Pair<EnumeratedDistribution,Double>>): probability mass function enumerated as a list of <T, probability> pairs.
+            pmf (List<Pair<EnumeratedDistribution, Double>>): probability mass function enumerated as a list of <T, probability> pairs.
         
         Raises:
             MathIllegalArgumentException: of weights includes negative, NaN or infinite values or only 0's
@@ -195,7 +194,7 @@ class IntegerDistribution:
         """
         ...
     @typing.overload
-    def probability(self, int: int) -> float:
+    def probability(self, x: int) -> float:
         """
         For a random variable X whose values are distributed according to this distribution, this method returns P(X = x). In other words, this method represents the probability mass function (PMF) for the distribution.
         
@@ -205,7 +204,7 @@ class IntegerDistribution:
         Returns:
             the value of the probability mass function at x
         
-        double probability(int x0, int x1) throws MathIllegalArgumentException
+        double probability (int x0, int x1) throws MathIllegalArgumentException
         
         For a random variable X whose values are distributed according to this distribution, this method returns P(x0 < X <= x1).
         
@@ -224,7 +223,7 @@ class IntegerDistribution:
         """
         ...
     @typing.overload
-    def probability(self, int: int, int2: int) -> float: ...
+    def probability(self, x0: int, x1: int) -> float: ...
 
 class MultivariateRealDistribution:
     """
@@ -273,7 +272,7 @@ class MultivariateRealDistribution:
         Returns:
             a random value vector.
         
-        double[][] sample(int sampleSize) throws MathIllegalArgumentException
+        double[][] sample (int sampleSize) throws MathIllegalArgumentException
         
         Generates a list of a random value vectors from the distribution.
         
@@ -286,14 +285,14 @@ class MultivariateRealDistribution:
         Raises:
             MathIllegalArgumentException: if sampleSize is not positive.
         
-              - sample
-        
+        Also see:
+            sample
         
         
         """
         ...
     @typing.overload
-    def sample(self, int: int) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def sample(self, sampleSize: int) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
 
 class RealDistribution:
     """

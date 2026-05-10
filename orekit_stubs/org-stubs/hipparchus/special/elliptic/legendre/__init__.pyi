@@ -34,12 +34,13 @@ class LegendreEllipticIntegral:
     Since:
         2.0
     
-          - Elliptic_integral
-          - CompleteEllipticIntegraloftheFirstKind
-          - CompleteEllipticIntegraloftheSecondKind
-          - EllipticIntegraloftheFirstKind
-          - EllipticIntegraloftheSecondKind
-          - EllipticIntegraloftheThirdKind
+    Also see:
+        Elliptic_integral,
+        CompleteEllipticIntegraloftheFirstKind,
+        CompleteEllipticIntegraloftheSecondKind,
+        EllipticIntegraloftheFirstKind,
+        EllipticIntegraloftheSecondKind,
+        EllipticIntegraloftheThirdKind
     """
     _bigD_2__T = typing.TypeVar('_bigD_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _bigD_3__T = typing.TypeVar('_bigD_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -47,7 +48,7 @@ class LegendreEllipticIntegral:
     _bigD_7__T = typing.TypeVar('_bigD_7__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def bigD(double: float) -> float:
+    def bigD(m: float) -> float:
         """
         The complete elliptic integral D(m) is \[ \int_0^{\frac{\pi}{2}} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
         
@@ -59,7 +60,8 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral D(m)
         
-              - bigD
+        Also see:
+            bigD
         
         Get the complete elliptic integral D(m) = [K(m) - E(m)]/m.
         
@@ -73,7 +75,8 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral D(m)
         
-              - bigD
+        Also see:
+            bigD
         
         Get the incomplete elliptic integral D(φ, m) = [F(φ, m) - E(φ, m)]/m.
         
@@ -88,7 +91,8 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral D(φ, m)
         
-              - bigD
+        Also see:
+            bigD
         
         Get the incomplete elliptic integral D(φ, m) = [F(φ, m) - E(φ, m)]/m.
         
@@ -105,17 +109,17 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral D(φ, m)
         
-              - bigD
-        
+        Also see:
+            bigD
         
         """
         ...
     @typing.overload
     @staticmethod
-    def bigD(double: float, double2: float) -> float: ...
+    def bigD(phi: float, m: float) -> float: ...
     @typing.overload
     @staticmethod
-    def bigD(t: _bigD_2__T) -> _bigD_2__T:
+    def bigD(m: _bigD_2__T) -> _bigD_2__T:
         """
         The complete elliptic integral D(m) is \[ \int_0^{\frac{\pi}{2}} \frac{\sin^2\theta}{\sqrt{1-m \sin^2\theta}} d\theta \]
         
@@ -127,7 +131,8 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral D(m)
         
-              - bigD
+        Also see:
+            bigD
         
         Get the complete elliptic integral D(m) = [K(m) - E(m)]/m.
         
@@ -141,7 +146,8 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral D(m)
         
-              - bigD
+        Also see:
+            bigD
         
         Get the incomplete elliptic integral D(φ, m) = [F(φ, m) - E(φ, m)]/m.
         
@@ -156,8 +162,8 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral D(φ, m)
         
-              - bigD
-        
+        Also see:
+            bigD
         
         """
         ...
@@ -178,24 +184,24 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral D(φ, m)
         
-              - bigD
-        
+        Also see:
+            bigD
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def bigD(complex: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
+    def bigD(m: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def bigD(complex: org.hipparchus.complex.Complex, complex2: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
+    def bigD(phi: org.hipparchus.complex.Complex, m: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def bigD(fieldComplex: org.hipparchus.complex.FieldComplex[_bigD_6__T]) -> org.hipparchus.complex.FieldComplex[_bigD_6__T]: ...
+    def bigD(m: org.hipparchus.complex.FieldComplex[_bigD_6__T]) -> org.hipparchus.complex.FieldComplex[_bigD_6__T]: ...
     @typing.overload
     @staticmethod
-    def bigD(fieldComplex: org.hipparchus.complex.FieldComplex[_bigD_7__T], fieldComplex2: org.hipparchus.complex.FieldComplex[_bigD_7__T]) -> org.hipparchus.complex.FieldComplex[_bigD_7__T]: ...
+    def bigD(phi: org.hipparchus.complex.FieldComplex[_bigD_7__T], m: org.hipparchus.complex.FieldComplex[_bigD_7__T]) -> org.hipparchus.complex.FieldComplex[_bigD_7__T]: ...
     _bigE_2__T = typing.TypeVar('_bigE_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _bigE_3__T = typing.TypeVar('_bigE_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _bigE_7__T = typing.TypeVar('_bigE_7__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -203,7 +209,7 @@ class LegendreEllipticIntegral:
     _bigE_9__T = typing.TypeVar('_bigE_9__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def bigE(double: float) -> float:
+    def bigE(m: float) -> float:
         """
         The complete elliptic integral of the second kind E(m) is \[ \int_0^{\frac{\pi}{2}} \sqrt{1-m \sin^2\theta} d\theta \]
         
@@ -215,9 +221,10 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral of the second kind E(m)
         
-              - bigE
-              - CompleteEllipticIntegraloftheSecondKind
-              - Elliptic_integral
+        Also see:
+            bigE,
+            CompleteEllipticIntegraloftheSecondKind,
+            Elliptic_integral
         
         Get the complete elliptic integral of the second kind E(m).
         
@@ -231,9 +238,10 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral of the second kind E(m)
         
-              - bigE
-              - CompleteEllipticIntegraloftheSecondKind
-              - Elliptic_integral
+        Also see:
+            bigE,
+            CompleteEllipticIntegraloftheSecondKind,
+            Elliptic_integral
         
         Get the incomplete elliptic integral of the second kind E(φ, m).
         
@@ -248,9 +256,10 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the second kind E(φ, m)
         
-              - bigE
-              - EllipticIntegraloftheSecondKind
-              - Elliptic_integral
+        Also see:
+            bigE,
+            EllipticIntegraloftheSecondKind,
+            Elliptic_integral
         
         Get the incomplete elliptic integral of the second kind E(φ, m).
         
@@ -267,9 +276,10 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the second kind E(φ, m)
         
-              - bigE
-              - EllipticIntegraloftheSecondKind
-              - Elliptic_integral
+        Also see:
+            bigE,
+            EllipticIntegraloftheSecondKind,
+            Elliptic_integral
         
         Get the incomplete elliptic integral of the second kind E(φ, m) using numerical integration.
         
@@ -289,19 +299,19 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the second kind E(φ, m)
         
-              - bigE
-              - EllipticIntegraloftheSecondKind
-              - Elliptic_integral
-        
+        Also see:
+            bigE,
+            EllipticIntegraloftheSecondKind,
+            Elliptic_integral
         
         """
         ...
     @typing.overload
     @staticmethod
-    def bigE(double: float, double2: float) -> float: ...
+    def bigE(phi: float, m: float) -> float: ...
     @typing.overload
     @staticmethod
-    def bigE(t: _bigE_2__T) -> _bigE_2__T:
+    def bigE(m: _bigE_2__T) -> _bigE_2__T:
         """
         The complete elliptic integral of the second kind E(m) is \[ \int_0^{\frac{\pi}{2}} \sqrt{1-m \sin^2\theta} d\theta \]
         
@@ -313,9 +323,10 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral of the second kind E(m)
         
-              - bigE
-              - CompleteEllipticIntegraloftheSecondKind
-              - Elliptic_integral
+        Also see:
+            bigE,
+            CompleteEllipticIntegraloftheSecondKind,
+            Elliptic_integral
         
         Get the complete elliptic integral of the second kind E(m).
         
@@ -329,9 +340,10 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral of the second kind E(m)
         
-              - bigE
-              - CompleteEllipticIntegraloftheSecondKind
-              - Elliptic_integral
+        Also see:
+            bigE,
+            CompleteEllipticIntegraloftheSecondKind,
+            Elliptic_integral
         
         Get the incomplete elliptic integral of the second kind E(φ, m).
         
@@ -346,10 +358,10 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the second kind E(φ, m)
         
-              - bigE
-              - EllipticIntegraloftheSecondKind
-              - Elliptic_integral
-        
+        Also see:
+            bigE,
+            EllipticIntegraloftheSecondKind,
+            Elliptic_integral
         
         """
         ...
@@ -370,28 +382,28 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the second kind E(φ, m)
         
-              - bigE
-              - EllipticIntegraloftheSecondKind
-              - Elliptic_integral
-        
+        Also see:
+            bigE,
+            EllipticIntegraloftheSecondKind,
+            Elliptic_integral
         
         """
         ...
     @typing.overload
     @staticmethod
-    def bigE(complex: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
+    def bigE(m: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def bigE(complex: org.hipparchus.complex.Complex, complex2: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
+    def bigE(phi: org.hipparchus.complex.Complex, m: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def bigE(complex: org.hipparchus.complex.Complex, complex2: org.hipparchus.complex.Complex, complexUnivariateIntegrator: org.hipparchus.complex.ComplexUnivariateIntegrator, int: int) -> org.hipparchus.complex.Complex: ...
+    def bigE(phi: org.hipparchus.complex.Complex, m: org.hipparchus.complex.Complex, integrator: org.hipparchus.complex.ComplexUnivariateIntegrator, maxEval: int) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def bigE(fieldComplex: org.hipparchus.complex.FieldComplex[_bigE_7__T]) -> org.hipparchus.complex.FieldComplex[_bigE_7__T]: ...
+    def bigE(m: org.hipparchus.complex.FieldComplex[_bigE_7__T]) -> org.hipparchus.complex.FieldComplex[_bigE_7__T]: ...
     @typing.overload
     @staticmethod
-    def bigE(fieldComplex: org.hipparchus.complex.FieldComplex[_bigE_8__T], fieldComplex2: org.hipparchus.complex.FieldComplex[_bigE_8__T]) -> org.hipparchus.complex.FieldComplex[_bigE_8__T]: ...
+    def bigE(phi: org.hipparchus.complex.FieldComplex[_bigE_8__T], m: org.hipparchus.complex.FieldComplex[_bigE_8__T]) -> org.hipparchus.complex.FieldComplex[_bigE_8__T]: ...
     @typing.overload
     @staticmethod
     def bigE(phi: org.hipparchus.complex.FieldComplex[_bigE_9__T], m: org.hipparchus.complex.FieldComplex[_bigE_9__T], integrator: org.hipparchus.complex.FieldComplexUnivariateIntegrator[_bigE_9__T], maxEval: int) -> org.hipparchus.complex.FieldComplex[_bigE_9__T]:
@@ -412,10 +424,10 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the second kind E(φ, m)
         
-              - bigE
-              - EllipticIntegraloftheSecondKind
-              - Elliptic_integral
-        
+        Also see:
+            bigE,
+            EllipticIntegraloftheSecondKind,
+            Elliptic_integral
         
         
         """
@@ -425,7 +437,7 @@ class LegendreEllipticIntegral:
     _bigF_5__T = typing.TypeVar('_bigF_5__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def bigF(double: float, double2: float) -> float:
+    def bigF(phi: float, m: float) -> float:
         """
         The incomplete elliptic integral of the first kind F(φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}} \]
         
@@ -438,9 +450,10 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the first kind F(φ, m)
         
-              - bigK
-              - EllipticIntegraloftheFirstKind
-              - Elliptic_integral
+        Also see:
+            bigK,
+            EllipticIntegraloftheFirstKind,
+            Elliptic_integral
         
         Get the incomplete elliptic integral of the first kind F(φ, m).
         
@@ -457,9 +470,10 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the first kind F(φ, m)
         
-              - bigK
-              - EllipticIntegraloftheFirstKind
-              - Elliptic_integral
+        Also see:
+            bigK,
+            EllipticIntegraloftheFirstKind,
+            Elliptic_integral
         
         Get the incomplete elliptic integral of the first kind F(φ, m) using numerical integration.
         
@@ -479,16 +493,16 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the first kind F(φ, m)
         
-              - bigK
-              - EllipticIntegraloftheFirstKind
-              - Elliptic_integral
-        
+        Also see:
+            bigK,
+            EllipticIntegraloftheFirstKind,
+            Elliptic_integral
         
         """
         ...
     @typing.overload
     @staticmethod
-    def bigF(t: _bigF_1__T, t2: _bigF_1__T) -> _bigF_1__T:
+    def bigF(phi: _bigF_1__T, m: _bigF_1__T) -> _bigF_1__T:
         """
         The incomplete elliptic integral of the first kind F(φ, m) is \[ \int_0^{\phi} \frac{d\theta}{\sqrt{1-m \sin^2\theta}} \]
         
@@ -501,9 +515,10 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the first kind F(φ, m)
         
-              - bigK
-              - EllipticIntegraloftheFirstKind
-              - Elliptic_integral
+        Also see:
+            bigK,
+            EllipticIntegraloftheFirstKind,
+            Elliptic_integral
         
         Get the incomplete elliptic integral of the first kind F(φ, m).
         
@@ -520,22 +535,22 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the first kind F(φ, m)
         
-              - bigK
-              - EllipticIntegraloftheFirstKind
-              - Elliptic_integral
-        
+        Also see:
+            bigK,
+            EllipticIntegraloftheFirstKind,
+            Elliptic_integral
         
         """
         ...
     @typing.overload
     @staticmethod
-    def bigF(complex: org.hipparchus.complex.Complex, complex2: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
+    def bigF(phi: org.hipparchus.complex.Complex, m: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def bigF(complex: org.hipparchus.complex.Complex, complex2: org.hipparchus.complex.Complex, complexUnivariateIntegrator: org.hipparchus.complex.ComplexUnivariateIntegrator, int: int) -> org.hipparchus.complex.Complex: ...
+    def bigF(phi: org.hipparchus.complex.Complex, m: org.hipparchus.complex.Complex, integrator: org.hipparchus.complex.ComplexUnivariateIntegrator, maxEval: int) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def bigF(fieldComplex: org.hipparchus.complex.FieldComplex[_bigF_4__T], fieldComplex2: org.hipparchus.complex.FieldComplex[_bigF_4__T]) -> org.hipparchus.complex.FieldComplex[_bigF_4__T]: ...
+    def bigF(phi: org.hipparchus.complex.FieldComplex[_bigF_4__T], m: org.hipparchus.complex.FieldComplex[_bigF_4__T]) -> org.hipparchus.complex.FieldComplex[_bigF_4__T]: ...
     @typing.overload
     @staticmethod
     def bigF(phi: org.hipparchus.complex.FieldComplex[_bigF_5__T], m: org.hipparchus.complex.FieldComplex[_bigF_5__T], integrator: org.hipparchus.complex.FieldComplexUnivariateIntegrator[_bigF_5__T], maxEval: int) -> org.hipparchus.complex.FieldComplex[_bigF_5__T]:
@@ -556,10 +571,10 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the first kind F(φ, m)
         
-              - bigK
-              - EllipticIntegraloftheFirstKind
-              - Elliptic_integral
-        
+        Also see:
+            bigK,
+            EllipticIntegraloftheFirstKind,
+            Elliptic_integral
         
         
         """
@@ -568,7 +583,7 @@ class LegendreEllipticIntegral:
     _bigK_3__T = typing.TypeVar('_bigK_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def bigK(double: float) -> float:
+    def bigK(m: float) -> float:
         """
         The complete elliptic integral of the first kind K(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m \sin^2\theta}} \] it corresponds to the real quarter-period of Jacobi elliptic functions
         
@@ -580,10 +595,11 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral of the first kind K(m)
         
-              - bigKPrime
-              - bigF
-              - CompleteEllipticIntegraloftheFirstKind
-              - Elliptic_integral
+        Also see:
+            bigKPrime,
+            bigF,
+            CompleteEllipticIntegraloftheFirstKind,
+            Elliptic_integral
         
         Get the complete elliptic integral of the first kind K(m).
         
@@ -597,17 +613,17 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral of the first kind K(m)
         
-              - bigKPrime
-              - bigF
-              - CompleteEllipticIntegraloftheFirstKind
-              - Elliptic_integral
-        
+        Also see:
+            bigKPrime,
+            bigF,
+            CompleteEllipticIntegraloftheFirstKind,
+            Elliptic_integral
         
         """
         ...
     @typing.overload
     @staticmethod
-    def bigK(t: _bigK_1__T) -> _bigK_1__T:
+    def bigK(m: _bigK_1__T) -> _bigK_1__T:
         """
         The complete elliptic integral of the first kind K(m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m \sin^2\theta}} \] it corresponds to the real quarter-period of Jacobi elliptic functions
         
@@ -619,10 +635,11 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral of the first kind K(m)
         
-              - bigKPrime
-              - bigF
-              - CompleteEllipticIntegraloftheFirstKind
-              - Elliptic_integral
+        Also see:
+            bigKPrime,
+            bigF,
+            CompleteEllipticIntegraloftheFirstKind,
+            Elliptic_integral
         
         Get the complete elliptic integral of the first kind K(m).
         
@@ -636,26 +653,26 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral of the first kind K(m)
         
-              - bigKPrime
-              - bigF
-              - CompleteEllipticIntegraloftheFirstKind
-              - Elliptic_integral
-        
+        Also see:
+            bigKPrime,
+            bigF,
+            CompleteEllipticIntegraloftheFirstKind,
+            Elliptic_integral
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def bigK(complex: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
+    def bigK(m: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def bigK(fieldComplex: org.hipparchus.complex.FieldComplex[_bigK_3__T]) -> org.hipparchus.complex.FieldComplex[_bigK_3__T]: ...
+    def bigK(m: org.hipparchus.complex.FieldComplex[_bigK_3__T]) -> org.hipparchus.complex.FieldComplex[_bigK_3__T]: ...
     _bigKPrime_1__T = typing.TypeVar('_bigKPrime_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _bigKPrime_3__T = typing.TypeVar('_bigKPrime_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def bigKPrime(double: float) -> float:
+    def bigKPrime(m: float) -> float:
         """
         Get the complete elliptic integral of the first kind K'(m).
         
@@ -669,9 +686,10 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral of the first kind K'(m)
         
-              - bigK
-              - CompleteEllipticIntegraloftheFirstKind
-              - Elliptic_integral
+        Also see:
+            bigK,
+            CompleteEllipticIntegraloftheFirstKind,
+            Elliptic_integral
         
         Get the complete elliptic integral of the first kind K'(m).
         
@@ -685,16 +703,16 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral of the first kind K'(m)
         
-              - bigK
-              - CompleteEllipticIntegraloftheFirstKind
-              - Elliptic_integral
-        
+        Also see:
+            bigK,
+            CompleteEllipticIntegraloftheFirstKind,
+            Elliptic_integral
         
         """
         ...
     @typing.overload
     @staticmethod
-    def bigKPrime(t: _bigKPrime_1__T) -> _bigKPrime_1__T:
+    def bigKPrime(m: _bigKPrime_1__T) -> _bigKPrime_1__T:
         """
         Get the complete elliptic integral of the first kind K'(m).
         
@@ -708,9 +726,10 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral of the first kind K'(m)
         
-              - bigK
-              - CompleteEllipticIntegraloftheFirstKind
-              - Elliptic_integral
+        Also see:
+            bigK,
+            CompleteEllipticIntegraloftheFirstKind,
+            Elliptic_integral
         
         Get the complete elliptic integral of the first kind K'(m).
         
@@ -724,20 +743,20 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral of the first kind K'(m)
         
-              - bigK
-              - CompleteEllipticIntegraloftheFirstKind
-              - Elliptic_integral
-        
+        Also see:
+            bigK,
+            CompleteEllipticIntegraloftheFirstKind,
+            Elliptic_integral
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def bigKPrime(complex: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
+    def bigKPrime(m: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def bigKPrime(fieldComplex: org.hipparchus.complex.FieldComplex[_bigKPrime_3__T]) -> org.hipparchus.complex.FieldComplex[_bigKPrime_3__T]: ...
+    def bigKPrime(m: org.hipparchus.complex.FieldComplex[_bigKPrime_3__T]) -> org.hipparchus.complex.FieldComplex[_bigKPrime_3__T]: ...
     _bigPi_2__T = typing.TypeVar('_bigPi_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _bigPi_3__T = typing.TypeVar('_bigPi_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _bigPi_7__T = typing.TypeVar('_bigPi_7__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -745,7 +764,7 @@ class LegendreEllipticIntegral:
     _bigPi_9__T = typing.TypeVar('_bigPi_9__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def bigPi(double: float, double2: float) -> float:
+    def bigPi(n: float, m: float) -> float:
         """
         The complete elliptic integral of the third kind Π(n, m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m \sin^2\theta}(1-n \sin^2\theta)} \]
         
@@ -758,9 +777,10 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral of the third kind Π(n, m)
         
-              - bigPi
-              - EllipticIntegraloftheThirdKind
-              - Elliptic_integral
+        Also see:
+            bigPi,
+            EllipticIntegraloftheThirdKind,
+            Elliptic_integral
         
         Get the complete elliptic integral of the third kind Π(n, m).
         
@@ -775,9 +795,10 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral of the third kind Π(n, m)
         
-              - bigPi
-              - EllipticIntegraloftheThirdKind
-              - Elliptic_integral
+        Also see:
+            bigPi,
+            EllipticIntegraloftheThirdKind,
+            Elliptic_integral
         
         Get the incomplete elliptic integral of the third kind Π(n, φ, m).
         
@@ -793,9 +814,10 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the third kind Π(n, φ, m)
         
-              - bigPi
-              - EllipticIntegraloftheThirdKind
-              - Elliptic_integral
+        Also see:
+            bigPi,
+            EllipticIntegraloftheThirdKind,
+            Elliptic_integral
         
         Get the incomplete elliptic integral of the third kind Π(n, φ, m).
         
@@ -813,9 +835,10 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the third kind Π(n, φ, m)
         
-              - bigPi
-              - EllipticIntegraloftheThirdKind
-              - Elliptic_integral
+        Also see:
+            bigPi,
+            EllipticIntegraloftheThirdKind,
+            Elliptic_integral
         
         Get the incomplete elliptic integral of the third kind Π(n, φ, m) using numerical integration.
         
@@ -835,19 +858,19 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the third kind Π(n, φ, m)
         
-              - bigPi
-              - EllipticIntegraloftheThirdKind
-              - Elliptic_integral
-        
+        Also see:
+            bigPi,
+            EllipticIntegraloftheThirdKind,
+            Elliptic_integral
         
         """
         ...
     @typing.overload
     @staticmethod
-    def bigPi(double: float, double2: float, double3: float) -> float: ...
+    def bigPi(n: float, phi: float, m: float) -> float: ...
     @typing.overload
     @staticmethod
-    def bigPi(t: _bigPi_2__T, t2: _bigPi_2__T) -> _bigPi_2__T:
+    def bigPi(n: _bigPi_2__T, m: _bigPi_2__T) -> _bigPi_2__T:
         """
         The complete elliptic integral of the third kind Π(n, m) is \[ \int_0^{\frac{\pi}{2}} \frac{d\theta}{\sqrt{1-m \sin^2\theta}(1-n \sin^2\theta)} \]
         
@@ -860,9 +883,10 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral of the third kind Π(n, m)
         
-              - bigPi
-              - EllipticIntegraloftheThirdKind
-              - Elliptic_integral
+        Also see:
+            bigPi,
+            EllipticIntegraloftheThirdKind,
+            Elliptic_integral
         
         Get the complete elliptic integral of the third kind Π(n, m).
         
@@ -877,9 +901,10 @@ class LegendreEllipticIntegral:
         Returns:
             complete elliptic integral of the third kind Π(n, m)
         
-              - bigPi
-              - EllipticIntegraloftheThirdKind
-              - Elliptic_integral
+        Also see:
+            bigPi,
+            EllipticIntegraloftheThirdKind,
+            Elliptic_integral
         
         Get the incomplete elliptic integral of the third kind Π(n, φ, m).
         
@@ -895,10 +920,10 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the third kind Π(n, φ, m)
         
-              - bigPi
-              - EllipticIntegraloftheThirdKind
-              - Elliptic_integral
-        
+        Also see:
+            bigPi,
+            EllipticIntegraloftheThirdKind,
+            Elliptic_integral
         
         """
         ...
@@ -920,28 +945,28 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the third kind Π(n, φ, m)
         
-              - bigPi
-              - EllipticIntegraloftheThirdKind
-              - Elliptic_integral
-        
+        Also see:
+            bigPi,
+            EllipticIntegraloftheThirdKind,
+            Elliptic_integral
         
         """
         ...
     @typing.overload
     @staticmethod
-    def bigPi(complex: org.hipparchus.complex.Complex, complex2: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
+    def bigPi(n: org.hipparchus.complex.Complex, m: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def bigPi(complex: org.hipparchus.complex.Complex, complex2: org.hipparchus.complex.Complex, complex3: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
+    def bigPi(n: org.hipparchus.complex.Complex, phi: org.hipparchus.complex.Complex, m: org.hipparchus.complex.Complex) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def bigPi(complex: org.hipparchus.complex.Complex, complex2: org.hipparchus.complex.Complex, complex3: org.hipparchus.complex.Complex, complexUnivariateIntegrator: org.hipparchus.complex.ComplexUnivariateIntegrator, int: int) -> org.hipparchus.complex.Complex: ...
+    def bigPi(n: org.hipparchus.complex.Complex, phi: org.hipparchus.complex.Complex, m: org.hipparchus.complex.Complex, integrator: org.hipparchus.complex.ComplexUnivariateIntegrator, maxEval: int) -> org.hipparchus.complex.Complex: ...
     @typing.overload
     @staticmethod
-    def bigPi(fieldComplex: org.hipparchus.complex.FieldComplex[_bigPi_7__T], fieldComplex2: org.hipparchus.complex.FieldComplex[_bigPi_7__T]) -> org.hipparchus.complex.FieldComplex[_bigPi_7__T]: ...
+    def bigPi(n: org.hipparchus.complex.FieldComplex[_bigPi_7__T], m: org.hipparchus.complex.FieldComplex[_bigPi_7__T]) -> org.hipparchus.complex.FieldComplex[_bigPi_7__T]: ...
     @typing.overload
     @staticmethod
-    def bigPi(fieldComplex: org.hipparchus.complex.FieldComplex[_bigPi_8__T], fieldComplex2: org.hipparchus.complex.FieldComplex[_bigPi_8__T], fieldComplex3: org.hipparchus.complex.FieldComplex[_bigPi_8__T]) -> org.hipparchus.complex.FieldComplex[_bigPi_8__T]: ...
+    def bigPi(n: org.hipparchus.complex.FieldComplex[_bigPi_8__T], phi: org.hipparchus.complex.FieldComplex[_bigPi_8__T], m: org.hipparchus.complex.FieldComplex[_bigPi_8__T]) -> org.hipparchus.complex.FieldComplex[_bigPi_8__T]: ...
     @typing.overload
     @staticmethod
     def bigPi(n: org.hipparchus.complex.FieldComplex[_bigPi_9__T], phi: org.hipparchus.complex.FieldComplex[_bigPi_9__T], m: org.hipparchus.complex.FieldComplex[_bigPi_9__T], integrator: org.hipparchus.complex.FieldComplexUnivariateIntegrator[_bigPi_9__T], maxEval: int) -> org.hipparchus.complex.FieldComplex[_bigPi_9__T]:
@@ -963,10 +988,10 @@ class LegendreEllipticIntegral:
         Returns:
             incomplete elliptic integral of the third kind Π(n, φ, m)
         
-              - bigPi
-              - EllipticIntegraloftheThirdKind
-              - Elliptic_integral
-        
+        Also see:
+            bigPi,
+            EllipticIntegraloftheThirdKind,
+            Elliptic_integral
         
         
         """

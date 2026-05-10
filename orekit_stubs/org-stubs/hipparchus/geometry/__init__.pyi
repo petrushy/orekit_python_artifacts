@@ -46,8 +46,6 @@ class Geometry:
 
 class LocalizedGeometryFormats(java.lang.Enum['LocalizedGeometryFormats'], org.hipparchus.exception.Localizable):
     """
-    implements hipparchus
-    
     Enumeration for localized messages formats used in exceptions messages.
     
     The constants in this enumeration represent the available formats as localized strings. These formats are intended to be localized using simple properties files, using the constant name as the key and the property value as the message format. The source English format is provided in the constants themselves to serve both as a reminder for developers to understand the parameters needed by each format, as a basis for translators to create localized properties files, and as a default format if some translation is missing.
@@ -116,7 +114,12 @@ class LocalizedGeometryFormats(java.lang.Enum['LocalizedGeometryFormats'], org.h
     @staticmethod
     def values() -> typing.MutableSequence['LocalizedGeometryFormats']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (LocalizedGeometryFormats c : LocalizedGeometryFormats.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -131,8 +134,8 @@ class Point(java.io.Serializable, typing.Generic[_Point__S, _Point__P]):
     """
     This interface represents a generic geometrical point.
     
-          - Space
-          - Vector
+    Also see:
+        Space, Vector
     """
     def distance(self, p: _Point__P) -> float:
         """
@@ -191,7 +194,8 @@ class Space(java.io.Serializable):
     """
     This interface represents a generic space, with affine and vectorial counterparts.
     
-          - Vector
+    Also see:
+        Vector
     """
     def getDimension(self) -> int:
         """
@@ -213,8 +217,8 @@ class Space(java.io.Serializable):
         Raises:
             hipparchus: for dimension-1 spaces which do not have sub-spaces
         
-              - getDimension
-        
+        Also see:
+            getDimension
         
         
         """
@@ -236,8 +240,8 @@ class VectorFormat(typing.Generic[_VectorFormat__S, _VectorFormat__V]):
     """
     The default prefix: "{".
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -245,8 +249,8 @@ class VectorFormat(typing.Generic[_VectorFormat__S, _VectorFormat__V]):
     """
     The default suffix: "}".
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -254,8 +258,8 @@ class VectorFormat(typing.Generic[_VectorFormat__S, _VectorFormat__V]):
     """
     The default separator: ", ".
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -331,9 +335,9 @@ class VectorFormat(typing.Generic[_VectorFormat__S, _VectorFormat__V]):
         """
         ...
     @typing.overload
-    def parse(self, string: str) -> 'Vector'[_VectorFormat__S, _VectorFormat__V]: ...
+    def parse(self, source: str) -> 'Vector'[_VectorFormat__S, _VectorFormat__V]: ...
     @typing.overload
-    def parse(self, string: str, parsePosition: java.text.ParsePosition) -> 'Vector'[_VectorFormat__S, _VectorFormat__V]: ...
+    def parse(self, source: str, pos: java.text.ParsePosition) -> 'Vector'[_VectorFormat__S, _VectorFormat__V]: ...
 
 _Vector__S = typing.TypeVar('_Vector__S', bound=Space)  # <S>
 _Vector__V = typing.TypeVar('_Vector__V', bound='Vector')  # <V>
@@ -341,8 +345,8 @@ class Vector(Point[_Vector__S, _Vector__V], org.hipparchus.util.Blendable[_Vecto
     """
     This interface represents a generic vector in a vectorial space or a point in an affine space.
     
-          - Space
-          - Point
+    Also see:
+        Space, Point
     """
     @typing.overload
     def add(self, factor: float, v: _Vector__V) -> _Vector__V:
@@ -372,7 +376,7 @@ class Vector(Point[_Vector__S, _Vector__V], org.hipparchus.util.Blendable[_Vecto
         
         """
         ...
-    def blendArithmeticallyWith(self, v: _Vector__V, double: float) -> _Vector__V:
+    def blendArithmeticallyWith(self, other: _Vector__V, blendingValue: float) -> _Vector__V:
         """
         Specified by: hipparchus in interface hipparchus
         

@@ -39,13 +39,12 @@ class AbstractCurveFitter:
 
 class WeightedObservedPoint(java.io.Serializable):
     """
-    implements Serializable
-    
     This class is a simple container for weighted observed point in AbstractCurveFitter.
     
     Instances of this class are guaranteed to be immutable.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self, weight: float, x: float, y: float):
         """
@@ -92,11 +91,10 @@ class WeightedObservedPoint(java.io.Serializable):
 
 class WeightedObservedPoints(java.io.Serializable):
     """
-    implements Serializable
-    
     Simple container for weighted observed points used in AbstractCurveFitter algorithms.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self):
         """
@@ -109,7 +107,7 @@ class WeightedObservedPoints(java.io.Serializable):
         """
         ...
     @typing.overload
-    def add(self, double: float, double2: float) -> None:
+    def add(self, x: float, y: float) -> None:
         """
         Adds a point to the sample. Calling this method is equivalent to calling 0, x, y).
         
@@ -117,9 +115,9 @@ class WeightedObservedPoints(java.io.Serializable):
             x (double): Abscissa of the point.
             y (double): Observed value at x. After fitting we should have f(x) as close as possible to this value.
         
-              - add
-              - add
-              - toList
+        Also see:
+            add, add,
+            toList
         
         Adds a point to the sample.
         
@@ -128,15 +126,14 @@ class WeightedObservedPoints(java.io.Serializable):
             x (double): Abscissa of the point.
             y (double): Observed value at x. After fitting we should have f(x) as close as possible to this value.
         
-              - add
-              - add
-              - toList
-        
+        Also see:
+            add, add,
+            toList
         
         """
         ...
     @typing.overload
-    def add(self, double: float, double2: float, double3: float) -> None: ...
+    def add(self, weight: float, x: float, y: float) -> None: ...
     @typing.overload
     def add(self, observed: WeightedObservedPoint) -> None:
         """
@@ -145,10 +142,9 @@ class WeightedObservedPoints(java.io.Serializable):
         Parameters:
             observed (WeightedObservedPoint): Observed point to add.
         
-              - add
-              - add
-              - toList
-        
+        Also see:
+            add, add,
+            toList
         
         
         """
@@ -165,10 +161,9 @@ class WeightedObservedPoints(java.io.Serializable):
         Returns:
             the observed points, in the order they were added to this container.
         
-              - add
-              - add
-              - add
-        
+        Also see:
+            add, add,
+            add
         
         
         """
@@ -207,14 +202,14 @@ class GaussianCurveFitter(AbstractCurveFitter):
     @staticmethod
     def create() -> 'GaussianCurveFitter':
         """
-        Creates a default curve fitter. The initial guess for the parameters will be ParameterGuesser computed automatically, and the maximum number of iterations of the optimization algorithm is set to MAX_VALUE.
+        Creates a default curve fitter. The initial guess for the parameters will be ParameterGuesser computed automatically, and the maximum number of iterations of the optimization algorithm is set to Integer.
         
         Returns:
             a curve fitter.
         
-              - withStartPoint
-              - withMaxIterations
-        
+        Also see:
+            withStartPoint,
+            withMaxIterations
         
         
         """
@@ -264,14 +259,14 @@ class HarmonicCurveFitter(AbstractCurveFitter):
     @staticmethod
     def create() -> 'HarmonicCurveFitter':
         """
-        Creates a default curve fitter. The initial guess for the parameters will be ParameterGuesser computed automatically, and the maximum number of iterations of the optimization algorithm is set to MAX_VALUE.
+        Creates a default curve fitter. The initial guess for the parameters will be ParameterGuesser computed automatically, and the maximum number of iterations of the optimization algorithm is set to Integer.
         
         Returns:
             a curve fitter.
         
-              - withStartPoint
-              - withMaxIterations
-        
+        Also see:
+            withStartPoint,
+            withMaxIterations
         
         
         """
@@ -315,7 +310,7 @@ class PolynomialCurveFitter(AbstractCurveFitter):
     @staticmethod
     def create(degree: int) -> 'PolynomialCurveFitter':
         """
-        Creates a default curve fitter. Zero will be used as initial guess for the coefficients, and the maximum number of iterations of the optimization algorithm is set to MAX_VALUE.
+        Creates a default curve fitter. Zero will be used as initial guess for the coefficients, and the maximum number of iterations of the optimization algorithm is set to Integer.
         
         Parameters:
             degree (int): Degree of the polynomial to be fitted.
@@ -323,9 +318,9 @@ class PolynomialCurveFitter(AbstractCurveFitter):
         Returns:
             a curve fitter.
         
-              - withStartPoint
-              - withMaxIterations
-        
+        Also see:
+            withStartPoint,
+            withMaxIterations
         
         
         """
@@ -364,7 +359,7 @@ class SimpleCurveFitter(AbstractCurveFitter):
     @staticmethod
     def create(f: org.hipparchus.analysis.ParametricUnivariateFunction, start: typing.Union[typing.List[float], jpype.JArray]) -> 'SimpleCurveFitter':
         """
-        Creates a curve fitter. The maximum number of iterations of the optimization algorithm is set to MAX_VALUE.
+        Creates a curve fitter. The maximum number of iterations of the optimization algorithm is set to Integer.
         
         Parameters:
             f (hipparchus): Function to fit.
@@ -374,9 +369,9 @@ class SimpleCurveFitter(AbstractCurveFitter):
         Returns:
             a curve fitter.
         
-              - withStartPoint
-              - withMaxIterations
-        
+        Also see:
+            withStartPoint,
+            withMaxIterations
         
         
         """

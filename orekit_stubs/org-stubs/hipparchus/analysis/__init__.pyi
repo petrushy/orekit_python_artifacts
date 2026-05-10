@@ -67,7 +67,8 @@ class CalculusFieldMultivariateFunction(typing.Generic[_CalculusFieldMultivariat
     Since:
         2.2
     
-          - MultivariateFunction
+    Also see:
+        MultivariateFunction
     """
     def value(self, *x: _CalculusFieldMultivariateFunction__T) -> _CalculusFieldMultivariateFunction__T:
         """
@@ -91,7 +92,8 @@ class CalculusFieldMultivariateMatrixFunction(typing.Generic[_CalculusFieldMulti
     Since:
         2.2
     
-          - MultivariateMatrixFunction
+    Also see:
+        MultivariateMatrixFunction
     """
     def value(self, *x: _CalculusFieldMultivariateMatrixFunction__T) -> typing.MutableSequence[typing.MutableSequence[_CalculusFieldMultivariateMatrixFunction__T]]:
         """
@@ -115,7 +117,8 @@ class CalculusFieldMultivariateVectorFunction(typing.Generic[_CalculusFieldMulti
     Since:
         2.2
     
-          - MultivariateVectorFunction
+    Also see:
+        MultivariateVectorFunction
     """
     def value(self, *x: _CalculusFieldMultivariateVectorFunction__T) -> typing.MutableSequence[_CalculusFieldMultivariateVectorFunction__T]:
         """
@@ -175,8 +178,8 @@ class CalculusFieldUnivariateFunction(typing.Generic[_CalculusFieldUnivariateFun
     
     As shown, the exception is local to the user's code and it is guaranteed that Hipparchus will not catch it.
     
-          - UnivariateFunction
-          - FieldUnivariateFunction
+    Also see:
+        UnivariateFunction, FieldUnivariateFunction
     """
     def value(self, x: _CalculusFieldUnivariateFunction__T) -> _CalculusFieldUnivariateFunction__T:
         """
@@ -285,7 +288,8 @@ class FieldMultivariateFunction:
     Since:
         2.2
     
-          - MultivariateFunction
+    Also see:
+        MultivariateFunction
     """
     _toCalculusFieldMultivariateFunction__T = typing.TypeVar('_toCalculusFieldMultivariateFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def toCalculusFieldMultivariateFunction(self, field: org.hipparchus.Field[_toCalculusFieldMultivariateFunction__T]) -> CalculusFieldMultivariateFunction[_toCalculusFieldMultivariateFunction__T]:
@@ -323,7 +327,8 @@ class FieldMultivariateMatrixFunction:
     Since:
         2.2
     
-          - MultivariateMatrixFunction
+    Also see:
+        MultivariateMatrixFunction
     """
     _toCalculusFieldMultivariateMatrixFunction__T = typing.TypeVar('_toCalculusFieldMultivariateMatrixFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def toCalculusFieldMultivariateMatrixFunction(self, field: org.hipparchus.Field[_toCalculusFieldMultivariateMatrixFunction__T]) -> CalculusFieldMultivariateMatrixFunction[_toCalculusFieldMultivariateMatrixFunction__T]:
@@ -361,7 +366,8 @@ class FieldMultivariateVectorFunction:
     Since:
         2.2
     
-          - MultivariateVectorFunction
+    Also see:
+        MultivariateVectorFunction
     """
     _toCalculusFieldMultivariateVectorFunction__T = typing.TypeVar('_toCalculusFieldMultivariateVectorFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def toCalculusFieldMultivariateVectorFunction(self, field: org.hipparchus.Field[_toCalculusFieldMultivariateVectorFunction__T]) -> CalculusFieldMultivariateVectorFunction[_toCalculusFieldMultivariateVectorFunction__T]:
@@ -401,8 +407,8 @@ class FieldUnivariateFunction:
     Since:
         1.3
     
-          - UnivariateFunction
-          - CalculusFieldUnivariateFunction
+    Also see:
+        UnivariateFunction, CalculusFieldUnivariateFunction
     """
     _toCalculusFieldUnivariateFunction__T = typing.TypeVar('_toCalculusFieldUnivariateFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def toCalculusFieldUnivariateFunction(self, field: org.hipparchus.Field[_toCalculusFieldUnivariateFunction__T]) -> CalculusFieldUnivariateFunction[_toCalculusFieldUnivariateFunction__T]:
@@ -516,7 +522,7 @@ class FunctionUtils:
     """
     @typing.overload
     @staticmethod
-    def add(*univariateFunction: typing.Union['UnivariateFunction', typing.Callable]) -> 'UnivariateFunction':
+    def add(*f: typing.Union['UnivariateFunction', typing.Callable]) -> 'UnivariateFunction':
         """
         Adds functions.
         
@@ -539,10 +545,10 @@ class FunctionUtils:
         ...
     @typing.overload
     @staticmethod
-    def add(*univariateDifferentiableFunction: org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction) -> org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction: ...
+    def add(*f: org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction) -> org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction: ...
     @typing.overload
     @staticmethod
-    def collector(bivariateFunction: typing.Union[BivariateFunction, typing.Callable], double: float) -> 'MultivariateFunction':
+    def collector(combiner: typing.Union[BivariateFunction, typing.Callable], initialValue: float) -> 'MultivariateFunction':
         """
          h(x[]) = combiner(...combiner(combiner(initialValue,f(x[0])),f(x[1]))...),f(x[x.length-1]))
         
@@ -570,7 +576,7 @@ class FunctionUtils:
         ...
     @typing.overload
     @staticmethod
-    def collector(bivariateFunction: typing.Union[BivariateFunction, typing.Callable], univariateFunction: typing.Union['UnivariateFunction', typing.Callable], double: float) -> 'MultivariateFunction': ...
+    def collector(combiner: typing.Union[BivariateFunction, typing.Callable], f: typing.Union['UnivariateFunction', typing.Callable], initialValue: float) -> 'MultivariateFunction': ...
     @staticmethod
     def combine(combiner: typing.Union[BivariateFunction, typing.Callable], f: typing.Union['UnivariateFunction', typing.Callable], g: typing.Union['UnivariateFunction', typing.Callable]) -> 'UnivariateFunction':
         """
@@ -589,7 +595,7 @@ class FunctionUtils:
         ...
     @typing.overload
     @staticmethod
-    def compose(*univariateFunction: typing.Union['UnivariateFunction', typing.Callable]) -> 'UnivariateFunction':
+    def compose(*f: typing.Union['UnivariateFunction', typing.Callable]) -> 'UnivariateFunction':
         """
         Composes functions.
         
@@ -616,10 +622,10 @@ class FunctionUtils:
         ...
     @typing.overload
     @staticmethod
-    def compose(*univariateDifferentiableFunction: org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction) -> org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction: ...
+    def compose(*f: org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction) -> org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction: ...
     @typing.overload
     @staticmethod
-    def derivative(multivariateDifferentiableFunction: org.hipparchus.analysis.differentiation.MultivariateDifferentiableFunction, intArray: typing.Union[typing.List[int], jpype.JArray]) -> 'MultivariateFunction':
+    def derivative(f: org.hipparchus.analysis.differentiation.MultivariateDifferentiableFunction, order: typing.Union[typing.List[int], jpype.JArray]) -> 'MultivariateFunction':
         """
         Convert an UnivariateDifferentiableFunction to an UnivariateFunction computing n :sup:`th` order derivative.
         
@@ -632,8 +638,9 @@ class FunctionUtils:
         Returns:
             function computing the derivative at required order
         
-              - derivative
-              - toDifferentiable
+        Also see:
+            derivative,
+            toDifferentiable
         
         Convert an MultivariateDifferentiableFunction to an MultivariateFunction computing n :sup:`th` order derivative.
         
@@ -646,9 +653,9 @@ class FunctionUtils:
         Returns:
             function computing the derivative at required order
         
-              - derivative
-              - toDifferentiable
-        
+        Also see:
+            derivative,
+            toDifferentiable
         
         
         """
@@ -688,7 +695,7 @@ class FunctionUtils:
         ...
     @typing.overload
     @staticmethod
-    def multiply(*univariateFunction: typing.Union['UnivariateFunction', typing.Callable]) -> 'UnivariateFunction':
+    def multiply(*f: typing.Union['UnivariateFunction', typing.Callable]) -> 'UnivariateFunction':
         """
         Multiplies functions.
         
@@ -711,7 +718,7 @@ class FunctionUtils:
         ...
     @typing.overload
     @staticmethod
-    def multiply(*univariateDifferentiableFunction: org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction) -> org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction: ...
+    def multiply(*f: org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction) -> org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction: ...
     @staticmethod
     def sample(f: typing.Union['UnivariateFunction', typing.Callable], min: float, max: float, n: int) -> typing.MutableSequence[float]:
         """
@@ -737,7 +744,7 @@ class FunctionUtils:
         ...
     @typing.overload
     @staticmethod
-    def toDifferentiable(multivariateFunction: typing.Union['MultivariateFunction', typing.Callable], multivariateVectorFunction: typing.Union['MultivariateVectorFunction', typing.Callable]) -> org.hipparchus.analysis.differentiation.MultivariateDifferentiableFunction:
+    def toDifferentiable(f: typing.Union['MultivariateFunction', typing.Callable], derivatives: typing.Union['MultivariateVectorFunction', typing.Callable]) -> org.hipparchus.analysis.differentiation.MultivariateDifferentiableFunction:
         """
         Convert regular functions to UnivariateDifferentiableFunction.
         
@@ -752,8 +759,9 @@ class FunctionUtils:
         Returns:
             a differentiable function with value and all specified derivatives
         
-              - toDifferentiable
-              - derivative
+        Also see:
+            toDifferentiable,
+            derivative
         
         Convert regular functions to MultivariateDifferentiableFunction.
         
@@ -768,9 +776,9 @@ class FunctionUtils:
         Returns:
             a differentiable function with value and gradient
         
-              - toDifferentiable
-              - derivative
-        
+        Also see:
+            toDifferentiable,
+            derivative
         
         
         """
@@ -1020,7 +1028,7 @@ class PythonFieldUnivariateFunction(FieldUnivariateFunction):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1052,8 +1060,8 @@ class PythonUnivariateFunction(UnivariateFunction):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-    def value(self, double: float) -> float:
+    def pythonExtension(self, pythonObject: int) -> None: ...
+    def value(self, x: float) -> float:
         """
         Specified by: meth:`~org.hipparchus.analysis.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.UnivariateFunction.html?is` in interface UnivariateFunction
         

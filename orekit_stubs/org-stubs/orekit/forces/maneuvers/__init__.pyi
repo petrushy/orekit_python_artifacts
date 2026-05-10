@@ -78,7 +78,7 @@ class Control3DVectorCostType(java.lang.Enum['Control3DVectorCostType']):
     INF_NORM: typing.ClassVar['Control3DVectorCostType'] = ...
     _evaluate_1__T = typing.TypeVar('_evaluate_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def evaluate(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> float:
+    def evaluate(self, controlVector: org.hipparchus.geometry.euclidean.threed.Vector3D) -> float:
         """
         Evaluate the cost of the input seen as a 3D control vector.
         
@@ -102,7 +102,7 @@ class Control3DVectorCostType(java.lang.Enum['Control3DVectorCostType']):
         """
         ...
     @typing.overload
-    def evaluate(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_evaluate_1__T]) -> _evaluate_1__T: ...
+    def evaluate(self, controlVector: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_evaluate_1__T]) -> _evaluate_1__T: ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
@@ -194,7 +194,7 @@ class FieldImpulseProvider(typing.Generic[_FieldImpulseProvider__T]):
     _of_2__T = typing.TypeVar('_of_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def of(forwardImpulse: org.hipparchus.Field[_of_0__T], field: org.hipparchus.geometry.euclidean.threed.Vector3D) -> 'FieldImpulseProvider'[_of_0__T]:
+    def of(field: org.hipparchus.Field[_of_0__T], forwardImpulse: org.hipparchus.geometry.euclidean.threed.Vector3D) -> 'FieldImpulseProvider'[_of_0__T]:
         """
         Get a provider returning a given vector for forward propagation and its opposite for backward.
         
@@ -209,7 +209,7 @@ class FieldImpulseProvider(typing.Generic[_FieldImpulseProvider__T]):
         ...
     @typing.overload
     @staticmethod
-    def of(fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_of_1__T]) -> 'FieldImpulseProvider'[_of_1__T]:
+    def of(forwardImpulse: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_of_1__T]) -> 'FieldImpulseProvider'[_of_1__T]:
         """
         Get a provider returning a given vector for forward propagation and its opposite for backward.
         
@@ -608,15 +608,15 @@ class SmallManeuverAnalyticalModel(org.orekit.propagation.analytical.AdapterProp
     Note that this model takes only Keplerian effects into account. This means that using only this class to compute an inclination maneuver in Low Earth Orbit will not change ascending node drift rate despite inclination has changed (the same would be true for a semi-major axis change of course). In order to take this drift into account, an instance of J2DifferentialEffect must be used together with an instance of this class.
     """
     @typing.overload
-    def __init__(self, spacecraftState: org.orekit.propagation.SpacecraftState, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
+    def __init__(self, state0: org.orekit.propagation.SpacecraftState, dV: org.hipparchus.geometry.euclidean.threed.Vector3D, isp: float): ...
     @typing.overload
     def __init__(self, spacecraftState: org.orekit.propagation.SpacecraftState, frame: org.orekit.frames.Frame, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
     @typing.overload
     def __init__(self, spacecraftState: org.orekit.propagation.SpacecraftState, orbitType: org.orekit.orbits.OrbitType, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
     @typing.overload
-    def __init__(self, spacecraftState: org.orekit.propagation.SpacecraftState, orbitType: org.orekit.orbits.OrbitType, frame: org.orekit.frames.Frame, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
+    def __init__(self, state0: org.orekit.propagation.SpacecraftState, orbitType: org.orekit.orbits.OrbitType, frame: org.orekit.frames.Frame, dV: org.hipparchus.geometry.euclidean.threed.Vector3D, isp: float): ...
     @typing.overload
-    def apply(self, orbit: org.orekit.orbits.Orbit) -> org.orekit.orbits.Orbit:
+    def apply(self, orbit1: org.orekit.orbits.Orbit) -> org.orekit.orbits.Orbit:
         """
         Compute the effect of the maneuver on an orbit.
         
@@ -724,19 +724,19 @@ class ConstantThrustManeuver(Maneuver):
     The maneuver is defined by a direction in satellite frame. The current attitude of the spacecraft, defined by the current spacecraft state, will be used to compute the thrust direction in inertial frame. A typical case for tangential maneuvers is to use a LofOffset attitude provider for state propagation and a velocity increment along the +X satellite axis.
     """
     @typing.overload
-    def __init__(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider, dateBasedManeuverTriggers: org.orekit.forces.maneuvers.trigger.DateBasedManeuverTriggers, abstractConstantThrustPropulsionModel: org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel): ...
+    def __init__(self, attitudeOverride: org.orekit.attitudes.AttitudeProvider, dateBasedManeuverTriggers: org.orekit.forces.maneuvers.trigger.DateBasedManeuverTriggers, constantThrustPropulsionModel: org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel): ...
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, duration: float, thrust: float, isp: float, direction: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
     @typing.overload
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, string: str): ...
     @typing.overload
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, string: str): ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, duration: float, thrust: float, isp: float, attitudeOverride: org.orekit.attitudes.AttitudeProvider, direction: org.hipparchus.geometry.euclidean.threed.Vector3D, name: str): ...
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, control3DVectorCostType: Control3DVectorCostType, string: str): ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, duration: float, thrust: float, isp: float, attitudeOverride: org.orekit.attitudes.AttitudeProvider, direction: org.hipparchus.geometry.euclidean.threed.Vector3D, control3DVectorCostType: Control3DVectorCostType, name: str): ...
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider, abstractConstantThrustPropulsionModel: org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel): ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, duration: float, attitudeOverride: org.orekit.attitudes.AttitudeProvider, constantThrustPropulsionModel: org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel): ...
     @typing.overload
     def getDirection(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
@@ -919,7 +919,7 @@ class ConstantThrustManeuver(Maneuver):
         """
         ...
     @typing.overload
-    def isFiring(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> bool:
+    def isFiring(self, s: org.orekit.propagation.SpacecraftState) -> bool:
         """
         Check if maneuvering is on.
         
@@ -971,9 +971,9 @@ class FieldImpulseManeuver(AbstractImpulseManeuver, org.orekit.propagation.event
         addEventDetector, ImpulseManeuver
     """
     @typing.overload
-    def __init__(self, fieldEventDetector: org.orekit.propagation.events.FieldEventDetector[_FieldImpulseManeuver__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldImpulseManeuver__T], t: _FieldImpulseManeuver__T): ...
+    def __init__(self, trigger: org.orekit.propagation.events.FieldEventDetector[_FieldImpulseManeuver__T], deltaVSat: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldImpulseManeuver__T], isp: _FieldImpulseManeuver__T): ...
     @typing.overload
-    def __init__(self, fieldEventDetector: org.orekit.propagation.events.FieldEventDetector[_FieldImpulseManeuver__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldImpulseManeuver__T], t: _FieldImpulseManeuver__T): ...
+    def __init__(self, trigger: org.orekit.propagation.events.FieldEventDetector[_FieldImpulseManeuver__T], attitudeOverride: org.orekit.attitudes.AttitudeProvider, deltaVSat: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldImpulseManeuver__T], isp: _FieldImpulseManeuver__T): ...
     @typing.overload
     def __init__(self, fieldEventDetector: org.orekit.propagation.events.FieldEventDetector[_FieldImpulseManeuver__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldImpulseManeuver__T], t: _FieldImpulseManeuver__T, control3DVectorCostType: Control3DVectorCostType): ...
     @typing.overload
@@ -1116,9 +1116,9 @@ class ImpulseManeuver(AbstractImpulseManeuver, org.orekit.propagation.events.Det
         addEventDetector
     """
     @typing.overload
-    def __init__(self, eventDetector: org.orekit.propagation.events.EventDetector, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
+    def __init__(self, trigger: org.orekit.propagation.events.EventDetector, deltaVSat: org.hipparchus.geometry.euclidean.threed.Vector3D, isp: float): ...
     @typing.overload
-    def __init__(self, eventDetector: org.orekit.propagation.events.EventDetector, attitudeProvider: org.orekit.attitudes.AttitudeProvider, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
+    def __init__(self, trigger: org.orekit.propagation.events.EventDetector, attitudeOverride: org.orekit.attitudes.AttitudeProvider, deltaVSat: org.hipparchus.geometry.euclidean.threed.Vector3D, isp: float): ...
     @typing.overload
     def __init__(self, eventDetector: org.orekit.propagation.events.EventDetector, attitudeProvider: org.orekit.attitudes.AttitudeProvider, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, control3DVectorCostType: Control3DVectorCostType): ...
     @typing.overload
@@ -1244,7 +1244,7 @@ class ImpulseManeuver(AbstractImpulseManeuver, org.orekit.propagation.events.Det
         ...
 
 class PythonAbstractImpulseManeuver(AbstractImpulseManeuver):
-    def __init__(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider, control3DVectorCostType: Control3DVectorCostType):
+    def __init__(self, attitudeOverride: org.orekit.attitudes.AttitudeProvider, control3DVectorCostType: Control3DVectorCostType):
         """
         Constructor.
         """
@@ -1296,7 +1296,7 @@ class PythonAbstractImpulseManeuver(AbstractImpulseManeuver):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1344,7 +1344,7 @@ class PythonFieldImpulseProvider(FieldImpulseProvider[_PythonFieldImpulseProvide
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1391,7 +1391,7 @@ class PythonImpulseProvider(ImpulseProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

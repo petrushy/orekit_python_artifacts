@@ -30,7 +30,7 @@ class AbstractOpenIntHashMap:
         3.1
     """
     @typing.overload
-    def containsKey(self, int: int) -> bool:
+    def containsKey(self, key: int) -> bool:
         """
         Check if a value is associated with a key.
         
@@ -53,7 +53,7 @@ class AbstractOpenIntHashMap:
         """
         ...
     @typing.overload
-    def containsKey(self, int: int, int2: int) -> bool: ...
+    def containsKey(self, key: int, index: int) -> bool: ...
     def getSize(self) -> int:
         """
         Get the number of elements stored in the map.
@@ -87,7 +87,7 @@ class ArithmeticUtils:
     def addAndCheck(long: int, long2: int) -> int: ...
     @typing.overload
     @staticmethod
-    def divideUnsigned(int: int, int2: int) -> int:
+    def divideUnsigned(dividend: int, divisor: int) -> int:
         """
         Returns the unsigned quotient of dividing the first argument by the second where each argument and the result is interpreted as an unsigned value.
         
@@ -120,13 +120,13 @@ class ArithmeticUtils:
         ...
     @typing.overload
     @staticmethod
-    def divideUnsigned(long: int, long2: int) -> int: ...
+    def divideUnsigned(dividend: int, divisor: int) -> int: ...
     @typing.overload
     @staticmethod
-    def gcd(int: int, int2: int) -> int: ...
+    def gcd(p: int, q: int) -> int: ...
     @typing.overload
     @staticmethod
-    def gcd(long: int, long2: int) -> int: ...
+    def gcd(p: int, q: int) -> int: ...
     @staticmethod
     def isPowerOfTwo(n: int) -> bool:
         """
@@ -143,10 +143,10 @@ class ArithmeticUtils:
         ...
     @typing.overload
     @staticmethod
-    def lcm(int: int, int2: int) -> int: ...
+    def lcm(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def lcm(long: int, long2: int) -> int: ...
+    def lcm(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
     def mulAndCheck(int: int, int2: int) -> int: ...
@@ -155,22 +155,22 @@ class ArithmeticUtils:
     def mulAndCheck(long: int, long2: int) -> int: ...
     @typing.overload
     @staticmethod
-    def pow(int: int, int2: int) -> int: ...
+    def pow(k: int, e: int) -> int: ...
     @typing.overload
     @staticmethod
-    def pow(bigInteger: java.math.BigInteger, int: int) -> java.math.BigInteger: ...
+    def pow(k: java.math.BigInteger, e: int) -> java.math.BigInteger: ...
     @typing.overload
     @staticmethod
-    def pow(bigInteger: java.math.BigInteger, bigInteger2: java.math.BigInteger) -> java.math.BigInteger: ...
+    def pow(k: java.math.BigInteger, e: java.math.BigInteger) -> java.math.BigInteger: ...
     @typing.overload
     @staticmethod
-    def pow(bigInteger: java.math.BigInteger, long: int) -> java.math.BigInteger: ...
+    def pow(k: java.math.BigInteger, e: int) -> java.math.BigInteger: ...
     @typing.overload
     @staticmethod
-    def pow(long: int, int: int) -> int: ...
+    def pow(k: int, e: int) -> int: ...
     @typing.overload
     @staticmethod
-    def remainderUnsigned(int: int, int2: int) -> int:
+    def remainderUnsigned(dividend: int, divisor: int) -> int:
         """
         Returns the unsigned remainder from dividing the first argument by the second where each argument and the result is interpreted as an unsigned value.
         
@@ -199,7 +199,7 @@ class ArithmeticUtils:
         ...
     @typing.overload
     @staticmethod
-    def remainderUnsigned(long: int, long2: int) -> int: ...
+    def remainderUnsigned(dividend: int, divisor: int) -> int: ...
     @typing.overload
     @staticmethod
     def subAndCheck(int: int, int2: int) -> int: ...
@@ -209,13 +209,12 @@ class ArithmeticUtils:
 
 class BigReal(org.hipparchus.FieldElement['BigReal'], java.lang.Comparable['BigReal'], java.io.Serializable):
     """
-    implements FieldElement<BigReal>, Comparable<BigReal>, Serializable
-    
     Arbitrary precision decimal number.
     
     This class is a simple wrapper around the standard BigDecimal in order to implement the FieldElement interface.
     
-          - serialized
+    Also see:
+        serialized
     """
     ZERO: typing.ClassVar['BigReal'] = ...
     """
@@ -230,7 +229,7 @@ class BigReal(org.hipparchus.FieldElement['BigReal'], java.lang.Comparable['BigR
     @typing.overload
     def __init__(self, charArray: typing.Union[typing.List[str], jpype.JArray], int: int, int2: int): ...
     @typing.overload
-    def __init__(self, charArray: typing.Union[typing.List[str], jpype.JArray], int: int, int2: int, mathContext: java.math.MathContext): ...
+    def __init__(self, in_: typing.Union[typing.List[str], jpype.JArray], offset: int, len: int, mc: java.math.MathContext): ...
     @typing.overload
     def __init__(self, charArray: typing.Union[typing.List[str], jpype.JArray], mathContext: java.math.MathContext): ...
     @typing.overload
@@ -284,9 +283,9 @@ class BigReal(org.hipparchus.FieldElement['BigReal'], java.lang.Comparable['BigR
         
         """
         ...
-    def compareTo(self, bigReal: 'BigReal') -> int:
+    def compareTo(self, a: 'BigReal') -> int:
         """
-        Specified by: compareTo in interface Comparable
+        Specified by: Comparable in interface Comparable
         
         
         """
@@ -319,9 +318,9 @@ class BigReal(org.hipparchus.FieldElement['BigReal'], java.lang.Comparable['BigR
         
         """
         ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -372,13 +371,13 @@ class BigReal(org.hipparchus.FieldElement['BigReal'], java.lang.Comparable['BigR
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
         ...
     @typing.overload
-    def multiply(self, int: int) -> 'BigReal':
+    def multiply(self, a: int) -> 'BigReal':
         """
         Compute this × a.
         
@@ -470,18 +469,16 @@ class BigReal(org.hipparchus.FieldElement['BigReal'], java.lang.Comparable['BigR
 
 class BigRealField(org.hipparchus.Field[BigReal], java.io.Serializable):
     """
-    implements Field<BigReal>, Serializable
-    
     Representation of real numbers with arbitrary precision field.
     
     This class is a singleton.
     
-          - BigReal
-          - serialized
+    Also see:
+        BigReal, serialized
     """
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -539,7 +536,7 @@ class BigRealField(org.hipparchus.Field[BigReal], java.io.Serializable):
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -547,11 +544,10 @@ class BigRealField(org.hipparchus.Field[BigReal], java.io.Serializable):
 
 class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64'], java.lang.Comparable['Binary64']):
     """
-    implements CalculusFieldElement<Binary64>, Comparable<Binary64>
-    
     This class wraps a double value in an object. It is similar to the standard class Double, while also implementing the CalculusFieldElement interface.
     
-          - serialized
+    Also see:
+        serialized
     """
     ZERO: typing.ClassVar['Binary64'] = ...
     """
@@ -567,15 +563,15 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
     """
     NEGATIVE_INFINITY: typing.ClassVar['Binary64'] = ...
     """
-    The constant value of NEGATIVE_INFINITY as a Binary64.
+    The constant value of Double as a Binary64.
     """
     POSITIVE_INFINITY: typing.ClassVar['Binary64'] = ...
     """
-    The constant value of POSITIVE_INFINITY as a Binary64.
+    The constant value of Double as a Binary64.
     """
     NAN: typing.ClassVar['Binary64'] = ...
     """
-    The constant value of NaN as a Binary64.
+    The constant value of Double as a Binary64.
     """
     def __init__(self, x: float):
         """
@@ -624,7 +620,7 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         ...
     @typing.overload
-    def add(self, double: float) -> 'Binary64':
+    def add(self, a: float) -> 'Binary64':
         """
         Specified by: add in interface FieldElement
         
@@ -648,7 +644,7 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         ...
     @typing.overload
-    def add(self, binary64: 'Binary64') -> 'Binary64': ...
+    def add(self, a: 'Binary64') -> 'Binary64': ...
     def asin(self) -> 'Binary64':
         """
         Arc sine operation.
@@ -718,7 +714,7 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         The current implementation performs casting to a byte.
         
-        Overrides: byteValue in class Number
+        Overrides: Number in class Number
         
         
         """
@@ -747,20 +743,20 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         
         """
         ...
-    def compareTo(self, binary64: 'Binary64') -> int:
+    def compareTo(self, o: 'Binary64') -> int:
         """
         The current implementation returns the same value as doubleValue()))
         
-        Specified by: compareTo in interface Comparable
+        Specified by: Comparable in interface Comparable
         
-              - compareTo
-        
+        Also see:
+            Double
         
         
         """
         ...
     @typing.overload
-    def copySign(self, double: float) -> 'Binary64':
+    def copySign(self, sign: float) -> 'Binary64':
         """
         Returns the instance with the sign of the argument. A NaN sign argument is treated as positive.
         
@@ -786,7 +782,7 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         ...
     @typing.overload
-    def copySign(self, binary64: 'Binary64') -> 'Binary64': ...
+    def copySign(self, sign: 'Binary64') -> 'Binary64': ...
     def cos(self) -> 'Binary64':
         """
         Cosine operation.
@@ -812,7 +808,7 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         ...
     @typing.overload
-    def divide(self, double: float) -> 'Binary64':
+    def divide(self, a: float) -> 'Binary64':
         """
         Specified by: divide in interface CalculusFieldElement
         
@@ -838,17 +834,17 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         ...
     @typing.overload
-    def divide(self, binary64: 'Binary64') -> 'Binary64': ...
+    def divide(self, a: 'Binary64') -> 'Binary64': ...
     def doubleValue(self) -> float:
         """
-        Specified by: doubleValue in class Number
+        Specified by: Number in class Number
         
         
         """
         ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, obj: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -881,7 +877,7 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         The current implementation performs casting to a float.
         
-        Specified by: floatValue in class Number
+        Specified by: Number in class Number
         
         
         """
@@ -954,10 +950,10 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         The current implementation returns the same value as hashCode()
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
-              - hashCode
-        
+        Also see:
+            Double
         
         
         """
@@ -984,14 +980,14 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         The current implementation performs casting to a int.
         
-        Specified by: intValue in class Number
+        Specified by: Number in class Number
         
         
         """
         ...
     def isInfinite(self) -> bool:
         """
-        Returns true if this double precision number is infinite (POSITIVE_INFINITY or NEGATIVE_INFINITY).
+        Returns true if this double precision number is infinite (Double or Double).
         
         Specified by: isInfinite in interface CalculusFieldElement
         
@@ -1033,7 +1029,7 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, binary64: 'Binary64', double2: float, binary642: 'Binary64') -> 'Binary64':
+    def linearCombination(self, a1: float, b1: 'Binary64', a2: float, b2: 'Binary64') -> 'Binary64':
         """
         Compute a linear combination.
         
@@ -1048,8 +1044,9 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -1064,8 +1061,9 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -1082,8 +1080,9 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -1100,8 +1099,9 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -1120,8 +1120,9 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -1140,27 +1141,27 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-              - linearCombination
-              - linearCombination
-        
+        Also see:
+            linearCombination,
+            linearCombination
         
         
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, binary64: 'Binary64', double2: float, binary642: 'Binary64', double3: float, binary643: 'Binary64') -> 'Binary64': ...
+    def linearCombination(self, a1: float, b1: 'Binary64', a2: float, b2: 'Binary64', a3: float, b3: 'Binary64') -> 'Binary64': ...
     @typing.overload
-    def linearCombination(self, double: float, binary64: 'Binary64', double2: float, binary642: 'Binary64', double3: float, binary643: 'Binary64', double4: float, binary644: 'Binary64') -> 'Binary64': ...
+    def linearCombination(self, a1: float, b1: 'Binary64', a2: float, b2: 'Binary64', a3: float, b3: 'Binary64', a4: float, b4: 'Binary64') -> 'Binary64': ...
     @typing.overload
-    def linearCombination(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], binary64Array: typing.Union[typing.List['Binary64'], jpype.JArray]) -> 'Binary64': ...
+    def linearCombination(self, a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List['Binary64'], jpype.JArray]) -> 'Binary64': ...
     @typing.overload
-    def linearCombination(self, binary64: 'Binary64', binary642: 'Binary64', binary643: 'Binary64', binary644: 'Binary64') -> 'Binary64': ...
+    def linearCombination(self, a1: 'Binary64', b1: 'Binary64', a2: 'Binary64', b2: 'Binary64') -> 'Binary64': ...
     @typing.overload
-    def linearCombination(self, binary64: 'Binary64', binary642: 'Binary64', binary643: 'Binary64', binary644: 'Binary64', binary645: 'Binary64', binary646: 'Binary64') -> 'Binary64': ...
+    def linearCombination(self, a1: 'Binary64', b1: 'Binary64', a2: 'Binary64', b2: 'Binary64', a3: 'Binary64', b3: 'Binary64') -> 'Binary64': ...
     @typing.overload
-    def linearCombination(self, binary64: 'Binary64', binary642: 'Binary64', binary643: 'Binary64', binary644: 'Binary64', binary645: 'Binary64', binary646: 'Binary64', binary647: 'Binary64', binary648: 'Binary64') -> 'Binary64': ...
+    def linearCombination(self, a1: 'Binary64', b1: 'Binary64', a2: 'Binary64', b2: 'Binary64', a3: 'Binary64', b3: 'Binary64', a4: 'Binary64', b4: 'Binary64') -> 'Binary64': ...
     @typing.overload
-    def linearCombination(self, binary64Array: typing.Union[typing.List['Binary64'], jpype.JArray], binary64Array2: typing.Union[typing.List['Binary64'], jpype.JArray]) -> 'Binary64': ...
+    def linearCombination(self, a: typing.Union[typing.List['Binary64'], jpype.JArray], b: typing.Union[typing.List['Binary64'], jpype.JArray]) -> 'Binary64': ...
     def log(self) -> 'Binary64':
         """
         Natural logarithm.
@@ -1201,13 +1202,13 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         The current implementation performs casting to a long.
         
-        Specified by: longValue in class Number
+        Specified by: Number in class Number
         
         
         """
         ...
     @typing.overload
-    def multiply(self, double: float) -> 'Binary64':
+    def multiply(self, a: float) -> 'Binary64':
         """
         Specified by: multiply in interface FieldElement
         
@@ -1274,7 +1275,7 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         ...
     @typing.overload
-    def pow(self, double: float) -> 'Binary64':
+    def pow(self, p: float) -> 'Binary64':
         """
         Power operation.
         
@@ -1326,7 +1327,7 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         ...
     @typing.overload
-    def remainder(self, double: float) -> 'Binary64':
+    def remainder(self, a: float) -> 'Binary64':
         """
         IEEE remainder operator.
         
@@ -1352,7 +1353,7 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         ...
     @typing.overload
-    def remainder(self, binary64: 'Binary64') -> 'Binary64': ...
+    def remainder(self, a: 'Binary64') -> 'Binary64': ...
     def rint(self) -> 'Binary64':
         """
         Get the whole number that is the nearest to the instance, or the even one if x is exactly half way between two integers.
@@ -1399,7 +1400,7 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         The current implementation performs casting to a short.
         
-        Overrides: shortValue in class Number
+        Overrides: Number in class Number
         
         
         """
@@ -1489,7 +1490,7 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         ...
     @typing.overload
-    def subtract(self, double: float) -> 'Binary64':
+    def subtract(self, a: float) -> 'Binary64':
         """
         Specified by: subtract in interface CalculusFieldElement
         
@@ -1515,7 +1516,7 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         ...
     @typing.overload
-    def subtract(self, binary64: 'Binary64') -> 'Binary64': ...
+    def subtract(self, a: 'Binary64') -> 'Binary64': ...
     def tan(self) -> 'Binary64':
         """
         Tangent operation.
@@ -1568,10 +1569,10 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
         """
         The returned String is equal to doubleValue())
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
-              - toString
-        
+        Also see:
+            Double
         
         
         """
@@ -1591,16 +1592,14 @@ class Binary64(java.lang.Number, org.hipparchus.CalculusFieldElement['Binary64']
 
 class Binary64Field(org.hipparchus.Field[Binary64], java.io.Serializable):
     """
-    implements Field<Binary64>, Serializable
-    
     The field of Binary64.
     
-          - Binary64
-          - serialized
+    Also see:
+        Binary64, serialized
     """
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -1658,7 +1657,7 @@ class Binary64Field(org.hipparchus.Field[Binary64], java.io.Serializable):
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -1691,11 +1690,10 @@ class Blendable(typing.Generic[_Blendable__B]):
 
 class Combinations(java.lang.Iterable[typing.MutableSequence[int]]):
     """
-    implements Iterable<int[]>
-    
     Utility to create combinations (n, k) of k elements in a set of n elements.
     
-          - ` Combination @ Wikipedia <http://en.wikipedia.org/wiki/Combination>`
+    Also see:
+        ` Combination @ Wikipedia <http://en.wikipedia.org/wiki/Combination>`
     """
     def __init__(self, n: int, k: int):
         """
@@ -1755,7 +1753,7 @@ class Combinations(java.lang.Iterable[typing.MutableSequence[int]]):
         ...
     def iterator(self) -> java.util.Iterator[typing.MutableSequence[int]]:
         """
-        Specified by: iterator in interface Iterable
+        Specified by: Iterable in interface Iterable
         
         
         """
@@ -1772,8 +1770,8 @@ class CombinatoricsUtils:
     Since:
         2.2
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -2074,7 +2072,7 @@ class CompositeFormat:
     @staticmethod
     def getDefaultNumberFormat() -> java.text.NumberFormat:
         """
-        getInstance with the only customizing that the maximum number of fraction digits is set to 10.
+        NumberFormat with the only customizing that the maximum number of fraction digits is set to 10.
         
         Returns:
             the default number format.
@@ -2085,7 +2083,7 @@ class CompositeFormat:
     @staticmethod
     def getDefaultNumberFormat(locale: java.util.Locale) -> java.text.NumberFormat:
         """
-        getInstance with the only customizing that the maximum number of fraction digits is set to 10.
+        NumberFormat with the only customizing that the maximum number of fraction digits is set to 10.
         
         Parameters:
             locale (Locale): the specific locale used by the format.
@@ -2165,11 +2163,11 @@ class ContinuedFraction:
       - ` Continued Fraction <http://mathworld.wolfram.com/ContinuedFraction.html>`
     """
     @typing.overload
-    def evaluate(self, double: float) -> float: ...
+    def evaluate(self, x: float) -> float: ...
     @typing.overload
     def evaluate(self, double: float, double2: float) -> float: ...
     @typing.overload
-    def evaluate(self, double: float, double2: float, int: int) -> float: ...
+    def evaluate(self, x: float, epsilon: float, maxIterations: int) -> float: ...
     @typing.overload
     def evaluate(self, double: float, int: int) -> float: ...
 
@@ -2208,8 +2206,8 @@ class FastMath:
     """
     Archimede's constant PI, ratio of circle circumference to diameter.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -2217,8 +2215,8 @@ class FastMath:
     """
     Napier's constant e, base of the natural logarithm.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -2250,7 +2248,7 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def IEEEremainder(t: _IEEEremainder_1__T, double: float) -> _IEEEremainder_1__T:
+    def IEEEremainder(dividend: _IEEEremainder_1__T, divisor: float) -> _IEEEremainder_1__T:
         """
         Computes the remainder as prescribed by the IEEE 754 standard.
         
@@ -2299,11 +2297,11 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def IEEEremainder(t: _IEEEremainder_2__T, t2: _IEEEremainder_2__T) -> _IEEEremainder_2__T: ...
+    def IEEEremainder(dividend: _IEEEremainder_2__T, divisor: _IEEEremainder_2__T) -> _IEEEremainder_2__T: ...
     _abs_4__T = typing.TypeVar('_abs_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def abs(double: float) -> float:
+    def abs(x: float) -> float:
         """
         Absolute value.
         
@@ -2344,13 +2342,13 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def abs(float: float) -> float: ...
+    def abs(x: float) -> float: ...
     @typing.overload
     @staticmethod
-    def abs(int: int) -> int: ...
+    def abs(x: int) -> int: ...
     @typing.overload
     @staticmethod
-    def abs(long: int) -> int: ...
+    def abs(x: int) -> int: ...
     @typing.overload
     @staticmethod
     def abs(x: _abs_4__T) -> _abs_4__T:
@@ -2371,7 +2369,7 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def absExact(int: int) -> int:
+    def absExact(x: int) -> int:
         """
         Absolute value.
         
@@ -2400,7 +2398,7 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def absExact(long: int) -> int: ...
+    def absExact(x: int) -> int: ...
     _acos_1__T = typing.TypeVar('_acos_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
@@ -2469,10 +2467,10 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def addExact(int: int, int2: int) -> int: ...
+    def addExact(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def addExact(long: int, long2: int) -> int: ...
+    def addExact(a: int, b: int) -> int: ...
     _asin_1__T = typing.TypeVar('_asin_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
@@ -2708,31 +2706,31 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def ceilDiv(int: int, int2: int) -> int: ...
+    def ceilDiv(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def ceilDiv(long: int, int: int) -> int: ...
+    def ceilDiv(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def ceilDiv(long: int, long2: int) -> int: ...
+    def ceilDiv(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def ceilDivExact(int: int, int2: int) -> int: ...
+    def ceilDivExact(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def ceilDivExact(long: int, long2: int) -> int: ...
+    def ceilDivExact(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def ceilMod(int: int, int2: int) -> int: ...
+    def ceilMod(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def ceilMod(long: int, int: int) -> int: ...
+    def ceilMod(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def ceilMod(long: int, long2: int) -> int: ...
+    def ceilMod(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def clamp(double: float, double2: float, double3: float) -> float:
+    def clamp(value: float, inf: float, sup: float) -> float:
         """
         Clamp a value within an interval.
         
@@ -2808,21 +2806,21 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def clamp(float: float, float2: float, float3: float) -> float: ...
+    def clamp(value: float, inf: float, sup: float) -> float: ...
     @typing.overload
     @staticmethod
-    def clamp(int: int, int2: int, int3: int) -> int: ...
+    def clamp(value: int, inf: int, sup: int) -> int: ...
     @typing.overload
     @staticmethod
-    def clamp(long: int, int: int, int2: int) -> int: ...
+    def clamp(value: int, inf: int, sup: int) -> int: ...
     @typing.overload
     @staticmethod
-    def clamp(long: int, long2: int, long3: int) -> int: ...
+    def clamp(value: int, inf: int, sup: int) -> int: ...
     _copySign_2__T = typing.TypeVar('_copySign_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _copySign_3__T = typing.TypeVar('_copySign_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def copySign(double: float, double2: float) -> float:
+    def copySign(magnitude: float, sign: float) -> float:
         """
         Returns the first argument with the sign of the second argument. A NaN sign argument is treated as positive.
         
@@ -2846,10 +2844,10 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def copySign(float: float, float2: float) -> float: ...
+    def copySign(magnitude: float, sign: float) -> float: ...
     @typing.overload
     @staticmethod
-    def copySign(t: _copySign_2__T, double: float) -> _copySign_2__T:
+    def copySign(magnitude: _copySign_2__T, sign: float) -> _copySign_2__T:
         """
         Returns the first argument with the sign of the second argument. A NaN sign argument is treated as positive.
         
@@ -2880,7 +2878,7 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def copySign(t: _copySign_3__T, t2: _copySign_3__T) -> _copySign_3__T: ...
+    def copySign(magnitude: _copySign_3__T, sign: _copySign_3__T) -> _copySign_3__T: ...
     _cos_1__T = typing.TypeVar('_cos_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
@@ -2949,13 +2947,13 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def decrementExact(int: int) -> int: ...
+    def decrementExact(n: int) -> int: ...
     @typing.overload
     @staticmethod
-    def decrementExact(long: int) -> int: ...
+    def decrementExact(n: int) -> int: ...
     @typing.overload
     @staticmethod
-    def divideExact(int: int, int2: int) -> int:
+    def divideExact(x: int, y: int) -> int:
         """
         Divide two integers, checking for overflow.
         
@@ -2992,7 +2990,7 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def divideExact(long: int, long2: int) -> int: ...
+    def divideExact(x: int, y: int) -> int: ...
     _exp_1__T = typing.TypeVar('_exp_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
@@ -3090,22 +3088,22 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def floorDiv(int: int, int2: int) -> int: ...
+    def floorDiv(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def floorDiv(long: int, int: int) -> int: ...
+    def floorDiv(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def floorDiv(long: int, long2: int) -> int: ...
+    def floorDiv(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def floorDivExact(int: int, int2: int) -> int: ...
+    def floorDivExact(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def floorDivExact(long: int, long2: int) -> int: ...
+    def floorDivExact(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def floorMod(int: int, int2: int) -> int:
+    def floorMod(a: int, b: int) -> int:
         """
         Finds r such that a = q b + r with 0 <= r < b if b > 0 and b < r <= 0 if b < 0.
         
@@ -3124,7 +3122,8 @@ class FastMath:
         Since:
             1.3
         
-              - floorDiv
+        Also see:
+            floorDiv
         
         Finds r such that a = q b + r with 0 <= r < b if b > 0 and b < r <= 0 if b < 0.
         
@@ -3140,21 +3139,21 @@ class FastMath:
         Raises:
             MathRuntimeException: if b == 0
         
-              - floorDiv
-        
+        Also see:
+            floorDiv
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def floorMod(long: int, int: int) -> int: ...
+    def floorMod(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def floorMod(long: int, long2: int) -> int: ...
+    def floorMod(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def fma(double: float, double2: float, double3: float) -> float:
+    def fma(a: float, b: float, c: float) -> float:
         """
         Compute Fused-multiply-add operation a * b + c.
         
@@ -3171,10 +3170,9 @@ class FastMath:
         Since:
             1.3
         
-              - linearCombination
-              - linearCombination
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination, linearCombination,
+            linearCombination, linearCombination
         
         Compute Fused-multiply-add operation a * b + c.
         
@@ -3188,21 +3186,19 @@ class FastMath:
         Returns:
             a * b + c, using extended precision in the multiplication
         
-              - linearCombination
-              - linearCombination
-              - linearCombination
-              - linearCombination
-        
+        Also see:
+            linearCombination, linearCombination,
+            linearCombination, linearCombination
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def fma(float: float, float2: float, float3: float) -> float: ...
+    def fma(a: float, b: float, c: float) -> float: ...
     @typing.overload
     @staticmethod
-    def getExponent(double: float) -> int:
+    def getExponent(d: float) -> int:
         """
         Return the exponent of a double number, removing the bias.
         
@@ -3279,14 +3275,14 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def incrementExact(int: int) -> int: ...
+    def incrementExact(n: int) -> int: ...
     @typing.overload
     @staticmethod
-    def incrementExact(long: int) -> int: ...
+    def incrementExact(n: int) -> int: ...
     _log_2__T = typing.TypeVar('_log_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def log(double: float) -> float:
+    def log(x: float) -> float:
         """
         Natural logarithm.
         
@@ -3309,7 +3305,7 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def log(double: float, double2: float) -> float: ...
+    def log(base: float, x: float) -> float: ...
     @typing.overload
     @staticmethod
     def log(x: _log_2__T) -> _log_2__T:
@@ -3394,7 +3390,7 @@ class FastMath:
     _max_5__T = typing.TypeVar('_max_5__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def max(double: float, double2: float) -> float:
+    def max(a: float, b: float) -> float:
         """
         Compute the maximum of two values
         
@@ -3436,16 +3432,16 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def max(float: float, float2: float) -> float: ...
+    def max(a: float, b: float) -> float: ...
     @typing.overload
     @staticmethod
-    def max(int: int, int2: int) -> int: ...
+    def max(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def max(long: int, long2: int) -> int: ...
+    def max(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def max(t: _max_4__T, double: float) -> _max_4__T:
+    def max(a: _max_4__T, b: float) -> _max_4__T:
         """
         Compute the maximum of two values
         
@@ -3476,12 +3472,12 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def max(t: _max_5__T, t2: _max_5__T) -> _max_5__T: ...
+    def max(a: _max_5__T, b: _max_5__T) -> _max_5__T: ...
     _min_4__T = typing.TypeVar('_min_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _min_5__T = typing.TypeVar('_min_5__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def min(double: float, double2: float) -> float:
+    def min(a: float, b: float) -> float:
         """
         Compute the minimum of two values
         
@@ -3523,16 +3519,16 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def min(float: float, float2: float) -> float: ...
+    def min(a: float, b: float) -> float: ...
     @typing.overload
     @staticmethod
-    def min(int: int, int2: int) -> int: ...
+    def min(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def min(long: int, long2: int) -> int: ...
+    def min(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def min(t: _min_4__T, double: float) -> _min_4__T:
+    def min(a: _min_4__T, b: float) -> _min_4__T:
         """
         Compute the minimum of two values
         
@@ -3563,10 +3559,10 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def min(t: _min_5__T, t2: _min_5__T) -> _min_5__T: ...
+    def min(a: _min_5__T, b: _min_5__T) -> _min_5__T: ...
     @typing.overload
     @staticmethod
-    def multiplyExact(int: int, int2: int) -> int:
+    def multiplyExact(a: int, b: int) -> int:
         """
         Multiply two numbers, detecting overflows.
         
@@ -3612,10 +3608,10 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def multiplyExact(long: int, int: int) -> int: ...
+    def multiplyExact(a: int, b: int) -> int: ...
     @typing.overload
     @staticmethod
-    def multiplyExact(long: int, long2: int) -> int: ...
+    def multiplyExact(a: int, b: int) -> int: ...
     @staticmethod
     def multiplyFull(a: int, b: int) -> int:
         """
@@ -3656,7 +3652,7 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def negateExact(int: int) -> int:
+    def negateExact(x: int) -> int:
         """
         Negates the argument.
         
@@ -3685,10 +3681,10 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def negateExact(long: int) -> int: ...
+    def negateExact(x: int) -> int: ...
     @typing.overload
     @staticmethod
-    def nextAfter(double: float, double2: float) -> float:
+    def nextAfter(d: float, direction: float) -> float:
         """
         Get the next machine representable number after a number, moving in the direction of another number.
         
@@ -3750,7 +3746,7 @@ class FastMath:
     def nextAfter(float: float, double: float) -> float: ...
     @typing.overload
     @staticmethod
-    def nextDown(double: float) -> float:
+    def nextDown(a: float) -> float:
         """
         Compute next number towards negative infinity.
         
@@ -3773,10 +3769,10 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def nextDown(float: float) -> float: ...
+    def nextDown(a: float) -> float: ...
     @typing.overload
     @staticmethod
-    def nextUp(double: float) -> float:
+    def nextUp(a: float) -> float:
         """
         Compute next number towards positive infinity.
         
@@ -3799,7 +3795,7 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def nextUp(float: float) -> float: ...
+    def nextUp(a: float) -> float: ...
     _norm__T = typing.TypeVar('_norm__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
     def norm(x: _norm__T) -> float:
@@ -3823,7 +3819,7 @@ class FastMath:
     _pow_5__T = typing.TypeVar('_pow_5__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def pow(double: float, double2: float) -> float:
+    def pow(x: float, y: float) -> float:
         """
         Power function. Compute x^y.
         
@@ -3862,7 +3858,7 @@ class FastMath:
     def pow(double: float, long: int) -> float: ...
     @typing.overload
     @staticmethod
-    def pow(t: _pow_3__T, double: float) -> _pow_3__T:
+    def pow(x: _pow_3__T, y: float) -> _pow_3__T:
         """
         Power function. Compute x :sup:`y` .
         
@@ -3914,7 +3910,7 @@ class FastMath:
         """
         Returns a pseudo-random number between 0.0 and 1.0.
         
-        Note: this implementation currently delegates to random
+        Note: this implementation currently delegates to Math
         
         Returns:
             a random number between 0.0 and 1.0
@@ -3958,7 +3954,7 @@ class FastMath:
     _round_2__T = typing.TypeVar('_round_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def round(float: float) -> int:
+    def round(x: float) -> int:
         """
         Get the closest long to x.
         
@@ -3980,7 +3976,7 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def round(double: float) -> int: ...
+    def round(x: float) -> int: ...
     @typing.overload
     @staticmethod
     def round(x: _round_2__T) -> int:
@@ -4002,7 +3998,7 @@ class FastMath:
     _scalb_2__T = typing.TypeVar('_scalb_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def scalb(double: float, int: int) -> float:
+    def scalb(d: float, n: int) -> float:
         """
         Multiply a double number by a power of 2.
         
@@ -4066,7 +4062,7 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def signum(double: float) -> float:
+    def signum(a: float) -> float:
         """
         Compute the signum of a number. The signum is -1 for negative numbers, +1 for positive numbers and 0 otherwise
         
@@ -4089,7 +4085,7 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def signum(float: float) -> float: ...
+    def signum(a: float) -> float: ...
     _sin_1__T = typing.TypeVar('_sin_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
@@ -4226,7 +4222,7 @@ class FastMath:
         """
         Compute the square root of a number.
         
-        Note: this implementation currently delegates to sqrt
+        Note: this implementation currently delegates to Math
         
         Parameters:
             a (double): number on which evaluation is done
@@ -4256,7 +4252,7 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def subtractExact(int: int, int2: int) -> int:
+    def subtractExact(a: int, b: int) -> int:
         """
         Subtract two numbers, detecting overflows.
         
@@ -4287,7 +4283,7 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def subtractExact(long: int, long2: int) -> int: ...
+    def subtractExact(a: int, b: int) -> int: ...
     _tan_1__T = typing.TypeVar('_tan_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
@@ -4434,7 +4430,7 @@ class FastMath:
     _ulp_2__T = typing.TypeVar('_ulp_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def ulp(double: float) -> float:
+    def ulp(x: float) -> float:
         """
         Parameters:
             x (double): number from which ulp is requested
@@ -4454,7 +4450,7 @@ class FastMath:
         ...
     @typing.overload
     @staticmethod
-    def ulp(float: float) -> float: ...
+    def ulp(x: float) -> float: ...
     @typing.overload
     @staticmethod
     def ulp(x: _ulp_2__T) -> _ulp_2__T:
@@ -4531,11 +4527,11 @@ class FieldContinuedFraction:
     _evaluate_2__T = typing.TypeVar('_evaluate_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _evaluate_3__T = typing.TypeVar('_evaluate_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def evaluate(self, t: _evaluate_0__T) -> _evaluate_0__T: ...
+    def evaluate(self, x: _evaluate_0__T) -> _evaluate_0__T: ...
     @typing.overload
     def evaluate(self, t: _evaluate_1__T, double: float) -> _evaluate_1__T: ...
     @typing.overload
-    def evaluate(self, t: _evaluate_2__T, double: float, int: int) -> _evaluate_2__T: ...
+    def evaluate(self, x: _evaluate_2__T, epsilon: float, maxIterations: int) -> _evaluate_2__T: ...
     @typing.overload
     def evaluate(self, t: _evaluate_3__T, int: int) -> _evaluate_3__T: ...
     _getA__T = typing.TypeVar('_getA__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -4579,7 +4575,8 @@ class FieldSinCos(typing.Generic[_FieldSinCos__T]):
     Since:
         1.4
     
-          - sinCos
+    Also see:
+        sinCos
     """
     def __init__(self, sin: _FieldSinCos__T, cos: _FieldSinCos__T):
         """
@@ -4661,7 +4658,8 @@ class FieldSinhCosh(typing.Generic[_FieldSinhCosh__T]):
     Since:
         2.0
     
-          - sinhCosh
+    Also see:
+        sinhCosh
     """
     def __init__(self, sinh: _FieldSinhCosh__T, cosh: _FieldSinhCosh__T):
         """
@@ -4730,8 +4728,6 @@ class FieldSinhCosh(typing.Generic[_FieldSinhCosh__T]):
 _FieldTuple__T = typing.TypeVar('_FieldTuple__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTuple(org.hipparchus.CalculusFieldElement['FieldTuple'[_FieldTuple__T]], typing.Generic[_FieldTuple__T]):
     """
-    implements CalculusFieldElement<FieldTuple<T>>
-    
     This class allows to perform the same computation of all components of a Tuple at once.
     
     Since:
@@ -4784,9 +4780,9 @@ class FieldTuple(org.hipparchus.CalculusFieldElement['FieldTuple'[_FieldTuple__T
         """
         ...
     @typing.overload
-    def add(self, double: float) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def add(self, a: float) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
-    def add(self, fieldTuple: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def add(self, a: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
     def asin(self) -> 'FieldTuple'[_FieldTuple__T]:
         """
         Arc sine operation.
@@ -4877,9 +4873,9 @@ class FieldTuple(org.hipparchus.CalculusFieldElement['FieldTuple'[_FieldTuple__T
         """
         ...
     @typing.overload
-    def copySign(self, double: float) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def copySign(self, sign: float) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
-    def copySign(self, fieldTuple: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def copySign(self, sign: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
     def cos(self) -> 'FieldTuple'[_FieldTuple__T]:
         """
         Cosine operation.
@@ -4905,12 +4901,12 @@ class FieldTuple(org.hipparchus.CalculusFieldElement['FieldTuple'[_FieldTuple__T
         """
         ...
     @typing.overload
-    def divide(self, double: float) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def divide(self, a: float) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
-    def divide(self, fieldTuple: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
-    def equals(self, object: typing.Any) -> bool:
+    def divide(self, a: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def equals(self, obj: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -5038,7 +5034,7 @@ class FieldTuple(org.hipparchus.CalculusFieldElement['FieldTuple'[_FieldTuple__T
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -5062,21 +5058,21 @@ class FieldTuple(org.hipparchus.CalculusFieldElement['FieldTuple'[_FieldTuple__T
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, fieldTuple: 'FieldTuple'[_FieldTuple__T], double2: float, fieldTuple2: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldTuple'[_FieldTuple__T], a2: float, b2: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
-    def linearCombination(self, double: float, fieldTuple: 'FieldTuple'[_FieldTuple__T], double2: float, fieldTuple2: 'FieldTuple'[_FieldTuple__T], double3: float, fieldTuple3: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldTuple'[_FieldTuple__T], a2: float, b2: 'FieldTuple'[_FieldTuple__T], a3: float, b3: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
-    def linearCombination(self, double: float, fieldTuple: 'FieldTuple'[_FieldTuple__T], double2: float, fieldTuple2: 'FieldTuple'[_FieldTuple__T], double3: float, fieldTuple3: 'FieldTuple'[_FieldTuple__T], double4: float, fieldTuple4: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldTuple'[_FieldTuple__T], a2: float, b2: 'FieldTuple'[_FieldTuple__T], a3: float, b3: 'FieldTuple'[_FieldTuple__T], a4: float, b4: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
-    def linearCombination(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], fieldTupleArray: typing.Union[typing.List['FieldTuple'[_FieldTuple__T]], jpype.JArray]) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def linearCombination(self, a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List['FieldTuple'[_FieldTuple__T]], jpype.JArray]) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
-    def linearCombination(self, fieldTuple: 'FieldTuple'[_FieldTuple__T], fieldTuple2: 'FieldTuple'[_FieldTuple__T], fieldTuple3: 'FieldTuple'[_FieldTuple__T], fieldTuple4: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def linearCombination(self, a1: 'FieldTuple'[_FieldTuple__T], b1: 'FieldTuple'[_FieldTuple__T], a2: 'FieldTuple'[_FieldTuple__T], b2: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
-    def linearCombination(self, fieldTuple: 'FieldTuple'[_FieldTuple__T], fieldTuple2: 'FieldTuple'[_FieldTuple__T], fieldTuple3: 'FieldTuple'[_FieldTuple__T], fieldTuple4: 'FieldTuple'[_FieldTuple__T], fieldTuple5: 'FieldTuple'[_FieldTuple__T], fieldTuple6: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def linearCombination(self, a1: 'FieldTuple'[_FieldTuple__T], b1: 'FieldTuple'[_FieldTuple__T], a2: 'FieldTuple'[_FieldTuple__T], b2: 'FieldTuple'[_FieldTuple__T], a3: 'FieldTuple'[_FieldTuple__T], b3: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
-    def linearCombination(self, fieldTuple: 'FieldTuple'[_FieldTuple__T], fieldTuple2: 'FieldTuple'[_FieldTuple__T], fieldTuple3: 'FieldTuple'[_FieldTuple__T], fieldTuple4: 'FieldTuple'[_FieldTuple__T], fieldTuple5: 'FieldTuple'[_FieldTuple__T], fieldTuple6: 'FieldTuple'[_FieldTuple__T], fieldTuple7: 'FieldTuple'[_FieldTuple__T], fieldTuple8: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def linearCombination(self, a1: 'FieldTuple'[_FieldTuple__T], b1: 'FieldTuple'[_FieldTuple__T], a2: 'FieldTuple'[_FieldTuple__T], b2: 'FieldTuple'[_FieldTuple__T], a3: 'FieldTuple'[_FieldTuple__T], b3: 'FieldTuple'[_FieldTuple__T], a4: 'FieldTuple'[_FieldTuple__T], b4: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
-    def linearCombination(self, fieldTupleArray: typing.Union[typing.List['FieldTuple'[_FieldTuple__T]], jpype.JArray], fieldTupleArray2: typing.Union[typing.List['FieldTuple'[_FieldTuple__T]], jpype.JArray]) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def linearCombination(self, a: typing.Union[typing.List['FieldTuple'[_FieldTuple__T]], jpype.JArray], b: typing.Union[typing.List['FieldTuple'[_FieldTuple__T]], jpype.JArray]) -> 'FieldTuple'[_FieldTuple__T]: ...
     def log(self) -> 'FieldTuple'[_FieldTuple__T]:
         """
         Natural logarithm.
@@ -5165,9 +5161,9 @@ class FieldTuple(org.hipparchus.CalculusFieldElement['FieldTuple'[_FieldTuple__T
         """
         ...
     @typing.overload
-    def remainder(self, double: float) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def remainder(self, a: float) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
-    def remainder(self, fieldTuple: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def remainder(self, a: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
     def rint(self) -> 'FieldTuple'[_FieldTuple__T]:
         """
         Get the whole number that is the nearest to the instance, or the even one if x is exactly half way between two integers.
@@ -5295,9 +5291,9 @@ class FieldTuple(org.hipparchus.CalculusFieldElement['FieldTuple'[_FieldTuple__T
         """
         ...
     @typing.overload
-    def subtract(self, double: float) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def subtract(self, a: float) -> 'FieldTuple'[_FieldTuple__T]: ...
     @typing.overload
-    def subtract(self, fieldTuple: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
+    def subtract(self, a: 'FieldTuple'[_FieldTuple__T]) -> 'FieldTuple'[_FieldTuple__T]: ...
     def tan(self) -> 'FieldTuple'[_FieldTuple__T]:
         """
         Tangent operation.
@@ -5366,9 +5362,9 @@ class Incrementor:
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, max: int): ...
     @typing.overload
-    def __init__(self, int: int, maxCountExceededCallback: typing.Union['Incrementor.MaxCountExceededCallback', typing.Callable]): ...
+    def __init__(self, max: int, cb: typing.Union['Incrementor.MaxCountExceededCallback', typing.Callable]): ...
     @typing.overload
     def canIncrement(self) -> bool:
         """
@@ -5423,8 +5419,8 @@ class Incrementor:
         """
         Adds the increment value to the current iteration count. At counter exhaustion, this method will call the trigger method of the callback object passed to the withCallback method.
         
-              - increment
-        
+        Also see:
+            increment
         
         
         """
@@ -5440,8 +5436,8 @@ class Incrementor:
         Raises:
             MathIllegalArgumentException: if nTimes is negative.
         
-              - increment
-        
+        Also see:
+            increment
         
         """
         ...
@@ -5499,7 +5495,8 @@ class IterationEvent(java.util.EventObject):
     """
     The root class from which all events occurring while running an IterationManager should be derived.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self, source: typing.Any, iterations: int):
         """
@@ -5573,9 +5570,9 @@ class IterationManager:
     This abstract class provides a general framework for managing iterative algorithms. The maximum number of iterations can be set, and methods are provided to monitor the current iteration count. A lightweight event framework is also provided.
     """
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, maxIterations: int): ...
     @typing.overload
-    def __init__(self, int: int, maxCountExceededCallback: typing.Union[Incrementor.MaxCountExceededCallback, typing.Callable]): ...
+    def __init__(self, maxIterations: int, callBack: typing.Union[Incrementor.MaxCountExceededCallback, typing.Callable]): ...
     def addIterationListener(self, listener: IterationListener) -> None:
         """
         Attaches a listener to this manager.
@@ -5674,11 +5671,10 @@ class IterationManager:
 
 class KthSelector(java.io.Serializable):
     """
-    implements Serializable
-    
     A Simple K :sup:`th` selector implementation to pick up the K :sup:`th` ordered element from a work array containing the input numbers.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -5719,7 +5715,7 @@ class MathArrays:
     _buildArray_2__T = typing.TypeVar('_buildArray_2__T', bound=org.hipparchus.FieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def buildArray(field: org.hipparchus.Field[_buildArray_0__T], int: int) -> typing.MutableSequence[_buildArray_0__T]:
+    def buildArray(field: org.hipparchus.Field[_buildArray_0__T], length: int) -> typing.MutableSequence[_buildArray_0__T]:
         """
         Build an array of elements.
         
@@ -5766,15 +5762,15 @@ class MathArrays:
         ...
     @typing.overload
     @staticmethod
-    def buildArray(field: org.hipparchus.Field[_buildArray_1__T], int: int, int2: int) -> typing.MutableSequence[typing.MutableSequence[_buildArray_1__T]]: ...
+    def buildArray(field: org.hipparchus.Field[_buildArray_1__T], rows: int, columns: int) -> typing.MutableSequence[typing.MutableSequence[_buildArray_1__T]]: ...
     @typing.overload
     @staticmethod
-    def buildArray(field: org.hipparchus.Field[_buildArray_2__T], int: int, int2: int, int3: int) -> typing.MutableSequence[typing.MutableSequence[typing.MutableSequence[_buildArray_2__T]]]: ...
+    def buildArray(field: org.hipparchus.Field[_buildArray_2__T], l1: int, l2: int, l3: int) -> typing.MutableSequence[typing.MutableSequence[typing.MutableSequence[_buildArray_2__T]]]: ...
     _checkEqualLength_2__T = typing.TypeVar('_checkEqualLength_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _checkEqualLength_5__T = typing.TypeVar('_checkEqualLength_5__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def checkEqualLength(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], boolean: bool) -> bool:
+    def checkEqualLength(a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List[float], jpype.JArray], abort: bool) -> bool:
         """
         Check that both arrays have the same length.
         
@@ -5806,7 +5802,7 @@ class MathArrays:
         ...
     @typing.overload
     @staticmethod
-    def checkEqualLength(intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray], boolean: bool) -> bool: ...
+    def checkEqualLength(a: typing.Union[typing.List[int], jpype.JArray], b: typing.Union[typing.List[int], jpype.JArray], abort: bool) -> bool: ...
     @typing.overload
     @staticmethod
     def checkEqualLength(a: typing.Union[typing.List[_checkEqualLength_2__T], jpype.JArray], b: typing.Union[typing.List[_checkEqualLength_2__T], jpype.JArray], abort: bool) -> bool:
@@ -5831,7 +5827,7 @@ class MathArrays:
         ...
     @typing.overload
     @staticmethod
-    def checkEqualLength(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> None:
+    def checkEqualLength(a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
         Check that both arrays have the same length.
         
@@ -5856,7 +5852,7 @@ class MathArrays:
         ...
     @typing.overload
     @staticmethod
-    def checkEqualLength(intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
+    def checkEqualLength(a: typing.Union[typing.List[int], jpype.JArray], b: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
     @typing.overload
     @staticmethod
     def checkEqualLength(a: typing.Union[typing.List[_checkEqualLength_5__T], jpype.JArray], b: typing.Union[typing.List[_checkEqualLength_5__T], jpype.JArray]) -> None:
@@ -5877,10 +5873,10 @@ class MathArrays:
         ...
     @typing.overload
     @staticmethod
-    def checkNonNegative(longArray: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
+    def checkNonNegative(in_: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
     @typing.overload
     @staticmethod
-    def checkNonNegative(longArray: typing.Union[typing.List[typing.MutableSequence[int]], jpype.JArray]) -> None: ...
+    def checkNonNegative(in_: typing.Union[typing.List[typing.MutableSequence[int]], jpype.JArray]) -> None: ...
     @staticmethod
     def checkNotNaN(in_: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
@@ -5900,22 +5896,22 @@ class MathArrays:
     _checkOrder_5__T = typing.TypeVar('_checkOrder_5__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def checkOrder(doubleArray: typing.Union[typing.List[float], jpype.JArray], orderDirection: 'MathArrays.OrderDirection', boolean: bool, boolean2: bool) -> bool: ...
+    def checkOrder(val: typing.Union[typing.List[float], jpype.JArray], dir: 'MathArrays.OrderDirection', strict: bool, abort: bool) -> bool: ...
     @typing.overload
     @staticmethod
-    def checkOrder(tArray: typing.Union[typing.List[_checkOrder_1__T], jpype.JArray], orderDirection: 'MathArrays.OrderDirection', boolean: bool, boolean2: bool) -> bool: ...
+    def checkOrder(val: typing.Union[typing.List[_checkOrder_1__T], jpype.JArray], dir: 'MathArrays.OrderDirection', strict: bool, abort: bool) -> bool: ...
     @typing.overload
     @staticmethod
-    def checkOrder(doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
+    def checkOrder(val: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
     @typing.overload
     @staticmethod
-    def checkOrder(doubleArray: typing.Union[typing.List[float], jpype.JArray], orderDirection: 'MathArrays.OrderDirection', boolean: bool) -> None: ...
+    def checkOrder(val: typing.Union[typing.List[float], jpype.JArray], dir: 'MathArrays.OrderDirection', strict: bool) -> None: ...
     @typing.overload
     @staticmethod
-    def checkOrder(tArray: typing.Union[typing.List[_checkOrder_4__T], jpype.JArray]) -> None: ...
+    def checkOrder(val: typing.Union[typing.List[_checkOrder_4__T], jpype.JArray]) -> None: ...
     @typing.overload
     @staticmethod
-    def checkOrder(tArray: typing.Union[typing.List[_checkOrder_5__T], jpype.JArray], orderDirection: 'MathArrays.OrderDirection', boolean: bool) -> None: ...
+    def checkOrder(val: typing.Union[typing.List[_checkOrder_5__T], jpype.JArray], dir: 'MathArrays.OrderDirection', strict: bool) -> None: ...
     @staticmethod
     def checkPositive(in_: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
@@ -6000,22 +5996,22 @@ class MathArrays:
         ...
     @typing.overload
     @staticmethod
-    def distance(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def distance(p1: typing.Union[typing.List[float], jpype.JArray], p2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
     @staticmethod
-    def distance(intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
+    def distance(p1: typing.Union[typing.List[int], jpype.JArray], p2: typing.Union[typing.List[int], jpype.JArray]) -> float: ...
     @typing.overload
     @staticmethod
-    def distance1(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def distance1(p1: typing.Union[typing.List[float], jpype.JArray], p2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
     @staticmethod
-    def distance1(intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]) -> int: ...
+    def distance1(p1: typing.Union[typing.List[int], jpype.JArray], p2: typing.Union[typing.List[int], jpype.JArray]) -> int: ...
     @typing.overload
     @staticmethod
-    def distanceInf(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def distanceInf(p1: typing.Union[typing.List[float], jpype.JArray], p2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
     @staticmethod
-    def distanceInf(intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]) -> int: ...
+    def distanceInf(p1: typing.Union[typing.List[int], jpype.JArray], p2: typing.Union[typing.List[int], jpype.JArray]) -> int: ...
     @staticmethod
     def ebeAdd(a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
         """
@@ -6093,7 +6089,7 @@ class MathArrays:
     def equals(self, object: typing.Any) -> bool: ...
     @typing.overload
     @staticmethod
-    def equals(byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], byteArray2: typing.Union[typing.List[int], jpype.JArray, bytes]) -> bool:
+    def equals(x: typing.Union[typing.List[int], jpype.JArray, bytes], y: typing.Union[typing.List[int], jpype.JArray, bytes]) -> bool:
         """
         Returns true iff both arguments are null or have same dimensions and all their elements are equal as defined by equals.
         
@@ -6154,21 +6150,21 @@ class MathArrays:
         ...
     @typing.overload
     @staticmethod
-    def equals(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> bool: ...
+    def equals(x: typing.Union[typing.List[float], jpype.JArray], y: typing.Union[typing.List[float], jpype.JArray]) -> bool: ...
     @typing.overload
     @staticmethod
-    def equals(floatArray: typing.Union[typing.List[float], jpype.JArray], floatArray2: typing.Union[typing.List[float], jpype.JArray]) -> bool: ...
+    def equals(x: typing.Union[typing.List[float], jpype.JArray], y: typing.Union[typing.List[float], jpype.JArray]) -> bool: ...
     @typing.overload
     @staticmethod
-    def equals(intArray: typing.Union[typing.List[int], jpype.JArray], intArray2: typing.Union[typing.List[int], jpype.JArray]) -> bool: ...
+    def equals(x: typing.Union[typing.List[int], jpype.JArray], y: typing.Union[typing.List[int], jpype.JArray]) -> bool: ...
     @typing.overload
     @staticmethod
-    def equals(longArray: typing.Union[typing.List[int], jpype.JArray], longArray2: typing.Union[typing.List[int], jpype.JArray]) -> bool: ...
+    def equals(x: typing.Union[typing.List[int], jpype.JArray], y: typing.Union[typing.List[int], jpype.JArray]) -> bool: ...
     @typing.overload
     @staticmethod
     def equals(x: typing.Union[typing.List[_equals_6__T], jpype.JArray], y: typing.Union[typing.List[_equals_6__T], jpype.JArray]) -> bool:
         """
-        Returns true iff both arguments are null or have same dimensions and all their elements are equal as defined by equals.
+        Returns true iff both arguments are null or have same dimensions and all their elements are equal as defined by Object.
         
         Parameters:
             x (T[]): First array.
@@ -6184,10 +6180,10 @@ class MathArrays:
         ...
     @typing.overload
     @staticmethod
-    def equals(shortArray: typing.Union[typing.List[int], jpype.JArray], shortArray2: typing.Union[typing.List[int], jpype.JArray]) -> bool: ...
+    def equals(x: typing.Union[typing.List[int], jpype.JArray], y: typing.Union[typing.List[int], jpype.JArray]) -> bool: ...
     @typing.overload
     @staticmethod
-    def equalsIncludingNaN(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> bool:
+    def equalsIncludingNaN(x: typing.Union[typing.List[float], jpype.JArray], y: typing.Union[typing.List[float], jpype.JArray]) -> bool:
         """
         Returns true iff both arguments are null or have same dimensions and all their elements are equal as defined by equalsIncludingNaN.
         
@@ -6212,7 +6208,7 @@ class MathArrays:
         ...
     @typing.overload
     @staticmethod
-    def equalsIncludingNaN(floatArray: typing.Union[typing.List[float], jpype.JArray], floatArray2: typing.Union[typing.List[float], jpype.JArray]) -> bool: ...
+    def equalsIncludingNaN(x: typing.Union[typing.List[float], jpype.JArray], y: typing.Union[typing.List[float], jpype.JArray]) -> bool: ...
     _isMonotonic_1__T = typing.TypeVar('_isMonotonic_1__T', bound=java.lang.Comparable)  # <T>
     @typing.overload
     @staticmethod
@@ -6249,7 +6245,7 @@ class MathArrays:
         ...
     @typing.overload
     @staticmethod
-    def linearCombination(double: float, double2: float, double3: float, double4: float) -> float:
+    def linearCombination(a1: float, b1: float, a2: float, b2: float) -> float:
         """
         Compute a linear combination accurately.
         
@@ -6264,8 +6260,8 @@ class MathArrays:
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination, linearCombination
         
         Compute a linear combination accurately.
         
@@ -6282,8 +6278,8 @@ class MathArrays:
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination, linearCombination
         
         Compute a linear combination accurately.
         
@@ -6302,22 +6298,21 @@ class MathArrays:
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-              - linearCombination
-              - linearCombination
-        
+        Also see:
+            linearCombination, linearCombination
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def linearCombination(double: float, double2: float, double3: float, double4: float, double5: float, double6: float) -> float: ...
+    def linearCombination(a1: float, b1: float, a2: float, b2: float, a3: float, b3: float) -> float: ...
     @typing.overload
     @staticmethod
-    def linearCombination(double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float) -> float: ...
+    def linearCombination(a1: float, b1: float, a2: float, b2: float, a3: float, b3: float, a4: float, b4: float) -> float: ...
     @typing.overload
     @staticmethod
-    def linearCombination(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def linearCombination(a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @staticmethod
     def natural(n: int) -> typing.MutableSequence[int]:
         """
@@ -6386,8 +6381,8 @@ class MathArrays:
         Create a copy of an array scaled by a value.
         
         Parameters:
-            val (double): Scalar.
-            arr (double[]): Array to scale.
+            arr (double): Array to scale.
+            val (double[]): Scalar.
         
         Returns:
             scaled copy of array with each entry multiplied by val.
@@ -6403,8 +6398,8 @@ class MathArrays:
         The array is modified in place (no copy is created).
         
         Parameters:
-            val (double): Scalar
-            arr (double[]): Array to scale
+            arr (double): Array to scale
+            val (double[]): Scalar
         
         
         """
@@ -6435,15 +6430,15 @@ class MathArrays:
         Parameters:
             list (int[]): Array whose entries will be shuffled (in-place).
         
-              - shuffle
-        
+        Also see:
+            shuffle
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def shuffle(intArray: typing.Union[typing.List[int], jpype.JArray], int2: int, position: 'MathArrays.Position') -> None:
+    def shuffle(list: typing.Union[typing.List[int], jpype.JArray], start: int, pos: 'MathArrays.Position') -> None:
         """
         Shuffle the entries of the given array. The start and pos parameters select which portion of the array is randomized and which is left untouched.
         
@@ -6454,7 +6449,8 @@ class MathArrays:
                 TAIL) or the beginning (if
                 HEAD) of the array.
         
-              - shuffle
+        Also see:
+            shuffle
         
         Shuffle the entries of the given array, using the Fisher algorithm. The start and pos parameters select which portion of the array is randomized and which is left untouched.
         
@@ -6470,7 +6466,7 @@ class MathArrays:
         ...
     @typing.overload
     @staticmethod
-    def shuffle(intArray: typing.Union[typing.List[int], jpype.JArray], int2: int, position: 'MathArrays.Position', randomGenerator: org.hipparchus.random.RandomGenerator) -> None: ...
+    def shuffle(list: typing.Union[typing.List[int], jpype.JArray], start: int, pos: 'MathArrays.Position', rng: org.hipparchus.random.RandomGenerator) -> None: ...
     @typing.overload
     @staticmethod
     def shuffle(list: typing.Union[typing.List[int], jpype.JArray], rng: org.hipparchus.random.RandomGenerator) -> None:
@@ -6481,17 +6477,17 @@ class MathArrays:
             list (int[]): Array whose entries will be shuffled (in-place).
             rng (RandomGenerator): Random number generator.
         
-              - shuffle
-        
+        Also see:
+            shuffle
         
         """
         ...
     @typing.overload
     @staticmethod
-    def sortInPlace(doubleArray: typing.Union[typing.List[float], jpype.JArray], *doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
+    def sortInPlace(x: typing.Union[typing.List[float], jpype.JArray], *yList: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
     @typing.overload
     @staticmethod
-    def sortInPlace(doubleArray: typing.Union[typing.List[float], jpype.JArray], orderDirection: 'MathArrays.OrderDirection', *doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
+    def sortInPlace(x: typing.Union[typing.List[float], jpype.JArray], dir: 'MathArrays.OrderDirection', *yList: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
     @staticmethod
     def unique(data: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
         """
@@ -6514,10 +6510,10 @@ class MathArrays:
     def verifyValues(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> bool: ...
     @typing.overload
     @staticmethod
-    def verifyValues(doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int, boolean: bool) -> bool: ...
+    def verifyValues(values: typing.Union[typing.List[float], jpype.JArray], weights: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int, allowEmpty: bool) -> bool: ...
     @typing.overload
     @staticmethod
-    def verifyValues(doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> bool: ...
+    def verifyValues(values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> bool: ...
     @typing.overload
     @staticmethod
     def verifyValues(doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int, boolean: bool) -> bool: ...
@@ -6556,16 +6552,16 @@ class MathUtils:
     """
     Miscellaneous utility functions.
     
-          - ArithmeticUtils
-          - Precision
-          - MathArrays
+    Also see:
+        ArithmeticUtils, Precision,
+        MathArrays
     """
     TWO_PI: typing.ClassVar[float] = ...
     """
     \(2\pi\)
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -6573,8 +6569,8 @@ class MathUtils:
     """
     \(\pi^2\)
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -6582,8 +6578,8 @@ class MathUtils:
     """
     \(\pi/2\).
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -6610,13 +6606,13 @@ class MathUtils:
     def checkFinite(doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
     @typing.overload
     @staticmethod
-    def checkNotNull(object: typing.Any) -> None: ...
+    def checkNotNull(o: typing.Any) -> None: ...
     @typing.overload
     @staticmethod
-    def checkNotNull(object: typing.Any, localizable: org.hipparchus.exception.Localizable, *object2: typing.Any) -> None: ...
+    def checkNotNull(o: typing.Any, pattern: org.hipparchus.exception.Localizable, *args: typing.Any) -> None: ...
     @typing.overload
     @staticmethod
-    def checkRangeInclusive(double: float, double2: float, double3: float) -> None:
+    def checkRangeInclusive(value: float, lo: float, hi: float) -> None:
         """
         Checks that the given value is strictly within the range [lo, hi].
         
@@ -6643,23 +6639,23 @@ class MathUtils:
         ...
     @typing.overload
     @staticmethod
-    def checkRangeInclusive(long: int, long2: int, long3: int) -> None: ...
+    def checkRangeInclusive(value: int, lo: int, hi: int) -> None: ...
     @typing.overload
     @staticmethod
-    def copySign(byte: int, byte2: int) -> int: ...
+    def copySign(magnitude: int, sign: int) -> int: ...
     @typing.overload
     @staticmethod
-    def copySign(int: int, int2: int) -> int: ...
+    def copySign(magnitude: int, sign: int) -> int: ...
     @typing.overload
     @staticmethod
-    def copySign(long: int, long2: int) -> int: ...
+    def copySign(magnitude: int, sign: int) -> int: ...
     @typing.overload
     @staticmethod
-    def copySign(short: int, short2: int) -> int: ...
+    def copySign(magnitude: int, sign: int) -> int: ...
     @typing.overload
     def equals(self, object: typing.Any) -> bool:
         """
-        Returns true if the values are equal according to semantics of equals.
+        Returns true if the values are equal according to semantics of Double.
         
         Parameters:
             x (double): Value
@@ -6673,7 +6669,7 @@ class MathUtils:
         ...
     @typing.overload
     @staticmethod
-    def equals(double: float, double2: float) -> bool: ...
+    def equals(x: float, y: float) -> bool: ...
     @staticmethod
     def getHipparchusVersion() -> str:
         """
@@ -6692,7 +6688,7 @@ class MathUtils:
         ...
     @typing.overload
     @staticmethod
-    def hash(double: float) -> int:
+    def hash(value: float) -> int:
         """
         Returns an integer hash code representing the given double value.
         
@@ -6715,7 +6711,7 @@ class MathUtils:
         ...
     @typing.overload
     @staticmethod
-    def hash(doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> int: ...
+    def hash(value: typing.Union[typing.List[float], jpype.JArray]) -> int: ...
     _max__T = typing.TypeVar('_max__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
     def max(e1: _max__T, e2: _max__T) -> _max__T:
@@ -6893,8 +6889,6 @@ class MathUtils:
 
 class MultidimensionalCounter(java.lang.Iterable[int]):
     """
-    implements Iterable<Integer>
-    
     Converter between unidimensional storage structure and multidimensional conceptual structure. This utility will convert from indices in a multidimensional structure to the corresponding index in a one-dimensional array. For example, assuming that the ranges (in 3 dimensions) of indices are 2, 4 and 3, the following correspondences, between 3-tuples indices and unidimensional indices, will hold:
     
       - (0, 0, 0) corresponds to 0
@@ -6988,7 +6982,7 @@ class MultidimensionalCounter(java.lang.Iterable[int]):
         """
         Create an iterator over this counter.
         
-        Specified by: iterator in interface Iterable
+        Specified by: Iterable in interface Iterable
         
         Returns:
             the iterator.
@@ -6998,7 +6992,7 @@ class MultidimensionalCounter(java.lang.Iterable[int]):
         ...
     def toString(self) -> str:
         """
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -7024,7 +7018,7 @@ class Pair(typing.Generic[_Pair__K, _Pair__V]):
     @typing.overload
     def __init__(self, k: _Pair__K, v: _Pair__V): ...
     @typing.overload
-    def __init__(self, pair: 'Pair'[_Pair__K, _Pair__V]): ...
+    def __init__(self, entry: 'Pair'[_Pair__K, _Pair__V]): ...
     _create__K = typing.TypeVar('_create__K')  # <K>
     _create__V = typing.TypeVar('_create__V')  # <V>
     @staticmethod
@@ -7046,7 +7040,7 @@ class Pair(typing.Generic[_Pair__K, _Pair__V]):
         """
         Compare the specified object with this entry for equality.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             o (Object): Object.
@@ -7101,7 +7095,7 @@ class Pair(typing.Generic[_Pair__K, _Pair__V]):
         """
         Compute a hash code.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             the hash code value.
@@ -7111,7 +7105,7 @@ class Pair(typing.Generic[_Pair__K, _Pair__V]):
         ...
     def toString(self) -> str:
         """
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -7167,7 +7161,12 @@ class PivotingStrategy(java.lang.Enum['PivotingStrategy']):
     @staticmethod
     def values() -> typing.MutableSequence['PivotingStrategy']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (PivotingStrategy c : PivotingStrategy.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -7186,8 +7185,8 @@ class Precision:
     
     In IEEE 754 arithmetic, this is 2 :sup:`-53` .
     
-          - `Machine epsilon <http://en.wikipedia.org/wiki/Machine_epsilon>`
-    
+    Also see:
+        `Machine epsilon <http://en.wikipedia.org/wiki/Machine_epsilon>`
     
     
     """
@@ -7199,7 +7198,7 @@ class Precision:
     """
     @typing.overload
     @staticmethod
-    def compareTo(double: float, double2: float, double3: float) -> int:
+    def compareTo(x: float, y: float, eps: float) -> int:
         """
         Compares two numbers given some amount of allowed error.
         
@@ -7304,7 +7303,7 @@ class Precision:
         ...
     @typing.overload
     @staticmethod
-    def equals(double: float, double2: float) -> bool: ...
+    def equals(x: float, y: float) -> bool: ...
     @typing.overload
     @staticmethod
     def equals(double: float, double2: float, double3: float) -> bool: ...
@@ -7313,7 +7312,7 @@ class Precision:
     def equals(double: float, double2: float, int: int) -> bool: ...
     @typing.overload
     @staticmethod
-    def equals(float: float, float2: float) -> bool: ...
+    def equals(x: float, y: float) -> bool: ...
     @typing.overload
     @staticmethod
     def equals(float: float, float2: float, float3: float) -> bool: ...
@@ -7322,7 +7321,7 @@ class Precision:
     def equals(float: float, float2: float, int: int) -> bool: ...
     @typing.overload
     @staticmethod
-    def equalsIncludingNaN(double: float, double2: float) -> bool:
+    def equalsIncludingNaN(x: float, y: float) -> bool:
         """
         Returns true if both arguments are NaN or they are equal as defined by equals.
         
@@ -7395,7 +7394,7 @@ class Precision:
     def equalsIncludingNaN(double: float, double2: float, int: int) -> bool: ...
     @typing.overload
     @staticmethod
-    def equalsIncludingNaN(float: float, float2: float) -> bool: ...
+    def equalsIncludingNaN(x: float, y: float) -> bool: ...
     @typing.overload
     @staticmethod
     def equalsIncludingNaN(float: float, float2: float, float3: float) -> bool: ...
@@ -7420,7 +7419,7 @@ class Precision:
         ...
     @typing.overload
     @staticmethod
-    def isMathematicalInteger(double: float) -> bool:
+    def isMathematicalInteger(x: float) -> bool:
         """
         Check is x is a mathematical integer.
         
@@ -7449,7 +7448,7 @@ class Precision:
         ...
     @typing.overload
     @staticmethod
-    def isMathematicalInteger(float: float) -> bool: ...
+    def isMathematicalInteger(x: float) -> bool: ...
     @staticmethod
     def representableDelta(x: float, originalDelta: float) -> float:
         """
@@ -7469,9 +7468,9 @@ class Precision:
         ...
     @typing.overload
     @staticmethod
-    def round(double: float, int: int) -> float:
+    def round(x: float, scale: int) -> float:
         """
-        Rounds the given value to the specified number of decimal places. The value is rounded using the ROUND_HALF_UP method.
+        Rounds the given value to the specified number of decimal places. The value is rounded using the BigDecimal method.
         
         Parameters:
             x (double): Value to round.
@@ -7495,7 +7494,7 @@ class Precision:
             ArithmeticException: if roundingMethod == ROUND_UNNECESSARY and the specified scaling operation would require rounding.
             IllegalArgumentException: if roundingMethod does not represent a valid rounding mode.
         
-        Rounds the given value to the specified number of decimal places. The value is rounded using the ROUND_HALF_UP method.
+        Rounds the given value to the specified number of decimal places. The value is rounded using the BigDecimal method.
         
         Parameters:
             x (float): Value to round.
@@ -7504,7 +7503,7 @@ class Precision:
         Returns:
             the rounded value.
         
-        public static float round(float x, int scale, RoundingMode roundingMethod) throws MathRuntimeException, MathIllegalArgumentException
+        public static float round (float x, int scale, RoundingMode roundingMethod) throws MathRuntimeException, MathIllegalArgumentException
         
         Rounds the given value to the specified number of decimal places. The value is rounded using the given method which is any method defined in BigDecimal.
         
@@ -7526,18 +7525,16 @@ class Precision:
         ...
     @typing.overload
     @staticmethod
-    def round(double: float, int: int, roundingMode: java.math.RoundingMode) -> float: ...
+    def round(x: float, scale: int, roundingMethod: java.math.RoundingMode) -> float: ...
     @typing.overload
     @staticmethod
-    def round(float: float, int: int) -> float: ...
+    def round(x: float, scale: int) -> float: ...
     @typing.overload
     @staticmethod
-    def round(float: float, int: int, roundingMode: java.math.RoundingMode) -> float: ...
+    def round(x: float, scale: int, roundingMethod: java.math.RoundingMode) -> float: ...
 
 class ResizableDoubleArray(java.io.Serializable):
     """
-    implements Serializable
-    
     A variable length primitive double array implementation that automatically handles expanding and contracting its internal storage array as elements are added and removed.
     
     The internal storage array starts with capacity determined by the initialCapacity property, which can be set by the constructor. The default initial capacity is 16. Adding elements using addElement appends elements to the end of the array. When there are no open entries at the end of the internal storage array, the array is expanded. The size of the expanded array depends on the expansionMode and expansionFactor properties. The expansionMode determines whether the size of the array is multiplied by the expansionFactor (MULTIPLICATIVE) or if the expansion is additive (ADDITIVE -- expansionFactor storage locations added). The default expansionMode is MULTIPLICATIVE and the default expansionFactor is 2.
@@ -7548,7 +7545,8 @@ class ResizableDoubleArray(java.io.Serializable):
     
     Note: this class is NOT thread-safe.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -7557,11 +7555,11 @@ class ResizableDoubleArray(java.io.Serializable):
     @typing.overload
     def __init__(self, int: int): ...
     @typing.overload
-    def __init__(self, int: int, double: float): ...
+    def __init__(self, initialCapacity: int, expansionFactor: float): ...
     @typing.overload
-    def __init__(self, int: int, double: float, double2: float): ...
+    def __init__(self, initialCapacity: int, expansionFactor: float, contractionCriterion: float): ...
     @typing.overload
-    def __init__(self, int: int, double: float, double2: float, expansionMode: 'ResizableDoubleArray.ExpansionMode', *double3: float): ...
+    def __init__(self, initialCapacity: int, expansionFactor: float, contractionCriterion: float, expansionMode: 'ResizableDoubleArray.ExpansionMode', *data: float): ...
     @typing.overload
     def __init__(self, resizableDoubleArray: 'ResizableDoubleArray'): ...
     def addElement(self, value: float) -> None:
@@ -7668,7 +7666,7 @@ class ResizableDoubleArray(java.io.Serializable):
         """
         Returns true iff object is a ResizableDoubleArray with the same properties as this and an identical internal storage array.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             object (Object): object to be compared for equality with this
@@ -7765,7 +7763,7 @@ class ResizableDoubleArray(java.io.Serializable):
         """
         Returns a hash code consistent with equals.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             the hash code representing this ResizableDoubleArray.
@@ -7835,8 +7833,6 @@ class ResizableDoubleArray(java.io.Serializable):
 
 class RosenNumberPartitionIterator(java.util.Iterator[typing.MutableSequence[int]]):
     """
-    implements Iterator<int[]>
-    
     An iterator that generates all partitions of n elements, into k parts containing the number of elements in each part, based on Rosen's algorithm.
     
     This is a copy of the class (with slight edits) with the same name from the symja_android_library. The original file was published under the terms of the GPLV3 license, but the Hipparchus project was Hipparchus to include it relicensed to Apache V2.
@@ -7856,20 +7852,20 @@ class RosenNumberPartitionIterator(java.util.Iterator[typing.MutableSequence[int
         ...
     def hasNext(self) -> bool:
         """
-        Specified by: hasNext in interface Iterator
+        Specified by: Iterator in interface Iterator
         
-              - hasNext
-        
+        Also see:
+            Iterator
         
         
         """
         ...
     def next(self) -> typing.MutableSequence[int]:
         """
-        Specified by: next in interface Iterator
+        Specified by: Iterator in interface Iterator
         
-              - next
-        
+        Also see:
+            Iterator
         
         
         """
@@ -7886,14 +7882,15 @@ class RyuDouble:
     
     Ryū generates the shortest decimal representation of a floating point number that maintains round-trip safety. That is, a correct parser can recover the exact original number. Ryū is very fast (about 10 time faster than toString()).
     
-          - cfm
+    Also see:
+        cfm
     """
     DEFAULT_LOW_EXP: typing.ClassVar[int] = ...
     """
     Default low switch level to scientific notation.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -7901,14 +7898,14 @@ class RyuDouble:
     """
     Default high switch level to scientific notation.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
     @staticmethod
-    def doubleToString(double: float) -> str:
+    def doubleToString(value: float) -> str:
         """
         Convert a double to shortest string representation, preserving full accuracy.
         
@@ -7920,9 +7917,9 @@ class RyuDouble:
         Returns:
             shortest string representation
         
-              - doubleToString
-              - DEFAULT_LOW_EXP
-              - DEFAULT_HIGH_EXP
+        Also see:
+            doubleToString, DEFAULT_LOW_EXP,
+            DEFAULT_HIGH_EXP
         
         Convert a double to shortest string representation, preserving full accuracy.
         
@@ -7936,17 +7933,16 @@ class RyuDouble:
         Returns:
             shortest string representation
         
-              - doubleToString
-              - DEFAULT_LOW_EXP
-              - DEFAULT_HIGH_EXP
-        
+        Also see:
+            doubleToString, DEFAULT_LOW_EXP,
+            DEFAULT_HIGH_EXP
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def doubleToString(double: float, int: int, int2: int) -> str: ...
+    def doubleToString(value: float, lowExp: int, highExp: int) -> str: ...
 
 class SinCos:
     """
@@ -7957,7 +7953,8 @@ class SinCos:
     Since:
         1.3
     
-          - sinCos
+    Also see:
+        sinCos
     """
     def cos(self) -> float:
         """
@@ -8025,7 +8022,8 @@ class SinhCosh:
     Since:
         2.0
     
-          - sinhCosh
+    Also see:
+        sinhCosh
     """
     def cosh(self) -> float:
         """
@@ -8080,8 +8078,6 @@ class SinhCosh:
 
 class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     """
-    implements CalculusFieldElement<Tuple>
-    
     This class allows to perform the same computation of all components of a Tuple at once.
     
     Since:
@@ -8134,7 +8130,7 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         """
         ...
     @typing.overload
-    def add(self, double: float) -> 'Tuple':
+    def add(self, a: float) -> 'Tuple':
         """
         Compute this + a.
         
@@ -8160,7 +8156,7 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         """
         ...
     @typing.overload
-    def add(self, tuple: 'Tuple') -> 'Tuple': ...
+    def add(self, a: 'Tuple') -> 'Tuple': ...
     def asin(self) -> 'Tuple':
         """
         Arc sine operation.
@@ -8251,7 +8247,7 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         """
         ...
     @typing.overload
-    def copySign(self, double: float) -> 'Tuple':
+    def copySign(self, sign: float) -> 'Tuple':
         """
         Returns the instance with the sign of the argument. A NaN sign argument is treated as positive.
         
@@ -8277,7 +8273,7 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         """
         ...
     @typing.overload
-    def copySign(self, tuple: 'Tuple') -> 'Tuple': ...
+    def copySign(self, sign: 'Tuple') -> 'Tuple': ...
     def cos(self) -> 'Tuple':
         """
         Cosine operation.
@@ -8303,7 +8299,7 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         """
         ...
     @typing.overload
-    def divide(self, double: float) -> 'Tuple':
+    def divide(self, a: float) -> 'Tuple':
         """
         Compute this ÷ a.
         
@@ -8331,10 +8327,10 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         """
         ...
     @typing.overload
-    def divide(self, tuple: 'Tuple') -> 'Tuple': ...
-    def equals(self, object: typing.Any) -> bool:
+    def divide(self, a: 'Tuple') -> 'Tuple': ...
+    def equals(self, obj: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -8462,7 +8458,7 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -8486,7 +8482,7 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, tuple: 'Tuple', double2: float, tuple2: 'Tuple') -> 'Tuple':
+    def linearCombination(self, a1: float, b1: 'Tuple', a2: float, b2: 'Tuple') -> 'Tuple':
         """
         Compute a linear combination.
         
@@ -8501,8 +8497,9 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -8517,8 +8514,9 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -8535,8 +8533,9 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -8553,8 +8552,9 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -8573,8 +8573,9 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -8593,27 +8594,27 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-              - linearCombination
-              - linearCombination
-        
+        Also see:
+            linearCombination,
+            linearCombination
         
         
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, tuple: 'Tuple', double2: float, tuple2: 'Tuple', double3: float, tuple3: 'Tuple') -> 'Tuple': ...
+    def linearCombination(self, a1: float, b1: 'Tuple', a2: float, b2: 'Tuple', a3: float, b3: 'Tuple') -> 'Tuple': ...
     @typing.overload
-    def linearCombination(self, double: float, tuple: 'Tuple', double2: float, tuple2: 'Tuple', double3: float, tuple3: 'Tuple', double4: float, tuple4: 'Tuple') -> 'Tuple': ...
+    def linearCombination(self, a1: float, b1: 'Tuple', a2: float, b2: 'Tuple', a3: float, b3: 'Tuple', a4: float, b4: 'Tuple') -> 'Tuple': ...
     @typing.overload
-    def linearCombination(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], tupleArray: typing.Union[typing.List['Tuple'], jpype.JArray]) -> 'Tuple': ...
+    def linearCombination(self, a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List['Tuple'], jpype.JArray]) -> 'Tuple': ...
     @typing.overload
-    def linearCombination(self, tuple: 'Tuple', tuple2: 'Tuple', tuple3: 'Tuple', tuple4: 'Tuple') -> 'Tuple': ...
+    def linearCombination(self, a1: 'Tuple', b1: 'Tuple', a2: 'Tuple', b2: 'Tuple') -> 'Tuple': ...
     @typing.overload
-    def linearCombination(self, tuple: 'Tuple', tuple2: 'Tuple', tuple3: 'Tuple', tuple4: 'Tuple', tuple5: 'Tuple', tuple6: 'Tuple') -> 'Tuple': ...
+    def linearCombination(self, a1: 'Tuple', b1: 'Tuple', a2: 'Tuple', b2: 'Tuple', a3: 'Tuple', b3: 'Tuple') -> 'Tuple': ...
     @typing.overload
-    def linearCombination(self, tuple: 'Tuple', tuple2: 'Tuple', tuple3: 'Tuple', tuple4: 'Tuple', tuple5: 'Tuple', tuple6: 'Tuple', tuple7: 'Tuple', tuple8: 'Tuple') -> 'Tuple': ...
+    def linearCombination(self, a1: 'Tuple', b1: 'Tuple', a2: 'Tuple', b2: 'Tuple', a3: 'Tuple', b3: 'Tuple', a4: 'Tuple', b4: 'Tuple') -> 'Tuple': ...
     @typing.overload
-    def linearCombination(self, tupleArray: typing.Union[typing.List['Tuple'], jpype.JArray], tupleArray2: typing.Union[typing.List['Tuple'], jpype.JArray]) -> 'Tuple': ...
+    def linearCombination(self, a: typing.Union[typing.List['Tuple'], jpype.JArray], b: typing.Union[typing.List['Tuple'], jpype.JArray]) -> 'Tuple': ...
     def log(self) -> 'Tuple':
         """
         Natural logarithm.
@@ -8651,7 +8652,7 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         """
         ...
     @typing.overload
-    def multiply(self, double: float) -> 'Tuple':
+    def multiply(self, a: float) -> 'Tuple':
         """
         Compute this × a.
         
@@ -8720,7 +8721,7 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         """
         ...
     @typing.overload
-    def pow(self, double: float) -> 'Tuple':
+    def pow(self, p: float) -> 'Tuple':
         """
         Power operation.
         
@@ -8772,7 +8773,7 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         """
         ...
     @typing.overload
-    def remainder(self, double: float) -> 'Tuple':
+    def remainder(self, a: float) -> 'Tuple':
         """
         IEEE remainder operator.
         
@@ -8798,7 +8799,7 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         """
         ...
     @typing.overload
-    def remainder(self, tuple: 'Tuple') -> 'Tuple': ...
+    def remainder(self, a: 'Tuple') -> 'Tuple': ...
     def rint(self) -> 'Tuple':
         """
         Get the whole number that is the nearest to the instance, or the even one if x is exactly half way between two integers.
@@ -8926,7 +8927,7 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         """
         ...
     @typing.overload
-    def subtract(self, double: float) -> 'Tuple':
+    def subtract(self, a: float) -> 'Tuple':
         """
         Compute this - a.
         
@@ -8954,7 +8955,7 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         """
         ...
     @typing.overload
-    def subtract(self, tuple: 'Tuple') -> 'Tuple': ...
+    def subtract(self, a: 'Tuple') -> 'Tuple': ...
     def tan(self) -> 'Tuple':
         """
         Tangent operation.
@@ -9108,8 +9109,6 @@ class UnscentedTransformProvider:
 
 class AbstractUnscentedTransform(UnscentedTransformProvider):
     """
-    implements UnscentedTransformProvider
-    
     Base class for unscented transform providers.
     
     Since:
@@ -9145,22 +9144,23 @@ class JulierUnscentedTransform(AbstractUnscentedTransform):
     Since:
         2.2
     
-          - "S. J. Julier and J. K. Uhlmann. A New Extension of the Kalman Filter to Nonlinear Systems. Proc. SPIE 3068, Signal
-            Processing, Sensor Fusion, and Target Recognition VI, 182 (July 28, 1997)"
+    Also see:
+        "S. J. Julier and J. K. Uhlmann. A New Extension of the Kalman Filter to Nonlinear Systems. Proc. SPIE 3068, Signal
+        Processing, Sensor Fusion, and Target Recognition VI, 182 (July 28, 1997)"
     """
     DEFAULT_KAPPA: typing.ClassVar[float] = ...
     """
     Default value for kappa, (0.0, see reference).
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, stateDim: int): ...
     @typing.overload
-    def __init__(self, int: int, double: float): ...
+    def __init__(self, stateDim: int, kappa: float): ...
     def getWc(self) -> org.hipparchus.linear.RealVector:
         """
         Get the covariance weights.
@@ -9191,15 +9191,16 @@ class MerweUnscentedTransform(AbstractUnscentedTransform):
     Since:
         2.2
     
-          - "E. A. Wan and R. Van der Merwe, The unscented Kalman filter for nonlinear estimation, in Proc. Symp. Adaptive Syst.
-            Signal Process., Commun. Contr., Lake Louise, AB, Canada, Oct. 2000."
+    Also see:
+        "E. A. Wan and R. Van der Merwe, The unscented Kalman filter for nonlinear estimation, in Proc. Symp. Adaptive Syst.
+        Signal Process., Commun. Contr., Lake Louise, AB, Canada, Oct. 2000."
     """
     DEFAULT_ALPHA: typing.ClassVar[float] = ...
     """
     Default value for alpha (0.5, see reference).
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -9207,8 +9208,8 @@ class MerweUnscentedTransform(AbstractUnscentedTransform):
     """
     Default value for beta (2.0, see reference).
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -9216,15 +9217,15 @@ class MerweUnscentedTransform(AbstractUnscentedTransform):
     """
     Default value for kappa, (0.0, see reference).
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, stateDim: int): ...
     @typing.overload
-    def __init__(self, int: int, double: float, double2: float, double3: float): ...
+    def __init__(self, stateDim: int, alpha: float, beta: float, kappa: float): ...
     def getWc(self) -> org.hipparchus.linear.RealVector:
         """
         Get the covariance weights.
@@ -9248,15 +9249,14 @@ class MerweUnscentedTransform(AbstractUnscentedTransform):
 
 class OpenIntToDoubleHashMap(AbstractOpenIntHashMap, java.io.Serializable):
     """
-    implements Serializable
-    
     Open addressed map from int to double.
     
     This class provides a dedicated map from integers to doubles with a much smaller memory overhead than standard Map.
     
     This class is not synchronized. The specialized iterators returned by iterator are fail-fast: they throw a ConcurrentModificationException when they detect the map has been modified during iteration.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -9265,12 +9265,12 @@ class OpenIntToDoubleHashMap(AbstractOpenIntHashMap, java.io.Serializable):
     @typing.overload
     def __init__(self, int: int): ...
     @typing.overload
-    def __init__(self, int: int, double: float): ...
+    def __init__(self, expectedSize: int, missingEntries: float): ...
     @typing.overload
     def __init__(self, openIntToDoubleHashMap: 'OpenIntToDoubleHashMap'): ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, o: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -9290,7 +9290,7 @@ class OpenIntToDoubleHashMap(AbstractOpenIntHashMap, java.io.Serializable):
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -9341,29 +9341,28 @@ class OpenIntToDoubleHashMap(AbstractOpenIntHashMap, java.io.Serializable):
 _OpenIntToFieldHashMap__T = typing.TypeVar('_OpenIntToFieldHashMap__T', bound=org.hipparchus.FieldElement)  # <T>
 class OpenIntToFieldHashMap(AbstractOpenIntHashMap, java.io.Serializable, typing.Generic[_OpenIntToFieldHashMap__T]):
     """
-    implements Serializable
-    
     Open addressed map from int to FieldElement.
     
     This class provides a dedicated map from integers to FieldElements with a much smaller memory overhead than standard Map.
     
     This class is not synchronized. The specialized iterators returned by iterator are fail-fast: they throw a ConcurrentModificationException when they detect the map has been modified during iteration.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_OpenIntToFieldHashMap__T]): ...
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_OpenIntToFieldHashMap__T], int: int): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_OpenIntToFieldHashMap__T], int: int, t: _OpenIntToFieldHashMap__T): ...
+    def __init__(self, field: org.hipparchus.Field[_OpenIntToFieldHashMap__T], expectedSize: int, missingEntries: _OpenIntToFieldHashMap__T): ...
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_OpenIntToFieldHashMap__T], t: _OpenIntToFieldHashMap__T): ...
     @typing.overload
     def __init__(self, openIntToFieldHashMap: 'OpenIntToFieldHashMap'[_OpenIntToFieldHashMap__T]): ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, o: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -9383,7 +9382,7 @@ class OpenIntToFieldHashMap(AbstractOpenIntHashMap, java.io.Serializable, typing
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """

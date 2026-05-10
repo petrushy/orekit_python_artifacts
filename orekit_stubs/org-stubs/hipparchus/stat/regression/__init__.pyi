@@ -71,11 +71,10 @@ class MultipleLinearRegression:
 
 class RegressionResults(java.io.Serializable):
     """
-    implements Serializable
-    
     Results of a Multiple Linear Regression model fit.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self, parameters: typing.Union[typing.List[float], jpype.JArray], varcov: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], isSymmetricCompressed: bool, nobs: int, rank: int, sumy: float, sumysq: float, sse: float, containsConstant: bool, copyData: bool):
         """
@@ -362,12 +361,10 @@ class UpdatingMultipleLinearRegression:
     @typing.overload
     def regress(self) -> RegressionResults: ...
     @typing.overload
-    def regress(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> RegressionResults: ...
+    def regress(self, variablesToInclude: typing.Union[typing.List[int], jpype.JArray]) -> RegressionResults: ...
 
 class AbstractMultipleLinearRegression(MultipleLinearRegression):
     """
-    implements MultipleLinearRegression
-    
     Abstract base class for implementations of MultipleLinearRegression.
     """
     def estimateErrorVariance(self) -> float:
@@ -503,8 +500,6 @@ class AbstractMultipleLinearRegression(MultipleLinearRegression):
 
 class MillerUpdatingRegression(UpdatingMultipleLinearRegression):
     """
-    implements UpdatingMultipleLinearRegression
-    
     This class is a concrete implementation of the UpdatingMultipleLinearRegression interface.
     
     The algorithm is described in:
@@ -514,9 +509,9 @@ class MillerUpdatingRegression(UpdatingMultipleLinearRegression):
     This method for multiple regression forms the solution to the OLS problem by updating the QR decomposition as described by Gentleman.
     """
     @typing.overload
-    def __init__(self, int: int, boolean: bool): ...
+    def __init__(self, numberOfVariables: int, includeConstant: bool): ...
     @typing.overload
-    def __init__(self, int: int, boolean: bool, double: float): ...
+    def __init__(self, numberOfVariables: int, includeConstant: bool, errorTolerance: float): ...
     def addObservation(self, x: typing.Union[typing.List[float], jpype.JArray], y: float) -> None:
         """
         Adds an observation to the regression model.
@@ -646,8 +641,6 @@ class MillerUpdatingRegression(UpdatingMultipleLinearRegression):
 
 class SimpleRegression(java.io.Serializable, UpdatingMultipleLinearRegression):
     """
-    implements Serializable, UpdatingMultipleLinearRegression
-    
     Estimates an ordinary least squares regression model with one independent variable.
     
     y = intercept + slope * x
@@ -670,14 +663,15 @@ class SimpleRegression(java.io.Serializable, UpdatingMultipleLinearRegression):
         getIntercept returns .
     
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, boolean: bool): ...
+    def __init__(self, includeIntercept: bool): ...
     @typing.overload
-    def addData(self, double: float, double2: float) -> None:
+    def addData(self, x: float, y: float) -> None:
         """
         Uses updating formulas for means and sums of squares defined in "Algorithms for Computing the Sample Variance: Analysis and Recommendations", Chan, T.F., Golub, G.H., and LeVeque, R.J. 1983, American Statistician, vol. 37, pp. 242-247, referenced in Weisberg, S. "Applied Linear Regression". 2nd Ed. 1985.
         
@@ -685,7 +679,7 @@ class SimpleRegression(java.io.Serializable, UpdatingMultipleLinearRegression):
             x (double): independent variable value
             y (double): dependent variable value
         
-        public void addData(double[][] data) throws hipparchus
+        public void addData (double[][] data) throws hipparchus
         
         Adds the observations represented by the elements in data.
         
@@ -705,7 +699,7 @@ class SimpleRegression(java.io.Serializable, UpdatingMultipleLinearRegression):
         """
         ...
     @typing.overload
-    def addData(self, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None: ...
+    def addData(self, data: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None: ...
     def addObservation(self, x: typing.Union[typing.List[float], jpype.JArray], y: float) -> None:
         """
         Adds one observation to the regression model.
@@ -774,9 +768,6 @@ class SimpleRegression(java.io.Serializable, UpdatingMultipleLinearRegression):
         
         Returns:
             the intercept of the regression line if the model includes an intercept; 0 otherwise
-        
-              - 
-        
         
         
         """
@@ -909,7 +900,7 @@ class SimpleRegression(java.io.Serializable, UpdatingMultipleLinearRegression):
     @typing.overload
     def getSlopeConfidenceInterval(self) -> float: ...
     @typing.overload
-    def getSlopeConfidenceInterval(self, double: float) -> float: ...
+    def getSlopeConfidenceInterval(self, alpha: float) -> float: ...
     def getSlopeStdErr(self) -> float:
         """
         Returns the `standard error of the slope estimate <http://www.xycoon.com/standerrorb(1).htm>`, usually denoted s(b1).
@@ -993,9 +984,6 @@ class SimpleRegression(java.io.Serializable, UpdatingMultipleLinearRegression):
         Returns:
             true if the regression includes an intercept; false otherwise
         
-              - 
-        
-        
         
         """
         ...
@@ -1023,7 +1011,7 @@ class SimpleRegression(java.io.Serializable, UpdatingMultipleLinearRegression):
     @typing.overload
     def regress(self) -> RegressionResults: ...
     @typing.overload
-    def regress(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> RegressionResults: ...
+    def regress(self, variablesToInclude: typing.Union[typing.List[int], jpype.JArray]) -> RegressionResults: ...
     @typing.overload
     def removeData(self, x: float, y: float) -> None:
         """
@@ -1087,7 +1075,7 @@ class GLSMultipleLinearRegression(AbstractMultipleLinearRegression):
         """
         ...
     @typing.overload
-    def newSampleData(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray3: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None: ...
+    def newSampleData(self, y: typing.Union[typing.List[float], jpype.JArray], x: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], covariance: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None: ...
 
 class OLSMultipleLinearRegression(AbstractMultipleLinearRegression):
     """
@@ -1106,7 +1094,7 @@ class OLSMultipleLinearRegression(AbstractMultipleLinearRegression):
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float): ...
+    def __init__(self, threshold: float): ...
     def calculateAdjustedRSquared(self) -> float:
         """
         Returns the adjusted R-squared statistic, defined by the formula \(R_\mathrm{adj}^2 = 1 - \frac{\mathrm{SSR} (n - 1)}{\mathrm{SSTO} (n - p)}\) where SSR is the calculateResidualSumOfSquares, SSTO is the calculateTotalSumOfSquares, n is the number of observations and p is the number of parameters estimated (including the intercept).
@@ -1124,8 +1112,8 @@ class OLSMultipleLinearRegression(AbstractMultipleLinearRegression):
             NullPointerException: if the sample has not been set
             hipparchus: if the design matrix is singular
         
-              - isNoIntercept
-        
+        Also see:
+            isNoIntercept
         
         
         """
@@ -1193,14 +1181,14 @@ class OLSMultipleLinearRegression(AbstractMultipleLinearRegression):
         Raises:
             NullPointerException: if the sample has not been set
         
-              - isNoIntercept
-        
+        Also see:
+            isNoIntercept
         
         
         """
         ...
     @typing.overload
-    def newSampleData(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None:
+    def newSampleData(self, y: typing.Union[typing.List[float], jpype.JArray], x: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None:
         """
         Loads model x and y sample data from a flat input array, overriding any previous sample.
         
@@ -1229,7 +1217,7 @@ class OLSMultipleLinearRegression(AbstractMultipleLinearRegression):
         """
         ...
     @typing.overload
-    def newSampleData(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> None: ...
+    def newSampleData(self, data: typing.Union[typing.List[float], jpype.JArray], nobs: int, nvars: int) -> None: ...
 
 
 class __module_protocol__(Protocol):

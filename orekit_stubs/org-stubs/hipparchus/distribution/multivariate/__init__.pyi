@@ -17,8 +17,6 @@ import typing
 
 class AbstractMultivariateRealDistribution(org.hipparchus.distribution.MultivariateRealDistribution):
     """
-    implements MultivariateRealDistribution
-    
     Base class for multivariate probability distributions.
     """
     def getDimension(self) -> int:
@@ -70,8 +68,8 @@ class AbstractMultivariateRealDistribution(org.hipparchus.distribution.Multivari
         Returns:
             an array representing the random samples.
         
-              - sample
-        
+        Also see:
+            sample
         
         
         """
@@ -83,9 +81,9 @@ class MixtureMultivariateRealDistribution(AbstractMultivariateRealDistribution, 
     Class for representing ` mixture model <http://en.wikipedia.org/wiki/Mixture_model>` distributions.
     """
     @typing.overload
-    def __init__(self, list: java.util.List[org.hipparchus.util.Pair[float, _MixtureMultivariateRealDistribution__T]]): ...
+    def __init__(self, components: java.util.List[org.hipparchus.util.Pair[float, _MixtureMultivariateRealDistribution__T]]): ...
     @typing.overload
-    def __init__(self, randomGenerator: org.hipparchus.random.RandomGenerator, list: java.util.List[org.hipparchus.util.Pair[float, _MixtureMultivariateRealDistribution__T]]): ...
+    def __init__(self, rng: org.hipparchus.random.RandomGenerator, components: java.util.List[org.hipparchus.util.Pair[float, _MixtureMultivariateRealDistribution__T]]): ...
     def density(self, values: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
         Returns the probability density function (PDF) of this distribution evaluated at the specified point x. In general, the PDF is the derivative of the cumulative distribution function. If the derivative does not exist at x, then an appropriate replacement should be returned, e.g. POSITIVE_INFINITY, NaN, or the limit inferior or limit superior of the difference quotient.
@@ -145,17 +143,18 @@ class MultivariateNormalDistribution(AbstractMultivariateRealDistribution):
     """
     Implementation of the multivariate normal (Gaussian) distribution.
     
-          - ` Multivariate normal distribution (Wikipedia) <http://en.wikipedia.org/wiki/Multivariate_normal_distribution>`
-          - ` Multivariate normal distribution (MathWorld) <http://mathworld.wolfram.com/MultivariateNormalDistribution.html>`
+    Also see:
+        ` Multivariate normal distribution (Wikipedia) <http://en.wikipedia.org/wiki/Multivariate_normal_distribution>`, `
+        Multivariate normal distribution (MathWorld) <http://mathworld.wolfram.com/MultivariateNormalDistribution.html>`
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]): ...
+    def __init__(self, means: typing.Union[typing.List[float], jpype.JArray], covariances: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]): ...
     @typing.overload
     def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], double3: float): ...
     @typing.overload
     def __init__(self, randomGenerator: org.hipparchus.random.RandomGenerator, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, randomGenerator: org.hipparchus.random.RandomGenerator, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], double3: float): ...
+    def __init__(self, rng: org.hipparchus.random.RandomGenerator, means: typing.Union[typing.List[float], jpype.JArray], covariances: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], singularMatrixCheckTolerance: float): ...
     def density(self, vals: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
         Returns the probability density function (PDF) of this distribution evaluated at the specified point x. In general, the PDF is the derivative of the cumulative distribution function. If the derivative does not exist at x, then an appropriate replacement should be returned, e.g. POSITIVE_INFINITY, NaN, or the limit inferior or limit superior of the difference quotient.
@@ -233,14 +232,15 @@ class MixtureMultivariateNormalDistribution(MixtureMultivariateRealDistribution[
     """
     Multivariate normal mixture distribution. This class is mainly syntactic sugar.
     
-          - MixtureMultivariateRealDistribution
+    Also see:
+        MixtureMultivariateRealDistribution
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray3: typing.Union[typing.List[typing.MutableSequence[typing.MutableSequence[float]]], jpype.JArray]): ...
+    def __init__(self, weights: typing.Union[typing.List[float], jpype.JArray], means: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], covariances: typing.Union[typing.List[typing.MutableSequence[typing.MutableSequence[float]]], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, list: java.util.List[org.hipparchus.util.Pair[float, MultivariateNormalDistribution]]): ...
+    def __init__(self, components: java.util.List[org.hipparchus.util.Pair[float, MultivariateNormalDistribution]]): ...
     @typing.overload
-    def __init__(self, randomGenerator: org.hipparchus.random.RandomGenerator, list: java.util.List[org.hipparchus.util.Pair[float, MultivariateNormalDistribution]]): ...
+    def __init__(self, rng: org.hipparchus.random.RandomGenerator, components: java.util.List[org.hipparchus.util.Pair[float, MultivariateNormalDistribution]]): ...
 
 
 class __module_protocol__(Protocol):

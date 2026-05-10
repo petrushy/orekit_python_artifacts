@@ -262,7 +262,7 @@ class PythonFieldOfView(FieldOfView):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -278,9 +278,9 @@ class PolygonalFieldOfView(AbstractFieldOfView):
         10.1
     """
     @typing.overload
-    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, definingConeType: 'PolygonalFieldOfView.DefiningConeType', vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, int: int, double2: float): ...
+    def __init__(self, center: org.hipparchus.geometry.euclidean.threed.Vector3D, coneType: 'PolygonalFieldOfView.DefiningConeType', meridian: org.hipparchus.geometry.euclidean.threed.Vector3D, radius: float, n: int, margin: float): ...
     @typing.overload
-    def __init__(self, sphericalPolygonsSet: org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet, double: float): ...
+    def __init__(self, zone: org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet, margin: float): ...
     def getFootprint(self, fovToBody: org.orekit.frames.Transform, body: org.orekit.bodies.OneAxisEllipsoid, angularStep: float) -> java.util.List[java.util.List[org.orekit.bodies.GeodeticPoint]]:
         """
         Get the footprint of the Field Of View on ground.
@@ -494,7 +494,7 @@ class PythonAbstractFieldOfView(AbstractFieldOfView):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -891,7 +891,7 @@ class PythonSmoothFieldOfView(SmoothFieldOfView):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

@@ -20,8 +20,6 @@ import typing
 
 class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparable['Complex'], java.io.Serializable):
     """
-    implements CalculusFieldElement<Complex>, Comparable<Complex>, Serializable
-    
     Representation of a Complex number, i.e. a number which has both a real and imaginary part.
     
     Implementations of arithmetic operations handle NaN and infinite values according to the rules for Double, i.e. equals is an equivalence relation for all instances that have a NaN in either real or imaginary part, e.g. the following are considered equal:
@@ -32,7 +30,8 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
     
     Note that this contradicts the IEEE-754 standard for floating point numbers (according to which the test x == x must fail if x is NaN). The method equals in Precision conforms with IEEE-754 while this class conforms with the standard behavior for Java object types.
     
-          - serialized
+    Also see:
+        serialized
     """
     I: typing.ClassVar['Complex'] = ...
     """
@@ -77,9 +76,9 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
     A complex number representing "π + 0.0i".
     """
     @typing.overload
-    def __init__(self, double: float): ...
+    def __init__(self, real: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, real: float, imaginary: float): ...
     def abs(self) -> 'Complex':
         """
         Return the absolute value of this complex number. Returns NaN if either real or imaginary part is NaN and POSITIVE_INFINITY if neither part is NaN, but at least one part is infinite.
@@ -137,14 +136,14 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         Returns:
             this + addend.
         
-              - add
-        
+        Also see:
+            add
         
         
         """
         ...
     @typing.overload
-    def add(self, complex: 'Complex') -> 'Complex': ...
+    def add(self, addend: 'Complex') -> 'Complex': ...
     def asin(self) -> 'Complex':
         """
         Compute the ` inverse sine <http://mathworld.wolfram.com/InverseSine.html>` of this complex number. Implements the formula:
@@ -263,11 +262,11 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         
         """
         ...
-    def compareTo(self, complex: 'Complex') -> int:
+    def compareTo(self, o: 'Complex') -> int:
         """
         Comparison us performed using real ordering as the primary sort order and imaginary ordering as the secondary sort order.
         
-        Specified by: compareTo in interface Comparable
+        Specified by: Comparable in interface Comparable
         
         Since:
             3.0
@@ -290,7 +289,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         """
         ...
     @typing.overload
-    def copySign(self, double: float) -> 'Complex':
+    def copySign(self, z: float) -> 'Complex':
         """
         Returns the instance with the sign of the argument. A NaN sign argument is treated as positive.
         
@@ -390,24 +389,24 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         Returns:
             this / divisor.
         
-              - divide
-        
+        Also see:
+            divide
         
         
         """
         ...
     @typing.overload
-    def divide(self, complex: 'Complex') -> 'Complex': ...
+    def divide(self, divisor: 'Complex') -> 'Complex': ...
     @typing.overload
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
-        Test for equality with another object. If both the real and imaginary parts of two complex numbers are exactly the same, and neither is NaN, the two Complex objects are considered to be equal. The behavior is the same as for JDK's equals:
+        Test for equality with another object. If both the real and imaginary parts of two complex numbers are exactly the same, and neither is NaN, the two Complex objects are considered to be equal. The behavior is the same as for JDK's Double:
         
           - All NaN values are considered to be equal, i.e, if either (or both) real and imaginary parts of the complex
             number are equal to NaN, the complex number is equal to NaN.
           -         Instances constructed with different representations of zero (i.e. either "0" or "-0") are not considered to be equal.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality with this instance.
@@ -428,7 +427,8 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
             true if there are fewer than maxUlps floating point values between the real (resp. imaginary) parts of
             x and y.
         
-              - equals
+        Also see:
+            equals
         
         Returns true iff the values are equal as defined by equals.
         
@@ -449,15 +449,15 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         Returns:
             true if the values are two adjacent floating point numbers or they are within range of each other.
         
-              - equals
-        
+        Also see:
+            equals
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def equals(complex: 'Complex', complex2: 'Complex') -> bool: ...
+    def equals(x: 'Complex', y: 'Complex') -> bool: ...
     @typing.overload
     @staticmethod
     def equals(complex: 'Complex', complex2: 'Complex', double: float) -> bool: ...
@@ -477,8 +477,8 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         Returns:
             true if the values are two adjacent floating point numbers or they are within range of each other.
         
-              - equalsWithRelativeTolerance
-        
+        Also see:
+            equalsWithRelativeTolerance
         
         
         """
@@ -643,7 +643,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         """
         Get a hashCode for the complex number. Any NaN value in real or imaginary part produces the same hash code .
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object.
@@ -742,7 +742,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, complex: 'Complex', double2: float, complex2: 'Complex') -> 'Complex':
+    def linearCombination(self, a1: float, b1: 'Complex', a2: float, b2: 'Complex') -> 'Complex':
         """
         Compute a linear combination.
         
@@ -760,8 +760,9 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         Since:
             1.7
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -779,8 +780,9 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         Since:
             1.7
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -800,8 +802,9 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         Since:
             1.7
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -821,8 +824,9 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         Since:
             1.7
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -844,8 +848,9 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         Since:
             1.7
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -867,27 +872,27 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         Since:
             1.7
         
-              - linearCombination
-              - linearCombination
-        
+        Also see:
+            linearCombination,
+            linearCombination
         
         
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, complex: 'Complex', double2: float, complex2: 'Complex', double3: float, complex3: 'Complex') -> 'Complex': ...
+    def linearCombination(self, a1: float, b1: 'Complex', a2: float, b2: 'Complex', a3: float, b3: 'Complex') -> 'Complex': ...
     @typing.overload
-    def linearCombination(self, double: float, complex: 'Complex', double2: float, complex2: 'Complex', double3: float, complex3: 'Complex', double4: float, complex4: 'Complex') -> 'Complex': ...
+    def linearCombination(self, a1: float, b1: 'Complex', a2: float, b2: 'Complex', a3: float, b3: 'Complex', a4: float, b4: 'Complex') -> 'Complex': ...
     @typing.overload
-    def linearCombination(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], complexArray: typing.Union[typing.List['Complex'], jpype.JArray]) -> 'Complex': ...
+    def linearCombination(self, a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List['Complex'], jpype.JArray]) -> 'Complex': ...
     @typing.overload
-    def linearCombination(self, complex: 'Complex', complex2: 'Complex', complex3: 'Complex', complex4: 'Complex') -> 'Complex': ...
+    def linearCombination(self, a1: 'Complex', b1: 'Complex', a2: 'Complex', b2: 'Complex') -> 'Complex': ...
     @typing.overload
-    def linearCombination(self, complex: 'Complex', complex2: 'Complex', complex3: 'Complex', complex4: 'Complex', complex5: 'Complex', complex6: 'Complex') -> 'Complex': ...
+    def linearCombination(self, a1: 'Complex', b1: 'Complex', a2: 'Complex', b2: 'Complex', a3: 'Complex', b3: 'Complex') -> 'Complex': ...
     @typing.overload
-    def linearCombination(self, complex: 'Complex', complex2: 'Complex', complex3: 'Complex', complex4: 'Complex', complex5: 'Complex', complex6: 'Complex', complex7: 'Complex', complex8: 'Complex') -> 'Complex': ...
+    def linearCombination(self, a1: 'Complex', b1: 'Complex', a2: 'Complex', b2: 'Complex', a3: 'Complex', b3: 'Complex', a4: 'Complex', b4: 'Complex') -> 'Complex': ...
     @typing.overload
-    def linearCombination(self, complexArray: typing.Union[typing.List['Complex'], jpype.JArray], complexArray2: typing.Union[typing.List['Complex'], jpype.JArray]) -> 'Complex': ...
+    def linearCombination(self, a: typing.Union[typing.List['Complex'], jpype.JArray], b: typing.Union[typing.List['Complex'], jpype.JArray]) -> 'Complex': ...
     def log(self) -> 'Complex':
         """
         Compute the ` natural logarithm <http://mathworld.wolfram.com/NaturalLogarithm.html>` of this complex number. Implements the formula:
@@ -947,7 +952,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         """
         ...
     @typing.overload
-    def multiply(self, double: float) -> 'Complex':
+    def multiply(self, factor: float) -> 'Complex':
         """
         Returns a Complex whose value is this * factor, with factor interpreted as a integer number.
         
@@ -961,7 +966,8 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         Returns:
             this * factor.
         
-              - multiply
+        Also see:
+            multiply
         
         Returns a Complex whose value is this * factor, with factor interpreted as a real number.
         
@@ -973,16 +979,16 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         Returns:
             this * factor.
         
-              - multiply
-        
+        Also see:
+            multiply
         
         
         """
         ...
     @typing.overload
-    def multiply(self, int: int) -> 'Complex': ...
+    def multiply(self, factor: int) -> 'Complex': ...
     @typing.overload
-    def multiply(self, complex: 'Complex') -> 'Complex': ...
+    def multiply(self, factor: 'Complex') -> 'Complex': ...
     def multiplyMinusI(self) -> 'Complex':
         """
         Compute this *- -i.
@@ -1069,7 +1075,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         """
         ...
     @typing.overload
-    def pow(self, double: float) -> 'Complex':
+    def pow(self, x: float) -> 'Complex':
         """
         Returns of value of this complex number raised to the power of x.
         
@@ -1116,7 +1122,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         """
         ...
     @typing.overload
-    def remainder(self, double: float) -> 'Complex':
+    def remainder(self, a: float) -> 'Complex':
         """
         IEEE remainder operator.
         
@@ -1152,7 +1158,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         """
         ...
     @typing.overload
-    def remainder(self, complex: 'Complex') -> 'Complex': ...
+    def remainder(self, a: 'Complex') -> 'Complex': ...
     def rint(self) -> 'Complex':
         """
         Get the whole number that is the nearest to the instance, or the even one if x is exactly half way between two integers.
@@ -1371,14 +1377,14 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         Returns:
             this - subtrahend.
         
-              - subtract
-        
+        Also see:
+            subtract
         
         
         """
         ...
     @typing.overload
-    def subtract(self, complex: 'Complex') -> 'Complex': ...
+    def subtract(self, subtrahend: 'Complex') -> 'Complex': ...
     def tan(self) -> 'Complex':
         """
         Compute the ` tangent <http://mathworld.wolfram.com/Tangent.html>` of this complex number. Implements the formula:
@@ -1457,7 +1463,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         ...
     def toString(self) -> str:
         """
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -1476,7 +1482,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         ...
     @typing.overload
     @staticmethod
-    def valueOf(double: float) -> 'Complex':
+    def valueOf(realPart: float) -> 'Complex':
         """
         Create a complex number given the real and imaginary parts.
         
@@ -1500,15 +1506,14 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparab
         ...
     @typing.overload
     @staticmethod
-    def valueOf(double: float, double2: float) -> 'Complex': ...
+    def valueOf(realPart: float, imaginaryPart: float) -> 'Complex': ...
 
 class ComplexComparator(java.util.Comparator[Complex], java.io.Serializable):
     """
-    implements Comparator<Complex>, Serializable
-    
     Comparator for Complex Numbers.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self):
         """
@@ -1526,7 +1531,7 @@ class ComplexComparator(java.util.Comparator[Complex], java.io.Serializable):
         """
         Compare two complex numbers, using real ordering as the primary sort order and imaginary ordering as the secondary sort order.
         
-        Specified by: compare in interface Comparator
+        Specified by: Comparator in interface Comparator
         
         Parameters:
             o1 (Complex): first complex number
@@ -1542,18 +1547,16 @@ class ComplexComparator(java.util.Comparator[Complex], java.io.Serializable):
 
 class ComplexField(org.hipparchus.Field[Complex], java.io.Serializable):
     """
-    implements Field<Complex>, Serializable
-    
     Representation of the complex numbers field.
     
     This class is a singleton.
     
-          - Complex
-          - serialized
+    Also see:
+        Complex, serialized
     """
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -1611,7 +1614,7 @@ class ComplexField(org.hipparchus.Field[Complex], java.io.Serializable):
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -1628,13 +1631,13 @@ class ComplexFormat:
     @typing.overload
     def __init__(self, string: str, numberFormat: java.text.NumberFormat): ...
     @typing.overload
-    def __init__(self, string: str, numberFormat: java.text.NumberFormat, numberFormat2: java.text.NumberFormat): ...
+    def __init__(self, imaginaryCharacter: str, realFormat: java.text.NumberFormat, imaginaryFormat: java.text.NumberFormat): ...
     @typing.overload
     def __init__(self, numberFormat: java.text.NumberFormat): ...
     @typing.overload
     def __init__(self, numberFormat: java.text.NumberFormat, numberFormat2: java.text.NumberFormat): ...
     @typing.overload
-    def format(self, double: float) -> str:
+    def format(self, c: float) -> str:
         """
         This method calls format.
         
@@ -1662,7 +1665,7 @@ class ComplexFormat:
         Returns:
             the value passed in as toAppendTo.
         
-        public StringBuffer format(Object obj, StringBuffer toAppendTo, FieldPosition pos) throws MathIllegalArgumentException
+        public StringBuffer format (Object obj, StringBuffer toAppendTo, FieldPosition pos) throws MathIllegalArgumentException
         
         Formats a object to produce a string. obj must be either a Complex object or a Number object. Any other type of object will result in an IllegalArgumentException being thrown.
         
@@ -1677,14 +1680,14 @@ class ComplexFormat:
         Raises:
             MathIllegalArgumentException: is obj is not a valid type.
         
-              - format
-        
+        Also see:
+            Format
         
         
         """
         ...
     @typing.overload
-    def format(self, complex: Complex) -> str: ...
+    def format(self, c: Complex) -> str: ...
     @typing.overload
     def format(self, object: typing.Any, stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer: ...
     @typing.overload
@@ -1716,7 +1719,7 @@ class ComplexFormat:
         ...
     @typing.overload
     @staticmethod
-    def getComplexFormat(string: str, locale: java.util.Locale) -> 'ComplexFormat': ...
+    def getComplexFormat(imaginaryCharacter: str, locale: java.util.Locale) -> 'ComplexFormat': ...
     @typing.overload
     @staticmethod
     def getComplexFormat(locale: java.util.Locale) -> 'ComplexFormat':
@@ -1730,13 +1733,13 @@ class ComplexFormat:
         Since:
             1.4
         
-        public static ComplexFormat getComplexFormat(String imaginaryCharacter, Locale locale) throws MathIllegalArgumentException, NullArgumentException
+        public static ComplexFormat getComplexFormat (String imaginaryCharacter, Locale locale) throws MathIllegalArgumentException, NullArgumentException
         
         Returns the default complex format for the given locale.
         
         Parameters:
-            imaginaryCharacter (String): Imaginary character.
-            locale (Locale): the specific locale used by the format.
+            locale (String): the specific locale used by the format.
+            imaginaryCharacter (Locale): Imaginary character.
         
         Returns:
             the complex format specific to the given locale.
@@ -1782,7 +1785,7 @@ class ComplexFormat:
         """
         ...
     @typing.overload
-    def parse(self, string: str) -> Complex:
+    def parse(self, source: str) -> Complex:
         """
         Parses a string to produce a Complex object.
         
@@ -1797,7 +1800,7 @@ class ComplexFormat:
         """
         ...
     @typing.overload
-    def parse(self, string: str, parsePosition: java.text.ParsePosition) -> Complex: ...
+    def parse(self, source: str, pos: java.text.ParsePosition) -> Complex: ...
 
 class ComplexUnivariateIntegrator:
     """
@@ -1842,16 +1845,14 @@ class ComplexUtils:
     _polar2Complex_1__T = typing.TypeVar('_polar2Complex_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def polar2Complex(double: float, double2: float) -> Complex: ...
+    def polar2Complex(r: float, theta: float) -> Complex: ...
     @typing.overload
     @staticmethod
-    def polar2Complex(t: _polar2Complex_1__T, t2: _polar2Complex_1__T) -> 'FieldComplex'[_polar2Complex_1__T]: ...
+    def polar2Complex(r: _polar2Complex_1__T, theta: _polar2Complex_1__T) -> 'FieldComplex'[_polar2Complex_1__T]: ...
 
 _FieldComplex__T = typing.TypeVar('_FieldComplex__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComplex__T]], typing.Generic[_FieldComplex__T]):
     """
-    implements CalculusFieldElement<FieldComplex<T>>
-    
     Representation of a Complex number, i.e. a number which has both a real and imaginary part.
     
     Implementations of arithmetic operations handle NaN and infinite values according to the rules for Double, i.e. equals is an equivalence relation for all instances that have a NaN in either real or imaginary part, e.g. the following are considered equal:
@@ -1866,9 +1867,9 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
         2.0
     """
     @typing.overload
-    def __init__(self, t: _FieldComplex__T): ...
+    def __init__(self, real: _FieldComplex__T): ...
     @typing.overload
-    def __init__(self, t: _FieldComplex__T, t2: _FieldComplex__T): ...
+    def __init__(self, real: _FieldComplex__T, imaginary: _FieldComplex__T): ...
     def abs(self) -> 'FieldComplex'[_FieldComplex__T]:
         """
         Return the absolute value of this complex number. Returns NaN if either real or imaginary part is NaN and POSITIVE_INFINITY if neither part is NaN, but at least one part is infinite.
@@ -1910,11 +1911,11 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
         """
         ...
     @typing.overload
-    def add(self, double: float) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def add(self, addend: float) -> 'FieldComplex'[_FieldComplex__T]: ...
     @typing.overload
-    def add(self, t: _FieldComplex__T) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def add(self, addend: _FieldComplex__T) -> 'FieldComplex'[_FieldComplex__T]: ...
     @typing.overload
-    def add(self, fieldComplex: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def add(self, addend: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
     def asin(self) -> 'FieldComplex'[_FieldComplex__T]:
         """
         Compute the ` inverse sine <http://mathworld.wolfram.com/InverseSine.html>` of this complex number. Implements the formula:
@@ -2091,24 +2092,24 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
         """
         ...
     @typing.overload
-    def divide(self, double: float) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def divide(self, divisor: float) -> 'FieldComplex'[_FieldComplex__T]: ...
     @typing.overload
-    def divide(self, t: _FieldComplex__T) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def divide(self, divisor: _FieldComplex__T) -> 'FieldComplex'[_FieldComplex__T]: ...
     @typing.overload
-    def divide(self, fieldComplex: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def divide(self, divisor: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
     _equals_1__T = typing.TypeVar('_equals_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _equals_2__T = typing.TypeVar('_equals_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _equals_3__T = typing.TypeVar('_equals_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def equals(self, other: typing.Any) -> bool:
         """
-        Test for equality with another object. If both the real and imaginary parts of two complex numbers are exactly the same, and neither is NaN, the two Complex objects are considered to be equal. The behavior is the same as for JDK's equals:
+        Test for equality with another object. If both the real and imaginary parts of two complex numbers are exactly the same, and neither is NaN, the two Complex objects are considered to be equal. The behavior is the same as for JDK's Double:
         
           - All NaN values are considered to be equal, i.e, if either (or both) real and imaginary parts of the complex
             number are equal to NaN, the complex number is equal to NaN.
           -         Instances constructed with different representations of zero (i.e. either "0" or "-0") are not considered to be equal.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality with this instance.
@@ -2136,7 +2137,7 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
         ...
     @typing.overload
     @staticmethod
-    def equals(fieldComplex: 'FieldComplex'[_equals_2__T], fieldComplex2: 'FieldComplex'[_equals_2__T], double: float) -> bool:
+    def equals(x: 'FieldComplex'[_equals_2__T], y: 'FieldComplex'[_equals_2__T], maxUlps: float) -> bool:
         """
         Test for the floating-point equality between Complex objects. It returns true if both arguments are equal or within the range of allowed error (inclusive).
         
@@ -2150,7 +2151,8 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
             true if there are fewer than maxUlps floating point values between the real (resp. imaginary) parts of
             x and y.
         
-              - equals
+        Also see:
+            equals
         
         Returns true if, both for the real part and for the imaginary part, there is no T value strictly between the arguments or the difference between them is within the range of allowed error (inclusive). Returns false if either of the arguments is NaN.
         
@@ -2162,8 +2164,8 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
         Returns:
             true if the values are two adjacent floating point numbers or they are within range of each other.
         
-              - equals
-        
+        Also see:
+            equals
         
         
         """
@@ -2185,8 +2187,8 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
         Returns:
             true if the values are two adjacent floating point numbers or they are within range of each other.
         
-              - equalsWithRelativeTolerance
-        
+        Also see:
+            equalsWithRelativeTolerance
         
         
         """
@@ -2469,7 +2471,7 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
         """
         Get a hashCode for the complex number. Any NaN value in real or imaginary part produces the same hash code .
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object.
@@ -2556,21 +2558,21 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, fieldComplex: 'FieldComplex'[_FieldComplex__T], double2: float, fieldComplex2: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldComplex'[_FieldComplex__T], a2: float, b2: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
     @typing.overload
-    def linearCombination(self, double: float, fieldComplex: 'FieldComplex'[_FieldComplex__T], double2: float, fieldComplex2: 'FieldComplex'[_FieldComplex__T], double3: float, fieldComplex3: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldComplex'[_FieldComplex__T], a2: float, b2: 'FieldComplex'[_FieldComplex__T], a3: float, b3: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
     @typing.overload
-    def linearCombination(self, double: float, fieldComplex: 'FieldComplex'[_FieldComplex__T], double2: float, fieldComplex2: 'FieldComplex'[_FieldComplex__T], double3: float, fieldComplex3: 'FieldComplex'[_FieldComplex__T], double4: float, fieldComplex4: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldComplex'[_FieldComplex__T], a2: float, b2: 'FieldComplex'[_FieldComplex__T], a3: float, b3: 'FieldComplex'[_FieldComplex__T], a4: float, b4: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
     @typing.overload
-    def linearCombination(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], fieldComplexArray: typing.Union[typing.List['FieldComplex'[_FieldComplex__T]], jpype.JArray]) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def linearCombination(self, a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List['FieldComplex'[_FieldComplex__T]], jpype.JArray]) -> 'FieldComplex'[_FieldComplex__T]: ...
     @typing.overload
-    def linearCombination(self, fieldComplex: 'FieldComplex'[_FieldComplex__T], fieldComplex2: 'FieldComplex'[_FieldComplex__T], fieldComplex3: 'FieldComplex'[_FieldComplex__T], fieldComplex4: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def linearCombination(self, a1: 'FieldComplex'[_FieldComplex__T], b1: 'FieldComplex'[_FieldComplex__T], a2: 'FieldComplex'[_FieldComplex__T], b2: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
     @typing.overload
-    def linearCombination(self, fieldComplex: 'FieldComplex'[_FieldComplex__T], fieldComplex2: 'FieldComplex'[_FieldComplex__T], fieldComplex3: 'FieldComplex'[_FieldComplex__T], fieldComplex4: 'FieldComplex'[_FieldComplex__T], fieldComplex5: 'FieldComplex'[_FieldComplex__T], fieldComplex6: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def linearCombination(self, a1: 'FieldComplex'[_FieldComplex__T], b1: 'FieldComplex'[_FieldComplex__T], a2: 'FieldComplex'[_FieldComplex__T], b2: 'FieldComplex'[_FieldComplex__T], a3: 'FieldComplex'[_FieldComplex__T], b3: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
     @typing.overload
-    def linearCombination(self, fieldComplex: 'FieldComplex'[_FieldComplex__T], fieldComplex2: 'FieldComplex'[_FieldComplex__T], fieldComplex3: 'FieldComplex'[_FieldComplex__T], fieldComplex4: 'FieldComplex'[_FieldComplex__T], fieldComplex5: 'FieldComplex'[_FieldComplex__T], fieldComplex6: 'FieldComplex'[_FieldComplex__T], fieldComplex7: 'FieldComplex'[_FieldComplex__T], fieldComplex8: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def linearCombination(self, a1: 'FieldComplex'[_FieldComplex__T], b1: 'FieldComplex'[_FieldComplex__T], a2: 'FieldComplex'[_FieldComplex__T], b2: 'FieldComplex'[_FieldComplex__T], a3: 'FieldComplex'[_FieldComplex__T], b3: 'FieldComplex'[_FieldComplex__T], a4: 'FieldComplex'[_FieldComplex__T], b4: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
     @typing.overload
-    def linearCombination(self, fieldComplexArray: typing.Union[typing.List['FieldComplex'[_FieldComplex__T]], jpype.JArray], fieldComplexArray2: typing.Union[typing.List['FieldComplex'[_FieldComplex__T]], jpype.JArray]) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def linearCombination(self, a: typing.Union[typing.List['FieldComplex'[_FieldComplex__T]], jpype.JArray], b: typing.Union[typing.List['FieldComplex'[_FieldComplex__T]], jpype.JArray]) -> 'FieldComplex'[_FieldComplex__T]: ...
     def log(self) -> 'FieldComplex'[_FieldComplex__T]:
         """
         Compute the ` natural logarithm <http://mathworld.wolfram.com/NaturalLogarithm.html>` of this complex number. Implements the formula:
@@ -2624,13 +2626,13 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
         """
         ...
     @typing.overload
-    def multiply(self, double: float) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def multiply(self, factor: float) -> 'FieldComplex'[_FieldComplex__T]: ...
     @typing.overload
-    def multiply(self, int: int) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def multiply(self, factor: int) -> 'FieldComplex'[_FieldComplex__T]: ...
     @typing.overload
-    def multiply(self, t: _FieldComplex__T) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def multiply(self, factor: _FieldComplex__T) -> 'FieldComplex'[_FieldComplex__T]: ...
     @typing.overload
-    def multiply(self, fieldComplex: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def multiply(self, factor: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
     def multiplyMinusI(self) -> 'FieldComplex'[_FieldComplex__T]:
         """
         Compute this *- -i.
@@ -2725,9 +2727,9 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
         """
         ...
     @typing.overload
-    def remainder(self, double: float) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def remainder(self, a: float) -> 'FieldComplex'[_FieldComplex__T]: ...
     @typing.overload
-    def remainder(self, fieldComplex: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def remainder(self, a: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
     def rint(self) -> 'FieldComplex'[_FieldComplex__T]:
         """
         Get the whole number that is the nearest to the instance, or the even one if x is exactly half way between two integers.
@@ -2924,11 +2926,11 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
         """
         ...
     @typing.overload
-    def subtract(self, double: float) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def subtract(self, subtrahend: float) -> 'FieldComplex'[_FieldComplex__T]: ...
     @typing.overload
-    def subtract(self, t: _FieldComplex__T) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def subtract(self, subtrahend: _FieldComplex__T) -> 'FieldComplex'[_FieldComplex__T]: ...
     @typing.overload
-    def subtract(self, fieldComplex: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
+    def subtract(self, subtrahend: 'FieldComplex'[_FieldComplex__T]) -> 'FieldComplex'[_FieldComplex__T]: ...
     def tan(self) -> 'FieldComplex'[_FieldComplex__T]:
         """
         Compute the ` tangent <http://mathworld.wolfram.com/Tangent.html>` of this complex number. Implements the formula:
@@ -3007,7 +3009,7 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
         ...
     def toString(self) -> str:
         """
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -3028,7 +3030,7 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
     _valueOf_1__T = typing.TypeVar('_valueOf_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def valueOf(t: _valueOf_0__T) -> 'FieldComplex'[_valueOf_0__T]:
+    def valueOf(realPart: _valueOf_0__T) -> 'FieldComplex'[_valueOf_0__T]:
         """
         Create a complex number given the real and imaginary parts.
         
@@ -3052,23 +3054,22 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
         ...
     @typing.overload
     @staticmethod
-    def valueOf(t: _valueOf_1__T, t2: _valueOf_1__T) -> 'FieldComplex'[_valueOf_1__T]: ...
+    def valueOf(realPart: _valueOf_1__T, imaginaryPart: _valueOf_1__T) -> 'FieldComplex'[_valueOf_1__T]: ...
 
 _FieldComplexField__T = typing.TypeVar('_FieldComplexField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldComplexField(org.hipparchus.Field[FieldComplex[_FieldComplexField__T]], typing.Generic[_FieldComplexField__T]):
     """
-    implements Field<FieldComplex<T>>
-    
     Representation of the complex numbers field.
     
     Since:
         2.0
     
-          - FieldComplex
+    Also see:
+        FieldComplex
     """
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -3130,7 +3131,7 @@ class FieldComplexField(org.hipparchus.Field[FieldComplex[_FieldComplexField__T]
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -3161,13 +3162,12 @@ class FieldComplexUnivariateIntegrator(typing.Generic[_FieldComplexUnivariateInt
 
 class Quaternion(java.io.Serializable):
     """
-    implements Serializable
-    
     This class implements ` quaternions <http://mathworld.wolfram.com/Quaternion.html>` (Hamilton's hypercomplex numbers).
     
     Instance of this class are guaranteed to be immutable.
     
-          - serialized
+    Also see:
+        serialized
     """
     IDENTITY: typing.ClassVar['Quaternion'] = ...
     """
@@ -3190,13 +3190,13 @@ class Quaternion(java.io.Serializable):
     k
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float): ...
+    def __init__(self, a: float, b: float, c: float, d: float): ...
     @typing.overload
-    def __init__(self, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, scalar: float, v: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, v: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def add(self, quaternion: 'Quaternion') -> 'Quaternion':
+    def add(self, q: 'Quaternion') -> 'Quaternion':
         """
         Computes the sum of two quaternions.
         
@@ -3220,9 +3220,9 @@ class Quaternion(java.io.Serializable):
         ...
     @typing.overload
     @staticmethod
-    def add(quaternion: 'Quaternion', quaternion2: 'Quaternion') -> 'Quaternion': ...
+    def add(q1: 'Quaternion', q2: 'Quaternion') -> 'Quaternion': ...
     @typing.overload
-    def dotProduct(self, quaternion: 'Quaternion') -> float:
+    def dotProduct(self, q: 'Quaternion') -> float:
         """
         Computes the dot-product of two quaternions.
         
@@ -3246,11 +3246,11 @@ class Quaternion(java.io.Serializable):
         ...
     @typing.overload
     @staticmethod
-    def dotProduct(quaternion: 'Quaternion', quaternion2: 'Quaternion') -> float: ...
+    def dotProduct(q1: 'Quaternion', q2: 'Quaternion') -> float: ...
     @typing.overload
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Checks whether this instance is equal to another quaternion within a given tolerance.
         
@@ -3265,7 +3265,7 @@ class Quaternion(java.io.Serializable):
         """
         ...
     @typing.overload
-    def equals(self, quaternion: 'Quaternion', double: float) -> bool: ...
+    def equals(self, q: 'Quaternion', eps: float) -> bool: ...
     def getConjugate(self) -> 'Quaternion':
         """
         Returns the conjugate quaternion of the instance.
@@ -3356,8 +3356,8 @@ class Quaternion(java.io.Serializable):
         Returns:
             the scalar part.
         
-              - getQ0
-        
+        Also see:
+            getQ0
         
         
         """
@@ -3369,17 +3369,16 @@ class Quaternion(java.io.Serializable):
         Returns:
             the vector part.
         
-              - getQ1
-              - getQ2
-              - getQ3
-        
+        Also see:
+            getQ1, getQ2,
+            getQ3
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -3445,7 +3444,7 @@ class Quaternion(java.io.Serializable):
     def multiply(self, quaternion: 'Quaternion') -> 'Quaternion': ...
     @typing.overload
     @staticmethod
-    def multiply(quaternion: 'Quaternion', quaternion2: 'Quaternion') -> 'Quaternion': ...
+    def multiply(q1: 'Quaternion', q2: 'Quaternion') -> 'Quaternion': ...
     def normalize(self) -> 'Quaternion':
         """
         Computes the normalized quaternion (the versor of the instance). The norm of the quaternion must not be zero.
@@ -3460,7 +3459,7 @@ class Quaternion(java.io.Serializable):
         """
         ...
     @typing.overload
-    def subtract(self, quaternion: 'Quaternion') -> 'Quaternion':
+    def subtract(self, q: 'Quaternion') -> 'Quaternion':
         """
         Subtracts two quaternions.
         
@@ -3484,10 +3483,10 @@ class Quaternion(java.io.Serializable):
         ...
     @typing.overload
     @staticmethod
-    def subtract(quaternion: 'Quaternion', quaternion2: 'Quaternion') -> 'Quaternion': ...
+    def subtract(q1: 'Quaternion', q2: 'Quaternion') -> 'Quaternion': ...
     def toString(self) -> str:
         """
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -3495,11 +3494,10 @@ class Quaternion(java.io.Serializable):
 
 class RootsOfUnity(java.io.Serializable):
     """
-    implements Serializable
-    
     A helper class for the computation and caching of the n-th roots of unity.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self):
         """

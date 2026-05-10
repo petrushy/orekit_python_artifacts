@@ -20,11 +20,10 @@ import typing
 
 class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], java.lang.Comparable['BigFraction'], java.io.Serializable):
     """
-    implements FieldElement<BigFraction>, Comparable<BigFraction>, Serializable
-    
     Representation of a rational number without any overflow. This class is immutable.
     
-          - serialized
+    Also see:
+        serialized
     """
     TWO: typing.ClassVar['BigFraction'] = ...
     """
@@ -85,7 +84,7 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
     @typing.overload
     def __init__(self, double: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, int: int): ...
+    def __init__(self, value: float, epsilon: float, maxIterations: int): ...
     @typing.overload
     def __init__(self, double: float, long: int): ...
     @typing.overload
@@ -111,7 +110,7 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         """
         ...
     @typing.overload
-    def add(self, int: int) -> 'BigFraction':
+    def add(self, i: int) -> 'BigFraction':
         """
         Adds the value of this fraction to the passed integer, returning the result in reduced form.
         
@@ -162,8 +161,8 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         Raises:
             ArithmeticException: if the exact quotient does not have a terminating decimal expansion.
         
-              - BigDecimal
-        
+        Also see:
+            BigDecimal
         
         """
         ...
@@ -181,8 +180,8 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         Returns:
             the fraction as a BigDecimal.
         
-              - BigDecimal
-        
+        Also see:
+            BigDecimal
         
         
         """
@@ -202,8 +201,8 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         Raises:
             IllegalArgumentException: if roundingMode does not represent a valid rounding mode.
         
-              - BigDecimal
-        
+        Also see:
+            BigDecimal
         
         """
         ...
@@ -211,7 +210,7 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         """
         Compares this object to another based on size.
         
-        Specified by: compareTo in interface Comparable
+        Specified by: Comparable in interface Comparable
         
         Parameters:
             object (BigFraction): the object to compare to, must not be null.
@@ -219,8 +218,8 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         Returns:
             -1 if this is less than object, +1 if this is greater than object, 0 if they are equal.
         
-              - compareTo
-        
+        Also see:
+            Comparable
         
         
         """
@@ -263,7 +262,7 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         """
         ...
     @typing.overload
-    def divide(self, int: int) -> 'BigFraction':
+    def divide(self, bg: int) -> 'BigFraction':
         """
         Divide the value of this fraction by the passed BigInteger, ie this * 1 / bg, returning the result in reduced form.
         
@@ -326,13 +325,13 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         """
         Gets the fraction as a double. This calculates the fraction as the numerator divided by denominator.
         
-        Specified by: doubleValue in class Number
+        Specified by: Number in class Number
         
         Returns:
             the fraction as a double
         
-              - doubleValue
-        
+        Also see:
+            Number
         
         
         """
@@ -341,7 +340,7 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         """
         Test for the equality of two fractions. If the lowest term numerator and denominators are the same for both fractions, the two fractions are considered to be equal.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): fraction to test for equality to this fraction, can be null.
@@ -350,8 +349,8 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
             true if two fractions are equal, false if object is null, not an instance of
             BigFraction, or not equal to this fraction instance.
         
-              - equals
-        
+        Also see:
+            Object
         
         
         """
@@ -360,13 +359,13 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         """
         Gets the fraction as a float. This calculates the fraction as the numerator divided by denominator.
         
-        Specified by: floatValue in class Number
+        Specified by: Number in class Number
         
         Returns:
             the fraction as a float.
         
-              - floatValue
-        
+        Also see:
+            Number
         
         
         """
@@ -495,13 +494,13 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         """
         Gets a hashCode for the fraction.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object.
         
-              - hashCode
-        
+        Also see:
+            Object
         
         
         """
@@ -510,13 +509,13 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         """
         Gets the fraction as an int. This returns the whole number part of the fraction.
         
-        Specified by: intValue in class Number
+        Specified by: Number in class Number
         
         Returns:
             the whole number fraction part.
         
-              - intValue
-        
+        Also see:
+            Number
         
         
         """
@@ -551,19 +550,19 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         """
         Gets the fraction as a long. This returns the whole number part of the fraction.
         
-        Specified by: longValue in class Number
+        Specified by: Number in class Number
         
         Returns:
             the whole number fraction part.
         
-              - longValue
-        
+        Also see:
+            Number
         
         
         """
         ...
     @typing.overload
-    def multiply(self, int: int) -> 'BigFraction':
+    def multiply(self, bg: int) -> 'BigFraction':
         """
         Multiplies the value of this fraction by the passed BigInteger, returning the result in reduced form.
         
@@ -639,7 +638,7 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         """
         ...
     @typing.overload
-    def pow(self, double: float) -> float:
+    def pow(self, exponent: float) -> float:
         """
         Parameters:
             exponent (int): exponent to which this BigFraction is to be raised.
@@ -675,11 +674,11 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         """
         ...
     @typing.overload
-    def pow(self, int: int) -> 'BigFraction': ...
+    def pow(self, exponent: int) -> 'BigFraction': ...
     @typing.overload
-    def pow(self, bigInteger: java.math.BigInteger) -> 'BigFraction': ...
+    def pow(self, exponent: java.math.BigInteger) -> 'BigFraction': ...
     @typing.overload
-    def pow(self, long: int) -> 'BigFraction': ...
+    def pow(self, exponent: int) -> 'BigFraction': ...
     def reciprocal(self) -> 'BigFraction':
         """
         Return the multiplicative inverse of this fraction.
@@ -718,19 +717,20 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         """
         ...
     @typing.overload
-    def subtract(self, int: int) -> 'BigFraction':
+    def subtract(self, bg: int) -> 'BigFraction':
         """
         Subtracts the value of an BigInteger from the value of this BigFraction, returning the result in reduced form.
         
         Parameters:
-            bg (BigInteger): the BigInteger to subtract, cannot
-                be null.
+            bg (BigInteger): the BigInteger to subtract,
+                cannot be null.
         
         Returns:
             a BigFraction instance with the resulting values.
         
         Raises:
-            NullArgumentException: if the BigInteger is null.
+            NullArgumentException: if the BigInteger is
+                null.
         
         Subtracts the value of an integer from the value of this BigFraction, returning the result in reduced form.
         
@@ -774,13 +774,13 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         """
         Returns the String representing this fraction, ie "num / dem" or just "num" if the denominator is one.
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Returns:
             a string representation of the fraction.
         
-              - toString
-        
+        Also see:
+            Object
         
         
         """
@@ -790,18 +790,16 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
 
 class BigFractionField(org.hipparchus.Field[BigFraction], java.io.Serializable):
     """
-    implements Field<BigFraction>, Serializable
-    
     Representation of the fractional numbers without any overflow field.
     
     This class is a singleton.
     
-          - Fraction
-          - serialized
+    Also see:
+        Fraction, serialized
     """
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -859,7 +857,7 @@ class BigFractionField(org.hipparchus.Field[BigFraction], java.io.Serializable):
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -867,11 +865,10 @@ class BigFractionField(org.hipparchus.Field[BigFraction], java.io.Serializable):
 
 class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.lang.Comparable['Fraction'], java.io.Serializable):
     """
-    implements FieldElement<Fraction>, Comparable<Fraction>, Serializable
-    
     Representation of a rational number.
     
-          - serialized
+    Also see:
+        serialized
     """
     TWO: typing.ClassVar['Fraction'] = ...
     """
@@ -932,7 +929,7 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
     @typing.overload
     def __init__(self, double: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, int: int): ...
+    def __init__(self, value: float, epsilon: float, maxIterations: int): ...
     @typing.overload
     def __init__(self, double: float, int: int): ...
     @typing.overload
@@ -950,7 +947,7 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
         """
         ...
     @typing.overload
-    def add(self, int: int) -> 'Fraction':
+    def add(self, fraction: int) -> 'Fraction':
         """
         Adds the value of this fraction to another, returning the result in reduced form. The algorithm follows Knuth, 4.5.1.
         
@@ -983,7 +980,7 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
         """
         Compares this object to another based on size.
         
-        Specified by: compareTo in interface Comparable
+        Specified by: Comparable in interface Comparable
         
         Parameters:
             object (Fraction): the object to compare to
@@ -1032,7 +1029,7 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
         """
         ...
     @typing.overload
-    def divide(self, int: int) -> 'Fraction':
+    def divide(self, fraction: int) -> 'Fraction':
         """
         Divide the value of this fraction by another.
         
@@ -1066,7 +1063,7 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
         """
         Gets the fraction as a double. This calculates the fraction as the numerator divided by denominator.
         
-        Specified by: doubleValue in class Number
+        Specified by: Number in class Number
         
         Returns:
             the fraction as a double
@@ -1078,7 +1075,7 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
         """
         Test for the equality of two fractions. If the lowest term numerator and denominators are the same for both fractions, the two fractions are considered to be equal.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): fraction to test for equality to this fraction
@@ -1094,7 +1091,7 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
         """
         Gets the fraction as a float. This calculates the fraction as the numerator divided by denominator.
         
-        Specified by: floatValue in class Number
+        Specified by: Number in class Number
         
         Returns:
             the fraction as a float
@@ -1186,7 +1183,7 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
         """
         Gets a hashCode for the fraction.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -1198,7 +1195,7 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
         """
         Gets the fraction as an int. This returns the whole number part of the fraction.
         
-        Specified by: intValue in class Number
+        Specified by: Number in class Number
         
         Returns:
             the whole number fraction part
@@ -1236,7 +1233,7 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
         """
         Gets the fraction as a long. This returns the whole number part of the fraction.
         
-        Specified by: longValue in class Number
+        Specified by: Number in class Number
         
         Returns:
             the whole number fraction part
@@ -1245,7 +1242,7 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
         """
         ...
     @typing.overload
-    def multiply(self, int: int) -> 'Fraction':
+    def multiply(self, fraction: int) -> 'Fraction':
         """
         Multiplies the value of this fraction by another, returning the result in reduced form.
         
@@ -1326,7 +1323,7 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
         """
         ...
     @typing.overload
-    def subtract(self, int: int) -> 'Fraction':
+    def subtract(self, fraction: int) -> 'Fraction':
         """
         Subtracts the value of another fraction from the value of this one, returning the result in reduced form.
         
@@ -1359,13 +1356,13 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
         """
         Returns the String representing this fraction, ie "num / dem" or just "num" if the denominator is one.
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Returns:
             a string representation of the fraction.
         
-              - toString
-        
+        Also see:
+            Object
         
         
         """
@@ -1375,18 +1372,16 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
 
 class FractionField(org.hipparchus.Field[Fraction], java.io.Serializable):
     """
-    implements Field<Fraction>, Serializable
-    
     Representation of the fractional numbers field.
     
     This class is a singleton.
     
-          - Fraction
-          - serialized
+    Also see:
+        Fraction, serialized
     """
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -1444,7 +1439,7 @@ class FractionField(org.hipparchus.Field[Fraction], java.io.Serializable):
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -1452,20 +1447,19 @@ class FractionField(org.hipparchus.Field[Fraction], java.io.Serializable):
 
 class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializable):
     """
-    implements Serializable
-    
     Formats a BigFraction number in proper format or improper format.
     
     The number format for each of the whole number, numerator and, denominator can be configured.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, numberFormat: java.text.NumberFormat): ...
+    def __init__(self, format: java.text.NumberFormat): ...
     @typing.overload
-    def __init__(self, numberFormat: java.text.NumberFormat, numberFormat2: java.text.NumberFormat): ...
+    def __init__(self, numeratorFormat: java.text.NumberFormat, denominatorFormat: java.text.NumberFormat): ...
     @typing.overload
     def format(self, object: typing.Any) -> str:
         """
@@ -1481,7 +1475,7 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
         
         Formats an object and appends the result to a StringBuffer. obj must be either a BigFraction object or a BigInteger object or a Number object. Any other type of object will result in an IllegalArgumentException being thrown.
         
-        Overrides: format in class NumberFormat
+        Overrides: NumberFormat in class NumberFormat
         
         Parameters:
             obj (Object): the object to format.
@@ -1494,11 +1488,12 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
         Raises:
             MathIllegalArgumentException: if obj is not a valid type.
         
-              - format
+        Also see:
+            Format
         
         Formats a double value as a fraction and appends the result to a StringBuffer.
         
-        Specified by: format in class NumberFormat
+        Specified by: NumberFormat in class NumberFormat
         
         Parameters:
             value (double): the double value to format
@@ -1508,11 +1503,12 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
         Returns:
             a reference to the appended buffer
         
-              - format
+        Also see:
+            NumberFormat
         
         Formats a long value as a fraction and appends the result to a StringBuffer.
         
-        Specified by: format in class NumberFormat
+        Specified by: NumberFormat in class NumberFormat
         
         Parameters:
             value (long): the long value to format
@@ -1522,8 +1518,8 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
         Returns:
             a reference to the appended buffer
         
-              - format
-        
+        Also see:
+            NumberFormat
         
         
         """
@@ -1606,11 +1602,11 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
         """
         ...
     @typing.overload
-    def parse(self, string: str) -> BigFraction:
+    def parse(self, source: str) -> BigFraction:
         """
         Parses a string to produce a BigFraction object. This method expects the string to be formatted as an improper BigFraction.
         
-        Specified by: parse in class NumberFormat
+        Specified by: NumberFormat in class NumberFormat
         
         Parameters:
             source (String): the string to parse
@@ -1623,7 +1619,7 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
         """
         ...
     @typing.overload
-    def parse(self, string: str, parsePosition: java.text.ParsePosition) -> BigFraction: ...
+    def parse(self, source: str, pos: java.text.ParsePosition) -> BigFraction: ...
 
 class FractionFormat(org.hipparchus.fraction.AbstractFormat):
     """
@@ -1631,14 +1627,15 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
     
     The number format for each of the whole number, numerator and, denominator can be configured.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, numberFormat: java.text.NumberFormat): ...
+    def __init__(self, format: java.text.NumberFormat): ...
     @typing.overload
-    def __init__(self, numberFormat: java.text.NumberFormat, numberFormat2: java.text.NumberFormat): ...
+    def __init__(self, numeratorFormat: java.text.NumberFormat, denominatorFormat: java.text.NumberFormat): ...
     @typing.overload
     def format(self, object: typing.Any) -> str:
         """
@@ -1652,11 +1649,11 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
         Returns:
             the value passed in as toAppendTo.
         
-        public StringBuffer format(Object obj, StringBuffer toAppendTo, FieldPosition pos) throws MathIllegalArgumentException, MathIllegalStateException
+        public StringBuffer format (Object obj, StringBuffer toAppendTo, FieldPosition pos) throws MathIllegalArgumentException, MathIllegalStateException
         
         Formats an object and appends the result to a StringBuffer. obj must be either a Fraction object or a Number object. Any other type of object will result in an IllegalArgumentException being thrown.
         
-        Overrides: format in class NumberFormat
+        Overrides: NumberFormat in class NumberFormat
         
         Parameters:
             obj (Object): the object to format.
@@ -1670,11 +1667,12 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
             MathIllegalStateException: if the number cannot be converted to a fraction
             MathIllegalArgumentException: if obj is not a valid type.
         
-              - format
+        Also see:
+            Format
         
         Formats a double value as a fraction and appends the result to a StringBuffer.
         
-        Specified by: format in class NumberFormat
+        Specified by: NumberFormat in class NumberFormat
         
         Parameters:
             value (double): the double value to format
@@ -1684,11 +1682,12 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
         Returns:
             a reference to the appended buffer
         
-              - format
+        Also see:
+            NumberFormat
         
         Formats a long value as a fraction and appends the result to a StringBuffer.
         
-        Specified by: format in class NumberFormat
+        Specified by: NumberFormat in class NumberFormat
         
         Parameters:
             value (long): the long value to format
@@ -1698,8 +1697,8 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
         Returns:
             a reference to the appended buffer
         
-              - format
-        
+        Also see:
+            NumberFormat
         
         
         """
@@ -1782,11 +1781,11 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
         """
         ...
     @typing.overload
-    def parse(self, string: str) -> Fraction:
+    def parse(self, source: str) -> Fraction:
         """
         Parses a string to produce a Fraction object. This method expects the string to be formatted as an improper fraction.
         
-        Specified by: parse in class NumberFormat
+        Specified by: NumberFormat in class NumberFormat
         
         Parameters:
             source (String): the string to parse
@@ -1799,7 +1798,7 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
         """
         ...
     @typing.overload
-    def parse(self, string: str, parsePosition: java.text.ParsePosition) -> Fraction: ...
+    def parse(self, source: str, pos: java.text.ParsePosition) -> Fraction: ...
 
 class ProperBigFractionFormat(BigFractionFormat):
     """
@@ -1807,14 +1806,15 @@ class ProperBigFractionFormat(BigFractionFormat):
     
     Minus signs are only allowed in the whole number part - i.e., "-3 1/2" is legitimate and denotes -7/2, but "-3 -1/2" is invalid and will result in a ParseException.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, numberFormat: java.text.NumberFormat): ...
+    def __init__(self, format: java.text.NumberFormat): ...
     @typing.overload
-    def __init__(self, numberFormat: java.text.NumberFormat, numberFormat2: java.text.NumberFormat, numberFormat3: java.text.NumberFormat): ...
+    def __init__(self, wholeFormat: java.text.NumberFormat, numeratorFormat: java.text.NumberFormat, denominatorFormat: java.text.NumberFormat): ...
     @typing.overload
     def format(self, object: typing.Any) -> str:
         """
@@ -1832,7 +1832,7 @@ class ProperBigFractionFormat(BigFractionFormat):
         
         Formats a double value as a fraction and appends the result to a StringBuffer.
         
-        Specified by: format in class NumberFormat
+        Specified by: NumberFormat in class NumberFormat
         
         Parameters:
             value (double): the double value to format
@@ -1842,11 +1842,12 @@ class ProperBigFractionFormat(BigFractionFormat):
         Returns:
             a reference to the appended buffer
         
-              - format
+        Also see:
+            NumberFormat
         
         Formats a long value as a fraction and appends the result to a StringBuffer.
         
-        Specified by: format in class NumberFormat
+        Specified by: NumberFormat in class NumberFormat
         
         Parameters:
             value (long): the long value to format
@@ -1856,8 +1857,8 @@ class ProperBigFractionFormat(BigFractionFormat):
         Returns:
             a reference to the appended buffer
         
-              - format
-        
+        Also see:
+            NumberFormat
         
         
         """
@@ -1900,7 +1901,7 @@ class ProperBigFractionFormat(BigFractionFormat):
         """
         ...
     @typing.overload
-    def parse(self, string: str, parsePosition: java.text.ParsePosition) -> BigFraction: ...
+    def parse(self, source: str, pos: java.text.ParsePosition) -> BigFraction: ...
 
 class ProperFractionFormat(FractionFormat):
     """
@@ -1908,14 +1909,15 @@ class ProperFractionFormat(FractionFormat):
     
     Minus signs are only allowed in the whole number part - i.e., "-3 1/2" is legitimate and denotes -7/2, but "-3 -1/2" is invalid and will result in a ParseException.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, numberFormat: java.text.NumberFormat): ...
+    def __init__(self, format: java.text.NumberFormat): ...
     @typing.overload
-    def __init__(self, numberFormat: java.text.NumberFormat, numberFormat2: java.text.NumberFormat, numberFormat3: java.text.NumberFormat): ...
+    def __init__(self, wholeFormat: java.text.NumberFormat, numeratorFormat: java.text.NumberFormat, denominatorFormat: java.text.NumberFormat): ...
     @typing.overload
     def format(self, object: typing.Any) -> str:
         """
@@ -1933,7 +1935,7 @@ class ProperFractionFormat(FractionFormat):
         
         Formats a double value as a fraction and appends the result to a StringBuffer.
         
-        Specified by: format in class NumberFormat
+        Specified by: NumberFormat in class NumberFormat
         
         Parameters:
             value (double): the double value to format
@@ -1943,11 +1945,12 @@ class ProperFractionFormat(FractionFormat):
         Returns:
             a reference to the appended buffer
         
-              - format
+        Also see:
+            NumberFormat
         
         Formats a long value as a fraction and appends the result to a StringBuffer.
         
-        Specified by: format in class NumberFormat
+        Specified by: NumberFormat in class NumberFormat
         
         Parameters:
             value (long): the long value to format
@@ -1957,8 +1960,8 @@ class ProperFractionFormat(FractionFormat):
         Returns:
             a reference to the appended buffer
         
-              - format
-        
+        Also see:
+            NumberFormat
         
         
         """
@@ -2001,7 +2004,7 @@ class ProperFractionFormat(FractionFormat):
         """
         ...
     @typing.overload
-    def parse(self, string: str, parsePosition: java.text.ParsePosition) -> Fraction: ...
+    def parse(self, source: str, pos: java.text.ParsePosition) -> Fraction: ...
 
 class AbstractFormat: ...
 

@@ -214,7 +214,7 @@ class RtcmCorrectionMessage(org.orekit.gnss.metric.messages.rtcm.RtcmMessage[_Rt
     Since:
         12.0
     """
-    def __init__(self, system: int, typeCode: org.orekit.gnss.SatelliteSystem, header: _RtcmCorrectionMessage__H, data: java.util.List[_RtcmCorrectionMessage__D]):
+    def __init__(self, typeCode: int, system: org.orekit.gnss.SatelliteSystem, header: _RtcmCorrectionMessage__H, data: java.util.List[_RtcmCorrectionMessage__D]):
         """
         Constructor.
         

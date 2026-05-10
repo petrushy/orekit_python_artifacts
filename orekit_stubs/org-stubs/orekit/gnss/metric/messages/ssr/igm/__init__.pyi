@@ -88,7 +88,7 @@ class SsrIgmMessage(org.orekit.gnss.metric.messages.ssr.SsrMessage[_SsrIgmMessag
     Since:
         11.0
     """
-    def __init__(self, system: int, typeCode: org.orekit.gnss.SatelliteSystem, header: _SsrIgmMessage__H, data: java.util.List[_SsrIgmMessage__D]):
+    def __init__(self, typeCode: int, system: org.orekit.gnss.SatelliteSystem, header: _SsrIgmMessage__H, data: java.util.List[_SsrIgmMessage__D]):
         """
         Constructor.
         

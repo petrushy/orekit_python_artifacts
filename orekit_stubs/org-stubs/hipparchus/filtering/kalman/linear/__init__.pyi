@@ -18,7 +18,8 @@ class LinearEvolution:
     Since:
         1.3
     
-          - LinearProcess
+    Also see:
+        LinearProcess
     """
     def __init__(self, stateTransitionMatrix: org.hipparchus.linear.RealMatrix, controlMatrix: org.hipparchus.linear.RealMatrix, command: org.hipparchus.linear.RealVector, processNoiseMatrix: org.hipparchus.linear.RealMatrix, measurementJacobian: org.hipparchus.linear.RealMatrix):
         """
@@ -140,8 +141,9 @@ class LinearProcess(typing.Generic[_LinearProcess__T]):
     Since:
         1.3
     
-          - LinearKalmanFilter
-          - NonLinearProcess
+    Also see:
+        LinearKalmanFilter,
+        NonLinearProcess
     """
     def getEvolution(self, measurement: _LinearProcess__T) -> LinearEvolution:
         """

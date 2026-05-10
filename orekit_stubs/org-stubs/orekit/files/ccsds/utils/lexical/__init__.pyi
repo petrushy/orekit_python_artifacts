@@ -1125,7 +1125,7 @@ class PythonLexicalAnalyzer(LexicalAnalyzer):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1232,7 +1232,7 @@ class PythonMessageParser(MessageParser[_PythonMessageParser__T], typing.Generic
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1286,7 +1286,7 @@ class PythonXmlTokenBuilder(XmlTokenBuilder):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 class RegularXmlTokenBuilder(XmlTokenBuilder):
     """

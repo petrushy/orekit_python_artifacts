@@ -340,7 +340,7 @@ class PythonFieldManeuverTriggersResetter(FieldManeuverTriggersResetter[_PythonF
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -464,7 +464,7 @@ class PythonManeuverTriggers(ManeuverTriggers):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 class PythonManeuverTriggersResetter(ManeuverTriggersResetter):
     def __init__(self): ...
@@ -506,7 +506,7 @@ class PythonManeuverTriggersResetter(ManeuverTriggersResetter):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -800,7 +800,7 @@ class PythonAbstractManeuverTriggers(AbstractManeuverTriggers):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -852,7 +852,7 @@ class StartStopEventsTrigger(AbstractManeuverTriggers, typing.Generic[_StartStop
         ...
     _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None: ...
+    def init(self, initialState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], target: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None: ...
     @typing.overload
     def init(self, initialState: org.orekit.propagation.SpacecraftState, target: org.orekit.time.AbsoluteDate) -> None:
         """
@@ -889,11 +889,11 @@ class DateBasedManeuverTriggers(IntervalEventTrigger[org.orekit.propagation.even
     
     """
     @typing.overload
-    def __init__(self, string: str, absoluteDate: org.orekit.time.AbsoluteDate, double: float): ...
+    def __init__(self, name: str, date: org.orekit.time.AbsoluteDate, duration: float): ...
     @typing.overload
-    def __init__(self, string: str, absoluteDate: org.orekit.time.AbsoluteDate, double: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings): ...
+    def __init__(self, name: str, date: org.orekit.time.AbsoluteDate, duration: float, detectionSettings: org.orekit.propagation.events.EventDetectionSettings): ...
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float): ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, duration: float): ...
     def getDuration(self) -> float:
         """
         Get the duration of the maneuver (s). duration = endDate - startDate
@@ -947,7 +947,7 @@ class DateBasedManeuverTriggers(IntervalEventTrigger[org.orekit.propagation.even
 
 _PythonIntervalEventTrigger__T = typing.TypeVar('_PythonIntervalEventTrigger__T', bound=org.orekit.propagation.events.AbstractDetector)  # <T>
 class PythonIntervalEventTrigger(IntervalEventTrigger[_PythonIntervalEventTrigger__T], typing.Generic[_PythonIntervalEventTrigger__T]):
-    def __init__(self, t: _PythonIntervalEventTrigger__T): ...
+    def __init__(self, prototypeFiringIntervalDetector: _PythonIntervalEventTrigger__T): ...
     _convertIntervalDetector__D = typing.TypeVar('_convertIntervalDetector__D', bound=org.orekit.propagation.events.FieldEventDetector)  # <D>
     _convertIntervalDetector__S = typing.TypeVar('_convertIntervalDetector__S', bound=org.hipparchus.CalculusFieldElement)  # <S>
     def convertIntervalDetector(self, field: org.hipparchus.Field[_convertIntervalDetector__S], detector: _PythonIntervalEventTrigger__T) -> _convertIntervalDetector__D:
@@ -1015,7 +1015,7 @@ class PythonIntervalEventTrigger(IntervalEventTrigger[_PythonIntervalEventTrigge
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1024,7 +1024,7 @@ class PythonIntervalEventTrigger(IntervalEventTrigger[_PythonIntervalEventTrigge
 _PythonStartStopEventsTrigger__A = typing.TypeVar('_PythonStartStopEventsTrigger__A', bound=org.orekit.propagation.events.AbstractDetector)  # <A>
 _PythonStartStopEventsTrigger__O = typing.TypeVar('_PythonStartStopEventsTrigger__O', bound=org.orekit.propagation.events.AbstractDetector)  # <O>
 class PythonStartStopEventsTrigger(StartStopEventsTrigger[_PythonStartStopEventsTrigger__A, _PythonStartStopEventsTrigger__O], typing.Generic[_PythonStartStopEventsTrigger__A, _PythonStartStopEventsTrigger__O]):
-    def __init__(self, a: _PythonStartStopEventsTrigger__A, o: _PythonStartStopEventsTrigger__O): ...
+    def __init__(self, prototypeStartDetector: _PythonStartStopEventsTrigger__A, prototypeStopDetector: _PythonStartStopEventsTrigger__O): ...
     _convertStartDetector__D = typing.TypeVar('_convertStartDetector__D', bound=org.orekit.propagation.events.FieldEventDetector)  # <D>
     _convertStartDetector__S = typing.TypeVar('_convertStartDetector__S', bound=org.hipparchus.CalculusFieldElement)  # <S>
     def convertStartDetector(self, field: org.hipparchus.Field[_convertStartDetector__S], detector: _PythonStartStopEventsTrigger__A) -> _convertStartDetector__D:
@@ -1128,7 +1128,7 @@ class PythonStartStopEventsTrigger(StartStopEventsTrigger[_PythonStartStopEvents
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1156,7 +1156,7 @@ class TimeIntervalsManeuverTrigger(IntervalEventTrigger[org.orekit.propagation.e
         ...
     @typing.overload
     @staticmethod
-    def of(*timeIntervalDetector: org.orekit.propagation.events.TimeIntervalDetector) -> 'TimeIntervalsManeuverTrigger':
+    def of(*timeIntervals: org.orekit.propagation.events.TimeIntervalDetector) -> 'TimeIntervalsManeuverTrigger':
         """
         Parameters:
             timeIntervals (TimeInterval...): intervals

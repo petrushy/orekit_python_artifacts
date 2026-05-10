@@ -83,8 +83,9 @@ class DSCompiler:
        double dPdZdZ = product[compiler.getPartialDerivativeIndex(0, 0, 2)];
      
     
-          - DerivativeStructure
-          - FieldDerivativeStructure
+    Also see:
+        DerivativeStructure,
+        FieldDerivativeStructure
     """
     _acos_1__T = typing.TypeVar('_acos_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
@@ -348,7 +349,7 @@ class DSCompiler:
         """
         ...
     @typing.overload
-    def compose(self, tArray: typing.Union[typing.List[_compose_1__T], jpype.JArray], int: int, doubleArray: typing.Union[typing.List[float], jpype.JArray], tArray2: typing.Union[typing.List[_compose_1__T], jpype.JArray], int2: int) -> None:
+    def compose(self, operand: typing.Union[typing.List[_compose_1__T], jpype.JArray], operandOffset: int, f: typing.Union[typing.List[float], jpype.JArray], result: typing.Union[typing.List[_compose_1__T], jpype.JArray], resultOffset: int) -> None:
         """
         Compute composition of a derivative structure by a function.
         
@@ -372,7 +373,7 @@ class DSCompiler:
         """
         ...
     @typing.overload
-    def compose(self, tArray: typing.Union[typing.List[_compose_2__T], jpype.JArray], int: int, tArray2: typing.Union[typing.List[_compose_2__T], jpype.JArray], tArray3: typing.Union[typing.List[_compose_2__T], jpype.JArray], int2: int) -> None: ...
+    def compose(self, operand: typing.Union[typing.List[_compose_2__T], jpype.JArray], operandOffset: int, f: typing.Union[typing.List[_compose_2__T], jpype.JArray], result: typing.Union[typing.List[_compose_2__T], jpype.JArray], resultOffset: int) -> None: ...
     _cos_1__T = typing.TypeVar('_cos_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def cos(self, operand: typing.Union[typing.List[float], jpype.JArray], operandOffset: int, result: typing.Union[typing.List[float], jpype.JArray], resultOffset: int) -> None:
@@ -580,8 +581,8 @@ class DSCompiler:
             MathIllegalArgumentException: if the numbers of parameters does not match the instance
             MathIllegalArgumentException: if sum of derivation orders is larger than the instance limits
         
-              - getPartialDerivativeOrders
-        
+        Also see:
+            getPartialDerivativeOrders
         
         
         """
@@ -598,8 +599,8 @@ class DSCompiler:
         Returns:
             derivation orders with respect to each parameter
         
-              - getPartialDerivativeIndex
-        
+        Also see:
+            getPartialDerivativeIndex
         
         
         """
@@ -619,8 +620,8 @@ class DSCompiler:
         Since:
             2.2
         
-              - getPartialDerivativeIndex
-        
+        Also see:
+            getPartialDerivativeIndex
         
         
         """
@@ -704,7 +705,7 @@ class DSCompiler:
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, tArray: typing.Union[typing.List[_linearCombination_3__T], jpype.JArray], int: int, double2: float, tArray2: typing.Union[typing.List[_linearCombination_3__T], jpype.JArray], int2: int, double3: float, tArray3: typing.Union[typing.List[_linearCombination_3__T], jpype.JArray], int3: int, double4: float, tArray4: typing.Union[typing.List[_linearCombination_3__T], jpype.JArray], int4: int, tArray5: typing.Union[typing.List[_linearCombination_3__T], jpype.JArray], int5: int) -> None:
+    def linearCombination(self, a1: float, c1: typing.Union[typing.List[_linearCombination_3__T], jpype.JArray], offset1: int, a2: float, c2: typing.Union[typing.List[_linearCombination_3__T], jpype.JArray], offset2: int, a3: float, c3: typing.Union[typing.List[_linearCombination_3__T], jpype.JArray], offset3: int, a4: float, c4: typing.Union[typing.List[_linearCombination_3__T], jpype.JArray], offset4: int, result: typing.Union[typing.List[_linearCombination_3__T], jpype.JArray], resultOffset: int) -> None:
         """
         Compute linear combination. The derivative structure built will be a1 * ds1 + a2 * ds2 + a3 * ds3 + a4 * ds4
         
@@ -746,7 +747,7 @@ class DSCompiler:
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, tArray: typing.Union[typing.List[_linearCombination_4__T], jpype.JArray], int: int, double2: float, tArray2: typing.Union[typing.List[_linearCombination_4__T], jpype.JArray], int2: int, double3: float, tArray3: typing.Union[typing.List[_linearCombination_4__T], jpype.JArray], int3: int, tArray4: typing.Union[typing.List[_linearCombination_4__T], jpype.JArray], int4: int) -> None:
+    def linearCombination(self, a1: float, c1: typing.Union[typing.List[_linearCombination_4__T], jpype.JArray], offset1: int, a2: float, c2: typing.Union[typing.List[_linearCombination_4__T], jpype.JArray], offset2: int, a3: float, c3: typing.Union[typing.List[_linearCombination_4__T], jpype.JArray], offset3: int, result: typing.Union[typing.List[_linearCombination_4__T], jpype.JArray], resultOffset: int) -> None:
         """
         Compute linear combination. The derivative structure built will be a1 * ds1 + a2 * ds2 + a3 * ds3 + a4 * ds4
         
@@ -781,7 +782,7 @@ class DSCompiler:
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, tArray: typing.Union[typing.List[_linearCombination_5__T], jpype.JArray], int: int, double2: float, tArray2: typing.Union[typing.List[_linearCombination_5__T], jpype.JArray], int2: int, tArray3: typing.Union[typing.List[_linearCombination_5__T], jpype.JArray], int3: int) -> None:
+    def linearCombination(self, a1: float, c1: typing.Union[typing.List[_linearCombination_5__T], jpype.JArray], offset1: int, a2: float, c2: typing.Union[typing.List[_linearCombination_5__T], jpype.JArray], offset2: int, result: typing.Union[typing.List[_linearCombination_5__T], jpype.JArray], resultOffset: int) -> None:
         """
         Compute linear combination. The derivative structure built will be a1 * ds1 + a2 * ds2
         
@@ -810,11 +811,11 @@ class DSCompiler:
         """
         ...
     @typing.overload
-    def linearCombination(self, t: _linearCombination_6__T, tArray: typing.Union[typing.List[_linearCombination_6__T], jpype.JArray], int: int, t3: _linearCombination_6__T, tArray2: typing.Union[typing.List[_linearCombination_6__T], jpype.JArray], int2: int, t5: _linearCombination_6__T, tArray3: typing.Union[typing.List[_linearCombination_6__T], jpype.JArray], int3: int, t7: _linearCombination_6__T, tArray4: typing.Union[typing.List[_linearCombination_6__T], jpype.JArray], int4: int, tArray5: typing.Union[typing.List[_linearCombination_6__T], jpype.JArray], int5: int) -> None: ...
+    def linearCombination(self, a1: _linearCombination_6__T, c1: typing.Union[typing.List[_linearCombination_6__T], jpype.JArray], offset1: int, a2: _linearCombination_6__T, c2: typing.Union[typing.List[_linearCombination_6__T], jpype.JArray], offset2: int, a3: _linearCombination_6__T, c3: typing.Union[typing.List[_linearCombination_6__T], jpype.JArray], offset3: int, a4: _linearCombination_6__T, c4: typing.Union[typing.List[_linearCombination_6__T], jpype.JArray], offset4: int, result: typing.Union[typing.List[_linearCombination_6__T], jpype.JArray], resultOffset: int) -> None: ...
     @typing.overload
-    def linearCombination(self, t: _linearCombination_7__T, tArray: typing.Union[typing.List[_linearCombination_7__T], jpype.JArray], int: int, t3: _linearCombination_7__T, tArray2: typing.Union[typing.List[_linearCombination_7__T], jpype.JArray], int2: int, t5: _linearCombination_7__T, tArray3: typing.Union[typing.List[_linearCombination_7__T], jpype.JArray], int3: int, tArray4: typing.Union[typing.List[_linearCombination_7__T], jpype.JArray], int4: int) -> None: ...
+    def linearCombination(self, a1: _linearCombination_7__T, c1: typing.Union[typing.List[_linearCombination_7__T], jpype.JArray], offset1: int, a2: _linearCombination_7__T, c2: typing.Union[typing.List[_linearCombination_7__T], jpype.JArray], offset2: int, a3: _linearCombination_7__T, c3: typing.Union[typing.List[_linearCombination_7__T], jpype.JArray], offset3: int, result: typing.Union[typing.List[_linearCombination_7__T], jpype.JArray], resultOffset: int) -> None: ...
     @typing.overload
-    def linearCombination(self, t: _linearCombination_8__T, tArray: typing.Union[typing.List[_linearCombination_8__T], jpype.JArray], int: int, t3: _linearCombination_8__T, tArray2: typing.Union[typing.List[_linearCombination_8__T], jpype.JArray], int2: int, tArray3: typing.Union[typing.List[_linearCombination_8__T], jpype.JArray], int3: int) -> None: ...
+    def linearCombination(self, a1: _linearCombination_8__T, c1: typing.Union[typing.List[_linearCombination_8__T], jpype.JArray], offset1: int, a2: _linearCombination_8__T, c2: typing.Union[typing.List[_linearCombination_8__T], jpype.JArray], offset2: int, result: typing.Union[typing.List[_linearCombination_8__T], jpype.JArray], resultOffset: int) -> None: ...
     _log_1__T = typing.TypeVar('_log_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def log(self, operand: typing.Union[typing.List[float], jpype.JArray], operandOffset: int, result: typing.Union[typing.List[float], jpype.JArray], resultOffset: int) -> None:
@@ -936,7 +937,7 @@ class DSCompiler:
     _pow_6__T = typing.TypeVar('_pow_6__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _pow_7__T = typing.TypeVar('_pow_7__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pow(self, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, doubleArray2: typing.Union[typing.List[float], jpype.JArray], int2: int) -> None:
+    def pow(self, a: float, operand: typing.Union[typing.List[float], jpype.JArray], operandOffset: int, result: typing.Union[typing.List[float], jpype.JArray], resultOffset: int) -> None:
         """
         Compute power of a double to a derivative structure.
         
@@ -978,7 +979,7 @@ class DSCompiler:
         """
         ...
     @typing.overload
-    def pow(self, double: float, tArray: typing.Union[typing.List[_pow_1__T], jpype.JArray], int: int, tArray2: typing.Union[typing.List[_pow_1__T], jpype.JArray], int2: int) -> None:
+    def pow(self, a: float, operand: typing.Union[typing.List[_pow_1__T], jpype.JArray], operandOffset: int, result: typing.Union[typing.List[_pow_1__T], jpype.JArray], resultOffset: int) -> None:
         """
         Compute power of a double to a derivative structure.
         
@@ -1023,7 +1024,7 @@ class DSCompiler:
     @typing.overload
     def pow(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, double2: float, doubleArray2: typing.Union[typing.List[float], jpype.JArray], int2: int) -> None: ...
     @typing.overload
-    def pow(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, doubleArray2: typing.Union[typing.List[float], jpype.JArray], int2: int, doubleArray3: typing.Union[typing.List[float], jpype.JArray], int3: int) -> None: ...
+    def pow(self, x: typing.Union[typing.List[float], jpype.JArray], xOffset: int, y: typing.Union[typing.List[float], jpype.JArray], yOffset: int, result: typing.Union[typing.List[float], jpype.JArray], resultOffset: int) -> None: ...
     @typing.overload
     def pow(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int, doubleArray2: typing.Union[typing.List[float], jpype.JArray], int3: int) -> None: ...
     @typing.overload
@@ -1031,7 +1032,7 @@ class DSCompiler:
     @typing.overload
     def pow(self, tArray: typing.Union[typing.List[_pow_6__T], jpype.JArray], int: int, int2: int, tArray2: typing.Union[typing.List[_pow_6__T], jpype.JArray], int3: int) -> None: ...
     @typing.overload
-    def pow(self, tArray: typing.Union[typing.List[_pow_7__T], jpype.JArray], int: int, tArray2: typing.Union[typing.List[_pow_7__T], jpype.JArray], int2: int, tArray3: typing.Union[typing.List[_pow_7__T], jpype.JArray], int3: int) -> None: ...
+    def pow(self, x: typing.Union[typing.List[_pow_7__T], jpype.JArray], xOffset: int, y: typing.Union[typing.List[_pow_7__T], jpype.JArray], yOffset: int, result: typing.Union[typing.List[_pow_7__T], jpype.JArray], resultOffset: int) -> None: ...
     _rebase_1__T = typing.TypeVar('_rebase_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def rebase(self, ds: typing.Union[typing.List[float], jpype.JArray], dsOffset: int, baseCompiler: 'DSCompiler', p: typing.Union[typing.List[float], jpype.JArray], result: typing.Union[typing.List[float], jpype.JArray], resultOffset: int) -> None:
@@ -1411,16 +1412,14 @@ class DSCompiler:
     _taylor_1__T = typing.TypeVar('_taylor_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _taylor_2__T = typing.TypeVar('_taylor_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def taylor(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, *double2: float) -> float: ...
+    def taylor(self, ds: typing.Union[typing.List[float], jpype.JArray], dsOffset: int, *delta: float) -> float: ...
     @typing.overload
-    def taylor(self, tArray: typing.Union[typing.List[_taylor_1__T], jpype.JArray], int: int, *t2: _taylor_1__T) -> _taylor_1__T: ...
+    def taylor(self, ds: typing.Union[typing.List[_taylor_1__T], jpype.JArray], dsOffset: int, *delta: _taylor_1__T) -> _taylor_1__T: ...
     @typing.overload
-    def taylor(self, tArray: typing.Union[typing.List[_taylor_2__T], jpype.JArray], int: int, *double: float) -> _taylor_2__T: ...
+    def taylor(self, ds: typing.Union[typing.List[_taylor_2__T], jpype.JArray], dsOffset: int, *delta: float) -> _taylor_2__T: ...
 
 class DSFactory(java.io.Serializable):
     """
-    implements Serializable
-    
     Factory for DerivativeStructure.
     
     This class is a factory for DerivativeStructure instances.
@@ -1430,8 +1429,8 @@ class DSFactory(java.io.Serializable):
     Since:
         1.1
     
-          - DerivativeStructure
-          - serialized
+    Also see:
+        DerivativeStructure, serialized
     """
     def __init__(self, parameters: int, order: int):
         """
@@ -1459,8 +1458,8 @@ class DSFactory(java.io.Serializable):
                 the compiler
             MathIllegalArgumentException: if order is too large
         
-              - getAllDerivatives
-        
+        Also see:
+            getAllDerivatives
         
         
         """
@@ -1536,10 +1535,11 @@ class DifferentialAlgebra:
     Since:
         3.1
     
-          - Derivative
-          - TaylorMap
-          - FieldDerivative
-          - FieldTaylorMap
+    Also see:
+        Derivative,
+        TaylorMap,
+        FieldDerivative,
+        FieldTaylorMap
     """
     def getFreeParameters(self) -> int:
         """
@@ -1572,7 +1572,8 @@ class FDSFactory(typing.Generic[_FDSFactory__T]):
     
     Instances of this class are guaranteed to be immutable.
     
-          - FieldDerivativeStructure
+    Also see:
+        FieldDerivativeStructure
     """
     def __init__(self, valueField: org.hipparchus.Field[_FDSFactory__T], parameters: int, order: int):
         """
@@ -1587,13 +1588,13 @@ class FDSFactory(typing.Generic[_FDSFactory__T]):
         """
         ...
     @typing.overload
-    def build(self, *t: _FDSFactory__T) -> 'FieldDerivativeStructure'[_FDSFactory__T]: ...
+    def build(self, *derivatives: _FDSFactory__T) -> 'FieldDerivativeStructure'[_FDSFactory__T]: ...
     @typing.overload
-    def build(self, *double: float) -> 'FieldDerivativeStructure'[_FDSFactory__T]: ...
+    def build(self, *derivatives: float) -> 'FieldDerivativeStructure'[_FDSFactory__T]: ...
     @typing.overload
-    def constant(self, double: float) -> 'FieldDerivativeStructure'[_FDSFactory__T]: ...
+    def constant(self, value: float) -> 'FieldDerivativeStructure'[_FDSFactory__T]: ...
     @typing.overload
-    def constant(self, t: _FDSFactory__T) -> 'FieldDerivativeStructure'[_FDSFactory__T]: ...
+    def constant(self, value: _FDSFactory__T) -> 'FieldDerivativeStructure'[_FDSFactory__T]: ...
     def getCompiler(self) -> DSCompiler:
         """
         Get the compiler for the current dimensions.
@@ -1626,9 +1627,9 @@ class FDSFactory(typing.Generic[_FDSFactory__T]):
         """
         ...
     @typing.overload
-    def variable(self, int: int, double: float) -> 'FieldDerivativeStructure'[_FDSFactory__T]: ...
+    def variable(self, index: int, value: float) -> 'FieldDerivativeStructure'[_FDSFactory__T]: ...
     @typing.overload
-    def variable(self, int: int, t: _FDSFactory__T) -> 'FieldDerivativeStructure'[_FDSFactory__T]: ...
+    def variable(self, index: int, value: _FDSFactory__T) -> 'FieldDerivativeStructure'[_FDSFactory__T]: ...
     class DerivativeField(org.hipparchus.Field['FieldDerivativeStructure'[_FDSFactory__DerivativeField__T]], typing.Generic[_FDSFactory__DerivativeField__T]):
         def equals(self, object: typing.Any) -> bool: ...
         def getOne(self) -> 'FieldDerivativeStructure'[_FDSFactory__DerivativeField__T]: ...
@@ -1640,16 +1641,14 @@ class FDSFactory(typing.Generic[_FDSFactory__T]):
 _FieldGradientField__T = typing.TypeVar('_FieldGradientField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldGradientField(org.hipparchus.Field['FieldGradient'[_FieldGradientField__T]], typing.Generic[_FieldGradientField__T]):
     """
-    implements Field<FieldGradient<T>>
-    
     Field for Gradient instances.
     
     Since:
         1.7
     """
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -1712,7 +1711,7 @@ class FieldGradientField(org.hipparchus.Field['FieldGradient'[_FieldGradientFiel
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -1721,16 +1720,14 @@ class FieldGradientField(org.hipparchus.Field['FieldGradient'[_FieldGradientFiel
 _FieldUnivariateDerivative1Field__T = typing.TypeVar('_FieldUnivariateDerivative1Field__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldUnivariateDerivative1Field(org.hipparchus.Field['FieldUnivariateDerivative1'[_FieldUnivariateDerivative1Field__T]], typing.Generic[_FieldUnivariateDerivative1Field__T]):
     """
-    implements Field<FieldUnivariateDerivative1<T>>
-    
     Field for FieldUnivariateDerivative1 instances.
     
     Since:
         1.7
     """
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -1792,7 +1789,7 @@ class FieldUnivariateDerivative1Field(org.hipparchus.Field['FieldUnivariateDeriv
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -1801,16 +1798,14 @@ class FieldUnivariateDerivative1Field(org.hipparchus.Field['FieldUnivariateDeriv
 _FieldUnivariateDerivative2Field__T = typing.TypeVar('_FieldUnivariateDerivative2Field__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldUnivariateDerivative2Field(org.hipparchus.Field['FieldUnivariateDerivative2'[_FieldUnivariateDerivative2Field__T]], typing.Generic[_FieldUnivariateDerivative2Field__T]):
     """
-    implements Field<FieldUnivariateDerivative2<T>>
-    
     Field for FieldUnivariateDerivative2 instances.
     
     Since:
         1.7
     """
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -1872,7 +1867,7 @@ class FieldUnivariateDerivative2Field(org.hipparchus.Field['FieldUnivariateDeriv
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -1880,16 +1875,14 @@ class FieldUnivariateDerivative2Field(org.hipparchus.Field['FieldUnivariateDeriv
 
 class GradientField(org.hipparchus.Field['Gradient']):
     """
-    implements Field<Gradient>
-    
     Field for Gradient instances.
     
     Since:
         1.7
     """
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -1950,7 +1943,7 @@ class GradientField(org.hipparchus.Field['Gradient']):
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -1958,8 +1951,6 @@ class GradientField(org.hipparchus.Field['Gradient']):
 
 class GradientFunction(org.hipparchus.analysis.MultivariateVectorFunction):
     """
-    implements MultivariateVectorFunction
-    
     Class representing the gradient of a multivariate function.
     
     The vectorial components of the function represent the derivatives with respect to each function parameters.
@@ -1992,8 +1983,6 @@ class GradientFunction(org.hipparchus.analysis.MultivariateVectorFunction):
 
 class JacobianFunction(org.hipparchus.analysis.MultivariateMatrixFunction):
     """
-    implements MultivariateMatrixFunction
-    
     Class representing the Jacobian of a multivariate vector function.
     
     The rows iterate on the model functions while the columns iterate on the parameters; thus, the numbers of rows is equal to the dimension of the underlying function vector value and the number of columns is equal to the number of free parameters of the underlying function.
@@ -2029,23 +2018,21 @@ class MultivariateDifferentiableFunction(org.hipparchus.analysis.MultivariateFun
     Extension of MultivariateFunction representing a multivariate differentiable real function.
     """
     @typing.overload
-    def value(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def value(self, point: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def value(self, derivativeStructureArray: typing.Union[typing.List['DerivativeStructure'], jpype.JArray]) -> 'DerivativeStructure': ...
+    def value(self, point: typing.Union[typing.List['DerivativeStructure'], jpype.JArray]) -> 'DerivativeStructure': ...
 
 class MultivariateDifferentiableVectorFunction(org.hipparchus.analysis.MultivariateVectorFunction):
     """
     Extension of MultivariateVectorFunction representing a multivariate differentiable vectorial function.
     """
     @typing.overload
-    def value(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
+    def value(self, point: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def value(self, derivativeStructureArray: typing.Union[typing.List['DerivativeStructure'], jpype.JArray]) -> typing.MutableSequence['DerivativeStructure']: ...
+    def value(self, point: typing.Union[typing.List['DerivativeStructure'], jpype.JArray]) -> typing.MutableSequence['DerivativeStructure']: ...
 
 class UnivariateDerivative1Field(org.hipparchus.Field['UnivariateDerivative1'], java.io.Serializable):
     """
-    implements Field<UnivariateDerivative1>, Serializable
-    
     Field for UnivariateDerivative1 instances.
     
     This class is a singleton.
@@ -2053,11 +2040,12 @@ class UnivariateDerivative1Field(org.hipparchus.Field['UnivariateDerivative1'], 
     Since:
         1.7
     
-          - serialized
+    Also see:
+        serialized
     """
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -2115,7 +2103,7 @@ class UnivariateDerivative1Field(org.hipparchus.Field['UnivariateDerivative1'], 
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -2123,8 +2111,6 @@ class UnivariateDerivative1Field(org.hipparchus.Field['UnivariateDerivative1'], 
 
 class UnivariateDerivative2Field(org.hipparchus.Field['UnivariateDerivative2'], java.io.Serializable):
     """
-    implements Field<UnivariateDerivative2>, Serializable
-    
     Field for UnivariateDerivative2 instances.
     
     This class is a singleton.
@@ -2132,11 +2118,12 @@ class UnivariateDerivative2Field(org.hipparchus.Field['UnivariateDerivative2'], 
     Since:
         1.7
     
-          - serialized
+    Also see:
+        serialized
     """
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -2194,7 +2181,7 @@ class UnivariateDerivative2Field(org.hipparchus.Field['UnivariateDerivative2'], 
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -2206,14 +2193,15 @@ class UnivariateDifferentiableFunction(org.hipparchus.analysis.UnivariateFunctio
     
     This interface represents a simple function which computes both the value and the first derivative of a mathematical function. The derivative is computed with respect to the input variable.
     
-          - UnivariateDifferentiableFunction
-          - UnivariateFunctionDifferentiator
+    Also see:
+        UnivariateDifferentiableFunction,
+        UnivariateFunctionDifferentiator
     """
     _value_1__T = typing.TypeVar('_value_1__T', bound='Derivative')  # <T>
     @typing.overload
-    def value(self, double: float) -> float: ...
+    def value(self, x: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T: ...
+    def value(self, x: _value_1__T) -> _value_1__T: ...
 
 class UnivariateDifferentiableMatrixFunction(org.hipparchus.analysis.UnivariateMatrixFunction):
     """
@@ -2221,9 +2209,9 @@ class UnivariateDifferentiableMatrixFunction(org.hipparchus.analysis.UnivariateM
     """
     _value_1__T = typing.TypeVar('_value_1__T', bound='Derivative')  # <T>
     @typing.overload
-    def value(self, double: float) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
+    def value(self, x: float) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> typing.MutableSequence[typing.MutableSequence[_value_1__T]]: ...
+    def value(self, x: _value_1__T) -> typing.MutableSequence[typing.MutableSequence[_value_1__T]]: ...
 
 class UnivariateDifferentiableVectorFunction(org.hipparchus.analysis.UnivariateVectorFunction):
     """
@@ -2231,9 +2219,9 @@ class UnivariateDifferentiableVectorFunction(org.hipparchus.analysis.UnivariateV
     """
     _value_1__T = typing.TypeVar('_value_1__T', bound='Derivative')  # <T>
     @typing.overload
-    def value(self, double: float) -> typing.MutableSequence[float]: ...
+    def value(self, x: float) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> typing.MutableSequence[_value_1__T]: ...
+    def value(self, x: _value_1__T) -> typing.MutableSequence[_value_1__T]: ...
 
 class UnivariateFunctionDifferentiator:
     """
@@ -2326,7 +2314,7 @@ class Derivative(org.hipparchus.CalculusFieldElement[_Derivative__T], Differenti
         """
         ...
     @typing.overload
-    def add(self, double: float) -> _Derivative__T: ...
+    def add(self, a: float) -> _Derivative__T: ...
     def compose(self, *f: float) -> _Derivative__T:
         """
         Compute composition of the instance by a univariate function.
@@ -2387,8 +2375,8 @@ class Derivative(org.hipparchus.CalculusFieldElement[_Derivative__T], Differenti
             MathIllegalArgumentException: if the numbers of variables does not match the instance
             MathIllegalArgumentException: if sum of derivation orders is larger than the instance limits
         
-              - getValue
-        
+        Also see:
+            getValue
         
         
         """
@@ -2444,9 +2432,9 @@ class Derivative(org.hipparchus.CalculusFieldElement[_Derivative__T], Differenti
         """
         ...
     @typing.overload
-    def pow(self, double: float) -> _Derivative__T: ...
+    def pow(self, e: float) -> _Derivative__T: ...
     @typing.overload
-    def pow(self, int: int) -> _Derivative__T: ...
+    def pow(self, e: int) -> _Derivative__T: ...
     @typing.overload
     def remainder(self, a: _Derivative__T) -> _Derivative__T:
         """
@@ -2464,7 +2452,7 @@ class Derivative(org.hipparchus.CalculusFieldElement[_Derivative__T], Differenti
         """
         ...
     @typing.overload
-    def remainder(self, double: float) -> _Derivative__T: ...
+    def remainder(self, a: float) -> _Derivative__T: ...
     def sinh(self) -> _Derivative__T:
         """
         Hyperbolic sine operation.
@@ -2494,7 +2482,7 @@ class Derivative(org.hipparchus.CalculusFieldElement[_Derivative__T], Differenti
         """
         ...
     @typing.overload
-    def subtract(self, t: _Derivative__T) -> _Derivative__T: ...
+    def subtract(self, a: _Derivative__T) -> _Derivative__T: ...
     def withValue(self, value: float) -> _Derivative__T:
         """
         Create a new object with new value (zeroth-order derivative, as passed as input) and same derivatives of order one and above.
@@ -2523,7 +2511,8 @@ class FieldDerivative(org.hipparchus.CalculusFieldElement[_FieldDerivative__T], 
     Since:
         1.7
     
-          - Derivative
+    Also see:
+        Derivative
     """
     def acos(self) -> _FieldDerivative__T:
         """
@@ -2555,9 +2544,9 @@ class FieldDerivative(org.hipparchus.CalculusFieldElement[_FieldDerivative__T], 
         """
         ...
     @typing.overload
-    def add(self, double: float) -> _FieldDerivative__T: ...
+    def add(self, a: float) -> _FieldDerivative__T: ...
     @typing.overload
-    def add(self, s2: _FieldDerivative__S) -> _FieldDerivative__T: ...
+    def add(self, a: _FieldDerivative__S) -> _FieldDerivative__T: ...
     def ceil(self) -> _FieldDerivative__T:
         """
         Get the smallest whole number larger than instance.
@@ -2622,8 +2611,8 @@ class FieldDerivative(org.hipparchus.CalculusFieldElement[_FieldDerivative__T], 
             MathIllegalArgumentException: if the numbers of variables does not match the instance
             MathIllegalArgumentException: if sum of derivation orders is larger than the instance limits
         
-              - getValue
-        
+        Also see:
+            getValue
         
         
         """
@@ -2682,7 +2671,7 @@ class FieldDerivative(org.hipparchus.CalculusFieldElement[_FieldDerivative__T], 
         """
         ...
     @typing.overload
-    def newInstance(self, s2: _FieldDerivative__S) -> _FieldDerivative__T: ...
+    def newInstance(self, value: _FieldDerivative__S) -> _FieldDerivative__T: ...
     @typing.overload
     def pow(self, e: float) -> _FieldDerivative__T:
         """
@@ -2700,9 +2689,9 @@ class FieldDerivative(org.hipparchus.CalculusFieldElement[_FieldDerivative__T], 
         """
         ...
     @typing.overload
-    def pow(self, int: int) -> _FieldDerivative__T: ...
+    def pow(self, e: int) -> _FieldDerivative__T: ...
     @typing.overload
-    def pow(self, t: _FieldDerivative__T) -> _FieldDerivative__T: ...
+    def pow(self, e: _FieldDerivative__T) -> _FieldDerivative__T: ...
     def rint(self) -> _FieldDerivative__T:
         """
         Get the whole number that is the nearest to the instance, or the even one if x is exactly half way between two integers.
@@ -2757,9 +2746,9 @@ class FieldDerivative(org.hipparchus.CalculusFieldElement[_FieldDerivative__T], 
         """
         ...
     @typing.overload
-    def subtract(self, t: _FieldDerivative__T) -> _FieldDerivative__T: ...
+    def subtract(self, a: _FieldDerivative__T) -> _FieldDerivative__T: ...
     @typing.overload
-    def subtract(self, s2: _FieldDerivative__S) -> _FieldDerivative__T: ...
+    def subtract(self, a: _FieldDerivative__S) -> _FieldDerivative__T: ...
     def ulp(self) -> _FieldDerivative__T:
         """
         Compute least significant bit (Unit in Last Position) for a number.
@@ -2794,8 +2783,6 @@ class FieldDerivative(org.hipparchus.CalculusFieldElement[_FieldDerivative__T], 
 _FieldTaylorMap__T = typing.TypeVar('_FieldTaylorMap__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTaylorMap(DifferentialAlgebra, typing.Generic[_FieldTaylorMap__T]):
     """
-    implements DifferentialAlgebra
-    
     Container for a Taylor map.
     
     A Taylor map is a set of n DerivativeStructure \((f_1, f_2, \ldots, f_n)\) depending on m parameters \((p_1, p_2, \ldots, p_m)\), with positive n and m.
@@ -2804,9 +2791,9 @@ class FieldTaylorMap(DifferentialAlgebra, typing.Generic[_FieldTaylorMap__T]):
         2.2
     """
     @typing.overload
-    def __init__(self, tArray: typing.Union[typing.List[_FieldTaylorMap__T], jpype.JArray], fieldDerivativeStructureArray: typing.Union[typing.List['FieldDerivativeStructure'[_FieldTaylorMap__T]], jpype.JArray]): ...
+    def __init__(self, point: typing.Union[typing.List[_FieldTaylorMap__T], jpype.JArray], functions: typing.Union[typing.List['FieldDerivativeStructure'[_FieldTaylorMap__T]], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldTaylorMap__T], int: int, int2: int, int3: int): ...
+    def __init__(self, valueField: org.hipparchus.Field[_FieldTaylorMap__T], parameters: int, order: int, nbFunctions: int): ...
     def compose(self, other: 'FieldTaylorMap'[_FieldTaylorMap__T]) -> 'FieldTaylorMap'[_FieldTaylorMap__T]:
         """
         Compose the instance with another Taylor map as \(\mathrm{this} \circ \mathrm{other}\).
@@ -2892,14 +2879,14 @@ class FieldTaylorMap(DifferentialAlgebra, typing.Generic[_FieldTaylorMap__T]):
         Returns:
             inverted map
         
-              - S1076
-        
+        Also see:
+            S1076
         
         
         """
         ...
     @typing.overload
-    def value(self, *double: float) -> typing.MutableSequence[_FieldTaylorMap__T]:
+    def value(self, *deltaP: float) -> typing.MutableSequence[_FieldTaylorMap__T]:
         """
         Evaluate Taylor expansion of the map at some offset.
         
@@ -2921,12 +2908,10 @@ class FieldTaylorMap(DifferentialAlgebra, typing.Generic[_FieldTaylorMap__T]):
         """
         ...
     @typing.overload
-    def value(self, *t: _FieldTaylorMap__T) -> typing.MutableSequence[_FieldTaylorMap__T]: ...
+    def value(self, *deltaP: _FieldTaylorMap__T) -> typing.MutableSequence[_FieldTaylorMap__T]: ...
 
 class FiniteDifferencesDifferentiator(UnivariateFunctionDifferentiator, UnivariateVectorFunctionDifferentiator, UnivariateMatrixFunctionDifferentiator, java.io.Serializable):
     """
-    implements UnivariateFunctionDifferentiator, UnivariateVectorFunctionDifferentiator, UnivariateMatrixFunctionDifferentiator, Serializable
-    
     Univariate functions differentiator using finite differences.
     
     This class creates some wrapper objects around regular UnivariateFunction (or UnivariateVectorFunction or UnivariateMatrixFunction). These wrapper objects compute derivatives in addition to function values.
@@ -2942,14 +2927,15 @@ class FiniteDifferencesDifferentiator(UnivariateFunctionDifferentiator, Univaria
     
     This example shows that the small step size is really bad, even simply for second order derivative!
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
-    def __init__(self, int: int, double: float): ...
+    def __init__(self, nbPoints: int, stepSize: float): ...
     @typing.overload
-    def __init__(self, int: int, double: float, double2: float, double3: float): ...
+    def __init__(self, nbPoints: int, stepSize: float, tLower: float, tUpper: float): ...
     @typing.overload
-    def differentiate(self, univariateFunction: typing.Union[org.hipparchus.analysis.UnivariateFunction, typing.Callable]) -> UnivariateDifferentiableFunction:
+    def differentiate(self, function: typing.Union[org.hipparchus.analysis.UnivariateFunction, typing.Callable]) -> UnivariateDifferentiableFunction:
         """
         Create an implementation of a UnivariateDifferentiableFunction from a regular UnivariateFunction.
         
@@ -2991,9 +2977,9 @@ class FiniteDifferencesDifferentiator(UnivariateFunctionDifferentiator, Univaria
         """
         ...
     @typing.overload
-    def differentiate(self, univariateMatrixFunction: typing.Union[org.hipparchus.analysis.UnivariateMatrixFunction, typing.Callable]) -> UnivariateDifferentiableMatrixFunction: ...
+    def differentiate(self, function: typing.Union[org.hipparchus.analysis.UnivariateMatrixFunction, typing.Callable]) -> UnivariateDifferentiableMatrixFunction: ...
     @typing.overload
-    def differentiate(self, univariateVectorFunction: typing.Union[org.hipparchus.analysis.UnivariateVectorFunction, typing.Callable]) -> UnivariateDifferentiableVectorFunction: ...
+    def differentiate(self, function: typing.Union[org.hipparchus.analysis.UnivariateVectorFunction, typing.Callable]) -> UnivariateDifferentiableVectorFunction: ...
     def getNbPoints(self) -> int:
         """
         Get the number of points to use.
@@ -3017,8 +3003,6 @@ class FiniteDifferencesDifferentiator(UnivariateFunctionDifferentiator, Univaria
 
 class TaylorMap(DifferentialAlgebra):
     """
-    implements DifferentialAlgebra
-    
     Container for a Taylor map.
     
     A Taylor map is a set of n DerivativeStructure \((f_1, f_2, \ldots, f_n)\) depending on m parameters \((p_1, p_2, \ldots, p_m)\), with positive n and m.
@@ -3027,9 +3011,9 @@ class TaylorMap(DifferentialAlgebra):
         2.2
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], derivativeStructureArray: typing.Union[typing.List['DerivativeStructure'], jpype.JArray]): ...
+    def __init__(self, point: typing.Union[typing.List[float], jpype.JArray], functions: typing.Union[typing.List['DerivativeStructure'], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, int3: int): ...
+    def __init__(self, parameters: int, order: int, nbFunctions: int): ...
     def compose(self, other: 'TaylorMap') -> 'TaylorMap':
         """
         Compose the instance with another Taylor map as \(\mathrm{this} \circ \mathrm{other}\).
@@ -3115,8 +3099,8 @@ class TaylorMap(DifferentialAlgebra):
         Returns:
             inverted map
         
-              - S1076
-        
+        Also see:
+            S1076
         
         
         """
@@ -3143,10 +3127,11 @@ class Derivative1(Derivative[_Derivative1__T], typing.Generic[_Derivative1__T]):
     Since:
         3.1
     
-          - Derivative
-          - UnivariateDerivative1
-          - Gradient
-          - SparseGradient
+    Also see:
+        Derivative,
+        UnivariateDerivative1,
+        Gradient,
+        SparseGradient
     """
     def acos(self) -> _Derivative1__T:
         """
@@ -3250,7 +3235,7 @@ class Derivative1(Derivative[_Derivative1__T], typing.Generic[_Derivative1__T]):
         """
         ...
     @typing.overload
-    def compose(self, double: float, double2: float) -> _Derivative1__T: ...
+    def compose(self, f0: float, f1: float) -> _Derivative1__T: ...
     def cos(self) -> _Derivative1__T:
         """
         Cosine operation.
@@ -3479,8 +3464,6 @@ class Derivative1(Derivative[_Derivative1__T], typing.Generic[_Derivative1__T]):
 
 class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializable):
     """
-    implements Derivative<DerivativeStructure>, Serializable
-    
     Class representing both the value and the differentials of a function.
     
     This class is the workhorse of the differentiation package.
@@ -3495,9 +3478,9 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
     
     Instances of this class are guaranteed to be immutable.
     
-          - DSCompiler
-          - FieldDerivativeStructure
-          - serialized
+    Also see:
+        DSCompiler,
+        FieldDerivativeStructure, serialized
     """
     def abs(self) -> 'DerivativeStructure':
         """
@@ -3538,9 +3521,9 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         """
         ...
     @typing.overload
-    def add(self, double: float) -> org.hipparchus.CalculusFieldElement: ...
+    def add(self, a: float) -> org.hipparchus.CalculusFieldElement: ...
     @typing.overload
-    def add(self, derivativeStructure: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def add(self, a: 'DerivativeStructure') -> 'DerivativeStructure': ...
     def asin(self) -> 'DerivativeStructure':
         """
         Arc sine operation.
@@ -3578,12 +3561,12 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         """
         ...
     @typing.overload
-    def atan2(self, derivativeStructure: 'DerivativeStructure') -> 'DerivativeStructure':
+    def atan2(self, x: 'DerivativeStructure') -> 'DerivativeStructure':
         """
         Raises:
             MathIllegalArgumentException: if number of free parameters or orders are inconsistent
         
-        public static DerivativeStructure atan2(DerivativeStructure y, DerivativeStructure x) throws MathIllegalArgumentException
+        public static DerivativeStructure atan2 (DerivativeStructure y, DerivativeStructure x) throws MathIllegalArgumentException
         
         Two arguments arc tangent operation.
         
@@ -3600,7 +3583,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         ...
     @typing.overload
     @staticmethod
-    def atan2(derivativeStructure: 'DerivativeStructure', derivativeStructure2: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def atan2(y: 'DerivativeStructure', x: 'DerivativeStructure') -> 'DerivativeStructure': ...
     def atanh(self) -> 'DerivativeStructure':
         """
         Inverse hyperbolic tangent operation.
@@ -3636,7 +3619,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         """
         ...
     @typing.overload
-    def copySign(self, double: float) -> 'DerivativeStructure':
+    def copySign(self, sign: float) -> 'DerivativeStructure':
         """
         Returns the instance with the sign of the argument. A NaN sign argument is treated as positive.
         
@@ -3662,7 +3645,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         """
         ...
     @typing.overload
-    def copySign(self, derivativeStructure: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def copySign(self, sign: 'DerivativeStructure') -> 'DerivativeStructure': ...
     def cos(self) -> 'DerivativeStructure':
         """
         Cosine operation.
@@ -3709,7 +3692,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         """
         ...
     @typing.overload
-    def divide(self, double: float) -> 'DerivativeStructure':
+    def divide(self, a: float) -> 'DerivativeStructure':
         """
         '÷' operator.
         
@@ -3721,7 +3704,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         Returns:
             this÷a
         
-        public DerivativeStructure divide(DerivativeStructure a) throws MathIllegalArgumentException
+        public DerivativeStructure divide (DerivativeStructure a) throws MathIllegalArgumentException
         
         Compute this ÷ a.
         
@@ -3742,14 +3725,14 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         """
         ...
     @typing.overload
-    def divide(self, derivativeStructure: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def divide(self, a: 'DerivativeStructure') -> 'DerivativeStructure': ...
     def equals(self, other: typing.Any) -> bool:
         """
         Test for the equality of two derivative structures.
         
         Derivative structures are considered equal if they have the same number of free parameters, the same derivation order, and the same derivatives.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality to this
@@ -3869,10 +3852,9 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         
         Raises:
             MathIllegalArgumentException: if the numbers of variables does not match the instance
-            MathIllegalArgumentException: if sum of derivation orders is larger than the instance limits
         
-              - getValue
-        
+        Also see:
+            getValue
         
         
         """
@@ -3900,8 +3882,8 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         Returns:
             value part of the derivative structure
         
-              - getPartialDerivative
-        
+        Also see:
+            getPartialDerivative
         
         
         """
@@ -3910,7 +3892,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         """
         Get a hashCode for the derivative structure.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -3919,10 +3901,10 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         """
         ...
     @typing.overload
-    def hypot(self, derivativeStructure: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def hypot(self, y: 'DerivativeStructure') -> 'DerivativeStructure': ...
     @typing.overload
     @staticmethod
-    def hypot(derivativeStructure: 'DerivativeStructure', derivativeStructure2: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def hypot(x: 'DerivativeStructure', y: 'DerivativeStructure') -> 'DerivativeStructure': ...
     def integrate(self, varIndex: int, integrationOrder: int) -> 'DerivativeStructure':
         """
         Integrate w.r.t. one independent variable.
@@ -3943,21 +3925,21 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, derivativeStructure: 'DerivativeStructure', double2: float, derivativeStructure2: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def linearCombination(self, a1: float, b1: 'DerivativeStructure', a2: float, b2: 'DerivativeStructure') -> 'DerivativeStructure': ...
     @typing.overload
-    def linearCombination(self, double: float, derivativeStructure: 'DerivativeStructure', double2: float, derivativeStructure2: 'DerivativeStructure', double3: float, derivativeStructure3: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def linearCombination(self, a1: float, b1: 'DerivativeStructure', a2: float, b2: 'DerivativeStructure', a3: float, b3: 'DerivativeStructure') -> 'DerivativeStructure': ...
     @typing.overload
-    def linearCombination(self, double: float, derivativeStructure: 'DerivativeStructure', double2: float, derivativeStructure2: 'DerivativeStructure', double3: float, derivativeStructure3: 'DerivativeStructure', double4: float, derivativeStructure4: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def linearCombination(self, a1: float, b1: 'DerivativeStructure', a2: float, b2: 'DerivativeStructure', a3: float, b3: 'DerivativeStructure', a4: float, b4: 'DerivativeStructure') -> 'DerivativeStructure': ...
     @typing.overload
-    def linearCombination(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], derivativeStructureArray: typing.Union[typing.List['DerivativeStructure'], jpype.JArray]) -> 'DerivativeStructure': ...
+    def linearCombination(self, a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List['DerivativeStructure'], jpype.JArray]) -> 'DerivativeStructure': ...
     @typing.overload
-    def linearCombination(self, derivativeStructure: 'DerivativeStructure', derivativeStructure2: 'DerivativeStructure', derivativeStructure3: 'DerivativeStructure', derivativeStructure4: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def linearCombination(self, a1: 'DerivativeStructure', b1: 'DerivativeStructure', a2: 'DerivativeStructure', b2: 'DerivativeStructure') -> 'DerivativeStructure': ...
     @typing.overload
-    def linearCombination(self, derivativeStructure: 'DerivativeStructure', derivativeStructure2: 'DerivativeStructure', derivativeStructure3: 'DerivativeStructure', derivativeStructure4: 'DerivativeStructure', derivativeStructure5: 'DerivativeStructure', derivativeStructure6: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def linearCombination(self, a1: 'DerivativeStructure', b1: 'DerivativeStructure', a2: 'DerivativeStructure', b2: 'DerivativeStructure', a3: 'DerivativeStructure', b3: 'DerivativeStructure') -> 'DerivativeStructure': ...
     @typing.overload
-    def linearCombination(self, derivativeStructure: 'DerivativeStructure', derivativeStructure2: 'DerivativeStructure', derivativeStructure3: 'DerivativeStructure', derivativeStructure4: 'DerivativeStructure', derivativeStructure5: 'DerivativeStructure', derivativeStructure6: 'DerivativeStructure', derivativeStructure7: 'DerivativeStructure', derivativeStructure8: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def linearCombination(self, a1: 'DerivativeStructure', b1: 'DerivativeStructure', a2: 'DerivativeStructure', b2: 'DerivativeStructure', a3: 'DerivativeStructure', b3: 'DerivativeStructure', a4: 'DerivativeStructure', b4: 'DerivativeStructure') -> 'DerivativeStructure': ...
     @typing.overload
-    def linearCombination(self, derivativeStructureArray: typing.Union[typing.List['DerivativeStructure'], jpype.JArray], derivativeStructureArray2: typing.Union[typing.List['DerivativeStructure'], jpype.JArray]) -> 'DerivativeStructure': ...
+    def linearCombination(self, a: typing.Union[typing.List['DerivativeStructure'], jpype.JArray], b: typing.Union[typing.List['DerivativeStructure'], jpype.JArray]) -> 'DerivativeStructure': ...
     def log(self) -> 'DerivativeStructure':
         """
         Natural logarithm.
@@ -3997,7 +3979,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         """
         ...
     @typing.overload
-    def multiply(self, int: int) -> org.hipparchus.FieldElement:
+    def multiply(self, a: int) -> org.hipparchus.FieldElement:
         """
         '×' operator.
         
@@ -4009,7 +3991,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         Returns:
             this×a
         
-        public DerivativeStructure multiply(DerivativeStructure a) throws MathIllegalArgumentException
+        public DerivativeStructure multiply (DerivativeStructure a) throws MathIllegalArgumentException
         
         Compute this × a.
         
@@ -4028,9 +4010,9 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         """
         ...
     @typing.overload
-    def multiply(self, double: float) -> 'DerivativeStructure': ...
+    def multiply(self, a: float) -> 'DerivativeStructure': ...
     @typing.overload
-    def multiply(self, derivativeStructure: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def multiply(self, a: 'DerivativeStructure') -> 'DerivativeStructure': ...
     def negate(self) -> 'DerivativeStructure':
         """
         Returns the additive inverse of this element.
@@ -4090,7 +4072,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         Returns:
             this :sup:`n`
         
-        public DerivativeStructure pow(DerivativeStructure e) throws MathIllegalArgumentException
+        public DerivativeStructure pow (DerivativeStructure e) throws MathIllegalArgumentException
         
         Power operation.
         
@@ -4116,7 +4098,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
     def pow(self, derivativeStructure: 'DerivativeStructure') -> 'DerivativeStructure': ...
     @typing.overload
     @staticmethod
-    def pow(double: float, derivativeStructure: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def pow(a: float, x: 'DerivativeStructure') -> 'DerivativeStructure': ...
     def rebase(self, *p: 'DerivativeStructure') -> 'DerivativeStructure':
         """
         Rebase instance with respect to low level parameter functions.
@@ -4152,9 +4134,9 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         """
         ...
     @typing.overload
-    def remainder(self, double: float) -> org.hipparchus.CalculusFieldElement: ...
+    def remainder(self, a: float) -> org.hipparchus.CalculusFieldElement: ...
     @typing.overload
-    def remainder(self, derivativeStructure: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def remainder(self, a: 'DerivativeStructure') -> 'DerivativeStructure': ...
     def rootN(self, n: int) -> 'DerivativeStructure':
         """
         N :sup:`th` root.
@@ -4260,9 +4242,9 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         """
         ...
     @typing.overload
-    def subtract(self, double: float) -> org.hipparchus.CalculusFieldElement: ...
+    def subtract(self, a: float) -> org.hipparchus.CalculusFieldElement: ...
     @typing.overload
-    def subtract(self, derivativeStructure: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def subtract(self, a: 'DerivativeStructure') -> 'DerivativeStructure': ...
     def tan(self) -> 'DerivativeStructure':
         """
         Tangent operation.
@@ -4354,10 +4336,11 @@ class FieldDerivative1(FieldDerivative[_FieldDerivative1__S, _FieldDerivative1__
     Since:
         3.1
     
-          - FieldDerivative
-          - FieldUnivariateDerivative1
-          - FieldGradient
-          - Derivative1
+    Also see:
+        FieldDerivative,
+        FieldUnivariateDerivative1,
+        FieldGradient,
+        Derivative1
     """
     def acos(self) -> _FieldDerivative1__T:
         """
@@ -4673,17 +4656,16 @@ class FieldDerivative1(FieldDerivative[_FieldDerivative1__S, _FieldDerivative1__
 _FieldDerivativeStructure__T = typing.TypeVar('_FieldDerivativeStructure__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]], typing.Generic[_FieldDerivativeStructure__T]):
     """
-    implements FieldDerivative<T,FieldDerivativeStructure<T>>
-    
     Class representing both the value and the differentials of a function.
     
     This class is similar to DerivativeStructure except function parameters and value can be any CalculusFieldElement.
     
     Instances of this class are guaranteed to be immutable.
     
-          - DerivativeStructure
-          - FDSFactory
-          - DSCompiler
+    Also see:
+        DerivativeStructure,
+        FDSFactory,
+        DSCompiler
     """
     def abs(self) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]:
         """
@@ -4724,11 +4706,11 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         """
         ...
     @typing.overload
-    def add(self, s2: org.hipparchus.CalculusFieldElement) -> _FieldDerivativeStructure__T: ...
+    def add(self, a: org.hipparchus.CalculusFieldElement) -> _FieldDerivativeStructure__T: ...
     @typing.overload
-    def add(self, double: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def add(self, a: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def add(self, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def add(self, a: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     def asin(self) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]:
         """
         Arc sine operation.
@@ -4767,12 +4749,12 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         ...
     _atan2_1__T = typing.TypeVar('_atan2_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def atan2(self, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]:
+    def atan2(self, x: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]:
         """
         Raises:
             MathIllegalArgumentException: if number of free parameters or orders are inconsistent
         
-        public static <T extends CalculusFieldElement<T>> FieldDerivativeStructure<T> atan2(FieldDerivativeStructure<T> y, FieldDerivativeStructure<T> x) throws MathIllegalArgumentException
+        public static <T extends CalculusFieldElement<T>> FieldDerivativeStructure<T> atan2 (FieldDerivativeStructure<T> y, FieldDerivativeStructure<T> x) throws MathIllegalArgumentException
         
         Two arguments arc tangent operation.
         
@@ -4789,7 +4771,7 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         ...
     @typing.overload
     @staticmethod
-    def atan2(fieldDerivativeStructure: 'FieldDerivativeStructure'[_atan2_1__T], fieldDerivativeStructure2: 'FieldDerivativeStructure'[_atan2_1__T]) -> 'FieldDerivativeStructure'[_atan2_1__T]: ...
+    def atan2(y: 'FieldDerivativeStructure'[_atan2_1__T], x: 'FieldDerivativeStructure'[_atan2_1__T]) -> 'FieldDerivativeStructure'[_atan2_1__T]: ...
     def atanh(self) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]:
         """
         Inverse hyperbolic tangent operation.
@@ -4803,15 +4785,15 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         """
         ...
     @typing.overload
-    def compose(self, *t: _FieldDerivativeStructure__T) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def compose(self, *f: _FieldDerivativeStructure__T) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def compose(self, *double: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def compose(self, *f: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def copySign(self, double: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def copySign(self, sign: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def copySign(self, t: _FieldDerivativeStructure__T) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def copySign(self, sign: _FieldDerivativeStructure__T) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def copySign(self, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def copySign(self, sign: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     def cos(self) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]:
         """
         Cosine operation.
@@ -4858,18 +4840,18 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         """
         ...
     @typing.overload
-    def divide(self, double: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def divide(self, a: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def divide(self, t: _FieldDerivativeStructure__T) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def divide(self, a: _FieldDerivativeStructure__T) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def divide(self, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def divide(self, a: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     def equals(self, other: typing.Any) -> bool:
         """
         Test for the equality of two derivative structures.
         
         Derivative structures are considered equal if they have the same number of free parameters, the same derivation order, and the same derivatives.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality to this
@@ -4989,10 +4971,9 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         
         Raises:
             MathIllegalArgumentException: if the numbers of variables does not match the instance
-            MathIllegalArgumentException: if sum of derivation orders is larger than the instance limits
         
-              - getValue
-        
+        Also see:
+            getValue
         
         
         """
@@ -5020,8 +5001,8 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         Returns:
             value part of the derivative structure
         
-              - getPartialDerivative
-        
+        Also see:
+            getPartialDerivative
         
         
         """
@@ -5030,7 +5011,7 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         """
         Get a hashCode for the derivative structure.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -5040,10 +5021,10 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         ...
     _hypot_1__T = typing.TypeVar('_hypot_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def hypot(self, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def hypot(self, y: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
     @staticmethod
-    def hypot(fieldDerivativeStructure: 'FieldDerivativeStructure'[_hypot_1__T], fieldDerivativeStructure2: 'FieldDerivativeStructure'[_hypot_1__T]) -> 'FieldDerivativeStructure'[_hypot_1__T]: ...
+    def hypot(x: 'FieldDerivativeStructure'[_hypot_1__T], y: 'FieldDerivativeStructure'[_hypot_1__T]) -> 'FieldDerivativeStructure'[_hypot_1__T]: ...
     def integrate(self, varIndex: int, integrationOrder: int) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]:
         """
         Integrate w.r.t. one independent variable.
@@ -5064,29 +5045,29 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], double2: float, fieldDerivativeStructure2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a2: float, b2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def linearCombination(self, double: float, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], double2: float, fieldDerivativeStructure2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], double3: float, fieldDerivativeStructure3: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a2: float, b2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a3: float, b3: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def linearCombination(self, double: float, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], double2: float, fieldDerivativeStructure2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], double3: float, fieldDerivativeStructure3: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], double4: float, fieldDerivativeStructure4: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a2: float, b2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a3: float, b3: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a4: float, b4: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def linearCombination(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], fieldDerivativeStructureArray: typing.Union[typing.List['FieldDerivativeStructure'[_FieldDerivativeStructure__T]], jpype.JArray]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def linearCombination(self, a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List['FieldDerivativeStructure'[_FieldDerivativeStructure__T]], jpype.JArray]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def linearCombination(self, t: _FieldDerivativeStructure__T, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], t2: _FieldDerivativeStructure__T, fieldDerivativeStructure2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def linearCombination(self, a1: _FieldDerivativeStructure__T, b1: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a2: _FieldDerivativeStructure__T, b2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def linearCombination(self, t: _FieldDerivativeStructure__T, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], t2: _FieldDerivativeStructure__T, fieldDerivativeStructure2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], t3: _FieldDerivativeStructure__T, fieldDerivativeStructure3: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def linearCombination(self, a1: _FieldDerivativeStructure__T, b1: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a2: _FieldDerivativeStructure__T, b2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a3: _FieldDerivativeStructure__T, b3: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def linearCombination(self, t: _FieldDerivativeStructure__T, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], t2: _FieldDerivativeStructure__T, fieldDerivativeStructure2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], t3: _FieldDerivativeStructure__T, fieldDerivativeStructure3: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], t4: _FieldDerivativeStructure__T, fieldDerivativeStructure4: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def linearCombination(self, a1: _FieldDerivativeStructure__T, b1: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a2: _FieldDerivativeStructure__T, b2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a3: _FieldDerivativeStructure__T, b3: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a4: _FieldDerivativeStructure__T, b4: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def linearCombination(self, tArray: typing.Union[typing.List[_FieldDerivativeStructure__T], jpype.JArray], fieldDerivativeStructureArray: typing.Union[typing.List['FieldDerivativeStructure'[_FieldDerivativeStructure__T]], jpype.JArray]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def linearCombination(self, a: typing.Union[typing.List[_FieldDerivativeStructure__T], jpype.JArray], b: typing.Union[typing.List['FieldDerivativeStructure'[_FieldDerivativeStructure__T]], jpype.JArray]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def linearCombination(self, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], fieldDerivativeStructure2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], fieldDerivativeStructure3: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], fieldDerivativeStructure4: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def linearCombination(self, a1: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], b1: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], b2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def linearCombination(self, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], fieldDerivativeStructure2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], fieldDerivativeStructure3: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], fieldDerivativeStructure4: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], fieldDerivativeStructure5: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], fieldDerivativeStructure6: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def linearCombination(self, a1: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], b1: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], b2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a3: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], b3: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def linearCombination(self, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], fieldDerivativeStructure2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], fieldDerivativeStructure3: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], fieldDerivativeStructure4: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], fieldDerivativeStructure5: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], fieldDerivativeStructure6: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], fieldDerivativeStructure7: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], fieldDerivativeStructure8: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def linearCombination(self, a1: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], b1: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], b2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a3: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], b3: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], a4: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], b4: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def linearCombination(self, fieldDerivativeStructureArray: typing.Union[typing.List['FieldDerivativeStructure'[_FieldDerivativeStructure__T]], jpype.JArray], fieldDerivativeStructureArray2: typing.Union[typing.List['FieldDerivativeStructure'[_FieldDerivativeStructure__T]], jpype.JArray]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def linearCombination(self, a: typing.Union[typing.List['FieldDerivativeStructure'[_FieldDerivativeStructure__T]], jpype.JArray], b: typing.Union[typing.List['FieldDerivativeStructure'[_FieldDerivativeStructure__T]], jpype.JArray]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     def log(self) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]:
         """
         Natural logarithm.
@@ -5126,13 +5107,13 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         """
         ...
     @typing.overload
-    def multiply(self, int: int) -> _FieldDerivativeStructure__T: ...
+    def multiply(self, a: int) -> _FieldDerivativeStructure__T: ...
     @typing.overload
-    def multiply(self, double: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def multiply(self, a: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def multiply(self, t: _FieldDerivativeStructure__T) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def multiply(self, a: _FieldDerivativeStructure__T) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def multiply(self, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def multiply(self, a: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     def negate(self) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]:
         """
         Returns the additive inverse of this element.
@@ -5146,9 +5127,9 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         """
         ...
     @typing.overload
-    def newInstance(self, double: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def newInstance(self, value: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def newInstance(self, t: _FieldDerivativeStructure__T) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def newInstance(self, value: _FieldDerivativeStructure__T) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     _pow_3__T = typing.TypeVar('_pow_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def pow(self, double: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
@@ -5158,7 +5139,7 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
     def pow(self, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
     @staticmethod
-    def pow(double: float, fieldDerivativeStructure: 'FieldDerivativeStructure'[_pow_3__T]) -> 'FieldDerivativeStructure'[_pow_3__T]:
+    def pow(a: float, x: 'FieldDerivativeStructure'[_pow_3__T]) -> 'FieldDerivativeStructure'[_pow_3__T]:
         """
         Compute a :sup:`x` where a is a double and x a FieldDerivativeStructure
         
@@ -5169,7 +5150,7 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         Returns:
             a :sup:`x`
         
-        public FieldDerivativeStructure<FieldDerivativeStructure> pow(double p)
+        public FieldDerivativeStructure<FieldDerivativeStructure> pow (double p)
         
         Power operation.
         
@@ -5181,7 +5162,7 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         Returns:
             this :sup:`p`
         
-        public FieldDerivativeStructure<FieldDerivativeStructure> pow(int n)
+        public FieldDerivativeStructure<FieldDerivativeStructure> pow (int n)
         
         Integer power operation.
         
@@ -5193,7 +5174,7 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         Returns:
             this :sup:`n`
         
-        public FieldDerivativeStructure<FieldDerivativeStructure> pow(FieldDerivativeStructure<FieldDerivativeStructure> e) throws MathIllegalArgumentException
+        public FieldDerivativeStructure<FieldDerivativeStructure> pow (FieldDerivativeStructure<FieldDerivativeStructure> e) throws MathIllegalArgumentException
         
         Power operation.
         
@@ -5248,11 +5229,11 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         """
         ...
     @typing.overload
-    def remainder(self, double: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def remainder(self, a: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def remainder(self, t: _FieldDerivativeStructure__T) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def remainder(self, a: _FieldDerivativeStructure__T) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def remainder(self, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def remainder(self, a: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     def rootN(self, n: int) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]:
         """
         N :sup:`th` root.
@@ -5358,11 +5339,11 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         """
         ...
     @typing.overload
-    def subtract(self, s2: org.hipparchus.CalculusFieldElement) -> _FieldDerivativeStructure__T: ...
+    def subtract(self, a: org.hipparchus.CalculusFieldElement) -> _FieldDerivativeStructure__T: ...
     @typing.overload
-    def subtract(self, double: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def subtract(self, a: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
-    def subtract(self, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def subtract(self, a: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     def tan(self) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]:
         """
         Tangent operation.
@@ -5388,9 +5369,9 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         """
         ...
     @typing.overload
-    def taylor(self, *t: _FieldDerivativeStructure__T) -> _FieldDerivativeStructure__T: ...
+    def taylor(self, *delta: _FieldDerivativeStructure__T) -> _FieldDerivativeStructure__T: ...
     @typing.overload
-    def taylor(self, *double: float) -> _FieldDerivativeStructure__T: ...
+    def taylor(self, *delta: float) -> _FieldDerivativeStructure__T: ...
     def toDegrees(self) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]:
         """
         Convert radians to degrees, with error of less than 0.5 ULP
@@ -5437,8 +5418,6 @@ _FieldUnivariateDerivative__S = typing.TypeVar('_FieldUnivariateDerivative__S', 
 _FieldUnivariateDerivative__T = typing.TypeVar('_FieldUnivariateDerivative__T', bound='FieldUnivariateDerivative')  # <T>
 class FieldUnivariateDerivative(FieldDerivative[_FieldUnivariateDerivative__S, _FieldUnivariateDerivative__T], typing.Generic[_FieldUnivariateDerivative__S, _FieldUnivariateDerivative__T]):
     """
-    implements FieldDerivative<S,T>
-    
     Abstract class representing both the value and the differentials of a function.
     
     Since:
@@ -5488,10 +5467,9 @@ class FieldUnivariateDerivative(FieldDerivative[_FieldUnivariateDerivative__S, _
         
         Raises:
             MathIllegalArgumentException: if the numbers of variables does not match the instance
-            MathIllegalArgumentException: if sum of derivation orders is larger than the instance limits
         
-              - getValue
-        
+        Also see:
+            getValue
         
         
         """
@@ -5510,14 +5488,13 @@ class FieldUnivariateDerivative(FieldDerivative[_FieldUnivariateDerivative__S, _
 _UnivariateDerivative__T = typing.TypeVar('_UnivariateDerivative__T', bound='UnivariateDerivative')  # <T>
 class UnivariateDerivative(Derivative[_UnivariateDerivative__T], java.io.Serializable, java.lang.Comparable[_UnivariateDerivative__T], typing.Generic[_UnivariateDerivative__T]):
     """
-    implements Derivative<T>, Serializable, Comparable<T>
-    
     Abstract class representing both the value and the differentials of a function.
     
     Since:
         1.7
     
-          - serialized
+    Also see:
+        serialized
     """
     def getDerivative(self, n: int) -> float:
         """
@@ -5563,10 +5540,9 @@ class UnivariateDerivative(Derivative[_UnivariateDerivative__T], java.io.Seriali
         
         Raises:
             MathIllegalArgumentException: if the numbers of variables does not match the instance
-            MathIllegalArgumentException: if sum of derivation orders is larger than the instance limits
         
-              - getValue
-        
+        Also see:
+            getValue
         
         
         """
@@ -5585,8 +5561,6 @@ class UnivariateDerivative(Derivative[_UnivariateDerivative__T], java.io.Seriali
 _FieldGradient__T = typing.TypeVar('_FieldGradient__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldGradient(FieldDerivative1[_FieldGradient__T, 'FieldGradient'[_FieldGradient__T]], typing.Generic[_FieldGradient__T]):
     """
-    implements FieldDerivative1<T,FieldGradient<T>>
-    
     Class representing both the value and the differentials of a function.
     
     This class is a stripped-down version of FieldDerivativeStructure with getOrder limited to one. It should have less overhead than FieldDerivativeStructure in its domain.
@@ -5602,18 +5576,19 @@ class FieldGradient(FieldDerivative1[_FieldGradient__T, 'FieldGradient'[_FieldGr
     Since:
         1.7
     
-          - DerivativeStructure
-          - UnivariateDerivative1
-          - UnivariateDerivative2
-          - Gradient
-          - FieldDerivativeStructure
-          - FieldUnivariateDerivative1
-          - FieldUnivariateDerivative2
+    Also see:
+        DerivativeStructure,
+        UnivariateDerivative1,
+        UnivariateDerivative2,
+        Gradient,
+        FieldDerivativeStructure,
+        FieldUnivariateDerivative1,
+        FieldUnivariateDerivative2
     """
     @typing.overload
-    def __init__(self, t: _FieldGradient__T, *t2: _FieldGradient__T): ...
+    def __init__(self, value: _FieldGradient__T, *gradient: _FieldGradient__T): ...
     @typing.overload
-    def __init__(self, fieldDerivativeStructure: FieldDerivativeStructure[_FieldGradient__T]): ...
+    def __init__(self, ds: FieldDerivativeStructure[_FieldGradient__T]): ...
     def abs(self) -> 'FieldGradient'[_FieldGradient__T]:
         """
         absolute value.
@@ -5627,11 +5602,11 @@ class FieldGradient(FieldDerivative1[_FieldGradient__T, 'FieldGradient'[_FieldGr
         """
         ...
     @typing.overload
-    def add(self, s2: org.hipparchus.CalculusFieldElement) -> _FieldGradient__T: ...
+    def add(self, a: org.hipparchus.CalculusFieldElement) -> _FieldGradient__T: ...
     @typing.overload
-    def add(self, double: float) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def add(self, a: float) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def add(self, fieldGradient: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def add(self, a: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
     def atan2(self, x: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]:
         """
         Two arguments arc tangent operation.
@@ -5682,24 +5657,24 @@ class FieldGradient(FieldDerivative1[_FieldGradient__T, 'FieldGradient'[_FieldGr
         """
         ...
     @typing.overload
-    def copySign(self, double: float) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def copySign(self, sign: float) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def copySign(self, t: _FieldGradient__T) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def copySign(self, sign: _FieldGradient__T) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def copySign(self, fieldGradient: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def copySign(self, sign: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def divide(self, double: float) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def divide(self, a: float) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def divide(self, t: _FieldGradient__T) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def divide(self, a: _FieldGradient__T) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def divide(self, fieldGradient: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def divide(self, a: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
     def equals(self, other: typing.Any) -> bool:
         """
         Test for the equality of two univariate derivatives.
         
         univariate derivatives are considered equal if they have the same derivatives.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality to this
@@ -5802,7 +5777,7 @@ class FieldGradient(FieldDerivative1[_FieldGradient__T, 'FieldGradient'[_FieldGr
         """
         Get a hashCode for the univariate derivative.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -5829,25 +5804,25 @@ class FieldGradient(FieldDerivative1[_FieldGradient__T, 'FieldGradient'[_FieldGr
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, fieldGradient: 'FieldGradient'[_FieldGradient__T], double2: float, fieldGradient2: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldGradient'[_FieldGradient__T], a2: float, b2: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def linearCombination(self, double: float, fieldGradient: 'FieldGradient'[_FieldGradient__T], double2: float, fieldGradient2: 'FieldGradient'[_FieldGradient__T], double3: float, fieldGradient3: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldGradient'[_FieldGradient__T], a2: float, b2: 'FieldGradient'[_FieldGradient__T], a3: float, b3: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def linearCombination(self, double: float, fieldGradient: 'FieldGradient'[_FieldGradient__T], double2: float, fieldGradient2: 'FieldGradient'[_FieldGradient__T], double3: float, fieldGradient3: 'FieldGradient'[_FieldGradient__T], double4: float, fieldGradient4: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldGradient'[_FieldGradient__T], a2: float, b2: 'FieldGradient'[_FieldGradient__T], a3: float, b3: 'FieldGradient'[_FieldGradient__T], a4: float, b4: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def linearCombination(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], fieldGradientArray: typing.Union[typing.List['FieldGradient'[_FieldGradient__T]], jpype.JArray]) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def linearCombination(self, a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List['FieldGradient'[_FieldGradient__T]], jpype.JArray]) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def linearCombination(self, t: _FieldGradient__T, fieldGradient: 'FieldGradient'[_FieldGradient__T], t2: _FieldGradient__T, fieldGradient2: 'FieldGradient'[_FieldGradient__T], t3: _FieldGradient__T, fieldGradient3: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def linearCombination(self, a1: _FieldGradient__T, b1: 'FieldGradient'[_FieldGradient__T], a2: _FieldGradient__T, b2: 'FieldGradient'[_FieldGradient__T], a3: _FieldGradient__T, b3: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def linearCombination(self, tArray: typing.Union[typing.List[_FieldGradient__T], jpype.JArray], fieldGradientArray: typing.Union[typing.List['FieldGradient'[_FieldGradient__T]], jpype.JArray]) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def linearCombination(self, a: typing.Union[typing.List[_FieldGradient__T], jpype.JArray], b: typing.Union[typing.List['FieldGradient'[_FieldGradient__T]], jpype.JArray]) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def linearCombination(self, fieldGradient: 'FieldGradient'[_FieldGradient__T], fieldGradient2: 'FieldGradient'[_FieldGradient__T], fieldGradient3: 'FieldGradient'[_FieldGradient__T], fieldGradient4: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def linearCombination(self, a1: 'FieldGradient'[_FieldGradient__T], b1: 'FieldGradient'[_FieldGradient__T], a2: 'FieldGradient'[_FieldGradient__T], b2: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def linearCombination(self, fieldGradient: 'FieldGradient'[_FieldGradient__T], fieldGradient2: 'FieldGradient'[_FieldGradient__T], fieldGradient3: 'FieldGradient'[_FieldGradient__T], fieldGradient4: 'FieldGradient'[_FieldGradient__T], fieldGradient5: 'FieldGradient'[_FieldGradient__T], fieldGradient6: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def linearCombination(self, a1: 'FieldGradient'[_FieldGradient__T], b1: 'FieldGradient'[_FieldGradient__T], a2: 'FieldGradient'[_FieldGradient__T], b2: 'FieldGradient'[_FieldGradient__T], a3: 'FieldGradient'[_FieldGradient__T], b3: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def linearCombination(self, fieldGradient: 'FieldGradient'[_FieldGradient__T], fieldGradient2: 'FieldGradient'[_FieldGradient__T], fieldGradient3: 'FieldGradient'[_FieldGradient__T], fieldGradient4: 'FieldGradient'[_FieldGradient__T], fieldGradient5: 'FieldGradient'[_FieldGradient__T], fieldGradient6: 'FieldGradient'[_FieldGradient__T], fieldGradient7: 'FieldGradient'[_FieldGradient__T], fieldGradient8: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def linearCombination(self, a1: 'FieldGradient'[_FieldGradient__T], b1: 'FieldGradient'[_FieldGradient__T], a2: 'FieldGradient'[_FieldGradient__T], b2: 'FieldGradient'[_FieldGradient__T], a3: 'FieldGradient'[_FieldGradient__T], b3: 'FieldGradient'[_FieldGradient__T], a4: 'FieldGradient'[_FieldGradient__T], b4: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def linearCombination(self, fieldGradientArray: typing.Union[typing.List['FieldGradient'[_FieldGradient__T]], jpype.JArray], fieldGradientArray2: typing.Union[typing.List['FieldGradient'[_FieldGradient__T]], jpype.JArray]) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def linearCombination(self, a: typing.Union[typing.List['FieldGradient'[_FieldGradient__T]], jpype.JArray], b: typing.Union[typing.List['FieldGradient'[_FieldGradient__T]], jpype.JArray]) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
     def multiply(self, double: float) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
@@ -5869,9 +5844,9 @@ class FieldGradient(FieldDerivative1[_FieldGradient__T, 'FieldGradient'[_FieldGr
         """
         ...
     @typing.overload
-    def newInstance(self, double: float) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def newInstance(self, c: float) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def newInstance(self, t: _FieldGradient__T) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def newInstance(self, c: _FieldGradient__T) -> 'FieldGradient'[_FieldGradient__T]: ...
     _pow_3__T = typing.TypeVar('_pow_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def pow(self, t: _FieldGradient__T) -> _FieldGradient__T: ...
@@ -5881,7 +5856,7 @@ class FieldGradient(FieldDerivative1[_FieldGradient__T, 'FieldGradient'[_FieldGr
     def pow(self, int: int) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
     @staticmethod
-    def pow(double: float, fieldGradient: 'FieldGradient'[_pow_3__T]) -> 'FieldGradient'[_pow_3__T]:
+    def pow(a: float, x: 'FieldGradient'[_pow_3__T]) -> 'FieldGradient'[_pow_3__T]:
         """
         Compute a :sup:`x` where a is a double and x a FieldGradient
         
@@ -5892,7 +5867,7 @@ class FieldGradient(FieldDerivative1[_FieldGradient__T, 'FieldGradient'[_FieldGr
         Returns:
             a :sup:`x`
         
-        public FieldGradient<FieldGradient> pow(double p)
+        public FieldGradient<FieldGradient> pow (double p)
         
         Power operation.
         
@@ -5904,7 +5879,7 @@ class FieldGradient(FieldDerivative1[_FieldGradient__T, 'FieldGradient'[_FieldGr
         Returns:
             this :sup:`p`
         
-        public FieldGradient<FieldGradient> pow(int n)
+        public FieldGradient<FieldGradient> pow (int n)
         
         Integer power operation.
         
@@ -5920,11 +5895,11 @@ class FieldGradient(FieldDerivative1[_FieldGradient__T, 'FieldGradient'[_FieldGr
         """
         ...
     @typing.overload
-    def remainder(self, double: float) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def remainder(self, a: float) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def remainder(self, t: _FieldGradient__T) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def remainder(self, a: _FieldGradient__T) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def remainder(self, fieldGradient: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def remainder(self, a: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
     def rootN(self, n: int) -> 'FieldGradient'[_FieldGradient__T]:
         """
         N :sup:`th` root.
@@ -5997,13 +5972,13 @@ class FieldGradient(FieldDerivative1[_FieldGradient__T, 'FieldGradient'[_FieldGr
         """
         ...
     @typing.overload
-    def subtract(self, s2: org.hipparchus.CalculusFieldElement) -> _FieldGradient__T: ...
+    def subtract(self, a: org.hipparchus.CalculusFieldElement) -> _FieldGradient__T: ...
     @typing.overload
-    def subtract(self, double: float) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def subtract(self, a: float) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def subtract(self, fieldGradient: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
+    def subtract(self, a: 'FieldGradient'[_FieldGradient__T]) -> 'FieldGradient'[_FieldGradient__T]: ...
     @typing.overload
-    def taylor(self, *double: float) -> _FieldGradient__T:
+    def taylor(self, *delta: float) -> _FieldGradient__T:
         """
         Evaluate Taylor expansion of a gradient.
         
@@ -6025,7 +6000,7 @@ class FieldGradient(FieldDerivative1[_FieldGradient__T, 'FieldGradient'[_FieldGr
         """
         ...
     @typing.overload
-    def taylor(self, *t: _FieldGradient__T) -> _FieldGradient__T: ...
+    def taylor(self, *delta: _FieldGradient__T) -> _FieldGradient__T: ...
     def toDegrees(self) -> 'FieldGradient'[_FieldGradient__T]:
         """
         Convert radians to degrees, with error of less than 0.5 ULP
@@ -6101,8 +6076,6 @@ class FieldGradient(FieldDerivative1[_FieldGradient__T, 'FieldGradient'[_FieldGr
 _FieldUnivariateDerivative1__T = typing.TypeVar('_FieldUnivariateDerivative1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDerivative1__T, 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]], FieldDerivative1[_FieldUnivariateDerivative1__T, 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]], typing.Generic[_FieldUnivariateDerivative1__T]):
     """
-    implements FieldDerivative1<T,FieldUnivariateDerivative1<T>>
-    
     Class representing both the value and the differentials of a function.
     
     This class is a stripped-down version of FieldDerivativeStructure with only one getFreeParameters and getOrder also limited to one. It should have less overhead than FieldDerivativeStructure in its domain.
@@ -6118,18 +6091,19 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
     Since:
         1.7
     
-          - DerivativeStructure
-          - UnivariateDerivative1
-          - UnivariateDerivative2
-          - Gradient
-          - FieldDerivativeStructure
-          - FieldUnivariateDerivative2
-          - FieldGradient
+    Also see:
+        DerivativeStructure,
+        UnivariateDerivative1,
+        UnivariateDerivative2,
+        Gradient,
+        FieldDerivativeStructure,
+        FieldUnivariateDerivative2,
+        FieldGradient
     """
     @typing.overload
-    def __init__(self, t: _FieldUnivariateDerivative1__T, t2: _FieldUnivariateDerivative1__T): ...
+    def __init__(self, f0: _FieldUnivariateDerivative1__T, f1: _FieldUnivariateDerivative1__T): ...
     @typing.overload
-    def __init__(self, fieldDerivativeStructure: FieldDerivativeStructure[_FieldUnivariateDerivative1__T]): ...
+    def __init__(self, ds: FieldDerivativeStructure[_FieldUnivariateDerivative1__T]): ...
     def abs(self) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]:
         """
         absolute value.
@@ -6143,11 +6117,11 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         ...
     @typing.overload
-    def add(self, s2: org.hipparchus.CalculusFieldElement) -> _FieldUnivariateDerivative1__T: ...
+    def add(self, a: org.hipparchus.CalculusFieldElement) -> _FieldUnivariateDerivative1__T: ...
     @typing.overload
-    def add(self, double: float) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def add(self, a: float) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def add(self, fieldUnivariateDerivative1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def add(self, a: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     def atan2(self, x: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]:
         """
         Two arguments arc tangent operation.
@@ -6182,24 +6156,24 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         ...
     @typing.overload
-    def copySign(self, double: float) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def copySign(self, sign: float) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def copySign(self, t: _FieldUnivariateDerivative1__T) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def copySign(self, sign: _FieldUnivariateDerivative1__T) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def copySign(self, fieldUnivariateDerivative1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def copySign(self, sign: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def divide(self, double: float) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def divide(self, a: float) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def divide(self, t: _FieldUnivariateDerivative1__T) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def divide(self, a: _FieldUnivariateDerivative1__T) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def divide(self, fieldUnivariateDerivative1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def divide(self, a: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     def equals(self, other: typing.Any) -> bool:
         """
         Test for the equality of two univariate derivatives.
         
         univariate derivatives are considered equal if they have the same derivatives.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality to this
@@ -6260,8 +6234,8 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
         Returns:
             first derivative
         
-              - getValue
-        
+        Also see:
+            getValue
         
         
         """
@@ -6306,7 +6280,7 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         Get a hashCode for the univariate derivative.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -6333,25 +6307,25 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, fieldUnivariateDerivative1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], double2: float, fieldUnivariateDerivative12: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], a2: float, b2: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def linearCombination(self, double: float, fieldUnivariateDerivative1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], double2: float, fieldUnivariateDerivative12: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], double3: float, fieldUnivariateDerivative13: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], a2: float, b2: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], a3: float, b3: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def linearCombination(self, double: float, fieldUnivariateDerivative1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], double2: float, fieldUnivariateDerivative12: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], double3: float, fieldUnivariateDerivative13: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], double4: float, fieldUnivariateDerivative14: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], a2: float, b2: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], a3: float, b3: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], a4: float, b4: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def linearCombination(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], fieldUnivariateDerivative1Array: typing.Union[typing.List['FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]], jpype.JArray]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def linearCombination(self, a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List['FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]], jpype.JArray]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def linearCombination(self, t: _FieldUnivariateDerivative1__T, fieldUnivariateDerivative1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], t2: _FieldUnivariateDerivative1__T, fieldUnivariateDerivative12: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], t3: _FieldUnivariateDerivative1__T, fieldUnivariateDerivative13: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def linearCombination(self, a1: _FieldUnivariateDerivative1__T, b1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], a2: _FieldUnivariateDerivative1__T, b2: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], a3: _FieldUnivariateDerivative1__T, b3: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def linearCombination(self, tArray: typing.Union[typing.List[_FieldUnivariateDerivative1__T], jpype.JArray], fieldUnivariateDerivative1Array: typing.Union[typing.List['FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]], jpype.JArray]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def linearCombination(self, a: typing.Union[typing.List[_FieldUnivariateDerivative1__T], jpype.JArray], b: typing.Union[typing.List['FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]], jpype.JArray]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def linearCombination(self, fieldUnivariateDerivative1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], fieldUnivariateDerivative12: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], fieldUnivariateDerivative13: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], fieldUnivariateDerivative14: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def linearCombination(self, a1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], b1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], a2: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], b2: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def linearCombination(self, fieldUnivariateDerivative1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], fieldUnivariateDerivative12: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], fieldUnivariateDerivative13: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], fieldUnivariateDerivative14: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], fieldUnivariateDerivative15: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], fieldUnivariateDerivative16: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def linearCombination(self, a1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], b1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], a2: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], b2: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], a3: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], b3: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def linearCombination(self, fieldUnivariateDerivative1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], fieldUnivariateDerivative12: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], fieldUnivariateDerivative13: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], fieldUnivariateDerivative14: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], fieldUnivariateDerivative15: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], fieldUnivariateDerivative16: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], fieldUnivariateDerivative17: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], fieldUnivariateDerivative18: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def linearCombination(self, a1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], b1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], a2: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], b2: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], a3: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], b3: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], a4: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T], b4: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def linearCombination(self, fieldUnivariateDerivative1Array: typing.Union[typing.List['FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]], jpype.JArray], fieldUnivariateDerivative1Array2: typing.Union[typing.List['FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]], jpype.JArray]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def linearCombination(self, a: typing.Union[typing.List['FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]], jpype.JArray], b: typing.Union[typing.List['FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]], jpype.JArray]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
     def multiply(self, double: float) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
@@ -6373,9 +6347,9 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         ...
     @typing.overload
-    def newInstance(self, double: float) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def newInstance(self, value: float) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def newInstance(self, t: _FieldUnivariateDerivative1__T) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def newInstance(self, value: _FieldUnivariateDerivative1__T) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     _pow_3__T = typing.TypeVar('_pow_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def pow(self, t: _FieldUnivariateDerivative1__T) -> _FieldUnivariateDerivative1__T: ...
@@ -6385,7 +6359,7 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
     def pow(self, int: int) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
     @staticmethod
-    def pow(double: float, fieldUnivariateDerivative1: 'FieldUnivariateDerivative1'[_pow_3__T]) -> 'FieldUnivariateDerivative1'[_pow_3__T]:
+    def pow(a: float, x: 'FieldUnivariateDerivative1'[_pow_3__T]) -> 'FieldUnivariateDerivative1'[_pow_3__T]:
         """
         Compute a :sup:`x` where a is a double and x a FieldUnivariateDerivative1
         
@@ -6396,7 +6370,7 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
         Returns:
             a :sup:`x`
         
-        public FieldUnivariateDerivative1<FieldUnivariateDerivative1> pow(double p)
+        public FieldUnivariateDerivative1<FieldUnivariateDerivative1> pow (double p)
         
         Power operation.
         
@@ -6408,7 +6382,7 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
         Returns:
             this :sup:`p`
         
-        public FieldUnivariateDerivative1<FieldUnivariateDerivative1> pow(int n)
+        public FieldUnivariateDerivative1<FieldUnivariateDerivative1> pow (int n)
         
         Integer power operation.
         
@@ -6424,11 +6398,11 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         ...
     @typing.overload
-    def remainder(self, double: float) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def remainder(self, a: float) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def remainder(self, t: _FieldUnivariateDerivative1__T) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def remainder(self, a: _FieldUnivariateDerivative1__T) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def remainder(self, fieldUnivariateDerivative1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def remainder(self, a: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     def rootN(self, n: int) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]:
         """
         N :sup:`th` root.
@@ -6460,13 +6434,13 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         ...
     @typing.overload
-    def subtract(self, s2: org.hipparchus.CalculusFieldElement) -> _FieldUnivariateDerivative1__T: ...
+    def subtract(self, a: org.hipparchus.CalculusFieldElement) -> _FieldUnivariateDerivative1__T: ...
     @typing.overload
-    def subtract(self, double: float) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def subtract(self, a: float) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def subtract(self, fieldUnivariateDerivative1: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
+    def subtract(self, a: 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]: ...
     @typing.overload
-    def taylor(self, double: float) -> _FieldUnivariateDerivative1__T:
+    def taylor(self, delta: float) -> _FieldUnivariateDerivative1__T:
         """
         Evaluate Taylor expansion of a univariate derivative.
         
@@ -6488,7 +6462,7 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         ...
     @typing.overload
-    def taylor(self, t: _FieldUnivariateDerivative1__T) -> _FieldUnivariateDerivative1__T: ...
+    def taylor(self, delta: _FieldUnivariateDerivative1__T) -> _FieldUnivariateDerivative1__T: ...
     def toDegrees(self) -> 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]:
         """
         Convert radians to degrees, with error of less than 0.5 ULP
@@ -6561,18 +6535,19 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
     Since:
         1.7
     
-          - DerivativeStructure
-          - UnivariateDerivative1
-          - UnivariateDerivative2
-          - Gradient
-          - FieldDerivativeStructure
-          - FieldUnivariateDerivative1
-          - FieldGradient
+    Also see:
+        DerivativeStructure,
+        UnivariateDerivative1,
+        UnivariateDerivative2,
+        Gradient,
+        FieldDerivativeStructure,
+        FieldUnivariateDerivative1,
+        FieldGradient
     """
     @typing.overload
-    def __init__(self, t: _FieldUnivariateDerivative2__T, t2: _FieldUnivariateDerivative2__T, t3: _FieldUnivariateDerivative2__T): ...
+    def __init__(self, f0: _FieldUnivariateDerivative2__T, f1: _FieldUnivariateDerivative2__T, f2: _FieldUnivariateDerivative2__T): ...
     @typing.overload
-    def __init__(self, fieldDerivativeStructure: FieldDerivativeStructure[_FieldUnivariateDerivative2__T]): ...
+    def __init__(self, ds: FieldDerivativeStructure[_FieldUnivariateDerivative2__T]): ...
     def abs(self) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]:
         """
         absolute value.
@@ -6604,11 +6579,11 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         ...
     @typing.overload
-    def add(self, s2: org.hipparchus.CalculusFieldElement) -> _FieldUnivariateDerivative2__T: ...
+    def add(self, a: org.hipparchus.CalculusFieldElement) -> _FieldUnivariateDerivative2__T: ...
     @typing.overload
-    def add(self, double: float) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def add(self, a: float) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def add(self, fieldUnivariateDerivative2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def add(self, a: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     def asin(self) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]:
         """
         Arc sine operation.
@@ -6690,11 +6665,11 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         ...
     @typing.overload
-    def copySign(self, double: float) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def copySign(self, sign: float) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def copySign(self, t: _FieldUnivariateDerivative2__T) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def copySign(self, sign: _FieldUnivariateDerivative2__T) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def copySign(self, fieldUnivariateDerivative2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def copySign(self, sign: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     def cos(self) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]:
         """
         Cosine operation.
@@ -6716,18 +6691,18 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         ...
     @typing.overload
-    def divide(self, double: float) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def divide(self, a: float) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def divide(self, t: _FieldUnivariateDerivative2__T) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def divide(self, a: _FieldUnivariateDerivative2__T) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def divide(self, fieldUnivariateDerivative2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def divide(self, a: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     def equals(self, other: typing.Any) -> bool:
         """
         Test for the equality of two univariate derivatives.
         
         univariate derivatives are considered equal if they have the same derivatives.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality to this
@@ -6804,8 +6779,8 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
         Returns:
             first derivative
         
-              - getValue
-        
+        Also see:
+            getValue
         
         
         """
@@ -6839,9 +6814,9 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
         Returns:
             second derivative
         
-              - getValue
-              - getFirstDerivative
-        
+        Also see:
+            getValue,
+            getFirstDerivative
         
         
         """
@@ -6870,7 +6845,7 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         Get a hashCode for the univariate derivative.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -6896,25 +6871,25 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, fieldUnivariateDerivative2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], double2: float, fieldUnivariateDerivative22: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], a2: float, b2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def linearCombination(self, double: float, fieldUnivariateDerivative2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], double2: float, fieldUnivariateDerivative22: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], double3: float, fieldUnivariateDerivative23: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], a2: float, b2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], a3: float, b3: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def linearCombination(self, double: float, fieldUnivariateDerivative2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], double2: float, fieldUnivariateDerivative22: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], double3: float, fieldUnivariateDerivative23: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], double4: float, fieldUnivariateDerivative24: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def linearCombination(self, a1: float, b1: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], a2: float, b2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], a3: float, b3: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], a4: float, b4: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def linearCombination(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], fieldUnivariateDerivative2Array: typing.Union[typing.List['FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]], jpype.JArray]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def linearCombination(self, a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List['FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]], jpype.JArray]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def linearCombination(self, t: _FieldUnivariateDerivative2__T, fieldUnivariateDerivative2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], t2: _FieldUnivariateDerivative2__T, fieldUnivariateDerivative22: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], t3: _FieldUnivariateDerivative2__T, fieldUnivariateDerivative23: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def linearCombination(self, a1: _FieldUnivariateDerivative2__T, b1: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], a2: _FieldUnivariateDerivative2__T, b2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], a3: _FieldUnivariateDerivative2__T, b3: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def linearCombination(self, tArray: typing.Union[typing.List[_FieldUnivariateDerivative2__T], jpype.JArray], fieldUnivariateDerivative2Array: typing.Union[typing.List['FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]], jpype.JArray]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def linearCombination(self, a: typing.Union[typing.List[_FieldUnivariateDerivative2__T], jpype.JArray], b: typing.Union[typing.List['FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]], jpype.JArray]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def linearCombination(self, fieldUnivariateDerivative2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], fieldUnivariateDerivative22: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], fieldUnivariateDerivative23: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], fieldUnivariateDerivative24: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def linearCombination(self, a1: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], b1: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], a2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], b2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def linearCombination(self, fieldUnivariateDerivative2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], fieldUnivariateDerivative22: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], fieldUnivariateDerivative23: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], fieldUnivariateDerivative24: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], fieldUnivariateDerivative25: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], fieldUnivariateDerivative26: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def linearCombination(self, a1: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], b1: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], a2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], b2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], a3: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], b3: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def linearCombination(self, fieldUnivariateDerivative2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], fieldUnivariateDerivative22: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], fieldUnivariateDerivative23: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], fieldUnivariateDerivative24: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], fieldUnivariateDerivative25: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], fieldUnivariateDerivative26: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], fieldUnivariateDerivative27: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], fieldUnivariateDerivative28: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def linearCombination(self, a1: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], b1: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], a2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], b2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], a3: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], b3: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], a4: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T], b4: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def linearCombination(self, fieldUnivariateDerivative2Array: typing.Union[typing.List['FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]], jpype.JArray], fieldUnivariateDerivative2Array2: typing.Union[typing.List['FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]], jpype.JArray]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def linearCombination(self, a: typing.Union[typing.List['FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]], jpype.JArray], b: typing.Union[typing.List['FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]], jpype.JArray]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     def log(self) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]:
         """
         Natural logarithm.
@@ -6964,9 +6939,9 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         ...
     @typing.overload
-    def newInstance(self, double: float) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def newInstance(self, value: float) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def newInstance(self, t: _FieldUnivariateDerivative2__T) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def newInstance(self, value: _FieldUnivariateDerivative2__T) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     _pow_3__T = typing.TypeVar('_pow_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def pow(self, t: _FieldUnivariateDerivative2__T) -> _FieldUnivariateDerivative2__T: ...
@@ -6976,7 +6951,7 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
     def pow(self, int: int) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
     @staticmethod
-    def pow(double: float, fieldUnivariateDerivative2: 'FieldUnivariateDerivative2'[_pow_3__T]) -> 'FieldUnivariateDerivative2'[_pow_3__T]:
+    def pow(a: float, x: 'FieldUnivariateDerivative2'[_pow_3__T]) -> 'FieldUnivariateDerivative2'[_pow_3__T]:
         """
         Compute a :sup:`x` where a is a double and x a FieldUnivariateDerivative2
         
@@ -6987,7 +6962,7 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
         Returns:
             a :sup:`x`
         
-        public FieldUnivariateDerivative2<FieldUnivariateDerivative2> pow(double p)
+        public FieldUnivariateDerivative2<FieldUnivariateDerivative2> pow (double p)
         
         Power operation.
         
@@ -6997,7 +6972,7 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
         Returns:
             this :sup:`p`
         
-        public FieldUnivariateDerivative2<FieldUnivariateDerivative2> pow(int n)
+        public FieldUnivariateDerivative2<FieldUnivariateDerivative2> pow (int n)
         
         Integer power operation.
         
@@ -7021,11 +6996,11 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         ...
     @typing.overload
-    def remainder(self, double: float) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def remainder(self, a: float) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def remainder(self, t: _FieldUnivariateDerivative2__T) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def remainder(self, a: _FieldUnivariateDerivative2__T) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def remainder(self, fieldUnivariateDerivative2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def remainder(self, a: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     def rootN(self, n: int) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]:
         """
         N :sup:`th` root.
@@ -7113,11 +7088,11 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         ...
     @typing.overload
-    def subtract(self, s2: org.hipparchus.CalculusFieldElement) -> _FieldUnivariateDerivative2__T: ...
+    def subtract(self, a: org.hipparchus.CalculusFieldElement) -> _FieldUnivariateDerivative2__T: ...
     @typing.overload
-    def subtract(self, double: float) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def subtract(self, a: float) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     @typing.overload
-    def subtract(self, fieldUnivariateDerivative2: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
+    def subtract(self, a: 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]: ...
     def tan(self) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]:
         """
         Tangent operation.
@@ -7139,7 +7114,7 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         ...
     @typing.overload
-    def taylor(self, double: float) -> _FieldUnivariateDerivative2__T:
+    def taylor(self, delta: float) -> _FieldUnivariateDerivative2__T:
         """
         Evaluate Taylor expansion a univariate derivative.
         
@@ -7161,7 +7136,7 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
         """
         ...
     @typing.overload
-    def taylor(self, t: _FieldUnivariateDerivative2__T) -> _FieldUnivariateDerivative2__T: ...
+    def taylor(self, delta: _FieldUnivariateDerivative2__T) -> _FieldUnivariateDerivative2__T: ...
     def toDegrees(self) -> 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]:
         """
         Convert radians to degrees, with error of less than 0.5 ULP
@@ -7212,8 +7187,6 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
 
 class Gradient(Derivative1['Gradient'], java.io.Serializable):
     """
-    implements Derivative1<Gradient>, Serializable
-    
     Class representing both the value and the differentials of a function.
     
     This class is a stripped-down version of DerivativeStructure with getOrder limited to one. It should have less overhead than DerivativeStructure in its domain.
@@ -7229,19 +7202,19 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
     Since:
         1.7
     
-          - DerivativeStructure
-          - UnivariateDerivative1
-          - UnivariateDerivative2
-          - FieldDerivativeStructure
-          - FieldUnivariateDerivative1
-          - FieldUnivariateDerivative2
-          - FieldGradient
-          - serialized
+    Also see:
+        DerivativeStructure,
+        UnivariateDerivative1,
+        UnivariateDerivative2,
+        FieldDerivativeStructure,
+        FieldUnivariateDerivative1,
+        FieldUnivariateDerivative2,
+        FieldGradient, serialized
     """
     @typing.overload
-    def __init__(self, double: float, *double2: float): ...
+    def __init__(self, value: float, *gradient: float): ...
     @typing.overload
-    def __init__(self, derivativeStructure: DerivativeStructure): ...
+    def __init__(self, ds: DerivativeStructure): ...
     def abs(self) -> 'Gradient':
         """
         absolute value.
@@ -7271,7 +7244,7 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def add(self, gradient: 'Gradient') -> 'Gradient': ...
+    def add(self, a: 'Gradient') -> 'Gradient': ...
     def atan2(self, x: 'Gradient') -> 'Gradient':
         """
         Two arguments arc tangent operation.
@@ -7340,7 +7313,7 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def copySign(self, double: float) -> 'Gradient':
+    def copySign(self, sign: float) -> 'Gradient':
         """
         Returns the instance with the sign of the argument. A NaN sign argument is treated as positive.
         
@@ -7366,9 +7339,9 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def copySign(self, gradient: 'Gradient') -> 'Gradient': ...
+    def copySign(self, sign: 'Gradient') -> 'Gradient': ...
     @typing.overload
-    def divide(self, double: float) -> 'Gradient':
+    def divide(self, a: float) -> 'Gradient':
         """
         '÷' operator.
         
@@ -7396,14 +7369,14 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def divide(self, gradient: 'Gradient') -> 'Gradient': ...
+    def divide(self, a: 'Gradient') -> 'Gradient': ...
     def equals(self, other: typing.Any) -> bool:
         """
         Test for the equality of two univariate derivatives.
         
         univariate derivatives are considered equal if they have the same derivatives.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality to this
@@ -7459,8 +7432,8 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
         Returns:
             gradient part of the value of the function
         
-              - getPartialDerivative
-        
+        Also see:
+            getPartialDerivative
         
         
         """
@@ -7485,7 +7458,7 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
         """
         Get a hashCode for the univariate derivative.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -7512,7 +7485,7 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, gradient: 'Gradient', double2: float, gradient2: 'Gradient') -> 'Gradient':
+    def linearCombination(self, a1: float, b1: 'Gradient', a2: float, b2: 'Gradient') -> 'Gradient':
         """
         Compute a linear combination.
         
@@ -7527,8 +7500,9 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -7543,8 +7517,9 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -7561,8 +7536,9 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -7579,8 +7555,9 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -7599,8 +7576,9 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -7619,19 +7597,19 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-              - linearCombination
-              - linearCombination
-        
+        Also see:
+            linearCombination,
+            linearCombination
         
         
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, gradient: 'Gradient', double2: float, gradient2: 'Gradient', double3: float, gradient3: 'Gradient') -> 'Gradient': ...
+    def linearCombination(self, a1: float, b1: 'Gradient', a2: float, b2: 'Gradient', a3: float, b3: 'Gradient') -> 'Gradient': ...
     @typing.overload
-    def linearCombination(self, double: float, gradient: 'Gradient', double2: float, gradient2: 'Gradient', double3: float, gradient3: 'Gradient', double4: float, gradient4: 'Gradient') -> 'Gradient': ...
+    def linearCombination(self, a1: float, b1: 'Gradient', a2: float, b2: 'Gradient', a3: float, b3: 'Gradient', a4: float, b4: 'Gradient') -> 'Gradient': ...
     @typing.overload
-    def linearCombination(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], gradientArray: typing.Union[typing.List['Gradient'], jpype.JArray]) -> 'Gradient':
+    def linearCombination(self, a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List['Gradient'], jpype.JArray]) -> 'Gradient':
         """
         Compute a linear combination.
         
@@ -7658,15 +7636,15 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def linearCombination(self, gradient: 'Gradient', gradient2: 'Gradient', gradient3: 'Gradient', gradient4: 'Gradient') -> 'Gradient': ...
+    def linearCombination(self, a1: 'Gradient', b1: 'Gradient', a2: 'Gradient', b2: 'Gradient') -> 'Gradient': ...
     @typing.overload
-    def linearCombination(self, gradient: 'Gradient', gradient2: 'Gradient', gradient3: 'Gradient', gradient4: 'Gradient', gradient5: 'Gradient', gradient6: 'Gradient') -> 'Gradient': ...
+    def linearCombination(self, a1: 'Gradient', b1: 'Gradient', a2: 'Gradient', b2: 'Gradient', a3: 'Gradient', b3: 'Gradient') -> 'Gradient': ...
     @typing.overload
-    def linearCombination(self, gradient: 'Gradient', gradient2: 'Gradient', gradient3: 'Gradient', gradient4: 'Gradient', gradient5: 'Gradient', gradient6: 'Gradient', gradient7: 'Gradient', gradient8: 'Gradient') -> 'Gradient': ...
+    def linearCombination(self, a1: 'Gradient', b1: 'Gradient', a2: 'Gradient', b2: 'Gradient', a3: 'Gradient', b3: 'Gradient', a4: 'Gradient', b4: 'Gradient') -> 'Gradient': ...
     @typing.overload
-    def linearCombination(self, gradientArray: typing.Union[typing.List['Gradient'], jpype.JArray], gradientArray2: typing.Union[typing.List['Gradient'], jpype.JArray]) -> 'Gradient': ...
+    def linearCombination(self, a: typing.Union[typing.List['Gradient'], jpype.JArray], b: typing.Union[typing.List['Gradient'], jpype.JArray]) -> 'Gradient': ...
     @typing.overload
-    def multiply(self, double: float) -> 'Gradient':
+    def multiply(self, n: float) -> 'Gradient':
         """
         Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} = \sum_{i=1}^n \mathrm{this} \]
         
@@ -7775,7 +7753,7 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
     def pow(self, int: int) -> 'Gradient': ...
     @typing.overload
     @staticmethod
-    def pow(double: float, gradient: 'Gradient') -> 'Gradient': ...
+    def pow(a: float, x: 'Gradient') -> 'Gradient': ...
     @typing.overload
     def remainder(self, a: float) -> org.hipparchus.CalculusFieldElement:
         """
@@ -7793,7 +7771,7 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def remainder(self, gradient: 'Gradient') -> 'Gradient': ...
+    def remainder(self, a: 'Gradient') -> 'Gradient': ...
     def scalb(self, n: int) -> 'Gradient':
         """
         Multiply the instance by a power of 2.
@@ -7869,7 +7847,7 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def subtract(self, gradient: 'Gradient') -> 'Gradient': ...
+    def subtract(self, a: 'Gradient') -> 'Gradient': ...
     def taylor(self, *delta: float) -> float:
         """
         Evaluate Taylor expansion a derivative structure.
@@ -7956,13 +7934,12 @@ class Gradient(Derivative1['Gradient'], java.io.Serializable):
 
 class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
     """
-    implements Derivative1<SparseGradient>, Serializable
-    
     First derivative computation with large number of variables.
     
     This class plays a similar role to DerivativeStructure, with a focus on efficiency when dealing with large number of independent variables and most computation depend only on a few of them, and when only first derivative is desired. When these conditions are met, this class should be much faster than DerivativeStructure and use less memory.
     
-          - serialized
+    Also see:
+        serialized
     """
     def abs(self) -> 'SparseGradient':
         """
@@ -7993,7 +7970,7 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def add(self, sparseGradient: 'SparseGradient') -> 'SparseGradient': ...
+    def add(self, a: 'SparseGradient') -> 'SparseGradient': ...
     def addInPlace(self, a: 'SparseGradient') -> None:
         """
         Add in place.
@@ -8009,7 +7986,7 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def atan2(self, sparseGradient: 'SparseGradient') -> 'SparseGradient':
+    def atan2(self, x: 'SparseGradient') -> 'SparseGradient':
         """
         Two arguments arc tangent operation.
         
@@ -8021,7 +7998,7 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
             x (SparseGradient): second argument of the arc tangent
         
         Returns:
-        public static SparseGradient atan2(SparseGradient y, SparseGradient x)
+        public static SparseGradient atan2 (SparseGradient y, SparseGradient x)
         
         Two arguments arc tangent operation.
         
@@ -8035,7 +8012,7 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         ...
     @typing.overload
     @staticmethod
-    def atan2(sparseGradient: 'SparseGradient', sparseGradient2: 'SparseGradient') -> 'SparseGradient': ...
+    def atan2(y: 'SparseGradient', x: 'SparseGradient') -> 'SparseGradient': ...
     @typing.overload
     def compose(self, f0: float, f1: float) -> 'SparseGradient':
         """
@@ -8075,7 +8052,7 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def copySign(self, double: float) -> 'SparseGradient':
+    def copySign(self, sign: float) -> 'SparseGradient':
         """
         Returns the instance with the sign of the argument. A NaN sign argument is treated as positive.
         
@@ -8101,7 +8078,7 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def copySign(self, sparseGradient: 'SparseGradient') -> 'SparseGradient': ...
+    def copySign(self, sign: 'SparseGradient') -> 'SparseGradient': ...
     @staticmethod
     def createConstant(value: float) -> 'SparseGradient':
         """
@@ -8132,7 +8109,7 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def divide(self, double: float) -> 'SparseGradient':
+    def divide(self, a: float) -> 'SparseGradient':
         """
         Compute this ÷ a.
         
@@ -8167,7 +8144,7 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         
         Sparse gradients are considered equal if they have the same value and the same derivatives.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality to this
@@ -8243,10 +8220,9 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         
         Raises:
             MathIllegalArgumentException: if the numbers of variables does not match the instance
-            MathIllegalArgumentException: if sum of derivation orders is larger than the instance limits
         
-              - getValue
-        
+        Also see:
+            getValue
         
         
         """
@@ -8281,7 +8257,7 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         """
         Get a hashCode for the derivative structure.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -8290,7 +8266,7 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def hypot(self, sparseGradient: 'SparseGradient') -> 'SparseGradient':
+    def hypot(self, y: 'SparseGradient') -> 'SparseGradient':
         """
         Returns the hypotenuse of a triangle with sides this and y - sqrt(this :sup:`2`  +y :sup:`2` ) avoiding intermediate overflow or underflow.
         
@@ -8323,9 +8299,9 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         ...
     @typing.overload
     @staticmethod
-    def hypot(sparseGradient: 'SparseGradient', sparseGradient2: 'SparseGradient') -> 'SparseGradient': ...
+    def hypot(x: 'SparseGradient', y: 'SparseGradient') -> 'SparseGradient': ...
     @typing.overload
-    def linearCombination(self, double: float, sparseGradient: 'SparseGradient', double2: float, sparseGradient2: 'SparseGradient') -> 'SparseGradient':
+    def linearCombination(self, a1: float, b1: 'SparseGradient', a2: float, b2: 'SparseGradient') -> 'SparseGradient':
         """
         Compute a linear combination.
         
@@ -8340,8 +8316,9 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -8356,8 +8333,9 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -8374,8 +8352,9 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -8392,8 +8371,9 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -8412,8 +8392,9 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -8432,17 +8413,17 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-              - linearCombination
-              - linearCombination
-        
+        Also see:
+            linearCombination,
+            linearCombination
         
         
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, sparseGradient: 'SparseGradient', double2: float, sparseGradient2: 'SparseGradient', double3: float, sparseGradient3: 'SparseGradient') -> 'SparseGradient': ...
+    def linearCombination(self, a1: float, b1: 'SparseGradient', a2: float, b2: 'SparseGradient', a3: float, b3: 'SparseGradient') -> 'SparseGradient': ...
     @typing.overload
-    def linearCombination(self, double: float, sparseGradient: 'SparseGradient', double2: float, sparseGradient2: 'SparseGradient', double3: float, sparseGradient3: 'SparseGradient', double4: float, sparseGradient4: 'SparseGradient') -> 'SparseGradient': ...
+    def linearCombination(self, a1: float, b1: 'SparseGradient', a2: float, b2: 'SparseGradient', a3: float, b3: 'SparseGradient', a4: float, b4: 'SparseGradient') -> 'SparseGradient': ...
     @typing.overload
     def linearCombination(self, a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List['SparseGradient'], jpype.JArray]) -> 'SparseGradient':
         """
@@ -8460,15 +8441,15 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def linearCombination(self, sparseGradient: 'SparseGradient', sparseGradient2: 'SparseGradient', sparseGradient3: 'SparseGradient', sparseGradient4: 'SparseGradient') -> 'SparseGradient': ...
+    def linearCombination(self, a1: 'SparseGradient', b1: 'SparseGradient', a2: 'SparseGradient', b2: 'SparseGradient') -> 'SparseGradient': ...
     @typing.overload
-    def linearCombination(self, sparseGradient: 'SparseGradient', sparseGradient2: 'SparseGradient', sparseGradient3: 'SparseGradient', sparseGradient4: 'SparseGradient', sparseGradient5: 'SparseGradient', sparseGradient6: 'SparseGradient') -> 'SparseGradient': ...
+    def linearCombination(self, a1: 'SparseGradient', b1: 'SparseGradient', a2: 'SparseGradient', b2: 'SparseGradient', a3: 'SparseGradient', b3: 'SparseGradient') -> 'SparseGradient': ...
     @typing.overload
-    def linearCombination(self, sparseGradient: 'SparseGradient', sparseGradient2: 'SparseGradient', sparseGradient3: 'SparseGradient', sparseGradient4: 'SparseGradient', sparseGradient5: 'SparseGradient', sparseGradient6: 'SparseGradient', sparseGradient7: 'SparseGradient', sparseGradient8: 'SparseGradient') -> 'SparseGradient': ...
+    def linearCombination(self, a1: 'SparseGradient', b1: 'SparseGradient', a2: 'SparseGradient', b2: 'SparseGradient', a3: 'SparseGradient', b3: 'SparseGradient', a4: 'SparseGradient', b4: 'SparseGradient') -> 'SparseGradient': ...
     @typing.overload
-    def linearCombination(self, sparseGradientArray: typing.Union[typing.List['SparseGradient'], jpype.JArray], sparseGradientArray2: typing.Union[typing.List['SparseGradient'], jpype.JArray]) -> 'SparseGradient': ...
+    def linearCombination(self, a: typing.Union[typing.List['SparseGradient'], jpype.JArray], b: typing.Union[typing.List['SparseGradient'], jpype.JArray]) -> 'SparseGradient': ...
     @typing.overload
-    def multiply(self, double: float) -> 'SparseGradient':
+    def multiply(self, a: float) -> 'SparseGradient':
         """
         Compute this × a.
         
@@ -8551,7 +8532,7 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def pow(self, t: org.hipparchus.CalculusFieldElement) -> org.hipparchus.CalculusFieldElement:
+    def pow(self, p: org.hipparchus.CalculusFieldElement) -> org.hipparchus.CalculusFieldElement:
         """
         Power operation.
         
@@ -8591,9 +8572,9 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
     def pow(self, int: int) -> 'SparseGradient': ...
     @typing.overload
     @staticmethod
-    def pow(double: float, sparseGradient: 'SparseGradient') -> 'SparseGradient': ...
+    def pow(a: float, x: 'SparseGradient') -> 'SparseGradient': ...
     @typing.overload
-    def remainder(self, double: float) -> 'SparseGradient':
+    def remainder(self, a: float) -> 'SparseGradient':
         """
         IEEE remainder operator.
         
@@ -8621,7 +8602,7 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def remainder(self, sparseGradient: 'SparseGradient') -> 'SparseGradient': ...
+    def remainder(self, a: 'SparseGradient') -> 'SparseGradient': ...
     def scalb(self, n: int) -> 'SparseGradient':
         """
         Multiply the instance by a power of 2.
@@ -8670,7 +8651,7 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
         """
         ...
     @typing.overload
-    def subtract(self, sparseGradient: 'SparseGradient') -> 'SparseGradient': ...
+    def subtract(self, a: 'SparseGradient') -> 'SparseGradient': ...
     def taylor(self, *delta: float) -> float:
         """
         Evaluate Taylor expansion of a sparse gradient.
@@ -8728,8 +8709,6 @@ class SparseGradient(Derivative1['SparseGradient'], java.io.Serializable):
 
 class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Derivative1['UnivariateDerivative1']):
     """
-    implements Derivative1<UnivariateDerivative1>
-    
     Class representing both the value and the differentials of a function.
     
     This class is a stripped-down version of DerivativeStructure with only one getFreeParameters and getOrder also limited to one. It should have less overhead than DerivativeStructure in its domain.
@@ -8745,14 +8724,14 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
     Since:
         1.7
     
-          - DerivativeStructure
-          - UnivariateDerivative2
-          - Gradient
-          - FieldDerivativeStructure
-          - FieldUnivariateDerivative1
-          - FieldUnivariateDerivative2
-          - FieldGradient
-          - serialized
+    Also see:
+        DerivativeStructure,
+        UnivariateDerivative2,
+        Gradient,
+        FieldDerivativeStructure,
+        FieldUnivariateDerivative1,
+        FieldUnivariateDerivative2,
+        FieldGradient, serialized
     """
     PI: typing.ClassVar['UnivariateDerivative1'] = ...
     """
@@ -8764,9 +8743,9 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
     
     """
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, f0: float, f1: float): ...
     @typing.overload
-    def __init__(self, derivativeStructure: DerivativeStructure): ...
+    def __init__(self, ds: DerivativeStructure): ...
     def abs(self) -> 'UnivariateDerivative1':
         """
         absolute value.
@@ -8796,7 +8775,7 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
         """
         ...
     @typing.overload
-    def add(self, univariateDerivative1: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
+    def add(self, a: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
     def atan2(self, x: 'UnivariateDerivative1') -> 'UnivariateDerivative1':
         """
         Two arguments arc tangent operation.
@@ -8814,11 +8793,11 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
         
         """
         ...
-    def compareTo(self, univariateDerivative1: 'UnivariateDerivative1') -> int:
+    def compareTo(self, o: 'UnivariateDerivative1') -> int:
         """
         Comparison performed considering that derivatives are intrinsically linked to monomials in the corresponding Taylor expansion and that the higher the degree, the smaller the term.
         
-        Specified by: meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.compareTo` in interface Comparable
+        Specified by: meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is` in interface Comparable
         
         Since:
             3.0
@@ -8862,7 +8841,7 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
         """
         ...
     @typing.overload
-    def copySign(self, double: float) -> 'UnivariateDerivative1':
+    def copySign(self, sign: float) -> 'UnivariateDerivative1':
         """
         Returns the instance with the sign of the argument. A NaN sign argument is treated as positive.
         
@@ -8888,9 +8867,9 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
         """
         ...
     @typing.overload
-    def copySign(self, univariateDerivative1: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
+    def copySign(self, sign: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
     @typing.overload
-    def divide(self, double: float) -> 'UnivariateDerivative1':
+    def divide(self, a: float) -> 'UnivariateDerivative1':
         """
         '÷' operator.
         
@@ -8918,14 +8897,14 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
         """
         ...
     @typing.overload
-    def divide(self, univariateDerivative1: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
+    def divide(self, a: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
     def equals(self, other: typing.Any) -> bool:
         """
         Test for the equality of two univariate derivatives.
         
         univariate derivatives are considered equal if they have the same derivatives.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality to this
@@ -8985,8 +8964,8 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
         Returns:
             first derivative
         
-              - getValue
-        
+        Also see:
+            getValue
         
         
         """
@@ -9021,7 +9000,7 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
         """
         Get a hashCode for the univariate derivative.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -9048,7 +9027,7 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, univariateDerivative1: 'UnivariateDerivative1', double2: float, univariateDerivative12: 'UnivariateDerivative1') -> 'UnivariateDerivative1':
+    def linearCombination(self, a1: float, b1: 'UnivariateDerivative1', a2: float, b2: 'UnivariateDerivative1') -> 'UnivariateDerivative1':
         """
         Compute a linear combination.
         
@@ -9063,8 +9042,9 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -9079,8 +9059,9 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -9097,8 +9078,9 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -9115,8 +9097,9 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -9135,8 +9118,9 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -9155,19 +9139,19 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-              - linearCombination
-              - linearCombination
-        
+        Also see:
+            linearCombination,
+            linearCombination
         
         
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, univariateDerivative1: 'UnivariateDerivative1', double2: float, univariateDerivative12: 'UnivariateDerivative1', double3: float, univariateDerivative13: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
+    def linearCombination(self, a1: float, b1: 'UnivariateDerivative1', a2: float, b2: 'UnivariateDerivative1', a3: float, b3: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
     @typing.overload
-    def linearCombination(self, double: float, univariateDerivative1: 'UnivariateDerivative1', double2: float, univariateDerivative12: 'UnivariateDerivative1', double3: float, univariateDerivative13: 'UnivariateDerivative1', double4: float, univariateDerivative14: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
+    def linearCombination(self, a1: float, b1: 'UnivariateDerivative1', a2: float, b2: 'UnivariateDerivative1', a3: float, b3: 'UnivariateDerivative1', a4: float, b4: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
     @typing.overload
-    def linearCombination(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], univariateDerivative1Array: typing.Union[typing.List['UnivariateDerivative1'], jpype.JArray]) -> 'UnivariateDerivative1':
+    def linearCombination(self, a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List['UnivariateDerivative1'], jpype.JArray]) -> 'UnivariateDerivative1':
         """
         Compute a linear combination.
         
@@ -9194,15 +9178,15 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
         """
         ...
     @typing.overload
-    def linearCombination(self, univariateDerivative1: 'UnivariateDerivative1', univariateDerivative12: 'UnivariateDerivative1', univariateDerivative13: 'UnivariateDerivative1', univariateDerivative14: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
+    def linearCombination(self, a1: 'UnivariateDerivative1', b1: 'UnivariateDerivative1', a2: 'UnivariateDerivative1', b2: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
     @typing.overload
-    def linearCombination(self, univariateDerivative1: 'UnivariateDerivative1', univariateDerivative12: 'UnivariateDerivative1', univariateDerivative13: 'UnivariateDerivative1', univariateDerivative14: 'UnivariateDerivative1', univariateDerivative15: 'UnivariateDerivative1', univariateDerivative16: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
+    def linearCombination(self, a1: 'UnivariateDerivative1', b1: 'UnivariateDerivative1', a2: 'UnivariateDerivative1', b2: 'UnivariateDerivative1', a3: 'UnivariateDerivative1', b3: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
     @typing.overload
-    def linearCombination(self, univariateDerivative1: 'UnivariateDerivative1', univariateDerivative12: 'UnivariateDerivative1', univariateDerivative13: 'UnivariateDerivative1', univariateDerivative14: 'UnivariateDerivative1', univariateDerivative15: 'UnivariateDerivative1', univariateDerivative16: 'UnivariateDerivative1', univariateDerivative17: 'UnivariateDerivative1', univariateDerivative18: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
+    def linearCombination(self, a1: 'UnivariateDerivative1', b1: 'UnivariateDerivative1', a2: 'UnivariateDerivative1', b2: 'UnivariateDerivative1', a3: 'UnivariateDerivative1', b3: 'UnivariateDerivative1', a4: 'UnivariateDerivative1', b4: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
     @typing.overload
-    def linearCombination(self, univariateDerivative1Array: typing.Union[typing.List['UnivariateDerivative1'], jpype.JArray], univariateDerivative1Array2: typing.Union[typing.List['UnivariateDerivative1'], jpype.JArray]) -> 'UnivariateDerivative1': ...
+    def linearCombination(self, a: typing.Union[typing.List['UnivariateDerivative1'], jpype.JArray], b: typing.Union[typing.List['UnivariateDerivative1'], jpype.JArray]) -> 'UnivariateDerivative1': ...
     @typing.overload
-    def multiply(self, double: float) -> 'UnivariateDerivative1':
+    def multiply(self, n: float) -> 'UnivariateDerivative1':
         """
         Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} = \sum_{i=1}^n \mathrm{this} \]
         
@@ -9311,7 +9295,7 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
     def pow(self, int: int) -> 'UnivariateDerivative1': ...
     @typing.overload
     @staticmethod
-    def pow(double: float, univariateDerivative1: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
+    def pow(a: float, x: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
     @typing.overload
     def remainder(self, a: float) -> org.hipparchus.CalculusFieldElement:
         """
@@ -9329,7 +9313,7 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
         """
         ...
     @typing.overload
-    def remainder(self, univariateDerivative1: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
+    def remainder(self, a: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
     def scalb(self, n: int) -> 'UnivariateDerivative1':
         """
         Multiply the instance by a power of 2.
@@ -9364,7 +9348,7 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1'], Deriv
         """
         ...
     @typing.overload
-    def subtract(self, univariateDerivative1: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
+    def subtract(self, a: 'UnivariateDerivative1') -> 'UnivariateDerivative1': ...
     def taylor(self, delta: float) -> float:
         """
         Evaluate Taylor expansion a univariate derivative.
@@ -9449,14 +9433,14 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
     Since:
         1.7
     
-          - DerivativeStructure
-          - UnivariateDerivative2
-          - Gradient
-          - FieldDerivativeStructure
-          - FieldUnivariateDerivative2
-          - FieldUnivariateDerivative2
-          - FieldGradient
-          - serialized
+    Also see:
+        DerivativeStructure,
+        UnivariateDerivative2,
+        Gradient,
+        FieldDerivativeStructure,
+        FieldUnivariateDerivative2,
+        FieldUnivariateDerivative2,
+        FieldGradient, serialized
     """
     PI: typing.ClassVar['UnivariateDerivative2'] = ...
     """
@@ -9468,9 +9452,9 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
     
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
+    def __init__(self, f0: float, f1: float, f2: float): ...
     @typing.overload
-    def __init__(self, derivativeStructure: DerivativeStructure): ...
+    def __init__(self, ds: DerivativeStructure): ...
     def abs(self) -> 'UnivariateDerivative2':
         """
         absolute value.
@@ -9516,7 +9500,7 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         """
         ...
     @typing.overload
-    def add(self, univariateDerivative2: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
+    def add(self, a: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
     def asin(self) -> 'UnivariateDerivative2':
         """
         Arc sine operation.
@@ -9582,7 +9566,7 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         
         """
         ...
-    def compareTo(self, univariateDerivative2: 'UnivariateDerivative2') -> int:
+    def compareTo(self, o: 'UnivariateDerivative2') -> int:
         """
         Comparison performed considering that derivatives are intrinsically linked to monomials in the corresponding Taylor expansion and that the higher the degree, the smaller the term.
         
@@ -9609,7 +9593,7 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         """
         ...
     @typing.overload
-    def copySign(self, double: float) -> 'UnivariateDerivative2':
+    def copySign(self, sign: float) -> 'UnivariateDerivative2':
         """
         Returns the instance with the sign of the argument. A NaN sign argument is treated as positive.
         
@@ -9631,7 +9615,7 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         """
         ...
     @typing.overload
-    def copySign(self, univariateDerivative2: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
+    def copySign(self, sign: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
     def cos(self) -> 'UnivariateDerivative2':
         """
         Cosine operation.
@@ -9653,7 +9637,7 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         """
         ...
     @typing.overload
-    def divide(self, double: float) -> 'UnivariateDerivative2':
+    def divide(self, a: float) -> 'UnivariateDerivative2':
         """
         '÷' operator.
         
@@ -9675,14 +9659,14 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         """
         ...
     @typing.overload
-    def divide(self, univariateDerivative2: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
+    def divide(self, a: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
     def equals(self, other: typing.Any) -> bool:
         """
         Test for the equality of two univariate derivatives.
         
         univariate derivatives are considered equal if they have the same derivatives.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality to this
@@ -9758,9 +9742,9 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         Returns:
             first derivative
         
-              - getValue
-              - getSecondDerivative
-        
+        Also see:
+            getValue,
+            getSecondDerivative
         
         
         """
@@ -9794,9 +9778,9 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         Returns:
             second derivative
         
-              - getValue
-              - getFirstDerivative
-        
+        Also see:
+            getValue,
+            getFirstDerivative
         
         
         """
@@ -9815,7 +9799,7 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         """
         Get a hashCode for the univariate derivative.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -9841,7 +9825,7 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, univariateDerivative2: 'UnivariateDerivative2', double2: float, univariateDerivative22: 'UnivariateDerivative2') -> 'UnivariateDerivative2':
+    def linearCombination(self, a1: float, b1: 'UnivariateDerivative2', a2: float, b2: 'UnivariateDerivative2') -> 'UnivariateDerivative2':
         """
         Compute a linear combination.
         
@@ -9854,8 +9838,9 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -9868,8 +9853,9 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -9884,8 +9870,9 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -9900,8 +9887,9 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -9918,8 +9906,9 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -9936,19 +9925,19 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-              - linearCombination
-              - linearCombination
-        
+        Also see:
+            linearCombination,
+            linearCombination
         
         
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, univariateDerivative2: 'UnivariateDerivative2', double2: float, univariateDerivative22: 'UnivariateDerivative2', double3: float, univariateDerivative23: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
+    def linearCombination(self, a1: float, b1: 'UnivariateDerivative2', a2: float, b2: 'UnivariateDerivative2', a3: float, b3: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
     @typing.overload
-    def linearCombination(self, double: float, univariateDerivative2: 'UnivariateDerivative2', double2: float, univariateDerivative22: 'UnivariateDerivative2', double3: float, univariateDerivative23: 'UnivariateDerivative2', double4: float, univariateDerivative24: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
+    def linearCombination(self, a1: float, b1: 'UnivariateDerivative2', a2: float, b2: 'UnivariateDerivative2', a3: float, b3: 'UnivariateDerivative2', a4: float, b4: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
     @typing.overload
-    def linearCombination(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], univariateDerivative2Array: typing.Union[typing.List['UnivariateDerivative2'], jpype.JArray]) -> 'UnivariateDerivative2':
+    def linearCombination(self, a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List['UnivariateDerivative2'], jpype.JArray]) -> 'UnivariateDerivative2':
         """
         Compute a linear combination.
         
@@ -9971,13 +9960,13 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         """
         ...
     @typing.overload
-    def linearCombination(self, univariateDerivative2: 'UnivariateDerivative2', univariateDerivative22: 'UnivariateDerivative2', univariateDerivative23: 'UnivariateDerivative2', univariateDerivative24: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
+    def linearCombination(self, a1: 'UnivariateDerivative2', b1: 'UnivariateDerivative2', a2: 'UnivariateDerivative2', b2: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
     @typing.overload
-    def linearCombination(self, univariateDerivative2: 'UnivariateDerivative2', univariateDerivative22: 'UnivariateDerivative2', univariateDerivative23: 'UnivariateDerivative2', univariateDerivative24: 'UnivariateDerivative2', univariateDerivative25: 'UnivariateDerivative2', univariateDerivative26: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
+    def linearCombination(self, a1: 'UnivariateDerivative2', b1: 'UnivariateDerivative2', a2: 'UnivariateDerivative2', b2: 'UnivariateDerivative2', a3: 'UnivariateDerivative2', b3: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
     @typing.overload
-    def linearCombination(self, univariateDerivative2: 'UnivariateDerivative2', univariateDerivative22: 'UnivariateDerivative2', univariateDerivative23: 'UnivariateDerivative2', univariateDerivative24: 'UnivariateDerivative2', univariateDerivative25: 'UnivariateDerivative2', univariateDerivative26: 'UnivariateDerivative2', univariateDerivative27: 'UnivariateDerivative2', univariateDerivative28: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
+    def linearCombination(self, a1: 'UnivariateDerivative2', b1: 'UnivariateDerivative2', a2: 'UnivariateDerivative2', b2: 'UnivariateDerivative2', a3: 'UnivariateDerivative2', b3: 'UnivariateDerivative2', a4: 'UnivariateDerivative2', b4: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
     @typing.overload
-    def linearCombination(self, univariateDerivative2Array: typing.Union[typing.List['UnivariateDerivative2'], jpype.JArray], univariateDerivative2Array2: typing.Union[typing.List['UnivariateDerivative2'], jpype.JArray]) -> 'UnivariateDerivative2': ...
+    def linearCombination(self, a: typing.Union[typing.List['UnivariateDerivative2'], jpype.JArray], b: typing.Union[typing.List['UnivariateDerivative2'], jpype.JArray]) -> 'UnivariateDerivative2': ...
     def log(self) -> 'UnivariateDerivative2':
         """
         Natural logarithm.
@@ -10009,7 +9998,7 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         """
         ...
     @typing.overload
-    def multiply(self, double: float) -> 'UnivariateDerivative2':
+    def multiply(self, n: float) -> 'UnivariateDerivative2':
         """
         Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} = \sum_{i=1}^n \mathrm{this} \]
         
@@ -10102,7 +10091,7 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
     def pow(self, int: int) -> 'UnivariateDerivative2': ...
     @typing.overload
     @staticmethod
-    def pow(double: float, univariateDerivative2: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
+    def pow(a: float, x: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
     def reciprocal(self) -> 'UnivariateDerivative2':
         """
         Returns the multiplicative inverse of this element.
@@ -10128,7 +10117,7 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         """
         ...
     @typing.overload
-    def remainder(self, univariateDerivative2: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
+    def remainder(self, a: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
     def rootN(self, n: int) -> 'UnivariateDerivative2':
         """
         N :sup:`th` root.
@@ -10230,7 +10219,7 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         """
         ...
     @typing.overload
-    def subtract(self, univariateDerivative2: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
+    def subtract(self, a: 'UnivariateDerivative2') -> 'UnivariateDerivative2': ...
     def tan(self) -> 'UnivariateDerivative2':
         """
         Tangent operation.

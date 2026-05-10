@@ -38,11 +38,11 @@ class Attitude(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Attit
         Orbit, AttitudeProvider
     """
     @typing.overload
-    def __init__(self, frame: org.orekit.frames.Frame, timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates): ...
+    def __init__(self, referenceFrame: org.orekit.frames.Frame, orientation: org.orekit.utils.TimeStampedAngularCoordinates): ...
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame, rotation: org.hipparchus.geometry.euclidean.threed.Rotation, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, referenceFrame: org.orekit.frames.Frame, attitude: org.hipparchus.geometry.euclidean.threed.Rotation, spin: org.hipparchus.geometry.euclidean.threed.Vector3D, acceleration: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame, angularCoordinates: org.orekit.utils.AngularCoordinates): ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, referenceFrame: org.orekit.frames.Frame, orientation: org.orekit.utils.AngularCoordinates): ...
     def getDate(self) -> org.orekit.time.AbsoluteDate:
         """
         Get the date of attitude parameters.
@@ -122,7 +122,7 @@ class Attitude(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Attit
         """
         ...
     @typing.overload
-    def shiftedBy(self, double: float) -> 'Attitude':
+    def shiftedBy(self, dt: float) -> 'Attitude':
         """
         Get a time-shifted attitude.
         
@@ -155,7 +155,7 @@ class Attitude(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Attit
         """
         ...
     @typing.overload
-    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> 'Attitude': ...
+    def shiftedBy(self, dt: org.orekit.time.TimeOffset) -> 'Attitude': ...
     def withReferenceFrame(self, newReferenceFrame: org.orekit.frames.Frame) -> 'Attitude':
         """
         Get a similar attitude with a specific reference frame.
@@ -255,7 +255,22 @@ class AttitudeInterpolator(org.orekit.time.AbstractTimeInterpolator[Attitude]):
         
         """
         ...
-    def getSubInterpolators(self) -> java.util.List[org.orekit.time.TimeInterpolator[org.orekit.time.TimeStamped]]: ...
+    def getSubInterpolators(self) -> java.util.List[org.orekit.time.TimeInterpolator[org.orekit.time.TimeStamped]]:
+        """
+        Description copied from class: getSubInterpolators Get all lowest level interpolators implemented by this instance, otherwise return a list with this instance only.
+        
+        An example would be the spacecraft state interpolator which can use different interpolators for each of its attributes (orbit, absolute position-velocity-acceleration coordinates, mass...). In this case, it would return the list of all of these interpolators (or possibly all of their sub-interpolators if they were to use multiple interpolators themselves).
+        
+        Specified by: getSubInterpolators in interface TimeInterpolator
+        
+        Overrides: getSubInterpolators in class AbstractTimeInterpolator
+        
+        Returns:
+            list of interpolators
+        
+        
+        """
+        ...
 
 class AttitudeRotationModel(org.orekit.utils.ParameterDriversProvider):
     """
@@ -348,11 +363,11 @@ class FieldAttitude(org.orekit.time.FieldTimeStamped[_FieldAttitude__T], org.ore
     @typing.overload
     def __init__(self, frame: org.orekit.frames.Frame, timeStampedFieldAngularCoordinates: org.orekit.utils.TimeStampedFieldAngularCoordinates[_FieldAttitude__T]): ...
     @typing.overload
-    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldAttitude__T], frame: org.orekit.frames.Frame, fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[_FieldAttitude__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldAttitude__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldAttitude__T]): ...
+    def __init__(self, date: org.orekit.time.FieldAbsoluteDate[_FieldAttitude__T], referenceFrame: org.orekit.frames.Frame, attitude: org.hipparchus.geometry.euclidean.threed.FieldRotation[_FieldAttitude__T], spin: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldAttitude__T], acceleration: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldAttitude__T]): ...
     @typing.overload
-    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldAttitude__T], frame: org.orekit.frames.Frame, rotation: org.hipparchus.geometry.euclidean.threed.Rotation, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, field2: org.hipparchus.Field[_FieldAttitude__T]): ...
+    def __init__(self, date: org.orekit.time.FieldAbsoluteDate[_FieldAttitude__T], referenceFrame: org.orekit.frames.Frame, attitude: org.hipparchus.geometry.euclidean.threed.Rotation, spin: org.hipparchus.geometry.euclidean.threed.Vector3D, acceleration: org.hipparchus.geometry.euclidean.threed.Vector3D, field: org.hipparchus.Field[_FieldAttitude__T]): ...
     @typing.overload
-    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldAttitude__T], frame: org.orekit.frames.Frame, fieldAngularCoordinates: org.orekit.utils.FieldAngularCoordinates[_FieldAttitude__T]): ...
+    def __init__(self, date: org.orekit.time.FieldAbsoluteDate[_FieldAttitude__T], referenceFrame: org.orekit.frames.Frame, orientation: org.orekit.utils.FieldAngularCoordinates[_FieldAttitude__T]): ...
     def getDate(self) -> org.orekit.time.FieldAbsoluteDate[_FieldAttitude__T]:
         """
         Get the date of attitude parameters.
@@ -432,11 +447,11 @@ class FieldAttitude(org.orekit.time.FieldTimeStamped[_FieldAttitude__T], org.ore
         """
         ...
     @typing.overload
-    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> _FieldAttitude__T: ...
+    def shiftedBy(self, dt: org.orekit.time.TimeOffset) -> _FieldAttitude__T: ...
     @typing.overload
-    def shiftedBy(self, double: float) -> 'FieldAttitude'[_FieldAttitude__T]: ...
+    def shiftedBy(self, dt: float) -> 'FieldAttitude'[_FieldAttitude__T]: ...
     @typing.overload
-    def shiftedBy(self, t: _FieldAttitude__T) -> 'FieldAttitude'[_FieldAttitude__T]: ...
+    def shiftedBy(self, dt: _FieldAttitude__T) -> 'FieldAttitude'[_FieldAttitude__T]: ...
     def toAttitude(self) -> Attitude:
         """
         Converts to an Attitude instance.
@@ -505,7 +520,22 @@ class FieldAttitudeInterpolator(org.orekit.time.AbstractFieldTimeInterpolator[Fi
         
         """
         ...
-    def getSubInterpolators(self) -> java.util.List[org.orekit.time.FieldTimeInterpolator[org.orekit.time.FieldTimeStamped[_FieldAttitudeInterpolator__KK], _FieldAttitudeInterpolator__KK]]: ...
+    def getSubInterpolators(self) -> java.util.List[org.orekit.time.FieldTimeInterpolator[org.orekit.time.FieldTimeStamped[_FieldAttitudeInterpolator__KK], _FieldAttitudeInterpolator__KK]]:
+        """
+        Description copied from class: getSubInterpolators Get all lowest level interpolators implemented by this instance, otherwise return a list with this instance only.
+        
+        An example would be the spacecraft state interpolator which can use different interpolators for each of its attributes (orbit, absolute position-velocity-acceleration coordinates, mass...). In this case, it would return the list of all of these interpolators (or possibly all of their sub-interpolators if they were to use multiple interpolators themselves).
+        
+        Specified by: getSubInterpolators in interface FieldTimeInterpolator
+        
+        Overrides: getSubInterpolators in class AbstractFieldTimeInterpolator
+        
+        Returns:
+            list of interpolators
+        
+        
+        """
+        ...
 
 _FieldInertia__T = typing.TypeVar('_FieldInertia__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldInertia(typing.Generic[_FieldInertia__T]):
@@ -810,9 +840,9 @@ class TargetProvider:
     """
     _getDerivative2TargetDirection_0__T = typing.TypeVar('_getDerivative2TargetDirection_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getDerivative2TargetDirection(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_getDerivative2TargetDirection_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2[_getDerivative2TargetDirection_0__T]]: ...
+    def getDerivative2TargetDirection(self, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.OneAxisEllipsoid, pv: org.orekit.utils.TimeStampedFieldPVCoordinates[_getDerivative2TargetDirection_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2[_getDerivative2TargetDirection_0__T]]: ...
     @typing.overload
-    def getDerivative2TargetDirection(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.UnivariateDerivative2]: ...
+    def getDerivative2TargetDirection(self, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.OneAxisEllipsoid, pv: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.UnivariateDerivative2]: ...
     _getTargetDirection_0__T = typing.TypeVar('_getTargetDirection_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getTargetDirection(self, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.OneAxisEllipsoid, pv: org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetDirection_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTargetDirection_0__T]:
@@ -930,7 +960,7 @@ class AttitudeProvider(org.orekit.propagation.events.EventDetectorsProvider, Att
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+    def getAttitudeRotation(self, state: org.orekit.propagation.SpacecraftState, parameters: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
         """
         Compute the attitude-related rotation corresponding to an orbital state.
         
@@ -962,7 +992,7 @@ class AttitudeProvider(org.orekit.propagation.events.EventDetectorsProvider, Att
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    def getAttitudeRotation(self, pvProv: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     @typing.overload
     def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
     @typing.overload
@@ -1062,9 +1092,9 @@ class GroundPointTarget(TargetProvider):
         ...
     _getDerivative2TargetDirection_0__T = typing.TypeVar('_getDerivative2TargetDirection_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getDerivative2TargetDirection(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_getDerivative2TargetDirection_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2[_getDerivative2TargetDirection_0__T]]: ...
+    def getDerivative2TargetDirection(self, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.OneAxisEllipsoid, pv: org.orekit.utils.TimeStampedFieldPVCoordinates[_getDerivative2TargetDirection_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2[_getDerivative2TargetDirection_0__T]]: ...
     @typing.overload
-    def getDerivative2TargetDirection(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.UnivariateDerivative2]: ...
+    def getDerivative2TargetDirection(self, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.OneAxisEllipsoid, pv: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.UnivariateDerivative2]: ...
     _getTargetDirection_0__T = typing.TypeVar('_getTargetDirection_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getTargetDirection(self, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.OneAxisEllipsoid, pv: org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetDirection_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTargetDirection_0__T]:
@@ -1219,7 +1249,7 @@ class PythonAttitudeBuilder(AttitudeBuilder):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1299,7 +1329,7 @@ class PythonAttitudeRotationModel(AttitudeRotationModel):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1330,7 +1360,7 @@ class PythonAttitudeSwitchHandler(AttitudeSwitchHandler):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1370,7 +1400,7 @@ class PythonTargetProvider(TargetProvider):
         ...
     _getTargetDirection_1__T = typing.TypeVar('_getTargetDirection_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getTargetDirection(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def getTargetDirection(self, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.OneAxisEllipsoid, pv: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     @typing.overload
     def getTargetDirection(self, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.OneAxisEllipsoid, pv: org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetDirection_1__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTargetDirection_1__T]:
         """
@@ -1402,7 +1432,7 @@ class PythonTargetProvider(TargetProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1416,9 +1446,9 @@ class AlignedAndConstrained(AttitudeProvider):
         12.2
     """
     @typing.overload
-    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, targetProvider: typing.Union[TargetProvider, typing.Callable], vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, targetProvider2: typing.Union[TargetProvider, typing.Callable], frame: org.orekit.frames.Frame, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
+    def __init__(self, primarySat: org.hipparchus.geometry.euclidean.threed.Vector3D, primaryTarget: typing.Union[TargetProvider, typing.Callable], secondarySat: org.hipparchus.geometry.euclidean.threed.Vector3D, secondaryTarget: typing.Union[TargetProvider, typing.Callable], inertialFrame: org.orekit.frames.Frame, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.OneAxisEllipsoid): ...
     @typing.overload
-    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, targetProvider: typing.Union[TargetProvider, typing.Callable], vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, targetProvider2: typing.Union[TargetProvider, typing.Callable], extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
+    def __init__(self, primarySat: org.hipparchus.geometry.euclidean.threed.Vector3D, primaryTarget: typing.Union[TargetProvider, typing.Callable], secondarySat: org.hipparchus.geometry.euclidean.threed.Vector3D, secondaryTarget: typing.Union[TargetProvider, typing.Callable], sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.OneAxisEllipsoid): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getAttitude(self, pvProv: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
@@ -1495,7 +1525,7 @@ class AlignedAndConstrained(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    def getAttitudeRotation(self, pvProv: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
 
 class AttitudeProviderModifier(AttitudeProvider):
     """
@@ -1543,13 +1573,13 @@ class AttitudeProviderModifier(AttitudeProvider):
     @typing.overload
     def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
     @typing.overload
-    def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    def getEventDetectors(self, parameterDrivers: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
     _getFieldEventDetectors_0__T = typing.TypeVar('_getFieldEventDetectors_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getFieldEventDetectors_1__T = typing.TypeVar('_getFieldEventDetectors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_0__T]]: ...
     @typing.overload
-    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T], parameterDrivers: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
     @staticmethod
     def getFrozenAttitudeProvider(attitudeProvider: AttitudeProvider) -> 'AttitudeProviderModifier':
         """
@@ -1745,7 +1775,7 @@ class CelestialBodyPointed(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    def getAttitudeRotation(self, pvProv: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
 
 class FixedRate(AttitudeProvider):
     """
@@ -1841,7 +1871,7 @@ class FixedRate(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    def getAttitudeRotation(self, pvProv: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     def getReferenceAttitude(self) -> Attitude:
         """
         Get the reference attitude.
@@ -1862,7 +1892,7 @@ class FrameAlignedProvider(AttitudeProvider):
     @typing.overload
     def __init__(self, rotation: org.hipparchus.geometry.euclidean.threed.Rotation): ...
     @typing.overload
-    def __init__(self, rotation: org.hipparchus.geometry.euclidean.threed.Rotation, frame: org.orekit.frames.Frame): ...
+    def __init__(self, rotation: org.hipparchus.geometry.euclidean.threed.Rotation, reference: org.orekit.frames.Frame): ...
     @typing.overload
     def __init__(self, frame: org.orekit.frames.Frame): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -1941,7 +1971,7 @@ class FrameAlignedProvider(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    def getAttitudeRotation(self, pvProv: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     @staticmethod
     def of(satelliteFrame: org.orekit.frames.Frame) -> AttitudeProvider:
         """
@@ -2049,7 +2079,7 @@ class GroundPointing(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    def getAttitudeRotation(self, pvProv: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     def getBodyFrame(self) -> org.orekit.frames.Frame:
         """
         Get the body frame.
@@ -2068,9 +2098,9 @@ class LofOffset(AttitudeProvider):
     The attitude provider is defined as a rotation offset from some local orbital frame.
     """
     @typing.overload
-    def __init__(self, frame: org.orekit.frames.Frame, lOF: org.orekit.frames.LOF): ...
+    def __init__(self, inertialFrame: org.orekit.frames.Frame, lof: org.orekit.frames.LOF): ...
     @typing.overload
-    def __init__(self, frame: org.orekit.frames.Frame, lOF: org.orekit.frames.LOF, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, double: float, double2: float, double3: float): ...
+    def __init__(self, inertialFrame: org.orekit.frames.Frame, lof: org.orekit.frames.LOF, order: org.hipparchus.geometry.euclidean.threed.RotationOrder, alpha1: float, alpha2: float, alpha3: float): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getAttitude(self, pvProv: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
@@ -2147,7 +2177,7 @@ class LofOffset(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    def getAttitudeRotation(self, pvProv: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     def getInertialFrame(self) -> org.orekit.frames.Frame:
         """
         Get the inertial frame.
@@ -2240,7 +2270,7 @@ class PythonAttitudeProvider(AttitudeProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2433,7 +2463,7 @@ class AggregateBoundedAttitudeProvider(BoundedAttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    def getAttitudeRotation(self, pvProv: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     @typing.overload
     def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
     @typing.overload
@@ -2742,7 +2772,7 @@ class LofOffsetPointing(GroundPointing):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    def getAttitudeRotation(self, pvProv: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     _getTargetPV_0__T = typing.TypeVar('_getTargetPV_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getTargetPV(self, pvProv: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getTargetPV_0__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], date: org.orekit.time.FieldAbsoluteDate[_getTargetPV_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetPV_0__T]:
@@ -2949,7 +2979,7 @@ class PythonAttitudeProviderModifier(AttitudeProviderModifier):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -3040,7 +3070,7 @@ class PythonBoundedAttitudeProvider(BoundedAttitudeProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -3120,7 +3150,7 @@ class PythonGroundPointing(GroundPointing):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -3227,7 +3257,7 @@ class SpinStabilized(AttitudeProviderModifier):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    def getAttitudeRotation(self, pvProv: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     def getUnderlyingAttitudeProvider(self) -> AttitudeProvider:
         """
         Get the underlying attitude provider.
@@ -3254,9 +3284,9 @@ class TabulatedLofOffset(BoundedAttitudeProvider):
         LofOffset, TabulatedProvider
     """
     @typing.overload
-    def __init__(self, frame: org.orekit.frames.Frame, lOF: org.orekit.frames.LOF, list: java.util.List[org.orekit.utils.TimeStampedAngularCoordinates], int: int, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter): ...
+    def __init__(self, inertialFrame: org.orekit.frames.Frame, lof: org.orekit.frames.LOF, table: java.util.List[org.orekit.utils.TimeStampedAngularCoordinates], n: int, filter: org.orekit.utils.AngularDerivativesFilter): ...
     @typing.overload
-    def __init__(self, frame: org.orekit.frames.Frame, lOF: org.orekit.frames.LOF, list: java.util.List[org.orekit.utils.TimeStampedAngularCoordinates], int: int, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate): ...
+    def __init__(self, inertialFrame: org.orekit.frames.Frame, lof: org.orekit.frames.LOF, table: java.util.List[org.orekit.utils.TimeStampedAngularCoordinates], n: int, filter: org.orekit.utils.AngularDerivativesFilter, minDate: org.orekit.time.AbsoluteDate, maxDate: org.orekit.time.AbsoluteDate): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getAttitude(self, pvProv: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
@@ -3341,9 +3371,9 @@ class TabulatedProvider(BoundedAttitudeProvider):
         TabulatedLofOffset
     """
     @typing.overload
-    def __init__(self, list: java.util.List[org.orekit.utils.TimeStampedAngularCoordinates], int: int, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, attitudeBuilder: AttitudeBuilder): ...
+    def __init__(self, table: java.util.List[org.orekit.utils.TimeStampedAngularCoordinates], n: int, filter: org.orekit.utils.AngularDerivativesFilter, minDate: org.orekit.time.AbsoluteDate, maxDate: org.orekit.time.AbsoluteDate, builder: AttitudeBuilder): ...
     @typing.overload
-    def __init__(self, frame: org.orekit.frames.Frame, list: java.util.List[org.orekit.utils.TimeStampedAngularCoordinates], int: int, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter): ...
+    def __init__(self, referenceFrame: org.orekit.frames.Frame, table: java.util.List[org.orekit.utils.TimeStampedAngularCoordinates], n: int, filter: org.orekit.utils.AngularDerivativesFilter): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getAttitude(self, pvProv: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
@@ -3498,7 +3528,7 @@ class PythonGroundPointingAttitudeModifier(GroundPointingAttitudeModifier):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -3945,7 +3975,7 @@ class PythonAbstractSwitchingAttitudeProvider(org.orekit.attitudes.AbstractSwitc
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    def getAttitudeRotation(self, pvProv: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     def pythonDecRef(self) -> None:
         """
         Part of JCC Python interface to object
@@ -3958,7 +3988,7 @@ class PythonAbstractSwitchingAttitudeProvider(org.orekit.attitudes.AbstractSwitc
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

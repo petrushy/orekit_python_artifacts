@@ -61,7 +61,7 @@ class IodGauss:
         """
         ...
     @typing.overload
-    def estimate(self, frame: org.orekit.frames.Frame, angularAzEl: org.orekit.estimation.measurements.AngularAzEl, angularAzEl2: org.orekit.estimation.measurements.AngularAzEl, angularAzEl3: org.orekit.estimation.measurements.AngularAzEl) -> org.orekit.orbits.Orbit:
+    def estimate(self, outputFrame: org.orekit.frames.Frame, azEl1: org.orekit.estimation.measurements.AngularAzEl, azEl2: org.orekit.estimation.measurements.AngularAzEl, azEl3: org.orekit.estimation.measurements.AngularAzEl) -> org.orekit.orbits.Orbit:
         """
         Estimate and orbit based on Gauss Intial Orbit Determination method.
         
@@ -130,7 +130,7 @@ class IodGibbs:
         """
         ...
     @typing.overload
-    def estimate(self, frame: org.orekit.frames.Frame, pV: org.orekit.estimation.measurements.PV, pV2: org.orekit.estimation.measurements.PV, pV3: org.orekit.estimation.measurements.PV) -> org.orekit.orbits.Orbit:
+    def estimate(self, frame: org.orekit.frames.Frame, p1: org.orekit.estimation.measurements.PV, p2: org.orekit.estimation.measurements.PV, p3: org.orekit.estimation.measurements.PV) -> org.orekit.orbits.Orbit:
         """
         Give an initial orbit estimation, assuming Keplerian motion. All observations should be from the same location.
         
@@ -182,7 +182,7 @@ class IodGooding:
         """
         ...
     @typing.overload
-    def estimate(self, frame: org.orekit.frames.Frame, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D3: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D4: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, vector3D5: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate2: org.orekit.time.AbsoluteDate, vector3D6: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate3: org.orekit.time.AbsoluteDate, double: float, double2: float) -> org.orekit.orbits.Orbit:
+    def estimate(self, outputFrame: org.orekit.frames.Frame, O1: org.hipparchus.geometry.euclidean.threed.Vector3D, O2: org.hipparchus.geometry.euclidean.threed.Vector3D, O3: org.hipparchus.geometry.euclidean.threed.Vector3D, lineOfSight1: org.hipparchus.geometry.euclidean.threed.Vector3D, dateObs1: org.orekit.time.AbsoluteDate, lineOfSight2: org.hipparchus.geometry.euclidean.threed.Vector3D, dateObs2: org.orekit.time.AbsoluteDate, lineOfSight3: org.hipparchus.geometry.euclidean.threed.Vector3D, dateObs3: org.orekit.time.AbsoluteDate, rho1init: float, rho3init: float) -> org.orekit.orbits.Orbit:
         """
         Estimate orbit from three line of sight.
         
@@ -230,9 +230,9 @@ class IodGooding:
         """
         ...
     @typing.overload
-    def estimate(self, frame: org.orekit.frames.Frame, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D3: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D4: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, vector3D5: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate2: org.orekit.time.AbsoluteDate, vector3D6: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate3: org.orekit.time.AbsoluteDate, double: float, double2: float, int: int, boolean: bool) -> org.orekit.orbits.Orbit: ...
+    def estimate(self, outputFrame: org.orekit.frames.Frame, O1: org.hipparchus.geometry.euclidean.threed.Vector3D, O2: org.hipparchus.geometry.euclidean.threed.Vector3D, O3: org.hipparchus.geometry.euclidean.threed.Vector3D, lineOfSight1: org.hipparchus.geometry.euclidean.threed.Vector3D, dateObs1: org.orekit.time.AbsoluteDate, lineOfSight2: org.hipparchus.geometry.euclidean.threed.Vector3D, dateObs2: org.orekit.time.AbsoluteDate, lineOfSight3: org.hipparchus.geometry.euclidean.threed.Vector3D, dateObs3: org.orekit.time.AbsoluteDate, rho1init: float, rho3init: float, nRev: int, direction: bool) -> org.orekit.orbits.Orbit: ...
     @typing.overload
-    def estimate(self, frame: org.orekit.frames.Frame, angularAzEl: org.orekit.estimation.measurements.AngularAzEl, angularAzEl2: org.orekit.estimation.measurements.AngularAzEl, angularAzEl3: org.orekit.estimation.measurements.AngularAzEl) -> org.orekit.orbits.Orbit:
+    def estimate(self, outputFrame: org.orekit.frames.Frame, azEl1: org.orekit.estimation.measurements.AngularAzEl, azEl2: org.orekit.estimation.measurements.AngularAzEl, azEl3: org.orekit.estimation.measurements.AngularAzEl) -> org.orekit.orbits.Orbit:
         """
         This method doesn't need initial guesses of range values since they are computed by a Gauss algorithm.
         
@@ -486,7 +486,7 @@ class IodHerrickGibbs:
         """
         ...
     @typing.overload
-    def estimate(self, frame: org.orekit.frames.Frame, pV: org.orekit.estimation.measurements.PV, pV2: org.orekit.estimation.measurements.PV, pV3: org.orekit.estimation.measurements.PV) -> org.orekit.orbits.Orbit:
+    def estimate(self, frame: org.orekit.frames.Frame, p1: org.orekit.estimation.measurements.PV, p2: org.orekit.estimation.measurements.PV, p3: org.orekit.estimation.measurements.PV) -> org.orekit.orbits.Orbit:
         """
         Give an initial orbit estimation, assuming Keplerian motion.
         
@@ -568,7 +568,7 @@ class IodLambert:
         """
         ...
     @typing.overload
-    def estimate(self, frame: org.orekit.frames.Frame, boolean: bool, int: int, pV: org.orekit.estimation.measurements.PV, pV2: org.orekit.estimation.measurements.PV) -> org.orekit.orbits.Orbit:
+    def estimate(self, frame: org.orekit.frames.Frame, posigrade: bool, nRev: int, p1: org.orekit.estimation.measurements.PV, p2: org.orekit.estimation.measurements.PV) -> org.orekit.orbits.Orbit:
         """
         Estimate an initial orbit from two position measurements.
         
@@ -637,7 +637,7 @@ class IodLaplace:
         """
         ...
     @typing.overload
-    def estimate(self, frame: org.orekit.frames.Frame, angularAzEl: org.orekit.estimation.measurements.AngularAzEl, angularAzEl2: org.orekit.estimation.measurements.AngularAzEl, angularAzEl3: org.orekit.estimation.measurements.AngularAzEl) -> org.orekit.orbits.Orbit:
+    def estimate(self, outputFrame: org.orekit.frames.Frame, azEl1: org.orekit.estimation.measurements.AngularAzEl, azEl2: org.orekit.estimation.measurements.AngularAzEl, azEl3: org.orekit.estimation.measurements.AngularAzEl) -> org.orekit.orbits.Orbit:
         """
         Estimate the orbit from three angular observations at the same location.
         
@@ -688,7 +688,7 @@ class IodLaplace:
     @typing.overload
     def estimate(self, frame: org.orekit.frames.Frame, angularRaDec: org.orekit.estimation.measurements.AngularRaDec, angularRaDec2: org.orekit.estimation.measurements.AngularRaDec, angularRaDec3: org.orekit.estimation.measurements.AngularRaDec) -> org.orekit.orbits.Orbit: ...
     @typing.overload
-    def estimate(self, frame: org.orekit.frames.Frame, pVCoordinates: org.orekit.utils.PVCoordinates, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate2: org.orekit.time.AbsoluteDate, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate3: org.orekit.time.AbsoluteDate, vector3D3: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.orekit.orbits.Orbit: ...
+    def estimate(self, outputFrame: org.orekit.frames.Frame, obsPva: org.orekit.utils.PVCoordinates, obsDate1: org.orekit.time.AbsoluteDate, los1: org.hipparchus.geometry.euclidean.threed.Vector3D, obsDate2: org.orekit.time.AbsoluteDate, los2: org.hipparchus.geometry.euclidean.threed.Vector3D, obsDate3: org.orekit.time.AbsoluteDate, los3: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.orekit.orbits.Orbit: ...
 
 
 class __module_protocol__(Protocol):

@@ -206,16 +206,16 @@ class DateComponents(java.io.Serializable, java.lang.Comparable['DateComponents'
     
     """
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, offset: int): ...
     @typing.overload
     def __init__(self, int: int, int2: int): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, int3: int): ...
+    def __init__(self, year: int, month: int, day: int): ...
     @typing.overload
-    def __init__(self, int: int, month: 'Month', int2: int): ...
+    def __init__(self, year: int, month: 'Month', day: int): ...
     @typing.overload
     def __init__(self, dateComponents: 'DateComponents', int: int): ...
-    def compareTo(self, dateComponents: 'DateComponents') -> int:
+    def compareTo(self, other: 'DateComponents') -> int:
         """
         Specified by: Comparable in interface Comparable
         
@@ -243,7 +243,7 @@ class DateComponents(java.io.Serializable, java.lang.Comparable['DateComponents'
         
         """
         ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
         Overrides: Object in class Object
         
@@ -420,15 +420,15 @@ class DateTimeComponents(java.io.Serializable, java.lang.Comparable['DateTimeCom
     @typing.overload
     def __init__(self, int: int, int2: int, int3: int): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, int3: int, int4: int, int5: int, double: float): ...
+    def __init__(self, year: int, month: int, day: int, hour: int, minute: int, second: float): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, int3: int, int4: int, int5: int, timeOffset: 'TimeOffset'): ...
+    def __init__(self, year: int, month: int, day: int, hour: int, minute: int, second: 'TimeOffset'): ...
     @typing.overload
     def __init__(self, int: int, month: 'Month', int2: int): ...
     @typing.overload
-    def __init__(self, int: int, month: 'Month', int2: int, int3: int, int4: int, double: float): ...
+    def __init__(self, year: int, month: 'Month', day: int, hour: int, minute: int, second: float): ...
     @typing.overload
-    def __init__(self, int: int, month: 'Month', int2: int, int3: int, int4: int, timeOffset: 'TimeOffset'): ...
+    def __init__(self, year: int, month: 'Month', day: int, hour: int, minute: int, second: 'TimeOffset'): ...
     @typing.overload
     def __init__(self, dateComponents: DateComponents, timeComponents: 'TimeComponents'): ...
     @typing.overload
@@ -437,14 +437,14 @@ class DateTimeComponents(java.io.Serializable, java.lang.Comparable['DateTimeCom
     def __init__(self, dateTimeComponents: 'DateTimeComponents', long: int, timeUnit: java.util.concurrent.TimeUnit): ...
     @typing.overload
     def __init__(self, dateTimeComponents: 'DateTimeComponents', timeOffset: 'TimeOffset'): ...
-    def compareTo(self, dateTimeComponents: 'DateTimeComponents') -> int:
+    def compareTo(self, other: 'DateTimeComponents') -> int:
         """
         Specified by: Comparable in interface Comparable
         
         
         """
         ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
         Overrides: Object in class Object
         
@@ -479,7 +479,7 @@ class DateTimeComponents(java.io.Serializable, java.lang.Comparable['DateTimeCom
         """
         ...
     @typing.overload
-    def offsetFrom(self, dateTimeComponents: 'DateTimeComponents') -> float:
+    def offsetFrom(self, dateTime: 'DateTimeComponents') -> float:
         """
         Compute the seconds offset between two instances.
         
@@ -507,7 +507,7 @@ class DateTimeComponents(java.io.Serializable, java.lang.Comparable['DateTimeCom
         """
         ...
     @typing.overload
-    def offsetFrom(self, dateTimeComponents: 'DateTimeComponents', timeUnit: java.util.concurrent.TimeUnit) -> int: ...
+    def offsetFrom(self, dateTime: 'DateTimeComponents', timeUnit: java.util.concurrent.TimeUnit) -> int: ...
     @staticmethod
     def parseDateTime(string: str) -> 'DateTimeComponents':
         """
@@ -563,7 +563,7 @@ class DateTimeComponents(java.io.Serializable, java.lang.Comparable['DateTimeCom
         """
         ...
     @typing.overload
-    def toString(self, int: int) -> str:
+    def toString(self, minuteDuration: int) -> str:
         """
         Return a string representation of this date-time, rounded to millisecond precision.
         
@@ -604,7 +604,7 @@ class DateTimeComponents(java.io.Serializable, java.lang.Comparable['DateTimeCom
         """
         ...
     @typing.overload
-    def toString(self, int: int, int2: int) -> str: ...
+    def toString(self, minuteDuration: int, fractionDigits: int) -> str: ...
     def toStringRfc3339(self) -> str:
         """
         Represent the given date and time as a string according to the format in RFC 3339. RFC3339 is a restricted subset of ISO 8601 with a well defined grammar. This method includes enough precision to represent the point in time without rounding up to the next minute.
@@ -772,13 +772,13 @@ class FieldTimeInterpolator(typing.Generic[_FieldTimeInterpolator__T, _FieldTime
         """
         ...
     @typing.overload
-    def interpolate(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_FieldTimeInterpolator__KK], collection: typing.Union[java.util.Collection[_FieldTimeInterpolator__T], typing.Sequence[_FieldTimeInterpolator__T], typing.Set[_FieldTimeInterpolator__T]]) -> _FieldTimeInterpolator__T: ...
+    def interpolate(self, interpolationDate: 'FieldAbsoluteDate'[_FieldTimeInterpolator__KK], sample: typing.Union[java.util.Collection[_FieldTimeInterpolator__T], typing.Sequence[_FieldTimeInterpolator__T], typing.Set[_FieldTimeInterpolator__T]]) -> _FieldTimeInterpolator__T: ...
     @typing.overload
-    def interpolate(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_FieldTimeInterpolator__KK], stream: java.util.stream.Stream[_FieldTimeInterpolator__T]) -> _FieldTimeInterpolator__T: ...
+    def interpolate(self, interpolationDate: 'FieldAbsoluteDate'[_FieldTimeInterpolator__KK], sample: java.util.stream.Stream[_FieldTimeInterpolator__T]) -> _FieldTimeInterpolator__T: ...
     @typing.overload
-    def interpolate(self, absoluteDate: 'AbsoluteDate', collection: typing.Union[java.util.Collection[_FieldTimeInterpolator__T], typing.Sequence[_FieldTimeInterpolator__T], typing.Set[_FieldTimeInterpolator__T]]) -> _FieldTimeInterpolator__T: ...
+    def interpolate(self, interpolationDate: 'AbsoluteDate', sample: typing.Union[java.util.Collection[_FieldTimeInterpolator__T], typing.Sequence[_FieldTimeInterpolator__T], typing.Set[_FieldTimeInterpolator__T]]) -> _FieldTimeInterpolator__T: ...
     @typing.overload
-    def interpolate(self, absoluteDate: 'AbsoluteDate', stream: java.util.stream.Stream[_FieldTimeInterpolator__T]) -> _FieldTimeInterpolator__T: ...
+    def interpolate(self, interpolationDate: 'AbsoluteDate', sample: java.util.stream.Stream[_FieldTimeInterpolator__T]) -> _FieldTimeInterpolator__T: ...
 
 _FieldTimeStamped__T = typing.TypeVar('_FieldTimeStamped__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTimeStamped(typing.Generic[_FieldTimeStamped__T]):
@@ -1012,9 +1012,9 @@ class OffsetModel(java.io.Serializable):
         UTCTAIOffsetsLoader, serialized
     """
     @typing.overload
-    def __init__(self, dateComponents: DateComponents, int: int): ...
+    def __init__(self, start: DateComponents, offset: int): ...
     @typing.overload
-    def __init__(self, dateComponents: DateComponents, int: int, timeOffset: 'TimeOffset', int2: int): ...
+    def __init__(self, start: DateComponents, mjdRef: int, offset: 'TimeOffset', slope: int): ...
     def getMJDRef(self) -> int:
         """
         Get the reference date of the linear model as a modified julian day.
@@ -1085,27 +1085,27 @@ class TimeComponents(java.io.Serializable, java.lang.Comparable['TimeComponents'
     @typing.overload
     def __init__(self, double: float): ...
     @typing.overload
-    def __init__(self, int: int, double: float): ...
+    def __init__(self, secondInDayA: int, secondInDayB: float): ...
     @typing.overload
     def __init__(self, int: int, int2: int, double: float): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, double: float, int3: int): ...
+    def __init__(self, hour: int, minute: int, second: float, minutesFromUTC: int): ...
     @typing.overload
     def __init__(self, int: int, int2: int, timeOffset: 'TimeOffset'): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, timeOffset: 'TimeOffset', int3: int): ...
+    def __init__(self, hour: int, minute: int, second: 'TimeOffset', minutesFromUTC: int): ...
     @typing.overload
     def __init__(self, timeOffset: 'TimeOffset'): ...
     @typing.overload
     def __init__(self, timeOffset: 'TimeOffset', timeOffset2: 'TimeOffset', int: int): ...
-    def compareTo(self, timeComponents: 'TimeComponents') -> int:
+    def compareTo(self, other: 'TimeComponents') -> int:
         """
         Specified by: Comparable in interface Comparable
         
         
         """
         ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
         Overrides: Object in class Object
         
@@ -1380,9 +1380,9 @@ class TimeInterpolator(typing.Generic[_TimeInterpolator__T]):
         """
         ...
     @typing.overload
-    def interpolate(self, absoluteDate: 'AbsoluteDate', collection: typing.Union[java.util.Collection[_TimeInterpolator__T], typing.Sequence[_TimeInterpolator__T], typing.Set[_TimeInterpolator__T]]) -> _TimeInterpolator__T: ...
+    def interpolate(self, interpolationDate: 'AbsoluteDate', sample: typing.Union[java.util.Collection[_TimeInterpolator__T], typing.Sequence[_TimeInterpolator__T], typing.Set[_TimeInterpolator__T]]) -> _TimeInterpolator__T: ...
     @typing.overload
-    def interpolate(self, absoluteDate: 'AbsoluteDate', stream: java.util.stream.Stream[_TimeInterpolator__T]) -> _TimeInterpolator__T: ...
+    def interpolate(self, interpolationDate: 'AbsoluteDate', sample: java.util.stream.Stream[_TimeInterpolator__T]) -> _TimeInterpolator__T: ...
 
 class TimeInterval:
     """
@@ -1395,7 +1395,7 @@ class TimeInterval:
         AbsoluteDate
     """
     @typing.overload
-    def contains(self, timeInterval: 'TimeInterval') -> bool:
+    def contains(self, timeStamped: 'TimeInterval') -> bool:
         """
         Method returning true if and only if the dated input is contained within the closed interval.
         
@@ -1560,13 +1560,13 @@ class TimeOffset(java.lang.Comparable['TimeOffset'], java.io.Serializable):
     @typing.overload
     def __init__(self, long: int, timeOffset: 'TimeOffset'): ...
     @typing.overload
-    def __init__(self, long: int, timeOffset: 'TimeOffset', long2: int, timeOffset2: 'TimeOffset'): ...
+    def __init__(self, f1: int, t1: 'TimeOffset', f2: int, t2: 'TimeOffset'): ...
     @typing.overload
-    def __init__(self, long: int, timeOffset: 'TimeOffset', long2: int, timeOffset2: 'TimeOffset', long3: int, timeOffset3: 'TimeOffset'): ...
+    def __init__(self, f1: int, t1: 'TimeOffset', f2: int, t2: 'TimeOffset', f3: int, t3: 'TimeOffset'): ...
     @typing.overload
-    def __init__(self, long: int, timeOffset: 'TimeOffset', long2: int, timeOffset2: 'TimeOffset', long3: int, timeOffset3: 'TimeOffset', long4: int, timeOffset4: 'TimeOffset'): ...
+    def __init__(self, f1: int, t1: 'TimeOffset', f2: int, t2: 'TimeOffset', f3: int, t3: 'TimeOffset', f4: int, t4: 'TimeOffset'): ...
     @typing.overload
-    def __init__(self, long: int, timeOffset: 'TimeOffset', long2: int, timeOffset2: 'TimeOffset', long3: int, timeOffset3: 'TimeOffset', long4: int, timeOffset4: 'TimeOffset', long5: int, timeOffset5: 'TimeOffset'): ...
+    def __init__(self, f1: int, t1: 'TimeOffset', f2: int, t2: 'TimeOffset', f3: int, t3: 'TimeOffset', f4: int, t4: 'TimeOffset', f5: int, t5: 'TimeOffset'): ...
     @typing.overload
     def __init__(self, *timeOffset: 'TimeOffset'): ...
     def add(self, t: 'TimeOffset') -> 'TimeOffset':
@@ -1613,7 +1613,7 @@ class TimeOffset(java.lang.Comparable['TimeOffset'], java.io.Serializable):
         
         """
         ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, o: typing.Any) -> bool:
         """
         Overrides: Object in class Object
         
@@ -2450,8 +2450,8 @@ class TimeScalesFactory(java.io.Serializable):
             7.1
         
         Also see:
-            `USNO tai-utc.dat file <http://maia.usno.navy.mil/ser7/tai-utc.dat>`, `IERS UTC-TAI.history file
-            <http://hpiers.obspm.fr/eoppc/bul/bulc/UTC-TAI.history>`, TAIUTCDatFilesLoader,
+            `USNO tai-utc.dat file <http://maia.usno.navy.mil/ser7/tai-utc.dat>`,
+            UTC, TAIUTCDatFilesLoader,
             UTCTAIHistoryFilesLoader, getUTC,
             clearUTCTAIOffsetsLoaders
         
@@ -2644,10 +2644,10 @@ class TimeScalesFactory(java.io.Serializable):
         ...
     @typing.overload
     @staticmethod
-    def getUT1(eOPHistory: org.orekit.frames.EOPHistory) -> 'UT1Scale': ...
+    def getUT1(history: org.orekit.frames.EOPHistory) -> 'UT1Scale': ...
     @typing.overload
     @staticmethod
-    def getUT1(iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> 'UT1Scale': ...
+    def getUT1(conventions: org.orekit.utils.IERSConventions, simpleEOP: bool) -> 'UT1Scale': ...
     @staticmethod
     def getUTC() -> 'UTCScale':
         """
@@ -2671,7 +2671,7 @@ class TimeShiftable(typing.Generic[_TimeShiftable__T]):
     This interface represents objects that can be shifted in time.
     """
     @typing.overload
-    def shiftedBy(self, double: float) -> _TimeShiftable__T:
+    def shiftedBy(self, dt: float) -> _TimeShiftable__T:
         """
         Get a time-shifted instance.
         
@@ -2696,7 +2696,7 @@ class TimeShiftable(typing.Generic[_TimeShiftable__T]):
         """
         ...
     @typing.overload
-    def shiftedBy(self, timeOffset: TimeOffset) -> _TimeShiftable__T: ...
+    def shiftedBy(self, dt: TimeOffset) -> _TimeShiftable__T: ...
 
 class TimeStamped:
     """
@@ -2826,9 +2826,9 @@ class AGILeapSecondFilesLoader(org.orekit.data.AbstractSelfFeedingLoader, UTCTAI
     
     """
     @typing.overload
-    def __init__(self, string: str): ...
+    def __init__(self, supportedNames: str): ...
     @typing.overload
-    def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
+    def __init__(self, supportedNames: str, manager: org.orekit.data.DataProvidersManager): ...
     def loadOffsets(self) -> java.util.List[OffsetModel]:
         """
         Load UTC-TAI offsets entries.
@@ -3046,17 +3046,17 @@ class AbsoluteDate(TimeOffset, TimeStamped, TimeShiftable['AbsoluteDate'], java.
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, int3: int, int4: int, int5: int, double: float, timeScale: TimeScale): ...
+    def __init__(self, year: int, month: int, day: int, hour: int, minute: int, second: float, timeScale: TimeScale): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, int3: int, int4: int, int5: int, timeOffset: TimeOffset, timeScale: TimeScale): ...
+    def __init__(self, year: int, month: int, day: int, hour: int, minute: int, second: TimeOffset, timeScale: TimeScale): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, int3: int, timeScale: TimeScale): ...
+    def __init__(self, year: int, month: int, day: int, timeScale: TimeScale): ...
     @typing.overload
-    def __init__(self, int: int, month: Month, int2: int, int3: int, int4: int, double: float, timeScale: TimeScale): ...
+    def __init__(self, year: int, month: Month, day: int, hour: int, minute: int, second: float, timeScale: TimeScale): ...
     @typing.overload
-    def __init__(self, int: int, month: Month, int2: int, int3: int, int4: int, timeOffset: TimeOffset, timeScale: TimeScale): ...
+    def __init__(self, year: int, month: Month, day: int, hour: int, minute: int, second: TimeOffset, timeScale: TimeScale): ...
     @typing.overload
-    def __init__(self, int: int, month: Month, int2: int, timeScale: TimeScale): ...
+    def __init__(self, year: int, month: Month, day: int, timeScale: TimeScale): ...
     @typing.overload
     def __init__(self, string: str, timeScale: TimeScale): ...
     @typing.overload
@@ -3163,7 +3163,7 @@ class AbsoluteDate(TimeOffset, TimeStamped, TimeShiftable['AbsoluteDate'], java.
         ...
     @typing.overload
     @staticmethod
-    def createJDDate(int: int, double: float, timeScale: TimeScale) -> 'AbsoluteDate':
+    def createJDDate(jd: int, secondsSinceNoon: float, timeScale: TimeScale) -> 'AbsoluteDate':
         """
         Build an instance corresponding to a Julian Day date.
         
@@ -3197,7 +3197,7 @@ class AbsoluteDate(TimeOffset, TimeStamped, TimeShiftable['AbsoluteDate'], java.
         ...
     @typing.overload
     @staticmethod
-    def createJDDate(int: int, double: float, timeScale: TimeScale, timeScale2: TimeScale) -> 'AbsoluteDate': ...
+    def createJDDate(jd: int, secondsSinceNoon: float, timeScale: TimeScale, pivotTimeScale: TimeScale) -> 'AbsoluteDate': ...
     @staticmethod
     def createJulianEpoch(julianEpoch: float) -> 'AbsoluteDate':
         """
@@ -3226,10 +3226,10 @@ class AbsoluteDate(TimeOffset, TimeStamped, TimeShiftable['AbsoluteDate'], java.
         ...
     @typing.overload
     @staticmethod
-    def createMJDDate(int: int, double: float, timeScale: TimeScale) -> 'AbsoluteDate': ...
+    def createMJDDate(mjd: int, secondsInDay: float, timeScale: TimeScale) -> 'AbsoluteDate': ...
     @typing.overload
     @staticmethod
-    def createMJDDate(int: int, timeOffset: TimeOffset, timeScale: TimeScale) -> 'AbsoluteDate': ...
+    def createMJDDate(mjd: int, secondsInDay: TimeOffset, timeScale: TimeScale) -> 'AbsoluteDate': ...
     @staticmethod
     def createMedian(date1: 'AbsoluteDate', date2: 'AbsoluteDate') -> 'AbsoluteDate':
         """
@@ -3249,7 +3249,7 @@ class AbsoluteDate(TimeOffset, TimeStamped, TimeShiftable['AbsoluteDate'], java.
         """
         ...
     @typing.overload
-    def durationFrom(self, timeStamped: typing.Union[TimeStamped, typing.Callable]) -> float:
+    def durationFrom(self, instant: typing.Union[TimeStamped, typing.Callable]) -> float:
         """
         Compute the physically elapsed duration between two instants.
         
@@ -3292,11 +3292,11 @@ class AbsoluteDate(TimeOffset, TimeStamped, TimeShiftable['AbsoluteDate'], java.
         """
         ...
     @typing.overload
-    def durationFrom(self, absoluteDate: 'AbsoluteDate') -> float: ...
+    def durationFrom(self, instant: 'AbsoluteDate') -> float: ...
     @typing.overload
-    def durationFrom(self, absoluteDate: 'AbsoluteDate', timeUnit: java.util.concurrent.TimeUnit) -> int: ...
+    def durationFrom(self, instant: 'AbsoluteDate', timeUnit: java.util.concurrent.TimeUnit) -> int: ...
     @typing.overload
-    def getComponents(self, int: int) -> DateTimeComponents:
+    def getComponents(self, timeScale: int) -> DateTimeComponents:
         """
         Split the instance into date/time components.
         
@@ -3644,7 +3644,7 @@ class AbsoluteDate(TimeOffset, TimeStamped, TimeShiftable['AbsoluteDate'], java.
         ...
     @typing.overload
     @staticmethod
-    def parseCCSDSCalendarSegmentedTimeCode(byte: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes]) -> 'AbsoluteDate':
+    def parseCCSDSCalendarSegmentedTimeCode(preambleField: int, timeField: typing.Union[typing.List[int], jpype.JArray, bytes]) -> 'AbsoluteDate':
         """
         CCSDS Calendar Segmented Time Code is defined in the blue book: CCSDS Time Code Format (CCSDS 301.0-B-4) published in November 2010
         
@@ -3664,10 +3664,10 @@ class AbsoluteDate(TimeOffset, TimeStamped, TimeShiftable['AbsoluteDate'], java.
         ...
     @typing.overload
     @staticmethod
-    def parseCCSDSCalendarSegmentedTimeCode(byte: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], timeScale: TimeScale) -> 'AbsoluteDate': ...
+    def parseCCSDSCalendarSegmentedTimeCode(preambleField: int, timeField: typing.Union[typing.List[int], jpype.JArray, bytes], utc: TimeScale) -> 'AbsoluteDate': ...
     @typing.overload
     @staticmethod
-    def parseCCSDSDaySegmentedTimeCode(byte: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], dateComponents: DateComponents) -> 'AbsoluteDate':
+    def parseCCSDSDaySegmentedTimeCode(preambleField: int, timeField: typing.Union[typing.List[int], jpype.JArray, bytes], agencyDefinedEpoch: DateComponents) -> 'AbsoluteDate':
         """
         CCSDS Day Segmented Time Code is defined in the blue book: CCSDS Time Code Format (CCSDS 301.0-B-4) published in November 2010
         
@@ -3689,10 +3689,10 @@ class AbsoluteDate(TimeOffset, TimeStamped, TimeShiftable['AbsoluteDate'], java.
         ...
     @typing.overload
     @staticmethod
-    def parseCCSDSDaySegmentedTimeCode(byte: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], dateComponents: DateComponents, timeScale: TimeScale) -> 'AbsoluteDate': ...
+    def parseCCSDSDaySegmentedTimeCode(preambleField: int, timeField: typing.Union[typing.List[int], jpype.JArray, bytes], agencyDefinedEpoch: DateComponents, utc: TimeScale) -> 'AbsoluteDate': ...
     @typing.overload
     @staticmethod
-    def parseCCSDSUnsegmentedTimeCode(byte: int, byte2: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], absoluteDate: 'AbsoluteDate') -> 'AbsoluteDate':
+    def parseCCSDSUnsegmentedTimeCode(preambleField1: int, preambleField2: int, timeField: typing.Union[typing.List[int], jpype.JArray, bytes], agencyDefinedEpoch: 'AbsoluteDate') -> 'AbsoluteDate':
         """
         CCSDS Unsegmented Time Code is defined in the blue book: CCSDS Time Code Format (CCSDS 301.0-B-4) published in November 2010
         
@@ -3721,9 +3721,9 @@ class AbsoluteDate(TimeOffset, TimeStamped, TimeShiftable['AbsoluteDate'], java.
         ...
     @typing.overload
     @staticmethod
-    def parseCCSDSUnsegmentedTimeCode(byte: int, byte2: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], absoluteDate: 'AbsoluteDate', absoluteDate2: 'AbsoluteDate') -> 'AbsoluteDate': ...
+    def parseCCSDSUnsegmentedTimeCode(preambleField1: int, preambleField2: int, timeField: typing.Union[typing.List[int], jpype.JArray, bytes], agencyDefinedEpoch: 'AbsoluteDate', ccsdsEpoch: 'AbsoluteDate') -> 'AbsoluteDate': ...
     @typing.overload
-    def shiftedBy(self, double: float) -> 'AbsoluteDate':
+    def shiftedBy(self, dt: float) -> 'AbsoluteDate':
         """
         Get a time-shifted instance.
         
@@ -3763,9 +3763,9 @@ class AbsoluteDate(TimeOffset, TimeStamped, TimeShiftable['AbsoluteDate'], java.
         """
         ...
     @typing.overload
-    def shiftedBy(self, long: int, timeUnit: java.util.concurrent.TimeUnit) -> 'AbsoluteDate': ...
+    def shiftedBy(self, dt: int, timeUnit: java.util.concurrent.TimeUnit) -> 'AbsoluteDate': ...
     @typing.overload
-    def shiftedBy(self, timeOffset: TimeOffset) -> 'AbsoluteDate': ...
+    def shiftedBy(self, dt: TimeOffset) -> 'AbsoluteDate': ...
     def timeScalesOffset(self, scale1: TimeScale, scale2: TimeScale) -> float:
         """
         Compute the offset between two time scales at the current instant.
@@ -3851,7 +3851,7 @@ class AbsoluteDate(TimeOffset, TimeStamped, TimeShiftable['AbsoluteDate'], java.
         """
         ...
     @typing.overload
-    def toString(self, int: int) -> str:
+    def toString(self, timeScale: int) -> str:
         """
         Get a String representation of the instant location in ISO-8601 format without the UTC offset and with up to 16 digits of precision for the seconds value.
         
@@ -4090,7 +4090,16 @@ class AbstractFieldTimeInterpolator(FieldTimeInterpolator[_AbstractFieldTimeInte
         
         """
         ...
-    def getInternalNbInterpolationPoints(self) -> int: ...
+    def getInternalNbInterpolationPoints(self) -> int:
+        """
+        Get the number of interpolation points for this instance only i.e., not taking into account sub-interpolators.
+        
+        Returns:
+            required the number of interpolation points for this instance only i.e., not taking into account sub-interpolators.
+        
+        
+        """
+        ...
     def getNbInterpolationPoints(self) -> int:
         """
         Get the number of interpolation points. In the specific case where this interpolator contains multiple sub-interpolators, this method will return the maximum number of interpolation points required among all sub-interpolators.
@@ -4118,13 +4127,13 @@ class AbstractFieldTimeInterpolator(FieldTimeInterpolator[_AbstractFieldTimeInte
         """
         ...
     @typing.overload
-    def interpolate(self, absoluteDate: AbsoluteDate, collection: typing.Union[java.util.Collection[_AbstractFieldTimeInterpolator__T], typing.Sequence[_AbstractFieldTimeInterpolator__T], typing.Set[_AbstractFieldTimeInterpolator__T]]) -> _AbstractFieldTimeInterpolator__T: ...
+    def interpolate(self, interpolationDate: AbsoluteDate, sample: typing.Union[java.util.Collection[_AbstractFieldTimeInterpolator__T], typing.Sequence[_AbstractFieldTimeInterpolator__T], typing.Set[_AbstractFieldTimeInterpolator__T]]) -> _AbstractFieldTimeInterpolator__T: ...
     @typing.overload
-    def interpolate(self, absoluteDate: AbsoluteDate, stream: java.util.stream.Stream[_AbstractFieldTimeInterpolator__T]) -> _AbstractFieldTimeInterpolator__T: ...
+    def interpolate(self, interpolationDate: AbsoluteDate, sample: java.util.stream.Stream[_AbstractFieldTimeInterpolator__T]) -> _AbstractFieldTimeInterpolator__T: ...
     @typing.overload
-    def interpolate(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_AbstractFieldTimeInterpolator__KK], collection: typing.Union[java.util.Collection[_AbstractFieldTimeInterpolator__T], typing.Sequence[_AbstractFieldTimeInterpolator__T], typing.Set[_AbstractFieldTimeInterpolator__T]]) -> _AbstractFieldTimeInterpolator__T: ...
+    def interpolate(self, interpolationDate: 'FieldAbsoluteDate'[_AbstractFieldTimeInterpolator__KK], sample: typing.Union[java.util.Collection[_AbstractFieldTimeInterpolator__T], typing.Sequence[_AbstractFieldTimeInterpolator__T], typing.Set[_AbstractFieldTimeInterpolator__T]]) -> _AbstractFieldTimeInterpolator__T: ...
     @typing.overload
-    def interpolate(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_AbstractFieldTimeInterpolator__KK], stream: java.util.stream.Stream[_AbstractFieldTimeInterpolator__T]) -> _AbstractFieldTimeInterpolator__T: ...
+    def interpolate(self, interpolationDate: 'FieldAbsoluteDate'[_AbstractFieldTimeInterpolator__KK], sample: java.util.stream.Stream[_AbstractFieldTimeInterpolator__T]) -> _AbstractFieldTimeInterpolator__T: ...
     class InterpolationData:
         def getField(self) -> org.hipparchus.Field[_AbstractFieldTimeInterpolator__KK]: ...
         def getInterpolationDate(self) -> 'FieldAbsoluteDate'[_AbstractFieldTimeInterpolator__KK]: ...
@@ -4183,7 +4192,7 @@ class AbstractTimeInterpolator(TimeInterpolator[_AbstractTimeInterpolator__T], t
     @staticmethod
     def getCentralDate(date: AbsoluteDate, minDate: AbsoluteDate, maxDate: AbsoluteDate, threshold: float) -> AbsoluteDate:
         """
-        Get the central date to use to find neighbors while taking into account extrapolation threshold.
+        Get the central date to use to find neighbors while taking into account an extrapolation threshold.
         
         Parameters:
             date (AbsoluteDate): interpolation date
@@ -4231,7 +4240,16 @@ class AbstractTimeInterpolator(TimeInterpolator[_AbstractTimeInterpolator__T], t
         
         """
         ...
-    def getInternalNbInterpolationPoints(self) -> int: ...
+    def getInternalNbInterpolationPoints(self) -> int:
+        """
+        Get the number of interpolation points for this instance only i.e., not taking into account sub-interpolators.
+        
+        Returns:
+            required the number of interpolation points for this instance only i.e., not taking into account sub-interpolators.
+        
+        
+        """
+        ...
     def getNbInterpolationPoints(self) -> int:
         """
         Get the number of interpolation points. In the specific case where this interpolator contains multiple sub-interpolators, this method will return the maximum number of interpolation points required among all sub-interpolators.
@@ -4259,9 +4277,9 @@ class AbstractTimeInterpolator(TimeInterpolator[_AbstractTimeInterpolator__T], t
         """
         ...
     @typing.overload
-    def interpolate(self, absoluteDate: AbsoluteDate, collection: typing.Union[java.util.Collection[_AbstractTimeInterpolator__T], typing.Sequence[_AbstractTimeInterpolator__T], typing.Set[_AbstractTimeInterpolator__T]]) -> _AbstractTimeInterpolator__T: ...
+    def interpolate(self, interpolationDate: AbsoluteDate, sample: typing.Union[java.util.Collection[_AbstractTimeInterpolator__T], typing.Sequence[_AbstractTimeInterpolator__T], typing.Set[_AbstractTimeInterpolator__T]]) -> _AbstractTimeInterpolator__T: ...
     @typing.overload
-    def interpolate(self, absoluteDate: AbsoluteDate, stream: java.util.stream.Stream[_AbstractTimeInterpolator__T]) -> _AbstractTimeInterpolator__T: ...
+    def interpolate(self, interpolationDate: AbsoluteDate, sample: java.util.stream.Stream[_AbstractTimeInterpolator__T]) -> _AbstractTimeInterpolator__T: ...
     class InterpolationData:
         def getInterpolationDate(self) -> AbsoluteDate: ...
         def getNeighborList(self) -> java.util.List[_AbstractTimeInterpolator__T]: ...
@@ -4519,7 +4537,7 @@ class AbstractTimeScales(TimeScales):
         
         """
         ...
-    def getUT1(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> 'UT1Scale':
+    def getUT1(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool) -> 'UT1Scale':
         """
         Get the Universal Time 1 scale.
         
@@ -5008,9 +5026,9 @@ class FieldTimeShiftable(TimeShiftable[_FieldTimeShiftable__T], typing.Generic[_
         """
         ...
     @typing.overload
-    def shiftedBy(self, double: float) -> _FieldTimeShiftable__T: ...
+    def shiftedBy(self, dt: float) -> _FieldTimeShiftable__T: ...
     @typing.overload
-    def shiftedBy(self, timeOffset: TimeOffset) -> _FieldTimeShiftable__T: ...
+    def shiftedBy(self, dt: TimeOffset) -> _FieldTimeShiftable__T: ...
 
 _FieldTimeStampedPair__F = typing.TypeVar('_FieldTimeStampedPair__F', bound=FieldTimeStamped)  # <F>
 _FieldTimeStampedPair__S = typing.TypeVar('_FieldTimeStampedPair__S', bound=FieldTimeStamped)  # <S>
@@ -5032,9 +5050,9 @@ class FieldTimeStampedPair(FieldTimeStamped[_FieldTimeStampedPair__KK], typing.G
     
     """
     @typing.overload
-    def __init__(self, f: _FieldTimeStampedPair__F, s2: _FieldTimeStampedPair__S): ...
+    def __init__(self, first: _FieldTimeStampedPair__F, second: _FieldTimeStampedPair__S): ...
     @typing.overload
-    def __init__(self, f: _FieldTimeStampedPair__F, s2: _FieldTimeStampedPair__S, double: float): ...
+    def __init__(self, first: _FieldTimeStampedPair__F, second: _FieldTimeStampedPair__S, dateEqualityThreshold: float): ...
     def getDate(self) -> 'FieldAbsoluteDate'[_FieldTimeStampedPair__KK]:
         """
         Get the date.
@@ -5122,13 +5140,13 @@ class GLONASSDate(TimeStamped):
         AbsoluteDate, "GLONASS Interface Control Document v1.0, 2016"
     """
     @typing.overload
-    def __init__(self, int: int, int2: int, double: float): ...
+    def __init__(self, na: int, n4: int, secInNa: float): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, double: float, timeScale: TimeScale): ...
+    def __init__(self, na: int, n4: int, secInNa: float, glonass: TimeScale): ...
     @typing.overload
-    def __init__(self, absoluteDate: AbsoluteDate): ...
+    def __init__(self, date: AbsoluteDate): ...
     @typing.overload
-    def __init__(self, absoluteDate: AbsoluteDate, timeScale: TimeScale): ...
+    def __init__(self, date: AbsoluteDate, glonass: TimeScale): ...
     def getDate(self) -> AbsoluteDate:
         """
         Description copied from interface: getDate Get the date.
@@ -5479,17 +5497,17 @@ class GNSSDate(java.io.Serializable, TimeStamped):
     @typing.overload
     def __init__(self, int: int, double: float, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
     @typing.overload
-    def __init__(self, int: int, double: float, satelliteSystem: org.orekit.gnss.SatelliteSystem, dateComponents: DateComponents, timeScales: TimeScales): ...
+    def __init__(self, weekNumber: int, secondsInWeek: float, system: org.orekit.gnss.SatelliteSystem, reference: DateComponents, timeScales: TimeScales): ...
     @typing.overload
-    def __init__(self, int: int, double: float, satelliteSystem: org.orekit.gnss.SatelliteSystem, timeScales: TimeScales): ...
+    def __init__(self, weekNumber: int, secondsInWeek: float, system: org.orekit.gnss.SatelliteSystem, timeScales: TimeScales): ...
     @typing.overload
     def __init__(self, int: int, timeOffset: TimeOffset, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
     @typing.overload
-    def __init__(self, int: int, timeOffset: TimeOffset, satelliteSystem: org.orekit.gnss.SatelliteSystem, dateComponents: DateComponents, timeScales: TimeScales): ...
+    def __init__(self, weekNumber: int, secondsInWeek: TimeOffset, system: org.orekit.gnss.SatelliteSystem, reference: DateComponents, timeScales: TimeScales): ...
     @typing.overload
-    def __init__(self, int: int, timeOffset: TimeOffset, satelliteSystem: org.orekit.gnss.SatelliteSystem, timeScales: TimeScales): ...
+    def __init__(self, weekNumber: int, secondsInWeek: TimeOffset, system: org.orekit.gnss.SatelliteSystem, timeScales: TimeScales): ...
     @typing.overload
-    def __init__(self, absoluteDate: AbsoluteDate, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def __init__(self, date: AbsoluteDate, system: org.orekit.gnss.SatelliteSystem): ...
     @typing.overload
     def __init__(self, absoluteDate: AbsoluteDate, satelliteSystem: org.orekit.gnss.SatelliteSystem, timeScales: TimeScales): ...
     def getDate(self) -> AbsoluteDate:
@@ -5757,7 +5775,7 @@ class PythonClockModel(ClockModel):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -5788,7 +5806,7 @@ class PythonDatesSelector(DatesSelector):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -5877,7 +5895,7 @@ class PythonFieldTimeInterpolator(FieldTimeInterpolator[_PythonFieldTimeInterpol
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 _PythonFieldTimeStamped__T = typing.TypeVar('_PythonFieldTimeStamped__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldTimeStamped(FieldTimeStamped[_PythonFieldTimeStamped__T], typing.Generic[_PythonFieldTimeStamped__T]):
@@ -5917,7 +5935,7 @@ class PythonFieldTimeStamped(FieldTimeStamped[_PythonFieldTimeStamped__T], typin
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -5967,7 +5985,7 @@ class PythonParser(UTCTAIOffsetsLoader.Parser):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -6031,7 +6049,7 @@ class PythonTimeInterpolator(TimeInterpolator[_PythonTimeInterpolator__T], typin
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 class PythonTimeInterval(TimeInterval):
     def __init__(self): ...
@@ -6082,7 +6100,7 @@ class PythonTimeInterval(TimeInterval):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -6113,7 +6131,7 @@ class PythonTimeScalarFunction(TimeScalarFunction):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -6228,7 +6246,7 @@ class PythonTimeScale(TimeScale):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -6663,7 +6681,7 @@ class PythonTimeScales(TimeScales):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -6695,7 +6713,7 @@ class PythonTimeShiftable(TimeShiftable[_PythonTimeShiftable__T], typing.Generic
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -6717,7 +6735,7 @@ class PythonTimeShiftable(TimeShiftable[_PythonTimeShiftable__T], typing.Generic
         """
         ...
     @typing.overload
-    def shiftedBy(self, double: float) -> _PythonTimeShiftable__T: ...
+    def shiftedBy(self, dt: float) -> _PythonTimeShiftable__T: ...
 
 class PythonTimeStamped(TimeStamped):
     def __init__(self): ...
@@ -6756,7 +6774,7 @@ class PythonTimeStamped(TimeStamped):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -6787,7 +6805,7 @@ class PythonTimeVectorFunction(TimeVectorFunction):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -6863,7 +6881,7 @@ class PythonUTCTAIOffsetsLoader(UTCTAIOffsetsLoader):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -7104,9 +7122,9 @@ class TAIUTCDatFilesLoader(org.orekit.data.AbstractSelfFeedingLoader, UTCTAIOffs
     
     """
     @typing.overload
-    def __init__(self, string: str): ...
+    def __init__(self, supportedNames: str): ...
     @typing.overload
-    def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
+    def __init__(self, supportedNames: str, manager: org.orekit.data.DataProvidersManager): ...
     def loadOffsets(self) -> java.util.List[OffsetModel]:
         """
         Load UTC-TAI offsets entries.
@@ -7385,9 +7403,9 @@ class TimeStampedField(FieldTimeStamped[_TimeStampedField__KK], typing.Generic[_
         CalculusFieldElement
     """
     @typing.overload
-    def __init__(self, kK: _TimeStampedField__KK, absoluteDate: AbsoluteDate): ...
+    def __init__(self, value: _TimeStampedField__KK, date: AbsoluteDate): ...
     @typing.overload
-    def __init__(self, kK: _TimeStampedField__KK, fieldAbsoluteDate: 'FieldAbsoluteDate'[_TimeStampedField__KK]): ...
+    def __init__(self, value: _TimeStampedField__KK, date: 'FieldAbsoluteDate'[_TimeStampedField__KK]): ...
     def getDate(self) -> 'FieldAbsoluteDate'[_TimeStampedField__KK]:
         """
         Get the date.
@@ -7430,9 +7448,9 @@ class TimeStampedPair(TimeStamped, typing.Generic[_TimeStampedPair__K, _TimeStam
     
     """
     @typing.overload
-    def __init__(self, k: _TimeStampedPair__K, v: _TimeStampedPair__V): ...
+    def __init__(self, first: _TimeStampedPair__K, second: _TimeStampedPair__V): ...
     @typing.overload
-    def __init__(self, k: _TimeStampedPair__K, v: _TimeStampedPair__V, double: float): ...
+    def __init__(self, first: _TimeStampedPair__K, second: _TimeStampedPair__V, dateEqualityThreshold: float): ...
     @staticmethod
     def checkDatesConsistency(firstDate: AbsoluteDate, secondDate: AbsoluteDate, dateEqualityThreshold: float) -> None:
         """
@@ -7834,9 +7852,9 @@ class UTCTAIBulletinAFilesLoader(org.orekit.data.AbstractSelfFeedingLoader, UTCT
         7.1
     """
     @typing.overload
-    def __init__(self, string: str): ...
+    def __init__(self, supportedNames: str): ...
     @typing.overload
-    def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
+    def __init__(self, supportedNames: str, manager: org.orekit.data.DataProvidersManager): ...
     def loadOffsets(self) -> java.util.List[OffsetModel]:
         """
         Load UTC-TAI offsets entries.
@@ -7864,7 +7882,7 @@ class UTCTAIHistoryFilesLoader(org.orekit.data.AbstractSelfFeedingLoader, UTCTAI
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
+    def __init__(self, manager: org.orekit.data.DataProvidersManager): ...
     def loadOffsets(self) -> java.util.List[OffsetModel]:
         """
         Load UTC-TAI offsets entries.
@@ -7886,7 +7904,7 @@ class UTCTAIOffset(TimeStamped, java.io.Serializable):
     """
     Offset between UTCScale and TAIScale time scales.
     
-    The UTCScale and TAIScale time scales are two scales offset with respect to each other. The TAIScale scale is continuous whereas the UTCScale includes some discontinuity when leap seconds are introduced by the `International Earth Rotation Service <http://www.iers.org/>` (IERS).
+    The UTCScale and TAIScale time scales are two scales offset with respect to each other. The TAIScale scale is continuous whereas the UTCScale includes some discontinuity when leap seconds are introduced by the org (IERS).
     
     This class represents the offset between the two scales that is valid between two leap seconds occurrences. It handles both the linear offsets used from 1961-01-01 to 1971-12-31 and the constant integer offsets used since 1972-01-01.
     
@@ -7946,7 +7964,7 @@ class UTCTAIOffset(TimeStamped, java.io.Serializable):
         """
         ...
     @typing.overload
-    def getOffset(self, absoluteDate: AbsoluteDate) -> TimeOffset:
+    def getOffset(self, date: AbsoluteDate) -> TimeOffset:
         """
         Get the TAI - UTC offset in seconds.
         
@@ -7969,7 +7987,7 @@ class UTCTAIOffset(TimeStamped, java.io.Serializable):
         """
         ...
     @typing.overload
-    def getOffset(self, dateComponents: DateComponents, timeComponents: TimeComponents) -> TimeOffset: ...
+    def getOffset(self, date: DateComponents, time: TimeComponents) -> TimeOffset: ...
     def getValidityStart(self) -> AbsoluteDate:
         """
         Get the start time of validity for this offset.
@@ -8009,9 +8027,9 @@ class ClockOffsetHermiteInterpolator(AbstractTimeInterpolator[ClockOffset]):
         class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.interpolation.HermiteInterpolator?is`, TimeInterpolator
     """
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, interpolationPoints: int): ...
     @typing.overload
-    def __init__(self, int: int, double: float): ...
+    def __init__(self, interpolationPoints: int, extrapolationThreshold: float): ...
 
 _FieldAbsoluteDate__T = typing.TypeVar('_FieldAbsoluteDate__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShiftable['FieldAbsoluteDate'[_FieldAbsoluteDate__T], _FieldAbsoluteDate__T], java.lang.Comparable['FieldAbsoluteDate'[_FieldAbsoluteDate__T]], typing.Generic[_FieldAbsoluteDate__T]):
@@ -8054,17 +8072,17 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T]): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], int: int, int2: int, int3: int, int4: int, int5: int, double: float, timeScale: TimeScale): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], year: int, month: int, day: int, hour: int, minute: int, second: float, timeScale: TimeScale): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], int: int, int2: int, int3: int, int4: int, int5: int, timeOffset: TimeOffset, timeScale: TimeScale): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], year: int, month: int, day: int, hour: int, minute: int, second: TimeOffset, timeScale: TimeScale): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], int: int, int2: int, int3: int, timeScale: TimeScale): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], year: int, month: int, day: int, timeScale: TimeScale): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], int: int, month: Month, int2: int, int3: int, int4: int, double: float, timeScale: TimeScale): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], year: int, month: Month, day: int, hour: int, minute: int, second: float, timeScale: TimeScale): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], int: int, month: Month, int2: int, int3: int, int4: int, timeOffset: TimeOffset, timeScale: TimeScale): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], year: int, month: Month, day: int, hour: int, minute: int, second: TimeOffset, timeScale: TimeScale): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], int: int, month: Month, int2: int, timeScale: TimeScale): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], year: int, month: Month, day: int, timeScale: TimeScale): ...
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], string: str, timeScale: TimeScale): ...
     @typing.overload
@@ -8116,7 +8134,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
     _createBesselianEpoch_1__T = typing.TypeVar('_createBesselianEpoch_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def createBesselianEpoch(t: _createBesselianEpoch_0__T) -> 'FieldAbsoluteDate'[_createBesselianEpoch_0__T]:
+    def createBesselianEpoch(besselianEpoch: _createBesselianEpoch_0__T) -> 'FieldAbsoluteDate'[_createBesselianEpoch_0__T]:
         """
         According to Lieske paper: ` Precession Matrix Based on IAU (1976) System of Astronomical Constants <http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?1979A%26A....73..282L&amp;defaultprint=YES&amp;filetype=.pdf.>`, Astronomy and Astrophysics, vol. 73, no. 3, Mar. 1979, p. 282-284, Besselian Epoch is related to Julian Ephemeris Date as:
         
@@ -8142,12 +8160,12 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
         ...
     @typing.overload
     @staticmethod
-    def createBesselianEpoch(t: _createBesselianEpoch_1__T, timeScales: TimeScales) -> 'FieldAbsoluteDate'[_createBesselianEpoch_1__T]: ...
+    def createBesselianEpoch(besselianEpoch: _createBesselianEpoch_1__T, timeScales: TimeScales) -> 'FieldAbsoluteDate'[_createBesselianEpoch_1__T]: ...
     _createGPSDate_0__T = typing.TypeVar('_createGPSDate_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _createGPSDate_1__T = typing.TypeVar('_createGPSDate_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def createGPSDate(int: int, t: _createGPSDate_0__T) -> 'FieldAbsoluteDate'[_createGPSDate_0__T]:
+    def createGPSDate(weekNumber: int, milliInWeek: _createGPSDate_0__T) -> 'FieldAbsoluteDate'[_createGPSDate_0__T]:
         """
         Build an instance corresponding to a GPS date.
         
@@ -8169,12 +8187,12 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
         ...
     @typing.overload
     @staticmethod
-    def createGPSDate(int: int, t: _createGPSDate_1__T, timeScale: TimeScale) -> 'FieldAbsoluteDate'[_createGPSDate_1__T]: ...
+    def createGPSDate(weekNumber: int, milliInWeek: _createGPSDate_1__T, gps: TimeScale) -> 'FieldAbsoluteDate'[_createGPSDate_1__T]: ...
     _createJDDate_0__T = typing.TypeVar('_createJDDate_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _createJDDate_1__T = typing.TypeVar('_createJDDate_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def createJDDate(int: int, t: _createJDDate_0__T, timeScale: TimeScale) -> 'FieldAbsoluteDate'[_createJDDate_0__T]:
+    def createJDDate(jd: int, secondsSinceNoon: _createJDDate_0__T, timeScale: TimeScale) -> 'FieldAbsoluteDate'[_createJDDate_0__T]:
         """
         Build an instance corresponding to a Julian Day date.
         
@@ -8208,12 +8226,12 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
         ...
     @typing.overload
     @staticmethod
-    def createJDDate(int: int, t: _createJDDate_1__T, timeScale: TimeScale, timeScale2: TimeScale) -> 'FieldAbsoluteDate'[_createJDDate_1__T]: ...
+    def createJDDate(jd: int, secondsSinceNoon: _createJDDate_1__T, timeScale: TimeScale, pivotTimeScale: TimeScale) -> 'FieldAbsoluteDate'[_createJDDate_1__T]: ...
     _createJulianEpoch_0__T = typing.TypeVar('_createJulianEpoch_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _createJulianEpoch_1__T = typing.TypeVar('_createJulianEpoch_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def createJulianEpoch(t: _createJulianEpoch_0__T) -> 'FieldAbsoluteDate'[_createJulianEpoch_0__T]:
+    def createJulianEpoch(julianEpoch: _createJulianEpoch_0__T) -> 'FieldAbsoluteDate'[_createJulianEpoch_0__T]:
         """
         According to Lieske paper: ` Precession Matrix Based on IAU (1976) System of Astronomical Constants <http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?1979A%26A....73..282L&amp;defaultprint=YES&amp;filetype=.pdf.>`, Astronomy and Astrophysics, vol. 73, no. 3, Mar. 1979, p. 282-284, Julian Epoch is related to Julian Ephemeris Date as: 0) / 365
         
@@ -8238,7 +8256,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
         ...
     @typing.overload
     @staticmethod
-    def createJulianEpoch(t: _createJulianEpoch_1__T, timeScales: TimeScales) -> 'FieldAbsoluteDate'[_createJulianEpoch_1__T]: ...
+    def createJulianEpoch(julianEpoch: _createJulianEpoch_1__T, timeScales: TimeScales) -> 'FieldAbsoluteDate'[_createJulianEpoch_1__T]: ...
     _createMJDDate__T = typing.TypeVar('_createMJDDate__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
     def createMJDDate(mjd: int, secondsInDay: _createMJDDate__T, timeScale: TimeScale) -> 'FieldAbsoluteDate'[_createMJDDate__T]:
@@ -8276,7 +8294,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
         """
         ...
     @typing.overload
-    def durationFrom(self, fieldTimeStamped: typing.Union[FieldTimeStamped[_FieldAbsoluteDate__T], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]]) -> _FieldAbsoluteDate__T:
+    def durationFrom(self, instant: typing.Union[FieldTimeStamped[_FieldAbsoluteDate__T], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]]) -> _FieldAbsoluteDate__T:
         """
         Compute the physically elapsed duration between two instants.
         
@@ -8320,15 +8338,15 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
         """
         ...
     @typing.overload
-    def durationFrom(self, timeStamped: typing.Union[TimeStamped, typing.Callable]) -> _FieldAbsoluteDate__T: ...
+    def durationFrom(self, instant: typing.Union[TimeStamped, typing.Callable]) -> _FieldAbsoluteDate__T: ...
     @typing.overload
-    def durationFrom(self, absoluteDate: AbsoluteDate) -> _FieldAbsoluteDate__T: ...
+    def durationFrom(self, instant: AbsoluteDate) -> _FieldAbsoluteDate__T: ...
     @typing.overload
-    def durationFrom(self, absoluteDate: AbsoluteDate, timeUnit: java.util.concurrent.TimeUnit) -> _FieldAbsoluteDate__T: ...
+    def durationFrom(self, instant: AbsoluteDate, timeUnit: java.util.concurrent.TimeUnit) -> _FieldAbsoluteDate__T: ...
     @typing.overload
-    def durationFrom(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]) -> _FieldAbsoluteDate__T: ...
+    def durationFrom(self, instant: 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]) -> _FieldAbsoluteDate__T: ...
     @typing.overload
-    def durationFrom(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_FieldAbsoluteDate__T], timeUnit: java.util.concurrent.TimeUnit) -> _FieldAbsoluteDate__T: ...
+    def durationFrom(self, instant: 'FieldAbsoluteDate'[_FieldAbsoluteDate__T], timeUnit: java.util.concurrent.TimeUnit) -> _FieldAbsoluteDate__T: ...
     def equals(self, other: typing.Any) -> bool:
         """
         Check if the instance represents the same time as another instance.
@@ -8380,7 +8398,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
         """
         ...
     @typing.overload
-    def getComponents(self, int: int) -> DateTimeComponents:
+    def getComponents(self, timeScale: int) -> DateTimeComponents:
         """
         Split the instance into date/time components.
         
@@ -8938,14 +8956,14 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
         """
         ...
     @typing.overload
-    def parseCCSDSCalendarSegmentedTimeCode(self, byte: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes]) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
+    def parseCCSDSCalendarSegmentedTimeCode(self, preambleField: int, timeField: typing.Union[typing.List[int], jpype.JArray, bytes]) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
     @typing.overload
-    def parseCCSDSCalendarSegmentedTimeCode(self, byte: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], timeScale: TimeScale) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
+    def parseCCSDSCalendarSegmentedTimeCode(self, preambleField: int, timeField: typing.Union[typing.List[int], jpype.JArray, bytes], utc: TimeScale) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
     _parseCCSDSDaySegmentedTimeCode_0__T = typing.TypeVar('_parseCCSDSDaySegmentedTimeCode_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _parseCCSDSDaySegmentedTimeCode_1__T = typing.TypeVar('_parseCCSDSDaySegmentedTimeCode_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def parseCCSDSDaySegmentedTimeCode(field: org.hipparchus.Field[_parseCCSDSDaySegmentedTimeCode_0__T], byte: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], dateComponents: DateComponents) -> 'FieldAbsoluteDate'[_parseCCSDSDaySegmentedTimeCode_0__T]:
+    def parseCCSDSDaySegmentedTimeCode(field: org.hipparchus.Field[_parseCCSDSDaySegmentedTimeCode_0__T], preambleField: int, timeField: typing.Union[typing.List[int], jpype.JArray, bytes], agencyDefinedEpoch: DateComponents) -> 'FieldAbsoluteDate'[_parseCCSDSDaySegmentedTimeCode_0__T]:
         """
         CCSDS Day Segmented Time Code is defined in the blue book: CCSDS Time Code Format (CCSDS 301.0-B-4) published in November 2010
         
@@ -8968,7 +8986,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
         ...
     @typing.overload
     @staticmethod
-    def parseCCSDSDaySegmentedTimeCode(field: org.hipparchus.Field[_parseCCSDSDaySegmentedTimeCode_1__T], byte: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], dateComponents: DateComponents, timeScale: TimeScale) -> 'FieldAbsoluteDate'[_parseCCSDSDaySegmentedTimeCode_1__T]: ...
+    def parseCCSDSDaySegmentedTimeCode(field: org.hipparchus.Field[_parseCCSDSDaySegmentedTimeCode_1__T], preambleField: int, timeField: typing.Union[typing.List[int], jpype.JArray, bytes], agencyDefinedEpoch: DateComponents, utc: TimeScale) -> 'FieldAbsoluteDate'[_parseCCSDSDaySegmentedTimeCode_1__T]: ...
     _parseCCSDSUnsegmentedTimeCode_0__T = typing.TypeVar('_parseCCSDSUnsegmentedTimeCode_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _parseCCSDSUnsegmentedTimeCode_1__T = typing.TypeVar('_parseCCSDSUnsegmentedTimeCode_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
@@ -9004,13 +9022,13 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
     @staticmethod
     def parseCCSDSUnsegmentedTimeCode(field: org.hipparchus.Field[_parseCCSDSUnsegmentedTimeCode_1__T], byte: int, byte2: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], fieldAbsoluteDate: 'FieldAbsoluteDate'[_parseCCSDSUnsegmentedTimeCode_1__T]) -> 'FieldAbsoluteDate'[_parseCCSDSUnsegmentedTimeCode_1__T]: ...
     @typing.overload
-    def shiftedBy(self, double: float) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
+    def shiftedBy(self, dt: float) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
     @typing.overload
-    def shiftedBy(self, long: int, timeUnit: java.util.concurrent.TimeUnit) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
+    def shiftedBy(self, dt: int, timeUnit: java.util.concurrent.TimeUnit) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
     @typing.overload
-    def shiftedBy(self, t: _FieldAbsoluteDate__T) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
+    def shiftedBy(self, dt: _FieldAbsoluteDate__T) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
     @typing.overload
-    def shiftedBy(self, timeOffset: TimeOffset) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
+    def shiftedBy(self, dt: TimeOffset) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
     def timeScalesOffset(self, scale1: TimeScale, scale2: TimeScale) -> _FieldAbsoluteDate__T:
         """
         Compute the offset between two time scales at the current instant.
@@ -9132,7 +9150,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
         """
         ...
     @typing.overload
-    def toString(self, int: int) -> str:
+    def toString(self, timeScale: int) -> str:
         """
         Get a String representation of the instant location in ISO-8601 format without the UTC offset and with up to 16 digits of precision for the seconds value.
         
@@ -9242,9 +9260,9 @@ class FieldClockOffsetHermiteInterpolator(AbstractFieldTimeInterpolator[FieldClo
         class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.interpolation.HermiteInterpolator?is`, TimeInterpolator
     """
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, interpolationPoints: int): ...
     @typing.overload
-    def __init__(self, int: int, double: float): ...
+    def __init__(self, interpolationPoints: int, extrapolationThreshold: float): ...
 
 class GPSScale(ConstantOffsetTimeScale):
     """
@@ -9304,8 +9322,8 @@ class LazyLoadedTimeScales(AbstractTimeScales):
             7.1
         
         Also see:
-            `USNO tai-utc.dat file <http://maia.usno.navy.mil/ser7/tai-utc.dat>`, `IERS UTC-TAI.history file
-            <http://hpiers.obspm.fr/eoppc/bul/bulc/UTC-TAI.history>`, TAIUTCDatFilesLoader,
+            `USNO tai-utc.dat file <http://maia.usno.navy.mil/ser7/tai-utc.dat>`,
+            UTC, TAIUTCDatFilesLoader,
             UTCTAIHistoryFilesLoader, AGILeapSecondFilesLoader,
             getUTC,
             clearUTCTAIOffsetsLoaders
@@ -9475,7 +9493,7 @@ class LazyLoadedTimeScales(AbstractTimeScales):
         """
         ...
     @typing.overload
-    def getUT1(self, eOPHistory: org.orekit.frames.EOPHistory) -> UT1Scale:
+    def getUT1(self, history: org.orekit.frames.EOPHistory) -> UT1Scale:
         """
         Description copied from interface: getUT1 Get the Universal Time 1 scale.
         
@@ -9512,7 +9530,7 @@ class LazyLoadedTimeScales(AbstractTimeScales):
         """
         ...
     @typing.overload
-    def getUT1(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> UT1Scale: ...
+    def getUT1(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool) -> UT1Scale: ...
     def getUTC(self) -> UTCScale:
         """
         Description copied from interface: getUTC Get the Universal Time Coordinate scale.
@@ -9721,7 +9739,7 @@ class PythonAbstractTimeScales(AbstractTimeScales):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -9754,13 +9772,13 @@ class PythonFieldTimeShiftable(FieldTimeShiftable[_PythonFieldTimeShiftable__T, 
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
         ...
     @typing.overload
-    def shiftedBy(self, timeOffset: TimeOffset) -> _PythonFieldTimeShiftable__T:
+    def shiftedBy(self, dt: TimeOffset) -> _PythonFieldTimeShiftable__T:
         """
         Get a time-shifted instance.
         
@@ -9786,9 +9804,9 @@ class PythonFieldTimeShiftable(FieldTimeShiftable[_PythonFieldTimeShiftable__T, 
         """
         ...
     @typing.overload
-    def shiftedBy(self, double: float) -> _PythonFieldTimeShiftable__T: ...
+    def shiftedBy(self, dt: float) -> _PythonFieldTimeShiftable__T: ...
     @typing.overload
-    def shiftedBy(self, kK: _PythonFieldTimeShiftable__KK) -> _PythonFieldTimeShiftable__T: ...
+    def shiftedBy(self, dt: _PythonFieldTimeShiftable__KK) -> _PythonFieldTimeShiftable__T: ...
 
 class QZSSScale(ConstantOffsetTimeScale):
     """
@@ -9796,7 +9814,7 @@ class QZSSScale(ConstantOffsetTimeScale):
     
     By convention, TQZSS = TAI - 19 s.
     
-    The time scale is defined in ` Quasi-Zenith Satellite System Navigation Service - Interface Specification for QZSS <http://qzss.go.jp/en/technical/download/pdf/ps-is-qzss/is-qzss-pnt-003.pdf?t=1549268771755>` version 1.6, 2014.
+    The time scale is defined in ps version 1.6, 2014.
     
     This is intended to be accessed thanks to TimeScales, so there is no public constructor.
     
@@ -9869,9 +9887,9 @@ class TimeStampedDoubleAndDerivativeHermiteInterpolator(AbstractTimeInterpolator
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, interpolationPoints: int): ...
     @typing.overload
-    def __init__(self, int: int, double: float): ...
+    def __init__(self, interpolationPoints: int, extrapolationThreshold: float): ...
 
 class TimeStampedDoubleHermiteInterpolator(AbstractTimeInterpolator[TimeStampedDouble]):
     """
@@ -9882,25 +9900,25 @@ class TimeStampedDoubleHermiteInterpolator(AbstractTimeInterpolator[TimeStampedD
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, interpolationPoints: int): ...
     @typing.overload
-    def __init__(self, int: int, double: float): ...
+    def __init__(self, interpolationPoints: int, extrapolationThreshold: float): ...
 
 _TimeStampedFieldHermiteInterpolator__KK = typing.TypeVar('_TimeStampedFieldHermiteInterpolator__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
 class TimeStampedFieldHermiteInterpolator(AbstractFieldTimeInterpolator[TimeStampedField[_TimeStampedFieldHermiteInterpolator__KK], _TimeStampedFieldHermiteInterpolator__KK], typing.Generic[_TimeStampedFieldHermiteInterpolator__KK]):
     """
     Hermite interpolator of time stamped field value.
     
-    As this implementation of interpolation is polynomial, it should be used only with small number of interpolation points (about 10-20 points) in order to avoid `Runge's phenomenon <http://en.wikipedia.org/wiki/Runge%27s_phenomenon>` and numerical problems (including NaN appearing).
+    As this implementation of interpolation is polynomial, it should be used only with small number of interpolation points (about 10-20 points) in order to avoid  and numerical problems (including NaN appearing).
     
         class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.interpolation.FieldHermiteInterpolator?is`, FieldTimeInterpolator
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, int: int): ...
+    def __init__(self, interpolationPoints: int): ...
     @typing.overload
-    def __init__(self, int: int, double: float): ...
+    def __init__(self, interpolationPoints: int, extrapolationThreshold: float): ...
 
 
 class __module_protocol__(Protocol):

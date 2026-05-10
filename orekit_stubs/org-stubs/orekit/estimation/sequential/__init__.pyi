@@ -784,7 +784,18 @@ class PhysicalEstimatedState(org.orekit.time.TimeStamped):
     Also see:
         RtsSmoother
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, realVector: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix): ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, state: org.hipparchus.linear.RealVector, covarianceMatrix: org.hipparchus.linear.RealMatrix):
+        """
+        Constructor.
+        
+        Parameters:
+            date (AbsoluteDate): date
+            state (RealVector): mean state
+            covarianceMatrix (RealMatrix): covariance matrix
+        
+        
+        """
+        ...
     def getCovarianceMatrix(self) -> org.hipparchus.linear.RealMatrix:
         """
         Get the covariance matrix in "physical" (not normalised) units.
@@ -896,9 +907,9 @@ class SemiAnalyticalMeasurementHandler(org.orekit.propagation.sampling.OrekitSte
         11.3
     """
     @typing.overload
-    def __init__(self, semiAnalyticalProcess: 'SemiAnalyticalProcess', kalmanFilter: org.hipparchus.filtering.kalman.KalmanFilter[MeasurementDecorator], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], absoluteDate: org.orekit.time.AbsoluteDate): ...
+    def __init__(self, model: 'SemiAnalyticalProcess', filter: org.hipparchus.filtering.kalman.KalmanFilter[MeasurementDecorator], observedMeasurements: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], referenceDate: org.orekit.time.AbsoluteDate): ...
     @typing.overload
-    def __init__(self, semiAnalyticalProcess: 'SemiAnalyticalProcess', kalmanFilter: org.hipparchus.filtering.kalman.KalmanFilter[MeasurementDecorator], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool): ...
+    def __init__(self, model: 'SemiAnalyticalProcess', filter: org.hipparchus.filtering.kalman.KalmanFilter[MeasurementDecorator], observedMeasurements: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], referenceDate: org.orekit.time.AbsoluteDate, isUnscented: bool): ...
     def handleStep(self, interpolator: org.orekit.propagation.sampling.OrekitStepInterpolator) -> None:
         """
         Handle the current step.
@@ -1337,7 +1348,7 @@ class PythonAbstractKalmanEstimator(AbstractKalmanEstimator):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1429,7 +1440,7 @@ class PythonCovarianceMatrixProvider(CovarianceMatrixProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1658,7 +1669,7 @@ class PythonKalmanEstimation(KalmanEstimation):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1701,7 +1712,7 @@ class PythonKalmanObserver(KalmanObserver):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1778,7 +1789,7 @@ class PythonSemiAnalyticalProcess(SemiAnalyticalProcess):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2116,14 +2127,14 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
         
         """
         ...
-    def getEvolution(self, double: float, realVector: org.hipparchus.linear.RealVector, measurementDecorator: MeasurementDecorator) -> org.hipparchus.filtering.kalman.extended.NonLinearEvolution:
+    def getEvolution(self, previousTime: float, previousState: org.hipparchus.linear.RealVector, measurement: MeasurementDecorator) -> org.hipparchus.filtering.kalman.extended.NonLinearEvolution:
         """
         Specified by: meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.extended.NonLinearProcess.html?is` in interface NonLinearProcess
         
         
         """
         ...
-    def getInnovation(self, measurementDecorator: MeasurementDecorator, nonLinearEvolution: org.hipparchus.filtering.kalman.extended.NonLinearEvolution, realMatrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.RealVector:
+    def getInnovation(self, measurement: MeasurementDecorator, evolution: org.hipparchus.filtering.kalman.extended.NonLinearEvolution, innovationCovarianceMatrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.RealVector:
         """
         Specified by: meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.extended.NonLinearProcess.html?is` in interface NonLinearProcess
         
@@ -2517,14 +2528,14 @@ class SemiAnalyticalUnscentedKalmanModel(KalmanEstimation, org.hipparchus.filter
         
         """
         ...
-    def getEvolution(self, double: float, realVectorArray: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray], measurementDecorator: MeasurementDecorator) -> org.hipparchus.filtering.kalman.unscented.UnscentedEvolution:
+    def getEvolution(self, previousTime: float, sigmaPoints: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray], measurement: MeasurementDecorator) -> org.hipparchus.filtering.kalman.unscented.UnscentedEvolution:
         """
         Specified by: meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.unscented.UnscentedProcess.html?is` in interface UnscentedProcess
         
         
         """
         ...
-    def getInnovation(self, measurementDecorator: MeasurementDecorator, realVector: org.hipparchus.linear.RealVector, realVector2: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.RealVector:
+    def getInnovation(self, measurement: MeasurementDecorator, predictedMeas: org.hipparchus.linear.RealVector, predictedState: org.hipparchus.linear.RealVector, innovationCovarianceMatrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.RealVector:
         """
         Specified by: meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.unscented.UnscentedProcess.html?is` in interface UnscentedProcess
         
@@ -2661,7 +2672,7 @@ class SemiAnalyticalUnscentedKalmanModel(KalmanEstimation, org.hipparchus.filter
         
         """
         ...
-    def getPredictedMeasurements(self, realVectorArray: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray], measurementDecorator: MeasurementDecorator) -> typing.MutableSequence[org.hipparchus.linear.RealVector]:
+    def getPredictedMeasurements(self, predictedSigmaPoints: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray], measurement: MeasurementDecorator) -> typing.MutableSequence[org.hipparchus.linear.RealVector]:
         """
         Specified by: meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.unscented.UnscentedProcess.html?is` in interface UnscentedProcess
         
@@ -2682,7 +2693,7 @@ class SemiAnalyticalUnscentedKalmanModel(KalmanEstimation, org.hipparchus.filter
         
         """
         ...
-    def getProcessNoiseMatrix(self, double: float, realVector: org.hipparchus.linear.RealVector, measurementDecorator: MeasurementDecorator) -> org.hipparchus.linear.RealMatrix:
+    def getProcessNoiseMatrix(self, previousTime: float, predictedState: org.hipparchus.linear.RealVector, measurement: MeasurementDecorator) -> org.hipparchus.linear.RealMatrix:
         """
         Specified by: meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.unscented.UnscentedProcess.html?is` in interface UnscentedProcess
         
@@ -2814,9 +2825,9 @@ class ConstantProcessNoise(AbstractCovarianceMatrixProvider):
         9.2
     """
     @typing.overload
-    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix): ...
+    def __init__(self, processNoiseMatrix: org.hipparchus.linear.RealMatrix): ...
     @typing.overload
-    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, realMatrix2: org.hipparchus.linear.RealMatrix): ...
+    def __init__(self, initialNoiseMatrix: org.hipparchus.linear.RealMatrix, processNoiseMatrix: org.hipparchus.linear.RealMatrix): ...
     def getProcessNoiseMatrix(self, previous: org.orekit.propagation.SpacecraftState, current: org.orekit.propagation.SpacecraftState) -> org.hipparchus.linear.RealMatrix:
         """
         Get the process noise matrix between previous and current states.
@@ -2910,7 +2921,7 @@ class PythonAbstractCovarianceMatrixProvider(AbstractCovarianceMatrixProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2932,9 +2943,9 @@ class UnivariateProcessNoise(AbstractCovarianceMatrixProvider):
         9.2
     """
     @typing.overload
-    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, lOFType: org.orekit.frames.LOFType, positionAngleType: org.orekit.orbits.PositionAngleType, univariateFunctionArray: typing.Union[typing.List[org.hipparchus.analysis.UnivariateFunction], jpype.JArray], univariateFunctionArray2: typing.Union[typing.List[org.hipparchus.analysis.UnivariateFunction], jpype.JArray]): ...
+    def __init__(self, initialCovarianceMatrix: org.hipparchus.linear.RealMatrix, lofType: org.orekit.frames.LOFType, positionAngleType: org.orekit.orbits.PositionAngleType, lofCartesianOrbitalParametersEvolution: typing.Union[typing.List[org.hipparchus.analysis.UnivariateFunction], jpype.JArray], propagationParametersEvolution: typing.Union[typing.List[org.hipparchus.analysis.UnivariateFunction], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, lOFType: org.orekit.frames.LOFType, positionAngleType: org.orekit.orbits.PositionAngleType, univariateFunctionArray: typing.Union[typing.List[org.hipparchus.analysis.UnivariateFunction], jpype.JArray], univariateFunctionArray2: typing.Union[typing.List[org.hipparchus.analysis.UnivariateFunction], jpype.JArray], univariateFunctionArray3: typing.Union[typing.List[org.hipparchus.analysis.UnivariateFunction], jpype.JArray]): ...
+    def __init__(self, initialCovarianceMatrix: org.hipparchus.linear.RealMatrix, lofType: org.orekit.frames.LOFType, positionAngleType: org.orekit.orbits.PositionAngleType, lofCartesianOrbitalParametersEvolution: typing.Union[typing.List[org.hipparchus.analysis.UnivariateFunction], jpype.JArray], propagationParametersEvolution: typing.Union[typing.List[org.hipparchus.analysis.UnivariateFunction], jpype.JArray], measurementsParametersEvolution: typing.Union[typing.List[org.hipparchus.analysis.UnivariateFunction], jpype.JArray]): ...
     def getLofCartesianOrbitalParametersEvolution(self) -> typing.MutableSequence[org.hipparchus.analysis.UnivariateFunction]:
         """
         Getter for the lofCartesianOrbitalParametersEvolution.
@@ -3046,14 +3057,14 @@ class KalmanModel(org.orekit.estimation.sequential.AbstractKalmanEstimationCommo
         
         """
         ...
-    def getEvolution(self, double: float, realVector: org.hipparchus.linear.RealVector, measurementDecorator: MeasurementDecorator) -> org.hipparchus.filtering.kalman.extended.NonLinearEvolution:
+    def getEvolution(self, previousTime: float, previousState: org.hipparchus.linear.RealVector, measurement: MeasurementDecorator) -> org.hipparchus.filtering.kalman.extended.NonLinearEvolution:
         """
         Specified by: meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.extended.NonLinearProcess.html?is` in interface NonLinearProcess
         
         
         """
         ...
-    def getInnovation(self, measurementDecorator: MeasurementDecorator, nonLinearEvolution: org.hipparchus.filtering.kalman.extended.NonLinearEvolution, realMatrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.RealVector:
+    def getInnovation(self, measurement: MeasurementDecorator, evolution: org.hipparchus.filtering.kalman.extended.NonLinearEvolution, innovationCovarianceMatrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.RealVector:
         """
         Specified by: meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.extended.NonLinearProcess.html?is` in interface NonLinearProcess
         
@@ -3099,28 +3110,28 @@ class UnscentedKalmanModel(org.orekit.estimation.sequential.AbstractKalmanEstima
         
         """
         ...
-    def getEvolution(self, double: float, realVectorArray: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray], measurementDecorator: MeasurementDecorator) -> org.hipparchus.filtering.kalman.unscented.UnscentedEvolution:
+    def getEvolution(self, previousTime: float, sigmaPoints: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray], measurement: MeasurementDecorator) -> org.hipparchus.filtering.kalman.unscented.UnscentedEvolution:
         """
         Specified by: meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.unscented.UnscentedProcess.html?is` in interface UnscentedProcess
         
         
         """
         ...
-    def getInnovation(self, measurementDecorator: MeasurementDecorator, realVector: org.hipparchus.linear.RealVector, realVector2: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.RealVector:
+    def getInnovation(self, measurement: MeasurementDecorator, predictedMeas: org.hipparchus.linear.RealVector, predictedState: org.hipparchus.linear.RealVector, innovationCovarianceMatrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.RealVector:
         """
         Specified by: meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.unscented.UnscentedProcess.html?is` in interface UnscentedProcess
         
         
         """
         ...
-    def getPredictedMeasurements(self, realVectorArray: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray], measurementDecorator: MeasurementDecorator) -> typing.MutableSequence[org.hipparchus.linear.RealVector]:
+    def getPredictedMeasurements(self, predictedSigmaPoints: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray], measurement: MeasurementDecorator) -> typing.MutableSequence[org.hipparchus.linear.RealVector]:
         """
         Specified by: meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.unscented.UnscentedProcess.html?is` in interface UnscentedProcess
         
         
         """
         ...
-    def getProcessNoiseMatrix(self, double: float, realVector: org.hipparchus.linear.RealVector, measurementDecorator: MeasurementDecorator) -> org.hipparchus.linear.RealMatrix:
+    def getProcessNoiseMatrix(self, previousTime: float, predictedState: org.hipparchus.linear.RealVector, measurement: MeasurementDecorator) -> org.hipparchus.linear.RealMatrix:
         """
         Specified by: meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.unscented.UnscentedProcess.html?is` in interface UnscentedProcess
         

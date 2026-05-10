@@ -41,7 +41,7 @@ class LOSBuilder:
         """
         ...
     @typing.overload
-    def addTransform(self, lOSTransform: 'LOSTransform') -> 'LOSBuilder':
+    def addTransform(self, transform: 'LOSTransform') -> 'LOSBuilder':
         """
         Add a transform to be applied after the already registered transforms.
         
@@ -63,7 +63,7 @@ class LOSBuilder:
         """
         ...
     @typing.overload
-    def addTransform(self, timeIndependentLOSTransform: 'TimeIndependentLOSTransform') -> 'LOSBuilder': ...
+    def addTransform(self, transform: 'TimeIndependentLOSTransform') -> 'LOSBuilder': ...
     def build(self) -> 'TimeDependentLOS':
         """
         Build a lines-of-sight provider.

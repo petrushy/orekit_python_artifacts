@@ -15,8 +15,6 @@ import typing
 
 class BesselJ(org.hipparchus.analysis.UnivariateFunction):
     """
-    implements UnivariateFunction
-    
     This class provides computation methods related to Bessel functions of the first kind. Detailed descriptions of these functions are available in `Wikipedia <http://en.wikipedia.org/wiki/Bessel_function>`, `Abramowitz and Stegun <http://en.wikipedia.org/wiki/Abramowitz_and_Stegun>` (Ch. 9-11), and `DLMF <http://dlmf.nist.gov/>` (Ch. 10).
     
     This implementation is based on the rjbesl Fortran routine at `Netlib <http://www.netlib.org/specfun/rjbesl>`.
@@ -62,10 +60,10 @@ class BesselJ(org.hipparchus.analysis.UnivariateFunction):
         """
         ...
     @typing.overload
-    def value(self, double: float) -> float: ...
+    def value(self, x: float) -> float: ...
     @typing.overload
     @staticmethod
-    def value(double: float, double2: float) -> float: ...
+    def value(order: float, x: float) -> float: ...
     class BesselJResult:
         def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int): ...
         def getVals(self) -> typing.MutableSequence[float]: ...
@@ -101,7 +99,7 @@ class Beta:
         ...
     @typing.overload
     @staticmethod
-    def regularizedBeta(double: float, double2: float, double3: float) -> float:
+    def regularizedBeta(x: float, a: float, b: float) -> float:
         """
         Returns the ` regularized beta function <http://mathworld.wolfram.com/RegularizedBetaFunction.html>` I(x, a, b).
         
@@ -173,7 +171,7 @@ class Beta:
     def regularizedBeta(double: float, double2: float, double3: float, double4: float) -> float: ...
     @typing.overload
     @staticmethod
-    def regularizedBeta(double: float, double2: float, double3: float, double4: float, int: int) -> float: ...
+    def regularizedBeta(x: float, a: float, b: float, epsilon: float, maxIterations: int) -> float: ...
     @typing.overload
     @staticmethod
     def regularizedBeta(double: float, double2: float, double3: float, int: int) -> float: ...
@@ -186,7 +184,7 @@ class Erf:
     _erf_3__T = typing.TypeVar('_erf_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def erf(double: float) -> float:
+    def erf(x: float) -> float:
         """
         Returns the error function. \[ \mathrm{erf}(x) = \frac{2}{\sqrt{\pi}} \int_{t=0}^x e^{-t^2}dt \]
         
@@ -203,7 +201,8 @@ class Erf:
         Raises:
             MathIllegalStateException: if the algorithm fails to converge.
         
-              - regularizedGammaP
+        Also see:
+            regularizedGammaP
         
         Returns the difference between erf(x1) and erf(x2).
         
@@ -220,10 +219,10 @@ class Erf:
         ...
     @typing.overload
     @staticmethod
-    def erf(double: float, double2: float) -> float: ...
+    def erf(x1: float, x2: float) -> float: ...
     @typing.overload
     @staticmethod
-    def erf(t: _erf_2__T) -> _erf_2__T:
+    def erf(x: _erf_2__T) -> _erf_2__T:
         """
         Returns the error function. \[ \mathrm{erf}(x) = \frac{2}{\sqrt{\pi}} \int_{t=0}^x e^{-t^2}dt \]
         
@@ -240,7 +239,8 @@ class Erf:
         Raises:
             MathIllegalStateException: if the algorithm fails to converge.
         
-              - regularizedGammaP
+        Also see:
+            regularizedGammaP
         
         Returns the difference between erf(x1) and erf(x2).
         
@@ -258,7 +258,7 @@ class Erf:
         ...
     @typing.overload
     @staticmethod
-    def erf(t: _erf_3__T, t2: _erf_3__T) -> _erf_3__T: ...
+    def erf(x1: _erf_3__T, x2: _erf_3__T) -> _erf_3__T: ...
     _erfInv_1__T = typing.TypeVar('_erfInv_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
@@ -313,8 +313,8 @@ class Erf:
         Raises:
             MathIllegalStateException: if the algorithm fails to converge.
         
-              - regularizedGammaQ
-        
+        Also see:
+            regularizedGammaQ
         
         """
         ...
@@ -337,8 +337,8 @@ class Erf:
         Raises:
             MathIllegalStateException: if the algorithm fails to converge.
         
-              - regularizedGammaQ
-        
+        Also see:
+            regularizedGammaQ
         
         
         """
@@ -391,8 +391,8 @@ class Gamma:
     """
     `Euler-Mascheroni constant <http://en.wikipedia.org/wiki/Euler-Mascheroni_constant>`
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -400,8 +400,8 @@ class Gamma:
     """
     The value of the g constant in the Lanczos approximation, see lanczos.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -424,9 +424,9 @@ class Gamma:
         Returns:
             digamma(x) to within 10-8 relative or absolute error whichever is smaller.
         
-              - `Digamma <http://en.wikipedia.org/wiki/Digamma_function>`
-              - `Bernardo's original article <http://www.uv.es/~bernardo/1976AppStatist.pdf>`
-        
+        Also see:
+            `Digamma <http://en.wikipedia.org/wiki/Digamma_function>`, `Bernardo's original article
+            <http://www.uv.es/~bernardo/1976AppStatist.pdf>`
         
         """
         ...
@@ -448,9 +448,9 @@ class Gamma:
         Returns:
             digamma(x) to within 10-8 relative or absolute error whichever is smaller.
         
-              - `Digamma <http://en.wikipedia.org/wiki/Digamma_function>`
-              - `Bernardo's original article <http://www.uv.es/~bernardo/1976AppStatist.pdf>`
-        
+        Also see:
+            `Digamma <http://en.wikipedia.org/wiki/Digamma_function>`, `Bernardo's original article
+            <http://www.uv.es/~bernardo/1976AppStatist.pdf>`
         
         
         """
@@ -536,10 +536,10 @@ class Gamma:
         Returns:
             The Lanczos approximation.
         
-              - `Lanczos Approximation <http://mathworld.wolfram.com/LanczosApproximation.html>` equations (1) through (5), and Paul
-                Godfrey's `Note on the computation of the convergent Lanczos complex Gamma approximation
-                <http://my.fit.edu/~gabdo/gamma.txt>`
-        
+        Also see:
+            `Lanczos Approximation <http://mathworld.wolfram.com/LanczosApproximation.html>` equations (1) through (5), and Paul
+            Godfrey's `Note on the computation of the convergent Lanczos complex Gamma approximation
+            <http://my.fit.edu/~gabdo/gamma.txt>`
         
         """
         ...
@@ -555,10 +555,10 @@ class Gamma:
         Returns:
             The Lanczos approximation.
         
-              - `Lanczos Approximation <http://mathworld.wolfram.com/LanczosApproximation.html>` equations (1) through (5), and Paul
-                Godfrey's `Note on the computation of the convergent Lanczos complex Gamma approximation
-                <http://my.fit.edu/~gabdo/gamma.txt>`
-        
+        Also see:
+            `Lanczos Approximation <http://mathworld.wolfram.com/LanczosApproximation.html>` equations (1) through (5), and Paul
+            Godfrey's `Note on the computation of the convergent Lanczos complex Gamma approximation
+            <http://my.fit.edu/~gabdo/gamma.txt>`
         
         
         """
@@ -612,15 +612,15 @@ class Gamma:
     _logGamma1p_1__T = typing.TypeVar('_logGamma1p_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def logGamma1p(double: float) -> float: ...
+    def logGamma1p(x: float) -> float: ...
     @typing.overload
     @staticmethod
-    def logGamma1p(t: _logGamma1p_1__T) -> _logGamma1p_1__T: ...
+    def logGamma1p(x: _logGamma1p_1__T) -> _logGamma1p_1__T: ...
     _regularizedGammaP_2__T = typing.TypeVar('_regularizedGammaP_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _regularizedGammaP_3__T = typing.TypeVar('_regularizedGammaP_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def regularizedGammaP(double: float, double2: float) -> float:
+    def regularizedGammaP(a: float, x: float) -> float:
         """
         Parameters:
             a (double): Parameter.
@@ -659,10 +659,10 @@ class Gamma:
         ...
     @typing.overload
     @staticmethod
-    def regularizedGammaP(double: float, double2: float, double3: float, int: int) -> float: ...
+    def regularizedGammaP(a: float, x: float, epsilon: float, maxIterations: int) -> float: ...
     @typing.overload
     @staticmethod
-    def regularizedGammaP(t: _regularizedGammaP_2__T, t2: _regularizedGammaP_2__T) -> _regularizedGammaP_2__T:
+    def regularizedGammaP(a: _regularizedGammaP_2__T, x: _regularizedGammaP_2__T) -> _regularizedGammaP_2__T:
         """
         Parameters:
             a (T): Parameter.
@@ -702,12 +702,12 @@ class Gamma:
         ...
     @typing.overload
     @staticmethod
-    def regularizedGammaP(t: _regularizedGammaP_3__T, t2: _regularizedGammaP_3__T, double: float, int: int) -> _regularizedGammaP_3__T: ...
+    def regularizedGammaP(a: _regularizedGammaP_3__T, x: _regularizedGammaP_3__T, epsilon: float, maxIterations: int) -> _regularizedGammaP_3__T: ...
     _regularizedGammaQ_2__T = typing.TypeVar('_regularizedGammaQ_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _regularizedGammaQ_3__T = typing.TypeVar('_regularizedGammaQ_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def regularizedGammaQ(double: float, double2: float) -> float:
+    def regularizedGammaQ(a: float, x: float) -> float:
         """
         Parameters:
             a (double): the a parameter.
@@ -745,10 +745,10 @@ class Gamma:
         ...
     @typing.overload
     @staticmethod
-    def regularizedGammaQ(double: float, double2: float, double3: float, int: int) -> float: ...
+    def regularizedGammaQ(a: float, x: float, epsilon: float, maxIterations: int) -> float: ...
     @typing.overload
     @staticmethod
-    def regularizedGammaQ(t: _regularizedGammaQ_2__T, t2: _regularizedGammaQ_2__T) -> _regularizedGammaQ_2__T:
+    def regularizedGammaQ(a: _regularizedGammaQ_2__T, x: _regularizedGammaQ_2__T) -> _regularizedGammaQ_2__T:
         """
         Parameters:
             a (T): the a parameter.
@@ -787,7 +787,7 @@ class Gamma:
         ...
     @typing.overload
     @staticmethod
-    def regularizedGammaQ(t: _regularizedGammaQ_3__T, t2: _regularizedGammaQ_3__T, double: float, int: int) -> _regularizedGammaQ_3__T: ...
+    def regularizedGammaQ(a: _regularizedGammaQ_3__T, x: _regularizedGammaQ_3__T, epsilon: float, maxIterations: int) -> _regularizedGammaQ_3__T: ...
     _trigamma_1__T = typing.TypeVar('_trigamma_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
@@ -801,9 +801,8 @@ class Gamma:
         Returns:
             trigamma(x) to within 10-8 relative or absolute error whichever is smaller
         
-              - `Trigamma <http://en.wikipedia.org/wiki/Trigamma_function>`
-              - digamma
-        
+        Also see:
+            `Trigamma <http://en.wikipedia.org/wiki/Trigamma_function>`, digamma
         
         """
         ...
@@ -819,9 +818,8 @@ class Gamma:
         Returns:
             trigamma(x) to within 10-8 relative or absolute error whichever is smaller
         
-              - `Trigamma <http://en.wikipedia.org/wiki/Trigamma_function>`
-              - digamma
-        
+        Also see:
+            `Trigamma <http://en.wikipedia.org/wiki/Trigamma_function>`, digamma
         
         
         """

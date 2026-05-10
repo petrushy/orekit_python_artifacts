@@ -338,7 +338,7 @@ class PythonMeasurementFilter(MeasurementFilter[_PythonMeasurementFilter__T], ty
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -486,7 +486,7 @@ class PythonHatchFilter(org.orekit.estimation.measurements.filtering.HatchFilter
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

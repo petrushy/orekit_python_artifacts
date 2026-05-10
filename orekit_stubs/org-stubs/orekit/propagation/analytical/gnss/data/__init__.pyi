@@ -1877,9 +1877,9 @@ class GLONASSAlmanac(GLONASSOrbitalElements):
         10.0
     """
     @typing.overload
-    def __init__(self, int: int, int2: int, int3: int, int4: int, int5: int, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float): ...
+    def __init__(self, channel: int, health: int, day: int, month: int, year: int, ta: float, lambda_: float, deltaI: float, pa: float, ecc: float, deltaT: float, deltaTDot: float, tGlo2UTC: float, tGPS2Glo: float, tGlo: float): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, int3: int, int4: int, int5: int, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, channel: int, health: int, day: int, month: int, year: int, ta: float, lambda_: float, deltaI: float, pa: float, ecc: float, deltaT: float, deltaTDot: float, tGlo2UTC: float, tGPS2Glo: float, tGlo: float, glonass: org.orekit.time.TimeScale): ...
     def getDate(self) -> org.orekit.time.AbsoluteDate:
         """
         Description copied from interface: getDate Get the date.
@@ -2066,7 +2066,7 @@ class GLONASSAlmanac(GLONASSOrbitalElements):
         """
         ...
     @typing.overload
-    def getPropagator(self, dataContext: org.orekit.data.DataContext) -> org.orekit.propagation.analytical.gnss.GLONASSAnalyticalPropagator:
+    def getPropagator(self, context: org.orekit.data.DataContext) -> org.orekit.propagation.analytical.gnss.GLONASSAnalyticalPropagator:
         """
         Get the propagator corresponding to the navigation message.
         
@@ -2114,7 +2114,7 @@ class GLONASSAlmanac(GLONASSOrbitalElements):
         """
         ...
     @typing.overload
-    def getPropagator(self, dataContext: org.orekit.data.DataContext, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame: org.orekit.frames.Frame, frame2: org.orekit.frames.Frame, double: float) -> org.orekit.propagation.analytical.gnss.GLONASSAnalyticalPropagator: ...
+    def getPropagator(self, context: org.orekit.data.DataContext, provider: org.orekit.attitudes.AttitudeProvider, inertial: org.orekit.frames.Frame, bodyFixed: org.orekit.frames.Frame, mass: float) -> org.orekit.propagation.analytical.gnss.GLONASSAnalyticalPropagator: ...
     def getTime(self) -> float:
         """
         Description copied from interface: getTime Get the Reference Time.
@@ -2136,9 +2136,9 @@ class GLONASSEphemeris(GLONASSOrbitalElements):
         10.0
     """
     @typing.overload
-    def __init__(self, int: int, int2: int, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float): ...
+    def __init__(self, n4: int, nt: int, tb: float, x: float, xDot: float, xDotDot: float, y: float, yDot: float, yDotDot: float, z: float, zDot: float, zDotDot: float): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, absoluteDate: org.orekit.time.AbsoluteDate): ...
+    def __init__(self, n4: int, nt: int, tb: float, x: float, xDot: float, xDotDot: float, y: float, yDot: float, yDotDot: float, z: float, zDot: float, zDotDot: float, date: org.orekit.time.AbsoluteDate): ...
     def getDate(self) -> org.orekit.time.AbsoluteDate:
         """
         Description copied from interface: getDate Get the date.
@@ -2357,7 +2357,7 @@ class GLONASSNavigationMessage(AbstractEphemerisMessage, GLONASSOrbitalElements)
         """
         ...
     @typing.overload
-    def getPropagator(self, double: float) -> org.orekit.propagation.numerical.GLONASSNumericalPropagator:
+    def getPropagator(self, step: float) -> org.orekit.propagation.numerical.GLONASSNumericalPropagator:
         """
         Get the propagator corresponding to the navigation message.
         
@@ -2433,9 +2433,9 @@ class GLONASSNavigationMessage(AbstractEphemerisMessage, GLONASSOrbitalElements)
         """
         ...
     @typing.overload
-    def getPropagator(self, double: float, dataContext: org.orekit.data.DataContext) -> org.orekit.propagation.numerical.GLONASSNumericalPropagator: ...
+    def getPropagator(self, step: float, context: org.orekit.data.DataContext) -> org.orekit.propagation.numerical.GLONASSNumericalPropagator: ...
     @typing.overload
-    def getPropagator(self, double: float, dataContext: org.orekit.data.DataContext, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame: org.orekit.frames.Frame, double2: float) -> org.orekit.propagation.numerical.GLONASSNumericalPropagator: ...
+    def getPropagator(self, step: float, context: org.orekit.data.DataContext, provider: org.orekit.attitudes.AttitudeProvider, inertial: org.orekit.frames.Frame, mass: float) -> org.orekit.propagation.numerical.GLONASSNumericalPropagator: ...
     def getStatusFlags(self) -> int:
         """
         Get status flags.
@@ -3034,7 +3034,7 @@ class PythonFieldGNSSClockElements(FieldGNSSClockElements[_PythonFieldGNSSClockE
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -3157,7 +3157,7 @@ class PythonGNSSClockElements(GNSSClockElements):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -3392,7 +3392,7 @@ class PythonSBASOrbitalElements(SBASOrbitalElements):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -3527,7 +3527,7 @@ class SBASNavigationMessage(AbstractEphemerisMessage, SBASOrbitalElements):
         """
         ...
     @typing.overload
-    def getPropagator(self, frames: org.orekit.frames.Frames, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame2: org.orekit.frames.Frame, frame3: org.orekit.frames.Frame, double: float, double2: float) -> org.orekit.propagation.analytical.gnss.SBASPropagator: ...
+    def getPropagator(self, frames: org.orekit.frames.Frames, provider: org.orekit.attitudes.AttitudeProvider, inertial: org.orekit.frames.Frame, bodyFixed: org.orekit.frames.Frame, mass: float, mu: float) -> org.orekit.propagation.analytical.gnss.SBASPropagator: ...
     def getTime(self) -> float:
         """
         Gets the Reference Time of the SBAS orbit in GPS seconds of the week.
@@ -3940,7 +3940,7 @@ class AbstractAlmanac(CommonGnssData[_AbstractAlmanac__O], typing.Generic[_Abstr
     Since:
         11.0
     """
-    def __init__(self, double: float, double2: float, int: int, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem):
+    def __init__(self, mu: float, angularVelocity: float, weeksInCycle: int, timeScales: org.orekit.time.TimeScales, system: org.orekit.gnss.SatelliteSystem):
         """
         Constructor.
         
@@ -4038,7 +4038,7 @@ class AbstractAlmanac(CommonGnssData[_AbstractAlmanac__O], typing.Generic[_Abstr
         """
         ...
     @typing.overload
-    def getPropagator(self, frames: org.orekit.frames.Frames, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame2: org.orekit.frames.Frame, frame3: org.orekit.frames.Frame, double: float) -> org.orekit.propagation.analytical.gnss.GNSSPropagator: ...
+    def getPropagator(self, frames: org.orekit.frames.Frames, provider: org.orekit.attitudes.AttitudeProvider, inertial: org.orekit.frames.Frame, bodyFixed: org.orekit.frames.Frame, mass: float) -> org.orekit.propagation.analytical.gnss.GNSSPropagator: ...
 
 _FieldAbstractAlmanac__T = typing.TypeVar('_FieldAbstractAlmanac__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 _FieldAbstractAlmanac__O = typing.TypeVar('_FieldAbstractAlmanac__O', bound=AbstractAlmanac)  # <O>
@@ -4054,7 +4054,7 @@ class FieldAbstractAlmanac(FieldCommonGnssData[_FieldAbstractAlmanac__T, _FieldA
     @typing.overload
     def getPropagator(self, frames: org.orekit.frames.Frames) -> org.orekit.propagation.analytical.gnss.FieldGnssPropagator[_FieldAbstractAlmanac__T]: ...
     @typing.overload
-    def getPropagator(self, frames: org.orekit.frames.Frames, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame2: org.orekit.frames.Frame, frame3: org.orekit.frames.Frame, t: _FieldAbstractAlmanac__T) -> org.orekit.propagation.analytical.gnss.FieldGnssPropagator[_FieldAbstractAlmanac__T]: ...
+    def getPropagator(self, frames: org.orekit.frames.Frames, provider: org.orekit.attitudes.AttitudeProvider, inertial: org.orekit.frames.Frame, bodyFixed: org.orekit.frames.Frame, mass: _FieldAbstractAlmanac__T) -> org.orekit.propagation.analytical.gnss.FieldGnssPropagator[_FieldAbstractAlmanac__T]: ...
 
 _AbstractNavigationMessage__O = typing.TypeVar('_AbstractNavigationMessage__O', bound='AbstractNavigationMessage')  # <O>
 class AbstractNavigationMessage(AbstractAlmanac[_AbstractNavigationMessage__O], typing.Generic[_AbstractNavigationMessage__O]):
@@ -4176,9 +4176,9 @@ class BeidouAlmanac(AbstractAlmanac['BeidouAlmanac']):
     """
     ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def __init__(self, fieldBeidouAlmanac: 'FieldBeidouAlmanac'[___init___0__T]): ...
+    def __init__(self, original: 'FieldBeidouAlmanac'[___init___0__T]): ...
     @typing.overload
-    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def __init__(self, timeScales: org.orekit.time.TimeScales, system: org.orekit.gnss.SatelliteSystem): ...
     def getHealth(self) -> int:
         """
         Gets the Health status.
@@ -4908,9 +4908,9 @@ class GPSAlmanac(AbstractAlmanac['GPSAlmanac']):
     """
     ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def __init__(self, fieldGPSAlmanac: FieldGPSAlmanac[___init___0__T]): ...
+    def __init__(self, original: FieldGPSAlmanac[___init___0__T]): ...
     @typing.overload
-    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def __init__(self, timeScales: org.orekit.time.TimeScales, system: org.orekit.gnss.SatelliteSystem): ...
     def getHealth(self) -> int:
         """
         Gets the Health status.
@@ -5055,9 +5055,9 @@ class GalileoAlmanac(AbstractAlmanac['GalileoAlmanac']):
     """
     ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def __init__(self, fieldGalileoAlmanac: FieldGalileoAlmanac[___init___0__T]): ...
+    def __init__(self, original: FieldGalileoAlmanac[___init___0__T]): ...
     @typing.overload
-    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def __init__(self, timeScales: org.orekit.time.TimeScales, system: org.orekit.gnss.SatelliteSystem): ...
     def getHealthE1(self) -> int:
         """
         Gets the E1-B/C signal health status.
@@ -5193,9 +5193,9 @@ class NavICAlmanac(AbstractAlmanac['NavICAlmanac']):
     """
     ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def __init__(self, fieldNavICAlmanac: FieldNavICAlmanac[___init___0__T]): ...
+    def __init__(self, original: FieldNavICAlmanac[___init___0__T]): ...
     @typing.overload
-    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def __init__(self, timeScales: org.orekit.time.TimeScales, system: org.orekit.gnss.SatelliteSystem): ...
     def setSqrtA(self, sqrtA: float) -> None:
         """
         Setter for the Square Root of Semi-Major Axis (m^1/2).
@@ -5235,9 +5235,9 @@ class QZSSAlmanac(AbstractAlmanac['QZSSAlmanac']):
     """
     ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def __init__(self, fieldQZSSAlmanac: FieldQZSSAlmanac[___init___0__T]): ...
+    def __init__(self, original: FieldQZSSAlmanac[___init___0__T]): ...
     @typing.overload
-    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def __init__(self, timeScales: org.orekit.time.TimeScales, system: org.orekit.gnss.SatelliteSystem): ...
     def getHealth(self) -> int:
         """
         Gets the Health status.
@@ -5344,9 +5344,9 @@ class BeidouCivilianNavigationMessage(AbstractNavigationMessage['BeidouCivilianN
     """
     ___init___1__T = typing.TypeVar('___init___1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def __init__(self, radioWave: typing.Union[org.orekit.gnss.RadioWave, typing.Callable], timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def __init__(self, radioWave: typing.Union[org.orekit.gnss.RadioWave, typing.Callable], timeScales: org.orekit.time.TimeScales, system: org.orekit.gnss.SatelliteSystem): ...
     @typing.overload
-    def __init__(self, fieldBeidouCivilianNavigationMessage: 'FieldBeidouCivilianNavigationMessage'[___init___1__T]): ...
+    def __init__(self, original: 'FieldBeidouCivilianNavigationMessage'[___init___1__T]): ...
     def getADot(self) -> float:
         """
         Getter for the change rate in semi-major axis.
@@ -5766,9 +5766,9 @@ class BeidouLegacyNavigationMessage(AbstractNavigationMessage['BeidouLegacyNavig
     """
     ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def __init__(self, fieldBeidouLegacyNavigationMessage: 'FieldBeidouLegacyNavigationMessage'[___init___0__T]): ...
+    def __init__(self, original: 'FieldBeidouLegacyNavigationMessage'[___init___0__T]): ...
     @typing.overload
-    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def __init__(self, timeScales: org.orekit.time.TimeScales, system: org.orekit.gnss.SatelliteSystem): ...
     def getAODC(self) -> int:
         """
         Getter for the Age Of Data Clock (AODC).
@@ -7374,9 +7374,9 @@ class GalileoNavigationMessage(AbstractNavigationMessage['GalileoNavigationMessa
     """
     ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def __init__(self, fieldGalileoNavigationMessage: FieldGalileoNavigationMessage[___init___0__T]): ...
+    def __init__(self, original: FieldGalileoNavigationMessage[___init___0__T]): ...
     @typing.overload
-    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def __init__(self, timeScales: org.orekit.time.TimeScales, system: org.orekit.gnss.SatelliteSystem): ...
     def getBGDE1E5a(self) -> float:
         """
         Getter for the E1/E5a broadcast group delay.
@@ -8032,9 +8032,9 @@ class GPSCivilianNavigationMessage(CivilianNavigationMessage['GPSCivilianNavigat
     """
     ___init___1__T = typing.TypeVar('___init___1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def __init__(self, boolean: bool, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def __init__(self, cnv2: bool, timeScales: org.orekit.time.TimeScales, system: org.orekit.gnss.SatelliteSystem): ...
     @typing.overload
-    def __init__(self, fieldGPSCivilianNavigationMessage: FieldGPSCivilianNavigationMessage[___init___1__T]): ...
+    def __init__(self, original: FieldGPSCivilianNavigationMessage[___init___1__T]): ...
     _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
     def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F:
@@ -8062,9 +8062,9 @@ class GPSLegacyNavigationMessage(LegacyNavigationMessage['GPSLegacyNavigationMes
     """
     ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def __init__(self, fieldGPSLegacyNavigationMessage: FieldGPSLegacyNavigationMessage[___init___0__T]): ...
+    def __init__(self, original: FieldGPSLegacyNavigationMessage[___init___0__T]): ...
     @typing.overload
-    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def __init__(self, timeScales: org.orekit.time.TimeScales, system: org.orekit.gnss.SatelliteSystem): ...
     _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
     def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F:
@@ -8092,9 +8092,9 @@ class NavICL1NVNavigationMessage(CivilianNavigationMessage['NavICL1NVNavigationM
     """
     ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def __init__(self, fieldNavicL1NVNavigationMessage: FieldNavicL1NVNavigationMessage[___init___0__T]): ...
+    def __init__(self, original: FieldNavicL1NVNavigationMessage[___init___0__T]): ...
     @typing.overload
-    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def __init__(self, timeScales: org.orekit.time.TimeScales, system: org.orekit.gnss.SatelliteSystem): ...
     def getIscL1DL1P(self) -> float:
         """
         Getter for inter Signal Delay for L1D L1P.
@@ -8242,9 +8242,9 @@ class NavICLegacyNavigationMessage(LegacyNavigationMessage['NavICLegacyNavigatio
     """
     ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def __init__(self, fieldNavicLegacyNavigationMessage: FieldNavicLegacyNavigationMessage[___init___0__T]): ...
+    def __init__(self, original: FieldNavicLegacyNavigationMessage[___init___0__T]): ...
     @typing.overload
-    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def __init__(self, timeScales: org.orekit.time.TimeScales, system: org.orekit.gnss.SatelliteSystem): ...
     _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
     def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F:
@@ -8272,9 +8272,9 @@ class QZSSCivilianNavigationMessage(CivilianNavigationMessage['QZSSCivilianNavig
     """
     ___init___1__T = typing.TypeVar('___init___1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def __init__(self, boolean: bool, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def __init__(self, cnv2: bool, timeScales: org.orekit.time.TimeScales, system: org.orekit.gnss.SatelliteSystem): ...
     @typing.overload
-    def __init__(self, fieldQZSSCivilianNavigationMessage: FieldQZSSCivilianNavigationMessage[___init___1__T]): ...
+    def __init__(self, original: FieldQZSSCivilianNavigationMessage[___init___1__T]): ...
     _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
     def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F:
@@ -8302,9 +8302,9 @@ class QZSSLegacyNavigationMessage(LegacyNavigationMessage['QZSSLegacyNavigationM
     """
     ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def __init__(self, fieldQZSSLegacyNavigationMessage: FieldQZSSLegacyNavigationMessage[___init___0__T]): ...
+    def __init__(self, original: FieldQZSSLegacyNavigationMessage[___init___0__T]): ...
     @typing.overload
-    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def __init__(self, timeScales: org.orekit.time.TimeScales, system: org.orekit.gnss.SatelliteSystem): ...
     _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
     def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F:

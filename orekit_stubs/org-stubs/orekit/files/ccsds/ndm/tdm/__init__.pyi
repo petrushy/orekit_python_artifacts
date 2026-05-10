@@ -17,6 +17,7 @@ import org.orekit.files.ccsds.utils
 import org.orekit.files.ccsds.utils.generation
 import org.orekit.files.ccsds.utils.lexical
 import org.orekit.files.ccsds.utils.parsing
+import org.orekit.frames
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -457,7 +458,7 @@ class ObservationsBlock(org.orekit.files.ccsds.section.CommentsContainer, org.or
         """
         ...
     @typing.overload
-    def addObservation(self, observationType: ObservationType, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> None: ...
+    def addObservation(self, type: ObservationType, epoch: org.orekit.time.AbsoluteDate, measurement: float) -> None: ...
     def getObservations(self) -> java.util.List[Observation]:
         """
         Get the list of Observations data lines.
@@ -757,11 +758,10 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
     Since:
         9.0
     """
-    def __init__(self):
-        """
-        Create a new TDM meta-data.
-        """
-        ...
+    @typing.overload
+    def __init__(self): ...
+    @typing.overload
+    def __init__(self, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def addEphemerisName(self, participantNumber: int, ephemerisName: str) -> None:
         """
         Adds an ephemeris name to the list.
@@ -1080,6 +1080,24 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
+    def getRadecFrame(self) -> org.orekit.frames.Frame:
+        """
+        Get the reference frame used right ascension and declination measurements.
+        
+        Note that CCSDS 503 says "The origin (center) of the reference frame is assumed to be at the antenna reference point", but since the TDM does not provide the location of the antenna reference point the returned frame is not centered at the antenna reference point. Therefore, only the orientation of the returned frame is significant.
+        
+        Returns:
+            Orientation of the frame used for RADEC observations.
+        
+        Since:
+            13.1.5
+        
+        Also see:
+            getReferenceFrame
+        
+        
+        """
+        ...
     def getRangeMode(self) -> RangeMode:
         """
         Getter for the rangeMode.
@@ -1160,6 +1178,9 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         Returns:
             The reference frame specified by the REFERENCE_FRAME keyword.
+        
+        Also see:
+            getRadecFrame
         
         
         """
@@ -1828,27 +1849,10 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
     Since:
         9.0
     """
-    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, converter: RangeUnitsConverter, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]):
-        """
-        Complete constructor.
-        
-        Calling this constructor directly is not recommended. Users should rather use buildTdmParser.
-        
-        Parameters:
-            conventions (IERSConventions): IERS Conventions
-            simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
-            dataContext (DataContext): used to retrieve frames, time scales, etc.
-            parsedUnitsBehavior (ParsedUnitsBehavior): behavior to adopt for handling parsed units
-            converter (RangeUnitsConverter): converter for RU (may be null if there are no range observations in
-                RU)
-            filters (Function<ParseToken, List<ParseToken>>[]): filters to apply to parse tokens
-        
-        Since:
-            12.0
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, converter: RangeUnitsConverter, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
+    @typing.overload
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, converter: RangeUnitsConverter, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray], frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def build(self) -> Tdm:
         """
         Build the file from parsed entries.
@@ -2225,7 +2229,7 @@ class PythonRangeUnitsConverter(RangeUnitsConverter):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

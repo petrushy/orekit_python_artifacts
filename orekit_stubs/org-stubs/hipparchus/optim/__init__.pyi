@@ -76,7 +76,7 @@ class BaseOptimizer(typing.Generic[_BaseOptimizer__P]):
     @typing.overload
     def optimize(self) -> _BaseOptimizer__P: ...
     @typing.overload
-    def optimize(self, *optimizationData: 'OptimizationData') -> _BaseOptimizer__P: ...
+    def optimize(self, *optData: 'OptimizationData') -> _BaseOptimizer__P: ...
 
 _ConvergenceChecker__P = typing.TypeVar('_ConvergenceChecker__P')  # <P>
 class ConvergenceChecker(typing.Generic[_ConvergenceChecker__P]):
@@ -87,9 +87,9 @@ class ConvergenceChecker(typing.Generic[_ConvergenceChecker__P]):
     
     For convenience, three implementations that fit simple needs are already provided: SimpleValueChecker, SimpleVectorValueChecker and SimplePointChecker. The first two consider that convergence is reached when the objective function value does not change much anymore, it does not use the point set at all. The third one considers that convergence is reached when the input point set does not change much anymore, it does not use objective function value at all.
     
-          - SimplePointChecker
-          - SimpleValueChecker
-          - SimpleVectorValueChecker
+    Also see:
+        SimplePointChecker, SimpleValueChecker,
+        SimpleVectorValueChecker
     """
     def converged(self, iteration: int, previous: _ConvergenceChecker__P, current: _ConvergenceChecker__P) -> bool:
         """
@@ -109,8 +109,6 @@ class ConvergenceChecker(typing.Generic[_ConvergenceChecker__P]):
 
 class LocalizedOptimFormats(java.lang.Enum['LocalizedOptimFormats'], org.hipparchus.exception.Localizable):
     """
-    implements hipparchus
-    
     Enumeration for localized messages formats used in exceptions messages.
     
     The constants in this enumeration represent the available formats as localized strings. These formats are intended to be localized using simple properties files, using the constant name as the key and the property value as the message format. The source English format is provided in the constants themselves to serve both as a reminder for developers to understand the parameters needed by each format, as a basis for translators to create localized properties files, and as a default format if some translation is missing.
@@ -170,7 +168,12 @@ class LocalizedOptimFormats(java.lang.Enum['LocalizedOptimFormats'], org.hipparc
     @staticmethod
     def values() -> typing.MutableSequence['LocalizedOptimFormats']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (LocalizedOptimFormats c : LocalizedOptimFormats.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -223,18 +226,16 @@ class OptimizationProblem(typing.Generic[_OptimizationProblem__P]):
 
 class PointValuePair(org.hipparchus.util.Pair[typing.MutableSequence[float], float], java.io.Serializable):
     """
-    implements Serializable
-    
     This class holds a point and the value of an objective function at that point.
     
-          - PointVectorValuePair
-          - hipparchus
-          - serialized
+    Also see:
+        PointVectorValuePair,
+        hipparchus, serialized
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float): ...
+    def __init__(self, point: typing.Union[typing.List[float], jpype.JArray], value: float): ...
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float, boolean: bool): ...
+    def __init__(self, point: typing.Union[typing.List[float], jpype.JArray], value: float, copyArray: bool): ...
     def getPoint(self) -> typing.MutableSequence[float]:
         """
         Gets the point.
@@ -258,18 +259,16 @@ class PointValuePair(org.hipparchus.util.Pair[typing.MutableSequence[float], flo
 
 class PointVectorValuePair(org.hipparchus.util.Pair[typing.MutableSequence[float], typing.MutableSequence[float]], java.io.Serializable):
     """
-    implements Serializable
-    
     This class holds a point and the vectorial value of an objective function at that point.
     
-          - PointValuePair
-          - hipparchus
-          - serialized
+    Also see:
+        PointValuePair, hipparchus,
+        serialized
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, point: typing.Union[typing.List[float], jpype.JArray], value: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], boolean: bool): ...
+    def __init__(self, point: typing.Union[typing.List[float], jpype.JArray], value: typing.Union[typing.List[float], jpype.JArray], copyArray: bool): ...
     def getPoint(self) -> typing.MutableSequence[float]:
         """
         Gets the point.
@@ -316,8 +315,6 @@ class PointVectorValuePair(org.hipparchus.util.Pair[typing.MutableSequence[float
 _AbstractConvergenceChecker__P = typing.TypeVar('_AbstractConvergenceChecker__P')  # <P>
 class AbstractConvergenceChecker(ConvergenceChecker[_AbstractConvergenceChecker__P], typing.Generic[_AbstractConvergenceChecker__P]):
     """
-    implements ConvergenceChecker<P>
-    
     Base class for all convergence checker implementations.
     """
     def converged(self, iteration: int, previous: _AbstractConvergenceChecker__P, current: _AbstractConvergenceChecker__P) -> bool:
@@ -361,8 +358,6 @@ class AbstractConvergenceChecker(ConvergenceChecker[_AbstractConvergenceChecker_
 _AbstractOptimizationProblem__P = typing.TypeVar('_AbstractOptimizationProblem__P')  # <P>
 class AbstractOptimizationProblem(OptimizationProblem[_AbstractOptimizationProblem__P], typing.Generic[_AbstractOptimizationProblem__P]):
     """
-    implements OptimizationProblem<P>
-    
     Base class for implementing optimization problems. It contains the boiler-plate code for counting the number of evaluations of the objective function and the number of iterations of the algorithm, and storing the convergence checker.
     """
     def getConvergenceChecker(self) -> ConvergenceChecker[_AbstractOptimizationProblem__P]:
@@ -470,8 +465,6 @@ class BaseMultivariateOptimizer(BaseOptimizer[_BaseMultivariateOptimizer__P], ty
 _ConvergenceCheckerAndMultiplexer__P = typing.TypeVar('_ConvergenceCheckerAndMultiplexer__P')  # <P>
 class ConvergenceCheckerAndMultiplexer(ConvergenceChecker[_ConvergenceCheckerAndMultiplexer__P], typing.Generic[_ConvergenceCheckerAndMultiplexer__P]):
     """
-    implements ConvergenceChecker<P>
-    
     Multiplexer for ConvergenceChecker, checking all the checkers converged.
     
     The checkers are checked in the order of the initial list and the check loop is interrupted as soon as one checker fails to converge (that is the remaining checkers may not be called in first iterations.
@@ -510,8 +503,6 @@ class ConvergenceCheckerAndMultiplexer(ConvergenceChecker[_ConvergenceCheckerAnd
 _ConvergenceCheckerOrMultiplexer__P = typing.TypeVar('_ConvergenceCheckerOrMultiplexer__P')  # <P>
 class ConvergenceCheckerOrMultiplexer(ConvergenceChecker[_ConvergenceCheckerOrMultiplexer__P], typing.Generic[_ConvergenceCheckerOrMultiplexer__P]):
     """
-    implements ConvergenceChecker<P>
-    
     Multiplexer for ConvergenceChecker, checking one of the checkers converged.
     
     The checkers are checked in the order of the initial list and the check loop is interrupted as soon as one checker has converged (that is the remaining checkers may not be called in the final iteration.
@@ -549,8 +540,6 @@ class ConvergenceCheckerOrMultiplexer(ConvergenceChecker[_ConvergenceCheckerOrMu
 
 class InitialGuess(OptimizationData):
     """
-    implements OptimizationData
-    
     Starting point (first guess) of the optimization procedure.
     
     Immutable class.
@@ -578,8 +567,6 @@ class InitialGuess(OptimizationData):
 
 class MaxEval(OptimizationData):
     """
-    implements OptimizationData
-    
     Maximum number of evaluations of the function to be optimized.
     """
     def __init__(self, max: int):
@@ -612,7 +599,7 @@ class MaxEval(OptimizationData):
         
         Returns:
             a new instance suitable for allowing
-            MAX_VALUE evaluations.
+            Integer evaluations.
         
         
         """
@@ -620,8 +607,6 @@ class MaxEval(OptimizationData):
 
 class MaxIter(OptimizationData):
     """
-    implements OptimizationData
-    
     Maximum number of iterations performed by an (iterative) algorithm.
     """
     def __init__(self, max: int):
@@ -654,7 +639,7 @@ class MaxIter(OptimizationData):
         
         Returns:
             a new instance suitable for allowing
-            MAX_VALUE evaluations.
+            Integer evaluations.
         
         
         """
@@ -662,8 +647,6 @@ class MaxIter(OptimizationData):
 
 class SimpleBounds(OptimizationData):
     """
-    implements OptimizationData
-    
     Simple optimization constraints: lower and upper bounds. The valid range of the parameters is an interval that can be infinite (in one or both directions).
     
     Immutable class.
@@ -789,9 +772,9 @@ class SimplePointChecker(AbstractConvergenceChecker[_SimplePointChecker__P], typ
     The converged method will also return true if the number of iterations has been set (see ).
     """
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, relativeThreshold: float, absoluteThreshold: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, int: int): ...
+    def __init__(self, relativeThreshold: float, absoluteThreshold: float, maxIter: int): ...
     def converged(self, iteration: int, previous: _SimplePointChecker__P, current: _SimplePointChecker__P) -> bool:
         """
         Check if the optimization algorithm has converged considering the last two points. This method may be called several times from the same algorithm iteration with different points. This can be detected by checking the iteration number at each call if needed. Each time this method is called, the previous and current point correspond to points with the same role at each iteration, so they can be compared. As an example, simplex-based algorithms call this method for all points of the simplex, not only for the best or worst ones.
@@ -819,9 +802,9 @@ class SimpleValueChecker(AbstractConvergenceChecker[PointValuePair]):
     The converged method will also return true if the number of iterations has been set (see ).
     """
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, relativeThreshold: float, absoluteThreshold: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, int: int): ...
+    def __init__(self, relativeThreshold: float, absoluteThreshold: float, maxIter: int): ...
     def converged(self, iteration: int, previous: PointValuePair, current: PointValuePair) -> bool:
         """
         Check if the optimization algorithm has converged considering the last two points. This method may be called several time from the same algorithm iteration with different points. This can be detected by checking the iteration number at each call if needed. Each time this method is called, the previous and current point correspond to points with the same role at each iteration, so they can be compared. As an example, simplex-based algorithms call this method for all points of the simplex, not only for the best or worst ones.
@@ -849,9 +832,9 @@ class SimpleVectorValueChecker(AbstractConvergenceChecker[PointVectorValuePair])
     The converged method will also return true if the number of iterations has been set (see ).
     """
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, relativeThreshold: float, absoluteThreshold: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, int: int): ...
+    def __init__(self, relativeThreshold: float, absoluteThreshold: float, maxIter: int): ...
     def converged(self, iteration: int, previous: PointVectorValuePair, current: PointVectorValuePair) -> bool:
         """
         Check if the optimization algorithm has converged considering the last two points. This method may be called several times from the same algorithm iteration with different points. This can be detected by checking the iteration number at each call if needed. Each time this method is called, the previous and current point correspond to points with the same role at each iteration, so they can be compared. As an example, simplex-based algorithms call this method for all points of the simplex, not only for the best or worst ones.

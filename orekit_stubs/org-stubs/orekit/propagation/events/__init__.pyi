@@ -393,7 +393,7 @@ class EventDetectorsProvider:
     @typing.overload
     def getEventDetectors(self) -> java.util.stream.Stream[EventDetector]: ...
     @typing.overload
-    def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[EventDetector]: ...
+    def getEventDetectors(self, parameterDrivers: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[EventDetector]: ...
     _getFieldDateDetector__T = typing.TypeVar('_getFieldDateDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def getFieldDateDetector(self, field: org.hipparchus.Field[_getFieldDateDetector__T], *timeStampeds: typing.Union[org.orekit.time.TimeStamped, typing.Callable]) -> 'FieldDateDetector'[_getFieldDateDetector__T]:
         """
@@ -417,7 +417,7 @@ class EventDetectorsProvider:
     @typing.overload
     def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T]) -> java.util.stream.Stream['FieldEventDetector'[_getFieldEventDetectors_0__T]]: ...
     @typing.overload
-    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream['FieldEventDetector'[_getFieldEventDetectors_1__T]]: ...
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T], parameterDrivers: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream['FieldEventDetector'[_getFieldEventDetectors_1__T]]: ...
 
 _EventState__T = typing.TypeVar('_EventState__T', bound=EventDetector)  # <T>
 class EventState(typing.Generic[_EventState__T]):
@@ -1440,7 +1440,7 @@ class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
         """
         ...
     @typing.overload
-    def withMaxCheck(self, double: float) -> _AbstractDetector__T:
+    def withMaxCheck(self, newMaxCheck: float) -> _AbstractDetector__T:
         """
         Set up the maximum checking interval.
         
@@ -1472,7 +1472,7 @@ class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
         """
         ...
     @typing.overload
-    def withMaxCheck(self, adaptableInterval: typing.Union[org.orekit.propagation.events.intervals.AdaptableInterval, typing.Callable]) -> _AbstractDetector__T: ...
+    def withMaxCheck(self, newMaxCheck: typing.Union[org.orekit.propagation.events.intervals.AdaptableInterval, typing.Callable]) -> _AbstractDetector__T: ...
     def withMaxIter(self, newMaxIter: int) -> _AbstractDetector__T:
         """
         Set up the maximum number of iterations in the event time search.
@@ -1642,9 +1642,9 @@ class EventSlopeFilter(EventDetector, typing.Generic[_EventSlopeFilter__T]):
         EventEnablingPredicateFilter
     """
     @typing.overload
-    def __init__(self, eventDetectionSettings: EventDetectionSettings, t: _EventSlopeFilter__T, filterType: FilterType): ...
+    def __init__(self, detectionSettings: EventDetectionSettings, rawDetector: _EventSlopeFilter__T, filterType: FilterType): ...
     @typing.overload
-    def __init__(self, t: _EventSlopeFilter__T, filterType: FilterType): ...
+    def __init__(self, rawDetector: _EventSlopeFilter__T, filter: FilterType): ...
     def finish(self, state: org.orekit.propagation.SpacecraftState) -> None:
         """
         This method finalizes the event detector's job.
@@ -1934,7 +1934,7 @@ class FieldAbstractDetector(FieldEventDetector[_FieldAbstractDetector__T], typin
         """
         ...
     @typing.overload
-    def withMaxCheck(self, double: float) -> _FieldAbstractDetector__D:
+    def withMaxCheck(self, newMaxCheck: float) -> _FieldAbstractDetector__D:
         """
         Set up the maximum checking interval.
         
@@ -1968,7 +1968,7 @@ class FieldAbstractDetector(FieldEventDetector[_FieldAbstractDetector__T], typin
         """
         ...
     @typing.overload
-    def withMaxCheck(self, fieldAdaptableInterval: typing.Union[org.orekit.propagation.events.intervals.FieldAdaptableInterval[_FieldAbstractDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], bool], float]]) -> _FieldAbstractDetector__D: ...
+    def withMaxCheck(self, newMaxCheck: typing.Union[org.orekit.propagation.events.intervals.FieldAdaptableInterval[_FieldAbstractDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], bool], float]]) -> _FieldAbstractDetector__D: ...
     def withMaxIter(self, newMaxIter: int) -> _FieldAbstractDetector__D:
         """
         Set up the maximum number of iterations in the event time search.
@@ -2140,9 +2140,9 @@ class FieldEventSlopeFilter(FieldEventDetector[_FieldEventSlopeFilter__T], typin
         FieldEventEnablingPredicateFilter
     """
     @typing.overload
-    def __init__(self, fieldEventDetectionSettings: FieldEventDetectionSettings[_FieldEventSlopeFilter__T], d: _FieldEventSlopeFilter__D, filterType: FilterType): ...
+    def __init__(self, detectionSettings: FieldEventDetectionSettings[_FieldEventSlopeFilter__T], rawDetector: _FieldEventSlopeFilter__D, filterType: FilterType): ...
     @typing.overload
-    def __init__(self, d: _FieldEventSlopeFilter__D, filterType: FilterType): ...
+    def __init__(self, rawDetector: _FieldEventSlopeFilter__D, filterType: FilterType): ...
     def finish(self, state: org.orekit.propagation.FieldSpacecraftState[_FieldEventSlopeFilter__T]) -> None:
         """
         This method finalizes the event detector's job.
@@ -2315,7 +2315,7 @@ class PythonEnablingPredicate(EnablingPredicate):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2428,7 +2428,7 @@ class PythonEventDetector(EventDetector):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
     def reset(self, state: org.orekit.propagation.SpacecraftState, t: org.orekit.time.AbsoluteDate) -> None:
         """
         Reset the event detector during propagation when the state is modified by an event or an additional data provider.
@@ -2470,7 +2470,7 @@ class PythonEventDetectorsProvider(EventDetectorsProvider):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 _PythonFieldEnablingPredicate__T = typing.TypeVar('_PythonFieldEnablingPredicate__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldEnablingPredicate(FieldEnablingPredicate[_PythonFieldEnablingPredicate__T], typing.Generic[_PythonFieldEnablingPredicate__T]):
@@ -2505,7 +2505,7 @@ class PythonFieldEnablingPredicate(FieldEnablingPredicate[_PythonFieldEnablingPr
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 _PythonFieldEventDetector__T = typing.TypeVar('_PythonFieldEventDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldEventDetector(FieldEventDetector[_PythonFieldEventDetector__T], typing.Generic[_PythonFieldEventDetector__T]):
@@ -2627,7 +2627,7 @@ class PythonFieldEventDetector(FieldEventDetector[_PythonFieldEventDetector__T],
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
     def reset(self, s0: org.orekit.propagation.FieldSpacecraftState[_PythonFieldEventDetector__T], t: org.orekit.time.FieldAbsoluteDate[_PythonFieldEventDetector__T]) -> None:
         """
         Description copied from interface: reset Reset the event detector during propagation when the state is modified by an event or an additional data provider.
@@ -2767,9 +2767,9 @@ class AltitudeDetector(AbstractDetector['AltitudeDetector']):
     @typing.overload
     def __init__(self, double: float, double2: float, double3: float, bodyShape: org.orekit.bodies.BodyShape): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, bodyShape: org.orekit.bodies.BodyShape): ...
+    def __init__(self, maxCheck: float, altitude: float, bodyShape: org.orekit.bodies.BodyShape): ...
     @typing.overload
-    def __init__(self, double: float, bodyShape: org.orekit.bodies.BodyShape): ...
+    def __init__(self, altitude: float, bodyShape: org.orekit.bodies.BodyShape): ...
     def g(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Compute the value of the switching function. This function measures the difference between the current altitude and the threshold altitude.
@@ -2822,7 +2822,7 @@ class AngularSeparationDetector(AbstractDetector['AngularSeparationDetector']):
     """
     Default detection settings.
     """
-    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], pVCoordinatesProvider2: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float):
+    def __init__(self, beacon: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], observer: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], proximityAngle: float):
         """
         Build a new angular separation detector.
         
@@ -2912,7 +2912,7 @@ class AngularSeparationFromSatelliteDetector(AbstractDetector['AngularSeparation
     Also see:
         addEventDetector
     """
-    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], pVCoordinatesProvider2: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float):
+    def __init__(self, primaryObject: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], secondaryObject: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], proximityAngle: float):
         """
         Build a new angular detachment detector.
         
@@ -3040,12 +3040,12 @@ class BetaAngleDetector(AbstractDetector['BetaAngleDetector']):
         addEventDetector
     """
     @typing.overload
-    def __init__(self, double: float): ...
+    def __init__(self, betaAngleThreshold: float): ...
     @typing.overload
-    def __init__(self, double: float, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], frame: org.orekit.frames.Frame): ...
+    def __init__(self, betaAngleThreshold: float, celestialBodyProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], inertialFrame: org.orekit.frames.Frame): ...
     @typing.overload
     @staticmethod
-    def calculateBetaAngle(spacecraftState: org.orekit.propagation.SpacecraftState, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]) -> float:
+    def calculateBetaAngle(state: org.orekit.propagation.SpacecraftState, celestialBodyProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]) -> float:
         """
         Calculate the beta angle between the orbit plane and the celestial body.
         
@@ -3073,7 +3073,7 @@ class BetaAngleDetector(AbstractDetector['BetaAngleDetector']):
         ...
     @typing.overload
     @staticmethod
-    def calculateBetaAngle(spacecraftState: org.orekit.propagation.SpacecraftState, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], frame: org.orekit.frames.Frame) -> float: ...
+    def calculateBetaAngle(state: org.orekit.propagation.SpacecraftState, celestialBodyProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], frame: org.orekit.frames.Frame) -> float: ...
     def g(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Compute the value of the switching function. This function must be continuous (at least in its roots neighborhood), as the integrator will need to find its roots to locate the events.
@@ -3180,7 +3180,7 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
     """
     @typing.overload
     @staticmethod
-    def andCombine(collection: typing.Union[java.util.Collection[EventDetector], typing.Sequence[EventDetector], typing.Set[EventDetector]]) -> 'BooleanDetector':
+    def andCombine(detectors: typing.Union[java.util.Collection[EventDetector], typing.Sequence[EventDetector], typing.Set[EventDetector]]) -> 'BooleanDetector':
         """
         Create a new event detector that is the logical AND of the given event detectors.
         
@@ -3231,7 +3231,7 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
         ...
     @typing.overload
     @staticmethod
-    def andCombine(*eventDetector: EventDetector) -> 'BooleanDetector': ...
+    def andCombine(*detectors: EventDetector) -> 'BooleanDetector': ...
     def dependsOnTimeOnly(self) -> bool:
         """
         Description copied from interface: dependsOnTimeOnly Method returning true if and only if the detection function g does not depend on dependent variables, just the independent one i.e. time. This information is used for performance in propagation.
@@ -3322,7 +3322,7 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
         ...
     @typing.overload
     @staticmethod
-    def orCombine(collection: typing.Union[java.util.Collection[EventDetector], typing.Sequence[EventDetector], typing.Set[EventDetector]]) -> 'BooleanDetector':
+    def orCombine(detectors: typing.Union[java.util.Collection[EventDetector], typing.Sequence[EventDetector], typing.Set[EventDetector]]) -> 'BooleanDetector':
         """
         Create a new event detector that is the logical OR of the given event detectors.
         
@@ -3373,7 +3373,7 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
         ...
     @typing.overload
     @staticmethod
-    def orCombine(*eventDetector: EventDetector) -> 'BooleanDetector': ...
+    def orCombine(*detectors: EventDetector) -> 'BooleanDetector': ...
     def reset(self, state: org.orekit.propagation.SpacecraftState, target: org.orekit.time.AbsoluteDate) -> None:
         """
         Description copied from interface: reset Reset the event detector during propagation when the state is modified by an event or an additional data provider.
@@ -3401,9 +3401,9 @@ class CylindricalShadowEclipseDetector(AbstractDetector['CylindricalShadowEclips
         EclipseDetector
     """
     @typing.overload
-    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float, eventDetectionSettings: EventDetectionSettings, eventHandler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable]): ...
+    def __init__(self, sun: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], occultingBodyRadius: float, eventDetectionSettings: EventDetectionSettings, handler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable]): ...
     @typing.overload
-    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float, eventHandler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable]): ...
+    def __init__(self, sun: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], occultingBodyRadius: float, handler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable]): ...
     def g(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Compute the value of the switching function. This function must be continuous (at least in its roots neighborhood), as the integrator will need to find its roots to locate the events.
@@ -3616,7 +3616,7 @@ class EclipseDetector(AbstractDetector['EclipseDetector']):
         addEventDetector
     """
     @typing.overload
-    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], double: float, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
+    def __init__(self, occulted: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], occultedRadius: float, occulting: org.orekit.bodies.OneAxisEllipsoid): ...
     @typing.overload
     def __init__(self, occultationEngine: org.orekit.utils.OccultationEngine): ...
     def g(self, s: org.orekit.propagation.SpacecraftState) -> float:
@@ -3740,9 +3740,9 @@ class EventEnablingPredicateFilter(DetectorModifier):
         EventSlopeFilter
     """
     @typing.overload
-    def __init__(self, eventDetectionSettings: EventDetectionSettings, eventDetector: EventDetector, enablingPredicate: typing.Union[EnablingPredicate, typing.Callable]): ...
+    def __init__(self, detectionSettings: EventDetectionSettings, rawDetector: EventDetector, enabler: typing.Union[EnablingPredicate, typing.Callable]): ...
     @typing.overload
-    def __init__(self, eventDetector: EventDetector, enablingPredicate: typing.Union[EnablingPredicate, typing.Callable]): ...
+    def __init__(self, rawDetector: EventDetector, enabler: typing.Union[EnablingPredicate, typing.Callable]): ...
     def dependsOnTimeOnly(self) -> bool:
         """
         Method returning true if and only if the detection function g does not depend on dependent variables, just the independent one i.e. time. This information is used for performance in propagation.
@@ -3902,9 +3902,9 @@ class EventShifter(DetectorModifier):
         addEventDetector, EventDetector
     """
     @typing.overload
-    def __init__(self, eventDetectionSettings: EventDetectionSettings, eventDetector: EventDetector, boolean: bool, double: float, double2: float): ...
+    def __init__(self, detectionSettings: EventDetectionSettings, detector: EventDetector, useShiftedStates: bool, increasingTimeShift: float, decreasingTimeShift: float): ...
     @typing.overload
-    def __init__(self, eventDetector: EventDetector, boolean: bool, double: float, double2: float): ...
+    def __init__(self, detector: EventDetector, useShiftedStates: bool, increasingTimeShift: float, decreasingTimeShift: float): ...
     def g(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Compute the value of the switching function. This function must be continuous (at least in its roots neighborhood), as the integrator will need to find its roots to locate the events.
@@ -4085,7 +4085,7 @@ class ExtremumApproachDetector(AbstractDetector['ExtremumApproachDetector']):
         addEventDetector, EventSlopeFilter,
         FilterType
     """
-    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]):
+    def __init__(self, secondaryPVProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]):
         """
         Constructor with default values.
         
@@ -4225,9 +4225,9 @@ class FieldAltitudeDetector(FieldAbstractDetector['FieldAltitudeDetector'[_Field
     @typing.overload
     def __init__(self, t: _FieldAltitudeDetector__T, t2: _FieldAltitudeDetector__T, t3: _FieldAltitudeDetector__T, bodyShape: org.orekit.bodies.BodyShape): ...
     @typing.overload
-    def __init__(self, t: _FieldAltitudeDetector__T, t2: _FieldAltitudeDetector__T, bodyShape: org.orekit.bodies.BodyShape): ...
+    def __init__(self, maxCheck: _FieldAltitudeDetector__T, altitude: _FieldAltitudeDetector__T, bodyShape: org.orekit.bodies.BodyShape): ...
     @typing.overload
-    def __init__(self, t: _FieldAltitudeDetector__T, bodyShape: org.orekit.bodies.BodyShape): ...
+    def __init__(self, altitude: _FieldAltitudeDetector__T, bodyShape: org.orekit.bodies.BodyShape): ...
     def g(self, s: org.orekit.propagation.FieldSpacecraftState[_FieldAltitudeDetector__T]) -> _FieldAltitudeDetector__T:
         """
         Compute the value of the switching function. This function measures the difference between the current altitude and the threshold altitude.
@@ -4278,7 +4278,7 @@ class FieldAngularSeparationDetector(FieldAbstractDetector['FieldAngularSeparati
         addEventDetector,
         AngularSeparationDetector
     """
-    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], extendedPositionProvider2: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], t: _FieldAngularSeparationDetector__T):
+    def __init__(self, beacon: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], observer: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], proximityAngle: _FieldAngularSeparationDetector__T):
         """
         Build a new angular separation detector.
         
@@ -4408,9 +4408,9 @@ class FieldBetaAngleDetector(FieldAbstractDetector['FieldBetaAngleDetector'[_Fie
         addEventDetector
     """
     @typing.overload
-    def __init__(self, t: _FieldBetaAngleDetector__T): ...
+    def __init__(self, betaAngleThreshold: _FieldBetaAngleDetector__T): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldBetaAngleDetector__T], t: _FieldBetaAngleDetector__T, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_FieldBetaAngleDetector__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], frame: org.orekit.frames.Frame): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldBetaAngleDetector__T], betaAngleThreshold: _FieldBetaAngleDetector__T, celestialBodyProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_FieldBetaAngleDetector__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], inertialFrame: org.orekit.frames.Frame): ...
     _calculateBetaAngle_0__T = typing.TypeVar('_calculateBetaAngle_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _calculateBetaAngle_1__T = typing.TypeVar('_calculateBetaAngle_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
@@ -4559,10 +4559,10 @@ class FieldBooleanDetector(FieldAbstractDetector['FieldBooleanDetector'[_FieldBo
     _andCombine_1__T = typing.TypeVar('_andCombine_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def andCombine(collection: typing.Union[java.util.Collection[FieldEventDetector[_andCombine_0__T]], typing.Sequence[FieldEventDetector[_andCombine_0__T]], typing.Set[FieldEventDetector[_andCombine_0__T]]]) -> 'FieldBooleanDetector'[_andCombine_0__T]: ...
+    def andCombine(detectors: typing.Union[java.util.Collection[FieldEventDetector[_andCombine_0__T]], typing.Sequence[FieldEventDetector[_andCombine_0__T]], typing.Set[FieldEventDetector[_andCombine_0__T]]]) -> 'FieldBooleanDetector'[_andCombine_0__T]: ...
     @typing.overload
     @staticmethod
-    def andCombine(*fieldEventDetector: FieldEventDetector[_andCombine_1__T]) -> 'FieldBooleanDetector'[_andCombine_1__T]: ...
+    def andCombine(*detectors: FieldEventDetector[_andCombine_1__T]) -> 'FieldBooleanDetector'[_andCombine_1__T]: ...
     def dependsOnTimeOnly(self) -> bool:
         """
         Method returning true if and only if the detection function g does not depend on dependent variables, just the independent one i.e. time. This information is used for performance in propagation.
@@ -4651,10 +4651,10 @@ class FieldBooleanDetector(FieldAbstractDetector['FieldBooleanDetector'[_FieldBo
     _orCombine_1__T = typing.TypeVar('_orCombine_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def orCombine(collection: typing.Union[java.util.Collection[FieldEventDetector[_orCombine_0__T]], typing.Sequence[FieldEventDetector[_orCombine_0__T]], typing.Set[FieldEventDetector[_orCombine_0__T]]]) -> 'FieldBooleanDetector'[_orCombine_0__T]: ...
+    def orCombine(detectors: typing.Union[java.util.Collection[FieldEventDetector[_orCombine_0__T]], typing.Sequence[FieldEventDetector[_orCombine_0__T]], typing.Set[FieldEventDetector[_orCombine_0__T]]]) -> 'FieldBooleanDetector'[_orCombine_0__T]: ...
     @typing.overload
     @staticmethod
-    def orCombine(*fieldEventDetector: FieldEventDetector[_orCombine_1__T]) -> 'FieldBooleanDetector'[_orCombine_1__T]: ...
+    def orCombine(*detectors: FieldEventDetector[_orCombine_1__T]) -> 'FieldBooleanDetector'[_orCombine_1__T]: ...
     def reset(self, state: org.orekit.propagation.FieldSpacecraftState[_FieldBooleanDetector__T], target: org.orekit.time.FieldAbsoluteDate[_FieldBooleanDetector__T]) -> None:
         """
         Description copied from interface: reset Reset the event detector during propagation when the state is modified by an event or an additional data provider.
@@ -4684,9 +4684,9 @@ class FieldCylindricalShadowEclipseDetector(FieldAbstractDetector['FieldCylindri
         CylindricalShadowEclipseDetector
     """
     @typing.overload
-    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], t: _FieldCylindricalShadowEclipseDetector__T, fieldEventDetectionSettings: FieldEventDetectionSettings[_FieldCylindricalShadowEclipseDetector__T], fieldEventHandler: typing.Union[org.orekit.propagation.events.handlers.FieldEventHandler[_FieldCylindricalShadowEclipseDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], bool], org.hipparchus.ode.events.Action]]): ...
+    def __init__(self, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], occultingBodyRadius: _FieldCylindricalShadowEclipseDetector__T, eventDetectionSettings: FieldEventDetectionSettings[_FieldCylindricalShadowEclipseDetector__T], handler: typing.Union[org.orekit.propagation.events.handlers.FieldEventHandler[_FieldCylindricalShadowEclipseDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], bool], org.hipparchus.ode.events.Action]]): ...
     @typing.overload
-    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], t: _FieldCylindricalShadowEclipseDetector__T, fieldEventHandler: typing.Union[org.orekit.propagation.events.handlers.FieldEventHandler[_FieldCylindricalShadowEclipseDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], bool], org.hipparchus.ode.events.Action]]): ...
+    def __init__(self, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], occultingBodyRadius: _FieldCylindricalShadowEclipseDetector__T, handler: typing.Union[org.orekit.propagation.events.handlers.FieldEventHandler[_FieldCylindricalShadowEclipseDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], bool], org.hipparchus.ode.events.Action]]): ...
     def g(self, s: org.orekit.propagation.FieldSpacecraftState[_FieldCylindricalShadowEclipseDetector__T]) -> _FieldCylindricalShadowEclipseDetector__T:
         """
         Compute the value of the switching function. This function must be continuous (at least in its roots neighborhood), as the integrator will need to find its roots to locate the events.
@@ -4767,7 +4767,7 @@ class FieldDateDetector(FieldAbstractDetector['FieldDateDetector'[_FieldDateDete
     
     """
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldDateDetector__T], *fieldTimeStamped: typing.Union[org.orekit.time.FieldTimeStamped[_FieldDateDetector__T], typing.Callable[[], org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement]]]): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldDateDetector__T], *dates: typing.Union[org.orekit.time.FieldTimeStamped[_FieldDateDetector__T], typing.Callable[[], org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement]]]): ...
     @typing.overload
     def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldDateDetector__T]): ...
     def addEventDate(self, target: org.orekit.time.FieldAbsoluteDate[_FieldDateDetector__T]) -> None:
@@ -4871,7 +4871,7 @@ class FieldEclipseDetector(FieldAbstractDetector['FieldEclipseDetector'[_FieldEc
         addEventDetector
     """
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldEclipseDetector__T], extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], double: float, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldEclipseDetector__T], occulted: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], occultedRadius: float, occulting: org.orekit.bodies.OneAxisEllipsoid): ...
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldEclipseDetector__T], occultationEngine: org.orekit.utils.OccultationEngine): ...
     def g(self, s: org.orekit.propagation.FieldSpacecraftState[_FieldEclipseDetector__T]) -> _FieldEclipseDetector__T:
@@ -4996,9 +4996,9 @@ class FieldEventEnablingPredicateFilter(FieldDetectorModifier[_FieldEventEnablin
         FieldEventSlopeFilter
     """
     @typing.overload
-    def __init__(self, fieldEventDetectionSettings: FieldEventDetectionSettings[_FieldEventEnablingPredicateFilter__T], fieldEventDetector: FieldEventDetector[_FieldEventEnablingPredicateFilter__T], fieldEnablingPredicate: typing.Union[FieldEnablingPredicate[_FieldEventEnablingPredicateFilter__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], _FieldEventEnablingPredicateFilter__T], bool]]): ...
+    def __init__(self, detectionSettings: FieldEventDetectionSettings[_FieldEventEnablingPredicateFilter__T], rawDetector: FieldEventDetector[_FieldEventEnablingPredicateFilter__T], enabler: typing.Union[FieldEnablingPredicate[_FieldEventEnablingPredicateFilter__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], _FieldEventEnablingPredicateFilter__T], bool]]): ...
     @typing.overload
-    def __init__(self, fieldEventDetector: FieldEventDetector[_FieldEventEnablingPredicateFilter__T], fieldEnablingPredicate: typing.Union[FieldEnablingPredicate[_FieldEventEnablingPredicateFilter__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], _FieldEventEnablingPredicateFilter__T], bool]]): ...
+    def __init__(self, rawDetector: FieldEventDetector[_FieldEventEnablingPredicateFilter__T], enabler: typing.Union[FieldEnablingPredicate[_FieldEventEnablingPredicateFilter__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], _FieldEventEnablingPredicateFilter__T], bool]]): ...
     def dependsOnTimeOnly(self) -> bool:
         """
         Method returning true if and only if the detection function g does not depend on dependent variables, just the independent one i.e. time. This information is used for performance in propagation.
@@ -5160,9 +5160,9 @@ class FieldEventShifter(FieldDetectorModifier[_FieldEventShifter__T], typing.Gen
         FieldEventDetector, EventShifter
     """
     @typing.overload
-    def __init__(self, fieldEventDetectionSettings: FieldEventDetectionSettings[_FieldEventShifter__T], fieldEventDetector: FieldEventDetector[_FieldEventShifter__T], boolean: bool, t: _FieldEventShifter__T, t2: _FieldEventShifter__T): ...
+    def __init__(self, detectionSettings: FieldEventDetectionSettings[_FieldEventShifter__T], detector: FieldEventDetector[_FieldEventShifter__T], useShiftedStates: bool, increasingTimeShift: _FieldEventShifter__T, decreasingTimeShift: _FieldEventShifter__T): ...
     @typing.overload
-    def __init__(self, fieldEventDetector: FieldEventDetector[_FieldEventShifter__T], boolean: bool, t: _FieldEventShifter__T, t2: _FieldEventShifter__T): ...
+    def __init__(self, detector: FieldEventDetector[_FieldEventShifter__T], useShiftedStates: bool, increasingTimeShift: _FieldEventShifter__T, decreasingTimeShift: _FieldEventShifter__T): ...
     def g(self, s: org.orekit.propagation.FieldSpacecraftState[_FieldEventShifter__T]) -> _FieldEventShifter__T:
         """
         Compute the value of the switching function. This function must be continuous (at least in its roots neighborhood), as the integrator will need to find its roots to locate the events.
@@ -5343,9 +5343,9 @@ class FieldExtremumApproachDetector(FieldAbstractDetector['FieldExtremumApproach
         FieldEventSlopeFilter, FilterType
     """
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldExtremumApproachDetector__T], fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_FieldExtremumApproachDetector__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]]): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldExtremumApproachDetector__T], secondaryPVProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_FieldExtremumApproachDetector__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]]): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldExtremumApproachDetector__T], pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldExtremumApproachDetector__T], secondaryPVProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]): ...
     def computeDeltaPV(self, s: org.orekit.propagation.FieldSpacecraftState[_FieldExtremumApproachDetector__T]) -> org.orekit.utils.FieldPVCoordinates[_FieldExtremumApproachDetector__T]:
         """
         Compute the relative PV between primary and secondary objects.
@@ -5471,7 +5471,7 @@ class FieldLatitudeCrossingDetector(FieldAbstractDetector['FieldLatitudeCrossing
     @typing.overload
     def __init__(self, t: _FieldLatitudeCrossingDetector__T, t2: _FieldLatitudeCrossingDetector__T, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldLatitudeCrossingDetector__T], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldLatitudeCrossingDetector__T], body: org.orekit.bodies.OneAxisEllipsoid, latitude: float): ...
     def g(self, s: org.orekit.propagation.FieldSpacecraftState[_FieldLatitudeCrossingDetector__T]) -> _FieldLatitudeCrossingDetector__T:
         """
         Compute the value of the detection function.
@@ -5521,7 +5521,7 @@ class FieldLatitudeRangeCrossingDetector(FieldAbstractDetector['FieldLatitudeRan
     @typing.overload
     def __init__(self, t: _FieldLatitudeRangeCrossingDetector__T, t2: _FieldLatitudeRangeCrossingDetector__T, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float, double2: float): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldLatitudeRangeCrossingDetector__T], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float, double2: float): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldLatitudeRangeCrossingDetector__T], body: org.orekit.bodies.OneAxisEllipsoid, fromLatitude: float, toLatitude: float): ...
     def g(self, s: org.orekit.propagation.FieldSpacecraftState[_FieldLatitudeRangeCrossingDetector__T]) -> _FieldLatitudeRangeCrossingDetector__T:
         """
         Compute the value of the detection function.
@@ -5581,7 +5581,7 @@ class FieldLongitudeCrossingDetector(FieldAbstractDetector['FieldLongitudeCrossi
     @typing.overload
     def __init__(self, t: _FieldLongitudeCrossingDetector__T, t2: _FieldLongitudeCrossingDetector__T, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldLongitudeCrossingDetector__T], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldLongitudeCrossingDetector__T], body: org.orekit.bodies.OneAxisEllipsoid, longitude: float): ...
     def g(self, s: org.orekit.propagation.FieldSpacecraftState[_FieldLongitudeCrossingDetector__T]) -> _FieldLongitudeCrossingDetector__T:
         """
         Compute the value of the detection function.
@@ -5650,7 +5650,7 @@ class FieldLongitudeRangeCrossingDetector(FieldAbstractDetector['FieldLongitudeR
     @typing.overload
     def __init__(self, t: _FieldLongitudeRangeCrossingDetector__T, t2: _FieldLongitudeRangeCrossingDetector__T, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float, double2: float): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldLongitudeRangeCrossingDetector__T], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float, double2: float): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldLongitudeRangeCrossingDetector__T], body: org.orekit.bodies.OneAxisEllipsoid, fromLongitude: float, toLongitude: float): ...
     def g(self, s: org.orekit.propagation.FieldSpacecraftState[_FieldLongitudeRangeCrossingDetector__T]) -> _FieldLongitudeRangeCrossingDetector__T:
         """
         Compute the value of the detection function.
@@ -5705,7 +5705,7 @@ class FieldNegateDetector(FieldAbstractDetector['FieldNegateDetector'[_FieldNega
     Since:
         12.0
     """
-    def __init__(self, fieldEventDetector: FieldEventDetector[_FieldNegateDetector__T]):
+    def __init__(self, original: FieldEventDetector[_FieldNegateDetector__T]):
         """
         Create a new event detector that negates an existing event detector.
         
@@ -5851,9 +5851,9 @@ class FieldOfViewDetector(AbstractDetector['FieldOfViewDetector']):
         VisibilityTrigger
     """
     @typing.overload
-    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float, visibilityTrigger: VisibilityTrigger, fieldOfView: org.orekit.geometry.fov.FieldOfView): ...
+    def __init__(self, pvTarget: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], radiusTarget: float, trigger: VisibilityTrigger, fov: org.orekit.geometry.fov.FieldOfView): ...
     @typing.overload
-    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], fieldOfView: org.orekit.geometry.fov.FieldOfView): ...
+    def __init__(self, pvTarget: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], fov: org.orekit.geometry.fov.FieldOfView): ...
     def g(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Compute the value of the switching function. This function must be continuous (at least in its roots neighborhood), as the integrator will need to find its roots to locate the events.
@@ -6039,7 +6039,7 @@ class FieldRelativeDistanceDetector(FieldAbstractDetector['FieldRelativeDistance
     Also see:
         addEventDetector
     """
-    def __init__(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_FieldRelativeDistanceDetector__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], t: _FieldRelativeDistanceDetector__T):
+    def __init__(self, secondaryPVProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_FieldRelativeDistanceDetector__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], distanceThreshold: _FieldRelativeDistanceDetector__T):
         """
         Constructor with default values.
         
@@ -6118,7 +6118,7 @@ class FieldTimeIntervalDetector(FieldAbstractDetector['FieldTimeIntervalDetector
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldTimeIntervalDetector__T], timeInterval: org.orekit.time.TimeInterval): ...
     @typing.overload
-    def __init__(self, fieldEventDetectionSettings: FieldEventDetectionSettings[_FieldTimeIntervalDetector__T], fieldEventHandler: typing.Union[org.orekit.propagation.events.handlers.FieldEventHandler[_FieldTimeIntervalDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], bool], org.hipparchus.ode.events.Action]], timeInterval: org.orekit.time.TimeInterval): ...
+    def __init__(self, detectionSettings: FieldEventDetectionSettings[_FieldTimeIntervalDetector__T], handler: typing.Union[org.orekit.propagation.events.handlers.FieldEventHandler[_FieldTimeIntervalDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], bool], org.hipparchus.ode.events.Action]], timeInterval: org.orekit.time.TimeInterval): ...
     def dependsOnTimeOnly(self) -> bool:
         """
         Method returning true if and only if the detection function g does not depend on dependent variables, just the independent one i.e. time. This information is used for performance in propagation.
@@ -6171,7 +6171,7 @@ class FootprintOverlapDetector(AbstractDetector['FootprintOverlapDetector']):
         FieldOfViewDetector,
         GeographicZoneDetector
     """
-    def __init__(self, fieldOfView: org.orekit.geometry.fov.FieldOfView, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, sphericalPolygonsSet: org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet, double: float):
+    def __init__(self, fov: org.orekit.geometry.fov.FieldOfView, body: org.orekit.bodies.OneAxisEllipsoid, zone: org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet, samplingStep: float):
         """
         Build a new instance.
         
@@ -6342,9 +6342,9 @@ class GeographicZoneDetector(AbstractDetector['GeographicZoneDetector']):
         FootprintOverlapDetector
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, bodyShape: org.orekit.bodies.BodyShape, sphericalPolygonsSet: org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet, double3: float): ...
+    def __init__(self, maxCheck: float, threshold: float, body: org.orekit.bodies.BodyShape, zone: org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet, margin: float): ...
     @typing.overload
-    def __init__(self, bodyShape: org.orekit.bodies.BodyShape, sphericalPolygonsSet: org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet, double: float): ...
+    def __init__(self, body: org.orekit.bodies.BodyShape, zone: org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet, margin: float): ...
     def g(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Compute the value of the detection function.
@@ -6419,7 +6419,7 @@ class GroundFieldOfViewDetector(AbstractDetector['GroundFieldOfViewDetector']):
         addEventDetector,
         FieldOfViewDetector, ElevationDetector
     """
-    def __init__(self, frame: org.orekit.frames.Frame, fieldOfView: org.orekit.geometry.fov.FieldOfView):
+    def __init__(self, frame: org.orekit.frames.Frame, fov: org.orekit.geometry.fov.FieldOfView):
         """
         Build a new instance.
         
@@ -6498,7 +6498,7 @@ class HaloXZPlaneCrossingDetector(AbstractDetector['HaloXZPlaneCrossingDetector'
     Since:
         10.2
     """
-    def __init__(self, double: float, double2: float):
+    def __init__(self, maxCheck: float, threshold: float):
         """
         Simple Constructor.
         
@@ -6553,7 +6553,7 @@ class InterSatDirectViewDetector(AbstractDetector['InterSatDirectViewDetector'])
     Since:
         9.3
     """
-    def __init__(self, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]):
+    def __init__(self, body: org.orekit.bodies.OneAxisEllipsoid, secondary: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]):
         """
         simple constructor.
         
@@ -6660,7 +6660,7 @@ class LatitudeCrossingDetector(AbstractDetector['LatitudeCrossingDetector']):
     @typing.overload
     def __init__(self, double: float, double2: float, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double3: float): ...
     @typing.overload
-    def __init__(self, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float): ...
+    def __init__(self, body: org.orekit.bodies.OneAxisEllipsoid, latitude: float): ...
     def g(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Compute the value of the detection function.
@@ -6709,7 +6709,7 @@ class LatitudeExtremumDetector(AbstractDetector['LatitudeExtremumDetector']):
     @typing.overload
     def __init__(self, double: float, double2: float, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
     @typing.overload
-    def __init__(self, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
+    def __init__(self, body: org.orekit.bodies.OneAxisEllipsoid): ...
     def g(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Compute the value of the detection function.
@@ -6748,7 +6748,7 @@ class LatitudeRangeCrossingDetector(AbstractDetector['LatitudeRangeCrossingDetec
     @typing.overload
     def __init__(self, double: float, double2: float, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double3: float, double4: float): ...
     @typing.overload
-    def __init__(self, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float, double2: float): ...
+    def __init__(self, body: org.orekit.bodies.OneAxisEllipsoid, fromLatitude: float, toLatitude: float): ...
     def g(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Compute the value of the detection function.
@@ -6807,7 +6807,7 @@ class LongitudeCrossingDetector(AbstractDetector['LongitudeCrossingDetector']):
     @typing.overload
     def __init__(self, double: float, double2: float, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double3: float): ...
     @typing.overload
-    def __init__(self, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float): ...
+    def __init__(self, body: org.orekit.bodies.OneAxisEllipsoid, longitude: float): ...
     def g(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Compute the value of the detection function.
@@ -6877,7 +6877,7 @@ class LongitudeExtremumDetector(AbstractDetector['LongitudeExtremumDetector']):
     @typing.overload
     def __init__(self, double: float, double2: float, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
     @typing.overload
-    def __init__(self, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
+    def __init__(self, body: org.orekit.bodies.OneAxisEllipsoid): ...
     def g(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Compute the value of the detection function.
@@ -6916,7 +6916,7 @@ class LongitudeRangeCrossingDetector(AbstractDetector['LongitudeRangeCrossingDet
     @typing.overload
     def __init__(self, double: float, double2: float, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double3: float, double4: float): ...
     @typing.overload
-    def __init__(self, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float, double2: float): ...
+    def __init__(self, body: org.orekit.bodies.OneAxisEllipsoid, fromLongitude: float, toLongitude: float): ...
     def g(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Compute the value of the detection function.
@@ -6972,13 +6972,13 @@ class MagneticFieldDetector(AbstractDetector['MagneticFieldDetector']):
     It can detect flyovers of the South-Atlantic anomaly with a classically accepted limit value of 32,000 nT at sea level.
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, fieldModel: org.orekit.models.earth.GeoMagneticFieldFactory.FieldModel, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, boolean: bool): ...
+    def __init__(self, maxCheck: float, threshold: float, limit: float, model: org.orekit.models.earth.GeoMagneticFieldFactory.FieldModel, body: org.orekit.bodies.OneAxisEllipsoid, atSeaLevel: bool): ...
     @typing.overload
     def __init__(self, double: float, double2: float, double3: float, fieldModel: org.orekit.models.earth.GeoMagneticFieldFactory.FieldModel, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, boolean: bool, dataContext: org.orekit.data.DataContext): ...
     @typing.overload
-    def __init__(self, double: float, fieldModel: org.orekit.models.earth.GeoMagneticFieldFactory.FieldModel, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
+    def __init__(self, limit: float, model: org.orekit.models.earth.GeoMagneticFieldFactory.FieldModel, body: org.orekit.bodies.OneAxisEllipsoid): ...
     @typing.overload
-    def __init__(self, double: float, fieldModel: org.orekit.models.earth.GeoMagneticFieldFactory.FieldModel, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, boolean: bool): ...
+    def __init__(self, limit: float, model: org.orekit.models.earth.GeoMagneticFieldFactory.FieldModel, body: org.orekit.bodies.OneAxisEllipsoid, atSeaLevel: bool): ...
     def g(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Compute the value of the detection function.
@@ -7020,7 +7020,7 @@ class NegateDetector(AbstractDetector['NegateDetector'], DetectorModifier):
     """
     An event detector that negates the sign on another event detector's g function.
     """
-    def __init__(self, eventDetector: EventDetector):
+    def __init__(self, original: EventDetector):
         """
         Create a new event detector that negates an existing event detector.
         
@@ -7309,7 +7309,7 @@ class PositionAngleDetector(AbstractDetector['PositionAngleDetector']):
     @typing.overload
     def __init__(self, double: float, double2: float, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType, double3: float): ...
     @typing.overload
-    def __init__(self, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType, double: float): ...
+    def __init__(self, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType, angle: float): ...
     def g(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Compute the value of the detection function.
@@ -7386,9 +7386,9 @@ class PythonAbstractDetector(AbstractDetector[_PythonAbstractDetector__T], typin
         addEventDetector
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, int: int, eventHandler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable]): ...
+    def __init__(self, maxCheck: float, threshold: float, maxIter: int, handler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable]): ...
     @typing.overload
-    def __init__(self, eventDetectionSettings: EventDetectionSettings, eventHandler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable]): ...
+    def __init__(self, detectionSettings: EventDetectionSettings, handler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable]): ...
     def create(self, detectionSettings: EventDetectionSettings, newHandler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable]) -> _PythonAbstractDetector__T:
         """
         Build a new instance.
@@ -7441,7 +7441,7 @@ class PythonAbstractDetector(AbstractDetector[_PythonAbstractDetector__T], typin
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -7484,7 +7484,7 @@ class PythonDetectorModifier(DetectorModifier):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -7559,7 +7559,7 @@ class PythonFieldAbstractDetector(FieldAbstractDetector[_PythonFieldAbstractDete
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -7603,7 +7603,7 @@ class PythonFieldDetectorModifier(FieldDetectorModifier[_PythonFieldDetectorModi
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -7627,7 +7627,7 @@ class RelativeDistanceDetector(AbstractDetector['RelativeDistanceDetector']):
     Also see:
         addEventDetector
     """
-    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float):
+    def __init__(self, secondaryPVProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], distanceThreshold: float):
         """
         Constructor with default values.
         
@@ -7703,9 +7703,9 @@ class TimeIntervalDetector(AbstractDetector['TimeIntervalDetector']):
         TimeInterval
     """
     @typing.overload
-    def __init__(self, eventDetectionSettings: EventDetectionSettings, eventHandler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable], timeInterval: org.orekit.time.TimeInterval): ...
+    def __init__(self, detectionSettings: EventDetectionSettings, handler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable], timeInterval: org.orekit.time.TimeInterval): ...
     @typing.overload
-    def __init__(self, eventHandler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable], timeInterval: org.orekit.time.TimeInterval): ...
+    def __init__(self, handler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable], timeInterval: org.orekit.time.TimeInterval): ...
     def dependsOnTimeOnly(self) -> bool:
         """
         Method returning true if and only if the detection function g does not depend on dependent variables, just the independent one i.e. time. This information is used for performance in propagation.
@@ -7750,11 +7750,11 @@ class ElevationDetector(AbstractTopocentricDetector['ElevationDetector']):
         6.1
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, topocentricFrame: org.orekit.frames.TopocentricFrame): ...
+    def __init__(self, maxCheck: float, threshold: float, topo: org.orekit.frames.TopocentricFrame): ...
     @typing.overload
-    def __init__(self, topocentricFrame: org.orekit.frames.TopocentricFrame): ...
+    def __init__(self, topo: org.orekit.frames.TopocentricFrame): ...
     @typing.overload
-    def __init__(self, adaptableInterval: typing.Union[org.orekit.propagation.events.intervals.AdaptableInterval, typing.Callable], double: float, topocentricFrame: org.orekit.frames.TopocentricFrame): ...
+    def __init__(self, maxCheck: typing.Union[org.orekit.propagation.events.intervals.AdaptableInterval, typing.Callable], threshold: float, topo: org.orekit.frames.TopocentricFrame): ...
     def g(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Compute the value of the switching function. This function measures the difference between the current elevation (and azimuth if necessary) and the reference mask or minimum value.
@@ -7885,7 +7885,7 @@ class ElevationExtremumDetector(AbstractTopocentricDetector['ElevationExtremumDe
     @typing.overload
     def __init__(self, double: float, double2: float, topocentricFrame: org.orekit.frames.TopocentricFrame): ...
     @typing.overload
-    def __init__(self, topocentricFrame: org.orekit.frames.TopocentricFrame): ...
+    def __init__(self, topo: org.orekit.frames.TopocentricFrame): ...
     def g(self, s: org.orekit.propagation.SpacecraftState) -> float:
         """
         Compute the value of the detection function.
@@ -7923,9 +7923,9 @@ class FieldElevationDetector(FieldAbstractTopocentricDetector['FieldElevationDet
     The default implementation behavior is to Action propagation at raising and to Action propagation at setting. This can be changed by calling withHandler after construction.
     """
     @typing.overload
-    def __init__(self, t: _FieldElevationDetector__T, t2: _FieldElevationDetector__T, topocentricFrame: org.orekit.frames.TopocentricFrame): ...
+    def __init__(self, maxCheck: _FieldElevationDetector__T, threshold: _FieldElevationDetector__T, topo: org.orekit.frames.TopocentricFrame): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldElevationDetector__T], topocentricFrame: org.orekit.frames.TopocentricFrame): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldElevationDetector__T], topo: org.orekit.frames.TopocentricFrame): ...
     def g(self, s: org.orekit.propagation.FieldSpacecraftState[_FieldElevationDetector__T]) -> _FieldElevationDetector__T:
         """
         Compute the value of the switching function. This function measures the difference between the current elevation (and azimuth if necessary) and the reference mask or minimum value.
@@ -8057,7 +8057,7 @@ class FieldElevationExtremumDetector(FieldAbstractTopocentricDetector['FieldElev
     @typing.overload
     def __init__(self, t: _FieldElevationExtremumDetector__T, t2: _FieldElevationExtremumDetector__T, topocentricFrame: org.orekit.frames.TopocentricFrame): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldElevationExtremumDetector__T], topocentricFrame: org.orekit.frames.TopocentricFrame): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldElevationExtremumDetector__T], topo: org.orekit.frames.TopocentricFrame): ...
     def g(self, s: org.orekit.propagation.FieldSpacecraftState[_FieldElevationExtremumDetector__T]) -> _FieldElevationExtremumDetector__T:
         """
         Compute the value of the detection function.
@@ -8102,7 +8102,7 @@ class FieldGroundAtNightDetector(FieldAbstractTopocentricDetector['FieldGroundAt
     Also see:
         GroundAtNightDetector
     """
-    def __init__(self, topocentricFrame: org.orekit.frames.TopocentricFrame, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], t2: _FieldGroundAtNightDetector__T, atmosphericRefractionModel: typing.Union[org.orekit.models.AtmosphericRefractionModel, typing.Callable]):
+    def __init__(self, topocentricFrame: org.orekit.frames.TopocentricFrame, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], dawnDuskElevation: _FieldGroundAtNightDetector__T, refractionModel: typing.Union[org.orekit.models.AtmosphericRefractionModel, typing.Callable]):
         """
         Simple constructor.
         
@@ -8178,7 +8178,7 @@ class GroundAtNightDetector(AbstractTopocentricDetector['GroundAtNightDetector']
     """
     Sun elevation at astronomical dawn/dusk (18° below horizon).
     """
-    def __init__(self, topocentricFrame: org.orekit.frames.TopocentricFrame, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float, atmosphericRefractionModel: typing.Union[org.orekit.models.AtmosphericRefractionModel, typing.Callable]):
+    def __init__(self, groundLocation: org.orekit.frames.TopocentricFrame, sun: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], dawnDuskElevation: float, refractionModel: typing.Union[org.orekit.models.AtmosphericRefractionModel, typing.Callable]):
         """
         Simple constructor.
         

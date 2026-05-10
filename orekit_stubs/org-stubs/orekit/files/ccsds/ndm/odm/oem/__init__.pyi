@@ -10,6 +10,7 @@ import java.util
 import java.util.function
 import jpype
 import org.orekit.data
+import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.odm
 import org.orekit.files.ccsds.section
@@ -39,15 +40,15 @@ class EphemerisOemWriter(org.orekit.files.general.EphemerisFileWriter):
         StreamingOemWriter
     """
     @typing.overload
-    def __init__(self, oemWriter: 'OemWriter', odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, oemMetadata: 'OemMetadata', fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, double: float, int: int): ...
+    def __init__(self, writer: 'OemWriter', header: org.orekit.files.ccsds.ndm.odm.OdmHeader, template: 'OemMetadata', fileFormat: org.orekit.files.ccsds.utils.FileFormat, outputName: str, maxRelativeOffset: float, unitsColumn: int): ...
     @typing.overload
-    def __init__(self, oemWriter: 'OemWriter', odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, oemMetadata: 'OemMetadata', fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, double: float, int: int, formatter: org.orekit.utils.Formatter): ...
+    def __init__(self, writer: 'OemWriter', header: org.orekit.files.ccsds.ndm.odm.OdmHeader, template: 'OemMetadata', fileFormat: org.orekit.files.ccsds.utils.FileFormat, outputName: str, maxRelativeOffset: float, unitsColumn: int, formatter: org.orekit.utils.Formatter): ...
     _write_0__C = typing.TypeVar('_write_0__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
     _write_0__S = typing.TypeVar('_write_0__S', bound=org.orekit.files.general.EphemerisFile.EphemerisSegment)  # <S>
     _write_1__C = typing.TypeVar('_write_1__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
     _write_1__S = typing.TypeVar('_write_1__S', bound=org.orekit.files.general.EphemerisFile.EphemerisSegment)  # <S>
     @typing.overload
-    def write(self, string: str, ephemerisFile: typing.Union[org.orekit.files.general.EphemerisFile[_write_0__C, _write_0__S], typing.Callable[[], java.util.Map[str, org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, org.orekit.files.general.EphemerisFile.EphemerisSegment]]]]) -> None: ...
+    def write(self, appendable: str, ephemerisFile: typing.Union[org.orekit.files.general.EphemerisFile[_write_0__C, _write_0__S], typing.Callable[[], java.util.Map[str, org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, org.orekit.files.general.EphemerisFile.EphemerisSegment]]]]) -> None: ...
     @typing.overload
     def write(self, appendable: java.lang.Appendable, ephemerisFile: typing.Union[org.orekit.files.general.EphemerisFile[_write_1__C, _write_1__S], typing.Callable[[], java.util.Map[str, org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, org.orekit.files.general.EphemerisFile.EphemerisSegment]]]]) -> None: ...
     _writeSegment__C = typing.TypeVar('_writeSegment__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
@@ -257,16 +258,10 @@ class OemMetadata(org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata):
     Since:
         11.0
     """
-    def __init__(self, defaultInterpolationDegree: int):
-        """
-        Simple constructor.
-        
-        Parameters:
-            defaultInterpolationDegree (int): default interpolation degree
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self, defaultInterpolationDegree: int): ...
+    @typing.overload
+    def __init__(self, defaultInterpolationDegree: int, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def getInterpolationDegree(self) -> int:
         """
         Get the interpolation degree.
@@ -481,28 +476,10 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
     Since:
         6.1
     """
-    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate, mu: float, defaultInterpolationDegree: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]):
-        """
-        Complete constructor.
-        
-        Calling this constructor directly is not recommended. Users should rather use buildOemParser.
-        
-        Parameters:
-            conventions (IERSConventions): IERS Conventions
-            simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
-            dataContext (DataContext): used to retrieve frames, time scales, etc.
-            missionReferenceDate (AbsoluteDate): reference date for Mission Elapsed Time or Mission Relative Time time systems (may be null if time system is absolute)
-            mu (double): gravitational coefficient
-            defaultInterpolationDegree (int): default interpolation degree
-            parsedUnitsBehavior (ParsedUnitsBehavior): behavior to adopt for handling parsed units
-            filters (Function<ParseToken, List<ParseToken>>[]): filters to apply to parse tokens
-        
-        Since:
-            12.0
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate, mu: float, defaultInterpolationDegree: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
+    @typing.overload
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate, mu: float, defaultInterpolationDegree: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray], frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def build(self) -> Oem:
         """
         Build the file from parsed entries.
@@ -817,23 +794,6 @@ class OemSegment(org.orekit.files.ccsds.section.Segment[OemMetadata, OemData], o
         
         """
         ...
-    def getInertialFrame(self) -> org.orekit.frames.Frame:
-        """
-        Get the inertial reference frame for this ephemeris segment. Defines the propagation frame for getPropagator.
-        
-        The default implementation returns getFrame if it is inertial. Otherwise it returns getRoot. Implementors are encouraged to override this default implementation if a more suitable inertial frame is available.
-        
-        This implementation returns getFrame if it is isPseudoInertial, or its closest getParent that is pseudo-inertial.
-        
-        Specified by: getInertialFrame in interface EphemerisSegment
-        
-        Returns:
-            an reference frame that is inertial, i.e. isPseudoInertial is true. May be the
-            same as getFrame if it is inertial.
-        
-        
-        """
-        ...
     def getInterpolationSamples(self) -> int:
         """
         Get the number of samples to use in interpolation.
@@ -990,11 +950,11 @@ class StreamingOemWriter(java.lang.AutoCloseable):
         OemWriter
     """
     @typing.overload
-    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, oemWriter: OemWriter, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, oemMetadata: OemMetadata): ...
+    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, writer: OemWriter, header: org.orekit.files.ccsds.ndm.odm.OdmHeader, template: OemMetadata): ...
     @typing.overload
-    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, oemWriter: OemWriter, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, oemMetadata: OemMetadata, boolean: bool): ...
+    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, writer: OemWriter, header: org.orekit.files.ccsds.ndm.odm.OdmHeader, template: OemMetadata, useAttitudeFrame: bool): ...
     @typing.overload
-    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, oemWriter: OemWriter, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, oemMetadata: OemMetadata, boolean: bool, boolean2: bool): ...
+    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, writer: OemWriter, header: org.orekit.files.ccsds.ndm.odm.OdmHeader, template: OemMetadata, useAttitudeFrame: bool, includeAcceleration: bool): ...
     def close(self) -> None:
         """
         Specified by: AutoCloseable in interface AutoCloseable

@@ -344,7 +344,7 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
         2.0
     """
     @typing.overload
-    def arccd(self, double: float) -> _FieldJacobiElliptic__T:
+    def arccd(self, x: float) -> _FieldJacobiElliptic__T:
         """
         Evaluate inverse of Jacobi elliptic function cd.
         
@@ -372,9 +372,9 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
         """
         ...
     @typing.overload
-    def arccd(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    def arccd(self, x: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
     @typing.overload
-    def arccn(self, double: float) -> _FieldJacobiElliptic__T:
+    def arccn(self, x: float) -> _FieldJacobiElliptic__T:
         """
         Evaluate inverse of Jacobi elliptic function cn.
         
@@ -402,9 +402,9 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
         """
         ...
     @typing.overload
-    def arccn(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    def arccn(self, x: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
     @typing.overload
-    def arccs(self, double: float) -> _FieldJacobiElliptic__T:
+    def arccs(self, x: float) -> _FieldJacobiElliptic__T:
         """
         Evaluate inverse of Jacobi elliptic function cs.
         
@@ -432,9 +432,9 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
         """
         ...
     @typing.overload
-    def arccs(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    def arccs(self, x: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
     @typing.overload
-    def arcdc(self, double: float) -> _FieldJacobiElliptic__T:
+    def arcdc(self, x: float) -> _FieldJacobiElliptic__T:
         """
         Evaluate inverse of Jacobi elliptic function dc.
         
@@ -462,9 +462,9 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
         """
         ...
     @typing.overload
-    def arcdc(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    def arcdc(self, x: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
     @typing.overload
-    def arcdn(self, double: float) -> _FieldJacobiElliptic__T:
+    def arcdn(self, x: float) -> _FieldJacobiElliptic__T:
         """
         Evaluate inverse of Jacobi elliptic function dn.
         
@@ -492,9 +492,9 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
         """
         ...
     @typing.overload
-    def arcdn(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    def arcdn(self, x: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
     @typing.overload
-    def arcds(self, double: float) -> _FieldJacobiElliptic__T:
+    def arcds(self, x: float) -> _FieldJacobiElliptic__T:
         """
         Evaluate inverse of Jacobi elliptic function ds.
         
@@ -522,9 +522,9 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
         """
         ...
     @typing.overload
-    def arcds(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    def arcds(self, x: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
     @typing.overload
-    def arcnc(self, double: float) -> _FieldJacobiElliptic__T:
+    def arcnc(self, x: float) -> _FieldJacobiElliptic__T:
         """
         Evaluate inverse of Jacobi elliptic function nc.
         
@@ -552,9 +552,9 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
         """
         ...
     @typing.overload
-    def arcnc(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    def arcnc(self, x: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
     @typing.overload
-    def arcnd(self, double: float) -> _FieldJacobiElliptic__T:
+    def arcnd(self, x: float) -> _FieldJacobiElliptic__T:
         """
         Evaluate inverse of Jacobi elliptic function nd.
         
@@ -582,9 +582,9 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
         """
         ...
     @typing.overload
-    def arcnd(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    def arcnd(self, x: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
     @typing.overload
-    def arcns(self, double: float) -> _FieldJacobiElliptic__T:
+    def arcns(self, x: float) -> _FieldJacobiElliptic__T:
         """
         Evaluate inverse of Jacobi elliptic function ns.
         
@@ -612,9 +612,9 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
         """
         ...
     @typing.overload
-    def arcns(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    def arcns(self, x: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
     @typing.overload
-    def arcsc(self, double: float) -> _FieldJacobiElliptic__T:
+    def arcsc(self, x: float) -> _FieldJacobiElliptic__T:
         """
         Evaluate inverse of Jacobi elliptic function sc.
         
@@ -642,9 +642,9 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
         """
         ...
     @typing.overload
-    def arcsc(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    def arcsc(self, x: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
     @typing.overload
-    def arcsd(self, double: float) -> _FieldJacobiElliptic__T:
+    def arcsd(self, x: float) -> _FieldJacobiElliptic__T:
         """
         Evaluate inverse of Jacobi elliptic function sd.
         
@@ -672,9 +672,9 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
         """
         ...
     @typing.overload
-    def arcsd(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    def arcsd(self, x: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
     @typing.overload
-    def arcsn(self, double: float) -> _FieldJacobiElliptic__T:
+    def arcsn(self, x: float) -> _FieldJacobiElliptic__T:
         """
         Evaluate inverse of Jacobi elliptic function sn.
         
@@ -702,7 +702,7 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
         """
         ...
     @typing.overload
-    def arcsn(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    def arcsn(self, x: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
     def getM(self) -> _FieldJacobiElliptic__T:
         """
         Get the parameter of the function.
@@ -714,21 +714,21 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
         """
         ...
     @typing.overload
-    def valuesC(self, double: float) -> FieldCopolarC[_FieldJacobiElliptic__T]: ...
+    def valuesC(self, u: float) -> FieldCopolarC[_FieldJacobiElliptic__T]: ...
     @typing.overload
-    def valuesC(self, t: _FieldJacobiElliptic__T) -> FieldCopolarC[_FieldJacobiElliptic__T]: ...
+    def valuesC(self, u: _FieldJacobiElliptic__T) -> FieldCopolarC[_FieldJacobiElliptic__T]: ...
     @typing.overload
-    def valuesD(self, double: float) -> FieldCopolarD[_FieldJacobiElliptic__T]: ...
+    def valuesD(self, u: float) -> FieldCopolarD[_FieldJacobiElliptic__T]: ...
     @typing.overload
-    def valuesD(self, t: _FieldJacobiElliptic__T) -> FieldCopolarD[_FieldJacobiElliptic__T]: ...
+    def valuesD(self, u: _FieldJacobiElliptic__T) -> FieldCopolarD[_FieldJacobiElliptic__T]: ...
     @typing.overload
-    def valuesN(self, t: _FieldJacobiElliptic__T) -> FieldCopolarN[_FieldJacobiElliptic__T]: ...
+    def valuesN(self, u: _FieldJacobiElliptic__T) -> FieldCopolarN[_FieldJacobiElliptic__T]: ...
     @typing.overload
-    def valuesN(self, double: float) -> FieldCopolarN[_FieldJacobiElliptic__T]: ...
+    def valuesN(self, u: float) -> FieldCopolarN[_FieldJacobiElliptic__T]: ...
     @typing.overload
-    def valuesS(self, double: float) -> FieldCopolarS[_FieldJacobiElliptic__T]: ...
+    def valuesS(self, u: float) -> FieldCopolarS[_FieldJacobiElliptic__T]: ...
     @typing.overload
-    def valuesS(self, t: _FieldJacobiElliptic__T) -> FieldCopolarS[_FieldJacobiElliptic__T]: ...
+    def valuesS(self, u: _FieldJacobiElliptic__T) -> FieldCopolarS[_FieldJacobiElliptic__T]: ...
 
 _FieldJacobiTheta__T = typing.TypeVar('_FieldJacobiTheta__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldJacobiTheta(typing.Generic[_FieldJacobiTheta__T]):
@@ -784,7 +784,8 @@ class FieldTheta(typing.Generic[_FieldTheta__T]):
     Since:
         2.0
     
-          - FieldJacobiTheta
+    Also see:
+        FieldJacobiTheta
     """
     def theta1(self) -> _FieldTheta__T:
         """
@@ -1108,7 +1109,7 @@ class JacobiEllipticBuilder:
     _build_2__T = typing.TypeVar('_build_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def build(t: _build_0__T) -> FieldJacobiElliptic[_build_0__T]:
+    def build(m: _build_0__T) -> FieldJacobiElliptic[_build_0__T]:
         """
         Build an algorithm for computing Jacobi elliptic functions.
         
@@ -1118,7 +1119,7 @@ class JacobiEllipticBuilder:
         Returns:
             selected algorithm
         
-        public static FieldJacobiElliptic<Complex> build(Complex m)
+        public static FieldJacobiElliptic<Complex> build (Complex m)
         
         Build an algorithm for computing Jacobi elliptic functions.
         
@@ -1128,7 +1129,7 @@ class JacobiEllipticBuilder:
         Returns:
             selected algorithm
         
-        public static <T extends CalculusFieldElement<T>> FieldJacobiElliptic<FieldComplex<T>> build(FieldComplex<T> m)
+        public static <T extends CalculusFieldElement<T>> FieldJacobiElliptic<FieldComplex<T>> build (FieldComplex<T> m)
         
         Build an algorithm for computing Jacobi elliptic functions.
         
@@ -1157,10 +1158,10 @@ class JacobiEllipticBuilder:
         ...
     @typing.overload
     @staticmethod
-    def build(fieldComplex: org.hipparchus.complex.FieldComplex[_build_2__T]) -> FieldJacobiElliptic[org.hipparchus.complex.FieldComplex[_build_2__T]]: ...
+    def build(m: org.hipparchus.complex.FieldComplex[_build_2__T]) -> FieldJacobiElliptic[org.hipparchus.complex.FieldComplex[_build_2__T]]: ...
     @typing.overload
     @staticmethod
-    def build(double: float) -> JacobiElliptic: ...
+    def build(m: float) -> JacobiElliptic: ...
 
 class JacobiTheta:
     """
@@ -1214,7 +1215,8 @@ class Theta:
     Since:
         2.0
     
-          - JacobiTheta
+    Also see:
+        JacobiTheta
     """
     def theta1(self) -> org.hipparchus.complex.Complex:
         """

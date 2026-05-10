@@ -23,11 +23,10 @@ import typing
 
 class Euclidean3D(java.io.Serializable, org.hipparchus.geometry.Space):
     """
-    implements Serializable, Space
-    
     This class implements a three-dimensional space.
     
-          - serialized
+    Also see:
+        serialized
     """
     def getDimension(self) -> int:
         """
@@ -61,8 +60,8 @@ class Euclidean3D(java.io.Serializable, org.hipparchus.geometry.Space):
         Returns:
             n-1 dimension sub-space of this space
         
-              - getDimension
-        
+        Also see:
+            getDimension
         
         
         """
@@ -76,9 +75,9 @@ class FieldLine(typing.Generic[_FieldLine__T]):
     Each oriented line is intrinsically associated with an abscissa which is a coordinate on the line. The point at abscissa 0 is the orthogonal projection of the origin on the line, another equivalent way to express this is to say that it is the point of the line which is closest to the origin. Abscissa increases in the line direction.
     """
     @typing.overload
-    def __init__(self, fieldLine: 'FieldLine'[_FieldLine__T]): ...
+    def __init__(self, line: 'FieldLine'[_FieldLine__T]): ...
     @typing.overload
-    def __init__(self, fieldVector3D: 'FieldVector3D'[_FieldLine__T], fieldVector3D2: 'FieldVector3D'[_FieldLine__T], double: float): ...
+    def __init__(self, p1: 'FieldVector3D'[_FieldLine__T], p2: 'FieldVector3D'[_FieldLine__T], tolerance: float): ...
     def closestPoint(self, line: 'FieldLine'[_FieldLine__T]) -> 'FieldVector3D'[_FieldLine__T]:
         """
         Compute the point of the instance closest to another line.
@@ -107,9 +106,9 @@ class FieldLine(typing.Generic[_FieldLine__T]):
         """
         ...
     @typing.overload
-    def contains(self, vector3D: 'Vector3D') -> bool: ...
+    def contains(self, p: 'Vector3D') -> bool: ...
     @typing.overload
-    def distance(self, fieldLine: 'FieldLine'[_FieldLine__T]) -> _FieldLine__T:
+    def distance(self, p: 'FieldLine'[_FieldLine__T]) -> _FieldLine__T:
         """
         Compute the distance between the instance and a point.
         
@@ -119,7 +118,7 @@ class FieldLine(typing.Generic[_FieldLine__T]):
         Returns:
             distance between the instance and the point
         
-        public FieldLine distance(FieldLine<FieldLine> line)
+        public FieldLine distance (FieldLine<FieldLine> line)
         
         Compute the shortest distance between the instance and another line.
         
@@ -153,7 +152,7 @@ class FieldLine(typing.Generic[_FieldLine__T]):
         """
         ...
     @typing.overload
-    def getAbscissa(self, vector3D: 'Vector3D') -> _FieldLine__T: ...
+    def getAbscissa(self, point: 'Vector3D') -> _FieldLine__T: ...
     def getDirection(self) -> 'FieldVector3D'[_FieldLine__T]:
         """
         Get the normalized direction vector.
@@ -213,9 +212,9 @@ class FieldLine(typing.Generic[_FieldLine__T]):
         """
         ...
     @typing.overload
-    def pointAt(self, double: float) -> 'FieldVector3D'[_FieldLine__T]: ...
+    def pointAt(self, abscissa: float) -> 'FieldVector3D'[_FieldLine__T]: ...
     @typing.overload
-    def pointAt(self, t: _FieldLine__T) -> 'FieldVector3D'[_FieldLine__T]: ...
+    def pointAt(self, abscissa: _FieldLine__T) -> 'FieldVector3D'[_FieldLine__T]: ...
     def reset(self, p1: 'FieldVector3D'[_FieldLine__T], p2: 'FieldVector3D'[_FieldLine__T]) -> None:
         """
         Reset the instance as if built from two points.
@@ -244,15 +243,13 @@ class FieldLine(typing.Generic[_FieldLine__T]):
 _FieldRotation__T = typing.TypeVar('_FieldRotation__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
     """
-    implements Serializable
-    
     This class is a re-implementation of Rotation using hipparchus.
     
     Instance of this class are guaranteed to be immutable.
     
-          - FieldVector3D
-          - RotationOrder
-          - serialized
+    Also see:
+        FieldVector3D,
+        RotationOrder, serialized
     """
     @typing.overload
     def __init__(self, t: _FieldRotation__T, t2: _FieldRotation__T, t3: _FieldRotation__T, t4: _FieldRotation__T, boolean: bool): ...
@@ -261,11 +258,11 @@ class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldRotation__T], rotation: 'Rotation'): ...
     @typing.overload
-    def __init__(self, fieldVector3D: 'FieldVector3D'[_FieldRotation__T], t: _FieldRotation__T, rotationConvention: 'RotationConvention'): ...
+    def __init__(self, axis: 'FieldVector3D'[_FieldRotation__T], angle: _FieldRotation__T, convention: 'RotationConvention'): ...
     @typing.overload
     def __init__(self, fieldVector3D: 'FieldVector3D'[_FieldRotation__T], fieldVector3D2: 'FieldVector3D'[_FieldRotation__T]): ...
     @typing.overload
-    def __init__(self, fieldVector3D: 'FieldVector3D'[_FieldRotation__T], fieldVector3D2: 'FieldVector3D'[_FieldRotation__T], fieldVector3D3: 'FieldVector3D'[_FieldRotation__T], fieldVector3D4: 'FieldVector3D'[_FieldRotation__T]): ...
+    def __init__(self, u1: 'FieldVector3D'[_FieldRotation__T], u2: 'FieldVector3D'[_FieldRotation__T], v1: 'FieldVector3D'[_FieldRotation__T], v2: 'FieldVector3D'[_FieldRotation__T]): ...
     @typing.overload
     def __init__(self, rotationOrder: 'RotationOrder', rotationConvention: 'RotationConvention', t: _FieldRotation__T, t2: _FieldRotation__T, t3: _FieldRotation__T): ...
     _applyInverseTo_4__T = typing.TypeVar('_applyInverseTo_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -280,7 +277,7 @@ class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
     def applyInverseTo(self, vector3D: 'Vector3D') -> 'FieldVector3D'[_FieldRotation__T]: ...
     @typing.overload
     @staticmethod
-    def applyInverseTo(rotation: 'Rotation', fieldRotation: 'FieldRotation'[_applyInverseTo_4__T]) -> 'FieldRotation'[_applyInverseTo_4__T]:
+    def applyInverseTo(r: 'Rotation', u: 'FieldRotation'[_applyInverseTo_4__T]) -> 'FieldRotation'[_applyInverseTo_4__T]:
         """
         Apply the inverse of a rotation to a vector.
         
@@ -291,7 +288,7 @@ class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
         Returns:
             a new vector which such that u is its image by the rotation
         
-        public FieldRotation<FieldRotation> applyInverseTo(FieldRotation<FieldRotation> r)
+        public FieldRotation<FieldRotation> applyInverseTo (FieldRotation<FieldRotation> r)
         
         Apply the inverse of the instance to another rotation.
         
@@ -303,7 +300,7 @@ class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
         Returns:
             a new rotation which is the composition of r by the inverse of the instance
         
-        public FieldRotation<FieldRotation> applyInverseTo(Rotation r)
+        public FieldRotation<FieldRotation> applyInverseTo (Rotation r)
         
         Apply the inverse of the instance to another rotation.
         
@@ -331,7 +328,7 @@ class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
     @staticmethod
     def applyInverseTo(rotation: 'Rotation', fieldVector3D: 'FieldVector3D'[_applyInverseTo_5__T]) -> 'FieldVector3D'[_applyInverseTo_5__T]: ...
     @typing.overload
-    def applyInverseTo(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], tArray: typing.Union[typing.List[_FieldRotation__T], jpype.JArray]) -> None:
+    def applyInverseTo(self, in_: typing.Union[typing.List[float], jpype.JArray], out: typing.Union[typing.List[_FieldRotation__T], jpype.JArray]) -> None:
         """
         Apply the inverse of the rotation to a vector stored in an array.
         
@@ -361,7 +358,7 @@ class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
     def applyTo(self, vector3D: 'Vector3D') -> 'FieldVector3D'[_FieldRotation__T]: ...
     @typing.overload
     @staticmethod
-    def applyTo(rotation: 'Rotation', fieldRotation: 'FieldRotation'[_applyTo_4__T]) -> 'FieldRotation'[_applyTo_4__T]:
+    def applyTo(r: 'Rotation', u: 'FieldRotation'[_applyTo_4__T]) -> 'FieldRotation'[_applyTo_4__T]:
         """
         Apply a rotation to a vector.
         
@@ -372,7 +369,7 @@ class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
         Returns:
             a new vector which is the image of u by the rotation
         
-        public FieldRotation<FieldRotation> applyTo(FieldRotation<FieldRotation> r)
+        public FieldRotation<FieldRotation> applyTo (FieldRotation<FieldRotation> r)
         
         Apply the instance to another rotation.
         
@@ -384,7 +381,7 @@ class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
         Returns:
             a new rotation which is the composition of r by the instance
         
-        public FieldRotation<FieldRotation> applyTo(Rotation r)
+        public FieldRotation<FieldRotation> applyTo (Rotation r)
         
         Apply the instance to another rotation.
         
@@ -412,7 +409,7 @@ class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
     @staticmethod
     def applyTo(rotation: 'Rotation', fieldVector3D: 'FieldVector3D'[_applyTo_5__T]) -> 'FieldVector3D'[_applyTo_5__T]: ...
     @typing.overload
-    def applyTo(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], tArray: typing.Union[typing.List[_FieldRotation__T], jpype.JArray]) -> None:
+    def applyTo(self, in_: typing.Union[typing.List[float], jpype.JArray], out: typing.Union[typing.List[_FieldRotation__T], jpype.JArray]) -> None:
         """
         Apply the rotation to a vector stored in an array.
         
@@ -431,13 +428,13 @@ class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
     @typing.overload
     def applyTo(self, tArray: typing.Union[typing.List[_FieldRotation__T], jpype.JArray], tArray2: typing.Union[typing.List[_FieldRotation__T], jpype.JArray]) -> None: ...
     @typing.overload
-    def compose(self, fieldRotation: 'FieldRotation'[_FieldRotation__T], rotationConvention: 'RotationConvention') -> 'FieldRotation'[_FieldRotation__T]: ...
+    def compose(self, r: 'FieldRotation'[_FieldRotation__T], convention: 'RotationConvention') -> 'FieldRotation'[_FieldRotation__T]: ...
     @typing.overload
-    def compose(self, rotation: 'Rotation', rotationConvention: 'RotationConvention') -> 'FieldRotation'[_FieldRotation__T]: ...
+    def compose(self, r: 'Rotation', convention: 'RotationConvention') -> 'FieldRotation'[_FieldRotation__T]: ...
     @typing.overload
-    def composeInverse(self, fieldRotation: 'FieldRotation'[_FieldRotation__T], rotationConvention: 'RotationConvention') -> 'FieldRotation'[_FieldRotation__T]: ...
+    def composeInverse(self, r: 'FieldRotation'[_FieldRotation__T], convention: 'RotationConvention') -> 'FieldRotation'[_FieldRotation__T]: ...
     @typing.overload
-    def composeInverse(self, rotation: 'Rotation', rotationConvention: 'RotationConvention') -> 'FieldRotation'[_FieldRotation__T]: ...
+    def composeInverse(self, r: 'Rotation', convention: 'RotationConvention') -> 'FieldRotation'[_FieldRotation__T]: ...
     _distance__T = typing.TypeVar('_distance__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
     def distance(r1: 'FieldRotation'[_distance__T], r2: 'FieldRotation'[_distance__T]) -> _distance__T:
@@ -466,9 +463,6 @@ class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
         
         Returns:
             angle of the rotation (between 0 and π)
-        
-              - 
-        
         
         
         """
@@ -506,9 +500,6 @@ class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
         
         Returns:
             normalized axis of the rotation
-        
-              - 
-        
         
         
         """
@@ -602,71 +593,70 @@ class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
 _FieldVector3D__T = typing.TypeVar('_FieldVector3D__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVector3D__T], _FieldVector3D__T], java.io.Serializable, typing.Generic[_FieldVector3D__T]):
     """
-    implements hipparchus<FieldVector3D<T>,T>, Serializable
-    
     This class is a re-implementation of Vector3D using hipparchus.
     
     Instance of this class are guaranteed to be immutable.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self, double: float, fieldVector3D: 'FieldVector3D'[_FieldVector3D__T]): ...
     @typing.overload
-    def __init__(self, double: float, fieldVector3D: 'FieldVector3D'[_FieldVector3D__T], double2: float, fieldVector3D2: 'FieldVector3D'[_FieldVector3D__T]): ...
+    def __init__(self, a1: float, u1: 'FieldVector3D'[_FieldVector3D__T], a2: float, u2: 'FieldVector3D'[_FieldVector3D__T]): ...
     @typing.overload
-    def __init__(self, double: float, fieldVector3D: 'FieldVector3D'[_FieldVector3D__T], double2: float, fieldVector3D2: 'FieldVector3D'[_FieldVector3D__T], double3: float, fieldVector3D3: 'FieldVector3D'[_FieldVector3D__T]): ...
+    def __init__(self, a1: float, u1: 'FieldVector3D'[_FieldVector3D__T], a2: float, u2: 'FieldVector3D'[_FieldVector3D__T], a3: float, u3: 'FieldVector3D'[_FieldVector3D__T]): ...
     @typing.overload
-    def __init__(self, double: float, fieldVector3D: 'FieldVector3D'[_FieldVector3D__T], double2: float, fieldVector3D2: 'FieldVector3D'[_FieldVector3D__T], double3: float, fieldVector3D3: 'FieldVector3D'[_FieldVector3D__T], double4: float, fieldVector3D4: 'FieldVector3D'[_FieldVector3D__T]): ...
+    def __init__(self, a1: float, u1: 'FieldVector3D'[_FieldVector3D__T], a2: float, u2: 'FieldVector3D'[_FieldVector3D__T], a3: float, u3: 'FieldVector3D'[_FieldVector3D__T], a4: float, u4: 'FieldVector3D'[_FieldVector3D__T]): ...
     @typing.overload
     def __init__(self, t: _FieldVector3D__T, t2: _FieldVector3D__T): ...
     @typing.overload
-    def __init__(self, t: _FieldVector3D__T, t2: _FieldVector3D__T, t3: _FieldVector3D__T): ...
+    def __init__(self, x: _FieldVector3D__T, y: _FieldVector3D__T, z: _FieldVector3D__T): ...
     @typing.overload
     def __init__(self, t: _FieldVector3D__T, fieldVector3D: 'FieldVector3D'[_FieldVector3D__T]): ...
     @typing.overload
-    def __init__(self, t: _FieldVector3D__T, fieldVector3D: 'FieldVector3D'[_FieldVector3D__T], t2: _FieldVector3D__T, fieldVector3D2: 'FieldVector3D'[_FieldVector3D__T]): ...
+    def __init__(self, a1: _FieldVector3D__T, u1: 'FieldVector3D'[_FieldVector3D__T], a2: _FieldVector3D__T, u2: 'FieldVector3D'[_FieldVector3D__T]): ...
     @typing.overload
-    def __init__(self, t: _FieldVector3D__T, fieldVector3D: 'FieldVector3D'[_FieldVector3D__T], t2: _FieldVector3D__T, fieldVector3D2: 'FieldVector3D'[_FieldVector3D__T], t3: _FieldVector3D__T, fieldVector3D3: 'FieldVector3D'[_FieldVector3D__T]): ...
+    def __init__(self, a1: _FieldVector3D__T, u1: 'FieldVector3D'[_FieldVector3D__T], a2: _FieldVector3D__T, u2: 'FieldVector3D'[_FieldVector3D__T], a3: _FieldVector3D__T, u3: 'FieldVector3D'[_FieldVector3D__T]): ...
     @typing.overload
-    def __init__(self, t: _FieldVector3D__T, fieldVector3D: 'FieldVector3D'[_FieldVector3D__T], t2: _FieldVector3D__T, fieldVector3D2: 'FieldVector3D'[_FieldVector3D__T], t3: _FieldVector3D__T, fieldVector3D3: 'FieldVector3D'[_FieldVector3D__T], t4: _FieldVector3D__T, fieldVector3D4: 'FieldVector3D'[_FieldVector3D__T]): ...
+    def __init__(self, a1: _FieldVector3D__T, u1: 'FieldVector3D'[_FieldVector3D__T], a2: _FieldVector3D__T, u2: 'FieldVector3D'[_FieldVector3D__T], a3: _FieldVector3D__T, u3: 'FieldVector3D'[_FieldVector3D__T], a4: _FieldVector3D__T, u4: 'FieldVector3D'[_FieldVector3D__T]): ...
     @typing.overload
     def __init__(self, t: _FieldVector3D__T, vector3D: 'Vector3D'): ...
     @typing.overload
-    def __init__(self, t: _FieldVector3D__T, vector3D: 'Vector3D', t2: _FieldVector3D__T, vector3D2: 'Vector3D'): ...
+    def __init__(self, a1: _FieldVector3D__T, u1: 'Vector3D', a2: _FieldVector3D__T, u2: 'Vector3D'): ...
     @typing.overload
-    def __init__(self, t: _FieldVector3D__T, vector3D: 'Vector3D', t2: _FieldVector3D__T, vector3D2: 'Vector3D', t3: _FieldVector3D__T, vector3D3: 'Vector3D'): ...
+    def __init__(self, a1: _FieldVector3D__T, u1: 'Vector3D', a2: _FieldVector3D__T, u2: 'Vector3D', a3: _FieldVector3D__T, u3: 'Vector3D'): ...
     @typing.overload
-    def __init__(self, t: _FieldVector3D__T, vector3D: 'Vector3D', t2: _FieldVector3D__T, vector3D2: 'Vector3D', t3: _FieldVector3D__T, vector3D3: 'Vector3D', t4: _FieldVector3D__T, vector3D4: 'Vector3D'): ...
+    def __init__(self, a1: _FieldVector3D__T, u1: 'Vector3D', a2: _FieldVector3D__T, u2: 'Vector3D', a3: _FieldVector3D__T, u3: 'Vector3D', a4: _FieldVector3D__T, u4: 'Vector3D'): ...
     @typing.overload
-    def __init__(self, tArray: typing.Union[typing.List[_FieldVector3D__T], jpype.JArray]): ...
+    def __init__(self, v: typing.Union[typing.List[_FieldVector3D__T], jpype.JArray]): ...
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldVector3D__T], vector3D: 'Vector3D'): ...
     @typing.overload
-    def add(self, double: float, fieldVector3D: 'FieldVector3D'[_FieldVector3D__T]) -> 'FieldVector3D'[_FieldVector3D__T]: ...
+    def add(self, factor: float, v: 'FieldVector3D'[_FieldVector3D__T]) -> 'FieldVector3D'[_FieldVector3D__T]: ...
     @typing.overload
-    def add(self, double: float, vector3D: 'Vector3D') -> 'FieldVector3D'[_FieldVector3D__T]: ...
+    def add(self, factor: float, v: 'Vector3D') -> 'FieldVector3D'[_FieldVector3D__T]: ...
     @typing.overload
-    def add(self, t: _FieldVector3D__T, fieldVector3D: 'FieldVector3D'[_FieldVector3D__T]) -> 'FieldVector3D'[_FieldVector3D__T]: ...
+    def add(self, factor: _FieldVector3D__T, v: 'FieldVector3D'[_FieldVector3D__T]) -> 'FieldVector3D'[_FieldVector3D__T]: ...
     @typing.overload
-    def add(self, t: _FieldVector3D__T, vector3D: 'Vector3D') -> 'FieldVector3D'[_FieldVector3D__T]: ...
+    def add(self, factor: _FieldVector3D__T, v: 'Vector3D') -> 'FieldVector3D'[_FieldVector3D__T]: ...
     @typing.overload
-    def add(self, fieldVector3D: 'FieldVector3D'[_FieldVector3D__T]) -> 'FieldVector3D'[_FieldVector3D__T]: ...
+    def add(self, v: 'FieldVector3D'[_FieldVector3D__T]) -> 'FieldVector3D'[_FieldVector3D__T]: ...
     @typing.overload
-    def add(self, vector3D: 'Vector3D') -> 'FieldVector3D'[_FieldVector3D__T]: ...
+    def add(self, v: 'Vector3D') -> 'FieldVector3D'[_FieldVector3D__T]: ...
     _angle_0__T = typing.TypeVar('_angle_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _angle_1__T = typing.TypeVar('_angle_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _angle_2__T = typing.TypeVar('_angle_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def angle(fieldVector3D: 'FieldVector3D'[_angle_0__T], fieldVector3D2: 'FieldVector3D'[_angle_0__T]) -> _angle_0__T: ...
+    def angle(v1: 'FieldVector3D'[_angle_0__T], v2: 'FieldVector3D'[_angle_0__T]) -> _angle_0__T: ...
     @typing.overload
     @staticmethod
-    def angle(fieldVector3D: 'FieldVector3D'[_angle_1__T], vector3D: 'Vector3D') -> _angle_1__T: ...
+    def angle(v1: 'FieldVector3D'[_angle_1__T], v2: 'Vector3D') -> _angle_1__T: ...
     @typing.overload
     @staticmethod
-    def angle(vector3D: 'Vector3D', fieldVector3D: 'FieldVector3D'[_angle_2__T]) -> _angle_2__T: ...
-    def blendArithmeticallyWith(self, fieldVector3D: 'FieldVector3D'[_FieldVector3D__T], t: _FieldVector3D__T) -> 'FieldVector3D'[_FieldVector3D__T]:
+    def angle(v1: 'Vector3D', v2: 'FieldVector3D'[_angle_2__T]) -> _angle_2__T: ...
+    def blendArithmeticallyWith(self, other: 'FieldVector3D'[_FieldVector3D__T], blendingValue: _FieldVector3D__T) -> 'FieldVector3D'[_FieldVector3D__T]:
         """
         Specified by: hipparchus in interface hipparchus
         
@@ -679,12 +669,12 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
     _crossProduct_3__T = typing.TypeVar('_crossProduct_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _crossProduct_4__T = typing.TypeVar('_crossProduct_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def crossProduct(self, fieldVector3D: 'FieldVector3D'[_FieldVector3D__T]) -> 'FieldVector3D'[_FieldVector3D__T]: ...
+    def crossProduct(self, v: 'FieldVector3D'[_FieldVector3D__T]) -> 'FieldVector3D'[_FieldVector3D__T]: ...
     @typing.overload
-    def crossProduct(self, vector3D: 'Vector3D') -> 'FieldVector3D'[_FieldVector3D__T]: ...
+    def crossProduct(self, v: 'Vector3D') -> 'FieldVector3D'[_FieldVector3D__T]: ...
     @typing.overload
     @staticmethod
-    def crossProduct(fieldVector3D: 'FieldVector3D'[_crossProduct_2__T], fieldVector3D2: 'FieldVector3D'[_crossProduct_2__T]) -> 'FieldVector3D'[_crossProduct_2__T]:
+    def crossProduct(v1: 'FieldVector3D'[_crossProduct_2__T], v2: 'FieldVector3D'[_crossProduct_2__T]) -> 'FieldVector3D'[_crossProduct_2__T]:
         """
         Compute the cross-product of two vectors.
         
@@ -718,10 +708,10 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         ...
     @typing.overload
     @staticmethod
-    def crossProduct(fieldVector3D: 'FieldVector3D'[_crossProduct_3__T], vector3D: 'Vector3D') -> 'FieldVector3D'[_crossProduct_3__T]: ...
+    def crossProduct(v1: 'FieldVector3D'[_crossProduct_3__T], v2: 'Vector3D') -> 'FieldVector3D'[_crossProduct_3__T]: ...
     @typing.overload
     @staticmethod
-    def crossProduct(vector3D: 'Vector3D', fieldVector3D: 'FieldVector3D'[_crossProduct_4__T]) -> 'FieldVector3D'[_crossProduct_4__T]: ...
+    def crossProduct(v1: 'Vector3D', v2: 'FieldVector3D'[_crossProduct_4__T]) -> 'FieldVector3D'[_crossProduct_4__T]: ...
     _distance_2__T = typing.TypeVar('_distance_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _distance_3__T = typing.TypeVar('_distance_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _distance_4__T = typing.TypeVar('_distance_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -741,10 +731,10 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         """
         ...
     @typing.overload
-    def distance(self, vector3D: 'Vector3D') -> _FieldVector3D__T: ...
+    def distance(self, v: 'Vector3D') -> _FieldVector3D__T: ...
     @typing.overload
     @staticmethod
-    def distance(fieldVector3D: 'FieldVector3D'[_distance_2__T], fieldVector3D2: 'FieldVector3D'[_distance_2__T]) -> _distance_2__T:
+    def distance(v1: 'FieldVector3D'[_distance_2__T], v2: 'FieldVector3D'[_distance_2__T]) -> _distance_2__T:
         """
         Compute the distance between two vectors according to the L :sub:`2` norm.
         
@@ -784,10 +774,10 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         ...
     @typing.overload
     @staticmethod
-    def distance(fieldVector3D: 'FieldVector3D'[_distance_3__T], vector3D: 'Vector3D') -> _distance_3__T: ...
+    def distance(v1: 'FieldVector3D'[_distance_3__T], v2: 'Vector3D') -> _distance_3__T: ...
     @typing.overload
     @staticmethod
-    def distance(vector3D: 'Vector3D', fieldVector3D: 'FieldVector3D'[_distance_4__T]) -> _distance_4__T: ...
+    def distance(v1: 'Vector3D', v2: 'FieldVector3D'[_distance_4__T]) -> _distance_4__T: ...
     _distance1_2__T = typing.TypeVar('_distance1_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _distance1_3__T = typing.TypeVar('_distance1_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _distance1_4__T = typing.TypeVar('_distance1_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -807,10 +797,10 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         """
         ...
     @typing.overload
-    def distance1(self, vector3D: 'Vector3D') -> _FieldVector3D__T: ...
+    def distance1(self, v: 'Vector3D') -> _FieldVector3D__T: ...
     @typing.overload
     @staticmethod
-    def distance1(fieldVector3D: 'FieldVector3D'[_distance1_2__T], fieldVector3D2: 'FieldVector3D'[_distance1_2__T]) -> _distance1_2__T:
+    def distance1(v1: 'FieldVector3D'[_distance1_2__T], v2: 'FieldVector3D'[_distance1_2__T]) -> _distance1_2__T:
         """
         Compute the distance between two vectors according to the L :sub:`1` norm.
         
@@ -850,10 +840,10 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         ...
     @typing.overload
     @staticmethod
-    def distance1(fieldVector3D: 'FieldVector3D'[_distance1_3__T], vector3D: 'Vector3D') -> _distance1_3__T: ...
+    def distance1(v1: 'FieldVector3D'[_distance1_3__T], v2: 'Vector3D') -> _distance1_3__T: ...
     @typing.overload
     @staticmethod
-    def distance1(vector3D: 'Vector3D', fieldVector3D: 'FieldVector3D'[_distance1_4__T]) -> _distance1_4__T: ...
+    def distance1(v1: 'Vector3D', v2: 'FieldVector3D'[_distance1_4__T]) -> _distance1_4__T: ...
     _distanceInf_2__T = typing.TypeVar('_distanceInf_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _distanceInf_3__T = typing.TypeVar('_distanceInf_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _distanceInf_4__T = typing.TypeVar('_distanceInf_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -873,10 +863,10 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         """
         ...
     @typing.overload
-    def distanceInf(self, vector3D: 'Vector3D') -> _FieldVector3D__T: ...
+    def distanceInf(self, v: 'Vector3D') -> _FieldVector3D__T: ...
     @typing.overload
     @staticmethod
-    def distanceInf(fieldVector3D: 'FieldVector3D'[_distanceInf_2__T], fieldVector3D2: 'FieldVector3D'[_distanceInf_2__T]) -> _distanceInf_2__T:
+    def distanceInf(v1: 'FieldVector3D'[_distanceInf_2__T], v2: 'FieldVector3D'[_distanceInf_2__T]) -> _distanceInf_2__T:
         """
         Compute the distance between two vectors according to the L :sub:`∞` norm.
         
@@ -916,10 +906,10 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         ...
     @typing.overload
     @staticmethod
-    def distanceInf(fieldVector3D: 'FieldVector3D'[_distanceInf_3__T], vector3D: 'Vector3D') -> _distanceInf_3__T: ...
+    def distanceInf(v1: 'FieldVector3D'[_distanceInf_3__T], v2: 'Vector3D') -> _distanceInf_3__T: ...
     @typing.overload
     @staticmethod
-    def distanceInf(vector3D: 'Vector3D', fieldVector3D: 'FieldVector3D'[_distanceInf_4__T]) -> _distanceInf_4__T: ...
+    def distanceInf(v1: 'Vector3D', v2: 'FieldVector3D'[_distanceInf_4__T]) -> _distanceInf_4__T: ...
     _distanceSq_2__T = typing.TypeVar('_distanceSq_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _distanceSq_3__T = typing.TypeVar('_distanceSq_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _distanceSq_4__T = typing.TypeVar('_distanceSq_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -939,10 +929,10 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         """
         ...
     @typing.overload
-    def distanceSq(self, vector3D: 'Vector3D') -> _FieldVector3D__T: ...
+    def distanceSq(self, v: 'Vector3D') -> _FieldVector3D__T: ...
     @typing.overload
     @staticmethod
-    def distanceSq(fieldVector3D: 'FieldVector3D'[_distanceSq_2__T], fieldVector3D2: 'FieldVector3D'[_distanceSq_2__T]) -> _distanceSq_2__T:
+    def distanceSq(v1: 'FieldVector3D'[_distanceSq_2__T], v2: 'FieldVector3D'[_distanceSq_2__T]) -> _distanceSq_2__T:
         """
         Compute the square of the distance between two vectors.
         
@@ -982,10 +972,10 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         ...
     @typing.overload
     @staticmethod
-    def distanceSq(fieldVector3D: 'FieldVector3D'[_distanceSq_3__T], vector3D: 'Vector3D') -> _distanceSq_3__T: ...
+    def distanceSq(v1: 'FieldVector3D'[_distanceSq_3__T], v2: 'Vector3D') -> _distanceSq_3__T: ...
     @typing.overload
     @staticmethod
-    def distanceSq(vector3D: 'Vector3D', fieldVector3D: 'FieldVector3D'[_distanceSq_4__T]) -> _distanceSq_4__T: ...
+    def distanceSq(v1: 'Vector3D', v2: 'FieldVector3D'[_distanceSq_4__T]) -> _distanceSq_4__T: ...
     _dotProduct_2__T = typing.TypeVar('_dotProduct_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _dotProduct_3__T = typing.TypeVar('_dotProduct_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _dotProduct_4__T = typing.TypeVar('_dotProduct_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -1002,16 +992,16 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         Returns:
             the dot product this.v
         
-              - hipparchus
-        
+        Also see:
+            hipparchus
         
         """
         ...
     @typing.overload
-    def dotProduct(self, vector3D: 'Vector3D') -> _FieldVector3D__T: ...
+    def dotProduct(self, v: 'Vector3D') -> _FieldVector3D__T: ...
     @typing.overload
     @staticmethod
-    def dotProduct(fieldVector3D: 'FieldVector3D'[_dotProduct_2__T], fieldVector3D2: 'FieldVector3D'[_dotProduct_2__T]) -> _dotProduct_2__T:
+    def dotProduct(v1: 'FieldVector3D'[_dotProduct_2__T], v2: 'FieldVector3D'[_dotProduct_2__T]) -> _dotProduct_2__T:
         """
         Compute the dot-product of two vectors.
         
@@ -1045,10 +1035,10 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         ...
     @typing.overload
     @staticmethod
-    def dotProduct(fieldVector3D: 'FieldVector3D'[_dotProduct_3__T], vector3D: 'Vector3D') -> _dotProduct_3__T: ...
+    def dotProduct(v1: 'FieldVector3D'[_dotProduct_3__T], v2: 'Vector3D') -> _dotProduct_3__T: ...
     @typing.overload
     @staticmethod
-    def dotProduct(vector3D: 'Vector3D', fieldVector3D: 'FieldVector3D'[_dotProduct_4__T]) -> _dotProduct_4__T: ...
+    def dotProduct(v1: 'Vector3D', v2: 'FieldVector3D'[_dotProduct_4__T]) -> _dotProduct_4__T: ...
     def equals(self, other: typing.Any) -> bool:
         """
         Test for the equality of two 3D vectors.
@@ -1057,7 +1047,7 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         
         NaN coordinates are considered to affect globally the vector and be equals to each other - i.e, if either (or all) real part of the coordinates of the 3D vector are NaN, the 3D vector is NaN.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality to this
@@ -1076,9 +1066,6 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         Returns:
             azimuth (α) of the vector, between -π and +π
         
-              - 
-        
-        
         
         """
         ...
@@ -1088,9 +1075,6 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         
         Returns:
             elevation (δ) of the vector, between -π/2 and +π/2
-        
-              - 
-        
         
         
         """
@@ -1277,9 +1261,6 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         Returns:
             abscissa of the vector
         
-              - 
-        
-        
         
         """
         ...
@@ -1290,9 +1271,6 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         Returns:
             ordinate of the vector
         
-              - 
-        
-        
         
         """
         ...
@@ -1302,9 +1280,6 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         
         Returns:
             height of the vector
-        
-              - 
-        
         
         
         """
@@ -1330,7 +1305,7 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         
         All NaN values have the same hash code.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -1403,30 +1378,27 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         """
         ...
     @typing.overload
-    def scalarMultiply(self, double: float) -> 'FieldVector3D'[_FieldVector3D__T]: ...
+    def scalarMultiply(self, a: float) -> 'FieldVector3D'[_FieldVector3D__T]: ...
     @typing.overload
-    def scalarMultiply(self, t: _FieldVector3D__T) -> 'FieldVector3D'[_FieldVector3D__T]: ...
+    def scalarMultiply(self, a: _FieldVector3D__T) -> 'FieldVector3D'[_FieldVector3D__T]: ...
     @typing.overload
-    def subtract(self, double: float, fieldVector3D: 'FieldVector3D'[_FieldVector3D__T]) -> 'FieldVector3D'[_FieldVector3D__T]: ...
+    def subtract(self, factor: float, v: 'FieldVector3D'[_FieldVector3D__T]) -> 'FieldVector3D'[_FieldVector3D__T]: ...
     @typing.overload
-    def subtract(self, double: float, vector3D: 'Vector3D') -> 'FieldVector3D'[_FieldVector3D__T]: ...
+    def subtract(self, factor: float, v: 'Vector3D') -> 'FieldVector3D'[_FieldVector3D__T]: ...
     @typing.overload
-    def subtract(self, t: _FieldVector3D__T, fieldVector3D: 'FieldVector3D'[_FieldVector3D__T]) -> 'FieldVector3D'[_FieldVector3D__T]: ...
+    def subtract(self, factor: _FieldVector3D__T, v: 'FieldVector3D'[_FieldVector3D__T]) -> 'FieldVector3D'[_FieldVector3D__T]: ...
     @typing.overload
-    def subtract(self, t: _FieldVector3D__T, vector3D: 'Vector3D') -> 'FieldVector3D'[_FieldVector3D__T]: ...
+    def subtract(self, factor: _FieldVector3D__T, v: 'Vector3D') -> 'FieldVector3D'[_FieldVector3D__T]: ...
     @typing.overload
-    def subtract(self, fieldVector3D: 'FieldVector3D'[_FieldVector3D__T]) -> 'FieldVector3D'[_FieldVector3D__T]: ...
+    def subtract(self, v: 'FieldVector3D'[_FieldVector3D__T]) -> 'FieldVector3D'[_FieldVector3D__T]: ...
     @typing.overload
-    def subtract(self, vector3D: 'Vector3D') -> 'FieldVector3D'[_FieldVector3D__T]: ...
+    def subtract(self, v: 'Vector3D') -> 'FieldVector3D'[_FieldVector3D__T]: ...
     def toArray(self) -> typing.MutableSequence[_FieldVector3D__T]:
         """
         Get the vector coordinates as a dimension 3 array.
         
         Returns:
             vector coordinates
-        
-              - 
-        
         
         
         """
@@ -1436,7 +1408,7 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
         """
         Get a string representation of this vector.
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Returns:
             a string representation of this vector
@@ -1470,19 +1442,17 @@ class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVec
 
 class Line(org.hipparchus.geometry.partitioning.Embedding[Euclidean3D, 'Vector3D', org.hipparchus.geometry.euclidean.oned.Euclidean1D, org.hipparchus.geometry.euclidean.oned.Vector1D]):
     """
-    implements Embedding<Euclidean3D,Vector3D,Euclidean1D,Vector1D>
-    
     The class represent lines in a three dimensional space.
     
     Each oriented line is intrinsically associated with an abscissa which is a coordinate on the line. The point at abscissa 0 is the orthogonal projection of the origin on the line, another equivalent way to express this is to say that it is the point of the line which is closest to the origin. Abscissa increases in the line direction.
     
-          - fromDirection
-          -
+    Also see:
+        fromDirection,
     """
     @typing.overload
     def __init__(self, line: 'Line'): ...
     @typing.overload
-    def __init__(self, vector3D: 'Vector3D', vector3D2: 'Vector3D', double: float): ...
+    def __init__(self, p1: 'Vector3D', p2: 'Vector3D', tolerance: float): ...
     def closestPoint(self, line: 'Line') -> 'Vector3D':
         """
         Compute the point of the instance closest to another line.
@@ -1510,7 +1480,7 @@ class Line(org.hipparchus.geometry.partitioning.Embedding[Euclidean3D, 'Vector3D
         """
         ...
     @typing.overload
-    def distance(self, line: 'Line') -> float:
+    def distance(self, p: 'Line') -> float:
         """
         Compute the distance between the instance and a point.
         
@@ -1548,9 +1518,6 @@ class Line(org.hipparchus.geometry.partitioning.Embedding[Euclidean3D, 'Vector3D
         
         Raises:
             hipparchus: if direction is the zero vector.
-        
-              - 
-        
         
         
         """
@@ -1677,8 +1644,8 @@ class Line(org.hipparchus.geometry.partitioning.Embedding[Euclidean3D, 'Vector3D
         Returns:
             n-dimension point of the space corresponding to the specified sub-space point
         
-              - pointAt
-        
+        Also see:
+            pointAt
         
         
         """
@@ -1695,8 +1662,8 @@ class Line(org.hipparchus.geometry.partitioning.Embedding[Euclidean3D, 'Vector3D
         Returns:
             (n-1)-dimension point of the sub-space corresponding to the specified space point
         
-              - getAbscissa
-        
+        Also see:
+            getAbscissa
         
         
         """
@@ -1745,18 +1712,16 @@ class OutlineExtractor:
 
 class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D, 'Vector3D', 'Plane', 'SubPlane'], org.hipparchus.geometry.partitioning.Embedding[Euclidean3D, 'Vector3D', org.hipparchus.geometry.euclidean.twod.Euclidean2D, org.hipparchus.geometry.euclidean.twod.Vector2D]):
     """
-    implements Hyperplane<Euclidean3D,Vector3D,Plane,SubPlane>, Embedding<Euclidean3D,Vector3D,Euclidean2D,Vector2D>
-    
     The class represent planes in a three dimensional space.
     """
     @typing.overload
     def __init__(self, plane: 'Plane'): ...
     @typing.overload
-    def __init__(self, vector3D: 'Vector3D', double: float): ...
+    def __init__(self, normal: 'Vector3D', tolerance: float): ...
     @typing.overload
-    def __init__(self, vector3D: 'Vector3D', vector3D2: 'Vector3D', double: float): ...
+    def __init__(self, p: 'Vector3D', normal: 'Vector3D', tolerance: float): ...
     @typing.overload
-    def __init__(self, vector3D: 'Vector3D', vector3D2: 'Vector3D', vector3D3: 'Vector3D', double: float): ...
+    def __init__(self, p1: 'Vector3D', p2: 'Vector3D', p3: 'Vector3D', tolerance: float): ...
     def arbitraryPoint(self) -> 'Vector3D':
         """
         Get an arbitrary point in the hyperplane.
@@ -1817,9 +1782,9 @@ class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D, 'Vector
         Returns:
             normalized normal vector
         
-              - getU
-              - getV
-        
+        Also see:
+            getU,
+            getV
         
         
         """
@@ -1901,9 +1866,9 @@ class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D, 'Vector
         Returns:
             normalized first canonical vector
         
-              - getV
-              - getNormal
-        
+        Also see:
+            getV,
+            getNormal
         
         
         """
@@ -1917,15 +1882,15 @@ class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D, 'Vector
         Returns:
             normalized second canonical vector
         
-              - getU
-              - getNormal
-        
+        Also see:
+            getU,
+            getNormal
         
         
         """
         ...
     @typing.overload
-    def intersection(self, plane: 'Plane') -> Line:
+    def intersection(self, line: 'Plane') -> Line:
         """
         Get the intersection of a line with the instance.
         
@@ -1961,7 +1926,7 @@ class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D, 'Vector
     def intersection(self, line: Line) -> 'Vector3D': ...
     @typing.overload
     @staticmethod
-    def intersection(plane: 'Plane', plane2: 'Plane', plane3: 'Plane') -> 'Vector3D': ...
+    def intersection(plane1: 'Plane', plane2: 'Plane', plane3: 'Plane') -> 'Vector3D': ...
     def isSimilarTo(self, plane: 'Plane') -> bool:
         """
         Check if the instance is similar to another plane.
@@ -2024,7 +1989,7 @@ class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D, 'Vector
         """
         ...
     @typing.overload
-    def reset(self, vector3D: 'Vector3D', vector3D2: 'Vector3D') -> None: ...
+    def reset(self, p: 'Vector3D', normal: 'Vector3D') -> None: ...
     def revertSelf(self) -> None:
         """
         Revert the plane.
@@ -2077,8 +2042,8 @@ class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D, 'Vector
         Returns:
             3D space point (really a Vector3D instance)
         
-              - toSubSpace
-        
+        Also see:
+            toSubSpace
         
         
         """
@@ -2095,8 +2060,8 @@ class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D, 'Vector
         Returns:
             in-plane point (really a Vector2D instance)
         
-              - toSpace
-        
+        Also see:
+            toSpace
         
         
         """
@@ -2146,13 +2111,13 @@ class PolyhedronsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclide
     This class represents a 3D region: a set of polyhedrons.
     """
     @typing.overload
-    def __init__(self, double: float): ...
+    def __init__(self, tolerance: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float): ...
+    def __init__(self, xMin: float, xMax: float, yMin: float, yMax: float, zMin: float, zMax: float, tolerance: float): ...
     @typing.overload
     def __init__(self, collection: typing.Union[java.util.Collection['SubPlane'], typing.Sequence['SubPlane'], typing.Set['SubPlane']], double: float): ...
     @typing.overload
-    def __init__(self, list: java.util.List['Vector3D'], list2: java.util.List[typing.Union[typing.List[int], jpype.JArray]], double: float): ...
+    def __init__(self, vertices: java.util.List['Vector3D'], facets: java.util.List[typing.Union[typing.List[int], jpype.JArray]], tolerance: float): ...
     @typing.overload
     def __init__(self, bRep: 'PolyhedronsSet.BRep', double: float): ...
     @typing.overload
@@ -2170,7 +2135,7 @@ class PolyhedronsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclide
         Specified by: buildNew in class AbstractRegion
         
         Parameters:
-            tree (BSPTree<Euclidean3D,Vector3D,Plane,SubPlane> tree): inside/outside BSP tree representing the new region
+            tree (BSPTree<Euclidean3D, Vector3D, Plane, SubPlane> tree): inside/outside BSP tree representing the new region
         
         Returns:
             the built region
@@ -2263,8 +2228,6 @@ class PolyhedronsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclide
 
 class Rotation(java.io.Serializable):
     """
-    implements Serializable
-    
     This class implements rotations in a three-dimensional space.
     
     Rotations can be represented by several different mathematical entities (matrices, axe and angle, Cardan or Euler angles, quaternions). This class presents an higher level abstraction, more user-oriented and hiding this implementation details. Well, for the curious, we use quaternions for the internal representation. The user can build a rotation from any of these representations, and any of these representations can be retrieved from a Rotation instance (see the various constructors and getters). In addition, a rotation can also be built implicitly from a set of vectors and their image.
@@ -2289,9 +2252,9 @@ class Rotation(java.io.Serializable):
     
     Rotations are guaranteed to be immutable objects.
     
-          - Vector3D
-          - RotationOrder
-          - serialized
+    Also see:
+        Vector3D,
+        RotationOrder, serialized
     """
     IDENTITY: typing.ClassVar['Rotation'] = ...
     """
@@ -2304,13 +2267,13 @@ class Rotation(java.io.Serializable):
     @typing.overload
     def __init__(self, rotationOrder: 'RotationOrder', rotationConvention: 'RotationConvention', double: float, double2: float, double3: float): ...
     @typing.overload
-    def __init__(self, vector3D: 'Vector3D', double: float, rotationConvention: 'RotationConvention'): ...
+    def __init__(self, axis: 'Vector3D', angle: float, convention: 'RotationConvention'): ...
     @typing.overload
     def __init__(self, vector3D: 'Vector3D', vector3D2: 'Vector3D'): ...
     @typing.overload
-    def __init__(self, vector3D: 'Vector3D', vector3D2: 'Vector3D', vector3D3: 'Vector3D', vector3D4: 'Vector3D'): ...
+    def __init__(self, u1: 'Vector3D', u2: 'Vector3D', v1: 'Vector3D', v2: 'Vector3D'): ...
     @typing.overload
-    def applyInverseTo(self, rotation: 'Rotation') -> 'Rotation':
+    def applyInverseTo(self, u: 'Rotation') -> 'Rotation':
         """
         Apply the inverse of the rotation to a vector.
         
@@ -2347,7 +2310,7 @@ class Rotation(java.io.Serializable):
         """
         ...
     @typing.overload
-    def applyTo(self, rotation: 'Rotation') -> 'Rotation':
+    def applyTo(self, u: 'Rotation') -> 'Rotation':
         """
         Apply the rotation to a vector.
         
@@ -2447,9 +2410,6 @@ class Rotation(java.io.Serializable):
         Returns:
             angle of the rotation (between 0 and π)
         
-              - 
-        
-        
         
         """
         ...
@@ -2486,9 +2446,6 @@ class Rotation(java.io.Serializable):
         
         Returns:
             normalized axis of the rotation
-        
-              - 
-        
         
         
         """
@@ -2558,7 +2515,8 @@ class RotationConvention(java.lang.Enum['RotationConvention']):
     """
     This enumerates is used to differentiate the semantics of a rotation.
     
-          - Rotation
+    Also see:
+        Rotation
     """
     VECTOR_OPERATOR: typing.ClassVar['RotationConvention'] = ...
     FRAME_TRANSFORM: typing.ClassVar['RotationConvention'] = ...
@@ -2588,7 +2546,12 @@ class RotationConvention(java.lang.Enum['RotationConvention']):
     @staticmethod
     def values() -> typing.MutableSequence['RotationConvention']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (RotationConvention c : RotationConvention.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -2706,7 +2669,7 @@ class RotationOrder(java.lang.Enum['RotationOrder']):
         """
         Get a string representation of the instance.
         
-        Overrides: toString in class Enum
+        Overrides: Enum in class Enum
         
         Returns:
             a string representation of the instance (in fact, its name)
@@ -2740,7 +2703,12 @@ class RotationOrder(java.lang.Enum['RotationOrder']):
     @staticmethod
     def values() -> typing.MutableSequence['RotationOrder']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (RotationOrder c : RotationOrder.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -2798,8 +2766,6 @@ class Segment:
 
 class SphereGenerator(org.hipparchus.geometry.enclosing.SupportBallGenerator[Euclidean3D, 'Vector3D']):
     """
-    implements SupportBallGenerator<Euclidean3D,Vector3D>
-    
     Class generating an enclosing ball from its support points.
     """
     def __init__(self):
@@ -2832,8 +2798,6 @@ class SphereGenerator(org.hipparchus.geometry.enclosing.SupportBallGenerator[Euc
 
 class SphericalCoordinates(java.io.Serializable):
     """
-    implements Serializable
-    
     This class provides conversions related to `spherical coordinates <http://mathworld.wolfram.com/SphericalCoordinates.html>`.
     
     The conventions used here are the mathematical ones, i.e. spherical coordinates are related to Cartesian coordinates as follows:
@@ -2851,12 +2815,13 @@ class SphericalCoordinates(java.io.Serializable):
     
     This class provides conversion of coordinates and also of gradient and Hessian between spherical and Cartesian coordinates.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
+    def __init__(self, r: float, theta: float, phi: float): ...
     @typing.overload
-    def __init__(self, vector3D: 'Vector3D'): ...
+    def __init__(self, v: 'Vector3D'): ...
     def getCartesian(self) -> 'Vector3D':
         """
         Get the Cartesian coordinates.
@@ -2874,9 +2839,9 @@ class SphericalCoordinates(java.io.Serializable):
         Returns:
             polar (co-latitude) angle Φ
         
-              - getR
-              - getTheta
-        
+        Also see:
+            getR,
+            getTheta
         
         
         """
@@ -2888,9 +2853,9 @@ class SphericalCoordinates(java.io.Serializable):
         Returns:
             radius r
         
-              - getTheta
-              - getPhi
-        
+        Also see:
+            getTheta,
+            getPhi
         
         
         """
@@ -2902,9 +2867,9 @@ class SphericalCoordinates(java.io.Serializable):
         Returns:
             azimuthal angle in x-y plane θ
         
-              - getR
-              - getPhi
-        
+        Also see:
+            getR,
+            getPhi
         
         
         """
@@ -2948,11 +2913,11 @@ class SubLine:
     This class represents a subset of a Line.
     """
     @typing.overload
-    def __init__(self, line: Line, intervalsSet: org.hipparchus.geometry.euclidean.oned.IntervalsSet): ...
+    def __init__(self, line: Line, remainingRegion: org.hipparchus.geometry.euclidean.oned.IntervalsSet): ...
     @typing.overload
     def __init__(self, segment: Segment): ...
     @typing.overload
-    def __init__(self, vector3D: 'Vector3D', vector3D2: 'Vector3D', double: float): ...
+    def __init__(self, start: 'Vector3D', end: 'Vector3D', tolerance: float): ...
     def getSegments(self) -> java.util.List[Segment]:
         """
         Get the endpoints of the sub-line.
@@ -2994,7 +2959,7 @@ class SubPlane(org.hipparchus.geometry.partitioning.AbstractSubHyperplane[Euclid
         
         Parameters:
             hyperplane (Plane): underlying hyperplane
-            remainingRegion (Region<Euclidean2D,Vector2D,Line,SubLine> remainingRegion): remaining region of the hyperplane
+            remainingRegion (Region<Euclidean2D, Vector2D, Line, SubLine> remainingRegion): remaining region of the hyperplane
         
         
         """
@@ -3030,13 +2995,12 @@ class SubPlane(org.hipparchus.geometry.partitioning.AbstractSubHyperplane[Euclid
 
 class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D, 'Vector3D']):
     """
-    implements Serializable, Vector<Euclidean3D,Vector3D>
-    
     This class implements vectors in a three-dimensional space.
     
     Instance of this class are guaranteed to be immutable.
     
-          - serialized
+    Also see:
+        serialized
     """
     ZERO: typing.ClassVar['Vector3D'] = ...
     """
@@ -3081,17 +3045,17 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
     @typing.overload
     def __init__(self, double: float, double2: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
+    def __init__(self, x: float, y: float, z: float): ...
     @typing.overload
     def __init__(self, double: float, vector3D: 'Vector3D'): ...
     @typing.overload
-    def __init__(self, double: float, vector3D: 'Vector3D', double2: float, vector3D2: 'Vector3D'): ...
+    def __init__(self, a1: float, u1: 'Vector3D', a2: float, u2: 'Vector3D'): ...
     @typing.overload
-    def __init__(self, double: float, vector3D: 'Vector3D', double2: float, vector3D2: 'Vector3D', double3: float, vector3D3: 'Vector3D'): ...
+    def __init__(self, a1: float, u1: 'Vector3D', a2: float, u2: 'Vector3D', a3: float, u3: 'Vector3D'): ...
     @typing.overload
-    def __init__(self, double: float, vector3D: 'Vector3D', double2: float, vector3D2: 'Vector3D', double3: float, vector3D3: 'Vector3D', double4: float, vector3D4: 'Vector3D'): ...
+    def __init__(self, a1: float, u1: 'Vector3D', a2: float, u2: 'Vector3D', a3: float, u3: 'Vector3D', a4: float, u4: 'Vector3D'): ...
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, v: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
     def add(self, factor: float, v: 'Vector3D') -> 'Vector3D':
         """
@@ -3145,7 +3109,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
         """
         ...
     @typing.overload
-    def crossProduct(self, vector3D: 'Vector3D') -> 'Vector3D':
+    def crossProduct(self, v: 'Vector3D') -> 'Vector3D':
         """
         Compute the cross-product of the instance with another vector.
         
@@ -3169,9 +3133,9 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
         ...
     @typing.overload
     @staticmethod
-    def crossProduct(vector3D: 'Vector3D', vector3D2: 'Vector3D') -> 'Vector3D': ...
+    def crossProduct(v1: 'Vector3D', v2: 'Vector3D') -> 'Vector3D': ...
     @typing.overload
-    def distance(self, vector3D: 'Vector3D') -> float:
+    def distance(self, v: 'Vector3D') -> float:
         """
         Compute the distance between the instance and another point.
         
@@ -3199,9 +3163,9 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
         ...
     @typing.overload
     @staticmethod
-    def distance(vector3D: 'Vector3D', vector3D2: 'Vector3D') -> float: ...
+    def distance(v1: 'Vector3D', v2: 'Vector3D') -> float: ...
     @typing.overload
-    def distance1(self, vector3D: 'Vector3D') -> float:
+    def distance1(self, v: 'Vector3D') -> float:
         """
         Compute the distance between the instance and another vector according to the L :sub:`1` norm.
         
@@ -3231,9 +3195,9 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
         ...
     @typing.overload
     @staticmethod
-    def distance1(vector3D: 'Vector3D', vector3D2: 'Vector3D') -> float: ...
+    def distance1(v1: 'Vector3D', v2: 'Vector3D') -> float: ...
     @typing.overload
-    def distanceInf(self, vector3D: 'Vector3D') -> float:
+    def distanceInf(self, v: 'Vector3D') -> float:
         """
         Compute the distance between the instance and another vector according to the L :sub:`∞` norm.
         
@@ -3263,9 +3227,9 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
         ...
     @typing.overload
     @staticmethod
-    def distanceInf(vector3D: 'Vector3D', vector3D2: 'Vector3D') -> float: ...
+    def distanceInf(v1: 'Vector3D', v2: 'Vector3D') -> float: ...
     @typing.overload
-    def distanceSq(self, vector3D: 'Vector3D') -> float:
+    def distanceSq(self, v: 'Vector3D') -> float:
         """
         Compute the square of the distance between the instance and another vector.
         
@@ -3295,9 +3259,9 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
         ...
     @typing.overload
     @staticmethod
-    def distanceSq(vector3D: 'Vector3D', vector3D2: 'Vector3D') -> float: ...
+    def distanceSq(v1: 'Vector3D', v2: 'Vector3D') -> float: ...
     @typing.overload
-    def dotProduct(self, vector3D: 'Vector3D') -> float:
+    def dotProduct(self, v: 'Vector3D') -> float:
         """
         Compute the dot-product of the instance and another vector.
         
@@ -3311,7 +3275,8 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
         Returns:
             the dot product this.v
         
-              - hipparchus
+        Also see:
+            hipparchus
         
         Compute the dot-product of two vectors.
         
@@ -3327,7 +3292,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
         ...
     @typing.overload
     @staticmethod
-    def dotProduct(vector3D: 'Vector3D', vector3D2: 'Vector3D') -> float: ...
+    def dotProduct(v1: 'Vector3D', v2: 'Vector3D') -> float: ...
     def equals(self, other: typing.Any) -> bool:
         """
         Test for the equality of two 3D vectors.
@@ -3336,7 +3301,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
         
         NaN coordinates are considered to affect globally the vector and be equals to each other - i.e, if either (or all) coordinates of the 3D vector are equal to NaN, the 3D vector is equal to NaN.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality to this
@@ -3376,9 +3341,6 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
         Returns:
             azimuth (α) of the vector, between -π and +π
         
-              - 
-        
-        
         
         """
         ...
@@ -3388,9 +3350,6 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
         
         Returns:
             elevation (δ) of the vector, between -π/2 and +π/2
-        
-              - 
-        
         
         
         """
@@ -3462,9 +3421,6 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
         Returns:
             abscissa of the vector
         
-              - 
-        
-        
         
         """
         ...
@@ -3475,9 +3431,6 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
         Returns:
             ordinate of the vector
         
-              - 
-        
-        
         
         """
         ...
@@ -3487,9 +3440,6 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
         
         Returns:
             height of the vector
-        
-              - 
-        
         
         
         """
@@ -3512,7 +3462,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
         
         All NaN values have the same hash code.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -3649,9 +3599,6 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
         Returns:
             vector coordinates
         
-              - 
-        
-        
         
         """
         ...
@@ -3660,7 +3607,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D,
         """
         Get a string representation of this vector.
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Returns:
             a string representation of this vector
@@ -3697,15 +3644,15 @@ class Vector3DFormat(org.hipparchus.geometry.VectorFormat[Euclidean3D, Vector3D]
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, string: str, string2: str, string3: str): ...
+    def __init__(self, prefix: str, suffix: str, separator: str): ...
     @typing.overload
-    def __init__(self, string: str, string2: str, string3: str, numberFormat: java.text.NumberFormat): ...
+    def __init__(self, prefix: str, suffix: str, separator: str, format: java.text.NumberFormat): ...
     @typing.overload
-    def __init__(self, numberFormat: java.text.NumberFormat): ...
+    def __init__(self, format: java.text.NumberFormat): ...
     @typing.overload
     def format(self, vector: org.hipparchus.geometry.Vector[org.hipparchus.geometry.Space, org.hipparchus.geometry.Vector]) -> str: ...
     @typing.overload
-    def format(self, vector: org.hipparchus.geometry.Vector[Euclidean3D, Vector3D], stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer: ...
+    def format(self, vector: org.hipparchus.geometry.Vector[Euclidean3D, Vector3D], toAppendTo: java.lang.StringBuffer, pos: java.text.FieldPosition) -> java.lang.StringBuffer: ...
     @typing.overload
     @staticmethod
     def getVector3DFormat() -> 'Vector3DFormat':
@@ -3735,7 +3682,7 @@ class Vector3DFormat(org.hipparchus.geometry.VectorFormat[Euclidean3D, Vector3D]
         """
         ...
     @typing.overload
-    def parse(self, string: str) -> Vector3D:
+    def parse(self, source: str) -> Vector3D:
         """
         Parses a string to produce a Vector3D object.
         
@@ -3752,7 +3699,7 @@ class Vector3DFormat(org.hipparchus.geometry.VectorFormat[Euclidean3D, Vector3D]
         """
         ...
     @typing.overload
-    def parse(self, string: str, parsePosition: java.text.ParsePosition) -> Vector3D: ...
+    def parse(self, source: str, pos: java.text.ParsePosition) -> Vector3D: ...
 
 
 class __module_protocol__(Protocol):

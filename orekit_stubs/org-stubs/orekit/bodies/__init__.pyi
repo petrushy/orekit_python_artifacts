@@ -186,7 +186,7 @@ class BodyShape:
         """
         ...
     @typing.overload
-    def transform(self, geodeticPoint: 'GeodeticPoint') -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def transform(self, point: 'GeodeticPoint') -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
         Transform a Cartesian point to a surface-relative point.
         
@@ -227,7 +227,7 @@ class BodyShape:
         """
         ...
     @typing.overload
-    def transform(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> 'GeodeticPoint': ...
+    def transform(self, point: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, date: org.orekit.time.AbsoluteDate) -> 'GeodeticPoint': ...
 
 class CR3BPFactory:
     """
@@ -308,9 +308,9 @@ class CR3BPSystem:
         "Dynamical systems, the three-body problem, and space mission design, Koon, Lo, Marsden, Ross"
     """
     @typing.overload
-    def __init__(self, celestialBody: 'CelestialBody', celestialBody2: 'CelestialBody', double: float): ...
+    def __init__(self, primaryBody: 'CelestialBody', secondaryBody: 'CelestialBody', a: float): ...
     @typing.overload
-    def __init__(self, celestialBody: 'CelestialBody', celestialBody2: 'CelestialBody', double: float, double2: float): ...
+    def __init__(self, primaryBody: 'CelestialBody', secondaryBody: 'CelestialBody', a: float, mu: float): ...
     def getDdim(self) -> float:
         """
         Get the CR3BP distance between the two bodies.
@@ -795,22 +795,22 @@ class CelestialBodyFactory:
         ...
     @typing.overload
     @staticmethod
-    def addDefaultCelestialBodyLoader(string: str) -> None: ...
+    def addDefaultCelestialBodyLoader(supportedNames: str) -> None: ...
     @typing.overload
     @staticmethod
-    def addDefaultCelestialBodyLoader(string: str, string2: str) -> None: ...
+    def addDefaultCelestialBodyLoader(name: str, supportedNames: str) -> None: ...
     @typing.overload
     @staticmethod
     def clearCelestialBodyCache() -> None: ...
     @typing.overload
     @staticmethod
-    def clearCelestialBodyCache(string: str) -> None: ...
+    def clearCelestialBodyCache(name: str) -> None: ...
     @typing.overload
     @staticmethod
     def clearCelestialBodyLoaders() -> None: ...
     @typing.overload
     @staticmethod
-    def clearCelestialBodyLoaders(string: str) -> None: ...
+    def clearCelestialBodyLoaders(name: str) -> None: ...
     @staticmethod
     def getBody(name: str) -> CelestialBody:
         """
@@ -1123,7 +1123,7 @@ class Ellipse:
         """
         ...
     @typing.overload
-    def projectToEllipse(self, vector2D: org.hipparchus.geometry.euclidean.twod.Vector2D) -> org.hipparchus.geometry.euclidean.twod.Vector2D:
+    def projectToEllipse(self, p: org.hipparchus.geometry.euclidean.twod.Vector2D) -> org.hipparchus.geometry.euclidean.twod.Vector2D:
         """
         Find the closest ellipse point.
         
@@ -1241,9 +1241,9 @@ class Ellipsoid:
         ...
     _getPlaneSection_1__T = typing.TypeVar('_getPlaneSection_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getPlaneSection(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D) -> Ellipse: ...
+    def getPlaneSection(self, planePoint: org.hipparchus.geometry.euclidean.threed.Vector3D, planeNormal: org.hipparchus.geometry.euclidean.threed.Vector3D) -> Ellipse: ...
     @typing.overload
-    def getPlaneSection(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getPlaneSection_1__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getPlaneSection_1__T]) -> 'FieldEllipse'[_getPlaneSection_1__T]: ...
+    def getPlaneSection(self, planePoint: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getPlaneSection_1__T], planeNormal: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getPlaneSection_1__T]) -> 'FieldEllipse'[_getPlaneSection_1__T]: ...
     _isInside_0__T = typing.TypeVar('_isInside_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def isInside(self, point: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_isInside_0__T]) -> bool:
@@ -1280,9 +1280,9 @@ class Ellipsoid:
         ...
     _pointOnLimb_0__T = typing.TypeVar('_pointOnLimb_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pointOnLimb(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_pointOnLimb_0__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_pointOnLimb_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_pointOnLimb_0__T]: ...
+    def pointOnLimb(self, observer: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_pointOnLimb_0__T], outside: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_pointOnLimb_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_pointOnLimb_0__T]: ...
     @typing.overload
-    def pointOnLimb(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def pointOnLimb(self, observer: org.hipparchus.geometry.euclidean.threed.Vector3D, outside: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
 
 _FieldEllipse__T = typing.TypeVar('_FieldEllipse__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEllipse(typing.Generic[_FieldEllipse__T]):
@@ -1451,7 +1451,7 @@ class FieldGeodeticPoint(typing.Generic[_FieldGeodeticPoint__T]):
         BodyShape
     """
     @typing.overload
-    def __init__(self, t: _FieldGeodeticPoint__T, t2: _FieldGeodeticPoint__T, t3: _FieldGeodeticPoint__T): ...
+    def __init__(self, latitude: _FieldGeodeticPoint__T, longitude: _FieldGeodeticPoint__T, altitude: _FieldGeodeticPoint__T): ...
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldGeodeticPoint__T], geodeticPoint: 'GeodeticPoint'): ...
     def equals(self, object: typing.Any) -> bool:
@@ -1915,9 +1915,9 @@ class Loxodrome:
         11.3
     """
     @typing.overload
-    def __init__(self, geodeticPoint: GeodeticPoint, double: float, oneAxisEllipsoid: 'OneAxisEllipsoid'): ...
+    def __init__(self, point: GeodeticPoint, azimuth: float, body: 'OneAxisEllipsoid'): ...
     @typing.overload
-    def __init__(self, geodeticPoint: GeodeticPoint, double: float, oneAxisEllipsoid: 'OneAxisEllipsoid', double2: float): ...
+    def __init__(self, point: GeodeticPoint, azimuth: float, body: 'OneAxisEllipsoid', altitude: float): ...
     def getAltitude(self) -> float:
         """
         Get the altitude above the reference body.
@@ -1985,9 +1985,9 @@ class SexagesimalAngle:
         GeodeticPoint
     """
     @typing.overload
-    def __init__(self, double: float): ...
+    def __init__(self, angle: float): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, int3: int, double: float): ...
+    def __init__(self, sign: int, degree: int, arcMinute: int, arcSecond: float): ...
     def getAngle(self) -> float:
         """
         Get the corresponding angle in radians.
@@ -2050,7 +2050,7 @@ class FieldTimeStampedGeodeticPoint(FieldGeodeticPoint[_FieldTimeStampedGeodetic
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldTimeStampedGeodeticPoint__T], timeStampedGeodeticPoint: 'TimeStampedGeodeticPoint'): ...
     @typing.overload
-    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTimeStampedGeodeticPoint__T], t: _FieldTimeStampedGeodeticPoint__T, t2: _FieldTimeStampedGeodeticPoint__T, t3: _FieldTimeStampedGeodeticPoint__T): ...
+    def __init__(self, date: org.orekit.time.FieldAbsoluteDate[_FieldTimeStampedGeodeticPoint__T], latitude: _FieldTimeStampedGeodeticPoint__T, longitude: _FieldTimeStampedGeodeticPoint__T, altitude: _FieldTimeStampedGeodeticPoint__T): ...
     @typing.overload
     def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTimeStampedGeodeticPoint__T], fieldGeodeticPoint: FieldGeodeticPoint[_FieldTimeStampedGeodeticPoint__T]): ...
     def equals(self, object: typing.Any) -> bool:
@@ -2105,6 +2105,15 @@ class JPLEphemeridesLoader(org.orekit.data.AbstractSelfFeedingLoader, CelestialB
     
     
     """
+    DEFAULT_DE_2021_SUPPORTED_NAMES: typing.ClassVar[str] = ...
+    """
+    Default supported files name pattern for JPL DE files.
+    
+    Also see:
+        constant
+    
+    
+    """
     DEFAULT_INPOP_SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
     Default supported files name pattern for IMCCE INPOP files.
@@ -2115,9 +2124,9 @@ class JPLEphemeridesLoader(org.orekit.data.AbstractSelfFeedingLoader, CelestialB
     
     """
     @typing.overload
-    def __init__(self, string: str, ephemerisType: 'JPLEphemeridesLoader.EphemerisType'): ...
+    def __init__(self, supportedNames: str, generateType: 'JPLEphemeridesLoader.EphemerisType'): ...
     @typing.overload
-    def __init__(self, string: str, ephemerisType: 'JPLEphemeridesLoader.EphemerisType', dataProvidersManager: org.orekit.data.DataProvidersManager, timeScales: org.orekit.time.TimeScales, frame: org.orekit.frames.Frame): ...
+    def __init__(self, supportedNames: str, generateType: 'JPLEphemeridesLoader.EphemerisType', dataProvidersManager: org.orekit.data.DataProvidersManager, timeScales: org.orekit.time.TimeScales, gcrf: org.orekit.frames.Frame): ...
     def getLoadedAstronomicalUnit(self) -> float:
         """
         Get astronomical unit.
@@ -2267,7 +2276,7 @@ class LazyLoadedCelestialBodies(CelestialBodies):
         """
         ...
     @typing.overload
-    def addDefaultCelestialBodyLoader(self, string: str) -> None:
+    def addDefaultCelestialBodyLoader(self, supportedNames: str) -> None:
         """
         Parameters:
             supportedNames (String): regular expression for supported files names (may be null if the default JPL file names are used)
@@ -2302,7 +2311,7 @@ class LazyLoadedCelestialBodies(CelestialBodies):
         """
         ...
     @typing.overload
-    def addDefaultCelestialBodyLoader(self, string: str, string2: str) -> None: ...
+    def addDefaultCelestialBodyLoader(self, name: str, supportedNames: str) -> None: ...
     @typing.overload
     def clearCelestialBodyCache(self) -> None:
         """
@@ -2539,9 +2548,9 @@ class LoxodromeArc(Loxodrome):
         11.3
     """
     @typing.overload
-    def __init__(self, geodeticPoint: GeodeticPoint, geodeticPoint2: GeodeticPoint, oneAxisEllipsoid: 'OneAxisEllipsoid'): ...
+    def __init__(self, point: GeodeticPoint, endPoint: GeodeticPoint, body: 'OneAxisEllipsoid'): ...
     @typing.overload
-    def __init__(self, geodeticPoint: GeodeticPoint, geodeticPoint2: GeodeticPoint, oneAxisEllipsoid: 'OneAxisEllipsoid', double: float): ...
+    def __init__(self, point: GeodeticPoint, endPoint: GeodeticPoint, body: 'OneAxisEllipsoid', altitude: float): ...
     def calculatePointAlongArc(self, fraction: float) -> GeodeticPoint:
         """
         Calculate a point at a specific percentage along the arc.
@@ -2620,7 +2629,9 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
     @typing.overload
     def azimuthBetweenPoints(self, origin: FieldGeodeticPoint[_azimuthBetweenPoints_1__T], destination: FieldGeodeticPoint[_azimuthBetweenPoints_1__T]) -> _azimuthBetweenPoints_1__T:
         """
-        Compute the azimuth angle from local north between the two points. The angle is calculated clockwise from local north at the origin point and follows the rhumb line to the destination point.
+        Compute the azimuth angle from local north between the two points.
+        
+        The angle is calculated clockwise from local north at the origin point and follows the rhumb line to the destination point.
         
         Parameters:
             origin (FieldGeodeticPoint<T> origin): the origin point, at which the azimuth angle will be computed (non-null)
@@ -2691,6 +2702,8 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
         
         A line may have several intersection points with a closed surface (we consider the one point case as a degenerated two points case). The close parameter is used to select which of these points should be returned. The selected point is the one that is closest to the close point.
         
+        This method is similar to pointAtAltitude except it returns a point in the body frame (the other method returns a point in the same frame as the input line)
+        
         Parameters:
             line (FieldLine<T> line): test line (may intersect the body or not)
             close (FieldVector3D<T> close): point used for intersections selection
@@ -2698,7 +2711,7 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
             date (FieldAbsoluteDate<T> date): date of the line in given frame
         
         Returns:
-            intersection point at altitude zero or null if the line does not intersect the surface
+            intersection point in body frame at altitude zero or null if the line does not intersect the surface
         
         Since:
             9.3
@@ -2713,6 +2726,8 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
         
         A line may have several intersection points with a closed surface (we consider the one point case as a degenerated two points case). The close parameter is used to select which of these points should be returned. The selected point is the one that is closest to the close point.
         
+        This method is similar to pointAtAltitude pointAtAltitude} except it returns a point in the body frame (the other method returns a point in the sameframe as the input line)
+        
         Parameters:
             line (Line): test line (may intersect the body or not)
             close (Vector3D): point used for intersections selection
@@ -2720,7 +2735,7 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
             date (AbsoluteDate): date of the line in given frame
         
         Returns:
-            intersection point at altitude zero or null if the line does not intersect the surface
+            intersection point in body frame at altitude zero or null if the line does not intersect the surface
         
         Since:
             9.3
@@ -2847,9 +2862,58 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
         ...
     _pointAtAltitude_0__T = typing.TypeVar('_pointAtAltitude_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pointAtAltitude(self, fieldLine: org.hipparchus.geometry.euclidean.threed.FieldLine[_pointAtAltitude_0__T], t: _pointAtAltitude_0__T, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_pointAtAltitude_0__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pointAtAltitude_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_pointAtAltitude_0__T]: ...
+    def pointAtAltitude(self, line: org.hipparchus.geometry.euclidean.threed.FieldLine[_pointAtAltitude_0__T], altitude: _pointAtAltitude_0__T, close: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_pointAtAltitude_0__T], frame: org.orekit.frames.Frame, date: org.orekit.time.FieldAbsoluteDate[_pointAtAltitude_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_pointAtAltitude_0__T]:
+        """
+        Get point at some altitude along a line.
+        
+        A line may have several intersection points with a closed surface at some altitude (we consider the one point case as a degenerated two points case). The close parameter is used to select which of these points should be returned. The selected point is the one that is closest to the close point.
+        
+        This is a generalized version of getCartesianIntersectionPoint, with a non-zero altitude, except that it returns a point in the same frame as input line (the other method returns a point in the body frame).
+        
+        This method was adapted from the sister Rugged library.
+        
+        Parameters:
+            line (FieldLine<T> line): test line (may intersect the body or not)
+            altitude (T): altitude with respect to ellipsoid (m)
+            close (FieldVector3D<T> close): point used for intersections selection
+            frame (Frame): frame in which line is expressed
+            date (FieldAbsoluteDate<T> date): date of the line in given frame
+        
+        Returns:
+            intersection point at specified altitude zero or null if the line does not intersect the iso-altitude surface
+        
+        Since:
+            13.1.1
+        
+        
+        """
+        ...
     @typing.overload
-    def pointAtAltitude(self, line: org.hipparchus.geometry.euclidean.threed.Line, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def pointAtAltitude(self, line: org.hipparchus.geometry.euclidean.threed.Line, altitude: float, close: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, date: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+        Get point at some altitude along a line.
+        
+        A line may have several intersection points with a closed surface at some altitude (we consider the one point case as a degenerated two points case). The close parameter is used to select which of these points should be returned. The selected point is the one that is closest to the close point.
+        
+        This is a generalized version of getCartesianIntersectionPoint, with a non-zero altitude, except that it returns a point in the same frame as input line (the other method returns a point in the body frame).
+        
+        This method was adapted from the sister Rugged library.
+        
+        Parameters:
+            line (Line): test line (may intersect the body or not)
+            altitude (double): altitude with respect to ellipsoid (m)
+            close (Vector3D): point used for intersections selection
+            frame (Frame): frame in which line is expressed
+            date (AbsoluteDate): date of the line in given frame
+        
+        Returns:
+            intersection point at specified altitude zero or null if the line does not intersect the iso-altitude surface
+        
+        Since:
+            13.1.1
+        
+        """
+        ...
     @typing.overload
     def projectToGround(self, point: org.hipparchus.geometry.euclidean.threed.Vector3D, date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
@@ -2922,7 +2986,7 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
         """
         ...
     @typing.overload
-    def transform(self, geodeticPoint: GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def transform(self, point: GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
         Transform a surface-relative point to a Cartesian point.
         
@@ -2959,7 +3023,7 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
         """
         ...
     @typing.overload
-    def transform(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_2__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_transform_2__T]) -> FieldGeodeticPoint[_transform_2__T]:
+    def transform(self, point: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_2__T], frame: org.orekit.frames.Frame, date: org.orekit.time.FieldAbsoluteDate[_transform_2__T]) -> FieldGeodeticPoint[_transform_2__T]:
         """
         Transform a Cartesian point to a surface-relative point.
         
@@ -2999,9 +3063,9 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
         """
         ...
     @typing.overload
-    def transform(self, pVCoordinates: org.orekit.utils.PVCoordinates, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> FieldGeodeticPoint[org.hipparchus.analysis.differentiation.UnivariateDerivative2]: ...
+    def transform(self, point: org.orekit.utils.PVCoordinates, frame: org.orekit.frames.Frame, date: org.orekit.time.AbsoluteDate) -> FieldGeodeticPoint[org.hipparchus.analysis.differentiation.UnivariateDerivative2]: ...
     @typing.overload
-    def transform(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> GeodeticPoint: ...
+    def transform(self, point: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, date: org.orekit.time.AbsoluteDate) -> GeodeticPoint: ...
 
 class PythonBodyShape(BodyShape):
     def __init__(self): ...
@@ -3122,7 +3186,7 @@ class PythonBodyShape(BodyShape):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -3146,7 +3210,7 @@ class PythonBodyShape(BodyShape):
         """
         ...
     @typing.overload
-    def transform(self, geodeticPoint: GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def transform(self, point: GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
         Transform a Cartesian point to a surface-relative point.
         
@@ -3190,7 +3254,7 @@ class PythonBodyShape(BodyShape):
         """
         ...
     @typing.overload
-    def transform(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> GeodeticPoint: ...
+    def transform(self, point: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, date: org.orekit.time.AbsoluteDate) -> GeodeticPoint: ...
 
 class PythonCelestialBodies(CelestialBodies):
     def __init__(self): ...
@@ -3392,7 +3456,7 @@ class PythonCelestialBodies(CelestialBodies):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -3507,7 +3571,7 @@ class PythonCelestialBody(CelestialBody):
         ...
     _getPosition_1__T = typing.TypeVar('_getPosition_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getPosition(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def getPosition(self, date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     @typing.overload
     def getPosition(self, date: org.orekit.time.FieldAbsoluteDate[_getPosition_1__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getPosition_1__T]:
         """
@@ -3537,7 +3601,7 @@ class PythonCelestialBody(CelestialBody):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -3599,7 +3663,7 @@ class PythonCelestialBodyLoader(CelestialBodyLoader):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -3734,7 +3798,7 @@ class PythonIAUPole(IAUPole):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -3751,9 +3815,9 @@ class TimeStampedGeodeticPoint(GeodeticPoint, org.orekit.time.TimeStamped, org.o
         serialized
     """
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float): ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, latitude: float, longitude: float, altitude: float): ...
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, geodeticPoint: GeodeticPoint): ...
+    def __init__(self, date: org.orekit.time.AbsoluteDate, point: GeodeticPoint): ...
     def equals(self, object: typing.Any) -> bool:
         """
         Overrides: equals in class GeodeticPoint
@@ -3797,7 +3861,7 @@ class TimeStampedGeodeticPoint(GeodeticPoint, org.orekit.time.TimeStamped, org.o
         """
         ...
     @typing.overload
-    def shiftedBy(self, double: float) -> 'TimeStampedGeodeticPoint': ...
+    def shiftedBy(self, dt: float) -> 'TimeStampedGeodeticPoint': ...
     def toString(self) -> str:
         """
         Overrides: toString in class GeodeticPoint

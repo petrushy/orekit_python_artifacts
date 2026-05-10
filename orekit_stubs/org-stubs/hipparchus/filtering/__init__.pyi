@@ -15,8 +15,6 @@ import typing
 
 class LocalizedFilterFormats(java.lang.Enum['LocalizedFilterFormats'], org.hipparchus.exception.Localizable):
     """
-    implements hipparchus
-    
     Enumeration for localized messages formats used in exceptions messages.
     
     The constants in this enumeration represent the available formats as localized strings. These formats are intended to be localized using simple properties files, using the constant name as the key and the property value as the message format. The source English format is provided in the constants themselves to serve both as a reminder for developers to understand the parameters needed by each format, as a basis for translators to create localized properties files, and as a default format if some translation is missing.
@@ -65,7 +63,12 @@ class LocalizedFilterFormats(java.lang.Enum['LocalizedFilterFormats'], org.hippa
     @staticmethod
     def values() -> typing.MutableSequence['LocalizedFilterFormats']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (LocalizedFilterFormats c : LocalizedFilterFormats.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared

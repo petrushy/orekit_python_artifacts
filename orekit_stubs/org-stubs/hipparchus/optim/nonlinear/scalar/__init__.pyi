@@ -20,8 +20,6 @@ import typing
 
 class GoalType(java.lang.Enum['GoalType'], org.hipparchus.optim.OptimizationData):
     """
-    implements OptimizationData
-    
     Goal type for an optimization problem (minimization or maximization of a scalar function.
     """
     MAXIMIZE: typing.ClassVar['GoalType'] = ...
@@ -52,7 +50,12 @@ class GoalType(java.lang.Enum['GoalType'], org.hipparchus.optim.OptimizationData
     @staticmethod
     def values() -> typing.MutableSequence['GoalType']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (GoalType c : GoalType.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -63,8 +66,6 @@ class GoalType(java.lang.Enum['GoalType'], org.hipparchus.optim.OptimizationData
 
 class LeastSquaresConverter(org.hipparchus.analysis.MultivariateFunction):
     """
-    implements hipparchus
-    
     This class converts hipparchus to hipparchus when the goal is to minimize them.
     
     This class is mostly used when the vectorial objective function represents a theoretical result computed from a point set applied to a model and the models point must be adjusted to fit the theoretical result to some reference observations. The observations may be obtained for example from physical measurements whether the model is built from theoretical considerations.
@@ -73,16 +74,17 @@ class LeastSquaresConverter(org.hipparchus.analysis.MultivariateFunction):
     
     This class support combination of residuals with or without weights and correlations.
     
-          - hipparchus
-          - hipparchus
+    Also see:
+        hipparchus,
+        hipparchus
     """
     @typing.overload
-    def __init__(self, multivariateVectorFunction: typing.Union[org.hipparchus.analysis.MultivariateVectorFunction, typing.Callable], doubleArray: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, function: typing.Union[org.hipparchus.analysis.MultivariateVectorFunction, typing.Callable], observations: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
     def __init__(self, multivariateVectorFunction: typing.Union[org.hipparchus.analysis.MultivariateVectorFunction, typing.Callable], doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
     def __init__(self, multivariateVectorFunction: typing.Union[org.hipparchus.analysis.MultivariateVectorFunction, typing.Callable], doubleArray: typing.Union[typing.List[float], jpype.JArray], realMatrix: org.hipparchus.linear.RealMatrix): ...
-    def value(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
+    def value(self, point: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
         Specified by: hipparchus in interface hipparchus
         
@@ -168,8 +170,6 @@ class MultiStartMultivariateOptimizer(org.hipparchus.optim.BaseMultiStartMultiva
 
 class MultivariateFunctionMappingAdapter(org.hipparchus.analysis.MultivariateFunction):
     """
-    implements hipparchus
-    
     Adapter for mapping bounded hipparchus to unbounded ones.
     
     This adapter can be used to wrap functions subject to simple bounds on parameters so they can be used by optimizers that do not directly support simple bounds.
@@ -180,7 +180,8 @@ class MultivariateFunctionMappingAdapter(org.hipparchus.analysis.MultivariateFun
     
     This adapter is only a poor man solution to simple bounds optimization constraints that can be used with simple optimizers like SimplexOptimizer. A better solution is to use an optimizer that directly supports simple bounds like CMAESOptimizer or BOBYQAOptimizer. One caveat of this poor-man's solution is that behavior near the bounds may be numerically unstable as bounds are mapped from infinite values. Another caveat is that convergence values are evaluated by the optimizer with respect to unbounded variables, so there will be scales differences when converted to bounded variables.
     
-          - MultivariateFunctionPenaltyAdapter
+    Also see:
+        MultivariateFunctionPenaltyAdapter
     """
     def __init__(self, bounded: typing.Union[org.hipparchus.analysis.MultivariateFunction, typing.Callable], lower: typing.Union[typing.List[float], jpype.JArray], upper: typing.Union[typing.List[float], jpype.JArray]):
         """
@@ -239,8 +240,8 @@ class MultivariateFunctionMappingAdapter(org.hipparchus.analysis.MultivariateFun
         Returns:
             underlying function value
         
-              - unboundedToBounded
-        
+        Also see:
+            unboundedToBounded
         
         
         """
@@ -248,8 +249,6 @@ class MultivariateFunctionMappingAdapter(org.hipparchus.analysis.MultivariateFun
 
 class MultivariateFunctionPenaltyAdapter(org.hipparchus.analysis.MultivariateFunction):
     """
-    implements hipparchus
-    
     Adapter extending bounded hipparchus to an unbouded domain using a penalty function.
     
     This adapter can be used to wrap functions subject to simple bounds on parameters so they can be used by optimizers that do not directly support simple bounds.
@@ -258,7 +257,8 @@ class MultivariateFunctionPenaltyAdapter(org.hipparchus.analysis.MultivariateFun
     
     This adapter is only a poor-man's solution to simple bounds optimization constraints that can be used with simple optimizers like SimplexOptimizer. A better solution is to use an optimizer that directly supports simple bounds like CMAESOptimizer or BOBYQAOptimizer. One caveat of this poor-man's solution is that if start point or start simplex is completely outside of the allowed range, only the penalty function is used, and the optimizer may converge without ever entering the range.
     
-          - MultivariateFunctionMappingAdapter
+    Also see:
+        MultivariateFunctionMappingAdapter
     """
     def __init__(self, bounded: typing.Union[org.hipparchus.analysis.MultivariateFunction, typing.Callable], lower: typing.Union[typing.List[float], jpype.JArray], upper: typing.Union[typing.List[float], jpype.JArray], offset: float, scale: typing.Union[typing.List[float], jpype.JArray]):
         """
@@ -340,12 +340,10 @@ class MultivariateOptimizer(org.hipparchus.optim.BaseMultivariateOptimizer[org.h
     @typing.overload
     def optimize(self) -> typing.Any: ...
     @typing.overload
-    def optimize(self, *optimizationData: org.hipparchus.optim.OptimizationData) -> org.hipparchus.optim.PointValuePair: ...
+    def optimize(self, *optData: org.hipparchus.optim.OptimizationData) -> org.hipparchus.optim.PointValuePair: ...
 
 class ObjectiveFunction(org.hipparchus.optim.OptimizationData):
     """
-    implements OptimizationData
-    
     Scalar function to be optimized.
     """
     def __init__(self, f: typing.Union[org.hipparchus.analysis.MultivariateFunction, typing.Callable]):
@@ -371,8 +369,6 @@ class ObjectiveFunction(org.hipparchus.optim.OptimizationData):
 
 class ObjectiveFunctionGradient(org.hipparchus.optim.OptimizationData):
     """
-    implements OptimizationData
-    
     Gradient of the scalar function to be optimized.
     """
     def __init__(self, g: typing.Union[org.hipparchus.analysis.MultivariateVectorFunction, typing.Callable]):
@@ -403,7 +399,7 @@ class GradientMultivariateOptimizer(MultivariateOptimizer):
     @typing.overload
     def optimize(self) -> typing.Any: ...
     @typing.overload
-    def optimize(self, *optimizationData: org.hipparchus.optim.OptimizationData) -> org.hipparchus.optim.PointValuePair: ...
+    def optimize(self, *optData: org.hipparchus.optim.OptimizationData) -> org.hipparchus.optim.PointValuePair: ...
 
 
 class __module_protocol__(Protocol):

@@ -15,8 +15,6 @@ import typing
 
 class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
     """
-    implements CalculusFieldElement<Dfp>
-    
     Decimal floating point library for Java
     
     Another floating point class. This one is built using radix 10000 which is 10 :sup:`4` , so its almost decimal.
@@ -43,14 +41,15 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
     
     IEEE 854 defines that the implied radix point lies just to the right of the most significant digit and to the left of the remaining digits. This implementation puts the implied radix point to the left of all digits including the most significant one. The most significant digit here is the one just to the right of the radix point. This is a fine detail and is really only a matter of definition. Any side effects of this can be rendered invisible by a subclass.
     
-          - DfpField
+    Also see:
+        DfpField
     """
     RADIX: typing.ClassVar[int] = ...
     """
     The radix, or base of this system. Set to 10000
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -58,8 +57,8 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
     """
     The minimum exponent before underflow is signaled. Flush to zero occurs at minExp-DIGITS
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -67,8 +66,8 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
     """
     The maximum exponent before overflow is signaled and results flushed to infinity
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -76,8 +75,8 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
     """
     The amount under/overflows are scaled by before going to trap handler
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -85,8 +84,8 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
     """
     Indicator value for normal finite numbers.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -94,8 +93,8 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
     """
     Indicator value for Infinity.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -103,8 +102,8 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
     """
     Indicator value for signaling NaN.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -112,19 +111,19 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
     """
     Indicator value for quiet NaN.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
-    def __init__(self, dfp: 'Dfp'):
+    def __init__(self, field: 'Dfp'):
         """
         Makes an instance with a value of zero.
         
         Parameters:
             field (DfpField): field to which this instance belongs
         
-        protected Dfp(DfpField field, byte x)
+        protected Dfp (DfpField field, byte x)
         
         Create an instance from a byte value.
         
@@ -132,7 +131,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
             field (DfpField): field to which this instance belongs
             x (byte): value to convert to an instance
         
-        protected Dfp(DfpField field, int x)
+        protected Dfp (DfpField field, int x)
         
         Create an instance from an int value.
         
@@ -140,7 +139,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
             field (DfpField): field to which this instance belongs
             x (int): value to convert to an instance
         
-        protected Dfp(DfpField field, long x)
+        protected Dfp (DfpField field, long x)
         
         Create an instance from a long value.
         
@@ -148,7 +147,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
             field (DfpField): field to which this instance belongs
             x (long): value to convert to an instance
         
-        protected Dfp(DfpField field, double x)
+        protected Dfp (DfpField field, double x)
         
         Create an instance from a double value.
         
@@ -156,14 +155,14 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
             field (DfpField): field to which this instance belongs
             x (double): value to convert to an instance
         
-        public Dfp(Dfp d)
+        public Dfp (Dfp d)
         
         Copy constructor.
         
         Parameters:
             d (Dfp): instance to copy
         
-        protected Dfp(DfpField field, String s)
+        protected Dfp (DfpField field, String s)
         
         Create an instance from a String representation.
         
@@ -171,7 +170,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
             field (DfpField): field to which this instance belongs
             s (String): string representation of the instance
         
-        protected Dfp(DfpField field, byte sign, byte nans)
+        protected Dfp (DfpField field, byte sign, byte nans)
         
         Creates an instance with a non-finite value.
         
@@ -237,7 +236,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         """
         ...
     @typing.overload
-    def add(self, dfp: 'Dfp') -> 'Dfp': ...
+    def add(self, x: 'Dfp') -> 'Dfp': ...
     def asin(self) -> 'Dfp':
         """
         Arc sine operation.
@@ -329,7 +328,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         """
         ...
     @typing.overload
-    def copySign(self, double: float) -> 'Dfp':
+    def copySign(self, s: float) -> 'Dfp':
         """
         Returns the instance with the sign of the argument. A NaN sign argument is treated as positive.
         
@@ -355,7 +354,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         """
         ...
     @typing.overload
-    def copySign(self, dfp: 'Dfp') -> 'Dfp': ...
+    def copySign(self, s: 'Dfp') -> 'Dfp': ...
     @staticmethod
     def copysign(x: 'Dfp', y: 'Dfp') -> 'Dfp':
         """
@@ -396,7 +395,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         """
         ...
     @typing.overload
-    def divide(self, double: float) -> org.hipparchus.FieldElement:
+    def divide(self, divisor: float) -> org.hipparchus.FieldElement:
         """
         Divide this by divisor.
         
@@ -422,9 +421,9 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         """
         ...
     @typing.overload
-    def divide(self, int: int) -> 'Dfp': ...
+    def divide(self, divisor: int) -> 'Dfp': ...
     @typing.overload
-    def divide(self, dfp: 'Dfp') -> 'Dfp': ...
+    def divide(self, divisor: 'Dfp') -> 'Dfp': ...
     def dotrap(self, type: int, what: str, oper: 'Dfp', result: 'Dfp') -> 'Dfp':
         """
         Raises a trap. This does not set the corresponding flag however.
@@ -445,7 +444,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         """
         Check if instance is equal to x.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): object to check instance against
@@ -617,7 +616,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         """
         Gets a hashCode for the instance.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -713,7 +712,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, dfp: 'Dfp', double2: float, dfp2: 'Dfp') -> 'Dfp':
+    def linearCombination(self, a1: float, b1: 'Dfp', a2: float, b2: 'Dfp') -> 'Dfp':
         """
         Compute a linear combination.
         
@@ -728,8 +727,9 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -744,8 +744,9 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -762,8 +763,9 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -780,8 +782,9 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -800,8 +803,9 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-              - linearCombination
-              - linearCombination
+        Also see:
+            linearCombination,
+            linearCombination
         
         Compute a linear combination.
         
@@ -820,27 +824,27 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         Returns:
             a :sub:`1` ×b :sub:`1` + a :sub:`2` ×b :sub:`2` + a :sub:`3` ×b :sub:`3` + a :sub:`4` ×b :sub:`4`
         
-              - linearCombination
-              - linearCombination
-        
+        Also see:
+            linearCombination,
+            linearCombination
         
         
         """
         ...
     @typing.overload
-    def linearCombination(self, double: float, dfp: 'Dfp', double2: float, dfp2: 'Dfp', double3: float, dfp3: 'Dfp') -> 'Dfp': ...
+    def linearCombination(self, a1: float, b1: 'Dfp', a2: float, b2: 'Dfp', a3: float, b3: 'Dfp') -> 'Dfp': ...
     @typing.overload
-    def linearCombination(self, double: float, dfp: 'Dfp', double2: float, dfp2: 'Dfp', double3: float, dfp3: 'Dfp', double4: float, dfp4: 'Dfp') -> 'Dfp': ...
+    def linearCombination(self, a1: float, b1: 'Dfp', a2: float, b2: 'Dfp', a3: float, b3: 'Dfp', a4: float, b4: 'Dfp') -> 'Dfp': ...
     @typing.overload
-    def linearCombination(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], dfpArray: typing.Union[typing.List['Dfp'], jpype.JArray]) -> 'Dfp': ...
+    def linearCombination(self, a: typing.Union[typing.List[float], jpype.JArray], b: typing.Union[typing.List['Dfp'], jpype.JArray]) -> 'Dfp': ...
     @typing.overload
-    def linearCombination(self, dfp: 'Dfp', dfp2: 'Dfp', dfp3: 'Dfp', dfp4: 'Dfp') -> 'Dfp': ...
+    def linearCombination(self, a1: 'Dfp', b1: 'Dfp', a2: 'Dfp', b2: 'Dfp') -> 'Dfp': ...
     @typing.overload
-    def linearCombination(self, dfp: 'Dfp', dfp2: 'Dfp', dfp3: 'Dfp', dfp4: 'Dfp', dfp5: 'Dfp', dfp6: 'Dfp') -> 'Dfp': ...
+    def linearCombination(self, a1: 'Dfp', b1: 'Dfp', a2: 'Dfp', b2: 'Dfp', a3: 'Dfp', b3: 'Dfp') -> 'Dfp': ...
     @typing.overload
-    def linearCombination(self, dfp: 'Dfp', dfp2: 'Dfp', dfp3: 'Dfp', dfp4: 'Dfp', dfp5: 'Dfp', dfp6: 'Dfp', dfp7: 'Dfp', dfp8: 'Dfp') -> 'Dfp': ...
+    def linearCombination(self, a1: 'Dfp', b1: 'Dfp', a2: 'Dfp', b2: 'Dfp', a3: 'Dfp', b3: 'Dfp', a4: 'Dfp', b4: 'Dfp') -> 'Dfp': ...
     @typing.overload
-    def linearCombination(self, dfpArray: typing.Union[typing.List['Dfp'], jpype.JArray], dfpArray2: typing.Union[typing.List['Dfp'], jpype.JArray]) -> 'Dfp': ...
+    def linearCombination(self, a: typing.Union[typing.List['Dfp'], jpype.JArray], b: typing.Union[typing.List['Dfp'], jpype.JArray]) -> 'Dfp': ...
     def log(self) -> 'Dfp':
         """
         Natural logarithm.
@@ -888,7 +892,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         """
         ...
     @typing.overload
-    def multiply(self, double: float) -> org.hipparchus.FieldElement:
+    def multiply(self, x: float) -> org.hipparchus.FieldElement:
         """
         Multiply this by x.
         
@@ -916,9 +920,9 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         """
         ...
     @typing.overload
-    def multiply(self, int: int) -> 'Dfp': ...
+    def multiply(self, x: int) -> 'Dfp': ...
     @typing.overload
-    def multiply(self, dfp: 'Dfp') -> 'Dfp': ...
+    def multiply(self, x: 'Dfp') -> 'Dfp': ...
     def negate(self) -> 'Dfp':
         """
         Returns a number that is this number with the sign bit reversed.
@@ -952,7 +956,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         """
         ...
     @typing.overload
-    def newInstance(self, byte: int) -> 'Dfp':
+    def newInstance(self, x: int) -> 'Dfp':
         """
         Create an instance from a byte value.
         
@@ -1028,8 +1032,8 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         Since:
             1.7
         
-              - getExtendedField
-        
+        Also see:
+            getExtendedField
         
         
         """
@@ -1072,7 +1076,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         """
         ...
     @typing.overload
-    def pow(self, double: float) -> 'Dfp':
+    def pow(self, p: float) -> 'Dfp':
         """
         Power operation.
         
@@ -1150,7 +1154,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         """
         ...
     @typing.overload
-    def remainder(self, double: float) -> 'Dfp':
+    def remainder(self, d: float) -> 'Dfp':
         """
         Returns the IEEE remainder.
         
@@ -1330,7 +1334,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         """
         ...
     @typing.overload
-    def subtract(self, dfp: 'Dfp') -> 'Dfp': ...
+    def subtract(self, x: 'Dfp') -> 'Dfp': ...
     def tan(self) -> 'Dfp':
         """
         Tangent operation.
@@ -1374,8 +1378,8 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         Returns:
             a double approximating the instance
         
-              - toSplitDouble
-        
+        Also see:
+            toSplitDouble
         
         
         """
@@ -1399,8 +1403,8 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         Returns:
             an array of two doubles which sum represent the instance
         
-              - toDouble
-        
+        Also see:
+            toDouble
         
         
         """
@@ -1409,7 +1413,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
         """
         Get a string representation of the instance.
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Returns:
             string representation of the instance
@@ -1445,16 +1449,14 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
 
 class DfpField(org.hipparchus.Field[Dfp]):
     """
-    implements Field<Dfp>
-    
     Field for Decimal floating point instances.
     """
     FLAG_INVALID: typing.ClassVar[int] = ...
     """
     IEEE 854-1987 flag for invalid operation.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1462,8 +1464,8 @@ class DfpField(org.hipparchus.Field[Dfp]):
     """
     IEEE 854-1987 flag for division by zero.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1471,8 +1473,8 @@ class DfpField(org.hipparchus.Field[Dfp]):
     """
     IEEE 854-1987 flag for overflow.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1480,8 +1482,8 @@ class DfpField(org.hipparchus.Field[Dfp]):
     """
     IEEE 854-1987 flag for underflow.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1489,8 +1491,8 @@ class DfpField(org.hipparchus.Field[Dfp]):
     """
     IEEE 854-1987 flag for inexact result.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -1510,15 +1512,11 @@ class DfpField(org.hipparchus.Field[Dfp]):
         """
         Clears the IEEE 854 status flags.
         
-              - getIEEEFlags
-              - setIEEEFlags
-              - setIEEEFlagsBits
-              - FLAG_INVALID
-              - FLAG_DIV_ZERO
-              - FLAG_OVERFLOW
-              - FLAG_UNDERFLOW
-              - FLAG_INEXACT
-        
+        Also see:
+            getIEEEFlags, setIEEEFlags,
+            setIEEEFlagsBits, FLAG_INVALID,
+            FLAG_DIV_ZERO, FLAG_OVERFLOW,
+            FLAG_UNDERFLOW, FLAG_INEXACT
         
         
         """
@@ -1554,11 +1552,11 @@ class DfpField(org.hipparchus.Field[Dfp]):
         
         """
         ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, other: typing.Any) -> bool:
         """
         Two fields are considered equals if they have the same number of radix digits and the same rounding mode.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -1618,15 +1616,11 @@ class DfpField(org.hipparchus.Field[Dfp]):
         Returns:
             IEEE 854 status flags
         
-              - clearIEEEFlags
-              - setIEEEFlags
-              - setIEEEFlagsBits
-              - FLAG_INVALID
-              - FLAG_DIV_ZERO
-              - FLAG_OVERFLOW
-              - FLAG_UNDERFLOW
-              - FLAG_INEXACT
-        
+        Also see:
+            clearIEEEFlags, setIEEEFlags,
+            setIEEEFlagsBits, FLAG_INVALID,
+            FLAG_DIV_ZERO, FLAG_OVERFLOW,
+            FLAG_UNDERFLOW, FLAG_INEXACT
         
         
         """
@@ -1829,7 +1823,7 @@ class DfpField(org.hipparchus.Field[Dfp]):
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -1845,7 +1839,7 @@ class DfpField(org.hipparchus.Field[Dfp]):
         """
         ...
     @typing.overload
-    def newDfp(self, byte: int) -> Dfp:
+    def newDfp(self, x: int) -> Dfp:
         """
         Create an instance from a byte value.
         
@@ -1909,7 +1903,7 @@ class DfpField(org.hipparchus.Field[Dfp]):
         """
         ...
     @typing.overload
-    def newDfp(self, byte: int, byte2: int) -> Dfp: ...
+    def newDfp(self, sign: int, nans: int) -> Dfp: ...
     @typing.overload
     def newDfp(self, double: float) -> Dfp: ...
     @typing.overload
@@ -1927,15 +1921,11 @@ class DfpField(org.hipparchus.Field[Dfp]):
         Parameters:
             flags (int): desired value for the flags
         
-              - getIEEEFlags
-              - clearIEEEFlags
-              - setIEEEFlagsBits
-              - FLAG_INVALID
-              - FLAG_DIV_ZERO
-              - FLAG_OVERFLOW
-              - FLAG_UNDERFLOW
-              - FLAG_INEXACT
-        
+        Also see:
+            getIEEEFlags, clearIEEEFlags,
+            setIEEEFlagsBits, FLAG_INVALID,
+            FLAG_DIV_ZERO, FLAG_OVERFLOW,
+            FLAG_UNDERFLOW, FLAG_INEXACT
         
         
         """
@@ -1949,15 +1939,11 @@ class DfpField(org.hipparchus.Field[Dfp]):
         Parameters:
             bits (int): bits to set
         
-              - getIEEEFlags
-              - clearIEEEFlags
-              - setIEEEFlags
-              - FLAG_INVALID
-              - FLAG_DIV_ZERO
-              - FLAG_OVERFLOW
-              - FLAG_UNDERFLOW
-              - FLAG_INEXACT
-        
+        Also see:
+            getIEEEFlags, clearIEEEFlags,
+            setIEEEFlags, FLAG_INVALID,
+            FLAG_DIV_ZERO, FLAG_OVERFLOW,
+            FLAG_UNDERFLOW, FLAG_INEXACT
         
         
         """
@@ -2082,7 +2068,7 @@ class DfpMath:
         ...
     @typing.overload
     @staticmethod
-    def pow(dfp: Dfp, int: int) -> Dfp:
+    def pow(base: Dfp, a: int) -> Dfp:
         """
         Raises base to the power a by successive squaring.
         
@@ -2171,14 +2157,14 @@ class DfpDec(Dfp):
     """
     Subclass of Dfp which hides the radix-10000 artifacts of the superclass. This should give outward appearances of being a decimal number with DIGITS4-3 decimal digits. This class can be subclassed to appear to be an arbitrary number of decimal digits less than DIGITS4-3.
     """
-    def __init__(self, dfp: Dfp):
+    def __init__(self, factory: Dfp):
         """
         Makes an instance with a value of zero.
         
         Parameters:
             factory (DfpField): factory linked to this instance
         
-        protected DfpDec(DfpField factory, byte x)
+        protected DfpDec (DfpField factory, byte x)
         
         Create an instance from a byte value.
         
@@ -2186,7 +2172,7 @@ class DfpDec(Dfp):
             factory (DfpField): factory linked to this instance
             x (byte): value to convert to an instance
         
-        protected DfpDec(DfpField factory, int x)
+        protected DfpDec (DfpField factory, int x)
         
         Create an instance from an int value.
         
@@ -2194,7 +2180,7 @@ class DfpDec(Dfp):
             factory (DfpField): factory linked to this instance
             x (int): value to convert to an instance
         
-        protected DfpDec(DfpField factory, long x)
+        protected DfpDec (DfpField factory, long x)
         
         Create an instance from a long value.
         
@@ -2202,7 +2188,7 @@ class DfpDec(Dfp):
             factory (DfpField): factory linked to this instance
             x (long): value to convert to an instance
         
-        protected DfpDec(DfpField factory, double x)
+        protected DfpDec (DfpField factory, double x)
         
         Create an instance from a double value.
         
@@ -2210,14 +2196,14 @@ class DfpDec(Dfp):
             factory (DfpField): factory linked to this instance
             x (double): value to convert to an instance
         
-        public DfpDec(Dfp d)
+        public DfpDec (Dfp d)
         
         Copy constructor.
         
         Parameters:
             d (Dfp): instance to copy
         
-        protected DfpDec(DfpField factory, String s)
+        protected DfpDec (DfpField factory, String s)
         
         Create an instance from a String representation.
         
@@ -2225,7 +2211,7 @@ class DfpDec(Dfp):
             factory (DfpField): factory linked to this instance
             s (String): string representation of the instance
         
-        protected DfpDec(DfpField factory, byte sign, byte nans)
+        protected DfpDec (DfpField factory, byte sign, byte nans)
         
         Creates an instance with a non-finite value.
         
@@ -2269,7 +2255,7 @@ class DfpDec(Dfp):
         """
         ...
     @typing.overload
-    def newInstance(self, byte: int) -> Dfp:
+    def newInstance(self, x: int) -> Dfp:
         """
         Create an instance from a byte value.
         
@@ -2336,7 +2322,7 @@ class DfpDec(Dfp):
         """
         ...
     @typing.overload
-    def newInstance(self, byte: int, byte2: int) -> Dfp: ...
+    def newInstance(self, sign: int, nans: int) -> Dfp: ...
     @typing.overload
     def newInstance(self, double: float) -> Dfp: ...
     @typing.overload

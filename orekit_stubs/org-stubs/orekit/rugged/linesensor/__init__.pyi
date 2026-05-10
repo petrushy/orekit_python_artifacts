@@ -108,7 +108,7 @@ class LineSensor:
         """
         ...
     @typing.overload
-    def getLOS(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getLOS(self, date: org.orekit.time.AbsoluteDate, i: float) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
         Get the pixel normalized line-of-sight at some date.
         
@@ -135,11 +135,11 @@ class LineSensor:
         """
         ...
     @typing.overload
-    def getLOS(self, absoluteDate: org.orekit.time.AbsoluteDate, int: int) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def getLOS(self, date: org.orekit.time.AbsoluteDate, i: int) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     _getLOSDerivatives_0__T = typing.TypeVar('_getLOSDerivatives_0__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     _getLOSDerivatives_1__T = typing.TypeVar('_getLOSDerivatives_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def getLOSDerivatives(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, derivativeGenerator: org.orekit.rugged.utils.DerivativeGenerator[_getLOSDerivatives_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getLOSDerivatives_0__T]:
+    def getLOSDerivatives(self, date: org.orekit.time.AbsoluteDate, i: float, generator: org.orekit.rugged.utils.DerivativeGenerator[_getLOSDerivatives_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getLOSDerivatives_0__T]:
         """
         Get the pixel normalized line-of-sight at some date, and their derivatives with respect to estimated parameters.
         
@@ -168,7 +168,7 @@ class LineSensor:
         """
         ...
     @typing.overload
-    def getLOSDerivatives(self, absoluteDate: org.orekit.time.AbsoluteDate, int: int, derivativeGenerator: org.orekit.rugged.utils.DerivativeGenerator[_getLOSDerivatives_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getLOSDerivatives_1__T]: ...
+    def getLOSDerivatives(self, date: org.orekit.time.AbsoluteDate, i: int, generator: org.orekit.rugged.utils.DerivativeGenerator[_getLOSDerivatives_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getLOSDerivatives_1__T]: ...
     def getLine(self, date: org.orekit.time.AbsoluteDate) -> float:
         """
         Get the line number.
@@ -246,9 +246,9 @@ class SensorMeanPlaneCrossing:
     This class is used in the first stage of inverse location.
     """
     @typing.overload
-    def __init__(self, lineSensor: LineSensor, spacecraftToObservedBody: org.orekit.rugged.utils.SpacecraftToObservedBody, int: int, int2: int, boolean: bool, boolean2: bool, int3: int, double: float): ...
+    def __init__(self, sensor: LineSensor, scToBody: org.orekit.rugged.utils.SpacecraftToObservedBody, minLine: int, maxLine: int, lightTimeCorrection: bool, aberrationOfLightCorrection: bool, maxEval: int, accuracy: float): ...
     @typing.overload
-    def __init__(self, lineSensor: LineSensor, spacecraftToObservedBody: org.orekit.rugged.utils.SpacecraftToObservedBody, int: int, int2: int, boolean: bool, boolean2: bool, int3: int, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, stream: java.util.stream.Stream['SensorMeanPlaneCrossing.CrossingResult']): ...
+    def __init__(self, sensor: LineSensor, scToBody: org.orekit.rugged.utils.SpacecraftToObservedBody, minLine: int, maxLine: int, lightTimeCorrection: bool, aberrationOfLightCorrection: bool, maxEval: int, accuracy: float, meanPlaneNormal: org.hipparchus.geometry.euclidean.threed.Vector3D, cachedResults: java.util.stream.Stream['SensorMeanPlaneCrossing.CrossingResult']): ...
     def find(self, target: org.hipparchus.geometry.euclidean.threed.Vector3D) -> 'SensorMeanPlaneCrossing.CrossingResult':
         """
         Find mean plane crossing.

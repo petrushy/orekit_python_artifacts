@@ -654,7 +654,7 @@ class PythonAtmosphere(Atmosphere):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -773,7 +773,7 @@ class PythonDTM2000InputParameters(DTM2000InputParameters):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -929,7 +929,7 @@ class PythonJB2006InputParameters(JB2006InputParameters):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 class PythonJB2008InputParameters(JB2008InputParameters):
     def __init__(self): ...
@@ -1059,7 +1059,7 @@ class PythonNRLMSISE00InputParameters(NRLMSISE00InputParameters):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1229,9 +1229,9 @@ class DTM2000(AbstractSunInfluencedAtmosphere):
     All these data can be found on the gov
     """
     @typing.overload
-    def __init__(self, dTM2000InputParameters: DTM2000InputParameters, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], bodyShape: org.orekit.bodies.BodyShape): ...
+    def __init__(self, parameters: DTM2000InputParameters, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.BodyShape): ...
     @typing.overload
-    def __init__(self, dTM2000InputParameters: DTM2000InputParameters, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], bodyShape: org.orekit.bodies.BodyShape, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, parameters: DTM2000InputParameters, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.BodyShape, utc: org.orekit.time.TimeScale): ...
     _getDensity_2__T = typing.TypeVar('_getDensity_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getDensity_3__T = typing.TypeVar('_getDensity_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
@@ -1336,17 +1336,17 @@ class HarrisPriester(AbstractSunInfluencedAtmosphere):
     Springer 2005
     """
     @typing.overload
-    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
+    def __init__(self, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.OneAxisEllipsoid): ...
     @typing.overload
     def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float): ...
     @typing.overload
     def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], double2: float): ...
+    def __init__(self, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.OneAxisEllipsoid, tabAltRho: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], n: float): ...
     _getDensity_2__T = typing.TypeVar('_getDensity_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getDensity_3__T = typing.TypeVar('_getDensity_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getDensity(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D) -> float:
+    def getDensity(self, sunInEarth: org.hipparchus.geometry.euclidean.threed.Vector3D, posInEarth: org.hipparchus.geometry.euclidean.threed.Vector3D) -> float:
         """
         Get the local density.
         
@@ -1370,7 +1370,7 @@ class HarrisPriester(AbstractSunInfluencedAtmosphere):
         """
         ...
     @typing.overload
-    def getDensity(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame) -> float: ...
+    def getDensity(self, date: org.orekit.time.AbsoluteDate, position: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame) -> float: ...
     @typing.overload
     def getDensity(self, sunInEarth: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getDensity_2__T], posInEarth: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getDensity_2__T]) -> _getDensity_2__T:
         """
@@ -1531,7 +1531,7 @@ class NRLMSISE00(AbstractSunInfluencedAtmosphere):
     
     Dominik Brodowski implemented a C version of the NRLMSISE-00 model available at:
     
-    http://www.brodo.de/space/nrlmsise/index.html
+    https://www.brodo.de/space/nrlmsise/index.html
     
     Instances of this class are immutable.
     
@@ -1539,9 +1539,9 @@ class NRLMSISE00(AbstractSunInfluencedAtmosphere):
         8.1
     """
     @typing.overload
-    def __init__(self, nRLMSISE00InputParameters: NRLMSISE00InputParameters, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], bodyShape: org.orekit.bodies.BodyShape): ...
+    def __init__(self, parameters: NRLMSISE00InputParameters, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.BodyShape): ...
     @typing.overload
-    def __init__(self, nRLMSISE00InputParameters: NRLMSISE00InputParameters, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], bodyShape: org.orekit.bodies.BodyShape, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, parameters: NRLMSISE00InputParameters, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.BodyShape, ut: org.orekit.time.TimeScale): ...
     _getDensity_1__T = typing.TypeVar('_getDensity_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getDensity(self, date: org.orekit.time.AbsoluteDate, position: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame) -> float:
@@ -1604,7 +1604,7 @@ class NRLMSISE00(AbstractSunInfluencedAtmosphere):
         def getDensity(self, int: int) -> _NRLMSISE00__FieldOutput__T: ...
 
 class PythonAbstractSunInfluencedAtmosphere(AbstractSunInfluencedAtmosphere):
-    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable]):
+    def __init__(self, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable]):
         """
         Constructor.
         """
@@ -1718,7 +1718,7 @@ class PythonAbstractSunInfluencedAtmosphere(AbstractSunInfluencedAtmosphere):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1754,9 +1754,9 @@ class JB2006(AbstractJacchiaBowmanModel):
         13.1
     """
     @typing.overload
-    def __init__(self, jB2006InputParameters: JB2006InputParameters, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], bodyShape: org.orekit.bodies.BodyShape): ...
+    def __init__(self, parameters: JB2006InputParameters, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.BodyShape): ...
     @typing.overload
-    def __init__(self, jB2006InputParameters: JB2006InputParameters, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], bodyShape: org.orekit.bodies.BodyShape, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, parameters: JB2006InputParameters, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.BodyShape, utc: org.orekit.time.TimeScale): ...
 
 class JB2008(AbstractJacchiaBowmanModel):
     """
@@ -1791,9 +1791,9 @@ class JB2008(AbstractJacchiaBowmanModel):
     More information on these indices can be found on the ` official JB2008 website. <http://sol.spacenvironment.net/~JB2008/indices.html>`
     """
     @typing.overload
-    def __init__(self, jB2008InputParameters: JB2008InputParameters, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], bodyShape: org.orekit.bodies.BodyShape): ...
+    def __init__(self, parameters: JB2008InputParameters, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.BodyShape): ...
     @typing.overload
-    def __init__(self, jB2008InputParameters: JB2008InputParameters, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], bodyShape: org.orekit.bodies.BodyShape, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, parameters: JB2008InputParameters, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], earth: org.orekit.bodies.BodyShape, utc: org.orekit.time.TimeScale): ...
     _getDensity_2__T = typing.TypeVar('_getDensity_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getDensity_3__T = typing.TypeVar('_getDensity_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
@@ -1832,7 +1832,7 @@ class JB2008(AbstractJacchiaBowmanModel):
         """
         ...
     @typing.overload
-    def getDensity(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, double11: float, double12: float, double13: float, double14: float, double15: float) -> float: ...
+    def getDensity(self, dateMJD: float, sunRA: float, sunDecli: float, satLon: float, satLat: float, satAlt: float, f10: float, f10B: float, s10: float, s10B: float, xm10: float, xm10B: float, y10: float, y10B: float, dstdtc: float) -> float: ...
     @typing.overload
     def getDensity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getDensity_2__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getDensity_2__T], frame: org.orekit.frames.Frame) -> _getDensity_2__T:
         """
@@ -1870,7 +1870,7 @@ class JB2008(AbstractJacchiaBowmanModel):
         """
         ...
     @typing.overload
-    def getDensity(self, t: _getDensity_3__T, t2: _getDensity_3__T, t3: _getDensity_3__T, t4: _getDensity_3__T, t5: _getDensity_3__T, t6: _getDensity_3__T, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float) -> _getDensity_3__T: ...
+    def getDensity(self, dateMJD: _getDensity_3__T, sunRA: _getDensity_3__T, sunDecli: _getDensity_3__T, satLon: _getDensity_3__T, satLat: _getDensity_3__T, satAlt: _getDensity_3__T, f10: float, f10B: float, s10: float, s10B: float, xm10: float, xm10B: float, y10: float, y10B: float, dstdtc: float) -> _getDensity_3__T: ...
 
 
 class __module_protocol__(Protocol):

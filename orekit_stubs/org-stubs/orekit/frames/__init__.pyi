@@ -146,9 +146,9 @@ class EOPEntry(org.orekit.time.TimeStamped, java.io.Serializable):
         serialized
     """
     @typing.overload
-    def __init__(self, int: int, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, iTRFVersion: 'ITRFVersion', absoluteDate: org.orekit.time.AbsoluteDate): ...
+    def __init__(self, mjd: int, dt: float, lod: float, x: float, y: float, xRate: float, yRate: float, ddPsi: float, ddEps: float, dx: float, dy: float, itrfType: 'ITRFVersion', date: org.orekit.time.AbsoluteDate): ...
     @typing.overload
-    def __init__(self, int: int, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, iTRFVersion: 'ITRFVersion', absoluteDate: org.orekit.time.AbsoluteDate, eopDataType: 'EopDataType'): ...
+    def __init__(self, mjd: int, dt: float, lod: float, x: float, y: float, xRate: float, yRate: float, ddPsi: float, ddEps: float, dx: float, dy: float, itrfType: 'ITRFVersion', date: org.orekit.time.AbsoluteDate, eopDataType: 'EopDataType'): ...
     def getDate(self) -> org.orekit.time.AbsoluteDate:
         """
         Get the date.
@@ -201,7 +201,19 @@ class EOPEntry(org.orekit.time.TimeStamped, java.io.Serializable):
         
         """
         ...
-    def getEopDataType(self) -> 'EopDataType': ...
+    def getEopDataType(self) -> 'EopDataType':
+        """
+        Get the EOP data type.
+        
+        Returns:
+            EOP data type
+        
+        Since:
+            13.1.1
+        
+        
+        """
+        ...
     def getITRFType(self) -> 'ITRFVersion':
         """
         Get the ITRF version this entry defines.
@@ -426,7 +438,7 @@ class EOPHistory:
     
     
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, int: int, collection: typing.Union[java.util.Collection[EOPEntry], typing.Sequence[EOPEntry], typing.Set[EOPEntry]], boolean: bool, timeScales: org.orekit.time.TimeScales):
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, interpolationDegree: int, data: typing.Union[java.util.Collection[EOPEntry], typing.Sequence[EOPEntry], typing.Set[EOPEntry]], simpleEOP: bool, timeScales: org.orekit.time.TimeScales):
         """
         Simple constructor.
         
@@ -521,7 +533,22 @@ class EOPHistory:
         
         """
         ...
-    def getEopDataType(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'EopDataType': ...
+    def getEopDataType(self, date: org.orekit.time.AbsoluteDate) -> 'EopDataType':
+        """
+        Get the EOP data type.
+        
+        Parameters:
+            date (AbsoluteDate): date at which the value is desired
+        
+        Returns:
+            data type of the EOP covering the specified date
+        
+        Since:
+            13.1.1
+        
+        
+        """
+        ...
     _getEquinoxNutationCorrection_1__T = typing.TypeVar('_getEquinoxNutationCorrection_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getEquinoxNutationCorrection(self, date: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
@@ -1112,7 +1139,7 @@ class FieldStaticTransform(org.orekit.time.TimeStamped, typing.Generic[_FieldSta
     _of_3__T = typing.TypeVar('_of_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def of(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_of_0__T], fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[_of_0__T]) -> 'FieldStaticTransform'[_of_0__T]:
+    def of(date: org.orekit.time.FieldAbsoluteDate[_of_0__T], rotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[_of_0__T]) -> 'FieldStaticTransform'[_of_0__T]:
         """
         Parameters:
             date (FieldAbsoluteDate<T> date): of translation.
@@ -1178,17 +1205,17 @@ class FieldStaticTransform(org.orekit.time.TimeStamped, typing.Generic[_FieldSta
     @staticmethod
     def of(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_of_3__T], staticTransform: 'StaticTransform') -> 'FieldStaticTransform'[_of_3__T]: ...
     @typing.overload
-    def transformLine(self, fieldLine: org.hipparchus.geometry.euclidean.threed.FieldLine[_FieldStaticTransform__T]) -> org.hipparchus.geometry.euclidean.threed.FieldLine[_FieldStaticTransform__T]: ...
+    def transformLine(self, line: org.hipparchus.geometry.euclidean.threed.FieldLine[_FieldStaticTransform__T]) -> org.hipparchus.geometry.euclidean.threed.FieldLine[_FieldStaticTransform__T]: ...
     @typing.overload
     def transformLine(self, line: org.hipparchus.geometry.euclidean.threed.Line) -> org.hipparchus.geometry.euclidean.threed.FieldLine[_FieldStaticTransform__T]: ...
     @typing.overload
-    def transformPosition(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]: ...
+    def transformPosition(self, position: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]: ...
     @typing.overload
-    def transformPosition(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]: ...
+    def transformPosition(self, position: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]: ...
     @typing.overload
-    def transformVector(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]: ...
+    def transformVector(self, vector: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]: ...
     @typing.overload
-    def transformVector(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]: ...
+    def transformVector(self, vector: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]: ...
 
 _FieldTransformGenerator__T = typing.TypeVar('_FieldTransformGenerator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTransformGenerator(org.orekit.utils.TimeStampedGenerator['FieldTransform'[_FieldTransformGenerator__T]], typing.Generic[_FieldTransformGenerator__T]):
@@ -2150,7 +2177,7 @@ class OrphanFrame:
         """
         ...
     @typing.overload
-    def addChild(self, orphanFrame: 'OrphanFrame', transform: 'Transform', boolean: bool) -> None:
+    def addChild(self, child: 'OrphanFrame', transform: 'Transform', isPseudoInertial: bool) -> None:
         """
         Add a child.
         
@@ -2176,7 +2203,7 @@ class OrphanFrame:
     @typing.overload
     def addChild(self, orphanFrame: 'OrphanFrame', transformProvider: 'TransformProvider', boolean: bool) -> None: ...
     @typing.overload
-    def attachTo(self, frame: Frame, transform: 'Transform', boolean: bool) -> None:
+    def attachTo(self, parent: Frame, transform: 'Transform', isPseudoInertial: bool) -> None:
         """
         Parameters:
             parent (Frame): parent frame to attach to
@@ -2714,7 +2741,7 @@ class StaticTransform(org.orekit.time.TimeStamped):
         ...
     @typing.overload
     @staticmethod
-    def of(absoluteDate: org.orekit.time.AbsoluteDate, rotation: org.hipparchus.geometry.euclidean.threed.Rotation) -> 'StaticTransform':
+    def of(date: org.orekit.time.AbsoluteDate, rotation: org.hipparchus.geometry.euclidean.threed.Rotation) -> 'StaticTransform':
         """
         Parameters:
             date (AbsoluteDate): of translation.
@@ -2762,7 +2789,7 @@ class StaticTransform(org.orekit.time.TimeStamped):
     def of(absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> 'StaticTransform': ...
     @typing.overload
     @staticmethod
-    def of(absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, rotation: org.hipparchus.geometry.euclidean.threed.Rotation) -> 'StaticTransform': ...
+    def of(date: org.orekit.time.AbsoluteDate, translation: org.hipparchus.geometry.euclidean.threed.Vector3D, rotation: org.hipparchus.geometry.euclidean.threed.Rotation) -> 'StaticTransform': ...
     def transformLine(self, line: org.hipparchus.geometry.euclidean.threed.Line) -> org.hipparchus.geometry.euclidean.threed.Line:
         """
         Transform a line.
@@ -3125,9 +3152,9 @@ class EclipticProvider(TransformProvider):
         7.0
     """
     @typing.overload
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions): ...
+    def __init__(self, conventions: org.orekit.utils.IERSConventions): ...
     @typing.overload
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, timeScales: org.orekit.time.TimeScales): ...
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, timeScales: org.orekit.time.TimeScales): ...
     _getTransform_0__T = typing.TypeVar('_getTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getTransform(self, date: org.orekit.time.FieldAbsoluteDate[_getTransform_0__T]) -> 'FieldTransform'[_getTransform_0__T]:
@@ -3336,7 +3363,7 @@ class FieldKinematicTransform(FieldStaticTransform[_FieldKinematicTransform__T],
     _of_3__T = typing.TypeVar('_of_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def of(field: org.hipparchus.Field[_of_0__T], kinematicTransform: 'KinematicTransform') -> 'FieldKinematicTransform'[_of_0__T]:
+    def of(date: org.hipparchus.Field[_of_0__T], pvCoordinates: 'KinematicTransform') -> 'FieldKinematicTransform'[_of_0__T]:
         """
         Create a new kinematic transform from a translation and its rate.
         
@@ -3413,9 +3440,9 @@ class FieldKinematicTransform(FieldStaticTransform[_FieldKinematicTransform__T],
         """
         ...
     @typing.overload
-    def transformOnlyPV(self, fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_FieldKinematicTransform__T]) -> org.orekit.utils.FieldPVCoordinates[_FieldKinematicTransform__T]: ...
+    def transformOnlyPV(self, pv: org.orekit.utils.FieldPVCoordinates[_FieldKinematicTransform__T]) -> org.orekit.utils.FieldPVCoordinates[_FieldKinematicTransform__T]: ...
     @typing.overload
-    def transformOnlyPV(self, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldKinematicTransform__T]) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldKinematicTransform__T]: ...
+    def transformOnlyPV(self, pv: org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldKinematicTransform__T]) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldKinematicTransform__T]: ...
 
 class FixedTransformProvider(TransformProvider):
     """
@@ -3662,7 +3689,7 @@ class ITRFVersion(java.lang.Enum['ITRFVersion']):
     ITRF_1988: typing.ClassVar['ITRFVersion'] = ...
     @typing.overload
     @staticmethod
-    def getConverter(iTRFVersion: 'ITRFVersion', iTRFVersion2: 'ITRFVersion') -> 'ITRFVersion.Converter':
+    def getConverter(origin: 'ITRFVersion', destination: 'ITRFVersion') -> 'ITRFVersion.Converter':
         """
         Find a converter between specified ITRF frames.
         
@@ -3682,10 +3709,10 @@ class ITRFVersion(java.lang.Enum['ITRFVersion']):
         ...
     @typing.overload
     @staticmethod
-    def getConverter(iTRFVersion: 'ITRFVersion', iTRFVersion2: 'ITRFVersion', timeScale: org.orekit.time.TimeScale) -> 'ITRFVersion.Converter': ...
+    def getConverter(origin: 'ITRFVersion', destination: 'ITRFVersion', tt: org.orekit.time.TimeScale) -> 'ITRFVersion.Converter': ...
     @typing.overload
     @staticmethod
-    def getITRFVersion(int: int) -> 'ITRFVersion':
+    def getITRFVersion(year: int) -> 'ITRFVersion':
         """
         Find an ITRF version from its reference year.
         
@@ -3830,9 +3857,9 @@ class ITRFVersionLoader(ItrfVersionProvider):
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, string: str): ...
+    def __init__(self, supportedNames: str): ...
     @typing.overload
-    def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
+    def __init__(self, supportedNames: str, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
     def getConfiguration(self, name: str, mjd: int) -> 'ITRFVersionLoader.ITRFVersionConfiguration':
         """
         Description copied from interface: getConfiguration Get the ITRF version configuration defined by a given file at specified date.
@@ -4081,7 +4108,7 @@ class KinematicTransform(StaticTransform):
         ...
     @typing.overload
     @staticmethod
-    def of(absoluteDate: org.orekit.time.AbsoluteDate, rotation: org.hipparchus.geometry.euclidean.threed.Rotation, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> 'KinematicTransform':
+    def of(date: org.orekit.time.AbsoluteDate, rotation: org.hipparchus.geometry.euclidean.threed.Rotation, rotationRate: org.hipparchus.geometry.euclidean.threed.Vector3D) -> 'KinematicTransform':
         """
         Create a new kinematic transform from a rotation and zero, constant translation.
         
@@ -4138,9 +4165,9 @@ class KinematicTransform(StaticTransform):
         ...
     @typing.overload
     @staticmethod
-    def of(absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates, rotation: org.hipparchus.geometry.euclidean.threed.Rotation, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> 'KinematicTransform': ...
+    def of(date: org.orekit.time.AbsoluteDate, pvCoordinates: org.orekit.utils.PVCoordinates, rotation: org.hipparchus.geometry.euclidean.threed.Rotation, rotationRate: org.hipparchus.geometry.euclidean.threed.Vector3D) -> 'KinematicTransform': ...
     @typing.overload
-    def transformOnlyPV(self, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.orekit.utils.PVCoordinates:
+    def transformOnlyPV(self, pv: org.orekit.utils.PVCoordinates) -> org.orekit.utils.PVCoordinates:
         """
         Transform PVCoordinates, without the acceleration vector.
         
@@ -4164,7 +4191,7 @@ class KinematicTransform(StaticTransform):
         """
         ...
     @typing.overload
-    def transformOnlyPV(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates) -> org.orekit.utils.TimeStampedPVCoordinates: ...
+    def transformOnlyPV(self, pv: org.orekit.utils.TimeStampedPVCoordinates) -> org.orekit.utils.TimeStampedPVCoordinates: ...
 
 class L1Frame(Frame):
     """
@@ -4320,7 +4347,7 @@ class LOFType(java.lang.Enum['LOFType'], LOF):
     @typing.overload
     def rotationFromInertial(self, field: org.hipparchus.Field[_rotationFromInertial_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromInertial_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromInertial_0__T]: ...
     @typing.overload
-    def rotationFromInertial(self, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+    def rotationFromInertial(self, pv: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation:
         """
         Get the rotation from inertial frame to local orbital frame.
         
@@ -4348,7 +4375,7 @@ class LOFType(java.lang.Enum['LOFType'], LOF):
         """
         ...
     @typing.overload
-    def rotationFromInertial(self, field: org.hipparchus.Field[_rotationFromInertial_2__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_rotationFromInertial_2__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromInertial_2__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromInertial_2__T]:
+    def rotationFromInertial(self, field: org.hipparchus.Field[_rotationFromInertial_2__T], date: org.orekit.time.FieldAbsoluteDate[_rotationFromInertial_2__T], pv: org.orekit.utils.FieldPVCoordinates[_rotationFromInertial_2__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromInertial_2__T]:
         """
         Get the rotation from inertial frame to local orbital frame.
         
@@ -4387,7 +4414,7 @@ class LOFType(java.lang.Enum['LOFType'], LOF):
     @typing.overload
     def rotationFromLOF(self, field: org.hipparchus.Field[_rotationFromLOF_0__T], lOF: LOF, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_rotationFromLOF_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromLOF_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromLOF_0__T]: ...
     @typing.overload
-    def rotationFromLOF(self, lOF: LOF, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    def rotationFromLOF(self, field: LOF, fromLOF: org.orekit.time.AbsoluteDate, pv: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     @typing.overload
     def rotationFromLOF(self, field: org.hipparchus.Field[_rotationFromLOF_2__T], fromLOF: 'LOFType', pv: org.orekit.utils.FieldPVCoordinates[_rotationFromLOF_2__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromLOF_2__T]:
         """
@@ -4484,9 +4511,9 @@ class LocalMagneticFieldFrame(LOF):
     Attitude control thought the magnetic field is called Bdot as it follows the sinusoidal variation of the Earth magnetic field vector, along the orbit. Magnetorquers are used on board to align the instrument, as so the satellite, with the planet magnetic field, producing a sinusoidal torque along the orbit.
     """
     @typing.overload
-    def __init__(self, frame: Frame, geoMagneticField: org.orekit.models.earth.GeoMagneticField, frame2: Frame): ...
+    def __init__(self, inertialFrame: Frame, magneticField: org.orekit.models.earth.GeoMagneticField, bodyFrame: Frame): ...
     @typing.overload
-    def __init__(self, frame: Frame, geoMagneticField: org.orekit.models.earth.GeoMagneticField, lOFBuilderVector: 'LocalMagneticFieldFrame.LOFBuilderVector', frame2: Frame): ...
+    def __init__(self, inertialFrame: Frame, magneticField: org.orekit.models.earth.GeoMagneticField, lofBuilderVector: 'LocalMagneticFieldFrame.LOFBuilderVector', bodyFrame: Frame): ...
     def getInertialFrame(self) -> Frame:
         """
         Get interlai frame.
@@ -4674,7 +4701,7 @@ class PythonEOPHistoryLoader(EopHistoryLoader):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -4748,7 +4775,7 @@ class PythonFieldStaticTransform(FieldStaticTransform[_PythonFieldStaticTransfor
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 class PythonFrames(Frames):
     def __init__(self): ...
@@ -4832,7 +4859,7 @@ class PythonItrfVersionProvider(ItrfVersionProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -4865,7 +4892,7 @@ class PythonLOF(LOF):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
     _rotationFromInertial_0__T = typing.TypeVar('_rotationFromInertial_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def rotationFromInertial(self, field: org.hipparchus.Field[_rotationFromInertial_0__T], date: org.orekit.time.FieldAbsoluteDate[_rotationFromInertial_0__T], pv: org.orekit.utils.FieldPVCoordinates[_rotationFromInertial_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromInertial_0__T]:
@@ -4983,7 +5010,7 @@ class PythonStaticTransform(StaticTransform):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -5046,7 +5073,7 @@ class PythonTransformProvider(TransformProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -5627,7 +5654,24 @@ class TopocentricFrame(Frame, org.orekit.utils.ExtendedPositionProvider):
         
         """
         ...
-    def getVelocity(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def getVelocity(self, date: org.orekit.time.AbsoluteDate, frame: Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+        Get the velocity of the body in the selected frame.
+        
+        Specified by: getVelocity in interface ExtendedPositionProvider
+        
+        Specified by: getVelocity in interface PVCoordinatesProvider
+        
+        Parameters:
+            date (AbsoluteDate): current date
+            frame (Frame): the frame where to define the velocity
+        
+        Returns:
+            velocity of the body (m/s)
+        
+        
+        """
+        ...
     def getWest(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
         Get the west direction of topocentric frame, expressed in parent shape frame.
@@ -5706,9 +5750,9 @@ class UpdatableFrame(Frame):
     In order to implement the above case, the satellite frame is defined as an instance of this class and its updateTransform would be called each time we want to adjust the frame, i.e. each time we get a new measurement between the two antennas.
     """
     @typing.overload
-    def __init__(self, frame: Frame, transform: 'Transform', string: str): ...
+    def __init__(self, parent: Frame, transform: 'Transform', name: str): ...
     @typing.overload
-    def __init__(self, frame: Frame, transform: 'Transform', string: str, boolean: bool): ...
+    def __init__(self, parent: Frame, transform: 'Transform', name: str, pseudoInertial: bool): ...
     def updateTransform(self, f1: Frame, f2: Frame, f1Tof2: 'Transform', date: org.orekit.time.AbsoluteDate) -> None:
         """
         Update the transform from parent frame implicitly according to two other frames.
@@ -6051,19 +6095,19 @@ class FieldTransform(org.orekit.time.FieldTimeShiftable['FieldTransform'[_FieldT
     _interpolate_2__T = typing.TypeVar('_interpolate_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_0__T], collection: typing.Union[java.util.Collection['FieldTransform'[_interpolate_0__T]], typing.Sequence['FieldTransform'[_interpolate_0__T]], typing.Set['FieldTransform'[_interpolate_0__T]]]) -> 'FieldTransform'[_interpolate_0__T]: ...
+    def interpolate(interpolationDate: org.orekit.time.FieldAbsoluteDate[_interpolate_0__T], sample: typing.Union[java.util.Collection['FieldTransform'[_interpolate_0__T]], typing.Sequence['FieldTransform'[_interpolate_0__T]], typing.Set['FieldTransform'[_interpolate_0__T]]]) -> 'FieldTransform'[_interpolate_0__T]: ...
     @typing.overload
     @staticmethod
-    def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_1__T], cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, collection: typing.Union[java.util.Collection['FieldTransform'[_interpolate_1__T]], typing.Sequence['FieldTransform'[_interpolate_1__T]], typing.Set['FieldTransform'[_interpolate_1__T]]]) -> 'FieldTransform'[_interpolate_1__T]: ...
+    def interpolate(date: org.orekit.time.FieldAbsoluteDate[_interpolate_1__T], cFilter: org.orekit.utils.CartesianDerivativesFilter, aFilter: org.orekit.utils.AngularDerivativesFilter, sample: typing.Union[java.util.Collection['FieldTransform'[_interpolate_1__T]], typing.Sequence['FieldTransform'[_interpolate_1__T]], typing.Set['FieldTransform'[_interpolate_1__T]]]) -> 'FieldTransform'[_interpolate_1__T]: ...
     @typing.overload
     @staticmethod
-    def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_2__T], cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, stream: java.util.stream.Stream['FieldTransform'[_interpolate_2__T]]) -> 'FieldTransform'[_interpolate_2__T]: ...
+    def interpolate(date: org.orekit.time.FieldAbsoluteDate[_interpolate_2__T], cFilter: org.orekit.utils.CartesianDerivativesFilter, aFilter: org.orekit.utils.AngularDerivativesFilter, sample: java.util.stream.Stream['FieldTransform'[_interpolate_2__T]]) -> 'FieldTransform'[_interpolate_2__T]: ...
     @typing.overload
-    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> _FieldTransform__T: ...
+    def shiftedBy(self, dt: org.orekit.time.TimeOffset) -> _FieldTransform__T: ...
     @typing.overload
-    def shiftedBy(self, double: float) -> 'FieldTransform'[_FieldTransform__T]: ...
+    def shiftedBy(self, dt: float) -> 'FieldTransform'[_FieldTransform__T]: ...
     @typing.overload
-    def shiftedBy(self, t: _FieldTransform__T) -> 'FieldTransform'[_FieldTransform__T]: ...
+    def shiftedBy(self, dt: _FieldTransform__T) -> 'FieldTransform'[_FieldTransform__T]: ...
     def staticShiftedBy(self, dt: _FieldTransform__T) -> FieldStaticTransform[_FieldTransform__T]:
         """
         Shift the transform in time considering all rates, then return only the translation and rotation portion of the transform.
@@ -6096,13 +6140,13 @@ class FieldTransform(org.orekit.time.FieldTimeShiftable['FieldTransform'[_FieldT
         """
         ...
     @typing.overload
-    def transformPVCoordinates(self, fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_FieldTransform__T]) -> org.orekit.utils.FieldPVCoordinates[_FieldTransform__T]: ...
+    def transformPVCoordinates(self, pv: org.orekit.utils.FieldPVCoordinates[_FieldTransform__T]) -> org.orekit.utils.FieldPVCoordinates[_FieldTransform__T]: ...
     @typing.overload
-    def transformPVCoordinates(self, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.orekit.utils.FieldPVCoordinates[_FieldTransform__T]: ...
+    def transformPVCoordinates(self, pv: org.orekit.utils.PVCoordinates) -> org.orekit.utils.FieldPVCoordinates[_FieldTransform__T]: ...
     @typing.overload
-    def transformPVCoordinates(self, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldTransform__T]) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldTransform__T]: ...
+    def transformPVCoordinates(self, pv: org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldTransform__T]) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldTransform__T]: ...
     @typing.overload
-    def transformPVCoordinates(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldTransform__T]: ...
+    def transformPVCoordinates(self, pv: org.orekit.utils.TimeStampedPVCoordinates) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldTransform__T]: ...
 
 class GTODProvider(EOPBasedTransformProvider):
     """
@@ -6431,7 +6475,7 @@ class PythonAbstractFrames(AbstractFrames):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -6523,7 +6567,7 @@ class PythonEOPBasedTransformProvider(EOPBasedTransformProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -6641,7 +6685,7 @@ class PythonFieldKinematicTransform(FieldKinematicTransform[_PythonFieldKinemati
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -6758,7 +6802,7 @@ class PythonKinematicTransform(KinematicTransform):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -7033,12 +7077,12 @@ class Transform(org.orekit.time.TimeShiftable['Transform'], KinematicTransform):
         """
         ...
     @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream['Transform']) -> 'Transform': ...
+    def interpolate(self, interpolationDate: org.orekit.time.AbsoluteDate, sample: java.util.stream.Stream['Transform']) -> 'Transform': ...
     @typing.overload
     @staticmethod
-    def interpolate(absoluteDate: org.orekit.time.AbsoluteDate, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, collection: typing.Union[java.util.Collection['Transform'], typing.Sequence['Transform'], typing.Set['Transform']]) -> 'Transform': ...
+    def interpolate(date: org.orekit.time.AbsoluteDate, cFilter: org.orekit.utils.CartesianDerivativesFilter, aFilter: org.orekit.utils.AngularDerivativesFilter, sample: typing.Union[java.util.Collection['Transform'], typing.Sequence['Transform'], typing.Set['Transform']]) -> 'Transform': ...
     @typing.overload
-    def shiftedBy(self, double: float) -> 'Transform':
+    def shiftedBy(self, dt: float) -> 'Transform':
         """
         Get a time-shifted instance.
         
@@ -7064,7 +7108,7 @@ class Transform(org.orekit.time.TimeShiftable['Transform'], KinematicTransform):
         """
         ...
     @typing.overload
-    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> 'Transform': ...
+    def shiftedBy(self, dt: org.orekit.time.TimeOffset) -> 'Transform': ...
     def staticShiftedBy(self, dt: float) -> StaticTransform:
         """
         Shift the transform in time considering all rates, then return only the translation and rotation portion of the transform.
@@ -7099,7 +7143,7 @@ class Transform(org.orekit.time.TimeShiftable['Transform'], KinematicTransform):
     _transformPVCoordinates_0__T = typing.TypeVar('_transformPVCoordinates_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _transformPVCoordinates_2__T = typing.TypeVar('_transformPVCoordinates_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def transformPVCoordinates(self, fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_transformPVCoordinates_0__T]) -> org.orekit.utils.FieldPVCoordinates[_transformPVCoordinates_0__T]:
+    def transformPVCoordinates(self, pv: org.orekit.utils.FieldPVCoordinates[_transformPVCoordinates_0__T]) -> org.orekit.utils.FieldPVCoordinates[_transformPVCoordinates_0__T]:
         """
         Transform FieldPVCoordinates including kinematic effects.
         
@@ -7126,7 +7170,7 @@ class Transform(org.orekit.time.TimeShiftable['Transform'], KinematicTransform):
         """
         ...
     @typing.overload
-    def transformPVCoordinates(self, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.orekit.utils.PVCoordinates:
+    def transformPVCoordinates(self, pva: org.orekit.utils.PVCoordinates) -> org.orekit.utils.PVCoordinates:
         """
         Transform PVCoordinates including kinematic effects.
         
@@ -7209,7 +7253,7 @@ class PythonAbstractEopParser(org.orekit.frames.AbstractEopParser):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

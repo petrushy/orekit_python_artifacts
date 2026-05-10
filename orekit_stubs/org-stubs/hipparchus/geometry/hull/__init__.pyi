@@ -53,8 +53,9 @@ class ConvexHullGenerator(typing.Generic[_ConvexHullGenerator__S, _ConvexHullGen
     """
     Interface for convex hull generators.
     
-          - `Convex Hull (Wikipedia) <http://en.wikipedia.org/wiki/Convex_hull>`
-          - `Convex Hull (MathWorld) <http://mathworld.wolfram.com/ConvexHull.html>`
+    Also see:
+        `Convex Hull (Wikipedia) <http://en.wikipedia.org/wiki/Convex_hull>`, `Convex Hull (MathWorld)
+        <http://mathworld.wolfram.com/ConvexHull.html>`
     """
     def generate(self, points: typing.Union[java.util.Collection[_ConvexHullGenerator__P], typing.Sequence[_ConvexHullGenerator__P], typing.Set[_ConvexHullGenerator__P]]) -> ConvexHull[_ConvexHullGenerator__S, _ConvexHullGenerator__P, _ConvexHullGenerator__H, _ConvexHullGenerator__I]:
         """

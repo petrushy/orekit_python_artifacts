@@ -922,9 +922,9 @@ class FundamentalNutationArguments:
     @typing.overload
     def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, timeScale: org.orekit.time.TimeScale, inputStream: java.io.InputStream, string: str): ...
     @typing.overload
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, timeScale: org.orekit.time.TimeScale, inputStream: java.io.InputStream, string: str, timeScales: org.orekit.time.TimeScales): ...
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, timeScale: org.orekit.time.TimeScale, stream: java.io.InputStream, name: str, timeScales: org.orekit.time.TimeScales): ...
     @typing.overload
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, timeScale: org.orekit.time.TimeScale, list: java.util.List[typing.Union[typing.List[float], jpype.JArray]]): ...
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, timeScale: org.orekit.time.TimeScale, coefficients: java.util.List[typing.Union[typing.List[float], jpype.JArray]]): ...
     @typing.overload
     def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, timeScale: org.orekit.time.TimeScale, list: java.util.List[typing.Union[typing.List[float], jpype.JArray]], timeScales: org.orekit.time.TimeScales): ...
     _evaluateAll_1__T = typing.TypeVar('_evaluateAll_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -995,7 +995,7 @@ class LineOrientedFilteringReader(java.io.Reader):
     @typing.overload
     def read(self, charBuffer: java.nio.CharBuffer) -> int: ...
     @typing.overload
-    def read(self, charArray: typing.Union[typing.List[str], jpype.JArray], int: int, int2: int) -> int: ...
+    def read(self, b: typing.Union[typing.List[str], jpype.JArray], offset: int, len: int) -> int: ...
 
 class PoissonSeries:
     """
@@ -1795,9 +1795,9 @@ class ClasspathCrawler(DataProvider):
         DataProvidersManager
     """
     @typing.overload
-    def __init__(self, classLoader: java.lang.ClassLoader, *string: str): ...
+    def __init__(self, classLoader: java.lang.ClassLoader, *list: str): ...
     @typing.overload
-    def __init__(self, *string: str): ...
+    def __init__(self, *list: str): ...
     def feed(self, supported: java.util.regex.Pattern, visitor: DataLoader, manager: DataProvidersManager) -> bool:
         """
         Feed a data file loader by browsing the data collection.
@@ -2134,7 +2134,7 @@ class PythonAbstractSelfFeedingLoader(AbstractSelfFeedingLoader):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2225,7 +2225,7 @@ class PythonDataContext(DataContext):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2280,7 +2280,7 @@ class PythonDataFilter(DataFilter):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2328,7 +2328,7 @@ class PythonDataLoader(DataLoader):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2398,7 +2398,7 @@ class PythonDataProvider(DataProvider):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2461,7 +2461,7 @@ class PythonLineOrientedFilteringReader(LineOrientedFilteringReader):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2509,7 +2509,7 @@ class PythonReaderOpener(DataSource.ReaderOpener):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2596,7 +2596,7 @@ class PythonSeriesTerm(SeriesTerm):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2644,7 +2644,7 @@ class PythonStreamOpener(DataSource.StreamOpener):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2755,7 +2755,7 @@ class ZipJarCrawler(DataProvider):
     @typing.overload
     def __init__(self, file: typing.Union[java.io.File, jpype.protocol.SupportsPath]): ...
     @typing.overload
-    def __init__(self, classLoader: java.lang.ClassLoader, string: str): ...
+    def __init__(self, classLoader: java.lang.ClassLoader, resource: str): ...
     @typing.overload
     def __init__(self, string: str): ...
     @typing.overload
@@ -2958,7 +2958,7 @@ class NetworkCrawler(AbstractListCrawler[java.net.URL]):
 
 _PythonAbstractListCrawler__T = typing.TypeVar('_PythonAbstractListCrawler__T')  # <T>
 class PythonAbstractListCrawler(AbstractListCrawler[_PythonAbstractListCrawler__T], typing.Generic[_PythonAbstractListCrawler__T]):
-    def __init__(self, *t: _PythonAbstractListCrawler__T): ...
+    def __init__(self, *inputs: _PythonAbstractListCrawler__T): ...
     def finalize(self) -> None:
         """
         Part of JCC Python interface to object
@@ -3045,7 +3045,7 @@ class PythonAbstractListCrawler(AbstractListCrawler[_PythonAbstractListCrawler__
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

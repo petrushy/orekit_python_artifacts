@@ -122,16 +122,10 @@ class AemMetadata(org.orekit.files.ccsds.ndm.adm.AdmMetadata):
     Since:
         10.2
     """
-    def __init__(self, defaultInterpolationDegree: int):
-        """
-        Simple constructor.
-        
-        Parameters:
-            defaultInterpolationDegree (int): default interpolation degree
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self, defaultInterpolationDegree: int): ...
+    @typing.overload
+    def __init__(self, defaultInterpolationDegree: int, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def getAttitudeType(self) -> org.orekit.files.ccsds.ndm.adm.AttitudeType:
         """
         Get the format of the data lines in the message.
@@ -514,27 +508,10 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
     Since:
         10.2
     """
-    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate, defaultInterpolationDegree: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]):
-        """
-        Complete constructor.
-        
-        Calling this constructor directly is not recommended. Users should rather use buildAemParser.
-        
-        Parameters:
-            conventions (IERSConventions): IERS Conventions
-            simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
-            dataContext (DataContext): used to retrieve frames, time scales, etc.
-            missionReferenceDate (AbsoluteDate): reference date for Mission Elapsed Time or Mission Relative Time time systems (may be null if time system is absolute)
-            defaultInterpolationDegree (int): default interpolation degree
-            parsedUnitsBehavior (ParsedUnitsBehavior): behavior to adopt for handling parsed units
-            filters (Function<ParseToken, List<ParseToken>>[]): filters to apply to parse tokens
-        
-        Since:
-            12.0
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate, defaultInterpolationDegree: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
+    @typing.overload
+    def __init__(self, conventions: org.orekit.utils.IERSConventions, simpleEOP: bool, dataContext: org.orekit.data.DataContext, missionReferenceDate: org.orekit.time.AbsoluteDate, defaultInterpolationDegree: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, filters: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray], frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def build(self) -> Aem:
         """
         Build the file from parsed entries.
@@ -1054,17 +1031,17 @@ class AttitudeWriter(org.orekit.files.general.AttitudeEphemerisFileWriter):
         11.0
     """
     @typing.overload
-    def __init__(self, aemWriter: AemWriter, admHeader: org.orekit.files.ccsds.ndm.adm.AdmHeader, aemMetadata: AemMetadata, fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, double: float, int: int): ...
+    def __init__(self, writer: AemWriter, header: org.orekit.files.ccsds.ndm.adm.AdmHeader, template: AemMetadata, fileFormat: org.orekit.files.ccsds.utils.FileFormat, outputName: str, maxRelativeOffset: float, unitsColumn: int): ...
     @typing.overload
-    def __init__(self, aemWriter: AemWriter, admHeader: org.orekit.files.ccsds.ndm.adm.AdmHeader, aemMetadata: AemMetadata, fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, double: float, int: int, formatter: org.orekit.utils.Formatter): ...
+    def __init__(self, writer: AemWriter, header: org.orekit.files.ccsds.ndm.adm.AdmHeader, template: AemMetadata, fileFormat: org.orekit.files.ccsds.utils.FileFormat, outputName: str, maxRelativeOffset: float, unitsColumn: int, formatter: org.orekit.utils.Formatter): ...
     _write_0__C = typing.TypeVar('_write_0__C', bound=org.orekit.utils.TimeStampedAngularCoordinates)  # <C>
     _write_0__S = typing.TypeVar('_write_0__S', bound=org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment)  # <S>
     _write_1__C = typing.TypeVar('_write_1__C', bound=org.orekit.utils.TimeStampedAngularCoordinates)  # <C>
     _write_1__S = typing.TypeVar('_write_1__S', bound=org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment)  # <S>
     @typing.overload
-    def write(self, string: str, attitudeEphemerisFile: typing.Union[org.orekit.files.general.AttitudeEphemerisFile[_write_0__C, _write_0__S], typing.Callable[[], java.util.Map[str, org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris[org.orekit.utils.TimeStampedAngularCoordinates, org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment]]]]) -> None: ...
+    def write(self, appendable: str, ephemerisFile: typing.Union[org.orekit.files.general.AttitudeEphemerisFile[_write_0__C, _write_0__S], typing.Callable[[], java.util.Map[str, org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris[org.orekit.utils.TimeStampedAngularCoordinates, org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment]]]]) -> None: ...
     @typing.overload
-    def write(self, appendable: java.lang.Appendable, attitudeEphemerisFile: typing.Union[org.orekit.files.general.AttitudeEphemerisFile[_write_1__C, _write_1__S], typing.Callable[[], java.util.Map[str, org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris[org.orekit.utils.TimeStampedAngularCoordinates, org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment]]]]) -> None: ...
+    def write(self, appendable: java.lang.Appendable, ephemerisFile: typing.Union[org.orekit.files.general.AttitudeEphemerisFile[_write_1__C, _write_1__S], typing.Callable[[], java.util.Map[str, org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris[org.orekit.utils.TimeStampedAngularCoordinates, org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment]]]]) -> None: ...
 
 class StreamingAemWriter(java.lang.AutoCloseable):
     """

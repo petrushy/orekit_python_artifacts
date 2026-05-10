@@ -20,7 +20,7 @@ class FieldOrekitFixedStepHandler(typing.Generic[_FieldOrekitFixedStepHandler__T
     """
     This interface is a space-dynamics aware fixed size step handler.
     
-    It mirrors the FixedStepHandler interface from `commons-math <http://commons.apache.org/math/>` but provides a space-dynamics interface to the methods.
+    It mirrors the FixedStepHandler interface from commons but provides a space-dynamics interface to the methods.
     """
     def finish(self, finalState: org.orekit.propagation.FieldSpacecraftState[_FieldOrekitFixedStepHandler__T]) -> None:
         """
@@ -65,7 +65,7 @@ class FieldOrekitStepHandler(typing.Generic[_FieldOrekitStepHandler__T]):
     """
     This interface is a space-dynamics aware step handler.
     
-    It mirrors the StepHandler interface from ` commons-math <http://commons.apache.org/math/>` but provides a space-dynamics interface to the methods.
+    It mirrors the StepHandler interface from commons but provides a space-dynamics interface to the methods.
     """
     def finish(self, finalState: org.orekit.propagation.FieldSpacecraftState[_FieldOrekitStepHandler__T]) -> None:
         """
@@ -109,7 +109,7 @@ class FieldOrekitStepInterpolator(org.orekit.utils.FieldPVCoordinatesProvider[_F
     """
     This interface is a space-dynamics aware step interpolator.
     
-    It mirrors the StepInterpolator interface from ` commons-math <http://commons.apache.org/math/>` but provides a space-dynamics interface to the methods.
+    It mirrors the StepInterpolator interface from commons but provides a space-dynamics interface to the methods.
     """
     def getCurrentState(self) -> org.orekit.propagation.FieldSpacecraftState[_FieldOrekitStepInterpolator__T]:
         """
@@ -517,7 +517,7 @@ class FieldOrekitStepNormalizer(FieldOrekitStepHandler[_FieldOrekitStepNormalize
     """
     This class wraps an object implementing OrekitFixedStepHandler into a OrekitStepHandler.
     
-    It mirrors the StepNormalizer interface from `commons-math <http://commons.apache.org/math/>` but provides a space-dynamics interface to the methods.
+    It mirrors the StepNormalizer interface from commons but provides a space-dynamics interface to the methods.
     """
     def __init__(self, h: _FieldOrekitStepNormalizer__T, handler: typing.Union[FieldOrekitFixedStepHandler[_FieldOrekitStepNormalizer__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement]], None]]):
         """
@@ -620,7 +620,7 @@ class FieldPropagationStepRecorder(FieldOrekitStepHandler[_FieldPropagationStepR
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, boolean: bool): ...
+    def __init__(self, resetAutomatically: bool): ...
     def copyStates(self) -> java.util.List[org.orekit.propagation.FieldSpacecraftState[_FieldPropagationStepRecorder__T]]:
         """
         Copy the current saved steps.
@@ -696,9 +696,9 @@ class FieldStepHandlerMultiplexer(FieldOrekitStepHandler[_FieldStepHandlerMultip
         """
         ...
     @typing.overload
-    def add(self, t: _FieldStepHandlerMultiplexer__T, fieldOrekitFixedStepHandler: typing.Union[FieldOrekitFixedStepHandler[_FieldStepHandlerMultiplexer__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement]], None]]) -> None: ...
+    def add(self, h: _FieldStepHandlerMultiplexer__T, handler: typing.Union[FieldOrekitFixedStepHandler[_FieldStepHandlerMultiplexer__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement]], None]]) -> None: ...
     @typing.overload
-    def add(self, fieldOrekitStepHandler: typing.Union[FieldOrekitStepHandler[_FieldStepHandlerMultiplexer__T], typing.Callable[[FieldOrekitStepInterpolator[org.hipparchus.CalculusFieldElement]], None]]) -> None: ...
+    def add(self, handler: typing.Union[FieldOrekitStepHandler[_FieldStepHandlerMultiplexer__T], typing.Callable[[FieldOrekitStepInterpolator[org.hipparchus.CalculusFieldElement]], None]]) -> None: ...
     def clear(self) -> None:
         """
         Remove all handlers managed by this multiplexer.
@@ -766,9 +766,9 @@ class FieldStepHandlerMultiplexer(FieldOrekitStepHandler[_FieldStepHandlerMultip
         """
         ...
     @typing.overload
-    def remove(self, fieldOrekitFixedStepHandler: typing.Union[FieldOrekitFixedStepHandler[_FieldStepHandlerMultiplexer__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement]], None]]) -> None: ...
+    def remove(self, handler: typing.Union[FieldOrekitFixedStepHandler[_FieldStepHandlerMultiplexer__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement]], None]]) -> None: ...
     @typing.overload
-    def remove(self, fieldOrekitStepHandler: typing.Union[FieldOrekitStepHandler[_FieldStepHandlerMultiplexer__T], typing.Callable[[FieldOrekitStepInterpolator[org.hipparchus.CalculusFieldElement]], None]]) -> None: ...
+    def remove(self, handler: typing.Union[FieldOrekitStepHandler[_FieldStepHandlerMultiplexer__T], typing.Callable[[FieldOrekitStepInterpolator[org.hipparchus.CalculusFieldElement]], None]]) -> None: ...
 
 class MultisatStepNormalizer(MultiSatStepHandler):
     """
@@ -956,7 +956,7 @@ class PropagationStepRecorder(OrekitStepHandler):
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, boolean: bool): ...
+    def __init__(self, resetAutomatically: bool): ...
     def copyStates(self) -> java.util.List[org.orekit.propagation.SpacecraftState]:
         """
         Copy the current saved steps.
@@ -1089,7 +1089,7 @@ class PythonFieldOrekitFixedStepHandler(FieldOrekitFixedStepHandler[_PythonField
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1185,7 +1185,7 @@ class PythonFieldOrekitStepInterpolator(FieldOrekitStepInterpolator[_PythonField
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1278,7 +1278,7 @@ class PythonMultiSatFixedStepHandler(MultiSatFixedStepHandler):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 class PythonMultiSatStepHandler(MultiSatStepHandler):
     def __init__(self): ...
@@ -1355,7 +1355,7 @@ class PythonMultiSatStepHandler(MultiSatStepHandler):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1421,7 +1421,7 @@ class PythonOrekitFixedStepHandler(OrekitFixedStepHandler):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 class PythonOrekitStepHandler(OrekitStepHandler):
     def __init__(self): ...
@@ -1492,7 +1492,7 @@ class PythonOrekitStepHandler(OrekitStepHandler):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1604,7 +1604,7 @@ class PythonOrekitStepInterpolator(OrekitStepInterpolator):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1742,7 +1742,7 @@ class StepHandlerMultiplexer(OrekitStepHandler):
         """
         ...
     @typing.overload
-    def remove(self, orekitFixedStepHandler: typing.Union[OrekitFixedStepHandler, typing.Callable]) -> None:
+    def remove(self, handler: typing.Union[OrekitFixedStepHandler, typing.Callable]) -> None:
         """
         Remove a handler.
         
@@ -1768,7 +1768,7 @@ class StepHandlerMultiplexer(OrekitStepHandler):
         """
         ...
     @typing.overload
-    def remove(self, orekitStepHandler: typing.Union[OrekitStepHandler, typing.Callable]) -> None: ...
+    def remove(self, handler: typing.Union[OrekitStepHandler, typing.Callable]) -> None: ...
 
 
 class __module_protocol__(Protocol):

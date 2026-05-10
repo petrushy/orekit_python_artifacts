@@ -15,8 +15,6 @@ import typing
 
 class ADMMQPConvergenceChecker(org.hipparchus.optim.ConvergenceChecker['LagrangeSolution'], org.hipparchus.optim.OptimizationData):
     """
-    implements ConvergenceChecker<LagrangeSolution>, OptimizationData
-    
     Convergence Checker for ADMM QP Optimizer.
     
     Since:
@@ -228,8 +226,6 @@ class ADMMQPModifiedRuizEquilibrium:
 
 class ADMMQPOption(org.hipparchus.optim.OptimizationData):
     """
-    implements OptimizationData
-    
     Container for ADMMQPOptimizer settings.
     
     Since:
@@ -239,8 +235,8 @@ class ADMMQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default Absolute and Relative Tolerance for convergence.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -248,8 +244,8 @@ class ADMMQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default Absolute and Relative Tolerance for Infeasible Criteria.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -257,8 +253,8 @@ class ADMMQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default Value of regularization term sigma for Karush–Kuhn–Tucker solver.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -266,8 +262,8 @@ class ADMMQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default Value of Alpha filter for ADMM iteration.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -275,8 +271,8 @@ class ADMMQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default Value for Enabling Problem Scaling.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -284,8 +280,8 @@ class ADMMQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default Value for the Max Iteration for the scaling.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -293,8 +289,8 @@ class ADMMQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default Value for adapting the weight during iterations.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -302,8 +298,8 @@ class ADMMQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default Max Value for the Weight for ADMM iteration.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -311,8 +307,8 @@ class ADMMQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default Min Value for the Weight for ADMM iteration.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -320,8 +316,8 @@ class ADMMQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default Max number of weight changes.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -329,8 +325,8 @@ class ADMMQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default Value for enabling polishing the solution.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -338,8 +334,8 @@ class ADMMQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default Value for Iteration of polishing Algorithm.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -604,7 +600,7 @@ class ConstraintOptimizer(org.hipparchus.optim.BaseMultivariateOptimizer['Lagran
     @typing.overload
     def optimize(self) -> typing.Any: ...
     @typing.overload
-    def optimize(self, *optimizationData: org.hipparchus.optim.OptimizationData) -> 'LagrangeSolution': ...
+    def optimize(self, *optData: org.hipparchus.optim.OptimizationData) -> 'LagrangeSolution': ...
 
 _KarushKuhnTuckerSolver__T = typing.TypeVar('_KarushKuhnTuckerSolver__T')  # <T>
 class KarushKuhnTuckerSolver(org.hipparchus.optim.OptimizationData, typing.Generic[_KarushKuhnTuckerSolver__T]):
@@ -696,8 +692,6 @@ class LagrangeSolution:
 
 class SQPOption(org.hipparchus.optim.OptimizationData):
     """
-    implements OptimizationData
-    
     Parameter for SQP Algorithm.
     
     Since:
@@ -707,8 +701,8 @@ class SQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default convergence criteria.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -716,8 +710,8 @@ class SQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default tolerance for convergence and active constraint.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -725,8 +719,8 @@ class SQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default weight for augmented QP subproblem.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -734,8 +728,8 @@ class SQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default max value admitted for additional variable in QP subproblem.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -743,8 +737,8 @@ class SQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default max iteration admitted for QP subproblem.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -752,8 +746,8 @@ class SQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default parameter for evaluation of Armijo condition for descend direction.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -761,8 +755,8 @@ class SQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default parameter for quadratic line search.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -770,8 +764,8 @@ class SQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default flag for using BFGS update formula.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -779,8 +773,8 @@ class SQPOption(org.hipparchus.optim.OptimizationData):
     """
     Default max iteration before reset hessian.
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -974,8 +968,6 @@ class SQPOption(org.hipparchus.optim.OptimizationData):
 
 class TwiceDifferentiableFunction(org.hipparchus.analysis.MultivariateFunction):
     """
-    implements hipparchus
-    
     A MultivariateFunction that also has a defined gradient and Hessian.
     
     Since:
@@ -993,7 +985,7 @@ class TwiceDifferentiableFunction(org.hipparchus.analysis.MultivariateFunction):
         """
         ...
     @typing.overload
-    def gradient(self, realVector: org.hipparchus.linear.RealVector) -> org.hipparchus.linear.RealVector:
+    def gradient(self, x: org.hipparchus.linear.RealVector) -> org.hipparchus.linear.RealVector:
         """
         Parameters:
             x (hipparchus): a point to evaluate this gradient at
@@ -1013,9 +1005,9 @@ class TwiceDifferentiableFunction(org.hipparchus.analysis.MultivariateFunction):
         """
         ...
     @typing.overload
-    def gradient(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.linear.RealVector: ...
+    def gradient(self, x: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.linear.RealVector: ...
     @typing.overload
-    def hessian(self, realVector: org.hipparchus.linear.RealVector) -> org.hipparchus.linear.RealMatrix:
+    def hessian(self, x: org.hipparchus.linear.RealVector) -> org.hipparchus.linear.RealMatrix:
         """
         Parameters:
             x (hipparchus): a point to evaluate this Hessian at
@@ -1035,9 +1027,9 @@ class TwiceDifferentiableFunction(org.hipparchus.analysis.MultivariateFunction):
         """
         ...
     @typing.overload
-    def hessian(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.linear.RealMatrix: ...
+    def hessian(self, x: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.linear.RealMatrix: ...
     @typing.overload
-    def value(self, realVector: org.hipparchus.linear.RealVector) -> float:
+    def value(self, x: org.hipparchus.linear.RealVector) -> float:
         """
         Parameters:
             x (hipparchus): a point to evaluate this function at.
@@ -1059,7 +1051,7 @@ class TwiceDifferentiableFunction(org.hipparchus.analysis.MultivariateFunction):
         """
         ...
     @typing.overload
-    def value(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def value(self, x: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
 
 class VectorDifferentiableFunction(org.hipparchus.analysis.MultivariateVectorFunction):
     """
@@ -1115,7 +1107,7 @@ class VectorDifferentiableFunction(org.hipparchus.analysis.MultivariateVectorFun
         """
         ...
     @typing.overload
-    def value(self, realVector: org.hipparchus.linear.RealVector) -> org.hipparchus.linear.RealVector:
+    def value(self, x: org.hipparchus.linear.RealVector) -> org.hipparchus.linear.RealVector:
         """
         Parameters:
             x (hipparchus): a point to evaluate this function at.
@@ -1137,12 +1129,10 @@ class VectorDifferentiableFunction(org.hipparchus.analysis.MultivariateVectorFun
         """
         ...
     @typing.overload
-    def value(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
+    def value(self, x: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]: ...
 
 class ADMMQPKKT(KarushKuhnTuckerSolver['ADMMQPSolution']):
     """
-    implements KarushKuhnTuckerSolver<ADMMQPSolution>
-    
     Alternative Direction Method of Multipliers Solver.
     
     Since:
@@ -1218,13 +1208,13 @@ class ADMMQPSolution(LagrangeSolution):
         3.1
     """
     @typing.overload
-    def __init__(self, realVector: org.hipparchus.linear.RealVector, realVector2: org.hipparchus.linear.RealVector): ...
+    def __init__(self, x: org.hipparchus.linear.RealVector, v: org.hipparchus.linear.RealVector): ...
     @typing.overload
-    def __init__(self, realVector: org.hipparchus.linear.RealVector, realVector2: org.hipparchus.linear.RealVector, double: float): ...
+    def __init__(self, x: org.hipparchus.linear.RealVector, lambda_: org.hipparchus.linear.RealVector, value: float): ...
     @typing.overload
-    def __init__(self, realVector: org.hipparchus.linear.RealVector, realVector2: org.hipparchus.linear.RealVector, realVector3: org.hipparchus.linear.RealVector, realVector4: org.hipparchus.linear.RealVector): ...
+    def __init__(self, x: org.hipparchus.linear.RealVector, v: org.hipparchus.linear.RealVector, y: org.hipparchus.linear.RealVector, z: org.hipparchus.linear.RealVector): ...
     @typing.overload
-    def __init__(self, realVector: org.hipparchus.linear.RealVector, realVector2: org.hipparchus.linear.RealVector, realVector3: org.hipparchus.linear.RealVector, realVector4: org.hipparchus.linear.RealVector, double: float): ...
+    def __init__(self, x: org.hipparchus.linear.RealVector, v: org.hipparchus.linear.RealVector, y: org.hipparchus.linear.RealVector, z: org.hipparchus.linear.RealVector, value: float): ...
     def getV(self) -> org.hipparchus.linear.RealVector:
         """
         Returns V tilde auxiliary Variable
@@ -1443,7 +1433,7 @@ class QuadraticFunction(TwiceDifferentiableFunction):
         """
         ...
     @typing.overload
-    def gradient(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.linear.RealVector: ...
+    def gradient(self, x: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.linear.RealVector: ...
     @typing.overload
     def hessian(self, x: org.hipparchus.linear.RealVector) -> org.hipparchus.linear.RealMatrix:
         """
@@ -1459,7 +1449,7 @@ class QuadraticFunction(TwiceDifferentiableFunction):
         """
         ...
     @typing.overload
-    def hessian(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.linear.RealMatrix: ...
+    def hessian(self, x: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.linear.RealMatrix: ...
     @typing.overload
     def value(self, x: org.hipparchus.linear.RealVector) -> float:
         """
@@ -1475,7 +1465,7 @@ class QuadraticFunction(TwiceDifferentiableFunction):
         """
         ...
     @typing.overload
-    def value(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
+    def value(self, x: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
 
 class ADMMQPOptimizer(QPOptimizer):
     """
@@ -1557,8 +1547,6 @@ class ADMMQPOptimizer(QPOptimizer):
 
 class BoundedConstraint(Constraint):
     """
-    implements Constraint
-    
     Constraint with lower and upper bounds: \(l \le f(x) \le u\).
     
     Since:
@@ -1619,12 +1607,62 @@ class BoundedConstraint(Constraint):
         ...
 
 class SQPOptimizerGM(AbstractSQPOptimizer):
+    """
+    Sequential Quadratic Programming Optimizer.
+    
+    min f(x)
+    
+    q(x)=b1
+    
+    h(x)>=b2
+    
+    Algorithm based on paper:"Some Theoretical properties of an augmented lagrangian merit function (Gill,Murray,Sauders,Wriht,April 1986)"
+    
+    Since:
+        3.1
+    """
     def __init__(self): ...
-    def doOptimize(self) -> LagrangeSolution: ...
+    def doOptimize(self) -> LagrangeSolution:
+        """
+        Performs the bulk of the optimization algorithm.
+        
+        Specified by: doOptimize in class BaseOptimizer
+        
+        Returns:
+            the point/value pair giving the optimal value of the objective function.
+        
+        
+        """
+        ...
 
 class SQPOptimizerS(AbstractSQPOptimizer):
+    """
+    Sequential Quadratic Programming Optimizer.
+    
+    min f(x)
+    
+    q(x)=b1
+    
+    h(x)>=b2
+    
+    Algorithm based on paper:"On the convergence of a sequential quadratic programming method(Klaus Shittkowki,January 1982)"
+    
+    Since:
+        3.1
+    """
     def __init__(self): ...
-    def doOptimize(self) -> LagrangeSolution: ...
+    def doOptimize(self) -> LagrangeSolution:
+        """
+        Performs the bulk of the optimization algorithm.
+        
+        Specified by: doOptimize in class BaseOptimizer
+        
+        Returns:
+            the point/value pair giving the optimal value of the objective function.
+        
+        
+        """
+        ...
 
 class EqualityConstraint(BoundedConstraint):
     """
@@ -1664,17 +1702,15 @@ class InequalityConstraint(BoundedConstraint):
 
 class LinearBoundedConstraint(BoundedConstraint, org.hipparchus.optim.OptimizationData):
     """
-    implements OptimizationData
-    
     A set of linear inequality constraints expressed as ub>Ax>lb.
     
     Since:
         3.1
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], doubleArray3: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, a: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], lower: typing.Union[typing.List[float], jpype.JArray], upper: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, realVector: org.hipparchus.linear.RealVector, realVector2: org.hipparchus.linear.RealVector): ...
+    def __init__(self, a: org.hipparchus.linear.RealMatrix, lower: org.hipparchus.linear.RealVector, upper: org.hipparchus.linear.RealVector): ...
     def dim(self) -> int:
         """
         Returns the dimensionality of the function domain. If dim() returns (n) then this function expects an n-vector as its input.
@@ -1703,7 +1739,7 @@ class LinearBoundedConstraint(BoundedConstraint, org.hipparchus.optim.Optimizati
         """
         ...
     @typing.overload
-    def value(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
+    def value(self, x: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
         """
         Specified by: hipparchus in interface hipparchus
         
@@ -1729,21 +1765,19 @@ class LinearBoundedConstraint(BoundedConstraint, org.hipparchus.optim.Optimizati
         """
         ...
     @typing.overload
-    def value(self, realVector: org.hipparchus.linear.RealVector) -> org.hipparchus.linear.RealVector: ...
+    def value(self, x: org.hipparchus.linear.RealVector) -> org.hipparchus.linear.RealVector: ...
 
 class LinearEqualityConstraint(EqualityConstraint, org.hipparchus.optim.OptimizationData):
     """
-    implements OptimizationData
-    
     A set of linear equality constraints given as Ax = b.
     
     Since:
         3.1
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, a: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], b: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, realVector: org.hipparchus.linear.RealVector): ...
+    def __init__(self, a: org.hipparchus.linear.RealMatrix, b: org.hipparchus.linear.RealVector): ...
     def dim(self) -> int:
         """
         Description copied from interface: dim Returns the dimensionality of the function domain. If dim() returns (n) then this function expects an n-vector as its input.
@@ -1798,21 +1832,19 @@ class LinearEqualityConstraint(EqualityConstraint, org.hipparchus.optim.Optimiza
         """
         ...
     @typing.overload
-    def value(self, realVector: org.hipparchus.linear.RealVector) -> org.hipparchus.linear.RealVector: ...
+    def value(self, x: org.hipparchus.linear.RealVector) -> org.hipparchus.linear.RealVector: ...
 
 class LinearInequalityConstraint(InequalityConstraint, org.hipparchus.optim.OptimizationData):
     """
-    implements OptimizationData
-    
     Set of linear inequality constraints expressed as \( A x \gt B\).
     
     Since:
         3.1
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]): ...
+    def __init__(self, a: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], b: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, realVector: org.hipparchus.linear.RealVector): ...
+    def __init__(self, a: org.hipparchus.linear.RealMatrix, b: org.hipparchus.linear.RealVector): ...
     def dim(self) -> int:
         """
         Description copied from interface: dim Returns the dimensionality of the function domain. If dim() returns (n) then this function expects an n-vector as its input.
@@ -1857,7 +1889,7 @@ class LinearInequalityConstraint(InequalityConstraint, org.hipparchus.optim.Opti
         """
         ...
     @typing.overload
-    def value(self, realVector: org.hipparchus.linear.RealVector) -> org.hipparchus.linear.RealVector: ...
+    def value(self, x: org.hipparchus.linear.RealVector) -> org.hipparchus.linear.RealVector: ...
 
 
 class __module_protocol__(Protocol):

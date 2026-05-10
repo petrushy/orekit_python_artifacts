@@ -37,9 +37,9 @@ class KnockeRediffusedForceModel(org.orekit.forces.ForceModel):
         10.3
     """
     @typing.overload
-    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], radiationSensitive: 'RadiationSensitive', double: float, double2: float): ...
+    def __init__(self, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], spacecraft: 'RadiationSensitive', equatorialRadius: float, angularResolution: float): ...
     @typing.overload
-    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], radiationSensitive: 'RadiationSensitive', double: float, double2: float, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], spacecraft: 'RadiationSensitive', equatorialRadius: float, angularResolution: float, utc: org.orekit.time.TimeScale): ...
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def acceleration(self, s: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], parameters: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
@@ -466,7 +466,7 @@ class AbstractLightFluxModel(LightFluxModel):
         ...
     _getLightingRatio_1__T = typing.TypeVar('_getLightingRatio_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getLightingRatio(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
+    def getLightingRatio(self, state: org.orekit.propagation.SpacecraftState) -> float:
         """
         Parameters:
             state (SpacecraftState): state
@@ -486,7 +486,7 @@ class AbstractLightFluxModel(LightFluxModel):
         """
         ...
     @typing.overload
-    def getLightingRatio(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getLightingRatio_1__T]) -> _getLightingRatio_1__T:
+    def getLightingRatio(self, state: org.orekit.propagation.FieldSpacecraftState[_getLightingRatio_1__T]) -> _getLightingRatio_1__T:
         """
         Parameters:
             state (FieldSpacecraftState<T> state): state
@@ -530,7 +530,7 @@ class AbstractRadiationForceModel(RadiationForceModel):
         SolarRadiationPressure, ECOM2
     """
     @typing.overload
-    def addOccultingBody(self, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid) -> None:
+    def addOccultingBody(self, occulting: org.orekit.bodies.OneAxisEllipsoid) -> None:
         """
         Add a new occulting body.
         
@@ -560,7 +560,7 @@ class AbstractRadiationForceModel(RadiationForceModel):
         """
         ...
     @typing.overload
-    def addOccultingBody(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], double: float) -> None: ...
+    def addOccultingBody(self, provider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], radius: float) -> None: ...
     @staticmethod
     def getDefaultEclipseDetectionSettings() -> org.orekit.propagation.events.EventDetectionSettings:
         """
@@ -771,9 +771,9 @@ class IsotropicRadiationSingleCoefficient(RadiationSensitive):
         IsotropicRadiationCNES95Convention
     """
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, crossSection: float, cr: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float): ...
+    def __init__(self, crossSection: float, cr: float, crMin: float, crMax: float): ...
     def getRadiationParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]:
         """
         Get the drivers for supported parameters.
@@ -908,7 +908,7 @@ class PythonLightFluxModel(LightFluxModel):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -985,7 +985,7 @@ class PythonRadiationForceModel(RadiationForceModel):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1018,7 +1018,7 @@ class PythonRadiationSensitive(RadiationSensitive):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
     _radiationPressureAcceleration_0__T = typing.TypeVar('_radiationPressureAcceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def radiationPressureAcceleration(self, state: org.orekit.propagation.FieldSpacecraftState[_radiationPressureAcceleration_0__T], flux: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_radiationPressureAcceleration_0__T], parameters: typing.Union[typing.List[_radiationPressureAcceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_radiationPressureAcceleration_0__T]:
@@ -1259,9 +1259,9 @@ class ECOM2(AbstractRadiationForceModel):
     
     """
     @typing.overload
-    def __init__(self, int: int, int2: int, double: float, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], double2: float): ...
+    def __init__(self, nD: int, nB: int, value: float, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], equatorialRadius: float): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, double: float, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], double2: float, frames: org.orekit.frames.Frames): ...
+    def __init__(self, nD: int, nB: int, value: float, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], equatorialRadius: float, frames: org.orekit.frames.Frames): ...
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def acceleration(self, s: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], parameters: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
@@ -1368,7 +1368,7 @@ class PythonAbstractLightFluxModel(AbstractLightFluxModel):
         """
         ...
     @typing.overload
-    def getLightingRatio(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D) -> float: ...
+    def getLightingRatio(self, position: org.hipparchus.geometry.euclidean.threed.Vector3D, occultedBodyPosition: org.hipparchus.geometry.euclidean.threed.Vector3D) -> float: ...
     @typing.overload
     def getLightingRatio(self, position: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getLightingRatio_2__T], occultedBodyPosition: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getLightingRatio_2__T]) -> _getLightingRatio_2__T:
         """
@@ -1432,7 +1432,7 @@ class PythonAbstractLightFluxModel(AbstractLightFluxModel):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1453,11 +1453,11 @@ class SolarRadiationPressure(AbstractRadiationForceModel):
     MOON_EQUATORIAL_RADIUS);
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, radiationSensitive: RadiationSensitive): ...
+    def __init__(self, dRef: float, pRef: float, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], centralBody: org.orekit.bodies.OneAxisEllipsoid, spacecraft: RadiationSensitive): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, radiationSensitive: RadiationSensitive, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings): ...
+    def __init__(self, dRef: float, pRef: float, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], centralBody: org.orekit.bodies.OneAxisEllipsoid, spacecraft: RadiationSensitive, eclipseDetectionSettings: org.orekit.propagation.events.EventDetectionSettings): ...
     @typing.overload
-    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, radiationSensitive: RadiationSensitive): ...
+    def __init__(self, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], centralBody: org.orekit.bodies.OneAxisEllipsoid, spacecraft: RadiationSensitive): ...
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def acceleration(self, s: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], parameters: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
@@ -1555,11 +1555,11 @@ class ConicallyShadowedLightFluxModel(AbstractSolarLightFluxModel):
         Springer, 2000."
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], double3: float): ...
+    def __init__(self, kRef: float, occultedBodyRadius: float, occultedBody: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], occultingBodyRadius: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], double3: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings): ...
+    def __init__(self, kRef: float, occultedBodyRadius: float, occultedBody: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], occultingBodyRadius: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings): ...
     @typing.overload
-    def __init__(self, double: float, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], double2: float): ...
+    def __init__(self, occultedBodyRadius: float, occultedBody: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], occultingBodyRadius: float): ...
     @staticmethod
     def getDefaultEclipseDetectionSettings() -> org.orekit.propagation.events.EventDetectionSettings:
         """
@@ -1631,11 +1631,11 @@ class CylindricallyShadowedLightFluxModel(AbstractSolarLightFluxModel):
         AbstractSolarLightFluxModel, LightFluxModel
     """
     @typing.overload
-    def __init__(self, double: float, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], double2: float): ...
+    def __init__(self, kRef: float, occultedBody: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], occultingBodyRadius: float): ...
     @typing.overload
-    def __init__(self, double: float, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], double2: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings): ...
+    def __init__(self, kRef: float, occultedBody: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], occultingBodyRadius: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings): ...
     @typing.overload
-    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], double: float): ...
+    def __init__(self, occultedBody: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], occultingBodyRadius: float): ...
     @staticmethod
     def getDefaultEclipseDetectionSettings() -> org.orekit.propagation.events.EventDetectionSettings:
         """

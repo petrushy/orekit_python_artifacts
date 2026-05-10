@@ -21,8 +21,9 @@ class AdamsFieldStateInterpolator(org.hipparchus.ode.sampling.AbstractFieldODESt
     
     This interpolator computes dense output around the current point. The interpolation equation is based on Taylor series formulas.
     
-          - AdamsBashforthFieldIntegrator
-          - AdamsMoultonFieldIntegrator
+    Also see:
+        AdamsBashforthFieldIntegrator,
+        AdamsMoultonFieldIntegrator
     """
     def __init__(self, stepSize: _AdamsFieldStateInterpolator__T, reference: org.hipparchus.ode.FieldODEStateAndDerivative[_AdamsFieldStateInterpolator__T], scaled: typing.Union[typing.List[_AdamsFieldStateInterpolator__T], jpype.JArray], nordsieck: org.hipparchus.linear.Array2DRowFieldMatrix[_AdamsFieldStateInterpolator__T], isForward: bool, globalPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_AdamsFieldStateInterpolator__T], globalCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_AdamsFieldStateInterpolator__T], equationsMapper: org.hipparchus.ode.FieldEquationsMapper[_AdamsFieldStateInterpolator__T]):
         """
@@ -88,9 +89,9 @@ class AdamsStateInterpolator(org.hipparchus.ode.sampling.AbstractODEStateInterpo
     
     This interpolator computes dense output around the current point. The interpolation equation is based on Taylor series formulas.
     
-          - AdamsBashforthIntegrator
-          - AdamsMoultonIntegrator
-          - serialized
+    Also see:
+        AdamsBashforthIntegrator,
+        AdamsMoultonIntegrator, serialized
     """
     def __init__(self, stepSize: float, reference: org.hipparchus.ode.ODEStateAndDerivative, scaled: typing.Union[typing.List[float], jpype.JArray], nordsieck: org.hipparchus.linear.Array2DRowRealMatrix, isForward: bool, globalPreviousState: org.hipparchus.ode.ODEStateAndDerivative, globalCurrentState: org.hipparchus.ode.ODEStateAndDerivative, equationsMapper: org.hipparchus.ode.EquationsMapper):
         """
@@ -168,8 +169,8 @@ class GraggBulirschStoerStateInterpolator(org.hipparchus.ode.sampling.AbstractOD
     
         THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     
-          - GraggBulirschStoerIntegrator
-          - serialized
+    Also see:
+        GraggBulirschStoerIntegrator, serialized
     """
     def __init__(self, forward: bool, globalPreviousState: org.hipparchus.ode.ODEStateAndDerivative, globalCurrentState: org.hipparchus.ode.ODEStateAndDerivative, softPreviousState: org.hipparchus.ode.ODEStateAndDerivative, softCurrentState: org.hipparchus.ode.ODEStateAndDerivative, mapper: org.hipparchus.ode.EquationsMapper, yMidDots: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], mu: int):
         """
@@ -207,8 +208,9 @@ class RungeKuttaFieldStateInterpolator(org.hipparchus.ode.sampling.AbstractField
     """
     This class represents an interpolator over the last step during an ODE integration for Runge-Kutta and embedded Runge-Kutta integrators.
     
-          - FixedStepRungeKuttaFieldIntegrator
-          - EmbeddedRungeKuttaFieldIntegrator
+    Also see:
+        FixedStepRungeKuttaFieldIntegrator,
+        EmbeddedRungeKuttaFieldIntegrator
     """
     ...
 
@@ -216,9 +218,9 @@ class RungeKuttaStateInterpolator(org.hipparchus.ode.sampling.AbstractODEStateIn
     """
     This class represents an interpolator over the last step during an ODE integration for Runge-Kutta and embedded Runge-Kutta integrators.
     
-          - FixedStepRungeKuttaIntegrator
-          - EmbeddedRungeKuttaIntegrator
-          - serialized
+    Also see:
+        FixedStepRungeKuttaIntegrator,
+        EmbeddedRungeKuttaIntegrator, serialized
     """
     ...
 
@@ -240,7 +242,8 @@ class ClassicalRungeKuttaFieldStateInterpolator(RungeKuttaFieldStateInterpolator
     
     where θ belongs to [0 ; 1] and where y' :sub:`1` to y' :sub:`4` are the four evaluations of the derivatives already computed during the step.
     
-          - ClassicalRungeKuttaFieldIntegrator
+    Also see:
+        ClassicalRungeKuttaFieldIntegrator
     """
     def __init__(self, field: org.hipparchus.Field[_ClassicalRungeKuttaFieldStateInterpolator__T], forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[_ClassicalRungeKuttaFieldStateInterpolator__T]], jpype.JArray], globalPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_ClassicalRungeKuttaFieldStateInterpolator__T], globalCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_ClassicalRungeKuttaFieldStateInterpolator__T], softPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_ClassicalRungeKuttaFieldStateInterpolator__T], softCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_ClassicalRungeKuttaFieldStateInterpolator__T], mapper: org.hipparchus.ode.FieldEquationsMapper[_ClassicalRungeKuttaFieldStateInterpolator__T]):
         """
@@ -277,8 +280,8 @@ class ClassicalRungeKuttaStateInterpolator(RungeKuttaStateInterpolator):
     
     where θ belongs to [0 ; 1] and where y' :sub:`1` to y' :sub:`4` are the four evaluations of the derivatives already computed during the step.
     
-          - ClassicalRungeKuttaIntegrator
-          - serialized
+    Also see:
+        ClassicalRungeKuttaIntegrator, serialized
     """
     def __init__(self, forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], globalPreviousState: org.hipparchus.ode.ODEStateAndDerivative, globalCurrentState: org.hipparchus.ode.ODEStateAndDerivative, softPreviousState: org.hipparchus.ode.ODEStateAndDerivative, softCurrentState: org.hipparchus.ode.ODEStateAndDerivative, mapper: org.hipparchus.ode.EquationsMapper):
         """
@@ -302,7 +305,8 @@ class DormandPrince54FieldStateInterpolator(RungeKuttaFieldStateInterpolator[_Do
     """
     This class represents an interpolator over the last step during an ODE integration for the 5(4) Dormand-Prince integrator.
     
-          - DormandPrince54Integrator
+    Also see:
+        DormandPrince54Integrator
     """
     def __init__(self, field: org.hipparchus.Field[_DormandPrince54FieldStateInterpolator__T], forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[_DormandPrince54FieldStateInterpolator__T]], jpype.JArray], globalPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_DormandPrince54FieldStateInterpolator__T], globalCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_DormandPrince54FieldStateInterpolator__T], softPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_DormandPrince54FieldStateInterpolator__T], softCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_DormandPrince54FieldStateInterpolator__T], mapper: org.hipparchus.ode.FieldEquationsMapper[_DormandPrince54FieldStateInterpolator__T]):
         """
@@ -326,8 +330,8 @@ class DormandPrince54StateInterpolator(RungeKuttaStateInterpolator):
     """
     This class represents an interpolator over the last step during an ODE integration for the 5(4) Dormand-Prince integrator.
     
-          - DormandPrince54Integrator
-          - serialized
+    Also see:
+        DormandPrince54Integrator, serialized
     """
     def __init__(self, forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], globalPreviousState: org.hipparchus.ode.ODEStateAndDerivative, globalCurrentState: org.hipparchus.ode.ODEStateAndDerivative, softPreviousState: org.hipparchus.ode.ODEStateAndDerivative, softCurrentState: org.hipparchus.ode.ODEStateAndDerivative, mapper: org.hipparchus.ode.EquationsMapper):
         """
@@ -351,7 +355,8 @@ class DormandPrince853FieldStateInterpolator(RungeKuttaFieldStateInterpolator[_D
     """
     This class represents an interpolator over the last step during an ODE integration for the 8(5,3) Dormand-Prince integrator.
     
-          - DormandPrince853FieldIntegrator
+    Also see:
+        DormandPrince853FieldIntegrator
     """
     def __init__(self, field: org.hipparchus.Field[_DormandPrince853FieldStateInterpolator__T], forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[_DormandPrince853FieldStateInterpolator__T]], jpype.JArray], globalPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_DormandPrince853FieldStateInterpolator__T], globalCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_DormandPrince853FieldStateInterpolator__T], softPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_DormandPrince853FieldStateInterpolator__T], softCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_DormandPrince853FieldStateInterpolator__T], mapper: org.hipparchus.ode.FieldEquationsMapper[_DormandPrince853FieldStateInterpolator__T]):
         """
@@ -375,8 +380,8 @@ class DormandPrince853StateInterpolator(RungeKuttaStateInterpolator):
     """
     This class represents an interpolator over the last step during an ODE integration for the 8(5,3) Dormand-Prince integrator.
     
-          - DormandPrince853Integrator
-          - serialized
+    Also see:
+        DormandPrince853Integrator, serialized
     """
     def __init__(self, forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], globalPreviousState: org.hipparchus.ode.ODEStateAndDerivative, globalCurrentState: org.hipparchus.ode.ODEStateAndDerivative, softPreviousState: org.hipparchus.ode.ODEStateAndDerivative, softCurrentState: org.hipparchus.ode.ODEStateAndDerivative, mapper: org.hipparchus.ode.EquationsMapper):
         """
@@ -412,7 +417,8 @@ class EulerFieldStateInterpolator(RungeKuttaFieldStateInterpolator[_EulerFieldSt
     
     where θ belongs to [0 ; 1] and where y' is the evaluation of the derivatives already computed during the step.
     
-          - EulerFieldIntegrator
+    Also see:
+        EulerFieldIntegrator
     """
     def __init__(self, field: org.hipparchus.Field[_EulerFieldStateInterpolator__T], forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[_EulerFieldStateInterpolator__T]], jpype.JArray], globalPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_EulerFieldStateInterpolator__T], globalCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_EulerFieldStateInterpolator__T], softPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_EulerFieldStateInterpolator__T], softCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_EulerFieldStateInterpolator__T], mapper: org.hipparchus.ode.FieldEquationsMapper[_EulerFieldStateInterpolator__T]):
         """
@@ -448,8 +454,8 @@ class EulerStateInterpolator(RungeKuttaStateInterpolator):
     
     where θ belongs to [0 ; 1] and where y' is the evaluation of the derivatives already computed during the step.
     
-          - EulerIntegrator
-          - serialized
+    Also see:
+        EulerIntegrator, serialized
     """
     def __init__(self, forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], globalPreviousState: org.hipparchus.ode.ODEStateAndDerivative, globalCurrentState: org.hipparchus.ode.ODEStateAndDerivative, softPreviousState: org.hipparchus.ode.ODEStateAndDerivative, softCurrentState: org.hipparchus.ode.ODEStateAndDerivative, mapper: org.hipparchus.ode.EquationsMapper):
         """
@@ -486,7 +492,8 @@ class GillFieldStateInterpolator(RungeKuttaFieldStateInterpolator[_GillFieldStat
     
     where θ belongs to [0 ; 1] and where y' :sub:`1` to y' :sub:`4` are the four evaluations of the derivatives already computed during the step.
     
-          - GillFieldIntegrator
+    Also see:
+        GillFieldIntegrator
     """
     def __init__(self, field: org.hipparchus.Field[_GillFieldStateInterpolator__T], forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[_GillFieldStateInterpolator__T]], jpype.JArray], globalPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_GillFieldStateInterpolator__T], globalCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_GillFieldStateInterpolator__T], softPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_GillFieldStateInterpolator__T], softCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_GillFieldStateInterpolator__T], mapper: org.hipparchus.ode.FieldEquationsMapper[_GillFieldStateInterpolator__T]):
         """
@@ -523,8 +530,8 @@ class GillStateInterpolator(RungeKuttaStateInterpolator):
     
     where θ belongs to [0 ; 1] and where y' :sub:`1` to y' :sub:`4` are the four evaluations of the derivatives already computed during the step.
     
-          - GillIntegrator
-          - serialized
+    Also see:
+        GillIntegrator, serialized
     """
     def __init__(self, forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], globalPreviousState: org.hipparchus.ode.ODEStateAndDerivative, globalCurrentState: org.hipparchus.ode.ODEStateAndDerivative, softPreviousState: org.hipparchus.ode.ODEStateAndDerivative, softCurrentState: org.hipparchus.ode.ODEStateAndDerivative, mapper: org.hipparchus.ode.EquationsMapper):
         """
@@ -548,7 +555,8 @@ class HighamHall54FieldStateInterpolator(RungeKuttaFieldStateInterpolator[_Higha
     """
     This class represents an interpolator over the last step during an ODE integration for the 5(4) Higham and Hall integrator.
     
-          - HighamHall54FieldIntegrator
+    Also see:
+        HighamHall54FieldIntegrator
     """
     def __init__(self, field: org.hipparchus.Field[_HighamHall54FieldStateInterpolator__T], forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[_HighamHall54FieldStateInterpolator__T]], jpype.JArray], globalPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_HighamHall54FieldStateInterpolator__T], globalCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_HighamHall54FieldStateInterpolator__T], softPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_HighamHall54FieldStateInterpolator__T], softCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_HighamHall54FieldStateInterpolator__T], mapper: org.hipparchus.ode.FieldEquationsMapper[_HighamHall54FieldStateInterpolator__T]):
         """
@@ -572,8 +580,8 @@ class HighamHall54StateInterpolator(RungeKuttaStateInterpolator):
     """
     This class represents an interpolator over the last step during an ODE integration for the 5(4) Higham and Hall integrator.
     
-          - HighamHall54Integrator
-          - serialized
+    Also see:
+        HighamHall54Integrator, serialized
     """
     def __init__(self, forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], globalPreviousState: org.hipparchus.ode.ODEStateAndDerivative, globalCurrentState: org.hipparchus.ode.ODEStateAndDerivative, softPreviousState: org.hipparchus.ode.ODEStateAndDerivative, softCurrentState: org.hipparchus.ode.ODEStateAndDerivative, mapper: org.hipparchus.ode.EquationsMapper):
         """
@@ -599,7 +607,8 @@ class LutherFieldStateInterpolator(RungeKuttaFieldStateInterpolator[_LutherField
     
     This interpolator computes dense output inside the last step computed. The interpolation equation is consistent with the integration scheme.
     
-          - LutherFieldIntegrator
+    Also see:
+        LutherFieldIntegrator
     """
     def __init__(self, field: org.hipparchus.Field[_LutherFieldStateInterpolator__T], forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[_LutherFieldStateInterpolator__T]], jpype.JArray], globalPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_LutherFieldStateInterpolator__T], globalCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_LutherFieldStateInterpolator__T], softPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_LutherFieldStateInterpolator__T], softCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_LutherFieldStateInterpolator__T], mapper: org.hipparchus.ode.FieldEquationsMapper[_LutherFieldStateInterpolator__T]):
         """
@@ -625,8 +634,8 @@ class LutherStateInterpolator(RungeKuttaStateInterpolator):
     
     This interpolator computes dense output inside the last step computed. The interpolation equation is consistent with the integration scheme.
     
-          - LutherIntegrator
-          - serialized
+    Also see:
+        LutherIntegrator, serialized
     """
     def __init__(self, forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], globalPreviousState: org.hipparchus.ode.ODEStateAndDerivative, globalCurrentState: org.hipparchus.ode.ODEStateAndDerivative, softPreviousState: org.hipparchus.ode.ODEStateAndDerivative, softCurrentState: org.hipparchus.ode.ODEStateAndDerivative, mapper: org.hipparchus.ode.EquationsMapper):
         """
@@ -662,7 +671,8 @@ class MidpointFieldStateInterpolator(RungeKuttaFieldStateInterpolator[_MidpointF
     
     where θ belongs to [0 ; 1] and where y' :sub:`1` and y' :sub:`2` are the two evaluations of the derivatives already computed during the step.
     
-          - MidpointFieldIntegrator
+    Also see:
+        MidpointFieldIntegrator
     """
     def __init__(self, field: org.hipparchus.Field[_MidpointFieldStateInterpolator__T], forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[_MidpointFieldStateInterpolator__T]], jpype.JArray], globalPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_MidpointFieldStateInterpolator__T], globalCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_MidpointFieldStateInterpolator__T], softPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_MidpointFieldStateInterpolator__T], softCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_MidpointFieldStateInterpolator__T], mapper: org.hipparchus.ode.FieldEquationsMapper[_MidpointFieldStateInterpolator__T]):
         """
@@ -698,8 +708,8 @@ class MidpointStateInterpolator(RungeKuttaStateInterpolator):
     
     where θ belongs to [0 ; 1] and where y' :sub:`1` and y' :sub:`2` are the two evaluations of the derivatives already computed during the step.
     
-          - MidpointIntegrator
-          - serialized
+    Also see:
+        MidpointIntegrator, serialized
     """
     def __init__(self, forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], globalPreviousState: org.hipparchus.ode.ODEStateAndDerivative, globalCurrentState: org.hipparchus.ode.ODEStateAndDerivative, softPreviousState: org.hipparchus.ode.ODEStateAndDerivative, softCurrentState: org.hipparchus.ode.ODEStateAndDerivative, mapper: org.hipparchus.ode.EquationsMapper):
         """
@@ -736,7 +746,8 @@ class ThreeEighthesFieldStateInterpolator(RungeKuttaFieldStateInterpolator[_Thre
     
     where θ belongs to [0 ; 1] and where y' :sub:`1` to y' :sub:`4` are the four evaluations of the derivatives already computed during the step.
     
-          - ThreeEighthesFieldIntegrator
+    Also see:
+        ThreeEighthesFieldIntegrator
     """
     def __init__(self, field: org.hipparchus.Field[_ThreeEighthesFieldStateInterpolator__T], forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[_ThreeEighthesFieldStateInterpolator__T]], jpype.JArray], globalPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_ThreeEighthesFieldStateInterpolator__T], globalCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_ThreeEighthesFieldStateInterpolator__T], softPreviousState: org.hipparchus.ode.FieldODEStateAndDerivative[_ThreeEighthesFieldStateInterpolator__T], softCurrentState: org.hipparchus.ode.FieldODEStateAndDerivative[_ThreeEighthesFieldStateInterpolator__T], mapper: org.hipparchus.ode.FieldEquationsMapper[_ThreeEighthesFieldStateInterpolator__T]):
         """
@@ -773,8 +784,8 @@ class ThreeEighthesStateInterpolator(RungeKuttaStateInterpolator):
     
     where θ belongs to [0 ; 1] and where y' :sub:`1` to y' :sub:`4` are the four evaluations of the derivatives already computed during the step.
     
-          - ThreeEighthesIntegrator
-          - serialized
+    Also see:
+        ThreeEighthesIntegrator, serialized
     """
     def __init__(self, forward: bool, yDotK: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], globalPreviousState: org.hipparchus.ode.ODEStateAndDerivative, globalCurrentState: org.hipparchus.ode.ODEStateAndDerivative, softPreviousState: org.hipparchus.ode.ODEStateAndDerivative, softCurrentState: org.hipparchus.ode.ODEStateAndDerivative, mapper: org.hipparchus.ode.EquationsMapper):
         """

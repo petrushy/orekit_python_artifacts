@@ -130,11 +130,10 @@ class AdmMetadata(org.orekit.files.ccsds.section.Metadata):
     Since:
         10.2
     """
-    def __init__(self):
-        """
-        Simple constructor.
-        """
-        ...
+    @typing.overload
+    def __init__(self): ...
+    @typing.overload
+    def __init__(self, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     def getCenter(self) -> org.orekit.files.ccsds.definitions.BodyFacade:
         """
         Get the body at origin of reference frame.
@@ -384,18 +383,10 @@ class AttitudeEndpoints(org.orekit.attitudes.AttitudeBuilder):
     
     
     """
-    def __init__(self):
-        """
-        Empty constructor.
-        
-        This constructor is not strictly necessary, but it prevents spurious javadoc warnings with JDK 18 and later.
-        
-        Since:
-            12.0
-        
-        
-        """
-        ...
+    @typing.overload
+    def __init__(self): ...
+    @typing.overload
+    def __init__(self, frameMapper: org.orekit.files.ccsds.definitions.CcsdsFrameMapper): ...
     _build_1__T = typing.TypeVar('_build_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def build(self, frame: org.orekit.frames.Frame, pvProv: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], rawAttitude: org.orekit.utils.TimeStampedAngularCoordinates) -> org.orekit.attitudes.Attitude:
@@ -460,12 +451,31 @@ class AttitudeEndpoints(org.orekit.attitudes.AttitudeBuilder):
         
         """
         ...
+    def getExternal(self) -> org.orekit.frames.Frame:
+        """
+        Get the external reference frame. Only the orientation is significant.
+        
+        Returns:
+            the external frame.
+        
+        Since:
+            13.1.5
+        
+        Also see:
+            getExternalFrame
+        
+        
+        """
+        ...
     def getExternalFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
         """
         Get the external frame.
         
         Returns:
             external frame
+        
+        Also see:
+            getExternal
         
         
         """
@@ -486,6 +496,19 @@ class AttitudeEndpoints(org.orekit.attitudes.AttitudeBuilder):
         
         Returns:
             frame B
+        
+        
+        """
+        ...
+    def getFrameMapper(self) -> org.orekit.files.ccsds.definitions.CcsdsFrameMapper:
+        """
+        Get the mapping between a CCSDS frame and a Frame.
+        
+        Returns:
+            the frame mapper.
+        
+        Since:
+            13.1.5
         
         
         """
@@ -614,7 +637,7 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
         """
         ...
     @typing.overload
-    def createDataFields(self, boolean: bool, boolean2: bool, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, boolean3: bool, timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates) -> typing.MutableSequence[str]:
+    def createDataFields(self, isFirst: bool, isExternal2SpacecraftBody: bool, eulerRotSequence: org.hipparchus.geometry.euclidean.threed.RotationOrder, isSpacecraftBodyRate: bool, attitude: org.orekit.utils.TimeStampedAngularCoordinates) -> typing.MutableSequence[str]:
         """
         Get the attitude data fields corresponding to the attitude type.
         
@@ -650,7 +673,7 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
         """
         ...
     @typing.overload
-    def createDataFields(self, boolean: bool, boolean2: bool, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, boolean3: bool, timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates, formatter: org.orekit.utils.Formatter) -> typing.MutableSequence[str]: ...
+    def createDataFields(self, isFirst: bool, isExternal2SpacecraftBody: bool, eulerRotSequence: org.hipparchus.geometry.euclidean.threed.RotationOrder, isSpacecraftBodyRate: bool, attitude: org.orekit.utils.TimeStampedAngularCoordinates, formatter: org.orekit.utils.Formatter) -> typing.MutableSequence[str]: ...
     def generateData(self, isFirst: bool, isExternal2SpacecraftBody: bool, eulerRotSequence: org.hipparchus.geometry.euclidean.threed.RotationOrder, isSpacecraftBodyRate: bool, attitude: org.orekit.utils.TimeStampedAngularCoordinates) -> typing.MutableSequence[float]:
         """
         Generate the attitude data corresponding to the attitude type.
@@ -994,7 +1017,7 @@ class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typin
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

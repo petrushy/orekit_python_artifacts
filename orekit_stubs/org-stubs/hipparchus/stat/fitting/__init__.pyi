@@ -50,14 +50,15 @@ class EmpiricalDistribution(org.hipparchus.distribution.continuous.AbstractRealD
       - The input file must be a plain text file containing one valid numeric entry per line.
     
     
-          - serialized
+    Also see:
+        serialized
     """
     DEFAULT_BIN_COUNT: typing.ClassVar[int] = ...
     """
     Default bin count
     
-          - constant
-    
+    Also see:
+        constant
     
     
     """
@@ -66,10 +67,10 @@ class EmpiricalDistribution(org.hipparchus.distribution.continuous.AbstractRealD
     @typing.overload
     def __init__(self, int: int): ...
     @typing.overload
-    def __init__(self, int: int, randomGenerator: org.hipparchus.random.RandomGenerator): ...
+    def __init__(self, binCount: int, generator: org.hipparchus.random.RandomGenerator): ...
     @typing.overload
     def __init__(self, randomGenerator: org.hipparchus.random.RandomGenerator): ...
-    def cumulativeProbability(self, double: float) -> float:
+    def cumulativeProbability(self, x: float) -> float:
         """
         Algorithm description:
         
@@ -78,7 +79,7 @@ class EmpiricalDistribution(org.hipparchus.distribution.continuous.AbstractRealD
         If K is a constant distribution, we return P(B-) + P(B) (counting the full mass of B).
         """
         ...
-    def density(self, double: float) -> float:
+    def density(self, x: float) -> float:
         """
         Returns the kernel density normalized so that its integral over each bin equals the bin mass.
         
@@ -173,7 +174,7 @@ class EmpiricalDistribution(org.hipparchus.distribution.continuous.AbstractRealD
         
         """
         ...
-    def inverseCumulativeProbability(self, double: float) -> float:
+    def inverseCumulativeProbability(self, p: float) -> float:
         """
         Algorithm description:
         
@@ -281,9 +282,9 @@ class MultivariateNormalMixtureExpectationMaximization:
         """
         ...
     @typing.overload
-    def fit(self, mixtureMultivariateNormalDistribution: org.hipparchus.distribution.multivariate.MixtureMultivariateNormalDistribution) -> None: ...
+    def fit(self, initialMixture: org.hipparchus.distribution.multivariate.MixtureMultivariateNormalDistribution) -> None: ...
     @typing.overload
-    def fit(self, mixtureMultivariateNormalDistribution: org.hipparchus.distribution.multivariate.MixtureMultivariateNormalDistribution, int: int, double: float) -> None: ...
+    def fit(self, initialMixture: org.hipparchus.distribution.multivariate.MixtureMultivariateNormalDistribution, maxIterations: int, threshold: float) -> None: ...
     def getFittedModel(self) -> org.hipparchus.distribution.multivariate.MixtureMultivariateNormalDistribution:
         """
         Gets the fitted model.

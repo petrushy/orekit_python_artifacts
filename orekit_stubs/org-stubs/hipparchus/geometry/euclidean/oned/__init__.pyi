@@ -18,11 +18,10 @@ import typing
 
 class Euclidean1D(java.io.Serializable, org.hipparchus.geometry.Space):
     """
-    implements Serializable, Space
-    
     This class implements a one-dimensional space.
     
-          - serialized
+    Also see:
+        serialized
     """
     def getDimension(self) -> int:
         """
@@ -61,8 +60,8 @@ class Euclidean1D(java.io.Serializable, org.hipparchus.geometry.Space):
         Raises:
             NoSubSpaceException: in all cases
         
-              - getDimension
-        
+        Also see:
+            getDimension
         
         
         """
@@ -74,7 +73,8 @@ class Interval:
     """
     This class represents a 1D interval.
     
-          - IntervalsSet
+    Also see:
+        IntervalsSet
     """
     def __init__(self, lower: float, upper: float):
         """
@@ -146,14 +146,12 @@ class Interval:
 
 class IntervalsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclidean1D, 'Vector1D', 'OrientedPoint', 'SubOrientedPoint', Euclidean1D, 'Vector1D', 'OrientedPoint', 'SubOrientedPoint'], java.lang.Iterable[typing.MutableSequence[float]]):
     """
-    implements Iterable<double[]>
-    
     This class represents a 1D region: a set of intervals.
     """
     @typing.overload
-    def __init__(self, double: float): ...
+    def __init__(self, tolerance: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
+    def __init__(self, lower: float, upper: float, tolerance: float): ...
     @typing.overload
     def __init__(self, collection: typing.Union[java.util.Collection['SubOrientedPoint'], typing.Sequence['SubOrientedPoint'], typing.Set['SubOrientedPoint']], double: float): ...
     @typing.overload
@@ -183,7 +181,7 @@ class IntervalsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclidean
         Specified by: buildNew in class AbstractRegion
         
         Parameters:
-            tree (BSPTree<Euclidean1D,Vector1D,OrientedPoint,SubOrientedPoint> tree): inside/outside BSP tree representing the new region
+            tree (BSPTree<Euclidean1D, Vector1D, OrientedPoint, SubOrientedPoint> tree): inside/outside BSP tree representing the new region
         
         Returns:
             the built region
@@ -231,7 +229,7 @@ class IntervalsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclidean
         
         The iterator does not support the optional remove operation.
         
-        Specified by: iterator in interface Iterable
+        Specified by: Iterable in interface Iterable
         
         
         """
@@ -256,8 +254,6 @@ class IntervalsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclidean
 
 class OrientedPoint(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean1D, 'Vector1D', 'OrientedPoint', 'SubOrientedPoint']):
     """
-    implements Hyperplane<Euclidean1D,Vector1D,OrientedPoint,SubOrientedPoint>
-    
     This class represents a 1D oriented hyperplane.
     
     An hyperplane in 1D is a simple point, its orientation being a boolean.
@@ -459,7 +455,7 @@ class SubOrientedPoint(org.hipparchus.geometry.partitioning.AbstractSubHyperplan
         
         Parameters:
             hyperplane (OrientedPoint): underlying hyperplane
-            remainingRegion (Region<Euclidean1D,Vector1D,OrientedPoint,SubOrientedPoint> remainingRegion): remaining region of the hyperplane
+            remainingRegion (Region<Euclidean1D, Vector1D, OrientedPoint, SubOrientedPoint> remainingRegion): remaining region of the hyperplane
         
         
         """
@@ -523,13 +519,12 @@ class SubOrientedPoint(org.hipparchus.geometry.partitioning.AbstractSubHyperplan
 
 class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']):
     """
-    implements Vector<Euclidean1D,Vector1D>
-    
     This class represents a 1D vector.
     
     Instances of this class are guaranteed to be immutable.
     
-          - serialized
+    Also see:
+        serialized
     """
     ZERO: typing.ClassVar['Vector1D'] = ...
     """
@@ -552,15 +547,15 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']):
     A vector with all coordinates set to negative infinity.
     """
     @typing.overload
-    def __init__(self, double: float): ...
+    def __init__(self, x: float): ...
     @typing.overload
-    def __init__(self, double: float, vector1D: 'Vector1D'): ...
+    def __init__(self, a: float, u: 'Vector1D'): ...
     @typing.overload
-    def __init__(self, double: float, vector1D: 'Vector1D', double2: float, vector1D2: 'Vector1D'): ...
+    def __init__(self, a1: float, u1: 'Vector1D', a2: float, u2: 'Vector1D'): ...
     @typing.overload
-    def __init__(self, double: float, vector1D: 'Vector1D', double2: float, vector1D2: 'Vector1D', double3: float, vector1D3: 'Vector1D'): ...
+    def __init__(self, a1: float, u1: 'Vector1D', a2: float, u2: 'Vector1D', a3: float, u3: 'Vector1D'): ...
     @typing.overload
-    def __init__(self, double: float, vector1D: 'Vector1D', double2: float, vector1D2: 'Vector1D', double3: float, vector1D3: 'Vector1D', double4: float, vector1D4: 'Vector1D'): ...
+    def __init__(self, a1: float, u1: 'Vector1D', a2: float, u2: 'Vector1D', a3: float, u3: 'Vector1D', a4: float, u4: 'Vector1D'): ...
     @typing.overload
     def add(self, factor: float, v: 'Vector1D') -> 'Vector1D':
         """
@@ -594,7 +589,7 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']):
         """
         ...
     @typing.overload
-    def distance(self, vector1D: 'Vector1D') -> float:
+    def distance(self, p: 'Vector1D') -> float:
         """
         Compute the distance between the instance and another point.
         
@@ -622,7 +617,7 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']):
         ...
     @typing.overload
     @staticmethod
-    def distance(vector1D: 'Vector1D', vector1D2: 'Vector1D') -> float: ...
+    def distance(p1: 'Vector1D', p2: 'Vector1D') -> float: ...
     def distance1(self, p: 'Vector1D') -> float:
         """
         Compute the distance between the instance and another vector according to the L :sub:`1` norm.
@@ -641,7 +636,7 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']):
         """
         ...
     @typing.overload
-    def distanceInf(self, vector1D: 'Vector1D') -> float:
+    def distanceInf(self, p: 'Vector1D') -> float:
         """
         Compute the distance between the instance and another vector according to the L :sub:`∞` norm.
         
@@ -671,9 +666,9 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']):
         ...
     @typing.overload
     @staticmethod
-    def distanceInf(vector1D: 'Vector1D', vector1D2: 'Vector1D') -> float: ...
+    def distanceInf(p1: 'Vector1D', p2: 'Vector1D') -> float: ...
     @typing.overload
-    def distanceSq(self, vector1D: 'Vector1D') -> float:
+    def distanceSq(self, p: 'Vector1D') -> float:
         """
         Compute the square of the distance between the instance and another vector.
         
@@ -703,7 +698,7 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']):
         ...
     @typing.overload
     @staticmethod
-    def distanceSq(vector1D: 'Vector1D', vector1D2: 'Vector1D') -> float: ...
+    def distanceSq(p1: 'Vector1D', p2: 'Vector1D') -> float: ...
     def dotProduct(self, v: 'Vector1D') -> float:
         """
         Compute the dot-product of the instance and another vector.
@@ -727,7 +722,7 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']):
         
         NaN coordinates are considered to affect globally the vector and be equals to each other - i.e, if either (or all) coordinates of the 1D vector are equal to NaN, the 1D vector is equal to NaN.
         
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         Parameters:
             other (Object): Object to test for equality to this
@@ -827,9 +822,6 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']):
         Returns:
             abscissa of the vector
         
-              - 
-        
-        
         
         """
         ...
@@ -851,7 +843,7 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']):
         
         All NaN values have the same hash code.
         
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         Returns:
             a hash code value for this object
@@ -965,7 +957,7 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']):
         """
         Get a string representation of this vector.
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Returns:
             a string representation of this vector
@@ -1002,15 +994,15 @@ class Vector1DFormat(org.hipparchus.geometry.VectorFormat[Euclidean1D, Vector1D]
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, string: str, string2: str): ...
+    def __init__(self, prefix: str, suffix: str): ...
     @typing.overload
-    def __init__(self, string: str, string2: str, numberFormat: java.text.NumberFormat): ...
+    def __init__(self, prefix: str, suffix: str, format: java.text.NumberFormat): ...
     @typing.overload
-    def __init__(self, numberFormat: java.text.NumberFormat): ...
+    def __init__(self, format: java.text.NumberFormat): ...
     @typing.overload
     def format(self, vector: org.hipparchus.geometry.Vector[org.hipparchus.geometry.Space, org.hipparchus.geometry.Vector]) -> str: ...
     @typing.overload
-    def format(self, vector: org.hipparchus.geometry.Vector[Euclidean1D, Vector1D], stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer: ...
+    def format(self, vector: org.hipparchus.geometry.Vector[Euclidean1D, Vector1D], toAppendTo: java.lang.StringBuffer, pos: java.text.FieldPosition) -> java.lang.StringBuffer: ...
     @typing.overload
     @staticmethod
     def getVector1DFormat() -> 'Vector1DFormat':
@@ -1040,7 +1032,7 @@ class Vector1DFormat(org.hipparchus.geometry.VectorFormat[Euclidean1D, Vector1D]
         """
         ...
     @typing.overload
-    def parse(self, string: str) -> Vector1D:
+    def parse(self, source: str) -> Vector1D:
         """
         Parses a string to produce a Vector object.
         
@@ -1057,7 +1049,7 @@ class Vector1DFormat(org.hipparchus.geometry.VectorFormat[Euclidean1D, Vector1D]
         """
         ...
     @typing.overload
-    def parse(self, string: str, parsePosition: java.text.ParsePosition) -> Vector1D: ...
+    def parse(self, source: str, pos: java.text.ParsePosition) -> Vector1D: ...
 
 
 class __module_protocol__(Protocol):

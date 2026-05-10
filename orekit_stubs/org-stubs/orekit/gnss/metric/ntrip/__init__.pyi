@@ -1378,7 +1378,7 @@ class PythonMessageObserver(MessageObserver):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

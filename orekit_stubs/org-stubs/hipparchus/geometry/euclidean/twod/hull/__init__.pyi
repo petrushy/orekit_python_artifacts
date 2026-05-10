@@ -24,7 +24,8 @@ class AklToussaintHeuristic:
     
     The complexity of the operation is O(n), and may greatly improve the time it takes to construct the convex hull afterwards, depending on the point distribution.
     
-          - ` Akl-Toussaint heuristic (Wikipedia) <http://en.wikipedia.org/wiki/Convex_hull_algorithms#Akl-Toussaint_heuristic>`
+    Also see:
+        ` Akl-Toussaint heuristic (Wikipedia) <http://en.wikipedia.org/wiki/Convex_hull_algorithms#Akl-Toussaint_heuristic>`
     """
     @staticmethod
     def reducePoints(points: typing.Union[java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Sequence[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Set[org.hipparchus.geometry.euclidean.twod.Vector2D]]) -> java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D]:
@@ -43,11 +44,10 @@ class AklToussaintHeuristic:
 
 class ConvexHull2D(org.hipparchus.geometry.hull.ConvexHull[org.hipparchus.geometry.euclidean.twod.Euclidean2D, org.hipparchus.geometry.euclidean.twod.Vector2D, org.hipparchus.geometry.euclidean.twod.Line, org.hipparchus.geometry.euclidean.twod.SubLine], java.io.Serializable):
     """
-    implements ConvexHull<Euclidean2D,Vector2D,Line,SubLine>, Serializable
-    
     This class represents a convex hull in an two-dimensional euclidean space.
     
-          - serialized
+    Also see:
+        serialized
     """
     def __init__(self, vertices: typing.Union[typing.List[org.hipparchus.geometry.euclidean.twod.Vector2D], jpype.JArray], tolerance: float):
         """
@@ -134,15 +134,16 @@ class MonotoneChain(org.hipparchus.geometry.euclidean.twod.hull.AbstractConvexHu
     
     The tolerance parameter (default: 1e-10) is used as epsilon criteria to determine identical and collinear points.
     
-          - ` Andrew's monotone chain algorithm (Wikibooks)
-            <http://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain>`
+    Also see:
+        ` Andrew's monotone chain algorithm (Wikibooks)
+        <http://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain>`
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, boolean: bool): ...
+    def __init__(self, includeCollinearPoints: bool): ...
     @typing.overload
-    def __init__(self, boolean: bool, double: float): ...
+    def __init__(self, includeCollinearPoints: bool, tolerance: float): ...
     def findHullVertices(self, points: typing.Union[java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Sequence[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Set[org.hipparchus.geometry.euclidean.twod.Vector2D]]) -> java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D]:
         """
         Find the convex hull vertices from the set of input points.

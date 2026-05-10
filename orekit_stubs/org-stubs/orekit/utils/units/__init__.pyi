@@ -278,7 +278,7 @@ class Unit(java.io.Serializable):
         """
         ...
     @staticmethod
-    def ensureCompatible(description: str, reference: java.util.List['Unit'], units: bool, allowScaleDifferences: java.util.List['Unit']) -> None:
+    def ensureCompatible(description: str, reference: java.util.List['Unit'], allowScaleDifferences: bool, units: java.util.List['Unit']) -> None:
         """
         Ensure some units are compatible with reference units.
         
@@ -314,7 +314,7 @@ class Unit(java.io.Serializable):
         ...
     _fromSI_2__T = typing.TypeVar('_fromSI_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def fromSI(self, double: float) -> float:
+    def fromSI(self, value: float) -> float:
         """
         Convert a value from SI units.
         
@@ -335,7 +335,7 @@ class Unit(java.io.Serializable):
         """
         ...
     @typing.overload
-    def fromSI(self, double: float) -> float: ...
+    def fromSI(self, value: float) -> float: ...
     @typing.overload
     def fromSI(self, value: _fromSI_2__T) -> _fromSI_2__T:
         """
@@ -568,7 +568,7 @@ class Unit(java.io.Serializable):
         ...
     _toSI_2__T = typing.TypeVar('_toSI_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def toSI(self, double: float) -> float:
+    def toSI(self, value: float) -> float:
         """
         Convert a value to SI units.
         
@@ -589,7 +589,7 @@ class Unit(java.io.Serializable):
         """
         ...
     @typing.overload
-    def toSI(self, double: float) -> float: ...
+    def toSI(self, value: float) -> float: ...
     @typing.overload
     def toSI(self, value: _toSI_2__T) -> _toSI_2__T:
         """

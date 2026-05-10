@@ -152,9 +152,9 @@ class DSSTForceModel(org.orekit.utils.ParameterDriversProvider, org.orekit.propa
         ...
     _initializeShortPeriodTerms_1__T = typing.TypeVar('_initializeShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, propagationType: org.orekit.propagation.PropagationType, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List['ShortPeriodTerms']: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List['ShortPeriodTerms']: ...
     @typing.overload
-    def initializeShortPeriodTerms(self, fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], propagationType: org.orekit.propagation.PropagationType, tArray: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List['FieldShortPeriodTerms'[_initializeShortPeriodTerms_1__T]]: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List['FieldShortPeriodTerms'[_initializeShortPeriodTerms_1__T]]: ...
     def registerAttitudeProvider(self, provider: org.orekit.attitudes.AttitudeProvider) -> None:
         """
         Register an attitude provider.
@@ -169,7 +169,7 @@ class DSSTForceModel(org.orekit.utils.ParameterDriversProvider, org.orekit.propa
         ...
     _updateShortPeriodTerms_1__T = typing.TypeVar('_updateShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def updateShortPeriodTerms(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], *spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[float], jpype.JArray], *meanStates: org.orekit.propagation.SpacecraftState) -> None:
         """
         Update the short period terms.
         
@@ -200,7 +200,7 @@ class DSSTForceModel(org.orekit.utils.ParameterDriversProvider, org.orekit.propa
         """
         ...
     @typing.overload
-    def updateShortPeriodTerms(self, tArray: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *meanStates: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
 
 _FieldForceModelContext__T = typing.TypeVar('_FieldForceModelContext__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldForceModelContext(typing.Generic[_FieldForceModelContext__T]):
@@ -337,12 +337,12 @@ class J2SquaredModel:
         ...
     _initializeShortPeriodTerms_1__T = typing.TypeVar('_initializeShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, propagationType: org.orekit.propagation.PropagationType, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List['ShortPeriodTerms']: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List['ShortPeriodTerms']: ...
     @typing.overload
-    def initializeShortPeriodTerms(self, fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], propagationType: org.orekit.propagation.PropagationType, tArray: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_1__T]]: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_1__T]]: ...
     _updateShortPeriodTerms_1__T = typing.TypeVar('_updateShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def updateShortPeriodTerms(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], *spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[float], jpype.JArray], *meanStates: org.orekit.propagation.SpacecraftState) -> None:
         """
         Update the J2-squared short period terms.
         
@@ -372,7 +372,7 @@ class J2SquaredModel:
         """
         ...
     @typing.overload
-    def updateShortPeriodTerms(self, tArray: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *meanStates: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
 
 class ShortPeriodTerms:
     """
@@ -454,7 +454,7 @@ class AbstractGaussianContribution(DSSTForceModel):
     """
     _getMeanElementRate_1__T = typing.TypeVar('_getMeanElementRate_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getMeanElementRate(self, spacecraftState: org.orekit.propagation.SpacecraftState, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
+    def getMeanElementRate(self, state: org.orekit.propagation.SpacecraftState, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, parameters: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
         """
         Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
@@ -485,7 +485,7 @@ class AbstractGaussianContribution(DSSTForceModel):
         """
         ...
     @typing.overload
-    def getMeanElementRate(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getMeanElementRate_1__T], fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_getMeanElementRate_1__T], tArray: typing.Union[typing.List[_getMeanElementRate_1__T], jpype.JArray]) -> typing.MutableSequence[_getMeanElementRate_1__T]:
+    def getMeanElementRate(self, state: org.orekit.propagation.FieldSpacecraftState[_getMeanElementRate_1__T], auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_getMeanElementRate_1__T], parameters: typing.Union[typing.List[_getMeanElementRate_1__T], jpype.JArray]) -> typing.MutableSequence[_getMeanElementRate_1__T]:
         """
         Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
@@ -563,9 +563,9 @@ class AbstractGaussianContribution(DSSTForceModel):
         ...
     _initializeShortPeriodTerms_1__T = typing.TypeVar('_initializeShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, propagationType: org.orekit.propagation.PropagationType, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List[ShortPeriodTerms]: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List[ShortPeriodTerms]: ...
     @typing.overload
-    def initializeShortPeriodTerms(self, fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], propagationType: org.orekit.propagation.PropagationType, tArray: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_1__T]]: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_1__T]]: ...
     def registerAttitudeProvider(self, provider: org.orekit.attitudes.AttitudeProvider) -> None:
         """
         Register an attitude provider.
@@ -582,7 +582,7 @@ class AbstractGaussianContribution(DSSTForceModel):
         ...
     _updateShortPeriodTerms_1__T = typing.TypeVar('_updateShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def updateShortPeriodTerms(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], *spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[float], jpype.JArray], *meanStates: org.orekit.propagation.SpacecraftState) -> None:
         """
         Update the short period terms.
         
@@ -617,7 +617,7 @@ class AbstractGaussianContribution(DSSTForceModel):
         """
         ...
     @typing.overload
-    def updateShortPeriodTerms(self, tArray: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *meanStates: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
 
 class AbstractGaussianContributionContext(ForceModelContext):
     """
@@ -946,9 +946,9 @@ class DSSTJ2SquaredClosedForm(DSSTForceModel):
         ...
     _initializeShortPeriodTerms_1__T = typing.TypeVar('_initializeShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, propagationType: org.orekit.propagation.PropagationType, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List[ShortPeriodTerms]: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List[ShortPeriodTerms]: ...
     @typing.overload
-    def initializeShortPeriodTerms(self, fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], propagationType: org.orekit.propagation.PropagationType, tArray: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_1__T]]: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_1__T]]: ...
     def registerAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None:
         """
         Register an attitude provider.
@@ -965,7 +965,7 @@ class DSSTJ2SquaredClosedForm(DSSTForceModel):
         ...
     _updateShortPeriodTerms_1__T = typing.TypeVar('_updateShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def updateShortPeriodTerms(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], *spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[float], jpype.JArray], *meanStates: org.orekit.propagation.SpacecraftState) -> None:
         """
         Update the short period terms.
         
@@ -1000,7 +1000,7 @@ class DSSTJ2SquaredClosedForm(DSSTForceModel):
         """
         ...
     @typing.overload
-    def updateShortPeriodTerms(self, tArray: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *meanStates: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
 
 class DSSTJ2SquaredClosedFormContext(ForceModelContext):
     """
@@ -1165,9 +1165,9 @@ class DSSTNewtonianAttraction(DSSTForceModel):
         ...
     _initializeShortPeriodTerms_1__T = typing.TypeVar('_initializeShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, propagationType: org.orekit.propagation.PropagationType, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List[ShortPeriodTerms]: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List[ShortPeriodTerms]: ...
     @typing.overload
-    def initializeShortPeriodTerms(self, fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], propagationType: org.orekit.propagation.PropagationType, tArray: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_1__T]]: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_1__T]]: ...
     def registerAttitudeProvider(self, provider: org.orekit.attitudes.AttitudeProvider) -> None:
         """
         Register an attitude provider.
@@ -1184,7 +1184,7 @@ class DSSTNewtonianAttraction(DSSTForceModel):
         ...
     _updateShortPeriodTerms_1__T = typing.TypeVar('_updateShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def updateShortPeriodTerms(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], *spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[float], jpype.JArray], *meanStates: org.orekit.propagation.SpacecraftState) -> None:
         """
         Update the short period terms.
         
@@ -1219,7 +1219,7 @@ class DSSTNewtonianAttraction(DSSTForceModel):
         """
         ...
     @typing.overload
-    def updateShortPeriodTerms(self, tArray: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *meanStates: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
 
 class DSSTNewtonianAttractionContext(ForceModelContext):
     """
@@ -1286,9 +1286,9 @@ class DSSTTesseral(DSSTForceModel):
     
     """
     @typing.overload
-    def __init__(self, frame: org.orekit.frames.Frame, double: float, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider): ...
+    def __init__(self, centralBodyFrame: org.orekit.frames.Frame, centralBodyRotationRate: float, provider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider): ...
     @typing.overload
-    def __init__(self, frame: org.orekit.frames.Frame, double: float, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, int: int, int2: int, int3: int, int4: int, int5: int, int6: int, int7: int): ...
+    def __init__(self, centralBodyFrame: org.orekit.frames.Frame, centralBodyRotationRate: float, provider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, maxDegreeTesseralSP: int, maxOrderTesseralSP: int, maxEccPowTesseralSP: int, maxFrequencyShortPeriodics: int, maxDegreeMdailyTesseralSP: int, maxOrderMdailyTesseralSP: int, maxEccPowMdailyTesseralSP: int): ...
     _getMeanElementRate_1__T = typing.TypeVar('_getMeanElementRate_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getMeanElementRate(self, spacecraftState: org.orekit.propagation.SpacecraftState, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, parameters: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
@@ -1342,9 +1342,9 @@ class DSSTTesseral(DSSTForceModel):
         ...
     _initializeShortPeriodTerms_1__T = typing.TypeVar('_initializeShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, propagationType: org.orekit.propagation.PropagationType, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List[ShortPeriodTerms]: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List[ShortPeriodTerms]: ...
     @typing.overload
-    def initializeShortPeriodTerms(self, fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], propagationType: org.orekit.propagation.PropagationType, tArray: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_1__T]]: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_1__T]]: ...
     def registerAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None:
         """
         Register an attitude provider.
@@ -1361,7 +1361,7 @@ class DSSTTesseral(DSSTForceModel):
         ...
     _updateShortPeriodTerms_1__T = typing.TypeVar('_updateShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def updateShortPeriodTerms(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], *spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[float], jpype.JArray], *meanStates: org.orekit.propagation.SpacecraftState) -> None:
         """
         Update the short period terms.
         
@@ -1396,7 +1396,7 @@ class DSSTTesseral(DSSTForceModel):
         """
         ...
     @typing.overload
-    def updateShortPeriodTerms(self, tArray: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *meanStates: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
 
 class DSSTThirdBody(DSSTForceModel):
     """
@@ -1524,9 +1524,9 @@ class DSSTThirdBody(DSSTForceModel):
         ...
     _initializeShortPeriodTerms_1__T = typing.TypeVar('_initializeShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, propagationType: org.orekit.propagation.PropagationType, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List[ShortPeriodTerms]: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List[ShortPeriodTerms]: ...
     @typing.overload
-    def initializeShortPeriodTerms(self, fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], propagationType: org.orekit.propagation.PropagationType, tArray: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_1__T]]: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_1__T]]: ...
     def registerAttitudeProvider(self, provider: org.orekit.attitudes.AttitudeProvider) -> None:
         """
         Register an attitude provider.
@@ -1543,7 +1543,7 @@ class DSSTThirdBody(DSSTForceModel):
         ...
     _updateShortPeriodTerms_1__T = typing.TypeVar('_updateShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def updateShortPeriodTerms(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], *spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[float], jpype.JArray], *meanStates: org.orekit.propagation.SpacecraftState) -> None:
         """
         Update the short period terms.
         
@@ -1578,7 +1578,7 @@ class DSSTThirdBody(DSSTForceModel):
         """
         ...
     @typing.overload
-    def updateShortPeriodTerms(self, tArray: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *meanStates: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
 
 class DSSTThirdBodyDynamicContext(ForceModelContext):
     """
@@ -1861,13 +1861,13 @@ class DSSTZonal(DSSTForceModel):
     
     """
     @typing.overload
-    def __init__(self, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider): ...
+    def __init__(self, provider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider): ...
     @typing.overload
-    def __init__(self, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, int: int, int2: int, int3: int): ...
+    def __init__(self, provider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, maxDegreeShortPeriodics: int, maxEccPowShortPeriodics: int, maxFrequencyShortPeriodics: int): ...
     @typing.overload
-    def __init__(self, frame: org.orekit.frames.Frame, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider): ...
+    def __init__(self, bodyFixedFrame: org.orekit.frames.Frame, provider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider): ...
     @typing.overload
-    def __init__(self, frame: org.orekit.frames.Frame, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, int: int, int2: int, int3: int): ...
+    def __init__(self, bodyFixedFrame: org.orekit.frames.Frame, provider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, maxDegreeShortPeriodics: int, maxEccPowShortPeriodics: int, maxFrequencyShortPeriodics: int): ...
     _getMeanElementRate_1__T = typing.TypeVar('_getMeanElementRate_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getMeanElementRate(self, spacecraftState: org.orekit.propagation.SpacecraftState, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, parameters: typing.Union[typing.List[float], jpype.JArray]) -> typing.MutableSequence[float]:
@@ -1931,9 +1931,9 @@ class DSSTZonal(DSSTForceModel):
         ...
     _initializeShortPeriodTerms_1__T = typing.TypeVar('_initializeShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, propagationType: org.orekit.propagation.PropagationType, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List[ShortPeriodTerms]: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List[ShortPeriodTerms]: ...
     @typing.overload
-    def initializeShortPeriodTerms(self, fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], propagationType: org.orekit.propagation.PropagationType, tArray: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_1__T]]: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_1__T]]: ...
     def registerAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None:
         """
         Register an attitude provider.
@@ -1950,7 +1950,7 @@ class DSSTZonal(DSSTForceModel):
         ...
     _updateShortPeriodTerms_1__T = typing.TypeVar('_updateShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def updateShortPeriodTerms(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], *spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[float], jpype.JArray], *meanStates: org.orekit.propagation.SpacecraftState) -> None:
         """
         Update the short period terms.
         
@@ -1985,7 +1985,7 @@ class DSSTZonal(DSSTForceModel):
         """
         ...
     @typing.overload
-    def updateShortPeriodTerms(self, tArray: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *meanStates: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
 
 _FieldAbstractGaussianContributionContext__T = typing.TypeVar('_FieldAbstractGaussianContributionContext__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAbstractGaussianContributionContext(FieldForceModelContext[_FieldAbstractGaussianContributionContext__T], typing.Generic[_FieldAbstractGaussianContributionContext__T]):
@@ -2627,9 +2627,9 @@ class PythonDSSTForceModel(DSSTForceModel):
         ...
     _initializeShortPeriodTerms_1__T = typing.TypeVar('_initializeShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, propagationType: org.orekit.propagation.PropagationType, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List[ShortPeriodTerms]: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[float], jpype.JArray]) -> java.util.List[ShortPeriodTerms]: ...
     @typing.overload
-    def initializeShortPeriodTerms(self, fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], propagationType: org.orekit.propagation.PropagationType, tArray: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_1__T]]: ...
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_1__T], type: org.orekit.propagation.PropagationType, parameters: typing.Union[typing.List[_initializeShortPeriodTerms_1__T], jpype.JArray]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_1__T]]: ...
     def pythonDecRef(self) -> None:
         """
         Part of JCC Python interface to object
@@ -2642,7 +2642,7 @@ class PythonDSSTForceModel(DSSTForceModel):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2663,7 +2663,7 @@ class PythonDSSTForceModel(DSSTForceModel):
         ...
     _updateShortPeriodTerms_1__T = typing.TypeVar('_updateShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def updateShortPeriodTerms(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], *spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[float], jpype.JArray], *meanStates: org.orekit.propagation.SpacecraftState) -> None:
         """
         Update the short period terms.
         
@@ -2698,7 +2698,7 @@ class PythonDSSTForceModel(DSSTForceModel):
         """
         ...
     @typing.overload
-    def updateShortPeriodTerms(self, tArray: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
+    def updateShortPeriodTerms(self, parameters: typing.Union[typing.List[_updateShortPeriodTerms_1__T], jpype.JArray], *meanStates: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
 
 _PythonFieldShortPeriodTerms__T = typing.TypeVar('_PythonFieldShortPeriodTerms__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldShortPeriodTerms(FieldShortPeriodTerms[_PythonFieldShortPeriodTerms__T], typing.Generic[_PythonFieldShortPeriodTerms__T]):
@@ -2762,7 +2762,7 @@ class PythonFieldShortPeriodTerms(FieldShortPeriodTerms[_PythonFieldShortPeriodT
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2807,7 +2807,7 @@ class PythonForceModelContext(ForceModelContext):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 class PythonJ2SquaredModel(J2SquaredModel):
     def __init__(self): ...
@@ -2856,7 +2856,7 @@ class PythonJ2SquaredModel(J2SquaredModel):
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, pythonObject: int) -> None: ...
 
 class PythonShortPeriodTerms(ShortPeriodTerms):
     def __init__(self): ...
@@ -2919,7 +2919,7 @@ class PythonShortPeriodTerms(ShortPeriodTerms):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -3026,11 +3026,11 @@ class DSSTAtmosphericDrag(AbstractGaussianContribution):
     The drag acceleration is computed through the acceleration model of DragForce.
     """
     @typing.overload
-    def __init__(self, dragForce: org.orekit.forces.drag.DragForce, double: float): ...
+    def __init__(self, force: org.orekit.forces.drag.DragForce, mu: float): ...
     @typing.overload
-    def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere, double: float, double2: float, double3: float): ...
+    def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere, cd: float, area: float, mu: float): ...
     @typing.overload
-    def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere, dragSensitive: org.orekit.forces.drag.DragSensitive, double: float): ...
+    def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere, spacecraft: org.orekit.forces.drag.DragSensitive, mu: float): ...
     def getAtmosphere(self) -> org.orekit.models.earth.atmosphere.Atmosphere:
         """
         Get the atmospheric model.
@@ -3101,13 +3101,13 @@ class DSSTSolarRadiationPressure(AbstractGaussianContribution):
     The solar radiation pressure acceleration is computed through the acceleration model of SolarRadiationPressure.
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double5: float): ...
+    def __init__(self, dRef: float, pRef: float, cr: float, area: float, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], centralBody: org.orekit.bodies.OneAxisEllipsoid, mu: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double3: float): ...
+    def __init__(self, cr: float, area: float, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], centralBody: org.orekit.bodies.OneAxisEllipsoid, mu: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, radiationSensitive: org.orekit.forces.radiation.RadiationSensitive, double3: float): ...
+    def __init__(self, dRef: float, pRef: float, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], centralBody: org.orekit.bodies.OneAxisEllipsoid, spacecraft: org.orekit.forces.radiation.RadiationSensitive, mu: float): ...
     @typing.overload
-    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, radiationSensitive: org.orekit.forces.radiation.RadiationSensitive, double: float): ...
+    def __init__(self, sun: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], centralBody: org.orekit.bodies.OneAxisEllipsoid, spacecraft: org.orekit.forces.radiation.RadiationSensitive, mu: float): ...
     def getEquatorialRadius(self) -> float:
         """
         Get the central body equatorial radius.
@@ -3466,7 +3466,7 @@ class FieldDSSTZonalContext(FieldDSSTGravityContext[_FieldDSSTZonalContext__T], 
         ...
 
 class PythonAbstractGaussianContribution(AbstractGaussianContribution):
-    def __init__(self, string: str, double: float, forceModel: org.orekit.forces.ForceModel, double2: float):
+    def __init__(self, coefficientsKeyPrefix: str, threshold: float, contribution: org.orekit.forces.ForceModel, mu: float):
         """
         Build a new instance.
         
@@ -3549,7 +3549,7 @@ class PythonAbstractGaussianContribution(AbstractGaussianContribution):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

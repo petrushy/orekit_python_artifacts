@@ -45,9 +45,9 @@ class FieldPressureTemperature(typing.Generic[_FieldPressureTemperature__T]):
         12.1
     """
     @typing.overload
-    def __init__(self, t: _FieldPressureTemperature__T, t2: _FieldPressureTemperature__T, t3: _FieldPressureTemperature__T): ...
+    def __init__(self, altitude: _FieldPressureTemperature__T, pressure: _FieldPressureTemperature__T, temperature: _FieldPressureTemperature__T): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldPressureTemperature__T], pressureTemperatureHumidity: 'PressureTemperatureHumidity'): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldPressureTemperature__T], weather: 'PressureTemperatureHumidity'): ...
     def getAltitude(self) -> _FieldPressureTemperature__T:
         """
         Get altitude at which weather parameters have been computed.
@@ -95,7 +95,7 @@ class GlobalPressureTemperature:
     @typing.overload
     def __init__(self, geoid: org.orekit.models.earth.Geoid): ...
     @typing.overload
-    def __init__(self, geoid: org.orekit.models.earth.Geoid, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, geoid: org.orekit.models.earth.Geoid, utc: org.orekit.time.TimeScale): ...
     def getWeatherParameters(self, location: org.orekit.bodies.GeodeticPoint, date: org.orekit.time.AbsoluteDate) -> 'PressureTemperature':
         """
         Provide weather parameters.
@@ -483,9 +483,9 @@ class FieldPressureTemperatureHumidity(FieldPressureTemperature[_FieldPressureTe
         12.1
     """
     @typing.overload
-    def __init__(self, t: _FieldPressureTemperatureHumidity__T, t2: _FieldPressureTemperatureHumidity__T, t3: _FieldPressureTemperatureHumidity__T, t4: _FieldPressureTemperatureHumidity__T, t5: _FieldPressureTemperatureHumidity__T, t6: _FieldPressureTemperatureHumidity__T): ...
+    def __init__(self, altitude: _FieldPressureTemperatureHumidity__T, pressure: _FieldPressureTemperatureHumidity__T, temperature: _FieldPressureTemperatureHumidity__T, waterVaporPressure: _FieldPressureTemperatureHumidity__T, tm: _FieldPressureTemperatureHumidity__T, lambda_: _FieldPressureTemperatureHumidity__T): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldPressureTemperatureHumidity__T], pressureTemperatureHumidity: 'PressureTemperatureHumidity'): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldPressureTemperatureHumidity__T], weather: 'PressureTemperatureHumidity'): ...
     def getLambda(self) -> _FieldPressureTemperatureHumidity__T:
         """
         Get water vapor decrease factor.
@@ -629,7 +629,7 @@ class PythonPressureTemperatureHumidityProvider(PressureTemperatureHumidityProvi
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

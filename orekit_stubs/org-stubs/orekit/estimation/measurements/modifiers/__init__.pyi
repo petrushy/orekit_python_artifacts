@@ -39,16 +39,16 @@ class AberrationModifier(org.orekit.estimation.measurements.EstimationModifier[o
     def __init__(self, dataContext: org.orekit.data.DataContext): ...
     @typing.overload
     @staticmethod
-    def fieldNaturalToProper(gradientArray: typing.Union[typing.List[org.hipparchus.analysis.differentiation.Gradient], jpype.JArray], fieldTransform: org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient], frame: org.orekit.frames.Frame) -> typing.MutableSequence[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def fieldNaturalToProper(naturalRaDec: typing.Union[typing.List[org.hipparchus.analysis.differentiation.Gradient], jpype.JArray], stationToInertial: org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient], frame: org.orekit.frames.Frame) -> typing.MutableSequence[org.hipparchus.analysis.differentiation.Gradient]: ...
     @typing.overload
     @staticmethod
-    def fieldNaturalToProper(gradientArray: typing.Union[typing.List[org.hipparchus.analysis.differentiation.Gradient], jpype.JArray], fieldTransform: org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient], frame: org.orekit.frames.Frame, dataContext: org.orekit.data.DataContext) -> typing.MutableSequence[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def fieldNaturalToProper(naturalRaDec: typing.Union[typing.List[org.hipparchus.analysis.differentiation.Gradient], jpype.JArray], stationToInertial: org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient], frame: org.orekit.frames.Frame, context: org.orekit.data.DataContext) -> typing.MutableSequence[org.hipparchus.analysis.differentiation.Gradient]: ...
     @typing.overload
     @staticmethod
-    def fieldProperToNatural(gradientArray: typing.Union[typing.List[org.hipparchus.analysis.differentiation.Gradient], jpype.JArray], fieldTransform: org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient], frame: org.orekit.frames.Frame) -> typing.MutableSequence[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def fieldProperToNatural(properRaDec: typing.Union[typing.List[org.hipparchus.analysis.differentiation.Gradient], jpype.JArray], stationToInertial: org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient], frame: org.orekit.frames.Frame) -> typing.MutableSequence[org.hipparchus.analysis.differentiation.Gradient]: ...
     @typing.overload
     @staticmethod
-    def fieldProperToNatural(gradientArray: typing.Union[typing.List[org.hipparchus.analysis.differentiation.Gradient], jpype.JArray], fieldTransform: org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient], frame: org.orekit.frames.Frame, dataContext: org.orekit.data.DataContext) -> typing.MutableSequence[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def fieldProperToNatural(properRaDec: typing.Union[typing.List[org.hipparchus.analysis.differentiation.Gradient], jpype.JArray], stationToInertial: org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient], frame: org.orekit.frames.Frame, context: org.orekit.data.DataContext) -> typing.MutableSequence[org.hipparchus.analysis.differentiation.Gradient]: ...
     def getEffectName(self) -> str:
         """
         Get the name of the effect modifying the measurement.
@@ -99,7 +99,7 @@ class AberrationModifier(org.orekit.estimation.measurements.EstimationModifier[o
         ...
     @typing.overload
     @staticmethod
-    def naturalToProper(doubleArray: typing.Union[typing.List[float], jpype.JArray], groundStation: org.orekit.estimation.measurements.GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> typing.MutableSequence[float]:
+    def naturalToProper(naturalRaDec: typing.Union[typing.List[float], jpype.JArray], station: org.orekit.estimation.measurements.GroundStation, date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> typing.MutableSequence[float]:
         """
         Natural to proper correction for aberration of light.
         
@@ -121,10 +121,10 @@ class AberrationModifier(org.orekit.estimation.measurements.EstimationModifier[o
         ...
     @typing.overload
     @staticmethod
-    def naturalToProper(doubleArray: typing.Union[typing.List[float], jpype.JArray], groundStation: org.orekit.estimation.measurements.GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame, dataContext: org.orekit.data.DataContext) -> typing.MutableSequence[float]: ...
+    def naturalToProper(naturalRaDec: typing.Union[typing.List[float], jpype.JArray], station: org.orekit.estimation.measurements.GroundStation, date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame, context: org.orekit.data.DataContext) -> typing.MutableSequence[float]: ...
     @typing.overload
     @staticmethod
-    def properToNatural(doubleArray: typing.Union[typing.List[float], jpype.JArray], groundStation: org.orekit.estimation.measurements.GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> typing.MutableSequence[float]:
+    def properToNatural(properRaDec: typing.Union[typing.List[float], jpype.JArray], station: org.orekit.estimation.measurements.GroundStation, date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> typing.MutableSequence[float]:
         """
         Proper to natural correction for aberration of light.
         
@@ -146,7 +146,7 @@ class AberrationModifier(org.orekit.estimation.measurements.EstimationModifier[o
         ...
     @typing.overload
     @staticmethod
-    def properToNatural(doubleArray: typing.Union[typing.List[float], jpype.JArray], groundStation: org.orekit.estimation.measurements.GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame, dataContext: org.orekit.data.DataContext) -> typing.MutableSequence[float]: ...
+    def properToNatural(properRaDec: typing.Union[typing.List[float], jpype.JArray], station: org.orekit.estimation.measurements.GroundStation, date: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame, context: org.orekit.data.DataContext) -> typing.MutableSequence[float]: ...
 
 class AbstractRelativisticClockModifier:
     """
@@ -262,7 +262,7 @@ class AngularIonosphericDelayModifier(org.orekit.estimation.measurements.Estimat
     
     The ionospheric delay depends on the frequency of the signal (GNSS, VLBI...). For optical measurements (e.g. SLR), the ray is not affected by ionosphere charged particles.
     
-    Since 10.0, state derivatives and ionospheric parameters derivates are computed using automatic differentiation.
+    Since 10.0, state derivatives and ionospheric parameters derivatives are computed using automatic differentiation.
     
     Since:
         8.0
@@ -304,7 +304,7 @@ class AngularIonosphericDelayModifier(org.orekit.estimation.measurements.Estimat
         ...
     def modifyWithoutDerivatives(self, estimated: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.AngularAzEl]) -> None:
         """
-        Description copied from interface: modifyWithoutDerivatives Apply a modifier to an estimated measurement without derivatives.
+        Apply a modifier to an estimated measurement without derivatives.
         
         Specified by: modifyWithoutDerivatives in interface EstimationModifier
         
@@ -1151,7 +1151,7 @@ class RangeModifierUtil:
     """
     _modify__T = typing.TypeVar('_modify__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
     @staticmethod
-    def modify(estimated: org.orekit.estimation.measurements.EstimatedMeasurement[_modify__T], station: typing.Union[org.orekit.utils.ParameterDriversProvider, typing.Callable], converter: org.orekit.propagation.integration.AbstractGradientConverter, parametricModel: org.orekit.estimation.measurements.GroundStation, modelEffect: typing.Union[ParametricModelEffect, typing.Callable], modelEffectGradient: typing.Union[ParametricModelEffectGradient, typing.Callable], modifier: org.orekit.estimation.measurements.EstimationModifier[_modify__T]) -> None:
+    def modify(estimated: org.orekit.estimation.measurements.EstimatedMeasurement[_modify__T], parametricModel: typing.Union[org.orekit.utils.ParameterDriversProvider, typing.Callable], converter: org.orekit.propagation.integration.AbstractGradientConverter, station: org.orekit.estimation.measurements.GroundStation, modelEffect: typing.Union[ParametricModelEffect, typing.Callable], modelEffectGradient: typing.Union[ParametricModelEffectGradient, typing.Callable], modifier: org.orekit.estimation.measurements.EstimationModifier[_modify__T]) -> None:
         """
         Apply a modifier to an estimated measurement.
         
@@ -1195,7 +1195,7 @@ class RangeRateModifierUtil:
     """
     _modify__T = typing.TypeVar('_modify__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
     @staticmethod
-    def modify(estimated: org.orekit.estimation.measurements.EstimatedMeasurement[_modify__T], station: typing.Union[org.orekit.utils.ParameterDriversProvider, typing.Callable], converter: org.orekit.propagation.integration.AbstractGradientConverter, parametricModel: org.orekit.estimation.measurements.GroundStation, modelEffect: typing.Union[ParametricModelEffect, typing.Callable], modelEffectGradient: typing.Union[ParametricModelEffectGradient, typing.Callable], modifier: org.orekit.estimation.measurements.EstimationModifier[_modify__T]) -> None:
+    def modify(estimated: org.orekit.estimation.measurements.EstimatedMeasurement[_modify__T], parametricModel: typing.Union[org.orekit.utils.ParameterDriversProvider, typing.Callable], converter: org.orekit.propagation.integration.AbstractGradientConverter, station: org.orekit.estimation.measurements.GroundStation, modelEffect: typing.Union[ParametricModelEffect, typing.Callable], modelEffectGradient: typing.Union[ParametricModelEffectGradient, typing.Callable], modifier: org.orekit.estimation.measurements.EstimationModifier[_modify__T]) -> None:
         """
         Apply a modifier to an estimated measurement.
         
@@ -2101,7 +2101,7 @@ class PythonParametricModelEffect(ParametricModelEffect):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -2149,7 +2149,7 @@ class PythonParametricModelEffectGradient(ParametricModelEffectGradient):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -3315,7 +3315,7 @@ class PythonAbstractRelativisticClockOnBoardRangeRateModifier(AbstractRelativist
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

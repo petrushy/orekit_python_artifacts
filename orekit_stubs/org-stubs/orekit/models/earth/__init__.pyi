@@ -111,7 +111,7 @@ class EarthStandardAtmosphereRefraction(org.orekit.models.AtmosphericRefractionM
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, double: float, double2: float): ...
+    def __init__(self, pressure: float, temperature: float): ...
     def getPressure(self) -> float:
         """
         Get the local pressure at the evaluation location.
@@ -254,8 +254,8 @@ class GeoMagneticField:
     Based on original software written by Manoj Nair from the National Geophysical Data Center, NOAA, as part of the WMM 2010 software release (WMM_SubLibrary.c)
     
     Also see:
-        `World Magnetic Model Overview <http://www.ngdc.noaa.gov/geomag/WMM/DoDWMM.shtml>`, `WMM Software Downloads
-        <http://www.ngdc.noaa.gov/geomag/WMM/soft.shtml>`
+        DoDWMM,
+        soft
     """
     def calculateField(self, latitude: float, longitude: float, height: float) -> GeoMagneticElements:
         """
@@ -319,7 +319,7 @@ class GeoMagneticField:
         """
         ...
     @typing.overload
-    def transformModel(self, double: float) -> 'GeoMagneticField':
+    def transformModel(self, year: float) -> 'GeoMagneticField':
         """
         Time transform the model coefficients from the base year of the model using secular variation coefficients.
         
@@ -342,7 +342,7 @@ class GeoMagneticField:
         """
         ...
     @typing.overload
-    def transformModel(self, geoMagneticField: 'GeoMagneticField', double: float) -> 'GeoMagneticField': ...
+    def transformModel(self, otherModel: 'GeoMagneticField', year: float) -> 'GeoMagneticField': ...
     def validFrom(self) -> float:
         """
         Returns the start of the validity period for this model.
@@ -519,9 +519,9 @@ class GeoMagneticModelLoader(org.orekit.data.DataLoader):
     
     The format of the expected model file is either:
     
-      - combined format as used by the geomag software, available from the `IGRF model site
-        <http://www.ngdc.noaa.gov/IAGA/vmod/igrf.html>`; supports multiple epochs per file
-      - original format as used by the `WMM model site <http://www.ngdc.noaa.gov/geomag/WMM/DoDWMM.shtml>`.
+      - combined format as used by the geomag software, available from the
+        igrf; supports multiple epochs per file
+      - original format as used by the DoDWMM.
     
     Combined Format
     
@@ -603,9 +603,9 @@ class GeoMagneticModelParser:
     
     The format of the expected model file is either:
     
-      - combined format as used by the geomag software, available from the `IGRF model site
-        <http://www.ngdc.noaa.gov/IAGA/vmod/igrf.html>`; supports multiple epochs per file
-      - original format as used by the `WMM model site <http://www.ngdc.noaa.gov/geomag/WMM/DoDWMM.shtml>`.
+      - combined format as used by the geomag software, available from the
+        igrf; supports multiple epochs per file
+      - original format as used by the DoDWMM.
     
     Combined Format
     
@@ -738,7 +738,7 @@ class Geoid(EarthShape):
     
     References:
     
-      1.  Dru A. Smith. There is no such thing as "The" EGM96 geoid: Subtle points on the use of a global geopotential model. IGeS Bulletin No. 8:17-28, 1998. `http://www.ngs.noaa.gov/PUBS_LIB/EGM96_GEOID_PAPER/egm96_geoid_paper.html <http://www.ngs.noaa.gov/PUBS_LIB/EGM96_GEOID_PAPER/egm96_geoid_paper.html>` 2.  Martin Losch, Verena Seufer. How to Compute Geoid Undulations (Geoid Height Relative to a Given Reference Ellipsoid) from Spherical Harmonic Coefficients for Satellite Altimetry Applications. , 2003. `mitgcm.org/~mlosch/geoidcookbook.pdf <http://mitgcm.org/~mlosch/geoidcookbook.pdf>` 3.  Weikko A. Heiskanen, Helmut Moritz. Physical Geodesy. W. H. Freeman and Company, 1967. (especially sections 2.13 and equation 2-144 Bruns Formula) 4.  S. A. Holmes, W. E. Featherstone. A unified approach to the Clenshaw summation and the recursive computation of very high degree and order normalised associated Legendre functions. Journal of Geodesy, 76(5):279, 2002. 5.  DMA TR 8350.2. 1984. 6.  Department of Defense World Geodetic System 1984. 2000. NIMA TR 8350.2 Third Edition, Amendment 1.
+      1.  Dru A. Smith. There is no such thing as "The" EGM96 geoid: Subtle points on the use of a global geopotential model. IGeS Bulletin No. 8:17-28, 1998. egm96_geoid_paper 2.  Martin Losch, Verena Seufer. How to Compute Geoid Undulations (Geoid Height Relative to a Given Reference Ellipsoid) from Spherical Harmonic Coefficients for Satellite Altimetry Applications. , 2003. pdf 3.  Weikko A. Heiskanen, Helmut Moritz. Physical Geodesy. W. H. Freeman and Company, 1967. (especially sections 2.13 and equation 2-144 Bruns Formula) 4.  S. A. Holmes, W. E. Featherstone. A unified approach to the Clenshaw summation and the recursive computation of very high degree and order normalised associated Legendre functions. Journal of Geodesy, 76(5):279, 2002. 5.  DMA TR 8350.2. 1984. 6.  Department of Defense World Geodetic System 1984. 2000. NIMA TR 8350.2 Third Edition, Amendment 1.
     """
     def __init__(self, geopotential: org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider, referenceEllipsoid: 'ReferenceEllipsoid'):
         """
@@ -842,7 +842,7 @@ class Geoid(EarthShape):
             the undulation in m, positive means the geoid is higher than the ellipsoid.
         
         Also see:
-            Geoid, `Geoid on Wikipedia <http://en.wikipedia.org/wiki/Geoid>`
+            Geoid, Geoid
         
         
         """
@@ -914,7 +914,7 @@ class Geoid(EarthShape):
         """
         ...
     @typing.overload
-    def transform(self, geodeticPoint: org.orekit.bodies.GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def transform(self, point: org.orekit.bodies.GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
         Transform a Cartesian point to a surface-relative point.
         
@@ -931,7 +931,8 @@ class Geoid(EarthShape):
             getEllipsoid.
         
         Also see:
-            transform, `Orthometric_height <http://en.wikipedia.org/wiki/Orthometric_height>`
+            transform,
+            Orthometric_height
         
         Transform a surface-relative point to a Cartesian point.
         
@@ -951,7 +952,7 @@ class Geoid(EarthShape):
         """
         ...
     @typing.overload
-    def transform(self, date: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_2__T], point: org.orekit.frames.Frame, frame: org.orekit.time.FieldAbsoluteDate[_transform_2__T]) -> org.orekit.bodies.FieldGeodeticPoint[_transform_2__T]:
+    def transform(self, point: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_2__T], frame: org.orekit.frames.Frame, date: org.orekit.time.FieldAbsoluteDate[_transform_2__T]) -> org.orekit.bodies.FieldGeodeticPoint[_transform_2__T]:
         """
         Transform a Cartesian point to a surface-relative point.
         
@@ -968,12 +969,13 @@ class Geoid(EarthShape):
             getEllipsoid.
         
         Also see:
-            transform, `Orthometric_height <http://en.wikipedia.org/wiki/Orthometric_height>`
+            transform,
+            Orthometric_height
         
         """
         ...
     @typing.overload
-    def transform(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.bodies.GeodeticPoint: ...
+    def transform(self, point: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, date: org.orekit.time.AbsoluteDate) -> org.orekit.bodies.GeodeticPoint: ...
 
 class LazyLoadedGeoMagneticFields(GeoMagneticFields):
     """
@@ -1179,7 +1181,7 @@ class PythonEarthShape(EarthShape):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """
@@ -1203,7 +1205,7 @@ class PythonEarthShape(EarthShape):
         """
         ...
     @typing.overload
-    def transform(self, geodeticPoint: org.orekit.bodies.GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def transform(self, point: org.orekit.bodies.GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
         Transform a Cartesian point to a surface-relative point.
         
@@ -1247,7 +1249,7 @@ class PythonEarthShape(EarthShape):
         """
         ...
     @typing.overload
-    def transform(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.bodies.GeodeticPoint: ...
+    def transform(self, point: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, date: org.orekit.time.AbsoluteDate) -> org.orekit.bodies.GeodeticPoint: ...
 
 class PythonGeoMagneticFields(GeoMagneticFields):
     def __init__(self): ...
@@ -1329,7 +1331,7 @@ class PythonGeoMagneticFields(GeoMagneticFields):
         """
         ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def pythonExtension(self, pythonObject: int) -> None:
         """
         Part of JCC Python interface to object
         """

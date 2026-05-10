@@ -25,14 +25,12 @@ import typing
 _Frequency__T = typing.TypeVar('_Frequency__T', bound=java.lang.Comparable)  # <T>
 class Frequency(java.io.Serializable, typing.Generic[_Frequency__T]):
     """
-    implements Serializable
-    
     Maintains a frequency distribution of Comparable values.
     
     The values are ordered using the default (natural order), unless a Comparator is supplied in the constructor.
     
-          - LongFrequency
-          - serialized
+    Also see:
+        LongFrequency, serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -63,9 +61,9 @@ class Frequency(java.io.Serializable, typing.Generic[_Frequency__T]):
         
         """
         ...
-    def equals(self, object: typing.Any) -> bool:
+    def equals(self, obj: typing.Any) -> bool:
         """
-        Overrides: equals in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -153,15 +151,15 @@ class Frequency(java.io.Serializable, typing.Generic[_Frequency__T]):
         Returns:
             the number of unique values that have been added to the frequency table.
         
-              - valuesIterator
-        
+        Also see:
+            valuesIterator
         
         
         """
         ...
     def hashCode(self) -> int:
         """
-        Overrides: hashCode in class Object
+        Overrides: Object in class Object
         
         
         """
@@ -185,7 +183,7 @@ class Frequency(java.io.Serializable, typing.Generic[_Frequency__T]):
         """
         Return a string representation of this frequency distribution.
         
-        Overrides: toString in class Object
+        Overrides: Object in class Object
         
         Returns:
             a string representation.
@@ -206,8 +204,6 @@ class Frequency(java.io.Serializable, typing.Generic[_Frequency__T]):
 
 class LocalizedStatFormats(java.lang.Enum['LocalizedStatFormats'], org.hipparchus.exception.Localizable):
     """
-    implements hipparchus
-    
     Enumeration for localized messages formats used in exceptions messages.
     
     The constants in this enumeration represent the available formats as localized strings. These formats are intended to be localized using simple properties files, using the constant name as the key and the property value as the message format. The source English format is provided in the constants themselves to serve both as a reminder for developers to understand the parameters needed by each format, as a basis for translators to create localized properties files, and as a default format if some translation is missing.
@@ -271,7 +267,12 @@ class LocalizedStatFormats(java.lang.Enum['LocalizedStatFormats'], org.hipparchu
     @staticmethod
     def values() -> typing.MutableSequence['LocalizedStatFormats']:
         """
-        Returns an array containing the constants of this enum type, in the order they are declared.
+        Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to iterate over the constants as follows:
+        
+        
+        for (LocalizedStatFormats c : LocalizedStatFormats.values())
+            System.out.println(c);
+        
         
         Returns:
             an array containing the constants of this enum type, in the order they are declared
@@ -286,22 +287,22 @@ class StatUtils:
     """
     @typing.overload
     @staticmethod
-    def geometricMean(*double: float) -> float: ...
+    def geometricMean(*values: float) -> float: ...
     @typing.overload
     @staticmethod
-    def geometricMean(doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def geometricMean(values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @typing.overload
     @staticmethod
-    def max(*double: float) -> float: ...
+    def max(*values: float) -> float: ...
     @typing.overload
     @staticmethod
-    def max(doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def max(values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @typing.overload
     @staticmethod
-    def mean(*double: float) -> float: ...
+    def mean(*values: float) -> float: ...
     @typing.overload
     @staticmethod
-    def mean(doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def mean(values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @staticmethod
     def meanDifference(sample1: typing.Union[typing.List[float], jpype.JArray], sample2: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
@@ -324,13 +325,13 @@ class StatUtils:
         ...
     @typing.overload
     @staticmethod
-    def min(*double: float) -> float: ...
+    def min(*values: float) -> float: ...
     @typing.overload
     @staticmethod
-    def min(doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def min(values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @typing.overload
     @staticmethod
-    def mode(*double: float) -> typing.MutableSequence[float]: ...
+    def mode(*sample: float) -> typing.MutableSequence[float]: ...
     @typing.overload
     @staticmethod
     def mode(sample: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> typing.MutableSequence[float]:
@@ -371,34 +372,34 @@ class StatUtils:
         ...
     @typing.overload
     @staticmethod
-    def percentile(doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float) -> float: ...
+    def percentile(values: typing.Union[typing.List[float], jpype.JArray], p: float) -> float: ...
     @typing.overload
     @staticmethod
-    def percentile(doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int, double2: float) -> float: ...
+    def percentile(values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int, p: float) -> float: ...
     @typing.overload
     @staticmethod
-    def populationVariance(*double: float) -> float: ...
+    def populationVariance(*values: float) -> float: ...
     @typing.overload
     @staticmethod
-    def populationVariance(doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float) -> float: ...
+    def populationVariance(values: typing.Union[typing.List[float], jpype.JArray], mean: float) -> float: ...
     @typing.overload
     @staticmethod
-    def populationVariance(doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float, int: int, int2: int) -> float: ...
+    def populationVariance(values: typing.Union[typing.List[float], jpype.JArray], mean: float, begin: int, length: int) -> float: ...
     @typing.overload
     @staticmethod
-    def populationVariance(doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def populationVariance(values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @typing.overload
     @staticmethod
-    def product(*double: float) -> float: ...
+    def product(*values: float) -> float: ...
     @typing.overload
     @staticmethod
-    def product(doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def product(values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @typing.overload
     @staticmethod
-    def sum(*double: float) -> float: ...
+    def sum(*values: float) -> float: ...
     @typing.overload
     @staticmethod
-    def sum(doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def sum(values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @staticmethod
     def sumDifference(sample1: typing.Union[typing.List[float], jpype.JArray], sample2: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
@@ -420,28 +421,28 @@ class StatUtils:
         ...
     @typing.overload
     @staticmethod
-    def sumLog(*double: float) -> float: ...
+    def sumLog(*values: float) -> float: ...
     @typing.overload
     @staticmethod
-    def sumLog(doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def sumLog(values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @typing.overload
     @staticmethod
-    def sumSq(*double: float) -> float: ...
+    def sumSq(*values: float) -> float: ...
     @typing.overload
     @staticmethod
-    def sumSq(doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def sumSq(values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @typing.overload
     @staticmethod
-    def variance(*double: float) -> float: ...
+    def variance(*values: float) -> float: ...
     @typing.overload
     @staticmethod
-    def variance(doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float) -> float: ...
+    def variance(values: typing.Union[typing.List[float], jpype.JArray], mean: float) -> float: ...
     @typing.overload
     @staticmethod
-    def variance(doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float, int: int, int2: int) -> float: ...
+    def variance(values: typing.Union[typing.List[float], jpype.JArray], mean: float, begin: int, length: int) -> float: ...
     @typing.overload
     @staticmethod
-    def variance(doubleArray: typing.Union[typing.List[float], jpype.JArray], int: int, int2: int) -> float: ...
+    def variance(values: typing.Union[typing.List[float], jpype.JArray], begin: int, length: int) -> float: ...
     @staticmethod
     def varianceDifference(sample1: typing.Union[typing.List[float], jpype.JArray], sample2: typing.Union[typing.List[float], jpype.JArray], meanDifference: float) -> float:
         """
@@ -459,8 +460,8 @@ class StatUtils:
             hipparchus: if the arrays do not have the same length.
             hipparchus: if the arrays length is less than 2.
         
-              - meanDifference
-        
+        Also see:
+            meanDifference
         
         
         """
@@ -478,7 +479,8 @@ class LongFrequency(Frequency[int]):
     
     The values are ordered using the default (natural order), unless a Comparator is supplied in the constructor.
     
-          - serialized
+    Also see:
+        serialized
     """
     @typing.overload
     def __init__(self): ...
@@ -496,7 +498,7 @@ class LongFrequency(Frequency[int]):
         """
         ...
     @typing.overload
-    def addValue(self, int: int) -> None: ...
+    def addValue(self, v: int) -> None: ...
     @typing.overload
     def getCount(self, v: java.lang.Comparable) -> int:
         """
@@ -512,7 +514,7 @@ class LongFrequency(Frequency[int]):
         """
         ...
     @typing.overload
-    def getCount(self, int: int) -> int: ...
+    def getCount(self, v: int) -> int: ...
     @typing.overload
     def getCumFreq(self, v: java.lang.Comparable) -> int:
         """
@@ -528,7 +530,7 @@ class LongFrequency(Frequency[int]):
         """
         ...
     @typing.overload
-    def getCumFreq(self, int: int) -> int: ...
+    def getCumFreq(self, v: int) -> int: ...
     @typing.overload
     def getCumPct(self, v: java.lang.Comparable) -> float:
         """
@@ -544,7 +546,7 @@ class LongFrequency(Frequency[int]):
         """
         ...
     @typing.overload
-    def getCumPct(self, int: int) -> float: ...
+    def getCumPct(self, v: int) -> float: ...
     @typing.overload
     def getPct(self, v: java.lang.Comparable) -> float:
         """
@@ -560,7 +562,7 @@ class LongFrequency(Frequency[int]):
         """
         ...
     @typing.overload
-    def getPct(self, int: int) -> float: ...
+    def getPct(self, v: int) -> float: ...
     @typing.overload
     def incrementValue(self, v: java.lang.Comparable, increment: int) -> None:
         """
@@ -574,7 +576,7 @@ class LongFrequency(Frequency[int]):
         """
         ...
     @typing.overload
-    def incrementValue(self, int: int, long: int) -> None: ...
+    def incrementValue(self, v: int, increment: int) -> None: ...
 
 
 class __module_protocol__(Protocol):
