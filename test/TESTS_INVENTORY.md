@@ -278,11 +278,9 @@ Source: `Orekit/orekit_jpype/test/`. Sorted by recommended translation order.
 | ✅ done | EphemerisEventsTest.py | 162 | propagation/analytical/EphemerisEventsTest.java | Translated 2026-05-11. Adaptations: `int → float` for `mass=2500.0` and `math.radians(261.0)` (Pythonic substitution; JCC's `_parseArgs` is strict on primitive types where jpype auto-converts); `ArrayList(python_list)` → populate via `.add()` in a loop; `ephem.clearStepHandlers()` → `Propagator.cast_(ephem).clearStepHandlers()` because `clearStepHandlers` is a default method on the `Propagator` interface. Same `regular-data` root as Java. 4/4 test methods pass. |
 | ✅ done | LeastSquaresTleGenerationAlgorithmTest.py | 91 | propagation/analytical/tle/generation/ | Translated 2026-05-11. Adaptations: `forEach(lambda d: d.setSelected(True))` → `for d in tle.getParametersDrivers(): d.setSelected(True)` (JCC can't bridge Python lambdas into a `java.util.function.Consumer`). 3/3 test methods pass. |
 | ✅ done | FixedPointTleGenerationAlgorithmTest.py | 214 | propagation/analytical/tle/generation/ | Translated 2026-05-11. Same lambda-to-loop fix as above; `int → float` already in source; `math.pi` substituted for `FastMath.PI`. NEW gotcha: `FieldTLE.getParameters(field)` and `getParameters(field, date)` are default methods on `ParameterDriversProvider` interface — JCC doesn't dispatch them on subclasses, so cast: `ParameterDriversProvider.cast_(tle).getParameters(field)`. 12/12 test methods pass. |
-| 🔵 planned | EphemerisEventsTest, then more event-driven tests | | | once the EventHandler bridge pattern is settled, several tests follow the same recipe |
-| 🔵 planned | HaloOrbitTest.py | 218 | bodies / forces (three-body) | three-body propagation; check whether any abstract subclassing is needed |
-| 🔵 planned | RuggedTest.py | 217 | (Rugged, not core Orekit) | Rugged is bundled in the conda package but currently uncovered by the JCC suite; high user-facing value |
-| 🔵 planned | SpacecraftStateInterpolatorTest.py | 307 | propagation/SpacecraftStateInterpolatorTest.java | Larger; investigate whether step-handler bridges are needed |
-| 🔵 planned | OpmParserTest.py | 347 | files/ccsds/ndm/odm/opm/ | CCSDS OPM parser; large, mostly assertion-heavy; should translate cleanly once imports are right |
+| ✅ done | HaloOrbitTest.py | 218 | orbits/HaloOrbitTest.java | Translated 2026-05-11. CR3BP / three-body. Adaptations: multi-root data via `setup_orekit_data(["resources/cr3bp", "resources/regular-data"])` (mirrors Java's `setDataRoot("cr3bp:regular-data")`); explicit `JArray_double([...])` for the integrator's `vecAbsoluteTolerances`/`vecRelativeTolerances` `double[]` parameters; `OrekitException` (Java) → `JavaError` (Python) in `assertRaises`; `int → float` in literals (`8.0e6`, `1.0`). 5/5 test methods pass. |
+| ✅ done | SpacecraftStateInterpolatorTest.py | 307 | propagation/SpacecraftStateInterpolatorTest.java | Translated 2026-05-11. NEW gotcha: `NumericalPropagator.tolerances(...)` returns `double[][]`, which JCC wraps as `JArray_object`; indexing returns Object that the integrator constructor rejects. Cast each row: `JArray('double').cast_(tolerances[0])`. Also: `addAdditionalData("quadratic", JArray_double([dt*dt]))` instead of bare `dt*dt` (JCC needs explicit boxing); `sample` Python list → `ArrayList` for `interpolator.interpolate`. 2/2 test methods pass. |
+| ✅ done | OpmParserTest.py | 347 | files/ccsds/ndm/odm/opm/OpmParserTest.java | Translated 2026-05-11. Several JCC-specific patterns surfaced: (1) `parser.parseMessage(source)` returns Object (generic erasure) — wrap in `Opm.cast_(...)`; (2) `OpmWriter.writeMessage` is on the `MessageWriter` interface as a default method — cast: `MessageWriter.cast_(writer).writeMessage(...)`; (3) `oe.getParts()[0]` returns Object — coerce with `str(...)` for string compares; (4) `assertEqual(date1, date2)` fails because JCC's `__eq__` on wrapped objects is identity, not `.equals()` — added an `assertDateEqual` helper that compares via `durationFrom`; (5) `len(java_list)` and `java_list[i]` don't work on JCC's `List` wrapper — use `.size()` and `.get(i)`; (6) `java.io.CharArrayWriter` not in JCC's java.io wrapping — `StringWriter` substitutes (both `Appendable`); (7) jpype's `myReader(@JImplements(DataSource.StreamOpener))` has no JCC bridge — round-trip writes to a `tempfile.NamedTemporaryFile` and re-reads via `DataSource(File(path))`. 5/5 test methods pass. |
 | ✅ done (partial) | PyhelpersTest.py | 120 (jpype) → 99 (JCC) | (no Java equivalent — pyhelpers is Python-only) | Translated 2026-05-11 as a partial port. Covers: `setup_orekit_data` from a single folder, from a list of paths (multi-root), with `None` (raises), with an invalid path (raises `FileNotFoundError`); `setup_orekit_curdir` backward-compat wrapper; `download_orekit_data_curdir` (gated behind `OREKIT_TEST_NETWORK=1` env var). Skipped: `clear_factories` tests (helper deferred), numpy `JArray_double2D` (not ported), numpy `to_elevationmask` (not ported). 5 active tests pass + 1 skipped (network). pytest-style → unittest.TestCase conversion. |
 | ⛔ n/a | OrekitConvertersTest.py | 49 | n/a | Tests jpype's automatic Python ↔ Java converters: `abs_date.to_datetime()`, `AbsoluteDate(py_datetime, 0.0)`, `__repr__` formatting, numpy-aware `JArray_double2D`. None of these mechanisms exist in JCC; the test surface is jpype-specific by design. |
 | ⛔ n/a | DefaultMethodsTest.py | 117 | (no Java equivalent — this test specifically validates jpype handles default methods on inherited interfaces) | Was written for jpype to verify it dispatches Java interface default methods on subclasses. JCC explicitly does NOT (see CLAUDE.md "JCC ignores Java interface default methods"). The corresponding JCC behaviour is "raise InvalidArgsError"; the workaround is `cast_()`. Translating this test would just hard-code the limitation; better to leave it as a jpype-only invariant. |
@@ -331,10 +329,10 @@ Source: `tests_in_development/` in this repo. Listed for completeness.
 
 ## Counts
 
-- JCC suite today: 32 files (28 tests + 3 helpers + 1 `__init__.py`).
+- JCC suite today: 35 files (31 tests + 3 helpers + 1 `__init__.py`).
 - jpype suite: 35 files (incl. helpers and runner).
-- Translation queue (🔵): 4 (HaloOrbit, Rugged, SpacecraftStateInterpolator, OpmParser).
-- Translated to date (✅): 4 (EphemerisEvents, LeastSquaresTleGen, FixedPointTleGen, Pyhelpers-partial).
+- Translation queue (🔵): 1 (Rugged).
+- Translated to date (✅): 7 (EphemerisEvents, LeastSquaresTleGen, FixedPointTleGen, Pyhelpers-partial, HaloOrbit, SpacecraftStateInterpolator, OpmParser).
 - Marked n/a (⛔): 2 (OrekitConverters, DefaultMethods).
 
 ## Translation lessons learned (running list)
@@ -391,3 +389,56 @@ future translators don't repeat the discovery cost.
   "OREKIT_TEST_NETWORK"), ...)` so the conda CI doesn't depend on
   external connectivity. Run locally with `OREKIT_TEST_NETWORK=1` to
   exercise.
+- **Java exception classes are NOT Python exceptions.** `assertRaises`
+  needs `JavaError` (re-exported from `orekit`), not the Java
+  exception class itself (`OrekitException`,
+  `OrekitIllegalArgumentException`, etc.). To inspect the underlying
+  Java side: `with self.assertRaises(JavaError) as ctx: ...; oe =
+  OrekitException.cast_(ctx.exception.getJavaException())`. Then
+  `oe.getSpecifier()` / `oe.getParts()` work as in Java.
+- **Generic methods erase to Object.** Anywhere the Java method is
+  generic (`<T> T parseMessage(DataSource)`,
+  `<T> T cast(...)`), JCC returns the erased Object. Cast back at the
+  call site: `Opm.cast_(parser.parseMessage(source))`. This pattern
+  applies to all CCSDS parsers, generic factories, and the Field-aware
+  TLE / propagator APIs.
+- **`Object[]` returned by Java surfaces as JCC Object indexing.**
+  `oe.getParts()[0]` returns Object, not str — coerce with
+  `str(oe.getParts()[0])` or `String.cast_(...)` if you need a Python
+  string for an `assertEqual` against a Python literal. Same applies to
+  `Map.values()`, `Map.keySet()` returns, etc.
+- **`==` on Java wrappers is identity, not `.equals()`.** Two distinct
+  `AbsoluteDate` (or any other Java) wrapper instances representing the
+  same value will compare unequal under `assertEqual`. Either:
+  (a) compare via the domain-specific equality method
+  (e.g. `actual.durationFrom(expected) == 0.0` for AbsoluteDate); or
+  (b) call `.equals()` directly. For repeated patterns, define a small
+  helper like `assertDateEqual` on the test class.
+- **`len(java_list)` / `java_list[i]` don't work on JCC's `List`
+  wrapper.** Even though concrete `ArrayList` instances may
+  occasionally support them, JCC's wrapper for the `List` interface
+  generally does NOT implement `__len__` or `__getitem__`. Use
+  `java_list.size()` and `java_list.get(i)` — the underlying Java
+  methods. Same caveat for `Map`: `m.size()` and `m.get(key)`.
+- **`double[][]` index returns Object.** When a Java method returns
+  `double[][]`, JCC wraps it as `JArray_object`. Indexing yields a
+  generic Object that subsequent Java calls expecting `double[]` will
+  reject with `InvalidArgsError`. Cast each row:
+  `JArray('double').cast_(matrix[0])`.
+- **`SpacecraftState.addAdditionalData("name", value)` needs explicit
+  boxing.** The Java signature is `addAdditionalData(String, Object)`.
+  Pass a Python float and JCC won't auto-box; pass a `JArray_double([
+  value])` (or `Double` from `java.lang`) instead. Mirrors how
+  `getAdditionalState("name")` returns a `double[]` on the read side.
+- **java.io's wrapping is incomplete.** Not every `java.io` class is in
+  the JCC build (see `--package java.io` in
+  `orekit-feedstock/recipe/build.sh` for what is). `CharArrayWriter` is
+  out; `StringWriter` is in. Both implement `Appendable`, so for
+  Generator-style writers `StringWriter` is a clean substitute.
+- **No `PythonStreamOpener` (or generally, no bridge for many Java
+  functional interfaces).** When jpype tests use
+  `@JImplements(DataSource.StreamOpener)` to provide a stream from
+  memory, JCC has no equivalent because the Orekit Python wrapper jar
+  doesn't ship a `PythonStreamOpener` bridge. The portable workaround
+  is to write the bytes to a `tempfile.NamedTemporaryFile`, use
+  `DataSource(File(path))`, and clean up in a `finally` block.
