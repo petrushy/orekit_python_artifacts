@@ -38,7 +38,7 @@ from org.orekit.frames import FramesFactory
 from org.orekit.orbits import PositionAngleType
 from org.orekit.time import AbsoluteDate
 from org.orekit.time import TimeScalesFactory
-from org.orekit.utils import Constants
+from org.orekit.utils import Constants, PVCoordinatesProvider
 from org.orekit.propagation.sampling import PythonOrekitFixedStepHandler
 from org.orekit.propagation.events import InterSatDirectViewDetector
 from org.hipparchus.geometry.euclidean.threed import Line
@@ -128,7 +128,7 @@ class InterSatDirectViewDetectorTest(unittest.TestCase):
 
             def handleStep(self, state):
                 pos1 = state.getPVCoordinates().getPosition()
-                pos2 = o2.getPVCoordinates(state.getDate(), state.getFrame()).getPosition()
+                pos2 = PVCoordinatesProvider.cast_(o2).getPVCoordinates(state.getDate(), state.getFrame()).getPosition()
 
                 assert Vector3D.distance(pos1, pos2) > 8100.0
                 assert Vector3D.distance(pos1, pos2) < 16400.0
