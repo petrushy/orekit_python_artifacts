@@ -82,7 +82,7 @@ class Result():
 class IodLaplaceTest(unittest.TestCase):
 
     def setUp(self):
-        setup_orekit_curdir("resources")
+        setup_orekit_curdir("resources/regular-data")
         self.gcrf = FramesFactory.getGCRF()
         self.itrf = FramesFactory.getITRF(IERSConventions.IERS_2010, False)
 

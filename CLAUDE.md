@@ -330,6 +330,47 @@ mostly just return the running env and may try to extend the classpath.
 This matters when developing tests interactively — re-importing or
 re-calling `initVM` does not give you a fresh VM.
 
+### `setup_orekit_curdir("resources")` on the full Java test tree
+
+The Java Orekit project's `src/test/resources/` contains many parallel EOP
+fixture sets (`bulletinA/`, `eopc04/`, `eop-prediction/`, `linear-EOP/`,
+`zero-EOP/`, `missing-months/`, `new-bulletinB/`, `eop-xml/`,
+`compressed-data/`, `earth/finals2000A.all`, ...). Each is a deliberate test
+fixture covering a specific date range — they are **not** intended to be
+loaded together. The Java tests pick one curated subset per test via
+`Utils.setDataRoot("regular-data")` (or
+`"regular-data:atmosphere:potential/icgem-format"` etc.).
+
+If a Python test calls `setup_orekit_curdir("resources")`, `DirectoryCrawler`
+walks the **entire** tree, Orekit's `LazyLoadedEop` merges all fixtures into
+one EOP timeline, and `EOPHistory.checkEOPContinuity` then refuses any
+frame computation with:
+
+```text
+org.orekit.errors.OrekitException: missing Earth Orientation Parameters
+  between 2020-06-07T00:00:00.000Z and 2022-01-01T00:00:00.000Z, gap is 4.95072E7 s
+```
+
+The fix is **per-test**: mirror the Java equivalent's `Utils.setDataRoot(...)`
+value. For most tests that means `setup_orekit_curdir("resources/regular-data")`.
+For multi-root tests (Java's `setDataRoot` accepts `:`-separated roots) build
+the providers manually, since `setup_orekit_curdir` calls
+`DM.clearProviders()` ([pyhelpers.py:127](pyhelpers.py#L127)) on each call
+and won't stack:
+
+```python
+from org.orekit.data import DataContext, DirectoryCrawler
+from java.io import File
+DM = DataContext.getDefault().getDataProvidersManager()
+DM.clearProviders(); DM.clearLoadedDataNames(); DM.resetFiltersToDefault()
+for sub in ("regular-data", "atmosphere", "potential/icgem-format"):
+    DM.addProvider(DirectoryCrawler(File(f"resources/{sub}")))
+```
+
+When a Python test fails on `FramesFactory.getITRF(...)` with the EOP-gap
+error after a resource refresh, this is almost always the cause. Look at
+the corresponding Java test's `@BeforeEach setUp()` for the right data root.
+
 ## Running tests locally without a full conda build
 
 If a single test fails inside conda-forge CI and you need to iterate, you

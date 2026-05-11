@@ -9,6 +9,8 @@ Python version translated from Java orekit 11.1 by Petrus Hyvönen, SSC 2022
 import  orekit
 orekit.initVM()
 from orekit.pyhelpers import  setup_orekit_curdir
+from org.orekit.data import DataContext, DirectoryCrawler
+from java.io import File
 
 from org.hipparchus.geometry.euclidean.threed import Vector3D
 from org.hipparchus.ode.nonstiff import DormandPrince853Integrator
@@ -43,7 +45,13 @@ import math
 class BrouwerLyddanePropagatorTest(unittest.TestCase):
 
     def setUp(self):
-        setup_orekit_curdir("resources")
+        # Mirrors Java's Utils.setDataRoot("regular-data:atmosphere:potential/icgem-format")
+        DM = DataContext.getDefault().getDataProvidersManager()
+        DM.clearProviders()
+        DM.clearLoadedDataNames()
+        DM.resetFiltersToDefault()
+        for sub in ("regular-data", "atmosphere", "potential/icgem-format"):
+            DM.addProvider(DirectoryCrawler(File(f"resources/{sub}")))
         self.provider = GravityFieldFactory.getNormalizedProvider(5, 0)
 
     def test_sameDateCartesian(self):

@@ -582,5 +582,7 @@ public class EstimationTestUtils {
 
 if __name__ == '__main__':
     a = EstimationTestUtils()
-    Context = a.eccentricContext(["../test/resources"])
+    Context = a.eccentricContext(["../test/resources/regular-data",
+                                  "../test/resources/potential",
+                                  "../test/resources/tides"])
     print(Context)

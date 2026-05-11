@@ -47,7 +47,7 @@ import sys
 
 from orekit.pyhelpers import setup_orekit_curdir
 
-setup_orekit_curdir("resources")
+setup_orekit_curdir("resources/regular-data")
 
 
 class GroundFieldOfViewDetectorTest(unittest.TestCase):

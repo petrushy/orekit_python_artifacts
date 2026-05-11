@@ -46,7 +46,7 @@ class GroundPointingTest(unittest.TestCase):
     def setUp(self):
         
         DM = DataContext.getDefault().getDataProvidersManager()
-        datafile = File('../test/resources')
+        datafile = File('../test/resources/regular-data')
         if not datafile.exists():
             print('File :', datafile.absolutePath, ' not found')
 
