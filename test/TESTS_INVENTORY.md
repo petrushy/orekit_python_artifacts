@@ -232,15 +232,36 @@ completeness so the table reflects total coverage.
 | File | jpype counterpart | Java original | Notes |
 |---|---|---|---|
 | AltitudeDetectorTest.py | yes | propagation/events/ | |
+| AccurateFormatterTest.py | unknown | utils/AccurateFormatterTest.java | direct Java-to-JCC port; static and instance overloads |
 | BackAndForthDetectorTest.py | yes | propagation/events/ | |
+| AveragedCircularWithMeanAngleTest.py | unknown | propagation/conversion/averaging/elements/AveragedCircularWithMeanAngleTest.java | direct Java-to-JCC port |
+| AveragedEquinoctialWithMeanAngleTest.py | unknown | propagation/conversion/averaging/elements/AveragedEquinoctialWithMeanAngleTest.java | direct Java-to-JCC port |
+| AveragedKeplerianWithMeanAngleTest.py | unknown | propagation/conversion/averaging/elements/AveragedKeplerianWithMeanAngleTest.java | direct Java-to-JCC port |
+| AngularDerivativesFilterTest.py | unknown | utils/AngularDerivativesFilterTest.java | direct Java-to-JCC port |
+| AlignmentDetectorTest.py | yes | propagation/events/AlignmentDetectorTest.java | adapted from jpype; numerical propagation event stop |
+| BetaAngleDetectorTest.py | yes | propagation/events/BetaAngleDetectorTest.java | adapted from jpype; beta-angle propagation and record handler |
+| BoundedAttitudeProviderTest.py | yes | attitudes/BoundedAttitudeProviderTest.java | adapted from jpype; includes field attitude path |
+| BodyFacadeTest.py | unknown | files/ccsds/definitions/BodyFacadeTest.java | direct Java-to-JCC port; uses `regular-data` |
 | BrouwerLyddanePropagatorTest.py | yes | propagation/analytical/ | uses multi-root `setup_orekit_data` |
+| CartesianDerivativesFilterTest.py | unknown | utils/CartesianDerivativesFilterTest.java | direct Java-to-JCC port |
+| CenterNameTest.py | unknown | files/ccsds/definitions/CenterNameTest.java | direct Java-to-JCC port; uses frame factories and `ModifiedFrame` |
 | Context.py | yes | (helper, not a test) | |
+| AnalyticalSolarPositionProviderTest.py | yes | bodies/AnalyticalSolarPositionProviderTest.java | adapted from jpype; Sun position comparison |
+| BoundedPVCoordinatesProviderTest.py | yes | utils/BoundedPVCoordinatesProviderTest.java | adapted from jpype; uses `PythonPVCoordinatesProvider` bridge |
+| ConstantPVCoordinatesProviderTest.py | yes | utils/ConstantPVCoordinatesProviderTest.java | adapted from jpype; geodetic point frame transforms |
+| DataDictionaryTest.py | yes | utils/DataDictionaryTest.java | adapted from jpype; casts erased `Object` arrays back to `JArray_double` |
 | DateconversionTest.py | yes | (Python-specific; date conversion) | |
+| DateDriverTest.py | yes | utils/DateDriverTest.java | adapted from jpype |
+| DoubleArrayDictionaryTest.py | yes | utils/DoubleArrayDictionaryTest.java | adapted from jpype; copy constructor workaround via `putAll` |
 | EstimationTestUtils.py | yes | estimation/EstimationTestUtils.java | helper used by IodGibbs/IodLaplace; uses `setup_orekit_data` |
 | EventDetectorTest.py | yes | propagation/events/ | |
 | EventHandlerTest.py | yes | propagation/events/handlers/ | |
+| ExtendedPositionProviderAdapterTest.py | yes | utils/ExtendedPositionProviderAdapterTest.java | adapted from jpype; Moon frame adapter smoke |
+| ExtendedPositionProviderTest.py | yes | utils/ExtendedPositionProviderTest.java | adapted from jpype; uses `PythonExtendedPositionProvider` field bridge |
 | FieldStopOnDecreasingTest.py | yes | propagation/events/ | |
+| FixedTransformProviderTest.py | yes | frames/FixedTransformProviderTest.java | adapted from jpype |
 | FixedRateTest.py | no (JCC-only) | attitudes/ | |
+| GLONASSDateTest.py | yes | time/GLONASSDateTest.java | adapted from jpype |
 | GroundFieldOfViewDetectorTest.py | yes | propagation/events/ | |
 | ImpulseManeuverTest.py | yes | forces/maneuvers/ | |
 | InterSatDirectViewDetectorTest.py | yes | propagation/events/ | uses cast to `PVCoordinatesProvider` for the `getPVCoordinates(date, frame)` interface-default-method gotcha |
@@ -248,13 +269,28 @@ completeness so the table reflects total coverage.
 | IodLaplaceTest.py | yes | estimation/iod/ | |
 | KeplerianConverterTest.py | yes | orbits/ | |
 | KlobucharModelTest.py | yes | models/earth/ionosphere/ | |
+| LatitudeExtremumDetectorTest.py | yes | propagation/events/LatitudeExtremumDetectorTest.java | adapted from jpype; event logger over one day |
 | MeasurementCreator.py | yes | (helper, not a test) | |
+| MonthTest.py | unknown | time/MonthTest.java | direct Java-to-JCC port; enum parsing and Java exception paths |
 | NodeDetectorTest.py | yes | propagation/events/ | |
+| NegateDetectorTest.py | yes | propagation/events/NegateDetectorTest.java | adapted from jpype; uses `PythonEventDetector` mock |
+| ObservableSatelliteTest.py | unknown | estimation/measurements/ObservableSatelliteTest.java | direct Java-to-JCC port |
+| OrDetectorTest.py | yes | propagation/events/OrDetectorTest.java | adapted from jpype; collection overload + `PythonEventDetector` mock |
 | OrekitDataLoadTest.py | no (JCC-only) | (Python-specific; data loader) | |
 | OrekitStepHandlerTest.py | yes | propagation/sampling/ | |
+| OrekitConfigurationTest.py | unknown | utils/OrekitConfigurationTest.java | direct Java-to-JCC port |
 | PVMeasurementCreator.py | yes | (helper, not a test) | |
+| OrbitRelativeFrameTest.py | unknown | files/ccsds/definitions/OrbitRelativeFrameTest.java | direct Java-to-JCC port; casts `LOFType` to `LOF` for interface method |
+| ParameterDriverTest.py | unknown | utils/ParameterDriverTest.java | direct Java-to-JCC port; span-map iteration and Java exception casts |
+| PocMethodTypeTest.py | unknown | files/ccsds/definitions/PocMethodTypeTest.java | direct Java-to-JCC port |
+| RuggedTest.py | yes | (jpype-origin smoke test) | direct-location smoke test for Rugged; uses `regular-data` |
+| SexagesimalAngleTest.py | unknown | bodies/SexagesimalAngleTest.java | direct Java-to-JCC port |
+| ShiftingPVCoordinatesProviderTest.py | yes | utils/ShiftingPVCoordinatesProviderTest.java | adapted from jpype |
 | SmallManeuverAnalyticalModelTest.py | yes | propagation/analytical/ | |
 | SpinStabilizedTest.py | yes | attitudes/ | |
+| TimeStampedDoubleTest.py | yes | time/TimeStampedDoubleTest.java | adapted from jpype |
+| TLEConverterTest.py | in-development | propagation/conversion/TLEConverterTest.java | direct Java-to-JCC port |
+| TimeIntervalDetectorTest.py | yes | propagation/events/TimeIntervalDetectorTest.java | adapted from jpype; uses `PythonEventHandler` bridge |
 | TransformTest.py | yes | frames/ | |
 
 ## JCC-only (🟠)
@@ -278,12 +314,21 @@ Source: `Orekit/orekit_jpype/test/`. Sorted by recommended translation order.
 | ✅ done | EphemerisEventsTest.py | 162 | propagation/analytical/EphemerisEventsTest.java | Translated 2026-05-11. Adaptations: `int → float` for `mass=2500.0` and `math.radians(261.0)` (Pythonic substitution; JCC's `_parseArgs` is strict on primitive types where jpype auto-converts); `ArrayList(python_list)` → populate via `.add()` in a loop; `ephem.clearStepHandlers()` → `Propagator.cast_(ephem).clearStepHandlers()` because `clearStepHandlers` is a default method on the `Propagator` interface. Same `regular-data` root as Java. 4/4 test methods pass. |
 | ✅ done | LeastSquaresTleGenerationAlgorithmTest.py | 91 | propagation/analytical/tle/generation/ | Translated 2026-05-11. Adaptations: `forEach(lambda d: d.setSelected(True))` → `for d in tle.getParametersDrivers(): d.setSelected(True)` (JCC can't bridge Python lambdas into a `java.util.function.Consumer`). 3/3 test methods pass. |
 | ✅ done | FixedPointTleGenerationAlgorithmTest.py | 214 | propagation/analytical/tle/generation/ | Translated 2026-05-11. Same lambda-to-loop fix as above; `int → float` already in source; `math.pi` substituted for `FastMath.PI`. NEW gotcha: `FieldTLE.getParameters(field)` and `getParameters(field, date)` are default methods on `ParameterDriversProvider` interface — JCC doesn't dispatch them on subclasses, so cast: `ParameterDriversProvider.cast_(tle).getParameters(field)`. 12/12 test methods pass. |
+| ✅ done | RuggedTest.py | 202 | (jpype-origin smoke test) | Translated 2026-05-11 from `/Users/sepehy/Development/Orekit/orekit_jpype/test/RuggedTest.py`. Adaptations: `orekit_jpype` imports → `orekit`; removed numpy/pytest in favor of Python lists, `math.degrees`, and `unittest` assertions; `Vector3D(list)` → `Vector3D(x, y, z)`; data root narrowed from `resources` to `resources/regular-data`; `LineSensor.getLOS(date, 0)` must use an `int` pixel index because `0.0` selects the floating overload and hits `ArrayIndexOutOfBoundsException`. 2/2 test methods pass. |
+| ✅ done | TLEConverterTest.py | 75 | propagation/conversion/TLEConverterTest.java | Translated 2026-05-11 directly from Java. Adaptations: use `1.0` for the `positionScale` double; Java's no-arg `buildPropagator()` path takes an empty-parameter route in this JCC wrapper, so call `buildPropagator(builder.getSelectedNormalizedParameters())` explicitly. 2/2 test methods pass. |
+| ✅ done | Direct Java batch: AccurateFormatterTest.py, AngularDerivativesFilterTest.py, AveragedCircularWithMeanAngleTest.py, AveragedEquinoctialWithMeanAngleTest.py, AveragedKeplerianWithMeanAngleTest.py, BodyFacadeTest.py, CartesianDerivativesFilterTest.py, ObservableSatelliteTest.py, OrekitConfigurationTest.py, PocMethodTypeTest.py | 10 files | mixed: utils, CCSDS definitions, averaging elements, estimation measurements | Translated 2026-05-11 directly from Java. Adaptations: explicit float literals for constructor overloads; Java exception assertions use `JavaError`; Java regex version check uses Python `re`; Python `math.nextafter(60.0, -math.inf)` substitutes Java `Math.nextDown(60.0)` in `AccurateFormatterTest`. 29/29 test methods pass across the batch. |
+| ✅ done | Direct Java batch: CenterNameTest.py, MonthTest.py, OrbitRelativeFrameTest.py, ParameterDriverTest.py, SexagesimalAngleTest.py | 5 files | mixed: CCSDS definitions, time, bodies, utils | Translated 2026-05-11 directly from Java. Adaptations: Java exception assertions use `JavaError` then cast where specifier/parts are checked; `TimeSpanMap.Span` iteration uses an explicit `while span is not None`; `LOFType` must be cast to the `LOF` interface before calling `isQuasiInertial()`; Java `String.format(Locale.US, ...)` translated to Python `%` formatting with explicit unicode escapes for sexagesimal symbols. 29/29 test methods pass across the batch. |
+| ✅ done | jpype batch: DoubleArrayDictionaryTest.py, DataDictionaryTest.py, DateDriverTest.py, TimeStampedDoubleTest.py | 4 files | mixed: utils, time | Translated 2026-05-11 from `/Users/sepehy/Development/Orekit/orekit_jpype/test`. Adaptations: `DataDictionary.get("a")` returns erased `Object`, so cast to `JArray_double` before array assertions; `DataDictionary(DataDictionary)` and `DoubleArrayDictionary(DoubleArrayDictionary)` copy constructors are advertised but rejected by JCC, so use no-arg construction plus `putAll(original)`. 29/29 test methods pass across the batch. |
+| ✅ done | jpype batch: AnalyticalSolarPositionProviderTest.py, BoundedPVCoordinatesProviderTest.py, ShiftingPVCoordinatesProviderTest.py, ExtendedPositionProviderAdapterTest.py, GLONASSDateTest.py | 5 files | mixed: bodies, utils, time | Translated 2026-05-11 from `/Users/sepehy/Development/Orekit/orekit_jpype/test`. Adaptations: imports/data root to JCC convention; `BoundedPVCoordinatesProviderTest` replaces jpype `@JImplements` with a `PythonPVCoordinatesProvider` subclass and `super().__init__()`; date equality uses `durationFrom` rather than wrapper identity. 6/6 test methods pass across the batch. |
+| ✅ done | jpype bridge/provider batch: NegateDetectorTest.py, OrDetectorTest.py, ExtendedPositionProviderTest.py, ConstantPVCoordinatesProviderTest.py, BoundedAttitudeProviderTest.py | 5 files | mixed: propagation events, utils, attitudes | Translated 2026-05-11 from `/Users/sepehy/Development/Orekit/orekit_jpype/test`. Adaptations: jpype `@JImplements(EventDetector)` mocks replaced with `PythonEventDetector` + `PythonEventHandler` + `PythonAdaptableInterval`; `BooleanDetector.orCombine` uses an explicit `ArrayList` of `EventDetector.cast_(...)` rather than varargs; `PythonExtendedPositionProvider` exposes only the field-date `getPosition` native, so the PV default method is tested through that field bridge; Java-wrapper equality for vectors/dates replaced by component/duration comparisons. 11/11 test methods pass across the batch. |
+| ✅ done | jpype event/frames batch: ElevationExtremumDetectorTest.py, BetaAngleDetectorTest.py, AlignmentDetectorTest.py, FixedTransformProviderTest.py, TimeIntervalDetectorTest.py, LatitudeExtremumDetectorTest.py | 6 files | mixed: propagation events, frames | Translated 2026-05-11 from `/Users/sepehy/Development/Orekit/orekit_jpype/test`. Adaptations: `withXxx` fluent chains often return `AbstractDetector` wrappers, so cast back to concrete detector classes before concrete getters; use `getDetectionSettings()` for max-check/threshold/max-iteration assertions; `Vector3D.normalize()` is not exposed in this JCC build, so normalize with `scalarMultiply(1.0 / getNorm())`; `TimeIntervalDetectorTest` replaces jpype `@JImplements(EventHandler)` with `PythonEventHandler`. 11/11 test methods pass across the batch. |
 | ✅ done | HaloOrbitTest.py | 218 | orbits/HaloOrbitTest.java | Translated 2026-05-11. CR3BP / three-body. Adaptations: multi-root data via `setup_orekit_data(["resources/cr3bp", "resources/regular-data"])` (mirrors Java's `setDataRoot("cr3bp:regular-data")`); explicit `JArray_double([...])` for the integrator's `vecAbsoluteTolerances`/`vecRelativeTolerances` `double[]` parameters; `OrekitException` (Java) → `JavaError` (Python) in `assertRaises`; `int → float` in literals (`8.0e6`, `1.0`). 5/5 test methods pass. |
 | ✅ done | SpacecraftStateInterpolatorTest.py | 307 | propagation/SpacecraftStateInterpolatorTest.java | Translated 2026-05-11. NEW gotcha: `NumericalPropagator.tolerances(...)` returns `double[][]`, which JCC wraps as `JArray_object`; indexing returns Object that the integrator constructor rejects. Cast each row: `JArray('double').cast_(tolerances[0])`. Also: `addAdditionalData("quadratic", JArray_double([dt*dt]))` instead of bare `dt*dt` (JCC needs explicit boxing); `sample` Python list → `ArrayList` for `interpolator.interpolate`. 2/2 test methods pass. |
 | ✅ done | OpmParserTest.py | 347 | files/ccsds/ndm/odm/opm/OpmParserTest.java | Translated 2026-05-11. Several JCC-specific patterns surfaced: (1) `parser.parseMessage(source)` returns Object (generic erasure) — wrap in `Opm.cast_(...)`; (2) `OpmWriter.writeMessage` is on the `MessageWriter` interface as a default method — cast: `MessageWriter.cast_(writer).writeMessage(...)`; (3) `oe.getParts()[0]` returns Object — coerce with `str(...)` for string compares; (4) `assertEqual(date1, date2)` fails because JCC's `__eq__` on wrapped objects is identity, not `.equals()` — added an `assertDateEqual` helper that compares via `durationFrom`; (5) `len(java_list)` and `java_list[i]` don't work on JCC's `List` wrapper — use `.size()` and `.get(i)`; (6) `java.io.CharArrayWriter` not in JCC's java.io wrapping — `StringWriter` substitutes (both `Appendable`); (7) jpype's `myReader(@JImplements(DataSource.StreamOpener))` has no JCC bridge — round-trip writes to a `tempfile.NamedTemporaryFile` and re-reads via `DataSource(File(path))`. 5/5 test methods pass. |
 | ✅ done (partial) | PyhelpersTest.py | 120 (jpype) → 99 (JCC) | (no Java equivalent — pyhelpers is Python-only) | Translated 2026-05-11 as a partial port. Covers: `setup_orekit_data` from a single folder, from a list of paths (multi-root), with `None` (raises), with an invalid path (raises `FileNotFoundError`); `setup_orekit_curdir` backward-compat wrapper; `download_orekit_data_curdir` (gated behind `OREKIT_TEST_NETWORK=1` env var). Skipped: `clear_factories` tests (helper deferred), numpy `JArray_double2D` (not ported), numpy `to_elevationmask` (not ported). 5 active tests pass + 1 skipped (network). pytest-style → unittest.TestCase conversion. |
 | ⛔ n/a | OrekitConvertersTest.py | 49 | n/a | Tests jpype's automatic Python ↔ Java converters: `abs_date.to_datetime()`, `AbsoluteDate(py_datetime, 0.0)`, `__repr__` formatting, numpy-aware `JArray_double2D`. None of these mechanisms exist in JCC; the test surface is jpype-specific by design. |
 | ⛔ n/a | DefaultMethodsTest.py | 117 | (no Java equivalent — this test specifically validates jpype handles default methods on inherited interfaces) | Was written for jpype to verify it dispatches Java interface default methods on subclasses. JCC explicitly does NOT (see CLAUDE.md "JCC ignores Java interface default methods"). The corresponding JCC behaviour is "raise InvalidArgsError"; the workaround is `cast_()`. Translating this test would just hard-code the limitation; better to leave it as a jpype-only invariant. |
+| 🟡 blocked | FunctionalDetectorTest.py | 52 | propagation/events/FunctionalDetectorTest.java | Stubs advertise `FunctionalDetector.withFunction(ToDoubleFunction)`, but the live JCC wrapper exposes no `withFunction` method (`dir(FunctionalDetector())` only has generic `withDetectionSettings/withHandler/withMaxCheck/withMaxIter/withThreshold`). Do not add a weakened test; needs wrapper generation/support for the functional-interface setter. |
 
 ## In-development tests on the jpype side
 
@@ -293,7 +338,7 @@ Source: `Orekit/orekit_jpype/test-in-development/` and
 | File | Notes |
 |---|---|
 | PythonDocstringTest.py | Tests stub-rendered docstrings; jpype-specific (jpype renders javadoc into docstrings; JCC does not) — likely ⛔. |
-| TLEConverterTest.py | TLE conversion; candidate once the TLE generation tests above are done. |
+| TLEConverterTest.py | ✅ moved to `test/` on 2026-05-11. |
 | GroundPointingTest.py (jpype side) | jpype's port of the same test JCC already has — JCC ↔ jpype divergence point. |
 
 ## In-development tests on the JCC side
@@ -321,7 +366,8 @@ Source: `tests_in_development/` in this repo. Listed for completeness.
    pyhelpers, copy `pyhelpers.py` over the env's installed copy first —
    see [../CLAUDE.md](../CLAUDE.md) "Running tests locally without a full
    conda build".)
-5. Re-run the full suite (28 + 1 = 29 expected) to confirm no regression.
+5. Re-run the touched batch, then the full suite when practical, to confirm
+   no regression.
 6. Move the entry from 🔵 to ✅ in this file with a short note on any
    non-obvious adaptations.
 7. Commit with a message like `test: translate <Name>Test from
@@ -329,10 +375,16 @@ Source: `tests_in_development/` in this repo. Listed for completeness.
 
 ## Counts
 
-- JCC suite today: 35 files (31 tests + 3 helpers + 1 `__init__.py`).
-- jpype suite: 35 files (incl. helpers and runner).
-- Translation queue (🔵): 1 (Rugged).
-- Translated to date (✅): 7 (EphemerisEvents, LeastSquaresTleGen, FixedPointTleGen, Pyhelpers-partial, HaloOrbit, SpacecraftStateInterpolator, OpmParser).
+- JCC suite today: 76 top-level files in `test/`; 72 Python files; 67
+  `*Test.py` files.
+- jpype suite: 266 recursive `*Test.py` files under
+  `/Users/sepehy/Development/Orekit/orekit_jpype/test`.
+- Translation queue from jpype by basename: 207 `*Test.py` files.
+- Translated to date (✅): 48 counted by grouped entries here
+  (EphemerisEvents, LeastSquaresTleGen, FixedPointTleGen, Rugged,
+  TLEConverter, direct Java batches of 10 and 5, jpype batches of 4, 5,
+  5, and 6, Pyhelpers-partial, HaloOrbit, SpacecraftStateInterpolator,
+  OpmParser).
 - Marked n/a (⛔): 2 (OrekitConverters, DefaultMethods).
 
 ## Translation lessons learned (running list)
@@ -348,12 +400,22 @@ future translators don't repeat the discovery cost.
 - **`ArrayList(python_list)` doesn't auto-convert.** JCC's `ArrayList`
   exposes only `ArrayList()`, `ArrayList(int)`, and `ArrayList(Collection)`;
   a Python list isn't a Collection. Build with `.add()` in a loop.
+- **Overload-sensitive numeric literals can go both ways.** Most Orekit
+  double parameters need `1.0`, but some APIs have both `int` and
+  `double` overloads with different semantics. In Rugged,
+  `LineSensor.getLOS(date, 0)` must use an `int` pixel index; passing
+  `0.0` selects the floating overload and can produce an out-of-range
+  pixel access.
 - **Interface default methods need a cast.** Anywhere the jpype test calls
   a method that's a `default` method on a Java interface (e.g.
   `Propagator.clearStepHandlers()`, the `Orbit.getPVCoordinates(date,
   frame)` case from `InterSatDirectViewDetectorTest`), JCC won't dispatch
   it on the subclass. Cast to the declaring interface first:
   `Propagator.cast_(ephem).clearStepHandlers()`.
+- **Some interface methods are exposed only through the interface wrapper.**
+  `LOFType` implements `LOF`, but JCC's `LOFType` enum wrapper does not
+  expose `isQuasiInertial()` directly. Cast first:
+  `LOF.cast_(lof_type).isQuasiInertial()`.
 - **`PythonXxx` bridge subclassing requires `super().__init__()`.** Without
   it, the Python instance isn't registered with the Java handle and JCC
   callbacks find a NULL Python pointer at runtime. Add it as the first
@@ -378,6 +440,13 @@ future translators don't repeat the discovery cost.
   `ParameterDriversProvider.cast_(tle).getParameters(field)`. Same root
   cause as the `Orbit.getPVCoordinates(date, frame)` and
   `Propagator.clearStepHandlers()` cases.
+- **Prefer explicit parameter arrays for propagator builders.** In
+  `TLEPropagatorBuilder`, Java's no-arg `buildPropagator()` path should
+  delegate to selected normalized parameters, but the JCC wrapper can
+  instead take an empty-parameter route and fail with an inconsistent
+  dimensions error. Use
+  `builder.buildPropagator(builder.getSelectedNormalizedParameters())`,
+  matching existing helper code in `EstimationTestUtils.py`.
 - **Pytest → unittest.** When the jpype test uses pytest functions
   (`def test_xxx():`, `pytest.raises(...)`), wrap the methods in a
   `unittest.TestCase` subclass and use `self.assertRaises(...)`,
@@ -402,6 +471,49 @@ future translators don't repeat the discovery cost.
   call site: `Opm.cast_(parser.parseMessage(source))`. This pattern
   applies to all CCSDS parsers, generic factories, and the Field-aware
   TLE / propagator APIs.
+- **Some collection/dictionary values also erase to Object.** For
+  `DataDictionary.get("a")` where the stored value is a `double[]`, cast
+  before Python sequence operations: `JArray_double.cast_(dictionary.get("a"))`.
+  The same applies to `DataDictionary.toMap().get("a")`.
+- **Some generated copy constructors are not callable.** In this build,
+  `DataDictionary(DataDictionary)` and
+  `DoubleArrayDictionary(DoubleArrayDictionary)` appear in stubs but fail
+  with `InvalidArgsError`. Use:
+  `copy = DataDictionary(); copy.putAll(original)` or the equivalent
+  `DoubleArrayDictionary` form.
+- **`PythonEventDetector` needs the older detector getters.** Even when
+  the Java-side API also has `EventDetectionSettings`, the JCC bridge
+  calls Python natives named `getMaxCheckInterval`, `getThreshold`, and
+  `getMaxIterationCount`. Implement those explicitly, usually with a
+  small `PythonAdaptableInterval` subclass.
+- **`BooleanDetector.orCombine` varargs can reject Python detector
+  subclasses.** Build a Java `ArrayList`, add `EventDetector.cast_(detector)`
+  for each Python detector, then call the collection overload.
+- **`PythonExtendedPositionProvider` only registers the field-date
+  position callback.** The bridge native is
+  `getPosition(FieldAbsoluteDate, Frame)`, and Java's default
+  `getPVCoordinates(AbsoluteDate, Frame)` routes through that field path.
+  Don't rely on a Python `AbsoluteDate` branch being called from Java.
+- **Some default-method overrides are not possible through minimal
+  bridges.** `PythonDetectorModifier` currently registers only
+  `getDetector`. jpype can override `DetectorModifier.getHandler()`, but
+  this JCC bridge cannot, so a faithful `DetectorModifierTest` port needs
+  wrapper support before adding it without dropping assertions.
+- **Fluent `withXxx` methods may narrow to abstract wrappers.** Several
+  concrete event detectors return a wrapper typed as `AbstractDetector`
+  after calls like `.withMaxCheck(...).withThreshold(...).withHandler(...)`.
+  Cast back before concrete getters:
+  `ElevationExtremumDetector.cast_(detector.withMaxCheck(...))`.
+  For generic settings assertions, prefer
+  `detector.getDetectionSettings().getThreshold()` and
+  `.getMaxCheckInterval()`.
+- **Some Hipparchus vector methods are not exposed under Java names.**
+  `Vector3D.normalize()` is not available in this JCC build. Use
+  `vector.scalarMultiply(1.0 / vector.getNorm())`.
+- **Advertised functional-interface setters may be absent at runtime.**
+  `FunctionalDetector.withFunction` appears in stubs, but the live JCC
+  wrapper has no such method. Treat this as a wrapper-generation gap, not
+  a test translation failure.
 - **`Object[]` returned by Java surfaces as JCC Object indexing.**
   `oe.getParts()[0]` returns Object, not str — coerce with
   `str(oe.getParts()[0])` or `String.cast_(...)` if you need a Python
