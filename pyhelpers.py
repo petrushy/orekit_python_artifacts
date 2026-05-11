@@ -25,6 +25,8 @@ from datetime import datetime, timedelta, timezone
 
 import math
 import os
+import logging
+from typing import List, Union
 from java.io import File
 from orekit import JArray
 from org.orekit.data import DataProvidersManager, ZipJarCrawler, DirectoryCrawler, DataContext
@@ -52,11 +54,11 @@ def download_orekit_data_curdir(filename='orekit-data.zip'):
     # Download the orekit-data file and store it locally
 
     with urlrequest.urlopen(url) as response, open(filename, 'wb') as out_file:
-        print('Downloading file from:', url)
+        logging.info(f"Downloading orekit data file from: {url}")
         shutil.copyfileobj(response, out_file)
 
 
-def setup_orekit_curdir(filename='orekit-data.zip', from_pip_library=False):
+def setup_orekit_curdir(filename: str = 'orekit-data.zip', from_pip_library: bool = False) -> None:
     """Setup the java engine with orekit.
 
     This function loads the Orekit data from either:
@@ -75,34 +77,67 @@ def setup_orekit_curdir(filename='orekit-data.zip', from_pip_library=False):
 
     Args:
         filename (str): Name of zip or folder with orekit data. Default filename is 'orekit-data.zip'
-        from_pip_library (bool), default False: if True, will first try to load the data from the `orekitdata` python library
+        from_pip_library (bool), default False: if True, will first try to load the data from the `orekitdata` python library.
+            Note: prefer using `setup_orekit_data` directly, which supports multiple data sources and defaults to True for this flag.
 
+    Raises:
+        FileNotFoundError: if `filename` does not exist (and the pip library was not used).
+            This replaces the prior silent-return behaviour; valid paths are unaffected.
     """
 
-    DM = DataContext.getDefault().getDataProvidersManager()
+    setup_orekit_data(filenames=filename, from_pip_library=from_pip_library)
 
-    data_load_from_library_sucessful = False
+
+def setup_orekit_data(filenames: Union[str, List[str], None] = 'orekit-data.zip',
+                      from_pip_library: bool = True) -> None:
+    """
+    Sets up the orekit data from a file, folder or list of files/folders.
+    Can also load the data from the `orekitdata` python library. (default)
+
+    Args:
+        filenames (Union[str, List[str], None]): Name of zip or folder with orekit data, or a list of them.
+            Default filename is 'orekit-data.zip'
+        from_pip_library (bool), default True: if True, will only try to load the data from the `orekitdata` python library
+
+    Raises:
+        FileNotFoundError: if any provided path does not exist or no sources are specified.
+    """
+    # Normalise to a list
+    if filenames is None:
+        files_to_load: List[str] = []
+    elif isinstance(filenames, str):
+        files_to_load = [filenames]
+    else:
+        files_to_load = list(filenames)
+
+    # Optionally prepend the pip library path
     if from_pip_library:
         try:
             import orekitdata
-            datafile = File(orekitdata.__path__[0])
-            if not datafile.exists():
-                print(f"""Unable to find orekitdata library folder,
-                      will try to load Orekit data using the folder or filename {filename}""")
+            lib_path = orekitdata.__path__[0]
+            if File(lib_path).exists():
+                files_to_load = [lib_path]
             else:
-                filename = orekitdata.__path__[0]
-                data_load_from_library_sucessful = True
+                logging.info(f"Unable to find orekitdata library folder, will try filenames: {files_to_load}")
         except ImportError:
-            print(f"""Failed to load orekitdata library.
+            logging.warning(f"""Failed to load orekitdata library.
                   Install with `pip install git+https://gitlab.orekit.org/orekit/orekit-data.git`
-                  Will try to load Orekit data using the folder or filename {filename}""")
+                  Will try to load Orekit data using: {files_to_load}""")
 
-    if not data_load_from_library_sucessful:
+    if not files_to_load:
+        logging.warning("No orekit data sources specified")
+        raise FileNotFoundError("No orekit data sources specified")
+
+    DM = DataContext.getDefault().getDataProvidersManager()
+    DM.clearProviders()
+    DM.clearLoadedDataNames()
+    DM.resetFiltersToDefault()
+
+    for filename in files_to_load:
         datafile = File(filename)
         if not datafile.exists():
-            print('File or folder:', datafile.getAbsolutePath(), ' not found')
-            print("""
-
+            logging.warning(f"File or folder: {datafile.getAbsolutePath()} not found")
+            logging.warning("""
             The Orekit library relies on some external data for physical models.
             Typical data are the Earth Orientation Parameters and the leap seconds history,
             both being provided by the IERS or the planetary ephemerides provided by JPL.
@@ -114,20 +149,17 @@ def setup_orekit_curdir(filename='orekit-data.zip', from_pip_library=False):
 
             or by the function:
             orekit.pyhelpers.download_orekit_data_curdir()
-
             """)
-            return
+            raise FileNotFoundError(datafile.getAbsolutePath())
 
-    if os.path.isdir(filename):
-        crawler = DirectoryCrawler(datafile)
-    elif os.path.isfile(filename):
-        crawler = ZipJarCrawler(datafile)
-    else:
-        print('filename ', filename, ' is neither a file nor a folder')
-    DM.clearProviders()
-    DM.clearLoadedDataNames()
-    DM.resetFiltersToDefault()
-    DM.addProvider(crawler)
+        logging.debug(f"Loading Orekit data from: {datafile.getAbsolutePath()}")
+        if os.path.isdir(filename):
+            DM.addProvider(DirectoryCrawler(datafile))
+        elif os.path.isfile(filename):
+            DM.addProvider(ZipJarCrawler(datafile))
+        else:
+            logging.warning(f'Could not load orekit data from filename: {filename}')
+            raise FileNotFoundError(filename)
 
 MICROSECOND_MULTIPLIER = 1000000
 def absolutedate_to_datetime(orekit_absolutedate: AbsoluteDate, tz_aware=False) -> datetime:

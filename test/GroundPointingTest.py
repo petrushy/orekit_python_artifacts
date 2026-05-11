@@ -7,11 +7,8 @@ orekit.initVM()
 
 import unittest
 from typing import Union
-from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext, DirectoryCrawler
-from java.io import File
-
 from orekit import JArray_double
-from orekit.pyhelpers import absolutedate_to_datetime
+from orekit.pyhelpers import absolutedate_to_datetime, setup_orekit_data
 from org.hipparchus import CalculusFieldElement
 from org.hipparchus.analysis.differentiation import GradientField, UnivariateDerivative1, UnivariateDerivative2
 from org.hipparchus.complex import ComplexField
@@ -44,15 +41,8 @@ class GroundPointingTest(unittest.TestCase):
     EARTH_FIXED_FRAME = None
 
     def setUp(self):
-        
-        DM = DataContext.getDefault().getDataProvidersManager()
-        datafile = File('../test/resources/regular-data')
-        if not datafile.exists():
-            print('File :', datafile.absolutePath, ' not found')
-
-        crawler = DirectoryCrawler(datafile)
-        DM.clearProviders()
-        DM.addProvider(crawler)
+        # Mirrors Java's Utils.setDataRoot("regular-data")
+        setup_orekit_data(filenames="resources/regular-data", from_pip_library=False)
         self.INERTIAL_FRAME = FramesFactory.getEME2000()
         self.OTHER_INERTIAL_FRAME = FramesFactory.getGCRF()
         self.EARTH_FIXED_FRAME = FramesFactory.getITRF(IERSConventions.IERS_2010, True)

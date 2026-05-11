@@ -353,19 +353,27 @@ org.orekit.errors.OrekitException: missing Earth Orientation Parameters
 
 The fix is **per-test**: mirror the Java equivalent's `Utils.setDataRoot(...)`
 value. For most tests that means `setup_orekit_curdir("resources/regular-data")`.
-For multi-root tests (Java's `setDataRoot` accepts `:`-separated roots) build
-the providers manually, since `setup_orekit_curdir` calls
-`DM.clearProviders()` ([pyhelpers.py:127](pyhelpers.py#L127)) on each call
-and won't stack:
+
+For multi-root tests (Java's `setDataRoot` accepts `:`-separated roots) call
+the new `setup_orekit_data(filenames=[...])` helper with a list of paths —
+it clears providers once and adds one crawler per path:
 
 ```python
-from org.orekit.data import DataContext, DirectoryCrawler
-from java.io import File
-DM = DataContext.getDefault().getDataProvidersManager()
-DM.clearProviders(); DM.clearLoadedDataNames(); DM.resetFiltersToDefault()
-for sub in ("regular-data", "atmosphere", "potential/icgem-format"):
-    DM.addProvider(DirectoryCrawler(File(f"resources/{sub}")))
+from orekit.pyhelpers import setup_orekit_data
+setup_orekit_data(filenames=["resources/regular-data",
+                             "resources/atmosphere",
+                             "resources/potential/icgem-format"],
+                  from_pip_library=False)
 ```
+
+`setup_orekit_curdir` is preserved as a one-path wrapper (it now delegates
+to `setup_orekit_data`). Note both functions now **raise `FileNotFoundError`
+if a path is missing**, instead of the previous silent print-and-return.
+
+In test fixtures predating `setup_orekit_data` (e.g. the inline
+`DataContext.getDefault().getDataProvidersManager()` + `DirectoryCrawler`
+loop in [test/BrouwerLyddanePropagatorTest.py:46](test/BrouwerLyddanePropagatorTest.py#L46))
+the manual pattern still works but is no longer the preferred form.
 
 When a Python test fails on `FramesFactory.getITRF(...)` with the EOP-gap
 error after a resource refresh, this is almost always the cause. Look at
@@ -388,8 +396,9 @@ do **not** need a full `conda-build` cycle (~15 min). Faster loop:
    ~/miniforge3/envs/orekit_validate/bin/python -m unittest \
      SomeTest.SomeTestClass.someTestMethod -v
    ```
-   `setup_orekit_curdir("resources")` will pick up `test/resources/` from
-   the current working directory.
+   Each test sets its own data root (e.g. `setup_orekit_curdir("resources/regular-data")`
+   or `setup_orekit_data(filenames=[...])`) so paths resolve relative to
+   `test/` as cwd.
 
 This proves the test logic without rebuilding JCC. Use it when you
 already trust the build pipeline.

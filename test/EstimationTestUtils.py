@@ -33,9 +33,9 @@ orekit.initVM()
 #setup_orekit_curdir()
 
 from orekit import JArray_double
-from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext, DirectoryCrawler
+from orekit.pyhelpers import setup_orekit_data
+from org.orekit.data import DataContext
 from java.util import Arrays, HashMap
-from java.io import File
 
 # from org.hipparchus.RealFieldElement;
 # from org.hipparchus.geometry.euclidean.threed.FieldRotation;
@@ -96,18 +96,10 @@ curdir = pathlib.Path(__file__).parent.resolve()
 
 class EstimationTestUtils():
     def eccentricContext(self, dataRoot: list):
-        DM = DataContext.getDefault().getDataProvidersManager()
+        setup_orekit_data(filenames=list(dataRoot), from_pip_library=False)
         GravityFieldFactory.clearPotentialCoefficientsReaders()
         GravityFieldFactory.clearOceanTidesReaders()
-        for i in dataRoot:
-            datafile = File(i)
-            if not datafile.exists():
-                print('File :', datafile.absolutePath, ' not found')
 
-            crawler = DirectoryCrawler(datafile)
-            DM.addProvider(crawler)
-
-        #DataProvidersManager.OREKIT_DATA_PATH = dataRoot
         context = Context()
 
         context.conventions = IERSConventions.IERS_2010
