@@ -398,6 +398,58 @@ Source: `tests_in_development/` in this repo. Listed for completeness.
   OpmParser).
 - Marked n/a (⛔): 2 (OrekitConverters, DefaultMethods).
 
+## Bridge expansion roadmap
+
+The Python `Python*` JCC bridges in the Orekit fork were expanded in two
+batches during the 13.1.5 line:
+
+- **Tier 1 (shipped)** — Modifier family: `PythonDetectorModifier`,
+  `PythonFieldDetectorModifier`, `PythonForceModelModifier`,
+  `PythonAttitudeProviderModifier`. Every default method on the wrapped
+  interface re-declared as `native` so Python subclasses can override.
+- **Tier 2 (shipped, partial)** — `PythonAttitudeProvider`,
+  `PythonStaticTransform`, `PythonFieldStaticTransform`, `PythonLOF`.
+  Same pattern.
+
+### Deferred to Orekit 14.0 — `PythonEventDetector` and `PythonFieldEventDetector`
+
+Originally part of Tier 2, the proposed expansion of these two bridges
+was **reverted** because they are very commonly subclassed in the wild
+and the change would have been source-incompatible without warning. The
+deferred natives:
+
+- `PythonEventDetector`: `dependsOnTimeOnly()`, `getDetectionSettings()`
+- `PythonFieldEventDetector`: `dependsOnTimeOnly()`
+
+**Plan:** include these in the **14.0 release** (next major bump) where
+breaking changes are expected. The patches are trivial — append two
+(resp. one) `public native` declarations matching the corresponding
+interface method's signature, and update each bridge's header comment to
+note the expansion.
+
+In the meantime:
+
+- Existing Python `PythonEventDetector` subclasses can NOT override
+  `dependsOnTimeOnly()` or `getDetectionSettings()`. The Java interface
+  defaults dispatch at the JVM level (return `false` and a default
+  `EventDetectionSettings` respectively).
+- For tests that need to customise these values, the workaround is to
+  use the fluent builder methods on a real `EventDetector` subclass
+  (e.g. `someDetector.withMaxCheck(...).withThreshold(...)`) rather than
+  building a `PythonEventDetector` from scratch.
+- Same applies on the field side via
+  `PythonFieldEventDetector` / `dependsOnTimeOnly()`.
+
+### Tier 3 (also deferred)
+
+Targeted picks from the audit (see the original report) that are smaller
+and lower-frequency. Worth folding into 14.0 alongside the EventDetector
+work for a single coherent "bridge surface refresh" release. Candidates:
+`PythonAdditionalDataProvider` + Field, `PythonShiftablePVCoordinatesHolder`
+(close the `getPVCoordinates(date, frame)` interface-default gotcha at
+its source), `PythonImpulseProvider` + Field,
+`PythonPVCoordinatesProvider` + Field.
+
 ## Translation lessons learned (running list)
 
 Patterns observed during ports — add to this list as new ones surface so
